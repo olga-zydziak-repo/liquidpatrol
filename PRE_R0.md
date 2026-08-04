@@ -1,7 +1,8 @@
 # PRE_R0 — dokument przed budową R0.0
 
 Data: 2026-08-04. Poprzednik: `RECON_R0.md` (etap R, kompletny).
-Elementy **[PROPOZYCJA]** wymagają Twojej ratyfikacji. Do etapu B nie wchodzę, dopóki nie dopiszesz ręką **RATYFIKOWANE**.
+
+> **RATYFIKOWANE 2026-08-04** (commit bazowy `a720cd6`) z aneksami **R0-A1…A5** (patrz sekcja „ANEKSY" poniżej — wiążące, wpięte do §3/§4). Rozbieżności (1)–(3) zaakceptowane w brzmieniu z PRE. Harmonic zamiast Ionic zaakceptowany (para Jazzy↔Harmonic, wsparcie PX4 v1.16, **LTS do 2028 vs EOL Ionic 09.2026**). **Płaszczyzna sterowania R0.1 (MAVSDK vs XRCE offboard) pozostaje jawnie OTWARTA — R0.0 jej nie przesądza.** Warunki wejścia w B: push do remote + działające sudo (§4).
 
 ---
 
@@ -26,7 +27,7 @@ Stabilnie działający stack **PX4 SITL + Gazebo + ROS2** na tej maszynie, potwi
 | Render | **D3D12 GPU** przez wrapper: `GALLIUM_DRIVER=d3d12`, `MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA` | zmierzone: daje `D3D12 (RTX 5070 Ti)`, OpenGL 4.6. **Domyślny renderer to llvmpipe — GPU trzeba wymusić** |
 | Airframe | **`gz_x500`** (bazowy quad) | hello-mission; `gz_x500_mono_cam` istnieje na później (kamera) |
 | Świat | domyślny (uruchamiać `gz_x500`, nie `..._default`) | lekki |
-| Sterowanie z Pythona | **MAVSDK-Python** | najprostszy dowód telemetrii offboard; baza R0.1 |
+| Sterowanie z Pythona | **MAVSDK-Python** (tylko dla R0.0 hello-mission/telemetrii) | najprostszy dowód telemetrii offboard. **Wybór płaszczyzny sterowania R0.1 (MAVSDK vs XRCE offboard przez `px4_msgs`) pozostaje OTWARTY — R0.0 go nie przesądza.** |
 
 **Fallback (kolejność eskalacji, jeśli ścieżka główna zawiedzie — patrz §4):**
 1. **Gazebo software/headless** — `LIBGL_ALWAYS_SOFTWARE=1` (llvmpipe zmierzony: 2635 FPS na trywialnej scenie) lub `gz sim -s` (sam serwer fizyki, bez okna). Wciąż ważny wynik R0.0.
@@ -45,7 +46,16 @@ Stabilnie działający stack **PX4 SITL + Gazebo + ROS2** na tej maszynie, potwi
 3. **Telemetria offboard z Pythona dociera** — skrypt MAVSDK-Python łączy się i drukuje pozycję/heartbeat drona w trakcie misji.
 4. **Powtarzalność** — instalacja i uruchomienie ujęte w skryptach w repo (`install_*.sh`, `run_hello_mission.sh`), tak by przebieg dało się odtworzyć.
 
-Metryki zapisywane (nie bramkujące, ale w raporcie): RTF, FPS/obciążenie GPU (`nvidia-smi`), zużycie RAM podczas budowy i runtime, exit-code'y.
+**Ogniwa stosu i obciążenie (wiążące — aneksy A1/A2):**
+
+5. **[A1] Żywe ogniwa łącza podczas hello-mission:** `ros2 topic hz /fmu/out/vehicle_odometry` (lub `…/vehicle_local_position`) **≥10 Hz przez cały lot** ORAZ **≥1 topik zmostkowany gz→ROS2** (kamera lub `/clock`) o niezerowej, **raportowanej** częstotliwości. Dowodzi, że działa uXRCE-DDS *oraz* `ros_gz_bridge`, nie tylko sam PX4↔Gazebo.
+6. **[A2] Soak pod obciążeniem:** **≥15 min ciągłego symu** z aktywnym sensorem kamery (**`gz_x500_mono_cam`**) mostkowanym do ROS2, **bez pada**. Ta sama księgowość trójwynikowa co §3 (pass / pad-z-sygnaturą / zejście).
+
+**Dowód + fingerprint (A3):** string renderera z logu **`gz … -v4`** zapisany do artefaktu; `RAPORT_R0` **pinuje wersje**: Mesa / WSL / WSLg / sterownik NVIDIA. `GALLIUM_DRIVER` i `MESA_D3D12_DEFAULT_ADAPTER_NAME` **w skrypcie startowym w repo** (`env_gpu.sh`).
+
+**Telemetria + RTF (A4):** misja domknięta wg MAVSDK = **wszystkie itemy + land + disarm**; strumień pozycji **bez przerwy >1 s**. **RTF logowany per bieg jako liczba raportowana (NIE bramka).**
+
+Metryki zapisywane (nie bramkujące, w raporcie): RTF (A4), FPS/obciążenie GPU (`nvidia-smi`), zużycie RAM podczas budowy i runtime, exit-code'y, częstotliwości topików (A1).
 
 ---
 
@@ -56,6 +66,7 @@ Metryki zapisywane (nie bramkujące, ale w raporcie): RTF, FPS/obciążenie GPU 
 **Reguła stopu (twarda, nie improwizowana):**
 - **[PROPOZYCJA] Limit prób na ścieżkę główną (WSL2+D3D12):** jeśli po **~2 sesjach lub ~4 h prób** GUI-Gazebo z D3D12 nie stoi stabilnie (powtarzalny exit-144 / crash render), **STOP → zejście na fallback §2 pkt 1 (software/headless)** i zaliczenie bramki w trybie „software", z jawną notą.
 - Jeśli **nawet software/headless** nie utrzyma hello-mission → STOP i **ESKALACJA do Ciebie** z opcjami (Docker / dual-boot / chmura), nie walka na ślepo.
+- **[A5] Reguła zejścia po drabinie:** wyczerpanie budżetu §4 **LUB ≥3 pady o tej samej sygnaturze** (`exit 144` / `dxg ioctl -22`) przy **udokumentowanej konfiguracji** → zejście o jeden szczebel fallbacku (§2) **z zapisem sygnatury** w `RAPORT_R0`. Pady o różnych sygnaturach = diagnozować osobno, nie kumulować do progu 3.
 - Każdy pad GPU w trakcie budowy = STOP z krótką notą + opcje, commit ostatniego działającego kroku.
 
 **Blokada operacyjna do usunięcia przed B:** działające `sudo` (etap B = dziesiątki `apt install`). **[PROPOZYCJA]:** ustawić hasło konta przez `wsl -u root passwd olga` na starcie B. (Bezhasłowe sudo/NOPASSWD tylko na Twoją wyraźną zgodę — osłabia bezpieczeństwo.)
@@ -89,6 +100,17 @@ Jeśli ścieżka główna okaże się gładka — możliwe domknięcie w 1 sesji
 
 ---
 
-## STOP
+## ANEKSY R0-A1…A5 (wiążące, ratyfikowane 2026-08-04)
 
-Po zapisaniu tego PRE: commit + push, **STOP**. Czekam na Twoją ratyfikację (**RATYFIKOWANE** ręką w tym pliku lub w czacie) zanim wejdę w etap B. Elementy do decyzji: **§2** (stos + fallback), **§3** (bramka), **§4** (limit prób + naprawa sudo), **§7** (budżet).
+- **A1** — bramka/ogniwa: `/fmu/out/vehicle_odometry` (lub `…local_position`) ≥10 Hz przez cały lot + ≥1 topik gz→ROS2 niezerowy i raportowany → wpięte do §3 pkt 5.
+- **A2** — bramka/obciążenie: soak ≥15 min z `gz_x500_mono_cam` mostkowaną do ROS2, bez pada, księgowość trójwynikowa → §3 pkt 6.
+- **A3** — dowód+fingerprint: renderer z `gz -v4` do artefaktu; pin wersji Mesa/WSL/WSLg/NVIDIA; zmienne GPU w `env_gpu.sh` → §3.
+- **A4** — telemetria+RTF: misja domknięta MAVSDK (itemy+land+disarm), pozycja bez przerwy >1 s; RTF raportowany, nie bramka → §3.
+- **A5** — zejście po drabinie: budżet §4 wyczerpany LUB ≥3 pady tej samej sygnatury → szczebel niżej z zapisem sygnatury → §4.
+
+## Warunki wejścia w etap B (ratyfikowane)
+
+1. **Push do remote** wykonany.
+2. **Działające sudo** (`wsl -u root passwd olga`) — etap B = dziesiątki `apt install`.
+
+Po spełnieniu → budowa wg §2, bramka §3+aneksy, reguła §4, artefakty §6.
