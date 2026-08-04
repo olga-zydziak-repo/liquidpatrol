@@ -49,7 +49,19 @@ Fakty: ścieżka GPU-GL WSLg (`d3d12` Gallium via dxcore/`/dev/dxg`) jest **obec
 
 - Gazebo Harmonic renderuje przez **OGRE2 na OpenGL** (domyślnie), *nie* Vulkan. To dobrze: Vulkan/`dzn` na WSL 24.04 bywa zepsuty (brak plików sterownika `dzn`), ale nas to nie dotyczy przy domyślnym OGRE2-GL.
 - Dźwignie środowiskowe, jeśli domyślnie llvmpipe: `MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA`, `GALLIUM_DRIVER=d3d12`, `LIBGL_ALWAYS_SOFTWARE=0`.
-- **POMIAR ODŁOŻONY** (wymaga `sudo apt install mesa-utils` — patrz ESKALACJA niżej). Werdykt "D3D12 (NVIDIA…)" = akceleracja; "llvmpipe" = software, blokada wydajności.
+
+**POMIAR ZROBIONY (2026-08-04, `mesa-utils` 9.0.0, Mesa 25.2.8):**
+
+| Konfiguracja | Renderer | OpenGL | glxgears 12 s |
+|---|---|---|---|
+| **domyślnie** | `llvmpipe (LLVM 20.1)` — **software** | 4.5 | 2635 FPS, exit 124 |
+| `GALLIUM_DRIVER=d3d12` + `…ADAPTER_NAME=NVIDIA` | **`D3D12 (NVIDIA GeForce RTX 5070 Ti Laptop GPU)`** | **4.6** | 146 FPS, exit 124 |
+
+Werdykt:
+1. **Akceleracja GPU JEST dostępna, ale NIE jest domyślna** — domyślny renderer to llvmpipe (software). GPU włącza się wyłącznie przez zmienne środowiskowe → w etapie B Gazebo MUSI być uruchamiany przez wrapper eksportujący `GALLIUM_DRIVER=d3d12` i `MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA`. To jest konkretny, mierzalny warunek bramki §3.
+2. **glxgears NIE jest miarodajny** — trywialna scena, gdzie ścieżka D3D12 płaci narzut *present* przez kompozytor WSLg (Weston/RDP) na ramkę, więc software „wygrywa" na FPS. Przy realnym obciążeniu (OGRE2: cienie/tekstury/siatki) relacja się odwraca. Jedyny wiarygodny werdykt wydajności/stabilności = **sam Gazebo w hello-mission** — dokładnie to, co mierzy bramka R0.0.
+3. **Stabilność (mikro-sygnał):** oba renderery przeżyły 12 s ciągłego rysowania z exit 124 (czysty timeout), **żadnego exit-144/pada dxg**. To dobry, ale niewystarczający sygnał — realny stress to Gazebo pod obciążeniem, nie glxgears.
+4. **Konsekwencja dla fallbacku:** llvmpipe daje 2635 FPS na trywialnej scenie → **software rendering jest realną, być może wystarczającą opcją** dla lekkiego świata patrolu, jeśli D3D12 okaże się niestabilny pod Gazebo. Wzmacnia bezpiecznik headless/software z (e).
 
 ## (c) Airframe i world
 
@@ -87,14 +99,8 @@ Fakty: ścieżka GPU-GL WSLg (`d3d12` Gallium via dxcore/`/dev/dxg`) jest **obec
 
 ---
 
-## ESKALACJA (jedna) — pomiar renderera wymaga sudo
+## Nota operacyjna: sudo w WSL
 
-`sudo` w tej sesji wymaga hasła; nie mogę go uruchomić nieinteraktywnie. Aby domknąć (b) — jedyny brakujący pomiar R — proszę uruchomić w prompt:
+`sudo` wymaga hasła konta Linuksa (≠ hasło Windows). Konto `olga` nie miało znanego hasła; obejście = wejście jako root z Windowsa (`wsl -u root …`), którym doinstalowano `mesa-utils`. **Do etapu B (dziesiątki `apt install`: ROS2/Gazebo/PX4) potrzebne działające sudo** — rekomendacja: ustawić hasło (`wsl -u root passwd olga`) przed budową. Do rozstrzygnięcia w PRE §4.
 
-```
-! sudo apt-get install -y mesa-utils
-```
-
-Potem zmierzę renderer (`glxinfo -B`, oraz z `GALLIUM_DRIVER=d3d12`) i dopiszę werdykt tu w (b). To ~2 MB diagnostyki, w pełni odwracalne. Bez tego RECON jest kompletny we wszystkich pozostałych punktach; ten jeden jest sednem i wolę mieć liczbę niż domysł.
-
-**Status R:** kompletny poza pomiarem (b). Po pomiarze → piszę PRE_R0.md i STOP na ratyfikację.
+**Status R: KOMPLETNY.** Wszystkie punkty (a)–(f) zmierzone/rozpoznane, łącznie z sednem (b). → PRE_R0.md, potem STOP na ratyfikację.
