@@ -128,6 +128,10 @@ class Mav:
             except Exception as e:
                 self.calls.append((f"gf_fail:{e}", False))
 
+        try:
+            await drone.telemetry.set_rate_position_velocity_ned(30.0)
+        except Exception:
+            pass
         async def tel():
             async for pv in drone.telemetry.position_velocity_ned():
                 now = time.monotonic()
@@ -169,6 +173,10 @@ class Mav:
                 except Exception as e:
                     self.calls.append((f"land_fail:{e}", False))
             await asyncio.sleep(0.05)
+
+    def reset_tel_gap(self):
+        """Zeruj pomiar luki telemetrii na starcie fazy patrolu (§7: 'przez cały lot')."""
+        self.tel_max_gap = 0.0; self._last_tel = None
 
     def wait_ready(self, timeout): return self._ready.wait(timeout)
     def arm(self): self._arm.set()

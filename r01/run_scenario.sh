@@ -6,8 +6,10 @@ set -uo pipefail
 ROOT="$HOME/projects/liquidpatrol"; cd "$ROOT"
 SC="${1:?podaj scenariusz S1|S2|S3|S4}"
 OUT="/tmp/r01"; mkdir -p "$OUT"
+set +u
 source /opt/ros/jazzy/setup.bash 2>/dev/null || true
-set +u; source ros2_ws/install/setup.bash 2>/dev/null || true; set -u
+source ros2_ws/install/setup.bash 2>/dev/null || true
+set -u
 source env_gpu.sh >/dev/null 2>&1
 
 echo "==== $SC: teardown stare + baseline dmesg ===="

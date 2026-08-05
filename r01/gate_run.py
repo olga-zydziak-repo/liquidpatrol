@@ -79,6 +79,7 @@ class Runner:
             self.xrce.publish_setpoint((self.start[0], self.start[1], -ALT_M)); time.sleep(PERIOD)
             if abs(self.mav.pos[2] - (-ALT_M)) < 1.0:
                 break
+        self.mav.reset_tel_gap()   # §7: luka telemetrii mierzona w fazie lotu (nie setup)
         print(f"[gate] armed={self.mav.armed} down={self.mav.pos[2]:.1f} fm={self.mav.flight_mode}")
 
     def _abort(self):

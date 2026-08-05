@@ -1,0 +1,28 @@
+{
+    "SCENARIO_RESULT": {
+        "scenario": "S1",
+        "laps_done": 3,
+        "all_wp_reached_<=1.5m": true,
+        "tel_gap_max_s": 0.046,
+        "tel_gap_ok_<0.5": true,
+        "setpoint_dt_max_s": 0.053,
+        "setpoint_ok_<0.5": true,
+        "A1_motion_cmds": 0,
+        "A1_ok": true,
+        "A3_gf_fired": false,
+        "A3_ok_0_firings": true,
+        "max_radial_m": 27.82,
+        "outcome": "SUKCES",
+        "PASS": true,
+        "mavsdk_calls": [
+            "param:MPC_XY_VEL_MAX=3",
+            "param:MPC_XY_CRUISE=3",
+            "param:MPC_XY_VEL_ALL=3",
+            "param:COM_OBL_RC_ACT=5(Hold)",
+            "param:GF(hor=37.0,ver=25.0,act=2)",
+            "arm",
+            "return_to_launch",
+            "land"
+        ]
+    }
+}
