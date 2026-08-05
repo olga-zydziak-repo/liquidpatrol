@@ -1,0 +1,31 @@
+{
+  "property": "P1",
+  "verdict": "PROVED",
+  "method": "1-induction (z3)",
+  "z3_pip": "5.0.0.0",
+  "z3_lib": "5.0.0",
+  "obligations": {
+    "base": "unsat",
+    "inv_step": "unsat",
+    "P1a": "unsat",
+    "P1b": "unsat",
+    "P1c": "unsat",
+    "P1d": "unsat"
+  },
+  "automaton": "r01/shield.py:_decide (ALLOW/HOLD/REFUSE, reasons GEOFENCE/COMMAND_INVALID/STALE_CMD/ABORT)",
+  "properties": {
+    "P1a": "ALLOW ⇒ ¬geo ∧ ¬terminal (przepuszcza tylko geofence-bezpiecznie)",
+    "P1b": "geo ⇒ REFUSE ∧ (¬term ∧ geo ⇒ reason=GEOFENCE)",
+    "P1c": "REFUSE ⇒ reason ∈ {GEOFENCE,COMMAND_INVALID,STALE_CMD,ABORT}",
+    "P1d": "terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (latch)"
+  },
+  "assumptions": [
+    "geo = boolowski predykat naruszenia geofence; arytmetyka bariery (radial+hamowanie) jest przedmiotem P2-analog (osobne twierdzenie warunkowe)"
+  ],
+  "code_refs": {
+    "shield": "r01/shield.py:_decide",
+    "config": "r01/config.py (R_E, obwiednia)"
+  },
+  "note_discrepancy": "ABORT dodane jako 4. reason (operator) poza 3 z PRE_R01 §8 — jawnie",
+  "model_sha256": "c91abe27d52bf6866dc767869b6149bc1e7e4fe22d5c4940b3414d7861b2e481"
+}

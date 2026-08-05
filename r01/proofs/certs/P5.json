@@ -1,0 +1,31 @@
+{
+  "property": "P5",
+  "verdict": "PASS",
+  "method": "per-tick conformance: proven-model tau ≡ r01/shield.py (decision+reason+state)",
+  "z3_pip": "5.0.0.0",
+  "z3_lib": "5.0.0",
+  "episodes_random": 400,
+  "episodes_targeted": 8,
+  "transitions_covered": [
+    "abort",
+    "geo",
+    "hold",
+    "latch",
+    "patrol",
+    "return"
+  ],
+  "coverage": "6/6",
+  "mismatches": 0,
+  "latched_reasons_covered": [
+    "GEOFENCE",
+    "ABORT",
+    "COMMAND_INVALID",
+    "STALE_CMD"
+  ],
+  "binds": "P1 (r01/proofs/certs/P1.json) — dowód dotyczy KODU egzekutora, nie fikcji",
+  "code_refs": {
+    "shield": "r01/shield.py:_decide",
+    "model": "r01/proofs/verify.py:tau"
+  },
+  "model_sha256": "db20e1ccaa2b68c9884787ca629737488909632715e324f85d7850dabc3631ff"
+}

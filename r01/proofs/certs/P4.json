@@ -1,0 +1,42 @@
+{
+  "property": "P4",
+  "verdict": "PASS",
+  "method": "wyczerpujący test gramatyki (5 in / 8 out) + property-based (2000) + HMAC-SHA256",
+  "checks": {
+    "in_grammar_all_ALLOW": true,
+    "out_grammar_all_COMMAND_INVALID": true,
+    "stale_REFUSE": true,
+    "fresh_ALLOW": true,
+    "geofence_target_REFUSE": true,
+    "mode_from_record": true,
+    "mode_of_denies_non_allow": true,
+    "chain_verifiable": true,
+    "tamper_detected": true,
+    "property_2000_seqs": true
+  },
+  "grammar": [
+    "START_PATROL",
+    "HOLD",
+    "RESUME",
+    "RETURN_HOME",
+    "ABORT"
+  ],
+  "commands": [
+    "start patrol",
+    "hold",
+    "resume",
+    "return home",
+    "abort"
+  ],
+  "properties": {
+    "a": "brak trybu bez admisji",
+    "b": "tryb wykonany ≡ admitowany",
+    "c": "poza gramatyką⇒COMMAND_INVALID; stale⇒STALE_CMD; cel poza R_E⇒GEOFENCE",
+    "d": "HMAC-SHA256, łańcuch weryfikowalny+odtwarzalny, sabotaż wykryty"
+  },
+  "code_refs": {
+    "authz": "r01/authz.py",
+    "language": "r01/language.py"
+  },
+  "model_sha256": "147e35979bb4c24f5ff718b9f9c02e4b155a813f24d11abf883e11b418e8bab1"
+}
