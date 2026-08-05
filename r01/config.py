@@ -23,7 +23,7 @@ R_ROUTE = math.hypot(HALF, HALF)  # 28.284 m — maks. promień trasy od Home (n
 # --- Założenia marginesu reakcji (A2 — margines WYLICZONY, nie z ręki) -------
 V_MAX = 3.0                       # clamp prędkości poziomej [m/s]
 T_REACT_S = 0.20                  # tick 50 ms + aktywacja ≤125 ms (zmierzone recon R1)
-A_BRAKE = 2.0                     # [m/s²] PROWIZORYCZNIE konserwatywnie; DO ZMIERZENIA w BUILD
+A_BRAKE = 2.0                     # [m/s²] konserwatywne; ZMIERZONE 2.65 (brake_test) ≥ 2.0 → zwalidowane
 DELTA_MARGIN = V_MAX * T_REACT_S + (V_MAX ** 2) / (2.0 * A_BRAKE)   # 2.85 m
 
 # --- Obwiednia osłony R_E (z nierówności zawierania) -------------------------
