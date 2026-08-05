@@ -69,12 +69,27 @@ Rozdzielono przyczyny niskiego Hz kamery (A4 raportowane, niebramkujące). Sonda
 | 320×240@15 | 225 KB | 13.5 Hz | **15.1 Hz** |
 | 320×240@30 | 225 KB | 19.7 Hz | **29.2 Hz** |
 
-**Wniosek:** wąskie gardło = **transport DDS/most ROS2 skalujący się z ROZMIAREM obrazu**, NIE render gz (gz-side zawsze zdrowy). 900 KB dławi best_effort DDS do 2.6 Hz; 225 KB przechodzi pełną częstotliwość. Wyjaśnia anomalię S1 (640×480 bridge 2.6 Hz + contention lotu → 1.4 Hz).
-**Rekomendacja R0.2:** kamera bridged ≤320×240 (≤256 KB) → pełny rate; albo **gz-transport bez mostu** (14 Hz przy 640×480); albo tuning QoS/kompresja. (RTF w sondzie = artefakt parsowania; zdrowie symu z gz-side Hz.)
+**Wniosek (ZAMKNIĘCIE RYZYKA):** wąskie gardło = **transport DDS/most ROS2 skalujący się z ROZMIAREM ramki**, NIE render gz (gz-side zawsze zdrowy 13–20 Hz). **Zmierzony sufit mostu: ramka ≤ ~256 KB przechodzi przy PEŁNYM rate** (225 KB → 15 Hz@15, 29 Hz@30); ≥ 900 KB dławi best_effort DDS do 2.6 Hz. Ryzyko „kamera dławi łącze" jest tym samym **domknięte i skwantyfikowane** (nie otwarte): to nie awaria renderu ani symu, lecz znany próg transportu, z jawną granicą. Wyjaśnia anomalię S1 (640×480 = 900 KB → most 2.6 Hz + contention lotu → 1.4 Hz).
+
+**Profil kamery R0.2 mieści się POD progiem** (percepcja, nie sterowanie — slot uczony w R0.2):
+- **256×256 @ 1 Hz** = 196 KB/ramkę (< 256 KB) — klatki kontekstowe.
+- **64×64 @ 12 Hz** = 12 KB/ramkę (≪ 256 KB) — szybki kanał percepcji.
+Oba profile są znacząco pod zmierzonym sufitem mostu → transport nie będzie wąskim gardłem R0.2.
+
+**Opcje uszeregowane (R0.2, malejąco preferencja):**
+1. **Ramka ≤ 320×240 (≤ ~256 KB) na moście** — najprostsze, zmierzone jako pełny rate; profil R0.2 już się mieści.
+2. **gz-transport w węźle** (subskrypcja gz bez mostu ROS2) — 14 Hz nawet przy 640×480; omija DDS, kosztem integracji poza ekosystemem ROS.
+3. **Kompresja** (image_transport / compressed) — utrzymuje duże ramki na moście kosztem CPU/dekompresji; ostatnia opcja.
 
 ## 7. Stabilność / higiena
 - **0 padów** we wszystkich biegach R0.1 (S1–S4 + brake + sonda kamery): CaptureCrash=0, oops=0. Sygnatura pada A5 (`dxg-22` koincydentne ze śmiercią) nie wystąpiła.
 - Świeży boot + teardown per scenariusz; brak sierocych procesów.
+
+### Uwaga o wartościach RTF (co jest miarodajne, a co NIE)
+Aby uniknąć błędnego cytowania:
+- **MIARODAJNE RTF** (real-time factor symu): **R0.0 soak avg 0.99982** (29 próbek, `RAPORT_R0.md` §3/A4) oraz §3.2 R0.0 ~0.99. To rzeczywisty RTF stacku pod obciążeniem (≈ real-time). W R0.1 sim pracował tak samo (potwierdzenie pośrednie: gz-side kamery 13–20 Hz, lot lockstep bez dryfu).
+- **ARTEFAKT — NIE cytować:** wartości RTF ~**0.0035** w `results/R01/gate/camera_probe.log` (sonda S3-3) to **błąd parsera** pola `real_time_factor` z `/world/default/stats` (sonda chwyciła zły token), a NIE realny RTF — sim był zdrowy (gz-side render 13.9–19.7 Hz w tych samych biegach). Te liczby są nieważne i nie należy ich przywoływać jako RTF.
+- RTF pozostaje metryką **raportowaną, nie bramkującą** (A4).
 
 ## 8. Rozbieżności (rejestr)
 1. **Korekta geometrii pod A2 (przy ratyfikacji):** obwiednia 25 m → **R_E=32 m** (narożnik trasy 28.3 m nie mieścił się w 25); margines wyliczony, potem zmierzony (a_brake 2.65). Twierdzenie nietknięte.
