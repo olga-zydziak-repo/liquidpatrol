@@ -2,7 +2,16 @@
 
 Data: 2026-08-05. Poprzednik: `RAPORT_R0.md` (bramka R0.0 PASS, tryb GPU/D3D12), `results/R01/recon_R01.md` (ETAP R — pomiary R1–R5 + mapa portu).
 
-> **STATUS: [PROPOZYCJA] — do ratyfikacji Olgi. Budowa DOPIERO po ratyfikacji.** Wszystkie sekcje oznaczone [PROPOZYCJA] to propozycje wykonawcy oparte na pomiarach recon; liczby-kryteria są **zamrożone przed pomiarem bramkowym** i **dwustronne** (jawny próg pass/fail).
+> **STATUS: RATYFIKOWANE 2026-08-05** (bazowy commit PRE `d7a0b67`) **z aneksami R01-A1…A4** (poniżej — wiążące, wpięte do §3/§5/§7/§8). Rozbieżności (§10) zaakceptowane w brzmieniu z PRE, w tym `COM_OBL_RC_ACT`→Hold/Return wobec braku `COM_OBL_ACT`/`GF_COUNT` w v1.16.2. Tick 20 Hz zaakceptowany (nowy habitat — liczby z LiquidSight się nie przenoszą). Warunek wejścia w budowę: **push do remote** (Olga wykonuje). Sekcje [PROPOZYCJA] pozostają propozycjami wykonawcy opartymi na recon; liczby-kryteria **zamrożone przed pomiarem bramkowym**, **dwustronne**.
+
+---
+
+## ANEKSY R01-A1…A4 (wiążące, ratyfikowane 2026-08-05)
+
+- **A1 — niezmiennik płaszczyzn:** MAVSDK **wyłącznie** arm/disarm/tryby (+heartbeat); setpointy **WYŁĄCZNIE** XRCE przez osłonę; **żadnych komend ruchu po MAVSDK**. Dowód w bramce: trace misji wykazuje **zero motion-komend po ścieżce MAVSDK**. → wpięte do §3, §7.
+- **A2 — zawieranie geometria↔P2:** liczby misji i założenia twierdzenia domykają się **jedną nierównością zawierania**; margines **wyliczony z założeń** (`v_max`, tick 20 Hz, aktywacja ≤125 ms, dynamika hamowania), nie z ręki; jeśli się nie domyka → **poszerzamy obwiednię, nie osłabiamy twierdzenia**. → wpięte do §5, §8.
+- **A3 — warstwa-0 mierzalna:** natywny geofence `GF_*` skonfigurowany **NA ZEWNĄTRZ** obwiedni osłony (obwiednia + zapas), akcja Hold/RTL. Kryterium bramki: **0 odpaleń natywnego GF** we wszystkich scenariuszach (osłona uprzedza). Plus **jeden celowy test warstwy-0** (S4): urwanie strumienia → reakcja natywna po ~1.03 s wg `COM_OBL_RC_ACT`, **zalogowana jako scenariusz, nie jako pad**. → wpięte do §5, §7.
+- **A4 — kamera:** konfiguracja **zamrożona poniżej progu saturacji** wg danych R3 (rozdzielczość/rate z pomiaru); częstotliwość kamery **raportowana** z płaskością w oknie misji — **metryka raportowana, NIE bramkująca** R0.1. → wpięte do §5, §7.
 
 ---
 
@@ -43,6 +52,8 @@ Centralizacja configu: `geo_lim`/obwiednia w **jednym** miejscu, współdzielona
 
 **Wybór: HYBRYDA — setpointy przez XRCE, arm/mode/RTL przez MAVSDK (heartbeat).**
 
+**[A1] NIEZMIENNIK PŁASZCZYZN (wiążący):** MAVSDK obsługuje **wyłącznie** arm/disarm/przełączanie trybów + heartbeat. **Wszystkie setpointy ruchu idą WYŁĄCZNIE przez XRCE przez osłonę** — żadnej komendy ruchu (goto/setpoint/velocity) po ścieżce MAVSDK. `return home`/`abort` realizują tryb RTL/Land przez MAVSDK (przełączenie trybu, nie setpoint ruchu) — dozwolone jako komendy trybu, nie ruchu. Egzekwowane architektonicznie: `setpoint_publisher` (XRCE) to jedyny producent setpointów, za osłoną.
+
 Uzasadnienie z recon R1 (zmierzone):
 - Strumień setpointów XRCE @50 Hz: jitter std **0.21 ms**, mniej warstw niż MAVLink (wprost do uORB) → osłona wpięta w strumień XRCE ma czysty, niskolatencyjny kanał egzekucji.
 - Arm czysto-XRCE **odrzucony** (`No connection to GCS`) → potrzebny heartbeat MAVLink. MAVSDK dostarcza go i uzbraja niezawodnie (R0.0). Zatem MAVSDK zarządza arm/tryb/RTL, XRCE niesie setpointy pod osłoną.
@@ -74,9 +85,10 @@ Osłona tyka z częstotliwością publikacji setpointów (proponuję **20 Hz**; 
 ## §5 — [PROPOZYCJA] Świat + trasa
 
 - **Świat:** `default` (ground+sun, najtańszy) + opcjonalne lekkie znaczniki perymetru (4 słupki w rogach). Kamera `mono_cam` leci w tle jako obciążenie (R3).
-- **Trasa perymetru:** prostokąt **40 m × 40 m** (środek w Home), **4 waypointy narożne**, wysokość **10 m** (AGL), prędkość przelotu **3 m/s**. Pętla zamknięta, kierunek stały.
-- **Obwiednia geofence (osłona + natywny GF):** półbok **25 m** (perymetr 20 m + margines 5 m) w poziomie, **15 m** w pionie. `GF_MAX_HOR_DIST=25`, `GF_MAX_VER_DIST=15`. Osłona-geofence (port P2) egzekwuje **wewnątrz** (przed natywnym GF) na tej samej obwiedni z jawnym marginesem reakcji.
-- **Kamera (stabilny load, R3):** [PROPOZYCJA] `640×480 @ 15 Hz`, `visualize=false` — kryterium stabilności dwustronne w §6.
+- **Trasa perymetru:** prostokąt **40 m × 40 m** (środek w Home), **4 waypointy narożne** w (±20, ±20) m, wysokość **10 m** (AGL), prędkość przelotu **3 m/s**. Pętla zamknięta, kierunek stały. **Maks. promień trasy od Home: R_route = √2·20 = 28.28 m** (narożnik).
+- **[A2] Obwiednia osłony R_E (z nierówności zawierania, NIE z ręki):** margines reakcji Δ = `v_max·t_react + v_max²/(2·a_brake)`, gdzie `v_max=3 m/s`, `t_react ≤ 0.2 s` (tick 50 ms + aktywacja ≤125 ms), `a_brake` = **do zmierzenia w BUILD** (profil hamowania PX4; prowizorycznie konserwatywnie 2.0 m/s²). Prowizorycznie Δ = 3·0.2 + 9/(2·2) = **2.85 m**. Zawieranie: `R_route + Δ ≤ R_E` → 28.28 + 2.85 = 31.13 → **R_E = 32 m** (poziomo), **V_E = 20 m** (pionowo). Osłona-geofence (port P2) egzekwuje na R_E z marginesem Δ. **Uwaga: pierwotna obwiednia 25 m NIE zawierała narożnika trasy (28.3 m) — poszerzona do 32 m zgodnie z A2 (poszerzamy obwiednię, nie osłabiamy twierdzenia).** Jeśli zmierzone `a_brake < 2.0` → Δ rośnie → R_E poszerzana ponownie przed bramką.
+- **[A3] Natywny geofence GF_* NA ZEWNĄTRZ R_E:** `GF_MAX_HOR_DIST = R_E + 5 = 37 m`, `GF_MAX_VER_DIST = V_E + 5 = 25 m`, `GF_ACTION = 2 (Hold)` lub `3 (Return)`. To warstwa-0 ostatniej szansy — osłona ma **uprzedzać** (kryterium 0 odpaleń, §7).
+- **[A4] Kamera — konfiguracja zamrożona poniżej saturacji (R3):** `640×480 @ 15 Hz`, `visualize=false`, `always_on=1`. Uzasadnienie: R3 pokazał saturację przy 1280×960@30 (≈13 Hz avg); 640×480 to ≈4× tańszy render → 15 Hz z zapasem. Częstotliwość + płaskość w oknie misji **raportowane, NIE bramkujące** (§7).
 
 ---
 
@@ -103,11 +115,13 @@ Księgowość trójwynikowa per scenariusz. **Odmowa osłony w S3 to WYNIK POZYT
 - Warunek: **N=3** pełne okrążenia perymetru (4 wp każde), bez REFUSE, bez HOLD niezamierzonego.
 - Kryteria (zamrożone, dwustronne):
   - Wszystkie waypointy osiągnięte, każdy w promieniu **≤ 1.5 m** (PASS) / > 1.5 m lub pominięty (FAIL).
-  - Telemetria pozycji bez przerwy **> 0.5 s** (PASS) / przerwa > 0.5 s (FAIL) — zaostrzenie względem A4 (1 s).
+  - Telemetria pozycji: brak przerwy **> 0.5 s** (PASS) / przerwa > 0.5 s (FAIL) — zaostrzenie względem A4-R0 (1 s).
   - Strumień setpointów: min okres między publikacjami **< 0.5 s** przez cały lot (PASS) / ≥ 0.5 s (FAIL).
+  - **[A1]** trace misji: **0 motion-komend po ścieżce MAVSDK** (PASS) / jakakolwiek komenda ruchu po MAVSDK (FAIL).
+  - **[A3]** **0 odpaleń natywnego GF** (`geofence_result` bez breach) (PASS) / ≥1 odpalenie (FAIL) — osłona uprzedza.
   - 0 padów GPU (sygnatura pada: `dxg -22` koincydentne ze śmiercią procesu).
-  - Kamera-load stabilny: **min/s ≥ 12 Hz** przy celu 15 Hz (PASS) / < 12 Hz (FAIL) — konfiguracja z §5.
   - Księgowość: **SUKCES** (0 ODMOWA, 0 PORAZKA).
+  - **[A4] Raportowane, NIE bramkujące:** częstotliwość kamery + płaskość (min/s, avg) w oknie misji; RTF.
 
 ### S2 — Wymuszony HOLD (utrata strumienia komend / komenda `hold`)
 - Bodziec: w trakcie okrążenia wyślij `hold` (wariant A) LUB odetnij źródło komend (wariant B).
@@ -118,12 +132,20 @@ Księgowość trójwynikowa per scenariusz. **Odmowa osłony w S3 to WYNIK POZYT
   - Księgowość: **HOLD** zaksięgowany odrębnie; wynik końcowy SUKCES (odmowa≠porażka; HOLD≠porażka).
 
 ### S3 — Wymuszona próba wyjścia za płot → REFUSE + akcja bezpieczna
-- Bodziec: planer/komenda żąda waypointu **poza obwiednią** (np. 30 m od Home > 25 m limit).
+- Bodziec: planer/komenda żąda waypointu **daleko poza obwiednią** (np. 45 m od Home ≫ R_E=32 m).
 - Kryteria (to jest sedno R0.1):
-  - Osłona zwraca **REFUSE(GEOFENCE)** i **NIE przepuszcza** setpointu poza płot (PASS) / setpoint przepuszczony lub dron przekracza obwiednię osłony (FAIL).
-  - Akcja bezpieczna wykonana (Hold, potem Return) — dron pozostaje **wewnątrz obwiedni** (max dystans od Home **≤ 25 m**) (PASS) / przekroczenie (FAIL).
-  - **REFUSE wyprzedza natywny GF** — osłona reaguje zanim zadziała `GF_ACTION` (dowód: trace osłony REFUSE przed `geofence_result` breach). Natywny GF pozostaje uzbrojony jako ostatnia siatka (weryfikacja defense-in-depth: gdyby osłona zawiodła, GF by złapał).
+  - Osłona zwraca **REFUSE(GEOFENCE)** i **NIE przepuszcza** setpointu poza płot (PASS) / setpoint przepuszczony lub dron przekracza R_E (FAIL).
+  - Akcja bezpieczna wykonana (Hold, potem Return) — dron pozostaje **wewnątrz obwiedni** (max dystans od Home **≤ R_E = 32 m**) (PASS) / przekroczenie (FAIL).
+  - **[A3] REFUSE wyprzedza natywny GF — 0 odpaleń GF** (`geofence_result` bez breach; dron nie osiąga 37 m) (PASS) / natywny GF odpalił (FAIL). Dowód: trace osłony REFUSE przed jakimkolwiek `geofence_result` breach. Natywny GF pozostaje uzbrojony jako ostatnia siatka (defense-in-depth).
   - Księgowość: **ODMOWA** (rozłączna, nie PORAZKA). Asercja `outcome()`: `(ODMOWA)⇔terminal-REFUSE`.
+
+### S4 — [A3] Celowy test warstwy-0 (natywny failsafe utraty strumienia)
+- Bodziec: **intencjonalne urwanie strumienia setpointów** (osłona przestaje publikować) w bezpiecznym punkcie wewnątrz obwiedni.
+- Kryteria:
+  - `offboard_control_signal_lost` po **~1.0–1.1 s** (zmierzone recon: 1.03 s = `COM_OF_LOSS_T`) → natywna akcja `COM_OBL_RC_ACT` (Hold/Return) (PASS) / brak reakcji lub reakcja > 1.5 s (FAIL).
+  - Dron pozostaje **wewnątrz obwiedni** podczas reakcji (≤ R_E) (PASS) / wyjście (FAIL).
+  - **Zdarzenie zalogowane jako SCENARIUSZ (kontrolowana reakcja warstwy-0), NIE jako pad.** exit-code/dmesg tylko jeśli towarzyszy `dxg -22` koincydentne ze śmiercią procesu.
+- Cel S4: dowieść, że warstwa-0 (natywny failsafe) działa i jest mierzalna — komplementarnie do S1–S3, gdzie osłona ma ją uprzedzać (0 odpaleń GF). S4 to jedyny scenariusz, w którym warstwa natywna reaguje — celowo.
 
 ### Reguła nadrzędna księgowości
 Każdy scenariusz klasyfikowany trójwynikowo. **PORAZKA** = dryf/nieosiągnięcie/pad BEZ odmowy LUB wrong-action (setpoint za płot przepuszczony). **ODMOWA** = osłona zatrzymała misję (terminal REFUSE). **SUKCES** = cel osiągnięty bez odmowy i bez wrong-action.
@@ -139,7 +161,15 @@ Każdy scenariusz klasyfikowany trójwynikowo. **PORAZKA** = dryf/nieosiągnięc
 | **P5** | Konformancja kod↔model: model z3 ≡ `shield.step()` egzekutora PX4 na wszystkich przejściach | z3 concrete-eval (port `conformance.py`) | **OBOWIĄZKOWO OD NOWA** przeciw nowemu egzekutorowi |
 | **P2-analog** | Geofence jako **twierdzenie warunkowe**: „dron respektujący osłonę nie opuszcza obwiedni" z **jawnymi założeniami** | bariera+próg z3 NRA (port `geofence.py`), przepisane na dynamikę PX4 | **od nowa**, założenia: (a) clamp prędkości `V_max` (zmierzyć), (b) czas reakcji osłony ≤ tick (50 ms) + margines do `COM_OF_LOSS_T`, (c) dystans hamowania z profilu decel PX4 (zmierzyć), (d) margines obwiedni 5 m |
 
-**Żadna liczba nie przenosi się z LiquidSight** — `V_max`, decel, tick, margines, obwiednia = zmierzone/ustalone dla PX4 w BUILD, wpięte jako `constants_rational` nowych certów. Kształt dowodów (model=lustro kodu → indukcja/bariera UNSAT → cert z hashem+wersją z3) przenosi się 1:1. P3 (uczony pilot) **poza zakresem R0.1**.
+**[A2] Rdzeń zobowiązania P2-analog = jedna nierówność zawierania** (spina geometrię §5 z twierdzeniem):
+```
+R_route + Δ(v_max, t_react, a_brake)  ≤  R_E        (osłona zawiera trasę + margines)
+R_E + zapas                            ≤  R_GF       (natywny GF na zewnątrz, A3)
+gdzie Δ = v_max·t_react + v_max²/(2·a_brake)
+```
+Prowizorycznie: 28.28 + 2.85 = 31.13 ≤ **R_E=32** ; 32 + 5 = **R_GF=37**. Twierdzenie P2-analog: „dron respektujący osłonę (barierę na R_E z marginesem Δ) nigdy nie opuszcza R_E" — dowód bariera+próg z3 NRA. **Margines Δ wyliczony z założeń, nie przyjęty z ręki.** `a_brake` mierzone w BUILD; jeśli nierówność się nie domyka → **poszerzamy R_E (i R_GF), nie osłabiamy twierdzenia** (A2). Bramka S3 empirycznie waliduje twierdzenie (dron ≤ R_E), S4 waliduje warstwę-0.
+
+**Żadna liczba nie przenosi się z LiquidSight** — `v_max`, `a_brake`, tick, Δ, R_E, R_GF = zmierzone/ustalone dla PX4 w BUILD, wpięte jako `constants_rational` nowych certów. Kształt dowodów (model=lustro kodu → indukcja/bariera UNSAT → cert z hashem+wersją z3) przenosi się 1:1. P3 (uczony pilot) **poza zakresem R0.1**.
 
 ---
 
@@ -160,7 +190,8 @@ Każdy scenariusz klasyfikowany trójwynikowo. **PORAZKA** = dryf/nieosiągnięc
 1. `COM_OBL_ACT` i `GF_COUNT` z promptu **nie istnieją** w PX4 v1.16.2 — używamy `COM_OBL_RC_ACT` (0=Position default) i 5 param `GF_*` (bez GF_COUNT). (recon R1/R2)
 2. Dryf kamery „15.8→11.8 Hz" przeformułowany na **wariancję saturacji renderu** (avg ~13 Hz, min/s 4) — nie monotoniczny dryf. Stabilizacja przez konfigurację (§5). (recon R3)
 3. Nowe (poza promptem): arm czysto-XRCE blokowany brakiem heartbeatu GCS → wymusza hybrydę XRCE+MAVSDK (§3). (recon R1)
-4. `COM_OBL_RC_ACT` domyślnie 0=Position — proponuję zmianę na 5=Hold/3=Return dla patrolu (do zamrożenia). (§3/§7)
+4. `COM_OBL_RC_ACT` domyślnie 0=Position — zmiana na 5=Hold/3=Return dla patrolu (zaakceptowane przy ratyfikacji). (§3/§7)
+5. **Korekta geometrii wymuszona przez A2 (przy ratyfikacji):** pierwotna obwiednia 25 m NIE zawierała narożnika trasy 40×40 m (28.3 m od Home). Zgodnie z A2 obwiednia osłony poszerzona do **R_E=32 m**, natywny GF do **37 m** — margines wyliczony z założeń, twierdzenie nietknięte. (§5/§8)
 
 ---
 
@@ -172,4 +203,4 @@ Każdy scenariusz klasyfikowany trójwynikowo. **PORAZKA** = dryf/nieosiągnięc
 
 ---
 
-**Po ratyfikacji → budowa wg §2–§8, bramka §7 (kryteria zamrożone), reguły §9, certy §8. Push robi Olga. STOP na PRE.**
+**RATYFIKOWANE z aneksami A1–A4. Warunek wejścia w budowę: push do remote (Olga wykonuje teraz). Następnie budowa wg §2–§8, bramka §7 (S1–S4, kryteria zamrożone), reguły §9, certy §8. STOP do czasu push.**
