@@ -1,0 +1,56 @@
+[  864.102164] memcpy: detected field-spanning write (size 16) of single field "current_pos" at drivers/hv/dxgkrnl/dxgvmbus.c:3093 (size 8)
+[  864.102215] WARNING: CPU: 21 PID: 3580 at drivers/hv/dxgkrnl/dxgvmbus.c:3093 dxgvmb_send_wait_sync_object_gpu+0x23d/0x290
+[  864.102234] Modules linked in: intel_rapl_msr intel_rapl_common kvm_intel kvm irqbypass battery ac sch_fq_codel autofs4 br_netfilter bridge stp llc ip_tables tun
+[  864.102253] CPU: 21 UID: 1000 PID: 3580 Comm: queue1:src Tainted: G        W           6.18.33.2-microsoft-standard-WSL2 #1 PREEMPT(none) 
+[  864.102256] Tainted: [W]=WARN
+[  864.102258] RIP: 0010:dxgvmb_send_wait_sync_object_gpu+0x23d/0x290
+[  864.102261] Code: ff b9 08 00 00 00 48 c7 c2 58 45 a8 a2 4c 89 f6 48 c7 c7 60 d3 9b a2 4c 89 85 60 ff ff ff c6 05 79 72 6a 01 01 e8 03 a5 25 ff <0f> 0b 4c 8b 85 60 ff ff ff e9 a2 fe ff ff b8 ea ff ff ff eb 8d 31
+[  864.102262] RSP: 0018:ffffd1cf8eb3b9c8 EFLAGS: 00010282
+[  864.102264] RAX: 0000000000000000 RBX: ffff893d08b93000 RCX: 0000000000000027
+[  864.102265] RDX: ffff893fe5f5cd08 RSI: 0000000000000001 RDI: ffff893fe5f5cd00
+[  864.102265] RBP: ffffd1cf8eb3ba80 R08: 0000000000000000 R09: 0000000000000003
+[  864.102266] R10: ffffd1cf8eb3b838 R11: ffffffffa3553708 R12: 0000000000000002
+[  864.102266] R13: 0000000000000008 R14: 0000000000000010 R15: 0000000000000010
+[  864.102267] FS:  00007299bddff6c0(0000) GS:ffff894042307000(0000) knlGS:0000000000000000
+[  864.102268] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+[  864.102268] CR2: 00007299d5cb72d8 CR3: 0000000198766005 CR4: 0000000000b72ef0
+[  864.102271] Call Trace:
+[  864.102274]  <TASK>
+[  864.102280]  dxgkio_wait_sync_object_gpu+0x296/0x3f0
+[  864.102282]  dxgk_ioctl+0x66/0x110
+[  864.102290]  dxgk_unlocked_ioctl+0x12/0x20
+[  864.102291]  __x64_sys_ioctl+0xa1/0xf0
+[  864.102300]  x64_sys_call+0x102c/0x20f0
+[  864.102307]  do_syscall_64+0x73/0x990
+[  864.102315]  ? _raw_spin_unlock+0x12/0x30
+[  864.102324]  ? free_frozen_page_commit+0x85/0x3c0
+[  864.102329]  ? _raw_spin_unlock+0x12/0x30
+[  864.102331]  ? __free_frozen_pages+0x1e5/0x690
+[  864.102332]  ? insert_vmap_area+0xbd/0x110
+[  864.102335]  ? vfree.part.0+0xe9/0x290
+[  864.102336]  ? vfree+0x30/0x50
+[  864.102337]  ? dxgvmb_send_lock2+0x87/0x2a0
+[  864.102339]  ? __rseq_handle_notify_resume+0xaf/0x490
+[  864.102345]  ? dxgkio_lock2+0x11c/0x240
+[  864.102346]  ? dxgk_ioctl+0x66/0x110
+[  864.102347]  ? exit_to_user_mode_loop+0xc4/0x100
+[  864.102351]  ? do_syscall_64+0x28a/0x990
+[  864.102353]  ? do_syscall_64+0x28a/0x990
+[  864.102354]  ? irqentry_exit_to_user_mode+0x1d8/0x200
+[  864.102356]  ? irqentry_exit+0x3f/0x50
+[  864.102356]  ? exc_page_fault+0x7f/0x170
+[  864.102357]  entry_SYSCALL_64_after_hwframe+0x76/0x7e
+[  864.102358] RIP: 0033:0x729ae1b24f1d
+[  864.102361] Code: 04 25 28 00 00 00 48 89 45 c8 31 c0 48 8d 45 10 c7 45 b0 10 00 00 00 48 89 45 b8 48 8d 45 d0 48 89 45 c0 b8 10 00 00 00 0f 05 <89> c2 3d 00 f0 ff ff 77 1a 48 8b 45 c8 64 48 2b 04 25 28 00 00 00
+[  864.102362] RSP: 002b:00007299bddfbf10 EFLAGS: 00000246 ORIG_RAX: 0000000000000010
+[  864.102363] RAX: ffffffffffffffda RBX: 00007299aa691240 RCX: 0000729ae1b24f1d
+[  864.102363] RDX: 00007299bddfbfa0 RSI: 00000000c050473b RDI: 0000000000000024
+[  864.102364] RBP: 00007299bddfbf60 R08: 00007299aa69cfd0 R09: 0000000000000002
+[  864.102364] R10: 0000729798056498 R11: 0000000000000246 R12: 00000000000002d0
+[  864.102364] R13: 000000000000002c R14: 000000000000002c R15: 00007299bddfbfa0
+[  864.102368]  </TASK>
+[  864.102368] ---[ end trace 0000000000000000 ]---
+[ 1197.503269] misc dxg: dxgk: dxgkio_is_feature_enabled: Ioctl failed: -22
+[ 1197.504581] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -22
+[ 1197.505020] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -22
+[ 1197.505479] misc dxg: dxgk: dxgkio_query_adapter_info: Ioctl failed: -22
