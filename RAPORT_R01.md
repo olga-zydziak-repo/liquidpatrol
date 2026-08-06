@@ -81,13 +81,20 @@ Cert `r01/proofs/certs/P2.json` (z3 5.0.0), a_brake=2.0 (wartość kodu), A_min=
 
 **Twierdzenie (warunkowe):** `Inv(p,v) = 0 ≤ v ≤ v_max ∧ p + v²/(2·a_brake) ≤ R_E  ⇒  p ≤ R_E` (dron respektujący osłonę nie opuszcza obwiedni).
 **Założenia jawne:**
-1. |v| ≤ v_max = 3.0 m/s (clamp `MPC_XY_VEL_MAX`, zmierzony);
+1. |v| ≤ v_max; clamp `MPC_XY_VEL_MAX` **ustawiony na 3.0 m/s** (parametr zadany). Uwaga: tracking PX4 **przekracza clamp** — zmierzone v_REFUSE = 3.084 m/s (§5.1); przeliczenie dla tej wartości poniżej;
 2. t_react = 0.2 s złożony ze zmierzonych (tel_gap+tick+setpoint = 0.149 ≤ 0.2, §5.2);
 3. a_brake ≥ 2.0 m/s² (ZMIERZONY 2.65, §5.1 — dolne oszacowanie);
 4. hamowanie ciągłe (bariera p + v²/2a zachowana wzdłuż hamowania);
 5. rzut na promień (najgorsza oś); **native GF (R_GF = 37 m) jako backstop A3**.
 
-Twierdzenie dowiedzione dla wartości kodu a_brake=2.0; zwalidowane pomiarem 2.65 ≥ 2.0 (`empirical_validation` w P2.json). Model wymierny: v_max=3, t_react=1/5, R_route=2829/100 (≥ 20√2, konserwatywnie), R_E=32.
+**Przekroczenie clampa (tracking) — odnotowane jawnie i przeliczone.** Zmierzona prędkość w chwili REFUSE **v_REFUSE = 3.084 m/s przekracza zadany clamp v_max = 3.0 o +2.8%** (tolerancja trackingu kontrolera pozycji PX4). Nierówność zawierania A2 domyka się także dla zmierzonej v = 3.084 (Δ = v·t_react + v²/(2·a)):
+```
+a = 2.65 (zmierzony):  Δ = 3.084·0.2 + 3.084²/(2·2.65) = 2.411 → R_route+Δ = 30.70 m ≤ 32
+a = 2.0  (kod):        Δ = 3.084·0.2 + 3.084²/(2·2.0)  = 2.995 → R_route+Δ = 31.28 m ≤ 32
+```
+**Robustność bariery na overshoot:** re-dowód z3 przy **v_max = 3.1 m/s** (obejmuje 3.084 z zapasem) — **PROVED**, wszystkie 6 zobowiązań unsat, A_min = 1.555, a_brake = 2.0 ≥ 1.555. Cert `r01/proofs/certs/P2_vmax3p1.json`.
+
+Twierdzenie dowiedzione dla wartości kodu a_brake=2.0; zwalidowane pomiarem 2.65 ≥ 2.0 (`empirical_validation` w P2.json) oraz odporne na zmierzone przekroczenie clampa (v=3.084, i re-dowód przy v_max=3.1). Model wymierny: v_max=3, t_react=1/5, R_route=2829/100 (≥ 20√2, konserwatywnie), R_E=32.
 
 ## 6. Badanie kamery (S3-3) → wejście do R0.2 (NIE bramka R0.1)
 

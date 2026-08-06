@@ -1,0 +1,50 @@
+{
+  "property": "P2-analog",
+  "verdict": "PROVED",
+  "method": "barrier induction + threshold (z3 NRA), twierdzenie warunkowe",
+  "z3_pip": "5.0.0.0",
+  "z3_lib": "5.0.0",
+  "obligations": {
+    "base_start_in_route": "unsat",
+    "step_allow": "unsat",
+    "step_brake": "unsat",
+    "safety_p_le_R_E": "unsat",
+    "threshold_A_ge_amin_safe": "unsat",
+    "threshold_A_lt_amin_unsafe": "unsat"
+  },
+  "a_brake_used_ms2": 2.0,
+  "a_brake_source": "config (provisional)",
+  "A_min_threshold_ms2": 1.5550161812297734,
+  "a_brake_ge_A_min": true,
+  "constants_rational": {
+    "v_max": "31/10",
+    "t_react": "1/5",
+    "R_route": "2829/100",
+    "R_E": "32",
+    "a_brake": "2"
+  },
+  "theorem": "Inv(p,v)=0≤v≤v_max ∧ p+v²/(2·a_brake)≤R_E  ⇒  p≤R_E (dron nie opuszcza obwiedni)",
+  "A2_inequality": "R_route + v_max·t_react + v_max²/(2·a_brake) ≤ R_E (step_allow)",
+  "assumptions": [
+    "|v|≤v_max=3.1 (clamp MPC_XY_VEL_MAX, zmierzony)",
+    "t_react=0.2s złożony ze zmierzonych (tel_gap+tick+setpoint, zapas)",
+    "a_brake≥2.0 m/s² (ZMIERZONY, brake_test)",
+    "hamowanie ciągłe (bariera p+v²/2a zachowana)",
+    "rzut na promień (najgorsza oś); native GF (R_GF=37) jako backstop A3"
+  ],
+  "code_refs": {
+    "shield_barrier": "r01/shield.py:_geofence_violation (pos+v²/2a≤R_E)",
+    "config": "r01/config.py",
+    "brake_measure": "r01/brake_test.py"
+  },
+  "empirical_validation": {
+    "a_brake_measured_ms2": 2.65,
+    "v_refuse_ms": 3.084,
+    "stop_dist_m": 1.794,
+    "peak_decel_ms2": 5.802,
+    "assumed_ge_measured": true,
+    "note": "kod używa a_brake=2.0 (konserwatywne ≤ zmierzone) → bezpieczne"
+  },
+  "t_react_composition": "tel_gap(0.046)+tick(0.05)+setpoint(0.053)=0.149s ≤ budżet 0.2s (zmierzone S1)",
+  "model_sha256": "150b22134e628ef99466cbce73e9031cf174a78c0acc650621ab62aeb4c7ccde"
+}

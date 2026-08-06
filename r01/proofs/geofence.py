@@ -19,13 +19,15 @@ import z3
 from r01.config import V_MAX, T_REACT_S, R_E as CFG_R_E, A_BRAKE as CFG_A_BRAKE
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-CERT = os.path.join(_HERE, "certs", "P2.json")
+_VMP = os.environ.get("V_MAX_PROVE")     # opcjonalny override v_max (robustność, np. 3.1 na overshoot)
+CERT = os.path.join(_HERE, "certs",
+                    (f"P2_vmax{_VMP.replace('.', 'p')}.json" if _VMP else "P2.json"))
 
 # --- stałe wymierne (nowy habitat PX4) --------------------------------------
 def _fr(x):
     return Fraction(str(x))
 
-VELF = _fr(V_MAX)                      # v_max = 3
+VELF = _fr(_VMP) if _VMP else _fr(V_MAX)    # v_max = 3 (override: V_MAX_PROVE)
 DTF = _fr(T_REACT_S)                   # t_react (złożony ze zmierzonych, budżet 0.2 s)
 # R_route = 20√2 (narożnik) — konserwatywna nadaproksymacja wymierna (większy geo_lim = trudniej = bezpiecznie)
 RROUTE = Fraction(2829, 100)           # ≥ 28.28427...
