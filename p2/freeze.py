@@ -23,7 +23,10 @@ SPLIT_SEED = 1234
 HORIZONS = [13, 25, 50]              # {0.5,1,2}s @25fps
 PARAM_BUDGET = 30000
 PARAM_TOL = 0.02
-BASELINE_VARIANT = "R=sigma^2 (prawdziwe sigma)"   # A3 domyślny
+# A3 (mocny baseline): R=σ² (prawdziwe σ) ORAZ Q strojone na TRAIN (grid q_vel, wybór po ADE) —
+# empirycznie potwierdzone (synthetic CV): sam default Q => Kalman słomiany (przegrywa ZOH);
+# strojony Q => Kalman bije ZOH ~12x na predykcji. Test nietykany.
+BASELINE_VARIANT = "R=sigma^2 (prawdziwe sigma) + Q strojone na train (arms.tune_kalman_q, A3)"
 
 
 def provenance():
