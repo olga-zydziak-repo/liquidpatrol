@@ -68,6 +68,8 @@ Werdykt offline **wybiera kandydata** rdzenia do R0.2 — tu: **brak zysku z rdz
 ### 7.1 Konsekwencja do §7 (kierunek do R0.2)
 **Zwycięzca pomiaru = ZOH-age** — czyli **semantyka kanału celu z jawnym wiekiem obserwacji**, już przeniesiona w R0.1 (kanał 5-dim (cx,cy,w,h,age)). **R0.2 wchodzi z tym kanałem BEZ rdzenia uczonego**; jedynym komponentem uczonym pozostaje **detektor** (percepcja). Slot pilota/estymatora offline nie wnosi zysku na tym proxy → nie wchodzi rdzeń uczony, wchodzi kanał ZOH-age.
 
+**Kandydaci GRU+Δt / CfC zaparkowani jawnie** (eksploracja: ≈ ZOH, > Kalman/IMM w średniej, ale NULL vs ZOH). Ewentualny **test w pętli — wyłącznie z przyczyny wykazanej w R0.2** (konkretny deficyt kanału ZOH-age ujawniony w pętli sterowania), nie „na zapas".
+
 ## 8. Rozbieżności (rejestr)
 
 1. **recon↔dane (ledger #1):** recon R2 oszacował **avg 72.3 s** długości sekwencji (z „Total annotation span >23000 s / 318" — strona `emergentmind.com/topics/anti-uav-rgbt-dataset`). **Zmierzone dane Anti-UAV300:** sekwencje **≤1000 kl = ≤40 s** (test mean ~37.5 s, median 40 s). Pierwotna liczba (23000 s span) **przeszacowała** — prawdopodobnie agregat innej/większej wersji rodziny Anti-UAV lub inne liczenie. Horyzonty {13,25,50} kl i próg T_min=30 s pozostają poprawne (84 test kwalifikujących); rozbieżność bez wpływu na protokół.
@@ -91,6 +93,8 @@ Werdykt offline **wybiera kandydata** rdzenia do R0.2 — tu: **brak zysku z rdz
 **Odpowiedź na cel aneksu: TAK — filtracyjny precondition ODCIĄŁ ramiona dobre na osi tezy.** GRU+Δt i CfC, mierzone na osi werdyktu (predykcja w dziury), **biją ZOH i Kalman/IMM w średniej** — a zostały odrzucone (FAIL_EARLY) bo nie biły ZOH na osi ORTOGONALNEJ (filtracja). To empiryczne potwierdzenie lekcji §8.5.
 
 **ALE — dwustronnie, zgodnie z kryterium §7:** wszystkie marginesy (GRU/CfC vs ZOH ~0.007; vs Kalman ~0.036 przy pooled_std ~0.04–0.06) **mieszczą się w pooled_std → NULL**. **Żadne ramię uczone nie bije ZOH-age o > pooled_std nawet na skorygowanej osi.** Mamba (oba) gorsze; Mamba+Δt numerycznie niestabilny (std 0.705).
+
+**GRU+Δt i CfC nierozróżnialne** (Δ = 0.0004 ≪ rozrzut ~0.037) — **bez rankingu między nimi**.
 
 **Wniosek eksploracji:** (a) precondition był wadliwą bramką (odciął GRU/CfC ≈ ZOH, nie „słabe"); (b) po korekcie osi wynik **nadal NULL vs ZOH** — werdykt §7 (brak zdecydowanego zysku z rdzenia uczonego, ZOH-age = wybór offline) **skorygowana oś POTWIERDZA**, nie obala. Zysk GRU/CfC nad Kalman/IMM (motion-models) jest realny w średniej, ale w granicach szumu.
 
