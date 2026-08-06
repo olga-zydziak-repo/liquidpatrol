@@ -65,12 +65,34 @@ Data: 2026-08-06. Poprzedniki: `PRE_P2.md` (ratyfikowany + aneksy A1–A4), `p2/
 
 Werdykt offline **wybiera kandydata** rdzenia do R0.2 — tu: **brak zysku z rdzeni uczonych; kandydatem offline jest ZOH-age** (najprostszy). **Nie przesądza to pętli** — możliwa **inwersja proxy↔pętla** (rdzeń słaby na proxy predykcji-w-dziury może być użyteczny w pętli sterowania i odwrotnie; `RAPORT_3D`). **Figura na publicznym wideo raportuje TYLKO to, co zmierzono offline** (ZOH bije uczone i Kalman/IMM na predykcji-w-dziury Anti-UAV IR), NIE twierdzi o wydajności w pętli. Arbitrem finalnym jest bramka w pętli zamkniętej.
 
+### 7.1 Konsekwencja do §7 (kierunek do R0.2)
+**Zwycięzca pomiaru = ZOH-age** — czyli **semantyka kanału celu z jawnym wiekiem obserwacji**, już przeniesiona w R0.1 (kanał 5-dim (cx,cy,w,h,age)). **R0.2 wchodzi z tym kanałem BEZ rdzenia uczonego**; jedynym komponentem uczonym pozostaje **detektor** (percepcja). Slot pilota/estymatora offline nie wnosi zysku na tym proxy → nie wchodzi rdzeń uczony, wchodzi kanał ZOH-age.
+
 ## 8. Rozbieżności (rejestr)
 
 1. **recon↔dane (ledger #1):** recon R2 oszacował **avg 72.3 s** długości sekwencji (z „Total annotation span >23000 s / 318" — strona `emergentmind.com/topics/anti-uav-rgbt-dataset`). **Zmierzone dane Anti-UAV300:** sekwencje **≤1000 kl = ≤40 s** (test mean ~37.5 s, median 40 s). Pierwotna liczba (23000 s span) **przeszacowała** — prawdopodobnie agregat innej/większej wersji rodziny Anti-UAV lub inne liczenie. Horyzonty {13,25,50} kl i próg T_min=30 s pozostają poprawne (84 test kwalifikujących); rozbieżność bez wpływu na protokół.
 2. **Dane: opcja 2 (pobranie)** zamiast opcji 1 (zrzut) — zrzut niewykonany; pobrano samodzielnie z gwardią miejsca (stall Drive na 990M → jedno wznowienie `--continue`).
 3. **latent-ODE** — patrz §6 (bug numeryczny, wynik niemiarodajny dla tego ramienia).
 4. **Duch G2 (walidacja pozytywna):** naturalne dziury (mediana 13, średnia 25.6 kl) **pokrywają siatkę L {13,25,50}** — syntetyczne maski realistyczne.
+5. **LEKCJA (precondition ⟂ oś tezy):** filtracyjny precondition okazał się **osią ORTOGONALNĄ do tezy**. ZOH na filtracji siedzi na podłodze szumu (nie do pobicia przy erratycznej dynamice, niezależnie od jakości predykcji ramienia) → precondition odcina ramiona **zanim** zmierzymy je na osi werdyktu (predykcja w dziury). **Nauka do przyszłych PRE: precondition MUSI leżeć na osi werdyktu, nie obok niej** (np. „bij ZOH na predykcji w dziury", nie „na filtracji"). Aneks eksploracyjny (poniżej) sprawdza empirycznie, czy ten precondition odciął ramię dobre na osi tezy.
+
+## EKSPLORACJA (POZA pre-rejestracją — werdykt §7 NIETYKALNY)
+
+> Aneks eksploracyjny **poza zamrożonym protokołem**; **nie zmienia werdyktu §7** (który stoi: wszystkie uczone FAIL_EARLY, teza niepotwierdzona). Cel: czy filtracyjny precondition (§8.5) odciął ramię dobre na osi tezy? Metoda: deterministyczna re-produkcja 4 miarodajnych ramion (identyczne seedy/config/40 epok co bieg pre-rejestrowany → identyczne wagi; `run_gate` nie zapisywał checkpointów), ewaluacja ADE/FDE predykcji w dziury na teście × seedach masek, **ignorując precondition**. latent-ODE wykluczony (bug integracji, §6.1). Wynik: `p2/frozen/gate_explore.json`.
+
+**Wyniki (ADE predykcji w dziury, test 84 × 5 seedów masek; latent-ODE wykluczony):**
+| Ramię | ADE (mean ± std) | margines vs ZOH (0.1073) | vs Kalman/IMM | FDE@{13,25,50} |
+|---|---|---|---|---|
+| **GRU+Δt** | **0.1004 ± 0.037** | **+0.0069 (bije w średniej)** | bije Kalman(0.136)+IMM(0.156) | 0.091 / 0.099 / 0.112 |
+| **CfC** | **0.1008 ± 0.038** | **+0.0065 (bije w średniej)** | bije Kalman+IMM | 0.091 / 0.100 / 0.112 |
+| Mamba time-blind | 0.1449 ± 0.072 | −0.0376 (gorszy) | ~Kalman | 0.147 / 0.139 / 0.149 |
+| Mamba+Δt | 0.2556 ± 0.705 | −0.148 (niestabilny) | gorszy | 0.30 / 0.23 / 0.24 |
+
+**Odpowiedź na cel aneksu: TAK — filtracyjny precondition ODCIĄŁ ramiona dobre na osi tezy.** GRU+Δt i CfC, mierzone na osi werdyktu (predykcja w dziury), **biją ZOH i Kalman/IMM w średniej** — a zostały odrzucone (FAIL_EARLY) bo nie biły ZOH na osi ORTOGONALNEJ (filtracja). To empiryczne potwierdzenie lekcji §8.5.
+
+**ALE — dwustronnie, zgodnie z kryterium §7:** wszystkie marginesy (GRU/CfC vs ZOH ~0.007; vs Kalman ~0.036 przy pooled_std ~0.04–0.06) **mieszczą się w pooled_std → NULL**. **Żadne ramię uczone nie bije ZOH-age o > pooled_std nawet na skorygowanej osi.** Mamba (oba) gorsze; Mamba+Δt numerycznie niestabilny (std 0.705).
+
+**Wniosek eksploracji:** (a) precondition był wadliwą bramką (odciął GRU/CfC ≈ ZOH, nie „słabe"); (b) po korekcie osi wynik **nadal NULL vs ZOH** — werdykt §7 (brak zdecydowanego zysku z rdzenia uczonego, ZOH-age = wybór offline) **skorygowana oś POTWIERDZA**, nie obala. Zysk GRU/CfC nad Kalman/IMM (motion-models) jest realny w średniej, ale w granicach szumu.
 
 ## 9. Konkluzja
 
