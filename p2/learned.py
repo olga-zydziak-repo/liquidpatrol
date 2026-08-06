@@ -69,6 +69,22 @@ class MambaS6Core(nn.Module):
         return torch.stack(ys, 1)
 
 
+class LatentODECore(nn.Module):
+    """Mały latent-ODE: z całkowany Eulerem o Δt (age) przez ode-func, aktualizowany obserwacją."""
+    def __init__(self, d=68, h_ode=210):
+        super().__init__(); self.hdim = d
+        self.enc = nn.Linear(5, d)
+        self.ode = nn.Sequential(nn.Linear(d, h_ode), nn.Tanh(), nn.Linear(h_ode, d))
+    def forward(self, x):
+        B, T, _ = x.shape; z = x.new_zeros(B, self.hdim); ys = []
+        for t in range(T):
+            dt = (x[:, t, 4:5].clamp(0, 100) / 25.0)
+            z = z + dt * self.ode(z)                 # Euler o Δt (age)
+            z = z + torch.tanh(self.enc(x[:, t]))     # aktualizacja obserwacją (last_obs+age)
+            ys.append(z)
+        return torch.stack(ys, 1)
+
+
 class LearnedArm(nn.Module):
     def __init__(self, core, name):
         super().__init__(); self.core = core; self.name = name
@@ -89,10 +105,11 @@ def build(name):
     if name == "CfC":          return LearnedArm(CfCCore(116), name)
     if name == "Mamba-notime": return LearnedArm(MambaS6Core(150, 8, time_aware=False), name)
     if name == "Mamba+dt":     return LearnedArm(MambaS6Core(150, 8, time_aware=True), name)
+    if name == "latent-ODE":   return LearnedArm(LatentODECore(68, 210), name)
     raise ValueError(name)
 
 
-LEARNED = ["GRU+dt", "CfC", "Mamba-notime", "Mamba+dt"]
+LEARNED = ["GRU+dt", "CfC", "Mamba-notime", "Mamba+dt", "latent-ODE"]
 
 
 def nparams(m): return sum(p.numel() for p in m.parameters())

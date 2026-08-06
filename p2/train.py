@@ -52,17 +52,37 @@ def val_fde25(arm, val_eps):
     return float(np.mean(errs)) if errs else np.inf
 
 
+WIN = 200        # okno BPTT
+BATCH = 32
+
+
+def _windows(train_eps):
+    """Tnie epizody na okna WIN; zwraca stos (N,WIN,5) X i (N,WIN,OUT) Y (padding NaN w Y)."""
+    Xs, Ys = [], []
+    for e in train_eps:
+        X = np.nan_to_num(e["X"], nan=0.0).astype(np.float32); Y = targets(e).astype(np.float32)
+        T = X.shape[0]
+        for s in range(0, T, WIN):
+            xw = X[s:s + WIN]; yw = Y[s:s + WIN]
+            if xw.shape[0] < WIN:
+                pad = WIN - xw.shape[0]
+                xw = np.pad(xw, ((0, pad), (0, 0))); yw = np.pad(yw, ((0, pad), (0, 0)), constant_values=np.nan)
+            Xs.append(xw); Ys.append(yw)
+    return torch.tensor(np.stack(Xs)), torch.tensor(np.stack(Ys))
+
+
 def train_arm(name, train_eps, val_eps, seed, epochs=EPOCHS):
     torch.manual_seed(seed); np.random.seed(seed)
     arm = build(name); opt = torch.optim.AdamW(arm.parameters(), lr=1e-3)
-    Xtr, Ytr = to_tensors(train_eps)
+    Xw, Yw = _windows(train_eps); N = Xw.shape[0]
     best = {"fde": np.inf, "epoch": -1, "state": None}
     for ep in range(epochs):
-        arm.train(); perm = np.random.permutation(len(Xtr))
-        for i in perm:
-            opt.zero_grad(); out = arm(Xtr[i][None])[0]
-            loss = masked_loss(out, Ytr[i]); loss.backward(); opt.step()
-        arm.eval(); fde = val_fde25(arm, val_eps)          # JAWNY selektor
+        arm.train(); perm = torch.randperm(N)
+        for b in range(0, N, BATCH):
+            idx = perm[b:b + BATCH]
+            opt.zero_grad(); out = arm(Xw[idx])
+            loss = masked_loss(out, Yw[idx]); loss.backward(); opt.step()
+        arm.eval(); fde = val_fde25(arm, val_eps)          # JAWNY selektor epoki
         if fde < best["fde"]:
             best = {"fde": fde, "epoch": ep, "state": {k: v.clone() for k, v in arm.state_dict().items()}}
     arm.load_state_dict(best["state"])                      # best-val
