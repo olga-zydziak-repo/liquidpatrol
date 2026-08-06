@@ -2,15 +2,26 @@
 
 Data: 2026-08-06. Poprzednik: `p2/recon_P2.md` (ETAP R). Kontekst: `RAPORT_R01.md` (port R0.1 zamknięty).
 
-> **SZKIELET ZAMROŻONY** (od Olgi i CC). Wykonawca **nie proponuje alternatyw struktury** — wypełnia sloty **[PROPOZYCJA]** liczbami z reconu. **STATUS: do ratyfikacji. Budowa po ratyfikacji. STOP po PRE.**
+> **SZKIELET ZAMROŻONY** (od Olgi i CC). Wykonawca **nie proponuje alternatyw struktury** — wypełnia sloty **[PROPOZYCJA]** liczbami z reconu. **STATUS: RATYFIKOWANE 2026-08-06 z aneksami P2-A1…A4** (poniżej — wiążące, wpięte do §1/§2/§5/§6/§9). Rozbieżności (1)–(5) zaakceptowane w brzmieniu z PRE (w tym 12.5→13 i „anotacje, nie klatki"). Wariant B zatwierdzony, A jako fallback. **Budowa po naniesieniu aneksów; push teraz (Olga). STOP.**
 >
 > Sens P2: **jeden rdzeń zasila dwa tory** — figura na publicznym wideo (offline) + komponent kanału celu w R0.2 (pętla). Werdykt offline **wybiera kandydata**, nie przesądza pętli (lekcja 3d, §8).
 
 ---
 
+## ANEKSY P2-A1…A4 (wiążące, ratyfikowane 2026-08-06)
+
+- **A1 — modalność + licencja:** kanoniczna modalność = **IR**; RGB co najwyżej jako **osobno raportowany split** (nie miesza się z werdyktem IR). Współrzędne (cx,cy,w,h) **znormalizowane do rozdzielczości modalności IR**. Anotacje **challenge per-klatka** (rozbieżność 4). Licencja: **kod MIT ≠ warunki samego datasetu** — figura z **krzywych/metryk = bez ryzyka**; ewentualne **przykładowe klatki** w publikacji = do sprawdzenia dopiero przy pisaniu. → §1.
+- **A2 — krok 0 = PRE-uzupełnienie:** reguły decyzyjne kroku 0 zapisane **Z GÓRY i deterministyczne** (w tym reguła progu długości, gdy sekwencji ≥30 s za mało). Krok 0 kończy się **commitem ZAMRAŻAJĄCYM splity, maski i statystyki PRZED pierwszym treningiem**, i **ten commit idzie na push przed treningiem** — zewnętrzny znacznik zamrożenia przed pomiarem. **Kryteria werdyktu po kroku 0 NIETYKALNE.** → §2, §9.
+- **A3 — baseline mocny:** Kalman CV / IMM dostają **prawdziwe σ** wstrzykniętego szumu (macierz R = σ²), **albo** strojenie **wyłącznie na train** wg procedury zapisanej w PRE — jawnie. Teza przeciwko **mocnemu filtrowi**, nie słomianemu. → §5, §6.
+- **A4 — Mamba:** dopuszczona **referencyjna implementacja czysto-PyTorch (S6)**, **jedna wspólna** dla wariantu time-blind i +Δt; wydajność kerneli nieistotna przy tej skali. → §5.
+
+---
+
 ## §1 — Dataset (z reconu R1)
 
-**Wariant B — oryginał Anti-UAV (ZhaoJ9014), licencja MIT.** Modalność IR (boxy IR; dla estymatora modalność nieistotna — te same trajektorie celu). fps **25**. Split predefiniowany **po SEKWENCJACH**: train 160 / val 67 / **test 91 (ZAMROŻONY przed treningiem)**. Gęstość ≈ per-klatka. Rekomendacja i uzasadnienie: `recon_P2.md` R1.
+**Wariant B — oryginał Anti-UAV (ZhaoJ9014).** fps **25**. Split predefiniowany **po SEKWENCJACH**: train 160 / val 67 / **test 91 (ZAMROŻONY przed treningiem)**. Gęstość ≈ per-klatka. Rekomendacja i uzasadnienie: `recon_P2.md` R1.
+- **[A1] Modalność kanoniczna = IR.** Werdykt (§7) liczony wyłącznie na boxach IR. **RGB — co najwyżej osobno raportowany split** (nie miesza się z werdyktem IR). Współrzędne (cx,cy,w,h) **znormalizowane do rozdzielczości modalności IR** (nie obrazu RGB). Anotacje **challenge per-klatka**.
+- **[A1] Licencja — rozróżnienie:** **kod repo = MIT**; **warunki samego datasetu = odrębne**. **Figura z krzywych/metryk** (RMSE/ADE/FDE vs horyzont/p/L) — **bez ryzyka licencyjnego** (nie zawiera treści datasetu). **Przykładowe klatki** w publikacji — **do sprawdzenia dopiero przy pisaniu figury**, nie blokuje budowy (P2 uczy się na boxach, nie klatkach — rozbieżność „anotacje, nie klatki").
 - **Krok 0 budowy (przed protokołem):** pobrać etykiety B (per-klatka, wersja challenge — NIE coarse baza 2021), policzyć: rozkład długości, **licznik sekwencji ≥ 30 s**, **rate naturalnych dziur** (frakcja exist=0 + rozkład długości dziur). Zainstalować torch, zbenchmarkować rdzeń.
 - Fallback: wariant A (Anti-UAV410, IR, 410 seq) — po weryfikacji kompletności flag i licencji.
 
@@ -43,13 +54,16 @@ Budżet rdzenia ~**30k parametrów**; ramiona uczone dostrojone szerokością uk
 | Ramię | Typ | Uwaga |
 |---|---|---|
 | **ZOH-age** | kotwica (0 param) | trzymaj ostatnią detekcję z wiekiem age — dolna kotwica |
-| **Kalman CV** | analityczny | constant-velocity, update Δt-aware (age) |
-| **IMM** | analityczny | mieszanka (CV + CA / CV + stationary) |
+| **Kalman CV** | analityczny (mocny) | constant-velocity, update Δt-aware (age); **[A3] R = σ² (PRAWDZIWE σ szumu)** |
+| **IMM** | analityczny (mocny) | mieszanka (CV + CA / CV + stationary); **[A3] R = σ² (prawdziwe σ)** |
 | **GRU+Δt** | uczony ~30k | Δt jako wejście |
 | **CfC** | uczony ~30k | closed-form continuous-time |
-| **Mamba bez czasu** | uczony ~30k | SSM bez Δt (ablacja czasu) |
-| **Mamba+Δt** | uczony ~30k | SSM z Δt |
+| **Mamba bez czasu** | uczony ~30k | **[A4] S6 czysto-PyTorch**, wariant time-blind |
+| **Mamba+Δt** | uczony ~30k | **[A4] TA SAMA implementacja S6**, wariant +Δt |
 | **latent-ODE (mały)** | uczony ~30k | **opcjonalnie**, jeśli budżet §9 pozwoli |
+
+**[A3] Baseline MOCNY (nie słomiany):** Kalman CV / IMM dostają **prawdziwe σ** wstrzykniętego szumu obserwacyjnego (macierz obserwacji R = σ²·I dla σ z §2). **Wariant alternatywny (jeśli tak zdecyduje build):** strojenie Q/R **wyłącznie na train** wg procedury zapisanej w PRE (grid Q na train, wybór po val, zero dotykania testu) — **jawnie odnotowane, które wariant użyty**. Teza §7 ma bić mocny filtr.
+**[A4] Mamba:** **jedna wspólna referencyjna implementacja S6 czysto-PyTorch** dla obu wariantów (time-blind i +Δt) — różnica wyłącznie w podaniu Δt; wydajność kerneli nieistotna przy tej skali.
 
 Analityczne (ZOH/Kalman/IMM) — bez treningu. Uczone — trening identyczny (§6).
 
@@ -70,7 +84,16 @@ Analityczne (ZOH/Kalman/IMM) — bez treningu. Uczone — trening identyczny (§
 
 Werdykt offline **wybiera KANDYDATA** rdzenia do R0.2 — **nie przesądza wyniku w pętli**. Arbitrem finalnym jest **bramka w pętli zamkniętej** (możliwa **inwersja proxy↔pętla**: ranking offline może się odwrócić w pętli — `RAPORT_3D`). **Figura na publicznym wideo raportuje TYLKO to, co zmierzono offline** (predykcja w dziury) — nie twierdzi o wydajności w pętli sterowania.
 
-## §9 — Stop-rules, budżet, rozbieżności
+## §9 — Krok 0, stop-rules, budżet, rozbieżności
+
+### [A2] Krok 0 — reguły decyzyjne Z GÓRY, deterministyczne, zakończone commitem zamrażającym
+Reguły ustalone **przed** jakimkolwiek pomiarem (nietykalne po kroku 0):
+1. **Modalność/split:** IR (A1); split predefiniowany B (160/67/91) po sekwencjach; test 91 zamrożony.
+2. **Reguła progu długości (deterministyczna):** próg pierwotny **T_min = 30 s** (750 kl). Sekwencja kwalifikuje się do EWALUACJI, jeśli długość ≥ T_min **oraz** zawiera dziurę mieszczącą horyzont 2 s (50 kl) + kontekst. **Jeśli test ma < N_min = 30 sekwencji kwalifikujących**, obniżaj T_min po **drabinie {30, 20, 15, 10} s** do pierwszej wartości dającej ≥ N_min; **zapisz wybrane T_min**. Jeśli przy T_min < 20 s wciąż < N_min → **odrzuć horyzont 2 s** (zostają {0.5, 1} s = {13, 25} kl), odnotowane jawnie.
+3. **Maski:** siatka (p, L, σ) z §2, seedy masek {0..4}, seed splitu 1234 — **realizacje wyznaczone deterministycznie z seedów** (odtwarzalne).
+4. **Statystyki do zamrożenia:** rozkład długości, licznik ≥ T_min, **rate naturalnych dziur** (frakcja exist=0 + rozkład długości dziur — „duch G2"), porównanie z syntetyczną siatką (p,L).
+5. **Baseline (A3):** ustalić wariant Kalman/IMM — **R = σ² (prawdziwe σ)** [domyślny] lub strojenie Q/R wyłącznie na train wg procedury zapisanej tu — **zapisać który**.
+- **Commit zamrażający** (koniec kroku 0): zamraża split (ID sekwencji), realizacje/seedy masek, σ i siatkę, wybrane T_min, statystyki oraz wariant baseline — **PRZED pierwszym treningiem**. **Ten commit idzie na PUSH przed treningiem** = zewnętrzny znacznik zamrożenia przed pomiarem. **Kryteria werdyktu (§4/§6/§7) po tym commicie NIETYKALNE.**
 
 **Stop-rules:**
 - **FAIL_EARLY** (§6): ramię nie bijące ZOH na filtracji → poza porównaniem predykcji, raportowane.
@@ -88,4 +111,4 @@ Werdykt offline **wybiera KANDYDATA** rdzenia do R0.2 — **nie przesądza wynik
 4. Wariant B: użyć anotacji **challenge (per-klatka)**, nie coarse bazy 2021 — potwierdzić gęstość splitu.
 5. Wariant A (410) jako fallback — licencja i kompletność flag do weryfikacji.
 
-**Po ratyfikacji → budowa: krok 0 (dane) → protokół §2 → ramiona §5 → trening §6 → teza §7 → RAPORT_P2. Push robi Olga. STOP na PRE.**
+**RATYFIKOWANE z aneksami A1–A4. Budowa: krok 0 (dane + reguły §9 [A2]) → COMMIT ZAMRAŻAJĄCY → PUSH przed treningiem (znacznik zewnętrzny) → protokół §2 → ramiona §5 → trening §6 → teza §7 → RAPORT_P2. Kryteria werdyktu po kroku 0 nietykalne. Push teraz (Olga). STOP na PRE.**
