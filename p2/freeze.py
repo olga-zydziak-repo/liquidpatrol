@@ -10,7 +10,9 @@ from p2.io_labels import load_split, discover, sha256
 from p2 import stats_k0
 
 FROZEN = os.path.join(os.path.dirname(os.path.abspath(__file__)), "frozen")
-SOURCE_URL = os.environ.get("SOURCE_URL", "https://github.com/ZhaoJ9014/Anti-UAV")  # MIT (A1)
+SOURCE_URL = os.environ.get("SOURCE_URL",
+    "https://drive.google.com/file/d/1NPYaop35ocVTYWHOYQQHn8YHsM9jmLGr/view")  # paczka Anti-UAV300
+LICENSE_REPO = "https://github.com/ZhaoJ9014/Anti-UAV (MIT)"  # A1: licencja projektu
 
 # --- siatki i seedy (z PRE_P2 §2, [PROPOZYCJA]) — ZAMROŻONE ---
 SIGMA_GRID = [0.02, 0.05, 0.10]
@@ -30,7 +32,8 @@ BASELINE_VARIANT = "R=sigma^2 (prawdziwe sigma) + Q strojone na train (arms.tune
 
 
 def provenance():
-    prov = {"source_url": SOURCE_URL, "modality": "IR", "files": []}
+    prov = {"source_url": SOURCE_URL, "license_repo": LICENSE_REPO, "modality": "IR",
+            "package": "Anti-UAV300 (zip, sha256 w deleted_videos.json)", "files": []}
     for split in ("train", "val", "test"):
         for f in discover(split):
             prov["files"].append({"split": split, "path": os.path.relpath(f),
@@ -41,8 +44,10 @@ def provenance():
 def build_manifest():
     st = stats_k0.compute()
     ladder = st.get("ladder", {})
-    split = {sp: sorted(os.path.splitext(os.path.basename(os.path.dirname(f) if f.endswith("IR_label.json")
-             else f))[0] for f in discover(sp)) for sp in ("train", "val", "test")}
+    def _seqname(f):
+        b = os.path.splitext(os.path.basename(f))[0]
+        return os.path.basename(os.path.dirname(f)) if b.lower() in ("infrared", "ir_label") else b
+    split = {sp: sorted(_seqname(f) for f in discover(sp)) for sp in ("train", "val", "test")}
     if not any(split.values()):
         return None, st
     manifest = {

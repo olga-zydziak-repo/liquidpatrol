@@ -51,19 +51,20 @@ def load_sequence(json_path, box_format="xywh", W=IR_W, H=IR_H):
     rects = d.get("gt_rect") or d.get("get_rect") or d.get("res") or []
     boxes = _boxes_to_norm(rects, exist, box_format, W, H)
     name = os.path.splitext(os.path.basename(json_path))[0]
-    if name.lower() in ("ir_label",):     # układ per-sekwencja: nazwa z katalogu
+    if name.lower() in ("ir_label", "infrared"):     # układ per-sekwencja: nazwa z katalogu
         name = os.path.basename(os.path.dirname(json_path))
     return {"name": name, "boxes": boxes, "exist": np.array([bool(e) for e in exist]),
             "n_frames": len(exist), "sha256": sha256(json_path), "path": json_path}
 
 
 def discover(split, root=DATA_ROOT):
-    """Znajduje pliki etykiet dla splitu (oba układy: per-katalog i spłaszczony)."""
+    """Znajduje pliki etykiet IR dla splitu. Anti-UAV300: <split>/<seq>/infrared.json (A1)."""
     base = os.path.join(root, split)
-    files = sorted(glob.glob(os.path.join(base, "*", "IR_label.json")))     # per-sekwencja
-    if not files:
-        files = sorted(glob.glob(os.path.join(base, "*.json")))              # spłaszczony
-    return files
+    for pat in ("infrared.json", "IR_label.json"):
+        files = sorted(glob.glob(os.path.join(base, "*", pat)))
+        if files:
+            return files
+    return sorted(glob.glob(os.path.join(base, "*.json")))                    # spłaszczony fallback
 
 
 def load_split(split, box_format="xywh", root=DATA_ROOT):
