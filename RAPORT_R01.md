@@ -49,15 +49,45 @@ trójwynikową (odmowa ≠ porażka). Slot uczonego pilota **jawnie pusty** (→
 
 z3 5.0.0 (jak LiquidSight), certy JSON z `model_sha256` w `r01/proofs/certs/`. **Żadna liczba nie przeniesiona** — wszystkie stałe zmierzone/ustalone dla PX4.
 
-## 5. a_brake + walidacja A2 (S3-1) — empiryczna, zmierzona
+## 5. a_brake (S3-1) + P2-analog (S3-2) — empiryczna, zmierzona
 
-Test hamowania w ruchu przy granicy (`brake_test.py`): lot na v_max → REFUSE w pędzie (v=3.08 m/s) → hamowanie.
-- **a_brake zmierzone = 2.65 m/s²** (droga zatrzymania 1.79 m; peak decel 5.8).
-- **a_brake ≥ A_min (1.44)** i **≥ 2.0** → prowizoryczne założenie kodu (2.0) **empirycznie potwierdzone jako konserwatywne**.
-- **A2 (nierówność zawierania) DOMYKA przy R_E=32**: R_route 28.28 + Δ 2.298 = 30.58 ≤ 32 → **poszerzanie obwiedni NIE potrzebne**.
-- **t_react = 0.2 s** złożony ze zmierzonych: tel_gap 0.046 + tick 0.05 + setpoint 0.053 = **0.149 s ≤ budżet 0.2 s**.
+### 5.1 Pomiar a_brake — test hamowania w ruchu przy granicy (`brake_test.py`)
+Warunki biegu: lot wzdłuż +x na **v_max**, na **wysokości patrolu 10 m AGL (z = −10 m NED)**; osłona wymusza **REFUSE w pędzie** (target 50 m ≫ R_E). Zmierzone w chwili REFUSE i podczas hamowania:
+- **v w chwili REFUSE = 3.084 m/s** (na clampie v_max=3), pozycja x = 14.05 m.
+- **droga zatrzymania = 1.794 m** (do v < 0.15 m/s).
+- **a_brake = v²/(2·d_stop) = 3.084² / (2·1.794) = 2.65 m/s² — DOLNE OSZACOWANIE** (średnia deceleracja z drogi/energii; deceleracja chwilowa szczytowa 5.80 m/s²). Wartość użyta w barierze to konserwatywne dolne oszacowanie zdolności hamowania.
+- **a_brake ≥ A_min (1.447)** oraz **≥ 2.0** → prowizoryczne założenie kodu (a_brake=2.0) **empirycznie potwierdzone jako konserwatywne** (2.0 ≤ 2.65).
 
-P2-analog dowiedziony dla a_brake=2.0 (wartość kodu), zwalidowany pomiarem 2.65 ≥ 2.0 (`empirical_validation` w P2.json).
+### 5.2 Kompozycja t_react ze zmierzonych składników
+t_react złożony jawnie z pomiarów S1:
+```
+t_react = tel_gap(0.046 s) + tick(0.050 s) + okres_setpointu(0.053 s) = 0.149 s  ≤  budżet 0.200 s
+```
+Suma zmierzonych **0.149 s** mieści się pod przyjętym budżetem **0.2 s** (zapas 0.051 s). W dowodzie użyto budżetu t_react = 0.2 s (1/5).
+
+### 5.3 Nierówność zawierania A2 — przeliczona wartościami z pomiaru
+Δ = v_max·t_react + v_max²/(2·a_brake). Z wartościami zmierzonymi (a_brake=2.65):
+```
+Δ = 3·0.2 + 3²/(2·2.65) = 0.600 + 1.698 = 2.298 m
+R_route + Δ = 28.284 + 2.298 = 30.58 m  ≤  R_E = 32 m     → DOMYKA
+```
+(Dla konserwatywnej wartości kodu a_brake=2.0: Δ = 0.6 + 2.25 = 2.85; R_route+Δ = 31.13 ≤ 32 — również domyka.)
+**Poszerzanie obwiedni NIE potrzebne** — R_E=32 wystarcza przy zmierzonej dynamice.
+
+### 5.4 Werdykt bariery z3 NRA (P2-analog) + założenia twierdzenia warunkowego
+Cert `r01/proofs/certs/P2.json` (z3 5.0.0), a_brake=2.0 (wartość kodu), A_min=1.447:
+**WERDYKT: PROVED** — wszystkie 6 zobowiązań **unsat**:
+`base_start_in_route` · `step_allow` · `step_brake` · `safety_p_le_R_E` · `threshold_A_ge_amin_safe` · `threshold_A_lt_amin_unsafe`.
+
+**Twierdzenie (warunkowe):** `Inv(p,v) = 0 ≤ v ≤ v_max ∧ p + v²/(2·a_brake) ≤ R_E  ⇒  p ≤ R_E` (dron respektujący osłonę nie opuszcza obwiedni).
+**Założenia jawne:**
+1. |v| ≤ v_max = 3.0 m/s (clamp `MPC_XY_VEL_MAX`, zmierzony);
+2. t_react = 0.2 s złożony ze zmierzonych (tel_gap+tick+setpoint = 0.149 ≤ 0.2, §5.2);
+3. a_brake ≥ 2.0 m/s² (ZMIERZONY 2.65, §5.1 — dolne oszacowanie);
+4. hamowanie ciągłe (bariera p + v²/2a zachowana wzdłuż hamowania);
+5. rzut na promień (najgorsza oś); **native GF (R_GF = 37 m) jako backstop A3**.
+
+Twierdzenie dowiedzione dla wartości kodu a_brake=2.0; zwalidowane pomiarem 2.65 ≥ 2.0 (`empirical_validation` w P2.json). Model wymierny: v_max=3, t_react=1/5, R_route=2829/100 (≥ 20√2, konserwatywnie), R_E=32.
 
 ## 6. Badanie kamery (S3-3) → wejście do R0.2 (NIE bramka R0.1)
 
