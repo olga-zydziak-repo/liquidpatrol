@@ -1,0 +1,98 @@
+{
+  "config": {
+    "op": {
+      "sigma": 0.05,
+      "p": 0.5,
+      "L": 25
+    },
+    "epochs": 5,
+    "mask_seeds": [
+      0,
+      1
+    ],
+    "train_seeds": [
+      0
+    ],
+    "n_test": 10,
+    "smoke": true
+  },
+  "arms": {
+    "ZOH-age": {
+      "type": "analityczne",
+      "ADE_mean": 0.08562052810865092,
+      "ADE_std": 0.02118075682101181,
+      "n_units": 20
+    },
+    "Kalman-CV": {
+      "type": "analityczne",
+      "ADE_mean": 0.11397384695953194,
+      "ADE_std": 0.05468289201874271,
+      "n_units": 20
+    },
+    "IMM": {
+      "type": "analityczne",
+      "ADE_mean": 0.1282243772865211,
+      "ADE_std": 0.0571560672724361,
+      "n_units": 20
+    },
+    "GRU+dt": {
+      "type": "uczone",
+      "FAIL_EARLY_ALL": true,
+      "fail_early": [
+        {
+          "train_seed": 0,
+          "arm_rmse": 0.4249776436786572,
+          "zoh_rmse": 0.006010819914818714
+        }
+      ]
+    },
+    "CfC": {
+      "type": "uczone",
+      "FAIL_EARLY_ALL": true,
+      "fail_early": [
+        {
+          "train_seed": 0,
+          "arm_rmse": 0.18434270257719565,
+          "zoh_rmse": 0.006010819914818714
+        }
+      ]
+    },
+    "Mamba-notime": {
+      "type": "uczone",
+      "FAIL_EARLY_ALL": true,
+      "fail_early": [
+        {
+          "train_seed": 0,
+          "arm_rmse": 3.201655620400639,
+          "zoh_rmse": 0.006010819914818714
+        }
+      ]
+    },
+    "Mamba+dt": {
+      "type": "uczone",
+      "FAIL_EARLY_ALL": true,
+      "fail_early": [
+        {
+          "train_seed": 0,
+          "arm_rmse": 7.5257072195908865,
+          "zoh_rmse": 0.006010819914818714
+        }
+      ]
+    },
+    "latent-ODE": {
+      "type": "uczone",
+      "FAIL_EARLY_ALL": true,
+      "fail_early": [
+        {
+          "train_seed": 0,
+          "arm_rmse": 45.34834952083807,
+          "zoh_rmse": 0.006010819914818714
+        }
+      ]
+    }
+  },
+  "teza": {
+    "verdict": "wszystkie uczone FAIL_EARLY — brak porównania"
+  },
+  "wall_time_s": 22.1
+}

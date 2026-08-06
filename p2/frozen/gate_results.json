@@ -1,0 +1,205 @@
+{
+  "config": {
+    "op": {
+      "sigma": 0.05,
+      "p": 0.5,
+      "L": 25
+    },
+    "epochs": 40,
+    "mask_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "train_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "n_test": 84,
+    "smoke": false
+  },
+  "arms": {
+    "ZOH-age": {
+      "type": "analityczne",
+      "ADE_mean": 0.10728442159114746,
+      "ADE_std": 0.045018574522751924,
+      "n_units": 420
+    },
+    "Kalman-CV": {
+      "type": "analityczne",
+      "ADE_mean": 0.1356282447613832,
+      "ADE_std": 0.08294076606559243,
+      "n_units": 420
+    },
+    "IMM": {
+      "type": "analityczne",
+      "ADE_mean": 0.15629015616498393,
+      "ADE_std": 0.0921741899434045,
+      "n_units": 420
+    },
+    "GRU+dt": {
+      "type": "uczone",
+      "FAIL_EARLY_ALL": true,
+      "fail_early": [
+        {
+          "train_seed": 0,
+          "arm_rmse": 0.04294641608914761,
+          "zoh_rmse": 0.005121886492636871
+        },
+        {
+          "train_seed": 1,
+          "arm_rmse": 0.03797466822036039,
+          "zoh_rmse": 0.005098194514080754
+        },
+        {
+          "train_seed": 2,
+          "arm_rmse": 0.043868585982460365,
+          "zoh_rmse": 0.005166828263001137
+        },
+        {
+          "train_seed": 3,
+          "arm_rmse": 0.0376271458948236,
+          "zoh_rmse": 0.005127201940076375
+        },
+        {
+          "train_seed": 4,
+          "arm_rmse": 0.04219491708907522,
+          "zoh_rmse": 0.0051676389102265526
+        }
+      ]
+    },
+    "CfC": {
+      "type": "uczone",
+      "FAIL_EARLY_ALL": true,
+      "fail_early": [
+        {
+          "train_seed": 0,
+          "arm_rmse": 0.054389571952334896,
+          "zoh_rmse": 0.005121886492636871
+        },
+        {
+          "train_seed": 1,
+          "arm_rmse": 0.051277386756987314,
+          "zoh_rmse": 0.005098194514080754
+        },
+        {
+          "train_seed": 2,
+          "arm_rmse": 0.04719720343587298,
+          "zoh_rmse": 0.005166828263001137
+        },
+        {
+          "train_seed": 3,
+          "arm_rmse": 0.047396415164859054,
+          "zoh_rmse": 0.005127201940076375
+        },
+        {
+          "train_seed": 4,
+          "arm_rmse": 0.04798123904803019,
+          "zoh_rmse": 0.0051676389102265526
+        }
+      ]
+    },
+    "Mamba-notime": {
+      "type": "uczone",
+      "FAIL_EARLY_ALL": true,
+      "fail_early": [
+        {
+          "train_seed": 0,
+          "arm_rmse": 0.17323612868114863,
+          "zoh_rmse": 0.005121886492636871
+        },
+        {
+          "train_seed": 1,
+          "arm_rmse": 0.11162922506984288,
+          "zoh_rmse": 0.005098194514080754
+        },
+        {
+          "train_seed": 2,
+          "arm_rmse": 0.16895752276474232,
+          "zoh_rmse": 0.005166828263001137
+        },
+        {
+          "train_seed": 3,
+          "arm_rmse": 0.14057352980849028,
+          "zoh_rmse": 0.005127201940076375
+        },
+        {
+          "train_seed": 4,
+          "arm_rmse": 0.14345085629651147,
+          "zoh_rmse": 0.0051676389102265526
+        }
+      ]
+    },
+    "Mamba+dt": {
+      "type": "uczone",
+      "FAIL_EARLY_ALL": true,
+      "fail_early": [
+        {
+          "train_seed": 0,
+          "arm_rmse": 0.18357428483692492,
+          "zoh_rmse": 0.005121886492636871
+        },
+        {
+          "train_seed": 1,
+          "arm_rmse": 0.11516968560853337,
+          "zoh_rmse": 0.005098194514080754
+        },
+        {
+          "train_seed": 2,
+          "arm_rmse": 0.19842218735154177,
+          "zoh_rmse": 0.005166828263001137
+        },
+        {
+          "train_seed": 3,
+          "arm_rmse": 0.15774947065115827,
+          "zoh_rmse": 0.005127201940076375
+        },
+        {
+          "train_seed": 4,
+          "arm_rmse": 0.2420741646418311,
+          "zoh_rmse": 0.0051676389102265526
+        }
+      ]
+    },
+    "latent-ODE": {
+      "type": "uczone",
+      "FAIL_EARLY_ALL": true,
+      "fail_early": [
+        {
+          "train_seed": 0,
+          "arm_rmse": 7.368649215373322,
+          "zoh_rmse": 0.005121886492636871
+        },
+        {
+          "train_seed": 1,
+          "arm_rmse": 12.717487275843414,
+          "zoh_rmse": 0.005098194514080754
+        },
+        {
+          "train_seed": 2,
+          "arm_rmse": 7.488648338674191,
+          "zoh_rmse": 0.005166828263001137
+        },
+        {
+          "train_seed": 3,
+          "arm_rmse": 6.86997335477882,
+          "zoh_rmse": 0.005127201940076375
+        },
+        {
+          "train_seed": 4,
+          "arm_rmse": 9.26549263559762,
+          "zoh_rmse": 0.0051676389102265526
+        }
+      ]
+    }
+  },
+  "teza": {
+    "verdict": "wszystkie uczone FAIL_EARLY — brak porównania"
+  },
+  "wall_time_s": 6771.4
+}
