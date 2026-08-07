@@ -1,0 +1,64 @@
+[
+  {
+    "regime": "idle",
+    "device": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+    "cuda": true,
+    "torch": "2.11.0+cu128",
+    "compute_cap": [
+      12,
+      0
+    ],
+    "imgsz": 640,
+    "phrase": "drone",
+    "n": 30,
+    "warmup": 3,
+    "cadence_s": 1.0,
+    "lat_ms": {
+      "med": 20.5,
+      "p95": 22.4,
+      "mean": 20.2,
+      "min": 11.9,
+      "max": 23.4
+    },
+    "achievable_hz_single": 48.78,
+    "vram_mib": {
+      "baseline": 0,
+      "after_load": 982,
+      "peak": 982,
+      "detector_footprint_vs_baseline": 982
+    },
+    "vram_total_mib": 12227,
+    "headroom_mib_at_peak": 11245
+  },
+  {
+    "regime": "sim",
+    "device": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+    "cuda": true,
+    "torch": "2.11.0+cu128",
+    "compute_cap": [
+      12,
+      0
+    ],
+    "imgsz": 640,
+    "phrase": "drone",
+    "n": 30,
+    "warmup": 3,
+    "cadence_s": 1.0,
+    "lat_ms": {
+      "med": 8.5,
+      "p95": 13.2,
+      "mean": 8.9,
+      "min": 7.0,
+      "max": 13.4
+    },
+    "achievable_hz_single": 117.82,
+    "vram_mib": {
+      "baseline": 601,
+      "after_load": 1583,
+      "peak": 1583,
+      "detector_footprint_vs_baseline": 982
+    },
+    "vram_total_mib": 12227,
+    "headroom_mib_at_peak": 10644
+  }
+]
