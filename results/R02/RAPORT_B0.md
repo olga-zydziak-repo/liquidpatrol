@@ -16,6 +16,19 @@ przed pomiarem. Artefakty: `results/R02/b0_latency.json`, `results/R02/b0_detect
 **Decyzja (A2):** w budżecie → **kontynuować budowę** (aktor, kanał, OBSERVE). Bez fallbacku
 (lżejszy model / niższa częstotliwość / rozdzielczość) — nie był potrzebny.
 
+## 0. Fingerprint detektora (prowieniencja — odtwarzalność)
+
+| Element | Wartość |
+|---|---|
+| Model | YOLO-World `yolov8s-worldv2.pt` (ultralytics assets v8.4.0) |
+| **sha256 wag** | `9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792` |
+| Rozmiar wag | 25 923 032 B (24.7 MB) |
+| torch | 2.11.0+cu128 (CUDA runtime 12.8, cudnn 91900) |
+| torchvision | 0.26.0+cu128 |
+| ultralytics | 8.4.115 |
+| numpy / opencv | 2.4.4 / 5.0.0 |
+| Sprzęt | RTX 5070 Ti Laptop, driver 577.13, sm_120, WSL2 |
+
 ## 1. Konfiguracja pomiaru
 
 - **Sprzęt:** RTX 5070 Ti Laptop, **12 227 MiB VRAM**, driver 577.13, **compute cap 12.0 (sm_120, Blackwell)**, WSL2.
