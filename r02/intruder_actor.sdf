@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<!-- !!! SUPERSEDED / NIE UŻYWAĆ !!! — ten skinless <actor> WYWALA serwer gz (SceneBroadcaster
+     segfault na __default__ mesh; MeshManager.cc:150). Zastąpiony przez r02/intruder_model.sdf
+     (podejście MODEL). Zachowany jako dowód znaleziska. Szczegóły: results/R02/RAPORT_R1.md §1.
+     r02/intruder_actor.sdf — aktor-intruz R0.2 (R1). [PRÓBA 1, PORZUCONA]
+     Kinematyczny, DETERMINISTYCZNY: pozа = f(czas symu) przez skrypt <trajectory> (gz-sim animuje
+     aktora względem sim-time, NIE fizyki ODE → physics OFF automatycznie). Model wizualny = ciemny
+     prostopadłościan (imitacja UAV). Trajektoria: przelot boczny przed kamerą drona (+x forward),
+     y ∈ [-15,15] na wysokości z=10 m (= wysokość patrolu), okres 20 s, w pętli.
+     Determinizm: brak fizyki/losowości → ta sama sim-time ⇒ ta sama poza między biegami (powtarzalność
+     scenariuszy, PRE §2.1). Trajektorię per-scenariusz podmienia się (seed=ID scenariusza). -->
+<sdf version="1.9">
+  <actor name="intruder">
+    <pose>12 -15 10 0 0 0</pose>
+    <link name="body">
+      <visual name="hull">
+        <geometry>
+          <box><size>0.7 0.7 0.25</size></box>
+        </geometry>
+        <material>
+          <ambient>0.03 0.03 0.03 1</ambient>
+          <diffuse>0.08 0.08 0.08 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+        </material>
+      </visual>
+      <visual name="arms">
+        <geometry>
+          <box><size>1.1 0.08 0.05</size></box>
+        </geometry>
+        <material>
+          <ambient>0.02 0.02 0.02 1</ambient>
+          <diffuse>0.05 0.05 0.05 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <script>
+      <loop>true</loop>
+      <auto_start>true</auto_start>
+      <delay_start>0.0</delay_start>
+      <trajectory id="0" type="patrol_crossing">
+        <waypoint><time>0.0</time><pose>12 -15 10 0 0 0</pose></waypoint>
+        <waypoint><time>10.0</time><pose>12 15 10 0 0 0</pose></waypoint>
+        <waypoint><time>20.0</time><pose>12 -15 10 0 0 0</pose></waypoint>
+      </trajectory>
+    </script>
+  </actor>
+</sdf>
