@@ -48,8 +48,12 @@ F_FOV = 0.8                       # ≥80% klatek w-polu
 EPS_FP_PER_MIN = 0.0              # 0 fałszywych locków na pustej scenie (cel; G1 mierzy jawnie)
 
 # --- Estymata celu w NED (bearing-only, BEZ rdzenia uczonego — R-DIV-3) ------
-# Rzut kierunku z (cx,cy) na stałą wysokość intruza + pierścień D_safe. Wysokość intruza z SDF (R1).
-INTRUDER_ALT_M = 10.0             # z=10 (r02/intruder_driver.py scripted_pose z=10)
+# Rzut kierunku z (cx,cy) na stałą wysokość intruza + pierścień D_safe.
+# ZNALEZISKO R3 (harness): bearing-only rzut wymaga PARALAKSY PIONOWEJ — gdy dron i intruz na tej
+# samej wysokości, wiązka jest pozioma i nie przecina płaszczyzny intruza (brak zasięgu → estymata
+# fantomowa). PRE §2.4 „rzut na stałą wysokość intruza" ZAKŁADA separację. Habitat: patrol z=ALT_M
+# (10 m), intruz operuje NIŻEJ (realistyczne anti-UAV — dron patroluje wyżej, obserwuje w dół).
+INTRUDER_ALT_M = 6.0             # intruz 4 m poniżej patrolu (paralaksa dla bearing-only); driver --z 6
 
 # Rejestr stałych [A4] do zamrożenia (raport kalibracji wypełnia „źródło"/„zmierzone").
 A4_HABITAT_CONSTS = (
