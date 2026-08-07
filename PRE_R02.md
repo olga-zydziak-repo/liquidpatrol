@@ -74,6 +74,23 @@ nie import.
 
 ---
 
+## 0ter. Uzupełnienie po R1 (decyzja intruza + R1-A/R1-B) — WIĄŻĄCE
+
+**Intruz = sylwetka x500** (mesh PX4/gz reużyty przez `model://`; `.glb` zewn. tylko fallback).
+Zwalidowane mini-sanity (`RAPORT_R1 §3a`): pokrycie 3/3 conf 0.177 z intruzem, 0 boxów bez.
+
+**R1-A (progi detekcji, jedna linia — zamrożone):** intruz „wykrywany" w klatce ⇔ top-1 box **pokrywa**
+prawdziwą pozycję intruza (środek boxa w true-bbox z pixel-diff GT symu); scena bez intruza PASS ⇔
+**brak** boxa spełniającego kryterium ENTRY (poniżej). Do bramki: `coverage_when_present ≥ 0.8` klatek
+w-polu; `false_lock_when_absent = 0` zdarzeń ENTRY.
+
+**R1-B (ENTRY strukturalny, NIE conf — A1/D1 stoi):** wejście w OBSERVE wymaga **spójnej detekcji przez
+k = 3 kolejne klatki @1 Hz** (top-1 box w spójnej lokalizacji, ruch ≤ próg między klatkami), NIE progu
+confidence. `age` liczony od pierwszej z serii k. Wartość **k=3** (≈3 s) zamrożona; do rewizji tylko
+pomiarem w G1/G2. **G1 mierzy ε_FP jawnie** (liczba zdarzeń ENTRY na pustej scenie / min — cel 0).
+
+---
+
 ## 1. Cel i teza
 
 **Zadanie docelowe R0.2:** egzekutor lata **patrol perymetru** (jak R0.1), a gdy w polu widzenia

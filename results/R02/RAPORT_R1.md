@@ -64,6 +64,23 @@ intruz to prymitywny box. **Konsekwencja dla G1/G2:**
 To ryzyko **nie blokuje R1** (aktor istnieje, deterministyczny, widoczny), ale **przesądza kształt G2**
 → wymaga decyzji przed budową kanału/bramki.
 
+## 3a. Decyzja Olgi + mini-sanity R1-A (x500 mesh) — dwustronny PASS
+
+**Decyzja:** intruz = sylwetka **x500** (mesh z zainstalowanego PX4/gz: `NXP-HGD-CF.dae` frame + 4×
+`5010Base.dae` + 4× `1345_prop`), reużyty przez `model://` — bez assetu zewnętrznego (.glb tylko fallback).
+Driver bez zmian. `r02/intruder_model.sdf` zaktualizowany.
+
+**Mini-sanity (przed budową kanału, dwustronny):** spawn x500-mesh bez crashu (0 markerów). Detektor
+YOLO-World `["drone"]`, conf-floor 0.001 (A1 — bez progu):
+
+| Warunek | Wynik |
+|---|---|
+| **Z intruzem w polu** (8,0,1.5), 3 klatki | pokrycie top-1 na intruzie **3/3**, conf **0.177** (vs 0.001 dla prymitywnego boxa — ~180×), true_bbox ~20×11 px |
+| **Bez intruza w polu** (x=−50), 3 klatki | **0 boxów, conf 0.000** — brak fałszywego locka |
+
+**Separacja z↔bez ogromna** → mesh x500 wiarygodnie wykrywany, tło nie generuje locka. Eskalacja do
+opcji 3 (detektor dostrojony) **niepotrzebna**. Progi/kryteria → PRE-uzupełnienie (`PRE_R02.md`).
+
 ## 4. Higiena
 - Stack posprzątany po każdej próbie (0 procesów, VRAM=0).
 - Reguła operacyjna potwierdzona: `mkdir -p $LOGDIR` przed redirectem `run_stack.sh`; teardown po PID

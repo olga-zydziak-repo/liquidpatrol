@@ -1,30 +1,37 @@
 <?xml version="1.0" ?>
-<!-- r02/intruder_model.sdf — aktor-intruz R0.2 (R1), PODEJŚCIE POPRAWNE (model, nie gz <actor>).
-     gz <actor> bez <skin> WYWALA serwer (SceneBroadcaster segfault na __default__ mesh) — patrz
-     results/R02/r1_status.md. PRE §2.1 mówi „kinematyczny MODEL … pose-scripted … SetPose per krok symu".
-     Model statyczny (physics OFF, brak grawitacji/kolizji-dynamiki) = renderuje się niezawodnie i nie
-     pada; pozę steruje deterministycznie r02/intruder_driver.py (poza = f(sim_time) przez set_pose).
-     Wizual = ciemny quad-UAV (kadłub + ramiona). Kolizja pominięta (nie potrzebna — intruz nie zderza się). -->
+<!-- r02/intruder_model.sdf — aktor-intruz R0.2 (R1). Wizual = sylwetka x500 (mesh z PX4/gz, decyzja
+     Olgi: reużyć zainstalowany mesh zamiast assetu zewn.). Model STATYCZNY (physics OFF), TYLKO wizuale
+     (bez kolizji/inercji) — pozę steruje deterministycznie r02/intruder_driver.py (poza=f(sim_time)).
+     NIE gz <actor> (skinless actor segfaultuje serwer — results/R02/RAPORT_R1.md §1).
+     Meshe model://x500_base/... rozwiązywane przez GZ_SIM_RESOURCE_PATH (PX4 ustawia; x500 drona ich używa). -->
 <sdf version="1.9">
   <model name="intruder">
     <static>true</static>
     <pose>12 0 10 0 0 0</pose>
     <link name="body">
-      <visual name="hull">
-        <geometry><box><size>0.7 0.7 0.25</size></box></geometry>
-        <material>
-          <ambient>0.03 0.03 0.03 1</ambient>
-          <diffuse>0.08 0.08 0.08 1</diffuse>
-          <specular>0.1 0.1 0.1 1</specular>
-        </material>
+      <!-- rama nośna (kadłub + ramiona) -->
+      <visual name="frame">
+        <pose>0 0 .025 0 0 3.141592654</pose>
+        <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/NXP-HGD-CF.dae</uri></mesh></geometry>
       </visual>
-      <visual name="arms">
-        <geometry><box><size>1.1 0.08 0.05</size></box></geometry>
-        <material>
-          <ambient>0.02 0.02 0.02 1</ambient>
-          <diffuse>0.05 0.05 0.05 1</diffuse>
-        </material>
-      </visual>
+      <!-- 4 silniki -->
+      <visual name="motor_0"><pose>0.174 0.174 .032 0 0 -.45</pose>
+        <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
+      <visual name="motor_1"><pose>-0.174 0.174 .032 0 0 -.45</pose>
+        <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
+      <visual name="motor_2"><pose>0.174 -0.174 .032 0 0 -.45</pose>
+        <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
+      <visual name="motor_3"><pose>-0.174 -0.174 .032 0 0 -.45</pose>
+        <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
+      <!-- 4 śmigła (sylwetka propelerów — istotna dla rozpoznania jako UAV) -->
+      <visual name="prop_0"><pose>0.174 0.174 .06 0 0 0</pose>
+        <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_ccw.stl</uri></mesh></geometry></visual>
+      <visual name="prop_1"><pose>-0.174 0.174 .06 0 0 0</pose>
+        <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_cw.stl</uri></mesh></geometry></visual>
+      <visual name="prop_2"><pose>0.174 -0.174 .06 0 0 0</pose>
+        <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_cw.stl</uri></mesh></geometry></visual>
+      <visual name="prop_3"><pose>-0.174 -0.174 .06 0 0 0</pose>
+        <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_ccw.stl</uri></mesh></geometry></visual>
     </link>
   </model>
 </sdf>
