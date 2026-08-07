@@ -252,6 +252,11 @@ Reguły ich wyboru zamrożone tu; liczby = pomiar, nie zgadywanka w PRE.)*
 
 ## 5. Plan re-certyfikacji (szczegół)
 
+0. **certs_selfcheck (GUARD — PIERWSZY krok, przed P1/P4/P5)** —
+   `python3 -m r01.proofs.certs_selfcheck`: dla każdego certu `model_sha256 == sha256(jego prover)`.
+   **Głośny FAIL (exit 1) przy rozjeździe** → napraw (regeneracja prover + commit) ZANIM ruszysz re-cert.
+   Uruchamiany też na **koniec każdej sesji dotykającej `proofs/`**.
+   **Lekcja higieny (repo): sesja uruchamiająca prover kończy się CZYSTYM DRZEWEM albo COMMITEM.**
 1. **P1** — rozszerzyć `verify.py:tau` o `M_OBSERVE`/`L_observe` (klasa ALLOW), re-dowód 1-indukcji.
    Krytyczne zobowiązanie: **P1a** (`ALLOW ⇒ ¬geo ∧ ¬term`) — OBSERVE jako ALLOW **musi** siedzieć
    poniżej R-G w `tau`. Oczekiwane: 6/6 zobowiązań unsat (+ ewent. P1e: `OBSERVE ⇒ ¬geo`).
