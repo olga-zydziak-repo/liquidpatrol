@@ -2,7 +2,7 @@
 
 Wiąże r01/shield.py z dowiedzionym modelem z3 r01.proofs.verify.tau (obiekt P1). Dla KAŻDEGO tiku:
 ewaluuje tau na konkretnych wejściach (z3 concrete+simplify) i porównuje DECYZJĘ + POWÓD + STAN-PO
-z realnym PatrolShield.step. Pełne pokrycie 6 przejść + latch dla każdego reason. Zgodność ⇒ P1
+z realnym PatrolShield.step. Pełne pokrycie 7 przejść + latch dla każdego reason. Zgodność ⇒ P1
 dotyczy KODU egzekutora PX4, nie fikcji. Cert: r01/proofs/certs/P5.json.
 Uruchom: PYTHONPATH=.certdeps python3 -m r01.proofs.conformance
 """
@@ -12,20 +12,21 @@ import z3
 
 from r01.shield import (PatrolShield, ALLOW as S_ALLOW, HOLD as S_HOLD, REFUSE as S_REFUSE,
                         GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT,
-                        PATROL, HOLDING, RETURNING, DONE,
-                        M_PATROL, M_HOLD, M_RETURN, M_ABORT)
+                        PATROL, HOLDING, RETURNING, DONE, OBSERVING,
+                        M_PATROL, M_HOLD, M_RETURN, M_ABORT, M_OBSERVE)
 from r01.proofs.verify import (tau, ALLOW, HOLD, REFUSE, NONE, GEOFENCE as M_GEO,
                                COMMAND_INVALID as M_CI, STALE_CMD as M_ST, ABORT_R as M_AB,
-                               PATROL as MP, HOLDING as MH, RETURNING as MR, DONE as MD,
-                               M_PATROL as MM_P, M_HOLD as MM_H, M_RETURN as MM_R, M_ABORT as MM_A)
+                               PATROL as MP, HOLDING as MH, RETURNING as MR, DONE as MD, OBSERVING as MO,
+                               M_PATROL as MM_P, M_HOLD as MM_H, M_RETURN as MM_R, M_ABORT as MM_A,
+                               M_OBSERVE as MM_O)
 
 CERT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "certs", "P5.json")
 
 DEC_ID = {S_ALLOW: ALLOW, S_HOLD: HOLD, S_REFUSE: REFUSE}
 RSN_ID = {None: NONE, GEOFENCE: M_GEO, COMMAND_INVALID: M_CI, STALE_CMD: M_ST, ABORT: M_AB}
-STATE_ID = {PATROL: MP, HOLDING: MH, RETURNING: MR, DONE: MD}
-MODE_ID = {M_PATROL: MM_P, M_HOLD: MM_H, M_RETURN: MM_R, M_ABORT: MM_A}
-LEAVES = ["latch", "geo", "abort", "hold", "return", "patrol"]
+STATE_ID = {PATROL: MP, HOLDING: MH, RETURNING: MR, DONE: MD, OBSERVING: MO}
+MODE_ID = {M_PATROL: MM_P, M_HOLD: MM_H, M_RETURN: MM_R, M_ABORT: MM_A, M_OBSERVE: MM_O}
+LEAVES = ["latch", "geo", "abort", "hold", "return", "observe", "patrol"]
 
 
 def sh_pre(sh):
@@ -47,7 +48,7 @@ def leaf_of(pre, geo, mode_i):
         return "latch"
     if geo:
         return "geo"
-    return {MM_A: "abort", MM_H: "hold", MM_R: "return", MM_P: "patrol"}[mode_i]
+    return {MM_A: "abort", MM_H: "hold", MM_R: "return", MM_O: "observe", MM_P: "patrol"}[mode_i]
 
 
 def run_episode(sh, ticks, coverage, mism):
@@ -74,18 +75,21 @@ def gen_random(seed):
         pos = (rng.uniform(-35, 35), rng.uniform(-35, 35), -rng.uniform(0, 25))
         vel = (rng.uniform(-4, 4), rng.uniform(-4, 4), rng.uniform(-2, 2))
         target = (rng.uniform(-40, 40), rng.uniform(-40, 40), -rng.uniform(0, 25))
-        mode = rng.choice([M_PATROL, M_HOLD, M_RETURN, M_ABORT])
+        mode = rng.choice([M_PATROL, M_HOLD, M_RETURN, M_ABORT, M_OBSERVE])
         ticks.append((pos, vel, target, mode))
     return ticks
 
 
 def gen_targeted():
-    """Pokrycie 6 liści + latch dla każdego reason (via latch_refuse i via geo/abort)."""
+    """Pokrycie 7 liści + latch dla każdego reason (via latch_refuse i via geo/abort)."""
     IN = (0.0, 0.0, -10.0); V0 = (0.0, 0.0, 0.0); TG = (20.0, 20.0, -10.0); FAR = (45.0, 0.0, -10.0)
     eps = []
     eps.append(("patrol", None, [(IN, V0, TG, M_PATROL), (IN, V0, TG, M_PATROL)]))
     eps.append(("hold", None, [(IN, V0, TG, M_HOLD)]))
     eps.append(("return", None, [(IN, V0, TG, M_RETURN)]))
+    eps.append(("observe", None, [(IN, V0, TG, M_OBSERVE), (IN, V0, TG, M_OBSERVE)]))    # OBSERVE = ALLOW (7. liść)
+    # OBSERVE goniący intruza ZA płot: setpoint poza R_E → R-G nadrzędny → REFUSE(GEOFENCE) → latch (G3)
+    eps.append(("observe→geo→latch", None, [(IN, V0, FAR, M_OBSERVE), (IN, V0, TG, M_OBSERVE)]))
     eps.append(("abort→latch", None, [(IN, V0, TG, M_ABORT), (IN, V0, TG, M_PATROL)]))  # abort potem latch
     eps.append(("geo→latch", None, [(IN, V0, FAR, M_PATROL), (IN, V0, TG, M_PATROL)]))  # geo potem latch
     # predykcja: pozycja blisko obwiedni + prędkość na zewnątrz → geo
@@ -112,7 +116,7 @@ def main():
     ok = (not mism) and (not missing)
     print("=== P5 konformancja kod↔model (R0.1) ===")
     print(f"  rozbieżności tau≡shield: {len(mism)}  ({n_rand} losowych + {len(targeted)} celowanych epizodów)")
-    print(f"  pokrycie przejść: {len(coverage)}/6" + (f"  BRAK: {missing}" if missing else "  (pełne)"))
+    print(f"  pokrycie przejść: {len(coverage)}/7" + (f"  BRAK: {missing}" if missing else "  (pełne)"))
     if mism:
         print("  PIERWSZA ROZBIEŻNOŚĆ:", json.dumps(mism[0], default=str, ensure_ascii=False))
     print(f"WERDYKT P5: {'PASS' if ok else 'FAIL'}")
@@ -122,7 +126,7 @@ def main():
             "method": "per-tick conformance: proven-model tau ≡ r01/shield.py (decision+reason+state)",
             "z3_pip": "5.0.0.0", "z3_lib": z3.get_version_string(),
             "episodes_random": n_rand, "episodes_targeted": len(targeted),
-            "transitions_covered": sorted(coverage), "coverage": f"{len(coverage)}/6", "mismatches": 0,
+            "transitions_covered": sorted(coverage), "coverage": f"{len(coverage)}/7", "mismatches": 0,
             "latched_reasons_covered": ["GEOFENCE", "ABORT", "COMMAND_INVALID", "STALE_CMD"],
             "binds": "P1 (r01/proofs/certs/P1.json) — dowód dotyczy KODU egzekutora, nie fikcji",
             "code_refs": {"shield": "r01/shield.py:_decide", "model": "r01/proofs/verify.py:tau"},

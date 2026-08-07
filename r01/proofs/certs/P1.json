@@ -10,14 +10,17 @@
     "P1a": "unsat",
     "P1b": "unsat",
     "P1c": "unsat",
-    "P1d": "unsat"
+    "P1d": "unsat",
+    "P1e": "unsat"
   },
-  "automaton": "r01/shield.py:_decide (ALLOW/HOLD/REFUSE, reasons GEOFENCE/COMMAND_INVALID/STALE_CMD/ABORT)",
+  "automaton": "r01/shield.py:_decide (7 liści: latch>geo>abort>hold>return>OBSERVE>patrol; ALLOW/HOLD/REFUSE, reasons GEOFENCE/COMMAND_INVALID/STALE_CMD/ABORT)",
+  "leaves": 7,
   "properties": {
     "P1a": "ALLOW ⇒ ¬geo ∧ ¬terminal (przepuszcza tylko geofence-bezpiecznie)",
     "P1b": "geo ⇒ REFUSE ∧ (¬term ∧ geo ⇒ reason=GEOFENCE)",
     "P1c": "REFUSE ⇒ reason ∈ {GEOFENCE,COMMAND_INVALID,STALE_CMD,ABORT}",
-    "P1d": "terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (latch)"
+    "P1d": "terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (latch)",
+    "P1e": "OBSERVE ⇒ ¬geo ∧ ¬terminal ∧ ALLOW (7. liść poniżej R-G — śledzenie nie łamie obwiedni)"
   },
   "assumptions": [
     "geo = boolowski predykat naruszenia geofence; arytmetyka bariery (radial+hamowanie) jest przedmiotem P2-analog (osobne twierdzenie warunkowe)"
@@ -27,5 +30,5 @@
     "config": "r01/config.py (R_E, obwiednia)"
   },
   "note_discrepancy": "ABORT dodane jako 4. reason (operator) poza 3 z PRE_R01 §8 — jawnie",
-  "model_sha256": "c91abe27d52bf6866dc767869b6149bc1e7e4fe22d5c4940b3414d7861b2e481"
+  "model_sha256": "2ba7628824be2390ed631a7824775a95c4dee7387b4eec5b6a525f3b54baa6d4"
 }

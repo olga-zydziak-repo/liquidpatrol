@@ -9,6 +9,8 @@
     "fresh_ALLOW": true,
     "geofence_target_REFUSE": true,
     "mode_from_record": true,
+    "observe_on_mode_OBSERVE": true,
+    "observe_off_mode_PATROL": true,
     "mode_of_denies_non_allow": true,
     "chain_verifiable": true,
     "tamper_detected": true,
@@ -19,14 +21,18 @@
     "HOLD",
     "RESUME",
     "RETURN_HOME",
-    "ABORT"
+    "ABORT",
+    "OBSERVE_ON",
+    "OBSERVE_OFF"
   ],
   "commands": [
     "start patrol",
     "hold",
     "resume",
     "return home",
-    "abort"
+    "abort",
+    "observe on",
+    "observe off"
   ],
   "properties": {
     "a": "brak trybu bez admisji",
@@ -38,5 +44,5 @@
     "authz": "r01/authz.py",
     "language": "r01/language.py"
   },
-  "model_sha256": "147e35979bb4c24f5ff718b9f9c02e4b155a813f24d11abf883e11b418e8bab1"
+  "model_sha256": "8e1802b59aab05f5277ca1ba162dbd57108f734c0e4971d9e63889d19791bc39"
 }

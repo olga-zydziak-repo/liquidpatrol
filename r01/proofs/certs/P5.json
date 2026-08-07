@@ -5,16 +5,17 @@
   "z3_pip": "5.0.0.0",
   "z3_lib": "5.0.0",
   "episodes_random": 400,
-  "episodes_targeted": 8,
+  "episodes_targeted": 10,
   "transitions_covered": [
     "abort",
     "geo",
     "hold",
     "latch",
+    "observe",
     "patrol",
     "return"
   ],
-  "coverage": "6/6",
+  "coverage": "7/7",
   "mismatches": 0,
   "latched_reasons_covered": [
     "GEOFENCE",
@@ -27,5 +28,5 @@
     "shield": "r01/shield.py:_decide",
     "model": "r01/proofs/verify.py:tau"
   },
-  "model_sha256": "db20e1ccaa2b68c9884787ca629737488909632715e324f85d7850dabc3631ff"
+  "model_sha256": "27ddc20bdc2c25541287366b7c39a830ec19c1f310b0221d7217ce551ae6c113"
 }

@@ -1,9 +1,10 @@
 """r01/proofs/verify.py — P1 (własności automatu osłony R0.1) przez 1-indukcję w z3.
 
 Port kształtu z liquidsight/proofs/verify.py; MODEL = lustro r01/shield.py:_decide (nowy automat).
-Automat R0.1 (prostszy — bez lock/age/dwell): wejścia geo(Bool, naruszenie geofence — arytmetyka
-bariery należy do P2-analog), mode∈{PATROL,HOLD,RETURN,ABORT}. Stan: tm(terminal), rsn, st.
-6 liści (priorytet): latch, geo, abort, hold, return, patrol.
+Automat R0.2 (7 liści — R0.1 + OBSERVE): wejścia geo(Bool, naruszenie geofence — arytmetyka
+bariery należy do P2-analog), mode∈{PATROL,HOLD,RETURN,ABORT,OBSERVE}. Stan: tm(terminal), rsn, st.
+7 liści (priorytet): latch, geo, abort, hold, return, OBSERVE, patrol.
+OBSERVE = klasa ALLOW PONIŻEJ R-G (jak patrol) — geofence nadrzędny z priorytetu (PRE_R02 §2.4).
 
 Zobowiązania: BAZA Inv(c0), KROK Inv(c) ⇒ Inv(c') ∧ P1(a..d). z3 sprawdza NEGACJĘ (oczekiwane UNSAT).
 Uruchom: PYTHONPATH=.certdeps python3 -m r01.proofs.verify
@@ -18,8 +19,8 @@ CERT = os.path.join(_HERE, "certs", "P1.json")
 # enumeracje (Int) — muszą zgadzać się z r01/shield.py oraz conformance.py
 ALLOW, HOLD, REFUSE = 0, 1, 2
 NONE, GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT_R = 0, 1, 2, 3, 4
-PATROL, HOLDING, RETURNING, DONE = 0, 1, 2, 3
-M_PATROL, M_HOLD, M_RETURN, M_ABORT = 0, 1, 2, 3
+PATROL, HOLDING, RETURNING, DONE, OBSERVING = 0, 1, 2, 3, 4
+M_PATROL, M_HOLD, M_RETURN, M_ABORT, M_OBSERVE = 0, 1, 2, 3, 4
 
 
 def _sv(p):
@@ -27,7 +28,8 @@ def _sv(p):
 
 
 def domain(c):
-    return z3.And(c["rsn"] >= 0, c["rsn"] <= 4, c["st"] >= 0, c["st"] <= 3)
+    # st ∈ {PATROL,HOLDING,RETURNING,DONE,OBSERVING} = 0..4 (R0.2: +OBSERVING)
+    return z3.And(c["rsn"] >= 0, c["rsn"] <= 4, c["st"] >= 0, c["st"] <= 4)
 
 
 def inv(c):
@@ -38,11 +40,14 @@ def inv(c):
 
 
 def valid(mode):
-    return z3.And(mode >= 0, mode <= 3)
+    # mode ∈ {PATROL,HOLD,RETURN,ABORT,OBSERVE} = 0..4 (R0.2: +OBSERVE)
+    return z3.And(mode >= 0, mode <= 4)
 
 
 def tau(c, geo, mode):
-    """Relacja przejścia — lustro r01.shield._decide. Zwraca (post, decision)."""
+    """Relacja przejścia — lustro r01.shield._decide. Zwraca (post, decision, leaves).
+    Priorytet (7 liści): latch > geo > abort > hold > return > OBSERVE > patrol.
+    OBSERVE i patrol = klasa ALLOW PONIŻEJ R-G — R-G (L_geo) ma priorytet nad oboma (PRE_R02 §2.4)."""
     L_latch = c["tm"]
     base = z3.Not(c["tm"])
     L_geo = z3.And(base, geo)
@@ -50,14 +55,16 @@ def tau(c, geo, mode):
     L_abort = z3.And(ok, mode == M_ABORT)
     L_hold = z3.And(ok, mode == M_HOLD)
     L_return = z3.And(ok, mode == M_RETURN)
+    L_observe = z3.And(ok, mode == M_OBSERVE)               # R0.2: 7. liść (ALLOW, poniżej R-G)
     L_patrol = z3.And(ok, mode == M_PATROL)
     dec = z3.If(z3.Or(L_latch, L_geo, L_abort), REFUSE,
-                z3.If(z3.Or(L_hold, L_return), HOLD, ALLOW))
+                z3.If(z3.Or(L_hold, L_return), HOLD, ALLOW))  # L_observe ∨ L_patrol → ALLOW
     tm2 = z3.Or(L_latch, L_geo, L_abort)
     rsn2 = z3.If(L_latch, c["rsn"], z3.If(L_geo, GEOFENCE, z3.If(L_abort, ABORT_R, NONE)))
-    st2 = z3.If(tm2, DONE, z3.If(L_hold, HOLDING, z3.If(L_return, RETURNING, PATROL)))
+    st2 = z3.If(tm2, DONE, z3.If(L_hold, HOLDING,
+               z3.If(L_return, RETURNING, z3.If(L_observe, OBSERVING, PATROL))))
     cp = {"tm": tm2, "rsn": rsn2, "st": st2}
-    leaves = {"L_geo": L_geo, "L_patrol": L_patrol}
+    leaves = {"L_geo": L_geo, "L_patrol": L_patrol, "L_observe": L_observe}
     return cp, dec, leaves
 
 
@@ -73,7 +80,10 @@ def props(c, cp, dec, geo, leaves):
                                           cp["rsn"] == STALE_CMD, cp["rsn"] == ABORT_R))
     # P1d: terminal monotoniczny (raz REFUSE — zawsze REFUSE): terminal ⇒ terminal' ∧ REFUSE
     P1d = z3.Implies(c["tm"], z3.And(cp["tm"], dec == REFUSE))
-    return {"P1a": P1a, "P1b": P1b, "P1c": P1c, "P1d": P1d}
+    # P1e (R0.2): OBSERVE aktywny ⇒ ¬geo ∧ ¬terminal ∧ ALLOW (7. liść siedzi PONIŻEJ R-G —
+    #  śledzenie NIGDY nie łamie obwiedni Z KONSTRUKCJI priorytetu, nie dodatkowej reguły; PRE §2.4)
+    P1e = z3.Implies(leaves["L_observe"], z3.And(z3.Not(geo), z3.Not(c["tm"]), dec == ALLOW))
+    return {"P1a": P1a, "P1b": P1b, "P1c": P1c, "P1d": P1d, "P1e": P1e}
 
 
 def prove():
@@ -112,12 +122,15 @@ def main():
     cert = {
         "property": "P1", "verdict": "PROVED", "method": "1-induction (z3)",
         "z3_pip": "5.0.0.0", "z3_lib": z3.get_version_string(), "obligations": res,
-        "automaton": "r01/shield.py:_decide (ALLOW/HOLD/REFUSE, reasons GEOFENCE/COMMAND_INVALID/STALE_CMD/ABORT)",
+        "automaton": "r01/shield.py:_decide (7 liści: latch>geo>abort>hold>return>OBSERVE>patrol; "
+                     "ALLOW/HOLD/REFUSE, reasons GEOFENCE/COMMAND_INVALID/STALE_CMD/ABORT)",
+        "leaves": 7,
         "properties": {
             "P1a": "ALLOW ⇒ ¬geo ∧ ¬terminal (przepuszcza tylko geofence-bezpiecznie)",
             "P1b": "geo ⇒ REFUSE ∧ (¬term ∧ geo ⇒ reason=GEOFENCE)",
             "P1c": "REFUSE ⇒ reason ∈ {GEOFENCE,COMMAND_INVALID,STALE_CMD,ABORT}",
             "P1d": "terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (latch)",
+            "P1e": "OBSERVE ⇒ ¬geo ∧ ¬terminal ∧ ALLOW (7. liść poniżej R-G — śledzenie nie łamie obwiedni)",
         },
         "assumptions": ["geo = boolowski predykat naruszenia geofence; arytmetyka bariery (radial+"
                         "hamowanie) jest przedmiotem P2-analog (osobne twierdzenie warunkowe)"],

@@ -11,6 +11,11 @@ Reguły (priorytet = kontrakt):
        pozycja + dystans_hamowania(v) > R_E → REFUSE(GEOFENCE) + akcja bezpieczna.
   R-A  ABORT: operator kończy misję → REFUSE(ABORT) (bezpieczne zatrzymanie).
   R-H  HOLD: tryb HOLD → podmiana na hold-setpoint (pozycja bieżąca, v=0).
+  R-R  RETURN: tryb RETURN → hold do przejęcia przez RTL (MAVSDK).
+  R-O  OBSERVE (R0.2, 7. liść): tryb OBSERVE → ALLOW, przepuść setpoint obserwacji (pierścień
+       D_safe, bearing-only z kanału). PONIŻEJ R-G: setpoint OBSERVE za płot jest przecięty przez
+       R-G tak jak waypoint patrolu (geofence nadrzędny z PRIORYTETU, nie nowej reguły — PRE §2.4).
+       OBSERVE nie zmienia v_max/clampów/obwiedni (R02-A3).
   R-P  PATROL: ALLOW → przepuść setpoint planera.
 HOLD/REFUSE NIE urywają strumienia (A1/§4): applied = hold-setpoint, strumień żyje < COM_OF_LOSS_T.
 
@@ -28,6 +33,9 @@ GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT = \
     "GEOFENCE", "COMMAND_INVALID", "STALE_CMD", "ABORT"
 # tryby (z admitowanych komend)
 M_PATROL, M_HOLD, M_RETURN, M_ABORT = "PATROL", "HOLD", "RETURN", "ABORT"
+M_OBSERVE = "OBSERVE"           # R0.2: tryb OBSERVE (auto-wyzwalany kanałem, autoryzowany gramatyką P4)
+# stan OBSERVE (klasa ALLOW, jak PATROL)
+OBSERVING = "OBSERVING"
 
 
 def _radial(x, y) -> float:
@@ -125,6 +133,14 @@ class PatrolShield:
             self.state = RETURNING
             return {"k": k, "state": RETURNING, "decision": HOLD, "reason": None,
                     "rule": "R-R", "detail": "return→RTL(MAVSDK)", "applied": self._hold_setpoint(pos)}
+
+        # R-O observe (R0.2, 7. liść) → ALLOW; setpoint obserwacji przepuszczony (target = pierścień
+        # D_safe z kanału, wyliczony w egzekutorze). PONIŻEJ R-G: gdy setpoint OBSERVE za płotem,
+        # R-G (wyżej) już zwrócił REFUSE(GEOFENCE) — tu docieramy tylko gdy geofence-bezpiecznie.
+        if mode == M_OBSERVE:
+            self.state = OBSERVING
+            return {"k": k, "state": OBSERVING, "decision": ALLOW, "reason": None, "rule": "R-O",
+                    "applied": [float(target[0]), float(target[1]), float(target[2])]}
 
         # R-P patrol → ALLOW
         self.state = PATROL

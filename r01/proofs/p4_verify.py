@@ -20,8 +20,10 @@ from r01.config import STALE_CMD_S, R_E
 _HERE = os.path.dirname(os.path.abspath(__file__))
 CERT = os.path.join(_HERE, "certs", "P4.json")
 
-VALID = ["start patrol", "hold", "resume", "return home", "abort"]
-OUT = ["land", "fly to the red box", "patrol", "start", "hold now", "", "returnhome", "abort!"]
+VALID = ["start patrol", "hold", "resume", "return home", "abort", "observe on", "observe off"]
+# poza gramatyką: w tym near-miss dla OBSERVE (samo "observe", zły argument) — dalej COMMAND_INVALID
+OUT = ["land", "fly to the red box", "patrol", "start", "hold now", "", "returnhome", "abort!",
+       "observe", "observe maybe", "observe on now"]
 
 
 def check():
@@ -41,6 +43,9 @@ def check():
     a4 = Authorizer()
     rec = a4.admit("start patrol")
     checks["mode_from_record"] = a4.mode_of(rec) == "PATROL"
+    # R0.2: observe on/off → tryb OBSERVE / PATROL (autorytet trybu OBSERVE, §2.4)
+    checks["observe_on_mode_OBSERVE"] = a4.mode_of(a4.admit("observe on")) == "OBSERVE"
+    checks["observe_off_mode_PATROL"] = a4.mode_of(a4.admit("observe off")) == "PATROL"
     try:
         a4.mode_of(a4.admit("land")); checks["mode_of_denies_non_allow"] = False
     except PermissionError:
