@@ -396,19 +396,35 @@ utrzymać w kadrze celu wymaganego przez kopertę: cel POWYŻEJ drona (tło nieb
 → wysoka elewacja → górna krawędź kadru → klipowany przez pitch lotu. Cel na poziomie/niżej → w kadrze,
 ale tło gruntu → niewykrywany. **Fixed-forward-camera fundamentalnie ogranicza kopertę.**
 
-### DECYZJA O KOLEJNOŚCI DŹWIGNI (wynik toru A steruje torem C)
-- **NOWA dźwignia 0 (PRIORYTET, tania) — CELOWANIE/STABILIZACJA KAMERY:** gimbal / pitch kamery w górę /
-  aktywne celowanie (osłona już liczy yaw_cmd na cel — rozszerzyć o pitch/gimbal), by cel POWYŻEJ drona
-  pozostawał w kadrze mimo attitude lotu. To adresuje przyczynę źródłową, tanio, PRZED treningiem.
-- **Dźwignia 1 (rozdzielczość/gz-transport) — DE-PRIORYTET:** potok już 640×480; nie jest wąskim gardłem.
-- **Dźwignia 3 (detektor jednoklasowy / R2-alt) — DE-PRIORYTET jako pierwszy ruch:** detektor adekwatny
-  na kadrowanym celu (0.156). Wraca dopiero jeśli po naprawie kadrowania conf w locie wciąż < próg.
-- **Dźwignia 2 (MTI/ruch) — pozostaje** (wzmacnia ε_FP; niezależna od kadrowania).
-- **A7 R2-alt trigger: PRZE-ATRYBUOWANY** — G2 „porażka detekcji" była w istocie **porażką KADROWANIA**
-  (cel poza kadrem), nie jakości detektora. R2-alt nie jest pierwszą dźwignią.
+### CATCH (rozbieżność, decyzja Olgi) — conf jako separator jest KRUCHY, fix kadrowania NIEWYSTARCZAJĄCY
+**Static conf 0.156 przy IDEALNYM kadrowaniu jest PONIŻEJ θ_conf 0.1635 i poniżej szumu max 0.158.**
+Tzn. **przerwa dystrybucyjna 0.158↔0.169 ZAPADŁA SIĘ w niezależnym pomiarze** (sweep dawał 0.169–0.214,
+ale ta klatka statyczna, dobrze kadrowana, daje 0.156). Konsekwencje:
+- **Fix kadrowania (dźwignia 0) jest KONIECZNY, ale NIEWYSTARCZAJĄCY** — nawet idealnie kadrowany cel bywa
+  pod θ_conf. **conf jako separator jest krokościenny/kruchy.**
+- **θ_conf NIE obniżamy** (wpuściłby szum; zakaz). Po fixie kadrowania: **re-derywacja OBU chmur W LOCIE**
+  (sygnał i szum). **Jeśli sygnał ≤ szum → conf-floor UPADA jako mechanizm** i ENTRY musi stanąć na
+  **separatorze ORTOGONALNYM** (ruch/MTI, spójność strukturalna) — nie conf.
 
-**Lekcja programu (do wpisania):** statyczne sweepy tracą status źródła progów — **charakteryzacja
-wyłącznie W LOCIE** (attitude kamery zmienia kadrowanie 4× i decyduje). θ_conf bez zmian (zakaz obniżania).
+### DECYZJA O KOLEJNOŚCI DŹWIGNI (wynik toru A steruje torem C)
+- **Dźwignia 0 (PRIORYTET) — CELOWANIE KAMERY, wariant 0b PREFEROWANY:**
+  - **0b (preferowane): poza kamery KOMPENSOWANA ATTITUDE** (gimbal-like — kamera trzyma ZADANĄ elewację
+    niezależnie od pitchu kadłuba). **Uzasadnienie:** okno kątowe koperty jest kilkustopniowe, a jitter
+    attitude zawisu tego SAMEGO rzędu — dlatego realne EO/IR są **gimbalowane**. 0b usuwa i średnią, i
+    sprzężenie z jitterem.
+  - 0a (odrzucone jako samodzielne): statyczny pitch-offset kamery — usuwa ŚREDNIĄ, ale zostawia
+    sprzężenie z jitterem zawisu (cel dryfuje w/z kadru na jitterze).
+  - **Wariant do rozważenia: szersze pionowe FOV** — ale **KOSZT MIERZONY, nie zakładany** (mniej pikseli
+    na celu = krótszy zasięg; trade-off zmierzyć, nie założyć).
+- **Dźwignia 2 (MTI/ruch) — AWANS do WSPÓŁ-PRIORYTETU z 0:** **separator ORTOGONALNY do conf** (szum
+  statyczny nie ma spójnego ruchu → wzmacnia też ε_FP). Kluczowe wobec CATCH (conf kruchy).
+- **Dźwignia 1 (rozdzielczość/gz-transport) — DE-PRIORYTET:** potok już 640×480 (premisa lever 1 obalona).
+- **Dźwignia 3 (detektor jednoklasowy / R2-alt) — OSTATNIA:** detektor adekwatny na kadrowanym celu (0.156).
+- **A7 R2-alt trigger: PRZE-ATRYBUOWANY** — G2 „porażka detekcji" = **porażka KADROWANIA**, nie jakości detektora.
+
+**Lekcja programu (WPISANA):** statyczne sweepy **tracą status źródła progów** — **charakteryzacja
+WYŁĄCZNIE W LOCIE** (attitude kamery zmienia kadrowanie 4× i decyduje; conf ze sweepu statycznego nie
+transferuje). θ_conf bez zmian (zakaz obniżania).
 
 ---
 

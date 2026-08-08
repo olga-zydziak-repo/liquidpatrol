@@ -87,16 +87,20 @@ if [ "$SCEN" = "CHAR" ] || [ "$SCEN" = "CHAR2" ]; then
   echo "[gate] CHAR: intruz statyczny GT=($CHAR_INTRUDER)"
 fi
 
-# 6) węzeł detektora (env ROS2+torch — .b0deps na PYTHONPATH; zwalidowane w żywym smoke R3)
-YOLO_WEIGHTS="$ROOT/.b0deps/weights/yolov8s-worldv2.pt" \
-  PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" setsid nohup python3 -m r02.detector_node \
-  --image-topic "$ROS_IMG" > "$LOGDIR/detector.log" 2>&1 &
-DET_PID=$!; PIDS+=($DET_PID); echo "[gate] detektor pid=$DET_PID"
-sleep 8   # załadowanie wag YOLO-World (~3 s w smoke)
+# 6) węzeł detektora (env ROS2+torch) — POMIJANY w GT-FED (tor B: kanał z pozy GT, bez percepcji)
+if [ "${GT_FED:-0}" != "1" ]; then
+  YOLO_WEIGHTS="$ROOT/.b0deps/weights/yolov8s-worldv2.pt" \
+    PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" setsid nohup python3 -m r02.detector_node \
+    --image-topic "$ROS_IMG" > "$LOGDIR/detector.log" 2>&1 &
+  DET_PID=$!; PIDS+=($DET_PID); echo "[gate] detektor pid=$DET_PID"
+  sleep 8   # załadowanie wag YOLO-World (~3 s w smoke)
+else
+  echo "[gate] GT-FED=1 → detektor POMINIĘTY (kanał zasilany pozą GT symulatora)"
+fi
 
 # 7) runner bramki
-echo "[gate] start runner G=$SCEN"
-SCENARIO="$SCEN" TRACE="$LOGDIR/gate_${SCEN}.jsonl" CHAR_INTRUDER="$CHAR_INTRUDER" \
+echo "[gate] start runner G=$SCEN (GT_FED=${GT_FED:-0})"
+SCENARIO="$SCEN" TRACE="$LOGDIR/gate_${SCEN}.jsonl" CHAR_INTRUDER="$CHAR_INTRUDER" GT_FED="${GT_FED:-0}" \
   CHAR_LOG="${CHAR_LOG:-$LOGDIR/char.jsonl}" \
   PYTHONPATH="$ROOT:${PYTHONPATH:-}" python3 -m r02.gate_run_r02 2>&1 | tee "$LOGDIR/gate.log"
 RC=${PIPESTATUS[0]}

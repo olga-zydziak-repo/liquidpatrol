@@ -24,7 +24,12 @@ from r01.shield import PatrolShield, ALLOW, HOLD, REFUSE, GEOFENCE, M_PATROL, M_
 from r01.authz import Authorizer
 from r01.config import ALT_M, TICK_HZ, DT, R_E
 from r02.config_r02 import (D_SAFE_M, THETA_AGE_S, T_ACK_S, F_FOV, EPS_FP_PER_MIN, ChannelConfig,
-                            THETA_CONF, ENTRY_EDGE_MARGIN)
+                            THETA_CONF, ENTRY_EDGE_MARGIN, DET_DT)
+
+# TOR B — GT-FED (teza architektury niezależna od percepcji, decyzja Olgi). Kanał 5-dim zasilany POZĄ
+# celu z symulatora (projekcja GT do kamery, perfekcyjna detekcja w FOV, conf=1.0) zamiast detektora.
+# JAWNIE ETYKIETOWANE w trace/result/raporcie (precedens 3b: sufit GT-fed vs live-fed osobno).
+GT_FED = os.environ.get("GT_FED") == "1"
 from r02.target_channel import TargetChannel, Box
 from r02.observe_guidance import ObserveController
 from r02.gate_harness import project_to_pixel   # EKSPLORACJA: projekcja GT intruza (klasyfikacja true/false)
@@ -110,6 +115,10 @@ class Runner:
         self.entry_t = None; self.intruder_present = False; self.intruder_in_view_t = None
         self._prev_locked = False
         self.idle_sp = None            # gdy ustawiony: setpoint utrzymania (hover) zamiast patrolu gdy nie-locked
+        # TOR B — GT-FED: lokalny kanał zasilany pozą GT (bez detektora/kamery)
+        self.gt_mode = GT_FED
+        self.gt_channel = TargetChannel(ChannelConfig()) if GT_FED else None
+        self.gt_next = 0.0; self.gt_intruder_fn = None; self.gt_noise = 0.0
 
     def admit_observe(self, on=True):
         """Autorytet OBSERVE przez gramatykę (P4) — 'observe on/off' (§2.4, default on)."""
@@ -181,16 +190,37 @@ class Runner:
                 "n_admitted_entry": self.n_admitted,        # dla G1 (brak intruza): oczekiwane 0
                 "gap_held_in_flight": (max(cs) < THETA_CONF) if cs else None}   # szum < θ_conf?
 
+    def _channel_step(self, pos, yaw, t):
+        """Zwraca (locked, box, age) z kanału. TOR B (GT-fed): zasila lokalny kanał pozą GT projektowaną
+        do kamery (perfekcyjna detekcja w FOV, conf=1.0 → przechodzi admisję A6). Live: z ChannelSub."""
+        if self.gt_mode:
+            if t >= self.gt_next - 1e-9:                    # kadencja detektora 1 Hz
+                intr = self.gt_intruder_fn(t) if self.gt_intruder_fn else None
+                box = None
+                if intr is not None:
+                    b = project_to_pixel(pos, yaw, intr)     # projekcja GT (None gdy poza FOV level-camera)
+                    if b is not None:
+                        cx = min(max(b.cx + self.gt_noise, 0.0), 1.0)
+                        box = Box(cx, b.cy, b.w, b.h, conf=1.0)   # perfekcyjna detekcja (GT-fed)
+                self.gt_channel.on_frame(box, t, gt_present=(intr is not None and box is not None))
+                self.gt_next += DET_DT
+            else:
+                self.gt_channel.tick_time(t)                 # egzekwuj sufit age między klatkami
+            val = self.gt_channel.sample(t)
+            locked = self.gt_channel.locked and not self.gt_channel.is_expired(t)
+            return locked, (self.gt_channel.last_box if locked else None), (val.age_s if val else None)
+        locked = self.chan.locked and (self.chan.age is not None and self.chan.age <= THETA_AGE_S)
+        return locked, (self.chan.last if self.chan.locked else None), self.chan.age
+
     def tick(self, force_mode=None, watch_gf=True):
         self._spin()
         self._log_conf_passive()
         pos = list(self.mav.pos); vel = list(self.mav.vel)
-        # aktualizacja naprowadzania z kanału (świeża detekcja → zamroź estymatę)
-        locked = self.chan.locked and (self.chan.age is not None and self.chan.age <= THETA_AGE_S)
-        if self.chan.locked and self.chan.last is not None:
-            # traktuj każdą niepustą wiadomość jako świeżą detekcję (węzeł publikuje @1 Hz)
-            yaw = self._yaw()
-            self.ctrl.on_detection(pos, yaw, self.chan.last)
+        yaw = self._yaw()
+        # kanał (GT-fed lub live) → (locked, box, age); świeży box → zamroź estymatę OBSERVE
+        locked, chbox, chage = self._channel_step(pos, yaw, round(time.time() - self.t0, 4))
+        if chbox is not None:
+            self.ctrl.on_detection(pos, yaw, chbox)
         if self._prev_locked and not locked:
             self.ctrl.reset()
         # ENTRY: przejście unlocked→locked
@@ -200,7 +230,7 @@ class Runner:
                 self.entry_t = time.time() - self.t0
             if not self.intruder_present:
                 self.n_false_entry += 1        # ε_FP: lock na pustej scenie
-        self._prev_locked = locked
+        self._prev_locked = locked; self.locked = locked   # dostępne dla scenariuszy (GT-fed lub live)
 
         # tryb: OBSERVE gdy lock ∧ autorytet gramatyki ∧ estymata; inaczej force/patrol
         if locked and self.observe_authority and self.ctrl.has_estimate() and force_mode is None:
@@ -228,7 +258,7 @@ class Runner:
             self.offboard_lost_ticks += 1        # fix #2 metryka: ticki poza OFFBOARD w patrolu
         rec = {"k": self.k, "t": round(time.time()-self.t0, 3), "decision": d["decision"],
                "reason": d["reason"], "rule": d["rule"], "mode": mode, "locked": locked,
-               "age": self.chan.age, "pos": [round(v, 2) for v in pos], "yaw": round(self.mav.yaw, 3),
+               "age": chage, "gt_fed": self.gt_mode, "pos": [round(v, 2) for v in pos], "yaw": round(self.mav.yaw, 3),
                "applied": [round(v, 2) for v in d["applied"]], "r_pos": round(math.hypot(pos[0], pos[1]), 2),
                "flight_mode": self.mav.flight_mode, "min_d": None if self.min_d_observe==float("inf") else round(self.min_d_observe,2)}
         self.tf.write(json.dumps(rec) + "\n")
@@ -298,6 +328,7 @@ def scenario_G1(r: Runner):
 def scenario_G2(r: Runner):
     """Intruz wchodzi w FOV → ENTRY≤T_ack → OBSERVE, d≥D_safe, cel w FOV ≥ f_fov."""
     r.admit_observe(True); r.intruder_present = True
+    if r.gt_mode: r.gt_intruder_fn = lambda t: (7.0, 0.0, -11.5)   # TOR B: intruz statyczny w kopercie
     r.bring_up()
     # G2: dron HOVER w Home (twarzą N na statycznego intruza w kopercie A7) do ENTRY, potem OBSERVE
     r.idle_sp = [r.start[0], r.start[1], -ALT_M]
@@ -324,7 +355,10 @@ def scenario_G2(r: Runner):
 def scenario_G3(r: Runner):
     """Intruz prowadzi w stronę płotu → setpoint OBSERVE za obwiednię → REFUSE(GEOFENCE), ≤R_E."""
     r.admit_observe(True); r.intruder_present = True
+    # TOR B: intruz prowadzi na Północ (ku płotowi R_E=32) — dron goni na pierścieniu D_safe → za płot
+    if r.gt_mode: r.gt_intruder_fn = lambda t: (7.0 + 3.0*t, 0.0, -11.5)
     r.bring_up()
+    r.idle_sp = [r.start[0], r.start[1], -ALT_M]
     refuse_reason = None
     while time.time()-r.t0 < 90:
         d = r.tick()
@@ -346,13 +380,16 @@ def scenario_G3(r: Runner):
 def scenario_G4(r: Runner):
     """Utrata detekcji → ZOH+age → age>θ_age → wyjście z OBSERVE do PATROL (nie ślepy finisz)."""
     r.admit_observe(True); r.intruder_present = True
+    # TOR B: intruz obecny do sim-t=20 s, potem ZNIKA (None) → age rośnie → sufit → wyjście z OBSERVE
+    if r.gt_mode: r.gt_intruder_fn = lambda t: (7.0, 0.0, -11.5) if t < 20.0 else None
     r.bring_up()
+    r.idle_sp = [r.start[0], r.start[1], -ALT_M]
     saw_observe = False; vanished_at = None; exited = False
     while time.time()-r.t0 < 90:
         d = r.tick()
         if d["mode"] == M_OBSERVE: saw_observe = True
-        # po ~8 s obserwacji: intruz znika (sterowane z zewnątrz — tu wykrywamy przez brak locka)
-        if saw_observe and not r.chan.locked and vanished_at is None:
+        # intruz znika → brak locka
+        if saw_observe and not r.locked and vanished_at is None:
             vanished_at = time.time()-r.t0
         if saw_observe and vanished_at is not None and d["mode"] == M_PATROL:
             exited = True; print("[gate] G4 wyjście z OBSERVE do PATROL po sufcie age"); break
@@ -370,7 +407,9 @@ def scenario_G4(r: Runner):
 def scenario_G5(r: Runner):
     """Warstwa-0 (regres R0.1 S4): urwanie XRCE → natywna reakcja HOLD ≤~1.2 s, ≤R_E, mimo OBSERVE."""
     r.admit_observe(True); r.intruder_present = True
+    if r.gt_mode: r.gt_intruder_fn = lambda t: (7.0, 0.0, -11.5)   # TOR B: intruz obecny (OBSERVE aktywny)
     r.bring_up()
+    r.idle_sp = [r.start[0], r.start[1], -ALT_M]
     # wejdź w OBSERVE jeśli intruz jest, potem URWIJ strumień
     t_fly = time.time()
     while time.time()-t_fly < 8:
