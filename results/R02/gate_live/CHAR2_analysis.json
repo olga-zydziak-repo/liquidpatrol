@@ -1,0 +1,43 @@
+{
+  "char_log": "/tmp/r02/CHAR2/char.jsonl",
+  "n_frames": 49,
+  "n_infov_frames": 49,
+  "n_true_boxes": 0,
+  "n_false_boxes": 105,
+  "conf_false(szum)": {
+    "n": 105,
+    "min": 0.00103,
+    "p5": 0.00107,
+    "p50": 0.00259,
+    "p90": 0.01117,
+    "p95": 0.01499,
+    "p99": 0.0301,
+    "max": 0.04372
+  },
+  "conf_true(sygnał)": {
+    "n": 0
+  },
+  "edge_false(szum)": {
+    "n": 105,
+    "min": 0.004,
+    "p5": 0.0231,
+    "p50": 0.1041,
+    "p90": 0.2143,
+    "p95": 0.2429,
+    "p99": 0.2523,
+    "max": 0.2545
+  },
+  "edge_true(sygnał)": {
+    "n": 0
+  },
+  "separacja_conf": {
+    "tau=p99_szumu": 0.0301,
+    "frac_sygnał_powyżej_tau": null,
+    "rozdziela": false
+  },
+  "separacja_geometryczna": {
+    "frac_szum_przy_krawędzi(edge<0.10)": 0.495,
+    "frac_sygnał_centralny(edge>=0.10)": null
+  },
+  "sygnał_conf_wg_zasięgu(5m biny)": {}
+}

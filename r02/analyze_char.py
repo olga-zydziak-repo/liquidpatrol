@@ -40,10 +40,15 @@ def main():
     n_infov = sum(1 for fr in frames if fr.get("in_fov"))
     true_conf, false_conf, true_edge, false_edge = [], [], [], []
     n_true = n_false = 0
+    by_range = {}                # bin zasięgu (5 m) → lista conf sygnału (CHAR2)
     for fr in frames:
+        rng = fr.get("range")
         for b in fr.get("boxes", []):
             if b["true"]:
                 true_conf.append(b["conf"]); true_edge.append(b["edge"]); n_true += 1
+                if rng is not None:
+                    rb = int(rng // 5) * 5
+                    by_range.setdefault(rb, []).append(b["conf"])
             else:
                 false_conf.append(b["conf"]); false_edge.append(b["edge"]); n_false += 1
 
@@ -68,6 +73,9 @@ def main():
                                           and tau_conf is not None)},
         "separacja_geometryczna": {"frac_szum_przy_krawędzi(edge<0.10)": round(false_edgey, 3) if false_edgey is not None else None,
                                     "frac_sygnał_centralny(edge>=0.10)": round(true_central, 3) if true_central is not None else None},
+        "sygnał_conf_wg_zasięgu(5m biny)": {f"{k}-{k+5}m": {"n": len(v), "p50": round(pct(v,50),4),
+                                            "min": round(min(v),4), "max": round(max(v),4)}
+                                            for k, v in sorted(by_range.items())},
     }
     print(json.dumps(res, indent=2, ensure_ascii=False))
     if out:

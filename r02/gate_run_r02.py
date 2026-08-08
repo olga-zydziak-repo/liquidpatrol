@@ -422,11 +422,65 @@ def scenario_CHAR(r: Runner):
     return crit["PASS"]
 
 
+def scenario_CHAR2(r: Runner):
+    """EKSPLORACJA — DEDYKOWANY PAS SYGNAŁU (krok 1 decyzji Olgi). Dron leci wzdłuż OSI KAMERY (y=0)
+    ku STATYCZNEMU intruzowi (dead-ahead, yaw=0), z dwellem per zasięg → zamiata 5–25 m, cel centralny
+    → GĘSTY rozkład conf(zasięg) SYGNAŁU (nie 1 box). Loguje wszystkie boxy z true/false + range + edge.
+    OBSERVE off, kanał bez wpływu na tor. Cel: chmura sygnału do wyboru progu (z chmurą szumu z CHAR)."""
+    gt = os.environ.get("CHAR_INTRUDER", "25,0,8").split(",")
+    gx, gy, gz = float(gt[0]), float(gt[1]), float(gt[2])
+    intr_ned = (gx, gy, -gz)
+    r.admit_observe(False); r.intruder_present = True
+    boxes_sub = BoxesSub(r.xrce.node)
+    charf = open(os.environ.get("CHAR_LOG", "/tmp/r02/CHAR2/char.jsonl"), "w")
+    r.bring_up()                                  # wznios w Home (0,0,-10)
+    # zamiataj zasięg: target_x kroki tam-i-z-powrotem, dwell per zasięg (gęstość klatek)
+    xs = [0, 4, 8, 12, 16, 20, 20, 16, 12, 8, 4, 0]   # x drona; range do (gx,gy)=~sqrt((gx-x)^2+dz^2)
+    last_seq = -1; n_true = 0; n_false = 0; n_frames = 0
+    for tx in xs:
+        t_dwell = time.time()
+        while time.time() - t_dwell < 4.0 and time.time() - r.t0 < 300:
+            pos = list(r.mav.pos); vel = list(r.mav.vel)
+            sp = [float(tx), gy, -ALT_M]          # leć wzdłuż y=gy ku intruzowi (dead-ahead)
+            d = r.shield.step(r.k, pos, vel, sp, mode=M_PATROL)
+            r._pub(d["applied"]); r._spin()
+            r.max_radial = max(r.max_radial, math.hypot(pos[0], pos[1]))
+            if boxes_sub.seq != last_seq:
+                last_seq = boxes_sub.seq; n_frames += 1
+                yaw = r.mav.yaw
+                exp = project_to_pixel(pos, yaw, intr_ned)
+                rng = math.sqrt((pos[0]-gx)**2 + (pos[1]-gy)**2 + (pos[2]-(-gz))**2)
+                recs = []
+                for (cx, cy, w, h, conf) in boxes_sub.boxes:
+                    edge = min(cx, 1.0-cx, cy, 1.0-cy)
+                    is_true = bool(exp is not None and math.hypot(cx-exp.cx, cy-exp.cy) < 0.15)
+                    if is_true: n_true += 1
+                    else: n_false += 1
+                    recs.append({"cx": round(cx,4), "cy": round(cy,4), "conf": round(conf,5),
+                                 "edge": round(edge,4), "true": is_true})
+                charf.write(json.dumps({"t": round(time.time()-r.t0,2), "range": round(rng,2),
+                            "pos": [round(v,2) for v in pos], "in_fov": exp is not None,
+                            "exp": [round(exp.cx,4), round(exp.cy,4)] if exp else None,
+                            "nbox": len(recs), "boxes": recs}) + "\n")
+            r.k += 1; time.sleep(PERIOD)
+    charf.close()
+    crit = {"scenario": "CHAR2_signal", "char_frames": n_frames, "char_true_boxes": n_true,
+            "char_false_boxes": n_false, "offboard_lost_ticks": r.offboard_lost_ticks,
+            "gf_native_0": r.offboard_lost_ticks == 0, "stream_max_dt": round(r.stream_max_dt,3),
+            "A1_ok": len(r.mav.motion_cmds())==0, "max_r": round(r.max_radial,2),
+            "inside_R_E": r.max_radial <= R_E,
+            "char_log": os.environ.get("CHAR_LOG", "/tmp/r02/CHAR2/char.jsonl")}
+    crit["PASS"] = n_true > 20 and crit["A1_ok"] and crit["inside_R_E"]   # gęsty sygnał zebrany
+    r.mav.rtl(); time.sleep(6); r.mav.land(); time.sleep(2)
+    r.finish(crit)
+    return crit["PASS"]
+
+
 def main():
-    laps = {"G1": 3, "G2": 1, "G3": 3, "G4": 2, "G5": 1, "CHAR": 3}[SCEN]
+    laps = {"G1": 3, "G2": 1, "G3": 3, "G4": 2, "G5": 1, "CHAR": 3, "CHAR2": 1}[SCEN]
     r = Runner(laps)
     fn = {"G1": scenario_G1, "G2": scenario_G2, "G3": scenario_G3, "G4": scenario_G4,
-          "G5": scenario_G5, "CHAR": scenario_CHAR}[SCEN]
+          "G5": scenario_G5, "CHAR": scenario_CHAR, "CHAR2": scenario_CHAR2}[SCEN]
     ok = fn(r)
     sys.exit(0 if ok else 3)
 
