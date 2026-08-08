@@ -206,6 +206,61 @@ projekcja GT + `edge_dist` (odległość środka boxa od najbliższej krawędzi 
 
 ---
 
+## 3c. Krok 1 (gęsty sygnał) + Krok 2/2b (mitygacja z rozkładu) — decyzja Olgi: pomiar→mitygacja→teza
+
+Poprzedni pas (§3b) miał sygnał RZADKI (geometria). Krok 1 domknął to DWOMA pomiarami:
+
+### Krok 1a — ZNALEZISKO geometrii detekcji (dlaczego lot dawał 0 sygnału)
+Latający pas z intruzem na alt 8/14 dał **0 detekcji celu** (max conf 0.051, boxy krawędziowe). Przyczyna:
+przy patrolu (alt 10) dron patrzy w DÓŁ/skośnie → intruz **na tle GRUNTU** (clutter) → detektor NIE odpala.
+Smoke/R1-A łapały bo intruz był **na tle NIEBA, blisko poziomu, ~8 m**. **Detekcja jest warunkowana
+geometrią i tłem** (nie tylko zasięgiem). Dowód: `results/R02/gate_live/CHAR2_alt8_char.jsonl`.
+
+### Krok 1b — STATYCZNY sweep sygnału (bez lotu, geometria smoke: near-level, tło nieba)
+`r02/signal_sweep.py`: dron na ziemi (kamera Północ), intruz przesuwany przez zasięg przy elewacji ~11°.
+Krzywa conf(zasięg) SYGNAŁU (top-1 centralny, cx≈0.50). Dowód: `results/R02/gate_live/SWEEP_signal.jsonl`.
+
+| zasięg | 5 m | 7 m | 9 m | **11 m** | 13 m | 15 m | 18 m |
+|---|---|---|---|---|---|---|---|
+| **conf sygnału** | 0.169 | **0.214** | **0.214** | 0.048 | 0.005 | 0.005 | 0.001 |
+| edge | 0.38 | 0.38 | 0.38 | 0.38 | 0.39 | 0.39 | 0.25 |
+
+**Efektywny zasięg detektora ≈ 10 m.** Sygnał silny 5–9 m (**0.17–0.21**, centralny), **zapada się > 10 m**
+(≥13 m = poziom szumu). Zero-shot YOLO-World na mono x500-mesh ma wąski zasięg — ograniczenie detektora.
+
+### OBIE CHMURY (do wyboru progu — liczba, której brakowało)
+| | conf | przestrzennie |
+|---|---|---|
+| **SZUM** (N=625, cały lot) | p99=0.060, **max=0.158** | 57% edge<0.10; **centralny (edge≥0.10) max=0.158, p99=0.050** |
+| **SYGNAŁ operacyjny** (5–9 m, sweep) | **0.169–0.214** | centralny (edge≈0.38) |
+
+### Krok 2 (C-primary, strukturalna, A1-preserving) — ZAIMPLEMENTOWANA, ale NIEDOMYKAJĄCA
+Wyprowadzone z chmur, **reguła w kodzie** (`config_r02.ENTRY_EDGE_MARGIN=0.10`, `target_channel` ENTRY):
+- **edge-margin 0.10** (sygnał edge 0.38 vs szum 57% edge<0.10) → odrzuca **57% szumu bez conf**. ✓ (testy)
+- **persistencja:** run-length TOP-1 szumu CENTRALNEGO (po edge-margin) = **[7,5,3,3,…], max=7**. By szum
+  nie osiągnął ENTRY trzeba **k≥8** — ale to (a) **fragile** (pojedynczy max z jednego lotu — TA SAMA
+  pułapka co 35×), (b) **grozi detekcji** (sygnał w tranzycie przez zasięg ≤10 m persistuje podobnie).
+  → **persistencji NIE podbijam ręcznie do 8** (byłoby strojeniem na pojedynczej próbce).
+- **Wniosek (MIERZONY):** edge-margin usuwa 57% szumu, ale **szum centralny (edge≥0.10) sięga conf 0.158
+  i persistuje do 7 klatek** → **C SAM NIE DOMYKA ε_FP=0** przy zachowanej detekcji.
+
+### Krok 2b — conf-floor w ENTRY-admisji: **STOP + Twoja re-ratyfikacja (A1/D1)**
+Czysty separator to **próg conf**, bo chmury rozdziela GAP DYSTRYBUCYJNY (nie pojedyncza próbka):
+- **sygnał operacyjny min = 0.169** (5–9 m) **vs szum centralny max = 0.158** → prób ~**0.16** rozdziela
+  na CAŁYM zasięgu detekowalnym OBSERVE (5–10 m); powyżej 10 m sygnał<próg, ale tam detektor i tak nie
+  widzi (poza obwiednią OBSERVE, akceptowalne). Margines cienki (0.16↔0.169) → conf-floor **z edge-margin**
+  (który zdejmuje krawędziowe conf-outliery do 0.108) daje zapas.
+- **To rewizja A1/D1** (conf wchodzi do ENTRY-admisji — UPSTREAM kanału, **P1/P5 nietknięte**, osłona nadal
+  bez conf). Zgodnie z Twoją instrukcją: **conf-floor NIE zaimplementowany — STOP, czeka na re-ratyfikację.**
+- **Nie re-runuję G1** tą iterację: ε_FP=0 nie jest osiągnięte bez conf-floor (C sam nie domyka), a re-run
+  z fragile-C tylko potwierdziłby residual. G1 re-run = po ratyfikacji conf-floor (następna iteracja).
+
+**Uwaga wyższego rzędu:** wąski zasięg detektora (~10 m) i cienki margines (0.158↔0.169) to **ograniczenie
+DETEKTORA** (zero-shot mono). Alternatywa: detektor dostrojony/jednoklasowy (R2-alt) — większy zakres,
+osobna decyzja. Rdzeń uczony (GRU/CfC) nadal NIE dotyczy (to detekcja, nie kanał ZOH-age; SR-4 zamknięty).
+
+---
+
 ## 4. G5 — warstwa-0 (natywny failsafe)
 
 G5 = regres R0.1 **S4** (urwanie strumienia XRCE → natywna reakcja HOLD ≤~1.2 s przez PX4

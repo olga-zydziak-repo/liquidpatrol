@@ -44,6 +44,10 @@ class Box:
     def center(self):
         return (self.cx, self.cy)
 
+    def edge_dist(self):
+        """Odległość środka boxa od najbliższej krawędzi kadru (0=krawędź, 0.5=środek)."""
+        return min(self.cx, 1.0 - self.cx, self.cy, 1.0 - self.cy)
+
 
 @dataclass(frozen=True)
 class ChannelValue:
@@ -99,6 +103,11 @@ class TargetChannel:
         return ev
 
     def _on_frame_unlocked(self, box, t, gt_present):
+        # edge-margin (Krok 2/C, RE-FREEZE 0ter): kandydat ENTRY musi być CENTRALNY — box przy
+        # krawędzi (edge_dist < margin) traktowany jak BRAK boxa dla serii ENTRY (odrzuca 57% szumu
+        # przy-krawędziowego, A1-preserving). Refresh locka (poniżej) NIE stosuje edge-margin.
+        if box is not None and box.edge_dist() < self.cfg.entry_edge_margin:
+            box = None
         if box is None:
             # brak boxa → seria się zrywa
             self.state = SEARCHING; self.streak = 0; self.anchor = None; self.t_first = None

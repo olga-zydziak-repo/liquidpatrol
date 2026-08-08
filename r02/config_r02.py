@@ -28,6 +28,12 @@ ENTRY_K = 3                       # k=3 kolejne klatki @1 Hz (≈3 s); rewizja t
 # move_thr: maks. ruch środka boxa (znormalizowany) między klatkami serii k, by uznać „spójną
 # lokalizację". [PROWIZORYCZNE/A4] — do kalibracji z rozkładu przesunięć intruza @1 Hz w FOV.
 ENTRY_MOVE_THR = 0.15             # 15% przekątnej kadru na klatkę (intruz v≈3 m/s, 1 Hz)
+# edge-margin (RE-FREEZE 0ter, Krok 2/C — WYPROWADZONE z chmur charakteryzacji, A1-preserving):
+#   kandydat ENTRY musi być CENTRALNY: edge_dist = min(cx,1-cx,cy,1-cy) ≥ margin. Derywacja:
+#   sygnał operacyjny centralny (edge≈0.38, sweep 5-9 m); szum 57% przy krawędzi (edge<0.10).
+#   Odrzuca 57% szumu bez conf. UWAGA: sam NIE domyka ε_FP=0 — szum CENTRALNY (edge≥0.10) sięga
+#   conf 0.158 i persistuje do 7 klatek (RAPORT_G_R02 §3b). conf-floor = Krok 2b (rewizja A1/D1).
+ENTRY_EDGE_MARGIN = 0.10         # geometryczny (NIE conf) — zachowuje A1
 
 # --- Kanał ZOH-age (semantyka §2.3 — [PROWIZORYCZNE/A4]) ---------------------
 # L_deliver: latencja dostarczenia detekcji do kanału (kamera→most→detektor→kanał). Podłoga age.
@@ -66,11 +72,12 @@ class ChannelConfig:
     """Config kanału ZOH-age (5-dim, BEZ conf). Współdzieli DT z osłoną."""
     entry_k: int = ENTRY_K
     entry_move_thr: float = ENTRY_MOVE_THR
+    entry_edge_margin: float = ENTRY_EDGE_MARGIN   # Krok 2/C: kandydat ENTRY musi być centralny
     l_deliver_s: float = L_DELIVER_S
     theta_age_s: float = THETA_AGE_S
     det_dt: float = DET_DT
 
     def sane(self) -> bool:
-        """Higiena: k≥2 (streak ma sens), podłoga<sufit, próg ruchu w [0,1]."""
+        """Higiena: k≥2 (streak ma sens), podłoga<sufit, próg ruchu w [0,1], margin w [0,0.5)."""
         return (self.entry_k >= 2 and 0.0 < self.l_deliver_s < self.theta_age_s
-                and 0.0 < self.entry_move_thr <= 1.0)
+                and 0.0 < self.entry_move_thr <= 1.0 and 0.0 <= self.entry_edge_margin < 0.5)

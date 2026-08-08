@@ -38,10 +38,10 @@ def test_entry_move_break():
     ch = fresh()
     ch.on_frame(Box(0.5, 0.5, 0.1, 0.1), 0.0)   # streak 1
     ch.on_frame(Box(0.5, 0.5, 0.1, 0.1), 1.0)   # streak 2
-    ch.on_frame(Box(0.9, 0.9, 0.1, 0.1), 2.0)   # skok > 0.15 → streak reset do 1
+    ch.on_frame(Box(0.8, 0.8, 0.1, 0.1), 2.0)   # skok > 0.15 (centralny, edge=0.2) → streak reset do 1
     check("po skoku brak locka", not ch.locked and ch.streak == 1)
-    ch.on_frame(Box(0.9, 0.9, 0.1, 0.1), 3.0)   # streak 2
-    e = ch.on_frame(Box(0.9, 0.9, 0.1, 0.1), 4.0)   # streak 3 → ENTRY
+    ch.on_frame(Box(0.8, 0.8, 0.1, 0.1), 3.0)   # streak 2
+    e = ch.on_frame(Box(0.8, 0.8, 0.1, 0.1), 4.0)   # streak 3 → ENTRY
     check("ENTRY po odbudowie serii w nowej lokalizacji", e == EV_ENTRY)
 
 
@@ -127,6 +127,21 @@ def test_eps_fp_counting():
     ch.on_frame(b, 1.0, gt_present=False)
     ch.on_frame(b, 2.0, gt_present=False)
     check("fałszywy ENTRY policzony", ch.n_false_entry == 1)
+
+
+def test_edge_margin_rejects_edge_entry():
+    """Krok 2/C (re-freeze 0ter): box przy KRAWĘDZI (edge<margin) nie tworzy ENTRY; centralny tak.
+    edge-margin=0.10 (CFG). A1-preserving (geometryczny, nie conf)."""
+    ch = fresh()
+    edge_box = Box(0.03, 0.5, 0.05, 0.05)          # cx=0.03 → edge_dist=0.03 < 0.10
+    for t in (0.0, 1.0, 2.0):
+        ch.on_frame(edge_box, t)
+    check("krawędziowy box NIE lockuje (odrzucony jako kandydat)", not ch.locked and ch.n_entry == 0)
+    ch2 = fresh()
+    cent_box = Box(0.5, 0.5, 0.05, 0.05)           # edge_dist=0.5 ≥ 0.10
+    for t in (0.0, 1.0, 2.0):
+        ch2.on_frame(cent_box, t)
+    check("centralny box lockuje normalnie", ch2.locked and ch2.n_entry == 1)
 
 
 def test_sample_none_before_lock():
