@@ -50,7 +50,7 @@ sleep 3
 # 4) spawn intruza (model, nie actor — R1) na wysokości 6 m (paralaksa bearing-only)
 gz service -s "/world/${WORLD}/create" --reqtype gz.msgs.EntityFactory \
   --reptype gz.msgs.Boolean --timeout 3000 \
-  --req "sdf_filename: \"$ROOT/r02/intruder_model.sdf\", name: \"intruder\", pose: {position: {x: 12, y: 0, z: 6}}" \
+  --req "sdf_filename: \"$ROOT/r02/intruder_model.sdf\", name: \"intruder\", pose: {position: {x: 12, y: 0, z: 14}}" \
   > "$LOGDIR/spawn.log" 2>&1
 echo "[gate] intruz spawn: $(cat $LOGDIR/spawn.log)"
 
@@ -60,9 +60,9 @@ CHAR_INTRUDER="${CHAR_INTRUDER:-25,0,6}"
 case "$SCEN" in
   G1) ;;  # G1 bez intruza w polu — przesuń go daleko
   CHAR|CHAR2) ;; # intruz statyczny w GT (bez drivera) — ustawiony niżej
-  G3) setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 6 \
+  G3) setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 14 \
         --log "$LOGDIR/intruder.jsonl" > "$LOGDIR/intruder.log" 2>&1 & PIDS+=($!) ;;
-  *)  setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 6 \
+  *)  setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 14 \
         --log "$LOGDIR/intruder.jsonl" > "$LOGDIR/intruder.log" 2>&1 & PIDS+=($!) ;;
 esac
 [ "$SCEN" = "G1" ] && gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose \
