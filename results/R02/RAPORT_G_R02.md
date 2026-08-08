@@ -276,12 +276,22 @@ przechodzi admisji ENTRY → 0 admisji → ε_FP=0** (dla zmierzonego rozkładu 
 `θ_conf = 0.1635 < sygnał_min = 0.169` → **sygnał operacyjny przechodzi → detekcja zachowana**. Status
 prowizoryczny (A4): żywy lot ma potwierdzić, że przerwa się utrzymała (pasywny log).
 
-**Żywy re-run G1 — ODROCZONY (jawnie, z powodu zewnętrznego):** GPU (12 GB) jest zajęte ~11.5 GB przez
-**INNĄ równoległą sesję** (`/home/olga/fabryka/ eval_after_epoch.py`/`train_epoch1.py`, snapshot bash).
-Zostało ~0.7 GB → boot symu+detektora (~2.5 GB) = **OOM**. **NIE konkuruję o GPU ani nie ubijam cudzej
-pracy** (wcześniej omyłkowo ubiłem `train_epoch1.py` — §8; teraz świadomie nie powtarzam). Runner +
-orkiestracja + pasywny log **gotowe** — G1 re-run wykona się gdy GPU zwolni. Werdykt: **ε_FP=0
-analitycznie z ratyfikowanej reguły; potwierdzenie w locie oczekuje na zasób.**
+**Żywy re-run G1 — WYKONANY (świeży boot, gdy GPU zwolniło) → PASS.** Dowód: `results/R02/gate_live/G1_A6_*`.
+
+| Kryterium | G1 iter.2 (przed A6) | **G1(A6) w locie** |
+|---|---|---|
+| **ε_FP** (fałszywe ENTRY) | 5, **1.585/min** | **0, 0.0/min** ✓ |
+| **gap_held_in_flight** (szum < θ_conf?) | — | **TRUE** — szum max **0.0806** ≪ θ_conf 0.1635 (n=561, p99=0.030) ✓ |
+| **n_admitted_entry** (szum przez admisję) | — | **0** ✓ |
+| A1 (mavsdk_motion_cmds) | 0 | **0** ✓ |
+| GF-native (fix#2) | ✗ (transient HOLD) | **0 (A3_gf_fired=False)** ✓ |
+| patrol / ≤R_E / outcome | 3 okr. / 27.8 / SUKCES | 3 okr. / **27.82** / **SUKCES** |
+| **PASS** | **FAIL (ε_FP)** | **PASS** |
+
+**Wniosek:** A6 (conf-floor 0.1635 + edge-margin 0.10) **domyka ε_FP=0 W LOCIE**; **przerwa 0.158↔0.169
+UTRZYMAŁA SIĘ pod szumem lotu z ogromnym zapasem** (szum lotu max 0.0806 — słabszy niż statyczny 0.158).
+gap_held=TRUE ⇒ **trigger eskalacji R2-alt NIE odpalony**. fix#2 potwierdzony (GF-native=0). ε_FP domknięte
+→ **wchodzę w G2–G5 wewnątrz koperty A7** (teza osłona+OBSERVE).
 
 **Higiena współdzielenia (nauka):** przed każdym bootem sprawdzam headroom i **compute-apps** — jeśli
 cudzy proces (nie-LiquidPatrol: `.venv`, `/home/olga/fabryka/`) zajmuje GPU, **czekam, nie ubijam**.
