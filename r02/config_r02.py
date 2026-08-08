@@ -57,7 +57,7 @@ THETA_AGE_S = 3.0                 # 3 s prowizorycznie (≈3 ticki detektora @1 
 #   zero zapasu nad θ_conf). Intruz 4 m nad patrolem (INTRUDER_ALT−ALT=14−10). Operating horizontal =
 #   D_safe + STANDOFF_MARGIN(1.5). Dla 3D=7 m: horizontal=√(7²−4²)=5.75 → D_safe=5.75−1.5=4.25 m.
 #   3D operacyjny = √(5.75²+4²) = 7.0 m (środek 5–9 m); elewacja atan(4/5.75)=34.8° w górę (<vfov/2=41.7°).
-D_SAFE_M = 4.25                   # POZIOMY; 3D operacyjny ~7 m (środek koperty A7); [PROWIZORYCZNE/A4]
+D_SAFE_M = 5.32                   # POZIOMY; 3D operacyjny ~7 m (środek koperty), elewacja ~13° (rider1); [PROW./A4]
 # T_ack: dopuszczalny czas od wejścia intruza w FOV do ENTRY (G2). = k·DET_DT + L_deliver + margines.
 T_ACK_S = ENTRY_K * DET_DT + L_DELIVER_S + 1.0   # ≈4.1 s (k=3 klatki + dostawa + margines)
 # f_fov: min. udział klatek z celem w FOV podczas OBSERVE (G2 PASS). [PROWIZORYCZNE/A4].
@@ -71,7 +71,8 @@ EPS_FP_PER_MIN = 0.0              # 0 fałszywych locków na pustej scenie (cel;
 # ZNALEZISKO bramki G1 (§3c): DETEKCJA wymaga TŁA NIEBA — intruz NIŻEJ (nad gruntem) NIE jest
 # wykrywany (clutter). Koperta A7: **intruz POWYŻEJ patrolu** → dron patrzy w GÓRĘ = tło nieba
 # (detekcja) ORAZ paralaksa (bearing-only projektuje w górę). Godzi oba warunki. patrol z=ALT_M (10).
-INTRUDER_ALT_M = 14.0            # intruz 4 m POWYŻEJ patrolu (A7: tło nieba + paralaksa); driver --z 14
+INTRUDER_ALT_M = 11.5            # intruz 1.5 m nad patrolem (rider1: elewacja ~13° = strefa detekcji,
+                                # centralny; 34.8° dawało top-edge+conf<θ. UWAGA: conf migocze ~θ_conf (§3d)
 
 # Rejestr stałych [A4] do zamrożenia (raport kalibracji wypełnia „źródło"/„zmierzone").
 A4_HABITAT_CONSTS = (

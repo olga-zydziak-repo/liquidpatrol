@@ -299,11 +299,21 @@ nie lepszego** — margines projektowy liczony konserwatywnie. **θ_conf pozosta
 pasywny log w KAŻDYM locie bramkowym monitoruje ogon; jeśli w którymś locie przekroczy θ_conf → trigger
 R2-alt (nie podniesienie progu po fakcie). Dotychczas (G1) ogon 0.0806 ≪ θ_conf — zapas duży.
 
-**Rider 2 (geometria D_safe — koperta w ŚRODKU, nie na krawędzi):** intruz 4 m nad patrolem (alt 14).
-Przy D_safe=8 m poziomo dystans 3D = √(8²+4²) ≈ **9 m = KRAWĘDŹ** koperty (sygnał 0.169 = min, zero zapasu
-nad θ_conf). **Zmniejszono `D_safe=4.25 m` poziomo** → operating horizontal = D_safe+margin(1.5) = 5.75 m
-→ **3D operacyjny = 7.0 m = ŚRODEK koperty** (5–9 m); elewacja 34.8° w górę (<vfov/2 41.7°). Scenariusz
-mierzy OSŁONĘ, nie brzeg detekcji. D_safe nie dotyka P2 (v_max/R_E/a_brake niezmienione). Harness G1–G4 PASS.
+**Rider 2 (D_safe → 3D w ŚRODKU koperty):** dystans 3D operacyjny ustawiony na **~7 m (środek 5–9 m)**,
+nie krawędź. D_safe nie dotyka P2 (v_max/R_E/a_brake niezmienione). Harness G1–G4 PASS.
+
+**Rider 1 (MICRO-SANITY OPTYKI — harness testuje logikę, nie optykę) — ZNALAZŁ 2 rozbieżności.** Dowody:
+`results/R02/gate_live/MSAN_elev34_alt14.jsonl`, `MSAN2_elev13_alt11.5.jsonl` (statyczny, kamera poziomo).
+1. **Framing przy alt 14 (elewacja 34.8°): ROZBIEŻNOŚĆ.** Realna optyka: intruz na **GÓRNEJ KRAWĘDZI** kadru
+   (cy=**0.086**, edge=0.086 **< edge-margin 0.10**) + conf **0.11 < θ_conf** → **NIE przeszedłby admisji ENTRY**.
+   Harness (model FOV) tego nie łapał. **Dostosowanie:** obniżono intruza do **alt 11.5 (elewacja ~13°)** →
+   intruz **CENTRALNY** (cy=**0.38**, edge 0.38 ≫ margin). D_safe=5.32 (3D ~7 m przy 13°). Harness PASS.
+2. **Migotanie conf przy 13° (NOWE, istotniejsze):** na STATYCZNYM intruzie conf **oscyluje 0.169↔0.084**
+   (klatka-po-klatce; render gz + niestabilność zero-shot) — **przeskakuje przez θ_conf 0.1635**. ENTRY
+   wymaga **k=3 KOLEJNYCH** ≥θ_conf → migotanie może zrywać serię. **To pre-wskazanie triggera A7 R2-alt**
+   („porażki detekcji wewnątrz koperty w G2"). Definitywny test = **G2** (tam A7 definiuje trigger).
+   **Odnotowane jako ryzyko; nie podnoszę θ_conf ani nie stroję** — jeśli G2 potwierdzi porażkę detekcji,
+   to trigger R2-alt (osobny PRE, detektor jednoklasowy), nie majstrowanie przy progu.
 
 **Higiena współdzielenia (nauka):** przed każdym bootem sprawdzam headroom i **compute-apps** — jeśli
 cudzy proces (nie-LiquidPatrol: `.venv`, `/home/olga/fabryka/`) zajmuje GPU, **czekam, nie ubijam**.

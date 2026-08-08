@@ -9,7 +9,7 @@ smoke gdzie detektor ODPALA: intruz na tle nieba, blisko poziomu), czyta detekto
 Uruchom (po stack+bridge+detektor): python3 -m r02.signal_sweep <world> [out.jsonl]
 """
 from __future__ import annotations
-import json, math, subprocess, sys, time
+import json, math, os, subprocess, sys, time
 
 import rclpy
 from rclpy.node import Node
@@ -18,9 +18,10 @@ from std_msgs.msg import Float32MultiArray
 
 BOXES_TOPIC = "/liquidpatrol/detector_boxes"
 CAM_H = 0.4                      # wys. kamery drona na ziemi (x500 ~0.18 + mount 0.242)
-ELEV_DEG = 11.0                 # elewacja intruza (geometria smoke: (8,0,2) → ~11°, detektor odpala)
-RANGES = [5, 7, 9, 11, 13, 15, 18, 21, 24]   # zasięgi poziome [m]
-DWELL_S = 5.0                   # dwell per zasięg (≥4 klatki detektora @1 Hz)
+# ELEV/RANGES parametryzowalne env (micro-sanity ridera 1: geometria OBSERVE, elewacja 34.8°):
+ELEV_DEG = float(os.environ.get("SWEEP_ELEV", "11.0"))   # 11° smoke; 34.8° = OBSERVE (intruz alt14@3D7m)
+RANGES = [float(x) for x in os.environ.get("SWEEP_RANGES", "5,7,9,11,13,15,18,21,24").split(",")]
+DWELL_S = float(os.environ.get("SWEEP_DWELL", "5.0"))
 
 
 def set_pose(world, x, y, z):
