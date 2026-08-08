@@ -1,6 +1,6 @@
 # PRE_R02 — [PROPOZYCJA] pełne zadanie: patrol + detekcja intruza + tryb OBSERVE, pod osłoną
 
-Status: **RATYFIKOWANA (2026-08-07) + aneksy R02-A1…A4 naniesione** — przed budową. Reżim recon: **R (tylko odczyt + pomiary nieinwazyjne)**.
+Status: **RATYFIKOWANA (2026-08-07) + aneksy R02-A1…A4 naniesione; A6 (conf-floor ENTRY-admisja) + A7 (koperta detekcji) ratyfikowane 2026-08-08 po bramce G1 iter.2** — patrz §0bis. Reżim recon: **R (tylko odczyt + pomiary nieinwazyjne)**.
 Rozbieżności R-DIV-1…4 zaakceptowane w brzmieniu z PRE (R-DIV-1 potwierdzona: prompt się mylił, PRE ma rację). Budowa od bramki wczesnej **B0** po pushu (Olga).
 Data: 2026-08-07. Poprzedniki: `RAPORT_R01.md` (R0.1 ZALICZONA — osłona/automat/certy P1/P2/P4/P5),
 `RAPORT_P2.md §7.1` (zwycięzca pomiaru = **ZOH-age**, kandydaci uczeni GRU+Δt/CfC **zaparkowani**),
@@ -71,6 +71,35 @@ pomiarem w bramce**. **NIE kopiuje się liczbowo z G2** — G2 jest prowieniencj
 (ZOH+rosnący age, reguła wygaszenia), **nie liczby**. Zasada „liczby się nie przenoszą" (A2 R0.1)
 obowiązuje też tu. To samo dotyczy `L_deliver`, `D_safe`, `T_ack`, `ε_FP`, `f_fov` — pomiar habitatu,
 nie import.
+
+**R02-A6 — conf-floor w ENTRY-admisji (RATYFIKOWANE 2026-08-08, po bramce G1 iter.2).** Bramka G1
+wykazała **ε_FP w locie** (fałszywe locki na scenerii pod A1 „bez progu conf"). Charakteryzacja (dwie
+chmury, `RAPORT_G_R02 §3c`) pokazała **przerwę dystrybucyjną**: sygnał operacyjny **0.169–0.214**
+(zasięg 5–9 m) vs szum centralny **max 0.158**. **Wprowadza się próg `θ_conf` w ENTRY-admisji:**
+- **Derywacja DETERMINISTYCZNA (reguła zapisana, nie ręczna):** `θ_conf = (sygnał_min + szum_centr_max)/2
+  = (0.169 + 0.158)/2 ≈ 0.163` (środek przerwy). W kodzie jako formuła, nie stała z ręki.
+- **Zakres działania — WYŁĄCZNIE ENTRY-admisja, UPSTREAM kanału:** conf bramkuje, które detekcje wchodzą
+  w serię ENTRY. **Kanał 5-dim `(cx,cy,w,h,age)`, osłona, P1/P5 — BEZ conf, BEZ zmian.** conf nigdy nie
+  wchodzi do wartości kanału ani decyzji osłony. **Edge-margin 0.10 zostaje** (A6 = KOMBINACJA edge+conf).
+- **Status `θ_conf`: prowizoryczny wg A4.** W **KAŻDYM** locie bramkowym **pasywne logowanie** conf sygnału
+  i szumu; raport bramki pokazuje, **czy przerwa 0.158↔0.169 utrzymała się w locie** (jeśli nie — trigger
+  eskalacji, patrz A7). Liczby = pomiar, nie import.
+- **Prowieniencja rewizji D1 (jawnie):** D1 (3b conf-shift, S3c0, ROC AUC 0.6496) chroniło **kanał i
+  politykę osłony** przed conf. Tu conf **NIE wchodzi** do kanału ani decyzji osłony — tylko do admisji
+  ENTRY upstream. **D1 w swojej istocie STOI** (conf-free kanał/osłona); A6 jest wąską admisją, nie
+  zaprzeczeniem D1. A1 (kanał BEZ conf) — nietknięte.
+
+**R02-A7 — koperta detekcji (ograniczenie komponentu, prowieniencja SWEEP+§3c-1a).** Zmierzona koperta
+detektora (zero-shot YOLO-World mono x500-mesh) jako **jawne ograniczenie komponentu**:
+- **Zasięg 5–9 m** (efektywny ≤10 m; ≥13 m sygnał = poziom szumu). **Tło NIEBA** (grunt zabija detekcję —
+  patrol patrzący w dół na intruza nad gruntem NIE wykrywa). **Centralnie** (edge-margin).
+- **Scenariusze G2–G5 projektowane WEWNĄTRZ koperty:** geometria podejścia intruza / wysokości / pitch
+  kamery tak, by cel był **na tle nieba, w zasięgu 5–9 m, centralnie**. Raport bramki mówi wprost:
+  **teza = architektura osłona+OBSERVE, mierzona WEWNĄTRZ zmierzonej koperty komponentu detekcji.**
+- **Eskalacja NAZWANA — R2-alt (detektor jednoklasowy) NIE teraz.** Trigger: (a) przerwa 0.158↔0.169
+  **zawala się w locie** (pasywne logowanie A6), LUB (b) **porażki detekcji wewnątrz koperty w G2**. Przy
+  triggerze → **osobny PRE** z projektem **anty-cyrkularnym** (trening na renderach INNEJ sceny/tekstur
+  niż scena bramki, by nie uczyć się scenerii testowej). Do triggera — detektor zero-shot zostaje.
 
 ---
 
