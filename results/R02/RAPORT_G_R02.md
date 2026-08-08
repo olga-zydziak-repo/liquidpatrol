@@ -14,7 +14,7 @@ R1-A żywa detekcja). Kryteria **zamrożone w PRE §4** przed pomiarem. Księgow
 | **Certy formalne** (z3 + property) | P1 (7 liści), P5 (7/7), P4 (+observe), P2 (nietknięte), selfcheck | **PASS** |
 | **Logika bramki** (harness deterministyczny na PRAWDZIWYM kodzie) | G1, G2, G3, G4 | **PASS (4/4)** |
 | **Łańcuch R3 NA ŻYWO** (kamera→detektor→kanał→ENTRY) | pipeline + osie detekcji G1/G2 + A1 | **PASS (żywy smoke)** |
-| **G5 warstwa-0** (natywny failsafe) | regres R0.1 S4 (COM_OF_LOSS_T), niezmiennik odziedziczony | **PASS (odziedziczony)** |
+| **G5 warstwa-0** (natywny failsafe) | regresja fix#2 (zombie-stream) — patrz `RAPORT_R02.md §III` | **NAPRAWIONA** (dead-man+re-cert; live timing pending GPU) |
 | **Latający G1 NA ŻYWO** (świeży boot, 3 okrążenia, detektor w pętli, yaw domknięty) | wykonany | **FAIL — ε_FP w locie** (§3a); lot+A1 OK |
 | **Fix #2** (setpoint w osobnym wątku) + dowód (patrol CHAR) | wykonany | **PASS** — 0 utrat OFFBOARD, GF-native=0, stream_max_dt=51 ms (§3b) |
 | **Pas charakteryzacyjny** (rozkład conf/przestrzenny szum vs sygnał, 3 okrążenia) | EKSPLORACJA (poza pre-rej.) | wykonany — **35× obalone: separacja MARGINALNA** (§3b) |
@@ -42,10 +42,10 @@ Kolejność wg §5: **selfcheck → P1 → P5 → P4** (P2 poza zakresem, R02-A3
 | Cert | Werdykt | Szczegół | sha(prover) |
 |---|---|---|---|
 | **certs_selfcheck** | **PASS 5/5** | prowieniencja model_sha256 ↔ prover dla wszystkich | — |
-| **P1** (`verify.py`) | **PROVED** | 1-indukcja z3, **7 zobowiązań unsat**: base, inv_step, P1a–P1e | `2ba76288…` |
-| **P5** (`conformance.py`) | **PASS** | tau≡shield, **pokrycie 7/7**, 0 rozbieżności (400 los + 10 celowanych) | `27ddc20b…` |
+| **P1** (`verify.py`) | **PROVED** | 1-indukcja z3, **7 zobowiązań unsat**: base, inv_step, P1a–P1e; **+założenie żywotności osłony (R0.2/fix-G5)** | `3046d032…` |
+| **P5** (`conformance.py`) | **PASS** | tau≡shield, **pokrycie 7/7**, 0 rozbieżności (400 los + 10 celowanych); **re-run od nowa po dead-man, bajt-identyczny** | `27ddc20b…` |
 | **P4** (`p4_verify.py`) | **PASS** | +`observe on/off`, mode-map, property-2000, HMAC, near-miss→COMMAND_INVALID | `8e1802b5…` |
-| **P2** (`geofence.py`) | **niezmieniony** | `150b2213…` — identyczny jak przed R0.2 (R02-A3: v_max/R_E/a_brake nietknięte) | `150b2213…` |
+| **P2** (`geofence.py`) | **PROVED** | bariera niezmieniona (R02-A3: v_max/R_E/a_brake nietknięte); **+założenie żywotności osłony zapisane wprost** → prover zregenerowany | `f6b22abc…` |
 | **R0.1 regresja** (`test_core`) | **PASS** | 43 asercje — dodanie liścia OBSERVE nie złamało R0.1 | — |
 
 **P1a (krytyczne):** `ALLOW ⇒ ¬geo ∧ ¬terminal` — **trzyma** (OBSERVE jako ALLOW siedzi PONIŻEJ R-G
