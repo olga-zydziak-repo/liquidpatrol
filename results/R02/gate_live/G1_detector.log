@@ -1,0 +1,10 @@
+/home/olga/projects/liquidpatrol/.b0deps/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+[INFO] [1786146930.618863533] [liquidpatrol_detector]: detektor: /home/olga/projects/liquidpatrol/.b0deps/weights/yolov8s-worldv2.pt set_classes(['drone']) imgsz=640 conf_floor=0.001
+[INFO] [1786146930.632689975] [liquidpatrol_detector]: sub=/world/default/model/x500_mono_cam_0/link/camera_link/sensor/imager/image pub=/liquidpatrol/target_channel @ 1.0 Hz
+[INFO] [1786146940.714132645] [liquidpatrol_detector]: ENTRY @ sim_t=27.20 box=array('f', [0.9516717791557312, 0.271170049905777, 0.0966564193367958, 0.2156214416027069, 0.10000000149011612])
+[INFO] [1786146955.659504589] [liquidpatrol_detector]: ENTRY @ sim_t=39.87 box=array('f', [0.026916150003671646, 0.2598181962966919, 0.05383230000734329, 0.21006642282009125, 0.10000000149011612])
+[INFO] [1786146992.686823669] [liquidpatrol_detector]: ENTRY @ sim_t=74.25 box=array('f', [0.20917704701423645, 0.2663383483886719, 0.41774439811706543, 0.13362173736095428, 0.10000000149011612])
+WARNING ⚠️ NMS time limit 2.050s exceeded
+[INFO] [1786147063.660978653] [liquidpatrol_detector]: ENTRY @ sim_t=138.93 box=array('f', [0.15863537788391113, 0.27919670939445496, 0.31727075576782227, 0.17054425179958344, 0.10000000149011612])
+[INFO] [1786147092.117016423] [liquidpatrol_detector]: ENTRY @ sim_t=164.14 box=array('f', [0.020071256905794144, 0.253204345703125, 0.04014251381158829, 0.2306055873632431, 0.10000000149011612])

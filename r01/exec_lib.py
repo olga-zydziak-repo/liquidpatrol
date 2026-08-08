@@ -88,6 +88,7 @@ class Mav:
     """MAVSDK (wątek asyncio): telemetria + flight_mode + arm/RTL/Land + GF config. A1: brak ruchu."""
     def __init__(self, set_gf=True):
         self.pos = [0.0, 0.0, 0.0]; self.vel = [0.0, 0.0, 0.0]
+        self.yaw = 0.0                   # R0.2: yaw [rad] NED (0=Północ) — OBSERVE potrzebuje attitude
         self.have_tel = False; self.armed = False
         self.flight_mode = None
         self.tel_max_gap = 0.0; self._last_tel = None
@@ -132,6 +133,10 @@ class Mav:
             await drone.telemetry.set_rate_position_velocity_ned(30.0)
         except Exception:
             pass
+        try:
+            await drone.telemetry.set_rate_attitude_euler(20.0)
+        except Exception:
+            pass
         async def tel():
             async for pv in drone.telemetry.position_velocity_ned():
                 now = time.monotonic()
@@ -148,6 +153,11 @@ class Mav:
             async for m in drone.telemetry.flight_mode():
                 self.flight_mode = str(m)
         asyncio.ensure_future(fm())
+
+        async def att():                 # R0.2: yaw z attitude (NED, deg→rad) dla naprowadzania OBSERVE
+            async for a in drone.telemetry.attitude_euler():
+                self.yaw = math.radians(a.yaw_deg)
+        asyncio.ensure_future(att())
 
         async for h in drone.telemetry.health():
             if h.is_global_position_ok and h.is_home_position_ok:

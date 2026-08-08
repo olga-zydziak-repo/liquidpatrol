@@ -149,13 +149,8 @@ class Runner:
         return d
 
     def _yaw(self):
-        # ZNALEZISKO/OGRANICZENIE (do domknięcia przed latającym sweepem): yaw wyprowadzony z
-        # PRĘDKOŚCI (kurs ruchu) — w zawisie v≈0 → yaw=0. Poprawnie OBSERVE potrzebuje PRAWDZIWEGO
-        # yaw (attitude), którego `exec_lib.Mav` nie instrumentuje (tel: pos/vel/flight_mode).
-        # Naprowadzanie OBSERVE (ObserveController) zakłada znany yaw (patrz r02/gate_harness.py,
-        # gdzie yaw jest wiarygodny). Latający G2/G3 wymaga: exec_lib.Mav += attitude_euler (yaw).
-        vx, vy = self.mav.vel[0], self.mav.vel[1]
-        return math.atan2(vy, vx) if math.hypot(vx, vy) > 0.3 else 0.0
+        # R0.2: PRAWDZIWY yaw z attitude (exec_lib.Mav.yaw, NED rad) — domknięte dla latającego OBSERVE.
+        return self.mav.yaw
 
     def bring_up(self):
         print("[gate] czekam na MAVSDK health...")

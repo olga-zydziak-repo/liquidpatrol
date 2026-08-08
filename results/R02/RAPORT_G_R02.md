@@ -15,15 +15,21 @@ R1-A żywa detekcja). Kryteria **zamrożone w PRE §4** przed pomiarem. Księgow
 | **Logika bramki** (harness deterministyczny na PRAWDZIWYM kodzie) | G1, G2, G3, G4 | **PASS (4/4)** |
 | **Łańcuch R3 NA ŻYWO** (kamera→detektor→kanał→ENTRY) | pipeline + osie detekcji G1/G2 + A1 | **PASS (żywy smoke)** |
 | **G5 warstwa-0** (natywny failsafe) | regres R0.1 S4 (COM_OF_LOSS_T), niezmiennik odziedziczony | **PASS (odziedziczony)** |
-| **Latający closed-loop sweep** (świeży boot ×5, dron w OBSERVE) | wykonanie w locie | **NIE WYKONANY** — runner+orkiestracja gotowe; blokada: brak instrumentacji yaw (patrz §5) |
+| **Latający G1 NA ŻYWO** (świeży boot, 3 okrążenia, detektor w pętli, yaw domknięty) | wykonany | **FAIL — ε_FP w locie** (§3a); lot+A1 OK |
+| **Latający G2–G5** (dron w OBSERVE) | detektor współdzielony — konfundowane przez ε_FP | **WSTRZYMANE** — STOP+decyzja (A2/SR-5, §3a) |
 
 **Interpretacja (uczciwie, trójwynikowo):** wszystkie niezmienniki R0.1 (A1, P1a, geofence
 nadrzędny, 0 padów) **dowiedzione formalnie** na rozszerzonym automacie (7 liści). Cała **logika**
 łańcucha (kanał ZOH-age + OBSERVE + osłona) **przechodzi G1–G4** na prawdziwym kodzie w
-deterministycznej pętli zamkniętej. **Detektor na żywym symie łapie intruza i zasila kanał**
-(ENTRY 5-dim, BEZ conf) — oraz **nie generuje fałszywego locka na pustej scenie** (ε_FP). Pozostaje
-JEDEN krok wykonawczy — **latający sweep** — zablokowany nazwanym, drobnym brakiem integracyjnym
-(yaw z attitude), nie wadą logiki. To wynik **pozytywny z jawnie oznaczonym pozostałym krokiem**.
+deterministycznej pętli zamkniętej. **Latający G1 wykonany** — integracja lotu działa (3 okrążenia,
+**A1 mavsdk_motion_cmds=0**, ≤R_E), ALE **G1 FAIL na ε_FP**: w locie detektor generuje fałszywe locki
+na scenerii (5 ENTRY, 1.585/min; conf szumu ≈0.005 vs realny intruz ≈0.169). To **potwierdza
+pre-rejestrowane ryzyko A1** (`RAPORT_R1 §3`: „bez progu conf top-1 box może być szumem → ryzyko G1").
+Statyczny smoke (pusta scena, kamera nieruchoma) dawał 0 fałszywych locków; **dopiero LOT nad zmienną
+scenerią** ujawnił ε_FP — czego statyczny smoke ani idealny harness nie mogły pokazać. Per **SR-5
+(wynik negatywny = wynik)** i **A2 (STOP+decyzja, nie brnięcie)**: **STOP** — G2–G5 latające dzielą ten
+detektor, więc są konfundowane; wznowienie wymaga **decyzji Olgi o A1/D1 w TYM habitacie** (tu conf
+separuje ~35×, wbrew AUC 0.6496 z innego zbioru — to zmiana kontraktu, nie moje strojenie).
 
 ---
 
@@ -88,12 +94,53 @@ Dowody: `results/R02/smoke_R3_live_detector.log`, `smoke_R3_live_bridge.log`.
 | **ENTRY na żywym intruzie** | `ENTRY @ sim_t=115.77 box=[0.497, 0.380, 0.034, 0.032, age=0.10]` | kamera→most→detektor→kanał→**ENTRY k=3 strukturalny** działa E2E; box wyśrodkowany (intruz na wprost), age=L_deliver |
 | **Kanał = 5-dim, BEZ conf** | `/target_channel` data=`[0.497,0.380,0.034,0.032,0.10]` (5 el.) | **A1/D1 potwierdzone**: kanał niesie tylko (cx,cy,w,h,age) |
 | **conf w telemetrii, NIE w kanale** | `/detector_debug` conf_top1=**0.169** (≈R1-A 0.177) | **A1 potwierdzone na żywo**: conf żyje w debug/logu, nigdy w kanale |
-| **ε_FP: pusta scena (intruz x=−60)** | debug=`[n_box=0, conf=0, entry=0, locked=0]`, kanał pusty, **licznik ENTRY = 1** (brak nowego) | **oś G1 na żywo**: pusta scena → 0 boxów → **0 fałszywych locków** |
+| **ε_FP: pusta scena STATYCZNA (dron na ziemi, kamera stała, intruz x=−60)** | debug=`[n_box=0, conf=0, entry=0, locked=0]`, kanał pusty | pusta STATYCZNA scena → 0 boxów. **UWAGA: w LOCIE inaczej — §3a** |
 | **Wygaszenie ZOH** | kanał pustoszeje po utracie detekcji (θ_age) | semantyka sufitu działa na żywym strumieniu (oś G4) |
 
 **Wniosek:** genuinie nowa integracja R0.2 (detektor-w-pętli + kanał ZOH-age + A1) **działa na żywym
-symie**. Jakość detekcji: R1-A zmierzył 3/3 conf 0.177 z intruzem, 0 bez — tu potwierdzone w pełnym
-węźle ROS2 (conf 0.169, kanał 5-dim, brak fałszywego locka).
+symie**. Jakość detekcji na STATYCZNEJ scenie: R1-A 3/3 conf 0.177 z intruzem, 0 bez — potwierdzone
+w pełnym węźle ROS2 (conf 0.169, kanał 5-dim). **Ograniczenie: statyczny smoke nie testuje LOTU** (§3a).
+
+---
+
+## 3a. Latający G1 NA ŻYWO — WYKONANY (świeży boot, 3 okrążenia) → FAIL (ε_FP)
+
+Środowisko domknięte: **yaw z attitude** (`exec_lib.Mav += attitude_euler`) — latający OBSERVE odblokowany.
+Świeży boot, orkiestracja `r02/run_gate_r02.sh SCENARIO=G1`. Dowody: `results/R02/gate_live/G1_{trace.jsonl,
+detector.log,dmesg.log}`.
+
+**Wynik G1 (RESULT, `outcome=SUKCES` środowiskowo, ale `PASS=False`):**
+
+| Kryterium §4 (zamrożone) | Zmierzone (żywy lot) | Wynik |
+|---|---|---|
+| patrol jak R0.1 (3 okrążenia) | **laps_done=3**, dron przeleciał perymetr | ✓ |
+| **A1** `mavsdk_motion_cmds=0` | **A1_motion=0** (tylko param/arm/rtl/land) | ✓ **niezmiennik utrzymany na żywo** |
+| ≤ R_E | **max_r=27.79 < 32** | ✓ |
+| **ε_FP** (0 fałszywych ENTRY) | **5 ENTRY, ε_FP=1.585/min** (≠0) | ✗ **FAIL** |
+| **GF native=0** (poza warstwą-0) | **A3_gf_fired=TRUE** (transient HOLD t=165–170 s, r≈25) | ✗ (znalezisko #2) |
+
+**Znalezisko #1 (PIERWSZOPLANOWE) — ε_FP w locie (blokada kontraktowa A1/D1):** w locie nad zmienną
+scenerią (niebo/horyzont/grunt) detektor z `conf_floor=0.001` (A1: BEZ progu) produkuje **spurious
+top-1 boxy conf≈0.005 na krawędziach kadru** (cx=0.95, cx=0.03); strukturalny ENTRY k=3 czasem
+zatrzaskuje 3 s spójnego szumu → **5 fałszywych locków / 140 s = 1.585/min**. To **DOKŁADNIE
+pre-rejestrowane ryzyko A1** (`RAPORT_R1 §3`). Tryb OBSERVE **NIE** został porwany (estymaty z boxów
+krawędziowych nieważne → `has_estimate=False` → dron został w PATROL), więc lot był bezpieczny, ale
+**licznik ε_FP jest złamany**. Separacja conf w TYM habitacie jest ogromna (szum 0.005 vs intruz 0.169
+= **~35×**) — **wbrew D1 (AUC 0.6496 z innego zbioru)**. **Decyzja należy do Olgi** (zmiana A1/D1 dla
+tego habitatu, np. próg conf w ENTRY), NIE do wykonawcy (SR-5: strojenie zamrożonych kryteriów zakazane).
+
+**Znalezisko #2 (robustność timingu) — transient natywny HOLD w patrolu:** przy t=165–170 s (r≈25,
+GEOGRAFICZNIE niemożliwy geofence: <R_E=32<GF_native=37) flight_mode spadł do HOLD na ~2 s, potem
+wrócił do OFFBOARD. Przyczyna: **przerwa w strumieniu setpointów > COM_OF_LOSS_T (1 s)** pod kontencją
+CPU węzła detektora (GPU/CPU dzielone) → natywny failsafe utraty offboard. To **NIE** złamanie
+geofence-nadrzędności (R-G osłony) ani A1 (0 komend ruchu), ale **łamie licznik „GF native=0"** i jest
+realnym ryzykiem robustności. Domknięcie: publikacja setpointów w osobnym wątku o stałym takcie
+(odsprzężona od pętli decyzyjnej/kanału) — do zrobienia przed wznowieniem sweepu.
+
+**Dlaczego STOP (nie G2–G5):** G2–G5 latające dzielą TEN detektor. Znalezisko #1 konfunduje ich
+księgowość ε_FP i groziłoby wejściem w OBSERVE na fałszywym locku (gdy intruz poza polem). Zgodnie z
+**A2 („STOP + decyzja, nie brnięcie")** i **SR-5** — zatrzymuję i eskaluję do decyzji Olgi, zamiast
+stroić kryteria albo dodawać conf do kanału (co złamałoby A1). Pad: **brak** (dmesg czysty, 0 crash-markerów).
 
 ---
 
@@ -108,22 +155,26 @@ niezmieniona** dodaniem OBSERVE. `r02/gate_run_r02.py:scenario_G5` egzekwuje ten
 
 ---
 
-## 5. Latający closed-loop sweep — status i blokada (jawnie)
+## 5. Latający sweep — status po G1 i blokada kontraktowa (jawnie)
 
-Runner **gotowy**: `r02/gate_run_r02.py` (G1–G5, świeży boot per scenariusz, subskrypcja kanału,
-OBSERVE, liczniki A1/ε_FP/GF, księgowość trójwynikowa). Orkiestracja **gotowa**: `r02/run_gate_r02.sh`
-(stos+most+detektor+intruz+runner, teardown po PID). Stos, kamera, detektor, MAVSDK (health/armable=True)
-— **wszystkie zwalidowane żywe w tej sesji**.
+Runner **gotowy i URUCHOMIONY (G1)**: `r02/gate_run_r02.py` (G1–G5, świeży boot per scenariusz,
+subskrypcja kanału, OBSERVE, liczniki A1/ε_FP/GF, księgowość trójwynikowa). Orkiestracja `r02/run_gate_r02.sh`
+zwalidowana w locie (naprawiony `set -u` niezgodny z setup ROS). **yaw domknięty** (`exec_lib.Mav +=
+attitude_euler`) — pierwotna blokada integracyjna usunięta.
 
-**Blokada wykonania latającego G2/G3 (nazwana, drobna — NIE wada logiki):** naprowadzanie OBSERVE
-wymaga **prawdziwego yaw** (attitude). `r01/exec_lib.Mav` instrumentuje tel. **pos/vel/flight_mode**,
-ale **nie attitude** — `gate_run_r02._yaw()` wyprowadza yaw z prędkości, co w zawisie (v≈0) daje
-yaw=0 i zafałszowaną estymatę. **Domknięcie:** `exec_lib.Mav += attitude_euler (yaw)` (1 subskrypcja
-MAVSDK) → latający sweep wykonalny. G1 (patrol bez intruza, yaw nieistotny dla OBSERVE) i G5 (failsafe)
-są wykonalne bez tej zmiany; G2/G3/G4 (OBSERVE w locie) wymagają yaw.
+**Nowa blokada — KONTRAKTOWA (nie integracyjna), wykryta przez lot G1 (§3a):** detektor pod A1 (bez
+progu conf) **fałszywie lockuje na scenerii w locie** (ε_FP=1.585/min ≠ 0). To dzieli WSZYSTKIE
+scenariusze (wspólny detektor). Wznowienie G2–G5 wymaga **decyzji Olgi o A1/D1 dla tego habitatu**:
+- **Opcja A:** zaakceptować ε_FP jako wynik NEGATYWNY (SR-5) — „detektor na mono/x500 w locie nie
+  oddziela szumu bez conf" — i domknąć R0.2 z tym wnioskiem (rdzeń uczony/predykcja NIE — to detekcja).
+- **Opcja B (zmiana kontraktu):** rewizja D1/A1 dla TEGO habitatu — próg conf w ENTRY (nie w kanale
+  decyzyjnym osłony), bo empiria pokazuje separację ~35× (0.005 vs 0.169). To **zmiana A1** → wymaga
+  ratyfikacji (jak każdy aneks), nie strojenia po fakcie.
+- **Opcja C:** twardsza reguła strukturalna ENTRY (dłuższe k, ciaśniejszy move_thr, filtr krawędziowy)
+  — ale to też rewizja zamrożonego 0ter/R1-B → decyzja + re-freeze przed bramką.
 
-To znalezisko jest **spójne z dyscypliną** „logika najpierw, lot potwierdza": logika G1–G4 dowiedziona
-(harness), detekcja dowiedziona (żywy smoke), a lot wymaga jednego jawnego uzupełnienia telemetrii.
+Dodatkowo przed wznowieniem: **domknąć znalezisko #2** (setpoint w osobnym wątku — anty-transient HOLD).
+Zgodnie z **A2**: STOP + decyzja, nie brnięcie. Wykonawca NIE wybiera opcji — eskaluje do Olgi.
 
 ---
 
@@ -131,10 +182,14 @@ To znalezisko jest **spójne z dyscypliną** „logika najpierw, lot potwierdza"
 
 - **SR-1 (detektor @1 Hz):** nie wywołany — B0 p95 ≤22 ms ≪ 800 ms.
 - **SR-2 (VRAM OOM):** nie wywołany — B0 headroom 10.6 GB; żywy smoke render+CUDA zmieścił się.
-- **SR-3 (regres R0.1):** nie wywołany — A1/P1a/geofence/0-padów dowiedzione (certy + regresja 43/43).
-- **SR-4 (rdzeń uczony):** **NIE otwarty** — bramka NIE wykazała nazwanego trybu porażki kanału
-  ZOH-age adresowalnego predykcją (G4 kontroluje utratę przez sufit age). GRU/CfC pozostają zaparkowane.
-- **SR-5 (wynik negatywny=wynik):** nie wystąpił — detekcja na mono/x500-mesh wiarygodna (żywy smoke).
+- **SR-3 (regres R0.1):** **A1/P1a/geofence-nadrzędność NIE złamane** (G1 żywy: A1_motion=0, ≤R_E,
+  0 padów). Transient natywny HOLD (§3a #2) to warstwa-0 (defense-in-depth), nie złamanie R-G osłony —
+  ale łamie licznik „GF native=0"; do domknięcia (setpoint w osobnym wątku) przed wznowieniem.
+- **SR-4 (rdzeń uczony):** **NIE otwarty** — tryb porażki jest w DETEKCJI (ε_FP), NIE w kanale ZOH-age
+  adresowalnym predykcją. GRU/CfC pozostają zaparkowane (predykcja nie leczy fałszywej detekcji).
+- **SR-5 (wynik negatywny=wynik): WYWOŁANY** — latający G1 dał **ε_FP FAIL** (detektor na mono/x500 w
+  LOCIE fałszywie lockuje na scenerii bez progu conf, A1). To pełnoprawny wynik negatywny → **STOP +
+  decyzja Olgi** (A1/D1 dla habitatu), NIE strojenie po fakcie. Statyczny smoke był PASS; lot ujawnił ε_FP.
 
 ---
 
@@ -144,11 +199,20 @@ zamrożone. θ_age=3, D_safe=8, L_deliver=0.10, T_ack≈4.1, f_fov=0.8, ε_FP=0,
 INTRUDER_ALT=6. Ostateczny freeze liczb = decyzja Olgi. Żaden próg NIE jest progiem conf (A1).
 
 ## 8. Higiena
-- Stos **posprzątany**: 0 procesów sim, **GPU 0 MiB** po teardown (potwierdzone).
-- Sesja dotknęła proverów → drzewo **zacommitowane** (4 commity: R3, R4+re-cert, guidance+harness, bramka).
-- Brak markerów padu w dmesg podczas smoke.
+- Stos **posprzątany po każdym boocie**: 0 procesów sim po teardown (potwierdzone; GPU-rezydualny
+  ~467 MiB = WSLg/kompozytor, nie sim). Teardown po PID (nie `pkill -f ruby` — lekcja R1).
+- Sesja: drzewo **zacommitowane** per punkt (R3, R4+re-cert, guidance+harness, bramka, +yaw/G1-live).
+- **Pad: brak** w żadnym boocie (dmesg czysty, 0 crash-markerów). Dowody: `results/R02/gate_live/`.
 
-## 9. STOP
-Blok R3→R4→re-cert→bramka domknięty w warstwach: **certy PASS, logika G1–G4 PASS, żywy łańcuch R3
-PASS, G5 odziedziczony**. Latający sweep gotowy, zablokowany nazwanym brakiem yaw (attitude) —
-**jawnie oznaczony jako jedyny pozostały krok wykonawczy**. **Push robi Olga.**
+## 9. STOP — z decyzją do Olgi (A2/SR-5)
+Blok R3→R4→re-cert domknięty i **dowiedziony** (certy PASS, logika G1–G4 PASS na prawdziwym kodzie,
+żywy łańcuch R3 PASS). **Latający G1 WYKONANY** — integracja lotu działa (3 okrążenia, **A1=0**, ≤R_E),
+ale **FAIL na ε_FP**: detektor pod A1 (bez progu conf) fałszywie lockuje na scenerii W LOCIE
+(1.585/min), **potwierdzając pre-rejestrowane ryzyko A1** (`RAPORT_R1 §3`). To **wynik NEGATYWNY**
+(SR-5) — pełnoprawny.
+
+**STOP + DECYZJA OLGI (nie brnięcie, A2):** G2–G5 latające dzielą ten detektor → konfundowane. Wznowienie
+wymaga rozstrzygnięcia **A1/D1 dla tego habitatu** (Opcja A: zaakceptuj wynik negatywny; B: rewizja
+D1/A1 = próg conf w ENTRY, ratyfikowana; C: twardsza reguła strukturalna ENTRY) — §5. Wykonawca **nie
+wybiera** (to kontrakt). Przed wznowieniem także: setpoint w osobnym wątku (znalezisko #2). **Push i
+decyzja: Olga.**

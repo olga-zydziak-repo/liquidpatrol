@@ -4,7 +4,7 @@
 #       (ros_gz_bridge) + węzeł detektora (env ROS2+torch) + intruz (gz create + intruder_driver)
 #       + runner bramki (r02/gate_run_r02.py). TEARDOWN po PID (nie pkill -f ruby — lekcja R1).
 # Użycie: SCENARIO=G1|G2|G3|G4|G5 ./r02/run_gate_r02.sh
-set -uo pipefail
+set -o pipefail    # NIE -u: skrypty setup ROS (AMENT_TRACE_SETUP_FILES) nie są nounset-czyste
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 SCEN="${SCENARIO:-G1}"
