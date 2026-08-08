@@ -52,8 +52,12 @@ L_DELIVER_S = 0.10                # 100 ms prowizorycznie (transport BEST_EFFORT
 THETA_AGE_S = 3.0                 # 3 s prowizorycznie (≈3 ticki detektora @1 Hz zmostkowane ZOH)
 
 # --- OBSERVE (R4, §2.4 — [PROWIZORYCZNE/A4]) --------------------------------
-# D_safe: dystans bezpieczny dron↔intruz w OBSERVE (bez zbliżania). Reguła: z FOV + margines.
-D_SAFE_M = 8.0                    # 8 m prowizorycznie (>> obwiednia intruza; do ustalenia z FOV)
+# D_safe: dystans bezpieczny dron↔intruz w OBSERVE (bez zbliżania), POZIOMY. Reguła (rider Olgi):
+#   dystans 3D operacyjny = ŚRODEK koperty detekcji (~7 m), nie krawędź (9 m, gdzie sygnał 0.169 = min,
+#   zero zapasu nad θ_conf). Intruz 4 m nad patrolem (INTRUDER_ALT−ALT=14−10). Operating horizontal =
+#   D_safe + STANDOFF_MARGIN(1.5). Dla 3D=7 m: horizontal=√(7²−4²)=5.75 → D_safe=5.75−1.5=4.25 m.
+#   3D operacyjny = √(5.75²+4²) = 7.0 m (środek 5–9 m); elewacja atan(4/5.75)=34.8° w górę (<vfov/2=41.7°).
+D_SAFE_M = 4.25                   # POZIOMY; 3D operacyjny ~7 m (środek koperty A7); [PROWIZORYCZNE/A4]
 # T_ack: dopuszczalny czas od wejścia intruza w FOV do ENTRY (G2). = k·DET_DT + L_deliver + margines.
 T_ACK_S = ENTRY_K * DET_DT + L_DELIVER_S + 1.0   # ≈4.1 s (k=3 klatki + dostawa + margines)
 # f_fov: min. udział klatek z celem w FOV podczas OBSERVE (G2 PASS). [PROWIZORYCZNE/A4].

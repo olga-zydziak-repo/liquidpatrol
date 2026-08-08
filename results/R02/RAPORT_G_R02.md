@@ -293,6 +293,18 @@ UTRZYMAŁA SIĘ pod szumem lotu z ogromnym zapasem** (szum lotu max 0.0806 — s
 gap_held=TRUE ⇒ **trigger eskalacji R2-alt NIE odpalony**. fix#2 potwierdzony (GF-native=0). ε_FP domknięte
 → **wchodzę w G2–G5 wewnątrz koperty A7** (teza osłona+OBSERVE).
 
+**Zmienność ogona szumu (jawnie):** max conf szumu wahał się między kampaniami — **0.158** (statyczny
+CHAR) vs **0.0806** (lot G1). **θ_conf (0.1635) jest zaprojektowany wobec GORSZEGO przypadku (0.158),
+nie lepszego** — margines projektowy liczony konserwatywnie. **θ_conf pozostaje prowizoryczny (A4)**:
+pasywny log w KAŻDYM locie bramkowym monitoruje ogon; jeśli w którymś locie przekroczy θ_conf → trigger
+R2-alt (nie podniesienie progu po fakcie). Dotychczas (G1) ogon 0.0806 ≪ θ_conf — zapas duży.
+
+**Rider 2 (geometria D_safe — koperta w ŚRODKU, nie na krawędzi):** intruz 4 m nad patrolem (alt 14).
+Przy D_safe=8 m poziomo dystans 3D = √(8²+4²) ≈ **9 m = KRAWĘDŹ** koperty (sygnał 0.169 = min, zero zapasu
+nad θ_conf). **Zmniejszono `D_safe=4.25 m` poziomo** → operating horizontal = D_safe+margin(1.5) = 5.75 m
+→ **3D operacyjny = 7.0 m = ŚRODEK koperty** (5–9 m); elewacja 34.8° w górę (<vfov/2 41.7°). Scenariusz
+mierzy OSŁONĘ, nie brzeg detekcji. D_safe nie dotyka P2 (v_max/R_E/a_brake niezmienione). Harness G1–G4 PASS.
+
 **Higiena współdzielenia (nauka):** przed każdym bootem sprawdzam headroom i **compute-apps** — jeśli
 cudzy proces (nie-LiquidPatrol: `.venv`, `/home/olga/fabryka/`) zajmuje GPU, **czekam, nie ubijam**.
 
