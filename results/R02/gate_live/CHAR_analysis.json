@@ -1,0 +1,56 @@
+{
+  "char_log": "/tmp/r02/CHAR/char.jsonl",
+  "n_frames": 162,
+  "n_infov_frames": 111,
+  "n_true_boxes": 1,
+  "n_false_boxes": 625,
+  "conf_false(szum)": {
+    "n": 625,
+    "min": 0.001,
+    "p5": 0.00112,
+    "p50": 0.00279,
+    "p90": 0.01066,
+    "p95": 0.02077,
+    "p99": 0.06036,
+    "max": 0.15753
+  },
+  "conf_true(sygnał)": {
+    "n": 1,
+    "min": 0.00159,
+    "p5": 0.00159,
+    "p50": 0.00159,
+    "p90": 0.00159,
+    "p95": 0.00159,
+    "p99": 0.00159,
+    "max": 0.00159
+  },
+  "edge_false(szum)": {
+    "n": 625,
+    "min": 0.0058,
+    "p5": 0.0117,
+    "p50": 0.0823,
+    "p90": 0.1864,
+    "p95": 0.2396,
+    "p99": 0.2967,
+    "max": 0.4998
+  },
+  "edge_true(sygnał)": {
+    "n": 1,
+    "min": 0.4998,
+    "p5": 0.4998,
+    "p50": 0.4998,
+    "p90": 0.4998,
+    "p95": 0.4998,
+    "p99": 0.4998,
+    "max": 0.4998
+  },
+  "separacja_conf": {
+    "tau=p99_szumu": 0.06036,
+    "frac_sygnał_powyżej_tau": 0.0,
+    "rozdziela": false
+  },
+  "separacja_geometryczna": {
+    "frac_szum_przy_krawędzi(edge<0.10)": 0.568,
+    "frac_sygnał_centralny(edge>=0.10)": 1.0
+  }
+}

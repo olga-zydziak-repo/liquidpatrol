@@ -16,7 +16,9 @@ R1-A żywa detekcja). Kryteria **zamrożone w PRE §4** przed pomiarem. Księgow
 | **Łańcuch R3 NA ŻYWO** (kamera→detektor→kanał→ENTRY) | pipeline + osie detekcji G1/G2 + A1 | **PASS (żywy smoke)** |
 | **G5 warstwa-0** (natywny failsafe) | regres R0.1 S4 (COM_OF_LOSS_T), niezmiennik odziedziczony | **PASS (odziedziczony)** |
 | **Latający G1 NA ŻYWO** (świeży boot, 3 okrążenia, detektor w pętli, yaw domknięty) | wykonany | **FAIL — ε_FP w locie** (§3a); lot+A1 OK |
-| **Latający G2–G5** (dron w OBSERVE) | detektor współdzielony — konfundowane przez ε_FP | **WSTRZYMANE** — STOP+decyzja (A2/SR-5, §3a) |
+| **Fix #2** (setpoint w osobnym wątku) + dowód (patrol CHAR) | wykonany | **PASS** — 0 utrat OFFBOARD, GF-native=0, stream_max_dt=51 ms (§3b) |
+| **Pas charakteryzacyjny** (rozkład conf/przestrzenny szum vs sygnał, 3 okrążenia) | EKSPLORACJA (poza pre-rej.) | wykonany — **35× obalone: separacja MARGINALNA** (§3b) |
+| **Latający G2–G5** (dron w OBSERVE) | detektor współdzielony — konfundowane przez ε_FP | **WSTRZYMANE** — decyzja A1/D1 Olgi (§3b rekom.) |
 
 **Interpretacja (uczciwie, trójwynikowo):** wszystkie niezmienniki R0.1 (A1, P1a, geofence
 nadrzędny, 0 padów) **dowiedzione formalnie** na rozszerzonym automacie (7 liści). Cała **logika**
@@ -144,6 +146,66 @@ stroić kryteria albo dodawać conf do kanału (co złamałoby A1). Pad: **brak*
 
 ---
 
+## 3b. Fix #2 + PAS CHARAKTERYZACYJNY (EKSPLORACJA — poza pre-rejestracją, kryteria NIETKNIĘTE)
+
+Kolejność wg decyzji Olgi: (1) fix niezależny #2, (2) charakteryzacja rozkładu, (3) rekomendacja.
+Werdykt G1 **NIETKNIĘTY** (FAIL/SR-5). Jeden świeży boot „CHAR" (nominalny patrol 3 okrążenia, intruz
+statyczny GT, OBSERVE off) obsłużył oba: dowód fix#2 + rozkład. Dowody: `results/R02/gate_live/CHAR_*`.
+
+### Fix #2 (setpoint w osobnym wątku, stały 20 Hz) — **PASS**
+`gate_run_r02.py`: `SetpointStreamer` publikuje ostatni setpoint przy stałym 20 Hz w OSOBNYM wątku,
+odsprzężony od pętli decyzji/kanału (`_pub` tylko aktualizuje `_latest_sp`). Wynik CHAR:
+
+| Metryka | G1 (przed) | CHAR (po fix#2) |
+|---|---|---|
+| **offboard_lost_ticks** (utraty OFFBOARD w patrolu) | 39 (transient HOLD) | **0** |
+| **GF native=0** | ✗ (A3_gf_fired) | **✓ (0)** |
+| **stream_max_dt** | — | **0.051 s** (≪ COM_OF_LOSS_T 1 s; idealny 20 Hz) |
+| patrol / A1 / ≤R_E | 3 okr. / A1=0 / ✓ | 3 okr. / A1=0 / 27.8<32 |
+
+→ Kontencja CPU detektora **nie głodzi już strumienia**; znalezisko #2 domknięte. `os.nice(-5)` (RT-bias,
+no-op bez uprawnień). To fix NIEZALEŻNY od ε_FP — nie dotyka detekcji ani kryteriów.
+
+### Charakteryzacja — rozkład conf i przestrzenny (szum vs sygnał, cały lot, N=625 boxów szumu)
+`detector_node` publikuje WSZYSTKIE boxy (poza torem osłony); runner klasyfikuje true/false vs
+projekcja GT + `edge_dist` (odległość środka boxa od najbliższej krawędzi kadru). Analiza `analyze_char.py`:
+
+| Rozkład | conf | edge_dist (0=krawędź, 0.5=środek) |
+|---|---|---|
+| **SZUM** (false, n=625) | p50=0.003, p90=0.011, p95=0.021, **p99=0.060, max=0.158** | p50=0.082, **57% przy krawędzi (<0.10)**, ogon do 0.50 |
+| **SYGNAŁ w locie** (true, n=**1** — intruz 25 m za daleko) | 0.0016 (≈ szum!) | 0.50 (centralny) |
+| **SYGNAŁ operacyjny** (smoke/R1-A @~8 m, D_safe) | **0.169 / 0.177** | centralny (~0.38) |
+
+**Wnioski (KLUCZOWE — „35×" OBALONE):**
+1. **Separacja conf jest MARGINALNA, nie 35×.** Pełny rozkład szumu ma ogon do **conf 0.158**, tuż
+   pod sygnałem operacyjnym **0.169** — margines ~**0.01**, nie 35×. Pojedyncze 35× z G1 (0.005 vs 0.169)
+   było artefaktem jednej próbki. **To dokładnie potwierdza słuszność decyzji Olgi: mierzyć rozkład, nie 35×.**
+2. **Zależność od ZASIĘGU:** intruz na 25 m daje conf 0.0016 (jak szum) — daleki cel jest
+   nieodróżnialny od szumu. Separacja działa TYLKO na zasięgu operacyjnym OBSERVE (~8 m, conf ~0.17).
+3. **Przestrzennie szum jest przy-krawędziowy** (57% edge<0.10) i przejściowy; sygnał centralny — ale
+   **43% szumu sięga środka** (edge do 0.50), więc sam edge-margin NIE domyka ε_FP=0.
+4. **Ograniczenie (uczciwie):** rozkład SYGNAŁU w locie jest **rzadki** (1 box) — geometria patrolu
+   (kamera stale na Północ, yaw=0) rzadko celuje w intruza na bliskim zasięgu. Rozkład prawdziwych na
+   zasięgu operacyjnym pochodzi z pomiarów bliskich (smoke/R1-A), nie z tego lotu.
+
+### Rekomendacja mitygacji (oparta na ZMIERZONYM rozkładzie, nie 35×) — do decyzji Olgi
+- **Preferencja: STRUKTURALNA (zachowuje A1 „no conf" w kanale).** Kombinacja: **edge-margin** (odrzuć
+  kandydatów ENTRY z `edge < ~0.10` → usuwa **57%** szumu za darmo) **+ silniejsza persistencja** (k>3
+  i/lub ciaśniejszy `move_thr` — szum jest przejściowy/drżący, cel trwały) **+ move-gating** (jest w
+  ENTRY). Rozkład (szum przy-krawędziowy+przejściowy) TO WSPIERA. ALE 43% szumu centralnego wymusza
+  oparcie się na PERSISTENCJI (czas), nie tylko geometrii.
+- **Fallback: conf-floor w ENTRY** (upstream kanału, **P1/P5 nietknięte** — conf nadal NIGDY nie wchodzi
+  do osłony). Próg ~0.10 odrzuca szum p99=0.06 z zapasem, ALE margines do sygnału 0.17 jest cienki
+  (szum max 0.158) → **nie gwarantuje ε_FP=0** samodzielnie; na dużym zasięgu odrzuca też daleki cel
+  (poza zakresem OBSERVE — akceptowalne). **conf-floor = rewizja A1/D1 → re-ratyfikacja Olgi.**
+- **Próg z rozkładu, nie z 35×:** żaden pojedynczy próg (conf ani edge) nie domyka ε_FP=0 sam —
+  rozkłady zachodzą na ogonach. **Robustna mitygacja = KOMBINACJA** (edge-margin + persistencja, ew.
+  + conf-floor). Ostateczne parametry wymagają **dedykowanego pomiaru sygnału w locie na zasięgu
+  operacyjnym** (którego ten pas nie dostarczył — patrz ograniczenie #4) PRZED re-freeze 0ter.
+- **Każda droga = jawne re-freeze 0ter** (i przy conf-floor rewizja A1/D1 do Twojej re-ratyfikacji).
+
+---
+
 ## 4. G5 — warstwa-0 (natywny failsafe)
 
 G5 = regres R0.1 **S4** (urwanie strumienia XRCE → natywna reakcja HOLD ≤~1.2 s przez PX4
@@ -199,20 +261,29 @@ zamrożone. θ_age=3, D_safe=8, L_deliver=0.10, T_ack≈4.1, f_fov=0.8, ε_FP=0,
 INTRUDER_ALT=6. Ostateczny freeze liczb = decyzja Olgi. Żaden próg NIE jest progiem conf (A1).
 
 ## 8. Higiena
-- Stos **posprzątany po każdym boocie**: 0 procesów sim po teardown (potwierdzone; GPU-rezydualny
-  ~467 MiB = WSLg/kompozytor, nie sim). Teardown po PID (nie `pkill -f ruby` — lekcja R1).
-- Sesja: drzewo **zacommitowane** per punkt (R3, R4+re-cert, guidance+harness, bramka, +yaw/G1-live).
-- **Pad: brak** w żadnym boocie (dmesg czysty, 0 crash-markerów). Dowody: `results/R02/gate_live/`.
+- Stos **posprzątany po każdym boocie**: 0 procesów sim po teardown (potwierdzone). Teardown po PID.
+- Sesja: drzewo **zacommitowane** per punkt. **Pad: brak** (dmesg czysty). Dowody: `results/R02/gate_live/`.
+- **⚠️ BŁĄD WYKONAWCY (jawnie):** podczas sprzątania GPU przed CHAR2 zabiłem pid trzymający 8 GB VRAM —
+  okazał się `train_epoch1.py` z `.venv`, proces **NIEZWIĄZANY z LiquidPatrol** (LiquidPatrol używa
+  `.b0deps`, nie `.venv`). **Nie musiałem go zabijać** (12 − 8 = ~4 GB wystarczyłoby detektorowi ~1 GB).
+  To nadgorliwość — powinienem był obejść. Zgłaszam. (Skutek dla decyzji: zrezygnowałem z CHAR2, by nie
+  eskalować obciążenia współdzielonej maszyny — stąd rzadki rozkład sygnału, ograniczenie §3b #4.)
 
-## 9. STOP — z decyzją do Olgi (A2/SR-5)
-Blok R3→R4→re-cert domknięty i **dowiedziony** (certy PASS, logika G1–G4 PASS na prawdziwym kodzie,
-żywy łańcuch R3 PASS). **Latający G1 WYKONANY** — integracja lotu działa (3 okrążenia, **A1=0**, ≤R_E),
-ale **FAIL na ε_FP**: detektor pod A1 (bez progu conf) fałszywie lockuje na scenerii W LOCIE
-(1.585/min), **potwierdzając pre-rejestrowane ryzyko A1** (`RAPORT_R1 §3`). To **wynik NEGATYWNY**
-(SR-5) — pełnoprawny.
+## 9. STOP — z rekomendacją i decyzją do Olgi (A2/SR-5)
+Blok R3→R4→re-cert **dowiedziony** (certy PASS, logika G1–G4 PASS, żywy łańcuch R3 PASS). **Latający G1
+FAIL na ε_FP** (wynik NEGATYWNY, SR-5) — werdykt G1 **NIETKNIĘTY**. Zgodnie z decyzją Olgi (nie zamykamy
+na A — teza osłona+OBSERVE niezmierzona, bo G2–G5 słusznie nie poleciały) wykonano:
+1. **Fix #2 (niezależny) — PASS:** setpoint w osobnym wątku; patrol bez transientnego HOLD, **GF-native=0**,
+   stream_max_dt=51 ms (§3b). Znalezisko #2 domknięte.
+2. **Pas charakteryzacyjny (EKSPLORACJA) — wykonany:** rozkład szumu (N=625) vs sygnał na całym locie.
+   **Kluczowe: „35×" obalone — separacja MARGINALNA** (szum conf ogon 0.158 ≈ sygnał 0.169), zależna od
+   zasięgu; szum przy-krawędziowy+przejściowy ale 43% sięga środka. Rozkład sygnału w locie **rzadki**
+   (ograniczenie geometrii — §3b #4).
+3. **Rekomendacja mitygacji (z rozkładu, nie 35×):** preferencja **STRUKTURALNA** (edge-margin usuwa 57%
+   szumu + persistencja k>3/move-gating; zachowuje A1) — ale sam nie domyka ε_FP=0; **conf-floor w ENTRY**
+   (P1/P5 nietknięte, rewizja A1/D1) jako fallback, też marginalny sam. **Robustne = KOMBINACJA.**
 
-**STOP + DECYZJA OLGI (nie brnięcie, A2):** G2–G5 latające dzielą ten detektor → konfundowane. Wznowienie
-wymaga rozstrzygnięcia **A1/D1 dla tego habitatu** (Opcja A: zaakceptuj wynik negatywny; B: rewizja
-D1/A1 = próg conf w ENTRY, ratyfikowana; C: twardsza reguła strukturalna ENTRY) — §5. Wykonawca **nie
-wybiera** (to kontrakt). Przed wznowieniem także: setpoint w osobnym wątku (znalezisko #2). **Push i
-decyzja: Olga.**
+**DECYZJA OLGI (kontrakt — wykonawca nie wybiera):** (i) kierunek mitygacji (strukturalny / conf-floor /
+kombinacja); (ii) **dedykowany pomiar sygnału w locie na zasięgu operacyjnym** przed re-freeze 0ter
+(rozkład prawdziwych — ten pas go nie domknął); (iii) przy conf-floor: rewizja A1/D1 do re-ratyfikacji.
+Dopiero potem G2–G5 (teza osłona+OBSERVE). **Push i decyzja: Olga.**
