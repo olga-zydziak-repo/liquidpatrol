@@ -103,11 +103,14 @@ class TargetChannel:
         return ev
 
     def _on_frame_unlocked(self, box, t, gt_present):
-        # edge-margin (Krok 2/C, RE-FREEZE 0ter): kandydat ENTRY musi być CENTRALNY — box przy
-        # krawędzi (edge_dist < margin) traktowany jak BRAK boxa dla serii ENTRY (odrzuca 57% szumu
-        # przy-krawędziowego, A1-preserving). Refresh locka (poniżej) NIE stosuje edge-margin.
+        # ENTRY-admisja (KOMBINACJA, upstream locka): box musi być CENTRALNY (edge-margin, geometryczny,
+        # A1-preserving) ORAZ przekroczyć conf-floor θ_conf (R02-A6). conf UŻYTY WYŁĄCZNIE tu (admisja
+        # ENTRY) — NIGDY nie wchodzi do wartości kanału (5-dim), osłony, P1/P5. Box odrzucony = BRAK boxa
+        # dla serii ENTRY. Refresh locka (poniżej) NIE stosuje ani edge-margin, ani conf-floor.
         if box is not None and box.edge_dist() < self.cfg.entry_edge_margin:
             box = None
+        if box is not None and box.conf is not None and box.conf < self.cfg.entry_theta_conf:
+            box = None                      # R02-A6 conf-floor (ENTRY-admisja) — conf nie wchodzi do kanału
         if box is None:
             # brak boxa → seria się zrywa
             self.state = SEARCHING; self.streak = 0; self.anchor = None; self.t_first = None

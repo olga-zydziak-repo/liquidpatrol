@@ -23,7 +23,8 @@ from r01.exec_lib import XrcePublisher, Mav, Planner
 from r01.shield import PatrolShield, ALLOW, HOLD, REFUSE, GEOFENCE, M_PATROL, M_OBSERVE
 from r01.authz import Authorizer
 from r01.config import ALT_M, TICK_HZ, DT, R_E
-from r02.config_r02 import (D_SAFE_M, THETA_AGE_S, T_ACK_S, F_FOV, EPS_FP_PER_MIN, ChannelConfig)
+from r02.config_r02 import (D_SAFE_M, THETA_AGE_S, T_ACK_S, F_FOV, EPS_FP_PER_MIN, ChannelConfig,
+                            THETA_CONF, ENTRY_EDGE_MARGIN)
 from r02.target_channel import TargetChannel, Box
 from r02.observe_guidance import ObserveController
 from r02.gate_harness import project_to_pixel   # EKSPLORACJA: projekcja GT intruza (klasyfikacja true/false)
@@ -87,6 +88,8 @@ class Runner:
         self.tf = open(TRACE, "w")
         self.xrce = XrcePublisher()
         self.chan = ChannelSub(self.xrce.node)          # współdziel węzeł rclpy osłony
+        self.boxes_sub = BoxesSub(self.xrce.node)       # A6: pasywne logowanie conf (wszystkie boxy)
+        self.conf_samples = []; self.n_admitted = 0; self._boxes_seq = -1
         self.mav = Mav(set_gf=True)
         self.shield = PatrolShield(); self.shield.reset()
         self.planner = Planner(laps)
@@ -158,8 +161,28 @@ class Runner:
     def _spin(self):
         rclpy.spin_once(self.xrce.node, timeout_sec=0.0)
 
+    def _log_conf_passive(self):
+        """A6: pasywne logowanie conf (sygnał+szum) w KAŻDYM locie — czy przerwa utrzymała się w locie.
+        Liczy też n_admitted = boxy przechodzące admisję ENTRY (conf≥θ_conf ∧ central) = potencjalne locki."""
+        if self.boxes_sub.seq != self._boxes_seq:
+            self._boxes_seq = self.boxes_sub.seq
+            for (cx, cy, w, h, conf) in self.boxes_sub.boxes:
+                self.conf_samples.append(conf)
+                edge = min(cx, 1-cx, cy, 1-cy)
+                if conf >= THETA_CONF and edge >= ENTRY_EDGE_MARGIN:
+                    self.n_admitted += 1
+
+    def conf_report(self):
+        cs = sorted(self.conf_samples)
+        p99 = cs[min(len(cs)-1, int(0.99*(len(cs)-1)))] if cs else None
+        return {"theta_conf": round(THETA_CONF, 4), "conf_n": len(cs),
+                "conf_max": round(max(cs), 4) if cs else None, "conf_p99": round(p99, 4) if p99 else None,
+                "n_admitted_entry": self.n_admitted,        # dla G1 (brak intruza): oczekiwane 0
+                "gap_held_in_flight": (max(cs) < THETA_CONF) if cs else None}   # szum < θ_conf?
+
     def tick(self, force_mode=None, watch_gf=True):
         self._spin()
+        self._log_conf_passive()
         pos = list(self.mav.pos); vel = list(self.mav.vel)
         # aktualizacja naprowadzania z kanału (świeża detekcja → zamroź estymatę)
         locked = self.chan.locked and (self.chan.age is not None and self.chan.age <= THETA_AGE_S)
@@ -240,6 +263,7 @@ class Runner:
 
     def finish(self, summary):
         self.stop_streamer()
+        summary = {**summary, "conf_passive_A6": self.conf_report()}   # A6: pasywny log conf w każdym locie
         self.tf.write(json.dumps({"SCENARIO_RESULT": summary}) + "\n"); self.tf.close()
         print("[gate] RESULT:", json.dumps(summary, ensure_ascii=False))
         self.mav.stop(); self.xrce.shutdown()
@@ -377,7 +401,7 @@ def scenario_CHAR(r: Runner):
     gx, gy, gz = float(gt[0]), float(gt[1]), float(gt[2])
     intr_ned = (gx, gy, -gz)                      # NED (down = -alt)
     r.admit_observe(False); r.intruder_present = True   # patrol, bez autorytetu OBSERVE
-    boxes_sub = BoxesSub(r.xrce.node)
+    boxes_sub = r.boxes_sub          # A6: współdziel pasywny subskrybent boxów
     charf = open(os.environ.get("CHAR_LOG", "/tmp/r02/CHAR/char.jsonl"), "w")
     r.bring_up()
     last_seq = -1; n_frames = 0; n_true = 0; n_false = 0
@@ -431,7 +455,7 @@ def scenario_CHAR2(r: Runner):
     gx, gy, gz = float(gt[0]), float(gt[1]), float(gt[2])
     intr_ned = (gx, gy, -gz)
     r.admit_observe(False); r.intruder_present = True
-    boxes_sub = BoxesSub(r.xrce.node)
+    boxes_sub = r.boxes_sub          # A6: współdziel pasywny subskrybent boxów
     charf = open(os.environ.get("CHAR_LOG", "/tmp/r02/CHAR2/char.jsonl"), "w")
     r.bring_up()                                  # wznios w Home (0,0,-10)
     # zamiataj zasięg: target_x kroki tam-i-z-powrotem, dwell per zasięg (gęstość klatek)

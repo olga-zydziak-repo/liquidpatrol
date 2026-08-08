@@ -34,6 +34,14 @@ ENTRY_MOVE_THR = 0.15             # 15% przekątnej kadru na klatkę (intruz v�
 #   Odrzuca 57% szumu bez conf. UWAGA: sam NIE domyka ε_FP=0 — szum CENTRALNY (edge≥0.10) sięga
 #   conf 0.158 i persistuje do 7 klatek (RAPORT_G_R02 §3b). conf-floor = Krok 2b (rewizja A1/D1).
 ENTRY_EDGE_MARGIN = 0.10         # geometryczny (NIE conf) — zachowuje A1
+# conf-floor w ENTRY-admisji (R02-A6, ratyfikowane). WYŁĄCZNIE admisja ENTRY UPSTREAM kanału —
+# conf NIGDY w wartości kanału (5-dim), osłonie, P1/P5 (A1/D1 stoją). Kombinacja z edge-margin.
+# DERYWACJA DETERMINISTYCZNA (reguła, nie ręczna): środek PRZERWY DYSTRYBUCYJNEJ dwóch chmur
+# (RAPORT_G_R02 §3c): sygnał operacyjny min (SWEEP 5–9 m) i szum centralny max (CHAR, edge≥0.10).
+# [PROWIZORYCZNE/A4] — pasywne logowanie conf w KAŻDYM locie bramkowym weryfikuje przerwę w locie.
+SIGNAL_MIN_OPERATIONAL = 0.169   # [ZMIERZONE] SWEEP: min conf sygnału w paśmie 5–9 m
+NOISE_CENTRAL_MAX = 0.158        # [ZMIERZONE] CHAR: max conf szumu centralnego (edge≥edge_margin)
+THETA_CONF = (SIGNAL_MIN_OPERATIONAL + NOISE_CENTRAL_MAX) / 2.0   # ≈ 0.1635 (środek przerwy)
 
 # --- Kanał ZOH-age (semantyka §2.3 — [PROWIZORYCZNE/A4]) ---------------------
 # L_deliver: latencja dostarczenia detekcji do kanału (kamera→most→detektor→kanał). Podłoga age.
@@ -73,11 +81,13 @@ class ChannelConfig:
     entry_k: int = ENTRY_K
     entry_move_thr: float = ENTRY_MOVE_THR
     entry_edge_margin: float = ENTRY_EDGE_MARGIN   # Krok 2/C: kandydat ENTRY musi być centralny
+    entry_theta_conf: float = THETA_CONF           # R02-A6: conf-floor w ENTRY-admisji (upstream)
     l_deliver_s: float = L_DELIVER_S
     theta_age_s: float = THETA_AGE_S
     det_dt: float = DET_DT
 
     def sane(self) -> bool:
-        """Higiena: k≥2 (streak ma sens), podłoga<sufit, próg ruchu w [0,1], margin w [0,0.5)."""
+        """Higiena: k≥2, podłoga<sufit, próg ruchu w [0,1], margin w [0,0.5), θ_conf w [0,1)."""
         return (self.entry_k >= 2 and 0.0 < self.l_deliver_s < self.theta_age_s
-                and 0.0 < self.entry_move_thr <= 1.0 and 0.0 <= self.entry_edge_margin < 0.5)
+                and 0.0 < self.entry_move_thr <= 1.0 and 0.0 <= self.entry_edge_margin < 0.5
+                and 0.0 <= self.entry_theta_conf < 1.0)

@@ -144,6 +144,23 @@ def test_edge_margin_rejects_edge_entry():
     check("centralny box lockuje normalnie", ch2.locked and ch2.n_entry == 1)
 
 
+def test_conf_floor_entry_admission():
+    """R02-A6: box centralny ale conf < θ_conf nie tworzy ENTRY; conf ≥ θ_conf tak. conf UŻYTY tylko
+    w admisji ENTRY — wartość kanału pozostaje 5-dim (bez conf)."""
+    from r02.config_r02 import THETA_CONF
+    ch = fresh()
+    low = Box(0.5, 0.5, 0.05, 0.05, conf=THETA_CONF - 0.02)    # centralny, conf pod progiem
+    for t in (0.0, 1.0, 2.0):
+        ch.on_frame(low, t)
+    check("conf<θ_conf: brak ENTRY (odrzucony w admisji)", not ch.locked and ch.n_entry == 0)
+    ch2 = fresh()
+    hi = Box(0.5, 0.5, 0.05, 0.05, conf=THETA_CONF + 0.02)     # centralny, conf nad progiem
+    for t in (0.0, 1.0, 2.0):
+        ch2.on_frame(hi, t)
+    check("conf≥θ_conf: ENTRY normalnie", ch2.locked and ch2.n_entry == 1)
+    check("wartość kanału 5-dim (bez conf) mimo conf-floor", len(ch2.sample(2.0).as_tuple()) == 5)
+
+
 def test_sample_none_before_lock():
     """sample() = None dopóki brak ENTRY (SEARCHING/CANDIDATE)."""
     ch = fresh(); b = Box(0.5, 0.5, 0.1, 0.1)
