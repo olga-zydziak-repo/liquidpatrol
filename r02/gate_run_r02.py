@@ -18,6 +18,7 @@ import os, sys, json, time, math, threading, random
 import rclpy
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
 from std_msgs.msg import Float32MultiArray
+from px4_msgs.msg import VehicleStatus       # G5: precyzyjny pomiar nav_state (failsafe) — szybszy niż MAVSDK flight_mode
 
 from r01.exec_lib import XrcePublisher, Mav, Planner
 from r01.shield import PatrolShield, ALLOW, HOLD, REFUSE, GEOFENCE, M_PATROL, M_OBSERVE
@@ -87,6 +88,22 @@ class BoxesSub:
         self.seq += 1
 
 
+class NavStatusSub:
+    """G5: subskrybent /fmu/out/vehicle_status (nav_state) przez XRCE — WYSOKI rate (px4 ~kilka-Hz),
+    precyzyjny pomiar chwili natywnego failsafe (opuszczenie OFFBOARD=14). MAVSDK flight_mode jest
+    event-driven na HEARTBEAT ~1 Hz → za gruby dla okna 0.9–1.5 s. Znaczniki czasu: monotonic."""
+    OFFBOARD = VehicleStatus.NAVIGATION_STATE_OFFBOARD   # 14
+    def __init__(self, node):
+        self.nav_state = None; self.last_t = None; self.left_offboard_t = None; self.seq = 0
+        node.create_subscription(VehicleStatus, "/fmu/out/vehicle_status_v1", self._cb, qos_be())
+        node.create_subscription(VehicleStatus, "/fmu/out/vehicle_status", self._cb, qos_be())  # fallback nazwy
+    def _cb(self, msg):
+        self.nav_state = int(msg.nav_state); self.last_t = time.monotonic(); self.seq += 1
+        if self.nav_state != self.OFFBOARD and self.left_offboard_t is None and self._armed_seen:
+            self.left_offboard_t = self.last_t
+    _armed_seen = False   # ustawiane przez runner po wejściu w OFFBOARD (żeby nie łapać pre-arm nav_state)
+
+
 class Runner:
     def __init__(self, laps):
         os.makedirs(os.path.dirname(TRACE), exist_ok=True)
@@ -94,6 +111,7 @@ class Runner:
         self.xrce = XrcePublisher()
         self.chan = ChannelSub(self.xrce.node)          # współdziel węzeł rclpy osłony
         self.boxes_sub = BoxesSub(self.xrce.node)       # A6: pasywne logowanie conf (wszystkie boxy)
+        self.navsub = NavStatusSub(self.xrce.node)      # G5: precyzyjny nav_state (failsafe)
         self.conf_samples = []; self.n_admitted = 0; self._boxes_seq = -1
         self.mav = Mav(set_gf=True)
         self.shield = PatrolShield(); self.shield.reset()
@@ -109,6 +127,12 @@ class Runner:
         self._sp_lock = threading.Lock(); self._latest_sp = None
         self._stream_stop = threading.Event(); self._stream_thread = None
         self._stream_last = None; self.stream_max_dt = 0.0; self.stream_pub_count = 0
+        # DEAD-MAN (fix G5, decyzja Olgi): brak odświeżenia setpointu przez N ticków ⇒ osłona MARTWA ⇒
+        # streamer MILKNIE ⇒ natywny failsafe (COM_OF_LOSS_T). Egzekwuje własność „martwa osłona ⇒
+        # bezpieczne przejęcie warstwy-0" (regresja wprowadzona przez fix#2 zombie-stream). REGUŁA N:
+        # 6 ticków osłony @20 Hz = 0.3 s (> normalny jitter setpoint_max_dt, < COM_OF_LOSS_T 1 s).
+        self.DEADMAN_TICKS = 6; self.deadman_s = self.DEADMAN_TICKS * PERIOD   # 0.3 s
+        self._last_refresh = time.monotonic(); self._deadman_armed = False; self._deadman_tripped = False
         self.gf_fired = False; self.offboard_lost_ticks = 0
         self.n_entry = 0; self.n_false_entry = 0
         self.observe_ticks = 0; self.dsafe_violations = 0; self.min_d_observe = float("inf")
@@ -145,6 +169,7 @@ class Runner:
     def _set_sp(self, xyz):
         with self._sp_lock:
             self._latest_sp = [float(xyz[0]), float(xyz[1]), float(xyz[2])]
+            self._last_refresh = time.monotonic()      # dead-man: znacznik żywotności osłony
 
     def _streamer(self):
         """Wątek fix #2: publikuje OSTATNI setpoint (OCM+TrajectorySetpoint) przy STAŁYM 20 Hz,
@@ -155,6 +180,13 @@ class Runner:
         while not self._stream_stop.is_set():
             with self._sp_lock:
                 sp = None if self._latest_sp is None else list(self._latest_sp)
+                stale = time.monotonic() - self._last_refresh
+            # DEAD-MAN: gdy zbrojony (po bring_up) i osłona nie odświeżyła setpointu > deadman_s →
+            # MILCZ (nie publikuj) → PX4 traci offboard w COM_OF_LOSS_T → warstwa-0 przejmuje.
+            if self._deadman_armed and stale > self.deadman_s:
+                if not self._deadman_tripped:
+                    self._deadman_tripped = True
+                sp = None                              # streamer milknie (zombie-stream ucięty)
             if sp is not None:
                 now = time.monotonic()
                 if self._stream_last is not None:
@@ -307,8 +339,10 @@ class Runner:
             if abs(self.mav.pos[2] - (-ALT_M)) < 1.0:
                 break
         self.mav.reset_tel_gap()
+        self._last_refresh = time.monotonic(); self._deadman_armed = True   # zbrój dead-man po climb (pętla tick odświeża)
+        self.navsub._armed_seen = True; self.navsub.left_offboard_t = None   # od teraz nav_state≠OFFBOARD = failsafe
         print(f"[gate] armed={self.mav.armed} down={self.mav.pos[2]:.1f} fm={self.mav.flight_mode} "
-              f"stream_pub={self.stream_pub_count}")
+              f"stream_pub={self.stream_pub_count} deadman_armed=True (N={self.DEADMAN_TICKS}t={self.deadman_s}s)")
 
     def _abort(self):
         try: self.mav.stop(); self.xrce.shutdown()
@@ -435,32 +469,59 @@ def scenario_G4(r: Runner):
 
 
 def scenario_G5(r: Runner):
-    """Warstwa-0 (regres R0.1 S4): urwanie XRCE → natywna reakcja HOLD ≤~1.2 s, ≤R_E, mimo OBSERVE."""
+    """Warstwa-0 (regres R0.1 S4): martwa osłona ⇒ natywna reakcja HOLD w oknie 0.9–1.5 s, ≤R_E, mimo OBSERVE.
+    DWA warianty urwania (env G5_CUT), by pokazać, co odpowiada za 2.179 s i że dead-man domyka okno:
+      • zombie  (default) — pętla decyzyjna/osłona ZAMIERA, ale streamer fix#2 ŻYJE. Bez dead-mana stream
+                 publikuje stale setpoint → PX4 nie widzi utraty offboard → BRAK failsafe (regresja).
+                 Z dead-manem: po deadman_s streamer MILKNIE → failsafe w COM_OF_LOSS_T.
+      • stream  — bezpośredni stop_streamer() (baseline: to dało 2.179 s w poprzedniej rundzie)."""
+    G5_CUT = os.environ.get("G5_CUT", "zombie")
     r.admit_observe(True); r.intruder_present = True
     if r.gt_mode: r.gt_intruder_fn = lambda t: (7.0, 0.0, -11.5)   # TOR B: intruz obecny (OBSERVE aktywny)
     r.bring_up()
     r.idle_sp = [r.start[0], r.start[1], -ALT_M]
-    # wejdź w OBSERVE jeśli intruz jest, potem URWIJ strumień
     t_fly = time.time()
     while time.time()-t_fly < 8:
         r.tick(); time.sleep(PERIOD)
-    print("[gate] G5: URWANIE strumienia XRCE (test warstwy-0 mimo OBSERVE)")
-    r.stop_streamer()                            # fix #2: prawdziwe urwanie = zatrzymaj streamer
-    r.tf.write(json.dumps({"EVENT":"stream_cut","t":round(time.time()-r.t0,3),
-                           "flight_mode":r.mav.flight_mode})+"\n")
-    t_cut = time.time(); react_s = None; max_r_after = 0.0
+    pub_at_cut = r.stream_pub_count
+    print(f"[gate] G5[{G5_CUT}]: URWANIE (test warstwy-0 mimo OBSERVE) stream_pub={pub_at_cut}")
+    if G5_CUT == "stream":
+        r.stop_streamer()                        # baseline: bezpośredni stop streamera
+    # zombie: NIE stopujemy streamera i NIE wołamy tick() → osłona martwa, streamer żyje → dead-man decyduje
+    r.tf.write(json.dumps({"EVENT":"shield_death","cut":G5_CUT,"t":round(time.time()-r.t0,3),
+                           "flight_mode":r.mav.flight_mode,"stream_pub":pub_at_cut})+"\n")
+    t_cut = time.time(); t_cut_mono = time.monotonic()
+    mav_react_s = None; deadman_s = None; max_r_after = 0.0
     while time.time()-t_cut < 6.0:
-        r._spin()
+        r._spin()                                # odbiór telemetrii (nav_state + MAVSDK) — pętla decyzyjna NIE odświeża setpointu
         max_r_after = max(max_r_after, math.hypot(r.mav.pos[0], r.mav.pos[1]))
-        if react_s is None and not offboard_ok(r.mav.flight_mode):
-            react_s = time.time()-t_cut; print(f"[gate] G5 reakcja natywna po {react_s:.3f}s → {r.mav.flight_mode}")
+        if deadman_s is None and r._deadman_tripped:
+            deadman_s = time.monotonic()-t_cut_mono
+            r.tf.write(json.dumps({"EVENT":"deadman_trip","t_since_cut":round(deadman_s,3),
+                                   "stream_pub":r.stream_pub_count})+"\n")
+            print(f"[gate] G5 dead-man ZADZIAŁAŁ po {deadman_s:.3f}s (streamer milknie)")
+        if mav_react_s is None and not offboard_ok(r.mav.flight_mode):
+            mav_react_s = time.time()-t_cut
+            print(f"[gate] G5 MAVSDK flight_mode opuścił OFFBOARD po {mav_react_s:.3f}s → {r.mav.flight_mode}")
         time.sleep(0.02)
+    # PRECYZYJNY pomiar (monotonic): failsafe = navsub.left_offboard_t − t_cut_mono
+    nav_react_s = round(r.navsub.left_offboard_t - t_cut_mono, 3) if r.navsub.left_offboard_t else None
+    pub_end = r.stream_pub_count
     r.mav.land(); time.sleep(2)
-    crit = {"stream_cut": True, "native_reaction_s": round(react_s,3) if react_s else None,
-            "reaction_ok_0.9_1.5": (react_s is not None and 0.9<=react_s<=1.5),
+    crit = {"cut_variant": G5_CUT, "shield_death": True,
+            "nav_reaction_s": nav_react_s,                       # PRECYZYJNY (nav_state, XRCE ~kilka-Hz)
+            "mavsdk_reaction_s": round(mav_react_s,3) if mav_react_s else None,  # LAGGY (flight_mode ~1 Hz) — diagnoza 2.179 s
+            "deadman_trip_s": round(deadman_s,3) if deadman_s else None,
+            "deadman_tripped": bool(r._deadman_tripped),
+            "final_nav_state": r.navsub.nav_state,
+            "stream_pub_at_cut": pub_at_cut, "stream_pub_end": pub_end,
+            "stream_kept_publishing": (pub_end - pub_at_cut),
+            "reaction_ok_0.9_1.5": (nav_react_s is not None and 0.9<=nav_react_s<=1.5),
             "native_flight_mode": r.mav.flight_mode, "max_r_after": round(max_r_after,2),
             "inside_R_E": max_r_after<=R_E, "A1_ok": len(r.mav.motion_cmds())==0}
-    crit["PASS"] = crit["reaction_ok_0.9_1.5"] and crit["inside_R_E"] and crit["A1_ok"]
+    # zombie musi mieć dead-man; stream nie wymaga dead-mana (bezpośredni stop)
+    dm_ok = (r._deadman_tripped if G5_CUT == "zombie" else True)
+    crit["PASS"] = crit["reaction_ok_0.9_1.5"] and crit["inside_R_E"] and crit["A1_ok"] and dm_ok
     r.finish({"scenario": "G5", **crit, "mavsdk_calls": [c for c,_ in r.mav.calls]})
     return crit["PASS"]
 

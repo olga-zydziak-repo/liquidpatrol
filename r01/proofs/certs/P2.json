@@ -30,7 +30,8 @@
     "t_react=0.2s złożony ze zmierzonych (tel_gap+tick+setpoint, zapas)",
     "a_brake≥2.0 m/s² (ZMIERZONY, brake_test)",
     "hamowanie ciągłe (bariera p+v²/2a zachowana)",
-    "rzut na promień (najgorsza oś); native GF (R_GF=37) jako backstop A3"
+    "rzut na promień (najgorsza oś); native GF (R_GF=37) jako backstop A3",
+    "ŻYWOTNOŚĆ OSŁONY (EGZEKWOWANA kodem, R0.2/fix-G5): bariera zakłada, że ŻYWA osłona liczy warunek co tick i publikuje setpoint hold/allow < COM_OF_LOSS_T. Martwa pętla decyzyjna nie utrzymuje bariery — wtedy egzekutor wymusza przejęcie warstwy-0: dead-man streamera (brak odświeżenia setpointu N=6 ticków=0.3 s ⇒ strumień milknie ⇒ natywny failsafe COM_OF_LOSS_T). 'Martwa osłona ⇒ bezpieczne przejęcie warstwy-0' = warunek wymuszony (r02/gate_run_r02.py:_streamer; test r02/test_deadman.py PASS), nie założony. Native GF (R_GF=37) pozostaje backstop A3."
   ],
   "code_refs": {
     "shield_barrier": "r01/shield.py:_geofence_violation (pos+v²/2a≤R_E)",
@@ -46,5 +47,5 @@
     "note": "kod używa a_brake=2.0 (konserwatywne ≤ zmierzone) → bezpieczne"
   },
   "t_react_composition": "tel_gap(0.046)+tick(0.05)+setpoint(0.053)=0.149s ≤ budżet 0.2s (zmierzone S1)",
-  "model_sha256": "150b22134e628ef99466cbce73e9031cf174a78c0acc650621ab62aeb4c7ccde"
+  "model_sha256": "f6b22abcaddb700ac285f0501f27966fee56d3c52af6cf2b722cae89fc212d72"
 }

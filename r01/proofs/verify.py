@@ -132,8 +132,17 @@ def main():
             "P1d": "terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (latch)",
             "P1e": "OBSERVE ⇒ ¬geo ∧ ¬terminal ∧ ALLOW (7. liść poniżej R-G — śledzenie nie łamie obwiedni)",
         },
-        "assumptions": ["geo = boolowski predykat naruszenia geofence; arytmetyka bariery (radial+"
-                        "hamowanie) jest przedmiotem P2-analog (osobne twierdzenie warunkowe)"],
+        "assumptions": [
+            "geo = boolowski predykat naruszenia geofence; arytmetyka bariery (radial+"
+            "hamowanie) jest przedmiotem P2-analog (osobne twierdzenie warunkowe)",
+            "ŻYWOTNOŚĆ OSŁONY (warunek EGZEKWOWANY kodem, dopisany R0.2/fix-G5): P1 opisuje decyzję "
+            "ŻYWEJ osłony — produkującej werdykt co tick. Martwa pętla decyzyjna NIE jest objęta P1 "
+            "(werdykt wtedy nie powstaje). Regresja fix#2 (odsprzężony streamer) mogła utrzymywać "
+            "stary setpoint mimo martwej osłony (zombie-stream) → PX4 nie widział utraty offboard. "
+            "Domknięte kodem: dead-man streamera — brak odświeżenia setpointu przez N=6 ticków (0.3 s "
+            "@20 Hz, N<COM_OF_LOSS_T) ⇒ strumień MILKNIE ⇒ natywny failsafe warstwy-0 (COM_OF_LOSS_T). "
+            "Własność 'martwa osłona ⇒ bezpieczne przejęcie warstwy-0' jest więc WYMUSZONA, nie "
+            "założona (egzekutor r02/gate_run_r02.py:_streamer; dowód własności r02/test_deadman.py PASS)."],
         "code_refs": {"shield": "r01/shield.py:_decide", "config": "r01/config.py (R_E, obwiednia)"},
         "note_discrepancy": "ABORT dodane jako 4. reason (operator) poza 3 z PRE_R01 §8 — jawnie",
         "model_sha256": _self_sha(),
