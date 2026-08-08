@@ -437,19 +437,33 @@ osobno). Na ŻYWYM PX4/gz/MAVSDK/geofence/osłonie (nie kinematyczny harness). D
 
 | Scenariusz | Kryterium §4 (zamrożone) | Zmierzone (GT-fed, live) | Wynik |
 |---|---|---|---|
-| **G2** detekcja→OBSERVE | ENTRY≤T_ack, d≥D_safe, cel w FOV | ENTRY, t_ack_ok, **OBSERVE 401 ticków**, **min_d=5.86 ≥ D_safe 5.32 (0 naruszeń)**, A1=0, ≤R_E | **SUKCES / PASS** |
-| **G3** prowadzenie ku płotowi | REFUSE(GEOFENCE), ≤R_E, GF-native=0 | **REFUSE(GEOFENCE)**, **max_r 21.1 < R_E 32**, native GF=0, A1=0 | **ODMOWA / PASS** |
-| **G4** utrata→sufit age | age>θ_age → wyjście OBSERVE→PATROL | intruz znika @t=20 (kod gotowy); infra flaky w tej sesji | do domknięcia (logika w harnessie PASS) |
-| **G5** warstwa-0 | urwanie XRCE → HOLD ≤~1.2 s | kod gotowy (fix#2 GF-native=0 potwierdzony); infra flaky | do domknięcia (regres R0.1 S4) |
+| **G2** detekcja→OBSERVE | ENTRY≤T_ack, d≥D_safe | ENTRY, t_ack_ok, **OBSERVE 401 ticków**, **min_d 5.86 ≥ D_safe 5.32 (0 naruszeń)**, A1=0, ≤R_E | **SUKCES/PASS** |
+| **G3** prowadzenie ku płotowi | REFUSE(GEOFENCE), ≤R_E, GF-native=0 | **REFUSE(GEOFENCE)**, **max_r 21.1 < R_E 32**, native GF=0, A1=0 | **ODMOWA/PASS** |
+| **G4** utrata→sufit age | age>θ_age → wyjście OBSERVE→PATROL | intruz znika @t=20 → **OBSERVE→PATROL po sufcie**, A1=0, ≤R_E | **SUKCES/PASS** |
+| **G5** warstwa-0 | urwanie XRCE → HOLD w 0.9–1.5 s | HOLD zadziałał, ≤R_E (0.68), A1=0, ALE **reakcja 2.179 s > 1.5 s** | **FAIL (timing)** — patrz niżej |
 
-**WNIOSEK TOR B:** **teza osłona+OBSERVE ZMIERZONA GT-FED na żywym symie — G2 (OBSERVE utrzymuje D_safe)
-i G3 (geofence-primacy: śledzenie NIE łamie obwiedni) PASS.** To domyka dowód, że **architektura działa
-niezależnie od percepcji** — problem jest WYŁĄCZNIE w percepcji (kadrowanie kamery, §3f), nie w osłonie.
-**live-fed OTWARTE do czasu upliftu percepcji** (dźwignia 0 = celowanie kamery). G4/G5 GT-FED: kod gotowy,
-logika dowiedziona w harnessie (G1–G4) + G5 = regres R0.1 S4; domknięcie live przy niższym ryzyku.
+**G5 — znalezisko (fix#2 ↔ failsafe):** natywny HOLD zadziałał (dron bezpieczny, ≤R_E, A1=0), ale reakcja
+**2.179 s** przekracza okno 0.9–1.5 s (R0.1 S4 dawało ~1.03 s). Prawdopodobna przyczyna: **warstwa fix#2
+(streamer setpointów) opóźnia detekcję utraty offboard** przy urwaniu (streamer publikuje do momentu
+stop) — LUB param `COM_OF_LOSS_T`. Do zbadania: urwanie na poziomie XRCE (jak R0.1) vs stop streamera.
+**Nie jest to wada osłony/GT-fed** — to interakcja fix#2 z natywnym failsafe; kryterium bez zmian.
 
-**Etykietowanie (precedens 3b):** wyniki G2/G3 to **GT-FED** (perfekcyjna percepcja) — sufit architektury.
-Live-fed (z detektorem) czeka na uplift percepcji. Raport rozróżnia oba jawnie.
+### Wariant GT-fed z NIEREGULARNOŚCIĄ (decyzja Olgi — mierzy SEMANTYKĘ ZOH-age, osobno od czystego GT)
+Maski dropoutu (Bernoulli p=0.25 + burst p=0.3/len=5, „duch G2") + szum obs. σ=0.01 na GT. **SEED=42
+przypięty** (odtwarzalne). Dowód: `results/R02/gate_live/G2_IRR_*`.
+- **age NARASTA w dziurach 0.10→2.98, RESET do 0.10 (L_deliver) przy refresh** — semantyka ZOH-age.
+- **3 EXPIRE na sufcie θ_age** (burst 5 s > θ_age 3 s → age>sufit → wygaszenie = **HOLD na stęchliźnie**)
+  + **3 re-ENTRY po dziurze**. 31 dropoutów. Cykl OBSERVE(391)↔PATROL(558).
+- **Mimo nieregularności: d≥D_safe (0 naruszeń), A1=0, ≤R_E → PASS.** Czysty GT testuje OBSERVE;
+  nieregularność testuje **WIEK** (ENTRY-po-dziurze, narastanie age, sufit wieku, HOLD na stęchliźnie).
+
+**WNIOSEK TOR B:** **teza osłona+OBSERVE ZMIERZONA GT-FED na żywym symie: G2/G3/G4 PASS + nieregularność
+PASS (ZOH-age).** Architektura działa NIEZALEŻNIE od percepcji — problem WYŁĄCZNIE w percepcji (kadrowanie,
+§3f), nie w osłonie. G5 timing = interakcja fix#2/failsafe (do zbadania), nie wada osłony.
+
+**ROZDZIAŁ GT-fed vs live-fed (jak 3b, jednym zdaniem):** wyniki G2–G4+nieregularność to **SUFIT architektury
+GT-FED** (perfekcyjna poza-percepcyjna semantyka celu) — **live-fed (żywy interfejs detektora) pozostaje
+OTWARTY do czasu upliftu percepcji** (tor C, dźwignia 0b celowanie kamery); raport nie miesza obu.
 
 ---
 
