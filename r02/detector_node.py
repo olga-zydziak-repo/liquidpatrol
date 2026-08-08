@@ -31,6 +31,7 @@ from r02.target_channel import TargetChannel, Box, EV_ENTRY
 WEIGHTS = os.environ.get("YOLO_WEIGHTS", ".b0deps/weights/yolov8s-worldv2.pt")
 CH_TOPIC = "/liquidpatrol/target_channel"
 DBG_TOPIC = "/liquidpatrol/detector_debug"
+BOXES_TOPIC = "/liquidpatrol/detector_boxes"     # EKSPLORACJA: wszystkie boxy (poza torem osłony)
 
 
 def qos_be():
@@ -67,6 +68,9 @@ class DetectorNode(Node):
         self.sub = self.create_subscription(Image, image_topic, self._on_image, qos_be())
         self.pub_ch = self.create_publisher(Float32MultiArray, CH_TOPIC, 10)
         self.pub_dbg = self.create_publisher(Float32MultiArray, DBG_TOPIC, 10)
+        # EKSPLORACJA (charakteryzacja): WSZYSTKIE boxy [cx,cy,w,h,conf]*n spłaszczone. Poza torem
+        # decyzyjnym (osłona NIE subskrybuje) — tylko do pomiaru rozkładu conf/przestrzennego.
+        self.pub_boxes = self.create_publisher(Float32MultiArray, BOXES_TOPIC, 10)
         self.timer = self.create_timer(1.0 / det_hz, self._on_tick)   # kadencja detektora 1 Hz
         self.get_logger().info(f"sub={image_topic} pub={CH_TOPIC} @ {det_hz} Hz")
 
@@ -78,19 +82,20 @@ class DetectorNode(Node):
         # sim-time z nagłówka klatki (spójne z zegarem symu / determinizmem aktora)
         return self.frame_stamp if self.frame_stamp is not None else time.monotonic()
 
-    def _detect_top1(self, frame):
-        """Zwraca (Box|None). Top-1 box po AREA? NIE — po conf top-1 (najpewniejszy),
-        ALE conf NIE bramkuje publikacji ani nie wchodzi do kanału (A1/D1): conf_floor bardzo niski,
-        wybieramy 1 box o najwyższym conf, conf ląduje wyłącznie w debug/log."""
+    def _detect(self, frame):
+        """Zwraca (top1_box|None, all_boxes, nbox). all_boxes = lista (cx,cy,w,h,conf) posortowana
+        malejąco po conf. Top-1 = najwyższy conf (conf tylko do wyboru+log, NIE do kanału — A1/D1)."""
         img3 = np.stack([frame] * 3, axis=-1)   # mono→3ch (jak B0)
         res = self.model.predict(img3, imgsz=self.imgsz, conf=self.conf_floor, verbose=False)[0]
         if res.boxes is None or len(res.boxes) == 0:
-            return None, 0, None
+            return None, [], 0
         xywhn = res.boxes.xywhn.cpu().numpy()    # [cx,cy,w,h] znormalizowane
         confs = res.boxes.conf.cpu().numpy()
-        i = int(np.argmax(confs))                # top-1 = najwyższy conf (conf tylko do wyboru+log)
-        cx, cy, w, h = [float(v) for v in xywhn[i]]
-        return Box(cx, cy, w, h, conf=float(confs[i])), len(confs), float(confs[i])
+        order = np.argsort(-confs)               # malejąco po conf
+        allb = [(float(xywhn[j][0]), float(xywhn[j][1]), float(xywhn[j][2]), float(xywhn[j][3]),
+                 float(confs[j])) for j in order]
+        top = allb[0]
+        return Box(top[0], top[1], top[2], top[3], conf=top[4]), allb, len(allb)
 
     def _on_tick(self):
         if self.last_frame is None:
@@ -98,13 +103,19 @@ class DetectorNode(Node):
         if self.t0 is None:
             self.t0 = self._sim_t()
         t = self._sim_t()
-        box, nbox, conf_top1 = self._detect_top1(self.last_frame)
+        box, allb, nbox = self._detect(self.last_frame)
+        conf_top1 = box.conf if box is not None else None
         ev = self.channel.on_frame(box, t)       # zasila ZOH-age (ENTRY k=3, sufit θ_age)
         val = self.channel.sample(t)
         # publikacja kanału 5-dim (BEZ conf) — pusty gdy brak locka
         m = Float32MultiArray()
         m.data = list(val.as_tuple()) if val is not None else []
         self.pub_ch.publish(m)
+        # EKSPLORACJA: wszystkie boxy [cx,cy,w,h,conf]*n + sim_t na końcu (poza torem osłony)
+        bm = Float32MultiArray()
+        flat = [v for b in allb for v in b]
+        bm.data = flat + [float(t)]
+        self.pub_boxes.publish(bm)
         # debug/telemetria (conf ŻYJE TYLKO TU — nigdy w kanale)
         dbg = Float32MultiArray()
         dbg.data = [float(nbox), float(conf_top1 or 0.0), 1.0 if ev == EV_ENTRY else 0.0,

@@ -13,7 +13,7 @@ Uruchom (env ROS2, po starcie stacku+detektora+intruza): SCENARIO=G1..G5 python3
 Orkiestracja świeżego bootu per scenariusz: r02/run_gate_r02.sh
 """
 from __future__ import annotations
-import os, sys, json, time, math
+import os, sys, json, time, math, threading
 
 import rclpy
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
@@ -26,11 +26,13 @@ from r01.config import ALT_M, TICK_HZ, DT, R_E
 from r02.config_r02 import (D_SAFE_M, THETA_AGE_S, T_ACK_S, F_FOV, EPS_FP_PER_MIN, ChannelConfig)
 from r02.target_channel import TargetChannel, Box
 from r02.observe_guidance import ObserveController
+from r02.gate_harness import project_to_pixel   # EKSPLORACJA: projekcja GT intruza (klasyfikacja true/false)
 
 SCEN = os.environ.get("SCENARIO", "G1")
 TRACE = os.environ.get("TRACE", f"/tmp/r02/gate_{SCEN}.jsonl")
 PERIOD = DT
 CH_TOPIC = "/liquidpatrol/target_channel"
+BOXES_TOPIC = "/liquidpatrol/detector_boxes"
 
 
 def offboard_ok(fm):
@@ -61,6 +63,24 @@ class ChannelSub:
             self.locked = False     # pusty kanał = brak locka (detektor: SEARCHING/CANDIDATE/EXPIRE)
 
 
+class BoxesSub:
+    """EKSPLORACJA: subskrybent WSZYSTKICH boxów detektora [cx,cy,w,h,conf]*n + sim_t. Poza torem
+    osłony (osłona subskrybuje wyłącznie kanał 5-dim). Do pomiaru rozkładu conf/przestrzennego."""
+    def __init__(self, node):
+        self.boxes = []          # [(cx,cy,w,h,conf)]
+        self.sim_t = None
+        self.seq = 0
+        node.create_subscription(Float32MultiArray, BOXES_TOPIC, self._cb, qos_be())
+
+    def _cb(self, msg):
+        d = list(msg.data)
+        if not d:
+            self.boxes = []; self.sim_t = None; self.seq += 1; return
+        self.sim_t = d[-1]; flat = d[:-1]
+        self.boxes = [tuple(flat[i:i+5]) for i in range(0, len(flat) - 4, 5)]
+        self.seq += 1
+
+
 class Runner:
     def __init__(self, laps):
         os.makedirs(os.path.dirname(TRACE), exist_ok=True)
@@ -76,7 +96,12 @@ class Runner:
         self.k = 0
         self.max_radial = 0.0
         self._last_pub = None; self.setpoint_max_dt = 0.0
-        self.gf_fired = False
+        # fix #2: setpoint w OSOBNYM WĄTKU o stałym takcie (odsprzężony od pętli decyzji/kanału),
+        # by kontencja CPU detektora nie głodziła strumienia → brak natywnego HOLD z utraty offboard.
+        self._sp_lock = threading.Lock(); self._latest_sp = None
+        self._stream_stop = threading.Event(); self._stream_thread = None
+        self._stream_last = None; self.stream_max_dt = 0.0; self.stream_pub_count = 0
+        self.gf_fired = False; self.offboard_lost_ticks = 0
         self.n_entry = 0; self.n_false_entry = 0
         self.observe_ticks = 0; self.dsafe_violations = 0; self.min_d_observe = float("inf")
         self.entry_t = None; self.intruder_present = False; self.intruder_in_view_t = None
@@ -89,11 +114,46 @@ class Runner:
         return rec
 
     def _pub(self, xyz):
+        # pętla decyzji NIE publikuje bezpośrednio — tylko aktualizuje setpoint; publikuje streamer.
         now = time.monotonic()
         if self._last_pub is not None:
-            self.setpoint_max_dt = max(self.setpoint_max_dt, now - self._last_pub)
+            self.setpoint_max_dt = max(self.setpoint_max_dt, now - self._last_pub)  # takt decyzji (info)
         self._last_pub = now
-        self.xrce.publish_setpoint(xyz)
+        self._set_sp(xyz)
+
+    def _set_sp(self, xyz):
+        with self._sp_lock:
+            self._latest_sp = [float(xyz[0]), float(xyz[1]), float(xyz[2])]
+
+    def _streamer(self):
+        """Wątek fix #2: publikuje OSTATNI setpoint (OCM+TrajectorySetpoint) przy STAŁYM 20 Hz,
+        niezależnie od stalli pętli decyzyjnej/detektora. Mierzy realny takt (stream_max_dt)."""
+        nxt = time.monotonic()
+        try: os.nice(-5)                       # łagodny RT-bias (bez uprawnień = no-op)
+        except Exception: pass
+        while not self._stream_stop.is_set():
+            with self._sp_lock:
+                sp = None if self._latest_sp is None else list(self._latest_sp)
+            if sp is not None:
+                now = time.monotonic()
+                if self._stream_last is not None:
+                    self.stream_max_dt = max(self.stream_max_dt, now - self._stream_last)
+                self._stream_last = now; self.stream_pub_count += 1
+                try: self.xrce.publish_setpoint(sp)
+                except Exception: pass
+            nxt += PERIOD
+            slp = nxt - time.monotonic()
+            if slp > 0: time.sleep(slp)
+            else: nxt = time.monotonic()       # spóźnieni → reset harmonogramu (bez kumulacji)
+
+    def start_streamer(self):
+        if self._stream_thread is None:
+            self._stream_stop.clear()
+            self._stream_thread = threading.Thread(target=self._streamer, daemon=True)
+            self._stream_thread.start()
+
+    def stop_streamer(self):
+        self._stream_stop.set()
 
     def _spin(self):
         rclpy.spin_once(self.xrce.node, timeout_sec=0.0)
@@ -139,9 +199,10 @@ class Runner:
                     self.dsafe_violations += 1
         if watch_gf and self.mav.armed and not offboard_ok(self.mav.flight_mode) and self.mav.flight_mode:
             self.gf_fired = True
+            self.offboard_lost_ticks += 1        # fix #2 metryka: ticki poza OFFBOARD w patrolu
         rec = {"k": self.k, "t": round(time.time()-self.t0, 3), "decision": d["decision"],
                "reason": d["reason"], "rule": d["rule"], "mode": mode, "locked": locked,
-               "age": self.chan.age, "pos": [round(v, 2) for v in pos],
+               "age": self.chan.age, "pos": [round(v, 2) for v in pos], "yaw": round(self.mav.yaw, 3),
                "applied": [round(v, 2) for v in d["applied"]], "r_pos": round(math.hypot(pos[0], pos[1]), 2),
                "flight_mode": self.mav.flight_mode, "min_d": None if self.min_d_observe==float("inf") else round(self.min_d_observe,2)}
         self.tf.write(json.dumps(rec) + "\n")
@@ -157,25 +218,28 @@ class Runner:
         if not self.mav.wait_ready(30):
             print("[gate] BRAK health — STOP"); self._abort(); sys.exit(2)
         self.t0 = time.time(); self.start = list(self.mav.pos)
-        for _ in range(int(TICK_HZ * 1.5)):
-            self.xrce.publish_setpoint((self.start[0], self.start[1], -ALT_M)); time.sleep(PERIOD)
+        # fix #2: uruchom streamer (stały 20 Hz) ZANIM offboard — strumień żyje niezależnie od pętli
+        self._set_sp((self.start[0], self.start[1], -ALT_M)); self.start_streamer()
+        time.sleep(1.5)                                    # prestream (streamer publikuje)
         self.xrce.set_offboard_mode(); time.sleep(0.2); self.mav.arm()
         t = time.time()
         while not self.mav.armed and time.time()-t < 5:
-            self.xrce.publish_setpoint((self.start[0], self.start[1], -ALT_M)); time.sleep(PERIOD)
+            time.sleep(PERIOD)
         tc = time.time()
         while time.time()-tc < 15:
-            self.xrce.publish_setpoint((self.start[0], self.start[1], -ALT_M)); time.sleep(PERIOD)
+            time.sleep(PERIOD)
             if abs(self.mav.pos[2] - (-ALT_M)) < 1.0:
                 break
         self.mav.reset_tel_gap()
-        print(f"[gate] armed={self.mav.armed} down={self.mav.pos[2]:.1f} fm={self.mav.flight_mode}")
+        print(f"[gate] armed={self.mav.armed} down={self.mav.pos[2]:.1f} fm={self.mav.flight_mode} "
+              f"stream_pub={self.stream_pub_count}")
 
     def _abort(self):
         try: self.mav.stop(); self.xrce.shutdown()
         except Exception: pass
 
     def finish(self, summary):
+        self.stop_streamer()
         self.tf.write(json.dumps({"SCENARIO_RESULT": summary}) + "\n"); self.tf.close()
         print("[gate] RESULT:", json.dumps(summary, ensure_ascii=False))
         self.mav.stop(); self.xrce.shutdown()
@@ -283,6 +347,7 @@ def scenario_G5(r: Runner):
     while time.time()-t_fly < 8:
         r.tick(); time.sleep(PERIOD)
     print("[gate] G5: URWANIE strumienia XRCE (test warstwy-0 mimo OBSERVE)")
+    r.stop_streamer()                            # fix #2: prawdziwe urwanie = zatrzymaj streamer
     r.tf.write(json.dumps({"EVENT":"stream_cut","t":round(time.time()-r.t0,3),
                            "flight_mode":r.mav.flight_mode})+"\n")
     t_cut = time.time(); react_s = None; max_r_after = 0.0
@@ -302,10 +367,66 @@ def scenario_G5(r: Runner):
     return crit["PASS"]
 
 
+def scenario_CHAR(r: Runner):
+    """EKSPLORACJA (poza pre-rejestracją, kryteria NIETKNIĘTE): nominalny patrol N okrążeń z intruzem
+    statycznym w znanym miejscu (GT). Loguje WSZYSTKIE boxy detektora z klasyfikacją true/false (vs
+    projekcja GT) + edge_dist + conf. Cel: rozkład conf i przestrzenny szumu vs sygnału na CAŁYM locie.
+    ALSO: dowód fix #2 (0 utrat OFFBOARD w patrolu, GF-native=0, stream_max_dt). OBSERVE WYŁĄCZONE
+    (observe_authority off) — czysty patrol, brak wpływu fałszywych locków na tor."""
+    gt = os.environ.get("CHAR_INTRUDER", "25,0,6").split(",")
+    gx, gy, gz = float(gt[0]), float(gt[1]), float(gt[2])
+    intr_ned = (gx, gy, -gz)                      # NED (down = -alt)
+    r.admit_observe(False); r.intruder_present = True   # patrol, bez autorytetu OBSERVE
+    boxes_sub = BoxesSub(r.xrce.node)
+    charf = open(os.environ.get("CHAR_LOG", "/tmp/r02/CHAR/char.jsonl"), "w")
+    r.bring_up()
+    last_seq = -1; n_frames = 0; n_true = 0; n_false = 0
+    laps_target = r.planner.laps
+    while not r.planner.done and time.time()-r.t0 < 400:
+        r.tick(force_mode=M_PATROL)              # wymuś patrol (bez OBSERVE)
+        r.planner.advance_if_reached(list(r.mav.pos))
+        if boxes_sub.seq != last_seq:            # nowa klatka detektora (1 Hz)
+            last_seq = boxes_sub.seq; n_frames += 1
+            pos = list(r.mav.pos); yaw = r.mav.yaw
+            exp = project_to_pixel(pos, yaw, intr_ned)   # Box|None (GT w FOV?)
+            in_fov = exp is not None
+            recs = []
+            for (cx, cy, w, h, conf) in boxes_sub.boxes:
+                edge = min(cx, 1.0 - cx, cy, 1.0 - cy)
+                is_true = bool(in_fov and math.hypot(cx - exp.cx, cy - exp.cy) < 0.12)
+                if is_true: n_true += 1
+                else: n_false += 1
+                recs.append({"cx": round(cx, 4), "cy": round(cy, 4), "w": round(w, 4),
+                             "h": round(h, 4), "conf": round(conf, 5), "edge": round(edge, 4),
+                             "true": is_true})
+            charf.write(json.dumps({"t": round(time.time()-r.t0, 2), "pos": [round(v,2) for v in pos],
+                        "yaw": round(yaw, 3), "in_fov": in_fov,
+                        "exp": [round(exp.cx,4), round(exp.cy,4)] if exp else None,
+                        "nbox": len(recs), "boxes": recs}) + "\n")
+        time.sleep(PERIOD)
+    charf.close()
+    o = r.shield.outcome(env_success=r.planner.done)
+    crit = {"laps_done": r.planner.lap, "laps_target": laps_target,
+            "char_frames": n_frames, "char_true_boxes": n_true, "char_false_boxes": n_false,
+            # fix #2 dowód:
+            "offboard_lost_ticks": r.offboard_lost_ticks, "gf_native_0": r.offboard_lost_ticks == 0,
+            "stream_max_dt": round(r.stream_max_dt, 3), "stream_dt_ok": r.stream_max_dt < 1.0,
+            "stream_pub": r.stream_pub_count, "A1_ok": len(r.mav.motion_cmds()) == 0,
+            "max_r": round(r.max_radial, 2), "inside_R_E": r.max_radial <= R_E, "outcome": o["wynik"]}
+    # CHAR PASS = dowód fix #2 (patrol OK, brak transientu HOLD); charakteryzacja to dane, nie werdykt
+    crit["PASS"] = (crit["gf_native_0"] and crit["stream_dt_ok"] and crit["A1_ok"]
+                    and crit["inside_R_E"] and r.planner.done)
+    r.mav.rtl(); time.sleep(6); r.mav.land(); time.sleep(2)
+    r.finish({"scenario": "CHAR", **crit, "char_log": os.environ.get("CHAR_LOG", "/tmp/r02/CHAR/char.jsonl"),
+              "mavsdk_calls": [c for c, _ in r.mav.calls]})
+    return crit["PASS"]
+
+
 def main():
-    laps = {"G1": 3, "G2": 1, "G3": 3, "G4": 2, "G5": 1}[SCEN]
+    laps = {"G1": 3, "G2": 1, "G3": 3, "G4": 2, "G5": 1, "CHAR": 3}[SCEN]
     r = Runner(laps)
-    fn = {"G1": scenario_G1, "G2": scenario_G2, "G3": scenario_G3, "G4": scenario_G4, "G5": scenario_G5}[SCEN]
+    fn = {"G1": scenario_G1, "G2": scenario_G2, "G3": scenario_G3, "G4": scenario_G4,
+          "G5": scenario_G5, "CHAR": scenario_CHAR}[SCEN]
     ok = fn(r)
     sys.exit(0 if ok else 3)
 

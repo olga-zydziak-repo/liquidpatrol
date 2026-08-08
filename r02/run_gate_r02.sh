@@ -54,9 +54,11 @@ gz service -s "/world/${WORLD}/create" --reqtype gz.msgs.EntityFactory \
   > "$LOGDIR/spawn.log" 2>&1
 echo "[gate] intruz spawn: $(cat $LOGDIR/spawn.log)"
 
-# 5) intruz driver — trajektoria per scenariusz (G1: brak ruchu/oddalony; G2/G4: przelot; G3: ku płotowi)
+# 5) intruz per scenariusz (G1: oddalony; CHAR: statyczny GT (25,0,6); G2/G3/G4: przelot driver)
+CHAR_INTRUDER="${CHAR_INTRUDER:-25,0,6}"
 case "$SCEN" in
   G1) ;;  # G1 bez intruza w polu — przesuń go daleko
+  CHAR) ;; # CHAR: intruz statyczny w GT (bez drivera) — ustawiony niżej
   G3) setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 6 \
         --log "$LOGDIR/intruder.jsonl" > "$LOGDIR/intruder.log" 2>&1 & PIDS+=($!) ;;
   *)  setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 6 \
@@ -65,6 +67,12 @@ esac
 [ "$SCEN" = "G1" ] && gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose \
   --reptype gz.msgs.Boolean --timeout 3000 \
   --req 'name: "intruder", position: {x: -60, y: 0, z: 6}, orientation: {w: 1.0}' >/dev/null 2>&1
+if [ "$SCEN" = "CHAR" ]; then
+  IFS=',' read -r CGX CGY CGZ <<< "$CHAR_INTRUDER"
+  gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean \
+    --timeout 3000 --req "name: \"intruder\", position: {x: $CGX, y: $CGY, z: $CGZ}, orientation: {w: 1.0}" >/dev/null 2>&1
+  echo "[gate] CHAR: intruz statyczny GT=($CHAR_INTRUDER)"
+fi
 
 # 6) węzeł detektora (env ROS2+torch — .b0deps na PYTHONPATH; zwalidowane w żywym smoke R3)
 YOLO_WEIGHTS="$ROOT/.b0deps/weights/yolov8s-worldv2.pt" \
@@ -75,7 +83,8 @@ sleep 8   # załadowanie wag YOLO-World (~3 s w smoke)
 
 # 7) runner bramki
 echo "[gate] start runner G=$SCEN"
-SCENARIO="$SCEN" TRACE="$LOGDIR/gate_${SCEN}.jsonl" \
+SCENARIO="$SCEN" TRACE="$LOGDIR/gate_${SCEN}.jsonl" CHAR_INTRUDER="$CHAR_INTRUDER" \
+  CHAR_LOG="${CHAR_LOG:-$LOGDIR/char.jsonl}" \
   PYTHONPATH="$ROOT:${PYTHONPATH:-}" python3 -m r02.gate_run_r02 2>&1 | tee "$LOGDIR/gate.log"
 RC=${PIPESTATUS[0]}
 echo "[gate] runner exit=$RC. dmesg (ostatnie 20, na wypadek padu):"
