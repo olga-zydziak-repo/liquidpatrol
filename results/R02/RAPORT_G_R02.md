@@ -320,6 +320,49 @@ cudzy proces (nie-LiquidPatrol: `.venv`, `/home/olga/fabryka/`) zajmuje GPU, **c
 
 ---
 
+## 3e. G2 W LOCIE → **A7 R2-alt TRIGGER ODPALONY** (porażka detekcji w kopercie)
+
+Po riderach wszedłem w G2 (świeży boot, intruz statyczny w kopercie A7, dron HOVER w Home twarzą N).
+**2 niezależne loty (G2a, G2b), intruz POTWIERDZONY na (7,0,11.5)** (`gz model -p` — set_pose OK, NIE bug).
+Dowody: `results/R02/gate_live/G2{a,b}_*`, `G2_intruder_pose_confirmed.log`.
+
+| | G2a | G2b |
+|---|---|---|
+| n_entry / PASS / outcome | 0 / **False** / PORAZKA | 0 / **False** / PORAZKA |
+| **conf_max sygnału (pasywny log)** | **0.0456** (n=202) | **0.0475** (n=181) |
+| n_admitted_entry | 0 | 0 |
+| max_r (hover w Home) | 1.14 | 0.48 |
+| pad (dmesg) | brak | brak |
+
+**Wynik: detektor NIE wykrywa intruza nad θ_conf w LOCIE.** conf sygnału ~**0.045–0.047** (≈ poziom szumu)
+≪ θ_conf 0.1635 → **0 admisji ENTRY → brak OBSERVE → G2 PORAZKA.** Intruz poprawnie w kopercie (7 m,
+elewacja 12°, tło nieba) — to **GENUINE porażka detekcji, nie geometrii/setupu**.
+
+**ZNALEZISKO KLUCZOWE — statyczna charakteryzacja NIE przeniosła się na LOT (4×):** SWEEP statyczny
+(dron na ziemi) dawał **0.169–0.214 @ 5–9 m**; **LOT (dron alt 10) daje 0.045** przy tej samej geometrii
+względnej. Prawdopodobna przyczyna: **pitch/attitude kamery w zawisie** (multirotor przechyla się dla
+utrzymania pozycji → kamera-forward odchyla się od intruza przy 12° w górę) + warunki lotu. **Koperta A7
+zmierzona statycznie była OPTYMISTYCZNA** — nie obowiązuje w locie. **θ_conf (0.1635, z sweepu
+statycznego) NIE transferuje** — sygnał lotu (0.045) jest pod progiem.
+
+**To DOKŁADNIE nazwany trigger A7:** „porażki detekcji wewnątrz koperty w G2". Rider 1 (micro-sanity)
+PRE-WSKAZAŁ to (migotanie conf ~θ_conf przy 13° statycznie); **G2 POTWIERDZIŁ w locie** (conf 0.045 ≪ θ_conf).
+
+### Konsekwencja: STOP + eskalacja R2-alt (osobny PRE) — NIE strojenie θ_conf
+Per A7: trigger → **osobny PRE z detektorem jednoklasowym, projekt ANTY-CYRKULARNY** (trening na renderach
+INNEJ sceny/tekstur niż scena bramki). **NIE obniżam θ_conf** (wpuściłby szum; zakaz strojenia progu).
+**Dodatkowy wymóg dla R2-alt (nauka G2):** charakteryzacja detektora **W LOCIE** (nie statycznie) — koperta
+musi być mierzona w warunkach zawisu/attitude kamery, bo statyczna jest optymistyczna.
+
+### Co JEST dowiedzione (teza osłona+OBSERVE — LOGIKA, nie live)
+Teza **osłona+OBSERVE nie jest zmierzona live** — bo detekcja pada u ŹRÓDŁA (wejście łańcucha). ALE:
+- **Logika G1–G4** (osłona 7-liści + kanał ZOH-age + OBSERVE): **PASS** (harness na prawdziwym kodzie).
+- **Certy** P1(7 liści)/P5(7/7)/P4/P2: **PASS**. **ε_FP=0 w locie** (G1(A6) PASS, gap_held).
+- **fix#2** (setpoint w wątku): PASS (GF-native=0). **A1=0**, geofence-nadrzędność, 0 padów — utrzymane.
+Brakuje wyłącznie **wiarygodnej detekcji w locie** — to R2-alt, nie wada architektury osłony.
+
+---
+
 ## 4. G5 — warstwa-0 (natywny failsafe)
 
 G5 = regres R0.1 **S4** (urwanie strumienia XRCE → natywna reakcja HOLD ≤~1.2 s przez PX4
@@ -390,12 +433,14 @@ deterministyczny, wyłącznie ENTRY-admisja, kanał/osłona/P1/P5 bez conf, komb
 (szum lotu max 0.0806 ≪ θ_conf 0.1635), A1=0, GF-native=0 (fix#2), 3 okr., SUKCES. **ε_FP DOMKNIĘTE w locie;
 trigger R2-alt NIE odpalony.**
 
-**G2–G5 (teza osłona+OBSERVE) — GOTOWE w kopercie A7, loty czekają na GPU:** geometria przeprojektowana
-(`INTRUDER_ALT_M=14` — intruz POWYŻEJ patrolu: godzi tło NIEBA (detekcja) + paralaksę (bearing-only);
-harness G1–G4 PASS z nową geometrią). Orkiestracja intruz z=14. **Loty odroczone — GPU ponownie zajęte
-~10 GB przez sesję `/home/olga/fabryka/`; NIE konkuruję, NIE ubijam** (higiena współdzielenia). G2–G5
-świeży boot per scenariusz wykonają się gdy GPU wolne. Commity: `bab52bd` (aneksy), `571f348` (impl A6),
-`d75a882` (G1 PASS w locie), `4e0401f` (redesign A7). Push: Olga.
+**G2 W LOCIE → A7 R2-alt TRIGGER ODPALONY (§3e).** Ridery: D_safe→3D 7 m; **micro-sanity (rider 1) znalazł
+2 rozbieżności optyki** (alt 14/34.8° top-edge → dostosowano alt 11.5/13°; conf migocze ~θ_conf). **G2
+(2 loty, intruz potwierdzony w kopercie): PORAZKA — conf sygnału w LOCIE 0.045–0.047 ≪ θ_conf 0.1635 →
+0 ENTRY.** Statyczny sweep (0.169) NIE przeniósł się na lot (4×, pitch kamery). **To nazwany trigger A7 →
+osobny PRE R2-alt (detektor jednoklasowy, anty-cyrkularny, charakteryzacja W LOCIE). NIE stroję θ_conf.**
+**Teza osłona+OBSERVE:** LOGIKA dowiedziona (harness G1–G4, certy, ε_FP=0 w locie, fix#2), ale **nie
+zmierzona live — detekcja pada u źródła.** To R2-alt, nie wada osłony. Commity: `bab52bd`/`571f348`/`d75a882`
+/`4e0401f`/`1b43519`/`724974a`. **Decyzja (R2-alt PRE) i push: Olga.**
 
 ## 9. STOP — z rekomendacją i decyzją do Olgi (A2/SR-5) [iteracja 1–2, historyczne]
 Blok R3→R4→re-cert **dowiedziony** (certy PASS, logika G1–G4 PASS, żywy łańcuch R3 PASS). **Latający G1

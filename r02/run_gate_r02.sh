@@ -60,14 +60,26 @@ CHAR_INTRUDER="${CHAR_INTRUDER:-25,0,6}"
 case "$SCEN" in
   G1) ;;  # G1 bez intruza w polu — przesuń go daleko
   CHAR|CHAR2) ;; # intruz statyczny w GT (bez drivera) — ustawiony niżej
-  G3) setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 14 \
+  G2) ;;  # G2 intruz STATYCZNY w polu N drona @~7m alt11.5 (koperta A7) — set_pose niżej
+  G3) setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 11.5 \
         --log "$LOGDIR/intruder.jsonl" > "$LOGDIR/intruder.log" 2>&1 & PIDS+=($!) ;;
-  *)  setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 14 \
+  *)  setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 11.5 \
         --log "$LOGDIR/intruder.jsonl" > "$LOGDIR/intruder.log" 2>&1 & PIDS+=($!) ;;
 esac
 [ "$SCEN" = "G1" ] && gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose \
   --reptype gz.msgs.Boolean --timeout 3000 \
   --req 'name: "intruder", position: {x: -60, y: 0, z: 6}, orientation: {w: 1.0}' >/dev/null 2>&1
+# G2: intruz statyczny w polu Północ drona (7,0,11.5) — koperta A7 (3D~7m, elewacja~12°, tło nieba)
+if [ "$SCEN" = "G2" ]; then
+  for try in 1 2 3; do
+    gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean \
+      --timeout 3000 --req 'name: "intruder", position: {x: 7, y: 0, z: 11.5}, orientation: {w: 1.0}' >/dev/null 2>&1
+    sleep 1
+  done
+  # WERYFIKACJA pozy (bug: set_pose bywa ignorowane zaraz po spawnie)
+  gz topic -e -t "/world/${WORLD}/dynamic_pose/info" -n 1 2>/dev/null | grep -A5 'name: "intruder"' | grep -E "x:|y:|z:" | head -3 > "$LOGDIR/intruder_pose.log"
+  echo "[gate] G2 intruz poza: $(tr '\n' ' ' < $LOGDIR/intruder_pose.log)"
+fi
 if [ "$SCEN" = "CHAR" ] || [ "$SCEN" = "CHAR2" ]; then
   IFS=',' read -r CGX CGY CGZ <<< "$CHAR_INTRUDER"
   gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean \

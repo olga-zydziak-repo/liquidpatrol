@@ -109,6 +109,7 @@ class Runner:
         self.observe_ticks = 0; self.dsafe_violations = 0; self.min_d_observe = float("inf")
         self.entry_t = None; self.intruder_present = False; self.intruder_in_view_t = None
         self._prev_locked = False
+        self.idle_sp = None            # gdy ustawiony: setpoint utrzymania (hover) zamiast patrolu gdy nie-locked
 
     def admit_observe(self, on=True):
         """Autorytet OBSERVE przez gramatykę (P4) — 'observe on/off' (§2.4, default on)."""
@@ -207,6 +208,8 @@ class Runner:
             sp = self.ctrl.setpoint(pos) or self.planner.target()
         elif force_mode is not None:
             mode = force_mode; sp = self.planner.target()
+        elif self.idle_sp is not None:
+            mode = M_PATROL; sp = list(self.idle_sp)   # hover na intruzie (dwell do ENTRY), nie patrol
         else:
             mode = M_PATROL; sp = self.planner.target()
 
@@ -296,6 +299,8 @@ def scenario_G2(r: Runner):
     """Intruz wchodzi w FOV → ENTRY≤T_ack → OBSERVE, d≥D_safe, cel w FOV ≥ f_fov."""
     r.admit_observe(True); r.intruder_present = True
     r.bring_up()
+    # G2: dron HOVER w Home (twarzą N na statycznego intruza w kopercie A7) do ENTRY, potem OBSERVE
+    r.idle_sp = [r.start[0], r.start[1], -ALT_M]
     while time.time()-r.t0 < 60:
         r.tick()
         if r.observe_ticks > int(20*TICK_HZ):   # ~20 s obserwacji wystarczy
