@@ -361,14 +361,19 @@ INTRUDER_ALT=6. Ostateczny freeze liczb = decyzja Olgi. Żaden próg NIE jest pr
   To nadgorliwość — powinienem był obejść. Zgłaszam. (Skutek dla decyzji: zrezygnowałem z CHAR2, by nie
   eskalować obciążenia współdzielonej maszyny — stąd rzadki rozkład sygnału, ograniczenie §3b #4.)
 
-## 9bis. STOP iteracji 3 (aneksy A6/A7 + implementacja A6)
+## 9bis. STOP iteracji 3 (A6 zamknięte w locie; G2–G5 gotowe w kopercie A7, czekają na GPU)
 Ratyfikacja Olgi naniesiona (A6/A7, `PRE_R02.md §0bis`). **A6 conf-floor zaimplementowany** (θ_conf=0.1635
 deterministyczny, wyłącznie ENTRY-admisja, kanał/osłona/P1/P5 bez conf, kombinacja z edge-margin, testy
-28/28 PASS) + **pasywne logowanie conf** w runnerze. **ε_FP=0 — dowód analityczny** (θ_conf 0.1635 > szum
-max 0.158 → 0 admisji; < sygnał 0.169 → detekcja zachowana). **Żywy re-run G1 ODROCZONY** — GPU zajęte
-~11.5 GB przez inną sesję (`/home/olga/fabryka/`); **nie konkuruję, nie ubijam**. Runner gotowy → wykona
-się gdy GPU wolne. **Następna dźwignia: G2–G5 wewnątrz koperty A7 (teza osłona+OBSERVE).** Commit per krok
-(aneksy `bab52bd`, impl `571f348`). Push: Olga.
+28/28) + **pasywne logowanie conf**. **G1(A6) re-run W LOCIE → PASS** (§3d): **ε_FP=0** (0/min), **gap_held=TRUE**
+(szum lotu max 0.0806 ≪ θ_conf 0.1635), A1=0, GF-native=0 (fix#2), 3 okr., SUKCES. **ε_FP DOMKNIĘTE w locie;
+trigger R2-alt NIE odpalony.**
+
+**G2–G5 (teza osłona+OBSERVE) — GOTOWE w kopercie A7, loty czekają na GPU:** geometria przeprojektowana
+(`INTRUDER_ALT_M=14` — intruz POWYŻEJ patrolu: godzi tło NIEBA (detekcja) + paralaksę (bearing-only);
+harness G1–G4 PASS z nową geometrią). Orkiestracja intruz z=14. **Loty odroczone — GPU ponownie zajęte
+~10 GB przez sesję `/home/olga/fabryka/`; NIE konkuruję, NIE ubijam** (higiena współdzielenia). G2–G5
+świeży boot per scenariusz wykonają się gdy GPU wolne. Commity: `bab52bd` (aneksy), `571f348` (impl A6),
+`d75a882` (G1 PASS w locie), `4e0401f` (redesign A7). Push: Olga.
 
 ## 9. STOP — z rekomendacją i decyzją do Olgi (A2/SR-5) [iteracja 1–2, historyczne]
 Blok R3→R4→re-cert **dowiedziony** (certy PASS, logika G1–G4 PASS, żywy łańcuch R3 PASS). **Latający G1
