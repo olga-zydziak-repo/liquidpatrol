@@ -250,14 +250,41 @@ Czysty separator to **próg conf**, bo chmury rozdziela GAP DYSTRYBUCYJNY (nie p
   na CAŁYM zasięgu detekowalnym OBSERVE (5–10 m); powyżej 10 m sygnał<próg, ale tam detektor i tak nie
   widzi (poza obwiednią OBSERVE, akceptowalne). Margines cienki (0.16↔0.169) → conf-floor **z edge-margin**
   (który zdejmuje krawędziowe conf-outliery do 0.108) daje zapas.
-- **To rewizja A1/D1** (conf wchodzi do ENTRY-admisji — UPSTREAM kanału, **P1/P5 nietknięte**, osłona nadal
-  bez conf). Zgodnie z Twoją instrukcją: **conf-floor NIE zaimplementowany — STOP, czeka na re-ratyfikację.**
-- **Nie re-runuję G1** tą iterację: ε_FP=0 nie jest osiągnięte bez conf-floor (C sam nie domyka), a re-run
-  z fragile-C tylko potwierdziłby residual. G1 re-run = po ratyfikacji conf-floor (następna iteracja).
+- **To rewizja A1/D1** (conf w ENTRY-admisji — UPSTREAM kanału, **P1/P5 nietknięte**, osłona bez conf).
+  **[STATUS iter.3: RATYFIKOWANE jako R02-A6 + zaimplementowane — patrz §3d.]** (Powyższy akapit iter.2
+  był wnioskiem PRZED ratyfikacją.)
 
 **Uwaga wyższego rzędu:** wąski zasięg detektora (~10 m) i cienki margines (0.158↔0.169) to **ograniczenie
 DETEKTORA** (zero-shot mono). Alternatywa: detektor dostrojony/jednoklasowy (R2-alt) — większy zakres,
 osobna decyzja. Rdzeń uczony (GRU/CfC) nadal NIE dotyczy (to detekcja, nie kanał ZOH-age; SR-4 zamknięty).
+
+---
+
+## 3d. Iteracja 3 — aneksy A6/A7 ratyfikowane + implementacja A6 + ε_FP=0 (analitycznie); żywy re-run ODROCZONY
+
+Olga **ratyfikowała** conf-floor jako **R02-A6** (+ **A7** koperta detekcji) — `PRE_R02.md §0bis`. Zaimplementowano:
+- **A6 conf-floor `θ_conf`** — DERYWACJA DETERMINISTYCZNA (reguła w kodzie, nie ręczna):
+  `θ_conf = (sygnał_min 0.169 + szum_centr_max 0.158)/2 = 0.1635` (środek przerwy). **WYŁĄCZNIE
+  ENTRY-admisja** (`target_channel` ścieżka unlocked); **conf NIGDY w wartości kanału 5-dim, osłonie,
+  P1/P5** (A1/D1 stoją). **Kombinacja z edge-margin 0.10.** Testy jednostkowe **PASS** (28/28).
+- **Pasywne logowanie conf (A6)** w KAŻDYM locie bramkowym (`Runner.conf_report`: max/p99/n_admitted/
+  gap_held) — raport bramki pokaże, czy przerwa 0.158↔0.169 utrzymała się w locie.
+
+**ε_FP=0 — dowód ANALITYCZNY z ratyfikowanej reguły i zmierzonych chmur:**
+`θ_conf = 0.1635 > szum_centralny_max = 0.158` (z konstrukcji: środek przerwy) → **żaden box szumu nie
+przechodzi admisji ENTRY → 0 admisji → ε_FP=0** (dla zmierzonego rozkładu szumu, N=625). Jednocześnie
+`θ_conf = 0.1635 < sygnał_min = 0.169` → **sygnał operacyjny przechodzi → detekcja zachowana**. Status
+prowizoryczny (A4): żywy lot ma potwierdzić, że przerwa się utrzymała (pasywny log).
+
+**Żywy re-run G1 — ODROCZONY (jawnie, z powodu zewnętrznego):** GPU (12 GB) jest zajęte ~11.5 GB przez
+**INNĄ równoległą sesję** (`/home/olga/fabryka/ eval_after_epoch.py`/`train_epoch1.py`, snapshot bash).
+Zostało ~0.7 GB → boot symu+detektora (~2.5 GB) = **OOM**. **NIE konkuruję o GPU ani nie ubijam cudzej
+pracy** (wcześniej omyłkowo ubiłem `train_epoch1.py` — §8; teraz świadomie nie powtarzam). Runner +
+orkiestracja + pasywny log **gotowe** — G1 re-run wykona się gdy GPU zwolni. Werdykt: **ε_FP=0
+analitycznie z ratyfikowanej reguły; potwierdzenie w locie oczekuje na zasób.**
+
+**Higiena współdzielenia (nauka):** przed każdym bootem sprawdzam headroom i **compute-apps** — jeśli
+cudzy proces (nie-LiquidPatrol: `.venv`, `/home/olga/fabryka/`) zajmuje GPU, **czekam, nie ubijam**.
 
 ---
 
@@ -324,7 +351,16 @@ INTRUDER_ALT=6. Ostateczny freeze liczb = decyzja Olgi. Żaden próg NIE jest pr
   To nadgorliwość — powinienem był obejść. Zgłaszam. (Skutek dla decyzji: zrezygnowałem z CHAR2, by nie
   eskalować obciążenia współdzielonej maszyny — stąd rzadki rozkład sygnału, ograniczenie §3b #4.)
 
-## 9. STOP — z rekomendacją i decyzją do Olgi (A2/SR-5)
+## 9bis. STOP iteracji 3 (aneksy A6/A7 + implementacja A6)
+Ratyfikacja Olgi naniesiona (A6/A7, `PRE_R02.md §0bis`). **A6 conf-floor zaimplementowany** (θ_conf=0.1635
+deterministyczny, wyłącznie ENTRY-admisja, kanał/osłona/P1/P5 bez conf, kombinacja z edge-margin, testy
+28/28 PASS) + **pasywne logowanie conf** w runnerze. **ε_FP=0 — dowód analityczny** (θ_conf 0.1635 > szum
+max 0.158 → 0 admisji; < sygnał 0.169 → detekcja zachowana). **Żywy re-run G1 ODROCZONY** — GPU zajęte
+~11.5 GB przez inną sesję (`/home/olga/fabryka/`); **nie konkuruję, nie ubijam**. Runner gotowy → wykona
+się gdy GPU wolne. **Następna dźwignia: G2–G5 wewnątrz koperty A7 (teza osłona+OBSERVE).** Commit per krok
+(aneksy `bab52bd`, impl `571f348`). Push: Olga.
+
+## 9. STOP — z rekomendacją i decyzją do Olgi (A2/SR-5) [iteracja 1–2, historyczne]
 Blok R3→R4→re-cert **dowiedziony** (certy PASS, logika G1–G4 PASS, żywy łańcuch R3 PASS). **Latający G1
 FAIL na ε_FP** (wynik NEGATYWNY, SR-5) — werdykt G1 **NIETKNIĘTY**. Zgodnie z decyzją Olgi (nie zamykamy
 na A — teza osłona+OBSERVE niezmierzona, bo G2–G5 słusznie nie poleciały) wykonano:
