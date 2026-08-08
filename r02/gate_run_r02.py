@@ -13,7 +13,7 @@ Uruchom (env ROS2, po starcie stacku+detektora+intruza): SCENARIO=G1..G5 python3
 Orkiestracja świeżego bootu per scenariusz: r02/run_gate_r02.sh
 """
 from __future__ import annotations
-import os, sys, json, time, math, threading
+import os, sys, json, time, math, threading, random
 
 import rclpy
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
@@ -118,7 +118,15 @@ class Runner:
         # TOR B — GT-FED: lokalny kanał zasilany pozą GT (bez detektora/kamery)
         self.gt_mode = GT_FED
         self.gt_channel = TargetChannel(ChannelConfig()) if GT_FED else None
-        self.gt_next = 0.0; self.gt_intruder_fn = None; self.gt_noise = 0.0
+        self.gt_next = 0.0; self.gt_intruder_fn = None
+        # NIEREGULARNOŚĆ GT (decyzja Olgi — jedyny sposób zmierzyć semantykę ZOH-age): maski dropoutu
+        # (Bernoulli + burst) + szum obserwacyjny na GT. SEEDY PRZYPIĘTE (odtwarzalne). Wynik OSOBNO od czystego GT.
+        self.gt_rng = random.Random(int(os.environ.get("GT_SEED", "1")))
+        self.gt_dropout_p = float(os.environ.get("GT_DROPOUT", "0.0"))   # Bernoulli p pojedynczej dziury
+        self.gt_burst_p = float(os.environ.get("GT_BURST_P", "0.0"))     # p rozpoczęcia bursta (duch G2)
+        self.gt_burst_len = int(os.environ.get("GT_BURST_LEN", "5"))     # długość bursta [klatek det.]
+        self.gt_noise_std = float(os.environ.get("GT_NOISE", "0.0"))     # szum obserwacyjny (piksel, σ)
+        self.gt_burst_left = 0; self.gt_n_dropout = 0
 
     def admit_observe(self, on=True):
         """Autorytet OBSERVE przez gramatykę (P4) — 'observe on/off' (§2.4, default on)."""
@@ -200,8 +208,17 @@ class Runner:
                 if intr is not None:
                     b = project_to_pixel(pos, yaw, intr)     # projekcja GT (None gdy poza FOV level-camera)
                     if b is not None:
-                        cx = min(max(b.cx + self.gt_noise, 0.0), 1.0)
-                        box = Box(cx, b.cy, b.w, b.h, conf=1.0)   # perfekcyjna detekcja (GT-fed)
+                        cx = min(max(b.cx + self.gt_rng.gauss(0, self.gt_noise_std), 0.0), 1.0)  # szum obs.
+                        cy = min(max(b.cy + self.gt_rng.gauss(0, self.gt_noise_std), 0.0), 1.0)
+                        box = Box(cx, cy, b.w, b.h, conf=1.0)   # perfekcyjna detekcja (GT-fed) + szum
+                # DROPOUT (Bernoulli + burst) — symuluje utratę detekcji → test ZOH-age (dziura→age→sufit)
+                if box is not None:
+                    if self.gt_burst_left > 0:
+                        box = None; self.gt_burst_left -= 1; self.gt_n_dropout += 1
+                    elif self.gt_rng.random() < self.gt_dropout_p:
+                        box = None; self.gt_n_dropout += 1
+                        if self.gt_rng.random() < self.gt_burst_p:
+                            self.gt_burst_left = self.gt_burst_len   # rozpocznij burst (duch G2)
                 self.gt_channel.on_frame(box, t, gt_present=(intr is not None and box is not None))
                 self.gt_next += DET_DT
             else:
@@ -246,6 +263,7 @@ class Runner:
             mode = M_PATROL; sp = self.planner.target()
 
         d = self.shield.step(self.k, pos, vel, sp, mode=mode)
+        d["mode"] = mode                       # udostępnij tryb scenariuszom (fix: shield.step nie zwraca 'mode')
         self._pub(d["applied"])
         self.max_radial = max(self.max_radial, math.hypot(pos[0], pos[1]))
         if mode == M_OBSERVE and locked:
@@ -299,6 +317,12 @@ class Runner:
     def finish(self, summary):
         self.stop_streamer()
         summary = {**summary, "conf_passive_A6": self.conf_report()}   # A6: pasywny log conf w każdym locie
+        if self.gt_mode:                                               # TOR B: etykieta + nieregularność (seedy)
+            summary["gt_fed"] = True
+            summary["gt_irregularity"] = {"seed": int(os.environ.get("GT_SEED", "1")),
+                "dropout_p": self.gt_dropout_p, "burst_p": self.gt_burst_p, "burst_len": self.gt_burst_len,
+                "noise_std": self.gt_noise_std, "n_dropout": self.gt_n_dropout,
+                "n_expire": self.gt_channel.n_expire if self.gt_channel else None}
         self.tf.write(json.dumps({"SCENARIO_RESULT": summary}) + "\n"); self.tf.close()
         print("[gate] RESULT:", json.dumps(summary, ensure_ascii=False))
         self.mav.stop(); self.xrce.shutdown()
