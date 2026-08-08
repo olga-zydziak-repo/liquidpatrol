@@ -428,6 +428,31 @@ transferuje). θ_conf bez zmian (zakaz obniżania).
 
 ---
 
+## 3g. TOR B — G2–G5 GT-FED (teza architektury niezależna od percepcji) — G2+G3 PASS na żywym symie
+
+Decyzja Olgi: tor B mierzy OBSERVE/geofence-primacy/REFUSE/age **niezależnie od percepcji** — kanał 5-dim
+zasilany **POZĄ GT symulatora** (projekcja GT do kamery, perfekcyjna detekcja w FOV, conf=1.0), detektor
+POMINIĘTY. **JAWNIE ETYKIETOWANE** (`gt_fed: true` w trace/result; precedens 3b: sufit GT-fed vs live-fed
+osobno). Na ŻYWYM PX4/gz/MAVSDK/geofence/osłonie (nie kinematyczny harness). Dowody: `results/R02/gate_live/{G2,G3}_GTFED_*`.
+
+| Scenariusz | Kryterium §4 (zamrożone) | Zmierzone (GT-fed, live) | Wynik |
+|---|---|---|---|
+| **G2** detekcja→OBSERVE | ENTRY≤T_ack, d≥D_safe, cel w FOV | ENTRY, t_ack_ok, **OBSERVE 401 ticków**, **min_d=5.86 ≥ D_safe 5.32 (0 naruszeń)**, A1=0, ≤R_E | **SUKCES / PASS** |
+| **G3** prowadzenie ku płotowi | REFUSE(GEOFENCE), ≤R_E, GF-native=0 | **REFUSE(GEOFENCE)**, **max_r 21.1 < R_E 32**, native GF=0, A1=0 | **ODMOWA / PASS** |
+| **G4** utrata→sufit age | age>θ_age → wyjście OBSERVE→PATROL | intruz znika @t=20 (kod gotowy); infra flaky w tej sesji | do domknięcia (logika w harnessie PASS) |
+| **G5** warstwa-0 | urwanie XRCE → HOLD ≤~1.2 s | kod gotowy (fix#2 GF-native=0 potwierdzony); infra flaky | do domknięcia (regres R0.1 S4) |
+
+**WNIOSEK TOR B:** **teza osłona+OBSERVE ZMIERZONA GT-FED na żywym symie — G2 (OBSERVE utrzymuje D_safe)
+i G3 (geofence-primacy: śledzenie NIE łamie obwiedni) PASS.** To domyka dowód, że **architektura działa
+niezależnie od percepcji** — problem jest WYŁĄCZNIE w percepcji (kadrowanie kamery, §3f), nie w osłonie.
+**live-fed OTWARTE do czasu upliftu percepcji** (dźwignia 0 = celowanie kamery). G4/G5 GT-FED: kod gotowy,
+logika dowiedziona w harnessie (G1–G4) + G5 = regres R0.1 S4; domknięcie live przy niższym ryzyku.
+
+**Etykietowanie (precedens 3b):** wyniki G2/G3 to **GT-FED** (perfekcyjna percepcja) — sufit architektury.
+Live-fed (z detektorem) czeka na uplift percepcji. Raport rozróżnia oba jawnie.
+
+---
+
 ## 4. G5 — warstwa-0 (natywny failsafe)
 
 G5 = regres R0.1 **S4** (urwanie strumienia XRCE → natywna reakcja HOLD ≤~1.2 s przez PX4

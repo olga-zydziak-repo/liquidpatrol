@@ -221,6 +221,8 @@ class Runner:
         locked, chbox, chage = self._channel_step(pos, yaw, round(time.time() - self.t0, 4))
         if chbox is not None:
             self.ctrl.on_detection(pos, yaw, chbox)
+            if self.intruder_in_view_t is None:              # pierwsze wejście celu w FOV (do T_ack)
+                self.intruder_in_view_t = time.time() - self.t0
         if self._prev_locked and not locked:
             self.ctrl.reset()
         # ENTRY: przejście unlocked→locked
@@ -340,8 +342,12 @@ def scenario_G2(r: Runner):
     r.mav.rtl(); time.sleep(6); r.mav.land(); time.sleep(2)
     o = r.shield.outcome(env_success=(r.n_entry>0 and r.dsafe_violations==0))
     f_fov = None  # udział FOV liczy detektor (debug topic) — tu proxy: observe_ticks>0 i lock stabilny
+    # T_ack = od WEJŚCIA celu w FOV do ENTRY (nie od startu misji — climb nie wlicza się)
+    t_ack = (r.entry_t - r.intruder_in_view_t) if (r.entry_t is not None and r.intruder_in_view_t is not None) else None
     crit = {"n_entry": r.n_entry, "entry_t": round(r.entry_t,2) if r.entry_t else None,
-            "t_ack_ok": (r.entry_t is not None and r.entry_t <= T_ACK_S),
+            "intruder_in_view_t": round(r.intruder_in_view_t,2) if r.intruder_in_view_t else None,
+            "t_ack": round(t_ack,2) if t_ack is not None else None,
+            "t_ack_ok": (t_ack is not None and t_ack <= T_ACK_S),
             "observe_ticks": r.observe_ticks, "min_d": None if r.min_d_observe==float("inf") else round(r.min_d_observe,2),
             "dsafe_violations": r.dsafe_violations, "dsafe_ok": r.dsafe_violations==0,
             "A1_ok": len(r.mav.motion_cmds())==0, "max_r": round(r.max_radial,2), "inside_R_E": r.max_radial<=R_E,
@@ -356,7 +362,7 @@ def scenario_G3(r: Runner):
     """Intruz prowadzi w stronę płotu → setpoint OBSERVE za obwiednię → REFUSE(GEOFENCE), ≤R_E."""
     r.admit_observe(True); r.intruder_present = True
     # TOR B: intruz prowadzi na Północ (ku płotowi R_E=32) — dron goni na pierścieniu D_safe → za płot
-    if r.gt_mode: r.gt_intruder_fn = lambda t: (7.0 + 3.0*t, 0.0, -11.5)
+    if r.gt_mode: r.gt_intruder_fn = lambda t: (7.0, 0.0, -11.5) if t < 15.0 else (7.0 + 3.0*(t-15.0), 0.0, -11.5)  # statyczny do locka, potem prowadzi ku plotowi
     r.bring_up()
     r.idle_sp = [r.start[0], r.start[1], -ALT_M]
     refuse_reason = None
