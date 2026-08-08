@@ -363,6 +363,55 @@ Brakuje wyłącznie **wiarygodnej detekcji w locie** — to R2-alt, nie wada arc
 
 ---
 
+## 3f. TOR A — SONDA ATRYBUCYJNA (decyzja Olgi): 4× to PERCEPCJA (kadrowanie kamery), NIE potok, NIE detektor
+
+Cel: rozstrzygnąć czy spadek conf statyczny 0.16 → lot 0.045 to **percepcja** czy **potok**. Metoda:
+przechwyt surowej klatki ze STATYCZNEGO (dron na ziemi) i z LOTU (dron alt 10) przy IDENTYCZNEJ pozie
+WZGLĘDNEJ intruza (7 m, elewacja ~12°), potem **detektor OFFLINE na obu zapisanych klatkach** (ten sam
+kod/model — izoluje treść obrazu od live-timingu). Dowody: `results/R02/gate_live/{static,flight}.{png,npy,_meta.json}`.
+
+| | STATIC (dron ziemia) | FLIGHT (dron alt 10, hover) |
+|---|---|---|
+| **rozdzielczość / encoding / step** (POTOK) | **640×480 rgb8 / 1920** | **640×480 rgb8 / 1920** — IDENTYCZNE |
+| **detektor OFFLINE (ta sama klatka)** | nbox=1, **conf 0.156**, box cx 0.495 **cy 0.372** | **nbox=0, conf 0.0** |
+| **wizualnie (PNG)** | **intruz wyraźny, centralny, na tle nieba** | **intruz CAŁKOWICIE NIEOBECNY** (czyste niebo+grunt) |
+| yaw drona | — | **0° (Północ = ku intruzowi)**, dryf [−1,+2]° |
+| tło (górna połowa, mean) | 218 | 218 — identyczne |
+
+**WNIOSEK ATRYBUCJI — jednoznaczny:**
+1. **POTOK NIE Jest przyczyną.** Obie klatki **640×480 rgb8** (nie 320×240!) — **most przekazuje NATYWNE
+   640×480, nie downsampluje.** Topik/rozdzielczość/encoding/step identyczne. (Obala premisę „320×240 =
+   limit mostu" z lever 1.)
+2. **DETEKTOR NIE jest (intrinsycznie) przyczyną.** Ten sam detektor na klatce statycznej: **conf 0.156**
+   (wykrywa poprawnie kadrowany cel). Detektor jest ADEKWATNY, gdy cel jest w kadrze.
+3. **YAW NIE jest przyczyną.** Dron patrzy na Północ (0°, ku intruzowi).
+4. **PRZYCZYNA = PERCEPCJA przez WERTYKALNE KADROWANIE / ATTITUDE kamery w LOCIE.** Intruz (elewacja
+   +12–16° w górę) jest **klipowany z góry kadru** przez **pitch zawisu** (multirotor przechyla się dla
+   utrzymania pozycji; kamera stała-forward pochyla się z kadłubem) → cel wypada z kadru → 0 detekcji.
+   Statyczny (dron poziomo) kadruje cel → 0.156. Potwierdza rider 1 (przy 34.8° cel na cy 0.086 = górna
+   krawędź już statycznie; lot dopycha go poza kadr).
+
+**GŁĘBSZE — KONFLIKT GEOMETRYCZNY (przyczyna źródłowa):** kamera STAŁA-FORWARD, POZIOMA nie może
+utrzymać w kadrze celu wymaganego przez kopertę: cel POWYŻEJ drona (tło nieba + paralaksa bearing-only)
+→ wysoka elewacja → górna krawędź kadru → klipowany przez pitch lotu. Cel na poziomie/niżej → w kadrze,
+ale tło gruntu → niewykrywany. **Fixed-forward-camera fundamentalnie ogranicza kopertę.**
+
+### DECYZJA O KOLEJNOŚCI DŹWIGNI (wynik toru A steruje torem C)
+- **NOWA dźwignia 0 (PRIORYTET, tania) — CELOWANIE/STABILIZACJA KAMERY:** gimbal / pitch kamery w górę /
+  aktywne celowanie (osłona już liczy yaw_cmd na cel — rozszerzyć o pitch/gimbal), by cel POWYŻEJ drona
+  pozostawał w kadrze mimo attitude lotu. To adresuje przyczynę źródłową, tanio, PRZED treningiem.
+- **Dźwignia 1 (rozdzielczość/gz-transport) — DE-PRIORYTET:** potok już 640×480; nie jest wąskim gardłem.
+- **Dźwignia 3 (detektor jednoklasowy / R2-alt) — DE-PRIORYTET jako pierwszy ruch:** detektor adekwatny
+  na kadrowanym celu (0.156). Wraca dopiero jeśli po naprawie kadrowania conf w locie wciąż < próg.
+- **Dźwignia 2 (MTI/ruch) — pozostaje** (wzmacnia ε_FP; niezależna od kadrowania).
+- **A7 R2-alt trigger: PRZE-ATRYBUOWANY** — G2 „porażka detekcji" była w istocie **porażką KADROWANIA**
+  (cel poza kadrem), nie jakości detektora. R2-alt nie jest pierwszą dźwignią.
+
+**Lekcja programu (do wpisania):** statyczne sweepy tracą status źródła progów — **charakteryzacja
+wyłącznie W LOCIE** (attitude kamery zmienia kadrowanie 4× i decyduje). θ_conf bez zmian (zakaz obniżania).
+
+---
+
 ## 4. G5 — warstwa-0 (natywny failsafe)
 
 G5 = regres R0.1 **S4** (urwanie strumienia XRCE → natywna reakcja HOLD ≤~1.2 s przez PX4
