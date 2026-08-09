@@ -200,6 +200,36 @@ touchdown spełnia `r_true ≤ R_E` bez osobnego członu czasowego zniżania. Br
 (c) człon Land pokryty przez cap (komentarz w modelu + zdanie tu). [OBALONE B1: wzorzec deadline
 `ε > ε_budget + δ` zastąpiony ostrością dwustronną cap/geometria.]
 
+### §3bis. RAMKA SĘDZIEGO — definicja ε_pos + T_home (ratyfikacja Olgi 2026-08-09, po weryfikacji B1)
+
+**Kontekst (znalezisko weryfikacji B1, `results/R03/recon/B1bis/instrument/FINDING_eps_definition.md`):**
+ANEKS-2 `max_drift=1.49` = ABSOLUTNE `|pos_EKF − pos_GT|` (reprodukcja co do cyfry) — wliczało **offset
+ramki home↔gz-world ~0.44 m**, który NIE jest błędem estymatora (przy zdrowym GPS SITL śledzi truth do
+cm). Kanał GT `gz model -p` (~2 Hz, stempel przy powrocie subprocessu) ma **~0.2 m szumu skorelowanego
+z ruchem** w osi patrolu (latencja stempla; interpolacja nie naprawia).
+
+**DEFINICJA ε_pos (JEDNA, w charakteryzacji i bramce — D13 b/c/d tym samym sędzią):**
+`ε_pos = || pos_EKF − (pos_GT ⊖ T_home) ||` w **ramce home** (środek koperty `R_E` = fizyczny punkt
+home). `⊖ T_home` = transformacja pozy GT (gz-world, ENU→NED przez zwalidowany swap R-2) do ramki home.
+
+- **T_home (offset ramki):** estymowany **per boot WYŁĄCZNIE z okna zdrowego GPS ≥ 20 s przed denialiem**,
+  **trzymany STAŁY przez cały epizod** DR→Land. **Skoki estymaty EKF po resecie liczą się jako błąd ε**
+  (NIE re-bazujemy po resecie) — `xy_reset_counter`/`z_reset_counter` (R-1) adnotują epizody resetu.
+- To NIE jest „odejmowanie bazy per próbka" — `T_home` to pojedynczy, stały wektor translacji ramki na
+  epizod. Dryf/reset EKF w oknie DR wchodzi w pełni do ε_pos.
+
+**BRAMKA INSTRUMENTU per lot (kryterium ważności):** `p95(ε_pos) w oknie zdrowym ≤ 0.10 m` (oczekiwane
+~cm przy poprawnym kanale). Powyżej → **lot NIEWAŻNY** (kryterium wykluczenia W5, §5quater). Systematycznie
+powyżej **po** naprawie kanału (streaming) → **SR-B7** (STOP-instrument, §6).
+
+**KANAŁ GT (naprawa, R-2):** streaming pozy gz z **sim-time** (stempel u źródła), parowanie strumieni
+**po sim-time** (lockstep SITL: `vehicle_local_position.timestamp` == gz sim-time). Zastępuje `gz model -p`.
+Unit-test sędziego rozszerzony o **syntetykę RUCHOMĄ** (znane `v` + znany skew stempla → **skew wykryty**).
+Raport: korelacja szumu z ruchem **przed/po** naprawie (test hipotezy skew).
+
+**Liczba robocza capa (reguła D10 na ε_pos REL):** `1.5 × 1.15 = 1.725 → 7/4 = 1.75` (B1 lot 1);
+**finalnie decyduje siatka B1-bis** (`max` po B1 ∪ B1-bis, przeliczone tą definicją).
+
 ---
 
 ## §4. Zmiana automatu + akcja bezpieczna + histereza + re-cert (R4 — papier)
@@ -336,7 +366,12 @@ lot ODRZUCONY (nie wchodzi do siatki `max`) jeśli którekolwiek: **(W1)** nie o
 `armed→takeoff→offboard→denial_on` (np. `arm() COMMAND_DENIED`, utrata offboard przed denialem);
 **(W2)** okno dead-reckoning pod ruchem < 60 s; **(W3)** luka telemetrii EKF > 1.0 s (5 pominiętych
 próbek @20 Hz) LUB brak próbek GT przez > 2.0 s w oknie DR; **(W4)** params PX4 nieprzywrócone po locie
-(`EKF2_GPS_CTRL≠7` — SR-B5). Odrzucenie logowane z przyczyną (prowieniencja), NIE po cichu.
+(`EKF2_GPS_CTRL≠7` — SR-B5); **(W5)** bramka instrumentu (§3bis): `p95(ε_pos) w oknie zdrowym > 0.10 m`
+(kanał GT niewiarygodny na tym locie). Odrzucenie logowane z przyczyną (prowieniencja), NIE po cichu.
+
+**Kanał GT + T_home (§3bis, WIĄŻĄCE):** rejestrator B1-bis używa **streamingu pozy gz z sim-time**
+(nie `gz model -p`); parowanie po sim-time; `T_home` z okna zdrowego ≥ 20 s, stały na epizod; loguje
+`vehicle_local_position.timestamp` (px4/sim), `xy_reset_counter`, `z_reset_counter` (R-1).
 
 **§5quater-prov (prowieniencja lotu 3 B1, R-2):** lot 3 B1 (`/tmp/r03b/b1_3.jsonl`, 1958 próbek)
 ODRZUCONY. **Przyczyna proksymalna: `arm() COMMAND_DENIED`** (`fly_3.log`) — dron NIGDY nie uzbroił/
@@ -358,8 +393,9 @@ ubiquitous warning). Loty ważne: lot 1 = `b1_val.jsonl`→`b1_flight1.jsonl` (2
    `(2·8.55)²/(2·20)² ≈ 18%` oryginalnego pola — twardy dół.
 Mapowanie na cap: `half-side' ≥ 8.55 ⇔ ε_cap ≤ R_E − d_stop − √2·8.55 = 32 − 2.85 − 12.09 = 17.06 m`.
 **Jeśli reguła D10 da `ε_cap` wymuszający `half-side' < 8.55 m` → STOP (SR-B1'): twierdzenie w tym
-habitacie/geometrii niedomykalne — WYNIK z liczbami, nie dowożenie pozytywu.** (Robocze `ε_cap=2.25`
-→ `half-side'=19.02 m ≫ 8.55` → margines duży; próg to backstop na katastrofę, nie target.)
+habitacie/geometrii niedomykalne — WYNIK z liczbami, nie dowożenie pozytywu.** (Robocze po §3bis `ε_cap=7/4=1.75`
+→ `R_route'=32−2.85−1.75=27.40` → `half-side'=27.40/√2=19.38 m ≫ 8.55` → margines duży; próg to
+backstop na katastrofę, nie target. Finalne z B1-bis.)
 
 **Kolejność:** unit-test sędziego PASS → 6+ lotów → metryki → D10/D11 → SR-B1' → **ANEKS-4 (freeze,
 commit tylko PRE) PRZED B2**. Freeze→pomiar dowodzony łańcuchem commitów.
@@ -387,7 +423,9 @@ samowolnego strojenia def. fixu/histerezy). **SR-B4** wyników bramki nie stroi 
 z raportem. **SR-B5** params PX4 przywrócone po sesji; frozen R0.1/R0.2 nietykane; drzewo czyste na koniec.
 **SR-B6** brak plateau w B1-bis (wzrost monotoniczny przez całe okno ≥ 120 s) ALBO `max_drift` łamiący
 próg degeneracji przez regułę cap → STOP: **A-plateau pada tak samo jak A-drift** — raport z liczbami
-zamiast dowożenia pozytywu.
+zamiast dowożenia pozytywu. **SR-B7** (instrument, §3bis) `p95(ε_pos) w oknie zdrowym > 0.10 m
+SYSTEMATYCZNIE po naprawie kanału GT (streaming sim-time)` → STOP-instrument: sędzia niewiarygodny,
+brak podstawy do freeze — decyzja Olgi o kanale GT/definicji przed jakimkolwiek pomiarem capa.
 
 ---
 
