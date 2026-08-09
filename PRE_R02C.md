@@ -168,8 +168,32 @@ nadal być egzekwowane przez STRUKTURĘ (edge-margin + k=3) + MTI** (AND-gate). 
 
 ---
 
+## 8. PRE_R02C-rev1 (rider 4) — PREMISA PRZEPISANA po C-A1
+
+**JAWNA ROZBIEŻNOŚĆ:** premisa recon (R1–R4) zakładała, że słaba detekcja w locie to problem PERCEPCJI
+(kadrowanie §3f / detektor). **Build C-A1 OBALIŁ tę premisę** (`RAPORT_R02C.md`): intruz w locie NIE jest
+RENDEROWANY dla kamery powietrznej (awaria fidelity symulatora, mechanizm silnikowy gz-sim), więc detekcja
+nie miała czego wykryć. §3f było artefaktem braku renderu.
+
+**Dźwignia ZERO (nowa, blokująca): FIX RENDERU symulatora** — intruz musi być widoczny dla kamery
+powietrznej. Do czasu naprawy WSZYSTKIE pomiary detekcji w locie są niewiarygodne (guard §4 RAPORT_R02C je
+blokuje). Opcje naprawy: `RAPORT_R02C §5` (O1 silnik / O2 config / O3 geometria / O4 zawieś live-fed).
+
+**KOLEJNOŚĆ DŹWIGNI — rev1:**
+0. **Fix renderu** (dźwignia zerowa, blokująca) — bez niej reszta bezprzedmiotowa.
+1. ~~0b gimbal~~ **DE-PRIORYTET** — pitch zmierzony **~0.6° (C-A1)**, NIE klipuje; gimbal nie rozwiązuje
+   braku renderu. Pomiar pitchu ZOSTAJE jako wykonany (luka att() była realna, teraz domknięta).
+2. **θ_conf / detekcja** — re-derywacja DOPIERO po fixie renderu (chmury w locie z WIDOCZNYM celem).
+3. **MTI / R2-alt** — ZAWIESZONE; przedwczesne póki render niesprawny.
+
+**BEZ ZMIAN:** kryterium dwustronne (≥7 m coverage≥0.8 / ε_FP=0), zakaz obniżania θ_conf, charakteryzacja
+wyłącznie w locie, prowieniencja przyrządu. **Scene-sanity guard (rider 2) = trwała bariera** — każdy lot
+bramkowy live asertuje widoczność intruza (regresja renderu nie udaje wyniku detekcji).
+
+---
+
 ## STOP
 
-Recon domknięty (R1–R4), PRE **RATYFIKOWANE** z riderami C-A1…C-A4 (§7, wiążące). Build wchodzi krokiem 1
-= **re-atrybucja C-A1** (z wewnętrznym GATE-em: mały pitch + cel w kadrze ⇒ STOP+re-atrybucja przed 0a/0b).
-Dowody reconu: `results/R02/gate_live/R3_STALL_G1.jsonl`, modele gz (ścieżki w §1). Push = Olga.
+Recon domknięty (R1–R4), PRE **RATYFIKOWANE** z riderami C-A1…C-A4 (§7). Build C-A1 wykonany → **§3f
+OBALONE, mechanizm renderu SILNIKOWY → escape hatch (rider 5): STOP z ustaleniami+opcjami** (`RAPORT_R02C`).
+Premisa przepisana (§8, rev1). Guard wdrożony (bariera). Opcje O1–O4 do decyzji Olgi. Push = Olga.
