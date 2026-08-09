@@ -757,6 +757,7 @@ def scenario_C1(r: Runner):
         r.xrce.node.create_subscription(Image, img_topic, _on_img, qos_be())
     r.bring_up()
     r.idle_sp = [r.start[0], r.start[1], -ALT_M]
+    gsan = r.preflight_scene_sanity(INTR_NED, enforce=False)   # GUARD jako kryterium (rider 0), bez STOP w diagnostyce
     # weryfikacja pozy intruza (statyczny → gz model -p, NIE dynamic_pose)
     intr_pose_q = None
     try:
