@@ -84,3 +84,24 @@ Dwa spójne odczyty:
 - **(B) reżim operacyjny (intencja D12)** → cap z epizodu REFUSE→Land (krótki DR + Land do touchdown).
   Wymaga lotu z profilem epizodu (dodać MODE=episode). Wtedy cap ~rząd 1–3 m, trasa ważna.
   Długie okno pozostaje SONDĄ SR-B6 (plateau-stability: PASS — błąd ograniczony).
+
+## 7. EPISODE (operacyjny) + AKCJA BEZPIECZNA — znaleziska (ratyf. Wariant A z poprawkami)
+
+Loty EPISODE (dobry boot 90 s konwergencji EKF; eph→0.150; kanał czysty p95≤0.07):
+| lot | stan | ε_pos (zejście 0.7 m/s ~14 s) | @2s | @5s | @10s | t_flag |
+|---|---|---|---|---|---|---|
+| g1 | prosta v_max | 2.45 m | 0.45 | 1.19 | 2.44 | — |
+| c1 | narożnik 90° v_max | 12.33 m | 0.68 | 2.71 | 10.5 | 0.025 s |
+
+**Znaleziska:**
+1. **AUTO.LAND (`d.action.land`) UCIEKA pod DR = 42 m** (pętla POZYCYJNA station-keeping goni dryfującą
+   estymatę). Zasada: pod degradacją estymatora tylko akcje OTWARTO-PĘTLOWE wzgl. degradowanej wielkości.
+   2. instancja zawodnej natywnej warstwy-0 (po „martwym" eph-failsafe §2). → D5 REWIZJA: velocity-descent.
+2. **Velocity-descent (v_xy=0, v_down) też dryfuje** — pod DR dron nie wyzeruje PRAWDZIWEJ prędkości
+   (brak aidingu). Dryf ~proporcjonalny do CZASU epizodu → **tempo/czas zejścia = DŹWIGNIA**.
+3. Konwergencja EKF: 15 s settle → eph 0.22 (broken, flyaway); **90 s → eph 0.150** (dobry). NIE load
+   (24 rdzenie, ~23%). Arm preflight (gyro bias/heading) czasem nie przechodzi — losowa flakiness SITL.
+4. `EKF2_HGT_REF` default=1 (GPS) → wysokość degraduje pod denialiem → wymuszamy 0 (Baro), §3quater.
+
+**Profil dwufazowy (§3quater):** 1.5 m/s (MPC_Z_VEL_MAX_DN) do 2 m AGL, potem 0.7 (MPC_LAND_SPEED).
+Predykcja prerejestrowana: ε_pos(narożnik, dwufazowy) ∈ [2.5, 6] m. Re-pomiar: ≥3 narożnik + ≥2 prosta.

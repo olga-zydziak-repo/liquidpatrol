@@ -275,9 +275,10 @@ def compute_drift(ekf, gt, swap=True):
     t_home_window_s = round((t_dr0 - min(t for (t, _, _) in series if t < t_dr0)), 1) \
         if any(t < t_dr0 for (t, _, _) in series) else 0.0
 
-    # ε_pos w oknie zdrowym po odjęciu T_home. Bramka W5 na próbkach |v|<V_GATE (fidelity kanału,
-    # v·Δt-odporna); pełna p95 raportowana informacyjnie (przy v_max zdominowana jitterem stempla).
-    healthy = [(t, math.hypot(ex - thx, ey - thy)) for (t, ex, ey) in series if t < t_dr0]
+    # ε_pos w OKNIE T_home (≥20 s przed denialiem — Olga §3bis; wyklucza transient startu/climbu).
+    # Bramka W5 na próbkach |v|<V_GATE (fidelity kanału, v·Δt-odporna); pełna p95 informacyjnie.
+    healthy = [(t, math.hypot(ex - thx, ey - thy))
+               for (t, ex, ey) in series if t_dr0 - T_HOME_WINDOW_S <= t < t_dr0]
     healthy_all = [d for (_, d) in healthy]
     healthy_lowv = [d for (t, d) in healthy if _speed_at(spts, t) < V_GATE_MS]
     healthy_p95_full = _p95(healthy_all)
