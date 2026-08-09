@@ -82,14 +82,38 @@ wprowadzona przez **fix#2** (odsprzężony streamer 20 Hz).
    vs `G5_CUT=stream` (bezpośredni stop).
 
 **Naprawiona:** **dead-man w streamerze** — brak odświeżenia setpointu przez **N=6 ticków (0.3 s
-@20 Hz, N<COM_OF_LOSS_T)** ⇒ streamer **MILKNIE** ⇒ natywny failsafe warstwy-0 w `COM_OF_LOSS_T`.
-Zbrojony po bring_up (climb nie odświeża setpointu). Cel **podwójny**:
-- **własność** „martwa osłona ⇒ bezpieczne przejęcie warstwy-0" jest teraz **WYMUSZONA kodem**;
-- **timing** wraca do okna: deadman-silence (~0.3 s) + COM_OF_LOSS_T (~1.0 s) ≈ **1.3 s ∈ 0.9–1.5 s**.
+@20 Hz)** ⇒ streamer **MILKNIE** ⇒ natywny failsafe warstwy-0 w `COM_OF_LOSS_T`. Zbrojony po bring_up.
+Cel **podwójny**: (a) własność „martwa osłona ⇒ bezpieczne przejęcie warstwy-0" **WYMUSZONA kodem**;
+(b) timing failsafe.
 
 **Dowód własności (deterministyczny, bez SITL):** `r02/test_deadman.py` — realna metoda `_streamer`
 na atrapie: osłona ŻYWA ⇒ 21 publikacji ciągłych, **brak** fałszywego tripu; osłona MARTWA ⇒ stream
 cichnie w **0.25 s**, `deadman_tripped=True`, **zero** publikacji po progu. **PASS.**
+
+**POMIAR NA ŻYWO (świeży boot per wariant, precyzyjny nav_state; GPU zwolnione przez fabrykę):**
+
+| wariant urwania | nav_reaction (XRCE) | mavsdk_reaction | dead-man | ≤R_E / A1 | okno 0.9–1.5 |
+|---|---|---|---|---|---|
+| **stream** (bezpośredni stop = scenariusz oryginalnego G5) | **1.383 s** | 2.623 s | — (niepotrzebny) | ✓/✓ | **PASS** |
+| **zombie** (śmierć osłony, streamer żyje) | **1.589 s** | 2.587 s | trip @0.286 s, potem cisza | ✓/✓ | **0.089 s ponad** |
+
+**Dwa wnioski pomiarowe:**
+1. **Regresja 2.179 s = ARTEFAKT POMIARU.** Prawdziwa reakcja trybu utraty transportu (stream = scenariusz
+   oryginalnego G5) to **1.383 s — w oknie**. MAVSDK `flight_mode` (HEARTBEAT ~1 Hz) zawyżał o **1.0–1.24 s**
+   (nav 1.383 vs mavsdk 2.623; nav 1.589 vs mavsdk 2.587). Precyzyjny `NavStatusSub` to demaskuje.
+   **Oryginalny scenariusz G5 przechodzi (1.383 s).** dmesg czysty (brak segfault/OOM), dron bezpieczny.
+2. **Dead-man domyka GŁĘBSZĄ dziurę bezpieczeństwa (zombie).** Martwa osłona przy żywym streamerze:
+   dead-man tripuje **na żywo @0.286 s** → stream cichnie (`stream_kept_publishing=5` potem 0) → failsafe
+   @**1.589 s** (nav_state→4 HOLD). Własność „martwa osłona ⇒ warstwa-0" **wymuszona i zmierzona live**.
+   Koszt: **+0.286 s** (nieusuwalne wykrycie śmierci przez N ticków) → 0.089 s ponad górną granicą okna.
+
+**NUANS N vs okno (do decyzji Olgi):** zombie 1.589 s = baza ~1.30–1.38 s + dead-man 0.286 s. Aby zejść
+≤1.5 s trzeba N=4 ticki (0.2 s). ALE: N musi być **> max legalnego stalla pętli decyzyjnej** — a fix#2
+powstał WŁAŚNIE dlatego, że pętla stalluje pod kontencją detektora (stall > COM_OF_LOSS_T → natywny HOLD).
+W **GT-fed** (bez detektora) pętla nie stalluje → N=0.3 s bezpieczne, zombie=1.589 s. Dla **live-fed** N
+trzeba **re-derywować z rozkładu stalli pętli pod kontencją** (sprzężone z torem C — detekcja live).
+Rekomendacja: przyjąć GT-fed zombie jako **bezpieczny + własność wymuszona** (1.589 s), a finalne N/okno
+dla live-fed domknąć w torze C. Oryginalny scenariusz G5 (stream) **PASS 1.383 s** niezależnie.
 
 **Re-certyfikacja (zmiana w egzekutorze):**
 - Założenie **żywotności osłony** zapisane **WPROST** w P1 (`verify.py`) i P2 (`geofence.py`) jako
@@ -99,14 +123,8 @@ cichnie w **0.25 s**, `deadman_tripped=True`, **zero** publikacji po progu. **PA
   cert **bajt-identyczny** → dead-man w egzekutorze **NIE** zmienił automatu osłony.
 - **certs_selfcheck: PASS 5/5.**
 
-**Pozostaje: live G5 timing (oba warianty) — ZABLOKOWANE zasobem zewnętrznym.** GPU trzymane 99%
-przez **niezwiązaną sesję fabryka** (`train_epoch1.py`, pid 68380). G5 mierzy timing failsafe do
-rozdzielczości 0.6 s okna — pod 100% GPU-contention gz-render dałby pomiar kontencji, nie
-dead-mana+COM_OF_LOSS_T. **Nie kontuję** (dyscyplina — jak wcześniejszy „latający sweep zablokowany
-brakiem yaw"). Uruchomię `SCENARIO=G5 G5_CUT=zombie` i `G5_CUT=stream` **po zwolnieniu GPU**;
-oczekiwany `nav_reaction_s` ≈ 1.3 s (w oknie), `deadman_tripped=True`, `stream_kept_publishing`
-plateau po tripie. Instrument i fix **gotowe i zacommitowane** (9f41171) — brakuje tylko pojedynczego
-pomiaru na żywym symie.
+Dowody live: `results/R02/gate_live/G5_{ZOMBIE,STREAM}_gate.{jsonl,log}` + dmesg (czyste). Pomiar
+wykonany po zwolnieniu GPU przez fabrykę (bez kontencji — pomiar czysty, jak uzgodniono z Olgą).
 
 ---
 
@@ -117,7 +135,9 @@ pomiaru na żywym symie.
 | Certy formalne (P1/P2/P4/P5, selfcheck 5/5, +założenie żywotności) | **PASS** |
 | Logika bramki G1–G4 (harness na prawdziwym kodzie) | **PASS 4/4** |
 | Teza architektury GT-fed (G2/G3/G4 + nieregularność 5 seedów) | **PASS** |
-| G5 — dead-man (własność + re-cert + dowód determ.) | **PASS**; live timing **pending GPU** |
+| G5 — oryginalny scenariusz (stream) live | **PASS 1.383 s** (regresja 2.179 = artefakt MAVSDK) |
+| G5 — dead-man (własność „martwa osłona⇒warstwa-0") | **WYMUSZONA + zmierzona live** (zombie trip @0.286 s, failsafe 1.589 s, bezpieczny) |
+| G5 — zombie timing vs okno | 1.589 s = 0.089 s ponad; N vs stall = **decyzja Olgi** (live-fed N → tor C) |
 | Tor żywy (live-fed) — percepcja | **OTWARTY** (przyczyna: kadrowanie §II; tor C wyceniony) |
 
 **STOP.** Push robi Olga. Tor C (PRE detection uplift) startuje po tym raporcie.
