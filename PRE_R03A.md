@@ -229,6 +229,52 @@ Raport: korelacja szumu z ruchem **przed/po** naprawie (test hipotezy skew).
 
 **Liczba robocza capa (reguła D10 na ε_pos REL):** `1.5 × 1.15 = 1.725 → 7/4 = 1.75` (B1 lot 1);
 **finalnie decyduje siatka B1-bis** (`max` po B1 ∪ B1-bis, przeliczone tą definicją).
+> **[OBALONE B1-bis — patrz §3ter]** Robocze 7/4 z B1 lot 1 nieaktualne: B1-bis (kanał streaming)
+> pokazał dryf f(czas×v) do 25.7 m/125 s. Cap NIE z długiego okna — patrz A-episode (§3ter).
+
+### §3ter. A-episode — rewizja po B1-bis (ratyfikacja Olgi 2026-08-09, Wariant C zaostrzony)
+
+**A-plateau (BEZWARUNKOWE) OBALONE pomiarem B1-bis (WYNIK nogi, do raportu §II).** Kanał streaming
+(mono+skew, wszystkie loty `p95(|v|<1)≤0.10` PASS, `FINDING_clock_and_regime.md`): dryf ma kształt
+step-do-plateau (OGRANICZONY per okno), ale **poziom plateau = f(czas_DR × v)** — dron dead-reckonuje
+PRĘDKOŚĆ i ucieka zanim estymata się ustabilizuje:
+
+| reżim | plateau max_drift | okno |
+|---|---|---|
+| hover | 0.30–0.55 m | 83 s |
+| narożnik v_max | 4.4 m | 73 s |
+| prosta v_max | 6.0 m | 94 s |
+| **prosta v_max** | **25.7 m** | **125 s** |
+
+`ε_cap = 1.5×25.7 = 38.6 → R_route' = 32−2.85−38.6 < 0` — **twierdzenie NIEDOMYKALNE przy nieograniczonym
+v_max DR**. To FALSYFIKAT bezwarunkowego A-plateau — wpisany jawnie, nie chowany.
+
+**NOWE ZAŁOŻENIE — A-episode:** `ε_pos ≤ ε_cap` pod **WYMUSZONYM profilem epizodu** (nie dowolne DR).
+Nośne, bo fast-REFUSE (D12) ogranicza epizod DR do reżimu operacyjnego (intencja D12 dosłownie).
+Do **rejestru założeń P1** wchodzą JAWNIE (jak żywotność):
+- **A-episode:** zawieranie ważne pod wymuszonym profilem `flaga→debounce→REFUSE→Land→touchdown`.
+- **A-flag:** utrata aidingu flagowana ≤ `t_flag` (zmierzone z prowieniencją B1-bis; R2 recon ~0.1 s).
+
+**Profil epizodu (reguła ZAMROŻONA TERAZ, przed lotami episode):**
+- Cięcie denialu w **najgorszym stanie**: (i) na prostej przy `v_max` ORAZ (ii) na narożniku.
+- Segment **pre-REFUSE na `v_max` przez `t_pre = 1.0 s`** (zamrożone). **Arytmetyka uzasadnienia:**
+  `t_pre ≥ 4 × (t_flag + debounce + tick) = 4 × (0.10 + 0.10 + 0.05) = 4 × 0.25 = 1.00 s`
+  (`t_flag≈0.10 s` R2/zmierzone B1-bis; `debounce=2 ticki=0.10 s` D12; `tick=0.05 s` @20 Hz) —
+  4× łańcucha aidingu→akcja, mocny zapas na worst-case cięcia.
+- Potem **Land do touchdown** (near-hover, GPS wciąż DENIED — realny scenariusz; restore po touchdown, SR-B5).
+- `ε_pos` liczone przez **CAŁY epizod** (denial→touchdown), D13c bez zmian.
+
+**Cap (reguła D10 na A-episode):** `ε_cap = 1.5 × max(ε_pos po WAŻNYCH lotach EPISODE)`, zaokrągl.
+w górę do ćwiartki. **Siatka episode: ≥ 2 stany cięcia × ≥ 2 loty** (prosta v_max, narożnik).
+
+**Zgodność char↔bramka (kluczowe):** **S2/S4 wykonują TEN SAM wymuszony profil** (t_pre=1.0 s v_max →
+Land). Self-consistency: charakteryzacja i bramka mierzą ten sam reżim (zachowana z opcji A).
+
+**Długie okno (≥60/≥120 s)** pozostaje w raporcie jako **sonda FALSYFIKUJĄCA** (SR-B6: czy błąd
+ograniczony — TAK per okno, ale bezwarunkowe plateau obalone), NIE jako podstawa capa i NIE jako PASS.
+
+**P2-ε: forma nierówności BEZ ZMIAN** (`(r_est≤R_route')∧(ε≤ε_cap)⇒r_true+d_stop≤R_E`) — warunek
+A-episode żyje w rejestrze założeń, arytmetyka certu czysta.
 
 ---
 
@@ -397,8 +443,14 @@ habitacie/geometrii niedomykalne — WYNIK z liczbami, nie dowożenie pozytywu.*
 → `R_route'=32−2.85−1.75=27.40` → `half-side'=27.40/√2=19.38 m ≫ 8.55` → margines duży; próg to
 backstop na katastrofę, nie target. Finalne z B1-bis.)
 
-**Kolejność:** unit-test sędziego PASS → 6+ lotów → metryki → D10/D11 → SR-B1' → **ANEKS-4 (freeze,
-commit tylko PRE) PRZED B2**. Freeze→pomiar dowodzony łańcuchem commitów.
+**[REWIZJA po B1-bis — §3ter]:** długie okna (siatka wyżej) WYKONANE jako **sonda falsyfikująca**
+(kanał streaming; A-plateau bezwarunkowe OBALONE). **Cap NIE z długiego okna.** Podstawa capa = loty
+**EPISODE** (profil `t_pre=1.0 s v_max → Land→touchdown`, §3ter): ≥ 2 stany (prosta v_max, narożnik)
+× ≥ 2 loty; `ε_cap = 1.5×max(ε_pos episode)`. Kanał/instrument/bramka W5 (`p95(|v|<1)≤0.10`) bez zmian.
+
+**Kolejność:** unit-test sędziego PASS ✓ → sonda długiego okna (falsyfikacja A-plateau) ✓ → **loty
+EPISODE** → ε_cap (D10 na A-episode) → D11 → SR-B1' → **ANEKS-4 (freeze, commit tylko PRE) PRZED B2**.
+Freeze→pomiar dowodzony łańcuchem commitów.
 
 ---
 
@@ -421,9 +473,10 @@ w tej geometrii — WYNIK). **SR-B2** P5 rozbieżność → STOP (automatu nie �
 flapowanie flagi dead-reckoning w nominalu → STOP przed resztą bramki, raport z histogramem (bez
 samowolnego strojenia def. fixu/histerezy). **SR-B4** wyników bramki nie stroi się po fakcie; FAIL=FAIL
 z raportem. **SR-B5** params PX4 przywrócone po sesji; frozen R0.1/R0.2 nietykane; drzewo czyste na koniec.
-**SR-B6** brak plateau w B1-bis (wzrost monotoniczny przez całe okno ≥ 120 s) ALBO `max_drift` łamiący
-próg degeneracji przez regułę cap → STOP: **A-plateau pada tak samo jak A-drift** — raport z liczbami
-zamiast dowożenia pozytywu. **SR-B7** (instrument, §3bis) `p95(ε_pos) w oknie zdrowym > 0.10 m
+**SR-B6** [WERDYKT WARUNKOWY po B1-bis]: błąd **OGRANICZONY per wymuszony epizod (A-episode)** — PASS
+w tym sensie; ale **wzrost ~z dystansem DR przy podtrzymanym `v_max` → bezwarunkowe A-plateau OBALONE**
+(25.7 m/125 s, §3ter). Długie okno = sonda falsyfikująca (nie PASS). Gdyby błąd rósł BEZ plateau nawet
+per wymuszony epizod (episode ε_pos nieograniczone) → STOP z liczbami (A-episode pada jak A-drift). **SR-B7** (instrument, §3bis) `p95(ε_pos) w oknie zdrowym > 0.10 m
 SYSTEMATYCZNIE po naprawie kanału GT (streaming sim-time)` → STOP-instrument: sędzia niewiarygodny,
 brak podstawy do freeze — decyzja Olgi o kanale GT/definicji przed jakimkolwiek pomiarem capa.
 
