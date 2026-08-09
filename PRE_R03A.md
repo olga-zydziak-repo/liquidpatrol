@@ -195,6 +195,36 @@ zamrażający (PRE) PRZED bramką (kolejność freeze→pomiar dowodzona łańcu
 
 ---
 
+## §5ter. ANEKS-2 — wyniki B1 (drift) + ROZBIEŻNOŚĆ (SR-B1 wyzwolone, 2026-08-09)
+
+Pomiar (2 loty ważne z 3; lot 3 padł na bind MAVSDK 14540 — nie zmienił params; loty patrol offboard-velocity
+±1.5 m/s, denial `EKF2_GPS_CTRL 7→0` w locie ≥65 s pod ruchem). Kanały: GT=`gz model -p` (`gt_judge`),
+EKF=`vehicle_local_position` (`nav-local`), Δt=`monotonic_local`. Dowody: `results/R03/recon/B1_drift/`.
+**Uwaga osi (znalezisko):** GT gz=ENU, EKF=NED → korelacja z zamianą osi (EKF.x↔GT.y); bez swap fałszywe ~5 m.
+
+| lot | max_drift (swap) | plateau | p95_rate (chwil.) | czas dryf>ε_budget 0.7 m |
+|---|---|---|---|---|
+| 1 | **1.49 m** | 1.48 m | 0.0087 m/s | **0.37 s** |
+| 2 | 0.91 m | 0.79 m | 0.108 m/s | 4.25 s |
+
+**ROZBIEŻNOŚĆ KRYTYCZNA (A-drift OBALONE pomiarem) → SR-B1:**
+- Dryf to **STEP do plateau (~0.9–1.5 m), NIE liniowy**; osiąga plateau w ~11 s pod ciągłym ruchem.
+- **max plateau 1.49 m > slack 0.866 m** → przy narożniku `R_route+d_stop+drift=28.284+2.85+1.49=32.62 > R_E 32`.
+- Reguła freeze (rate-based): `drift_rate_assumed=max(2×0.108, 0.7/30)=0.216 m/s → θ_pos=3.24 s` — ale realny
+  dryf przekracza ε_budget w **0.37 s (lot 1)** ⇒ przy θ_pos=3.24 s dryf ≈1.2 m przy REFUSE ⇒ **arytmetyka
+  Land NIE domyka** (`step 1.49 m > rezerwa 0.166 m`). Model liniowy `ε_pos=drift_rate·age_pos` nie pasuje.
+- **Niuans (nie rozstrzygnięty bez decyzji):** loty mierzyły dryf pod CIĄGŁYM ruchem 65 s (worst case);
+  osłona REFUSE→Land zatrzymuje ruch → istotny dryf w oknie [0,θ_pos]. Bezpośredni „czas-do-ε_budget"
+  daje θ_pos ≈ **0.37 s** (min z lotów) = REFUSE ~natychmiast na dead_reckoning. Metryka rate-based reguły
+  jest plateau-dominowana (kaptuje flat rate ~0, nie front-loaded step).
+
+**STATUS: STOP (SR-B1) — arytmetyka nie domyka; θ_pos NIE zamrożony.** Decyzja Olgi: (i) θ_pos z
+bezpośredniego czasu-do-ε_budget (~0.37 s, REFUSE natychmiast) zamiast rate-reguły; LUB (ii) re-def metryki
+dryfu (front-window); LUB (iii) re-pomiar z osłoną zatrzymującą ruch (dryf w krótkim oknie); LUB (iv)
+limitacja habitat/geometria (clean-loss w narożniku poza obwiednią). NIE strojenie.
+
+---
+
 ## §6. Stop-rules
 
 - **SR-1** brak deterministycznego, odwracalnego denialu → **SPEŁNIONE** (EKF2_GPS_CTRL=0 działa); gdyby
