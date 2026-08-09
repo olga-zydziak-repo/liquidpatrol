@@ -31,6 +31,7 @@ PATROL, HOLDING, RETURNING, DONE = "PATROL", "HOLDING", "RETURNING", "DONE"
 # powody
 GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT = \
     "GEOFENCE", "COMMAND_INVALID", "STALE_CMD", "ABORT"
+POS_DEGRADED = "POS_DEGRADED"      # R0.3a: 5. reason (D3) — zdegradowane zdrowie pozycji (GPS-denied)
 # tryby (z admitowanych komend)
 M_PATROL, M_HOLD, M_RETURN, M_ABORT = "PATROL", "HOLD", "RETURN", "ABORT"
 M_OBSERVE = "OBSERVE"           # R0.2: tryb OBSERVE (auto-wyzwalany kanałem, autoryzowany gramatyką P4)
@@ -53,6 +54,35 @@ class PatrolShield:
         self.n_hold_release = 0
         self._was_hold = False
         self.trace = []                 # log decyzji per tick
+        # R0.3a — monitor zdrowia pozycji (D12): event-based, debounce + histereza.
+        # POS_DEGRADED to REFUSE ODWRACALNY (nie terminal latch) — re-ALLOW po M s zdrowia (D6).
+        self._pos_bad = 0               # kolejne ticki zwalidowanej flagi (debounce)
+        self._pos_healthy = 0           # kolejne ticki zdrowia w stanie POS_DEGRADED (histereza)
+        self._pos_refuse = False        # czy aktywny REFUSE(POS_DEGRADED)
+        self.n_pos_enter = 0            # księgowość wejść w POS_DEGRADED
+        self.pos_debounce_ticks = getattr(self, "pos_debounce_ticks", 2)   # D12: 2 ticki
+        self.pos_hyst_ticks = getattr(self, "pos_hyst_ticks",
+                                      int(round(5.0 / self.cfg.dt)))        # D6: M=5 s
+
+    def _pos_monitor(self, pos_flag):
+        """Aktualizuje stan POS_DEGRADED z debounce (wejście) i histerezą (wyjście).
+        pos_flag = zwalidowana flaga utraty aidingu (dead_reckoning, def. R1). None ⇒ monitor nieaktywny
+        (kompatybilność wstecz: r01/r02 bez GPS-denied → zachowanie bez zmian)."""
+        if pos_flag is None:
+            return
+        if pos_flag:
+            self._pos_bad += 1
+            self._pos_healthy = 0
+            if self._pos_bad >= self.pos_debounce_ticks and not self._pos_refuse:
+                self._pos_refuse = True
+                self.n_pos_enter += 1
+        else:
+            self._pos_bad = 0
+            if self._pos_refuse:
+                self._pos_healthy += 1
+                if self._pos_healthy >= self.pos_hyst_ticks:   # M s ciągłego zdrowia → re-ALLOW
+                    self._pos_refuse = False
+                    self._pos_healthy = 0
 
     # -- dystans hamowania (bariera P2-analog) ------------------------------
     def _braking_dist(self, vel) -> float:
@@ -79,7 +109,8 @@ class PatrolShield:
             self.state = DONE
 
     # -- pojedynczy tick ----------------------------------------------------
-    def step(self, k, pos, vel, target, mode=M_PATROL):
+    def step(self, k, pos, vel, target, mode=M_PATROL, pos_flag=None):
+        self._pos_monitor(pos_flag)
         d = self._decide(k, pos, vel, target, mode)
         d["t"] = round(k * self.cfg.dt, 4)
         d["values"] = {
@@ -108,6 +139,14 @@ class PatrolShield:
             r, rule = self.terminal
             return {"k": k, "state": DONE, "decision": REFUSE, "reason": r, "rule": rule,
                     "applied": self._hold_setpoint(pos)}
+
+        # R-POS (R0.3a, D3/D12): zdegradowane zdrowie pozycji → REFUSE(POS_DEGRADED).
+        # PONIŻEJ latch, NA/PONAD R-G (prekondycja geofence: bariera p+v²/2a≤R_E na NIEPEWNYM p
+        # niewiarygodna — nie wolno ufać barierze na dryfującym p). ODWRACALNY (nie terminal): re-ALLOW
+        # po histerezie M. Akcja bezpieczna = velocity-descent dwufazowy (D5 zrew.; AUTO.LAND wykluczony).
+        if self._pos_refuse:
+            return {"k": k, "state": self.state, "decision": REFUSE, "reason": POS_DEGRADED,
+                    "rule": "R-POS", "action": "VELOCITY_DESCENT", "applied": self._hold_setpoint(pos)}
 
         # R-G geofence (najwyższy priorytet, każdy tryb)
         viol, detail = self._geofence_violation(pos, vel, target)
