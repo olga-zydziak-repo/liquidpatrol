@@ -138,3 +138,45 @@ Ziściła się. **DECYZJA: O4.**
 
 **Escape hatch domknięty w budżecie (~1 sesja, ~11 lotów).** Ustalenia + para repro + wykluczenia +
 retro-audyt + guard + decyzja O4 dostarczone. Push = Olga; engine-recon = osobny cykl na Twój sygnał.
+
+---
+
+## 8. Prowieniencja §6 — pakiet, granice dowodu, errata (2026-08-09)
+
+**Pakiet:** `results/R02/gate_live/C1_provenance/` (commit 7b58295 + niniejszy): światy §6 odtworzone
+z kodu wstawień (as-run niezachowany — `default.sdf` był przywracany po każdym biegu; luka nazwana),
+logi wykonawcy per bieg (`gate.log`/`trace.jsonl`/`px4.log`), klatki surowe: **uratowane 12/12 —
+10 wariantów C1 (`C1_first`, `C1b`, `C1_direct`, `C1_phys`, `C1_z7`, `C1_world`, `C1_worldonly`,
+`C1_noshadow`, `C1_box`, `C1_boxlow`) + `ATTR_static`/`ATTR_flight`; `.npy`+PNG 1:1 w `frames/`,
+sha256/rozmiar/mtime w `frames_manifest.json`. Nic nie przepadło (`/tmp/r02` przeżyło do salvage'u).**
+
+**Łańcuch dowodowy world-SDF:** `px4.log` każdego biegu potwierdza load
+`…/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf` — czyli dokładnie pliku modyfikowanego
+in-place; zero błędów parsera/meshy w logach; wstawka Lot 1/Lot 2 to prymityw box z materiałem inline
+(brak zasobów zewnętrznych); `session_worldonly_trace.jsonl` bajt-identyczny z pierwotnie
+committowanym `C1_lifecycle_worldonly.jsonl` (as-run). Ocena wierszy §6: Lot 1 („nie mesh-specific")
+i Lot 2 („nie wysokość celu") — wysoka pewność; lifecycle A — wysoka-minus (meshe = te same URI
+`model://x500_base`, które renderują na nosicielu w tym samym procesie serwera); shadows=off — SŁABY
+(NULL bez kontroli pozytywnej zmiany pikselowej), nienośny dla mechanizmu.
+
+**Granica dowodu (jawna):** dowód obrazowy (guard) nie rozróżnia „model w grafie sceny, nierenderowany"
+od „model cicho niezainstancjonowany przy world-load". Dla ścieżki create-based obecność była
+potwierdzana pozytywnie (`gz model -p` w runtime) — rdzeń symptomu stoi więc na create-path;
+world-path replikuje go obrazowo. Instrument §6 nie wykonywał enumeracji sceny (odpytywał sztywno
+nazwę `intruder`, w świecie był `intruder_world`) — naprawione forward-looking w A4.
+
+**Nota [Err] (dla przyszłego issue-triage):** linie `[Err] [UserCommands.cc:1319] Unable to update the
+pose … name[intruder]` we wszystkich biegach world-SDF (potwierdzone: `session_box_px4.log`,
+`session_boxlow_px4.log`) to artefakt name-mismatch (skrypt wołał set_pose mimo SKIP_CREATE, celując
+w nieistniejącą nazwę). **Nie jest to mechanizm awarii renderu.**
+
+**Symptom (wersja EN, do ewentualnego zgłoszenia upstream przy engine-reconie):** *camera sensor on an
+airborne/elevated model does not render small (~0.6 m) models — mesh or primitive box, runtime-created
+or present in world SDF, target high or low, 7–13 m away — while rendering the vehicle's own close
+geometry and the ground plane; a ground-level camera renders the same models. Runtime-created targets
+confirmed present via `gz model -p`; world-SDF targets evidenced by loaded-world path + clean parse
+(no scene-graph enumeration performed). Habitat: Gazebo Harmonic 8.14 / ogre2 / WSL2 mesa-D3D12.*
+
+**Errata:** static conf = **0.154** (źródło: `static_meta.json`, `RAPORT_R02C §2`); `RAPORT_G_R02 §3f`
+podaje 0.156 (linie 376/385/391/400/402/422) — źródłem liczby jest artefakt; 0.156 traktować jako
+literówkę raportu.

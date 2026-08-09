@@ -93,6 +93,20 @@ def scene_sanity_intruder(frame, pos, yaw, pitch, roll, intr_ned, dark_thr=160, 
             "region_px": int(reg.size), "el_deg": pf["el_deg"]}
 
 
+def gz_scene_models(expected_name):
+    """A4 (tor C ogon): enumeracja modeli sceny gz (`gz model --list`) — pierwsza, PRZED query po nazwie.
+    Zwraca {names, expected, present}. Rozdziela „nazwa nieobecna w scenie" od „obecna, nierenderowana".
+    Guard tylko RAPORTUJE (nie orzeka o kryteriach)."""
+    try:
+        import subprocess, re as _re
+        out = subprocess.run(["gz", "model", "--list"], capture_output=True, text=True, timeout=6).stdout
+        names = _re.findall(r"^\s*-\s*(\S+)\s*$", out, _re.M) or _re.findall(r"\b(\w+)\b", out)
+        names = [n for n in names if n not in ("Available", "models", "Requesting", "world")]
+        return {"names": names, "expected": expected_name, "present": expected_name in names}
+    except Exception as e:
+        return {"names": None, "expected": expected_name, "present": None, "err": str(e)}
+
+
 def qos_be():
     return QoSProfile(depth=1, history=HistoryPolicy.KEEP_LAST, reliability=ReliabilityPolicy.BEST_EFFORT)
 
@@ -286,9 +300,12 @@ class Runner:
             time.sleep(0.05)
         res = scene_sanity_intruder(self._frame, list(self.mav.pos), self._yaw(),
                                     self.mav.pitch, self.mav.roll, intr_ned)
+        # A4: enumeracja sceny NAJPIERW → rozdziela „nazwa nieobecna" od „obecna, nierenderowana"
+        res["model_in_state"] = gz_scene_models(os.environ.get("INTRUDER_NAME", "intruder"))
         self.tf.write(json.dumps({"EVENT": "scene_sanity", **res})+"\n")
         print(f"[gate] SCENE-SANITY intruz: {res.get('guard')} "
-              f"(in_fov={res.get('in_fov')} dark_px={res.get('dark_px')} el={res.get('el_deg')})")
+              f"(in_fov={res.get('in_fov')} dark_px={res.get('dark_px')} el={res.get('el_deg')} "
+              f"model_in_state={res['model_in_state'].get('present')} names={res['model_in_state'].get('names')})")
         if enforce and res.get("guard") == "FAIL_in_state_not_in_image":
             print("[gate] !! GUARD FAIL: intruz w STANIE sceny, ale NIEOBECNY w OBRAZIE (regresja renderu, "
                   "tor C C-A1). Bramka live NIE jest wiarygodna. STOP (SCENE_SANITY=off by pominąć świadomie).")
@@ -758,11 +775,13 @@ def scenario_C1(r: Runner):
     r.bring_up()
     r.idle_sp = [r.start[0], r.start[1], -ALT_M]
     gsan = r.preflight_scene_sanity(INTR_NED, enforce=False)   # GUARD jako kryterium (rider 0), bez STOP w diagnostyce
-    # weryfikacja pozy intruza (statyczny → gz model -p, NIE dynamic_pose)
+    # A4: weryfikacja pozy = ENUMERACJA sceny NAJPIERW, potem query po nazwie z parametru (INTRUDER_NAME)
+    intr_name = os.environ.get("INTRUDER_NAME", "intruder")
+    scene_models = gz_scene_models(intr_name)
     intr_pose_q = None
     try:
         import subprocess
-        intr_pose_q = subprocess.run(["gz", "model", "-m", "intruder", "-p"], capture_output=True,
+        intr_pose_q = subprocess.run(["gz", "model", "-m", intr_name, "-p"], capture_output=True,
                                      text=True, timeout=5).stdout.strip()[:200]
     except Exception as e: intr_pose_q = f"query_fail:{e}"
     pitches = []; rolls = []; yaws = []; boxes_seen = []; projs_full = []; proj_cx = []
@@ -798,6 +817,7 @@ def scenario_C1(r: Runner):
     yaw_deg = [math.degrees(y) for y in yaws]
     verdict = {"scenario": "C1_reattrib",
         "intruder_pose_gz": intr_pose_q, "intruder_assumed_NED": INTR_NED,
+        "scene_models_enum": scene_models,   # A4: enumeracja sceny (nazwa obecna? lista nazw)
         "pitch_deg": {"mean": deg(mp), "min": round(min(pitch_deg),2) if pitch_deg else None,
                       "max": round(max(pitch_deg),2) if pitch_deg else None,
                       "abs_max": round(max((abs(x) for x in pitch_deg), default=0),2),

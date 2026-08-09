@@ -51,12 +51,13 @@ sleep 3
 #    spawnować WPROST w pozie docelowej (para repro: spawn-wprost vs set_pose). SPAWN_SDF nadpisuje model.
 ISP="${INTRUDER_SPAWN:-12, 0, 14}"; IFS=',' read -r SPX SPY SPZ <<< "$ISP"
 SPAWN_SDF="${SPAWN_SDF:-$ROOT/r02/intruder_model.sdf}"
+INTRUDER_NAME="${INTRUDER_NAME:-intruder}"   # A4: nazwa intruza spójnie przez create/set_pose/query (fix name-mismatch)
 # DIAGNOSTYKA C-A1 (dyskryminator cyklu życia, rider 0): SKIP_CREATE=1 pomija runtime-create (intruz TYLKO
 # z pliku świata, jeśli tam jest) — czysty wariant „present-at-init" bez confoundu drugiego intruza.
 if [ "${SKIP_CREATE:-0}" != "1" ]; then
   gz service -s "/world/${WORLD}/create" --reqtype gz.msgs.EntityFactory \
     --reptype gz.msgs.Boolean --timeout 3000 \
-    --req "sdf_filename: \"$SPAWN_SDF\", name: \"intruder\", pose: {position: {x: $SPX, y: $SPY, z: $SPZ}}" \
+    --req "sdf_filename: \"$SPAWN_SDF\", name: \"$INTRUDER_NAME\", pose: {position: {x: $SPX, y: $SPY, z: $SPZ}}" \
     > "$LOGDIR/spawn.log" 2>&1
   echo "[gate] intruz spawn: $(cat $LOGDIR/spawn.log)"
 else
@@ -75,25 +76,27 @@ case "$SCEN" in
   *)  setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 11.5 \
         --log "$LOGDIR/intruder.jsonl" > "$LOGDIR/intruder.log" 2>&1 & PIDS+=($!) ;;
 esac
-[ "$SCEN" = "G1" ] && gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose \
+# G1: odsuń intruza z pola (tylko gdy jest w scenie — pomiń przy SKIP_CREATE=1, A4 name-mismatch fix)
+{ [ "$SCEN" = "G1" ] && [ "${SKIP_CREATE:-0}" != "1" ]; } && gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose \
   --reptype gz.msgs.Boolean --timeout 3000 \
-  --req 'name: "intruder", position: {x: -60, y: 0, z: 6}, orientation: {w: 1.0}' >/dev/null 2>&1
+  --req "name: \"$INTRUDER_NAME\", position: {x: -60, y: 0, z: 6}, orientation: {w: 1.0}" >/dev/null 2>&1
 # G2/C1: intruz statyczny w polu Północ drona (7,0,11.5) — koperta A7 (3D~7m, elewacja~12°, tło nieba)
-# DIAGNOSTYKA C-A1: SKIP_SETPOSE=1 pomija set_pose (spawn-wprost = para repro dla mechanizmu renderu).
-if { [ "$SCEN" = "G2" ] || [ "$SCEN" = "C1" ]; } && [ "${SKIP_SETPOSE:-0}" != "1" ]; then
+# DIAGNOSTYKA C-A1: SKIP_SETPOSE=1 pomija set_pose (para repro). A4: SKIP_CREATE=1 też pomija set_pose/query
+# (nie ma runtime-owego intruza o tej nazwie → uniknięcie [Err] UserCommands name-mismatch).
+if { [ "$SCEN" = "G2" ] || [ "$SCEN" = "C1" ]; } && [ "${SKIP_SETPOSE:-0}" != "1" ] && [ "${SKIP_CREATE:-0}" != "1" ]; then
   for try in 1 2 3; do
     gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean \
-      --timeout 3000 --req 'name: "intruder", position: {x: 7, y: 0, z: 11.5}, orientation: {w: 1.0}' >/dev/null 2>&1
+      --timeout 3000 --req "name: \"$INTRUDER_NAME\", position: {x: 7, y: 0, z: 11.5}, orientation: {w: 1.0}" >/dev/null 2>&1
     sleep 1
   done
   # WERYFIKACJA pozy (bug: set_pose bywa ignorowane zaraz po spawnie)
-  gz topic -e -t "/world/${WORLD}/dynamic_pose/info" -n 1 2>/dev/null | grep -A5 'name: "intruder"' | grep -E "x:|y:|z:" | head -3 > "$LOGDIR/intruder_pose.log"
-  echo "[gate] G2 intruz poza: $(tr '\n' ' ' < $LOGDIR/intruder_pose.log)"
+  gz topic -e -t "/world/${WORLD}/dynamic_pose/info" -n 1 2>/dev/null | grep -A5 "name: \"$INTRUDER_NAME\"" | grep -E "x:|y:|z:" | head -3 > "$LOGDIR/intruder_pose.log"
+  echo "[gate] G2/C1 intruz ($INTRUDER_NAME) poza: $(tr '\n' ' ' < $LOGDIR/intruder_pose.log)"
 fi
 if [ "$SCEN" = "CHAR" ] || [ "$SCEN" = "CHAR2" ]; then
   IFS=',' read -r CGX CGY CGZ <<< "$CHAR_INTRUDER"
   gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean \
-    --timeout 3000 --req "name: \"intruder\", position: {x: $CGX, y: $CGY, z: $CGZ}, orientation: {w: 1.0}" >/dev/null 2>&1
+    --timeout 3000 --req "name: \"$INTRUDER_NAME\", position: {x: $CGX, y: $CGY, z: $CGZ}, orientation: {w: 1.0}" >/dev/null 2>&1
   echo "[gate] CHAR: intruz statyczny GT=($CHAR_INTRUDER)"
 fi
 
