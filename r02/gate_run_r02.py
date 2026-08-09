@@ -741,7 +741,7 @@ def scenario_C1(r: Runner):
     Mierzy rozkład pitch/roll (att() rozszerzone), projekcję celu LEVEL vs PEŁNO-ATTITUDE, oraz co widzi
     detektor (boxy/conf). Rozdziela: (i) POZA FOV (klip pitchem) vs (ii) W FOV nie-wykryty (render/detektor).
     GATE C-A1: mały pitch ∧ cel-w-kadrze ⇒ STOP+re-atrybucja przed 0a/0b. Wyłącznie w locie."""
-    INTR_NED = (7.0, 0.0, -11.5)                         # intruz 7 m N, 1.5 m nad patrolem (elew ~12°)
+    INTR_NED = tuple(float(x) for x in os.environ.get("C1_INTR", "7,0,-11.5").split(","))  # NED; diagnostyka pozycji
     r.admit_observe(False); r.intruder_present = True
     # capture surowej klatki (jeśli IMG_TOPIC podany przez orkiestrację)
     frame = {"buf": None}
