@@ -493,6 +493,42 @@ Freeze→pomiar dowodzony łańcuchem commitów.
 
 ---
 
+## §5quinquies. ANEKS-4 — FREEZE liczb (B1-bis episode dwufazowy, 2026-08-10)
+
+**Loty EPISODE (profil dwufazowy §3quater, dobry boot 90 s konwergencji EKF, kanał czysty,
+`EKF2_HGT_REF=0` Baro; ε_pos liczone denial→touchdown zwalidowanym sędzią mono+skew):**
+
+| lot | stan | ε_pos [m] | p95(v<1) | ważny | epi_dr | t_flag |
+|---|---|---|---|---|---|---|
+| p_c1 | narożnik 90° v_max | 4.99 | 0.075 | ✓ | 9.94 s | — |
+| p_c2 | narożnik 90° v_max | 4.47 | — | ✓ | 9.97 s | — |
+| p_c3 | narożnik 90° v_max | 4.75 | — | ✓ | 9.96 s | — |
+| p_s1 | prosta v_max | 3.36 | — | ✓ | 9.97 s | — |
+| p_s2 | prosta v_max | **6.02** | 0.087 | ✓ | 9.93 s | 0.023 s |
+
+Dowody: `results/R03/recon/B1bis/episode/` (`metrics_episode2.jsonl`, jsonl+flylog per lot).
+
+**Sprawdzenie predykcji prerejestrowanej (§3quater):** narożnik ∈ **[2.5, 6] m** → zmierzone 4.47–4.99
+**W PAŚMIE ✓**. **Prosta p_s2 = 6.02 m > narożniki** (nieoczekiwane; wariancja błędu prędkości DR
+per boot — prosta nie ma bandu, ale jako max NAPĘDZA cap). Pomiar czysty (episode-clipped = full-dr max
+6.023; skew nieistotny; p95 0.087 ✓) — przyjęty, nie odrzucony.
+
+**FREEZE — reguła D10 (na max ważnych episode):**
+`max ε_pos = 6.023` (p_s2) → `ε_cap = 1.5 × 6.023 = 9.034` → zaokrągl. w górę do ćwiartki = **`ε_cap = 37/4 = 9.25 m`**.
+
+**FREEZE — reguła D11 (geometria):**
+`R_route' = R_E − d_stop − ε_cap = 32 − 2.85 − 9.25 = **19.90 m**`;
+`half-side' = R_route'/√2 = 19.90/√2 = **14.07 m**`.
+
+**SR-B1' (próg degeneracji 8.55 m):** `half-side' = 14.07 m ≫ 8.55` → **NIE wyzwolone → TWIERDZENIE
+DOMYKALNE** w tej geometrii przy profilu dwufazowym. (A-plateau bezwarunkowe było niedomykalne — §3ter;
+A-episode z akcją velocity-descent dwufazową **domyka**.)
+
+**Te liczby → stała w `config r03` (B2), cert P2-ε `ε_cap=37/4` (B3).** `r01/config.py` (frozen) NIETKNIĘTY.
+Robocze wcześniejsze (9/4, 7/4) **OBALONE/zastąpione** finalnym `37/4` z pomiaru episode.
+
+---
+
 ## §6. Stop-rules
 
 - **SR-1** brak deterministycznego, odwracalnego denialu → **SPEŁNIONE** (EKF2_GPS_CTRL=0 działa); gdyby
