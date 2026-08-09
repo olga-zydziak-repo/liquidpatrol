@@ -8,13 +8,14 @@ source env_gpu.sh >/dev/null 2>&1 || true
 set -o pipefail
 export HEADLESS=1
 FL="$ROOT/results/R03/recon/B1bis/episode"; mkdir -p "$FL"
-MET="$FL/metrics_episode.jsonl"; : > "$MET"
+MET="$FL/metrics_episode2.jsonl"; : > "$MET"   # profil DWUFAZOWY (§3quater)
 
 FLIGHTS=(
-  "e1_straight straight"
-  "e2_straight straight"
-  "e3_corner corner"
-  "e4_corner corner"
+  "p_c1_corner corner"
+  "p_c2_corner corner"
+  "p_c3_corner corner"
+  "p_s1_straight straight"
+  "p_s2_straight straight"
 )
 
 boot() {

@@ -1,0 +1,14 @@
+[b1bis] EKF2_GPS_CTRL old=7
+[b1bis] EKF2_HGT_REF 0->0 (Baro, habitat GPS-denied)
+[b1bis] EVENT armed mono=7198.2015 mode=episode
+[b1bis] EVENT takeoff mono=7198.2134 mode=episode
+[b1bis] EVENT offboard mono=7208.2265 mode=episode
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[b1bis] EVENT denial_on mono=7233.2964 mode=episode
+[b1bis] EVENT refuse_land mono=7234.3221 mode=episode
+[b1bis] EVENT h_switch mono=7238.3524 mode=episode
+[b1bis] EVENT touchdown mono=7243.2566 mode=episode
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[b1bis] restored EKF2_GPS_CTRL=7 EKF2_HGT_REF=0
+[b1bis] EKF2_GPS_CTRL post=7
+[b1bis] EVENT done mono=7243.3188 mode=episode
