@@ -91,7 +91,39 @@ Mechanizm silnikowy → nie brnę w internals. Opcje na następną sesję/cykl:
 równolegle **O4** jako stan bazowy (teza obroniona GT-fed, guard chroni przed regresją). Dźwignie 0/2/R2-alt
 pozostają ZAWIESZONE (celowały w nie-problem). θ_conf i kryterium dwustronne bez zmian.
 
-## 6. STOP
+## 6. O2 SWEEP (decyzja Olgi: O2 + test zerowy; guard jako kryterium)
 
-Escape hatch uruchomiony (mechanizm silnikowy). Ustalenia + para repro + retro-audyt + guard dostarczone;
-opcje O1–O4 do decyzji. Commity `12d74dd` (mechanizm), `407b1ee` (guard). Push = Olga. PRE_R02C-rev1: §7.
+Wszystkie testy: world-SDF only, kamera POWIETRZNA, `SCENE_SANITY` guard = PASS/FAIL, jedna zmienna.
+
+| test | zmienna | guard airborne |
+|---|---|---|
+| **rider 0 — cykl życia A** | world-file present-at-init (SKIP_CREATE) | **FAIL** (dark_px=0) |
+| rider 0 — B / C | runtime-create / set_pose | FAIL (wcześniej) → **LIFECYCLE OBALONE** |
+| **toggle #1** | shadows=off (scene+sun) | **FAIL** (nie shadows) |
+| **Lot 1** (wariant 3) | BOX prymityw @ (7,0,11.5) | **FAIL** → NIE mesh-specific |
+| **Lot 2** (wariant 3) | BOX nisko @ gz(10,0,2), elew −35° | **FAIL** → NIE wysokość celu |
+
+**MECHANIZM (precyzyjny symptom — do issue-search w trackerze gz-sim):** podniesiony/powietrzny sensor
+kamery gz (habitat **WSL2 / D3D12**, ogre2) **nie renderuje MAŁYCH obiektów** (~0.6 m, mesh LUB prymityw
+box, dystans ~7–10 m, wysoko LUB nisko), choć renderuje **wielki `ground_plane`** i **bliskie śmigła
+drona**; kamera **NAZIEMNA renderuje te same małe obiekty** (`static.png`). **Wykluczone:** model-config
+(set_pose / static / typ / mesh-vs-box), cykl życia (world/create/set_pose), wysokość celu, shadows.
+**Klasa: SILNIKOWA** (LOD / culling / scene-management dla podniesionego sensora na WSL2-D3D12).
+
+## 7. DECYZJA — O4 (reguła Olgi z góry) + PRE_R02C-rev1
+
+Reguła zamrożona przed lotami: „oba loty FAIL przy renderującym ground_plane → hipoteza rozmiaru/kubatury,
+koniec zgadywania → **O4 baza GT-fed, engine jako osobny recon** z issue-search po pełnym symptomie".
+Ziściła się. **DECYZJA: O4.**
+- **Tor C detekcji ZAMKNIĘTY na bazie GT-fed** — teza osłona+OBSERVE obroniona (`RAPORT_R02.md`), certy 5/5,
+  dead-man, G5 warstwa-0 — **nie zależą od renderu kamery**. **Scene-sanity guard** chroni przed regresją
+  (żaden przyszły lot live nie zaraportuje detekcji bez widocznego intruza).
+- **Live-fed detection uplift ZAWIESZONY** do naprawy fidelity symulatora (render małych obiektów dla
+  podniesionego sensora). **Osobny recon** (nowy cykl): issue-search gz-sim tracker po symptomie §6,
+  test render-engine `ogre2→ogre` / API-backend na WSL2 (habitat change, rider 2 fingerprint), ewent.
+  bump gz **tylko** z konkretnym issue upstream (ryzyko parowania PX4↔Harmonic — fundament R0.0).
+- **Dźwignie 0/2/R2-alt** (gimbal/MTI/detektor) pozostają **bezprzedmiotowe** — celowały w nie-problem
+  (percepcja), gdy przyczyną jest render. **θ_conf i kryterium dwustronne bez zmian.**
+
+**Escape hatch domknięty w budżecie (~1 sesja, ~11 lotów).** Ustalenia + para repro + wykluczenia +
+retro-audyt + guard + decyzja O4 dostarczone. Push = Olga; engine-recon = osobny cykl na Twój sygnał.
