@@ -18,6 +18,24 @@ Zero komponentów uczonych. GT (`ε_pos_rzecz = |pos_EKF − pos_GT|`) jawnie et
 
 ---
 
+## §0bis. RATYFIKACJA (2026-08-09) — decyzje D1–D8 + ridery R03A-A1..A4 (WIĄŻĄCE, nadrzędne nad §pierwotnym)
+
+- **D1 — admisja CZASOWA:** `age_pos` od utraty wiarygodnego fixu absolutnego / wejścia w dead-reckoning
+  (def. „wiarygodnego fixu" — §1). **`eph` NIGDY w admisji** — pasywna telemetria, jak conf poza kanałem (D1/A1 R0.2).
+- **D2 — formy:** dowód formy dynamicznej **(ii)** przez most P2-ε: `(i) ∧ (r ≤ R_route) ⇒ (ii)`; admisja runtime = statyczna **(i)** na deadline `θ_pos`.
+- **D3 — `REFUSE(POS_DEGRADED)` = 5. reason** klasy REFUSE (precedens ABORT), bez nowego liścia.
+- **D4 — `ε_budget = 0.7 m` Z REGUŁY:** `slack 0.866 − rezerwa_tick (v_max·tick = 3.0·0.05 = 0.15) = 0.716 → 0.7`.
+- **D5 — akcja po REFUSE(POS) = Land** (komenda trybu z listy zamkniętej węzła osłony, w trace); RTL wykluczony (brak global pos, R2).
+- **D6 — histereza `M = 5 s`** ciągłego zdrowego fixu do re-ALLOW.
+- **D7 — nominal S1 = 5 min × 3 świeże booty.**
+- **D8 — denial = `EKF2_GPS_CTRL` 7→0** (restore 0→7). **Scope: usunięcie aidingu (clean loss), NIE jamming/spoofing** —
+  roszczenia skalowane do tego. Stempel wstrzyknięcia przyrządem; odwracalność per bieg.
+
+**Ridery R03A-A1..A4** naniesione w §1–§5 (A1 sygnał+twierdzenie+drift; A2 flaga-vs-akcja warstwy-0;
+A3 ε_budget+M+most+arytmetyka Land; A4 scope denialu+stempel+eph pasywnie).
+
+---
+
 ## §1. Źródła telemetrii (R1 — inwentarz + żywe potwierdzenie XRCE)
 
 Żywe echo (stack SITL, etykieta Hz = `ros2-topic-hz`); pełny inwentarz: `results/R03/recon/R1_topics_inventory.md`.
@@ -30,9 +48,14 @@ Zero komponentów uczonych. GT (`ε_pos_rzecz = |pos_EKF − pos_GT|`) jawnie et
 | `/fmu/out/failsafe_flags` | `local_position_invalid`, `global_position_invalid`, `local_position_accuracy_low` | **1.85** | mapa warstwy-0 (`FailsafeFlags.msg:28/31/51`) |
 | `/fmu/out/vehicle_gps_position` (SensorGps) | `fix_type`, `jamming_state`, `spoofing_state` | — | stan GPS (bonus) |
 
-**Minimalny zestaw (wybór z uzasadnieniem):** (a) **age_pos = czas od `dead_reckoning=true`** (NIE eph —
-patrz §7 rozbieżność krytyczna); (b) **ε_pos_est** wyprowadzony z age_pos przez model dryfu (bo eph
-niewiarygodne w bezruchu), z `eph` jako sygnał POMOCNICZY/górny gdy wiarygodny.
+**Definicja „wiarygodnego fixu absolutnego" (D1, wpisana wprost):** `¬dead_reckoning` (fix absolutny
+fuzjonowany) — `dead_reckoning=true` ⇔ utrata wiarygodnego fixu ⇔ start `age_pos`. Reset `age_pos`:
+`M=5 s` ciągłego `¬dead_reckoning` (histereza D6).
+
+**Minimalny zestaw (D1):** (a) **age_pos = czas od `dead_reckoning=true`** — JEDYNY sygnał admisji;
+(b) `ε_pos_est = drift_rate·age_pos` (model dryfu). **`eph` NIGDY w admisji** — pasywna telemetria
+(symetria z conf poza kanałem D1/A1 R0.2: eph = zmierzone-ale-niezaufane; do logu/telemetrii, nie decyzji).
+Uzasadnienie wykluczenia eph z admisji: §7.1 (niewiarygodne w bezruchu — spike→osiada).
 
 **Rozbieżności (jawne):** (1) `estimator_status` (pełny, `pos_horiz_accuracy[m]`) **NIE publikowany** przez
 XRCE — tylko `estimator_status_flags`; `eph` z VLP to jedyny ε_pos[m] przez XRCE. (2) `SensorGps.msg` (src)
@@ -55,12 +78,21 @@ Sonda naziemna (disarmed): przy przełączeniu 7→0 (mono `monotonic_local`):
 zadziałał; `EKF2_GPS_CTRL` to działająca alternatywa. (`full.log`, `inject.log`.) `SYS_FAILURE_EN` istnieje
 (`system_params.c:303`, default 0), ale ścieżka iniekcji nie dała efektu.
 
-**Mapa natywnej warstwy-0:** jedyny param rodziny w v1.16.2 = **`COM_POS_FS_EPH = 5.0 m`**
-(`commander_params.c:531`; DELAY/EPV/PROB/GAIN USUNIĘTE — rozbieżność vs starsze PX4). Failsafe:
-`local_position_accuracy_low` → `COM_POS_LOW_ACT` (`failsafe.cpp:535`). **Konsekwencja krytyczna:** skoro
-`eph` osiada NISKO gdy nieruchomo/zawis, **natywny failsafe eph>5 m może NIE odpalić** — luka, którą
-osłona (age_pos czasowe) pokrywa. Analogia GF: warstwa-0 NA ZEWNĄTRZ, kryterium 0 odpaleń w nominale.
-**Akcja natywna w LOCIE — NIEZMIERZONA** (iniekcja w locie zawiodła, patrz rozbieżność) → pomiar w buildzie.
+**Scope denialu (D8/A4):** `EKF2_GPS_CTRL` 7→0 = **usunięcie aidingu GPS (clean loss), NIE jamming/spoofing**
+— wszystkie roszczenia skalowane do clean-loss. **Stempel wstrzyknięcia** = `monotonic_local` zdarzenia
+denial_on (+ `px4-msg-us` najbliższej próbki); **odwracalność potwierdzana per bieg** (0→7 + weryfikacja
+`get_param_int` po biegu, SR-4/SR-B5).
+
+**Mapa natywnej warstwy-0 — ROZDZIAŁ FLAGA vs AKCJA (A2, WIĄŻĄCY):**
+- **FLAGA:** `failsafe_flags.local_position_invalid`/`global_position_invalid` (nazwa jawna), czas z
+  **kwantyzacją ±0.54 s** (źródło 1.85 Hz → ½·1/1.85=0.27 s? — [DO POLICZENIA w buildzie: ½ okresu =
+  0.270 s; recon podał ±0.54 s = pełny okres, etykietować którą konwencją]); flaga to NIE akcja.
+- **AKCJA:** czy natywny failsafe wykonał zmianę trybu **w offboard** i kiedy (nav_state, `nav`/`px4-msg-us`).
+  Próg: **`COM_POS_FS_EPH=5.0 m`** (`commander_params.c:531`; jedyny COM_POS_FS_* w v1.16.2 — DELAY/EPV/PROB/GAIN
+  USUNIĘTE, rozbieżność) → `local_position_accuracy_low` → `COM_POS_LOW_ACT` (`failsafe.cpp:535`).
+- **Nagłówek „luka warstwy-0" TYLKO z tym rozdziałem.** Kryterium: **0 natywnych AKCJI przed akcją osłony**
+  (jak GF=0), **z notą możliwej PUSTOŚCI** (próg eph 5 m „martwy" w tym trybie — eph osiada <5 m, §7.1).
+- **Akcja natywna w LOCIE — NIEZMIERZONA w reconie** (iniekcja w locie zawiodła) → pomiar w bramce (B5/S2).
 
 **Liczby czasowe (etykieta):** wszystkie z `monotonic_local` (zdarzenia sondy) + `px4-msg-us` (timestamp msg).
 
@@ -73,19 +105,29 @@ zmierzone 0.149), `A_BRAKE=2.0` (:26, zmierzone 2.65≥2.0 — rozbieżność, d
 `DELTA_MARGIN=d_stop = v·t_react + v²/2a = 0.6 + 2.25 = 2.85` (:27), `R_E=32.0` (:30).
 **slack = R_E − (R_route + d_stop) = 32 − 31.134 = 0.866 m** — naturalny sufit budżetu ε_pos.
 
-**Dwie formy:** (i) **statyczna:** ALLOW ⇐ `ε_pos_est ≤ ε_budget` (stała ≤ slack); (ii) **dynamiczna:**
-`r_bież + d_stop + ε_pos_est ≤ R_E` (w locie — dopuszcza większe ε_pos blisko Home).
+**`ε_budget` Z REGUŁY (D4, zapisujemy REGUŁĘ):** `ε_budget = slack − rezerwa_tick`, gdzie
+`rezerwa_tick = v_max·tick = 3.0·0.05 = 0.15 m` (droga w 1 tick osłony przed reakcją) →
+`0.866 − 0.15 = 0.716 → ε_budget = 0.7 m`. Rezerwa zawierania po budżecie = `slack − ε_budget = 0.166 m`.
 
-**REWIZJA z R2 (krytyczna):** `ε_pos_est` **NIE = eph** (eph niedoszacowuje dryf w bezruchu). Robustnie:
-**`ε_pos_est = drift_rate · age_pos`** (age_pos = czas w `dead_reckoning`; `drift_rate` [m/s] MIERZONY
-w locie GPS-out przeciw GT — build). Admisja realizuje się jako **próg CZASOWY**: REFUSE gdy
-`age_pos > age_pos_max = ε_budget / drift_rate`. `eph` sygnał pomocniczy (górny), gdy `¬dead_reckoning`.
+**Formy (D2):** (i) **statyczna** (admisja runtime): ALLOW ⇐ `ε_pos_est ≤ ε_budget`, tj. na deadline
+`age_pos ≤ θ_pos`; (ii) **dynamiczna** (dowodzona): `r + d_stop + ε_pos ≤ R_E`. **MOST P2-ε:**
+`(i) ∧ (r ≤ R_route) ⇒ (ii)` (przy `r=R_route` worst-case, `ε_pos ≤ ε_budget ≤ slack` ⇒ zawieranie).
 
-**Zakres dowodu:** **P2-ε jako OSOBNY cert** (wzorzec `P2_vmax3p1.json`), kanoniczny `P2.json` NIETKNIĘTY.
-z3: bariera rozszerzona `p + v²/2a + ε_pos ≤ R_E` — dodanie członu `ε_pos ≥ 0` (liniowe) → **forma (ii)
-w NRA WYKONALNA**. Dowodzimy (ii); admisja = konserwatywne (i) przy `r=R_route` (⇒ `ε_pos ≤ slack`).
-**DO RATYFIKACJI:** forma (i) vs (ii); `ε_budget` (propozycja 0.7 m: slack 0.866 − 0.7 = 0.166 m rezerwy
-zawierania, i 0.7 ≫ nominalny eph 0.15 → brak fałszywego REFUSE; alternatywa 0.8 zostawia 0.066 m — cieńsza).
+**`ε_pos_est = drift_rate · age_pos`** (D1: age_pos czasowe; eph poza admisją). **Deadline
+`θ_pos = ε_budget / drift_rate_assumed`.** Admisja: **REFUSE(POS_DEGRADED) gdy `age_pos > θ_pos`**.
+
+**Założenie A-drift (jawne w twierdzeniu P2-ε, jak żywotność osłony):** *„zawieranie WARUNKOWE: dryf
+rzeczywisty ≤ `drift_rate_assumed`".* `drift_rate_assumed` z **protokołu B1** (charakteryzacja POD RUCHEM,
+status [A4], PRZED zamrożeniem progów — §5/B1). **ZAKAZ wstrzykiwania sztucznego dryfu** (zmiana habitatu
+— tylko osobną decyzją Olgi); `drift_rate` mierzony z clean-loss EKF vs GT.
+
+**Arytmetyka Land (A3):** akcja Land dolicza człon `t_land · drift_rate_assumed` — musi zajść:
+`t_land · drift_rate_assumed ≤ rezerwa 0.166 m` **ALBO** doliczyć do budżetu (θ_pos pomniejszony).
+`t_land` = czas zniżania z ALT_M=10 m — **zmierzyć sondą** (etykieta przyrządu). Nie domyka → **STOP
+SR-B1** (nie strojenie).
+
+**Zakres dowodu:** **P2-ε OSOBNY cert** (wzorzec `P2_vmax3p1.json`), kanoniczny `P2.json` NIETKNIĘTY.
+z3 NRA: `(i) ∧ (r ≤ R_route) ⇒ (ii)` (UNSAT-ami) + ostrość budżetu (kontrprzykład przy `ε > ε_budget + δ`).
 
 ---
 
@@ -96,12 +138,12 @@ R-A; P1c rozszerza zbiór reasonów). P1 7-liściowy NIETKNIĘTY strukturalnie. 
 geofence** (zdegradowana pozycja podważa barierę `p+v²/2a≤R_E` liczoną na niepewnym p) → poniżej latch,
 NA/PONAD R-G. Uzasadnienie: nie wolno ufać barierze na dryfującym p.
 
-**Akcja bezpieczna po REFUSE(POS):** RTL **niedostępny** (wymaga global position; `global_position_invalid=True`
-zmierzone w R2) → lista zamknięta: **Hold** (na ostatniej estymacie, ryzyko dryfu) lub **Land** (zejście
-pionowe, nie wymaga pozycji poziomej). **Rekomendacja: Land** (robustne wobec dryfu). DO RATYFIKACJI.
+**Akcja bezpieczna po REFUSE(POS) = Land (D5):** RTL **wykluczony** (wymaga global position;
+`global_position_invalid=True` zmierzone R2). Land = zejście pionowe, nie wymaga pozycji poziomej;
+komenda trybu z **listy zamkniętej** węzła osłony (rozszerzenie o Land), zapisana w trace.
 
-**Histereza:** re-ALLOW dopiero po **M s** zdrowego fixu (`¬dead_reckoning ∧ eph≤ε_recover`, `ε_recover<ε_budget`).
-M DO RATYFIKACJI (propozycja z R2: recovery eph wraca <1 s, ale margines anty-flapping → M≈3–5 s).
+**Histereza (D6): `M = 5 s`** ciągłego zdrowego fixu (`¬dead_reckoning`) do re-ALLOW. (eph poza admisją;
+warunek zdrowia = `¬dead_reckoning`, nie eph.)
 
 **Interakcja z dead-manem:** denial to awaria SENSORA — pętla decyzyjna i streamer ŻYJĄ (osłona produkuje
 REFUSE(POS), streamer publikuje setpoint akcji bezpiecznej). **Brak sprzężenia z dead-manem** (nie ma
@@ -121,15 +163,35 @@ admisji WEWNĘTRZNY, nie komenda operatora → gramatyka bez zmian.
 - **S3** denial + recovery → powrót do ALLOW po histerezie M.
 - **S4** denial przy granicy (najgorsza geometria: narożnik trasy, r≈R_route).
 
-**KRYTERIUM (ZAMROŻONE, Olga ratyfikuje):**
-- **(+)** 100% biegów S2/S4 (≥3 świeże booty każdy): akcja bezpieczna **ZANIM** `ε_pos_rzecz` (sędzia GT)
-  przekroczy `ε_budget` ORAZ **0 naruszeń R_E** ORAZ **0 odpaleń natywnego failsafe pozycyjnego**
-  (osłona uprzedza warstwę-0);
-- **(−)** **0 fałszywych `REFUSE(POS)`** w S1 (N min × 3 booty).
-- **N (nominal):** eph nominalny STABILNY ~0.15 m (R1) → N = 3 min (zapas nad transjentami bootu).
+**KRYTERIUM ZAMROŻONE — na MECHANIZM (A1):**
+- **(+)** 100% biegów S2/S4 (≥3 świeże booty): **`REFUSE(POS_DEGRADED)` w deadline `θ_pos ± tol`**
+  ORAZ **akcja Land domknięta** (touchdown wewnątrz `R_E`) ORAZ **0 naruszeń R_E** ORAZ **0 natywnych
+  AKCJI przed akcją osłony** (A2, z notą pustości). `ε_pos_rzecz` (sędzia GT) raportowane **INFORMACYJNIE**
+  z notą wierności SITL (NIE w kryterium — clean-loss w quasi-idealnym IMU może dać dryf ≈ 0).
+- **(−)** **0 fałszywych `REFUSE(POS)`** w S1 (**N = 5 min × 3 booty**, D7).
 
-**Metryki NIENASYCONE (raportować rozrzut):** czas do REFUSE, `ε_pos_rzecz` przy REFUSE, min margines
-`R_E − r`, age_pos przy REFUSE. NIE metryki cięte sufitem (lekcja max_age/θ_age R0.2).
+**`tol` WYPROWADZONA i ZAMROŻONA** (suma kwantyzacji, składniki policzone): `tol = tick_osłony (0.05 s)
++ okres_źródła_flagi (dead_reckoning @100 Hz = 0.01 s; failsafe_flags @1.85 Hz = 0.54 s — użyć źródła
+admisji) + niepewność_stempla_wstrzyknięcia (≤ 1 tick sondy)`. **Admisja czyta `dead_reckoning` @100 Hz**
+⇒ `tol ≈ 0.05 + 0.01 + 0.05 = 0.11 s` [POLICZYĆ dokładnie w B2, zamrozić przed bramką].
+
+**Metryki NIENASYCONE (rozrzut):** czas-do-REFUSE, `ε_pos_rzecz` przy REFUSE, min margines `R_E−r`,
+czas Land, age_pos przy REFUSE. NIE metryki cięte deadline'em (lekcja max_age/θ_age R0.2).
+
+---
+
+## §5bis. Protokół B1 — charakteryzacja `drift_rate` (ZAMROŻONY PRZED pomiarem)
+
+3 biegi patrolowe (trasa R0.1, świeży boot każdy): denial w locie, okno dead-reckoning **≥ 60 s POD RUCHEM**.
+`drift_rate_measured_p95 = p95( |Δ(pos_EKF − pos_GT)| / Δt )` w oknach. Kanały: **GT = poza gz, etykieta
+`gt_judge`**; **EKF = `vehicle_local_position`, etykieta `nav-local`**; **Δt = `monotonic_local`**.
+
+**REGUŁA WYBORU (zamrożona TERAZ, przed liczbą):**
+`drift_rate_assumed = max( 2 × drift_rate_measured_p95 , ε_budget / θ_pos_max )`, `θ_pos_max = 30 s`
+(podłoga testowalności — zweryfikuj że noga S2 trwa ≥ `θ_pos + 15 s`). `θ_pos = ε_budget / drift_rate_assumed`
+(≤ 30 s z konstrukcji). Jeśli `drift_rate_measured ≈ 0` (SITL quasi-idealne IMU) — to WYNIK do raportu
+(nota wierności), deadline stoi na A-drift; **zero „poprawiania" symulatora**. Wyniki → ANEKS-2 → commit
+zamrażający (PRE) PRZED bramką (kolejność freeze→pomiar dowodzona łańcuchem commitów).
 
 ---
 
@@ -144,6 +206,12 @@ admisji WEWNĘTRZNY, nie komenda operatora → gramatyka bez zmian.
   ale `eph`+`dead_reckoning`+`failsafe_flags` wystarczają. **NIE przechodzić po cichu na MAVSDK-telemetrię.**
 - **SR-4** żaden param PX4 zmieniony w sondach nie zostaje → **SPEŁNIONE** (EKF2_GPS_CTRL=7, SYS_FAILURE_EN=0
   zweryfikowane po sondzie).
+
+**Stop-rules BUILD:** **SR-B1** arytmetyka Land nie domyka budżetu (A3) → STOP z liczbami. **SR-B2** P5
+rozbieżność → STOP (automatu nie łata się pod test). **SR-B3** flapowanie flagi dead-reckoning w nominalu
+→ STOP przed resztą bramki, raport z histogramem (bez samowolnego strojenia def. fixu/histerezy). **SR-B4**
+wyników bramki nie stroi się po fakcie; FAIL=FAIL z raportem. **SR-B5** params PX4 przywrócone po sesji;
+frozen R0.1/R0.2 nietykane; drzewo czyste na koniec.
 
 ---
 
@@ -160,16 +228,9 @@ admisji WEWNĘTRZNY, nie komenda operatora → gramatyka bez zmian.
 
 ---
 
-## STOP — decyzje do ratyfikacji (Olga)
+## STOP/GO — RATYFIKOWANE (Olga, 2026-08-09)
 
-Recon R1–R5 domknięty; PRE zamrożony. **Koniec sesji, żadnej budowy.** Do ratyfikacji przed buildem:
-1. **Sygnał admisji: age_pos CZASOWE (dead_reckoning+czas)** vs eph — rekomendacja: czasowe (§7.1).
-2. Forma twierdzenia **(i) statyczna** vs (ii) dynamiczna — rekomendacja: dowód (ii), admisja (i).
-3. Reason vs liść — rekomendacja: **reason POS_DEGRADED** (precedens ABORT).
-4. **ε_budget** — rekomendacja 0.7 m (rezerwa 0.166 m).
-5. **Akcja po REFUSE(POS)** — rekomendacja **Land** (RTL niedostępny bez global pos).
-6. **Histereza M** — rekomendacja 3–5 s.
-7. **N minut** nominalu — rekomendacja 3 min.
-8. **Mechanizm denialu** — rekomendacja `EKF2_GPS_CTRL=0` (kanoniczny `failure gps off` zawiódł).
-
-Push = Olga. Dowody: `results/R03/recon/`. Build startuje po ratyfikacji (osobny cykl).
+PRE_R03A **RATYFIKOWANE z riderami R03A-A1..A4 + decyzjami D1–D8** (§0bis, naniesione w §1–§5).
+Build wg `PROMPT_R03A_BUILD`: Krok0 aneks (ten commit) → B1 drift_rate (freeze PRZED bramką) → B2
+implementacja+testy → B3 P2-ε → B4 re-cert → B5 bramka S1–S4 → B6 RAPORT_R03A. Kolejność freeze→pomiar
+dowodzona łańcuchem commitów. Dowody reconu: `results/R03/recon/`. Push = Olga na końcu.
