@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.9">
+  <world name="default">
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic"/>
+    <scene>
+      <grid>false</grid>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>1 1</size>
+            </plane>
+          </geometry>
+          <surface>
+            <friction>
+              <ode/>
+            </friction>
+            <bounce/>
+            <contact/>
+          </surface>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>500 500</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 0 0 0 -0 0</pose>
+          <mass>1</mass>
+          <inertia>
+            <ixx>1</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>1</iyy>
+            <iyz>0</iyz>
+            <izz>1</izz>
+          </inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <light name="sunUTC" type="directional">
+      <pose>0 0 500 0 -0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0.001 0.625 -0.78</direction>
+      <diffuse>0.904 0.904 0.904 1</diffuse>
+      <specular>0.271 0.271 0.271 1</specular>
+      <attenuation>
+        <range>2000</range>
+        <linear>0</linear>
+        <constant>1</constant>
+        <quadratic>0</quadratic>
+      </attenuation>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.397971057728974</latitude_deg>
+      <longitude_deg> 8.546163739800146</longitude_deg>
+      <elevation>0</elevation>
+    </spherical_coordinates>
+    <model name="intruder_world">
+        <static>true</static>
+        <pose>7 0 11.5 0 0 0</pose>
+        <link name="body">
+          <!-- rama nośna (kadłub + ramiona) -->
+          <visual name="frame">
+            <pose>0 0 .025 0 0 3.141592654</pose>
+            <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/NXP-HGD-CF.dae</uri></mesh></geometry>
+          </visual>
+          <!-- 4 silniki -->
+          <visual name="motor_0"><pose>0.174 0.174 .032 0 0 -.45</pose>
+            <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
+          <visual name="motor_1"><pose>-0.174 0.174 .032 0 0 -.45</pose>
+            <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
+          <visual name="motor_2"><pose>0.174 -0.174 .032 0 0 -.45</pose>
+            <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
+          <visual name="motor_3"><pose>-0.174 -0.174 .032 0 0 -.45</pose>
+            <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
+          <!-- 4 śmigła (sylwetka propelerów — istotna dla rozpoznania jako UAV) -->
+          <visual name="prop_0"><pose>0.174 0.174 .06 0 0 0</pose>
+            <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_ccw.stl</uri></mesh></geometry></visual>
+          <visual name="prop_1"><pose>-0.174 0.174 .06 0 0 0</pose>
+            <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_cw.stl</uri></mesh></geometry></visual>
+          <visual name="prop_2"><pose>0.174 -0.174 .06 0 0 0</pose>
+            <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_cw.stl</uri></mesh></geometry></visual>
+          <visual name="prop_3"><pose>-0.174 -0.174 .06 0 0 0</pose>
+            <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_ccw.stl</uri></mesh></geometry></visual>
+        </link>
+      </model>
+  </world>
+</sdf>
