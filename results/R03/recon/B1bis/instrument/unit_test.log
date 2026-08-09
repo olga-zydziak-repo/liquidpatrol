@@ -1,0 +1,11 @@
+=== GT-JUDGE UNIT-TEST (R-2): znany błąd -> znany wynik, oba układy osi ===
+case                              swap_got  swap_exp  noswap_got  noswap_exp  PASS
+C1 dryf 2.0 N / truth 5.0 N         2.0000    2.0000      8.6023      8.6023  PASS
+C2 dryf 1.5 E / truth 3.0 E         1.5000    1.5000      5.4083      5.4083  PASS
+C3 zero dryf / truth 6.0 N          0.0000    0.0000      8.4853      8.4853  PASS
+
+=== CASE 4: syntetyka RUCHOMA — detekcja skew stempla GT ===
+  inj_skew=+0.16s  skew_hat=+0.16s  resid@skew=0.0000  resid@0=0.2360  PASS
+  inj_skew=-0.10s  skew_hat=-0.10s  resid@skew=0.0000  resid@0=0.1488  PASS
+
+WYNIK: PASS — instrument zwalidowany (swap+skew), wolno liczyć B1-bis
