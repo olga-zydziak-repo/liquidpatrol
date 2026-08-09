@@ -5,7 +5,7 @@
   "z3_pip": "5.0.0.0",
   "z3_lib": "5.0.0",
   "episodes_random": 400,
-  "episodes_targeted": 10,
+  "episodes_targeted": 15,
   "transitions_covered": [
     "abort",
     "geo",
@@ -13,9 +13,10 @@
     "latch",
     "observe",
     "patrol",
+    "pos",
     "return"
   ],
-  "coverage": "7/7",
+  "coverage": "8/8",
   "mismatches": 0,
   "latched_reasons_covered": [
     "GEOFENCE",
@@ -23,10 +24,11 @@
     "COMMAND_INVALID",
     "STALE_CMD"
   ],
+  "r03a_note": "8. liść R-POS (POS_DEGRADED, ODWRACALNY) pokryty: debounce 1t/2t, histereza (flicker+re-ALLOW), priorytet latch>R-POS>R-G. Konformancja tau≡shield NIEZALEŻNA od M (histereza) — tau bierze pos_bad=shield._pos_refuse po _pos_monitor.",
   "binds": "P1 (r01/proofs/certs/P1.json) — dowód dotyczy KODU egzekutora, nie fikcji",
   "code_refs": {
     "shield": "r01/shield.py:_decide",
     "model": "r01/proofs/verify.py:tau"
   },
-  "model_sha256": "27ddc20bdc2c25541287366b7c39a830ec19c1f310b0221d7217ce551ae6c113"
+  "model_sha256": "869c16692d0b1536d7a19083fb2c666ae9bc3098518517e1f6965fce25c653a6"
 }

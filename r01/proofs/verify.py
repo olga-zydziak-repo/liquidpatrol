@@ -19,7 +19,9 @@ CERT = os.path.join(_HERE, "certs", "P1.json")
 # enumeracje (Int) — muszą zgadzać się z r01/shield.py oraz conformance.py
 ALLOW, HOLD, REFUSE = 0, 1, 2
 NONE, GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT_R = 0, 1, 2, 3, 4
+POS_DEGRADED_R = 5                       # R0.3a: 5. reason (D3)
 PATROL, HOLDING, RETURNING, DONE, OBSERVING = 0, 1, 2, 3, 4
+POSDEG = 5                               # R0.3a: stan REFUSE(POS_DEGRADED) — ODWRACALNY (nie terminal)
 M_PATROL, M_HOLD, M_RETURN, M_ABORT, M_OBSERVE = 0, 1, 2, 3, 4
 
 
@@ -28,8 +30,9 @@ def _sv(p):
 
 
 def domain(c):
-    # st ∈ {PATROL,HOLDING,RETURNING,DONE,OBSERVING} = 0..4 (R0.2: +OBSERVING)
-    return z3.And(c["rsn"] >= 0, c["rsn"] <= 4, c["st"] >= 0, c["st"] <= 4)
+    # st ∈ {PATROL,HOLDING,RETURNING,DONE,OBSERVING,POSDEG} = 0..5 (R0.3a: +POSDEG)
+    # rsn ∈ 0..5 (R0.3a: +POS_DEGRADED)
+    return z3.And(c["rsn"] >= 0, c["rsn"] <= 5, c["st"] >= 0, c["st"] <= 5)
 
 
 def inv(c):
@@ -44,53 +47,70 @@ def valid(mode):
     return z3.And(mode >= 0, mode <= 4)
 
 
-def tau(c, geo, mode):
+def tau(c, geo, mode, pos_bad):
     """Relacja przejścia — lustro r01.shield._decide. Zwraca (post, decision, leaves).
-    Priorytet (7 liści): latch > geo > abort > hold > return > OBSERVE > patrol.
-    OBSERVE i patrol = klasa ALLOW PONIŻEJ R-G — R-G (L_geo) ma priorytet nad oboma (PRE_R02 §2.4)."""
+    Priorytet (R0.3a): latch > R-POS > R-G > abort > hold > return > OBSERVE > patrol.
+    R-POS (pos_bad, zwalidowana flaga po debounce) PONIŻEJ latch, NA/PONAD R-G (prekondycja geofence:
+    bariera na niepewnym p niewiarygodna). R-POS ODWRACALNY (nie terminal) — re-ALLOW po histerezie M.
+    OBSERVE i patrol = klasa ALLOW PONIŻEJ R-G (PRE_R02 §2.4)."""
     L_latch = c["tm"]
     base = z3.Not(c["tm"])
-    L_geo = z3.And(base, geo)
-    ok = z3.And(base, z3.Not(geo))
+    L_pos = z3.And(base, pos_bad)                           # R0.3a: R-POS (poniżej latch, ponad R-G)
+    after_pos = z3.And(base, z3.Not(pos_bad))
+    L_geo = z3.And(after_pos, geo)
+    ok = z3.And(after_pos, z3.Not(geo))
     L_abort = z3.And(ok, mode == M_ABORT)
     L_hold = z3.And(ok, mode == M_HOLD)
     L_return = z3.And(ok, mode == M_RETURN)
-    L_observe = z3.And(ok, mode == M_OBSERVE)               # R0.2: 7. liść (ALLOW, poniżej R-G)
+    L_observe = z3.And(ok, mode == M_OBSERVE)
     L_patrol = z3.And(ok, mode == M_PATROL)
-    dec = z3.If(z3.Or(L_latch, L_geo, L_abort), REFUSE,
-                z3.If(z3.Or(L_hold, L_return), HOLD, ALLOW))  # L_observe ∨ L_patrol → ALLOW
-    tm2 = z3.Or(L_latch, L_geo, L_abort)
+    dec = z3.If(z3.Or(L_latch, L_pos, L_geo, L_abort), REFUSE,
+                z3.If(z3.Or(L_hold, L_return), HOLD, ALLOW))
+    tm2 = z3.Or(L_latch, L_geo, L_abort)                    # R-POS NIE latch (odwracalny)
+    # rsn2 = powód ZATRZAŚNIĘTY w STANIE (tylko terminal; POS odwracalny NIE trafia do stanu)
     rsn2 = z3.If(L_latch, c["rsn"], z3.If(L_geo, GEOFENCE, z3.If(L_abort, ABORT_R, NONE)))
-    st2 = z3.If(tm2, DONE, z3.If(L_hold, HOLDING,
-               z3.If(L_return, RETURNING, z3.If(L_observe, OBSERVING, PATROL))))
+    # dec_reason = powód WYEMITOWANY w tym ticku (POS transient) — porównywany z shield d["reason"]
+    dec_reason = z3.If(L_latch, c["rsn"],
+                       z3.If(L_pos, POS_DEGRADED_R,
+                             z3.If(L_geo, GEOFENCE, z3.If(L_abort, ABORT_R, NONE))))
+    st2 = z3.If(tm2, DONE,
+                z3.If(L_pos, POSDEG,
+                      z3.If(L_hold, HOLDING,
+                            z3.If(L_return, RETURNING, z3.If(L_observe, OBSERVING, PATROL)))))
     cp = {"tm": tm2, "rsn": rsn2, "st": st2}
-    leaves = {"L_geo": L_geo, "L_patrol": L_patrol, "L_observe": L_observe}
-    return cp, dec, leaves
+    leaves = {"L_pos": L_pos, "L_geo": L_geo, "L_patrol": L_patrol, "L_observe": L_observe}
+    return cp, dec, dec_reason, leaves
 
 
-def props(c, cp, dec, geo, leaves):
-    """P1(a)–(d)."""
-    # P1a: ALLOW ⇒ ¬geo ∧ ¬terminal (osłona przepuszcza tylko gdy geofence-bezpiecznie)
-    P1a = z3.Implies(dec == ALLOW, z3.And(z3.Not(geo), z3.Not(c["tm"])))
-    # P1b: geo ⇒ REFUSE ∧ (¬term ∧ geo ⇒ reason=GEOFENCE)
+def props(c, cp, dec, dec_reason, geo, pos_bad, leaves):
+    """P1(a)–(f). R0.3a: +POS_DEGRADED w P1c; +P1f (POS_DEGRADED ⇒ REFUSE). Powody emitowane =
+    dec_reason (transient tego ticku); cp['rsn'] = powód zatrzaśnięty w stanie (terminal)."""
+    # P1a: ALLOW ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal (przepuszcza tylko gdy geofence-bezpiecznie I pos-zdrowo)
+    P1a = z3.Implies(dec == ALLOW, z3.And(z3.Not(geo), z3.Not(pos_bad), z3.Not(c["tm"])))
+    # P1b: geo ⇒ REFUSE ∧ (¬term ∧ ¬pos ∧ geo ⇒ dec_reason=GEOFENCE)  (R-POS ma priorytet nad R-G)
     P1b = z3.And(z3.Implies(geo, dec == REFUSE),
-                 z3.Implies(z3.And(z3.Not(c["tm"]), geo), cp["rsn"] == GEOFENCE))
-    # P1c: REFUSE ⇒ reason ∈ {GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT}
-    P1c = z3.Implies(dec == REFUSE, z3.Or(cp["rsn"] == GEOFENCE, cp["rsn"] == COMMAND_INVALID,
-                                          cp["rsn"] == STALE_CMD, cp["rsn"] == ABORT_R))
-    # P1d: terminal monotoniczny (raz REFUSE — zawsze REFUSE): terminal ⇒ terminal' ∧ REFUSE
+                 z3.Implies(z3.And(z3.Not(c["tm"]), z3.Not(pos_bad), geo), dec_reason == GEOFENCE))
+    # P1c: REFUSE ⇒ dec_reason ∈ {GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT, POS_DEGRADED} (R0.3a +5.)
+    P1c = z3.Implies(dec == REFUSE, z3.Or(dec_reason == GEOFENCE, dec_reason == COMMAND_INVALID,
+                                          dec_reason == STALE_CMD, dec_reason == ABORT_R,
+                                          dec_reason == POS_DEGRADED_R))
+    # P1d: terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (R-POS odwracalny NIE narusza — pos
+    #  nie jest terminal, więc latch zachowuje monotoniczność)
     P1d = z3.Implies(c["tm"], z3.And(cp["tm"], dec == REFUSE))
-    # P1e (R0.2): OBSERVE aktywny ⇒ ¬geo ∧ ¬terminal ∧ ALLOW (7. liść siedzi PONIŻEJ R-G —
-    #  śledzenie NIGDY nie łamie obwiedni Z KONSTRUKCJI priorytetu, nie dodatkowej reguły; PRE §2.4)
-    P1e = z3.Implies(leaves["L_observe"], z3.And(z3.Not(geo), z3.Not(c["tm"]), dec == ALLOW))
-    return {"P1a": P1a, "P1b": P1b, "P1c": P1c, "P1d": P1d, "P1e": P1e}
+    # P1e (R0.2): OBSERVE ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal ∧ ALLOW (poniżej R-G i R-POS)
+    P1e = z3.Implies(leaves["L_observe"],
+                     z3.And(z3.Not(geo), z3.Not(pos_bad), z3.Not(c["tm"]), dec == ALLOW))
+    # P1f (R0.3a): pos_bad ∧ ¬terminal ⇒ REFUSE ∧ dec_reason=POS_DEGRADED (POS_DEGRADED ⇒ REFUSE, §4/D3)
+    P1f = z3.Implies(z3.And(z3.Not(c["tm"]), pos_bad),
+                     z3.And(dec == REFUSE, dec_reason == POS_DEGRADED_R))
+    return {"P1a": P1a, "P1b": P1b, "P1c": P1c, "P1d": P1d, "P1e": P1e, "P1f": P1f}
 
 
 def prove():
     c = _sv("c_")
-    geo = z3.Bool("geo"); mode = z3.Int("mode")
-    cp, dec, leaves = tau(c, geo, mode)
-    P = props(c, cp, dec, geo, leaves)
+    geo = z3.Bool("geo"); mode = z3.Int("mode"); pos_bad = z3.Bool("pos_bad")
+    cp, dec, dec_reason, leaves = tau(c, geo, mode, pos_bad)
+    P = props(c, cp, dec, dec_reason, geo, pos_bad, leaves)
     results = {}
     # BAZA: c0 = reset (tm=False, rsn=NONE, st=PATROL)
     c0 = {"tm": z3.BoolVal(False), "rsn": z3.IntVal(NONE), "st": z3.IntVal(PATROL)}
@@ -122,19 +142,27 @@ def main():
     cert = {
         "property": "P1", "verdict": "PROVED", "method": "1-induction (z3)",
         "z3_pip": "5.0.0.0", "z3_lib": z3.get_version_string(), "obligations": res,
-        "automaton": "r01/shield.py:_decide (7 liści: latch>geo>abort>hold>return>OBSERVE>patrol; "
-                     "ALLOW/HOLD/REFUSE, reasons GEOFENCE/COMMAND_INVALID/STALE_CMD/ABORT)",
-        "leaves": 7,
+        "automaton": "r01/shield.py:_decide (R0.3a: latch>R-POS>R-G>abort>hold>return>OBSERVE>patrol; "
+                     "ALLOW/HOLD/REFUSE, reasons GEOFENCE/COMMAND_INVALID/STALE_CMD/ABORT/POS_DEGRADED)",
+        "leaves": 8,
+        "leaves_note": "R0.3a: +R-POS (POS_DEGRADED) poniżej latch, NA/PONAD R-G; ODWRACALNY (nie latch)"
+                       " — struktura 7 liści mode-decyzji zachowana, R-POS = prekondycja geofence (D3/§4)",
         "properties": {
-            "P1a": "ALLOW ⇒ ¬geo ∧ ¬terminal (przepuszcza tylko geofence-bezpiecznie)",
-            "P1b": "geo ⇒ REFUSE ∧ (¬term ∧ geo ⇒ reason=GEOFENCE)",
-            "P1c": "REFUSE ⇒ reason ∈ {GEOFENCE,COMMAND_INVALID,STALE_CMD,ABORT}",
-            "P1d": "terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (latch)",
-            "P1e": "OBSERVE ⇒ ¬geo ∧ ¬terminal ∧ ALLOW (7. liść poniżej R-G — śledzenie nie łamie obwiedni)",
+            "P1a": "ALLOW ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal (przepuszcza tylko geofence- I pos-bezpiecznie)",
+            "P1b": "geo ⇒ REFUSE ∧ (¬term ∧ ¬pos ∧ geo ⇒ reason=GEOFENCE)",
+            "P1c": "REFUSE ⇒ reason ∈ {GEOFENCE,COMMAND_INVALID,STALE_CMD,ABORT,POS_DEGRADED}",
+            "P1d": "terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (latch; R-POS odwracalny nie narusza)",
+            "P1e": "OBSERVE ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal ∧ ALLOW (poniżej R-G i R-POS)",
+            "P1f": "pos_bad ∧ ¬terminal ⇒ REFUSE ∧ reason'=POS_DEGRADED (POS_DEGRADED ⇒ REFUSE, D3/§4)",
         },
         "assumptions": [
             "geo = boolowski predykat naruszenia geofence; arytmetyka bariery (radial+"
             "hamowanie) jest przedmiotem P2-analog (osobne twierdzenie warunkowe)",
+            "A-episode [A4] (R0.3a): pos_bad = ZWALIDOWANA flaga utraty aidingu PO debounce 2 ticki (D12); "
+            "zawieranie ε_pos≤ε_cap ważne pod WYMUSZONYM profilem epizodu (flaga→REFUSE→velocity-descent "
+            "dwufazowy→touchdown). A-plateau bezwarunkowe OBALONE (§3ter). Arytmetyka: cert P2-ε (osobny).",
+            "A-flag [A4] (R0.3a): utrata aidingu FLAGOWANA ≤ t_flag (zmierzone B1-bis 0.023–0.046 s, "
+            "R2 recon ~0.1 s); pos_bad staje się True w ≤ debounce+1 tick od flagi (D13a, bound 0.15 s).",
             "ŻYWOTNOŚĆ OSŁONY (warunek EGZEKWOWANY kodem, dopisany R0.2/fix-G5): P1 opisuje decyzję "
             "ŻYWEJ osłony — produkującej werdykt co tick. Martwa pętla decyzyjna NIE jest objęta P1 "
             "(werdykt wtedy nie powstaje). Regresja fix#2 (odsprzężony streamer) mogła utrzymywać "

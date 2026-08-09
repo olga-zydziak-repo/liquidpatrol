@@ -28,6 +28,7 @@ from r01.config import ShieldConfig
 ALLOW, HOLD, REFUSE = "ALLOW", "HOLD", "REFUSE"
 # stany
 PATROL, HOLDING, RETURNING, DONE = "PATROL", "HOLDING", "RETURNING", "DONE"
+POSDEG = "POSDEG"                  # R0.3a: stan REFUSE(POS_DEGRADED) — ODWRACALNY (nie DONE/terminal)
 # powody
 GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT = \
     "GEOFENCE", "COMMAND_INVALID", "STALE_CMD", "ABORT"
@@ -145,7 +146,8 @@ class PatrolShield:
         # niewiarygodna — nie wolno ufać barierze na dryfującym p). ODWRACALNY (nie terminal): re-ALLOW
         # po histerezie M. Akcja bezpieczna = velocity-descent dwufazowy (D5 zrew.; AUTO.LAND wykluczony).
         if self._pos_refuse:
-            return {"k": k, "state": self.state, "decision": REFUSE, "reason": POS_DEGRADED,
+            self.state = POSDEG            # stan odwracalny (nie DONE — nie terminal)
+            return {"k": k, "state": POSDEG, "decision": REFUSE, "reason": POS_DEGRADED,
                     "rule": "R-POS", "action": "VELOCITY_DESCENT", "applied": self._hold_setpoint(pos)}
 
         # R-G geofence (najwyższy priorytet, każdy tryb)
