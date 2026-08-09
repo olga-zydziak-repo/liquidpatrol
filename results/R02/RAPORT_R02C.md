@@ -119,9 +119,20 @@ Ziściła się. **DECYZJA: O4.**
   dead-man, G5 warstwa-0 — **nie zależą od renderu kamery**. **Scene-sanity guard** chroni przed regresją
   (żaden przyszły lot live nie zaraportuje detekcji bez widocznego intruza).
 - **Live-fed detection uplift ZAWIESZONY** do naprawy fidelity symulatora (render małych obiektów dla
-  podniesionego sensora). **Osobny recon** (nowy cykl): issue-search gz-sim tracker po symptomie §6,
-  test render-engine `ogre2→ogre` / API-backend na WSL2 (habitat change, rider 2 fingerprint), ewent.
-  bump gz **tylko** z konkretnym issue upstream (ryzyko parowania PX4↔Harmonic — fundament R0.0).
+  podniesionego sensora). **ENGINE-RECON: PARKOWANY** (decyzja Olgi — NIE startować; osobny cykl na sygnał).
+
+  **Przyszły zakres engine-reconu — trzy TANIE dyskryminatory (kolejność od najtańszego), guard jako kryterium:**
+  1. **Software render llvmpipe** — ten sam scenariusz airborne pod software rendererem → rozdziela
+     **gz-engine (ogre2) vs sterownik mesa-D3D12** (to habitat!). Skrypty fallbacku software istnieją od R0.0.
+     Najtańszy, rozstrzyga „silnik gz" vs „sterownik WSL2".
+  2. **GUI-view vs sensor-image** — porównaj widok GUI z pozy kamery powietrznej z obrazem sensora →
+     rozdziela **„scena sensora"** od **„render w ogóle"** (czy GUI z tej samej pozy widzi mały obiekt).
+  3. **`rgbd_camera` zamiast `camera`** — próba sensora rgbd (kanał koloru); w **gz-sensors #128** ścieżka
+     rgbd była odporna tam, gdzie `camera`/`thermal` padały. **Hipoteza do testu, NIE diagnoza.**
+
+  Plus: **issue-search w trackerze gz-sim po pełnym symptomie §6** (podniesiony sensor + małe obiekty na
+  dystansie, WSL2/D3D12/ogre2). Render-engine `ogre2→ogre` / API-backend = habitat change (rider 2
+  fingerprint); bump gz **tylko** z konkretnym issue upstream (ryzyko parowania PX4↔Harmonic — fundament R0.0).
 - **Dźwignie 0/2/R2-alt** (gimbal/MTI/detektor) pozostają **bezprzedmiotowe** — celowały w nie-problem
   (percepcja), gdy przyczyną jest render. **θ_conf i kryterium dwustronne bez zmian.**
 
