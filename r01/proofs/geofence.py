@@ -122,7 +122,8 @@ def main():
                             "ŻYWOTNOŚĆ OSŁONY (EGZEKWOWANA kodem, R0.2/fix-G5): bariera zakłada, że ŻYWA "
                             "osłona liczy warunek co tick i publikuje setpoint hold/allow < COM_OF_LOSS_T. "
                             "Martwa pętla decyzyjna nie utrzymuje bariery — wtedy egzekutor wymusza przejęcie "
-                            "warstwy-0: dead-man streamera (brak odświeżenia setpointu N=6 ticków=0.3 s ⇒ "
+                            "warstwy-0: dead-man streamera (brak odświeżenia setpointu N ticków, N=6=0.3 s "
+                            "[PROWIZORYCZNE/A4: N>max legalnego stalla pętli; live-fed re-derywacja tor C] ⇒ "
                             "strumień milknie ⇒ natywny failsafe COM_OF_LOSS_T). 'Martwa osłona ⇒ bezpieczne "
                             "przejęcie warstwy-0' = warunek wymuszony (r02/gate_run_r02.py:_streamer; test "
                             "r02/test_deadman.py PASS), nie założony. Native GF (R_GF=37) pozostaje backstop A3."],

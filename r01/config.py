@@ -39,7 +39,11 @@ GF_ACTION = 2                      # 2=Hold (v1.16); alt 3=Return
 # --- Tick osłony / strumień -------------------------------------------------
 TICK_HZ = 20.0
 DT = 1.0 / TICK_HZ                 # 0.05 s
-COM_OF_LOSS_T = 1.0               # [s] próg utraty offboard (zmierzone: reakcja ~1.03 s)
+COM_OF_LOSS_T = 1.0               # [s] próg utraty offboard. UWAGA prowieniencja przyrządu (R0.2 §III):
+                                  # R0.1 S4 reakcja 1.234 s I ~1.03 s mierzone MAVSDK flight_mode (HEARTBEAT
+                                  # ~1 Hz, lag 0–1 s). Precyzyjnie (NavStatusSub/XRCE, R0.2 G5 stream=
+                                  # ekwiwalent S4): reakcja utraty transportu = 1.383 s. Okno 0.9–1.5 s
+                                  # skalibrowane na laggy kanale — trafne przypadkiem (próbka R0.1 miała mały lag).
 
 # --- Świeżość komend --------------------------------------------------------
 STALE_CMD_S = 2.0                 # komenda starsza => REFUSE(STALE_CMD)

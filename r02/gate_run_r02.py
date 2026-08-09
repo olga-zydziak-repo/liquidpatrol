@@ -25,7 +25,7 @@ from r01.shield import PatrolShield, ALLOW, HOLD, REFUSE, GEOFENCE, M_PATROL, M_
 from r01.authz import Authorizer
 from r01.config import ALT_M, TICK_HZ, DT, R_E
 from r02.config_r02 import (D_SAFE_M, THETA_AGE_S, T_ACK_S, F_FOV, EPS_FP_PER_MIN, ChannelConfig,
-                            THETA_CONF, ENTRY_EDGE_MARGIN, DET_DT)
+                            THETA_CONF, ENTRY_EDGE_MARGIN, DET_DT, DEADMAN_TICKS)
 
 # TOR B — GT-FED (teza architektury niezależna od percepcji, decyzja Olgi). Kanał 5-dim zasilany POZĄ
 # celu z symulatora (projekcja GT do kamery, perfekcyjna detekcja w FOV, conf=1.0) zamiast detektora.
@@ -130,8 +130,9 @@ class Runner:
         # DEAD-MAN (fix G5, decyzja Olgi): brak odświeżenia setpointu przez N ticków ⇒ osłona MARTWA ⇒
         # streamer MILKNIE ⇒ natywny failsafe (COM_OF_LOSS_T). Egzekwuje własność „martwa osłona ⇒
         # bezpieczne przejęcie warstwy-0" (regresja wprowadzona przez fix#2 zombie-stream). REGUŁA N:
-        # 6 ticków osłony @20 Hz = 0.3 s (> normalny jitter setpoint_max_dt, < COM_OF_LOSS_T 1 s).
-        self.DEADMAN_TICKS = 6; self.deadman_s = self.DEADMAN_TICKS * PERIOD   # 0.3 s
+        # N=DEADMAN_TICKS (config_r02, [PROWIZORYCZNE/A4]): > max legalnego stalla pętli, < COM_OF_LOSS_T.
+        # GT-fed N=6 (0.3 s) OK; live-fed re-derywacja z rozkładu stalli → tor C. NIE strojone pod okno.
+        self.DEADMAN_TICKS = DEADMAN_TICKS; self.deadman_s = self.DEADMAN_TICKS * PERIOD   # 0.3 s
         self._last_refresh = time.monotonic(); self._deadman_armed = False; self._deadman_tripped = False
         self.gf_fired = False; self.offboard_lost_ticks = 0
         self.n_entry = 0; self.n_false_entry = 0

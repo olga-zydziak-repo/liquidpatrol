@@ -42,10 +42,10 @@ Kolejność wg §5: **selfcheck → P1 → P5 → P4** (P2 poza zakresem, R02-A3
 | Cert | Werdykt | Szczegół | sha(prover) |
 |---|---|---|---|
 | **certs_selfcheck** | **PASS 5/5** | prowieniencja model_sha256 ↔ prover dla wszystkich | — |
-| **P1** (`verify.py`) | **PROVED** | 1-indukcja z3, **7 zobowiązań unsat**: base, inv_step, P1a–P1e; **+założenie żywotności osłony (R0.2/fix-G5)** | `3046d032…` |
+| **P1** (`verify.py`) | **PROVED** | 1-indukcja z3, **7 zobowiązań unsat**: base, inv_step, P1a–P1e; **+założenie żywotności osłony (dead-man N=6 [PROWIZORYCZNE/A4])** | `94e6ab28…` |
 | **P5** (`conformance.py`) | **PASS** | tau≡shield, **pokrycie 7/7**, 0 rozbieżności (400 los + 10 celowanych); **re-run od nowa po dead-man, bajt-identyczny** | `27ddc20b…` |
 | **P4** (`p4_verify.py`) | **PASS** | +`observe on/off`, mode-map, property-2000, HMAC, near-miss→COMMAND_INVALID | `8e1802b5…` |
-| **P2** (`geofence.py`) | **PROVED** | bariera niezmieniona (R02-A3: v_max/R_E/a_brake nietknięte); **+założenie żywotności osłony zapisane wprost** → prover zregenerowany | `f6b22abc…` |
+| **P2** (`geofence.py`) | **PROVED** | bariera niezmieniona (R02-A3: v_max/R_E/a_brake nietknięte); **+założenie żywotności osłony (dead-man N=6 [PROWIZORYCZNE/A4])** → prover zregenerowany | `7c382af5…` |
 | **R0.1 regresja** (`test_core`) | **PASS** | 43 asercje — dodanie liścia OBSERVE nie złamało R0.1 | — |
 
 **P1a (krytyczne):** `ALLOW ⇒ ¬geo ∧ ¬terminal` — **trzyma** (OBSERVE jako ALLOW siedzi PONIŻEJ R-G

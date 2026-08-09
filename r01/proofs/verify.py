@@ -139,8 +139,9 @@ def main():
             "ŻYWEJ osłony — produkującej werdykt co tick. Martwa pętla decyzyjna NIE jest objęta P1 "
             "(werdykt wtedy nie powstaje). Regresja fix#2 (odsprzężony streamer) mogła utrzymywać "
             "stary setpoint mimo martwej osłony (zombie-stream) → PX4 nie widział utraty offboard. "
-            "Domknięte kodem: dead-man streamera — brak odświeżenia setpointu przez N=6 ticków (0.3 s "
-            "@20 Hz, N<COM_OF_LOSS_T) ⇒ strumień MILKNIE ⇒ natywny failsafe warstwy-0 (COM_OF_LOSS_T). "
+            "Domknięte kodem: dead-man streamera — brak odświeżenia setpointu przez N ticków (N=6=0.3 s "
+            "@20 Hz [PROWIZORYCZNE/A4: N>max legalnego stalla pętli; live-fed re-derywacja z rozkładu "
+            "stalli w torze C]) ⇒ strumień MILKNIE ⇒ natywny failsafe warstwy-0 (COM_OF_LOSS_T). "
             "Własność 'martwa osłona ⇒ bezpieczne przejęcie warstwy-0' jest więc WYMUSZONA, nie "
             "założona (egzekutor r02/gate_run_r02.py:_streamer; dowód własności r02/test_deadman.py PASS)."],
         "code_refs": {"shield": "r01/shield.py:_decide", "config": "r01/config.py (R_E, obwiednia)"},

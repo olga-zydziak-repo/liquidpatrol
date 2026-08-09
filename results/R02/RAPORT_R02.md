@@ -107,13 +107,46 @@ cichnie w **0.25 s**, `deadman_tripped=True`, **zero** publikacji po progu. **PA
    @**1.589 s** (nav_state→4 HOLD). Własność „martwa osłona ⇒ warstwa-0" **wymuszona i zmierzona live**.
    Koszt: **+0.286 s** (nieusuwalne wykrycie śmierci przez N ticków) → 0.089 s ponad górną granicą okna.
 
-**NUANS N vs okno (do decyzji Olgi):** zombie 1.589 s = baza ~1.30–1.38 s + dead-man 0.286 s. Aby zejść
-≤1.5 s trzeba N=4 ticki (0.2 s). ALE: N musi być **> max legalnego stalla pętli decyzyjnej** — a fix#2
-powstał WŁAŚNIE dlatego, że pętla stalluje pod kontencją detektora (stall > COM_OF_LOSS_T → natywny HOLD).
-W **GT-fed** (bez detektora) pętla nie stalluje → N=0.3 s bezpieczne, zombie=1.589 s. Dla **live-fed** N
-trzeba **re-derywować z rozkładu stalli pętli pod kontencją** (sprzężone z torem C — detekcja live).
-Rekomendacja: przyjąć GT-fed zombie jako **bezpieczny + własność wymuszona** (1.589 s), a finalne N/okno
-dla live-fed domknąć w torze C. Oryginalny scenariusz G5 (stream) **PASS 1.383 s** niezależnie.
+**DECYZJA OLGI — rozdział trybów, bez retro-poszerzania okna:**
+
+**(a) Zamrożone kryterium G5 dotyczy ścieżki UTRATY TRANSPORTU** (bezpośredni stop = scenariusz oryginalnego
+G5 = wariant `stream`). Wynik precyzyjny **1.383 s ∈ 0.9–1.5 s → PASS**. Okna NIE poszerzamy.
+
+**(b) Ścieżka ZOMBIE to NOWY tryb, nieobjęty bramką R0.1** (R0.1 publikował setpoint w pętli decyzyjnej →
+śmierć pętli = natychmiastowy stop; brak odsprzężonego streamera = brak trybu zombie). Raportowana OSOBNO,
+z **własnym budżetem wyprowadzonym JAWNIE**:
+> `budżet_zombie = COM_OF_LOSS_T + N·tick = ~1.30 s + 6·0.0476 s (0.286 s zmierzone) = ~1.59 s`
+>
+> wynik **1.589 s** — zgodny z budżetem. Bezpieczny (≤R_E, A1=0, własność wymuszona). To **nie** porażka
+> zamrożonego kryterium (które dotyczy trybu transportu) — to zmierzony koszt NOWEJ wymuszonej własności.
+
+**(c) N=6 = PROWIZORYCZNE [A4].** Reguła: N·tick > max LEGALNEGO stalla pętli decyzyjnej (fix#2 istnieje BO
+pętla stalluje pod kontencją detektora: stall > COM_OF_LOSS_T → natywny HOLD). GT-fed (bez detektora) →
+pętla nie stalluje → N=0.3 s bezpieczne. **Live-fed: N re-derywowane z rozkładu stalli pętli pod kontencją —
+DELEGOWANE DO TORU C** (i tak potrzebne do live-fed). Opcja N=4-teraz **odrzucona**: bez rozkładu stalli
+grozi fałszywym tripem = reintrodukcja problemu, który fix#2 rozwiązał. (`config_r02.DEADMAN_TICKS`, [A4].)
+
+### III-bis. PROWIENIENCJA PRZYRZĄDU (lekcja, decyzja Olgi (3))
+
+**Każda liczba czasowa dostaje etykietę kanału pomiaru.** Kanały: **`nav`** = `NavStatusSub`/XRCE
+(`vehicle_status.nav_state`, ~kilka-Hz, precyzyjny); **`mav`** = MAVSDK `flight_mode` (HEARTBEAT ~1 Hz,
+lag 0–1 s, event-driven).
+
+| Pomiar | Kanał | Wartość |
+|---|---|---|
+| G5 stream (utrata transportu) | **nav** | **1.383 s** |
+| G5 stream | mav | 2.623 s (lag 1.24 s) |
+| G5 zombie (śmierć osłony) | **nav** | **1.589 s** |
+| G5 zombie | mav | 2.587 s (lag 1.00 s) |
+| R0.1 **S4** (retrospekcja, `results/R01/gate/S4_result.json`) | **mav** | 1.234 s |
+| R0.2 stream = precyzyjna reprodukcja S4 (ten sam mechanizm urwania) | **nav** | **1.383 s** |
+
+**Rozbieżność:** R0.1 S4 (1.234 s) **ORAZ** okno 0.9–1.5 s (`gate_run.py:216`) **ORAZ** nota
+`COM_OF_LOSS_T ~1.03 s` — **wszystkie z laggy kanału `mav`**. Lag jest zmienny 0–1 s → próbka R0.1 S4
+miała MAŁY lag (1.234 ≈ precyzyjne 1.383), więc okno wyszło trafne **przypadkiem**. Precyzyjna wartość
+trybu transportu (odtwarzalna): **1.383 s (nav)**. **Fantomowa regresja 2.179 s** z poprzedniej rundy =
+wysokolagowa próbka `mav` tej samej ~1.3–1.4 s reakcji — NIE prawdziwa regresja timingu. **Lekcja: timing
+warstwy-0 mierzyć kanałem `nav` (XRCE), nie `mav`; etykietować kanał przy każdej liczbie.**
 
 **Re-certyfikacja (zmiana w egzekutorze):**
 - Założenie **żywotności osłony** zapisane **WPROST** w P1 (`verify.py`) i P2 (`geofence.py`) jako

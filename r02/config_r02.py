@@ -78,9 +78,21 @@ EPS_FP_PER_MIN = 0.0              # 0 fałszywych locków na pustej scenie (cel;
 INTRUDER_ALT_M = 11.5            # intruz 1.5 m nad patrolem (rider1: elewacja ~13° = strefa detekcji,
                                 # centralny; 34.8° dawało top-edge+conf<θ. UWAGA: conf migocze ~θ_conf (§3d)
 
+# --- WARSTWA-0 dead-man (fix G5, §III RAPORT_R02 — [PROWIZORYCZNE/A4]) --------
+# N ticków osłony bez odświeżenia setpointu ⇒ streamer milknie ⇒ natywny failsafe (COM_OF_LOSS_T).
+# Egzekwuje „martwa osłona ⇒ bezpieczne przejęcie warstwy-0" (regresja zombie-stream fix#2).
+# REGUŁA WYBORU N: N·tick MUSI być > max LEGALNEGO stalla pętli decyzyjnej (inaczej fałszywy trip =
+#   reintrodukcja problemu, który fix#2 rozwiązał: stall→utrata offboard→HOLD). ORAZ N·tick możliwie
+#   małe (koszt reakcji zombie = N·tick + COM_OF_LOSS_T). W GT-fed (bez detektora) pętla NIE stalluje →
+#   N=6 (0.3 s) bezpieczne; zmierzone live zombie 1.589 s. [PROWIZORYCZNE/A4]: dla LIVE-FED N wymaga
+#   RE-DERYWACJI z rozkładu stalli pętli pod kontencją detektora — DELEGOWANE DO TORU C (i tak potrzebne
+#   do live-fed). NIE strojone pod okno (opcja N=4 odrzucona bez pomiaru rozkładu — decyzja Olgi).
+DEADMAN_TICKS = 6                 # [PROWIZORYCZNE/A4, re-derywacja tor C] 6 ticków @20 Hz = 0.3 s
+
 # Rejestr stałych [A4] do zamrożenia (raport kalibracji wypełnia „źródło"/„zmierzone").
 A4_HABITAT_CONSTS = (
     "THETA_AGE_S", "D_SAFE_M", "L_DELIVER_S", "T_ACK_S", "F_FOV", "EPS_FP_PER_MIN", "ENTRY_MOVE_THR",
+    "DEADMAN_TICKS",
 )
 
 
