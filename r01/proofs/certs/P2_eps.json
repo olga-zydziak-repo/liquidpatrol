@@ -1,0 +1,39 @@
+{
+  "property": "P2-eps",
+  "verdict": "PROVED",
+  "method": "z3 NRA — twierdzenie warunkowe plateau + ostrość dwustronna",
+  "z3_lib": "5.0.0",
+  "obligations": {
+    "main_containment": "unsat",
+    "sharp_cap_plus_delta": "sat",
+    "sharp_route_plus_delta": "sat",
+    "boundary_exact_safe": "unsat",
+    "land_covered_by_cap": "unsat"
+  },
+  "theorem": "(r_est≤R_route') ∧ (0≤ε≤ε_cap) ∧ (r_true≤r_est+ε) ⇒ r_true+d_stop≤R_E",
+  "rule_D11": "R_route' = R_E − d_stop − ε_cap",
+  "constants_rational": {
+    "eps_cap": "37/4",
+    "d_stop": "57/20",
+    "R_E": "32",
+    "R_route_prime": "199/10",
+    "v_max": "3"
+  },
+  "R_route_prime_float": 19.9,
+  "half_side_prime_float": 14.071424945612295,
+  "sharpness": "kontrprzykład przy ε_cap+δ ORAZ R_route'+δ (sat); próg dokładny bezpieczny (unsat)",
+  "land_note": "człon t_land·rate USUNIĘTY (model rate OBALONY B1); Land pokryty przez ε_cap obowiązujący do touchdown (D13c) — r_true ≤ R_E−d_stop przez cały epizod",
+  "assumptions": [
+    "A-plateau [A4]: ε_pos ≤ ε_cap przez cały epizod DR→Land (walidowane w bramce D13c)",
+    "ε_cap z reguły D10 (1.5×max(max_drift) B1∪B1-bis, zaokrągl. w górę do ćwiartki), ZAMROŻONE ANEKS-4",
+    "r_true ≤ r_est + ε_pos (nierówność trójkąta radialna, worst-case oś)",
+    "d_stop = DELTA_MARGIN = v_max·t_react + v_max²/2a_brake (R0.1, frozen)",
+    "koperta R_E NIETYKANA (D11: kurczymy trasę R_route', nie rozciągamy świata)"
+  ],
+  "canonical_P2_untouched": true,
+  "code_refs": {
+    "config": "r01/config.py (R_E, DELTA_MARGIN, V_MAX)",
+    "route_r03": "r03/config.py (R_route', half-side' — D11)"
+  },
+  "model_sha256": "8fb1ab19f3e47dbc8214e232e0b349388cf5093383f94735001b8177970c46eb"
+}

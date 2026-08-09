@@ -34,6 +34,7 @@ PROVER_OF = {
     "P2_vmax3p1.json": "geofence.py",   # ten sam prover, override V_MAX_PROVE=3.1
     "P4.json": "p4_verify.py",
     "P5.json": "conformance.py",
+    "P2_eps.json": "eps_verify.py",     # R0.3a: P2-ε (forma plateau/A-episode)
 }
 
 
