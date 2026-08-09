@@ -60,7 +60,7 @@ CHAR_INTRUDER="${CHAR_INTRUDER:-25,0,6}"
 case "$SCEN" in
   G1) ;;  # G1 bez intruza w polu — przesuń go daleko
   CHAR|CHAR2) ;; # intruz statyczny w GT (bez drivera) — ustawiony niżej
-  G2) ;;  # G2 intruz STATYCZNY w polu N drona @~7m alt11.5 (koperta A7) — set_pose niżej
+  G2|C1) ;;  # G2/C1 intruz STATYCZNY w polu N drona @~7m alt11.5 (koperta A7) — set_pose niżej
   G3) setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 11.5 \
         --log "$LOGDIR/intruder.jsonl" > "$LOGDIR/intruder.log" 2>&1 & PIDS+=($!) ;;
   *)  setsid nohup python3 -m r02.intruder_driver --world "$WORLD" --seconds 90 --x 12 --z 11.5 \
@@ -69,8 +69,8 @@ esac
 [ "$SCEN" = "G1" ] && gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose \
   --reptype gz.msgs.Boolean --timeout 3000 \
   --req 'name: "intruder", position: {x: -60, y: 0, z: 6}, orientation: {w: 1.0}' >/dev/null 2>&1
-# G2: intruz statyczny w polu Północ drona (7,0,11.5) — koperta A7 (3D~7m, elewacja~12°, tło nieba)
-if [ "$SCEN" = "G2" ]; then
+# G2/C1: intruz statyczny w polu Północ drona (7,0,11.5) — koperta A7 (3D~7m, elewacja~12°, tło nieba)
+if [ "$SCEN" = "G2" ] || [ "$SCEN" = "C1" ]; then
   for try in 1 2 3; do
     gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean \
       --timeout 3000 --req 'name: "intruder", position: {x: 7, y: 0, z: 11.5}, orientation: {w: 1.0}' >/dev/null 2>&1
@@ -101,7 +101,7 @@ fi
 # 7) runner bramki
 echo "[gate] start runner G=$SCEN (GT_FED=${GT_FED:-0})"
 SCENARIO="$SCEN" TRACE="$LOGDIR/gate_${SCEN}.jsonl" CHAR_INTRUDER="$CHAR_INTRUDER" GT_FED="${GT_FED:-0}" \
-  CHAR_LOG="${CHAR_LOG:-$LOGDIR/char.jsonl}" \
+  CHAR_LOG="${CHAR_LOG:-$LOGDIR/char.jsonl}" IMG_TOPIC="$ROS_IMG" C1_PREFIX="$LOGDIR/C1_frame" \
   PYTHONPATH="$ROOT:${PYTHONPATH:-}" python3 -m r02.gate_run_r02 2>&1 | tee "$LOGDIR/gate.log"
 RC=${PIPESTATUS[0]}
 echo "[gate] runner exit=$RC. dmesg (ostatnie 20, na wypadek padu):"

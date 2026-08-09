@@ -18,6 +18,7 @@ import os, sys, json, time, math, threading, random
 import rclpy
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
 from std_msgs.msg import Float32MultiArray
+from sensor_msgs.msg import Image            # C-A1 (tor C): capture surowej klatki dla overlay projekcji
 from px4_msgs.msg import VehicleStatus       # G5: precyzyjny pomiar nav_state (failsafe) — szybszy niż MAVSDK flight_mode
 
 from r01.exec_lib import XrcePublisher, Mav, Planner
@@ -44,6 +45,28 @@ BOXES_TOPIC = "/liquidpatrol/detector_boxes"
 
 def offboard_ok(fm):
     return fm is not None and "OFFBOARD" in fm
+
+
+def project_full_attitude(pos, yaw, pitch, roll, intr):
+    """C-A1 (tor C): projekcja intruza NED → (in_fov, cx, cy, az_deg, el_deg) z PEŁNYM attitude kamery
+    (yaw+pitch+roll), w przeciwieństwie do project_to_pixel (level, tylko yaw). Rozdziela „poza FOV"
+    (klip pitchem) od „w FOV" (renderer/detektor). Kamera forward = body +X (montaż x500_mono_cam)."""
+    import math as _m
+    HFOV = 1.74; VFOV = 1.453           # mono_cam: h_fov 1.74 rad, V-FOV pochodne (640×480 pinhole)
+    wx, wy, wz = intr[0]-pos[0], intr[1]-pos[1], intr[2]-pos[2]
+    cy_, sy = _m.cos(yaw), _m.sin(yaw); cp, sp = _m.cos(pitch), _m.sin(pitch); cr, sr = _m.cos(roll), _m.sin(roll)
+    # NED→body: Rx(roll)·Ry(pitch)·Rz(yaw)
+    x1 =  cy_*wx + sy*wy;  y1 = -sy*wx + cy_*wy;  z1 = wz            # Rz(yaw)
+    x2 =  cp*x1 - sp*z1;   y2 = y1;               z2 = sp*x1 + cp*z1 # Ry(pitch)
+    bx = x2;               by = cr*y2 + sr*z2;    bz = -sr*y2 + cr*z2# Rx(roll)
+    if bx <= 0.1:
+        return {"in_fov": False, "reason": "za_kamera", "cx": None, "cy": None, "az_deg": None, "el_deg": None}
+    az = _m.atan2(by, bx); el = _m.atan2(-bz, _m.hypot(bx, by))
+    in_fov = (abs(az) <= HFOV/2.0 and abs(el) <= VFOV/2.0)
+    cx = 0.5 + _m.tan(az)/(2.0*_m.tan(HFOV/2.0))
+    cyp = 0.5 - _m.tan(el)/(2.0*_m.tan(VFOV/2.0))
+    return {"in_fov": in_fov, "cx": round(cx,3), "cy": round(cyp,3),
+            "az_deg": round(_m.degrees(az),2), "el_deg": round(_m.degrees(el),2)}
 
 
 def qos_be():
@@ -653,11 +676,102 @@ def scenario_CHAR2(r: Runner):
     return crit["PASS"]
 
 
+def scenario_C1(r: Runner):
+    """C-A1 (tor C, krok 1 buildu = RE-ATRYBUCJA §3f): dron ZAWIS w Home, intruz statyczny (7,0,11.5).
+    Mierzy rozkład pitch/roll (att() rozszerzone), projekcję celu LEVEL vs PEŁNO-ATTITUDE, oraz co widzi
+    detektor (boxy/conf). Rozdziela: (i) POZA FOV (klip pitchem) vs (ii) W FOV nie-wykryty (render/detektor).
+    GATE C-A1: mały pitch ∧ cel-w-kadrze ⇒ STOP+re-atrybucja przed 0a/0b. Wyłącznie w locie."""
+    INTR_NED = (7.0, 0.0, -11.5)                         # intruz 7 m N, 1.5 m nad patrolem (elew ~12°)
+    r.admit_observe(False); r.intruder_present = True
+    # capture surowej klatki (jeśli IMG_TOPIC podany przez orkiestrację)
+    frame = {"buf": None}
+    img_topic = os.environ.get("IMG_TOPIC")
+    if img_topic:
+        import numpy as _np
+        def _on_img(msg):
+            try:
+                buf = _np.frombuffer(bytes(msg.data), dtype=_np.uint8)
+                ch = max(1, len(msg.data)//(msg.height*msg.width))
+                frame["buf"] = buf.reshape(msg.height, msg.width, ch) if ch>1 else buf.reshape(msg.height, msg.width)
+            except Exception: pass
+        r.xrce.node.create_subscription(Image, img_topic, _on_img, qos_be())
+    r.bring_up()
+    r.idle_sp = [r.start[0], r.start[1], -ALT_M]
+    # weryfikacja pozy intruza (statyczny → gz model -p, NIE dynamic_pose)
+    intr_pose_q = None
+    try:
+        import subprocess
+        intr_pose_q = subprocess.run(["gz", "model", "-m", "intruder", "-p"], capture_output=True,
+                                     text=True, timeout=5).stdout.strip()[:200]
+    except Exception as e: intr_pose_q = f"query_fail:{e}"
+    pitches = []; rolls = []; yaws = []; boxes_seen = []; projs_full = []; proj_cx = []
+    t_hover = time.time()
+    while time.time()-t_hover < 18:                      # ~18 s zawisu — rozkład attitude + detekcja
+        r._spin(); r._log_conf_passive()
+        r._pub(r.idle_sp)                                # utrzymuj hover (dead-man żywy)
+        yw = r._yaw()
+        pitches.append(r.mav.pitch); rolls.append(r.mav.roll); yaws.append(yw)
+        pf = project_full_attitude(list(r.mav.pos), yw, r.mav.pitch, r.mav.roll, INTR_NED)
+        projs_full.append(pf)
+        if pf.get("cx") is not None: proj_cx.append(pf["cx"])
+        if r.boxes_sub.boxes:                            # co widzi detektor (max conf box)
+            b = max(r.boxes_sub.boxes, key=lambda x: x[4])
+            boxes_seen.append({"cx": round(b[0],3), "cy": round(b[1],3), "conf": round(b[4],4)})
+        time.sleep(PERIOD)
+    r.mav.land(); time.sleep(2)
+    import statistics as _st, numpy as _np
+    def deg(x): return round(math.degrees(x),2)
+    pitch_deg = [math.degrees(p) for p in pitches]; roll_deg = [math.degrees(x) for x in rolls]
+    # projekcje przy ŚREDNIM attitude
+    mp = _st.mean(pitches) if pitches else 0.0; mr = _st.mean(rolls) if rolls else 0.0
+    proj_level = project_to_pixel(list(r.mav.pos), r._yaw(), INTR_NED)     # level (tylko yaw)
+    proj_full_mean = project_full_attitude(list(r.mav.pos), r._yaw(), mp, mr, INTR_NED)
+    n_in_fov = sum(1 for p in projs_full if p.get("in_fov"))
+    conf_max = max((b["conf"] for b in boxes_seen), default=0.0)
+    # zapis klatki (jeśli złapana) + npy
+    prefix = os.environ.get("C1_PREFIX", "/tmp/r02/C1/frame")
+    os.makedirs(os.path.dirname(prefix), exist_ok=True)
+    frame_saved = None
+    if frame["buf"] is not None:
+        _np.save(prefix+".npy", frame["buf"]); frame_saved = prefix+".npy"
+    yaw_deg = [math.degrees(y) for y in yaws]
+    verdict = {"scenario": "C1_reattrib",
+        "intruder_pose_gz": intr_pose_q, "intruder_assumed_NED": INTR_NED,
+        "pitch_deg": {"mean": deg(mp), "min": round(min(pitch_deg),2) if pitch_deg else None,
+                      "max": round(max(pitch_deg),2) if pitch_deg else None,
+                      "abs_max": round(max((abs(x) for x in pitch_deg), default=0),2),
+                      "std": round(_st.pstdev(pitch_deg),2) if len(pitch_deg)>1 else 0.0},
+        "roll_deg": {"mean": deg(mr), "abs_max": round(max((abs(x) for x in roll_deg), default=0),2)},
+        "yaw_deg": {"mean": round(_st.mean(yaw_deg),2) if yaw_deg else None,
+                    "abs_max": round(max((abs(x) for x in yaw_deg), default=0),2)},
+        "proj_cx_hover": {"mean": round(_st.mean(proj_cx),3) if proj_cx else None,
+                          "min": round(min(proj_cx),3) if proj_cx else None,
+                          "max": round(max(proj_cx),3) if proj_cx else None},
+        "proj_level": (None if proj_level is None else {"cx": round(proj_level.cx,3), "cy": round(proj_level.cy,3)}),
+        "frames_in_fov_frac": round(n_in_fov/max(len(projs_full),1),3),
+        "detector_conf_max": round(conf_max,4), "detector_boxes_n": len(boxes_seen),
+        "theta_conf": THETA_CONF, "frame_saved": frame_saved, "channel_time": "monotonic_local(att via MAVSDK 20Hz)"}
+    # KLASYFIKACJA re-atrybucji (per-frame, NIE post-land)
+    in_fov = verdict["frames_in_fov_frac"] >= 0.9; small_pitch = verdict["pitch_deg"]["abs_max"] < 15.0
+    detected = conf_max >= THETA_CONF
+    if not in_fov:
+        verdict["reattrib"] = "POZA_FOV (klip attitude) — dźwignia 0 (celowanie) UZASADNIONA"
+        verdict["GATE_C1_stop"] = False
+    elif in_fov and not detected:
+        verdict["reattrib"] = "W_FOV_NIE_WYKRYTY (render/detektor) — NIE kadrowanie; gimbal moze byc NIEPOTRZEBNY"
+        verdict["GATE_C1_stop"] = small_pitch     # mały pitch + w kadrze ⇒ STOP+re-atrybucja
+    else:
+        verdict["reattrib"] = "W_FOV_WYKRYTY — cel widoczny w zawisie (sprzeczne z §3f? sprawdz OBSERVE-motion)"
+        verdict["GATE_C1_stop"] = small_pitch
+    r.finish(verdict)
+    return True
+
+
 def main():
-    laps = {"G1": 3, "G2": 1, "G3": 3, "G4": 2, "G5": 1, "CHAR": 3, "CHAR2": 1}[SCEN]
+    laps = {"G1": 3, "G2": 1, "G3": 3, "G4": 2, "G5": 1, "CHAR": 3, "CHAR2": 1, "C1": 1}[SCEN]
     r = Runner(laps)
     fn = {"G1": scenario_G1, "G2": scenario_G2, "G3": scenario_G3, "G4": scenario_G4,
-          "G5": scenario_G5, "CHAR": scenario_CHAR, "CHAR2": scenario_CHAR2}[SCEN]
+          "G5": scenario_G5, "CHAR": scenario_CHAR, "CHAR2": scenario_CHAR2, "C1": scenario_C1}[SCEN]
     ok = fn(r)
     sys.exit(0 if ok else 3)
 

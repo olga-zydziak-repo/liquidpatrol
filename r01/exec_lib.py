@@ -89,6 +89,7 @@ class Mav:
     def __init__(self, set_gf=True):
         self.pos = [0.0, 0.0, 0.0]; self.vel = [0.0, 0.0, 0.0]
         self.yaw = 0.0                   # R0.2: yaw [rad] NED (0=Północ) — OBSERVE potrzebuje attitude
+        self.pitch = 0.0; self.roll = 0.0  # tor C/C-A1: pełne attitude [rad] — re-atrybucja §3f + kompensacja MTI
         self.have_tel = False; self.armed = False
         self.flight_mode = None
         self.tel_max_gap = 0.0; self._last_tel = None
@@ -157,6 +158,8 @@ class Mav:
         async def att():                 # R0.2: yaw z attitude (NED, deg→rad) dla naprowadzania OBSERVE
             async for a in drone.telemetry.attitude_euler():
                 self.yaw = math.radians(a.yaw_deg)
+                self.pitch = math.radians(a.pitch_deg)   # tor C/C-A1: re-atrybucja §3f (klip pitchem?)
+                self.roll = math.radians(a.roll_deg)
         asyncio.ensure_future(att())
 
         async for h in drone.telemetry.health():
