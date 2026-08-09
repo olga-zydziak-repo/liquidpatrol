@@ -69,6 +69,30 @@ def project_full_attitude(pos, yaw, pitch, roll, intr):
             "az_deg": round(_m.degrees(az),2), "el_deg": round(_m.degrees(el),2)}
 
 
+def scene_sanity_intruder(frame, pos, yaw, pitch, roll, intr_ned, dark_thr=160, min_px=8, box_frac=0.10):
+    """SCENE-SANITY GUARD (tor C/C-A1, wzorzec certs_selfcheck): asercja że intruz obecny w STANIE sceny
+    jest też WIDOCZNY w OBRAZIE. Projektuje pozę intruza (pełne attitude); jeśli w FOV — sprawdza czy w
+    przewidzianym regionie są ciemne piksele obiektu (mesh ciemny < dark_thr na tle nieba/gruntu). Zwraca
+    verdict. Regresja renderu (intruz w stanie, brak w obrazie) = GUARD_FAIL, NIE wynik detekcji.
+    Egzekwowane kodem: mechanizm §3f (iteracja 6) był awarią renderu udającą porażkę detekcji."""
+    pf = project_full_attitude(pos, yaw, pitch, roll, intr_ned)
+    if not pf.get("in_fov"):
+        return {"guard": "SKIP_out_of_fov", "in_fov": False, **pf}   # poza kadrem — guard nie orzeka
+    if frame is None:
+        return {"guard": "NO_FRAME", "in_fov": True, **pf}
+    import numpy as _np
+    g = (frame[..., 0] if frame.ndim == 3 else frame).astype(int)
+    h, w = g.shape
+    cxpx, cypx = int(pf["cx"]*w), int(pf["cy"]*h)
+    r = max(6, int(box_frac*min(h, w)/2))               # okno ~box_frac ramki wokół projekcji
+    reg = g[max(0,cypx-r):cypx+r, max(0,cxpx-r):cxpx+r]
+    dark = int((reg < dark_thr).sum()) if reg.size else 0
+    visible = dark >= min_px
+    return {"guard": ("PASS_visible" if visible else "FAIL_in_state_not_in_image"),
+            "in_fov": True, "cx": pf["cx"], "cy": pf["cy"], "dark_px": dark, "min_px": min_px,
+            "region_px": int(reg.size), "el_deg": pf["el_deg"]}
+
+
 def qos_be():
     return QoSProfile(depth=1, history=HistoryPolicy.KEEP_LAST, reliability=ReliabilityPolicy.BEST_EFFORT)
 
@@ -135,6 +159,11 @@ class Runner:
         self.chan = ChannelSub(self.xrce.node)          # współdziel węzeł rclpy osłony
         self.boxes_sub = BoxesSub(self.xrce.node)       # A6: pasywne logowanie conf (wszystkie boxy)
         self.navsub = NavStatusSub(self.xrce.node)      # G5: precyzyjny nav_state (failsafe)
+        # SCENE-SANITY GUARD (tor C/C-A1): capture klatki do asercji widoczności intruza (regresja renderu
+        # nigdy więcej nie udaje wyniku detekcji). Subskrypcja tylko gdy IMG_TOPIC podany przez orkiestrację.
+        self._frame = None; _img_topic = os.environ.get("IMG_TOPIC")
+        if _img_topic:
+            self.xrce.node.create_subscription(Image, _img_topic, self._on_frame, qos_be())
         self.conf_samples = []; self.n_admitted = 0; self._boxes_seq = -1
         self.mav = Mav(set_gf=True)
         self.shield = PatrolShield(); self.shield.reset()
@@ -236,6 +265,36 @@ class Runner:
 
     def _spin(self):
         rclpy.spin_once(self.xrce.node, timeout_sec=0.0)
+
+    def _on_frame(self, msg):
+        try:
+            import numpy as _np
+            buf = _np.frombuffer(bytes(msg.data), dtype=_np.uint8)
+            ch = max(1, len(msg.data)//(msg.height*msg.width))
+            self._frame = buf.reshape(msg.height, msg.width, ch) if ch > 1 else buf.reshape(msg.height, msg.width)
+        except Exception: pass
+
+    def preflight_scene_sanity(self, intr_ned, enforce=None):
+        """GUARD widoczności intruza na starcie scenariusza LIVE (nie GT-fed). Zbiera klatkę i orzeka.
+        enforce: gdy True i FAIL → sys.exit (twarda bariera). Default: enforce w trybie LIVE (nie GT-fed),
+        wyłączony gdy SCENE_SANITY=off (np. dopóki render niesprawny — świadoma zgoda)."""
+        if enforce is None:
+            enforce = (not self.gt_mode) and os.environ.get("SCENE_SANITY", "on") != "off"
+        for _ in range(30):                              # do ~1.5 s na złapanie klatki
+            self._spin()
+            if self._frame is not None: break
+            time.sleep(0.05)
+        res = scene_sanity_intruder(self._frame, list(self.mav.pos), self._yaw(),
+                                    self.mav.pitch, self.mav.roll, intr_ned)
+        self.tf.write(json.dumps({"EVENT": "scene_sanity", **res})+"\n")
+        print(f"[gate] SCENE-SANITY intruz: {res.get('guard')} "
+              f"(in_fov={res.get('in_fov')} dark_px={res.get('dark_px')} el={res.get('el_deg')})")
+        if enforce and res.get("guard") == "FAIL_in_state_not_in_image":
+            print("[gate] !! GUARD FAIL: intruz w STANIE sceny, ale NIEOBECNY w OBRAZIE (regresja renderu, "
+                  "tor C C-A1). Bramka live NIE jest wiarygodna. STOP (SCENE_SANITY=off by pominąć świadomie).")
+            self.finish({"scenario": "SCENE_SANITY_FAIL", "scene_sanity": res})
+            sys.exit(4)
+        return res
 
     def _log_conf_passive(self):
         """A6: pasywne logowanie conf (sygnał+szum) w KAŻDYM locie — czy przerwa utrzymała się w locie.
@@ -431,6 +490,7 @@ def scenario_G2(r: Runner):
     r.admit_observe(True); r.intruder_present = True
     if r.gt_mode: r.gt_intruder_fn = lambda t: (7.0, 0.0, -11.5)   # TOR B: intruz statyczny w kopercie
     r.bring_up()
+    r.preflight_scene_sanity((7.0, 0.0, -11.5))   # GUARD (tor C): live wymaga widocznego intruza; GT-fed pomija
     # G2: dron HOVER w Home (twarzą N na statycznego intruza w kopercie A7) do ENTRY, potem OBSERVE
     r.idle_sp = [r.start[0], r.start[1], -ALT_M]
     while time.time()-r.t0 < 60:
