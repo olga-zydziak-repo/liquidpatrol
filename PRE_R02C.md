@@ -74,10 +74,13 @@ patrolem; **re-potwierdzić pod OBSERVE-motion** (inna dynamika) przed zamrożen
 
 ## 2. DŹWIGNIE — kolejność (z reconu)
 
-1. **0b (gimbal attitude-comp)** — czoło, JEŚLI build potwierdzi JITTER pitchu; **0a (statyczny offset)**
-   jeśli build pokaże tylko BIAS (tańsze). Decyzja gated pomiarem pitchu (R1 luka).
+0. **RE-ATRYBUCJA (C-A1) — GATE przed wyborem dźwigni 0.** Rozstrzygnij „poza FOV" (zła kamera/model) vs
+   „w FOV nie-wyrenderowany" vs „pitch klipuje". Dźwigni 0 NIE wybierać przed tym.
+1. **0b (gimbal attitude-comp)** JEŚLI JITTER pitchu; **0a (statyczny offset)** jeśli BIAS; **poprawny
+   wariant kamery** jeśli C-A1 wykaże złą kamerę (najtańsze). Decyzja gated C-A1.
 2. **Szersze V-FOV** — wariant pomocniczy z **mierzonym kosztem zasięgu** (nie zamiast celowania).
-3. **MTI (R2)** — separator ortogonalny, AND-gate; wchodzi gdy conf sam nie domyka (sygnał≤szum po fixie).
+3. **MTI (R2)** — separator ortogonalny, **WYŁĄCZNIE AND-gate z kandydatem (C-A3), nigdy samodzielnie**;
+   wchodzi gdy conf sam nie domyka (sygnał≤szum po fixie).
 4. **R2-alt (detektor jednoklasowy) — OSTATNIA**, projekt anty-cyrkularny (§5).
 
 ---
@@ -101,14 +104,18 @@ Zamrożone przed pomiarem build. Rewizja X **tylko** nazwaną eskalacją (nie st
 
 ## 4. PLAN BUILD (po ratyfikacji PRE; kolejność)
 
-1. **Pomiar attitude (domknięcie luki R1):** rozszerz `att()` o pitch/roll (dane płyną). Zmierz rozkład
-   pitchu w **zawisie ORAZ OBSERVE-motion**, skoreluj z pozycją intruza w kadrze → **potwierdź mechanizm
-   §3f ilościowo** i rozstrzygnij **0a (bias) vs 0b (jitter)**. (Dwuzadaniowe: te same pitch/roll zasilają R2.)
-2. **Fix kadrowania** (0a lub 0b wg kroku 1). Wariant szersze-FOV z mierzonym kosztem zasięgu jeśli potrzebny.
+1. **RE-ATRYBUCJA (C-A1) — GATE przed 0a/0b:** (a) rozszerz `att()` o pitch/roll, zmierz w **zawisie ORAZ
+   OBSERVE-motion**; (b) **zweryfikuj model+wariant kamery ładowany przez stack lotu** (podejrzenie
+   `_down`/90°) vs model sondy statycznej; (c) klatka z **naniesioną przewidywaną projekcją celu** →
+   rozdziel „poza FOV" vs „w FOV nie-wyrenderowany". **GATE: mały pitch ∧ cel-w-kadrze ⇒ STOP+re-atrybucja
+   PRZED wyborem dźwigni 0** (gimbal może być niepotrzebny).
+2. **Fix kadrowania** — dopiero PO rozstrzygnięciu C-A1: jeśli zła kamera/model → poprawny wariant (tanie);
+   jeśli bias pitchu → 0a; jeśli jitter → 0b. Szersze-FOV z mierzonym kosztem zasięgu jeśli potrzebny.
 3. **Re-char θ_conf w locie (R4):** obie chmury, zasięg operacyjny, wyłącznie lot.
 4. **MTI (R2)** jeśli krok 3 pokaże sygnał≤szum: warp+diff @15 Hz z kompensacją pitch/roll/yaw, AND-gate.
-5. **Re-derywacja N dead-mana (R3):** re-potwierdź rozkład stalli pod OBSERVE-motion → zamroź N (kandydat
-   3–4 ticki), zaktualizuj budżet zombie i P1/P2 (założenie żywotności, [A4]→zmierzone).
+5. **Re-derywacja N dead-mana (R3+C-A2):** re-potwierdź rozkład stalli **pod OBSERVE-motion**; **N =
+   ceil(3× max_stall_ticks)** (margines ≥3×), etykieta `monotonic_local`; zapisz jawnie że N=6 stało na
+   niezmierzonym założeniu (lekcja klasy §III-bis). Zaktualizuj budżet zombie i P1/P2 ([A4]→zmierzone).
 6. **Bramka dwustronna** (§3) w locie; **R2-alt tylko jeśli 1–5 nie domkną** (§5).
 
 ---
@@ -133,8 +140,36 @@ uczenia się artefaktów konkretnej sceny. Jednoklasowy („drone"), charakteryz
 
 ---
 
+## 7. RIDERY RATYFIKACYJNE (C-A1…C-A4) — WIĄŻĄCE, naniesione przed buildem
+
+Olga ratyfikowała PRE_R02C 2026-08-09 z czterema riderami. Nadrzędne nad §2/§4 tam gdzie zaostrzają.
+
+**C-A1 — krok 1 buildu = RE-ATRYBUCJA, nie tylko pomiar pitchu.** §3f jest **NIEDOWIEDZIONE** (przy
+V-FOV 83° klip celu na 12–16° wymaga pitchu >26–30°, czego zawis nie produkuje). Krok 1 build MUSI:
+1. zmierzyć **pitch/roll w zawisie** (rozszerzenie att());
+2. **zweryfikować, KTÓRY model i wariant kamery ładuje stack lotu** (podejrzenie: `x500_mono_cam_down`,
+   obrót 90° w dół) — **porównać z modelem użytym w sondzie statycznej** (atrybucja iter.6);
+3. wygenerować **klatkę z NANIESIONĄ przewidywaną projekcją celu** (z pozy intruza + pozy kamery) →
+   rozdziela **„poza FOV"** od **„w FOV, ale nie wyrenderowany"**.
+**GATE:** jeśli pitch mały **i** cel powinien być w kadrze → **STOP + re-atrybucja PRZED wyborem 0a/0b**;
+**gimbal (0b) może okazać się NIEPOTRZEBNY.** Nie wolno wybierać dźwigni 0 przed rozstrzygnięciem C-A1.
+
+**C-A2 — N (dead-man) re-derywacja.** Rozkład stalli potwierdzony **pod OBSERVE-motion** (nie tylko
+patrol R3), **margines ≥3× nad zmierzonym maksimum**, wynik z **etykietą przyrządu** (`monotonic_local`).
+Zapisać JAWNIE: **poprzednie N=6 stało na NIEZMIERZONYM założeniu** („pętla stalluje ~1 s") — lekcja tej
+samej klasy co prowieniencja przyrządu (§III-bis RAPORT_R02). N finalne = ceil(3×max_stall_ticks).
+
+**C-A3 — MTI wyłącznie AND-gate.** MTI **NIGDY samodzielnie** (sam podnosi ε_FP — R2). Tylko jako
+potwierdzenie kandydata (conf/strukturalny ∧ ruch-spójny). **ZAMROŻONE w PRE** (§2 poz. 3, §5, §6).
+
+**C-A4 — θ_conf / ε_FP.** Jeśli po fixie kadrowania **sygnał ≤ szum i conf-floor padnie**, **ε_FP=0 MUSI
+nadal być egzekwowane przez STRUKTURĘ (edge-margin + k=3) + MTI** (AND-gate). Kryterium dwustronne
+(≥7 m przy coverage ≥0.8 / ε_FP=0) **bez zmian**.
+
+---
+
 ## STOP
 
-Recon domknięty (R1–R4), kryterium dwustronne zamrożone, plan build i eskalacje nazwane. **STOP na
-ratyfikacji PRE przez Olgę** (dyscyplina recon→PRE→STOP). Push i decyzja o wejściu w build = Olga.
-Dowody reconu: `results/R02/gate_live/R3_STALL_G1.jsonl`, modele gz (ścieżki w §1).
+Recon domknięty (R1–R4), PRE **RATYFIKOWANE** z riderami C-A1…C-A4 (§7, wiążące). Build wchodzi krokiem 1
+= **re-atrybucja C-A1** (z wewnętrznym GATE-em: mały pitch + cel w kadrze ⇒ STOP+re-atrybucja przed 0a/0b).
+Dowody reconu: `results/R02/gate_live/R3_STALL_G1.jsonl`, modele gz (ścieżki w §1). Push = Olga.
