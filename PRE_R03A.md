@@ -36,6 +36,48 @@ A3 ε_budget+M+most+arytmetyka Land; A4 scope denialu+stempel+eph pasywnie).
 
 ---
 
+## §0ter. RATYFIKACJA (2026-08-09, po SR-B1) — rewizja A-drift→A-plateau: D9–D13 + R-1/R-2 (WIĄŻĄCE, nadrzędne nad §0bis w zakresie modelu błędu)
+
+**Kontekst:** B1 (drift) OBALIŁ założenie A-drift pomiarem (ANEKS-2, §5ter): dryf = STEP do plateau
+~0.9–1.5 m (NIE liniowy), max_drift lot 1 = 1.49 m > slack 0.866 m; model `ε_pos=drift_rate·age_pos`
+i deadline `θ_pos` obalone. SR-B1 wyzwolone zasadnie. Olga ratyfikuje rewizję W CAŁOŚCI — obalenie
+A-drift wpisane jawnie jako WYNIK nogi (pomiar poprawił twierdzenie), nie ukryte.
+
+- **D9 — model błędu:** A-drift OBALONE (B1). Nowe założenie **A-plateau**: `ε_pos ≤ ε_cap` (błąd
+  ograniczony, kształt step-do-plateau), status **[A4]**, z pomiaru in-habitat. **Czas przestaje być
+  zmienną ochronną** — żaden deadline nie wygrywa wyścigu ze stepem ~0.7 m w ~0.37 s (lot 1).
+- **D10 — reguła cap (zamrożona TERAZ, przed B1-bis):** `ε_cap = 1.5 × max(max_drift po WSZYSTKICH
+  ważnych lotach B1 ∪ B1-bis)`, zaokrąglone **w górę** do najbliższego nadrzędnego z siatki ćwiartek
+  (…, 2, 9/4, 5/2, 11/4, 3, …). Wartość ROBOCZA z dzisiejszych lotów: `1.5×1.49 = 2.235 → 9/4 = 2.25`
+  (finalna liczba zamrożona w ANEKS-4 po B1-bis; TU zapisujemy REGUŁĘ, nie liczbę).
+- **D11 — domknięcie GEOMETRIĄ, nie czasem:** `R_route' = R_E − d_stop − ε_cap`; połowa boku kwadratu
+  `half-side' = R_route'/√2`. Koperta NIETYKANA: `R_E`/`V_E`/geofence bez zmian — **kurczymy własną
+  trasę, nie rozciągamy świata**. Robocze: `32 − 2.85 − 2.25 = 26.90 → half-side' = 26.90/√2 = 19.02 m`.
+  Nowa trasa wchodzi jako stała w **config r03** z cytatem reguły D11; `r01/config.py` (frozen, zapis
+  historyczny) **NIETKNIĘTY**.
+- **D12 — admisja EVENT-BASED:** `REFUSE(POS_DEGRADED)` na **zwalidowanej fladze** utraty aidingu
+  (definicja z R1: `dead_reckoning`/`failsafe_flags`) z debounce **2 ticki (0.10 s @ 20 Hz)**; `age_pos`
+  zostaje jako telemetria i nośnik histerezy `M = 5 s`. **Rola szybkiego REFUSE:** ogranicza epizod
+  dead-reckoningu do reżimu, w którym A-plateau JEST ZMIERZONE — nie „wyprzedza dryf".
+- **D13 — kryterium (+) bramki (5 warunków):** (a) REFUSE ≤ debounce + 1 tick od zwalidowanej flagi
+  (tol z kwantyzacji, składniki wyprowadzone §5); (b) Land domknięty: touchdown wewnątrz `R_E`
+  (sędzia GT); (c) `ε_pos_rzecz ≤ ε_cap` przez **CAŁY epizod** per bieg — to WALIDACJA A-plateau w
+  bramce, przekroczenie = FAIL uczciwy, zero strojenia; (d) 0 naruszeń `R_E` (GT); (e) rozdział
+  FLAGA/AKCJA natywna wg A2 + 0 natywnych AKCJI przed akcją osłony (z notą możliwej pustości).
+  **S4 = cięcie przy narożniku na v_max.** Kryterium (−) bez zmian: **0 fałszywych REFUSE(POS)** w S1
+  (5 min × 3 booty).
+
+**Ridery wiążące:**
+- **R-1:** w B1-bis pasywnie **liczniki resetów estymatora** (kandydaci: `xy_reset_counter`/
+  `z_reset_counter` w `vehicle_local_position` — nazwy ZWERYFIKOWANE w msgs zainstalowanej wersji,
+  nie z pamięci). Nota mechanizmu stepu (reset vs transient) jako HIPOTEZA w raporcie — nie diagnoza.
+- **R-2:** lekcja przyrządowa **ENU/NED** do PRE (§7): GT gz=ENU vs EKF=NED, bez swapa fałszywe ~5 m —
+  korelacja z zamianą osi OBOWIĄZKOWA w sędzim GT. Instrument sędziego dostaje **unit-test na
+  syntetyce** (znany błąd → znany wynik, oba układy osi) — **PASS wymagany ZANIM** policzy cokolwiek
+  w B1-bis. Przyczyna odrzucenia lotu 3 z B1 dopisana do prowieniencji (§5quater).
+
+---
+
 ## §1. Źródła telemetrii (R1 — inwentarz + żywe potwierdzenie XRCE)
 
 Żywe echo (stack SITL, etykieta Hz = `ros2-topic-hz`); pełny inwentarz: `results/R03/recon/R1_topics_inventory.md`.
@@ -105,29 +147,58 @@ zmierzone 0.149), `A_BRAKE=2.0` (:26, zmierzone 2.65≥2.0 — rozbieżność, d
 `DELTA_MARGIN=d_stop = v·t_react + v²/2a = 0.6 + 2.25 = 2.85` (:27), `R_E=32.0` (:30).
 **slack = R_E − (R_route + d_stop) = 32 − 31.134 = 0.866 m** — naturalny sufit budżetu ε_pos.
 
+### §3-REWIZJA (D9–D11, po SR-B1) — forma PLATEAU zastępuje formę rate/deadline
+
+**Twierdzenie zawierania (forma plateau, WIĄŻĄCA):**
+`(r_est ≤ R_route') ∧ (ε_pos ≤ ε_cap) ⇒ r_true ≤ R_E`.
+Sens: skoro `r_true ≤ r_est + ε_pos` (przy `ε_pos = |pos_EKF − pos_GT|`) oraz `R_route' = R_E − d_stop − ε_cap`,
+to na worst-case `r_est = R_route'` (+ zapas hamowania `d_stop` w barierze) mamy
+`r_true + d_stop ≤ R_route' + ε_cap + d_stop = R_E`. Zawieranie NIE zależy od czasu ani od kształtu
+narastania błędu — tylko od OGRANICZENIA `ε_pos ≤ ε_cap` (A-plateau, [A4], walidowane w bramce D13c).
+
+**Reguła ε_cap (D10) — REGUŁA, nie liczba:** `ε_cap = 1.5 × max(max_drift po WSZYSTKICH ważnych lotach
+B1 ∪ B1-bis)`, zaokrąglenie **w górę** do najbliższego nadrzędnego z siatki ćwiartek (…, 2, 9/4, 5/2,
+11/4, 3, …). Robocze: `1.5×1.49 = 2.235 → 9/4 = 2.25` (liczba finalna → ANEKS-4 po B1-bis).
+
+**Reguła geometrii (D11) — REGUŁA, nie liczba:** `R_route' = R_E − d_stop − ε_cap`;
+`half-side' = R_route'/√2`. `R_E`/geofence NIETYKANE. Robocze: `32 − 2.85 − 2.25 = 26.90 →
+half-side' = 19.02 m`. Stała trasy → **config r03** (frozen `r01/config.py` nietknięty).
+
+**Zakres ważności A-plateau:** epizod dead-reckoningu jest OGRANICZONY łańcuchem `flaga → debounce
+(2 ticki) → REFUSE(POS_DEGRADED) → Land` (D12); `ε_cap` obowiązuje przez CAŁY epizod aż do touchdown
+(walidacja D13c). Poza tym epizodem admisja stoi na zdrowym fixie (`¬dead_reckoning`).
+
+> **[OBALONE B1 — zapis historyczny, NIE kasować (§5ter dowody)]** Poniższe formy rate/deadline
+> (D2/A3: `θ_pos`, `ε_pos_est = drift_rate·age_pos`, człon Land `t_land·drift_rate`) zostały OBALONE
+> pomiarem B1: dryf to STEP do plateau, nie proces liniowy; żaden deadline nie wyprzedza stepu 0.7 m
+> w 0.37 s. Zastąpione formą plateau powyżej. Pozostają jako ślad rewizji.
+
 **`ε_budget` Z REGUŁY (D4, zapisujemy REGUŁĘ):** `ε_budget = slack − rezerwa_tick`, gdzie
 `rezerwa_tick = v_max·tick = 3.0·0.05 = 0.15 m` (droga w 1 tick osłony przed reakcją) →
 `0.866 − 0.15 = 0.716 → ε_budget = 0.7 m`. Rezerwa zawierania po budżecie = `slack − ε_budget = 0.166 m`.
 
-**Formy (D2):** (i) **statyczna** (admisja runtime): ALLOW ⇐ `ε_pos_est ≤ ε_budget`, tj. na deadline
-`age_pos ≤ θ_pos`; (ii) **dynamiczna** (dowodzona): `r + d_stop + ε_pos ≤ R_E`. **MOST P2-ε:**
-`(i) ∧ (r ≤ R_route) ⇒ (ii)` (przy `r=R_route` worst-case, `ε_pos ≤ ε_budget ≤ slack` ⇒ zawieranie).
+> **[OBALONE B1 — zapis historyczny, NIE kasować]**
+> **Formy (D2):** (i) **statyczna** (admisja runtime): ALLOW ⇐ `ε_pos_est ≤ ε_budget`, tj. na deadline
+> `age_pos ≤ θ_pos`; (ii) **dynamiczna** (dowodzona): `r + d_stop + ε_pos ≤ R_E`. **MOST P2-ε:**
+> `(i) ∧ (r ≤ R_route) ⇒ (ii)` (przy `r=R_route` worst-case, `ε_pos ≤ ε_budget ≤ slack` ⇒ zawieranie).
+>
+> **`ε_pos_est = drift_rate · age_pos`** (D1: age_pos czasowe; eph poza admisją). **Deadline
+> `θ_pos = ε_budget / drift_rate_assumed`.** Admisja: **REFUSE(POS_DEGRADED) gdy `age_pos > θ_pos`**.
+>
+> **Założenie A-drift (obalone):** *„zawieranie WARUNKOWE: dryf rzeczywisty ≤ `drift_rate_assumed`".*
+> Obalone B1: dryf front-loaded step, nie liniowy → `drift_rate_assumed` niereprezentatywny; zastąpione
+> A-plateau (D9). Zakaz wstrzykiwania sztucznego dryfu (zmiana habitatu) OBOWIĄZUJE dalej w B1-bis.
 
-**`ε_pos_est = drift_rate · age_pos`** (D1: age_pos czasowe; eph poza admisją). **Deadline
-`θ_pos = ε_budget / drift_rate_assumed`.** Admisja: **REFUSE(POS_DEGRADED) gdy `age_pos > θ_pos`**.
+**Arytmetyka Land (A3 — UPROSZCZONA, D13.4):** człon `t_land · drift_rate` **USUNIĘTY** wraz z modelem
+rate. Land jest pokryty przez `ε_cap` obowiązujący przez CAŁY epizod aż do touchdown: skoro
+`ε_pos ≤ ε_cap` walidowane do momentu przyziemienia (D13c), a `R_route' = R_E − d_stop − ε_cap`, to
+touchdown spełnia `r_true ≤ R_E` bez osobnego członu czasowego zniżania. Brak zależności od `t_land`.
 
-**Założenie A-drift (jawne w twierdzeniu P2-ε, jak żywotność osłony):** *„zawieranie WARUNKOWE: dryf
-rzeczywisty ≤ `drift_rate_assumed`".* `drift_rate_assumed` z **protokołu B1** (charakteryzacja POD RUCHEM,
-status [A4], PRZED zamrożeniem progów — §5/B1). **ZAKAZ wstrzykiwania sztucznego dryfu** (zmiana habitatu
-— tylko osobną decyzją Olgi); `drift_rate` mierzony z clean-loss EKF vs GT.
-
-**Arytmetyka Land (A3):** akcja Land dolicza człon `t_land · drift_rate_assumed` — musi zajść:
-`t_land · drift_rate_assumed ≤ rezerwa 0.166 m` **ALBO** doliczyć do budżetu (θ_pos pomniejszony).
-`t_land` = czas zniżania z ALT_M=10 m — **zmierzyć sondą** (etykieta przyrządu). Nie domyka → **STOP
-SR-B1** (nie strojenie).
-
-**Zakres dowodu:** **P2-ε OSOBNY cert** (wzorzec `P2_vmax3p1.json`), kanoniczny `P2.json` NIETKNIĘTY.
-z3 NRA: `(i) ∧ (r ≤ R_route) ⇒ (ii)` (UNSAT-ami) + ostrość budżetu (kontrprzykład przy `ε > ε_budget + δ`).
+**Zakres dowodu (forma plateau):** **P2-ε OSOBNY cert** (`proofs/certs/P2_eps.json`), kanoniczny
+`P2.json` NIETKNIĘTY. z3 na dokładnych ułamkach: (a) `(r_est ≤ R_route') ∧ (ε ≤ ε_cap) ⇒ r_true ≤ R_E`
+(UNSAT-ami); (b) **ostrość dwustronna** — kontrprzykład przy `ε_cap + δ` ORAZ przy `R_route' + δ`;
+(c) człon Land pokryty przez cap (komentarz w modelu + zdanie tu). [OBALONE B1: wzorzec deadline
+`ε > ε_budget + δ` zastąpiony ostrością dwustronną cap/geometria.]
 
 ---
 
@@ -161,19 +232,32 @@ admisji WEWNĘTRZNY, nie komenda operatora → gramatyka bez zmian.
 - **S1** nominal (zdrowy GPS, patrol ≥N min, świeży boot ×3).
 - **S2** denial w patrolu → akcja bezpieczna.
 - **S3** denial + recovery → powrót do ALLOW po histerezie M.
-- **S4** denial przy granicy (najgorsza geometria: narożnik trasy, r≈R_route).
+- **S4** **cięcie przy narożniku na `v_max`** (najgorsza geometria + worst-case stanu prędkości w
+  chwili cięcia: `r≈R_route'`, pełna `v_max` w kierunku narożnika).
 
-**KRYTERIUM ZAMROŻONE — na MECHANIZM (A1):**
-- **(+)** 100% biegów S2/S4 (≥3 świeże booty): **`REFUSE(POS_DEGRADED)` w deadline `θ_pos ± tol`**
-  ORAZ **akcja Land domknięta** (touchdown wewnątrz `R_E`) ORAZ **0 naruszeń R_E** ORAZ **0 natywnych
-  AKCJI przed akcją osłony** (A2, z notą pustości). `ε_pos_rzecz` (sędzia GT) raportowane **INFORMACYJNIE**
-  z notą wierności SITL (NIE w kryterium — clean-loss w quasi-idealnym IMU może dać dryf ≈ 0).
+**KRYTERIUM ZAMROŻONE — forma PLATEAU (D13, nadrzędne nad A1):**
+- **(+)** 100% biegów S2/S4 (≥3 świeże booty), WSZYSTKIE 5 warunków:
+  - **(a)** `REFUSE(POS_DEGRADED)` ≤ **debounce + 1 tick** od zwalidowanej flagi (tol niżej).
+  - **(b)** Land domknięty: **touchdown wewnątrz `R_E`** (sędzia GT).
+  - **(c)** `ε_pos_rzecz ≤ ε_cap` przez **CAŁY epizod** per bieg — WALIDACJA A-plateau w bramce.
+    Przekroczenie = **FAIL uczciwy**, zero strojenia. *(Zmiana vs A1: ε_pos_rzecz WCHODZI teraz do
+    kryterium jako test A-plateau — nie jest już „tylko informacyjne". Nota wierności SITL zostaje:
+    clean-loss w quasi-idealnym IMU może dać ε_pos_rzecz ≪ ε_cap — to nie zwalnia z warunku, tylko
+    raportowane jako margines.)*
+  - **(d)** 0 naruszeń `R_E` (GT).
+  - **(e)** rozdział FLAGA/AKCJA natywna wg A2 + **0 natywnych AKCJI przed akcją osłony** (z notą
+    możliwej pustości — próg eph 5 m „martwy", §7.1/§2).
 - **(−)** **0 fałszywych `REFUSE(POS)`** w S1 (**N = 5 min × 3 booty**, D7).
 
-**`tol` WYPROWADZONA i ZAMROŻONA** (suma kwantyzacji, składniki policzone): `tol = tick_osłony (0.05 s)
-+ okres_źródła_flagi (dead_reckoning @100 Hz = 0.01 s; failsafe_flags @1.85 Hz = 0.54 s — użyć źródła
-admisji) + niepewność_stempla_wstrzyknięcia (≤ 1 tick sondy)`. **Admisja czyta `dead_reckoning` @100 Hz**
-⇒ `tol ≈ 0.05 + 0.01 + 0.05 = 0.11 s` [POLICZYĆ dokładnie w B2, zamrozić przed bramką].
+**Zakres ważności A-plateau (w bramce):** epizod DR ograniczony `flaga→debounce→REFUSE→Land`; `ε_cap`
+walidowany do touchdown (D13c). Twierdzenie plateau NIE rości ważności poza tym epizodem.
+
+**`tol` dla (a) — WYPROWADZONA i ZAMROŻONA** (event-based, kwantyzacja @20 Hz, tick = 0.05 s):
+`bound = debounce (2 ticki = 0.10 s) + kwantyzacja_odczytu_flagi (1 tick = 0.05 s) = 0.15 s`.
+Składnik kwantyzacji: flaga `dead_reckoning` (źródło @~100 Hz) próbkowana przez osłonę na jej ticku
+20 Hz ⇒ do 1 ticka opóźnienia detekcji. Niepewność stempla wstrzyknięcia (≤ 1 tick sondy) mierzona
+INFORMACYJNIE per bieg (nie poszerza bound — bound liczony od ZWALIDOWANEJ flagi, nie od iniekcji).
+**Bound 0.15 s zamrożony**; dokładny odczyt składników potwierdzony w B2 (SR-B2 gdyby się rozjechał).
 
 **Metryki NIENASYCONE (rozrzut):** czas-do-REFUSE, `ε_pos_rzecz` przy REFUSE, min margines `R_E−r`,
 czas Land, age_pos przy REFUSE. NIE metryki cięte deadline'em (lekcja max_age/θ_age R0.2).
@@ -223,6 +307,63 @@ bezpośredniego czasu-do-ε_budget (~0.37 s, REFUSE natychmiast) zamiast rate-re
 dryfu (front-window); LUB (iii) re-pomiar z osłoną zatrzymującą ruch (dryf w krótkim oknie); LUB (iv)
 limitacja habitat/geometria (clean-loss w narożniku poza obwiednią). NIE strojenie.
 
+**ROZSTRZYGNIĘCIE (2026-08-09):** Olga wybrała ścieżkę **rewizji modelu** — A-drift→A-plateau (D9),
+domknięcie GEOMETRIĄ nie czasem (D11). Rate/θ_pos porzucone; cap `ε_cap` z reguły D10; admisja
+event-based (D12). Szczegóły §0ter/§3-REWIZJA. B1-bis (§5quater) rozszerza charakteryzację przed freeze.
+
+---
+
+## §5quater. Protokół B1-bis — rozszerzona charakteryzacja plateau (ZAMROŻONY PRZED biegami)
+
+**Cel:** zebrać `max(max_drift)` po większej, celowanej siatce (worst-case stanów prędkości) → reguła
+D10 → `ε_cap`; reguła D11 → `R_route'`/`half-side'`; test progu degeneracji SR-B1'. GT **WYŁĄCZNIE
+sędzią**; instrument sędziego zwalidowany unit-testem (R-2) PRZED liczeniem.
+
+**Siatka (≥ 6 WAŻNYCH lotów, świeży boot każdy):**
+- 2× cięcie/denial **w zawisie** (v≈0 w chwili denialu),
+- 2× **na prostej przy `v_max`** (denial w połowie nogi, pełna prędkość),
+- 2× **przy narożniku** (worst-case stanu prędkości w chwili cięcia — zmiana kierunku).
+- Okna dead-reckoning **≥ 60 s**; **jeden lot z oknem ≥ 120 s** (sonda stabilności plateau — czy nie
+  narasta dalej po plateau; wejście do SR-B6).
+
+**Metryki per lot** (etykiety przyrządów, oś-swap przez ZWALIDOWANY instrument):
+`max_drift`, `plateau` (średnia po transiencie), `t_do_plateau`, **liczniki resetów** (R-1:
+`xy_reset_counter`/`z_reset_counter` z `vehicle_local_position` — nazwy zweryfikować w msgs zainstalowanej
+wersji przy budowie rejestratora).
+
+**Kryteria WYKLUCZENIA lotu (zamrożone TERAZ; wyprowadzone z przyczyny odrzucenia lotu 3 B1 — §5quater-prov):**
+lot ODRZUCONY (nie wchodzi do siatki `max`) jeśli którekolwiek: **(W1)** nie osiągnął fazy
+`armed→takeoff→offboard→denial_on` (np. `arm() COMMAND_DENIED`, utrata offboard przed denialem);
+**(W2)** okno dead-reckoning pod ruchem < 60 s; **(W3)** luka telemetrii EKF > 1.0 s (5 pominiętych
+próbek @20 Hz) LUB brak próbek GT przez > 2.0 s w oknie DR; **(W4)** params PX4 nieprzywrócone po locie
+(`EKF2_GPS_CTRL≠7` — SR-B5). Odrzucenie logowane z przyczyną (prowieniencja), NIE po cichu.
+
+**§5quater-prov (prowieniencja lotu 3 B1, R-2):** lot 3 B1 (`/tmp/r03b/b1_3.jsonl`, 1958 próbek)
+ODRZUCONY. **Przyczyna proksymalna: `arm() COMMAND_DENIED`** (`fly_3.log`) — dron NIGDY nie uzbroił/
+wystartował ⇒ brak ważnego okna DR (W1). Ostrzeżenie „bind error: Address in use" pojawia się w logach
+**WSZYSTKICH** lotów (także ważnych 1,2) — to NIE jest cecha różnicująca; ANEKS-2 przypisało odrzucenie
+błędnie „bind MAVSDK 14540". **Korekta wpisana tu** (lekcja: różnicować przyczynę proksymalną od
+ubiquitous warning). Loty ważne: lot 1 = `b1_val.jsonl`→`b1_flight1.jsonl` (2022), lot 2 = `b1_2.jsonl`→
+`b1_flight2.jsonl` (1919).
+
+**SR-B1' — próg degeneracji trasy (ZAMROŻONY TERAZ, przed liczbami z siatki):**
+`half-side'_min = 3 × d_stop = 3 × 2.85 = 8.55 m`. **Uzasadnienie (grid-independent, dwa filary):**
+1. **Testowalność S4 (wiążący):** noga trasy ma długość `2·half-side'`; przy narożniku pochłania
+   `d_stop` na hamowanie. Aby `v_max` było UTRZYMANE przez nietrywialny odcinek (S4 wymaga worst-case
+   v_max), segment cruise `≈ 2·half-side' − 2·d_stop` musi być dodatni i znaczący. Przy
+   `half-side' = 3·d_stop`: noga = `6·d_stop`, cruise ≈ `4·d_stop = 2/3 nogi` → v_max realnie
+   utrzymane. Poniżej `3·d_stop` frakcja utrzymanego v_max się załamuje i **S4 przestaje być
+   wiernym worst-case** (kryterium zamrożone stałoby się niemierzalne).
+2. **Pokrycie pola (kontrolny):** oryginał `half-side = R_route/√2 = 20.0 m`; przy 8.55 m pokrycie
+   `(2·8.55)²/(2·20)² ≈ 18%` oryginalnego pola — twardy dół.
+Mapowanie na cap: `half-side' ≥ 8.55 ⇔ ε_cap ≤ R_E − d_stop − √2·8.55 = 32 − 2.85 − 12.09 = 17.06 m`.
+**Jeśli reguła D10 da `ε_cap` wymuszający `half-side' < 8.55 m` → STOP (SR-B1'): twierdzenie w tym
+habitacie/geometrii niedomykalne — WYNIK z liczbami, nie dowożenie pozytywu.** (Robocze `ε_cap=2.25`
+→ `half-side'=19.02 m ≫ 8.55` → margines duży; próg to backstop na katastrofę, nie target.)
+
+**Kolejność:** unit-test sędziego PASS → 6+ lotów → metryki → D10/D11 → SR-B1' → **ANEKS-4 (freeze,
+commit tylko PRE) PRZED B2**. Freeze→pomiar dowodzony łańcuchem commitów.
+
 ---
 
 ## §6. Stop-rules
@@ -237,11 +378,16 @@ limitacja habitat/geometria (clean-loss w narożniku poza obwiednią). NIE stroj
 - **SR-4** żaden param PX4 zmieniony w sondach nie zostaje → **SPEŁNIONE** (EKF2_GPS_CTRL=7, SYS_FAILURE_EN=0
   zweryfikowane po sondzie).
 
-**Stop-rules BUILD:** **SR-B1** arytmetyka Land nie domyka budżetu (A3) → STOP z liczbami. **SR-B2** P5
-rozbieżność → STOP (automatu nie łata się pod test). **SR-B3** flapowanie flagi dead-reckoning w nominalu
-→ STOP przed resztą bramki, raport z histogramem (bez samowolnego strojenia def. fixu/histerezy). **SR-B4**
-wyników bramki nie stroi się po fakcie; FAIL=FAIL z raportem. **SR-B5** params PX4 przywrócone po sesji;
-frozen R0.1/R0.2 nietykane; drzewo czyste na koniec.
+**Stop-rules BUILD:** **SR-B1** [WYZWOLONE 2026-08-09, ROZSTRZYGNIĘTE rewizją D9–D13 — patrz §5ter/§0ter;
+zostaje w historii] arytmetyka Land/deadline nie domyka → było STOP z liczbami → rewizja A-plateau.
+**SR-B1'** geometria: `half-side' < 8.55 m` (próg §5quater) → STOP z liczbami (twierdzenie niedomykalne
+w tej geometrii — WYNIK). **SR-B2** P5 rozbieżność → STOP (automatu nie łata się pod test). **SR-B3**
+flapowanie flagi dead-reckoning w nominalu → STOP przed resztą bramki, raport z histogramem (bez
+samowolnego strojenia def. fixu/histerezy). **SR-B4** wyników bramki nie stroi się po fakcie; FAIL=FAIL
+z raportem. **SR-B5** params PX4 przywrócone po sesji; frozen R0.1/R0.2 nietykane; drzewo czyste na koniec.
+**SR-B6** brak plateau w B1-bis (wzrost monotoniczny przez całe okno ≥ 120 s) ALBO `max_drift` łamiący
+próg degeneracji przez regułę cap → STOP: **A-plateau pada tak samo jak A-drift** — raport z liczbami
+zamiast dowożenia pozytywu.
 
 ---
 
@@ -255,6 +401,13 @@ frozen R0.1/R0.2 nietykane; drzewo czyste na koniec.
 3. `COM_POS_FS_*` w v1.16.2 zredukowane do `COM_POS_FS_EPH` (rodzina DELAY/EPV/PROB/GAIN usunięta).
 4. `estimator_status` (pos_horiz_accuracy) nie przez XRCE; `SensorGps.msg` src vs żywy topic (jamming/spoofing).
 5. Akcja natywna w LOCIE niezmierzona (iniekcja w locie zawiodła) — build.
+6. **PRZYRZĄD ENU/NED (R-2, lekcja z B1):** GT `gz model -p` = **ENU**; EKF `vehicle_local_position` =
+   **NED**. Bez zamiany osi (EKF.x↔GT.y, znak z) sędzia GT liczy fałszywe ~5 m. **Korelacja z zamianą
+   osi OBOWIĄZKOWA**; instrument sędziego (skrypt) dostaje **unit-test na syntetyce** (znany błąd →
+   znany wynik, oba układy) — PASS wymagany ZANIM policzy cokolwiek w B1-bis. 8. instancja wzorca
+   „prowieniencja przyrządu" (po conf-separator R0.2, laggy-mav R0.2, att-yaw-only R0.2C…).
+7. **Przyczyna odrzucenia lotu 3 B1 skorygowana** (§5quater-prov): proksymalnie `arm() COMMAND_DENIED`,
+   nie „bind 14540" (bind warning ubiquitous, nie różnicujący).
 
 ---
 
