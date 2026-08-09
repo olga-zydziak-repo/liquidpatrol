@@ -47,10 +47,13 @@ setsid nohup ros2 run ros_gz_bridge parameter_bridge \
 PIDS+=($!); echo "[gate] most kamery pid=$! (gz==ros:$IMG_TOPIC)"
 sleep 3
 
-# 4) spawn intruza (model, nie actor — R1) na wysokości 6 m (paralaksa bearing-only)
+# 4) spawn intruza (model, nie actor — R1). DIAGNOSTYKA C-A1 renderu: INTRUDER_SPAWN="x,y,z" pozwala
+#    spawnować WPROST w pozie docelowej (para repro: spawn-wprost vs set_pose). SPAWN_SDF nadpisuje model.
+ISP="${INTRUDER_SPAWN:-12, 0, 14}"; IFS=',' read -r SPX SPY SPZ <<< "$ISP"
+SPAWN_SDF="${SPAWN_SDF:-$ROOT/r02/intruder_model.sdf}"
 gz service -s "/world/${WORLD}/create" --reqtype gz.msgs.EntityFactory \
   --reptype gz.msgs.Boolean --timeout 3000 \
-  --req "sdf_filename: \"$ROOT/r02/intruder_model.sdf\", name: \"intruder\", pose: {position: {x: 12, y: 0, z: 14}}" \
+  --req "sdf_filename: \"$SPAWN_SDF\", name: \"intruder\", pose: {position: {x: $SPX, y: $SPY, z: $SPZ}}" \
   > "$LOGDIR/spawn.log" 2>&1
 echo "[gate] intruz spawn: $(cat $LOGDIR/spawn.log)"
 
@@ -70,7 +73,8 @@ esac
   --reptype gz.msgs.Boolean --timeout 3000 \
   --req 'name: "intruder", position: {x: -60, y: 0, z: 6}, orientation: {w: 1.0}' >/dev/null 2>&1
 # G2/C1: intruz statyczny w polu Północ drona (7,0,11.5) — koperta A7 (3D~7m, elewacja~12°, tło nieba)
-if [ "$SCEN" = "G2" ] || [ "$SCEN" = "C1" ]; then
+# DIAGNOSTYKA C-A1: SKIP_SETPOSE=1 pomija set_pose (spawn-wprost = para repro dla mechanizmu renderu).
+if { [ "$SCEN" = "G2" ] || [ "$SCEN" = "C1" ]; } && [ "${SKIP_SETPOSE:-0}" != "1" ]; then
   for try in 1 2 3; do
     gz service -s "/world/${WORLD}/set_pose" --reqtype gz.msgs.Pose --reptype gz.msgs.Boolean \
       --timeout 3000 --req 'name: "intruder", position: {x: 7, y: 0, z: 11.5}, orientation: {w: 1.0}' >/dev/null 2>&1
