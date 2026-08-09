@@ -121,7 +121,7 @@ class Runner:
         self.observe_authority = False
         self.k = 0
         self.max_radial = 0.0
-        self._last_pub = None; self.setpoint_max_dt = 0.0
+        self._last_pub = None; self.setpoint_max_dt = 0.0; self.setpoint_dts = []
         # fix #2: setpoint w OSOBNYM WĄTKU o stałym takcie (odsprzężony od pętli decyzji/kanału),
         # by kontencja CPU detektora nie głodziła strumienia → brak natywnego HOLD z utraty offboard.
         self._sp_lock = threading.Lock(); self._latest_sp = None
@@ -163,7 +163,9 @@ class Runner:
         # pętla decyzji NIE publikuje bezpośrednio — tylko aktualizuje setpoint; publikuje streamer.
         now = time.monotonic()
         if self._last_pub is not None:
-            self.setpoint_max_dt = max(self.setpoint_max_dt, now - self._last_pub)  # takt decyzji (info)
+            dt = now - self._last_pub
+            self.setpoint_max_dt = max(self.setpoint_max_dt, dt)  # takt decyzji (info)
+            self.setpoint_dts.append(dt)      # R3 tor C: rozkład stalli pętli decyzyjnej (re-derywacja N dead-mana)
         self._last_pub = now
         self._set_sp(xyz)
 
@@ -349,9 +351,24 @@ class Runner:
         try: self.mav.stop(); self.xrce.shutdown()
         except Exception: pass
 
+    def _stall_report(self):
+        """R3 tor C: rozkład stalli pętli decyzyjnej (inter-_set_sp) — wejście do re-derywacji N dead-mana.
+        KANAŁ POMIARU: time.monotonic() lokalny (nie MAVSDK). N musi być > p_max stalla, by dead-man nie
+        tripował na legalnym stallu (reintrodukcja problemu fix#2)."""
+        d = sorted(self.setpoint_dts)
+        if not d: return None
+        def pct(p): return round(d[min(len(d)-1, int(p*len(d)))], 4)
+        tick = 1.0/20.0
+        return {"channel": "monotonic_local", "n": len(d), "p50": pct(0.50), "p95": pct(0.95),
+                "p99": pct(0.99), "max": round(d[-1], 4),
+                "max_ticks_@20Hz": round(d[-1]/tick, 2), "p99_ticks_@20Hz": round(pct(0.99)/tick, 2),
+                "over_6ticks(0.30s)": sum(1 for x in d if x > 6*tick),
+                "over_4ticks(0.20s)": sum(1 for x in d if x > 4*tick)}
+
     def finish(self, summary):
         self.stop_streamer()
         summary = {**summary, "conf_passive_A6": self.conf_report()}   # A6: pasywny log conf w każdym locie
+        summary["stall_dist_R3"] = self._stall_report()                # R3 tor C: rozkład stalli pętli (re-derywacja N)
         if self.gt_mode:                                               # TOR B: etykieta + nieregularność (seedy)
             summary["gt_fed"] = True
             summary["gt_irregularity"] = {"seed": int(os.environ.get("GT_SEED", "1")),
