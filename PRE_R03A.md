@@ -276,6 +276,42 @@ ograniczony — TAK per okno, ale bezwarunkowe plateau obalone), NIE jako podsta
 **P2-ε: forma nierówności BEZ ZMIAN** (`(r_est≤R_route')∧(ε≤ε_cap)⇒r_true+d_stop≤R_E`) — warunek
 A-episode żyje w rejestrze założeń, arytmetyka certu czysta.
 
+### §3quater. Akcja bezpieczna + profil zejścia (ratyfikacja Olgi 2026-08-09, Wariant A z poprawkami)
+
+**Znalezisko B1-bis (loty EPISODE, dobry boot 90 s konwergencji, kanał czysty p95≤0.07):**
+prosta v_max `ε_pos=2.45 m`; **narożnik (zwrot 90° v_max) `ε_pos=12.33 m`** (zejście 0.7 m/s ~14 s).
+Dryf zdominowany fazą ZEJŚCIA (@5s=2.7→@10s=10.5). **Pod dead-reckoningiem dron NIE wyzeruje
+prawdziwej prędkości (brak aidingu) → dryf ~proporcjonalny do CZASU epizodu → tempo/czas zejścia = DŹWIGNIA.**
+
+**ZNALEZISKO KRYTYCZNE — AUTO.LAND UCIEKA (do nagłówka raportu §II'/III):** `d.action.land()`
+(AUTO.LAND) pod DR = **flyaway 42 m** — pętla POZYCYJNA (station-keeping) goni DRYFUJĄCĄ estymatę.
+**Zasada: pod degradacją estymatora dozwolone tylko akcje OTWARTO-PĘTLOWE względem degradowanej
+wielkości.** 2. instancja wzorca „zawodna natywna warstwa-0" (po eph-failsafe „martwym" §2).
+
+**D5 REWIZJA (akcja bezpieczna, aneks §4, re-cert P1+P5 OD NOWA — lista komend = element spec):**
+akcja po REFUSE(POS) = **zejście STEROWANE PRĘDKOŚCIĄ z `v_xy=0` zadawanym RÓWNOCZEŚNIE**
+(`VelocityNed(0,0,v_down)`). **`d.action.land`/AUTO.LAND WYKLUCZONE z listy zamkniętej komend osłony**
+(uzasadnienie: runaway 42 m, pętla pozycyjna na skażonej estymacie). RTL już wykluczony (global pos, R2).
+
+**Profil zejścia DWUFAZOWY (ZAMROŻONY TERAZ, kryterium NIEZALEŻNE):**
+- Faza 1 (szybka): `v_desc_fast = MPC_Z_VEL_MAX_DN = 1.5 m/s` (limit PX4 dla trybów prędkościowych =
+  granica bezpieczeństwa VRS realnego wiropłata; **v1.16.2 zweryfikowane**: `multicopter_position_control_limits_params.c:81`)
+  do `h_switch ≈ 2 m AGL` (z 8 m: ~4 s).
+- Faza 2 (dotknięcie): `MPC_LAND_SPEED = 0.7 m/s` (`multicopter_takeoff_land_params.c:111`) do touchdown.
+- **NOTA:** SITL NIE modeluje VRS — szybsze zejście niż `MPC_Z_VEL_MAX_DN` byłoby GRANIEM symulatora.
+  Profil IDENTYCZNY w charakteryzacji (episode) i w bramce S2/S4.
+
+**Warunek habitatu — height reference (Olga p.3):** `EKF2_HGT_REF` default = **1 (GPS)** — pod denialiem
+wysokość degraduje. **Wymuszamy `EKF2_HGT_REF = 0 (Baro)`** na loty episode/bramkę (habitat GPS-denied
+używa baro/range dla wysokości); przywracane po sesji (SR-B5). Gdyby baro niedostępne → STOP z liczbami.
+
+**PREDYKCJA PREREJESTROWANA (wpisana PRZED lotami, Olga p.4):**
+`ε_pos(narożnik, profil dwufazowy) ∈ [2.5, 6] m`. Wynik POZA pasmem → **zbadać przyczynę PRZED
+przyjęciem liczby** (nie przyjmować milcząco).
+
+**Siatka episode (Olga p.5):** **≥ 3 loty narożnik + ≥ 2 prosta** (cap=1.5×max niestabilny na n=1;
+narożnik ustawia cap → gęściej tam). Cap/geometria wg D10/D11 bez zmian; poniżej progu → SR-B1' (wynik).
+
 ---
 
 ## §4. Zmiana automatu + akcja bezpieczna + histereza + re-cert (R4 — papier)
@@ -285,9 +321,12 @@ R-A; P1c rozszerza zbiór reasonów). P1 7-liściowy NIETKNIĘTY strukturalnie. 
 geofence** (zdegradowana pozycja podważa barierę `p+v²/2a≤R_E` liczoną na niepewnym p) → poniżej latch,
 NA/PONAD R-G. Uzasadnienie: nie wolno ufać barierze na dryfującym p.
 
-**Akcja bezpieczna po REFUSE(POS) = Land (D5):** RTL **wykluczony** (wymaga global position;
-`global_position_invalid=True` zmierzone R2). Land = zejście pionowe, nie wymaga pozycji poziomej;
-komenda trybu z **listy zamkniętej** węzła osłony (rozszerzenie o Land), zapisana w trace.
+**Akcja bezpieczna po REFUSE(POS) [D5 ZREWIDOWANE §3quater]:** = **zejście STEROWANE PRĘDKOŚCIĄ**
+`VelocityNed(0,0,v_down)` z `v_xy=0` równocześnie, profil dwufazowy (1.5→0.7 m/s, §3quater).
+RTL **wykluczony** (global pos, R2). **AUTO.LAND (`d.action.land`) WYKLUCZONE z listy zamkniętej**
+(flyaway 42 m pod DR — pętla pozycyjna goni skażoną estymatę; §3quater). Lista zamknięta komend osłony
+= {velocity-setpoint (patrol/OBSERVE), velocity-descent (POS_DEGRADED)}; AUTO.LAND/RTL poza listą.
+Zapisane w trace. [OBALONE B1-bis: „Land = komenda trybu" — AUTO.LAND niestabilny pod DR.]
 
 **Histereza (D6): `M = 5 s`** ciągłego zdrowego fixu (`¬dead_reckoning`) do re-ALLOW. (eph poza admisją;
 warunek zdrowia = `¬dead_reckoning`, nie eph.)
