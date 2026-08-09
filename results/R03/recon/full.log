@@ -1,0 +1,22 @@
+[probe] connected mono=136636.22
+[probe] SYS_FAILURE_EN old=0
+[probe] EVENT armed mono=136636.8421
+[probe] EVENT takeoff mono=136636.8538
+[probe] EVENT denial_on_GPS_OFF mono=136658.8722
+Traceback (most recent call last):
+  File "/tmp/r03/probe_full.py", line 39, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/tmp/r03/probe_full.py", line 25, in main
+    await d.failure.inject(FailureUnit.SENSOR_GPS, FailureType.OFF, 0)
+  File "/home/olga/.local/lib/python3.12/site-packages/mavsdk/failure.py", line 431, in inject
+    raise FailureError(result, "inject()", failure_unit, failure_type, instance)
+mavsdk.failure.FailureError: TIMEOUT: 'Timeout'; origin: inject(); params: (<FailureUnit.SENSOR_GPS: 4>, <FailureType.OFF: 1>, 0)
