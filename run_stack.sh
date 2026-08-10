@@ -27,11 +27,15 @@ setsid nohup MicroXRCEAgent udp4 -p 8888 > "$LOGDIR/agent.log" 2>&1 &
 echo "  agent pid=$!"
 sleep 1
 
-echo "[stack] start PX4 SITL model=$MODEL world=$WORLD (GUI on, D3D12)…"
+echo "[stack] start PX4 SITL model=$MODEL world=$WORLD (HEADLESS='${HEADLESS:-}', D3D12)…"
 cd "$PX4_DIR/rootfs"
 export PX4_SIM_MODEL="$MODEL"
 export PX4_GZ_WORLD="$WORLD"
-unset HEADLESS                  # HEADLESS puste => GUI wystartuje (px4-rc.gzsim)
+# HEADLESS: jeśli wołający USTAWIŁ (bramka: HEADLESS=1) → BEZ GUI. GUI (`gz sim -g`) potrafi ciągnąć
+# >180% CPU i głodzić lockstep → „time jump / Resetting time synchroniser" → EKF reset → High Gyro Bias /
+# horizontal velocity unstable → „Arming denied: Resolve system health failures". Bez GUI sim jest stabilny
+# i arm przechodzi. Soak (nie ustawia HEADLESS) → GUI jak dotąd. px4-rc.gzsim: puste/unset => GUI.
+[ -n "${HEADLESS:-}" ] || unset HEADLESS
 # Kanoniczne wywolanie (Tools/simulation/sitl_multiple_run.sh:31): rootfs = build/.../etc
 setsid nohup "$PX4_DIR/bin/px4" -i 0 -d "$PX4_DIR/etc" > "$LOGDIR/px4.log" 2>&1 &
 echo "  px4 pid=$!"
