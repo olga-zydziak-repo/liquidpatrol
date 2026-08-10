@@ -35,6 +35,18 @@ MODEL = os.environ.get("B1_MODEL", "x500_mono_cam_0")
 GT_TOPIC = f"/world/{WORLD}/dynamic_pose/info"
 from r01.config import V_MAX as VMAX
 ALT = 8.0
+# --- STAŁE UPRZĘŻY (nie kryteria bramki; parametry instrumentu) ---
+# GPS_CTRL_NOMINAL: zdrowy default aidingu GPS. CYTAT: PX4-Autopilot/src/modules/ekf2/params_gnss.yaml
+# EKF2_GPS_CTRL default:7 (bity lon/lat|alt|3D-vel). Osłona MUSI startować od zdrowego GPS — inaczej
+# denial nie ma czego odciąć. FORSujemy tę wartość w preflighcie i przy restore/recovery ZAMIAST czytanej
+# z bootu: SITL zapisuje parametry do rootfs/parameters.bson i PRZEŻYWAJĄ reboot; bieg z denialiem, który
+# padł/został ubity przed restore, zostawia GPS_CTRL=0 na trwałe → każdy kolejny boot GPS-denied →
+# is_global_position_ok=False → HEALTH TIMEOUT. Odczyt-jako-old był SAMO-utrwalający (restore→0).
+GPS_CTRL_NOMINAL = 7
+# HEALTH_WAIT_TIMEOUT_S: ograniczony (stary bezterminowy `async for` WIESZAŁ się na zatrutym boocie).
+# Zmierzony bring-up przy zdrowym GPS (po 90 s settle, HGT_REF=0): t_health=2.3 s
+# (results/R03/recon/DIAG/confirm.log). 45 s = ~19× margines (pokrywa też reset HGT_REF 1→0). Zostaje 45.
+HEALTH_WAIT_TIMEOUT_S = 45
 QOS = QoSProfile(depth=1, history=HistoryPolicy.KEEP_LAST, reliability=ReliabilityPolicy.BEST_EFFORT)
 
 _lock = threading.Lock(); _f = None; _running = False
@@ -103,16 +115,22 @@ async def main():
     async for s in d.core.connection_state():
         if s.is_connected:
             break
-    gps_old = await d.param.get_param_int("EKF2_GPS_CTRL")
+    gps_boot = await d.param.get_param_int("EKF2_GPS_CTRL")   # tylko log (wykrywa zatrucie z prev. biegu)
     hgt_old = await d.param.get_param_int("EKF2_HGT_REF")
+    # PREFLIGHT SANITIZE: wymuś zdrowy GPS niezależnie od zatrutej wartości z rootfs/parameters.bson.
+    await d.param.set_param_int("EKF2_GPS_CTRL", GPS_CTRL_NOMINAL)
+    if gps_boot != GPS_CTRL_NOMINAL:
+        print(f"[gate] PREFLIGHT: EKF2_GPS_CTRL boot={gps_boot} → wymuszono {GPS_CTRL_NOMINAL} "
+              f"(zatrucie z poprzedniego biegu — self-heal)", flush=True)
     await d.param.set_param_int("EKF2_HGT_REF", 0)   # Baro (§3quater)
     try:
-        healthy = await asyncio.wait_for(_wait_health(d), timeout=45)
+        healthy = await asyncio.wait_for(_wait_health(d), timeout=HEALTH_WAIT_TIMEOUT_S)
     except asyncio.TimeoutError:
         healthy = False
     if not healthy:
         print("[gate] HEALTH TIMEOUT — boot niezdatny (retry przez wrapper)", flush=True)
         try:
+            await d.param.set_param_int("EKF2_GPS_CTRL", GPS_CTRL_NOMINAL)  # zostaw zdrowy stan
             await d.param.set_param_int("EKF2_HGT_REF", int(hgt_old))
         except Exception:
             pass
@@ -135,6 +153,7 @@ async def main():
     if not await arm_retry(d):
         print("[gate] ARM FAILED — boot niezdatny (retry przez wrapper)", flush=True)
         try:
+            await d.param.set_param_int("EKF2_GPS_CTRL", GPS_CTRL_NOMINAL)  # zostaw zdrowy stan
             await d.param.set_param_int("EKF2_HGT_REF", int(hgt_old))
         except Exception:
             pass
@@ -199,7 +218,7 @@ async def main():
             denial_done = True; denial_t = now
         # recovery (S3): 0→7 w locie
         if SCEN == "S3" and denial_done and not recovery_done and denial_t is not None and (now - denial_t) >= recovery_after:
-            await d.param.set_param_int("EKF2_GPS_CTRL", int(gps_old)); ev("denial_off"); recovery_done = True
+            await d.param.set_param_int("EKF2_GPS_CTRL", GPS_CTRL_NOMINAL); ev("denial_off"); recovery_done = True
         # decyzja osłony
         d_dec = shield.step(tick, pos, vel, tgt, mode=M_PATROL, pos_flag=(dr if denial_done else None))
         is_pos = (d_dec["decision"] == REFUSE and d_dec.get("reason") == POS_DEGRADED)
@@ -241,10 +260,10 @@ async def main():
         "terminal": (shield.terminal[0] if shield.terminal else None)})
     ev("done")
     await asyncio.sleep(2)
-    # restore params (SR-B5)
-    await d.param.set_param_int("EKF2_GPS_CTRL", int(gps_old))
+    # restore params (SR-B5) — do ZDROWEGO nominału, nie do (potencjalnie zatrutej) wartości z bootu
+    await d.param.set_param_int("EKF2_GPS_CTRL", GPS_CTRL_NOMINAL)
     await d.param.set_param_int("EKF2_HGT_REF", int(hgt_old))
-    print(f"[gate {SCEN}] restored GPS_CTRL={gps_old} HGT_REF={hgt_old}", flush=True)
+    print(f"[gate {SCEN}] restored GPS_CTRL={GPS_CTRL_NOMINAL} (boot był {gps_boot}) HGT_REF={hgt_old}", flush=True)
     try:
         await d.offboard.stop()
     except Exception:

@@ -10,6 +10,7 @@ WORLD="${WORLD:-default}"
 PX4_DIR="$ROOT/PX4-Autopilot/build/px4_sitl_default"
 LOGDIR="${LOGDIR:-/tmp/r0_soak}"
 mkdir -p "$LOGDIR"
+LOGDIR="$(cd "$LOGDIR" && pwd)"   # ABSOLUTNY — px4 startuje po `cd rootfs`; relatywny LOGDIR gubił px4.log
 
 # shellcheck disable=SC1091
 source "$ROOT/env_gpu.sh"

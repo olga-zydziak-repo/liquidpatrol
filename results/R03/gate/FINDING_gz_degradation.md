@@ -38,3 +38,11 @@ oscylacji, skok resetu EKF/ε), S4 (r_est przy cięciu, min margines zawierania)
 
 **Wznowienie:** po restarcie WSL2/gz uruchomić kolejno `bash r03/run_gate_one.sh S4`, `... S1 5`,
 `... S3`, potem `python3 -m r03.gate_judge results/R03/gate/S4/run.jsonl ...`.
+
+---
+## ADDENDUM 2026-08-11 (sesja DIAG) — rozdzielenie dwóch awarii
+Po restarcie WSL2 gz DZIAŁA (`/clock` 2 s) — awaria środowiskowa gz minęła. Ale bloker health, który
+ZAINICJOWAŁ serię odrzutów S4, NIE był gz: to **zatruty `EKF2_GPS_CTRL=0` utrwalony w rootfs/parameters.bson**
+(px4.log S4/boot1 z 08-10 pokazuje ZDROWY sim: `tone_alarm home set`, `partner IP` — nie „0 /clock").
+Pełna diagnoza + naprawa uprzęży: `results/R03/recon/DIAG/FINDING_health_blocker.md`. SR-C4 spięło dwie
+różne przyczyny; addendum je rozdziela. Bramka jest odblokowana po naprawie preflight-sanitize.

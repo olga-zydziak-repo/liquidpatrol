@@ -15,11 +15,20 @@ BASE="$ROOT/results/R03/gate/$SCEN"; mkdir -p "$BASE"
 teardown() {
   pkill -9 -f mavsdk_server 2>/dev/null; pkill -9 -f "px4_sitl_default/bin/px4" 2>/dev/null
   pkill -9 -f "gz sim" 2>/dev/null; pkill -9 -f MicroXRCEAgent 2>/dev/null; pkill -9 -f "ruby.*gz" 2>/dev/null
+  pkill -9 -f 'r03.gate_run_r03' 2>/dev/null; pkill -9 -f 'health_probe\|confirm_probe' 2>/dev/null  # osierocony egzekutor/sonda
   sleep 3
 }
 zombie_check() {
-  local z; z=$(pgrep -af 'bin/px4|gz sim|MicroXRCEAgent|mavsdk_server' | grep -v pgrep)
-  [ -n "$z" ] && { echo "[gate1] ZOMBIE po teardown: $z" ; pkill -9 -f 'bin/px4|gz sim|MicroXRCEAgent|mavsdk_server'; sleep 2; } || echo "[gate1] brak zombie"
+  # proces-wzorce + osierocone trzymacze portów UDP osłony (14540 MAVSDK, 8888 agent) — wzorzec gz/px4 ich nie łapie
+  local z pz; z=$(pgrep -af 'bin/px4|gz sim|MicroXRCEAgent|mavsdk_server|r03.gate_run_r03|health_probe' | grep -v pgrep)
+  pz=$(ss -lunp 2>/dev/null | grep -E ':14540|:8888|:50051' | grep -oE 'pid=[0-9]+' | sort -u)
+  if [ -n "$z" ] || [ -n "$pz" ]; then
+    echo "[gate1] ZOMBIE po teardown: $z ; porty: $pz"
+    pkill -9 -f 'bin/px4|gz sim|MicroXRCEAgent|mavsdk_server|r03.gate_run_r03|health_probe' 2>/dev/null
+    echo "$pz" | grep -oE '[0-9]+' | xargs -r kill -9 2>/dev/null; sleep 2
+  else
+    echo "[gate1] brak zombie (procesy + porty 14540/8888/50051 czyste)"
+  fi
 }
 
 DROPPED=0; OKBOOT=""
@@ -39,6 +48,12 @@ for boot in 1 2 3; do
   else
     DROPPED=$((DROPPED+1))
     echo "[gate1] $SCEN boot#$boot ODRZUCONY rc=$rc (arm/health flakiness; NIE liczony jako bieg)"
+    # LUKA LOGOWANIA (DIAG): przy odrzucie wypisz PRZYCZYNĘ do run.log — konsola PX4 (preflight-fail)
+    # i EKF2_GPS_CTRL z bootu — żeby nie grzebać w px4.log. px4/agent/boot.log powstają zawsze (run_stack).
+    { echo "--- DIAG odrzutu boot#$boot rc=$rc ---";
+      echo "[px4 preflight/health tail]"; grep -aE 'Preflight|Fail|health|GPS|home set' "$BD/px4.log" 2>/dev/null | tail -15;
+      echo "[executor tail]"; tail -8 "$BD/run.log" 2>/dev/null;
+    } >> "$BD/run.log"
   fi
 done
 teardown; zombie_check
