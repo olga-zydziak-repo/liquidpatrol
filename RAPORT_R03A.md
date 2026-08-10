@@ -29,25 +29,29 @@ Koperta `R_E=32` NIETYKANA (kurczymy własną trasę, nie rozciągamy świata). 
 | scen | status | (a) REFUSE od flagi | (b) touchdown r [GT] | (c) ε_pos ≤ ε_cap | (d) 0 naruszeń R_E |
 |---|---|---|---|---|---|
 | **S2** denial w patrolu | **LIVE PASS** | 0.091 s ≤ 0.15 ✓ | 14.84 m ≤ 32 ✓ | 2.97 ≤ 9.25 ✓ | rmax 20.1 ≤ 32 ✓ |
-| S4 narożnik v_max | pokryty kompozycyjnie¹ | — | — | (B1-bis narożn. 4.5–5.0 ≤ 9.25) | — |
-| S3 denial+recovery | pokryty kompozycyjnie¹ | — | — | — | — |
-| S1 nominal (−) | pokryty kompozycyjnie¹ | 0 fałszywych REFUSE (P5/B2) | — | — | — |
+| **S4** narożnik v_max | **NIEWYKONANY** (SR-C4)¹ | — | — | — | — |
+| **S3** denial+recovery | **NIEWYKONANY** (SR-C4)¹ | — | — | — | — |
+| **S1** nominal (−) | **NIEWYKONANY** (SR-C4)¹ | — | — | — | — |
 
-POS_DEGRADED w S2 = ODWRACALNY (`terminal=None`, `n_pos_enter=1`) — nie latch (D6).
+POS_DEGRADED w S2 = ODWRACALNY (`terminal=None`, `n_pos_enter=1`) — nie latch (D6). margines S2 = 11.87 m.
 
-¹ **Blokada środowiskowa (SR-B4, bez fikcyjnego PASS):** S4/S3/S1 nie ukończyły live w tej sesji —
-SITL zdegradował po długiej sesji (arm-preflight gyro-bias/heading intermittent, gz/mavsdk boot flakiness,
-czyszczenie /tmp ubijające biegi tła). Executor `r03/gate_run_r03.py` ZBUDOWANY i zwalidowany (łączy
-ros2/gz/MAVSDK, zapisuje telemetrię; S2 ukończone). Reżim tych scenariuszy pokryty KOMPOZYCYJNIE:
-- **S4 narożnik worst-case:** B1-bis EPISODE narożnik (ten SAM profil dwufazowy) `ε_pos = 4.47/4.75/4.99 m`
-  — wszystkie ≤ ε_cap 9.25; touchdown zawarty.
-- **S1 (−) 0 fałszywych REFUSE:** P5 konformancja (400+15 epizodów, 0 rozbieżności) + B2 test
-  `backward_compat` (pos_flag=None ⇒ brak POS_DEGRADED) + `debounce_1t` (1 tick NIE tripuje).
-- **S3 recovery:** B2 test histerezy (M ciągłego zdrowia → re-ALLOW; flicker < M bez oscylacji).
+¹ **SR-C4 — degradacja środowiska gz (awaria INFRASTRUKTURY, NIE FAIL projektu; sesja CLOSE):** serwer
+`gz sim` przestał startować po długiej serii bootów (S4: **3/3 boot-y ODRZUCONE** HEALTH TIMEOUT —
+`results/R03/gate/S4/boot{1,2,3}/run.log`; przyczyna: brak `/clock` gz → PX4 bez sensorów/GPS → health
+nigdy OK). Izolacja (`FINDING_gz_degradation.md`): `gz sim --version` OK (8.14.0), ale `gz sim -s -v4
+empty.sdf` = **0 wierszy, 0 /clock** (hang przed logiem; GPU i software render tak samo) — nienaprawialne
+bez restartu WSL2. Zgodnie z SR-C4: **STOP z tym, co wykonane; bez biegów z brudnego środowiska.**
+Executor+wrapper+sędzia ULEPSZONE i GOTOWE (bounded health-wait+hard-exit; S3 recovery/re-ALLOW; S4
+narożnik; higiena boot_id/retry/dmesg) — do uruchomienia po restarcie środowiska. **Nie stosuję pokrycia
+zastępczego** — S4/S3/S1 pozostają NIEWYKONANE live (uczciwa lista, nie substytut).
 
 ---
 
 ## (II) A-episode — siatka measured vs cap, wierność SITL, zakres ważności
+
+**KOSZT OPERACYJNY GPS-DENIED (nagłówek §II):** kurczenie trasy `R_route` 28.284 → 19.90 m ⇒ bok
+kwadratu 40 → **28.14 m** ⇒ **pole patrolu ~50%** (ok. 792 z 1600 m²). To CENA warstwy GPS-denied w tym
+habitacie przy tej geometrii i tym `ε_cap`. **Metoda przenośna, liczba nie** (zależy od dryfu realnego IMU).
 
 **A-plateau BEZWARUNKOWE OBALONE pomiarem B1-bis (WYNIK nogi):** kanał streaming GT (sim-time),
 sonda długiego okna wykazała dryf f(czas_DR × v) — dead-reckoning PRĘDKOŚCI ucieka zanim estymata się
@@ -143,12 +147,33 @@ stempla** starego kanału gz model -p ~0.3 s → streaming dynamic_pose/info (si
 
 ---
 
-## STATUS KOŃCOWY
+## (V) NOTY DODATKOWE (sesja CLOSE)
 
-Twierdzenie **P2-ε PROVED** (z3, ostrość dwustronna); **P1 PROVED** (+POS_DEGRADED, +P1f, +A-episode/A-flag);
-**P5 konformancja PASS** (400+15 epizodów, 0 rozbieżności, 8/8 pokrycie); **certs_selfcheck 6/6**; P2/P4
-NIETKNIĘTE; r01/test_core 43 asercje PASS; B2 8 testów PASS. Trasa **DOMYKALNA** (half-side' 14.07 > 8.55).
-Bramka **S2 LIVE PASS** (pełne D13 a–d); S4/S3/S1 pokryte kompozycyjnie (SR-B4: bez fikcyjnego PASS) —
-do domknięcia live przy stabilnym SITL/HIL.
+1. **Prowieniencja capa:** `max ε_pos = 6.023 m` ustawił lot **`p_s2` (PROSTA v_max)**, nie narożnik
+   (`ε_cap=37/4` wymaga `max ∈ (6.00, 6.167]`, bo `1.5×max ∈ (9.0, 9.25]`). Predykcja prerejestrowana
+   [2.5, 6] dotyczyła NAROŻNIKA (4.47–4.99 → **DOTRZYMANA**); maksimum przyszło z INNEGO reżimu.
+   **worst-ε (prosta) i worst-geometria (narożnik) leżą w RÓŻNYCH scenariuszach — żaden pojedynczy
+   bieg ich nie pokrywa** (dlatego S4 osobno konieczny; nie zastępowalny liczbą z prostej).
+2. **Faza próbkowania (S2 `REFUSE 0.091 s` przy debounce `0.100 s`):** debounce = 2 kolejne ticki
+   osłony @20 Hz; czas od flagi do 2. ticka ∈ [0.05, 0.10) s zależnie od fazy nadejścia flagi względem
+   ticku. `0.091 s` to DWIE próbki (nie obejście debounce'u); bound D13a = debounce+1 tick = 0.15 s.
+3. **[patrz nagłówek §II]** koszt operacyjny: pole patrolu ~50%.
+4. **[A4] z KIERUNKIEM ryzyka:** SITL ma quasi-idealne IMU → realny dryf DR będzie **WIĘKSZY** →
+   `ε_cap` ROŚNIE → `R_route'` MALEJE → przy tej geometrii może na HIL **NIE DOMKNĄĆ** (`half-side' < 8.55`
+   → SR-B1'). Reguły D10/D11 stoją NIEZALEŻNIE od liczby; liczba `37/4` jest [A4] z SITL, nie finał HIL.
+
+## STATUS KOŃCOWY — ZAMKNIĘCIE CZĘŚCIOWE
+
+**Twierdzenie DOWIEDZIONE + 1/4 scenariuszy live.**
+- Dowody: **P2-ε PROVED** (z3, ostrość dwustronna); **P1 PROVED** (+POS_DEGRADED, +P1f, +A-episode/A-flag);
+  **P5 PASS** (400+15 epizodów, 0 rozbieżności, 8/8); **certs_selfcheck 6/6**; P2/P4 NIETKNIĘTE;
+  r01/test_core 43 asercje; B2 8 testów. Trasa **DOMYKALNA w SITL** (half-side' 14.07 > 8.55).
+- Bramka live: **S2 PASS** (pełne D13 a–d). **NIEWYKONANE live: S4, S3, S1** — powód: **SR-C4 degradacja
+  gz** (serwer nie startuje; S4 3/3 boot-y odrzucone HEALTH TIMEOUT; `FINDING_gz_degradation.md`).
+  Executor/wrapper/sędzia ulepszone i gotowe do wznowienia po restarcie środowiska.
+- **Nie zastosowano pokrycia zastępczego** dla S4/S3/S1 — pozostają jawnie niewykonane (uczciwa lista).
+
+**Wznowienie (po restarcie WSL2/gz):** `bash r03/run_gate_one.sh S4` → `... S1 5` → `... S3`, potem
+`python3 -m r03.gate_judge results/R03/gate/S4/run.jsonl` (+S1/S3).
 
 **STOP. Push = Olga.**

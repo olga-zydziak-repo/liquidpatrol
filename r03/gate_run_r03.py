@@ -86,6 +86,13 @@ async def arm_retry(d):
     return False
 
 
+async def _wait_health(d):
+    async for h in d.telemetry.health():
+        if h.is_global_position_ok and h.is_home_position_ok:
+            return True
+    return False
+
+
 async def main():
     global _f, _running
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
@@ -99,9 +106,17 @@ async def main():
     gps_old = await d.param.get_param_int("EKF2_GPS_CTRL")
     hgt_old = await d.param.get_param_int("EKF2_HGT_REF")
     await d.param.set_param_int("EKF2_HGT_REF", 0)   # Baro (§3quater)
-    async for h in d.telemetry.health():
-        if h.is_global_position_ok and h.is_home_position_ok:
-            break
+    try:
+        healthy = await asyncio.wait_for(_wait_health(d), timeout=45)
+    except asyncio.TimeoutError:
+        healthy = False
+    if not healthy:
+        print("[gate] HEALTH TIMEOUT — boot niezdatny (retry przez wrapper)", flush=True)
+        try:
+            await d.param.set_param_int("EKF2_HGT_REF", int(hgt_old))
+        except Exception:
+            pass
+        os._exit(3)     # boot niezdatny → HARD exit (mavsdk/rclpy cleanup wisi) → wrapper retry
 
     shield = PatrolShield(); shield.reset()
     shield.pos_debounce_ticks = C.DEBOUNCE_TICKS
@@ -118,7 +133,12 @@ async def main():
         print(f"[gate {SCEN}] {s} mono={time.monotonic():.3f}", flush=True)
 
     if not await arm_retry(d):
-        print("[gate] ARM FAILED", flush=True); return
+        print("[gate] ARM FAILED — boot niezdatny (retry przez wrapper)", flush=True)
+        try:
+            await d.param.set_param_int("EKF2_HGT_REF", int(hgt_old))
+        except Exception:
+            pass
+        os._exit(2)     # arm flakiness → HARD exit (cleanup wisi) → wrapper retry
     ev("armed")
     await d.action.set_takeoff_altitude(ALT); await d.action.takeoff(); ev("takeoff")
     await asyncio.sleep(10)
@@ -134,21 +154,22 @@ async def main():
             rclpy.spin_once(ekf, timeout_sec=0.02)
     th = threading.Thread(target=spin, daemon=True); th.start()
 
-    # --- pętla OSŁONY (20 Hz) ---
+    # --- pętla OSŁONY (20 Hz), shield-driven przez CAŁY epizod (zejście też) ---
     wps = C.corner_waypoints_r03()          # trasa zredukowana (NED)
     tick = 0
-    denial_done = False
-    recovery_done = False
-    landed = False
-    t_start = time.monotonic()
-    # czas denialu: S2/S4 po ~1 nodze patrolu; S1 nigdy; S3 denial potem recovery
-    denial_at = 12.0 if SCEN in ("S2", "S3", "S4") else 1e9
-    recovery_at = denial_at + 8.0 if SCEN == "S3" else 1e9
-    s1_dur = S1_MIN * 60.0 if SCEN == "S1" else 1e9
-    leg = 4.0
+    denial_done = False; recovery_done = False
+    descending = False; desc_t0 = None; h_switched = False; td = False
+    re_allowed = False; re_allow_t = None
+    denial_t = None
     seg_i = 0
-    # dla S4: cięcie w narożniku — denial gdy zmiana kierunku
-    vmax_scale = 1.0
+    dist = 1e9
+    t_start = time.monotonic()
+    denial_at = 12.0 if SCEN in ("S2", "S3") else 1e9    # S4: wyzwalane narożnikiem
+    recovery_after = 2.0 if SCEN == "S3" else 1e9        # sekundy PO denialu (okno na M przed touchdown)
+    s1_dur = S1_MIN * 60.0 if SCEN == "S1" else 1e9
+    desc_fast_dur = max(0.0, (ALT - C.H_SWITCH_AGL) / C.V_DESC_FAST)
+    desc_total = desc_fast_dur + C.H_SWITCH_AGL / C.V_DESC_LAND + 1.5
+
     while True:
         now = time.monotonic() - t_start
         m = ekf.m
@@ -157,52 +178,61 @@ async def main():
         pos = (float(m.x), float(m.y), float(m.z))
         vel = (float(m.vx), float(m.vy), 0.0)
         dr = bool(m.dead_reckoning)
-        # denial injection. S4: cięcie PRZY NAROŻNIKU (po dojściu do 1. waypointa = zmiana kierunku
-        # przy v_max) — worst-case stanu prędkości. S2/S3: w patrolu (mid-leg). S1: nigdy.
-        if SCEN == "S4":
-            trigger = (not denial_done) and seg_i >= 1 and dist < 3.0 and now >= 8.0
-        else:
-            trigger = (not denial_done) and now >= denial_at
-        if trigger:
-            await d.param.set_param_int("EKF2_GPS_CTRL", 0); ev("denial_on"); denial_done = True
-        if SCEN == "S3" and denial_done and not recovery_done and now >= recovery_at:
-            await d.param.set_param_int("EKF2_GPS_CTRL", int(gps_old)); ev("denial_off"); recovery_done = True
-        # target: patrol po trasie (velocity ku waypointowi), v_max
+        r_est = math.hypot(pos[0], pos[1])
+        # waypoint / dist (potrzebne PRZED triggerem S4)
         wp = wps[seg_i % len(wps)]
         dx, dy = wp[0] - pos[0], wp[1] - pos[1]
         dist = math.hypot(dx, dy)
-        if dist < 1.0:
+        if dist < 1.0 and not descending:
             seg_i += 1
         tgt = (wp[0], wp[1], -ALT)
-        # shield decyzja
-        d_dec = shield.step(tick, pos, vel, tgt, mode=M_PATROL, pos_flag=(dr if denial_done else None))
-        # zastosuj decyzję
-        if d_dec["decision"] == REFUSE and d_dec.get("reason") == POS_DEGRADED:
-            if not landed:
-                ev("refuse_pos_land")
-                # AKCJA BEZPIECZNA: zejście dwufazowe velocity (v_xy=0)
-                t1 = time.monotonic() + max(0.0, (ALT - C.H_SWITCH_AGL) / C.V_DESC_FAST)
-                while time.monotonic() < t1:
-                    await d.offboard.set_velocity_ned(VelocityNedYaw(0, 0, C.V_DESC_FAST, 0)); await asyncio.sleep(0.05)
-                ev("h_switch")
-                t2 = time.monotonic() + (C.H_SWITCH_AGL / C.V_DESC_LAND + 2.0)
-                while time.monotonic() < t2:
-                    await d.offboard.set_velocity_ned(VelocityNedYaw(0, 0, C.V_DESC_LAND, 0)); await asyncio.sleep(0.05)
-                ev("touchdown"); landed = True
-                break
+        # denial injection
+        if SCEN == "S4":
+            trigger = (not denial_done) and seg_i >= 1 and dist < 3.0 and now >= 8.0  # przy narożniku, v_max
         else:
-            # patrol: velocity ku waypointowi, clamp v_max
-            if dist > 1e-3:
-                vn = VMAX * dx / dist; ve = VMAX * dy / dist
+            trigger = (not denial_done) and now >= denial_at
+        if trigger:
+            await d.param.set_param_int("EKF2_GPS_CTRL", 0)
+            _w({"t": "event", "mono": round(time.monotonic(), 4), "ev": "denial_on",
+                "r_est_at_cut": round(r_est, 3), "speed_at_cut": round(math.hypot(vel[0], vel[1]), 3)})
+            print(f"[gate {SCEN}] denial_on r_est={r_est:.2f} v={math.hypot(vel[0],vel[1]):.2f}", flush=True)
+            denial_done = True; denial_t = now
+        # recovery (S3): 0→7 w locie
+        if SCEN == "S3" and denial_done and not recovery_done and denial_t is not None and (now - denial_t) >= recovery_after:
+            await d.param.set_param_int("EKF2_GPS_CTRL", int(gps_old)); ev("denial_off"); recovery_done = True
+        # decyzja osłony
+        d_dec = shield.step(tick, pos, vel, tgt, mode=M_PATROL, pos_flag=(dr if denial_done else None))
+        is_pos = (d_dec["decision"] == REFUSE and d_dec.get("reason") == POS_DEGRADED)
+
+        if is_pos:
+            if not descending:
+                descending = True; desc_t0 = time.monotonic(); ev("refuse_pos_land")
+            el = time.monotonic() - desc_t0
+            if el < desc_fast_dur:
+                vdesc = C.V_DESC_FAST
             else:
-                vn = ve = 0.0
-            await d.offboard.set_velocity_ned(VelocityNedYaw(vn, ve, 0, 0))
+                if not h_switched:
+                    ev("h_switch"); h_switched = True
+                vdesc = C.V_DESC_LAND
+            await d.offboard.set_velocity_ned(VelocityNedYaw(0, 0, vdesc, 0))
+            if el >= desc_total and not td:
+                ev("touchdown"); td = True
+                break                                   # S2/S4 (i S3 bez re-ALLOW przed touchdown)
+        else:
+            # ALLOW (patrol LUB re-ALLOW po histerezie w S3)
+            if descending and SCEN == "S3":
+                if not re_allowed:
+                    re_allowed = True; re_allow_t = now; ev("re_allow")
+                await d.offboard.set_velocity_ned(VelocityNedYaw(0, 0, 0, 0))   # hold (bez oscylacji)
+                if re_allow_t is not None and (now - re_allow_t) > 3.0:
+                    ev("s3_reallow_confirmed"); break
+            else:
+                vn, ve = (VMAX * dx / dist, VMAX * dy / dist) if dist > 1e-3 else (0.0, 0.0)
+                await d.offboard.set_velocity_ned(VelocityNedYaw(vn, ve, 0, 0))
         tick += 1
-        # S1: zakończ po s1_dur (bez denialu)
         if SCEN == "S1" and now >= s1_dur:
             ev("s1_done"); break
-        # bezpiecznik czasu
-        if now > (denial_at + 60 if denial_done else 400):
+        if now > (denial_at + 90 if denial_done else max(s1_dur, 400) + 30):
             ev("timeout"); break
         await asyncio.sleep(C.DT)
 
