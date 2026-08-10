@@ -64,7 +64,52 @@ Ale bloker health, który ZAINICJOWAŁ serię odrzutów S4, to zatruty GPS (px4.
 pokazuje ZDROWY sim: `tone_alarm home set`, `partner IP` — to nie „0 /clock"). SR-C4 spięło dwie różne
 awarie; ta nota to rozdziela. Po tej naprawie i restarcie środowiska bramka jest odblokowana.
 
+## RIDERY R-D1..R-D4 (ratyfikacja 2026-08-11, commit osobny)
+
+**R-D1 — sanitize uogólniony z paramu na KLASĘ.** Biała lista wszystkich parametrów, które uprząż
+KIEDYKOLWIEK zapisuje, w JEDNYM źródle prawdy: `r03/config.HARNESS_PARAM_NOMINAL`. Przegląd kodu
+(2026-08-11): `gate_run_r03.py` + `results/R03/recon/B1bis/b1bis_fly.py` zapisują wyłącznie
+`EKF2_GPS_CTRL` i `EKF2_HGT_REF`. **`SYS_FAILURE_EN` — sprawdzone, NIE zapisywany; nic innego.**
+`r03/config.HARNESS_PARAM_PREFLIGHT` = wymagany STAN PREFLIGHT dla WAŻNEGO biegu (nie „czysty default"):
+`EKF2_GPS_CTRL=7` (zdrowy GPS; default PX4=7 params_gnss.yaml) i `EKF2_HGT_REF=0` (Baro habitat §3quater;
+default PX4=1 module.yaml:103 — habitat nadpisuje; S2-passing też ustawiał 0 JEDNYM setem przed health-wait).
+**ZASADA: assert-on-entry, NIE restore-on-exit.** Restore z definicji ZAWODZI przy `pkill -9`, `os._exit`
+i crashu — dlatego naprawa jednego paramu nie zamyka KLASY błędu. Preflight egzekutora asertuje CAŁĄ listę
+do stanu preflight JEDNYM setem na param (bez churn/podwójnego resetu EKF — pierwsza wersja R-D1 asertowała
+HGT_REF=1 a potem 0, co dawało dwa resety i blokowało arm „Resolve system health failures"; poprawione).
+Denial ustawia GPS_CTRL=0 dopiero w LOCIE. Restore-on-exit zostaje tylko jako sprzątanie best-effort —
+twardą gwarancją czystego wejścia jest asercja NASTĘPNEGO biegu.
+
+**R-D2 — zatrucie jest SAMO-WYKRYWALNE ⇒ dane nieskażone.** Zatruty GPS blokuje uzbrojenie (health/arm
+nie przechodzi), a wrapper liczy bieg DOPIERO po udanym uzbrojeniu (event `armed`). Zatem żaden bieg z
+zatrutego bootu nigdy nie został policzony. **Wniosek: S2 LIVE PASS oraz dane B1-bis/cap (ε_cap=37/4) są
+NIESKAŻONE** — pochodzą wyłącznie z bootów, które się uzbroiły, czyli miały zdrowy GPS. Zatrucie nie mogło
+„po cichu" wejść do żadnego zaliczonego pomiaru; jest głośną awarią bring-upu, nie cichym biasem.
+
+**R-D3 — twarda asercja w trace.** Param POISON-CRITICAL na wejściu ≠ stan preflight ⇒ egzekutor emituje
+event `harness_invalid` (z powodem) i `meta.harness_valid=false`. Wrapper NIE liczy takiego biegu, choćby
+się uzbroił (self-heal naprawia stan na przyszłość, ale runu z brudnego wejścia nie ufamy) → retry na czysty
+boot. **POISON-CRITICAL = tylko `EKF2_GPS_CTRL`** (`config.HARNESS_PARAM_POISON_CRITICAL`): ≠7 na boocie =
+GPS-denied od startu (dangerous). `EKF2_HGT_REF=0` to wartość habitatu, którą USTAWIAMY SAMI — łagodna,
+oczekiwana (wycieka przy każdym ubitym biegu), więc NIE unieważnia (inaczej marnowałaby budżet 3 bootów).
+Zatrucie GPS nie może się prześlizgnąć jako ważny wynik.
+
+**R-D4 — lekcja przyrządowa (zapisana, nie zatarta).** `tone_alarm home set` NIE certyfikuje pozycji
+globalnej (to zdarzenie home, nie werdykt EKF); linie `WARN Preflight Fail ...` to STRUMIEŃ transientów,
+nie werdykt — liczy się STAN KOŃCOWY (`is_global_position_ok ∧ is_home_position_ok` z telemetrii health,
+nie ostatnia linia WARN w px4.log). W turze poprzedzającej DIAG „home set ⇒ GPS OK" i „ostatni WARN = GCS"
+były MYLNYM TROPEM. Reguła: diagnozuj po stanie końcowym mierzonym przyrządem, nie po strumieniu logu.
+
+## Retro — „flakiness" był NAZWANYM, DETERMINISTYCZNYM mechanizmem
+Ten sam mechanizm tłumaczy „degradację SITL / arm-preflight flakiness" z sesji BUILD: po PIERWSZYM ubitym
+biegu denialowym każdy kolejny boot startował GPS-denied i nie mógł się uzbroić. **Awaria była
+DETERMINISTYCZNA, nie losowa.** Słowo „flakiness" usunięte z opisów TEJ KLASY (`run_gate_one.sh`,
+`gate_run_r03.py`, `FINDING_clock_and_regime.md`:103 — korekta inline) i zastąpione nazwanym mechanizmem.
+**Awaria gz z sesji CLOSE (0 /clock nawet dla `empty.sdf`) zostaje OSOBNYM, prawdziwym znaleziskiem
+środowiskowym** (WSL2/gz-stack; minęła po restarcie) — nie jest tą samą klasą.
+
 ## Weryfikacja przed powrotem do biegów
-- `python3 -m py_compile r03/gate_run_r03.py` OK; `bash -n` obu wrapperów OK.
+- `python3 -m py_compile r03/gate_run_r03.py` OK; `bash -n` obu wrapperów OK; `certs_selfcheck` 6/6
+  (config.py nie jest hashowany — selfcheck hashuje pliki proverów).
 - Środowisko zostawione czyste (brak zombie, porty 14540/8888/50051 wolne), bson uzdrowione (GPS_CTRL=7).
 - **Push = Olga.** Po ratyfikacji: `bash r03/run_gate_one.sh S4` → `S1 5` → `S3` → `gate_judge`.

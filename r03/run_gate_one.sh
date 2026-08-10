@@ -42,15 +42,23 @@ for boot in 1 2 3; do
   SCEN="$SCEN" S1_MIN="$S1M" GATE_OUT="$BD/run.jsonl" \
       PYTHONPATH=".:.certdeps:$PYTHONPATH" python3 -m r03.gate_run_r03 >"$BD/run.log" 2>&1
   rc=$?
-  if [ "$rc" = "0" ] && grep -q '"ev": "armed"' "$BD/run.jsonl" 2>/dev/null && grep -q '"ev": "done"' "$BD/run.jsonl" 2>/dev/null; then
+  # R-D3: bieg z zatrutym paramem na wejściu (event harness_invalid) NIE liczy się, choćby uzbroił.
+  INVALID=""; grep -q '"ev": "harness_invalid"' "$BD/run.jsonl" 2>/dev/null && INVALID=1
+  if [ "$rc" = "0" ] && [ -z "$INVALID" ] && grep -q '"ev": "armed"' "$BD/run.jsonl" 2>/dev/null && grep -q '"ev": "done"' "$BD/run.jsonl" 2>/dev/null; then
     echo "[gate1] $SCEN boot#$boot OK (uzbrojony, bieg zaliczony)"; OKBOOT="$boot"
     cp "$BD/run.jsonl" "$BASE/run.jsonl"; break
   else
     DROPPED=$((DROPPED+1))
-    echo "[gate1] $SCEN boot#$boot ODRZUCONY rc=$rc (arm/health flakiness; NIE liczony jako bieg)"
+    # Odrzut NIE jest „flakiness". Klasa błędu jest DETERMINISTYCZNA: zatruty param na wejściu (R-D3) →
+    # harness_invalid; ARM/HEALTH FAIL → zwykle ten sam mechanizm (patrz FINDING_health_blocker.md).
+    if [ -n "$INVALID" ]; then
+      echo "[gate1] $SCEN boot#$boot ODRZUCONY: HARNESS_INVALID (zatruty param na wejściu, R-D3; self-heal zrobiony, retry)"
+    else
+      echo "[gate1] $SCEN boot#$boot ODRZUCONY rc=$rc (arm/health FAIL; mechanizm, nie losowość — patrz DIAG poniżej)"
+    fi
     # LUKA LOGOWANIA (DIAG): przy odrzucie wypisz PRZYCZYNĘ do run.log — konsola PX4 (preflight-fail)
     # i EKF2_GPS_CTRL z bootu — żeby nie grzebać w px4.log. px4/agent/boot.log powstają zawsze (run_stack).
-    { echo "--- DIAG odrzutu boot#$boot rc=$rc ---";
+    { echo "--- DIAG odrzutu boot#$boot rc=$rc invalid=${INVALID:-0} ---";
       echo "[px4 preflight/health tail]"; grep -aE 'Preflight|Fail|health|GPS|home set' "$BD/px4.log" 2>/dev/null | tail -15;
       echo "[executor tail]"; tail -8 "$BD/run.log" 2>/dev/null;
     } >> "$BD/run.log"

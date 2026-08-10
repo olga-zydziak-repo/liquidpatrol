@@ -100,7 +100,10 @@ Loty EPISODE (dobry boot 90 s konwergencji EKF; eph→0.150; kanał czysty p95�
 2. **Velocity-descent (v_xy=0, v_down) też dryfuje** — pod DR dron nie wyzeruje PRAWDZIWEJ prędkości
    (brak aidingu). Dryf ~proporcjonalny do CZASU epizodu → **tempo/czas zejścia = DŹWIGNIA**.
 3. Konwergencja EKF: 15 s settle → eph 0.22 (broken, flyaway); **90 s → eph 0.150** (dobry). NIE load
-   (24 rdzenie, ~23%). Arm preflight (gyro bias/heading) czasem nie przechodzi — losowa flakiness SITL.
+   (24 rdzenie, ~23%). ~~Arm preflight (gyro bias/heading) czasem nie przechodzi — losowa flakiness SITL.~~
+   **KOREKTA 2026-08-11 (retro DIAG):** to NIE była „losowa flakiness". Bieg B1-bis ubity przed restore
+   zostawiał `EKF2_GPS_CTRL=0` utrwalone w `rootfs/parameters.bson` → następny boot GPS-denied → arm
+   preflight nie przechodził DETERMINISTYCZNIE. Nazwany mechanizm: `results/R03/recon/DIAG/FINDING_health_blocker.md`.
 4. `EKF2_HGT_REF` default=1 (GPS) → wysokość degraduje pod denialiem → wymuszamy 0 (Baro), §3quater.
 
 **Profil dwufazowy (§3quater):** 1.5 m/s (MPC_Z_VEL_MAX_DN) do 2 m AGL, potem 0.7 (MPC_LAND_SPEED).

@@ -36,13 +36,12 @@ GT_TOPIC = f"/world/{WORLD}/dynamic_pose/info"
 from r01.config import V_MAX as VMAX
 ALT = 8.0
 # --- STAŁE UPRZĘŻY (nie kryteria bramki; parametry instrumentu) ---
-# GPS_CTRL_NOMINAL: zdrowy default aidingu GPS. CYTAT: PX4-Autopilot/src/modules/ekf2/params_gnss.yaml
-# EKF2_GPS_CTRL default:7 (bity lon/lat|alt|3D-vel). Osłona MUSI startować od zdrowego GPS — inaczej
-# denial nie ma czego odciąć. FORSujemy tę wartość w preflighcie i przy restore/recovery ZAMIAST czytanej
-# z bootu: SITL zapisuje parametry do rootfs/parameters.bson i PRZEŻYWAJĄ reboot; bieg z denialiem, który
-# padł/został ubity przed restore, zostawia GPS_CTRL=0 na trwałe → każdy kolejny boot GPS-denied →
-# is_global_position_ok=False → HEALTH TIMEOUT. Odczyt-jako-old był SAMO-utrwalający (restore→0).
-GPS_CTRL_NOMINAL = 7
+# Stan preflight paramów = biała lista R-D1 w JEDNYM źródle prawdy (r03/config.HARNESS_PARAM_PREFLIGHT).
+# ZASADA R-D1: assert-on-entry (preflight wymusza wymagany stan na CAŁEJ klasie JEDNYM setem), NIE
+# restore-on-exit — restore zawodzi przy pkill -9 / os._exit / crashu, więc naprawa jednego paramu nie
+# zamyka KLASY. SITL persystuje parametry w rootfs/parameters.bson przez reboot → zatruty param skaża każdy
+# boot DETERMINISTYCZNIE. Invalidity (R-D3) tylko dla POISON_CRITICAL (GPS_CTRL).
+GPS_CTRL_NOMINAL = C.HARNESS_PARAM_PREFLIGHT["EKF2_GPS_CTRL"]   # 7 (params_gnss.yaml default:7)
 # HEALTH_WAIT_TIMEOUT_S: ograniczony (stary bezterminowy `async for` WIESZAŁ się na zatrutym boocie).
 # Zmierzony bring-up przy zdrowym GPS (po 90 s settle, HGT_REF=0): t_health=2.3 s
 # (results/R03/recon/DIAG/confirm.log). 45 s = ~19× margines (pokrywa też reset HGT_REF 1→0). Zostaje 45.
@@ -115,14 +114,16 @@ async def main():
     async for s in d.core.connection_state():
         if s.is_connected:
             break
-    gps_boot = await d.param.get_param_int("EKF2_GPS_CTRL")   # tylko log (wykrywa zatrucie z prev. biegu)
-    hgt_old = await d.param.get_param_int("EKF2_HGT_REF")
-    # PREFLIGHT SANITIZE: wymuś zdrowy GPS niezależnie od zatrutej wartości z rootfs/parameters.bson.
-    await d.param.set_param_int("EKF2_GPS_CTRL", GPS_CTRL_NOMINAL)
-    if gps_boot != GPS_CTRL_NOMINAL:
-        print(f"[gate] PREFLIGHT: EKF2_GPS_CTRL boot={gps_boot} → wymuszono {GPS_CTRL_NOMINAL} "
-              f"(zatrucie z poprzedniego biegu — self-heal)", flush=True)
-    await d.param.set_param_int("EKF2_HGT_REF", 0)   # Baro (§3quater)
+    # --- PREFLIGHT PARAM ASSERT (R-D1): assert-on-entry na CAŁEJ klasie JEDNYM setem (bez churn) ---
+    poison = {}   # param POISON-CRITICAL != stan preflight (R-D3: wtedy bieg JAWNIE nieważny)
+    for p, want in C.HARNESS_PARAM_PREFLIGHT.items():
+        boot_v = await d.param.get_param_int(p)
+        if p in C.HARNESS_PARAM_POISON_CRITICAL and boot_v != want:
+            poison[p] = boot_v
+        await d.param.set_param_int(p, want)    # WYMUŚ stan preflight niezależnie od rootfs/parameters.bson
+    if poison:
+        print(f"[gate] PREFLIGHT: zatrute paramy {poison} → wymuszono stan preflight (self-heal); "
+              f"BIEG BĘDZIE OZNACZONY JAKO NIEWAŻNY (R-D3)", flush=True)
     try:
         healthy = await asyncio.wait_for(_wait_health(d), timeout=HEALTH_WAIT_TIMEOUT_S)
     except asyncio.TimeoutError:
@@ -130,8 +131,8 @@ async def main():
     if not healthy:
         print("[gate] HEALTH TIMEOUT — boot niezdatny (retry przez wrapper)", flush=True)
         try:
-            await d.param.set_param_int("EKF2_GPS_CTRL", GPS_CTRL_NOMINAL)  # zostaw zdrowy stan
-            await d.param.set_param_int("EKF2_HGT_REF", int(hgt_old))
+            for p, want in C.HARNESS_PARAM_PREFLIGHT.items():
+                await d.param.set_param_int(p, want)   # zostaw zdrowy stan (best-effort)
         except Exception:
             pass
         os._exit(3)     # boot niezdatny → HARD exit (mavsdk/rclpy cleanup wisi) → wrapper retry
@@ -143,6 +144,7 @@ async def main():
     fh = open(OUT, "w"); _f = fh; _running = True
     _w({"t": "meta", "scen": SCEN, "eps_cap": C.EPS_CAP, "R_E": shield.cfg.r_e,
         "half_p": C.HALF_P, "vmax": VMAX, "debounce": C.DEBOUNCE_TICKS,
+        "harness_valid": (not poison), "harness_poison": poison,
         "note": "osłona w pętli; GT=sędzia; velocity-descent dwufazowy na POS_DEGRADED"})
     gn.subscribe(Pose_V, GT_TOPIC, gt_cb)
 
@@ -150,14 +152,21 @@ async def main():
         _w({"t": "event", "mono": round(time.monotonic(), 4), "ev": s})
         print(f"[gate {SCEN}] {s} mono={time.monotonic():.3f}", flush=True)
 
+    # R-D3: twarda asercja w trace — boot startował z zatrutym paramem ⇒ bieg JAWNIE NIEWAŻNY (self-heal
+    # naprawił stan, ale runu z brudnego wejścia NIE liczymy; wrapper go odrzuci i zrobi retry).
+    if poison:
+        _w({"t": "event", "mono": round(time.monotonic(), 4), "ev": "harness_invalid",
+            "reason": f"boot param poison {poison} != preflight {C.HARNESS_PARAM_PREFLIGHT}"})
+        print(f"[gate {SCEN}] HARNESS_INVALID: {poison} — bieg nieważny (R-D3)", flush=True)
+
     if not await arm_retry(d):
         print("[gate] ARM FAILED — boot niezdatny (retry przez wrapper)", flush=True)
         try:
-            await d.param.set_param_int("EKF2_GPS_CTRL", GPS_CTRL_NOMINAL)  # zostaw zdrowy stan
-            await d.param.set_param_int("EKF2_HGT_REF", int(hgt_old))
+            for p, want in C.HARNESS_PARAM_PREFLIGHT.items():
+                await d.param.set_param_int(p, want)   # zostaw zdrowy stan (best-effort)
         except Exception:
             pass
-        os._exit(2)     # arm flakiness → HARD exit (cleanup wisi) → wrapper retry
+        os._exit(2)     # arm nie przechodzi → HARD exit (cleanup wisi) → wrapper retry
     ev("armed")
     await d.action.set_takeoff_altitude(ALT); await d.action.takeoff(); ev("takeoff")
     await asyncio.sleep(10)
@@ -260,10 +269,11 @@ async def main():
         "terminal": (shield.terminal[0] if shield.terminal else None)})
     ev("done")
     await asyncio.sleep(2)
-    # restore params (SR-B5) — do ZDROWEGO nominału, nie do (potencjalnie zatrutej) wartości z bootu
-    await d.param.set_param_int("EKF2_GPS_CTRL", GPS_CTRL_NOMINAL)
-    await d.param.set_param_int("EKF2_HGT_REF", int(hgt_old))
-    print(f"[gate {SCEN}] restored GPS_CTRL={GPS_CTRL_NOMINAL} (boot był {gps_boot}) HGT_REF={hgt_old}", flush=True)
+    # restore params (SR-B5) — do ZDROWYCH nominałów z białej listy (nie do odczytu z bootu). To tylko
+    # sprzątanie; twardą gwarancją czystego wejścia jest preflight-asercja NASTĘPNEGO biegu (R-D1).
+    for p, want in C.HARNESS_PARAM_PREFLIGHT.items():
+        await d.param.set_param_int(p, want)
+    print(f"[gate {SCEN}] restored do stanu preflight {C.HARNESS_PARAM_PREFLIGHT} (poison na wejściu: {poison})", flush=True)
     try:
         await d.offboard.stop()
     except Exception:
