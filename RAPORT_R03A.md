@@ -167,6 +167,51 @@ stempla** starego kanału gz model -p ~0.3 s → streaming dynamic_pose/info (si
    `ε_cap` ROŚNIE → `R_route'` MALEJE → przy tej geometrii może na HIL **NIE DOMKNĄĆ** (`half-side' < 8.55`
    → SR-B1'). Reguły D10/D11 stoją NIEZALEŻNIE od liczby; liczba `37/4` jest [A4] z SITL, nie finał HIL.
 
+---
+
+## (VI) NOTY DODATKOWE (sesja DIAG-2 / bramka 4/4 live)
+
+1. **KIERUNKOWOŚĆ marginesu S4 (krytyczne — nie czytać jako licencji na skrócenie capa).** Margines
+   `R_E − rmax = 11.69 m` w S4 **NIE** dowodzi, że koperta jest przeszacowana. `ε_pos` to MODUŁ wektora
+   błędu; twierdzenie P2-ε zakłada dryf skierowany **radialnie NA ZEWNĄTRZ** (worst-case kierunek), a w
+   tym pojedynczym biegu kierunek dryfu wypadł łagodnie (składowa radialna < moduł). Na margines nałożyły
+   się DWA NIEZALEŻNE luzy: (i) zrealizowane `ε 2.07 ≪ cap 9.25` (reżim narożnika, nie worst-case prostej),
+   (ii) korzystna ORIENTACJA dryfu. `ε_cap = 37/4` pokrywa worst-case REŻIM (prosta v_max, 6.023) **oraz**
+   worst-case KIERUNEK (moduł ≥ składowa radialna) — pojedynczy łagodny przebieg tego nie podważa. Nikt
+   (łącznie z nami za pół roku) nie ma prawa odczytać 11.69 m jako zapasu do skrócenia capa. **Docelowo:
+   raportować SKŁADOWĄ RADIALNĄ dryfu (rzut na oś home→dron), nie tylko moduł** — dziś sędzia liczy moduł.
+2. **`r_est` w chwili cięcia (uzupełnienie wymagane w PROMPT_CLOSE).** Z trace `denial_on`: **S4
+   `r_est_at_cut = 18.015 m`** (v=3.14 m/s), **S3 `13.862 m`** (v=3.15). Dla S4: cięcie na `18.02 m` przy
+   `R_route' = 19.90 m` → **1.88 m WEWNĄTRZ** granicy trasy (~90.5 % `R_route'`), czyli denial faktycznie
+   uderzył blisko brzegu zredukowanej trasy przy narożniku na v_max — reżim, o który chodziło. (S2 —
+   stary executor bac07ae nie logował `r_est_at_cut`; patrz nota 3 o prowieniencji S2.)
+3. **GUI jako TRZECIE ZNALEZISKO (threat-to-validity), obok AUTO.LAND i zatrucia paramu.** Komponent
+   WIZUALIZACJI (`gz sim -g`), formalnie POZA systemem pod testem, **skaził substrat pomiarowy**:
+   >180 % CPU → głodzenie lockstepu → „time jump / Resetting time synchroniser" → reset EKF → „High Gyro
+   Bias / horizontal velocity unstable" → „Arming denied". Klasa: **threat-to-validity pierwszej klasy dla
+   safety-case'u opartego na symulacji** — narzędzie obserwacji zmieniło mierzony układ. Naprawa: bramka
+   headless (`run_stack.sh` honoruje `HEADLESS`, `4845a92`), headless weryfikowany per bieg.
+   **PROWIENIENCJA (odpowiedź wprost):**
+   (a) **S2 w bramce 4/4 to NIE świeży bieg headless — liczba PRZENIESIONA** z sesji B5 (`bac07ae`,
+       `results/R03/gate/S2_run.jsonl`), wykonana w warunkach **GUI-on** (przed fixem `4845a92`). S1/S3/S4
+       to świeże biegi **headless** tej sesji. S2 armował i przeleciał poprawnie (kontencja GUI uderzała w
+       ARM/health, nie w poprawność zmierzonego ε), więc dane S2 stoją; ale dla pełnej spójności warunku
+       **headless re-run S2 jest naturalny** (nie zrobiony w tej sesji — do decyzji Olgi; nie bloker).
+   (b) **[A4]:** `ε_cap = 37/4` zmierzono w warunkach **GUI-on** (B1-bis, sesja z GUI). Headless
+       re-measurement jest naturalnym POTWIERDZENIEM, nie blokerem — cap jest użyty jako OGRANICZENIE
+       GÓRNE, a headless S4 wyszło `ε 2.07 ≪ 9.25` (i S3 0.57), więc zawieranie trzyma z zapasem niezależnie.
+4. **S3 wykonane z `ALT = 15 m`** (S2/S4 = 8 m) — INNY warunek scenariusza. Legalne (param UPRZĘŻY, nie
+   kryterium D13/ANEKS-4), ale jawnie: przy 8 m epizod (zejście ~8.4 s) był KRÓTSZY niż
+   `recovery + rekonwergencja-EKF + M(5 s) ≈ 9 s`, więc touchdown WYPRZEDZAŁ re-ALLOW i kryterium
+   re-ALLOW-po-M nie dawało się zaobserwować. `ALT` jest pionowe; `r_est` (zawieranie) poziome → wyższy
+   start NIE zmienia geometrii zawierania. `recovery_after` 2.0→1.5 s.
+5. **R-D3 zadziałało LIVE — ŚWIADOMY WYBÓR ARCHITEKTURY, nie usterka.** S1 boot1 = `harness_invalid`:
+   po teardownie S4 `EKF2_GPS_CTRL=0` wyciekło do `parameters.bson` (PX4 autosave 0 podczas denialu, a
+   `pkill -9` ubił przed zapisem restore) → boot1 wykrył zatrucie na wejściu → self-heal → dropped →
+   boot2 czysty PASS. **Teardown NADAL zatruwa i tak ma zostać** — naprawa KLASY siedzi w asercji WEJŚCIA
+   (assert-on-entry, R-D1), bo restore-on-exit zawodzi z definicji przy `pkill -9`/`os._exit`/crashu. Kto
+   później „naprawi" teardown myśląc, że coś jest zepsute, USUNIE tani mechanizm bez zysku i osłabi gwarancję.
+
 ## STATUS KOŃCOWY — ZAMKNIĘCIE PEŁNE
 
 **Twierdzenie DOWIEDZIONE + BRAMKA 4/4 LIVE PASS.**
