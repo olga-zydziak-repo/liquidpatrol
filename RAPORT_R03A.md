@@ -1,13 +1,15 @@
 # RAPORT_R03A — R0.3a GPS-DENIED: osłona konsumuje zdrowie własnej pozycji
 
-Data: 2026-08-10. PX4 **v1.16.2**. Reżim: build wg `PROMPT_R03A_BUILD2`; kryteria dwustronne ZAMROŻONE
-przed pomiarem; każda liczba z etykietą przyrządu; rozbieżności jawne; księgowość trójwynikowa.
-**GT (gz) WYŁĄCZNIE sędzią — nigdy w decyzji.** STOP na push (push = Olga).
+Data: 2026-08-10 (build) / 2026-08-11 (DIAG + bramka 4/4 live). PX4 **v1.16.2**. Reżim: build wg
+`PROMPT_R03A_BUILD2`; kryteria dwustronne ZAMROŻONE przed pomiarem; każda liczba z etykietą przyrządu;
+rozbieżności jawne; księgowość trójwynikowa. **GT (gz) WYŁĄCZNIE sędzią — nigdy w decyzji.** STOP na
+push (push = Olga).
 
 Łańcuch commitów (freeze→pomiar dowodzony): ANEKS-3 (`9293ab0`) → aneks-3-bis ramka T_home (`f9ad8e3`)
 → B1-bis sonda + instrument (`980fca2`) → aneks-3-ter A-episode (`8abf9b5`) → aneks-3-quater D5+profil
 (`d12511b`) → B1-bis episode (`72eba50`) → **ANEKS-4 freeze** (`5a60278`) → B2 (`c5aa7b0`) → B3
-(`10690bb`) → B4 (`ea6c4dd`) → B5 (`bac07ae`).
+(`10690bb`) → B4 (`ea6c4dd`) → B5 S2 PASS (`bac07ae`) → CLOSE (`c5c0586`) → DIAG przyczyna (`4d8c0ce`)
+→ ridery R-D1..R-D4 (`334b29b`) → fix headless (`4845a92`) → **bramka 4/4 live** (ten commit).
 
 ---
 
@@ -26,24 +28,27 @@ Koperta `R_E=32` NIETYKANA (kurczymy własną trasę, nie rozciągamy świata). 
 
 **Bramka (D13, osłona W PĘTLI, GT sędzią):**
 
-| scen | status | (a) REFUSE od flagi | (b) touchdown r [GT] | (c) ε_pos ≤ ε_cap | (d) 0 naruszeń R_E |
+| scen | status | (a) REFUSE od flagi | (b/re-ALLOW) | (c) ε_pos ≤ ε_cap | (d) 0 naruszeń R_E |
 |---|---|---|---|---|---|
-| **S2** denial w patrolu | **LIVE PASS** | 0.091 s ≤ 0.15 ✓ | 14.84 m ≤ 32 ✓ | 2.97 ≤ 9.25 ✓ | rmax 20.1 ≤ 32 ✓ |
-| **S4** narożnik v_max | **NIEWYKONANY** (SR-C4)¹ | — | — | — | — |
-| **S3** denial+recovery | **NIEWYKONANY** (SR-C4)¹ | — | — | — | — |
-| **S1** nominal (−) | **NIEWYKONANY** (SR-C4)¹ | — | — | — | — |
+| **S1** nominal (−) | **LIVE PASS** | 0 fałszywych REFUSE ✓ | flag_flips=0 (SR-B3) ✓ | — (bez epizodu) | eph 0.151 ✓ |
+| **S2** denial w patrolu | **LIVE PASS** | 0.091 s ≤ 0.15 ✓ | touchdown 14.84 m ≤ 32 ✓ | 2.97 ≤ 9.25 ✓ | rmax 20.1 ≤ 32 ✓ |
+| **S3** denial+recovery | **LIVE PASS** | 0.095 s ≤ 0.15 ✓ | re-ALLOW 6.09 s ≥ M=5 ✓; 0 oscyl. ✓ | 0.57 ≤ 9.25 ✓ | rmax 20.17 ≤ 32 ✓ |
+| **S4** narożnik v_max | **LIVE PASS** | 0.097 s ≤ 0.15 ✓ | touchdown 18.95 m ≤ 32 ✓ | 2.07 ≤ 9.25 ✓ | rmax 20.31 ≤ 32 ✓ |
 
-POS_DEGRADED w S2 = ODWRACALNY (`terminal=None`, `n_pos_enter=1`) — nie latch (D6). margines S2 = 11.87 m.
+**BRAMKA 4/4 LIVE PASS** (sesja DIAG-2, 2026-08-11; świeże booty, GT sędzią, osłona w pętli).
+POS_DEGRADED = ODWRACALNY (`terminal=None`, `n_pos_enter=1`) — nie latch (D6). S4 cięcie przy narożniku
+na v_max (r_est=18.02, v=3.14 m/s), min margines zawierania 11.69 m. S3 re-ALLOW dopiero po M (histereza,
+zero oscylacji). Instrument ε live jest ZGRUBNY (`healthy_p95` 0.30–0.52 m, okno zdrowe ~14 s, parowanie
+mono/skew, GT throttled) — powyżej charakteryzacyjnej bramki W5 (≤0.10, B1-bis), ALE kryterium D13c to
+`ε_pos ≤ ε_cap`, spełnione z szerokim marginesem we wszystkich epizodach; `healthy_p95` jest notą, nie
+bramką D13 (spójne z ratyfikowanym S2, którego `healthy_p95`=0.367).
 
-¹ **SR-C4 — degradacja środowiska gz (awaria INFRASTRUKTURY, NIE FAIL projektu; sesja CLOSE):** serwer
-`gz sim` przestał startować po długiej serii bootów (S4: **3/3 boot-y ODRZUCONE** HEALTH TIMEOUT —
-`results/R03/gate/S4/boot{1,2,3}/run.log`; przyczyna: brak `/clock` gz → PX4 bez sensorów/GPS → health
-nigdy OK). Izolacja (`FINDING_gz_degradation.md`): `gz sim --version` OK (8.14.0), ale `gz sim -s -v4
-empty.sdf` = **0 wierszy, 0 /clock** (hang przed logiem; GPU i software render tak samo) — nienaprawialne
-bez restartu WSL2. Zgodnie z SR-C4: **STOP z tym, co wykonane; bez biegów z brudnego środowiska.**
-Executor+wrapper+sędzia ULEPSZONE i GOTOWE (bounded health-wait+hard-exit; S3 recovery/re-ALLOW; S4
-narożnik; higiena boot_id/retry/dmesg) — do uruchomienia po restarcie środowiska. **Nie stosuję pokrycia
-zastępczego** — S4/S3/S1 pozostają NIEWYKONANE live (uczciwa lista, nie substytut).
+**Odblokowanie (sesja DIAG + ridery R-D1..R-D4 + fix headless):** poprzednia „SR-C4 degradacja gz" była
+częściowo błędną atrybucją — realnym blokerem HEALTH TIMEOUT był **zatruty `EKF2_GPS_CTRL=0` utrwalony w
+rootfs/parameters.bson** (naprawiony: preflight assert-on-entry klasy paramów, R-D1). Osobno: **gz GUI
+głodził lockstep** (>180% CPU → time-jump → EKF reset → arm denied); bramka biega **headless**
+(`run_stack.sh` honoruje HEADLESS). gz jako serwer działa (`/clock` 2 s). Diagnoza:
+`results/R03/recon/DIAG/FINDING_health_blocker.md`; addendum: `FINDING_gz_degradation.md`.
 
 ---
 
@@ -162,18 +167,24 @@ stempla** starego kanału gz model -p ~0.3 s → streaming dynamic_pose/info (si
    `ε_cap` ROŚNIE → `R_route'` MALEJE → przy tej geometrii może na HIL **NIE DOMKNĄĆ** (`half-side' < 8.55`
    → SR-B1'). Reguły D10/D11 stoją NIEZALEŻNIE od liczby; liczba `37/4` jest [A4] z SITL, nie finał HIL.
 
-## STATUS KOŃCOWY — ZAMKNIĘCIE CZĘŚCIOWE
+## STATUS KOŃCOWY — ZAMKNIĘCIE PEŁNE
 
-**Twierdzenie DOWIEDZIONE + 1/4 scenariuszy live.**
+**Twierdzenie DOWIEDZIONE + BRAMKA 4/4 LIVE PASS.**
 - Dowody: **P2-ε PROVED** (z3, ostrość dwustronna); **P1 PROVED** (+POS_DEGRADED, +P1f, +A-episode/A-flag);
   **P5 PASS** (400+15 epizodów, 0 rozbieżności, 8/8); **certs_selfcheck 6/6**; P2/P4 NIETKNIĘTE;
   r01/test_core 43 asercje; B2 8 testów. Trasa **DOMYKALNA w SITL** (half-side' 14.07 > 8.55).
-- Bramka live: **S2 PASS** (pełne D13 a–d). **NIEWYKONANE live: S4, S3, S1** — powód: **SR-C4 degradacja
-  gz** (serwer nie startuje; S4 3/3 boot-y odrzucone HEALTH TIMEOUT; `FINDING_gz_degradation.md`).
-  Executor/wrapper/sędzia ulepszone i gotowe do wznowienia po restarcie środowiska.
-- **Nie zastosowano pokrycia zastępczego** dla S4/S3/S1 — pozostają jawnie niewykonane (uczciwa lista).
-
-**Wznowienie (po restarcie WSL2/gz):** `bash r03/run_gate_one.sh S4` → `... S1 5` → `... S3`, potem
-`python3 -m r03.gate_judge results/R03/gate/S4/run.jsonl` (+S1/S3).
+- Bramka live (świeże booty, GT sędzią): **S1/S2/S3/S4 wszystkie PASS** (pełne D13). S1 nominal (0
+  fałszywych REFUSE, flag_flips=0/SR-B3); S2 denial w patrolu; S3 denial+recovery (re-ALLOW 6.09 s ≥ M,
+  0 oscylacji); S4 narożnik v_max (touchdown 18.95 m, margines 11.69 m). Artefakty:
+  `results/R03/gate/{S1,S3}/run.jsonl`, `S4/boot1/run.jsonl`, `S2_run.jsonl`.
+- Odblokowanie: sesja DIAG (przyczyna HEALTH TIMEOUT = zatruty `EKF2_GPS_CTRL=0` w bson, nie gz/timeout/
+  MAVSDK) + ridery R-D1..R-D4 (assert-on-entry klasy paramów, R-D3 harness_invalid) + fix headless
+  (`run_stack` honoruje HEADLESS — gz GUI głodził lockstep). `FINDING_health_blocker.md`.
+- Uczciwa nota kosztu: S3 uruchomiony z wyższą wysokością startu (15 m, param uprzęży, NIE kryterium) by
+  zejście trwało dość długo do zaobserwowania re-ALLOW-po-M; S1 boot1 odrzucony jako `harness_invalid`
+  (zatrucie GPS z teardown S4) → boot2 czysty PASS (R-D3 zadziałało w praktyce). Instrument ε live zgrubny
+  (`healthy_p95` 0.30–0.52 > W5 0.10) — D13c to `ε_pos ≤ ε_cap`, spełnione z marginesem; spójne z S2.
+- [A4] KIERUNEK ryzyka bez zmian: SITL quasi-idealne IMU → realny dryf większy → na HIL może NIE DOMKNĄĆ;
+  liczba `37/4` jest [A4] z SITL, reguły D10/D11 stoją niezależnie.
 
 **STOP. Push = Olga.**

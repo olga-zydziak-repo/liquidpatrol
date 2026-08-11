@@ -34,7 +34,11 @@ WORLD = os.environ.get("PX4_GZ_WORLD", "default")
 MODEL = os.environ.get("B1_MODEL", "x500_mono_cam_0")
 GT_TOPIC = f"/world/{WORLD}/dynamic_pose/info"
 from r01.config import V_MAX as VMAX
-ALT = 8.0
+# ALT: wysokość startowa (parametr UPRZĘŻY, nie kryterium). S3 wyżej, bo testuje re-ALLOW-po-histerezie:
+# zejście z 8 m trwa ~8.4 s, a re-ALLOW wymaga recovery + rekonwergencja-EKF + M(5 s) ≈ 9 s → touchdown
+# wyprzedzał re-ALLOW (nie dawało się zaobserwować kryterium D13). Z 15 m zejście ~13 s → jest margines.
+# ALT jest pionowe; r_est (zawieranie) jest poziome → wyższy start NIE zmienia geometrii zawierania.
+ALT = 15.0 if SCEN == "S3" else 8.0
 # --- STAŁE UPRZĘŻY (nie kryteria bramki; parametry instrumentu) ---
 # Stan preflight paramów = biała lista R-D1 w JEDNYM źródle prawdy (r03/config.HARNESS_PARAM_PREFLIGHT).
 # ZASADA R-D1: assert-on-entry (preflight wymusza wymagany stan na CAŁEJ klasie JEDNYM setem), NIE
@@ -169,7 +173,7 @@ async def main():
         os._exit(2)     # arm nie przechodzi → HARD exit (cleanup wisi) → wrapper retry
     ev("armed")
     await d.action.set_takeoff_altitude(ALT); await d.action.takeoff(); ev("takeoff")
-    await asyncio.sleep(10)
+    await asyncio.sleep(10 + max(0.0, (ALT - 8.0) / 1.5))   # dojście na wysokość (S3=15 m potrzebuje więcej)
     await d.offboard.set_velocity_ned(VelocityNedYaw(0, 0, 0, 0))
     try:
         await d.offboard.start(); ev("offboard")
@@ -193,7 +197,7 @@ async def main():
     dist = 1e9
     t_start = time.monotonic()
     denial_at = 12.0 if SCEN in ("S2", "S3") else 1e9    # S4: wyzwalane narożnikiem
-    recovery_after = 2.0 if SCEN == "S3" else 1e9        # sekundy PO denialu (okno na M przed touchdown)
+    recovery_after = 1.5 if SCEN == "S3" else 1e9        # sekundy PO denialu (wcześnie → M zdąży przed touchdown)
     s1_dur = S1_MIN * 60.0 if SCEN == "S1" else 1e9
     desc_fast_dur = max(0.0, (ALT - C.H_SWITCH_AGL) / C.V_DESC_FAST)
     desc_total = desc_fast_dur + C.H_SWITCH_AGL / C.V_DESC_LAND + 1.5

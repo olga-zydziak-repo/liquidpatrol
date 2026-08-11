@@ -1,0 +1,11 @@
+[gate1] S1 boot#1 — teardown + świeży boot
+[gate1] brak zombie (procesy + porty 14540/8888/50051 czyste)
+[gate1] S1 boot#1 PREFLIGHT: 90 s konwergencji EKF (znalezisko B1-bis)
+r03/run_gate_one.sh: line 35: 21346 Aborted                 (core dumped) SCEN="$SCEN" S1_MIN="$S1M" GATE_OUT="$BD/run.jsonl" PYTHONPATH=".:.certdeps:$PYTHONPATH" python3 -m r03.gate_run_r03 > "$BD/run.log" 2>&1
+[gate1] S1 boot#1 ODRZUCONY: HARNESS_INVALID (zatruty param na wejściu, R-D3; self-heal zrobiony, retry)
+[gate1] S1 boot#2 — teardown + świeży boot
+[gate1] brak zombie (procesy + porty 14540/8888/50051 czyste)
+[gate1] S1 boot#2 PREFLIGHT: 90 s konwergencji EKF (znalezisko B1-bis)
+[gate1] S1 boot#2 OK (uzbrojony, bieg zaliczony)
+[gate1] brak zombie (procesy + porty 14540/8888/50051 czyste)
+[gate1] S1 DONE ok_boot=2 dropped_boots=1

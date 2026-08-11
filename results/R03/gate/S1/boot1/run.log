@@ -1,0 +1,29 @@
+[gate] PREFLIGHT: zatrute paramy {'EKF2_GPS_CTRL': 0} → wymuszono stan preflight (self-heal); BIEG BĘDZIE OZNACZONY JAKO NIEWAŻNY (R-D3)
+[gate S1] HARNESS_INVALID: {'EKF2_GPS_CTRL': 0} — bieg nieważny (R-D3)
+[gate] arm niegotowe retry #0
+[gate S1] armed mono=39923.443
+[gate S1] takeoff mono=39923.478
+[gate S1] offboard mono=39933.504
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[gate S1] s1_done mono=40233.538
+[gate S1] done mono=40233.538
+[gate S1] restored do stanu preflight {'EKF2_GPS_CTRL': 7, 'EKF2_HGT_REF': 0} (poison na wejściu: {'EKF2_GPS_CTRL': 0})
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[gate S1] done -> /home/olga/projects/liquidpatrol/results/R03/gate/S1/boot1/run.jsonl
+terminate called without an active exception
+--- DIAG odrzutu boot#1 rc=134 invalid=1 ---
+[px4 preflight/health tail]
+WARN  [health_and_arming_checks] Preflight Fail: ekf2 missing data
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+INFO  [tone_alarm] home set
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+WARN  [commander] Arming denied: Resolve system health failures first	
+[executor tail]
+--- DIAG odrzutu boot#1 rc=134 invalid=1 ---
+[px4 preflight/health tail]
+WARN  [health_and_arming_checks] Preflight Fail: ekf2 missing data
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+INFO  [tone_alarm] home set
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+WARN  [commander] Arming denied: Resolve system health failures first	
+[executor tail]

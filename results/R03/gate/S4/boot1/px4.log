@@ -13,12 +13,11 @@ INFO  [px4] startup script: /bin/sh etc/init.d-posix/rcS 0
 INFO  [init] found model autostart file as SYS_AUTOSTART=4010
 INFO  [param] selected parameter default file parameters.bson
 INFO  [param] importing from 'parameters.bson'
-INFO  [parameters] BSON document size 850 bytes, decoded 850 bytes (INT32:21, FLOAT:19)
+INFO  [parameters] BSON document size 831 bytes, decoded 831 bytes (INT32:20, FLOAT:19)
 INFO  [param] selected parameter backup file parameters_backup.bson
 INFO  [dataman] data manager file './dataman' size is 1208528 bytes
 INFO  [init] Gazebo simulator
 INFO  [init] Starting gazebo with world: /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
-INFO  [init] Starting gz gui
 INFO  [init] Gazebo world is ready
 INFO  [init] Spawning model
 ATTENTION: default value of option vblank_mode overridden by environment.
@@ -27,23 +26,29 @@ INFO  [gz_bridge] world: default, model: x500_mono_cam_0
 INFO  [commander] LED: open /dev/led0 failed (22)
 INFO  [uxrce_dds_client] init UDP agent IP:127.0.0.1, port:8888
 INFO  [mavlink] mode: Normal, data rate: 4000000 B/s on udp port 18570 remote port 14550
-INFO  [lockstep_scheduler] setting initial absolute time to 2004000 us
-WARN  [health_and_arming_checks] Preflight Fail: No valid data from Baro 0
-WARN  [health_and_arming_checks] Preflight Fail: ekf2 missing data
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
 INFO  [mavlink] mode: Onboard, data rate: 4000000 B/s on udp port 14580 remote port 14540
 INFO  [mavlink] mode: Onboard, data rate: 4000 B/s on udp port 14280 remote port 14030
 INFO  [mavlink] mode: Gimbal, data rate: 400000 B/s on udp port 13030 remote port 13280
 INFO  [logger] logger started (mode=all)
 INFO  [logger] Start file log (type: full)
-INFO  [logger] [logger] ./log/2026-08-10/12_30_38.ulg	
-INFO  [logger] Opened full log file: ./log/2026-08-10/12_30_38.ulg
+INFO  [logger] [logger] ./log/2026-08-10/23_32_55.ulg	
+INFO  [logger] Opened full log file: ./log/2026-08-10/23_32_55.ulg
 INFO  [mavlink] MAVLink only on localhost (set param MAV_{i}_BROADCAST = 1 to enable network)
 INFO  [mavlink] MAVLink only on localhost (set param MAV_{i}_BROADCAST = 1 to enable network)
 INFO  [px4] Startup script returned successfully
-INFO  [tone_alarm] home set
+INFO  [lockstep_scheduler] setting initial absolute time to 2308000 us
+ERROR [vehicle_imu] 0 - gyro 1310988 timestamp error timestamp_sample: 0, previous timestamp_sample: 0
+ERROR [vehicle_imu] 0 - accel 1310988 timestamp error timestamp_sample: 0, previous timestamp_sample: 0
+WARN  [health_and_arming_checks] Preflight Fail: No valid data from Baro 0
+WARN  [health_and_arming_checks] Preflight Fail: ekf2 missing data
 WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
-INFO  [uxrce_dds_client] synchronized with time offset 1786365036383557us
+INFO  [tone_alarm] home set
+INFO  [tone_alarm] notify positive
+WARN  [health_and_arming_checks] Preflight Fail: heading estimate not stable
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+WARN  [health_and_arming_checks] Preflight Fail: horizontal velocity unstable
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+INFO  [uxrce_dds_client] synchronized with time offset 1786404774434423us
 INFO  [uxrce_dds_client] successfully created rt/fmu/out/register_ext_component_reply data writer, topic id: 198
 INFO  [uxrce_dds_client] successfully created rt/fmu/out/arming_check_request data writer, topic id: 17
 INFO  [uxrce_dds_client] successfully created rt/fmu/out/mode_completed data writer, topic id: 150
@@ -69,4 +74,52 @@ INFO  [uxrce_dds_client] successfully created rt/fmu/out/airspeed_validated data
 INFO  [uxrce_dds_client] successfully created rt/fmu/out/vtol_vehicle_status data writer, topic id: 288
 INFO  [uxrce_dds_client] successfully created rt/fmu/out/home_position data writer, topic id: 123
 INFO  [uxrce_dds_client] time sync converged
+WARN  [health_and_arming_checks] Preflight Fail: horizontal velocity unstable
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+WARN  [health_and_arming_checks] Preflight Fail: horizontal velocity unstable
+WARN  [health_and_arming_checks] Preflight Fail: High Gyro Bias
+WARN  [health_and_arming_checks] Geofence: exceeding maximum distance to Home
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+WARN  [health_and_arming_checks] Preflight Fail: horizontal velocity unstable
+WARN  [health_and_arming_checks] Preflight Fail: High Gyro Bias
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+WARN  [health_and_arming_checks] Preflight Fail: horizontal velocity unstable
+WARN  [health_and_arming_checks] Preflight Fail: High Gyro Bias
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+WARN  [health_and_arming_checks] Preflight Fail: High Gyro Bias
+WARN  [health_and_arming_checks] Preflight Fail: Attitude failure (pitch)
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+WARN  [health_and_arming_checks] Preflight Fail: horizontal velocity unstable
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+WARN  [health_and_arming_checks] Preflight Fail: horizontal velocity unstable
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+WARN  [timesync] time jump detected. Resetting time synchroniser.
+WARN  [uxrce_dds_client] time sync no longer converged
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the ground control station	
+INFO  [uxrce_dds_client] time sync converged
+WARN  [timesync] time jump detected. Resetting time synchroniser.
+WARN  [uxrce_dds_client] time sync no longer converged
+INFO  [uxrce_dds_client] time sync converged
 INFO  [mavlink] partner IP: 127.0.0.1
+INFO  [commander] [32mReady for takeoff![0m
+WARN  [timesync] time jump detected. Resetting time synchroniser.
+WARN  [uxrce_dds_client] time sync no longer converged
+INFO  [commander] Armed by external command	
+INFO  [tone_alarm] arming warning
+INFO  [navigator] Using default takeoff altitude: 8.0 m	
+INFO  [uxrce_dds_client] time sync converged
+INFO  [commander] Takeoff detected	
+WARN  [timesync] time jump detected. Resetting time synchroniser.
+WARN  [uxrce_dds_client] time sync no longer converged
+INFO  [uxrce_dds_client] time sync converged
+WARN  [failsafe] Failsafe activated	
+INFO  [tone_alarm] battery warning (fast)
+INFO  [commander] Landing detected	
+INFO  [commander] Disarmed by landing	
+INFO  [tone_alarm] notify neutral
+INFO  [vehicle_imu] GYRO 0 (1310988) offset committed: [-0.000 -0.000 -0.000]->[-0.001 -0.001 -0.015])
+INFO  [vehicle_magnetometer] 0 (197388) EST:0 offset: [-0.011, -0.106, 0.054]->[-0.017, -0.140, 0.083] (full [-0.061, -0.220, 
+INFO  [logger] closed logfile, bytes written: 34263904
+WARN  [timesync] time jump detected. Resetting time synchroniser.
+WARN  [uxrce_dds_client] time sync no longer converged
+INFO  [uxrce_dds_client] time sync converged

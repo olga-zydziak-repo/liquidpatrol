@@ -112,4 +112,12 @@ DETERMINISTYCZNA, nie losowa.** Słowo „flakiness" usunięte z opisów TEJ KLA
 - `python3 -m py_compile r03/gate_run_r03.py` OK; `bash -n` obu wrapperów OK; `certs_selfcheck` 6/6
   (config.py nie jest hashowany — selfcheck hashuje pliki proverów).
 - Środowisko zostawione czyste (brak zombie, porty 14540/8888/50051 wolne), bson uzdrowione (GPS_CTRL=7).
-- **Push = Olga.** Po ratyfikacji: `bash r03/run_gate_one.sh S4` → `S1 5` → `S3` → `gate_judge`.
+
+## WYNIK BRAMKI (2026-08-11, po ratyfikacji DIAG) — 4/4 LIVE PASS
+Po riderach + fix headless (`run_stack` honoruje HEADLESS — gz GUI ciągnął >180% CPU i głodził lockstep →
+time-jump → EKF reset → „Arming denied: Resolve system health failures"; headless usuwa to) bramka
+przeszła: **S1 PASS** (0 fałszywych REFUSE, flag_flips=0), **S2 PASS** (ratyf.), **S3 PASS** (re-ALLOW
+6.09 s ≥ M=5, 0 oscylacji), **S4 PASS** (touchdown 18.95 m, margines 11.69 m). R-D3 zadziałało w praktyce:
+S1 boot1 = `harness_invalid` (GPS=0 wyciekło z teardown S4, PX4 autosave 0 podczas denialu) → self-heal →
+boot2 czysty PASS. S3 z ALT=15 m (param uprzęży) — zejście z 8 m było krótsze niż recovery+lag+M, więc
+touchdown wyprzedzał re-ALLOW; wyższy start daje margines do zaobserwowania kryterium D13. **Push = Olga.**
