@@ -1,0 +1,9 @@
+[recon] D0.5/ground_low_control CAM_KIND=standalone CAM_Z=0.5 INTR=mesh range=7 RENDER=mesa-d3d12
+[gen_world] /home/olga/projects/liquidpatrol/results/R02/engine_recon/D0.5/ground_low_control/world_as_run.sdf CAM_KIND=standalone CAM_Z=0.5 INTR=mesh@(7.0,0.0,0.5) range=7.0
+[recon] gz -s pid=26327 (server-only)
+[recon] weryfikacja headless: GUI_PROCS=[brak]
+[recon] topik kamery: /world/recon/model/probe_cam/link/camera_link/sensor/imager/image
+[grab] RENDER_PASS_visible dark_px=42/8 center(min=49,mean=200.0) frame(mean=205.8) intruder_in_state=True shape=(480, 640, 3)
+{"verdict": "RENDER_PASS_visible", "dark_px": 42, "visible": true, "models": {"names": ["ground_plane", "intruder", "probe_cam"], "intruder_present": true, "raw": "Requesting state for world [recon]...\n\nAvailable models:\n    - ground_plane\n    - intruder\n    - probe_cam"}, "capture_status": "ok"}
+results/R02/engine_recon/run_recon.sh: line 64: 26327 Killed                  setsid nohup gz sim -s -r -v1 "$OUTDIR/world_as_run.sdf" > "$OUTDIR/gz.log" 2>&1
+[recon] D0.5/ground_low_control DONE rc=0 → /home/olga/projects/liquidpatrol/results/R02/engine_recon/D0.5/ground_low_control

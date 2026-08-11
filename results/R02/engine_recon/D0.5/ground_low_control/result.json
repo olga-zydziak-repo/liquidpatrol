@@ -1,0 +1,39 @@
+{
+  "HEADLESS": "1",
+  "RENDER_BACKEND": "mesa-d3d12",
+  "GZ_VER": "Gazebo Sim, version 8.14.0",
+  "CAM_KIND": "standalone",
+  "CAM_Z": "0.5",
+  "INTR_KIND": "mesh",
+  "INTR_RANGE": "7",
+  "DISC": "D0.5",
+  "RUN": "ground_low_control",
+  "IMG_TOPIC": "/world/recon/model/probe_cam/link/camera_link/sensor/imager/image",
+  "img_topic": "/world/recon/model/probe_cam/link/camera_link/sensor/imager/image",
+  "models": {
+    "names": [
+      "ground_plane",
+      "intruder",
+      "probe_cam"
+    ],
+    "intruder_present": true,
+    "raw": "Requesting state for world [recon]...\n\nAvailable models:\n    - ground_plane\n    - intruder\n    - probe_cam"
+  },
+  "capture_status": "ok",
+  "png": "frame.png",
+  "dark_px": 42,
+  "min_px": 8,
+  "region_px": 3136,
+  "center_min": 49,
+  "center_mean": 200.0,
+  "visible": true,
+  "frame_shape": [
+    480,
+    640,
+    3
+  ],
+  "frame_min": 49,
+  "frame_max": 218,
+  "frame_mean": 205.8,
+  "verdict": "RENDER_PASS_visible"
+}
