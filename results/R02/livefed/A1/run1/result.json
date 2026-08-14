@@ -1,0 +1,92 @@
+{
+  "HEADLESS": "1",
+  "RENDER_BACKEND": "mesa-d3d12",
+  "GZ_VER": "Gazebo Sim, version 8.11.0\nCopyright (C)",
+  "instrument": "mav (attitude ~20Hz), monotonic (parowanie klatka↔attitude)",
+  "geometry": {
+    "R_h_m": 6.837,
+    "delta_alt_m": 1.5,
+    "range_3d_m": 7.0,
+    "el_nom_deg": 12.37,
+    "ROI": [
+      0.5,
+      0.376
+    ],
+    "ROI_R": 0.2
+  },
+  "rtf_start": "real_time_factor: 1.0003503727180445",
+  "rtf_end": "real_time_factor: 1.0000735054026471",
+  "theta_conf": 0.1635,
+  "HOVER": {
+    "phase": "hover",
+    "n_frames": 7,
+    "frames_seen": 7,
+    "coverage_seen": 1.0,
+    "frames_out_of_fov_geom": 0,
+    "box_cx": {
+      "n": 7,
+      "min": 0.49,
+      "p50": 0.5032,
+      "max": 0.6763
+    },
+    "box_cy": {
+      "n": 7,
+      "min": 0.4,
+      "p50": 0.4042,
+      "max": 0.406
+    },
+    "box_edge": {
+      "n": 7,
+      "min": 0.3237,
+      "p50": 0.4042,
+      "max": 0.406
+    },
+    "true_conf": {
+      "n": 7,
+      "min": 0.0478,
+      "p50": 0.0851,
+      "max": 0.1108
+    },
+    "att_paired": 7,
+    "pair_maxdt_s": 0.077
+  },
+  "MOTION": {
+    "phase": "motion",
+    "n_frames": 20,
+    "frames_seen": 19,
+    "coverage_seen": 0.95,
+    "frames_out_of_fov_geom": 0,
+    "box_cx": {
+      "n": 19,
+      "min": 0.3656,
+      "p50": 0.5088,
+      "max": 0.6443
+    },
+    "box_cy": {
+      "n": 19,
+      "min": 0.2545,
+      "p50": 0.4044,
+      "max": 0.5308
+    },
+    "box_edge": {
+      "n": 19,
+      "min": 0.2545,
+      "p50": 0.3954,
+      "max": 0.4692
+    },
+    "true_conf": {
+      "n": 19,
+      "min": 0.0024,
+      "p50": 0.0811,
+      "max": 0.1615
+    },
+    "att_paired": 20,
+    "pair_maxdt_s": 0.036
+  },
+  "routing_rule": "coverage_seen>=0.95 => 0b ODRZUCONE definitywnie (PRE_R02C/A1)",
+  "note": "cel CIĄGLE dead-ahead (re-placer 8Hz) geometria operacyjna; coverage_seen=box≤R od projekcji; frames_out_of_fov_geom z paired attitude; motion-blur widoczne w coverage (nie w torze geom).",
+  "frame_min": 36,
+  "frame_mean": 207.1,
+  "overlay": "frame_motion_overlay.png",
+  "verdict": "0b ODRZUCONE"
+}

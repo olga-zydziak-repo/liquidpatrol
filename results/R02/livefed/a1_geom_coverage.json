@@ -1,0 +1,132 @@
+{
+  "instrument": "mav (attitude_euler ~20Hz) — z B1 attitude_samples.json (POD OBSERVE-motion)",
+  "geometry": {
+    "R_h_m": 6.837,
+    "delta_alt_m": 1.5,
+    "range_3d_m": 7.0,
+    "el_nominal_deg": 12.37,
+    "HFOV_rad": 1.74,
+    "VFOV_rad": 1.453,
+    "half_VFOV_deg": 41.63,
+    "az_nominal_deg": 0.0,
+    "note": "cel operacyjny dead-ahead (az=0 wg yaw próbki); izoluje pitch/roll jitter; el_nom liczony jako el=atan(Δalt/R_h); rzut = project_full_attitude"
+  },
+  "MOTION": {
+    "n": 336,
+    "in_fov": 336,
+    "coverage_seen_geom": 1.0,
+    "frames_out_of_fov": 0,
+    "cx": {
+      "n": 336,
+      "min": 0.481,
+      "p05": 0.495,
+      "p50": 0.503,
+      "p95": 0.516,
+      "max": 0.598
+    },
+    "cy": {
+      "n": 336,
+      "min": 0.126,
+      "p05": 0.248,
+      "p50": 0.372,
+      "p95": 0.494,
+      "max": 0.566
+    },
+    "el_deg": {
+      "n": 336,
+      "min": -6.71,
+      "p05": 0.62,
+      "p50": 12.81,
+      "p95": 24.13,
+      "max": 33.59
+    },
+    "edge_dist": {
+      "n": 336,
+      "min": 0.126,
+      "p05": 0.248,
+      "p50": 0.372,
+      "p95": 0.458,
+      "max": 0.495
+    },
+    "out_examples": []
+  },
+  "HOVER_baseline": {
+    "n": 84,
+    "in_fov": 84,
+    "coverage_seen_geom": 1.0,
+    "frames_out_of_fov": 0,
+    "cx": {
+      "n": 84,
+      "min": 0.5,
+      "p05": 0.501,
+      "p50": 0.502,
+      "p95": 0.504,
+      "max": 0.505
+    },
+    "cy": {
+      "n": 84,
+      "min": 0.364,
+      "p05": 0.365,
+      "p50": 0.37,
+      "p95": 0.372,
+      "max": 0.372
+    },
+    "el_deg": {
+      "n": 84,
+      "min": 12.78,
+      "p05": 12.8,
+      "p50": 13.0,
+      "p95": 13.45,
+      "max": 13.57
+    },
+    "edge_dist": {
+      "n": 84,
+      "min": 0.364,
+      "p05": 0.365,
+      "p50": 0.37,
+      "p95": 0.372,
+      "max": 0.372
+    },
+    "out_examples": []
+  },
+  "routing_rule": "coverage_seen_geom >= 0.95 => 0b ODRZUCONE definitywnie (PRE_R02C/A1, zamrożona)",
+  "MOTION_target_below": {
+    "n": 336,
+    "in_fov": 336,
+    "coverage_seen_geom": 1.0,
+    "frames_out_of_fov": 0,
+    "cx": {
+      "n": 336,
+      "min": 0.407,
+      "p05": 0.488,
+      "p50": 0.498,
+      "p95": 0.515,
+      "max": 0.59
+    },
+    "cy": {
+      "n": 336,
+      "min": 0.412,
+      "p05": 0.504,
+      "p50": 0.619,
+      "p95": 0.746,
+      "max": 0.82
+    },
+    "el_deg": {
+      "n": 336,
+      "min": -29.66,
+      "p05": -23.6,
+      "p50": -11.91,
+      "p95": -0.45,
+      "max": 8.85
+    },
+    "edge_dist": {
+      "n": 336,
+      "min": 0.18,
+      "p05": 0.254,
+      "p50": 0.381,
+      "p95": 0.459,
+      "max": 0.5
+    },
+    "out_examples": []
+  }
+}
