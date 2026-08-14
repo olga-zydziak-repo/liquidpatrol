@@ -241,3 +241,15 @@ GUI-on; E2 obaliło kontencję CPU) — nie zaokrąglać do „GUI winne".
 (+) zasięg skuteczny w locie ≥ 7 m przy coverage ≥ 0.8; (−) ε_FP = 0; oba **wyłącznie w locie**; `θ_conf`
 **NIETYKALNY**; MTI wyłącznie jako AND-gate (rider C-A3). ANEKS-H NIE dotyka tych kryteriów — dodaje tylko
 warunek ważności substratu, na którym się je mierzy.
+
+### H.4 — HABITAT PERCEPCYJNY DEMA `world_demo_v1` (2026-08-15, R-M1 PROMPT_MTI_BUILD)
+
+Świat charakteryzacji/bramki MTI (teksturowany grunt, realna paralaksa). Nagłówek IDENTYCZNY z `default.sdf`
+(physics ode 250 Hz, gravity, magnetic_field, atmosphere, scene, sun `sunUTC`, spherical_coords); DODANE: 359
+statycznych brył wizualnych (bez kolizji → koperta R_E/geofence bez zmian). Generator deterministyczny
+`worlds/gen_world_demo_v1.py` (seed 20260815).
+- **`worlds/world_demo_v1.sdf` sha256 = `eb80135a19a4309218ec3e905ca6f9eab3e1e706ce6cb5d9d791c3b3d1b28843`** (ZAMROŻONY).
+- Sanity habitatu (warunek wejścia, `results/R02/mti/sanity/run1/`): HEADLESS (GUI=brak), RTF sustained ~1.0
+  (0.9999–1.0000 live; 0.0056 = transient bootu 359 brył, nie kontencja), time-jump=0, arm+zawis+ląd OK.
+- **ZASADA (jawna): liczby percepcyjne MIĘDZY ŚWIATAMI SIĘ NIE PRZENOSZĄ.** Pomiary MTI/conf wyłącznie w
+  `world_demo_v1`; nic z `default.sdf` / B0-B3 / A1 nie jest priorem. `default.sdf` = habitat R0.x (frozen).

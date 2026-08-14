@@ -13,6 +13,24 @@ etykietą przyrządu. ANEKS-H obowiązuje każdemu przyszłemu biegowi (SR-M5).
 
 ---
 
+## ANEKS — RIDERY RATYFIKACYJNE R-M1…R-M5 (Olga, 2026-08-15) — WIĄŻĄCE
+
+PRE_MTI przyjęte z pięcioma riderami; nadrzędne nad treścią tam gdzie zaostrzają.
+- **R-M1 — świat charakteryzacji = świat DEMA.** Cała charakteryzacja/bramka MTI tej sesji w
+  `worlds/world_demo_v1.sdf` (teksturowany grunt, realna paralaksa; nagłówek == default; koperta R_E/geofence
+  bez zmian; światło jak default). Hash zamrożony w **ANEKS-H (H.4)**. `default.sdf` = habitat R0.x (frozen).
+  **Liczby percepcyjne MIĘDZY ŚWIATAMI SIĘ NIE PRZENOSZĄ** — nic z default.sdf/B0-B3/A1 nie jest priorem dla MTI.
+- **R-M2 — statystyki conf/MTI jako MEDIANA + IQR** (max wyłącznie informacyjnie). Egzekwowane w B4/B6.
+- **R-M3 — 0b (gimbal) ZAMKNIĘTE w rejestrze decyzji.** Odrzucone przez A1 (`RAPORT_LIVEFED_CHAR`); wraca
+  **wyłącznie nową decyzją Olgi z NOWYM dowodem**. Nie „przy okazji" w tej sesji (SR-M4/SR-N4).
+- **R-M4 — „zero re-certów przy wymianie bramy percepcji"** = zdanie do materiału whitepaper (R4): wymiana
+  brama conf→struktura∧MTI zachodzi UPSTREAM kanału 5-dim, `shield.step`/tau/P1/P5 nietknięte → **operacyjna
+  demonstracja tezy programu** (rdzeń bezpieczeństwa dowiedziony niezależnie od percepcji). W RAPORT_MTI §IV.
+- **R-M5 — syntetyczne wektory FP PRZED pierwszym lotem** (B2): każdy nazwany FP z inwentarza R2 = wektor
+  syntetyczny (znany input → oczekiwane odrzucenie → test PASS) zanim jakikolwiek pomiar w locie.
+
+---
+
 ## R1 — KOMPENSACJA EGO-MOTION (rdzeń trudności)
 
 W OBSERVE ruszają się jednocześnie platforma i cel → MTI bez derotacji ma tryb porażki „wszystko się rusza".

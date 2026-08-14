@@ -1,0 +1,5090 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- world_demo_v1 — teren DEMA (R-M1). Nagłówek == default.sdf; DODANE: teksturowany grunt (par? R2).
+     Wygenerowane przez worlds/gen_world_demo_v1.py (seed=20260815). Habitat percepcyjny ZAMROŻONY (hash w ANEKS-H).
+     Liczby percepcyjne MIĘDZY ŚWIATAMI SIĘ NIE PRZENOSZĄ — pomiary MTI/conf wyłącznie w tym świecie. -->
+<sdf version="1.9">
+  <world name="world_demo_v1">
+    <physics type="ode">
+      <max_step_size>0.004</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+      <real_time_update_rate>250</real_time_update_rate>
+    </physics>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type="adiabatic"/>
+    <scene>
+      <grid>false</grid>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>true</shadows>
+    </scene>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>1 1</size></plane></geometry>
+          <surface><friction><ode/></friction><bounce/><contact/></surface>
+        </collision>
+        <visual name="visual">
+          <geometry><plane><normal>0 0 1</normal><size>500 500</size></plane></geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+        <pose>0 0 0 0 -0 0</pose>
+        <inertial><pose>0 0 0 0 -0 0</pose><mass>1</mass>
+          <inertia><ixx>1</ixx><ixy>0</ixy><ixz>0</ixz><iyy>1</iyy><iyz>0</iyz><izz>1</izz></inertia>
+        </inertial>
+        <enable_wind>false</enable_wind>
+      </link>
+      <pose>0 0 0 0 -0 0</pose>
+      <self_collide>false</self_collide>
+    </model>
+    <light name="sunUTC" type="directional">
+      <pose>0 0 500 0 -0 0</pose>
+      <cast_shadows>true</cast_shadows>
+      <intensity>1</intensity>
+      <direction>0.001 0.625 -0.78</direction>
+      <diffuse>0.904 0.904 0.904 1</diffuse>
+      <specular>0.271 0.271 0.271 1</specular>
+      <attenuation><range>2000</range><linear>0</linear><constant>1</constant><quadratic>0</quadratic></attenuation>
+      <spot><inner_angle>0</inner_angle><outer_angle>0</outer_angle><falloff>0</falloff></spot>
+    </light>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <world_frame_orientation>ENU</world_frame_orientation>
+      <latitude_deg>47.397971057728974</latitude_deg>
+      <longitude_deg> 8.546163739800146</longitude_deg>
+      <elevation>0</elevation>
+    </spherical_coordinates>
+    <!-- 359 statycznych brył wizualnych (tekstura przestrzenna, par? R2) -->
+    <model name="tex_0">
+      <static>true</static>
+      <pose>-43.353 -42.619 0.330 0 0 0.478</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.332 1.909 0.660</size></box></geometry>
+          <material>
+            <ambient>0.206 0.206 0.206 1</ambient>
+            <diffuse>0.206 0.206 0.206 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_1">
+      <static>true</static>
+      <pose>-43.940 -36.062 0.072 0 0 2.013</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.142 2.374 0.143</size></box></geometry>
+          <material>
+            <ambient>0.472 0.472 0.472 1</ambient>
+            <diffuse>0.472 0.472 0.472 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_2">
+      <static>true</static>
+      <pose>-43.573 -32.677 0.229 0 0 2.665</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.899 1.463 0.458</size></box></geometry>
+          <material>
+            <ambient>0.272 0.349 0.446 1</ambient>
+            <diffuse>0.272 0.349 0.446 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_3">
+      <static>true</static>
+      <pose>-45.133 -27.444 0.131 0 0 0.393</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.441 1.454 0.263</size></box></geometry>
+          <material>
+            <ambient>0.751 0.555 0.457 1</ambient>
+            <diffuse>0.751 0.555 0.457 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_4">
+      <static>true</static>
+      <pose>-43.826 -23.495 0.386 0 0 2.801</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.707 1.599 0.772</size></box></geometry>
+          <material>
+            <ambient>0.197 0.254 0.324 1</ambient>
+            <diffuse>0.197 0.254 0.324 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_5">
+      <static>true</static>
+      <pose>-43.259 -18.822 0.175 0 0 1.994</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.657 2.166 0.349</size></box></geometry>
+          <material>
+            <ambient>0.743 0.743 0.743 1</ambient>
+            <diffuse>0.743 0.743 0.743 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_6">
+      <static>true</static>
+      <pose>-44.391 -11.911 0.375 0 0 1.945</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.481 1.253 0.750</size></box></geometry>
+          <material>
+            <ambient>0.570 0.570 0.570 1</ambient>
+            <diffuse>0.570 0.570 0.570 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_7">
+      <static>true</static>
+      <pose>-44.904 -8.130 0.113 0 0 0.185</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.085 1.228 0.227</size></box></geometry>
+          <material>
+            <ambient>0.301 0.223 0.183 1</ambient>
+            <diffuse>0.301 0.223 0.183 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_8">
+      <static>true</static>
+      <pose>-43.178 3.723 0.324 0 0 3.118</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.994 1.405 0.649</size></box></geometry>
+          <material>
+            <ambient>0.342 0.342 0.342 1</ambient>
+            <diffuse>0.342 0.342 0.342 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_9">
+      <static>true</static>
+      <pose>-44.359 8.768 0.393 0 0 2.894</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.415 0.808 0.786</size></box></geometry>
+          <material>
+            <ambient>0.293 0.293 0.293 1</ambient>
+            <diffuse>0.293 0.293 0.293 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_10">
+      <static>true</static>
+      <pose>-42.703 16.692 0.042 0 0 2.398</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.919 1.365 0.085</size></box></geometry>
+          <material>
+            <ambient>0.511 0.511 0.511 1</ambient>
+            <diffuse>0.511 0.511 0.511 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_11">
+      <static>true</static>
+      <pose>-44.306 20.814 0.496 0 0 2.506</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.127 1.101 0.993</size></box></geometry>
+          <material>
+            <ambient>0.148 0.190 0.242 1</ambient>
+            <diffuse>0.148 0.190 0.242 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_12">
+      <static>true</static>
+      <pose>-42.576 28.879 0.464 0 0 2.421</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.348 0.891 0.928</size></box></geometry>
+          <material>
+            <ambient>0.242 0.179 0.147 1</ambient>
+            <diffuse>0.242 0.179 0.147 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_13">
+      <static>true</static>
+      <pose>-44.939 33.103 0.062 0 0 2.424</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.685 0.999 0.124</size></box></geometry>
+          <material>
+            <ambient>0.629 0.629 0.629 1</ambient>
+            <diffuse>0.629 0.629 0.629 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_14">
+      <static>true</static>
+      <pose>-43.693 36.596 0.085 0 0 2.417</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.960 1.811 0.169</size></box></geometry>
+          <material>
+            <ambient>0.325 0.325 0.325 1</ambient>
+            <diffuse>0.325 0.325 0.325 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_15">
+      <static>true</static>
+      <pose>-42.710 41.360 0.217 0 0 1.039</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.162 1.529 0.435</size></box></geometry>
+          <material>
+            <ambient>0.775 0.775 0.775 1</ambient>
+            <diffuse>0.775 0.775 0.775 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_16">
+      <static>true</static>
+      <pose>-38.507 -45.081 0.091 0 0 1.362</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.125 1.754 0.183</size></box></geometry>
+          <material>
+            <ambient>0.366 0.366 0.366 1</ambient>
+            <diffuse>0.366 0.366 0.366 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_17">
+      <static>true</static>
+      <pose>-40.676 -34.834 0.197 0 0 0.442</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.506 1.858 0.394</size></box></geometry>
+          <material>
+            <ambient>0.282 0.282 0.282 1</ambient>
+            <diffuse>0.282 0.282 0.282 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_18">
+      <static>true</static>
+      <pose>-39.067 -26.708 0.279 0 0 1.996</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.022 1.057 0.559</size></box></geometry>
+          <material>
+            <ambient>0.688 0.688 0.688 1</ambient>
+            <diffuse>0.688 0.688 0.688 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_19">
+      <static>true</static>
+      <pose>-39.675 -25.454 0.297 0 0 1.872</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.768 1.075 0.594</size></box></geometry>
+          <material>
+            <ambient>0.491 0.491 0.491 1</ambient>
+            <diffuse>0.491 0.491 0.491 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_20">
+      <static>true</static>
+      <pose>-39.733 -17.481 0.316 0 0 0.555</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.881 2.167 0.632</size></box></geometry>
+          <material>
+            <ambient>0.655 0.655 0.655 1</ambient>
+            <diffuse>0.655 0.655 0.655 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_21">
+      <static>true</static>
+      <pose>-40.284 -12.087 0.431 0 0 1.909</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.836 2.018 0.863</size></box></geometry>
+          <material>
+            <ambient>0.695 0.695 0.695 1</ambient>
+            <diffuse>0.695 0.695 0.695 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_22">
+      <static>true</static>
+      <pose>-40.572 0.110 0.222 0 0 2.335</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.066 2.172 0.443</size></box></geometry>
+          <material>
+            <ambient>0.771 0.771 0.771 1</ambient>
+            <diffuse>0.771 0.771 0.771 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_23">
+      <static>true</static>
+      <pose>-40.127 6.690 0.093 0 0 2.346</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.594 2.026 0.186</size></box></geometry>
+          <material>
+            <ambient>0.623 0.623 0.623 1</ambient>
+            <diffuse>0.623 0.623 0.623 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_24">
+      <static>true</static>
+      <pose>-40.217 24.800 0.346 0 0 1.085</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.886 2.323 0.691</size></box></geometry>
+          <material>
+            <ambient>0.844 0.624 0.514 1</ambient>
+            <diffuse>0.844 0.624 0.514 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_25">
+      <static>true</static>
+      <pose>-39.162 28.520 0.328 0 0 2.926</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.367 1.798 0.657</size></box></geometry>
+          <material>
+            <ambient>0.493 0.493 0.493 1</ambient>
+            <diffuse>0.493 0.493 0.493 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_26">
+      <static>true</static>
+      <pose>-38.788 33.345 0.337 0 0 0.884</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.046 1.446 0.673</size></box></geometry>
+          <material>
+            <ambient>0.523 0.523 0.523 1</ambient>
+            <diffuse>0.523 0.523 0.523 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_27">
+      <static>true</static>
+      <pose>-38.644 35.862 0.038 0 0 0.779</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.992 1.844 0.076</size></box></geometry>
+          <material>
+            <ambient>0.445 0.329 0.271 1</ambient>
+            <diffuse>0.445 0.329 0.271 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_28">
+      <static>true</static>
+      <pose>-39.899 41.442 0.395 0 0 0.018</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.658 2.244 0.790</size></box></geometry>
+          <material>
+            <ambient>0.285 0.285 0.285 1</ambient>
+            <diffuse>0.285 0.285 0.285 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_29">
+      <static>true</static>
+      <pose>-37.195 -43.711 0.234 0 0 0.689</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.038 1.731 0.467</size></box></geometry>
+          <material>
+            <ambient>0.681 0.681 0.681 1</ambient>
+            <diffuse>0.681 0.681 0.681 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_30">
+      <static>true</static>
+      <pose>-34.798 -38.833 0.319 0 0 1.678</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.820 1.948 0.637</size></box></geometry>
+          <material>
+            <ambient>0.502 0.502 0.502 1</ambient>
+            <diffuse>0.502 0.502 0.502 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_31">
+      <static>true</static>
+      <pose>-36.679 -35.493 0.287 0 0 0.296</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.238 0.887 0.574</size></box></geometry>
+          <material>
+            <ambient>0.362 0.466 0.595 1</ambient>
+            <diffuse>0.362 0.466 0.595 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_32">
+      <static>true</static>
+      <pose>-35.562 -27.194 0.305 0 0 1.560</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.242 1.867 0.609</size></box></geometry>
+          <material>
+            <ambient>0.683 0.683 0.683 1</ambient>
+            <diffuse>0.683 0.683 0.683 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_33">
+      <static>true</static>
+      <pose>-35.474 -16.155 0.211 0 0 1.333</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.306 1.135 0.422</size></box></geometry>
+          <material>
+            <ambient>0.757 0.757 0.757 1</ambient>
+            <diffuse>0.757 0.757 0.757 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_34">
+      <static>true</static>
+      <pose>-35.711 -8.557 0.047 0 0 0.210</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.206 2.235 0.094</size></box></geometry>
+          <material>
+            <ambient>0.556 0.556 0.556 1</ambient>
+            <diffuse>0.556 0.556 0.556 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_35">
+      <static>true</static>
+      <pose>-34.541 -0.574 0.131 0 0 2.437</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.238 2.259 0.263</size></box></geometry>
+          <material>
+            <ambient>0.218 0.218 0.218 1</ambient>
+            <diffuse>0.218 0.218 0.218 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_36">
+      <static>true</static>
+      <pose>-34.752 5.366 0.375 0 0 1.771</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.598 1.542 0.750</size></box></geometry>
+          <material>
+            <ambient>0.162 0.208 0.266 1</ambient>
+            <diffuse>0.162 0.208 0.266 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_37">
+      <static>true</static>
+      <pose>-36.293 8.861 0.421 0 0 2.042</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.935 1.453 0.842</size></box></geometry>
+          <material>
+            <ambient>0.559 0.559 0.559 1</ambient>
+            <diffuse>0.559 0.559 0.559 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_38">
+      <static>true</static>
+      <pose>-36.342 10.691 0.459 0 0 0.085</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.063 1.992 0.918</size></box></geometry>
+          <material>
+            <ambient>0.339 0.436 0.557 1</ambient>
+            <diffuse>0.339 0.436 0.557 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_39">
+      <static>true</static>
+      <pose>-36.481 16.789 0.040 0 0 0.654</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.391 0.804 0.080</size></box></geometry>
+          <material>
+            <ambient>0.744 0.744 0.744 1</ambient>
+            <diffuse>0.744 0.744 0.744 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_40">
+      <static>true</static>
+      <pose>-37.432 23.786 0.124 0 0 0.966</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.171 2.388 0.249</size></box></geometry>
+          <material>
+            <ambient>0.396 0.396 0.396 1</ambient>
+            <diffuse>0.396 0.396 0.396 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_41">
+      <static>true</static>
+      <pose>-36.298 30.634 0.290 0 0 2.612</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.927 2.055 0.580</size></box></geometry>
+          <material>
+            <ambient>0.760 0.760 0.760 1</ambient>
+            <diffuse>0.760 0.760 0.760 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_42">
+      <static>true</static>
+      <pose>-33.040 -44.386 0.147 0 0 2.519</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.837 1.776 0.295</size></box></geometry>
+          <material>
+            <ambient>0.506 0.374 0.308 1</ambient>
+            <diffuse>0.506 0.374 0.308 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_43">
+      <static>true</static>
+      <pose>-32.250 -35.076 0.258 0 0 2.941</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.618 0.803 0.517</size></box></geometry>
+          <material>
+            <ambient>0.755 0.755 0.755 1</ambient>
+            <diffuse>0.755 0.755 0.755 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_44">
+      <static>true</static>
+      <pose>-32.519 -28.894 0.408 0 0 2.807</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.470 1.608 0.816</size></box></geometry>
+          <material>
+            <ambient>0.700 0.700 0.700 1</ambient>
+            <diffuse>0.700 0.700 0.700 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_45">
+      <static>true</static>
+      <pose>-30.735 -22.812 0.091 0 0 2.666</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.878 1.437 0.182</size></box></geometry>
+          <material>
+            <ambient>0.236 0.175 0.144 1</ambient>
+            <diffuse>0.236 0.175 0.144 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_46">
+      <static>true</static>
+      <pose>-32.895 -7.062 0.322 0 0 0.636</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.016 2.371 0.644</size></box></geometry>
+          <material>
+            <ambient>0.409 0.302 0.249 1</ambient>
+            <diffuse>0.409 0.302 0.249 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_47">
+      <static>true</static>
+      <pose>-32.070 -4.766 0.260 0 0 2.391</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.155 1.523 0.520</size></box></geometry>
+          <material>
+            <ambient>0.266 0.266 0.266 1</ambient>
+            <diffuse>0.266 0.266 0.266 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_48">
+      <static>true</static>
+      <pose>-30.902 -1.378 0.282 0 0 1.259</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.363 2.259 0.564</size></box></geometry>
+          <material>
+            <ambient>0.272 0.349 0.447 1</ambient>
+            <diffuse>0.272 0.349 0.447 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_49">
+      <static>true</static>
+      <pose>-30.986 2.503 0.188 0 0 1.156</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.059 0.862 0.375</size></box></geometry>
+          <material>
+            <ambient>0.561 0.561 0.561 1</ambient>
+            <diffuse>0.561 0.561 0.561 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_50">
+      <static>true</static>
+      <pose>-32.054 6.922 0.143 0 0 2.391</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.191 0.809 0.287</size></box></geometry>
+          <material>
+            <ambient>0.515 0.662 0.846 1</ambient>
+            <diffuse>0.515 0.662 0.846 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_51">
+      <static>true</static>
+      <pose>-33.300 12.702 0.491 0 0 2.755</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.400 1.773 0.983</size></box></geometry>
+          <material>
+            <ambient>0.537 0.537 0.537 1</ambient>
+            <diffuse>0.537 0.537 0.537 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_52">
+      <static>true</static>
+      <pose>-33.254 21.211 0.038 0 0 2.223</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.054 1.337 0.075</size></box></geometry>
+          <material>
+            <ambient>0.607 0.607 0.607 1</ambient>
+            <diffuse>0.607 0.607 0.607 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_53">
+      <static>true</static>
+      <pose>-30.774 24.296 0.221 0 0 2.975</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.997 1.661 0.442</size></box></geometry>
+          <material>
+            <ambient>0.357 0.357 0.357 1</ambient>
+            <diffuse>0.357 0.357 0.357 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_54">
+      <static>true</static>
+      <pose>-32.040 27.471 0.078 0 0 1.804</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.881 1.836 0.156</size></box></geometry>
+          <material>
+            <ambient>0.248 0.248 0.248 1</ambient>
+            <diffuse>0.248 0.248 0.248 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_55">
+      <static>true</static>
+      <pose>-27.903 -42.631 0.266 0 0 1.653</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.714 0.920 0.532</size></box></geometry>
+          <material>
+            <ambient>0.732 0.732 0.732 1</ambient>
+            <diffuse>0.732 0.732 0.732 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_56">
+      <static>true</static>
+      <pose>-26.973 -39.027 0.472 0 0 1.497</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.146 1.223 0.945</size></box></geometry>
+          <material>
+            <ambient>0.301 0.223 0.183 1</ambient>
+            <diffuse>0.301 0.223 0.183 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_57">
+      <static>true</static>
+      <pose>-29.500 -35.361 0.192 0 0 1.414</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.658 1.360 0.383</size></box></geometry>
+          <material>
+            <ambient>0.432 0.432 0.432 1</ambient>
+            <diffuse>0.432 0.432 0.432 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_58">
+      <static>true</static>
+      <pose>-29.079 -32.221 0.243 0 0 0.112</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.040 2.267 0.486</size></box></geometry>
+          <material>
+            <ambient>0.276 0.276 0.276 1</ambient>
+            <diffuse>0.276 0.276 0.276 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_59">
+      <static>true</static>
+      <pose>-26.610 -28.038 0.296 0 0 0.693</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.966 1.772 0.592</size></box></geometry>
+          <material>
+            <ambient>0.683 0.683 0.683 1</ambient>
+            <diffuse>0.683 0.683 0.683 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_60">
+      <static>true</static>
+      <pose>-27.108 -22.653 0.198 0 0 2.419</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.317 1.527 0.396</size></box></geometry>
+          <material>
+            <ambient>0.482 0.620 0.792 1</ambient>
+            <diffuse>0.482 0.620 0.792 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_61">
+      <static>true</static>
+      <pose>-27.518 -19.258 0.150 0 0 1.178</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.279 2.034 0.299</size></box></geometry>
+          <material>
+            <ambient>0.384 0.494 0.631 1</ambient>
+            <diffuse>0.384 0.494 0.631 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_62">
+      <static>true</static>
+      <pose>-28.007 -17.018 0.302 0 0 3.135</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.296 1.673 0.605</size></box></geometry>
+          <material>
+            <ambient>0.290 0.290 0.290 1</ambient>
+            <diffuse>0.290 0.290 0.290 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_63">
+      <static>true</static>
+      <pose>-27.441 -13.140 0.408 0 0 1.564</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.396 1.180 0.816</size></box></geometry>
+          <material>
+            <ambient>0.390 0.390 0.390 1</ambient>
+            <diffuse>0.390 0.390 0.390 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_64">
+      <static>true</static>
+      <pose>-27.739 -6.844 0.302 0 0 0.008</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.798 0.974 0.604</size></box></geometry>
+          <material>
+            <ambient>0.497 0.497 0.497 1</ambient>
+            <diffuse>0.497 0.497 0.497 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_65">
+      <static>true</static>
+      <pose>-26.874 1.242 0.461 0 0 1.040</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.777 1.462 0.923</size></box></geometry>
+          <material>
+            <ambient>0.657 0.657 0.657 1</ambient>
+            <diffuse>0.657 0.657 0.657 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_66">
+      <static>true</static>
+      <pose>-28.376 5.107 0.119 0 0 1.916</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.818 2.060 0.238</size></box></geometry>
+          <material>
+            <ambient>0.547 0.547 0.547 1</ambient>
+            <diffuse>0.547 0.547 0.547 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_67">
+      <static>true</static>
+      <pose>-28.526 11.137 0.290 0 0 0.456</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.529 2.166 0.580</size></box></geometry>
+          <material>
+            <ambient>0.777 0.777 0.777 1</ambient>
+            <diffuse>0.777 0.777 0.777 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_68">
+      <static>true</static>
+      <pose>-29.212 16.039 0.236 0 0 1.118</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.366 1.593 0.471</size></box></geometry>
+          <material>
+            <ambient>0.521 0.521 0.521 1</ambient>
+            <diffuse>0.521 0.521 0.521 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_69">
+      <static>true</static>
+      <pose>-26.682 19.858 0.180 0 0 0.189</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.096 1.677 0.360</size></box></geometry>
+          <material>
+            <ambient>0.213 0.213 0.213 1</ambient>
+            <diffuse>0.213 0.213 0.213 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_70">
+      <static>true</static>
+      <pose>-28.441 23.657 0.251 0 0 2.751</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.555 1.788 0.503</size></box></geometry>
+          <material>
+            <ambient>0.497 0.497 0.497 1</ambient>
+            <diffuse>0.497 0.497 0.497 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_71">
+      <static>true</static>
+      <pose>-27.354 29.026 0.300 0 0 2.186</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.998 1.455 0.600</size></box></geometry>
+          <material>
+            <ambient>0.484 0.622 0.795 1</ambient>
+            <diffuse>0.484 0.622 0.795 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_72">
+      <static>true</static>
+      <pose>-28.828 31.656 0.265 0 0 1.088</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.373 1.386 0.529</size></box></geometry>
+          <material>
+            <ambient>0.756 0.559 0.460 1</ambient>
+            <diffuse>0.756 0.559 0.460 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_73">
+      <static>true</static>
+      <pose>-28.734 40.255 0.313 0 0 1.028</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.895 1.469 0.626</size></box></geometry>
+          <material>
+            <ambient>0.520 0.520 0.520 1</ambient>
+            <diffuse>0.520 0.520 0.520 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_74">
+      <static>true</static>
+      <pose>-29.105 43.236 0.029 0 0 1.547</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.463 2.174 0.057</size></box></geometry>
+          <material>
+            <ambient>0.766 0.566 0.466 1</ambient>
+            <diffuse>0.766 0.566 0.466 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_75">
+      <static>true</static>
+      <pose>-24.626 -41.470 0.466 0 0 0.390</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.631 1.930 0.933</size></box></geometry>
+          <material>
+            <ambient>0.244 0.314 0.401 1</ambient>
+            <diffuse>0.244 0.314 0.401 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_76">
+      <static>true</static>
+      <pose>-24.828 -25.278 0.049 0 0 0.688</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.628 2.283 0.099</size></box></geometry>
+          <material>
+            <ambient>0.627 0.627 0.627 1</ambient>
+            <diffuse>0.627 0.627 0.627 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_77">
+      <static>true</static>
+      <pose>-22.803 -20.109 0.381 0 0 2.516</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.339 1.955 0.763</size></box></geometry>
+          <material>
+            <ambient>0.229 0.294 0.376 1</ambient>
+            <diffuse>0.229 0.294 0.376 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_78">
+      <static>true</static>
+      <pose>-22.924 -14.665 0.042 0 0 2.272</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.047 1.542 0.083</size></box></geometry>
+          <material>
+            <ambient>0.423 0.423 0.423 1</ambient>
+            <diffuse>0.423 0.423 0.423 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_79">
+      <static>true</static>
+      <pose>-25.355 0.607 0.134 0 0 2.329</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.366 1.168 0.267</size></box></geometry>
+          <material>
+            <ambient>0.740 0.740 0.740 1</ambient>
+            <diffuse>0.740 0.740 0.740 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_80">
+      <static>true</static>
+      <pose>-24.173 3.001 0.050 0 0 3.046</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.810 1.539 0.100</size></box></geometry>
+          <material>
+            <ambient>0.777 0.777 0.777 1</ambient>
+            <diffuse>0.777 0.777 0.777 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_81">
+      <static>true</static>
+      <pose>-22.791 8.011 0.125 0 0 2.095</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.441 1.128 0.250</size></box></geometry>
+          <material>
+            <ambient>0.683 0.683 0.683 1</ambient>
+            <diffuse>0.683 0.683 0.683 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_82">
+      <static>true</static>
+      <pose>-22.831 12.800 0.293 0 0 2.191</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.808 1.603 0.586</size></box></geometry>
+          <material>
+            <ambient>0.390 0.288 0.238 1</ambient>
+            <diffuse>0.390 0.288 0.238 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_83">
+      <static>true</static>
+      <pose>-24.456 14.957 0.404 0 0 1.902</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.509 2.234 0.808</size></box></geometry>
+          <material>
+            <ambient>0.331 0.331 0.331 1</ambient>
+            <diffuse>0.331 0.331 0.331 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_84">
+      <static>true</static>
+      <pose>-25.047 29.358 0.110 0 0 0.382</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.963 1.059 0.219</size></box></geometry>
+          <material>
+            <ambient>0.607 0.607 0.607 1</ambient>
+            <diffuse>0.607 0.607 0.607 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_85">
+      <static>true</static>
+      <pose>-23.930 31.730 0.027 0 0 0.252</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.332 1.482 0.053</size></box></geometry>
+          <material>
+            <ambient>0.252 0.252 0.252 1</ambient>
+            <diffuse>0.252 0.252 0.252 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_86">
+      <static>true</static>
+      <pose>-25.390 36.410 0.335 0 0 2.951</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.205 1.956 0.670</size></box></geometry>
+          <material>
+            <ambient>0.565 0.565 0.565 1</ambient>
+            <diffuse>0.565 0.565 0.565 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_87">
+      <static>true</static>
+      <pose>-25.162 40.874 0.148 0 0 1.181</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.251 1.024 0.296</size></box></geometry>
+          <material>
+            <ambient>0.570 0.570 0.570 1</ambient>
+            <diffuse>0.570 0.570 0.570 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_88">
+      <static>true</static>
+      <pose>-25.474 45.435 0.145 0 0 1.363</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.163 1.354 0.289</size></box></geometry>
+          <material>
+            <ambient>0.469 0.469 0.469 1</ambient>
+            <diffuse>0.469 0.469 0.469 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_89">
+      <static>true</static>
+      <pose>-20.490 -43.403 0.472 0 0 1.311</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.102 0.822 0.945</size></box></geometry>
+          <material>
+            <ambient>0.293 0.293 0.293 1</ambient>
+            <diffuse>0.293 0.293 0.293 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_90">
+      <static>true</static>
+      <pose>-19.764 -39.272 0.181 0 0 2.713</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.898 1.508 0.362</size></box></geometry>
+          <material>
+            <ambient>0.584 0.584 0.584 1</ambient>
+            <diffuse>0.584 0.584 0.584 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_91">
+      <static>true</static>
+      <pose>-19.366 -36.246 0.333 0 0 0.119</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.569 1.347 0.667</size></box></geometry>
+          <material>
+            <ambient>0.328 0.242 0.199 1</ambient>
+            <diffuse>0.328 0.242 0.199 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_92">
+      <static>true</static>
+      <pose>-21.245 -31.667 0.400 0 0 1.955</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.114 1.837 0.800</size></box></geometry>
+          <material>
+            <ambient>0.682 0.682 0.682 1</ambient>
+            <diffuse>0.682 0.682 0.682 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_93">
+      <static>true</static>
+      <pose>-21.350 -25.476 0.078 0 0 0.451</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.052 1.951 0.155</size></box></geometry>
+          <material>
+            <ambient>0.145 0.186 0.238 1</ambient>
+            <diffuse>0.145 0.186 0.238 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_94">
+      <static>true</static>
+      <pose>-18.546 -21.090 0.463 0 0 1.945</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.693 1.622 0.926</size></box></geometry>
+          <material>
+            <ambient>0.455 0.455 0.455 1</ambient>
+            <diffuse>0.455 0.455 0.455 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_95">
+      <static>true</static>
+      <pose>-21.440 -10.544 0.415 0 0 0.105</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.240 1.710 0.829</size></box></geometry>
+          <material>
+            <ambient>0.144 0.185 0.236 1</ambient>
+            <diffuse>0.144 0.185 0.236 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_96">
+      <static>true</static>
+      <pose>-20.510 -4.861 0.102 0 0 1.920</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.749 2.316 0.205</size></box></geometry>
+          <material>
+            <ambient>0.276 0.276 0.276 1</ambient>
+            <diffuse>0.276 0.276 0.276 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_97">
+      <static>true</static>
+      <pose>-18.820 -1.366 0.284 0 0 1.209</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.662 1.520 0.569</size></box></geometry>
+          <material>
+            <ambient>0.496 0.637 0.815 1</ambient>
+            <diffuse>0.496 0.637 0.815 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_98">
+      <static>true</static>
+      <pose>-20.633 8.403 0.033 0 0 2.609</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.323 1.140 0.066</size></box></geometry>
+          <material>
+            <ambient>0.729 0.729 0.729 1</ambient>
+            <diffuse>0.729 0.729 0.729 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_99">
+      <static>true</static>
+      <pose>-20.670 16.190 0.293 0 0 2.184</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.171 1.402 0.585</size></box></geometry>
+          <material>
+            <ambient>0.329 0.423 0.541 1</ambient>
+            <diffuse>0.329 0.423 0.541 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_100">
+      <static>true</static>
+      <pose>-20.375 21.304 0.424 0 0 1.884</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.991 1.940 0.848</size></box></geometry>
+          <material>
+            <ambient>0.608 0.608 0.608 1</ambient>
+            <diffuse>0.608 0.608 0.608 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_101">
+      <static>true</static>
+      <pose>-19.461 22.792 0.418 0 0 0.071</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.142 1.034 0.837</size></box></geometry>
+          <material>
+            <ambient>0.280 0.280 0.280 1</ambient>
+            <diffuse>0.280 0.280 0.280 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_102">
+      <static>true</static>
+      <pose>-18.743 33.471 0.176 0 0 0.073</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.313 2.088 0.353</size></box></geometry>
+          <material>
+            <ambient>0.306 0.393 0.502 1</ambient>
+            <diffuse>0.306 0.393 0.502 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_103">
+      <static>true</static>
+      <pose>-21.243 35.419 0.211 0 0 2.532</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.865 1.443 0.423</size></box></geometry>
+          <material>
+            <ambient>0.290 0.373 0.477 1</ambient>
+            <diffuse>0.290 0.373 0.477 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_104">
+      <static>true</static>
+      <pose>-20.307 40.465 0.130 0 0 0.695</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.335 1.680 0.261</size></box></geometry>
+          <material>
+            <ambient>0.497 0.497 0.497 1</ambient>
+            <diffuse>0.497 0.497 0.497 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_105">
+      <static>true</static>
+      <pose>-17.201 -38.617 0.061 0 0 1.469</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.897 2.379 0.122</size></box></geometry>
+          <material>
+            <ambient>0.237 0.237 0.237 1</ambient>
+            <diffuse>0.237 0.237 0.237 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_106">
+      <static>true</static>
+      <pose>-14.759 -36.167 0.268 0 0 1.010</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.240 1.185 0.535</size></box></geometry>
+          <material>
+            <ambient>0.315 0.315 0.315 1</ambient>
+            <diffuse>0.315 0.315 0.315 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_107">
+      <static>true</static>
+      <pose>-16.168 -33.026 0.351 0 0 0.295</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.973 1.101 0.703</size></box></geometry>
+          <material>
+            <ambient>0.402 0.402 0.402 1</ambient>
+            <diffuse>0.402 0.402 0.402 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_108">
+      <static>true</static>
+      <pose>-15.548 -27.046 0.111 0 0 0.358</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.434 2.178 0.223</size></box></geometry>
+          <material>
+            <ambient>0.770 0.770 0.770 1</ambient>
+            <diffuse>0.770 0.770 0.770 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_109">
+      <static>true</static>
+      <pose>-16.175 -24.036 0.297 0 0 0.977</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.231 1.324 0.595</size></box></geometry>
+          <material>
+            <ambient>0.509 0.509 0.509 1</ambient>
+            <diffuse>0.509 0.509 0.509 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_110">
+      <static>true</static>
+      <pose>-16.098 -18.799 0.141 0 0 0.315</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.355 1.769 0.282</size></box></geometry>
+          <material>
+            <ambient>0.451 0.580 0.741 1</ambient>
+            <diffuse>0.451 0.580 0.741 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_111">
+      <static>true</static>
+      <pose>-15.555 -16.228 0.360 0 0 1.785</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.342 2.289 0.720</size></box></geometry>
+          <material>
+            <ambient>0.739 0.739 0.739 1</ambient>
+            <diffuse>0.739 0.739 0.739 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_112">
+      <static>true</static>
+      <pose>-15.917 -13.240 0.434 0 0 1.408</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.099 1.739 0.869</size></box></geometry>
+          <material>
+            <ambient>0.360 0.360 0.360 1</ambient>
+            <diffuse>0.360 0.360 0.360 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_113">
+      <static>true</static>
+      <pose>-16.557 0.072 0.371 0 0 1.182</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.351 2.252 0.742</size></box></geometry>
+          <material>
+            <ambient>0.651 0.651 0.651 1</ambient>
+            <diffuse>0.651 0.651 0.651 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_114">
+      <static>true</static>
+      <pose>-16.670 4.985 0.381 0 0 0.539</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.570 2.172 0.761</size></box></geometry>
+          <material>
+            <ambient>0.510 0.656 0.838 1</ambient>
+            <diffuse>0.510 0.656 0.838 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_115">
+      <static>true</static>
+      <pose>-17.454 6.824 0.369 0 0 2.310</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.245 2.382 0.738</size></box></geometry>
+          <material>
+            <ambient>0.248 0.248 0.248 1</ambient>
+            <diffuse>0.248 0.248 0.248 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_116">
+      <static>true</static>
+      <pose>-16.158 10.713 0.145 0 0 2.342</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.021 0.881 0.291</size></box></geometry>
+          <material>
+            <ambient>0.612 0.612 0.612 1</ambient>
+            <diffuse>0.612 0.612 0.612 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_117">
+      <static>true</static>
+      <pose>-17.034 20.525 0.340 0 0 2.582</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.049 1.669 0.680</size></box></geometry>
+          <material>
+            <ambient>0.226 0.291 0.371 1</ambient>
+            <diffuse>0.226 0.291 0.371 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_118">
+      <static>true</static>
+      <pose>-16.416 33.357 0.095 0 0 1.124</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.910 1.384 0.190</size></box></geometry>
+          <material>
+            <ambient>0.753 0.753 0.753 1</ambient>
+            <diffuse>0.753 0.753 0.753 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_119">
+      <static>true</static>
+      <pose>-15.729 35.736 0.472 0 0 3.108</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.333 2.387 0.943</size></box></geometry>
+          <material>
+            <ambient>0.283 0.283 0.283 1</ambient>
+            <diffuse>0.283 0.283 0.283 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_120">
+      <static>true</static>
+      <pose>-16.927 41.144 0.183 0 0 0.891</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.045 1.036 0.366</size></box></geometry>
+          <material>
+            <ambient>0.456 0.456 0.456 1</ambient>
+            <diffuse>0.456 0.456 0.456 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_121">
+      <static>true</static>
+      <pose>-11.600 -45.350 0.301 0 0 0.032</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.709 1.582 0.603</size></box></geometry>
+          <material>
+            <ambient>0.664 0.664 0.664 1</ambient>
+            <diffuse>0.664 0.664 0.664 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_122">
+      <static>true</static>
+      <pose>-11.942 -38.751 0.358 0 0 2.140</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.995 2.313 0.716</size></box></geometry>
+          <material>
+            <ambient>0.264 0.264 0.264 1</ambient>
+            <diffuse>0.264 0.264 0.264 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_123">
+      <static>true</static>
+      <pose>-11.652 -32.845 0.308 0 0 3.129</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.096 1.553 0.617</size></box></geometry>
+          <material>
+            <ambient>0.256 0.329 0.421 1</ambient>
+            <diffuse>0.256 0.329 0.421 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_124">
+      <static>true</static>
+      <pose>-13.052 -26.687 0.111 0 0 0.295</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.371 2.386 0.222</size></box></geometry>
+          <material>
+            <ambient>0.500 0.370 0.304 1</ambient>
+            <diffuse>0.500 0.370 0.304 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_125">
+      <static>true</static>
+      <pose>-13.413 -23.587 0.240 0 0 3.072</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.814 1.113 0.480</size></box></geometry>
+          <material>
+            <ambient>0.640 0.640 0.640 1</ambient>
+            <diffuse>0.640 0.640 0.640 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_126">
+      <static>true</static>
+      <pose>-11.848 -14.659 0.240 0 0 0.042</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.216 1.421 0.480</size></box></geometry>
+          <material>
+            <ambient>0.256 0.256 0.256 1</ambient>
+            <diffuse>0.256 0.256 0.256 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_127">
+      <static>true</static>
+      <pose>-12.138 -11.713 0.331 0 0 2.339</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.062 2.005 0.661</size></box></geometry>
+          <material>
+            <ambient>0.557 0.557 0.557 1</ambient>
+            <diffuse>0.557 0.557 0.557 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_128">
+      <static>true</static>
+      <pose>-13.109 -2.856 0.372 0 0 2.696</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.108 1.262 0.744</size></box></geometry>
+          <material>
+            <ambient>0.650 0.650 0.650 1</ambient>
+            <diffuse>0.650 0.650 0.650 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_129">
+      <static>true</static>
+      <pose>-10.553 3.145 0.200 0 0 0.002</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.345 1.226 0.400</size></box></geometry>
+          <material>
+            <ambient>0.288 0.288 0.288 1</ambient>
+            <diffuse>0.288 0.288 0.288 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_130">
+      <static>true</static>
+      <pose>-11.441 10.540 0.263 0 0 0.549</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.115 1.116 0.525</size></box></geometry>
+          <material>
+            <ambient>0.705 0.705 0.705 1</ambient>
+            <diffuse>0.705 0.705 0.705 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_131">
+      <static>true</static>
+      <pose>-13.296 16.178 0.165 0 0 0.759</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.147 1.785 0.331</size></box></geometry>
+          <material>
+            <ambient>0.672 0.497 0.409 1</ambient>
+            <diffuse>0.672 0.497 0.409 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_132">
+      <static>true</static>
+      <pose>-10.678 27.970 0.312 0 0 1.855</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.325 1.309 0.625</size></box></geometry>
+          <material>
+            <ambient>0.757 0.560 0.461 1</ambient>
+            <diffuse>0.757 0.560 0.461 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_133">
+      <static>true</static>
+      <pose>-11.800 33.110 0.481 0 0 0.748</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.839 1.370 0.961</size></box></geometry>
+          <material>
+            <ambient>0.433 0.320 0.263 1</ambient>
+            <diffuse>0.433 0.320 0.263 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_134">
+      <static>true</static>
+      <pose>-11.258 35.847 0.112 0 0 0.554</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.888 1.136 0.224</size></box></geometry>
+          <material>
+            <ambient>0.526 0.676 0.864 1</ambient>
+            <diffuse>0.526 0.676 0.864 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_135">
+      <static>true</static>
+      <pose>-11.640 41.108 0.065 0 0 2.080</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.754 0.917 0.131</size></box></geometry>
+          <material>
+            <ambient>0.677 0.677 0.677 1</ambient>
+            <diffuse>0.677 0.677 0.677 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_136">
+      <static>true</static>
+      <pose>-8.900 -43.765 0.322 0 0 1.563</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.753 1.138 0.645</size></box></geometry>
+          <material>
+            <ambient>0.549 0.549 0.549 1</ambient>
+            <diffuse>0.549 0.549 0.549 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_137">
+      <static>true</static>
+      <pose>-8.571 -40.828 0.100 0 0 2.604</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.704 2.270 0.200</size></box></geometry>
+          <material>
+            <ambient>0.400 0.514 0.657 1</ambient>
+            <diffuse>0.400 0.514 0.657 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_138">
+      <static>true</static>
+      <pose>-7.318 -36.174 0.130 0 0 2.529</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.826 1.989 0.259</size></box></geometry>
+          <material>
+            <ambient>0.296 0.381 0.487 1</ambient>
+            <diffuse>0.296 0.381 0.487 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_139">
+      <static>true</static>
+      <pose>-8.667 -27.475 0.080 0 0 1.778</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.277 2.129 0.159</size></box></geometry>
+          <material>
+            <ambient>0.541 0.695 0.888 1</ambient>
+            <diffuse>0.541 0.695 0.888 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_140">
+      <static>true</static>
+      <pose>-7.750 -24.897 0.078 0 0 1.123</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.673 0.819 0.157</size></box></geometry>
+          <material>
+            <ambient>0.646 0.646 0.646 1</ambient>
+            <diffuse>0.646 0.646 0.646 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_141">
+      <static>true</static>
+      <pose>-8.935 -16.169 0.319 0 0 2.001</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.275 0.871 0.638</size></box></geometry>
+          <material>
+            <ambient>0.411 0.528 0.675 1</ambient>
+            <diffuse>0.411 0.528 0.675 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_142">
+      <static>true</static>
+      <pose>-7.885 -3.178 0.352 0 0 1.111</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.036 1.412 0.703</size></box></geometry>
+          <material>
+            <ambient>0.424 0.545 0.697 1</ambient>
+            <diffuse>0.424 0.545 0.697 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_143">
+      <static>true</static>
+      <pose>-9.309 0.106 0.078 0 0 1.336</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.130 2.039 0.156</size></box></geometry>
+          <material>
+            <ambient>0.311 0.311 0.311 1</ambient>
+            <diffuse>0.311 0.311 0.311 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_144">
+      <static>true</static>
+      <pose>-8.270 5.388 0.150 0 0 1.230</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.282 1.417 0.300</size></box></geometry>
+          <material>
+            <ambient>0.647 0.647 0.647 1</ambient>
+            <diffuse>0.647 0.647 0.647 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_145">
+      <static>true</static>
+      <pose>-6.588 8.196 0.251 0 0 2.885</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.640 0.907 0.503</size></box></geometry>
+          <material>
+            <ambient>0.261 0.335 0.428 1</ambient>
+            <diffuse>0.261 0.335 0.428 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_146">
+      <static>true</static>
+      <pose>-7.723 12.418 0.233 0 0 1.228</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.858 2.111 0.465</size></box></geometry>
+          <material>
+            <ambient>0.384 0.284 0.234 1</ambient>
+            <diffuse>0.384 0.284 0.234 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_147">
+      <static>true</static>
+      <pose>-7.879 20.180 0.348 0 0 3.045</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.343 1.363 0.696</size></box></geometry>
+          <material>
+            <ambient>0.454 0.454 0.454 1</ambient>
+            <diffuse>0.454 0.454 0.454 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_148">
+      <static>true</static>
+      <pose>-7.565 27.187 0.216 0 0 1.608</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.618 1.296 0.431</size></box></geometry>
+          <material>
+            <ambient>0.261 0.335 0.428 1</ambient>
+            <diffuse>0.261 0.335 0.428 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_149">
+      <static>true</static>
+      <pose>-7.745 32.767 0.478 0 0 0.162</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.438 2.004 0.956</size></box></geometry>
+          <material>
+            <ambient>0.294 0.217 0.179 1</ambient>
+            <diffuse>0.294 0.217 0.179 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_150">
+      <static>true</static>
+      <pose>-8.334 35.939 0.438 0 0 2.200</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.789 1.909 0.876</size></box></geometry>
+          <material>
+            <ambient>0.466 0.466 0.466 1</ambient>
+            <diffuse>0.466 0.466 0.466 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_151">
+      <static>true</static>
+      <pose>-4.885 -39.445 0.092 0 0 0.983</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.594 2.096 0.185</size></box></geometry>
+          <material>
+            <ambient>0.273 0.201 0.166 1</ambient>
+            <diffuse>0.273 0.201 0.166 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_152">
+      <static>true</static>
+      <pose>-4.578 -37.009 0.132 0 0 2.759</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.000 1.269 0.265</size></box></geometry>
+          <material>
+            <ambient>0.362 0.362 0.362 1</ambient>
+            <diffuse>0.362 0.362 0.362 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_153">
+      <static>true</static>
+      <pose>-4.952 -31.352 0.387 0 0 0.210</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.667 1.013 0.773</size></box></geometry>
+          <material>
+            <ambient>0.356 0.356 0.356 1</ambient>
+            <diffuse>0.356 0.356 0.356 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_154">
+      <static>true</static>
+      <pose>-3.020 -26.832 0.276 0 0 0.372</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.383 0.925 0.553</size></box></geometry>
+          <material>
+            <ambient>0.375 0.375 0.375 1</ambient>
+            <diffuse>0.375 0.375 0.375 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_155">
+      <static>true</static>
+      <pose>-4.825 -23.778 0.480 0 0 2.955</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.732 1.818 0.960</size></box></geometry>
+          <material>
+            <ambient>0.376 0.483 0.617 1</ambient>
+            <diffuse>0.376 0.483 0.617 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_156">
+      <static>true</static>
+      <pose>-4.537 -13.370 0.271 0 0 0.209</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.590 1.670 0.543</size></box></geometry>
+          <material>
+            <ambient>0.464 0.464 0.464 1</ambient>
+            <diffuse>0.464 0.464 0.464 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_157">
+      <static>true</static>
+      <pose>-2.684 -7.796 0.219 0 0 1.344</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.135 1.947 0.438</size></box></geometry>
+          <material>
+            <ambient>0.309 0.309 0.309 1</ambient>
+            <diffuse>0.309 0.309 0.309 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_158">
+      <static>true</static>
+      <pose>-2.631 -2.733 0.338 0 0 1.825</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.657 1.693 0.675</size></box></geometry>
+          <material>
+            <ambient>0.368 0.368 0.368 1</ambient>
+            <diffuse>0.368 0.368 0.368 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_159">
+      <static>true</static>
+      <pose>-3.344 -0.728 0.421 0 0 1.568</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.252 1.731 0.842</size></box></geometry>
+          <material>
+            <ambient>0.471 0.471 0.471 1</ambient>
+            <diffuse>0.471 0.471 0.471 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_160">
+      <static>true</static>
+      <pose>-4.555 3.045 0.153 0 0 1.327</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.395 1.000 0.306</size></box></geometry>
+          <material>
+            <ambient>0.633 0.468 0.385 1</ambient>
+            <diffuse>0.633 0.468 0.385 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_161">
+      <static>true</static>
+      <pose>-3.349 13.156 0.277 0 0 1.973</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.573 2.215 0.555</size></box></geometry>
+          <material>
+            <ambient>0.281 0.281 0.281 1</ambient>
+            <diffuse>0.281 0.281 0.281 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_162">
+      <static>true</static>
+      <pose>-4.669 15.133 0.304 0 0 2.890</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.536 1.462 0.609</size></box></geometry>
+          <material>
+            <ambient>0.255 0.255 0.255 1</ambient>
+            <diffuse>0.255 0.255 0.255 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_163">
+      <static>true</static>
+      <pose>-2.637 21.387 0.288 0 0 2.985</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.670 0.911 0.577</size></box></geometry>
+          <material>
+            <ambient>0.359 0.359 0.359 1</ambient>
+            <diffuse>0.359 0.359 0.359 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_164">
+      <static>true</static>
+      <pose>-5.418 28.485 0.258 0 0 1.438</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.962 1.683 0.516</size></box></geometry>
+          <material>
+            <ambient>0.351 0.351 0.351 1</ambient>
+            <diffuse>0.351 0.351 0.351 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_165">
+      <static>true</static>
+      <pose>-3.784 31.231 0.254 0 0 1.431</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.416 1.433 0.508</size></box></geometry>
+          <material>
+            <ambient>0.250 0.185 0.152 1</ambient>
+            <diffuse>0.250 0.185 0.152 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_166">
+      <static>true</static>
+      <pose>-5.202 35.552 0.284 0 0 0.944</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.749 0.820 0.569</size></box></geometry>
+          <material>
+            <ambient>0.428 0.428 0.428 1</ambient>
+            <diffuse>0.428 0.428 0.428 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_167">
+      <static>true</static>
+      <pose>-3.184 44.596 0.341 0 0 0.617</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.622 1.960 0.681</size></box></geometry>
+          <material>
+            <ambient>0.532 0.532 0.532 1</ambient>
+            <diffuse>0.532 0.532 0.532 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_168">
+      <static>true</static>
+      <pose>0.862 -43.629 0.050 0 0 0.389</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.843 1.291 0.101</size></box></geometry>
+          <material>
+            <ambient>0.421 0.541 0.692 1</ambient>
+            <diffuse>0.421 0.541 0.692 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_169">
+      <static>true</static>
+      <pose>0.887 -38.795 0.026 0 0 1.062</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.320 0.850 0.052</size></box></geometry>
+          <material>
+            <ambient>0.271 0.271 0.271 1</ambient>
+            <diffuse>0.271 0.271 0.271 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_170">
+      <static>true</static>
+      <pose>-1.378 -32.920 0.475 0 0 1.824</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.203 2.273 0.949</size></box></geometry>
+          <material>
+            <ambient>0.569 0.569 0.569 1</ambient>
+            <diffuse>0.569 0.569 0.569 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_171">
+      <static>true</static>
+      <pose>0.650 -18.872 0.432 0 0 1.924</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.359 0.815 0.863</size></box></geometry>
+          <material>
+            <ambient>0.470 0.470 0.470 1</ambient>
+            <diffuse>0.470 0.470 0.470 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_172">
+      <static>true</static>
+      <pose>0.395 -11.327 0.070 0 0 0.173</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.116 1.621 0.140</size></box></geometry>
+          <material>
+            <ambient>0.370 0.476 0.608 1</ambient>
+            <diffuse>0.370 0.476 0.608 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_173">
+      <static>true</static>
+      <pose>-0.995 -8.586 0.358 0 0 1.468</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.810 1.848 0.716</size></box></geometry>
+          <material>
+            <ambient>0.329 0.329 0.329 1</ambient>
+            <diffuse>0.329 0.329 0.329 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_174">
+      <static>true</static>
+      <pose>0.527 4.299 0.183 0 0 0.150</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.140 1.717 0.366</size></box></geometry>
+          <material>
+            <ambient>0.372 0.372 0.372 1</ambient>
+            <diffuse>0.372 0.372 0.372 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_175">
+      <static>true</static>
+      <pose>-0.146 17.148 0.453 0 0 1.216</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.849 2.191 0.906</size></box></geometry>
+          <material>
+            <ambient>0.347 0.446 0.570 1</ambient>
+            <diffuse>0.347 0.446 0.570 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_176">
+      <static>true</static>
+      <pose>-0.811 19.340 0.195 0 0 3.107</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.900 1.723 0.390</size></box></geometry>
+          <material>
+            <ambient>0.145 0.186 0.238 1</ambient>
+            <diffuse>0.145 0.186 0.238 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_177">
+      <static>true</static>
+      <pose>-1.050 24.015 0.041 0 0 0.124</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.675 2.352 0.082</size></box></geometry>
+          <material>
+            <ambient>0.311 0.311 0.311 1</ambient>
+            <diffuse>0.311 0.311 0.311 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_178">
+      <static>true</static>
+      <pose>-0.071 32.877 0.456 0 0 1.624</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.962 1.434 0.911</size></box></geometry>
+          <material>
+            <ambient>0.690 0.690 0.690 1</ambient>
+            <diffuse>0.690 0.690 0.690 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_179">
+      <static>true</static>
+      <pose>1.492 35.662 0.270 0 0 1.009</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.995 1.783 0.540</size></box></geometry>
+          <material>
+            <ambient>0.516 0.516 0.516 1</ambient>
+            <diffuse>0.516 0.516 0.516 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_180">
+      <static>true</static>
+      <pose>1.305 43.613 0.318 0 0 0.749</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.084 1.243 0.636</size></box></geometry>
+          <material>
+            <ambient>0.617 0.617 0.617 1</ambient>
+            <diffuse>0.617 0.617 0.617 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_181">
+      <static>true</static>
+      <pose>3.866 -44.480 0.314 0 0 0.269</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.879 1.808 0.628</size></box></geometry>
+          <material>
+            <ambient>0.188 0.242 0.309 1</ambient>
+            <diffuse>0.188 0.242 0.309 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_182">
+      <static>true</static>
+      <pose>3.669 -35.817 0.348 0 0 1.471</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.831 1.498 0.697</size></box></geometry>
+          <material>
+            <ambient>0.740 0.740 0.740 1</ambient>
+            <diffuse>0.740 0.740 0.740 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_183">
+      <static>true</static>
+      <pose>3.472 -30.509 0.294 0 0 2.207</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.030 1.462 0.589</size></box></geometry>
+          <material>
+            <ambient>0.465 0.465 0.465 1</ambient>
+            <diffuse>0.465 0.465 0.465 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_184">
+      <static>true</static>
+      <pose>5.249 -26.855 0.347 0 0 2.665</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.266 1.131 0.695</size></box></geometry>
+          <material>
+            <ambient>0.618 0.618 0.618 1</ambient>
+            <diffuse>0.618 0.618 0.618 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_185">
+      <static>true</static>
+      <pose>3.655 -24.461 0.482 0 0 1.790</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.824 1.302 0.965</size></box></geometry>
+          <material>
+            <ambient>0.709 0.524 0.432 1</ambient>
+            <diffuse>0.709 0.524 0.432 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_186">
+      <static>true</static>
+      <pose>3.466 -18.774 0.444 0 0 2.242</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.811 1.554 0.889</size></box></geometry>
+          <material>
+            <ambient>0.255 0.328 0.419 1</ambient>
+            <diffuse>0.255 0.328 0.419 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_187">
+      <static>true</static>
+      <pose>4.235 -14.935 0.231 0 0 3.112</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.241 1.269 0.463</size></box></geometry>
+          <material>
+            <ambient>0.354 0.354 0.354 1</ambient>
+            <diffuse>0.354 0.354 0.354 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_188">
+      <static>true</static>
+      <pose>4.317 -3.027 0.058 0 0 3.132</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.069 0.931 0.116</size></box></geometry>
+          <material>
+            <ambient>0.616 0.616 0.616 1</ambient>
+            <diffuse>0.616 0.616 0.616 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_189">
+      <static>true</static>
+      <pose>4.788 3.036 0.314 0 0 0.471</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.137 1.294 0.628</size></box></geometry>
+          <material>
+            <ambient>0.410 0.527 0.674 1</ambient>
+            <diffuse>0.410 0.527 0.674 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_190">
+      <static>true</static>
+      <pose>4.476 8.705 0.153 0 0 2.917</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.175 1.238 0.307</size></box></geometry>
+          <material>
+            <ambient>0.408 0.525 0.670 1</ambient>
+            <diffuse>0.408 0.525 0.670 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_191">
+      <static>true</static>
+      <pose>5.423 10.586 0.229 0 0 1.046</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.155 1.437 0.459</size></box></geometry>
+          <material>
+            <ambient>0.341 0.341 0.341 1</ambient>
+            <diffuse>0.341 0.341 0.341 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_192">
+      <static>true</static>
+      <pose>4.685 16.765 0.243 0 0 2.818</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.616 2.074 0.485</size></box></geometry>
+          <material>
+            <ambient>0.653 0.653 0.653 1</ambient>
+            <diffuse>0.653 0.653 0.653 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_193">
+      <static>true</static>
+      <pose>3.908 19.125 0.026 0 0 1.178</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.979 0.889 0.052</size></box></geometry>
+          <material>
+            <ambient>0.638 0.638 0.638 1</ambient>
+            <diffuse>0.638 0.638 0.638 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_194">
+      <static>true</static>
+      <pose>3.767 23.279 0.089 0 0 1.604</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.229 0.898 0.178</size></box></geometry>
+          <material>
+            <ambient>0.303 0.389 0.497 1</ambient>
+            <diffuse>0.303 0.389 0.497 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_195">
+      <static>true</static>
+      <pose>4.786 26.952 0.488 0 0 3.106</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.698 1.523 0.975</size></box></geometry>
+          <material>
+            <ambient>0.750 0.750 0.750 1</ambient>
+            <diffuse>0.750 0.750 0.750 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_196">
+      <static>true</static>
+      <pose>4.922 39.030 0.267 0 0 2.829</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.275 1.668 0.535</size></box></geometry>
+          <material>
+            <ambient>0.262 0.262 0.262 1</ambient>
+            <diffuse>0.262 0.262 0.262 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_197">
+      <static>true</static>
+      <pose>7.355 -41.331 0.486 0 0 1.414</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.331 1.204 0.972</size></box></geometry>
+          <material>
+            <ambient>0.292 0.292 0.292 1</ambient>
+            <diffuse>0.292 0.292 0.292 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_198">
+      <static>true</static>
+      <pose>7.600 -35.586 0.085 0 0 1.777</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.474 2.390 0.170</size></box></geometry>
+          <material>
+            <ambient>0.506 0.506 0.506 1</ambient>
+            <diffuse>0.506 0.506 0.506 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_199">
+      <static>true</static>
+      <pose>6.895 -32.715 0.451 0 0 1.839</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.961 1.630 0.903</size></box></geometry>
+          <material>
+            <ambient>0.707 0.707 0.707 1</ambient>
+            <diffuse>0.707 0.707 0.707 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_200">
+      <static>true</static>
+      <pose>9.405 -27.113 0.318 0 0 1.134</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.166 1.665 0.636</size></box></geometry>
+          <material>
+            <ambient>0.688 0.688 0.688 1</ambient>
+            <diffuse>0.688 0.688 0.688 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_201">
+      <static>true</static>
+      <pose>8.436 -20.874 0.470 0 0 1.770</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.110 1.482 0.941</size></box></geometry>
+          <material>
+            <ambient>0.295 0.379 0.484 1</ambient>
+            <diffuse>0.295 0.379 0.484 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_202">
+      <static>true</static>
+      <pose>7.913 -15.444 0.241 0 0 2.671</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.590 1.911 0.483</size></box></geometry>
+          <material>
+            <ambient>0.440 0.566 0.723 1</ambient>
+            <diffuse>0.440 0.566 0.723 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_203">
+      <static>true</static>
+      <pose>6.830 -12.809 0.226 0 0 3.126</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.833 0.892 0.452</size></box></geometry>
+          <material>
+            <ambient>0.721 0.721 0.721 1</ambient>
+            <diffuse>0.721 0.721 0.721 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_204">
+      <static>true</static>
+      <pose>8.514 -7.132 0.483 0 0 2.338</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.154 2.079 0.966</size></box></geometry>
+          <material>
+            <ambient>0.734 0.734 0.734 1</ambient>
+            <diffuse>0.734 0.734 0.734 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_205">
+      <static>true</static>
+      <pose>7.748 -3.960 0.162 0 0 2.566</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.379 1.245 0.323</size></box></geometry>
+          <material>
+            <ambient>0.432 0.432 0.432 1</ambient>
+            <diffuse>0.432 0.432 0.432 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_206">
+      <static>true</static>
+      <pose>9.014 4.942 0.360 0 0 0.298</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.194 1.906 0.720</size></box></geometry>
+          <material>
+            <ambient>0.680 0.503 0.414 1</ambient>
+            <diffuse>0.680 0.503 0.414 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_207">
+      <static>true</static>
+      <pose>7.641 8.979 0.146 0 0 0.807</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.310 2.387 0.292</size></box></geometry>
+          <material>
+            <ambient>0.474 0.474 0.474 1</ambient>
+            <diffuse>0.474 0.474 0.474 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_208">
+      <static>true</static>
+      <pose>8.345 12.068 0.200 0 0 2.922</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.037 1.230 0.401</size></box></geometry>
+          <material>
+            <ambient>0.657 0.657 0.657 1</ambient>
+            <diffuse>0.657 0.657 0.657 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_209">
+      <static>true</static>
+      <pose>7.107 21.235 0.285 0 0 0.492</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.188 2.398 0.570</size></box></geometry>
+          <material>
+            <ambient>0.779 0.779 0.779 1</ambient>
+            <diffuse>0.779 0.779 0.779 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_210">
+      <static>true</static>
+      <pose>8.512 23.901 0.245 0 0 2.785</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.291 1.945 0.490</size></box></geometry>
+          <material>
+            <ambient>0.614 0.614 0.614 1</ambient>
+            <diffuse>0.614 0.614 0.614 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_211">
+      <static>true</static>
+      <pose>6.907 37.423 0.357 0 0 2.064</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.351 1.138 0.714</size></box></geometry>
+          <material>
+            <ambient>0.611 0.611 0.611 1</ambient>
+            <diffuse>0.611 0.611 0.611 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_212">
+      <static>true</static>
+      <pose>7.815 38.951 0.449 0 0 2.365</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.089 1.143 0.898</size></box></geometry>
+          <material>
+            <ambient>0.233 0.233 0.233 1</ambient>
+            <diffuse>0.233 0.233 0.233 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_213">
+      <static>true</static>
+      <pose>13.252 -38.862 0.306 0 0 3.056</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.367 2.399 0.611</size></box></geometry>
+          <material>
+            <ambient>0.763 0.564 0.464 1</ambient>
+            <diffuse>0.763 0.564 0.464 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_214">
+      <static>true</static>
+      <pose>11.124 -24.824 0.354 0 0 0.498</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.380 1.045 0.708</size></box></geometry>
+          <material>
+            <ambient>0.599 0.599 0.599 1</ambient>
+            <diffuse>0.599 0.599 0.599 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_215">
+      <static>true</static>
+      <pose>12.857 -20.403 0.150 0 0 2.128</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.273 1.048 0.301</size></box></geometry>
+          <material>
+            <ambient>0.885 0.654 0.539 1</ambient>
+            <diffuse>0.885 0.654 0.539 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_216">
+      <static>true</static>
+      <pose>11.840 -14.650 0.090 0 0 2.568</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.275 1.378 0.181</size></box></geometry>
+          <material>
+            <ambient>0.319 0.235 0.194 1</ambient>
+            <diffuse>0.319 0.235 0.194 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_217">
+      <static>true</static>
+      <pose>12.770 -12.492 0.447 0 0 1.869</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.097 1.592 0.894</size></box></geometry>
+          <material>
+            <ambient>0.435 0.435 0.435 1</ambient>
+            <diffuse>0.435 0.435 0.435 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_218">
+      <static>true</static>
+      <pose>13.249 -8.681 0.208 0 0 0.992</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.249 1.513 0.416</size></box></geometry>
+          <material>
+            <ambient>0.331 0.425 0.543 1</ambient>
+            <diffuse>0.331 0.425 0.543 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_219">
+      <static>true</static>
+      <pose>12.236 -4.900 0.210 0 0 2.958</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.381 1.832 0.420</size></box></geometry>
+          <material>
+            <ambient>0.443 0.443 0.443 1</ambient>
+            <diffuse>0.443 0.443 0.443 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_220">
+      <static>true</static>
+      <pose>11.139 -0.089 0.156 0 0 1.285</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.750 1.264 0.312</size></box></geometry>
+          <material>
+            <ambient>0.581 0.581 0.581 1</ambient>
+            <diffuse>0.581 0.581 0.581 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_221">
+      <static>true</static>
+      <pose>12.817 5.342 0.169 0 0 2.365</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.979 1.930 0.337</size></box></geometry>
+          <material>
+            <ambient>0.327 0.327 0.327 1</ambient>
+            <diffuse>0.327 0.327 0.327 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_222">
+      <static>true</static>
+      <pose>12.634 8.919 0.338 0 0 0.348</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.266 1.442 0.675</size></box></geometry>
+          <material>
+            <ambient>0.330 0.330 0.330 1</ambient>
+            <diffuse>0.330 0.330 0.330 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_223">
+      <static>true</static>
+      <pose>11.985 12.166 0.168 0 0 2.573</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.472 1.841 0.335</size></box></geometry>
+          <material>
+            <ambient>0.496 0.496 0.496 1</ambient>
+            <diffuse>0.496 0.496 0.496 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_224">
+      <static>true</static>
+      <pose>11.998 16.794 0.461 0 0 1.980</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.274 2.297 0.922</size></box></geometry>
+          <material>
+            <ambient>0.206 0.206 0.206 1</ambient>
+            <diffuse>0.206 0.206 0.206 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_225">
+      <static>true</static>
+      <pose>11.031 25.302 0.030 0 0 0.794</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.071 1.349 0.061</size></box></geometry>
+          <material>
+            <ambient>0.491 0.491 0.491 1</ambient>
+            <diffuse>0.491 0.491 0.491 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_226">
+      <static>true</static>
+      <pose>13.056 29.489 0.172 0 0 0.932</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.131 2.070 0.343</size></box></geometry>
+          <material>
+            <ambient>0.494 0.494 0.494 1</ambient>
+            <diffuse>0.494 0.494 0.494 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_227">
+      <static>true</static>
+      <pose>13.242 33.374 0.448 0 0 2.350</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.005 1.679 0.896</size></box></geometry>
+          <material>
+            <ambient>0.737 0.737 0.737 1</ambient>
+            <diffuse>0.737 0.737 0.737 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_228">
+      <static>true</static>
+      <pose>12.674 36.370 0.344 0 0 2.381</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.741 2.342 0.687</size></box></geometry>
+          <material>
+            <ambient>0.170 0.218 0.279 1</ambient>
+            <diffuse>0.170 0.218 0.279 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_229">
+      <static>true</static>
+      <pose>11.317 41.109 0.181 0 0 1.611</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.791 1.846 0.361</size></box></geometry>
+          <material>
+            <ambient>0.262 0.262 0.262 1</ambient>
+            <diffuse>0.262 0.262 0.262 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_230">
+      <static>true</static>
+      <pose>15.121 -41.002 0.169 0 0 1.337</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.377 2.078 0.339</size></box></geometry>
+          <material>
+            <ambient>0.668 0.668 0.668 1</ambient>
+            <diffuse>0.668 0.668 0.668 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_231">
+      <static>true</static>
+      <pose>14.680 -36.968 0.366 0 0 2.031</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.097 2.061 0.732</size></box></geometry>
+          <material>
+            <ambient>0.440 0.440 0.440 1</ambient>
+            <diffuse>0.440 0.440 0.440 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_232">
+      <static>true</static>
+      <pose>14.538 -33.011 0.068 0 0 0.011</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.740 1.721 0.136</size></box></geometry>
+          <material>
+            <ambient>0.394 0.394 0.394 1</ambient>
+            <diffuse>0.394 0.394 0.394 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_233">
+      <static>true</static>
+      <pose>15.974 -27.411 0.222 0 0 0.039</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.683 2.170 0.443</size></box></geometry>
+          <material>
+            <ambient>0.275 0.275 0.275 1</ambient>
+            <diffuse>0.275 0.275 0.275 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_234">
+      <static>true</static>
+      <pose>16.021 -22.604 0.089 0 0 0.965</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.546 2.034 0.178</size></box></geometry>
+          <material>
+            <ambient>0.625 0.462 0.380 1</ambient>
+            <diffuse>0.625 0.462 0.380 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_235">
+      <static>true</static>
+      <pose>15.459 -19.074 0.327 0 0 2.654</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.327 1.536 0.654</size></box></geometry>
+          <material>
+            <ambient>0.618 0.457 0.376 1</ambient>
+            <diffuse>0.618 0.457 0.376 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_236">
+      <static>true</static>
+      <pose>16.202 -14.927 0.040 0 0 1.340</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.106 1.245 0.079</size></box></geometry>
+          <material>
+            <ambient>0.659 0.487 0.401 1</ambient>
+            <diffuse>0.659 0.487 0.401 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_237">
+      <static>true</static>
+      <pose>14.578 -12.341 0.435 0 0 3.124</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.032 1.464 0.870</size></box></geometry>
+          <material>
+            <ambient>0.255 0.255 0.255 1</ambient>
+            <diffuse>0.255 0.255 0.255 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_238">
+      <static>true</static>
+      <pose>15.189 -8.769 0.070 0 0 1.727</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.355 2.038 0.140</size></box></geometry>
+          <material>
+            <ambient>0.451 0.580 0.741 1</ambient>
+            <diffuse>0.451 0.580 0.741 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_239">
+      <static>true</static>
+      <pose>14.616 -4.354 0.072 0 0 0.538</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.877 2.158 0.144</size></box></geometry>
+          <material>
+            <ambient>0.233 0.300 0.383 1</ambient>
+            <diffuse>0.233 0.300 0.383 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_240">
+      <static>true</static>
+      <pose>17.209 0.104 0.410 0 0 0.746</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.503 1.003 0.820</size></box></geometry>
+          <material>
+            <ambient>0.641 0.641 0.641 1</ambient>
+            <diffuse>0.641 0.641 0.641 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_241">
+      <static>true</static>
+      <pose>15.595 4.487 0.286 0 0 1.048</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.803 1.214 0.573</size></box></geometry>
+          <material>
+            <ambient>0.223 0.223 0.223 1</ambient>
+            <diffuse>0.223 0.223 0.223 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_242">
+      <static>true</static>
+      <pose>14.935 8.362 0.201 0 0 2.554</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.484 2.394 0.402</size></box></geometry>
+          <material>
+            <ambient>0.290 0.290 0.290 1</ambient>
+            <diffuse>0.290 0.290 0.290 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_243">
+      <static>true</static>
+      <pose>17.351 13.475 0.085 0 0 2.278</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.817 1.845 0.169</size></box></geometry>
+          <material>
+            <ambient>0.751 0.555 0.457 1</ambient>
+            <diffuse>0.751 0.555 0.457 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_244">
+      <static>true</static>
+      <pose>16.608 15.325 0.066 0 0 0.944</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.655 1.224 0.133</size></box></geometry>
+          <material>
+            <ambient>0.708 0.708 0.708 1</ambient>
+            <diffuse>0.708 0.708 0.708 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_245">
+      <static>true</static>
+      <pose>16.684 19.142 0.337 0 0 2.454</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.539 1.208 0.674</size></box></geometry>
+          <material>
+            <ambient>0.790 0.584 0.481 1</ambient>
+            <diffuse>0.790 0.584 0.481 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_246">
+      <static>true</static>
+      <pose>15.746 31.959 0.185 0 0 2.940</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.275 0.966 0.370</size></box></geometry>
+          <material>
+            <ambient>0.660 0.660 0.660 1</ambient>
+            <diffuse>0.660 0.660 0.660 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_247">
+      <static>true</static>
+      <pose>16.128 39.187 0.062 0 0 0.614</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.520 1.136 0.124</size></box></geometry>
+          <material>
+            <ambient>0.455 0.455 0.455 1</ambient>
+            <diffuse>0.455 0.455 0.455 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_248">
+      <static>true</static>
+      <pose>16.403 44.430 0.436 0 0 2.408</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.374 1.771 0.873</size></box></geometry>
+          <material>
+            <ambient>0.249 0.320 0.408 1</ambient>
+            <diffuse>0.249 0.320 0.408 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_249">
+      <static>true</static>
+      <pose>20.297 -42.778 0.087 0 0 1.567</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.767 1.149 0.173</size></box></geometry>
+          <material>
+            <ambient>0.346 0.445 0.569 1</ambient>
+            <diffuse>0.346 0.445 0.569 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_250">
+      <static>true</static>
+      <pose>19.035 -34.546 0.026 0 0 2.896</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.050 1.234 0.051</size></box></geometry>
+          <material>
+            <ambient>0.570 0.421 0.347 1</ambient>
+            <diffuse>0.570 0.421 0.347 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_251">
+      <static>true</static>
+      <pose>21.191 -23.267 0.236 0 0 0.684</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.133 1.782 0.471</size></box></geometry>
+          <material>
+            <ambient>0.319 0.319 0.319 1</ambient>
+            <diffuse>0.319 0.319 0.319 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_252">
+      <static>true</static>
+      <pose>20.243 -20.228 0.182 0 0 2.220</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.835 1.918 0.364</size></box></geometry>
+          <material>
+            <ambient>0.772 0.772 0.772 1</ambient>
+            <diffuse>0.772 0.772 0.772 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_253">
+      <static>true</static>
+      <pose>20.334 -14.715 0.168 0 0 1.666</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.406 1.593 0.337</size></box></geometry>
+          <material>
+            <ambient>0.295 0.295 0.295 1</ambient>
+            <diffuse>0.295 0.295 0.295 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_254">
+      <static>true</static>
+      <pose>20.166 -12.675 0.175 0 0 1.978</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.066 0.903 0.350</size></box></geometry>
+          <material>
+            <ambient>0.474 0.474 0.474 1</ambient>
+            <diffuse>0.474 0.474 0.474 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_255">
+      <static>true</static>
+      <pose>19.827 5.355 0.489 0 0 0.020</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.284 2.194 0.978</size></box></geometry>
+          <material>
+            <ambient>0.700 0.700 0.700 1</ambient>
+            <diffuse>0.700 0.700 0.700 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_256">
+      <static>true</static>
+      <pose>19.369 8.260 0.303 0 0 1.271</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.353 2.217 0.606</size></box></geometry>
+          <material>
+            <ambient>0.473 0.473 0.473 1</ambient>
+            <diffuse>0.473 0.473 0.473 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_257">
+      <static>true</static>
+      <pose>18.885 11.399 0.283 0 0 2.013</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.573 2.026 0.565</size></box></geometry>
+          <material>
+            <ambient>0.664 0.491 0.404 1</ambient>
+            <diffuse>0.664 0.491 0.404 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_258">
+      <static>true</static>
+      <pose>21.159 19.089 0.276 0 0 2.219</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.007 1.542 0.552</size></box></geometry>
+          <material>
+            <ambient>0.621 0.621 0.621 1</ambient>
+            <diffuse>0.621 0.621 0.621 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_259">
+      <static>true</static>
+      <pose>19.565 25.370 0.106 0 0 2.937</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.159 1.545 0.213</size></box></geometry>
+          <material>
+            <ambient>0.283 0.283 0.283 1</ambient>
+            <diffuse>0.283 0.283 0.283 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_260">
+      <static>true</static>
+      <pose>20.094 29.278 0.386 0 0 1.098</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.239 2.320 0.773</size></box></geometry>
+          <material>
+            <ambient>0.500 0.370 0.304 1</ambient>
+            <diffuse>0.500 0.370 0.304 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_261">
+      <static>true</static>
+      <pose>19.681 33.475 0.392 0 0 1.745</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.156 1.947 0.784</size></box></geometry>
+          <material>
+            <ambient>0.287 0.212 0.174 1</ambient>
+            <diffuse>0.287 0.212 0.174 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_262">
+      <static>true</static>
+      <pose>19.273 35.789 0.366 0 0 0.351</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.083 1.583 0.731</size></box></geometry>
+          <material>
+            <ambient>0.460 0.340 0.280 1</ambient>
+            <diffuse>0.460 0.340 0.280 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_263">
+      <static>true</static>
+      <pose>19.556 40.269 0.272 0 0 1.480</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.285 0.863 0.543</size></box></geometry>
+          <material>
+            <ambient>0.696 0.514 0.424 1</ambient>
+            <diffuse>0.696 0.514 0.424 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_264">
+      <static>true</static>
+      <pose>19.091 42.618 0.051 0 0 1.968</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.846 2.232 0.102</size></box></geometry>
+          <material>
+            <ambient>0.223 0.223 0.223 1</ambient>
+            <diffuse>0.223 0.223 0.223 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_265">
+      <static>true</static>
+      <pose>25.003 -42.933 0.370 0 0 2.794</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.188 2.140 0.741</size></box></geometry>
+          <material>
+            <ambient>0.445 0.329 0.271 1</ambient>
+            <diffuse>0.445 0.329 0.271 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_266">
+      <static>true</static>
+      <pose>22.995 -40.034 0.371 0 0 0.762</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.954 1.763 0.743</size></box></geometry>
+          <material>
+            <ambient>0.759 0.759 0.759 1</ambient>
+            <diffuse>0.759 0.759 0.759 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_267">
+      <static>true</static>
+      <pose>25.493 -35.134 0.349 0 0 1.855</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.459 1.150 0.699</size></box></geometry>
+          <material>
+            <ambient>0.366 0.366 0.366 1</ambient>
+            <diffuse>0.366 0.366 0.366 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_268">
+      <static>true</static>
+      <pose>23.209 -28.852 0.118 0 0 0.052</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.807 1.996 0.237</size></box></geometry>
+          <material>
+            <ambient>0.450 0.579 0.740 1</ambient>
+            <diffuse>0.450 0.579 0.740 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_269">
+      <static>true</static>
+      <pose>25.279 -21.329 0.282 0 0 2.367</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.876 1.556 0.564</size></box></geometry>
+          <material>
+            <ambient>0.536 0.536 0.536 1</ambient>
+            <diffuse>0.536 0.536 0.536 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_270">
+      <static>true</static>
+      <pose>25.311 -15.610 0.033 0 0 0.893</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.258 1.426 0.066</size></box></geometry>
+          <material>
+            <ambient>0.536 0.690 0.881 1</ambient>
+            <diffuse>0.536 0.690 0.881 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_271">
+      <static>true</static>
+      <pose>22.799 -11.850 0.364 0 0 2.080</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.861 2.144 0.729</size></box></geometry>
+          <material>
+            <ambient>0.208 0.208 0.208 1</ambient>
+            <diffuse>0.208 0.208 0.208 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_272">
+      <static>true</static>
+      <pose>23.964 -6.984 0.253 0 0 0.410</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.371 2.378 0.507</size></box></geometry>
+          <material>
+            <ambient>0.480 0.480 0.480 1</ambient>
+            <diffuse>0.480 0.480 0.480 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_273">
+      <static>true</static>
+      <pose>23.007 -5.274 0.270 0 0 2.700</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.027 1.037 0.540</size></box></geometry>
+          <material>
+            <ambient>0.701 0.701 0.701 1</ambient>
+            <diffuse>0.701 0.701 0.701 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_274">
+      <static>true</static>
+      <pose>24.470 -1.122 0.125 0 0 1.838</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.279 1.939 0.250</size></box></geometry>
+          <material>
+            <ambient>0.867 0.641 0.528 1</ambient>
+            <diffuse>0.867 0.641 0.528 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_275">
+      <static>true</static>
+      <pose>22.936 3.209 0.287 0 0 2.944</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.822 1.774 0.574</size></box></geometry>
+          <material>
+            <ambient>0.778 0.778 0.778 1</ambient>
+            <diffuse>0.778 0.778 0.778 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_276">
+      <static>true</static>
+      <pose>24.151 6.998 0.214 0 0 0.359</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.883 1.808 0.427</size></box></geometry>
+          <material>
+            <ambient>0.368 0.368 0.368 1</ambient>
+            <diffuse>0.368 0.368 0.368 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_277">
+      <static>true</static>
+      <pose>23.816 12.146 0.361 0 0 0.564</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.955 1.150 0.722</size></box></geometry>
+          <material>
+            <ambient>0.458 0.339 0.279 1</ambient>
+            <diffuse>0.458 0.339 0.279 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_278">
+      <static>true</static>
+      <pose>22.766 17.319 0.488 0 0 0.652</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.123 1.420 0.976</size></box></geometry>
+          <material>
+            <ambient>0.350 0.450 0.575 1</ambient>
+            <diffuse>0.350 0.450 0.575 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_279">
+      <static>true</static>
+      <pose>22.934 19.251 0.373 0 0 2.321</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.384 1.119 0.745</size></box></geometry>
+          <material>
+            <ambient>0.387 0.497 0.635 1</ambient>
+            <diffuse>0.387 0.497 0.635 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_280">
+      <static>true</static>
+      <pose>25.391 29.410 0.097 0 0 0.916</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.035 1.755 0.195</size></box></geometry>
+          <material>
+            <ambient>0.628 0.464 0.382 1</ambient>
+            <diffuse>0.628 0.464 0.382 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_281">
+      <static>true</static>
+      <pose>22.573 33.298 0.133 0 0 1.431</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.523 2.219 0.267</size></box></geometry>
+          <material>
+            <ambient>0.614 0.614 0.614 1</ambient>
+            <diffuse>0.614 0.614 0.614 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_282">
+      <static>true</static>
+      <pose>23.020 36.904 0.137 0 0 1.675</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.058 2.154 0.274</size></box></geometry>
+          <material>
+            <ambient>0.439 0.439 0.439 1</ambient>
+            <diffuse>0.439 0.439 0.439 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_283">
+      <static>true</static>
+      <pose>25.195 39.620 0.095 0 0 0.465</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.228 2.113 0.189</size></box></geometry>
+          <material>
+            <ambient>0.406 0.522 0.667 1</ambient>
+            <diffuse>0.406 0.522 0.667 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_284">
+      <static>true</static>
+      <pose>24.862 45.032 0.250 0 0 1.881</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.361 2.285 0.501</size></box></geometry>
+          <material>
+            <ambient>0.556 0.411 0.338 1</ambient>
+            <diffuse>0.556 0.411 0.338 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_285">
+      <static>true</static>
+      <pose>26.880 -43.945 0.042 0 0 2.854</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.021 1.820 0.084</size></box></geometry>
+          <material>
+            <ambient>0.260 0.260 0.260 1</ambient>
+            <diffuse>0.260 0.260 0.260 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_286">
+      <static>true</static>
+      <pose>28.607 -33.484 0.370 0 0 2.859</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.325 1.757 0.740</size></box></geometry>
+          <material>
+            <ambient>0.736 0.736 0.736 1</ambient>
+            <diffuse>0.736 0.736 0.736 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_287">
+      <static>true</static>
+      <pose>28.947 -16.209 0.308 0 0 0.879</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.503 1.195 0.615</size></box></geometry>
+          <material>
+            <ambient>0.314 0.314 0.314 1</ambient>
+            <diffuse>0.314 0.314 0.314 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_288">
+      <static>true</static>
+      <pose>28.753 -11.679 0.123 0 0 2.742</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.337 0.813 0.247</size></box></geometry>
+          <material>
+            <ambient>0.292 0.292 0.292 1</ambient>
+            <diffuse>0.292 0.292 0.292 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_289">
+      <static>true</static>
+      <pose>26.934 -7.933 0.126 0 0 0.402</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.027 1.744 0.251</size></box></geometry>
+          <material>
+            <ambient>0.358 0.358 0.358 1</ambient>
+            <diffuse>0.358 0.358 0.358 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_290">
+      <static>true</static>
+      <pose>26.653 3.663 0.378 0 0 2.082</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.055 0.889 0.757</size></box></geometry>
+          <material>
+            <ambient>0.204 0.204 0.204 1</ambient>
+            <diffuse>0.204 0.204 0.204 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_291">
+      <static>true</static>
+      <pose>29.014 8.324 0.165 0 0 1.221</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.806 1.658 0.330</size></box></geometry>
+          <material>
+            <ambient>0.538 0.692 0.884 1</ambient>
+            <diffuse>0.538 0.692 0.884 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_292">
+      <static>true</static>
+      <pose>27.755 13.202 0.278 0 0 2.691</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.091 1.298 0.556</size></box></geometry>
+          <material>
+            <ambient>0.307 0.395 0.505 1</ambient>
+            <diffuse>0.307 0.395 0.505 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_293">
+      <static>true</static>
+      <pose>29.389 16.806 0.343 0 0 2.155</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.046 0.877 0.687</size></box></geometry>
+          <material>
+            <ambient>0.642 0.642 0.642 1</ambient>
+            <diffuse>0.642 0.642 0.642 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_294">
+      <static>true</static>
+      <pose>29.337 19.741 0.173 0 0 2.466</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.721 2.127 0.347</size></box></geometry>
+          <material>
+            <ambient>0.614 0.614 0.614 1</ambient>
+            <diffuse>0.614 0.614 0.614 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_295">
+      <static>true</static>
+      <pose>27.244 24.293 0.166 0 0 0.174</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.503 1.830 0.332</size></box></geometry>
+          <material>
+            <ambient>0.251 0.322 0.412 1</ambient>
+            <diffuse>0.251 0.322 0.412 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_296">
+      <static>true</static>
+      <pose>26.863 28.948 0.227 0 0 0.282</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.035 1.456 0.454</size></box></geometry>
+          <material>
+            <ambient>0.759 0.561 0.462 1</ambient>
+            <diffuse>0.759 0.561 0.462 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_297">
+      <static>true</static>
+      <pose>27.620 31.032 0.099 0 0 2.096</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.383 2.150 0.198</size></box></geometry>
+          <material>
+            <ambient>0.521 0.521 0.521 1</ambient>
+            <diffuse>0.521 0.521 0.521 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_298">
+      <static>true</static>
+      <pose>26.517 41.177 0.133 0 0 1.515</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.167 1.879 0.266</size></box></geometry>
+          <material>
+            <ambient>0.264 0.264 0.264 1</ambient>
+            <diffuse>0.264 0.264 0.264 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_299">
+      <static>true</static>
+      <pose>29.380 44.455 0.256 0 0 2.619</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.139 1.830 0.512</size></box></geometry>
+          <material>
+            <ambient>0.742 0.742 0.742 1</ambient>
+            <diffuse>0.742 0.742 0.742 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_300">
+      <static>true</static>
+      <pose>31.373 -42.897 0.129 0 0 2.858</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.022 0.902 0.258</size></box></geometry>
+          <material>
+            <ambient>0.333 0.333 0.333 1</ambient>
+            <diffuse>0.333 0.333 0.333 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_301">
+      <static>true</static>
+      <pose>30.522 -41.378 0.267 0 0 0.193</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.956 1.746 0.534</size></box></geometry>
+          <material>
+            <ambient>0.749 0.749 0.749 1</ambient>
+            <diffuse>0.749 0.749 0.749 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_302">
+      <static>true</static>
+      <pose>30.763 -35.160 0.499 0 0 2.329</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.707 1.214 0.998</size></box></geometry>
+          <material>
+            <ambient>0.524 0.524 0.524 1</ambient>
+            <diffuse>0.524 0.524 0.524 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_303">
+      <static>true</static>
+      <pose>32.199 -29.087 0.285 0 0 1.784</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.797 1.561 0.571</size></box></geometry>
+          <material>
+            <ambient>0.422 0.422 0.422 1</ambient>
+            <diffuse>0.422 0.422 0.422 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_304">
+      <static>true</static>
+      <pose>33.472 -19.848 0.463 0 0 0.427</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.599 1.655 0.926</size></box></geometry>
+          <material>
+            <ambient>0.220 0.220 0.220 1</ambient>
+            <diffuse>0.220 0.220 0.220 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_305">
+      <static>true</static>
+      <pose>31.695 -17.464 0.238 0 0 0.696</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.438 2.042 0.476</size></box></geometry>
+          <material>
+            <ambient>0.221 0.221 0.221 1</ambient>
+            <diffuse>0.221 0.221 0.221 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_306">
+      <static>true</static>
+      <pose>32.016 -4.190 0.441 0 0 2.016</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.623 1.737 0.882</size></box></geometry>
+          <material>
+            <ambient>0.354 0.261 0.215 1</ambient>
+            <diffuse>0.354 0.261 0.215 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_307">
+      <static>true</static>
+      <pose>30.967 3.936 0.064 0 0 0.896</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.196 1.827 0.128</size></box></geometry>
+          <material>
+            <ambient>0.279 0.359 0.458 1</ambient>
+            <diffuse>0.279 0.359 0.458 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_308">
+      <static>true</static>
+      <pose>32.785 9.174 0.464 0 0 1.052</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.586 1.661 0.928</size></box></geometry>
+          <material>
+            <ambient>0.584 0.584 0.584 1</ambient>
+            <diffuse>0.584 0.584 0.584 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_309">
+      <static>true</static>
+      <pose>33.390 16.777 0.269 0 0 0.072</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.327 1.894 0.538</size></box></geometry>
+          <material>
+            <ambient>0.324 0.416 0.532 1</ambient>
+            <diffuse>0.324 0.416 0.532 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_310">
+      <static>true</static>
+      <pose>33.117 19.981 0.388 0 0 2.916</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.154 2.354 0.776</size></box></geometry>
+          <material>
+            <ambient>0.603 0.603 0.603 1</ambient>
+            <diffuse>0.603 0.603 0.603 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_311">
+      <static>true</static>
+      <pose>33.114 32.485 0.113 0 0 2.203</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.978 2.011 0.227</size></box></geometry>
+          <material>
+            <ambient>0.274 0.203 0.167 1</ambient>
+            <diffuse>0.274 0.203 0.167 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_312">
+      <static>true</static>
+      <pose>32.189 39.534 0.312 0 0 0.131</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.146 2.096 0.624</size></box></geometry>
+          <material>
+            <ambient>0.404 0.404 0.404 1</ambient>
+            <diffuse>0.404 0.404 0.404 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_313">
+      <static>true</static>
+      <pose>36.363 -40.855 0.286 0 0 2.652</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.340 0.848 0.571</size></box></geometry>
+          <material>
+            <ambient>0.704 0.704 0.704 1</ambient>
+            <diffuse>0.704 0.704 0.704 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_314">
+      <static>true</static>
+      <pose>37.349 -34.981 0.242 0 0 2.012</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.346 1.153 0.483</size></box></geometry>
+          <material>
+            <ambient>0.294 0.294 0.294 1</ambient>
+            <diffuse>0.294 0.294 0.294 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_315">
+      <static>true</static>
+      <pose>36.596 -31.931 0.473 0 0 3.048</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.094 2.129 0.945</size></box></geometry>
+          <material>
+            <ambient>0.727 0.727 0.727 1</ambient>
+            <diffuse>0.727 0.727 0.727 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_316">
+      <static>true</static>
+      <pose>35.226 -28.548 0.062 0 0 2.474</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.365 1.682 0.123</size></box></geometry>
+          <material>
+            <ambient>0.521 0.521 0.521 1</ambient>
+            <diffuse>0.521 0.521 0.521 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_317">
+      <static>true</static>
+      <pose>35.638 -24.135 0.057 0 0 0.881</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.445 2.237 0.113</size></box></geometry>
+          <material>
+            <ambient>0.590 0.590 0.590 1</ambient>
+            <diffuse>0.590 0.590 0.590 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_318">
+      <static>true</static>
+      <pose>37.175 -21.286 0.279 0 0 0.176</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.105 0.835 0.558</size></box></geometry>
+          <material>
+            <ambient>0.557 0.557 0.557 1</ambient>
+            <diffuse>0.557 0.557 0.557 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_319">
+      <static>true</static>
+      <pose>36.377 -16.219 0.452 0 0 2.190</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.266 0.890 0.905</size></box></geometry>
+          <material>
+            <ambient>0.206 0.206 0.206 1</ambient>
+            <diffuse>0.206 0.206 0.206 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_320">
+      <static>true</static>
+      <pose>34.716 -8.215 0.484 0 0 3.007</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.350 1.262 0.968</size></box></geometry>
+          <material>
+            <ambient>0.720 0.720 0.720 1</ambient>
+            <diffuse>0.720 0.720 0.720 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_321">
+      <static>true</static>
+      <pose>36.510 -3.836 0.254 0 0 0.546</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.394 0.960 0.508</size></box></geometry>
+          <material>
+            <ambient>0.354 0.354 0.354 1</ambient>
+            <diffuse>0.354 0.354 0.354 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_322">
+      <static>true</static>
+      <pose>34.926 2.680 0.267 0 0 1.707</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.304 2.066 0.534</size></box></geometry>
+          <material>
+            <ambient>0.596 0.596 0.596 1</ambient>
+            <diffuse>0.596 0.596 0.596 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_323">
+      <static>true</static>
+      <pose>34.740 7.939 0.271 0 0 0.718</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.197 1.599 0.542</size></box></geometry>
+          <material>
+            <ambient>0.457 0.457 0.457 1</ambient>
+            <diffuse>0.457 0.457 0.457 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_324">
+      <static>true</static>
+      <pose>36.134 15.355 0.072 0 0 2.017</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.784 1.598 0.143</size></box></geometry>
+          <material>
+            <ambient>0.698 0.698 0.698 1</ambient>
+            <diffuse>0.698 0.698 0.698 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_325">
+      <static>true</static>
+      <pose>35.546 20.221 0.203 0 0 2.730</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.060 1.129 0.405</size></box></geometry>
+          <material>
+            <ambient>0.265 0.265 0.265 1</ambient>
+            <diffuse>0.265 0.265 0.265 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_326">
+      <static>true</static>
+      <pose>35.217 27.176 0.475 0 0 2.300</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.504 0.941 0.951</size></box></geometry>
+          <material>
+            <ambient>0.652 0.652 0.652 1</ambient>
+            <diffuse>0.652 0.652 0.652 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_327">
+      <static>true</static>
+      <pose>35.812 35.933 0.446 0 0 1.320</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.231 1.015 0.892</size></box></geometry>
+          <material>
+            <ambient>0.390 0.502 0.641 1</ambient>
+            <diffuse>0.390 0.502 0.641 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_328">
+      <static>true</static>
+      <pose>35.184 45.069 0.268 0 0 0.352</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.787 1.704 0.535</size></box></geometry>
+          <material>
+            <ambient>0.663 0.663 0.663 1</ambient>
+            <diffuse>0.663 0.663 0.663 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_329">
+      <static>true</static>
+      <pose>38.885 -43.013 0.272 0 0 2.655</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.924 2.095 0.544</size></box></geometry>
+          <material>
+            <ambient>0.456 0.456 0.456 1</ambient>
+            <diffuse>0.456 0.456 0.456 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_330">
+      <static>true</static>
+      <pose>40.866 -35.994 0.046 0 0 0.995</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.189 1.486 0.091</size></box></geometry>
+          <material>
+            <ambient>0.227 0.227 0.227 1</ambient>
+            <diffuse>0.227 0.227 0.227 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_331">
+      <static>true</static>
+      <pose>39.522 -33.243 0.194 0 0 2.052</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.377 2.307 0.388</size></box></geometry>
+          <material>
+            <ambient>0.400 0.400 0.400 1</ambient>
+            <diffuse>0.400 0.400 0.400 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_332">
+      <static>true</static>
+      <pose>41.003 -19.138 0.260 0 0 2.975</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.900 1.606 0.519</size></box></geometry>
+          <material>
+            <ambient>0.410 0.527 0.674 1</ambient>
+            <diffuse>0.410 0.527 0.674 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_333">
+      <static>true</static>
+      <pose>39.253 -17.462 0.071 0 0 1.071</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.873 1.471 0.141</size></box></geometry>
+          <material>
+            <ambient>0.420 0.420 0.420 1</ambient>
+            <diffuse>0.420 0.420 0.420 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_334">
+      <static>true</static>
+      <pose>41.491 -7.085 0.123 0 0 2.411</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.534 1.156 0.247</size></box></geometry>
+          <material>
+            <ambient>0.538 0.538 0.538 1</ambient>
+            <diffuse>0.538 0.538 0.538 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_335">
+      <static>true</static>
+      <pose>39.980 -3.769 0.103 0 0 1.364</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.928 1.236 0.206</size></box></geometry>
+          <material>
+            <ambient>0.203 0.203 0.203 1</ambient>
+            <diffuse>0.203 0.203 0.203 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_336">
+      <static>true</static>
+      <pose>38.809 4.461 0.408 0 0 0.049</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>0.854 2.342 0.816</size></box></geometry>
+          <material>
+            <ambient>0.780 0.576 0.475 1</ambient>
+            <diffuse>0.780 0.576 0.475 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_337">
+      <static>true</static>
+      <pose>39.477 7.185 0.072 0 0 0.942</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.686 1.340 0.145</size></box></geometry>
+          <material>
+            <ambient>0.331 0.331 0.331 1</ambient>
+            <diffuse>0.331 0.331 0.331 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_338">
+      <static>true</static>
+      <pose>40.066 12.951 0.152 0 0 2.583</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.842 2.184 0.305</size></box></geometry>
+          <material>
+            <ambient>0.674 0.674 0.674 1</ambient>
+            <diffuse>0.674 0.674 0.674 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_339">
+      <static>true</static>
+      <pose>41.493 15.473 0.251 0 0 1.151</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.185 1.263 0.501</size></box></geometry>
+          <material>
+            <ambient>0.482 0.482 0.482 1</ambient>
+            <diffuse>0.482 0.482 0.482 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_340">
+      <static>true</static>
+      <pose>40.574 19.693 0.084 0 0 1.634</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.024 1.625 0.168</size></box></geometry>
+          <material>
+            <ambient>0.520 0.520 0.520 1</ambient>
+            <diffuse>0.520 0.520 0.520 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_341">
+      <static>true</static>
+      <pose>39.984 24.038 0.474 0 0 1.781</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.387 1.950 0.949</size></box></geometry>
+          <material>
+            <ambient>0.742 0.742 0.742 1</ambient>
+            <diffuse>0.742 0.742 0.742 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_342">
+      <static>true</static>
+      <pose>41.500 37.026 0.489 0 0 0.950</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.046 2.355 0.978</size></box></geometry>
+          <material>
+            <ambient>0.339 0.339 0.339 1</ambient>
+            <diffuse>0.339 0.339 0.339 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_343">
+      <static>true</static>
+      <pose>40.268 41.459 0.491 0 0 1.095</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.358 1.839 0.981</size></box></geometry>
+          <material>
+            <ambient>0.359 0.359 0.359 1</ambient>
+            <diffuse>0.359 0.359 0.359 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_344">
+      <static>true</static>
+      <pose>39.219 43.792 0.386 0 0 0.234</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.351 1.239 0.773</size></box></geometry>
+          <material>
+            <ambient>0.452 0.334 0.275 1</ambient>
+            <diffuse>0.452 0.334 0.275 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_345">
+      <static>true</static>
+      <pose>44.847 -43.178 0.058 0 0 2.195</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.551 0.976 0.116</size></box></geometry>
+          <material>
+            <ambient>0.320 0.320 0.320 1</ambient>
+            <diffuse>0.320 0.320 0.320 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_346">
+      <static>true</static>
+      <pose>45.322 -35.210 0.131 0 0 2.216</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.790 2.360 0.262</size></box></geometry>
+          <material>
+            <ambient>0.758 0.758 0.758 1</ambient>
+            <diffuse>0.758 0.758 0.758 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_347">
+      <static>true</static>
+      <pose>42.573 -31.093 0.382 0 0 1.288</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.402 2.021 0.765</size></box></geometry>
+          <material>
+            <ambient>0.420 0.420 0.420 1</ambient>
+            <diffuse>0.420 0.420 0.420 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_348">
+      <static>true</static>
+      <pose>44.055 -24.309 0.478 0 0 2.351</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.096 1.077 0.956</size></box></geometry>
+          <material>
+            <ambient>0.245 0.245 0.245 1</ambient>
+            <diffuse>0.245 0.245 0.245 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_349">
+      <static>true</static>
+      <pose>43.361 -20.919 0.240 0 0 0.605</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>2.355 0.952 0.479</size></box></geometry>
+          <material>
+            <ambient>0.419 0.309 0.255 1</ambient>
+            <diffuse>0.419 0.309 0.255 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_350">
+      <static>true</static>
+      <pose>44.563 -8.010 0.102 0 0 1.297</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.739 1.180 0.204</size></box></geometry>
+          <material>
+            <ambient>0.430 0.430 0.430 1</ambient>
+            <diffuse>0.430 0.430 0.430 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_351">
+      <static>true</static>
+      <pose>45.372 -4.447 0.240 0 0 2.190</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.291 1.818 0.480</size></box></geometry>
+          <material>
+            <ambient>0.717 0.717 0.717 1</ambient>
+            <diffuse>0.717 0.717 0.717 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_352">
+      <static>true</static>
+      <pose>44.244 1.214 0.351 0 0 2.605</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.453 0.961 0.702</size></box></geometry>
+          <material>
+            <ambient>0.460 0.460 0.460 1</ambient>
+            <diffuse>0.460 0.460 0.460 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_353">
+      <static>true</static>
+      <pose>44.517 4.411 0.451 0 0 2.209</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.160 2.362 0.902</size></box></geometry>
+          <material>
+            <ambient>0.549 0.549 0.549 1</ambient>
+            <diffuse>0.549 0.549 0.549 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_354">
+      <static>true</static>
+      <pose>43.794 8.039 0.135 0 0 2.014</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.311 0.847 0.269</size></box></geometry>
+          <material>
+            <ambient>0.226 0.226 0.226 1</ambient>
+            <diffuse>0.226 0.226 0.226 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_355">
+      <static>true</static>
+      <pose>43.703 11.631 0.114 0 0 2.927</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.898 2.218 0.228</size></box></geometry>
+          <material>
+            <ambient>0.503 0.646 0.826 1</ambient>
+            <diffuse>0.503 0.646 0.826 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_356">
+      <static>true</static>
+      <pose>44.952 32.362 0.499 0 0 1.092</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.311 1.135 0.998</size></box></geometry>
+          <material>
+            <ambient>0.584 0.584 0.584 1</ambient>
+            <diffuse>0.584 0.584 0.584 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_357">
+      <static>true</static>
+      <pose>44.688 36.260 0.218 0 0 2.253</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.458 1.625 0.436</size></box></geometry>
+          <material>
+            <ambient>0.358 0.358 0.358 1</ambient>
+            <diffuse>0.358 0.358 0.358 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="tex_358">
+      <static>true</static>
+      <pose>44.805 44.911 0.346 0 0 2.455</pose>
+      <link name="l">
+        <visual name="v">
+          <geometry><box><size>1.249 1.369 0.691</size></box></geometry>
+          <material>
+            <ambient>0.308 0.308 0.308 1</ambient>
+            <diffuse>0.308 0.308 0.308 1</diffuse>
+            <specular>0.1 0.1 0.1 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+  </world>
+</sdf>
