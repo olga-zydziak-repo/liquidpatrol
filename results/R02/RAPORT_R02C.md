@@ -180,3 +180,31 @@ confirmed present via `gz model -p`; world-SDF targets evidenced by loaded-world
 **Errata:** static conf = **0.154** (źródło: `static_meta.json`, `RAPORT_R02C §2`); `RAPORT_G_R02 §3f`
 podaje 0.156 (linie 376/385/391/400/402/422) — źródłem liczby jest artefakt; 0.156 traktować jako
 literówkę raportu.
+
+## 8. REWIZJA (ENGINE-RECON E1/E2, 2026-08-11) — §6/§8 unieważnione wspólnym konfundem GUI
+
+Konfirmator jednozmienny E1 (lot + headless, tylko GUI off vs §6) → intruz RENDERUJE z powietrza
+(`results/R02/engine_recon/RAPORT_ENGINE_RECON.md`, dark_px 32–54, wzrokowo). Skutki dla §6/§8:
+
+1. **§6 macierz sweepu — UNIEWAŻNIONA wspólnym warunkiem.** Wszystkie 5 testów (lifecycle A/B/C,
+   shadows=off, Lot 1 BOX, Lot 2 BOX nisko) szło **GUI-on** — mierzyły JEDEN konfund (kontencja GUI), nie
+   właściwość silnika. Wiersze „NIE mesh-specific / NIE wysokość celu / NIE lifecycle / NIE shadows" stają
+   się **PUSTE** (nie rozróżniały niczego, bo wszystkie dzieliły GUI-on). **NIE kasuję** tabeli — zostaje jako
+   historia rewizji (wzorzec A-drift→A-plateau→A-episode). Klasa „SILNIKOWA (LOD/culling/scene-management)"
+   z §6 — **OBALONA** (E1 jednozmiennie; E2 obala też mechanizm CPU-lockstep).
+2. **§8 / „MECHANIZM (precyzyjny symptom — do issue-search)" — WYCOFANY.** Symptom był artefaktem kontencji
+   GUI w habitacie WSL2, nie bugiem gz. Pakiet issue-ready = **NIEAKTUALNY, nie przygotowany** — nic nie idzie
+   upstream (silnik renderuje poprawnie headless, gz 8.14.0). Dyskryminatory D1/D2/D3/D4 z §7 — zbędne (przesłanka
+   „silnik nie renderuje" fałszywa); D2/llvmpipe niepotrzebny.
+3. **Status O4 — PRECYZYJNIE: NIE unieważnione.** Zamknięcie toru C stało na bazie **GT-fed** i ta teza STOI
+   (osłona+OBSERVE, certy 5/5, dead-man, G5 — niezależne od renderu kamery). To **PONOWNE OTWARCIE ścieżki
+   live-fed** (render z powietrza działa headless), NIE kompromitacja zamknięcia GT-fed.
+4. **META-LEKCJA (rejestr).** Komponent WIZUALIZACJI (`gz sim -g`), formalnie POZA systemem pod testem, skaził
+   DWA niezależne substraty — arming/EKF (R0.3a) ORAZ render (tor C §6) — i przez PIĘĆ testów udawał właściwość
+   silnika. Groźniejsze niż przyrząd kłamiący: konfund **WSPÓLNY dla całego sweepu** nie ujawnia się przez
+   wewnętrzną niespójność wyników (wszystkie FAIL „spójnie"). Wniosek operacyjny: **zmienne habitatu
+   (GUI / kontencja CPU / RTF / zdrowie EKF) należą do ZAMROŻONEGO opisu warunków każdego pomiaru percepcyjnego**,
+   na równi z wersją silnika. Zaostrzenie z E2: RTF+time-jump NIE wystarcza (kontencja CPU głodzi EKF przy RTF=1.0).
+5. **Nota do RAPORT_R03A [A4]** (naniesiona osobno): GUI powodowało resety EKF → `ε_cap=37/4` mierzone GUI-on jest
+   PODEJRZANE o zawyżenie; headless re-charakteryzacja siatki B1-bis może ZMNIEJSZYĆ cap i odzyskać część pola
+   patrolu. NIE wykonywane tu (osobna noga, własne PRE).

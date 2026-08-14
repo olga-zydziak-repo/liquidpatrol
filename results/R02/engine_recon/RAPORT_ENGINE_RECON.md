@@ -5,10 +5,39 @@ WSL2 **mesa-D3D12**. Headless WYMUSZONY i weryfikowany per bieg (SR-E4). Artefak
 `results/R02/engine_recon/<dyskryminator>/<run>/` (frame.npy, frame.png 1:1, result.json, world_as_run.sdf,
 topics.txt, gz.log). Guard RAPORTUJE, nie orzeka.
 
-## WYNIK: D0.5 → PASS ⇒ **STOP (SR-E3)**. Hipoteza silnikowa OBALONA.
+## AKTUALIZACJA (E1/E2, PROMPT_R02C_CONFIRM, 2026-08-11) — konfundacja static-vs-flight DOMKNIĘTA
 
-**Pierwszy dyskryminator (D0.5) dał PASS. Zgodnie z SR-E3 zatrzymuję się — PASS zmienia rutowanie.**
-D0/D1/D2/D3/D4 **NIEWYKONANE** (celowo; dalsze biegi trzeba przeprojektować, bo klasa przyczyny się zmieniła).
+D0.5 był podwójnie konfundowany (GUI on→off ORAZ lot→statyka). E1 domyka to jednozmiennie.
+
+**E1 — KONFIRMATOR jednozmienny (lot + headless, tylko GUI off vs §6):** dron W LOCIE (zawis ~8.5 m,
+pitch 0.2°/roll 0.1°), intruz dead-ahead z realnej pozy gz → **RENDER_PASS** (dark_px 32; kontrola centrowana
+`flight_headless_centered` dark_px 54; potwierdzenie WZROKOWE `frame.png`: mesh x500 w centrum + własne ramię).
+Headless zweryfikowany (GUI_PROCS=brak, gz `-s`). **Hipoteza silnikowa OBALONA JEDNOZMIENNIE — §6 FAIL to GUI,
+nie lot, nie silnik.** Artefakty: `E1_confirm/{flight_headless,flight_headless_clean,flight_headless_centered}/`.
+
+**E2 — test mechanizmu pod obciążeniem CPU (`yes` oversubskrypcja, lot+headless):**
+| N yes | RTF baseline→stress | time jumps | dron | render |
+|---|---|---|---|---|
+| 32 | 0.985→**0.9996** | **0** | trzyma (z=8.25) | **PASS** dark_px 43 (wzrokowo mesh+ramię) |
+| 48 | ~1.0 | 0 | — | głodzi EKF → arm denied (poza lotem) |
+| 96 | 0.990→**0.9999** | **0** | **traci wysokość** (z→0.39, EKF głodzony) | placement artefakt |
+
+**HIPOTEZA UNIFIKUJĄCA (kontencja→time-jump→nieaktualna poza renderu→znikanie) — OBALONA dla kontencji CPU.**
+Kontencja CPU (do 96×, load>100) **NIE zrzuca RTF gz poniżej 1.0 i NIE tworzy time-jumpów** — render sensora
+utrzymuje real-time i renderuje poprawnie pod obciążeniem (E2@32 PASS wzrokowo). To, co kontencja CPU łamie, to
+**EKF PX4** (arm denied @48, utrata wysokości @96) — TEN SAM objaw co R0.3a, ale strona LOTU/estymatora, NIE render.
+→ **PASS mimo kontencji ⇒ przyczyna oryginalnego FAIL NIE jest domknięta mechanizmem CPU-lockstep.** GUI jest
+USTALONĄ ZMIENNĄ RÓŻNICUJĄCĄ (E1 jednozmiennie), ale wewnętrzny mechanizm (prawdopodobnie kontencja renderu
+GPU — GUI konkuruje o GPU z renderem sensora) **NIE jest zademonstrowany**. Nie zaokrąglam „GUI winne" do mechanizmu.
+
+**OTWARTA POZYCJA:** mechanizm renderowego FAIL pozostaje niedomknięty (kontencja GPU-side, nieodtwarzalna
+headless — GUI nie wstaje bez DISPLAY; CPU-stress jej nie replikuje). **Nota dla dema (zaostrzona):** monitor RTF
++ `time jump` jest KONIECZNY, ale NIE WYSTARCZAJĄCY — kontencja CPU głodzi EKF przy RTF=1.0 i 0 time-jumpów;
+warunek ważności biegu percepcyjnego musi obejmować też zdrowie EKF (gyro-bias/velocity-stable), nie tylko RTF.
+
+## WYNIK PIERWOTNY: D0.5 → PASS ⇒ **STOP (SR-E3)**. (E1 potwierdza jednozmiennie.)
+
+D0/D1/D2/D3/D4 **NIEWYKONANE** (SR-E3; klasa przyczyny ustalona: NIE silnik).
 
 ### D0.5 — headless re-run pary naziemna/powietrzna (ten sam cel, ten sam intruz)
 

@@ -200,6 +200,11 @@ stempla** starego kanału gz model -p ~0.3 s → streaming dynamic_pose/info (si
    (b) **[A4]:** `ε_cap = 37/4` zmierzono w warunkach **GUI-on** (B1-bis, sesja z GUI). Headless
        re-measurement jest naturalnym POTWIERDZENIEM, nie blokerem — cap jest użyty jako OGRANICZENIE
        GÓRNE, a headless S4 wyszło `ε 2.07 ≪ 9.25` (i S3 0.57), więc zawieranie trzyma z zapasem niezależnie.
+       **ZAOSTRZENIE (ENGINE-RECON E2, 2026-08-11):** potwierdzono, że kontencja CPU głodzi EKF (arm denied @48,
+       utrata wysokości @96 — objaw R0.3a headless). Skoro GUI-on powodowało resety/degradację EKF, `ε_cap` z
+       GUI-on jest PODEJRZANE o **ZAWYŻENIE** (gorszy estymator → większy dryf → większy zmierzony ε). Headless
+       re-charakteryzacja siatki B1-bis może **ZMNIEJSZYĆ** cap i odzyskać część oddanego pola patrolu — osobna
+       noga (własne PRE), NIE wykonana tu.
 4. **S3 wykonane z `ALT = 15 m`** (S2/S4 = 8 m) — INNY warunek scenariusza. Legalne (param UPRZĘŻY, nie
    kryterium D13/ANEKS-4), ale jawnie: przy 8 m epizod (zejście ~8.4 s) był KRÓTSZY niż
    `recovery + rekonwergencja-EKF + M(5 s) ≈ 9 s`, więc touchdown WYPRZEDZAŁ re-ALLOW i kryterium

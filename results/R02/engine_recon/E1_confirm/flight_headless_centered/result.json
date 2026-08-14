@@ -1,0 +1,43 @@
+{
+  "HEADLESS": "1",
+  "RENDER_BACKEND": "mesa-d3d12",
+  "GZ_VER": "Gazebo Sim, version 8.11.0\nCopyright (C)",
+  "CAM_KIND": "drone_FLIGHT_hover",
+  "CAM_Z": "8.46",
+  "img_topic": "/world/default/model/x500_mono_cam_0/link/camera_link/sensor/imager/image",
+  "capture_status": "ok",
+  "hover_ned": [
+    -0.225,
+    -0.057,
+    8.459
+  ],
+  "att_deg": {
+    "yaw": 23.29,
+    "pitch": 1.01,
+    "roll": -2.19
+  },
+  "intruder_gz": [
+    4.541,
+    5.283,
+    8.965
+  ],
+  "models": {
+    "names": [
+      "ground_plane",
+      "x500_mono_cam_0",
+      "intruder"
+    ],
+    "intruder_present": true,
+    "raw": "Requesting state for world [default]...\n\nAvailable models:\n    - ground_plane\n    - x500_mono_cam_0\n    - intruder"
+  },
+  "dark_px": 54,
+  "min_px": 8,
+  "region_px": 3136,
+  "center_min": 62,
+  "center_mean": 209.2,
+  "visible": true,
+  "frame_mean": 207.1,
+  "frame_min": 39,
+  "verdict": "RENDER_PASS_visible",
+  "rtf_baseline": "real_time_factor: 1.0003618809104193"
+}
