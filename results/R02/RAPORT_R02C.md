@@ -192,10 +192,14 @@ Konfirmator jednozmienny E1 (lot + headless, tylko GUI off vs §6) → intruz RE
    się **PUSTE** (nie rozróżniały niczego, bo wszystkie dzieliły GUI-on). **NIE kasuję** tabeli — zostaje jako
    historia rewizji (wzorzec A-drift→A-plateau→A-episode). Klasa „SILNIKOWA (LOD/culling/scene-management)"
    z §6 — **OBALONA** (E1 jednozmiennie; E2 obala też mechanizm CPU-lockstep).
-2. **§8 / „MECHANIZM (precyzyjny symptom — do issue-search)" — WYCOFANY.** Symptom był artefaktem kontencji
-   GUI w habitacie WSL2, nie bugiem gz. Pakiet issue-ready = **NIEAKTUALNY, nie przygotowany** — nic nie idzie
-   upstream (silnik renderuje poprawnie headless, gz 8.14.0). Dyskryminatory D1/D2/D3/D4 z §7 — zbędne (przesłanka
-   „silnik nie renderuje" fałszywa); D2/llvmpipe niepotrzebny.
+2. **§8 / „MECHANIZM (precyzyjny symptom — do issue-search)" — WYCOFANY.** **KOREKTA nadclaimu
+   (2026-08-11, PROMPT_R02C_LIVEFED):** wcześniejsze brzmienie „symptom był artefaktem kontencji GUI" było
+   NADCLAIMEM (napisane w gałęzi zakładającej potwierdzenie E2, które NIE nastąpiło — E2 OBALIŁO hipotezę
+   kontencji CPU). Poprawny zapis: **przyczyna FAIL §3f/§6 NIEDOMKNIĘTA mechanizmem; jedyny znany warunek
+   korelujący: GUI-on; E2 obaliło hipotezę kontencji CPU (render trzymał mimo obciążenia, RTF~1.0, 0 time-jumpów).**
+   Nie zaokrąglamy do „GUI winne". Pewne jest tylko: **NIE jest to bug gz** (silnik renderuje poprawnie headless,
+   gz 8.14.0, E1) → pakiet issue-ready NIEAKTUALNY, nic upstream. Dyskryminatory D1/D2/D3/D4 z §7 — zbędne
+   (przesłanka „silnik nie renderuje" obalona przez E1).
 3. **Status O4 — PRECYZYJNIE: NIE unieważnione.** Zamknięcie toru C stało na bazie **GT-fed** i ta teza STOI
    (osłona+OBSERVE, certy 5/5, dead-man, G5 — niezależne od renderu kamery). To **PONOWNE OTWARCIE ścieżki
    live-fed** (render z powietrza działa headless), NIE kompromitacja zamknięcia GT-fed.

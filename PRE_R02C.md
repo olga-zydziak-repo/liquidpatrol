@@ -197,3 +197,47 @@ bramkowy live asertuje widoczność intruza (regresja renderu nie udaje wyniku d
 Recon domknięty (R1–R4), PRE **RATYFIKOWANE** z riderami C-A1…C-A4 (§7). Build C-A1 wykonany → **§3f
 OBALONE, mechanizm renderu SILNIKOWY → escape hatch (rider 5): STOP z ustaleniami+opcjami** (`RAPORT_R02C`).
 Premisa przepisana (§8, rev1). Guard wdrożony (bariera). Opcje O1–O4 do decyzji Olgi. Push = Olga.
+
+---
+
+## ANEKS-H — HABITAT JAKO WARUNEK WAŻNOŚCI POMIARU (2026-08-11, po E1/E2)
+
+**Powód.** Konfund wspólny dla całego sweepu §6 (`RAPORT_R02C`) — GUI-on — NIE ujawnił się przez wewnętrzną
+niespójność wyników: pięć testów FAILowało „spójnie", udając właściwość silnika. E1 (lot+headless) obalił to
+jednozmiennie. Wniosek: **zmienne habitatu należą do ZAMROŻONEGO opisu warunków pomiaru percepcyjnego na równi
+z wersją silnika.**
+
+### H.1 — Warunki ważności KAŻDEGO biegu percepcyjnego (wzorzec `harness_invalid` z R-D3)
+
+To jest **kryterium WAŻNOŚCI biegu, NIE kryterium bramki.** Bieg naruszający którykolwiek warunek jest jawnie
+**nieważny** (nie liczy się ani na plus, ani na minus — jak `harness_invalid`). Per bieg wymagane i zapisane:
+- **HEADLESS zweryfikowany DOWODEM** (nie założony): brak procesu GUI (`gz sim -g`/`gz-gui`) w artefakcie
+  (`headless_proof.txt`); gz uruchomiony server-only lub HEADLESS=1 potwierdzone.
+- **RTF sim** (real_time_factor z `/world/*/stats`), zapisany.
+- **Licznik `time jump` / `Resetting time synchroniser`** z logu gz — zapisany (oczekiwane 0).
+- **Wersja gz** i **backend renderu** (np. mesa-D3D12 / llvmpipe).
+- **Brak kontencji**: zdrowie EKF (brak „High Gyro Bias"/„horizontal velocity unstable") — **zaostrzenie z E2:
+  RTF+time-jump są KONIECZNE ale NIEwystarczające; kontencja CPU głodzi EKF przy RTF=1.0 i 0 time-jumpów**, więc
+  zdrowie EKF/uzbrojenie jest osobnym warunkiem ważności.
+Instrument dowodowy (reużywalny): `results/R02/engine_recon/e1_run.sh` (weryfikacja headless) + `e1_flight.py`.
+
+### H.2 — UNIEWAŻNIENIE liczb percepcyjnych sprzed E1 (nie stanowią prioru)
+
+Wszystkie poniższe mierzone **przed E1** (bez wyrenderowanego celu i/lub GUI-on) → **historyczne, NIE priory**
+dla progów ani oczekiwań:
+| liczba | wartość historyczna | dlaczego skażona |
+|---|---|---|
+| atrybucja §3f „kadrowanie" (intruz klipowany pitchem) | jakościowa | intruz NIE renderowany w locie (GUI-on) → „poza FOV" nierozstrzygalne |
+| sygnał conf w locie | 0.045–0.081 | cel nie renderowany → mierzony był szum, nie sygnał |
+| `noise_max` (szum G1 live-fed) | 0.0544 (n=554) | habitat GUI-on; szum bez ważnego tła |
+| static conf (sonda naziemna) | 0.154 | naziemna renderowała, ale to nie próg LOTU (habitat/ryzyko inne) |
+
+Adnotacja obowiązkowa przy każdej z nich w dalszych dokumentach: **„mierzone przed E1; nie stanowią prioru dla
+progów ani oczekiwań"**. Przyczyna oryginalnego FAIL pozostaje **niedomknięta mechanizmem** (warunek korelujący:
+GUI-on; E2 obaliło kontencję CPU) — nie zaokrąglać do „GUI winne".
+
+### H.3 — Kryteria bramki BEZ ZMIAN (przypomnienie, nietykalne)
+
+(+) zasięg skuteczny w locie ≥ 7 m przy coverage ≥ 0.8; (−) ε_FP = 0; oba **wyłącznie w locie**; `θ_conf`
+**NIETYKALNY**; MTI wyłącznie jako AND-gate (rider C-A3). ANEKS-H NIE dotyka tych kryteriów — dodaje tylko
+warunek ważności substratu, na którym się je mierzy.
