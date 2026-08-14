@@ -1,0 +1,121 @@
+{
+  "HEADLESS": "1",
+  "RENDER_BACKEND": "mesa-d3d12",
+  "GZ_VER": "Gazebo Sim, version 8.11.0\nCopyright (C)",
+  "att_hover": {
+    "yaw": 95.56,
+    "pitch": -0.71,
+    "roll": 1.26
+  },
+  "theta_conf": 0.1635,
+  "ranges": [
+    5.0,
+    7.0,
+    9.0,
+    11.0
+  ],
+  "rtf_start": "real_time_factor: 0.99981603384977169",
+  "note": "sygnał=box w R0.18 od centrum (cel dead-ahead); szum=boxy poza; θ NIETYKALNY; conf-floor detektora 0.001",
+  "sweep": {
+    "5m": {
+      "n_frames": 8,
+      "target_conf": {
+        "n": 8,
+        "max": 0.0561,
+        "p95": 0.0561,
+        "p50": 0.0513,
+        "min": 0.0371
+      },
+      "noise_conf": {
+        "n": 13,
+        "max": 0.0393,
+        "p95": 0.0393,
+        "p50": 0.0032,
+        "min": 0.0014
+      },
+      "coverage_admit@theta": 0.0,
+      "frames_target_seen": 8,
+      "coverage_seen": 1.0,
+      "eps_fp_frames@theta": 0
+    },
+    "7m": {
+      "n_frames": 7,
+      "target_conf": {
+        "n": 7,
+        "max": 0.0226,
+        "p95": 0.0226,
+        "p50": 0.0164,
+        "min": 0.0103
+      },
+      "noise_conf": {
+        "n": 24,
+        "max": 0.0415,
+        "p95": 0.022,
+        "p50": 0.0024,
+        "min": 0.001
+      },
+      "coverage_admit@theta": 0.0,
+      "frames_target_seen": 7,
+      "coverage_seen": 1.0,
+      "eps_fp_frames@theta": 0
+    },
+    "9m": {
+      "n_frames": 7,
+      "target_conf": {
+        "n": 7,
+        "max": 0.009,
+        "p95": 0.009,
+        "p50": 0.0057,
+        "min": 0.0044
+      },
+      "noise_conf": {
+        "n": 7,
+        "max": 0.0147,
+        "p95": 0.0147,
+        "p50": 0.0031,
+        "min": 0.0012
+      },
+      "coverage_admit@theta": 0.0,
+      "frames_target_seen": 7,
+      "coverage_seen": 1.0,
+      "eps_fp_frames@theta": 0
+    },
+    "11m": {
+      "n_frames": 7,
+      "target_conf": {
+        "n": 7,
+        "max": 0.0112,
+        "p95": 0.0112,
+        "p50": 0.0075,
+        "min": 0.003
+      },
+      "noise_conf": {
+        "n": 36,
+        "max": 0.017,
+        "p95": 0.0089,
+        "p50": 0.0026,
+        "min": 0.001
+      },
+      "coverage_admit@theta": 0.0,
+      "frames_target_seen": 7,
+      "coverage_seen": 1.0,
+      "eps_fp_frames@theta": 0
+    }
+  },
+  "noise_phase": {
+    "n_frames": 11,
+    "target_conf": null,
+    "noise_conf": {
+      "n": 13,
+      "max": 0.0335,
+      "p95": 0.0335,
+      "p50": 0.0032,
+      "min": 0.0013
+    },
+    "coverage_admit@theta": 0.0,
+    "frames_target_seen": 0,
+    "coverage_seen": 0.0,
+    "eps_fp_frames@theta": 0
+  },
+  "rtf_end": "real_time_factor: 0.99942882642569775"
+}

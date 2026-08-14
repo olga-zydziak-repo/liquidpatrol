@@ -1,0 +1,44 @@
+{
+  "HEADLESS": "1",
+  "RENDER_BACKEND": "mesa-d3d12",
+  "GZ_VER": "Gazebo Sim, version 8.11.0\nCopyright (C)",
+  "hover_ned": [
+    0.485,
+    0.81,
+    7.877
+  ],
+  "att_deg": {
+    "yaw": 58.8,
+    "pitch": 5.76,
+    "roll": 3.38
+  },
+  "intruder_gz": [
+    7.396,
+    2.812,
+    10.117
+  ],
+  "intr_range": 7.0,
+  "rtf_start": "real_time_factor: 1.0003631318168495",
+  "rtf_end": "real_time_factor: 1.0000690047613285",
+  "n_det_frames": 17,
+  "nbox_mean": 5.06,
+  "true_target_conf": {
+    "n": 17,
+    "max": 0.1046,
+    "p50": 0.0285,
+    "min": 0.0092
+  },
+  "any_box_conf": {
+    "n": 86,
+    "max": 0.1046,
+    "p50": 0.0022,
+    "min": 0.001
+  },
+  "frames_with_true_target": 17,
+  "coverage_true": 1.0,
+  "theta_conf": 0.1635,
+  "note": "cel dead-ahead ~centrum; true=box w R0.18 od (0.5,0.5); conf-floor detektora 0.001",
+  "overlay": "frame_overlay.png",
+  "frame_min": 31,
+  "frame_mean": 207.7
+}

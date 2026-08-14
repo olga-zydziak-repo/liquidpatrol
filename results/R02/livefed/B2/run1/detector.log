@@ -1,0 +1,5 @@
+/home/olga/projects/liquidpatrol/.b0deps/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+[INFO] [1786747031.888890207] [liquidpatrol_detector]: detektor: /home/olga/projects/liquidpatrol/.b0deps/weights/yolov8s-worldv2.pt set_classes(['drone']) imgsz=640 conf_floor=0.001
+[INFO] [1786747031.902000036] [liquidpatrol_detector]: sub=/world/default/model/x500_mono_cam_0/link/camera_link/sensor/imager/image pub=/liquidpatrol/target_channel @ 1.0 Hz
+[INFO] [1786747137.923723776] [liquidpatrol_detector]: ENTRY @ sim_t=108.97 box=array('f', [0.43729257583618164, 0.38905078172683716, 0.04309272766113281, 0.03593858331441879, 0.10000000149011612])

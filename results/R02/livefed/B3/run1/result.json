@@ -1,0 +1,22 @@
+{
+  "HEADLESS": "1",
+  "instrument": "monotonic_local (pętla decyzyjna 20Hz, ruch OBSERVE)",
+  "n": 352,
+  "tick_s": 0.05,
+  "p50": 0.051,
+  "p95": 0.0519,
+  "p99": 0.0522,
+  "max_s": 0.0524,
+  "max_ticks": 1.05,
+  "p99_ticks": 1.04,
+  "over_4ticks": 0,
+  "over_6ticks": 0,
+  "baseline_R3_static": {
+    "max_ticks": 1.06,
+    "n": 3088,
+    "note": "R0.2 R3, inny reżim/habitat"
+  },
+  "DEADMAN_TICKS_current": 6,
+  "N_min_3x_margin_ticks": 3.15,
+  "N_recommendation": "N=6 (0.30s) WYSTARCZA: max 1.05t, 3× margines = 3.2t < 6"
+}

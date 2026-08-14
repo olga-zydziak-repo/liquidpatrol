@@ -1,0 +1,6 @@
+GUI_PROCS=[brak]  gz_server=[12336 gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf]
+[b0] kamera: /world/default/model/x500_mono_cam_0/link/camera_link/sensor/imager/image
+[b0] detektor start; 90 s settle EKF + załadowanie wag
+results/R02/livefed/b0_run.sh: line 16: 12682 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${IMG}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge.log" 2>&1
+results/R02/livefed/b0_run.sh: line 16: 12723 Killed                  YOLO_WEIGHTS="$ROOT/.b0deps/weights/yolov8s-worldv2.pt" PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" setsid nohup python3 -m r02.detector_node --image-topic "$IMG" > "$OUTDIR/detector.log" 2>&1
+[b0] run1 DONE rc=0 → /home/olga/projects/liquidpatrol/results/R02/livefed/B0/run1
