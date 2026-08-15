@@ -1,0 +1,211 @@
+{
+  "step": "REGATE — bramka ENTRY-once ×3 booty (POMIAR live, world_demo_v1.1)",
+  "criterion": "ANEKS_MTI_2 AM2.2: (+) coverage_entry_once≥0.8 mediana/boot na {7,9}m; (−) 0 false ENTRY oba sceny",
+  "boots": [
+    "regate1",
+    "regate2",
+    "regate3"
+  ],
+  "valid_boots": [
+    "regate1",
+    "regate2",
+    "regate3"
+  ],
+  "aneks_h": {
+    "regate1": {
+      "headless": true,
+      "timejump_pre": "0",
+      "timejump_post": "0",
+      "ekf_health_hits": "2",
+      "world_hash16": "a76a38c83cc774d3",
+      "rtf_start": 1.00013,
+      "rtf_end": 0.99973,
+      "trace_complete": true,
+      "valid": true
+    },
+    "regate2": {
+      "headless": true,
+      "timejump_pre": "0",
+      "timejump_post": "0",
+      "ekf_health_hits": "0",
+      "world_hash16": "a76a38c83cc774d3",
+      "rtf_start": 1.00025,
+      "rtf_end": 0.99963,
+      "trace_complete": true,
+      "valid": true
+    },
+    "regate3": {
+      "headless": true,
+      "timejump_pre": "0",
+      "timejump_post": "0",
+      "ekf_health_hits": "0",
+      "world_hash16": "a76a38c83cc774d3",
+      "rtf_start": 0.99993,
+      "rtf_end": 0.03968,
+      "trace_complete": true,
+      "valid": true
+    }
+  },
+  "plus_by_range": {
+    "5m": {
+      "coverage_entry_once_raw": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "coverage_entry_once_median": 1.0,
+      "n_entry_raw": [
+        1,
+        1,
+        1
+      ],
+      "n_admitted": 3,
+      "time_to_entry_s_raw": [
+        7.29,
+        3.62,
+        28.03
+      ],
+      "coverage_gate_raw": [
+        0.464,
+        0.415,
+        0.423
+      ],
+      "coverage_seen_raw": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "7m": {
+      "coverage_entry_once_raw": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "coverage_entry_once_median": 1.0,
+      "n_entry_raw": [
+        1,
+        1,
+        1
+      ],
+      "n_admitted": 3,
+      "time_to_entry_s_raw": [
+        2.17,
+        2.22,
+        5.98
+      ],
+      "coverage_gate_raw": [
+        0.491,
+        0.429,
+        0.464
+      ],
+      "coverage_seen_raw": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "9m": {
+      "coverage_entry_once_raw": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "coverage_entry_once_median": 1.0,
+      "n_entry_raw": [
+        1,
+        1,
+        1
+      ],
+      "n_admitted": 3,
+      "time_to_entry_s_raw": [
+        1.63,
+        2.75,
+        10.87
+      ],
+      "coverage_gate_raw": [
+        0.684,
+        0.732,
+        0.589
+      ],
+      "coverage_seen_raw": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "plus_verdict": {
+    "7m": {
+      "pass": true,
+      "median_cov_entry_once": 1.0,
+      "admitted_all_boots": true
+    },
+    "9m": {
+      "pass": true,
+      "median_cov_entry_once": 1.0,
+      "admitted_all_boots": true
+    }
+  },
+  "plus_overall_PASS": true,
+  "minus_by_boot": {
+    "regate1": {
+      "fp_empty_false_entry": 0,
+      "fp_empty_conj": {
+        "n_box": 171,
+        "n_central": 2,
+        "n_mti": 7,
+        "n_gate": 0
+      },
+      "fp_bg_false_entry": 0,
+      "fp_bg_false_gate_frames": 61,
+      "fp_bg_conj": {
+        "n_box": 439,
+        "n_central": 135,
+        "n_mti": 161,
+        "n_gate": 61
+      }
+    },
+    "regate2": {
+      "fp_empty_false_entry": 0,
+      "fp_empty_conj": {
+        "n_box": 161,
+        "n_central": 49,
+        "n_mti": 4,
+        "n_gate": 2
+      },
+      "fp_bg_false_entry": 0,
+      "fp_bg_false_gate_frames": 54,
+      "fp_bg_conj": {
+        "n_box": 406,
+        "n_central": 189,
+        "n_mti": 148,
+        "n_gate": 54
+      }
+    },
+    "regate3": {
+      "fp_empty_false_entry": 0,
+      "fp_empty_conj": {
+        "n_box": 167,
+        "n_central": 12,
+        "n_mti": 3,
+        "n_gate": 0
+      },
+      "fp_bg_false_entry": 0,
+      "fp_bg_false_gate_frames": 41,
+      "fp_bg_conj": {
+        "n_box": 424,
+        "n_central": 143,
+        "n_mti": 114,
+        "n_gate": 41
+      }
+    }
+  },
+  "minus_overall_PASS": true,
+  "verdict": "(+) PASS · (−) PASS",
+  "note_5m": {
+    "info_only": true,
+    "coverage_entry_once_median": 1.0,
+    "n_admitted": 3
+  }
+}

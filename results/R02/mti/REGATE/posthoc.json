@@ -1,0 +1,599 @@
+{
+  "step": "REGATE post-hoc (D1/D2/D4)",
+  "label": "ANALIZA POST-HOC ≠ bramka",
+  "boots": [
+    "regate1",
+    "regate2",
+    "regate3"
+  ],
+  "per_boot": {
+    "regate1": {
+      "n_records": 793,
+      "trace_complete": true,
+      "D1_attribution": {
+        "sweep_5m": {
+          "n_ticks": 56,
+          "n_box": 56,
+          "gate_on": 26,
+          "fail_central_frames": 20,
+          "fail_mti_frames": 10,
+          "limiting_conjunct": "central",
+          "apparent_motion_median": 0.26717,
+          "apparent_motion_q90": 0.9485,
+          "platform_vlat_median": 2.3946,
+          "mti_hit_apparent_motion_median": 0.20784,
+          "mti_miss_apparent_motion_median": 0.34104,
+          "n_hit_pairs": 29,
+          "n_miss_pairs": 26
+        },
+        "sweep_7m": {
+          "n_ticks": 57,
+          "n_box": 57,
+          "gate_on": 28,
+          "fail_central_frames": 17,
+          "fail_mti_frames": 12,
+          "limiting_conjunct": "central",
+          "apparent_motion_median": 0.18982,
+          "apparent_motion_q90": 0.72855,
+          "platform_vlat_median": 2.309,
+          "mti_hit_apparent_motion_median": 0.14601,
+          "mti_miss_apparent_motion_median": 0.30715,
+          "n_hit_pairs": 36,
+          "n_miss_pairs": 20
+        },
+        "sweep_9m": {
+          "n_ticks": 57,
+          "n_box": 57,
+          "gate_on": 39,
+          "fail_central_frames": 9,
+          "fail_mti_frames": 9,
+          "limiting_conjunct": "mti",
+          "apparent_motion_median": 0.14372,
+          "apparent_motion_q90": 0.67295,
+          "platform_vlat_median": 2.2731,
+          "mti_hit_apparent_motion_median": 0.10301,
+          "mti_miss_apparent_motion_median": 0.59336,
+          "n_hit_pairs": 42,
+          "n_miss_pairs": 14
+        }
+      },
+      "D2_ktable": {
+        "sweep_5m": {
+          "K2": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K3": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K4": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K5": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K6": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K7": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "gate_coverage_raw": 0.4643
+        },
+        "sweep_7m": {
+          "K2": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K3": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K4": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K5": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K6": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K7": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "gate_coverage_raw": 0.4912
+        },
+        "sweep_9m": {
+          "K2": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K3": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K4": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K5": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K6": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K7": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "gate_coverage_raw": 0.6842
+        }
+      },
+      "D4_mtip": {
+        "sweep_5m": {
+          "n_box_ticks": 56,
+          "baseline_B_perp_m": 18.308,
+          "bearing_az_spread_deg": 98.948,
+          "bearing_el_spread_deg": 75.61,
+          "note": "MTI-P pełny (rezydual triangulacji) wymaga sync bearing↔poza per klatka; tu dostępność geometrii (baseline) + rozrzut bearingu jako wykonalność.",
+          "feasible": true
+        },
+        "sweep_7m": {
+          "n_box_ticks": 57,
+          "baseline_B_perp_m": 9.95,
+          "bearing_az_spread_deg": 98.473,
+          "bearing_el_spread_deg": 75.857,
+          "note": "MTI-P pełny (rezydual triangulacji) wymaga sync bearing↔poza per klatka; tu dostępność geometrii (baseline) + rozrzut bearingu jako wykonalność.",
+          "feasible": true
+        },
+        "sweep_9m": {
+          "n_box_ticks": 57,
+          "baseline_B_perp_m": 7.802,
+          "bearing_az_spread_deg": 94.75,
+          "bearing_el_spread_deg": 70.083,
+          "note": "MTI-P pełny (rezydual triangulacji) wymaga sync bearing↔poza per klatka; tu dostępność geometrii (baseline) + rozrzut bearingu jako wykonalność.",
+          "feasible": true
+        }
+      }
+    },
+    "regate2": {
+      "n_records": 776,
+      "trace_complete": true,
+      "D1_attribution": {
+        "sweep_5m": {
+          "n_ticks": 53,
+          "n_box": 53,
+          "gate_on": 22,
+          "fail_central_frames": 20,
+          "fail_mti_frames": 11,
+          "limiting_conjunct": "central",
+          "apparent_motion_median": 0.46375,
+          "apparent_motion_q90": 0.90004,
+          "platform_vlat_median": 2.45,
+          "mti_hit_apparent_motion_median": 0.19329,
+          "mti_miss_apparent_motion_median": 0.57859,
+          "n_hit_pairs": 30,
+          "n_miss_pairs": 22
+        },
+        "sweep_7m": {
+          "n_ticks": 56,
+          "n_box": 56,
+          "gate_on": 24,
+          "fail_central_frames": 22,
+          "fail_mti_frames": 10,
+          "limiting_conjunct": "central",
+          "apparent_motion_median": 0.49125,
+          "apparent_motion_q90": 0.77731,
+          "platform_vlat_median": 2.287,
+          "mti_hit_apparent_motion_median": 0.17215,
+          "mti_miss_apparent_motion_median": 0.62944,
+          "n_hit_pairs": 36,
+          "n_miss_pairs": 19
+        },
+        "sweep_9m": {
+          "n_ticks": 56,
+          "n_box": 56,
+          "gate_on": 41,
+          "fail_central_frames": 9,
+          "fail_mti_frames": 6,
+          "limiting_conjunct": "central",
+          "apparent_motion_median": 0.15548,
+          "apparent_motion_q90": 0.72859,
+          "platform_vlat_median": 2.2418,
+          "mti_hit_apparent_motion_median": 0.08999,
+          "mti_miss_apparent_motion_median": 0.49849,
+          "n_hit_pairs": 44,
+          "n_miss_pairs": 11
+        }
+      },
+      "D2_ktable": {
+        "sweep_5m": {
+          "K2": {
+            "consec_entry": true,
+            "consec_cov_post": 0.8235,
+            "window_entry": true,
+            "window_cov_post": 0.8431
+          },
+          "K3": {
+            "consec_entry": true,
+            "consec_cov_post": 0.64,
+            "window_entry": true,
+            "window_cov_post": 0.8
+          },
+          "K4": {
+            "consec_entry": true,
+            "consec_cov_post": 0.6757,
+            "window_entry": true,
+            "window_cov_post": 0.7838
+          },
+          "K5": {
+            "consec_entry": true,
+            "consec_cov_post": 0.6667,
+            "window_entry": true,
+            "window_cov_post": 0.6667
+          },
+          "K6": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 0.6471
+          },
+          "K7": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 0.6364
+          },
+          "gate_coverage_raw": 0.4151
+        },
+        "sweep_7m": {
+          "K2": {
+            "consec_entry": true,
+            "consec_cov_post": 0.7593,
+            "window_entry": true,
+            "window_cov_post": 0.7593
+          },
+          "K3": {
+            "consec_entry": true,
+            "consec_cov_post": 0.7358,
+            "window_entry": true,
+            "window_cov_post": 0.7358
+          },
+          "K4": {
+            "consec_entry": true,
+            "consec_cov_post": 0.7115,
+            "window_entry": true,
+            "window_cov_post": 0.7115
+          },
+          "K5": {
+            "consec_entry": true,
+            "consec_cov_post": 0.4706,
+            "window_entry": true,
+            "window_cov_post": 0.6667
+          },
+          "K6": {
+            "consec_entry": true,
+            "consec_cov_post": 0.46,
+            "window_entry": true,
+            "window_cov_post": 0.46
+          },
+          "K7": {
+            "consec_entry": true,
+            "consec_cov_post": 0.449,
+            "window_entry": true,
+            "window_cov_post": 0.449
+          },
+          "gate_coverage_raw": 0.4286
+        },
+        "sweep_9m": {
+          "K2": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K3": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K4": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K5": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K6": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K7": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "gate_coverage_raw": 0.7321
+        }
+      },
+      "D4_mtip": {
+        "sweep_5m": {
+          "n_box_ticks": 53,
+          "baseline_B_perp_m": 15.05,
+          "bearing_az_spread_deg": 98.149,
+          "bearing_el_spread_deg": 78.963,
+          "note": "MTI-P pełny (rezydual triangulacji) wymaga sync bearing↔poza per klatka; tu dostępność geometrii (baseline) + rozrzut bearingu jako wykonalność.",
+          "feasible": true
+        },
+        "sweep_7m": {
+          "n_box_ticks": 56,
+          "baseline_B_perp_m": 9.943,
+          "bearing_az_spread_deg": 98.822,
+          "bearing_el_spread_deg": 73.906,
+          "note": "MTI-P pełny (rezydual triangulacji) wymaga sync bearing↔poza per klatka; tu dostępność geometrii (baseline) + rozrzut bearingu jako wykonalność.",
+          "feasible": true
+        },
+        "sweep_9m": {
+          "n_box_ticks": 56,
+          "baseline_B_perp_m": 8.073,
+          "bearing_az_spread_deg": 97.391,
+          "bearing_el_spread_deg": 65.924,
+          "note": "MTI-P pełny (rezydual triangulacji) wymaga sync bearing↔poza per klatka; tu dostępność geometrii (baseline) + rozrzut bearingu jako wykonalność.",
+          "feasible": true
+        }
+      }
+    },
+    "regate3": {
+      "n_records": 774,
+      "trace_complete": true,
+      "D1_attribution": {
+        "sweep_5m": {
+          "n_ticks": 52,
+          "n_box": 52,
+          "gate_on": 22,
+          "fail_central_frames": 22,
+          "fail_mti_frames": 8,
+          "limiting_conjunct": "central",
+          "apparent_motion_median": 0.51652,
+          "apparent_motion_q90": 0.95177,
+          "platform_vlat_median": 2.4352,
+          "mti_hit_apparent_motion_median": 0.3682,
+          "mti_miss_apparent_motion_median": 0.68986,
+          "n_hit_pairs": 29,
+          "n_miss_pairs": 22
+        },
+        "sweep_7m": {
+          "n_ticks": 56,
+          "n_box": 56,
+          "gate_on": 26,
+          "fail_central_frames": 16,
+          "fail_mti_frames": 14,
+          "limiting_conjunct": "central",
+          "apparent_motion_median": 0.31675,
+          "apparent_motion_q90": 0.82849,
+          "platform_vlat_median": 2.3276,
+          "mti_hit_apparent_motion_median": 0.2132,
+          "mti_miss_apparent_motion_median": 0.48583,
+          "n_hit_pairs": 34,
+          "n_miss_pairs": 21
+        },
+        "sweep_9m": {
+          "n_ticks": 56,
+          "n_box": 56,
+          "gate_on": 33,
+          "fail_central_frames": 21,
+          "fail_mti_frames": 2,
+          "limiting_conjunct": "central",
+          "apparent_motion_median": 0.18519,
+          "apparent_motion_q90": 0.92721,
+          "platform_vlat_median": 2.34,
+          "mti_hit_apparent_motion_median": 0.15759,
+          "mti_miss_apparent_motion_median": 0.85152,
+          "n_hit_pairs": 42,
+          "n_miss_pairs": 13
+        }
+      },
+      "D2_ktable": {
+        "sweep_5m": {
+          "K2": {
+            "consec_entry": true,
+            "consec_cov_post": 0.8776,
+            "window_entry": true,
+            "window_cov_post": 0.88
+          },
+          "K3": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 0.8571
+          },
+          "K4": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K5": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K6": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K7": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": false,
+            "window_cov_post": null
+          },
+          "gate_coverage_raw": 0.4231
+        },
+        "sweep_7m": {
+          "K2": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K3": {
+            "consec_entry": true,
+            "consec_cov_post": 1.0,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K4": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K5": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K6": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "K7": {
+            "consec_entry": false,
+            "consec_cov_post": null,
+            "window_entry": true,
+            "window_cov_post": 1.0
+          },
+          "gate_coverage_raw": 0.4643
+        },
+        "sweep_9m": {
+          "K2": {
+            "consec_entry": true,
+            "consec_cov_post": 0.9,
+            "window_entry": true,
+            "window_cov_post": 0.9
+          },
+          "K3": {
+            "consec_entry": true,
+            "consec_cov_post": 0.8571,
+            "window_entry": true,
+            "window_cov_post": 0.8571
+          },
+          "K4": {
+            "consec_entry": true,
+            "consec_cov_post": 0.8857,
+            "window_entry": true,
+            "window_cov_post": 0.8043
+          },
+          "K5": {
+            "consec_entry": true,
+            "consec_cov_post": 0.8529,
+            "window_entry": true,
+            "window_cov_post": 0.8529
+          },
+          "K6": {
+            "consec_entry": true,
+            "consec_cov_post": 0.8182,
+            "window_entry": true,
+            "window_cov_post": 0.8182
+          },
+          "K7": {
+            "consec_entry": true,
+            "consec_cov_post": 0.7812,
+            "window_entry": true,
+            "window_cov_post": 0.7812
+          },
+          "gate_coverage_raw": 0.5893
+        }
+      },
+      "D4_mtip": {
+        "sweep_5m": {
+          "n_box_ticks": 52,
+          "baseline_B_perp_m": 18.679,
+          "bearing_az_spread_deg": 98.394,
+          "bearing_el_spread_deg": 78.949,
+          "note": "MTI-P pełny (rezydual triangulacji) wymaga sync bearing↔poza per klatka; tu dostępność geometrii (baseline) + rozrzut bearingu jako wykonalność.",
+          "feasible": true
+        },
+        "sweep_7m": {
+          "n_box_ticks": 56,
+          "baseline_B_perp_m": 10.443,
+          "bearing_az_spread_deg": 98.665,
+          "bearing_el_spread_deg": 74.125,
+          "note": "MTI-P pełny (rezydual triangulacji) wymaga sync bearing↔poza per klatka; tu dostępność geometrii (baseline) + rozrzut bearingu jako wykonalność.",
+          "feasible": true
+        },
+        "sweep_9m": {
+          "n_box_ticks": 56,
+          "baseline_B_perp_m": 8.576,
+          "bearing_az_spread_deg": 96.809,
+          "bearing_el_spread_deg": 68.819,
+          "note": "MTI-P pełny (rezydual triangulacji) wymaga sync bearing↔poza per klatka; tu dostępność geometrii (baseline) + rozrzut bearingu jako wykonalność.",
+          "feasible": true
+        }
+      }
+    }
+  }
+}
