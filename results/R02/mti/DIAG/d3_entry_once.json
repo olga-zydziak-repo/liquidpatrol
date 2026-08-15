@@ -1,0 +1,116 @@
+{
+  "step": "D3 — PROJEKCJA ENTRY-once (MTI tylko do admisji)",
+  "label": "PROJEKCJA OFFLINE ≠ POMIAR",
+  "source": "results/R02/mti/B4/{fix1,fix2,fix3}/result.json (agregaty; brak śladu per-tick)",
+  "definition": "MTI wymagane WYŁĄCZNIE do ENTRY; po admisji kanał=struktura (coverage_seen); EXPIRE/sufit/age bez zmian; utrata struktury→starzenie jak dotąd",
+  "plus_criterion_entry_once": {
+    "5m": {
+      "boots_admitted": "2/3",
+      "admission_flags": [
+        true,
+        true,
+        false
+      ],
+      "time_to_entry_s": [
+        2.73,
+        3.08,
+        null
+      ],
+      "time_to_entry_median_s": 2.905,
+      "coverage_seen": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "coverage_locked_post_entry": [
+        1.0,
+        1.0,
+        null
+      ],
+      "operative_coverage_entry_once": [
+        1.0,
+        1.0,
+        0.0
+      ]
+    },
+    "7m": {
+      "boots_admitted": "3/3",
+      "admission_flags": [
+        true,
+        true,
+        true
+      ],
+      "time_to_entry_s": [
+        5.29,
+        1.66,
+        2.64
+      ],
+      "time_to_entry_median_s": 2.64,
+      "coverage_seen": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "coverage_locked_post_entry": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "operative_coverage_entry_once": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "9m": {
+      "boots_admitted": "3/3",
+      "admission_flags": [
+        true,
+        true,
+        true
+      ],
+      "time_to_entry_s": [
+        7.39,
+        2.18,
+        4.23
+      ],
+      "time_to_entry_median_s": 4.23,
+      "coverage_seen": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "coverage_locked_post_entry": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "operative_coverage_entry_once": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  "minus_criterion_entry_once": {
+    "fix1": {
+      "fp_empty_false_entry": 0,
+      "fp_bg_false_entry": 0,
+      "fp_bg_false_gate_frames": 50
+    },
+    "fix2": {
+      "fp_empty_false_entry": 0,
+      "fp_bg_false_entry": 0,
+      "fp_bg_false_gate_frames": 26
+    },
+    "fix3": {
+      "fp_empty_false_entry": 0,
+      "fp_bg_false_entry": 0,
+      "fp_bg_false_gate_frames": 46
+    }
+  },
+  "verdict_plus": "PROJEKCJA: (+) pod ENTRY-once — admisja 3/3 @7m i @9m, 2/3 @5m (fix3@5m brak ENTRY: cov_gate=0.393 ale 0 serii K=3 spójnych). Pokrycie operatywne po admisji = coverage_seen = 1.0 wszędzie gdzie admisja.",
+  "verdict_minus": "PROJEKCJA: (−) NIENARUSZONE — false_entry=0 na fp_empty ∧ fp_bg ×3 booty; ENTRY-once nie zmienia progu admisji, więc 0 fałszywych ENTRY zostaje 0.",
+  "caveat": "coverage_locked_post_entry=1.0 to częściowo ZOH-age hold, ALE coverage_seen=1.0 (YOLO trafia każdy tick) ⇒ lock realnie odświeżany, nie tylko dryfuje ZOH. Jedyna komórka bez admisji = fix3@5m (najbliższy zasięg = najgorszy, zgodne z note_5m).",
+  "requires_live_rebracket": true
+}

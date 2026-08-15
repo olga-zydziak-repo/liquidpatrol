@@ -1,0 +1,28 @@
+{
+  "step": "D0 — inwentarz braków danych (blokada D1/D2/D4)",
+  "label": "RAPORT BRAKÓW (SR-D1: brakujące dane = raport braków, nie bieg; SR-D4)",
+  "root_cause": "mti_flight.py buduje listę recs (per-tick: sim_t, has_box, conf, central, n_comps, mti_ok, gate, entry, locked) W PAMIĘCI, agreguje summ()/count, i JĄ PORZUCA. Do dysku trafia tylko result.json (agregaty per-sweep). Żaden log (agent/bridge/stack/px4/mti) nie zawiera śladu per-tick — potwierdzone grepem (0 trafień mti_ok|bearing|gate=|tick=).",
+  "persisted_per_sweep": [
+    "coverage_seen, coverage_gate, coverage_locked, coverage_locked_post_entry (skalary)",
+    "n_entry, false_entry, time_to_entry_s (skalary)",
+    "conf_passive summ(n,median,q1,q3,max)", "mti_comps_per_tick summ", "mti_comps_stream summ",
+    "false_gate_frames (skalar, tylko fp_bg)", "pairing content_resid median/p95"
+  ],
+  "missing_for_D1_mechanism": {
+    "target_apparent_motion_|dbearing|_per_frame": "NIEOBECNE — środek boxa (cx,cy) NIGDY nie zapisany w rec (tylko bool `central`); recs porzucone.",
+    "platform_maneuver_|omega|_|v_lat|_per_frame": "NIEOBECNE — vehicle_attitude buforowane w sen.att, ale porzucone; przeżywa tylko pairing residual median.",
+    "mti_hit_miss_per_frame": "NIEOBECNE — mti_ok/gate per tick w porzuconych recs; przeżywa tylko frakcja agregatowa coverage_gate.",
+    "verdict": "D1 NIEWYKONALNE z artefaktów. Hipoteza mechanizmu (pościg nulluje pozorny ruch celu; paralaksa tła zjadana przez persist) POZOSTAJE NIETESTOWANA — ani potwierdzona ani obalona."
+  },
+  "missing_for_D2_windowK": {
+    "per_tick_gate_boolean_sequence": "NIEOBECNE — logika okno→streak→ENTRY jest ZALEŻNA OD KOLEJNOŚCI; znamy tylko #gate_frames=round(cov_gate·n_ticks) i #false_gate_frames, NIE ich układ czasowy.",
+    "verdict": "D2 NIEWYKONALNE na realnych logach. Symulator projekcji ZBUDOWANY i zwalidowany (test_gate_sim 8/8, SR-D3) jako gotowy instrument, ale brak wejścia per-tick ⇒ żadne ZMIERZONE K nie może być wybrane. Wybór K wymaga biegu z logowaniem per-tick."
+  },
+  "missing_for_D4_MTI_P": {
+    "per_track_bearing_history": "NIEOBECNE — historia bearingu tracku nie logowana.",
+    "synchronized_ego_pose_per_frame": "NIEOBECNE — węzeł subskrybuje TYLKO vehicle_attitude; brak vehicle_local_position/odometrii; position_velocity_ned czytane RAZ (alt do startu).",
+    "baseline_B_perp_per_run": "NIEWYZNACZALNE — brak translacji ego per klatka ⇒ brak geometrii triangulacji.",
+    "verdict": "D4 ZATRZYMANE na braku pól (SR-D4). MTI-P (test anty-statyczny triangulacją) niewykonalny bez re-instrumentacji: +bearing history, +vehicle_local_position, +baseline. Dodatkowo pościg dead-ahead bywa zdegenerowany (czysty tail-chase, B_perp≈0)."
+  },
+  "note_gate_attribution": "Braki blokują też ATRYBUCJĘ (+) FAIL: gate=box∧central∧mti_ok zapisany łącznie; central vs mti_ok per tick w porzuconych recs. Z przeżywających agregatów NIE DA SIĘ rozdzielić, czy klatkowy spadek gate to człon MTI czy centralność. Teza RAPORT_MTI 'człon MTI przerywany klatkowo' opiera się na obserwacji NIE-utrwalonej."
+}
