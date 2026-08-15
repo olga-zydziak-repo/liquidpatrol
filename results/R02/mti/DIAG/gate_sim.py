@@ -77,7 +77,8 @@ def replay_gate(gate_seq, mode="consecutive", K=ENTRY_K, M=None,
             if admit:
                 locked = True
                 ticks_since_true = 0
-                entry_tick = t
+                if entry_tick is None:      # entry_tick = PIERWSZA admisja (zgodne z żywą bramą; re-ENTRY nie nadpisuje)
+                    entry_tick = t
                 n_entry += 1
         else:
             # --- faza LOCKED: ZOH-age hold ---

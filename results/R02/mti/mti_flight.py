@@ -20,7 +20,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
 from sensor_msgs.msg import Image
-from px4_msgs.msg import VehicleAttitude
+from px4_msgs.msg import VehicleAttitude, VehicleLocalPosition
 
 sys.path.insert(0, "/home/olga/projects/liquidpatrol")
 from r02.mti import MTITracker, MTIParams, box_matches_component
@@ -74,9 +74,11 @@ class Sensors(Node):
         super().__init__("mti_sensors")
         self.att = []          # (recv, ts_s_epoch, q[w,x,y,z])
         self.frames = []       # (recv, sim_s, frame)
+        self.lpos = None       # ostatnia poza platformy (REGATE R-1/D1/D4): dict pos+vel NED
         self.O = None          # ZAMROŻONY offset epoch↔sim (PRE_MTI R1); parowanie po TREŚCI, nie recv
         self.pair_resid = []   # rezyduum parowania po treści [s] (stabilność SR-M1)
         self.create_subscription(VehicleAttitude, "/fmu/out/vehicle_attitude", self._att, qos_be(50))
+        self.create_subscription(VehicleLocalPosition, "/fmu/out/vehicle_local_position", self._lpos, qos_be(20))
         if IMG_TOPIC:
             self.create_subscription(Image, IMG_TOPIC, self._img, qos_be(10))
 
@@ -85,6 +87,16 @@ class Sensors(Node):
         self.att.append((time.monotonic(), m.timestamp * 1e-6, q))
         if len(self.att) > 600:
             self.att = self.att[-600:]
+
+    def _lpos(self, m):
+        # ego-poza platformy per tick (karmi D1 manewr / D4 baseline post-hoc)
+        self.lpos = {"ts_s": m.timestamp * 1e-6,
+                     "x": round(float(m.x), 3), "y": round(float(m.y), 3), "z": round(float(m.z), 3),
+                     "vx": round(float(m.vx), 3), "vy": round(float(m.vy), 3), "vz": round(float(m.vz), 3),
+                     "xy_valid": bool(m.xy_valid), "z_valid": bool(m.z_valid)}
+
+    def latest_lpos(self):
+        return self.lpos
 
     def _img(self, msg):
         h, w = msg.height, msg.width
@@ -254,8 +266,14 @@ async def main():
             await asyncio.sleep(2.0); i += 1
         await d.offboard.set_velocity_ned(VelocityNedYaw(0, 0, 0, 0))
 
+    # REGATE R-1/R-2: per-tick trace = artefakt PIERWSZEJ KLASY (nigdy porzucany przy agregacji);
+    # koniunkty box/central/mti_ok logowane OSOBNO. CUR["phase"] taguje rekord fazą.
+    TRACE = []
+    CUR = {"phase": None}
+
     def decide_once(ch, gt_present):
-        """Jeden tik decyzyjny @DECISION_HZ: YOLO struktura + MTI koincydencja + kanał. Zwraca rekord."""
+        """Jeden tik decyzyjny @DECISION_HZ: YOLO struktura + MTI koincydencja + kanał. Zwraca rekord
+        i DOPISUJE go do TRACE (trace.jsonl) — koniunkty osobno, cx/cy/w/h/age, ego-poza platformy."""
         frame = STATE["last_frame"]; sim_t = STATE["last_sim"]; comps = list(STATE["comps"])
         if frame is None or sim_t is None:
             return None
@@ -271,9 +289,19 @@ async def main():
         central = box is not None and box.edge_dist() >= cfg.entry_edge_margin
         ev = ch.on_frame(box, sim_t, gt_present=gt_present, mti_ok=mti_ok)
         gate = bool(box is not None and central and mti_ok)   # struktura∧MTI (admisja tej klatki)
-        return {"sim_t": round(sim_t, 3), "has_box": box is not None, "conf": conf,
-                "central": central, "n_comps": len(comps), "mti_ok": bool(mti_ok),
-                "gate": gate, "entry": ev == EV_ENTRY, "locked": ch.locked}
+        cv = ch.sample(sim_t)                                 # ChannelValue|None → age po locku
+        rec = {"phase": CUR["phase"], "t_mono": round(time.monotonic(), 4), "sim_t": round(sim_t, 3),
+               "has_box": box is not None, "conf": conf,
+               "cx": round(box.cx, 4) if box is not None else None,
+               "cy": round(box.cy, 4) if box is not None else None,
+               "w": round(box.w, 4) if box is not None else None,
+               "h": round(box.h, 4) if box is not None else None,
+               "central": bool(central), "mti_ok": bool(mti_ok), "n_comps": len(comps),
+               "gate": gate, "entry": ev == EV_ENTRY, "locked": ch.locked,
+               "age": (cv.age_s if cv is not None else None),
+               "lpos": sen.latest_lpos()}
+        TRACE.append(rec)
+        return rec
 
     results = {"world": WORLD, "world_hash": None, "HEADLESS": os.environ.get("HEADLESS"),
                "instrument": "mav/monotonic; sim_t z header klatki; XRCE vehicle_attitude 100Hz",
@@ -283,6 +311,7 @@ async def main():
 
     async def run_dwell(label, R, dur, gt_present):
         ch = TargetChannel(cfg)
+        CUR["phase"] = label
         RP["R"] = R; RP["t0"] = time.monotonic()
         RP["mode"] = "track" if gt_present else "far"
         await asyncio.sleep(2.0)   # niech re-placer ustawi cel + MTI się rozgrzeje
@@ -309,12 +338,22 @@ async def main():
         false_entry = sum(1 for r in recs if r["entry"] and gt_present is False)
         confs = [r["conf"] for r in recs if r["conf"] is not None]
         comps_dist = [r["n_comps"] for r in recs]
+        # ENTRY-once (ANEKS_MTI_2 AM2.2): coverage kanału PO admisji = frakcja LOCKED od 1. ENTRY.
+        # To metryka (+) w zrewidowanej definicji; coverage_gate zostaje jako telemetria/dekompozycja.
+        cov_entry_once = round(locked_post / len(recs_post), 3) if recs_post else None
+        # dekompozycja koniunktów (R-2): co faktycznie strzelało per tick
+        conj = {"n_box": sum(1 for r in recs if r["has_box"]),
+                "n_central": sum(1 for r in recs if r["has_box"] and r["central"]),
+                "n_mti": sum(1 for r in recs if r["has_box"] and r["mti_ok"]),
+                "n_gate": gate}
         return {
             "label": label, "R": R, "dur_s": round(time.monotonic() - t_start, 1), "gt_present": gt_present,
             "n_ticks": n, "coverage_seen": round(seen / n, 3) if n else None,
             "coverage_gate": round(gate / n, 3) if n else None,
             "coverage_locked": round(locked / n, 3) if n else None,
             "coverage_locked_post_entry": round(locked_post / len(recs_post), 3) if recs_post else None,
+            "coverage_entry_once": cov_entry_once,   # (+) metryka ENTRY-once
+            "conj": conj,
             "n_entry": n_entry, "false_entry": false_entry,
             "time_to_entry_s": t_entry,
             "conf_passive": summ(confs), "mti_comps_per_tick": summ(comps_dist),
@@ -327,24 +366,29 @@ async def main():
             res = await run_dwell(f"sweep_{R:g}m", R, DWELL_S, gt_present=True)
             results["phases"][f"sweep_{R:g}m"] = res
             print(f"[mti] sweep {R:g}m cov_seen={res['coverage_seen']} cov_gate={res['coverage_gate']} "
-                  f"n_entry={res['n_entry']} t_entry={res['time_to_entry_s']} comps={res['mti_comps_per_tick']}", flush=True)
+                  f"cov_entry_once={res['coverage_entry_once']} n_entry={res['n_entry']} t_entry={res['time_to_entry_s']} "
+                  f"conj={res['conj']} comps={res['mti_comps_per_tick']}", flush=True)
     # --- FP empty (zawis, brak intruza) ---
     if "fp_empty" in PHASES:
         RP["mode"] = "far"; await asyncio.sleep(2.0)
-        ch = TargetChannel(cfg); t0 = time.monotonic(); recs = []
+        ch = TargetChannel(cfg); CUR["phase"] = "fp_empty"; t0 = time.monotonic(); recs = []
         while time.monotonic() - t0 < FP_EMPTY_S:
             r = decide_once(ch, gt_present=False)
             if r: recs.append(r)
             await asyncio.sleep(1.0 / DECISION_HZ)
         fe = sum(1 for r in recs if r["entry"]); mins = (time.monotonic() - t0) / 60.0
+        conj = {"n_box": sum(1 for r in recs if r["has_box"]),
+                "n_central": sum(1 for r in recs if r["has_box"] and r["central"]),
+                "n_mti": sum(1 for r in recs if r["has_box"] and r["mti_ok"]),
+                "n_gate": sum(1 for r in recs if r["gate"])}
         results["phases"]["fp_empty"] = {"label": "fp_empty_hover", "dur_s": round(time.monotonic()-t0,1),
             "n_ticks": len(recs), "false_entry": fe, "eps_fp_per_min": round(fe / mins, 3) if mins else None,
-            "mti_comps_per_tick": summ([r["n_comps"] for r in recs])}
+            "false_gate_conj": conj, "mti_comps_per_tick": summ([r["n_comps"] for r in recs])}
         print(f"[mti] FP_EMPTY false_entry={fe} eps_fp/min={results['phases']['fp_empty']['eps_fp_per_min']}", flush=True)
     # --- FP bg-motion (OBSERVE-motion, brak intruza, teksturowany grunt) ---
     if "fp_bg" in PHASES:
         RP["mode"] = "far"; await asyncio.sleep(1.0)
-        ch = TargetChannel(cfg); t0 = time.monotonic(); recs = []
+        ch = TargetChannel(cfg); CUR["phase"] = "fp_bg"; t0 = time.monotonic(); recs = []
         motion_task = asyncio.ensure_future(observe_motion(FP_BG_S))
         while time.monotonic() - t0 < FP_BG_S:
             r = decide_once(ch, gt_present=False)
@@ -353,9 +397,14 @@ async def main():
         await motion_task
         fe = sum(1 for r in recs if r["entry"]); mins = (time.monotonic() - t0) / 60.0
         gatef = sum(1 for r in recs if r["gate"])
+        conj = {"n_box": sum(1 for r in recs if r["has_box"]),
+                "n_central": sum(1 for r in recs if r["has_box"] and r["central"]),
+                "n_mti": sum(1 for r in recs if r["has_box"] and r["mti_ok"]),
+                "n_gate": gatef}
         results["phases"]["fp_bg"] = {"label": "fp_bg_observe_motion", "dur_s": round(time.monotonic()-t0,1),
             "n_ticks": len(recs), "false_entry": fe, "eps_fp_per_min": round(fe / mins, 3) if mins else None,
-            "false_gate_frames": gatef, "mti_comps_per_tick": summ([r["n_comps"] for r in recs])}
+            "false_gate_frames": gatef, "false_gate_conj": conj,
+            "mti_comps_per_tick": summ([r["n_comps"] for r in recs])}
         print(f"[mti] FP_BG false_entry={fe} eps_fp/min={results['phases']['fp_bg']['eps_fp_per_min']} "
               f"false_gate_frames={gatef}", flush=True)
 
@@ -365,8 +414,18 @@ async def main():
                           "content_resid_median_ms": round(1000 * statistics.median(sen.pair_resid), 2) if sen.pair_resid else None,
                           "content_resid_p95_ms": round(1000 * pctl(sen.pair_resid, 95), 2) if len(sen.pair_resid) > 10 else None,
                           "n_pairs": len(sen.pair_resid)}
+    # REGATE R-1: trace pierwszej klasy → trace.jsonl; kompletność asercją (SR-R6)
+    trace_path = os.path.join(OUTDIR, "trace.jsonl")
+    with open(trace_path, "w") as tf:
+        for r in TRACE:
+            tf.write(json.dumps(r, ensure_ascii=False) + "\n")
+    n_ticks_total = sum(p.get("n_ticks", 0) for p in results["phases"].values())
+    results["trace"] = {"path": "trace.jsonl", "n_records": len(TRACE), "n_ticks_total": n_ticks_total,
+                        "complete": len(TRACE) == n_ticks_total}
     json.dump(results, open(os.path.join(OUTDIR, "result.json"), "w"), indent=2, ensure_ascii=False)
+    print(f"[mti] TRACE n={len(TRACE)} n_ticks_total={n_ticks_total} complete={len(TRACE)==n_ticks_total}", flush=True)
     print(f"[mti] DONE rtf {results['rtf_start']}->{results['rtf_end']} pairing={results['pairing']}", flush=True)
+    assert len(TRACE) == n_ticks_total, f"TRACE niekompletny: {len(TRACE)} != {n_ticks_total} (SR-R6)"
     try:
         await d.offboard.stop(); await d.action.land(); await asyncio.sleep(3)
     except Exception: pass
