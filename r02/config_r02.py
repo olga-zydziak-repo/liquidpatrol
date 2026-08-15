@@ -96,13 +96,25 @@ A4_HABITAT_CONSTS = (
 )
 
 
+# --- MTI ENTRY-gate (PROMPT_MTI_BUILD B3, ratyfikowane R-M*) ------------------
+# Brama ENTRY = STRUKTURA ∧ MTI. Gdy `entry_require_mti=True`: conf ZDEGRADOWANE DO TELEMETRII PASYWNEJ
+# (logowane, NIGDY w admisji — symetria z `eph` z R0.3a: sygnał obecny w telemetrii, poza decyzją).
+# θ_conf (THETA_CONF) POZOSTAJE ZDEFINIOWANE ale PRZESTAJE BYĆ BRAMĄ (ratyfikowana zmiana ZNACZENIA,
+# nie zmiana progu — θ_conf NIETYKALNY). Domyślnie False → zachowanie R0.2 (conf-floor) nietknięte
+# (GT-fed / test_channel / frozen). MTI-gate włączają biegi demo (entry_require_mti=True).
+ENTRY_REQUIRE_MTI_DEFAULT = False
+MTI_CENTER_THR = 0.12            # koincydencja box↔komponent MTI (środek znorm.) — struktura ∧ MTI
+
+
 @dataclass(frozen=True)
 class ChannelConfig:
     """Config kanału ZOH-age (5-dim, BEZ conf). Współdzieli DT z osłoną."""
     entry_k: int = ENTRY_K
     entry_move_thr: float = ENTRY_MOVE_THR
     entry_edge_margin: float = ENTRY_EDGE_MARGIN   # Krok 2/C: kandydat ENTRY musi być centralny
-    entry_theta_conf: float = THETA_CONF           # R02-A6: conf-floor w ENTRY-admisji (upstream)
+    entry_theta_conf: float = THETA_CONF           # R02-A6: conf-floor (aktywny TYLKO gdy NIE require_mti)
+    entry_require_mti: bool = ENTRY_REQUIRE_MTI_DEFAULT  # B3: brama struktura∧MTI; conf pasywne gdy True
+    mti_center_thr: float = MTI_CENTER_THR
     l_deliver_s: float = L_DELIVER_S
     theta_age_s: float = THETA_AGE_S
     det_dt: float = DET_DT

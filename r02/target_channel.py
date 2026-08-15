@@ -89,28 +89,36 @@ class TargetChannel:
         self.events = []                # [(t, event, detail)]
 
     # -- klatka detektora (kadencja 1 Hz) -----------------------------------
-    def on_frame(self, box, t, gt_present: bool | None = None):
+    def on_frame(self, box, t, gt_present: bool | None = None, mti_ok: bool | None = None):
         """Jedna klatka detektora. box: Box|None (top-1, BEZ bramkowania conf — A1). t: sim-time [s].
         gt_present: opcjonalny ground-truth (czy intruz realnie w FOV) — TYLKO do liczenia ε_FP w bramce,
-        NIE wpływa na logikę kanału. Zwraca zdarzenie (EV_ENTRY/EXPIRE/REFRESH/None)."""
+        NIE wpływa na logikę kanału. mti_ok: czy box koincyduje z komponentem MTI (STRUKTURA ∧ MTI, B3) —
+        używane WYŁĄCZNIE gdy cfg.entry_require_mti. Zwraca zdarzenie (EV_ENTRY/EXPIRE/REFRESH/None)."""
         ev = EV_NONE
         if self.locked:
             ev = self._on_frame_locked(box, t, gt_present)
         else:
-            ev = self._on_frame_unlocked(box, t, gt_present)
+            ev = self._on_frame_unlocked(box, t, gt_present, mti_ok)
         if ev is not None:
             self.events.append((round(t, 4), ev, self._detail()))
         return ev
 
-    def _on_frame_unlocked(self, box, t, gt_present):
+    def _on_frame_unlocked(self, box, t, gt_present, mti_ok=None):
         # ENTRY-admisja (KOMBINACJA, upstream locka): box musi być CENTRALNY (edge-margin, geometryczny,
-        # A1-preserving) ORAZ przekroczyć conf-floor θ_conf (R02-A6). conf UŻYTY WYŁĄCZNIE tu (admisja
-        # ENTRY) — NIGDY nie wchodzi do wartości kanału (5-dim), osłony, P1/P5. Box odrzucony = BRAK boxa
-        # dla serii ENTRY. Refresh locka (poniżej) NIE stosuje ani edge-margin, ani conf-floor.
+        # A1-preserving). Druga brama zależy od trybu:
+        #   - cfg.entry_require_mti=True (DEMO/MTI, B3): box musi koincydować z KOMPONENTEM MTI (mti_ok).
+        #     conf ZDEGRADOWANE DO TELEMETRII PASYWNEJ — logowane w Box.conf, NIGDY w admisji (symetria z
+        #     eph z R0.3a). θ_conf pozostaje zdefiniowane, przestaje być bramą (ratyfikowana zmiana znaczenia).
+        #   - cfg.entry_require_mti=False (R0.2/GT-fed/frozen): conf-floor θ_conf (R02-A6) jak dotąd.
+        # conf/MTI UŻYTE WYŁĄCZNIE tu (admisja ENTRY) — NIGDY w wartości kanału (5-dim), osłonie, P1/P5.
+        # Refresh locka (poniżej) NIE stosuje ani edge-margin, ani conf/MTI.
         if box is not None and box.edge_dist() < self.cfg.entry_edge_margin:
             box = None
-        if box is not None and box.conf is not None and box.conf < self.cfg.entry_theta_conf:
-            box = None                      # R02-A6 conf-floor (ENTRY-admisja) — conf nie wchodzi do kanału
+        if self.cfg.entry_require_mti:
+            if box is not None and not mti_ok:
+                box = None                  # B3: STRUKTURA ∧ MTI — brak koincydencji ruchu ⇒ brak ENTRY
+        elif box is not None and box.conf is not None and box.conf < self.cfg.entry_theta_conf:
+            box = None                      # R02-A6 conf-floor (legacy) — conf nie wchodzi do kanału
         if box is None:
             # brak boxa → seria się zrywa
             self.state = SEARCHING; self.streak = 0; self.anchor = None; self.t_first = None
