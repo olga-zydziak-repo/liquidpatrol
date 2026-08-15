@@ -56,6 +56,13 @@ Kryteria ZAMROŻONE przed pomiarem (`PRE_R02C` / `PRE_MTI`), świeży boot per b
   Detekcja struktury jest kompletna (`coverage_seen = 1.0` wszędzie — YOLO widzi cel co klatkę), ale
   **człon MTI jest przerywany klatkowo** (cel w geometrii OBSERVE-motion daje ruch derotowany tylko w
   części klatek; między impulsami ruchu komponent MTI zanika) → iloczyn struktura∧MTI < 0.8/klatkę.
+  > **[KOREKTA R-3, 2026-08-16 — sesja DIAG/REGATE]** Zdanie „człon MTI przerywany klatkowo" opierało
+  > się na obserwacji **nie-utrwalonej**: `gate = box∧central∧mti_ok` był agregowany łącznie, a per-tick
+  > `recs` porzucane (`RAPORT_MTI_DIAG` D0) — **dekompozycja koniunkcji jest niedostępna z agregatów**,
+  > więc atrybucja spadku do członu MTI (vs `central`) była nieuprawniona. **Rozstrzyga trace re-bramki**
+  > (REGATE, koniunkty logowane osobno — R-2). Ponadto (+) FAIL był artefaktem POMIARU: metryka
+  > `coverage_gate` liczyła koniunkcję każdą klatkę, choć brama wymaga `mti_ok` tylko do admisji
+  > (ENTRY-once, `ANEKS_MTI_2`) — patrz `RAPORT_MTI_REGATE.md`.
 
 **Dźwignie (rozdzielczość → FOV → gimbal) POZOSTAJĄ ZAPARKOWANE** (SR-M4/R-M3). FAIL na (+) NIE
 uruchamia żadnej „przy okazji" — zwrot dźwigni wyłącznie nową decyzją Olgi z nowym dowodem. STOP z
@@ -211,3 +218,8 @@ sekundach, `coverage_seen=1.0`, `coverage_locked_post_entry=1.0`), lecz KLATKOWA
 osiąga zamrożonego progu 0.8 bo człon MTI jest przerywany w geometrii OBSERVE-motion. Rdzeń bezpieczeństwa
 dowiedziony niezależnie od percepcji (R-M4, certy 6/6). Zwrot dźwigni (rozdzielczość → FOV → gimbal) lub
 rewizja definicji (+) na `coverage_locked` — **wyłącznie decyzją Olgi**.
+
+> **[KOREKTA R-3, 2026-08-16]** Rewizja definicji (+) **RATYFIKOWANA** przez Olgę jako `ANEKS_MTI_2`
+> (ENTRY-once): (+) mierzone jako `coverage_entry_once` (LOCKED po admisji) ≥0.8, nie per-frame
+> `coverage_gate`. „Człon MTI przerywany klatkowo" to atrybucja nieuprawniona z agregatów (koniunkcja
+> logowana łącznie); rozstrzyga trace re-bramki. Wynik pomiaru: `RAPORT_MTI_REGATE.md`.

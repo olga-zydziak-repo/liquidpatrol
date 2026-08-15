@@ -200,3 +200,62 @@ kanału 5-dim → **zero re-certów P1/P5.** `DEADMAN_TICKS=6` nietknięte.
 7. **SR-M1 unit-test instrumentu** = pierwszy krok buildu (przed liczbą na realnych klatkach).
 
 Recon domknięty (R1–R5), read-only. **Build MTI = osobny prompt PO ratyfikacji.** Push = Olga.
+
+---
+
+## ANEKS_MTI_2 — ENTRY-once + trace pierwszej klasy (Olga, 2026-08-16, WIĄŻĄCE)
+
+Ratyfikacja rekomendacji sesji DIAG (`RAPORT_MTI_DIAG.md`, wariant **(b) ENTRY-once**) z riderami
+R-1…R-5. Wzorzec rewizji **A-drift→A-plateau**: definicja per-frame AND NIE jest kasowana — zostaje
+w historii jako **zrewidowana pomiarem**. Kryteria `PRE_R02C` **NIETKNIĘTE** (SR-M3 stoi); zmienia się
+**miejsce pomiaru coverage**, nie próg.
+
+### AM2.0 — Znalezisko implementacyjne (fundament rewizji)
+
+Inspekcja `r02/target_channel.py` (sesja REGATE): brama **JUŻ** realizuje admission-only MTI.
+`_on_frame_unlocked` (ścieżka admisji) wymaga `mti_ok`; `_on_frame_locked` (po locku) **nie sprawdza
+`mti_ok` w ogóle** — po admisji kanał odświeża się samą strukturą (`box`). Zatem **B5 (+) FAIL był
+ARTEFAKTEM POMIARU**: metryka `coverage_gate` w `mti_flight.py` liczyła pełną koniunkcję
+`box∧central∧mti_ok` KAŻDĄ klatkę, choć kanał wymaga jej wyłącznie do admisji. ENTRY-once nie jest
+więc zmianą logiki kanału — jest **korektą metryki (+)** do faktycznego zachowania bramy. To wprost
+domyka SR-R4 (rdzeń `shield.step`/kanał 5-dim nietknięty).
+
+### AM2.1 — Definicja bramy ENTRY-once (formalna)
+
+- **ADMISJA (ENTRY):** pełna koniunkcja `box ∧ central ∧ mti_ok` przez persist — **bez zmian** względem
+  dotychczasowej bramy (anti-clutter na wejściu).
+- **Po admisji:** kanał karmi **struktura** (`box`); `central`/`mti_ok` stają się **telemetrią**
+  (logowane, nie bramkujące).
+- **EXPIRE / sufit wieku θ_age / age** — **bez zmian**.
+- **Po EXPIRE ponowna admisja = ponownie pełna koniunkcja** — anti-clutter zachowany na KAŻDYM
+  wejściu, nie tylko pierwszym.
+
+### AM2.2 — Miejsce pomiaru coverage (kryteria PRE_R02C nietknięte)
+
+- **(+)** dla dystansu d: **ENTRY osiągnięte** ORAZ **coverage kanału PO admisji ≥ 0.8** (mediana per
+  boot); **czas-do-ENTRY** raportowany. Metryka = frakcja ticków w stanie LOCKED liczona OD pierwszego
+  ENTRY (`coverage_entry_once`); `coverage_gate` (per-frame AND) zostaje jako telemetria/dekompozycja.
+- **(−)** **0 fałszywych ENTRY** na obu scenach (pusta ∧ ruch tła), **pełne długości biegów jak w B5**
+  (fp_empty ~90 s, fp_bg ~240 s /boot × ≥3 booty). Dodatkowo: `false_gate_frames` z **dekompozycją per
+  koniunkt** (box / central / mti — co faktycznie strzelało).
+- **R-5:** dystans **5 m** raportowany **INFORMACYJNIE, poza kryterium** (B5: 5 m najbliższy = najgorszy;
+  fix3@5m brak ENTRY). Kryterium (+) domyka się na **{7, 9} m**.
+
+### AM2.3 — Historia rewizji (A-drift→A-plateau)
+
+Definicja pierwotna „(+) = coverage per-frame `box∧central∧mti_ok` ≥ 0.8" (B3/B5) → **zrewidowana
+pomiarem** (nie skasowana): metryka mierzyła koniunkcję poza jej zakresem (admisja), zawyżając wymóg.
+Definicja plateau = AM2.2. Kryteria PRE_R02C (zasięg, ε_FP wg R3) niezmienione.
+
+### AM2.4 — Reguły instrumentu percepcyjnego (obowiązują KAŻDĄ przyszłą sesję)
+
+- **R-1 — per-frame trace = artefakt PIERWSZEJ KLASY** każdego biegu percepcyjnego. `recs` per-tick
+  utrwalane (`trace.jsonl`), nigdy porzucane przy agregacji. (Reguła programowa po trzecim wystąpieniu
+  wzorca „agregacja porzuca dowód" — patrz `RAPORT_MTI_DIAG` D0.)
+- **R-2 — koniunkty bramy logowane OSOBNO** (`box`, `central`, `mti_ok`), by dekompozycja FP/porażki
+  była zawsze możliwa bez re-biegu.
+- Trace zawiera minimum: `t_mono, sim_t, box, central, mti_ok, gate, cx, cy, w, h, n_comps, entry,
+  locked, age` + poza platformy (`vehicle_local_position`: pozycja+prędkość) na potrzeby D1/D4 post-hoc.
+- **Kompletność trace = asercja per bieg** (liczba rekordów = liczba ticków).
+
+Push = Olga.
