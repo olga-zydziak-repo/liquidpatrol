@@ -1,0 +1,14 @@
+[mti] MAVSDK connected
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[mti] O_frozen=1786834167.996058 (init spread=0.5s, n_frames_buf=60)
+[mti] YOLO load /home/olga/projects/liquidpatrol/.b0deps/weights/yolov8s-worldv2.pt
+/home/olga/projects/liquidpatrol/.b0deps/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+[mti] sweep 5m cov_seen=1.0 cov_gate=0.415 cov_entry_once=1.0 n_entry=1 t_entry=3.62 conj={'n_box': 53, 'n_central': 33, 'n_mti': 30, 'n_gate': 22} comps={'n': 53, 'median': 16, 'q1': 11, 'q3': 21, 'max': 31}
+[mti] sweep 7m cov_seen=1.0 cov_gate=0.429 cov_entry_once=1.0 n_entry=1 t_entry=2.22 conj={'n_box': 56, 'n_central': 34, 'n_mti': 36, 'n_gate': 24} comps={'n': 56, 'median': 11, 'q1': 8, 'q3': 14, 'max': 21}
+[mti] sweep 9m cov_seen=1.0 cov_gate=0.732 cov_entry_once=1.0 n_entry=1 t_entry=2.75 conj={'n_box': 56, 'n_central': 47, 'n_mti': 45, 'n_gate': 41} comps={'n': 56, 'median': 14, 'q1': 12, 'q3': 18, 'max': 24}
+[mti] FP_EMPTY false_entry=0 eps_fp/min=0.0
+[mti] FP_BG false_entry=0 eps_fp/min=0.0 false_gate_frames=54
+[mti] TRACE n=776 n_ticks_total=776 complete=True
+[mti] DONE rtf real_time_factor: 1.00024556028505->real_time_factor: 0.99963038666453075 pairing={'O_frozen_s': 1786834167.996, 'content_resid_median_ms': 31112.91, 'content_resid_p95_ms': 33387.0, 'n_pairs': 400}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)

@@ -1,0 +1,207 @@
+{
+  "world": "world_demo_v1",
+  "world_hash": null,
+  "HEADLESS": "1",
+  "instrument": "mav/monotonic; sim_t z header klatki; XRCE vehicle_attitude 100Hz",
+  "params": {
+    "decision_hz": 2.0,
+    "dwell_s": 30.0,
+    "dalt": 1.5,
+    "mti": {
+      "diff_thr": 22,
+      "open_k": 3,
+      "close_k": 5,
+      "border_erode": 10,
+      "min_area_px": 8,
+      "max_area_frac": 0.2,
+      "persist_m": 3,
+      "persist_window": 4,
+      "persist_move_thr": 0.1
+    },
+    "require_mti": true,
+    "theta_conf_defined": 0.1635
+  },
+  "rtf_start": "real_time_factor: 0.99993300448869926",
+  "phases": {
+    "sweep_5m": {
+      "label": "sweep_5m",
+      "R": 5.0,
+      "dur_s": 32.1,
+      "gt_present": true,
+      "n_ticks": 52,
+      "coverage_seen": 1.0,
+      "coverage_gate": 0.423,
+      "coverage_locked": 0.077,
+      "coverage_locked_post_entry": 1.0,
+      "coverage_entry_once": 1.0,
+      "conj": {
+        "n_box": 52,
+        "n_central": 30,
+        "n_mti": 30,
+        "n_gate": 22
+      },
+      "n_entry": 1,
+      "false_entry": 0,
+      "time_to_entry_s": 28.03,
+      "conf_passive": {
+        "n": 52,
+        "median": 0.024,
+        "q1": 0.0097,
+        "q3": 0.0783,
+        "max": 0.3501
+      },
+      "mti_comps_per_tick": {
+        "n": 52,
+        "median": 19,
+        "q1": 15,
+        "q3": 26,
+        "max": 39
+      },
+      "mti_comps_stream": {
+        "n": 360,
+        "median": 20,
+        "q1": 15,
+        "q3": 27,
+        "max": 41
+      }
+    },
+    "sweep_7m": {
+      "label": "sweep_7m",
+      "R": 7.0,
+      "dur_s": 30.4,
+      "gt_present": true,
+      "n_ticks": 56,
+      "coverage_seen": 1.0,
+      "coverage_gate": 0.464,
+      "coverage_locked": 0.804,
+      "coverage_locked_post_entry": 1.0,
+      "coverage_entry_once": 1.0,
+      "conj": {
+        "n_box": 56,
+        "n_central": 40,
+        "n_mti": 35,
+        "n_gate": 26
+      },
+      "n_entry": 1,
+      "false_entry": 0,
+      "time_to_entry_s": 5.98,
+      "conf_passive": {
+        "n": 56,
+        "median": 0.0335,
+        "q1": 0.0176,
+        "q3": 0.0802,
+        "max": 0.2745
+      },
+      "mti_comps_per_tick": {
+        "n": 56,
+        "median": 18,
+        "q1": 12,
+        "q3": 25,
+        "max": 34
+      },
+      "mti_comps_stream": {
+        "n": 360,
+        "median": 20,
+        "q1": 13,
+        "q3": 25,
+        "max": 36
+      }
+    },
+    "sweep_9m": {
+      "label": "sweep_9m",
+      "R": 9.0,
+      "dur_s": 30.3,
+      "gt_present": true,
+      "n_ticks": 56,
+      "coverage_seen": 1.0,
+      "coverage_gate": 0.589,
+      "coverage_locked": 0.643,
+      "coverage_locked_post_entry": 1.0,
+      "coverage_entry_once": 1.0,
+      "conj": {
+        "n_box": 56,
+        "n_central": 35,
+        "n_mti": 43,
+        "n_gate": 33
+      },
+      "n_entry": 1,
+      "false_entry": 0,
+      "time_to_entry_s": 10.87,
+      "conf_passive": {
+        "n": 56,
+        "median": 0.0524,
+        "q1": 0.0288,
+        "q3": 0.1137,
+        "max": 0.2407
+      },
+      "mti_comps_per_tick": {
+        "n": 56,
+        "median": 16,
+        "q1": 12,
+        "q3": 23,
+        "max": 31
+      },
+      "mti_comps_stream": {
+        "n": 360,
+        "median": 17,
+        "q1": 13,
+        "q3": 23,
+        "max": 33
+      }
+    },
+    "fp_empty": {
+      "label": "fp_empty_hover",
+      "dur_s": 90.4,
+      "n_ticks": 167,
+      "false_entry": 0,
+      "eps_fp_per_min": 0.0,
+      "false_gate_conj": {
+        "n_box": 167,
+        "n_central": 12,
+        "n_mti": 3,
+        "n_gate": 0
+      },
+      "mti_comps_per_tick": {
+        "n": 167,
+        "median": 0,
+        "q1": 0,
+        "q3": 0,
+        "max": 23
+      }
+    },
+    "fp_bg": {
+      "label": "fp_bg_observe_motion",
+      "dur_s": 240.4,
+      "n_ticks": 443,
+      "false_entry": 0,
+      "eps_fp_per_min": 0.0,
+      "false_gate_frames": 41,
+      "false_gate_conj": {
+        "n_box": 424,
+        "n_central": 143,
+        "n_mti": 114,
+        "n_gate": 41
+      },
+      "mti_comps_per_tick": {
+        "n": 443,
+        "median": 8,
+        "q1": 1,
+        "q3": 15,
+        "max": 33
+      }
+    }
+  },
+  "rtf_end": "real_time_factor: 0.039680705630877638",
+  "pairing": {
+    "O_frozen_s": 1786835231.228,
+    "content_resid_median_ms": 33720.11,
+    "content_resid_p95_ms": 34718.87,
+    "n_pairs": 400
+  },
+  "trace": {
+    "path": "trace.jsonl",
+    "n_records": 774,
+    "n_ticks_total": 774,
+    "complete": true
+  }
+}
