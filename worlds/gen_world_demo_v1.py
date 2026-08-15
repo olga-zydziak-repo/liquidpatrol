@@ -15,12 +15,15 @@ NIE zmienia geometrii koperty (R_E/geofence żyją w config osłony, nie w świe
 """
 import os
 
+# v1.1 (2026-08-15): ZMNIEJSZONA gęstość — 359 brył (v1.0) dawało kontencję renderu gz → EKF High Gyro Bias
+# → arm denied (ANEKS-H/E2). Mniej, WIĘKSZYCH brył = ta sama struktura przestrzenna/paralaksa, ~4× mniejszy
+# koszt renderu → EKF stabilny. Hash re-zamrożony w ANEKS-H H.4.
 SEED = 20260815
 EXTENT = 44.0          # pole ±44 m
-SPACING = 4.0          # siatka co 4 m
-JITTER = 1.5           # rozrzut pozycji ±1.5 m
-FILL_P = 0.70          # prawdopodobieństwo wypełnienia komórki
-CLEAR_R = 2.5          # czysty pad wokół origin (start/ląd)
+SPACING = 7.0          # siatka co 7 m (rzadziej)
+JITTER = 2.0           # rozrzut pozycji ±2.0 m
+FILL_P = 0.55          # prawdopodobieństwo wypełnienia komórki
+CLEAR_R = 3.0          # czysty pad wokół origin (start/ląd)
 
 
 class LCG:
@@ -125,7 +128,7 @@ def main():
             y = gy * SPACING + rng.uniform(-JITTER, JITTER)
             if (x * x + y * y) ** 0.5 < CLEAR_R:      # czysty pad start/ląd
                 continue
-            sx = rng.uniform(0.8, 2.4); sy = rng.uniform(0.8, 2.4); sz = rng.uniform(0.05, 1.0)
+            sx = rng.uniform(1.5, 3.8); sy = rng.uniform(1.5, 3.8); sz = rng.uniform(0.1, 1.2)
             z = sz / 2.0                              # spoczywa na gruncie
             yaw = rng.uniform(0, 3.14159)
             shade = rng.uniform(0.20, 0.78)

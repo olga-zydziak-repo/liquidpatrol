@@ -1,0 +1,35 @@
+[mti] MAVSDK connected
+[mti] YOLO load /home/olga/projects/liquidpatrol/.b0deps/weights/yolov8s-worldv2.pt
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+/home/olga/projects/liquidpatrol/.b0deps/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+Exception in thread Thread-2 (replacer):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/olga/projects/liquidpatrol/results/R02/mti/mti_flight.py", line 145, in replacer
+    xyz, yaw = gz_drone_pose()
+               ^^^^^^^^^^^^^^^
+  File "/home/olga/projects/liquidpatrol/results/R02/mti/mti_flight.py", line 59, in gz_drone_pose
+    out = subprocess.run(["gz", "model", "-m", "x500_mono_cam_0", "-p"], capture_output=True, text=True, timeout=6).stdout
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/subprocess.py", line 2116, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+  File "/usr/lib/python3.12/subprocess.py", line 1253, in _check_timeout
+    raise TimeoutExpired(
+subprocess.TimeoutExpired: Command '['gz', 'model', '-m', 'x500_mono_cam_0', '-p']' timed out after 6 seconds
+[mti] sweep 5m cov_seen=1.0 cov_gate=0.321 n_entry=0 t_entry=None comps={'n': 56, 'median': 23, 'q1': 17, 'q3': 49, 'max': 104}
+[mti] sweep 7m cov_seen=1.0 cov_gate=0.158 n_entry=1 t_entry=17.44 comps={'n': 57, 'median': 26, 'q1': 18, 'q3': 39, 'max': 100}
+[mti] sweep 9m cov_seen=0.93 cov_gate=0.07 n_entry=0 t_entry=None comps={'n': 57, 'median': 30, 'q1': 19, 'q3': 47, 'max': 97}
+[mti] FP_EMPTY false_entry=0 eps_fp/min=0.0
+[mti] FP_BG false_entry=0 eps_fp/min=0.0 false_gate_frames=30
+[mti] DONE rtf real_time_factor: 0.99977854905138508->real_time_factor: 0.99989101187970508 pairing={'O_median_s': 1786754699.676, 'O_spread_s': 5.9501, 'n_O': 300}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)

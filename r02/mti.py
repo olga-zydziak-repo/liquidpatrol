@@ -33,9 +33,11 @@ class MTIParams:
     border_erode: int = 10           # erozja ważnego regionu — FP: artefakt KRAWĘDZI kadru po warpie
     min_area_px: int = 8             # FP: drobne speckle residuum derotacji (szybki yaw)
     max_area_frac: float = 0.20      # FP: całokadrowa mis-kompensacja / pas horyzontu
-    persist_m: int = 2               # spójność czasowa: komponent w ≥m z ostatnich M klatek
-    persist_window: int = 3          # M
-    persist_move_thr: float = 0.12   # maks. ruch środka (znorm.) między klatkami dla „ten sam" komponent
+    # spójność czasowa (track-before-detect): cel KOHERENTNY persystuje, paralaksa gruntu MIGOCZE.
+    # persist_m/window podniesione (val1: 53 comp/klatkę paralaksy → potrzeba twardszej persystencji).
+    persist_m: int = 3               # komponent w ≥m z ostatnich M klatek (potwierdzenie tracku)
+    persist_window: int = 4          # M
+    persist_move_thr: float = 0.10   # maks. ruch środka (znorm.) między klatkami dla „ten sam" komponent
 
 
 def quat_to_R(q) -> np.ndarray:
@@ -124,7 +126,9 @@ class MTITracker:
     """Strumieniowy MTI z buforem klatek + attitude (spójność czasowa). Używany przez detector_node.
     Parowanie klatka↔attitude wykonuje WOŁAJĄCY (XRCE vehicle_attitude, PRE_MTI R1) — tu dostaje już parę."""
 
-    def __init__(self, params: MTIParams | None = None, delta: int = 1):
+    def __init__(self, params: MTIParams | None = None, delta: int = 3):
+        # delta=3 klatki @15 Hz ≈ 200 ms — baseline dopasowany do dynamiki celu (~3 m/s → ~5 px @7 m);
+        # delta=1 (66 ms) był za krótki (val1: cov_gate 0.61 — MTI ślepy przy niskim ruchu względnym).
         self.p = params or MTIParams()
         self.delta = delta                       # o ile klatek wstecz para
         self.buf = []                            # [(frame, q)] ostatnie klatki

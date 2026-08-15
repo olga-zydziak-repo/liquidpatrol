@@ -1,0 +1,81 @@
+{
+  "world": "world_demo_v1",
+  "world_hash": null,
+  "HEADLESS": "1",
+  "instrument": "mav/monotonic; sim_t z header klatki; XRCE vehicle_attitude 100Hz",
+  "params": {
+    "decision_hz": 2.0,
+    "dwell_s": 30.0,
+    "dalt": 1.5,
+    "mti": {
+      "diff_thr": 22,
+      "open_k": 3,
+      "close_k": 5,
+      "border_erode": 10,
+      "min_area_px": 8,
+      "max_area_frac": 0.2,
+      "persist_m": 2,
+      "persist_window": 3,
+      "persist_move_thr": 0.12
+    },
+    "require_mti": true,
+    "theta_conf_defined": 0.1635
+  },
+  "rtf_start": "real_time_factor: 1.0001307670977981",
+  "phases": {
+    "sweep_7m": {
+      "label": "sweep_7m",
+      "R": 7.0,
+      "dur_s": 31.1,
+      "gt_present": true,
+      "n_ticks": 56,
+      "coverage_seen": 0.982,
+      "coverage_gate": 0.607,
+      "n_entry": 1,
+      "false_entry": 0,
+      "time_to_entry_s": 10.91,
+      "conf_passive": {
+        "n": 55,
+        "median": 0.0585,
+        "q1": 0.0115,
+        "q3": 0.1167,
+        "max": 0.2361
+      },
+      "mti_comps_per_tick": {
+        "n": 56,
+        "median": 50,
+        "q1": 32,
+        "q3": 67,
+        "max": 104
+      },
+      "mti_comps_stream": {
+        "n": 156,
+        "median": 47,
+        "q1": 28,
+        "q3": 65,
+        "max": 118
+      }
+    },
+    "fp_bg": {
+      "label": "fp_bg_observe_motion",
+      "dur_s": 40.1,
+      "n_ticks": 76,
+      "false_entry": 1,
+      "eps_fp_per_min": 1.495,
+      "false_gate_frames": 20,
+      "mti_comps_per_tick": {
+        "n": 76,
+        "median": 53,
+        "q1": 33,
+        "q3": 78,
+        "max": 107
+      }
+    }
+  },
+  "rtf_end": "real_time_factor: 1.0000297508850888",
+  "pairing": {
+    "O_median_s": 1786752698.25,
+    "O_spread_s": 9.161,
+    "n_O": 300
+  }
+}

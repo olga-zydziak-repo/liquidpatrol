@@ -1,0 +1,39 @@
+{
+  "step": "B5 — BRAMKA DWUSTRONNA (agregat fix1+fix2+fix3, ×3 świeże booty)",
+  "date": "2026-08-15",
+  "habitat": {"world": "world_demo_v1", "sha256": "a76a38c83cc774d325222688cb2b2055f0565bb54eec11c33f99ec361b1c83b0", "version": "v1.1 (84 tex_ bloki)"},
+  "instrument": "mav/monotonic; sim_t z header klatki; XRCE vehicle_attitude 100Hz; derotacja Δq względna",
+  "boots_valid": ["fix1", "fix2", "fix3"],
+  "boots_env_failed": ["fix2_envfail1 (ARM FAIL 60 retry — kontencja, NIEWAŻNY)"],
+  "aneks_h": {
+    "fix1": {"headless": true, "rtf_start": 0.99997, "timejump_pre": 0, "timejump_post": 0, "valid": true},
+    "fix2": {"headless": true, "rtf_start": 0.99853, "timejump_pre": 0, "timejump_post": 0, "valid": true},
+    "fix3": {"headless": true, "rtf_start": 1.00005, "timejump_pre": 0, "timejump_post": 0, "valid": true}
+  },
+  "criterion_plus": {
+    "spec": "zasięg ≥7m przy coverage_gate (struktura∧MTI klatkowa) ≥0.8, ≥3 świeże booty",
+    "coverage_gate_median_by_range": {"5m": 0.393, "7m": 0.632, "9m": 0.632},
+    "coverage_gate_range_by_range": {"5m": [0.333, 0.600], "7m": [0.596, 0.702], "9m": [0.621, 0.649]},
+    "coverage_gate_raw": {"5m": [0.333, 0.600, 0.393], "7m": [0.632, 0.702, 0.596], "9m": [0.621, 0.632, 0.649]},
+    "best_single_point": {"range": "7m", "value": 0.702, "boot": "fix2"},
+    "verdict": "FAIL (strict) — mediana <0.8 na KAŻDYM zasięgu; człon MTI przerywany klatkowo",
+    "note_5m": "fix3 @5m n_entry=0 (bez ENTRY), coverage_locked=0.0 — najbliższy zasięg najgorszy"
+  },
+  "criterion_minus": {
+    "spec": "ε_FP = 0 wg def R3 (pusta scena ORAZ ruch tła), ×3 booty",
+    "fp_empty_eps_per_min": {"fix1": 0.0, "fix2": 0.0, "fix3": 0.0},
+    "fp_bg_eps_per_min": {"fix1": 0.0, "fix2": 0.0, "fix3": 0.0},
+    "fp_bg_false_gate_frames": {"fix1": 50, "fix2": 26, "fix3": 46, "note": "0 ENTRY — pochłonięte przez persist+DEADMAN"},
+    "verdict": "PASS — 0 fałszywych ENTRY, ×3 booty × 2 sceny"
+  },
+  "supporting": {
+    "coverage_seen_all": 1.0,
+    "coverage_locked_median_by_range": {"5m": 0.93, "7m": 0.912, "9m": 0.86},
+    "coverage_locked_post_entry": "1.0 wszędzie gdzie ENTRY zaszło (wyjątek fix3@5m brak ENTRY)",
+    "time_to_entry_s": {"5m": [2.73, 3.08, null], "7m": [5.29, 1.66, 2.64], "9m": [7.39, 2.18, 4.23]},
+    "conf_passive_median": {"5m": 0.097, "7m": 0.088, "9m": 0.070, "theta_conf": 0.1635, "note": "conf ≪ θ_conf — telemetria, nie brama"},
+    "pairing_content_resid_median_ms": {"fix1": 64677, "fix2": 33350, "fix3": 30954, "note": "stały offset per boot (timesync origin); Δq względne → nieszkodliwe [A4]"}
+  },
+  "cert_provenance": "certs_selfcheck 6/6 PASS — brama wymieniona UPSTREAM, zero re-certów (R-M4)",
+  "verdict": "(−) PASS ε_FP=0 · (+) FAIL strict coverage_gate<0.8 → STOP z liczbami; dźwignie ZAPARKOWANE (SR-M4/R-M3)"
+}

@@ -1,0 +1,6 @@
+eb80135a19a4309218ec3e905ca6f9eab3e1e706ce6cb5d9d791c3b3d1b28843  /home/olga/projects/liquidpatrol/worlds/world_demo_v1.sdf
+GUI_PROCS=[brak]  gz_server=[25090 gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/world_demo_v1.sdf]
+[mti] kamera: /world/world_demo_v1/model/x500_mono_cam_0/link/camera_link/sensor/imager/image
+[mti] 90 s settle EKF
+results/R02/mti/mti_run.sh: line 19: 25396 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${IMG}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge.log" 2>&1
+[mti] val2 DONE rc=0 → /home/olga/projects/liquidpatrol/results/R02/mti/B4val/val2
