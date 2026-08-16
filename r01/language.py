@@ -9,11 +9,18 @@ R0.2 (§2.4): `observe on/off` = AUTORYTET trybu OBSERVE (default on). OBSERVE j
 kanałem (ENTRY detektora), ALE pozwolenie wchodzi do gramatyki (P4), by nie omijać admisji:
 detektor daje ENTRY, gramatyka daje pozwolenie, osłona składa oba. `observe on`→tryb OBSERVE,
 `observe off`→powrót do PATROL (cofnięcie autorytetu obserwacji).
+
+Noga D / DEMO-B (§2 PROMPT_D_BUILD_1): `grant observe` = TOKEN operatora (nowy element gramatyki,
+`OBSERVE_GRANT`). W odróżnieniu od `observe on` (autorytet statyczny R0.2) token jest per-epizod:
+niesie `operator_id`/`nonce`/`admission_seq` w rekordzie PCDL (patrz r01/authz.py). Sama gramatyka
+domyka się na czasowniku; pola strukturalne walidowane w warstwie authz (default-deny, jednorazowy
+nonce, wiązanie epizodu). Zamknięta gramatyka = zero free-form (ANEKS_D1 §Semantyka.2).
 """
 from __future__ import annotations
 from dataclasses import dataclass
 
-ACTIONS = ("START_PATROL", "HOLD", "RESUME", "RETURN_HOME", "ABORT", "OBSERVE_ON", "OBSERVE_OFF")
+ACTIONS = ("START_PATROL", "HOLD", "RESUME", "RETURN_HOME", "ABORT",
+           "OBSERVE_ON", "OBSERVE_OFF", "OBSERVE_GRANT")
 
 # mapowanie akcji → tryb osłony (r01.shield.M_*)
 ACTION_TO_MODE = {
@@ -24,14 +31,17 @@ ACTION_TO_MODE = {
     "ABORT": "ABORT",
     "OBSERVE_ON": "OBSERVE",
     "OBSERVE_OFF": "PATROL",
+    "OBSERVE_GRANT": "OBSERVE",     # token nadaje AUTORYTET OBSERVE (per-epizod, walidacja w authz)
 }
 
 _CANON = {"START_PATROL": "start patrol", "HOLD": "hold", "RESUME": "resume",
           "RETURN_HOME": "return home", "ABORT": "abort",
-          "OBSERVE_ON": "observe on", "OBSERVE_OFF": "observe off"}
+          "OBSERVE_ON": "observe on", "OBSERVE_OFF": "observe off",
+          "OBSERVE_GRANT": "grant observe"}
 _TABLE = {"start patrol": "START_PATROL", "hold": "HOLD", "resume": "RESUME",
           "return home": "RETURN_HOME", "abort": "ABORT",
-          "observe on": "OBSERVE_ON", "observe off": "OBSERVE_OFF"}
+          "observe on": "OBSERVE_ON", "observe off": "OBSERVE_OFF",
+          "grant observe": "OBSERVE_GRANT"}
 
 
 @dataclass(frozen=True)

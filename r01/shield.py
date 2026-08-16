@@ -12,10 +12,16 @@ Reguły (priorytet = kontrakt):
   R-A  ABORT: operator kończy misję → REFUSE(ABORT) (bezpieczne zatrzymanie).
   R-H  HOLD: tryb HOLD → podmiana na hold-setpoint (pozycja bieżąca, v=0).
   R-R  RETURN: tryb RETURN → hold do przejęcia przez RTL (MAVSDK).
-  R-O  OBSERVE (R0.2, 7. liść): tryb OBSERVE → ALLOW, przepuść setpoint obserwacji (pierścień
+  R-O  OBSERVE (R0.2, 7. liść): tryb OBSERVE ∧ auth_ok → ALLOW, przepuść setpoint obserwacji (pierścień
        D_safe, bearing-only z kanału). PONIŻEJ R-G: setpoint OBSERVE za płot jest przecięty przez
        R-G tak jak waypoint patrolu (geofence nadrzędny z PRIORYTETU, nie nowej reguły — PRE §2.4).
        OBSERVE nie zmienia v_max/clampów/obwiedni (R02-A3).
+  R-AUTH NO_AUTH (DEMO-B, 6. reason): tryb OBSERVE ∧ ¬auth_ok (eskalacja bez ważnego tokenu operatora)
+       → REFUSE(NO_AUTH). ODWRACALNY, NIETERMINALNY (wzorzec POS_DEGRADED, nie latch): brak eskalacji,
+       patrol/confirm trwa; po nadaniu tokenu OBSERVE staje otworem. PONIŻEJ R-G i R-POS (dominują —
+       ANEKS_D1 §Semantyka.5): R-AUTH żyje wewnątrz gałęzi OBSERVE, więc latch/R-POS/R-G/abort ją
+       wyprzedzają. `auth_ok` = wejście boolowskie z warstwy authz (podpis∧nonce∧epizod∧niekonsumowany);
+       osłona (TCB) realizuje TYLKO gałąź decyzji (§1.6). Token = bramkowanie uprawnień, NIE „secure C2".
   R-P  PATROL: ALLOW → przepuść setpoint planera.
 HOLD/REFUSE NIE urywają strumienia (A1/§4): applied = hold-setpoint, strumień żyje < COM_OF_LOSS_T.
 
@@ -29,10 +35,12 @@ ALLOW, HOLD, REFUSE = "ALLOW", "HOLD", "REFUSE"
 # stany
 PATROL, HOLDING, RETURNING, DONE = "PATROL", "HOLDING", "RETURNING", "DONE"
 POSDEG = "POSDEG"                  # R0.3a: stan REFUSE(POS_DEGRADED) — ODWRACALNY (nie DONE/terminal)
+NOAUTH = "NOAUTH"                  # DEMO-B: stan REFUSE(NO_AUTH) — ODWRACALNY (nie DONE/terminal)
 # powody
 GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT = \
     "GEOFENCE", "COMMAND_INVALID", "STALE_CMD", "ABORT"
 POS_DEGRADED = "POS_DEGRADED"      # R0.3a: 5. reason (D3) — zdegradowane zdrowie pozycji (GPS-denied)
+NO_AUTH = "NO_AUTH"                # DEMO-B: 6. reason — eskalacja OBSERVE bez ważnego tokenu operatora
 # tryby (z admitowanych komend)
 M_PATROL, M_HOLD, M_RETURN, M_ABORT = "PATROL", "HOLD", "RETURN", "ABORT"
 M_OBSERVE = "OBSERVE"           # R0.2: tryb OBSERVE (auto-wyzwalany kanałem, autoryzowany gramatyką P4)
@@ -110,9 +118,9 @@ class PatrolShield:
             self.state = DONE
 
     # -- pojedynczy tick ----------------------------------------------------
-    def step(self, k, pos, vel, target, mode=M_PATROL, pos_flag=None):
+    def step(self, k, pos, vel, target, mode=M_PATROL, pos_flag=None, auth_ok=True):
         self._pos_monitor(pos_flag)
-        d = self._decide(k, pos, vel, target, mode)
+        d = self._decide(k, pos, vel, target, mode, auth_ok)
         d["t"] = round(k * self.cfg.dt, 4)
         d["values"] = {
             "pos": [round(float(pos[0]), 3), round(float(pos[1]), 3), round(float(pos[2]), 3)],
@@ -120,6 +128,7 @@ class PatrolShield:
             "r_pos": round(_radial(pos[0], pos[1]), 3),
             "r_target": round(_radial(target[0], target[1]), 3),
             "mode": mode,
+            "auth_ok": bool(auth_ok),
         }
         # księgowość HOLD (wejścia/wyjścia)
         is_hold = d["decision"] == HOLD
@@ -134,7 +143,7 @@ class PatrolShield:
     def _hold_setpoint(self, pos):
         return [float(pos[0]), float(pos[1]), float(pos[2])]
 
-    def _decide(self, k, pos, vel, target, mode):
+    def _decide(self, k, pos, vel, target, mode, auth_ok=True):
         # R-T terminal
         if self.terminal is not None:
             r, rule = self.terminal
@@ -179,6 +188,14 @@ class PatrolShield:
         # D_safe z kanału, wyliczony w egzekutorze). PONIŻEJ R-G: gdy setpoint OBSERVE za płotem,
         # R-G (wyżej) już zwrócił REFUSE(GEOFENCE) — tu docieramy tylko gdy geofence-bezpiecznie.
         if mode == M_OBSERVE:
+            # R-AUTH (DEMO-B, 6. reason): eskalacja OBSERVE bez tokenu ⇒ REFUSE(NO_AUTH). ODWRACALNY,
+            # NIETERMINALNY (nie latch, nie DONE) — jak POS_DEGRADED. Brak eskalacji: applied=hold
+            # (patrol/confirm trwa), po nadaniu tokenu (auth_ok) ta sama gałąź daje OBSERVE (ALLOW).
+            if not auth_ok:
+                self.state = NOAUTH            # stan odwracalny (nie DONE — nie terminal)
+                return {"k": k, "state": NOAUTH, "decision": REFUSE, "reason": NO_AUTH,
+                        "rule": "R-AUTH", "detail": "eskalacja OBSERVE bez tokenu operatora",
+                        "applied": self._hold_setpoint(pos)}
             self.state = OBSERVING
             return {"k": k, "state": OBSERVING, "decision": ALLOW, "reason": None, "rule": "R-O",
                     "applied": [float(target[0]), float(target[1]), float(target[2])]}

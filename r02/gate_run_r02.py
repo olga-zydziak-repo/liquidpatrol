@@ -22,7 +22,7 @@ from sensor_msgs.msg import Image            # C-A1 (tor C): capture surowej kla
 from px4_msgs.msg import VehicleStatus       # G5: precyzyjny pomiar nav_state (failsafe) — szybszy niż MAVSDK flight_mode
 
 from r01.exec_lib import XrcePublisher, Mav, Planner
-from r01.shield import PatrolShield, ALLOW, HOLD, REFUSE, GEOFENCE, M_PATROL, M_OBSERVE
+from r01.shield import PatrolShield, ALLOW, HOLD, REFUSE, GEOFENCE, NO_AUTH, M_PATROL, M_OBSERVE
 from r01.authz import Authorizer
 from r01.config import ALT_M, TICK_HZ, DT, R_E
 from r02.config_r02 import (D_SAFE_M, THETA_AGE_S, T_ACK_S, F_FOV, EPS_FP_PER_MIN, ChannelConfig,
@@ -185,6 +185,13 @@ class Runner:
         self.ctrl = ObserveController(d_safe=D_SAFE_M, alt=ALT_M)
         self.authz = Authorizer()
         self.observe_authority = False
+        # DEMO-B (§2 PROMPT_D_BUILD_1) — ścieżka tokenowa, DOMYŚLNIE WYŁĄCZONA (token_gated=False ⇒
+        # zachowanie R0.2/R0.3a bez zmian: legacy observe_authority, auth_ok=True). Per-akt runner DEMO-B
+        # ustawia token_gated=True. admission_seq = epizod admisji (inkrement na ENTRY; -1 = brak epizodu).
+        self.token_gated = False
+        self.admission_seq = -1
+        self._nonce_ctr = 0
+        self.n_token_issued = 0; self.n_token_consumed = 0; self.n_refuse_no_auth = 0
         self.k = 0
         self.max_radial = 0.0
         self._last_pub = None; self.setpoint_max_dt = 0.0; self.setpoint_dts = []
@@ -223,6 +230,23 @@ class Runner:
         """Autorytet OBSERVE przez gramatykę (P4) — 'observe on/off' (§2.4, default on)."""
         rec = self.authz.admit("observe on" if on else "observe off")
         self.observe_authority = (rec["decision"] == "ALLOW" and rec["mode"] == "OBSERVE")
+        return rec
+
+    def issue_operator_token(self, operator_id="operator", nonce=None):
+        """DEMO-B: operator wydaje token OBSERVE_GRANT dla BIEŻĄCEGO epizodu admisji (default-deny,
+        per-admisja). Pre-autoryzacja zakazana: gdy ¬locked albo brak epizodu ⇒ REFUSE(PREAUTH), logowane.
+        Zwraca rekord PCDL (podpisany). Punkt-dławik: eskalacja i tak przez token_auth_ok w tick()."""
+        if nonce is None:
+            self._nonce_ctr += 1
+            nonce = f"{operator_id}:{self.admission_seq}:{self._nonce_ctr}"
+        rec = self.authz.issue_token(operator_id, nonce, self.admission_seq,
+                                     locked=bool(getattr(self, "locked", False)),
+                                     current_seq=self.admission_seq)
+        if rec["decision"] == "ALLOW":
+            self.n_token_issued += 1
+        self.tf.write(json.dumps({"k": self.k, "event": "token_issued", "op": operator_id,
+                                  "admission_seq": self.admission_seq, "decision": rec["decision"],
+                                  "reason": rec["reason"]}) + "\n")
         return rec
 
     def _pub(self, xyz):
@@ -376,17 +400,32 @@ class Runner:
                 self.intruder_in_view_t = time.time() - self.t0
         if self._prev_locked and not locked:
             self.ctrl.reset()
+            # EXPIRE (DEMO-B): konsumpcja tokenów bieżącego epizodu — re-admisja wymaga nowego tokenu.
+            if self.token_gated and self.admission_seq >= 0:
+                nc = self.authz.consume_tokens(self.admission_seq)
+                if nc:
+                    self.n_token_consumed += nc
+                    self.tf.write(json.dumps({"k": self.k, "event": "token_consumed",
+                                              "admission_seq": self.admission_seq, "n": nc}) + "\n")
         # ENTRY: przejście unlocked→locked
         if locked and not self._prev_locked:
             self.n_entry += 1
+            self.admission_seq += 1            # DEMO-B: nowy epizod admisji (per-cel operacyjnie = per-admisja)
             if self.entry_t is None:
                 self.entry_t = time.time() - self.t0
             if not self.intruder_present:
                 self.n_false_entry += 1        # ε_FP: lock na pustej scenie
         self._prev_locked = locked; self.locked = locked   # dostępne dla scenariuszy (GT-fed lub live)
 
-        # tryb: OBSERVE gdy lock ∧ autorytet gramatyki ∧ estymata; inaczej force/patrol
-        if locked and self.observe_authority and self.ctrl.has_estimate() and force_mode is None:
+        # tryb: OBSERVE gdy lock ∧ autorytet ∧ estymata; inaczej force/patrol.
+        # DEMO-B: gdy token_gated, eskalacja żądana na lock∧estymata, a OSŁONA bramkuje przez auth_ok
+        #  (token ważny dla epizodu). ¬auth_ok ⇒ shield zwraca REFUSE(NO_AUTH) ODWRACALNY (patrol/confirm trwa).
+        auth_ok = True
+        if self.token_gated and locked and self.ctrl.has_estimate() and force_mode is None:
+            mode = M_OBSERVE
+            sp = self.ctrl.setpoint(pos) or self.planner.target()
+            auth_ok = self.authz.token_auth_ok(self.admission_seq)
+        elif locked and self.observe_authority and self.ctrl.has_estimate() and force_mode is None:
             mode = M_OBSERVE
             sp = self.ctrl.setpoint(pos) or self.planner.target()
         elif force_mode is not None:
@@ -396,8 +435,12 @@ class Runner:
         else:
             mode = M_PATROL; sp = self.planner.target()
 
-        d = self.shield.step(self.k, pos, vel, sp, mode=mode)
+        d = self.shield.step(self.k, pos, vel, sp, mode=mode, auth_ok=auth_ok)
         d["mode"] = mode                       # udostępnij tryb scenariuszom (fix: shield.step nie zwraca 'mode')
+        if d["reason"] == NO_AUTH:
+            self.n_refuse_no_auth += 1
+            self.tf.write(json.dumps({"k": self.k, "event": "refuse_no_auth",
+                                      "admission_seq": self.admission_seq}) + "\n")
         self._pub(d["applied"])
         self.max_radial = max(self.max_radial, math.hypot(pos[0], pos[1]))
         if mode == M_OBSERVE and locked:
@@ -414,7 +457,8 @@ class Runner:
                "reason": d["reason"], "rule": d["rule"], "mode": mode, "locked": locked,
                "age": chage, "gt_fed": self.gt_mode, "pos": [round(v, 2) for v in pos], "yaw": round(self.mav.yaw, 3),
                "applied": [round(v, 2) for v in d["applied"]], "r_pos": round(math.hypot(pos[0], pos[1]), 2),
-               "flight_mode": self.mav.flight_mode, "min_d": None if self.min_d_observe==float("inf") else round(self.min_d_observe,2)}
+               "flight_mode": self.mav.flight_mode, "min_d": None if self.min_d_observe==float("inf") else round(self.min_d_observe,2),
+               "auth_ok": bool(auth_ok), "admission_seq": self.admission_seq}   # DEMO-B: pola tokenu (overlay B3)
         self.tf.write(json.dumps(rec) + "\n")
         self.k += 1
         return d
