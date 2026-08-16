@@ -11,14 +11,14 @@ import hashlib, json, os, sys, random
 import z3
 
 from r01.shield import (PatrolShield, ALLOW as S_ALLOW, HOLD as S_HOLD, REFUSE as S_REFUSE,
-                        GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT, POS_DEGRADED,
-                        PATROL, HOLDING, RETURNING, DONE, OBSERVING, POSDEG,
+                        GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT, POS_DEGRADED, NO_AUTH,
+                        PATROL, HOLDING, RETURNING, DONE, OBSERVING, POSDEG, NOAUTH,
                         M_PATROL, M_HOLD, M_RETURN, M_ABORT, M_OBSERVE)
 from r01.proofs.verify import (tau, ALLOW, HOLD, REFUSE, NONE, GEOFENCE as M_GEO,
                                COMMAND_INVALID as M_CI, STALE_CMD as M_ST, ABORT_R as M_AB,
-                               POS_DEGRADED_R as M_POS,
+                               POS_DEGRADED_R as M_POS, NO_AUTH_R as M_AUTH,
                                PATROL as MP, HOLDING as MH, RETURNING as MR, DONE as MD, OBSERVING as MO,
-                               POSDEG as M_POSDEG,
+                               POSDEG as M_POSDEG, NOAUTH as M_NOAUTH,
                                M_PATROL as MM_P, M_HOLD as MM_H, M_RETURN as MM_R, M_ABORT as MM_A,
                                M_OBSERVE as MM_O)
 
@@ -26,10 +26,11 @@ CERT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "certs", "P5.jso
 
 DEC_ID = {S_ALLOW: ALLOW, S_HOLD: HOLD, S_REFUSE: REFUSE}
 RSN_ID = {None: NONE, GEOFENCE: M_GEO, COMMAND_INVALID: M_CI, STALE_CMD: M_ST, ABORT: M_AB,
-          POS_DEGRADED: M_POS}
-STATE_ID = {PATROL: MP, HOLDING: MH, RETURNING: MR, DONE: MD, OBSERVING: MO, POSDEG: M_POSDEG}
+          POS_DEGRADED: M_POS, NO_AUTH: M_AUTH}
+STATE_ID = {PATROL: MP, HOLDING: MH, RETURNING: MR, DONE: MD, OBSERVING: MO, POSDEG: M_POSDEG,
+            NOAUTH: M_NOAUTH}
 MODE_ID = {M_PATROL: MM_P, M_HOLD: MM_H, M_RETURN: MM_R, M_ABORT: MM_A, M_OBSERVE: MM_O}
-LEAVES = ["latch", "pos", "geo", "abort", "hold", "return", "observe", "patrol"]   # R0.3a: +pos
+LEAVES = ["latch", "pos", "geo", "abort", "hold", "return", "observe", "no_auth", "patrol"]  # DEMO-B: +no_auth
 
 
 def sh_pre(sh):
@@ -38,37 +39,42 @@ def sh_pre(sh):
     return {"tm": tm, "rsn": rsn, "st": STATE_ID[sh.state]}
 
 
-def eval_tau(pre, geo, mode_i, pos_bad):
+def eval_tau(pre, geo, mode_i, pos_bad, auth_ok):
     c = {"tm": z3.BoolVal(pre["tm"]), "rsn": z3.IntVal(pre["rsn"]), "st": z3.IntVal(pre["st"])}
-    cp, dec, dec_reason, _ = tau(c, z3.BoolVal(geo), z3.IntVal(mode_i), z3.BoolVal(pos_bad))
+    cp, dec, dec_reason, _ = tau(c, z3.BoolVal(geo), z3.IntVal(mode_i), z3.BoolVal(pos_bad),
+                                 z3.BoolVal(auth_ok))
     b = lambda e: z3.is_true(z3.simplify(e))
     i = lambda e: z3.simplify(e).as_long()
     return i(dec), i(dec_reason), {"tm": b(cp["tm"]), "rsn": i(cp["rsn"]), "st": i(cp["st"])}
 
 
-def leaf_of(pre, geo, mode_i, pos_bad):
+def leaf_of(pre, geo, mode_i, pos_bad, auth_ok):
     if pre["tm"]:
         return "latch"
     if pos_bad:               # R0.3a: R-POS poniżej latch, ponad R-G
         return "pos"
     if geo:
         return "geo"
+    if mode_i == MM_O and not auth_ok:   # DEMO-B: R-AUTH w gałęzi OBSERVE (dominowany przez latch/pos/geo)
+        return "no_auth"
     return {MM_A: "abort", MM_H: "hold", MM_R: "return", MM_O: "observe", MM_P: "patrol"}[mode_i]
 
 
 def run_episode(sh, ticks, coverage, mism):
-    """ticks: lista (pos, vel, target, mode_str[, pos_flag]). Porównuje tau≡shield per tik.
-    pos_bad (wejście tau) = shield._pos_refuse PO _pos_monitor (stan który widział _decide)."""
+    """ticks: lista (pos, vel, target, mode_str[, pos_flag[, auth_ok]]). Porównuje tau≡shield per tik.
+    pos_bad (wejście tau) = shield._pos_refuse PO _pos_monitor (stan który widział _decide).
+    auth_ok (DEMO-B) = 6. element (default True — zgodność wsteczna R0.2/R0.3a bez tokenu)."""
     for k, tick in enumerate(ticks):
         pos, vel, target, mode = tick[0], tick[1], tick[2], tick[3]
         pos_flag = tick[4] if len(tick) > 4 else None
+        auth_ok = tick[5] if len(tick) > 5 else True
         pre = sh_pre(sh)      # stan PRZED krokiem (monitor nie zmienia tm/rsn/st)
         geo = sh._geofence_violation(pos, vel, target)[0]
         mode_i = MODE_ID[mode]
-        d = sh.step(k, pos, vel, target, mode=mode, pos_flag=pos_flag)
+        d = sh.step(k, pos, vel, target, mode=mode, pos_flag=pos_flag, auth_ok=auth_ok)
         pos_bad = bool(sh._pos_refuse)     # wartość, którą _decide użył (monitor już zaktualizował)
-        m_dec, m_reason, m_post = eval_tau(pre, geo, mode_i, pos_bad)
-        coverage.add(leaf_of(pre, geo, mode_i, pos_bad))
+        m_dec, m_reason, m_post = eval_tau(pre, geo, mode_i, pos_bad, auth_ok)
+        coverage.add(leaf_of(pre, geo, mode_i, pos_bad, auth_ok))
         s_dec = DEC_ID[d["decision"]]
         s_reason = RSN_ID[d.get("reason")]         # powód WYEMITOWANY w tym ticku (nie persystentny)
         s_post = sh_pre(sh)
@@ -89,7 +95,8 @@ def gen_random(seed):
         target = (rng.uniform(-40, 40), rng.uniform(-40, 40), -rng.uniform(0, 25))
         mode = rng.choice([M_PATROL, M_HOLD, M_RETURN, M_ABORT, M_OBSERVE])
         pos_flag = rng.random() < 0.25          # R0.3a: losowa flaga utraty aidingu
-        ticks.append((pos, vel, target, mode, pos_flag))
+        auth_ok = rng.random() < 0.5            # DEMO-B: losowy token (pokrycie L_observe/L_auth)
+        ticks.append((pos, vel, target, mode, pos_flag, auth_ok))
     return ticks
 
 
@@ -123,6 +130,22 @@ def gen_targeted():
     #  latch ponad R-POS: ABORT (latch) potem pos_flag → wciąż ABORT
     eps.append(("latch_above_pos", None, [(IN, V0, TG, M_ABORT, False),
                                            (IN, V0, TG, M_PATROL, True), (IN, V0, TG, M_PATROL, True)]))
+    # DEMO-B — wektory celowane NO_AUTH (R-AUTH). auth_ok = 6. element (pos_flag = 5.).
+    #  (i) ¬token ⇒ nigdy OBSERVE: eskalacja bez tokenu → no_auth (REFUSE, ODWRACALNY, nie DONE)
+    eps.append(("no_auth", None, [(IN, V0, TG, M_OBSERVE, None, False)]))
+    #  (ii) token otwiera WYŁĄCZNIE OBSERVE: no_auth (¬token) → OBSERVE (token) — stan NOAUTH→OBSERVING, nie latch
+    eps.append(("no_auth→token→observe", None, [(IN, V0, TG, M_OBSERVE, None, False),
+                                                 (IN, V0, TG, M_OBSERVE, None, True)]))
+    #  (ii-bis) odwracalność: token→OBSERVE potem cofnięcie (¬token) → z powrotem no_auth (nieterminalny)
+    eps.append(("token→observe→revoke", None, [(IN, V0, TG, M_OBSERVE, None, True),
+                                                (IN, V0, TG, M_OBSERVE, None, False)]))
+    #  (v) R-G dominuje R-AUTH: OBSERVE za płot bez tokenu → GEOFENCE (nie NO_AUTH), latch
+    eps.append(("geo_above_auth", None, [(IN, V0, FAR, M_OBSERVE, None, False), (IN, V0, TG, M_OBSERVE, None, False)]))
+    #  (v) R-POS dominuje R-AUTH: pos_bad (2t) + OBSERVE bez tokenu → POS_DEGRADED (nie NO_AUTH)
+    eps.append(("pos_above_auth", None, [(IN, V0, TG, M_OBSERVE, True, False), (IN, V0, TG, M_OBSERVE, True, False)]))
+    #  latch dominuje R-AUTH: ABORT (latch) potem OBSERVE bez tokenu → wciąż ABORT
+    eps.append(("latch_above_auth", None, [(IN, V0, TG, M_ABORT, None, False),
+                                           (IN, V0, TG, M_OBSERVE, None, False)]))
     return eps
 
 
@@ -158,6 +181,10 @@ def main():
             "r03a_note": "8. liść R-POS (POS_DEGRADED, ODWRACALNY) pokryty: debounce 1t/2t, histereza "
                          "(flicker+re-ALLOW), priorytet latch>R-POS>R-G. Konformancja tau≡shield NIEZALEŻNA "
                          "od M (histereza) — tau bierze pos_bad=shield._pos_refuse po _pos_monitor.",
+            "demob_note": "9. liść R-AUTH (NO_AUTH, ODWRACALNY) pokryty: (i) ¬token⇒no_auth, (ii) token⇒OBSERVE "
+                          "i cofnięcie⇒no_auth (nieterminalny), (v) DOMINACJA R-G i R-POS oraz latch nad R-AUTH "
+                          "(wektory krzyżowe geo_above_auth/pos_above_auth/latch_above_auth). auth_ok = wejście "
+                          "walidowane w authz (P4); tu weryfikowana WYŁĄCZNIE zgodność gałęzi decyzji tau≡shield.",
             "binds": "P1 (r01/proofs/certs/P1.json) — dowód dotyczy KODU egzekutora, nie fikcji",
             "code_refs": {"shield": "r01/shield.py:_decide", "model": "r01/proofs/verify.py:tau"},
             "model_sha256": hashlib.sha256(open(__file__, "rb").read()).hexdigest()}

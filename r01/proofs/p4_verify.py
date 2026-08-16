@@ -55,6 +55,63 @@ def check():
     a.chain[0]["command_raw"] = "abort"      # sabotaż
     checks["tamper_detected"] = not a.verify_chain()
 
+    # --- DEMO-B: warstwa TOKENU operatora ("no OBSERVE without operator token") -------------
+    at = Authorizer()
+    checks["token_default_deny"] = (at.token_auth_ok(0) is False)          # brak tokenu ⇒ auth_ok False
+    # anti-bypass: samo `admit("grant observe")` (bez nonce/epizodu) NIE jest ważnym tokenem
+    at.admit("grant observe")
+    checks["plain_grant_not_token"] = (at.token_auth_ok(0) is False)
+    # pre-autoryzacja zakazana: ¬locked ⇒ REFUSE(PREAUTH), auth_ok dalej False
+    r = at.issue_token("op1", "n_pa", 0, locked=False, current_seq=0)
+    checks["preauth_not_locked"] = (r["decision"] == "REFUSE" and r["reason"] == "PREAUTH"
+                                    and at.token_auth_ok(0) is False)
+    # pre-autoryzacja zakazana: zły admission_seq ⇒ REFUSE(PREAUTH)
+    r = at.issue_token("op1", "n_ep", 7, locked=True, current_seq=0)
+    checks["preauth_wrong_episode"] = (r["reason"] == "PREAUTH" and at.token_auth_ok(0) is False)
+    # ważny grant: ALLOW, mode OBSERVE, auth_ok True TYLKO dla epizodu wydania
+    r = at.issue_token("op1", "n_ok", 0, locked=True, current_seq=0)
+    checks["grant_allow_observe"] = (r["decision"] == "ALLOW" and r["mode"] == "OBSERVE")
+    checks["token_binds_episode"] = (at.token_auth_ok(0) is True and at.token_auth_ok(1) is False)
+    # nonce jednorazowy: reuse GRANTOWANEGO nonce ⇒ REFUSE(NONCE_REUSE)
+    r = at.issue_token("op1", "n_ok", 0, locked=True, current_seq=0)
+    checks["nonce_reuse_rejected"] = (r["reason"] == "NONCE_REUSE")
+    # tamper pól tokenu wykrywany (podpis pokrywa nonce/admission_seq/operator_id)
+    checks["token_chain_verifiable"] = at.verify_chain()
+    saved = at.chain[-2]["nonce"]; at.chain[-2]["nonce"] = "forged"
+    checks["token_tamper_detected"] = (not at.verify_chain())
+    at.chain[-2]["nonce"] = saved
+    # konsumpcja na EXPIRE: re-admisja wymaga NOWEGO tokenu
+    checks["consume_on_expire"] = (at.consume_tokens(0) == 1 and at.token_auth_ok(0) is False)
+    r = at.issue_token("op1", "n_ok2", 1, locked=True, current_seq=1)     # nowy epizod, nowy nonce
+    checks["readmission_needs_new_token"] = (at.token_auth_ok(1) is True and at.verify_chain())
+
+    # property-based tokeny: 1500 losowych sekwencji issue/consume — łańcuch ZAWSZE weryfikowalny,
+    # auth_ok WYŁĄCZNIE gdy istnieje niekonsumowany ALLOW-grant bieżącego epizodu (default-deny inwariant)
+    rngt = random.Random(4242)
+    tok_ok = True
+    for _ in range(1500):
+        az = Authorizer(); seq = 0; granted_live = False
+        for _ in range(rngt.randint(1, 8)):
+            act = rngt.choice(["issue", "expire", "advance"])
+            if act == "advance":                  # ENTRY: nowy epizod (konsumpcja poprzedniego)
+                az.consume_tokens(seq); seq += 1; granted_live = False
+            elif act == "expire":
+                az.consume_tokens(seq); granted_live = False
+            else:
+                locked = rngt.random() < 0.8
+                tseq = rngt.choice([seq, seq + 1, seq - 1])
+                nonce = f"n{rngt.random()}"
+                r = az.issue_token("op", nonce, tseq, locked=locked, current_seq=seq)
+                if r["decision"] == "ALLOW":
+                    granted_live = True
+                elif locked and tseq == seq:      # locked ∧ epizod OK ∧ świeży nonce ⇒ MUSI ALLOW
+                    tok_ok = False
+            if az.token_auth_ok(seq) != granted_live:
+                tok_ok = False
+        if not az.verify_chain():
+            tok_ok = False
+    checks["token_property_1500"] = tok_ok
+
     # property-based: 2000 losowych sekwencji, łańcuch zawsze spójny, decyzje zgodne z parse
     rng = random.Random(1234)
     prop_ok = True
@@ -91,13 +148,21 @@ def main():
     if not ok:
         sys.exit(1)
     cert = {"property": "P4", "verdict": "PASS",
-            "method": "wyczerpujący test gramatyki (5 in / 8 out) + property-based (2000) + HMAC-SHA256",
+            "method": "wyczerpujący test gramatyki (7 in / 11 out) + property-based (2000 admisji + "
+                      "1500 tokenów) + HMAC-SHA256; DEMO-B: warstwa tokenu operatora (OBSERVE_GRANT)",
             "checks": {k: bool(v) for k, v in ch.items()},
             "grammar": list(ACTIONS), "commands": VALID,
             "properties": {"a": "brak trybu bez admisji", "b": "tryb wykonany ≡ admitowany",
                            "c": "poza gramatyką⇒COMMAND_INVALID; stale⇒STALE_CMD; cel poza R_E⇒GEOFENCE",
-                           "d": "HMAC-SHA256, łańcuch weryfikowalny+odtwarzalny, sabotaż wykryty"},
-            "code_refs": {"authz": "r01/authz.py", "language": "r01/language.py"},
+                           "d": "HMAC-SHA256, łańcuch weryfikowalny+odtwarzalny, sabotaż wykryty",
+                           "token": "DEMO-B: default-deny (brak tokenu⇒auth_ok False); 'no OBSERVE without "
+                                    "operator token'; pre-autoryzacja zakazana (¬locked ∨ zły epizod⇒PREAUTH); "
+                                    "nonce jednorazowy (reuse⇒NONCE_REUSE); per-admisja (token wiąże epizod, "
+                                    "konsumpcja na EXPIRE, re-admisja wymaga nowego); tamper pól tokenu "
+                                    "(nonce/admission_seq/operator_id) wykryty przez podpis. authority gating, "
+                                    "NIE 'secure C2' (ANEKS_D1 §7)"},
+            "code_refs": {"authz": "r01/authz.py (issue_token/token_auth_ok/consume_tokens)",
+                          "language": "r01/language.py (OBSERVE_GRANT)"},
             "model_sha256": hashlib.sha256(open(__file__, "rb").read()).hexdigest()}
     os.makedirs(os.path.dirname(CERT), exist_ok=True)
     json.dump(cert, open(CERT, "w"), indent=2, ensure_ascii=False)

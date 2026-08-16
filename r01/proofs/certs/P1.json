@@ -12,20 +12,25 @@
     "P1c": "unsat",
     "P1d": "unsat",
     "P1e": "unsat",
-    "P1f": "unsat"
+    "P1f": "unsat",
+    "P1g": "unsat",
+    "P1h": "unsat"
   },
-  "automaton": "r01/shield.py:_decide (R0.3a: latch>R-POS>R-G>abort>hold>return>OBSERVE>patrol; ALLOW/HOLD/REFUSE, reasons GEOFENCE/COMMAND_INVALID/STALE_CMD/ABORT/POS_DEGRADED)",
-  "leaves": 8,
-  "leaves_note": "R0.3a: +R-POS (POS_DEGRADED) poniżej latch, NA/PONAD R-G; ODWRACALNY (nie latch) — struktura 7 liści mode-decyzji zachowana, R-POS = prekondycja geofence (D3/§4)",
+  "automaton": "r01/shield.py:_decide (DEMO-B: latch>R-POS>R-G>abort>hold>return>{OBSERVE∧auth_ok|R-AUTH}>patrol; ALLOW/HOLD/REFUSE, reasons GEOFENCE/COMMAND_INVALID/STALE_CMD/ABORT/POS_DEGRADED/NO_AUTH)",
+  "leaves": 9,
+  "leaves_note": "DEMO-B: +R-AUTH (NO_AUTH) jako rozszczepienie gałęzi OBSERVE (mode=OBSERVE ∧ ¬auth_ok); ODWRACALNY (nie latch). 8 liści R0.3a → 9 (observe rozdzielone na L_observe|L_auth). R-AUTH żyje W gałęzi OBSERVE ⇒ R-G i R-POS (wyżej) DOMINUJĄ (ANEKS_D1 §Semantyka.5).",
   "properties": {
     "P1a": "ALLOW ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal (przepuszcza tylko geofence- I pos-bezpiecznie)",
     "P1b": "geo ⇒ REFUSE ∧ (¬term ∧ ¬pos ∧ geo ⇒ reason=GEOFENCE)",
-    "P1c": "REFUSE ⇒ reason ∈ {GEOFENCE,COMMAND_INVALID,STALE_CMD,ABORT,POS_DEGRADED}",
-    "P1d": "terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (latch; R-POS odwracalny nie narusza)",
-    "P1e": "OBSERVE ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal ∧ ALLOW (poniżej R-G i R-POS)",
-    "P1f": "pos_bad ∧ ¬terminal ⇒ REFUSE ∧ reason'=POS_DEGRADED (POS_DEGRADED ⇒ REFUSE, D3/§4)"
+    "P1c": "REFUSE ⇒ reason ∈ {GEOFENCE,COMMAND_INVALID,STALE_CMD,ABORT,POS_DEGRADED,NO_AUTH}",
+    "P1d": "terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (latch; R-POS/R-AUTH odwracalne nie naruszają)",
+    "P1e": "OBSERVE(L_observe) ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal ∧ ALLOW (poniżej R-G i R-POS)",
+    "P1f": "pos_bad ∧ ¬terminal ⇒ REFUSE ∧ reason'=POS_DEGRADED (POS_DEGRADED ⇒ REFUSE, D3/§4)",
+    "P1g": "OBSERVE-ALLOW ⇒ auth_ok (żadnego OBSERVE bez ważnego tokenu operatora — default-deny)",
+    "P1h": "¬term ∧ ¬pos ∧ ¬geo ∧ mode=OBSERVE ∧ ¬auth_ok ⇒ REFUSE ∧ reason=NO_AUTH ∧ ¬terminal' (domknięcie R-AUTH; R-G i R-POS dominują jako prekondycje wyżej)"
   },
   "assumptions": [
+    "A-auth [DEMO-B]: auth_ok = ZWALIDOWANE wejście boolowskie z warstwy authz/runnera (podpis HMAC ∧ nonce świeży ∧ admission_seq zgodny z epizodem ∧ token niekonsumowany). Osłona (TCB) realizuje TYLKO gałąź decyzji R-AUTH; wyliczenie auth_ok jest kryte P4 (r01/authz.py: issue_token/token_auth_ok/consume_tokens) + testami deterministycznymi. HMAC z kluczem lokalnym = bramkowanie uprawnień (authority gating), NIE 'secure C2' (ANEKS_D1 §7).",
     "geo = boolowski predykat naruszenia geofence; arytmetyka bariery (radial+hamowanie) jest przedmiotem P2-analog (osobne twierdzenie warunkowe)",
     "A-episode [A4] (R0.3a): pos_bad = ZWALIDOWANA flaga utraty aidingu PO debounce 2 ticki (D12); zawieranie ε_pos≤ε_cap ważne pod WYMUSZONYM profilem epizodu (flaga→REFUSE→velocity-descent dwufazowy→touchdown). A-plateau bezwarunkowe OBALONE (§3ter). Arytmetyka: cert P2-ε (osobny).",
     "A-flag [A4] (R0.3a): utrata aidingu FLAGOWANA ≤ t_flag (zmierzone B1-bis 0.023–0.046 s, R2 recon ~0.1 s); pos_bad staje się True w ≤ debounce+1 tick od flagi (D13a, bound 0.15 s).",
@@ -36,5 +41,5 @@
     "config": "r01/config.py (R_E, obwiednia)"
   },
   "note_discrepancy": "ABORT dodane jako 4. reason (operator) poza 3 z PRE_R01 §8 — jawnie",
-  "model_sha256": "fac91fb3ce942999f62345edde8f2cc3102e34358188f69628478dd102ce1815"
+  "model_sha256": "1a076269a04c5325a82b86043c1dc5c2369de446408ce310c8e081828c3bf1aa"
 }

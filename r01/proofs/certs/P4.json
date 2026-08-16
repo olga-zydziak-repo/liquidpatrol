@@ -1,7 +1,7 @@
 {
   "property": "P4",
   "verdict": "PASS",
-  "method": "wyczerpujący test gramatyki (5 in / 8 out) + property-based (2000) + HMAC-SHA256",
+  "method": "wyczerpujący test gramatyki (7 in / 11 out) + property-based (2000 admisji + 1500 tokenów) + HMAC-SHA256; DEMO-B: warstwa tokenu operatora (OBSERVE_GRANT)",
   "checks": {
     "in_grammar_all_ALLOW": true,
     "out_grammar_all_COMMAND_INVALID": true,
@@ -14,6 +14,18 @@
     "mode_of_denies_non_allow": true,
     "chain_verifiable": true,
     "tamper_detected": true,
+    "token_default_deny": true,
+    "plain_grant_not_token": true,
+    "preauth_not_locked": true,
+    "preauth_wrong_episode": true,
+    "grant_allow_observe": true,
+    "token_binds_episode": true,
+    "nonce_reuse_rejected": true,
+    "token_chain_verifiable": true,
+    "token_tamper_detected": true,
+    "consume_on_expire": true,
+    "readmission_needs_new_token": true,
+    "token_property_1500": true,
     "property_2000_seqs": true
   },
   "grammar": [
@@ -23,7 +35,8 @@
     "RETURN_HOME",
     "ABORT",
     "OBSERVE_ON",
-    "OBSERVE_OFF"
+    "OBSERVE_OFF",
+    "OBSERVE_GRANT"
   ],
   "commands": [
     "start patrol",
@@ -38,11 +51,12 @@
     "a": "brak trybu bez admisji",
     "b": "tryb wykonany ≡ admitowany",
     "c": "poza gramatyką⇒COMMAND_INVALID; stale⇒STALE_CMD; cel poza R_E⇒GEOFENCE",
-    "d": "HMAC-SHA256, łańcuch weryfikowalny+odtwarzalny, sabotaż wykryty"
+    "d": "HMAC-SHA256, łańcuch weryfikowalny+odtwarzalny, sabotaż wykryty",
+    "token": "DEMO-B: default-deny (brak tokenu⇒auth_ok False); 'no OBSERVE without operator token'; pre-autoryzacja zakazana (¬locked ∨ zły epizod⇒PREAUTH); nonce jednorazowy (reuse⇒NONCE_REUSE); per-admisja (token wiąże epizod, konsumpcja na EXPIRE, re-admisja wymaga nowego); tamper pól tokenu (nonce/admission_seq/operator_id) wykryty przez podpis. authority gating, NIE 'secure C2' (ANEKS_D1 §7)"
   },
   "code_refs": {
-    "authz": "r01/authz.py",
-    "language": "r01/language.py"
+    "authz": "r01/authz.py (issue_token/token_auth_ok/consume_tokens)",
+    "language": "r01/language.py (OBSERVE_GRANT)"
   },
-  "model_sha256": "8e1802b59aab05f5277ca1ba162dbd57108f734c0e4971d9e63889d19791bc39"
+  "model_sha256": "5b9cbdc73198951d769b2e68e733f44611f6453b459d3ffe9875d5c3fd64512d"
 }

@@ -5,18 +5,19 @@
   "z3_pip": "5.0.0.0",
   "z3_lib": "5.0.0",
   "episodes_random": 400,
-  "episodes_targeted": 15,
+  "episodes_targeted": 21,
   "transitions_covered": [
     "abort",
     "geo",
     "hold",
     "latch",
+    "no_auth",
     "observe",
     "patrol",
     "pos",
     "return"
   ],
-  "coverage": "8/8",
+  "coverage": "9/9",
   "mismatches": 0,
   "latched_reasons_covered": [
     "GEOFENCE",
@@ -25,10 +26,11 @@
     "STALE_CMD"
   ],
   "r03a_note": "8. liść R-POS (POS_DEGRADED, ODWRACALNY) pokryty: debounce 1t/2t, histereza (flicker+re-ALLOW), priorytet latch>R-POS>R-G. Konformancja tau≡shield NIEZALEŻNA od M (histereza) — tau bierze pos_bad=shield._pos_refuse po _pos_monitor.",
+  "demob_note": "9. liść R-AUTH (NO_AUTH, ODWRACALNY) pokryty: (i) ¬token⇒no_auth, (ii) token⇒OBSERVE i cofnięcie⇒no_auth (nieterminalny), (v) DOMINACJA R-G i R-POS oraz latch nad R-AUTH (wektory krzyżowe geo_above_auth/pos_above_auth/latch_above_auth). auth_ok = wejście walidowane w authz (P4); tu weryfikowana WYŁĄCZNIE zgodność gałęzi decyzji tau≡shield.",
   "binds": "P1 (r01/proofs/certs/P1.json) — dowód dotyczy KODU egzekutora, nie fikcji",
   "code_refs": {
     "shield": "r01/shield.py:_decide",
     "model": "r01/proofs/verify.py:tau"
   },
-  "model_sha256": "869c16692d0b1536d7a19083fb2c666ae9bc3098518517e1f6965fce25c653a6"
+  "model_sha256": "7bc53ecb4164f63d271580c5ba453d83f951330b29d99aebf1deed33e1005f3e"
 }

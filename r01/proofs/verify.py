@@ -20,8 +20,10 @@ CERT = os.path.join(_HERE, "certs", "P1.json")
 ALLOW, HOLD, REFUSE = 0, 1, 2
 NONE, GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT_R = 0, 1, 2, 3, 4
 POS_DEGRADED_R = 5                       # R0.3a: 5. reason (D3)
+NO_AUTH_R = 6                            # DEMO-B: 6. reason — eskalacja OBSERVE bez tokenu
 PATROL, HOLDING, RETURNING, DONE, OBSERVING = 0, 1, 2, 3, 4
 POSDEG = 5                               # R0.3a: stan REFUSE(POS_DEGRADED) — ODWRACALNY (nie terminal)
+NOAUTH = 6                               # DEMO-B: stan REFUSE(NO_AUTH) — ODWRACALNY (nie terminal)
 M_PATROL, M_HOLD, M_RETURN, M_ABORT, M_OBSERVE = 0, 1, 2, 3, 4
 
 
@@ -30,9 +32,9 @@ def _sv(p):
 
 
 def domain(c):
-    # st ∈ {PATROL,HOLDING,RETURNING,DONE,OBSERVING,POSDEG} = 0..5 (R0.3a: +POSDEG)
-    # rsn ∈ 0..5 (R0.3a: +POS_DEGRADED)
-    return z3.And(c["rsn"] >= 0, c["rsn"] <= 5, c["st"] >= 0, c["st"] <= 5)
+    # st ∈ {PATROL,HOLDING,RETURNING,DONE,OBSERVING,POSDEG,NOAUTH} = 0..6 (DEMO-B: +NOAUTH)
+    # rsn ∈ 0..6 (DEMO-B: +NO_AUTH)
+    return z3.And(c["rsn"] >= 0, c["rsn"] <= 6, c["st"] >= 0, c["st"] <= 6)
 
 
 def inv(c):
@@ -47,12 +49,13 @@ def valid(mode):
     return z3.And(mode >= 0, mode <= 4)
 
 
-def tau(c, geo, mode, pos_bad):
-    """Relacja przejścia — lustro r01.shield._decide. Zwraca (post, decision, leaves).
-    Priorytet (R0.3a): latch > R-POS > R-G > abort > hold > return > OBSERVE > patrol.
+def tau(c, geo, mode, pos_bad, auth_ok):
+    """Relacja przejścia — lustro r01.shield._decide. Zwraca (post, decision, dec_reason, leaves).
+    Priorytet (DEMO-B): latch > R-POS > R-G > abort > hold > return > {OBSERVE ∧ auth_ok | R-AUTH} > patrol.
     R-POS (pos_bad, zwalidowana flaga po debounce) PONIŻEJ latch, NA/PONAD R-G (prekondycja geofence:
     bariera na niepewnym p niewiarygodna). R-POS ODWRACALNY (nie terminal) — re-ALLOW po histerezie M.
-    OBSERVE i patrol = klasa ALLOW PONIŻEJ R-G (PRE_R02 §2.4)."""
+    R-AUTH (DEMO-B): mode=OBSERVE ∧ ¬auth_ok ⇒ REFUSE(NO_AUTH) ODWRACALNY (nie terminal) — żyje WEWNĄTRZ
+    gałęzi OBSERVE, więc R-G i R-POS DOMINUJĄ (ANEKS_D1 §Semantyka.5). OBSERVE(auth)/patrol = klasa ALLOW."""
     L_latch = c["tm"]
     base = z3.Not(c["tm"])
     L_pos = z3.And(base, pos_bad)                           # R0.3a: R-POS (poniżej latch, ponad R-G)
@@ -62,55 +65,69 @@ def tau(c, geo, mode, pos_bad):
     L_abort = z3.And(ok, mode == M_ABORT)
     L_hold = z3.And(ok, mode == M_HOLD)
     L_return = z3.And(ok, mode == M_RETURN)
-    L_observe = z3.And(ok, mode == M_OBSERVE)
+    L_observe = z3.And(ok, mode == M_OBSERVE, auth_ok)          # OBSERVE tylko z ważnym tokenem
+    L_auth = z3.And(ok, mode == M_OBSERVE, z3.Not(auth_ok))     # DEMO-B: R-AUTH (eskalacja bez tokenu)
     L_patrol = z3.And(ok, mode == M_PATROL)
-    dec = z3.If(z3.Or(L_latch, L_pos, L_geo, L_abort), REFUSE,
+    dec = z3.If(z3.Or(L_latch, L_pos, L_geo, L_abort, L_auth), REFUSE,
                 z3.If(z3.Or(L_hold, L_return), HOLD, ALLOW))
-    tm2 = z3.Or(L_latch, L_geo, L_abort)                    # R-POS NIE latch (odwracalny)
-    # rsn2 = powód ZATRZAŚNIĘTY w STANIE (tylko terminal; POS odwracalny NIE trafia do stanu)
+    tm2 = z3.Or(L_latch, L_geo, L_abort)                    # R-POS i R-AUTH NIE latch (odwracalne)
+    # rsn2 = powód ZATRZAŚNIĘTY w STANIE (tylko terminal; POS/AUTH odwracalne NIE trafiają do stanu)
     rsn2 = z3.If(L_latch, c["rsn"], z3.If(L_geo, GEOFENCE, z3.If(L_abort, ABORT_R, NONE)))
-    # dec_reason = powód WYEMITOWANY w tym ticku (POS transient) — porównywany z shield d["reason"]
+    # dec_reason = powód WYEMITOWANY w tym ticku (POS/AUTH transient) — porównywany z shield d["reason"]
     dec_reason = z3.If(L_latch, c["rsn"],
                        z3.If(L_pos, POS_DEGRADED_R,
-                             z3.If(L_geo, GEOFENCE, z3.If(L_abort, ABORT_R, NONE))))
+                             z3.If(L_geo, GEOFENCE,
+                                   z3.If(L_abort, ABORT_R,
+                                         z3.If(L_auth, NO_AUTH_R, NONE)))))
     st2 = z3.If(tm2, DONE,
                 z3.If(L_pos, POSDEG,
-                      z3.If(L_hold, HOLDING,
-                            z3.If(L_return, RETURNING, z3.If(L_observe, OBSERVING, PATROL)))))
+                      z3.If(L_auth, NOAUTH,
+                            z3.If(L_hold, HOLDING,
+                                  z3.If(L_return, RETURNING, z3.If(L_observe, OBSERVING, PATROL))))))
     cp = {"tm": tm2, "rsn": rsn2, "st": st2}
-    leaves = {"L_pos": L_pos, "L_geo": L_geo, "L_patrol": L_patrol, "L_observe": L_observe}
+    leaves = {"L_pos": L_pos, "L_geo": L_geo, "L_patrol": L_patrol,
+              "L_observe": L_observe, "L_auth": L_auth}
     return cp, dec, dec_reason, leaves
 
 
-def props(c, cp, dec, dec_reason, geo, pos_bad, leaves):
-    """P1(a)–(f). R0.3a: +POS_DEGRADED w P1c; +P1f (POS_DEGRADED ⇒ REFUSE). Powody emitowane =
-    dec_reason (transient tego ticku); cp['rsn'] = powód zatrzaśnięty w stanie (terminal)."""
+def props(c, cp, dec, dec_reason, geo, pos_bad, auth_ok, mode, leaves):
+    """P1(a)–(f) + DEMO-B P1g/P1h (NO_AUTH). Powody emitowane = dec_reason (transient tego ticku);
+    cp['rsn'] = powód zatrzaśnięty w stanie (terminal)."""
     # P1a: ALLOW ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal (przepuszcza tylko gdy geofence-bezpiecznie I pos-zdrowo)
     P1a = z3.Implies(dec == ALLOW, z3.And(z3.Not(geo), z3.Not(pos_bad), z3.Not(c["tm"])))
     # P1b: geo ⇒ REFUSE ∧ (¬term ∧ ¬pos ∧ geo ⇒ dec_reason=GEOFENCE)  (R-POS ma priorytet nad R-G)
     P1b = z3.And(z3.Implies(geo, dec == REFUSE),
                  z3.Implies(z3.And(z3.Not(c["tm"]), z3.Not(pos_bad), geo), dec_reason == GEOFENCE))
-    # P1c: REFUSE ⇒ dec_reason ∈ {GEOFENCE, COMMAND_INVALID, STALE_CMD, ABORT, POS_DEGRADED} (R0.3a +5.)
+    # P1c: REFUSE ⇒ dec_reason ∈ {GEOFENCE,COMMAND_INVALID,STALE_CMD,ABORT,POS_DEGRADED,NO_AUTH} (DEMO-B +6.)
     P1c = z3.Implies(dec == REFUSE, z3.Or(dec_reason == GEOFENCE, dec_reason == COMMAND_INVALID,
                                           dec_reason == STALE_CMD, dec_reason == ABORT_R,
-                                          dec_reason == POS_DEGRADED_R))
-    # P1d: terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (R-POS odwracalny NIE narusza — pos
-    #  nie jest terminal, więc latch zachowuje monotoniczność)
+                                          dec_reason == POS_DEGRADED_R, dec_reason == NO_AUTH_R))
+    # P1d: terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (R-POS/R-AUTH odwracalne NIE naruszają —
+    #  nie są terminal, więc latch zachowuje monotoniczność)
     P1d = z3.Implies(c["tm"], z3.And(cp["tm"], dec == REFUSE))
-    # P1e (R0.2): OBSERVE ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal ∧ ALLOW (poniżej R-G i R-POS)
+    # P1e (R0.2): OBSERVE(L_observe) ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal ∧ ALLOW (poniżej R-G i R-POS)
     P1e = z3.Implies(leaves["L_observe"],
                      z3.And(z3.Not(geo), z3.Not(pos_bad), z3.Not(c["tm"]), dec == ALLOW))
     # P1f (R0.3a): pos_bad ∧ ¬terminal ⇒ REFUSE ∧ dec_reason=POS_DEGRADED (POS_DEGRADED ⇒ REFUSE, §4/D3)
     P1f = z3.Implies(z3.And(z3.Not(c["tm"]), pos_bad),
                      z3.And(dec == REFUSE, dec_reason == POS_DEGRADED_R))
-    return {"P1a": P1a, "P1b": P1b, "P1c": P1c, "P1d": P1d, "P1e": P1e, "P1f": P1f}
+    # P1g (DEMO-B): OBSERVE-ALLOW ⇒ auth_ok (żadnego OBSERVE bez ważnego tokenu — default-deny)
+    P1g = z3.Implies(leaves["L_observe"], auth_ok)
+    # P1h (DEMO-B, domknięcie): eskalacja bez tokenu (¬term ∧ ¬pos ∧ ¬geo ∧ mode=OBSERVE ∧ ¬auth_ok)
+    #  ⇒ REFUSE ∧ dec_reason=NO_AUTH ∧ NIE-terminal (odwracalny). R-G i R-POS dominują (prekondycje wyżej).
+    P1h = z3.Implies(z3.And(z3.Not(c["tm"]), z3.Not(pos_bad), z3.Not(geo),
+                            mode == M_OBSERVE, z3.Not(auth_ok)),
+                     z3.And(dec == REFUSE, dec_reason == NO_AUTH_R, z3.Not(cp["tm"])))
+    return {"P1a": P1a, "P1b": P1b, "P1c": P1c, "P1d": P1d, "P1e": P1e, "P1f": P1f,
+            "P1g": P1g, "P1h": P1h}
 
 
 def prove():
     c = _sv("c_")
     geo = z3.Bool("geo"); mode = z3.Int("mode"); pos_bad = z3.Bool("pos_bad")
-    cp, dec, dec_reason, leaves = tau(c, geo, mode, pos_bad)
-    P = props(c, cp, dec, dec_reason, geo, pos_bad, leaves)
+    auth_ok = z3.Bool("auth_ok")
+    cp, dec, dec_reason, leaves = tau(c, geo, mode, pos_bad, auth_ok)
+    P = props(c, cp, dec, dec_reason, geo, pos_bad, auth_ok, mode, leaves)
     results = {}
     # BAZA: c0 = reset (tm=False, rsn=NONE, st=PATROL)
     c0 = {"tm": z3.BoolVal(False), "rsn": z3.IntVal(NONE), "st": z3.IntVal(PATROL)}
@@ -142,20 +159,30 @@ def main():
     cert = {
         "property": "P1", "verdict": "PROVED", "method": "1-induction (z3)",
         "z3_pip": "5.0.0.0", "z3_lib": z3.get_version_string(), "obligations": res,
-        "automaton": "r01/shield.py:_decide (R0.3a: latch>R-POS>R-G>abort>hold>return>OBSERVE>patrol; "
-                     "ALLOW/HOLD/REFUSE, reasons GEOFENCE/COMMAND_INVALID/STALE_CMD/ABORT/POS_DEGRADED)",
-        "leaves": 8,
-        "leaves_note": "R0.3a: +R-POS (POS_DEGRADED) poniżej latch, NA/PONAD R-G; ODWRACALNY (nie latch)"
-                       " — struktura 7 liści mode-decyzji zachowana, R-POS = prekondycja geofence (D3/§4)",
+        "automaton": "r01/shield.py:_decide (DEMO-B: latch>R-POS>R-G>abort>hold>return>{OBSERVE∧auth_ok|"
+                     "R-AUTH}>patrol; ALLOW/HOLD/REFUSE, reasons GEOFENCE/COMMAND_INVALID/STALE_CMD/ABORT/"
+                     "POS_DEGRADED/NO_AUTH)",
+        "leaves": 9,
+        "leaves_note": "DEMO-B: +R-AUTH (NO_AUTH) jako rozszczepienie gałęzi OBSERVE (mode=OBSERVE ∧ ¬auth_ok);"
+                       " ODWRACALNY (nie latch). 8 liści R0.3a → 9 (observe rozdzielone na L_observe|L_auth)."
+                       " R-AUTH żyje W gałęzi OBSERVE ⇒ R-G i R-POS (wyżej) DOMINUJĄ (ANEKS_D1 §Semantyka.5).",
         "properties": {
             "P1a": "ALLOW ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal (przepuszcza tylko geofence- I pos-bezpiecznie)",
             "P1b": "geo ⇒ REFUSE ∧ (¬term ∧ ¬pos ∧ geo ⇒ reason=GEOFENCE)",
-            "P1c": "REFUSE ⇒ reason ∈ {GEOFENCE,COMMAND_INVALID,STALE_CMD,ABORT,POS_DEGRADED}",
-            "P1d": "terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (latch; R-POS odwracalny nie narusza)",
-            "P1e": "OBSERVE ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal ∧ ALLOW (poniżej R-G i R-POS)",
+            "P1c": "REFUSE ⇒ reason ∈ {GEOFENCE,COMMAND_INVALID,STALE_CMD,ABORT,POS_DEGRADED,NO_AUTH}",
+            "P1d": "terminal monotoniczny: terminal ⇒ terminal' ∧ REFUSE (latch; R-POS/R-AUTH odwracalne nie naruszają)",
+            "P1e": "OBSERVE(L_observe) ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal ∧ ALLOW (poniżej R-G i R-POS)",
             "P1f": "pos_bad ∧ ¬terminal ⇒ REFUSE ∧ reason'=POS_DEGRADED (POS_DEGRADED ⇒ REFUSE, D3/§4)",
+            "P1g": "OBSERVE-ALLOW ⇒ auth_ok (żadnego OBSERVE bez ważnego tokenu operatora — default-deny)",
+            "P1h": "¬term ∧ ¬pos ∧ ¬geo ∧ mode=OBSERVE ∧ ¬auth_ok ⇒ REFUSE ∧ reason=NO_AUTH ∧ ¬terminal' "
+                   "(domknięcie R-AUTH; R-G i R-POS dominują jako prekondycje wyżej)",
         },
         "assumptions": [
+            "A-auth [DEMO-B]: auth_ok = ZWALIDOWANE wejście boolowskie z warstwy authz/runnera "
+            "(podpis HMAC ∧ nonce świeży ∧ admission_seq zgodny z epizodem ∧ token niekonsumowany). "
+            "Osłona (TCB) realizuje TYLKO gałąź decyzji R-AUTH; wyliczenie auth_ok jest kryte P4 "
+            "(r01/authz.py: issue_token/token_auth_ok/consume_tokens) + testami deterministycznymi. "
+            "HMAC z kluczem lokalnym = bramkowanie uprawnień (authority gating), NIE 'secure C2' (ANEKS_D1 §7).",
             "geo = boolowski predykat naruszenia geofence; arytmetyka bariery (radial+"
             "hamowanie) jest przedmiotem P2-analog (osobne twierdzenie warunkowe)",
             "A-episode [A4] (R0.3a): pos_bad = ZWALIDOWANA flaga utraty aidingu PO debounce 2 ticki (D12); "
