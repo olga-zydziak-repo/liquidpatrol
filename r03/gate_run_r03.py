@@ -39,6 +39,13 @@ from r01.config import V_MAX as VMAX
 # wyprzedzał re-ALLOW (nie dawało się zaobserwować kryterium D13). Z 15 m zejście ~13 s → jest margines.
 # ALT jest pionowe; r_est (zawieranie) jest poziome → wyższy start NIE zmienia geometrii zawierania.
 ALT = 15.0 if SCEN == "S3" else 8.0
+
+# --- TRACE SCHEMA (DEMO-B B3, PROMPT_D_BUILD_3 §1, patch (e) PRE_D §4) --------
+#   v1 (pre-B3): rows {t: meta|event|outcome}; event denial_on niosło r_est_at_cut (RAZ), brak per-tick.
+#   v2 (B3): +row {t: "tick"} per-tick z r_est [m] i margin_R_E = R_E − r_est [m] (ε-budżet GPS-denied),
+#            + decision/reason/pos/dr/descending. Pola stare nietknięte (zgodność wsteczna).
+TRACE_SCHEMA_V = 2
+
 # --- STAŁE UPRZĘŻY (nie kryteria bramki; parametry instrumentu) ---
 # Stan preflight paramów = biała lista R-D1 w JEDNYM źródle prawdy (r03/config.HARNESS_PARAM_PREFLIGHT).
 # ZASADA R-D1: assert-on-entry (preflight wymusza wymagany stan na CAŁEJ klasie JEDNYM setem), NIE
@@ -146,7 +153,7 @@ async def main():
     shield.pos_hyst_ticks = int(round(C.HYST_M_S / C.DT))
 
     fh = open(OUT, "w"); _f = fh; _running = True
-    _w({"t": "meta", "scen": SCEN, "eps_cap": C.EPS_CAP, "R_E": shield.cfg.r_e,
+    _w({"t": "meta", "scen": SCEN, "schema_v": TRACE_SCHEMA_V, "eps_cap": C.EPS_CAP, "R_E": shield.cfg.r_e,
         "half_p": C.HALF_P, "vmax": VMAX, "debounce": C.DEBOUNCE_TICKS,
         "harness_valid": (not poison), "harness_poison": poison,
         "note": "osłona w pętli; GT=sędzia; velocity-descent dwufazowy na POS_DEGRADED"})
@@ -235,6 +242,11 @@ async def main():
         # decyzja osłony
         d_dec = shield.step(tick, pos, vel, tgt, mode=M_PATROL, pos_flag=(dr if denial_done else None))
         is_pos = (d_dec["decision"] == REFUSE and d_dec.get("reason") == POS_DEGRADED)
+        # B3 (e) PRE_D §4: per-tick ε-budżet GPS-denied — r_est [m] i margin_R_E = R_E − r_est [m].
+        _w({"t": "tick", "tick": tick, "mono": round(time.monotonic(), 4), "r_est": round(r_est, 3),
+            "margin_R_E": round(shield.cfg.r_e - r_est, 3), "decision": d_dec["decision"],
+            "reason": d_dec.get("reason"), "state": d_dec.get("state"),
+            "pos": [round(v, 3) for v in pos], "dr": bool(dr), "descending": bool(descending)})
 
         if is_pos:
             if not descending:

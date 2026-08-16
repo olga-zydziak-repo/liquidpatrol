@@ -42,6 +42,20 @@ PERIOD = DT
 CH_TOPIC = "/liquidpatrol/target_channel"
 BOXES_TOPIC = "/liquidpatrol/detector_boxes"
 
+# --- TRACE SCHEMA (DEMO-B B3, PROMPT_D_BUILD_3 §1) ---------------------------
+# Wersjonowany schemat trace gate_live. Zmiana pól ⇒ bump + wpis w changelogu.
+#   v1 (pre-B3): tick rec {k,t,decision,reason,rule,mode,locked,age,gt_fed,pos,yaw,applied,r_pos,
+#                flight_mode,min_d}; +B1: {auth_ok,admission_seq}; event rows {event: token_issued|
+#                token_consumed|refuse_no_auth}.
+#   v2 (B3, patche PRE_D §4): +tick (a) state(str automatu), (b) conj{box,central,mti_ok}(bool|null),
+#                (f) intr_ned([x,y,z] m NED | null). (c) age i (d) min_d już były. Pola nowe OPCJONALNE
+#                (zgodność wsteczna: parser czyta v1 bez wywrotki — .get z domyślną).
+TRACE_SCHEMA_V = 2
+TRACE_TICK_FIELDS = ["k", "t", "decision", "reason", "rule", "mode", "state", "locked", "age",
+                     "conj", "intr_ned", "gt_fed", "pos", "yaw", "applied", "r_pos", "flight_mode",
+                     "min_d", "auth_ok", "admission_seq"]
+TRACE_EVENT_TYPES = ["token_issued", "token_consumed", "refuse_no_auth"]
+
 
 def offboard_ok(fm):
     return fm is not None and "OFFBOARD" in fm
@@ -169,6 +183,9 @@ class Runner:
     def __init__(self, laps):
         os.makedirs(os.path.dirname(TRACE), exist_ok=True)
         self.tf = open(TRACE, "w")
+        # B3: nagłówek schematu (self-describing) — overlay/parser rozpoznaje wersję; brak = v1 (stare trace'y).
+        self.tf.write(json.dumps({"t": "schema", "v": TRACE_SCHEMA_V, "tick_fields": TRACE_TICK_FIELDS,
+                                  "event_types": TRACE_EVENT_TYPES}) + "\n")
         self.xrce = XrcePublisher()
         self.chan = ChannelSub(self.xrce.node)          # współdziel węzeł rclpy osłony
         self.boxes_sub = BoxesSub(self.xrce.node)       # A6: pasywne logowanie conf (wszystkie boxy)
@@ -192,6 +209,10 @@ class Runner:
         self.admission_seq = -1
         self._nonce_ctr = 0
         self.n_token_issued = 0; self.n_token_consumed = 0; self.n_refuse_no_auth = 0
+        # B3 patche PRE_D §4: (b) koniunkty ostatniej klatki (ZOH do tiku); (f) pozycja intruza NED
+        # (GT-fed: z gt_intruder_fn; live/B4: runner ustawia self._intr_ned per-tick). None gdy nieznane.
+        self._last_conj = None
+        self._intr_ned = None
         self.k = 0
         self.max_radial = 0.0
         self._last_pub = None; self.setpoint_max_dt = 0.0; self.setpoint_dts = []
@@ -244,7 +265,8 @@ class Runner:
                                      current_seq=self.admission_seq)
         if rec["decision"] == "ALLOW":
             self.n_token_issued += 1
-        self.tf.write(json.dumps({"k": self.k, "event": "token_issued", "op": operator_id,
+        self.tf.write(json.dumps({"k": self.k, "t": round(time.time()-self.t0, 3),
+                                  "event": "token_issued", "op": operator_id,
                                   "admission_seq": self.admission_seq, "decision": rec["decision"],
                                   "reason": rec["reason"]}) + "\n")
         return rec
@@ -362,6 +384,7 @@ class Runner:
         if self.gt_mode:
             if t >= self.gt_next - 1e-9:                    # kadencja detektora 1 Hz
                 intr = self.gt_intruder_fn(t) if self.gt_intruder_fn else None
+                self._intr_ned = [round(float(v), 3) for v in intr] if intr is not None else None  # B3 (f)
                 box = None
                 if intr is not None:
                     b = project_to_pixel(pos, yaw, intr)     # projekcja GT (None gdy poza FOV level-camera)
@@ -383,7 +406,9 @@ class Runner:
                 self.gt_channel.tick_time(t)                 # egzekwuj sufit age między klatkami
             val = self.gt_channel.sample(t)
             locked = self.gt_channel.locked and not self.gt_channel.is_expired(t)
+            self._last_conj = dict(self.gt_channel.last_conj)         # B3 (b): koniunkty ZOH
             return locked, (self.gt_channel.last_box if locked else None), (val.age_s if val else None)
+        self._last_conj = getattr(self.chan, "last_conj", None)       # B3 (b): live (None gdy sub bez pola)
         locked = self.chan.locked and (self.chan.age is not None and self.chan.age <= THETA_AGE_S)
         return locked, (self.chan.last if self.chan.locked else None), self.chan.age
 
@@ -405,7 +430,8 @@ class Runner:
                 nc = self.authz.consume_tokens(self.admission_seq)
                 if nc:
                     self.n_token_consumed += nc
-                    self.tf.write(json.dumps({"k": self.k, "event": "token_consumed",
+                    self.tf.write(json.dumps({"k": self.k, "t": round(time.time()-self.t0, 3),
+                                              "event": "token_consumed",
                                               "admission_seq": self.admission_seq, "n": nc}) + "\n")
         # ENTRY: przejście unlocked→locked
         if locked and not self._prev_locked:
@@ -439,7 +465,8 @@ class Runner:
         d["mode"] = mode                       # udostępnij tryb scenariuszom (fix: shield.step nie zwraca 'mode')
         if d["reason"] == NO_AUTH:
             self.n_refuse_no_auth += 1
-            self.tf.write(json.dumps({"k": self.k, "event": "refuse_no_auth",
+            self.tf.write(json.dumps({"k": self.k, "t": round(time.time()-self.t0, 3),
+                                      "event": "refuse_no_auth",
                                       "admission_seq": self.admission_seq}) + "\n")
         self._pub(d["applied"])
         self.max_radial = max(self.max_radial, math.hypot(pos[0], pos[1]))
@@ -454,8 +481,10 @@ class Runner:
             self.gf_fired = True
             self.offboard_lost_ticks += 1        # fix #2 metryka: ticki poza OFFBOARD w patrolu
         rec = {"k": self.k, "t": round(time.time()-self.t0, 3), "decision": d["decision"],
-               "reason": d["reason"], "rule": d["rule"], "mode": mode, "locked": locked,
-               "age": chage, "gt_fed": self.gt_mode, "pos": [round(v, 2) for v in pos], "yaw": round(self.mav.yaw, 3),
+               "reason": d["reason"], "rule": d["rule"], "mode": mode, "state": d.get("state"),   # B3 (a)
+               "locked": locked,
+               "age": chage, "conj": self._last_conj, "intr_ned": self._intr_ned,   # B3 (b), (f)
+               "gt_fed": self.gt_mode, "pos": [round(v, 2) for v in pos], "yaw": round(self.mav.yaw, 3),
                "applied": [round(v, 2) for v in d["applied"]], "r_pos": round(math.hypot(pos[0], pos[1]), 2),
                "flight_mode": self.mav.flight_mode, "min_d": None if self.min_d_observe==float("inf") else round(self.min_d_observe,2),
                "auth_ok": bool(auth_ok), "admission_seq": self.admission_seq}   # DEMO-B: pola tokenu (overlay B3)

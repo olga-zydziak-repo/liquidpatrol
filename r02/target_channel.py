@@ -87,6 +87,10 @@ class TargetChannel:
         self.n_expire = 0
         self.n_false_entry = 0          # ENTRY policzone gdy scena PUSTA (ustalane z ground-truth w bramce)
         self.events = []                # [(t, event, detail)]
+        # DEMO-B B3 (patch (b) PRE_D §4, RECORD-ONLY — NIE zmienia logiki ENTRY): rozkład koniunktów
+        # admisji z OSTATNIEJ klatki detektora, do overlaya. box=czy jest top-1; central=box∧centralny
+        # (edge_dist≥edge_margin, ta sama geometria co brama); mti_ok=koincydencja MTI (None gdy nieużyte).
+        self.last_conj = {"box": False, "central": False, "mti_ok": None}
 
     # -- klatka detektora (kadencja 1 Hz) -----------------------------------
     def on_frame(self, box, t, gt_present: bool | None = None, mti_ok: bool | None = None):
@@ -94,6 +98,11 @@ class TargetChannel:
         gt_present: opcjonalny ground-truth (czy intruz realnie w FOV) — TYLKO do liczenia ε_FP w bramce,
         NIE wpływa na logikę kanału. mti_ok: czy box koincyduje z komponentem MTI (STRUKTURA ∧ MTI, B3) —
         używane WYŁĄCZNIE gdy cfg.entry_require_mti. Zwraca zdarzenie (EV_ENTRY/EXPIRE/REFRESH/None)."""
+        # B3 (b): OBSERWACJA koniunktów (bez mutacji box/logiki) — czytana do trace w warstwie runnera.
+        _has = box is not None
+        _central = _has and box.edge_dist() >= self.cfg.entry_edge_margin
+        self.last_conj = {"box": bool(_has), "central": bool(_central),
+                          "mti_ok": (bool(mti_ok) if mti_ok is not None else None)}
         ev = EV_NONE
         if self.locked:
             ev = self._on_frame_locked(box, t, gt_present)
