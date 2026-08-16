@@ -12,6 +12,8 @@ Build + certy tokenu + nagrania + montaż = osobny prompt PO ratyfikacji (SR-D5)
 
 DEMO-B pokazuje **wyłącznie zdolności po bramkach** złożone w jedną misję wieloetapową; wszystko poza
 bramką ma **jawną planszę**. Trzy filary już po bramkach: (1) osłona P1/P2/P2-ε/P4/P5 (selfcheck 5/5);
+> [KOREKTA A1, 2026-08-16, ratyfikowana] `certs_selfcheck` to **6/6**, nie 5/5: prowieniencja pokrywa
+> P1, P2, P2_eps, P2_vmax3p1, P4, P5 (6 certów). Baseline B1 potwierdzony: PASS 6/6 na czystym HEAD `83c7e9c`.
 (2) GPS-denied 4/4 (`RAPORT_R03A`: REFUSE 0.091 s, velocity-descent dwufazowy, touchdown w kopercie);
 (3) percepcja live ENTRY-once (`RAPORT_MTI_REGATE`: (+) `coverage_entry_once`=1.0 @5/7/9 m, (−) 0
 fałszywych ENTRY). Nowy element wchodzący do dema (koncepcyjnie ratyfikowany): **token operatora** —
