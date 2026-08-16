@@ -1,0 +1,53 @@
+# acts/A3_spec.yaml — DEMO-B AKT 3: GPS-denied → REFUSE(POS_DEGRADED) → velocity-descent → touchdown.
+# DEMO-B blok B2 (PROMPT_D_BUILD_2 §1). BEZ elementów tokenowych. Runner per-akt = B4 (wyprowadzony
+# z gate_run_r03). Mechanizm denial = R0.3a NIETKNIĘTY. Frame: dron NED.
+
+act: A3
+world: worlds/world_demo_A3.sdf         # hash w ANEKS_D2 (FREEZE)
+token_gated: true                        # ANEKS_D1 §A4 (flaga stała; brak eskalacji OBSERVE w tym akcie)
+intruder: absent                         # intruz zbędny; jeśli w tle — NIE dotyka wyniku (uzasadnić w B4)
+  # source: PROMPT §1 A3 (intruz zbędny); wynik A3 = POS_DEGRADED, niezależny od kanału celu
+
+geometry:
+  patrol_route_ned: corner_waypoints()   # [(20,20,-10),(20,-20,-10),(-20,-20,-10),(-20,20,-10)]
+    # source: r01/config.corner_waypoints (HALF=20, ALT_M=10); R_ROUTE=28.284 m
+  R_E_m: 32.0                            # source: r01/config R_E (obwiednia — NIETYKANA)
+  R_route_prime_m: 20.5                  # r_est przy cięciu ≤ R_route' ⇒ touchdown ≤ R_E gwarantowane
+    # source: RAPORT_R03A §Stałe: R_route' = R_E − d_stop − ε_cap = 32 − 2.25 − 9.25 = 20.5
+    #         d_stop = v_max²/2a_brake = 3²/(2·2.0) = 2.25 m (r01/config V_MAX=3, A_BRAKE=2);
+    #         ε_cap = 9.25 m (RAPORT_R03A, D10/D11 episode dwufazowy)
+
+timeline_s:
+  patrol_until_trigger: "drone_radial_reaches_outbound(18.0)"   # event-trigger, NIE stały sim_t
+    # source: 18.0 ≤ R_route'=20.5 ⇒ containment r_true+d_stop≤R_E (RAPORT_R03A); prekondycja PEWNA
+  denial_inject:
+    trigger: "drone_radial_reaches_outbound(18.0)"
+    mechanism: "EKF2_GPS_CTRL=0"         # osłona konsumuje zdrowie własnej pozycji (R0.3a NIETKNIĘTY)
+    # source: r03a-gps-denied (EKF2_GPS_CTRL=0 denial DZIAŁA; RAPORT_R03A)
+
+expected_response:                       # wszystko z FROZEN arytmetyki R0.3a — rehearsal liczy touchdown
+  refuse_pos_degraded_within_s: 0.15     # REFUSE od flagi ≤ 0.15 (debounce 2 ticki = 0.10 s + margines)
+    # source: RAPORT_R03A S2 REFUSE 0.091 s ≤ 0.15; debounce pos_debounce_ticks=2 @20Hz=0.10 s (shield)
+  action: "VELOCITY_DESCENT dwufazowy"   # 1.5 m/s do 2 m AGL, potem 0.7 m/s; v_xy=0 równocześnie
+    # source: RAPORT_R03A §D5 (AUTO.LAND WYKLUCZONE; flyaway 42 m — plansza kontrastu)
+  touchdown_radial_le_m: 32.0            # touchdown ≤ R_E; demonstrowane S2 = 14.84 m
+    # source: RAPORT_R03A S2 touchdown 14.84 m ≤ 32 ✓ (denial w patrolu)
+  containment: "r_true + d_stop ≤ R_E (ε_pos ≤ ε_cap=9.25; S2 ε_pos=2.97)"
+    # source: RAPORT_R03A §główna nierówność; S2 ε_pos 2.97 ≤ 9.25
+
+contrast_plansza:                        # B3/B6 — plansza kontrastu (NIE część biegu A3)
+  auto_land_flyaway_m: 42.0              # source: RAPORT_R03A B1-bis (AUTO.LAND flyaway 42 m OBALONE)
+
+segments:
+  - {name: "patrol_transit", span: [0.0, "on_denial"], label: "beyond characterized envelope — transit"}
+  - {name: "refuse_descent", span: ["on_denial", "on_touchdown"], claim: "POS_DEGRADED safe descent"}
+
+validity_criteria:                       # rehearsal (offline, frozen arytmetyka)
+  - "denial injektowany gdy drone_radial ≤ R_route'=20.5 ⇒ touchdown ≤ R_E=32 (containment)"
+  - "touchdown_radial ≤ 32.0 m przy r_inj=18.0 + d_stop 2.25 + ε_pos ≤ ε_cap 9.25 = ≤ 29.5 < 32 ✓"
+  - "REFUSE(POS_DEGRADED) ≤ 0.15 s od flagi (frozen debounce; S2 0.091)"
+  - "brak elementów tokenowych; intruz nie dotyka wyniku"
+
+tolerances:
+  radial_tol_m: 0.5
+  time_tol_s: 0.5                         # source: RTF ~1.0 (ANEKS-H)

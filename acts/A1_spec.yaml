@@ -1,0 +1,58 @@
+# acts/A1_spec.yaml — DEMO-B AKT 1: patrol → intruz dwell → REFUSE(NO_AUTH) → token → OBSERVE
+# DEMO-B blok B2 (PROMPT_D_BUILD_2 §1). KAŻDA liczba: source: <frozen origin>. Runner per-akt = B4.
+# Frame: intruz = world ENU (gz_set_intruder x,y,z, z-up); dron = NED w osłonie (z=-alt), tu alt AGL dodatnio.
+# Operator = SKRYPTOWANY SYGNATARIUSZ (ANEKS_D1 §A5): grant na trigger ENTRY+opóźnienie, HITL symulowany.
+
+act: A1
+world: worlds/world_demo_A1.sdf        # hash w ANEKS_D2 (FREEZE)
+token_gated: true                       # ZAMROŻONE (ANEKS_D1 §A4): wszystkie akty token_gated=True
+intruder_model: r02/intruder_model.sdf  # MODEL (nie <actor> — RAPORT_R1 §1 segfault); teleport set_pose
+
+geometry:
+  drone_dwell_ned: [0.0, 0.0, -10.0]    # hover, r=0 < R_E=32; alt 10 m
+    # source: ALT_M=10.0 (r01/config.py); r=0 trywialnie w kopercie R_E=32
+  drone_facing: "+x_forward"            # kamera drona forward (konwencja MTI/R0.2)
+  intruder_ring_enu: [7.86, 0.0, 11.5]  # dead-ahead; 3D range od drona = sqrt(7.86^2+1.5^2)=8.00 m
+    # source: INTRUDER_ALT_M=11.5 (config_r02, 1.5 m nad patrolem); koperta detekcji 5–9 m środek 7
+    #         (config_r02 A7); d*≈8 m w pierścieniu 7–9 (PRE_D §5). horizontal=sqrt(8^2-1.5^2)=7.86
+  intruder_lateral_osc_m: 1.0           # ±1.0 m w y (ruch względny dla MTI)
+    # source: < REGATE ±1.5 m/0.3 Hz (RAPORT_MTI_REGATE); mniejsza amplituda = konserwatywnie w pierścieniu
+  ring_band_m: [7.0, 9.0]               # kryterium ważności: intruz w tym pasmie 3D podczas okna dwell
+    # source: koperta scharakteryzowana {7,9} m (PRE_D §5 D3(a); REGATE cov_entry_once=1.0 @7/9)
+
+timeline_s:                              # sim_t; fazy time-based (intruz) + event-based (operator)
+  patrol_until: 20.0                     # dron ≥ część okrążenia; intruz poza FOV (nisko/daleko)
+    # source: patrol laps (gate_run_r02 Planner); intruz nisko NIE wykrywany (config_r02 G1: wymaga tła nieba)
+  intruder_approach: [20.0, 23.0]        # intruz z pozycji parkingowej → pierścień (3 s)
+  intruder_ring_hold: [23.0, 49.0]       # 26 s w pierścieniu (osc); pokrywa ENTRY+grant+OBSERVE
+    # source: RING_HOLD=26.0 = t_entry_p95 10.87 (REGATE {7,9} max) + grant 3.0 + OBSERVE 10.0 + margines 2.13
+  entry_expected_by: 33.87               # 23.0 + t_entry_p95 10.87; ENTRY MUSI paść w [23, 33.87]
+    # source: REGATE time_to_entry_s_raw {7m:[2.17,2.22,5.98], 9m:[1.63,2.75,10.87]}; p95≈max=10.87 (n=6)
+  intruder_parking_enu: [7.0, 0.0, 3.0]  # niska pozycja pre/post (nad gruntem, clutter → brak detekcji)
+    # source: config_r02 G1 (detekcja wymaga tła nieba; intruz nisko = clutter, niewykrywalny)
+
+operator_beats:
+  - id: grant_1
+    trigger: "on_entry + 3.0"            # 3 s po ENTRY → REFUSE(NO_AUTH) WIDOCZNE w trace przed grantem
+    # source: DECISION 20 Hz (TICK_HZ, r01/config) + DET 1 Hz (config_r02 DET_HZ) → NO_AUTH emitowany
+    #         co tick decyzji od locka; 3 s = 60 ticków decyzji / 3 klatki det = jawnie widoczne
+    action: issue_operator_token         # Runner.issue_operator_token (B1); admission_seq bieżący
+    operator_id: "operator"              # skryptowany sygnatariusz (ANEKS_D1 §A5)
+
+segments:                                # znaczniki do plansz (B3/B6); tu tylko granice czasowe
+  - {name: "patrol_transit_in", span: [0.0, 20.0], label: "beyond characterized envelope — transit"}
+    # source: PRE_D §5 D3(b); percepcja roszczona WYŁĄCZNIE w dwell (poniżej)
+  - {name: "dwell_confirm_no_auth", span: [23.0, "on_grant_1"], claim: "none (authority-gated)"}
+  - {name: "observe_dwell", span: ["on_grant_1", "on_grant_1 + 10.0"], claim: "perception (in-ring)"}
+    # source: OBSERVE_S=10.0; D_safe hold min_d ≥ D_SAFE_M-0.5 = 4.82 (config_r02 D_SAFE_M=5.32)
+
+validity_criteria:                       # rehearsal (offline geometria/timing) sprawdza TE punkty
+  - "intruder 3D range od drone_dwell ∈ [7.0, 9.0] m przez całe intruder_ring_hold (z osc)"
+  - "ENTRY-okno [23.0, 33.87] mieści się w intruder_ring_hold (intruz w pierścieniu gdy ENTRY pada)"
+  - "grant_1 (ENTRY+3.0) + OBSERVE 10.0 s ≤ koniec ring_hold 49.0 dla worst-case ENTRY 33.87"
+  - "brak roszczenia percepcji poza dwell (segments: transit=beyond envelope)"
+
+tolerances:
+  range_tol_m: 0.5                        # dopuszczalne odchylenie 3D range od pasma (montaż/estymata)
+  time_tol_s: 0.5                         # tolerancja czasu segmentów (RTF~1.0, ANEKS-H)
+    # source: RTF ~1.0 headless (ANEKS-H; sonda R2 kamera ΔRTF +0.0001)

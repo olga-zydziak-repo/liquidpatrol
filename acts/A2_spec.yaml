@@ -1,0 +1,70 @@
+# acts/A2_spec.yaml — DEMO-B AKT 2: OBSERVE → utrata (EXPIRE, konsumpcja tokenu) → powrót →
+#   re-admisja (nowy admission_seq) → REFUSE(NO_AUTH) → drugi grant → OBSERVE. DWA beaty operatora.
+# DEMO-B blok B2 (PROMPT_D_BUILD_2 §1). Runner per-akt = B4. Frame jak A1.
+
+act: A2
+world: worlds/world_demo_A2.sdf         # hash w ANEKS_D2 (FREEZE)
+token_gated: true                        # ANEKS_D1 §A4
+intruder_model: r02/intruder_model.sdf   # MODEL, teleport set_pose (RAPORT_R1 §1)
+
+geometry:                                # identyczna jak A1 (ten sam pierścień)
+  drone_dwell_ned: [0.0, 0.0, -10.0]     # source: ALT_M=10.0 (r01/config)
+  drone_facing: "+x_forward"
+  intruder_ring_enu: [7.86, 0.0, 11.5]   # 3D 8.00 m; source jak A1 (config_r02 INTRUDER_ALT_M/koperta; PRE_D)
+  intruder_lateral_osc_m: 1.0            # source: < REGATE ±1.5 (RAPORT_MTI_REGATE)
+  intruder_far_enu: [70.0, 0.0, 11.5]    # „poza zasięg" — horizontal 70 m ≫ 9 m koperty → brak detekcji → EXPIRE
+    # source: koperta detekcji max 9 m (config_r02 A7); 70 m ≫ 9 → cel niewidoczny → age rośnie > θ_age
+  ring_band_m: [7.0, 9.0]                # source: PRE_D §5 / REGATE {7,9}
+
+timeline_s:
+  # Epizod 0 (admission_seq 0): jak A1
+  patrol_until: 20.0
+  intruder_approach: [20.0, 23.0]
+  ep0_ring_hold: [23.0, 45.0]            # 22 s: ENTRY + grant_1 + OBSERVE (krótszy niż A1 — potem utrata)
+    # source: 22 = t_entry_p95 10.87 + grant 3.0 + OBSERVE 6.0 + margines 2.13 (OBSERVE skrócony, akcent na EXPIRE)
+  # Utrata: intruz odlatuje
+  intruder_leave: [45.0, 46.0]           # teleport do intruder_far (1 s)
+  expire_gap: [45.0, 51.0]               # intruz poza zasięg 6.0 s ≥ k·θ_age
+    # source: LEAVE_S=6.0 = k·θ_age, k=2.0 ≥ 1.5 (PROMPT §1 A2); θ_age=THETA_AGE_S=3.0 (config_r02)
+  expire_expected_by: 48.0               # EXPIRE gdy age > θ_age=3.0 po ostatniej detekcji (~45+3)
+    # source: THETA_AGE_S=3.0 (config_r02); age narasta ZOH po utracie
+  # Powrót: intruz wraca → nowy epizod
+  intruder_return: [51.0, 54.0]          # z far → pierścień (3 s)
+  ep1_ring_hold: [54.0, 74.0]            # 20 s: re-ENTRY(admission_seq→1) + grant_2 + OBSERVE
+    # source: 20 = t_entry_p95 10.87 + grant 3.0 + OBSERVE 6.0 (margines wchłonięty; symetrycznie do ep0)
+  entry_expected_by_ep0: 33.87           # source: REGATE {7,9} p95 10.87 (jak A1)
+  entry_expected_by_ep1: 64.87           # 54.0 + 10.87 (re-ENTRY pełną bramą, ENTRY-once nowy epizod)
+    # source: REGATE p95 10.87; re-admisja = pełna koniunkcja box∧central∧mti_ok (ANEKS_MTI_2 ENTRY-once)
+
+operator_beats:
+  - id: grant_1
+    trigger: "on_entry[0] + 3.0"         # pierwszy epizod
+    action: issue_operator_token
+    operator_id: "operator"
+    # source: DECISION 20 Hz / DET 1 Hz (NO_AUTH widoczny), jak A1
+  - id: grant_2
+    trigger: "on_entry[1] + 3.0"         # DRUGI epizod (po EXPIRE+konsumpcja) — NOWY token wymagany
+    action: issue_operator_token
+    operator_id: "operator"
+    # source: B1 consume_tokens na EXPIRE ⇒ token ep0 skonsumowany ⇒ ep1 wymaga nowego (re-admisja)
+
+expire_semantics:                        # kontrakt B1 zweryfikowany deterministycznie (test_token_authz)
+  on_expire: "authz.consume_tokens(admission_seq_0)"   # token ep0 skonsumowany
+  readmission: "admission_seq 0→1 na re-ENTRY; token_auth_ok(1)=False do grant_2"
+  # source: gate_run_r02 admission_seq inkr. na ENTRY, consume na EXPIRE (B1 commit 01f47e8)
+
+segments:
+  - {name: "patrol_transit_in", span: [0.0, 20.0], label: "beyond characterized envelope — transit"}
+  - {name: "ep0_observe", span: ["on_grant_1", "on_grant_1 + 6.0"], claim: "perception (in-ring)"}
+  - {name: "leave_expire", span: [45.0, 51.0], claim: "none (target lost, EXPIRE)"}
+  - {name: "ep1_observe", span: ["on_grant_2", "on_grant_2 + 6.0"], claim: "perception (in-ring)"}
+
+validity_criteria:
+  - "ep0: intruder 3D range ∈ [7,9] przez ep0_ring_hold; ENTRY[0] w [23, 33.87]"
+  - "expire_gap ≥ k·θ_age = 6.0 s (k=2.0); intruz w intruder_far (horizontal 70 m ≫ 9)"
+  - "ep1: intruder 3D range ∈ [7,9] przez ep1_ring_hold; re-ENTRY[1] w [54, 64.87]; admission_seq 0→1"
+  - "grant_2 wymaga NOWEGO tokenu (ep0 skonsumowany) — kontrakt B1"
+
+tolerances:
+  range_tol_m: 0.5
+  time_tol_s: 0.5                         # source: RTF ~1.0 (ANEKS-H)

@@ -12,8 +12,19 @@ ENGINE-RECON: powietrzny sensor renderuje headless, kontencja GUI była konfunde
 Determinizm: seeded LCG (bez random/np — reprodukowalny SDF; habitat hashowalny w ANEKS-H).
 Nazwa świata WEWNĘTRZNA = `world_demo_v1` (spójna z nazwą pliku → wszystkie topiki /world/world_demo_v1/*).
 NIE zmienia geometrii koperty (R_E/geofence żyją w config osłony, nie w świecie).
+
+DEMO-B blok B2 (PROMPT_D_BUILD_2 §2): rozszerzenie PARAMETRYCZNE — warianty aktów `--act A1|A2|A3`
+dokładają KAMERĘ filmową (par. z sondy R2: 1280×720@30, always_on, statyczna) skadrowaną na centroid
+akcji aktu, i zmieniają nazwę świata na `world_demo_<AKT>` (spójność topików — lekcja bugu sondy R2).
+INTRUZ NIE jest pieczony w świat (frozen finding RAPORT_R1 §1: skinless <actor> segfaultuje serwer gz)
+— pozostaje modelem `r02/intruder_model.sdf` spawnowanym w runtime i sterowanym przez runner per-akt (B4)
+wg trajektorii f(sim_t) w spec `acts/<AKT>_spec.yaml`. Domyślne wywołanie (bez --act) generuje
+world_demo_v1.sdf BAJT-w-BAJT identycznie (hash a76a38c8 ZAMROŻONY) — terrain/seed/kolejność nietknięte.
+Kadr kamery per akt: FREEZE (sha256) w ANEKS_D2.md; zmiana po freeze = nowy hash + adnotacja.
 """
+import math
 import os
+import sys
 
 # v1.1 (2026-08-15): ZMNIEJSZONA gęstość — 359 brył (v1.0) dawało kontencję renderu gz → EKF High Gyro Bias
 # → arm denied (ANEKS-H/E2). Mniej, WIĘKSZYCH brył = ta sama struktura przestrzenna/paralaksa, ~4× mniejszy
@@ -115,7 +126,48 @@ BOX_TMPL = """    <model name="tex_{i}">
 """
 
 
-def main():
+# --- DEMO-B: kamera filmowa (par. z sondy R2 — results/demo/recon/world_demo_probe.sdf) ------------
+FILM_CAM_TMPL = """    <!-- DEMO-B kamera filmowa (par. sonda R2; kadr na centroid aktu {act}, FREEZE w ANEKS_D2). -->
+    <model name="film_cam">
+      <static>true</static>
+      <pose>{px:.3f} {py:.3f} {pz:.3f} 0 {pitch:.4f} {yaw:.4f}</pose>
+      <link name="l">
+        <sensor name="film" type="camera">
+          <pose>0 0 0 0 0 0</pose>
+          <camera>
+            <horizontal_fov>1.20</horizontal_fov>
+            <image><width>1280</width><height>720</height></image>
+            <clip><near>0.1</near><far>3000</far></clip>
+          </camera>
+          <always_on>1</always_on>
+          <update_rate>30</update_rate>
+          <visualize>false</visualize>
+        </sensor>
+      </link>
+    </model>
+"""
+
+# Geometria akcji per akt (ENU; źródła w acts/<AKT>_spec.yaml i RAPORT_D_B2). Centroid = punkt celowania
+# kamery; cam_pos = stanowisko (standoff boczny + lekko powyżej). Pitch/yaw LICZONE (aim-at-centroid).
+#   DRONE_DWELL=(0,0,10) [ALT_M=10, r01.config] · INTRUDER_RING=(7.86,0,11.5) [3D 8.0 m: √(7.86²+1.5²);
+#   INTRUDER_ALT_M=11.5, koperta 5–9 m środek — config_r02] · A3 zejście ~ (13,0,4) [pkt trasy < R_route'=20.5 m].
+ACT_CAM = {
+    "A1": {"centroid": (3.93, 0.0, 10.75), "cam_pos": (10.0, -14.0, 8.0)},   # midpoint dron↔intruz
+    "A2": {"centroid": (3.93, 0.0, 10.75), "cam_pos": (12.0, -16.0, 8.0)},   # jw. + zapas na wyjście/powrót
+    "A3": {"centroid": (13.0, 0.0, 4.0),   "cam_pos": (14.0, -18.0, 7.0)},   # zejście velocity-descent
+}
+
+
+def _cam_pose(cam_pos, centroid):
+    """Aim-at-centroid → (pitch, yaw) w konwencji SDF ENU. roll=0."""
+    dx = centroid[0] - cam_pos[0]; dy = centroid[1] - cam_pos[1]; dz = centroid[2] - cam_pos[2]
+    yaw = math.atan2(dy, dx)
+    pitch = math.atan2(dz, math.hypot(dx, dy))
+    return pitch, yaw
+
+
+def build_boxes():
+    """Deterministyczne pole brył (identyczne dla wszystkich światów — terrain frozen)."""
     rng = LCG(SEED)
     boxes = []
     i = 0
@@ -140,13 +192,40 @@ def main():
             boxes.append(BOX_TMPL.format(i=i, x=x, y=y, z=z, yaw=yaw, sx=sx, sy=sy, sz=sz,
                                          r=min(r, 1), g=min(g, 1), b=min(b, 1)))
             i += 1
-    out = os.path.join(os.path.dirname(__file__), "world_demo_v1.sdf")
+    return boxes
+
+
+def build_world(act=None):
+    """act=None → world_demo_v1 (BAJT-identyczny, terrain-only). act∈{A1,A2,A3} → +kamera, nazwa world_demo_<act>."""
+    boxes = build_boxes()
+    parts = []
+    if act is None:
+        world_name = "world_demo_v1"
+        parts.append(HEADER.format(seed=SEED))
+    else:
+        world_name = f"world_demo_{act}"
+        parts.append(HEADER.format(seed=SEED).replace("world_demo_v1", world_name))
+    parts.append(f"    <!-- {len(boxes)} statycznych brył wizualnych (tekstura przestrzenna, par? R2) -->\n")
+    parts.extend(boxes)
+    if act is not None:                               # kamera PRZED </world> (intruz spawnowany w runtime, B4)
+        pitch, yaw = _cam_pose(ACT_CAM[act]["cam_pos"], ACT_CAM[act]["centroid"])
+        px, py, pz = ACT_CAM[act]["cam_pos"]
+        parts.append(FILM_CAM_TMPL.format(act=act, px=px, py=py, pz=pz, pitch=pitch, yaw=yaw))
+    parts.append("  </world>\n</sdf>\n")
+    return "".join(parts), world_name, len(boxes)
+
+
+def main():
+    act = None
+    if len(sys.argv) > 2 and sys.argv[1] == "--act":
+        act = sys.argv[2]
+        assert act in ACT_CAM, f"nieznany akt {act} (dozwolone: {list(ACT_CAM)})"
+    body, world_name, nboxes = build_world(act)
+    fname = "world_demo_v1.sdf" if act is None else f"world_demo_{act}.sdf"
+    out = os.path.join(os.path.dirname(__file__), fname)
     with open(out, "w") as f:
-        f.write(HEADER.format(seed=SEED))
-        f.write(f"    <!-- {len(boxes)} statycznych brył wizualnych (tekstura przestrzenna, par? R2) -->\n")
-        f.writelines(boxes)
-        f.write("  </world>\n</sdf>\n")
-    print(f"[gen] {len(boxes)} brył → {out} (seed={SEED}, extent=±{EXTENT}, spacing={SPACING})")
+        f.write(body)
+    print(f"[gen] {nboxes} brył → {out} (world={world_name}, seed={SEED}, act={act})")
 
 
 if __name__ == "__main__":
