@@ -1,0 +1,52 @@
+{
+  "act": "A2",
+  "kind": "OFFLINE geometry+timing (NIE dowód percepcji — PROMPT §3)",
+  "world": "worlds/world_demo_A2.sdf",
+  "token_gated": true,
+  "verdict": "PASS",
+  "checks": [
+    {
+      "name": "range3d_in_band",
+      "ok": true,
+      "detail": "range3d ∈ [8.002,8.064] vs [7.0, 9.0]"
+    },
+    {
+      "name": "far_beyond_envelope",
+      "ok": true,
+      "detail": "far horizontal 70.0 > 9 m koperty"
+    },
+    {
+      "name": "expire_gap_ge_k_theta",
+      "ok": true,
+      "detail": "gap 6.0 ≥ k·θ_age 6.0 (θ_age frozen 3.0)"
+    },
+    {
+      "name": "re_entry_window_in_ep1",
+      "ok": true,
+      "detail": "re-ENTRY_by 64.87 ∈ ep1 [54.0, 74.0], offset 10.87 vs p95 10.87"
+    },
+    {
+      "name": "two_operator_beats",
+      "ok": true,
+      "detail": "2 beaty (grant_1, grant_2)"
+    }
+  ],
+  "frozen_rederived": {
+    "d_stop_m": 2.25,
+    "eps_cap_m": 9.25,
+    "R_route_prime_m": 20.5,
+    "theta_age_s": 3.0,
+    "R_E_m": 32.0,
+    "intruder_alt_m": 11.5,
+    "D_safe_m": 5.32
+  },
+  "derived": {
+    "range3d_band": [
+      8.001849786143202,
+      8.064093253429055
+    ],
+    "expire_gap_len": 6.0,
+    "k_theta": 6.0
+  },
+  "note": "sanity binarne; percepcja (ENTRY faktyczny, kadr pikselowy) = B5 pierwsza próba, nie tu"
+}

@@ -1,0 +1,49 @@
+{
+  "act": "A3",
+  "kind": "OFFLINE geometry+timing (NIE dowód percepcji — PROMPT §3)",
+  "world": "worlds/world_demo_A3.sdf",
+  "token_gated": true,
+  "verdict": "PASS",
+  "checks": [
+    {
+      "name": "R_route_prime_frozen",
+      "ok": true,
+      "detail": "spec R_route' 20.5 vs frozen 20.5 (R_E 32.0 − d_stop 2.25 − ε_cap 9.25)"
+    },
+    {
+      "name": "inject_within_R_route_prime",
+      "ok": true,
+      "detail": "r_inj 18.0 ≤ R_route' 20.5"
+    },
+    {
+      "name": "touchdown_le_R_E",
+      "ok": true,
+      "detail": "touchdown_bound 29.5 = r_inj 18.0+ε_cap 9.25+d_stop 2.25 ≤ R_E 32.0"
+    },
+    {
+      "name": "refuse_within_015",
+      "ok": true,
+      "detail": "REFUSE ≤ 0.15 s (S2 0.091 frozen)"
+    },
+    {
+      "name": "no_token_elements",
+      "ok": true,
+      "detail": "brak elementów tokenowych; intruz absent"
+    }
+  ],
+  "frozen_rederived": {
+    "d_stop_m": 2.25,
+    "eps_cap_m": 9.25,
+    "R_route_prime_m": 20.5,
+    "theta_age_s": 3.0,
+    "R_E_m": 32.0,
+    "intruder_alt_m": 11.5,
+    "D_safe_m": 5.32
+  },
+  "derived": {
+    "r_inj": 18.0,
+    "touchdown_bound": 29.5,
+    "R_route_prime": 20.5
+  },
+  "note": "sanity binarne; percepcja (ENTRY faktyczny, kadr pikselowy) = B5 pierwsza próba, nie tu"
+}

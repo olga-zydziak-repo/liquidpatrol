@@ -1,0 +1,52 @@
+{
+  "act": "A1",
+  "kind": "OFFLINE geometry+timing (NIE dowód percepcji — PROMPT §3)",
+  "world": "worlds/world_demo_A1.sdf",
+  "token_gated": true,
+  "verdict": "PASS",
+  "checks": [
+    {
+      "name": "intruder_alt_frozen",
+      "ok": true,
+      "detail": "Δalt spec 1.5 vs frozen 1.5"
+    },
+    {
+      "name": "range3d_in_band",
+      "ok": true,
+      "detail": "range3d ∈ [8.002,8.064] vs band [7.0, 9.0] ±0.5"
+    },
+    {
+      "name": "t_entry_p95_matches_regate",
+      "ok": true,
+      "detail": "spec entry_by-hold0 10.87 vs REGATE p95 10.87 (pool [2.17, 2.22, 5.98, 1.63, 2.75, 10.87])"
+    },
+    {
+      "name": "entry_window_in_hold",
+      "ok": true,
+      "detail": "entry_by 33.87 ∈ ring_hold [23.0, 49.0]"
+    },
+    {
+      "name": "grant_observe_fit",
+      "ok": true,
+      "detail": "entry_by+grant+observe 46.87 ≤ ring_hold_end 49.0"
+    }
+  ],
+  "frozen_rederived": {
+    "d_stop_m": 2.25,
+    "eps_cap_m": 9.25,
+    "R_route_prime_m": 20.5,
+    "theta_age_s": 3.0,
+    "R_E_m": 32.0,
+    "intruder_alt_m": 11.5,
+    "D_safe_m": 5.32
+  },
+  "derived": {
+    "range3d_band": [
+      8.001849786143202,
+      8.064093253429055
+    ],
+    "t_entry_p95": 10.87,
+    "end_needed": 46.87
+  },
+  "note": "sanity binarne; percepcja (ENTRY faktyczny, kadr pikselowy) = B5 pierwsza próba, nie tu"
+}
