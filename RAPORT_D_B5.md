@@ -265,3 +265,38 @@ SR-J2): mti_ok=1/entry=1/detektor-locked=1** → **P3 POTWIERDZONY: ±1.0 za ma�
 budzi MTI**. FIX = powrót spec ±1.5 (korekta rozbieżności B2) = **ANEKS_D5 propozycja druga → STOP na
 ratyfikacji** (SR-J1 spec frozen). Po ratyfikacji: spec ±1.5 → nowy hash A1/A2 → re-sanity → bramka A2 →
 próby A1→A3→A2. Sędzia `79b1e936` niezmieniony, progi/światy/`r01` nietknięte, selfcheck 6/6, regresja 37.
+
+---
+
+## AKTUALIZACJA-7 (PROMPT_D_BUILD_5F — ratyfikacja ANEKS_D5 pełnym tekstem) — §2 ROZBIEŻNOŚĆ KADENCJI DECYZJI → STOP
+
+**§1 wykonane (ratyfikowane):** ANEKS_D5 pełny tekst wpisany; echo `demo_mti` w manifeście
+(`build_manifest`+`_emit_act_manifest`, klasa A4/token_gated, SR-K1); spec `intruder_lateral_osc_m`
+1.0→1.5 A1/A2 (nowe hashe A1=`48a50c8d`, A2=`02441d93`); sonda `OSC_OVERRIDE` usunięta (trajektoria =
+czysta f(spec)). Judge intakt `79b1e936`, progi/tracker/światy/`r01` nietknięte, regresja 80 passed,
+selfcheck 6/6. Commit `ec3b70f`.
+
+**§3.1 re-sanity A1 (informacyjne, SR-J2) — n_entry=0 mimo ±1.5.** Boot ZDROWY (manifest:
+`demo_mti=true`, `armed_before_manifest=true`, `ekf2_gps_ctrl_bson=absent(default 7)`,
+spec_hash=48a50c8d, judge 79b1e936). YOLO widzi cel (n_box>0 na 43/43 klatkach), conf pasywne
+(max 0.10 — MTI jest bramą, nie conf). **`mti_ok=1` tylko 6/43 sporadycznie, NIGDY 3 pod rząd →
+k=3 nie domyka → brak locka/ENTRY.**
+
+**§2 ROZBIEŻNOŚĆ Z CHARAKTERYZACJĄ (obowiązkowy STOP, §2 „każda różnica ⇒ STOP"):** kadencja
+tiku DECYZYJNEGO (akumulacja ENTRY k=3) ≠ REGATE.
+- REGATE (`results/R02/mti/mti_flight.py`): **`DECISION_HZ=2.0`** (L41; L321 `period=1/DECISION_HZ`)
+  → `on_frame` @2 Hz → **k=3 = 1.5 s**. `cov_entry_once=1.0` mierzone przy 2 Hz.
+- tor aktu (`detector_node._on_tick`): **`DET_HZ=1.0`** (`config_r02` L22) → `on_frame` @1 Hz →
+  **k=3 = 3.0 s**. (MTI-push zgadza się: 15 Hz w obu.)
+- Mechanizm: rezyduum derotacji MTI zeruje się w punktach zwrotnych oscylacji (prędkość względna=0
+  2×/okres → migotanie @~0.6 Hz). Okno **3 s @1 Hz** zawsze przecina zero-crossing; **1.5 s @2 Hz**
+  mieści się w jednej fazie ruchu. Stąd 1 Hz = ENTRY LOSOWE (P3 sonda złapała przez zbieg faz;
+  re-sanity nie) — tor prób wymaga determinizmu, którego 2 Hz REGATE dawał, a 1 Hz nie.
+
+**Fix (do ratyfikacji dokumentem, SR-K2/K3 — poza §1.1):** wyrównać kadencję decyzji toru LIVE do
+`DECISION_HZ=2.0` == REGATE (restauracja charakteryzacji, ta sama klasa co §1.1). Miejsce najmniejszej
+delty: `_start_live_detector` startuje `detector_node` bez `--det-hz` → dopisać `--det-hz 2.0`
+(parametr harnessu; **`DET_HZ` w `config_r02` NIETKNIĘTY** — 1 Hz zostaje domyślną charakteryzacją R0.2,
+2 Hz to wartość MTI-REGATE dla demo). Progi (k=3, θ_conf, θ_age, MTI_CENTER_THR) BEZ ZMIAN.
+**STOP — decyzja wraca dokumentem.** Po ratyfikacji: re-sanity A1 (lock+ENTRY w [23,33.87]) → bramka
+A2 EXPIRE → próby A1→A3→A2. Push = Olga.
