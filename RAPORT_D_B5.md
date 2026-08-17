@@ -202,3 +202,22 @@ SUPERSEDED — właściwa przyczyna = parametr GPS.
 Seria 3 czystych bootów LIVE (`run_stability.sh`, higiena GPS aktywna): boot_1/2/3 = **VERDICT OK**
 (health @ 0.56/0.55/0.40 s, armed attempts=1, takeoff+hover 10 s+land). Fix DETERMINISTYCZNY potwierdzony.
 **T1 ⇒ odblokowane T2** (PROMPT_D_BUILD_5 §1–§3: sanity A1 → bramka A2 EXPIRE → próby A1→A3→A2).
+
+### T2 §1 — A1 sanity-live: BOOT/ARM/PIPELINE DZIAŁA end-to-end; ENTRY live NIE pada (percepcja)
+Pełny tor LIVE (higiena GPS → boot → **arm** → manifest-po-arm `armed_before_manifest=true` → detektor
+YOLO LIVE po arm → choreografia): **dron ARMOWAŁ** (fix GPS działa w pełnym torze LIVE, zero „BRAK health"),
+intruz teleportowany do pierścienia (intr_ned parking→ring), detektor załadowany i publikuje @1 Hz. ALE
+`n_entry=0` (528 ticków PATROL, locked=0) — **detektor YOLO nie zablokował intruza** w world_demo_A1.
+Sanity §1 informacyjne (percepcja NIERAPORTOWALNA) — jego cel (potwierdzenie że ENV/boot naprawiony)
+OSIĄGNIĘTY. **Luka percepcji live (YOLO nie lockuje w world_demo_A1 vs REGATE world_demo_v1) = OSOBNA
+sprawa, POZA zakresem 5R3** (który był „diagnoza+fix launchera"). Wymaga własnego promptu (dlaczego live
+detekcja nie pada tu vs REGATE: geometria/kadr mono/koperta/próg — spec i światy zamrożone, ścieżka STOP→
+adnotacja→ratyfikacja jeśli trzeba).
+
+## PODSUMOWANIE 5R3: PRZYCZYNA ŹRÓDŁOWA NAPRAWIONA, BOOT ODBLOKOWANY
+- **Znaleziona i naprawiona przyczyna 4-sesyjnej blokady:** leftover `EKF2_GPS_CTRL=0` (po A3 GPS-denied)
+  w persystowanym `parameters.bson` → GPS off → `is_global_position_ok` False → health timeout → arm-fail.
+- **Fix (harness):** `acts/ensure_gps_enabled.py` (reset →7 przed bootem) w `run_act_live.sh`+`run_stability.sh`.
+- **Zweryfikowane:** T1 3/3 czyste booty (health 0.4–0.56 s) + A1 sanity dron armuje end-to-end.
+- **Kontrakty frozen nietknięte** (świat/spec/sędzia 79b1e936/r01), selfcheck 6/6.
+- **NASTĘPNE:** luka percepcji live (osobny prompt) → potem T2 próby A1→A3→A2.
