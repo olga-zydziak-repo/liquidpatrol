@@ -50,11 +50,8 @@ def intruder_ned_fn(spec):
         return lambda t: None
     g = spec["geometry"]; tl = spec["timeline_s"]
     ring = _to_ned(g["intruder_ring_enu"])
-    osc = float(g.get("intruder_lateral_osc_m", 1.0))
-    # B5P sonda P3 (SR-J2, NIE zmienia spec): override amplitudy oscylacji przez OSC_OVERRIDE — test
-    # rozstrzygający „mti_ok wstaje przy ±1.5 (scharakteryzowane)?" bez dotykania frozen spec.
-    if os.environ.get("OSC_OVERRIDE"):
-        osc = float(os.environ["OSC_OVERRIDE"])
+    osc = float(g.get("intruder_lateral_osc_m", 1.0))   # ANEKS_D5 §1.2: spec == REGATE ±1.5 (P3 domknięty,
+    # sonda OSC_OVERRIDE usunięta — trajektoria = czysta f(spec, sim_t), zero cichej rozbieżności w próbach)
     park = _to_ned(g.get("intruder_parking_enu", [7.0, 0.0, 3.0]))
     far = _to_ned(g["intruder_far_enu"]) if "intruder_far_enu" in g else None
 
@@ -94,8 +91,11 @@ def intruder_ned_fn(spec):
 
 
 def build_manifest(act, world_sdf, head_sha, *, token_gated, contention, seed=None, trace_schema_v=2,
-                   aneks_h=None):
-    """Manifest per akt (§1). Hashe świata/spec/certów CZYTANE Z PLIKÓW (nie wpisane)."""
+                   aneks_h=None, demo_mti=None):
+    """Manifest per akt (§1). Hashe świata/spec/certów CZYTANE Z PLIKÓW (nie wpisane).
+
+    demo_mti (ANEKS_D5 §1.1, SR-K1): echo bramy LIVE = struktura∧MTI. Ta sama klasa co token_gated —
+    bez echa luka cert↔konfiguracja; bieg bez DEMO_MTI=1 ⇒ próba INVALID z definicji."""
     spec_path = os.path.join(_HERE, f"{act}_spec.yaml")
     world_hash = sha256_file(world_sdf) if os.path.exists(world_sdf) else None
     certs = {}
@@ -107,7 +107,8 @@ def build_manifest(act, world_sdf, head_sha, *, token_gated, contention, seed=No
     return {"act": act, "head": head_sha, "world_sdf": world_sdf, "world_hash": world_hash,
             "spec": f"acts/{act}_spec.yaml", "spec_hash": sha256_file(spec_path),
             "certs": certs, "token_gated": bool(token_gated), "contention": contention,
-            "seed": seed, "trace_schema_v": trace_schema_v, "aneks_h": aneks_h or {}}
+            "seed": seed, "trace_schema_v": trace_schema_v, "aneks_h": aneks_h or {},
+            "demo_mti": bool(demo_mti) if demo_mti is not None else None}
 
 
 def grant_delay_s(spec, default=3.0):

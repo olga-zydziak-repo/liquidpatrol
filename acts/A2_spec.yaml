@@ -11,7 +11,8 @@ geometry:                                # identyczna jak A1 (ten sam pierście�
   drone_dwell_ned: [0.0, 0.0, -10.0]     # source: ALT_M=10.0 (r01/config)
   drone_facing: "+x_forward"
   intruder_ring_enu: [7.86, 0.0, 11.5]   # 3D 8.00 m; source jak A1 (config_r02 INTRUDER_ALT_M/koperta; PRE_D)
-  intruder_lateral_osc_m: 1.0            # source: < REGATE ±1.5 (RAPORT_MTI_REGATE)
+  intruder_lateral_osc_m: 1.5            # source: == REGATE ±1.5 (mti_flight.py L182); ANEKS_D5 §1.2
+    # (ratyf. 2026-08-17): korekta rozbieżności B2 (P3: ±1.0 za mała dla MTI). Świat nietknięty (osc w runnerze).
   intruder_far_enu: [70.0, 0.0, 11.5]    # „poza zasięg" — horizontal 70 m ≫ 9 m koperty → brak detekcji → EXPIRE
     # source: koperta detekcji max 9 m (config_r02 A7); 70 m ≫ 9 → cel niewidoczny → age rośnie > θ_age
   ring_band_m: [7.0, 9.0]                # source: PRE_D §5 / REGATE {7,9}

@@ -1008,7 +1008,8 @@ def _emit_act_manifest(r, act):
             "rb").read()).hexdigest()
         m = AC.build_manifest(act, world_sdf, head, token_gated=r.token_gated,
                               contention=os.environ.get("CONTENTION", "?"),
-                              aneks_h={"headless": None, "note": "ANEKS-H domknięty po biegu"})
+                              aneks_h={"headless": None, "note": "ANEKS-H domknięty po biegu"},
+                              demo_mti=(os.environ.get("DEMO_MTI") == "1"))
         m["judge_sha256"] = jhash
         m["detector"] = "LIVE (r02.detector_node YOLO); GT_FED=0" if not r.gt_mode else "GT-fed"
         m["armed_before_manifest"] = bool(getattr(r.mav, "armed", False))   # dowód: manifest PO arm

@@ -15,8 +15,11 @@ geometry:
   intruder_ring_enu: [7.86, 0.0, 11.5]  # dead-ahead; 3D range od drona = sqrt(7.86^2+1.5^2)=8.00 m
     # source: INTRUDER_ALT_M=11.5 (config_r02, 1.5 m nad patrolem); koperta detekcji 5–9 m środek 7
     #         (config_r02 A7); d*≈8 m w pierścieniu 7–9 (PRE_D §5). horizontal=sqrt(8^2-1.5^2)=7.86
-  intruder_lateral_osc_m: 1.0           # ±1.0 m w y (ruch względny dla MTI)
-    # source: < REGATE ±1.5 m/0.3 Hz (RAPORT_MTI_REGATE); mniejsza amplituda = konserwatywnie w pierścieniu
+  intruder_lateral_osc_m: 1.5           # ±1.5 m w y (ruch względny dla MTI)
+    # source: == REGATE ±1.5 m/0.3 Hz (results/R02/mti/mti_flight.py L182 `1.5*sin(2π·0.3·t)`).
+    #         ANEKS_D5 §1.2 (ratyf. 2026-08-17): korekta rozbieżności B2 — ±1.0 za mała dla koniunktu
+    #         RUCHU (P3: mti_ok=0 @±1.0, n_comps≈0-2; mti_ok=1 @±1.5, n_comps do 38). Świat NIETKNIĘTY
+    #         (osc żyje w choreografii runnera f(sim_t), nie w SDF) → tylko nowy hash spec.
   ring_band_m: [7.0, 9.0]               # kryterium ważności: intruz w tym pasmie 3D podczas okna dwell
     # source: koperta scharakteryzowana {7,9} m (PRE_D §5 D3(a); REGATE cov_entry_once=1.0 @7/9)
 
