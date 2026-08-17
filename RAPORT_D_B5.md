@@ -117,3 +117,41 @@ selfcheck 6/6 ×2.** Fix manifest-po-arm ZACHOWANY (poprawność §0). Rekomenda
 2. Alternatywa architektury: arm w-procesie stylem `mti_flight` (dowiedziony live w REGATE) zamiast
    `gate_run_r02.bring_up` + osobny detektor.
 3. Zapewnić brak kontencji (fabryka) w oknie prób.
+
+---
+
+## AKTUALIZACJA-3 (sesja 3, PROMPT_D_BUILD_5R2) — rdzeń mti_flight: topologia FALSYFIKOWANA → opcja 1
+
+Wznowienie rdzeniem `mti_flight` (ANEKS_D4). Zbudowano `acts/live_stability_probe.py` (sterowanie
+połączeniem/arm/offboard **1:1 z mti_flight**: raw `System()` udpin 14540, health 90 s [global+home],
+arm-retry 60×, takeoff, offboard, hover, land) + `acts/run_stability.sh` (habitat aktu world_demo_A1
++ mono bridge, jak mti_run.sh; higiena env ANEKS_D4 c). T1 seria bootów stabilności:
+
+| boot | MAVSDK connect | health (global+home) 90 s | arm | verdict |
+|---|---|---|---|---|
+| 1 | **TAK @ 0.91 s** | **TIMEOUT @ 90 s** | nie | FAIL |
+| 2 | **TAK** | **TIMEOUT @ 90 s** | nie | FAIL |
+
+### Wynik: topologia mti_flight NIE jest naprawą (fallback T1)
+- **Łącze MAVSDK USTANAWIA SIĘ** (connect @0.91 s, 2/2) — więc problem to NIE połączenie/topologia.
+  Fallback „nie ustanowi łącza w ≤2 bootach" ściśle nie zaszedł, ALE cel (zdrowy/uzbrajalny boot)
+  nieosiągnięty 2/2 → hipoteza „to topologia" **FALSYFIKOWANA**.
+- **Blokada = `telemetry.health()` nie zbiega** (global+home OK nigdy w 90 s), przy **ZDROWYM EKF/GPS**
+  (px4.log: zero błędów GPS/EKF/fusion, `vehicle_gps_position` publikowane; jedyny Preflight Fail =
+  „No connection to GCS").
+- **DOWÓD KLUCZOWY:** B4 GT-fed (armed, ten sam świat world_demo_A1) miał **TĘ SAMĄ** warning
+  „No connection to GCS" (×2) a mimo to osiągnął „Ready for takeoff" → armed. Warning jest
+  **przejściowy/nieblokujący**; różnica = czy `telemetry.health()` dostarcza zdrowy komunikat
+  (B4 dostaje, tor LIVE/stability nie), NIEZALEŻNIE od topologii MAVSDK (obie: raw System / exec_lib.Mav).
+- **LEAD dla opcji 1:** zaobserwowano **zalegający `mavsdk_server` na udpin 14540** po biegach.
+  `System()` (mavsdk py) auto-spawnuje mavsdk_server; stary związany z 14540 → nowy klient łączy się do
+  MARTWEGO serwera → brak telemetrii z bieżącego PX4 → health timeout. Teardown kill mavsdk_server ISTNIEJE
+  (run_stability + mti_run), ale zaleganie obserwowane → wyścig/hygiena portu 14540 = pierwszy podejrzany.
+
+### SR-G6/H — STOP → opcja 1 (osobny prompt, SR-H3 nie mieszać ścieżek)
+Topologia mti_flight nie odblokowała bootu (2/2 health-timeout) → **STOP**. Rekomendacja **opcja 1**:
+diff sekwencji bootu `run_act.sh`(DZIAŁA, GT-fed) vs `run_act_live.sh`/`run_stability.sh`(FAIL) linia-po-linii,
+ze szczególnym sprawdzeniem: **(i) higiena mavsdk_server / bind 14540** (jawny kill+wait przed startem;
+zweryfikować brak stale servera); (ii) kolejność mavlink onboard vs klient; (iii) param COM_* datalink/GCS.
+**Zero prób, zero A2, sędzia 79b1e936 niezmieniony, r01 nietknięte, selfcheck 6/6 ×2.** Zbudowana sonda
++ launcher stabilności ZOSTAJĄ (narzędzie diagnostyczne dla opcji 1).
