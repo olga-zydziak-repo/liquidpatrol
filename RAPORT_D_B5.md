@@ -197,3 +197,8 @@ hover 10 s OK; land; VERDICT OK.** (results/demo/stability/d3_verify/boot_1/)
 bootem LIVE; wpięte do `run_act_live.sh` + `run_stability.sh` (po teardown). Zero zmian frozen
 (świat/spec/sędzia/r01/kamera). Historyczne komentarze w launcherach (obciążenie/detektor jako „przyczyna")
 SUPERSEDED — właściwa przyczyna = parametr GPS.
+
+### T1 — bramka stabilności 3/3 ZALICZONA (po fixie GPS)
+Seria 3 czystych bootów LIVE (`run_stability.sh`, higiena GPS aktywna): boot_1/2/3 = **VERDICT OK**
+(health @ 0.56/0.55/0.40 s, armed attempts=1, takeoff+hover 10 s+land). Fix DETERMINISTYCZNY potwierdzony.
+**T1 ⇒ odblokowane T2** (PROMPT_D_BUILD_5 §1–§3: sanity A1 → bramka A2 EXPIRE → próby A1→A3→A2).

@@ -1,2 +1,8 @@
-[probe] MAVSDK connected @ 1.12s
-[probe] HEALTH TIMEOUT @ 90.01s
+[probe] MAVSDK connected @ 0.89s
+[probe] health#1 gpos=True home=True lpos=True armable=True
+[probe] health OK @ 0.55s
+[probe] armed (attempts=1)
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[probe] hover 10.0s OK; land
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[probe] VERDICT OK (t_health=0.55s arm=1)
