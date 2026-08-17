@@ -967,10 +967,63 @@ def _act_setup(r, act):
 WORLD_NAME = os.environ.get("PX4_GZ_WORLD", "world_demo_v1")
 
 
+def _start_live_detector(r):
+    """B5: bridge mono + detector_node uruchamiane PO bring_up (po arm). Diagnoza 5 env-fail: obciążenie
+    LIVE (bridge+YOLO) PODCZAS arm blokuje połączenie MAVSDK/GCS ('No connection to GCS') → health timeout.
+    REGATE (mti_flight) armuje ZANIM ładuje YOLO. Tu: MAVSDK łączy+arm CZYSTO, potem start toru LIVE."""
+    topic = os.environ.get("LIVE_DETECTOR_TOPIC")
+    if not topic or r.gt_mode:
+        return
+    import subprocess
+    try:
+        # NIE-blokujące (żaden sleep w wątku scenariusza — inaczej dead-man 0.3 s tripuje stream→failsafe).
+        # Bridge+detektor ładują się w tle; pętla ticków odświeża setpoint; ENTRY pada gdy YOLO gotowy
+        # (intruz w pierścieniu w oknie dwell z zapasem). Late-join ROS: detektor złapie obraz po bridge.
+        subprocess.Popen(["ros2", "run", "ros_gz_bridge", "parameter_bridge",
+                          f"{topic}@sensor_msgs/msg/Image[gz.msgs.Image"],
+                         stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        dlog = os.environ.get("DETECTOR_LOG", "/tmp/detector.log")
+        subprocess.Popen([sys.executable, "-m", "r02.detector_node", "--image-topic", topic],
+                         stdout=open(dlog, "w"), stderr=subprocess.STDOUT)
+        print(f"[gate] LIVE bridge+detektor PO arm (topic={topic}, nie-blokująco)")
+    except Exception as e:
+        print(f"[gate] LIVE detektor start FAIL: {e}")
+
+
+def _emit_act_manifest(r, act):
+    """B5 §0/§2: manifest emitowany PO bring_up (po arm) a PRZED choreografią. Dzięki temu env-fail
+    bootu/health (crash w bring_up, PRZED manifestem) = NIE-próba (§0), a crash w choreografii = próba.
+    Ścieżka z env MANIFEST_OUT; jeśli brak — nie emituje (tryb nie-B5)."""
+    out = os.environ.get("MANIFEST_OUT")
+    if not out:
+        return
+    try:
+        import hashlib
+        from acts import act_common as AC
+        world_sdf = os.environ.get("WORLD_SDF", os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "worlds", f"{WORLD_NAME}.sdf"))
+        head = os.environ.get("HEAD_SHA", "unknown")
+        jhash = hashlib.sha256(open(os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "tools", "act_judge.py"),
+            "rb").read()).hexdigest()
+        m = AC.build_manifest(act, world_sdf, head, token_gated=r.token_gated,
+                              contention=os.environ.get("CONTENTION", "?"),
+                              aneks_h={"headless": None, "note": "ANEKS-H domknięty po biegu"})
+        m["judge_sha256"] = jhash
+        m["detector"] = "LIVE (r02.detector_node YOLO); GT_FED=0" if not r.gt_mode else "GT-fed"
+        m["armed_before_manifest"] = bool(getattr(r.mav, "armed", False))   # dowód: manifest PO arm
+        json.dump(m, open(out, "w"), indent=2, ensure_ascii=False)
+        print(f"[gate] manifest PO arm → {out} (judge={jhash[:16]}… armed={m['armed_before_manifest']})")
+    except Exception as e:
+        print(f"[gate] manifest emit FAIL: {e}")
+
+
 def scenario_A1(r: Runner):
     """AKT 1: patrol→intruz dwell 7–9→ENTRY→REFUSE(NO_AUTH)→token(A5)→OBSERVE. NIE próba (B5)."""
     spec, AC, start_teleport = _act_setup(r, "A1")
     r.bring_up()
+    _emit_act_manifest(r, "A1")                    # B5 §0/§2: manifest PO arm (env-fail bootu = nie-próba)
+    _start_live_detector(r)                       # B5: tor LIVE PO arm (nie blokuje MAVSDK/GCS przy arm)
     start_teleport()                              # wątek teleportu widocznego intruza (~2 Hz)
     r.idle_sp = [r.start[0], r.start[1], -ALT_M]
     grant_delay = AC.grant_delay_s(spec)
@@ -998,6 +1051,8 @@ def scenario_A2(r: Runner):
     """AKT 2: OBSERVE→utrata→EXPIRE(konsumpcja)→powrót→re-admisja→NO_AUTH→2. token→OBSERVE."""
     spec, AC, start_teleport = _act_setup(r, "A2")
     r.bring_up()
+    _emit_act_manifest(r, "A2")                    # B5 §0/§2: manifest PO arm
+    _start_live_detector(r)                       # B5: tor LIVE PO arm
     start_teleport()
     r.idle_sp = [r.start[0], r.start[1], -ALT_M]
     grant_delay = AC.grant_delay_s(spec)

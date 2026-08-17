@@ -72,3 +72,48 @@ B5 nieukończony: infrastruktura LIVE zbudowana i gotowa; sanity-live A1 zabloko
 boot/health (SR-G6). Sędzia zamrożony niezmieniony (79b1e936…), `r01` nietknięte, selfcheck 6/6 ×2,
 76 testów regresji PASS. **Wznowienie B5 = po ratyfikacji przez Olgę ścieżki hartowania bootu
 (propozycje wyżej). Push = Olga.**
+
+---
+
+## AKTUALIZACJA (sesja 2, 2026-08-17) — po pushu B5-STOP przez Olgę, re-send PROMPT_D_BUILD_5
+
+SR-G5 spełniony (Olga pushnęła commity B5-STOP). Podjęto próbę odblokowania sanity-live A1 z fixami
+harness/runner (bez zmian frozen: spec/świat/sędzia/percepcja/r01 NIETKNIĘTE; sędzia 79b1e936…).
+
+### Fix 1 (KOREKTA §0/§2, WAŻNA i ZACHOWANA): manifest emitowany PO bring_up
+Poprzednio manifest szedł PRZED `bring_up` → crash bootu/health był „PO manifeście" = **próba** (§0),
+błędnie zżerając budżet ≤3. §0 jasno intencjonuje env boot-fail = **nie-próba**. Naprawione:
+`gate_run_r02._emit_act_manifest` wołany PO `bring_up` (po arm; pole `armed_before_manifest`).
+Weryfikacja: envfail5/6 **NIE mają manifestu** = poprawnie nie-próby; envfail1–4 (stary porządek) miały
+manifest = były błędnie klasyfikowane. **Wszystkie 6 to env boot-fail (dron NIGDY nie uzbrojony) —
+licznik prób A1 = 0** (żadna choreografia nigdy nie ruszyła).
+
+### Fix 2 (diagnostyczny): tor LIVE (bridge+detektor) startuje PO arm; settle całkowicie czysty
+`_start_live_detector` startuje mono-bridge+detector_node dopiero po `bring_up` (wzorzec REGATE:
+arm ZANIM YOLO). Settle 210 s bez żadnego obciążenia LIVE.
+
+### Wynik: 2 kolejne env-fail (razem 6) — przyczyna NADAL niedomknięta
+| # | konfiguracja bring_up | wynik | EKF |
+|---|---|---|---|
+| 5 | czysty settle 210 s, bridge/detektor po arm | `BRAK health` | home set, gyro 1, brak nav-fail |
+| 6 | jw. (detektor NIGDY nie wystartował — fail przed nim) | `BRAK health` | jw. |
+
+**OBALONE hipotezy (łącznie):** 2-kamery-render, YOLO-w-settle, gyro-glitch, obciążenie-detektora-przy-arm,
+długość-settle. **EKF ZDROWY** (home set, gyro czyste, zero nav-fail). Blokada = `telemetry.health()`
+MAVSDK nigdy gotowe / `No connection to GCS` — **łącze MAVSDK↔PX4 nie ustanawia się w torze
+`run_act_live.sh` (GT_FED=0)**, podczas gdy **B4 GT-fed (`run_act.sh`) armował NIEZAWODNIE przy
+CIĘŻSZYM środowisku bring_up (aktywny film-bridge)**. Różnica środowiska bootu między
+`run_act.sh`(działa) a `run_act_live.sh`(fail) nie znaleziona w artefaktach; A3 (`run_A3.sh`, PX4_GZ_WORLD
+w run_stack) też armował. Najbardziej spójne z **intermittent arm-fail projektu** (dokum. ANEKS-H/E2),
+lecz 6/6 fail w LIVE vs niezawodny arm GT-fed sugeruje różnicę systematyczną NIEZIDENTYFIKOWANĄ.
+
+### SR-G6 — STOP DEFINITYWNY
+Sześć env-fail, cztery celowane fixy, przyczyna niepinowalna z artefaktów → **STOP** („nie brnąć").
+**Zero prób dowodowych, zero A2, zero zmian frozen, sędzia 79b1e936… niezmieniony, r01 nietknięte,
+selfcheck 6/6 ×2.** Fix manifest-po-arm ZACHOWANY (poprawność §0). Rekomendacja dla Olgi (poza sesją):
+1. **Debug łącza MAVSDK/GCS** w torze LIVE: diff sekwencji bootu `run_act.sh`(działa) vs `run_act_live.sh`
+   linia-po-linii; sprawdzić bind portu 14540 / kolejność mavlink onboard; ewentualnie boot-retry pętla
+   (każdy nie-próba §0) do pierwszego zdrowego bootu.
+2. Alternatywa architektury: arm w-procesie stylem `mti_flight` (dowiedziony live w REGATE) zamiast
+   `gate_run_r02.bring_up` + osobny detektor.
+3. Zapewnić brak kontencji (fabryka) w oknie prób.

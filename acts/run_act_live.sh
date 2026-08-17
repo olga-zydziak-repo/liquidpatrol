@@ -22,21 +22,12 @@ teardown(){ pkill -9 -f 'gz sim' 2>/dev/null; pkill -9 -f 'px4_sitl' 2>/dev/null
   pkill -9 -f 'gate_run_r02' 2>/dev/null; pkill -9 -f 'ruby.*gz' 2>/dev/null; sleep 2; }
 teardown
 
-# --- MANIFEST PRZED scenariuszem (§2, SR-G2) ---
+# MANIFEST emitowany PRZEZ RUNNER PO bring_up (§0/§2 reconc.): env-fail bootu/health = NIE-próba
+# (crash PRZED manifestem), crash choreografii = próba. Env dla runnera:
 HEAD=$(git rev-parse HEAD)
-python3 - "$ACT" "$WORLD" "$HEAD" "$OUTDIR" <<'PY'
-import sys, json, hashlib, os
-sys.path.insert(0,'/home/olga/projects/liquidpatrol')
-from acts import act_common as AC
-act,world,head,outdir=sys.argv[1:5]
-wsdf=f'/home/olga/projects/liquidpatrol/worlds/{world}.sdf'
-jhash=hashlib.sha256(open('/home/olga/projects/liquidpatrol/tools/act_judge.py','rb').read()).hexdigest()
-m=AC.build_manifest(act,wsdf,head,token_gated=True,contention=os.environ.get('CONTENTION','?'),
-                    aneks_h={'headless':None,'note':'ANEKS-H domknięty po biegu'})
-m['judge_sha256']=jhash; m['detector']='LIVE (r02.detector_node YOLO); GT_FED=0'
-json.dump(m,open(f'{outdir}/manifest.json','w'),indent=2,ensure_ascii=False)
-print('manifest OK judge_sha16=',jhash[:16],'world_hash16=',m['world_hash'][:16])
-PY
+export MANIFEST_OUT="$OUTDIR/manifest.json"
+export WORLD_SDF="$ROOT/worlds/${WORLD}.sdf"
+export HEAD_SHA="$HEAD"
 
 LOGDIR="$OUTDIR" WORLD="$WORLD" PX4_GZ_WORLD="$WORLD" MODEL=gz_x500_mono_cam bash run_stack.sh > "$OUTDIR/stack.log" 2>&1
 sleep 3
@@ -48,25 +39,23 @@ MONO=""; for i in $(seq 1 40); do MONO=$(gz topic -l 2>/dev/null | grep -E "imag
 FILM=$(gz topic -l 2>/dev/null | grep -iE "film.*image$" | head -1)
 echo "MONO=$MONO FILM=$FILM" | tee "$OUTDIR/topics.txt"
 [ -z "$MONO" ] && { echo "[live] BRAK kamery mono"; teardown; exit 5; }
-setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_mono.log" 2>&1 &
-# FILM_CAPTURE=0 (default): NIE bridge'uj kamery filmowej podczas biegu LIVE — DIAGNOZA: równoległy
-# bridge mono+film+YOLO przeciąża CPU → glitch timestampu IMU → arm-fail (3 env-fail). REGATE (mono-only)
-# działał. FILM_CAPTURE=1 włącza film (ryzyko przeciążenia). Wideo filmowe = osobne przejście, jeśli trzeba.
-if [ "${FILM_CAPTURE:-0}" = "1" ] && [ -n "$FILM" ]; then
-  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_film.log" 2>&1 &
-fi
 sleep 3
 gz service -s /world/${WORLD}/create --reqtype gz.msgs.EntityFactory --reptype gz.msgs.Boolean --timeout 3000 \
   --req "sdf_filename: \"$ROOT/r02/intruder_model.sdf\", name: \"intruder\", pose: {position: {x: 7.86, y: 0, z: 11.5}}" > "$OUTDIR/spawn.log" 2>&1
 
-# SETTLE EKF PRZED startem YOLO (wzorzec mti_run.sh: ładowanie YOLO w trakcie zbieżności EKF
-# glitchuje IMU/health → arm-fail; dwa biegi env-fail potwierdziły). Detektor startuje PO settle.
-echo "[live] 150 s settle EKF (bez YOLO — jak mti_run.sh)"; sleep 150
-# detektor LIVE (YOLO) na kamerze mono → publikuje kanał (ChannelSub w gate_run_r02 czyta)
-YOLO_WEIGHTS="$ROOT/.b0deps/weights/yolov8s-worldv2.pt" PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" \
-  setsid nohup python3 -m r02.detector_node --image-topic "$MONO" > "$OUTDIR/detector.log" 2>&1 &
-echo "[live] 20 s rozgrzewka detektora (YOLO load) po settle"; sleep 20
+# SETTLE EKF CAŁKOWICIE BEZ obciążenia LIVE (bridge/detektor) — jak B4 GT-fed który armował czysto.
+# Bridge mono + detektor startują DOPIERO PO settle (4 env-fail w poprzedniej sesji: bridge/YOLO w
+# oknie settle/arm → EKF/nav-health nie zbiega → BRAK health). Diagnostyka: izolacja obciążenia settle.
+echo "[live] 210 s settle EKF (BEZ bridge/detektora — czysta zbieżność jak B4)"; sleep 210
 grep -ci 'time jump\|Resetting time sync' "$OUTDIR/stack.log" > "$OUTDIR/timejump_pre.txt" 2>/dev/null || echo 0 > "$OUTDIR/timejump_pre.txt"
+# Bridge mono + detektor uruchamia SCENARIUSZ (gate_run_r02) PO bring_up/arm — diagnoza: obciążenie
+# LIVE przy arm blokowało MAVSDK/GCS ('No connection to GCS', 5 env-fail). Env dla runnera:
+export LIVE_DETECTOR_TOPIC="$MONO"
+export DETECTOR_LOG="$OUTDIR/detector.log"
+export YOLO_WEIGHTS="$ROOT/.b0deps/weights/yolov8s-worldv2.pt"
+if [ "${FILM_CAPTURE:-0}" = "1" ] && [ -n "$FILM" ]; then
+  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_film.log" 2>&1 &
+fi
 GRABBER=""
 if [ "${FILM_CAPTURE:-0}" = "1" ] && [ -n "$FILM" ]; then
   python3 "$ROOT/r02/capture_frame.py" "$FILM" "$OUTDIR/frames/kadr_check.npy" 8 > "$OUTDIR/kadr_check.log" 2>&1 || true
