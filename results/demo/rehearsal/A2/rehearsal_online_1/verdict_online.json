@@ -1,0 +1,44 @@
+{
+  "act": "A2",
+  "verdict": "INVALID",
+  "criteria": [
+    {
+      "name": "aneks_h_valid",
+      "ok": true,
+      "detail": {
+        "headless": true,
+        "rtf": [
+          0.992,
+          0.992
+        ],
+        "timejump": 0,
+        "ekf_health_hits": 0,
+        "world_hash_matches": true
+      },
+      "source": "PRE_D §5 (boot ANEKS-H ważny); RTF∈[0.97,1.03], timejump 0"
+    },
+    {
+      "name": "trace_complete",
+      "ok": false,
+      "detail": {
+        "missing": [
+          "readmit",
+          "grant2"
+        ],
+        "required": [
+          "entry",
+          "refuse_no_auth",
+          "grant",
+          "observe",
+          "expire",
+          "readmit",
+          "grant2"
+        ]
+      },
+      "source": "PRE_D §5 trace kompletny (asert = gen_subtitles.REQUIRED_EVENTS)"
+    }
+  ],
+  "violated": [
+    "trace_complete"
+  ]
+}
