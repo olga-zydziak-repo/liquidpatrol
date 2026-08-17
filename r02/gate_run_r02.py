@@ -921,11 +921,110 @@ def scenario_C1(r: Runner):
     return True
 
 
+# ============================ DEMO-B akty (B4, PROMPT_D_BUILD_4 §1) ============================
+# Runnery per-akt wyprowadzone z tego Runnera (A3-aneks: orkiestrator wieloaktowy OUT). Kanał GT-fed
+# (deterministyczny ENTRY); intruz WIDOCZNY teleportowany tym samym f(sim_t) (set_pose, MODEL) dla kamery
+# filmowej. Beat operatora = skryptowany sygnatariusz (A5) na ENTRY+opóźnienie. Assert A4 token_gated=True.
+
+def _act_setup(r, act):
+    """Wspólny wstęp aktu: spec, A4-assert, GT-fed fn ze spec, WĄTEK teleportu widocznego intruza (~2 Hz,
+    poza pętlą decyzji — jak mti_flight.replacer; kamera filmowa widzi ruch, kanał ENTRY z projekcji GT)."""
+    from acts import act_common as AC
+    spec = AC.load_spec(act)
+    r.token_gated = True
+    AC.assert_token_gated(r)                       # A4: twardy błąd jeśli False
+    r.intruder_present = True
+    ned_fn = AC.intruder_ned_fn(spec)
+    if r.gt_mode:
+        r.gt_intruder_fn = lambda t: ned_fn(t)     # kanał (ENTRY) — projekcja GT
+    r._teleport_stop = threading.Event()
+
+    def _telethread():
+        try:
+            from r02.intruder_driver import set_pose
+        except Exception:
+            return
+        while not r._teleport_stop.is_set():
+            t = time.time() - r.t0 if getattr(r, "t0", None) else 0.0
+            p = ned_fn(t)
+            if p is not None:
+                try:
+                    set_pose(WORLD_NAME, round(p[0], 3), round(p[1], 3), round(-p[2], 3))
+                except Exception:
+                    pass
+            time.sleep(0.5)                        # ~2 Hz — poza torem decyzji
+
+    def start_teleport():
+        threading.Thread(target=_telethread, daemon=True).start()
+    return spec, AC, start_teleport
+
+
+WORLD_NAME = os.environ.get("PX4_GZ_WORLD", "world_demo_v1")
+
+
+def scenario_A1(r: Runner):
+    """AKT 1: patrol→intruz dwell 7–9→ENTRY→REFUSE(NO_AUTH)→token(A5)→OBSERVE. NIE próba (B5)."""
+    spec, AC, start_teleport = _act_setup(r, "A1")
+    r.bring_up()
+    start_teleport()                              # wątek teleportu widocznego intruza (~2 Hz)
+    r.idle_sp = [r.start[0], r.start[1], -ALT_M]
+    grant_delay = AC.grant_delay_s(spec)
+    hold_end = spec["timeline_s"]["intruder_ring_hold"][1]
+    granted = False; entry_local = None
+    while time.time() - r.t0 < hold_end + 5:
+        t = time.time() - r.t0
+        d = r.tick()
+        if r.locked and entry_local is None:
+            entry_local = t
+        if entry_local is not None and not granted and t >= entry_local + grant_delay:
+            r.issue_operator_token("operator"); granted = True   # A5 skryptowany sygnatariusz
+        time.sleep(PERIOD)
+    r.mav.rtl(); time.sleep(6); r.mav.land(); time.sleep(2)
+    crit = {"scenario": "A1", "n_entry": r.n_entry, "n_refuse_no_auth": r.n_refuse_no_auth,
+            "n_token_issued": r.n_token_issued, "observe_ticks": r.observe_ticks,
+            "min_d": None if r.min_d_observe == float("inf") else round(r.min_d_observe, 2),
+            "dsafe_violations": r.dsafe_violations, "granted": granted,
+            "note": "REHEARSAL/integracja (B4) — NIE próba (B5); percepcja NIERAPORTOWALNA"}
+    r.finish(crit)
+    return True
+
+
+def scenario_A2(r: Runner):
+    """AKT 2: OBSERVE→utrata→EXPIRE(konsumpcja)→powrót→re-admisja→NO_AUTH→2. token→OBSERVE."""
+    spec, AC, start_teleport = _act_setup(r, "A2")
+    r.bring_up()
+    start_teleport()
+    r.idle_sp = [r.start[0], r.start[1], -ALT_M]
+    grant_delay = AC.grant_delay_s(spec)
+    ep1_end = spec["timeline_s"]["ep1_ring_hold"][1]
+    granted_seq = set(); prev_seq = -1; ep_entry_local = 0.0
+    while time.time() - r.t0 < ep1_end + 5:
+        t = time.time() - r.t0
+        d = r.tick()
+        # marker ENTRY lokalny per-epizod: gdy admission_seq rośnie, zapamiętaj czas nowego locka
+        if r.admission_seq != prev_seq:
+            prev_seq = r.admission_seq; ep_entry_local = t
+        # na każdy epizod (admission_seq) po ENTRY+opóźnieniu wydaj token (2 beaty operatora, A5)
+        if (r.locked and r.admission_seq >= 0 and r.admission_seq not in granted_seq
+                and t >= ep_entry_local + grant_delay):
+            r.issue_operator_token("operator"); granted_seq.add(r.admission_seq)
+        time.sleep(PERIOD)
+    r.mav.rtl(); time.sleep(6); r.mav.land(); time.sleep(2)
+    crit = {"scenario": "A2", "n_entry": r.n_entry, "n_token_issued": r.n_token_issued,
+            "n_token_consumed": r.n_token_consumed, "n_refuse_no_auth": r.n_refuse_no_auth,
+            "max_admission_seq": r.admission_seq, "granted_seqs": sorted(granted_seq),
+            "note": "REHEARSAL/integracja (B4) — NIE próba (B5)"}
+    r.finish(crit)
+    return True
+
+
 def main():
-    laps = {"G1": 3, "G2": 1, "G3": 3, "G4": 2, "G5": 1, "CHAR": 3, "CHAR2": 1, "C1": 1}[SCEN]
+    laps = {"G1": 3, "G2": 1, "G3": 3, "G4": 2, "G5": 1, "CHAR": 3, "CHAR2": 1, "C1": 1,
+            "A1": 1, "A2": 1}[SCEN]
     r = Runner(laps)
     fn = {"G1": scenario_G1, "G2": scenario_G2, "G3": scenario_G3, "G4": scenario_G4,
-          "G5": scenario_G5, "CHAR": scenario_CHAR, "CHAR2": scenario_CHAR2, "C1": scenario_C1}[SCEN]
+          "G5": scenario_G5, "CHAR": scenario_CHAR, "CHAR2": scenario_CHAR2, "C1": scenario_C1,
+          "A1": scenario_A1, "A2": scenario_A2}[SCEN]
     ok = fn(r)
     sys.exit(0 if ok else 3)
 
