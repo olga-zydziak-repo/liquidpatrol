@@ -947,6 +947,11 @@ def _act_setup(r, act):
         while not r._teleport_stop.is_set():
             t = time.time() - r.t0 if getattr(r, "t0", None) else 0.0
             p = ned_fn(t)
+            # B5 LIVE: aktor jest STEROWANY (teleportowany) — jego poza NED to znana GT choreografii
+            # (NIE roszczenie percepcji). Udostępnij ją tracowi (intr_ned) także w trybie live, gdzie
+            # kanał (detector_node, osobny proces) nie zna pozy 3D. Sędzia używa jej do geometrii
+            # (czy intruz był w pierścieniu przy ENTRY) — kontrola choreografii, nie percepcja.
+            r._intr_ned = [round(p[0], 3), round(p[1], 3), round(p[2], 3)] if p is not None else None
             if p is not None:
                 try:
                     set_pose(WORLD_NAME, round(p[0], 3), round(p[1], 3), round(-p[2], 3))
