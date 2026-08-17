@@ -1,0 +1,5 @@
+== ss PO spawnie serwera (14540 udp + 50051 grpc) ==
+UNCONN 0      0             0.0.0.0:14540      0.0.0.0:*    users:(("mavsdk_server",pid=50585,fd=3))   
+LISTEN 0      4096                *:50051            *:*    users:(("mavsdk_server",pid=50585,fd=8))   
+== mavsdk_server proc ==
+50585 /home/olga/.local/lib/python3.12/site-packages/mavsdk/bin/mavsdk_server -p 50051 udpin://0.0.0.0:14540

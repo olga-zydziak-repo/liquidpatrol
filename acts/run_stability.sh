@@ -17,6 +17,8 @@ teardown(){ pkill -9 -f 'gz sim' 2>/dev/null; pkill -9 -f 'px4_sitl' 2>/dev/null
   pkill -9 -f mavsdk_server 2>/dev/null; pkill -9 -f 'parameter_bridge' 2>/dev/null; pkill -9 -f detector_node 2>/dev/null
   pkill -9 -f live_stability_probe 2>/dev/null; pkill -9 -f 'ruby.*gz' 2>/dev/null; sleep 2; }
 teardown
+# D3 fix (5R3): higiena GPS — reset leftover EKF2_GPS_CTRL=0 (po A3) do 7 przed bootem
+python3 "$ROOT/acts/ensure_gps_enabled.py" 2>&1 | tee -a "${OUT:-$OUTDIR}/gps_hygiene.txt" || python3 "$ROOT/acts/ensure_gps_enabled.py"
 ps aux 2>/dev/null | grep -iE 'gz|px4|ros2|detector|mavsdk' | grep -v grep > "$OUT/ps_before.txt" || true
 
 cp "$ROOT/worlds/${WORLD}.sdf" "$ROOT/PX4-Autopilot/Tools/simulation/gz/worlds/${WORLD}.sdf"

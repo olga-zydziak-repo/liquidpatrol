@@ -25,10 +25,24 @@ HOVER_HOLD_S = float(os.environ.get("HOVER_HOLD_S", "10.0"))
 OUT = sys.argv[1] if len(sys.argv) > 1 else "/tmp/stability_probe.json"
 
 
-async def _health(d):
+async def _health(d, rec=None):
+    n = 0
     async for h in d.telemetry.health():
+        n += 1
+        if rec is not None and n <= 8:
+            rec.setdefault("health_stream", []).append(
+                {"gpos": h.is_global_position_ok, "home": h.is_home_position_ok,
+                 "lpos": h.is_local_position_ok, "armable": h.is_armable,
+                 "gyro": h.is_gyrometer_calibration_ok, "accel": h.is_accelerometer_calibration_ok,
+                 "mag": h.is_magnetometer_calibration_ok})
+            print(f"[probe] health#{n} gpos={h.is_global_position_ok} home={h.is_home_position_ok} "
+                  f"lpos={h.is_local_position_ok} armable={h.is_armable}", flush=True)
         if h.is_global_position_ok and h.is_home_position_ok:
+            if rec is not None:
+                rec["health_msgs_seen"] = n
             return True
+    if rec is not None:
+        rec["health_msgs_seen"] = n
     return False
 
 
@@ -37,8 +51,17 @@ async def main():
            "connected": False, "healthy": False, "t_to_health_s": None, "arm_attempts": None,
            "armed": False, "takeoff": False, "hover_ok": False, "landed": False, "verdict": "FAIL"}
     t0 = time.monotonic()
-    d = System()
-    await d.connect(system_address="udpin://0.0.0.0:14540")
+    # D1 (5R3): jeśli MAVSDK_SERVER_ADDR ustawione → klient łączy się do JAWNIE spawnowanego mavsdk_server
+    # (bez auto-spawnu), by wykluczyć wyścig zalegającego serwera na 14540. Inaczej auto (jak mti_flight).
+    srv = os.environ.get("MAVSDK_SERVER_ADDR")
+    if srv:
+        rec["server_mode"] = f"explicit ({srv}:{os.environ.get('MAVSDK_SERVER_PORT','50051')})"
+        d = System(mavsdk_server_address=srv, port=int(os.environ.get("MAVSDK_SERVER_PORT", "50051")))
+        await d.connect()
+    else:
+        rec["server_mode"] = "auto-spawn (mti_flight 1:1)"
+        d = System()
+        await d.connect(system_address="udpin://0.0.0.0:14540")
     async for s in d.core.connection_state():
         if s.is_connected:
             break
@@ -48,7 +71,7 @@ async def main():
     # health (global+home), timeout 90 s — jak mti_flight (ARM przed YOLO, redukcja kontencji EKF)
     th = time.monotonic()
     try:
-        rec["healthy"] = await asyncio.wait_for(_health(d), timeout=90)
+        rec["healthy"] = await asyncio.wait_for(_health(d, rec), timeout=90)
     except asyncio.TimeoutError:
         rec["healthy"] = False
     rec["t_to_health_s"] = round(time.monotonic() - th, 2)

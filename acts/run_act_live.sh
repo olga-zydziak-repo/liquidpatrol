@@ -21,6 +21,8 @@ teardown(){ pkill -9 -f 'gz sim' 2>/dev/null; pkill -9 -f 'px4_sitl' 2>/dev/null
   pkill -9 -f mavsdk_server 2>/dev/null; pkill -9 -f 'parameter_bridge' 2>/dev/null; pkill -9 -f 'detector_node' 2>/dev/null
   pkill -9 -f 'gate_run_r02' 2>/dev/null; pkill -9 -f 'ruby.*gz' 2>/dev/null; sleep 2; }
 teardown
+# D3 fix (5R3): higiena GPS — reset leftover EKF2_GPS_CTRL=0 (po A3) do 7 przed bootem
+python3 "$ROOT/acts/ensure_gps_enabled.py" 2>&1 | tee -a "${OUT:-$OUTDIR}/gps_hygiene.txt" || python3 "$ROOT/acts/ensure_gps_enabled.py"
 
 # MANIFEST emitowany PRZEZ RUNNER PO bring_up (§0/§2 reconc.): env-fail bootu/health = NIE-próba
 # (crash PRZED manifestem), crash choreografii = próba. Env dla runnera:

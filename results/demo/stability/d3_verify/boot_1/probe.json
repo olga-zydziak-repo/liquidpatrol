@@ -1,0 +1,28 @@
+{
+  "topology": "mti_flight core (System udpin14540, health90s, arm-retry60x)",
+  "connected": true,
+  "healthy": true,
+  "t_to_health_s": 0.52,
+  "arm_attempts": 1,
+  "armed": true,
+  "takeoff": true,
+  "hover_ok": true,
+  "landed": true,
+  "verdict": "OK",
+  "server_mode": "auto-spawn (mti_flight 1:1)",
+  "t_connect_s": 0.93,
+  "health_stream": [
+    {
+      "gpos": true,
+      "home": true,
+      "lpos": true,
+      "armable": true,
+      "gyro": true,
+      "accel": true,
+      "mag": true
+    }
+  ],
+  "health_msgs_seen": 1,
+  "alt_reached_m": 7.5,
+  "total_s": 32.76
+}

@@ -155,3 +155,45 @@ ze szczególnym sprawdzeniem: **(i) higiena mavsdk_server / bind 14540** (jawny 
 zweryfikować brak stale servera); (ii) kolejność mavlink onboard vs klient; (iii) param COM_* datalink/GCS.
 **Zero prób, zero A2, sędzia 79b1e936 niezmieniony, r01 nietknięte, selfcheck 6/6 ×2.** Zbudowana sonda
 + launcher stabilności ZOSTAJĄ (narzędzie diagnostyczne dla opcji 1).
+
+---
+
+## AKTUALIZACJA-4 (sesja 4, PROMPT_D_BUILD_5R3) — PRZYCZYNA ŹRÓDŁOWA ZNALEZIONA I NAPRAWIONA
+
+Drzewo decyzyjne opcji 1 (V0→D1→D2→D3) doprowadziło do **przyczyny źródłowej całej sagi B5**.
+
+### V0 — higiena: boot startował czysto
+`ss -ulpn`/`pgrep` przed bootem: porty 14540/50051 WOLNE, brak stale procs. `pkill -f mavsdk_server`
+łapie serwer. Boot 5R2 był naprawdę czysty. (hygiene_pre.txt)
+
+### D1 — lead zombie-serwera OBALONY
+Jawny cykl życia serwera (spawn `mavsdk_server` explicite, klient `System(mavsdk_server_address=…)`
+bez auto-spawnu, `ss` weryfikacja): serwer **odkrył PX4** ("System discovered") ale health **nadal
+TIMEOUT @90 s**. Zombie-serwer nie był przyczyną.
+
+### D2 — LOKALIZACJA segmentu (instrumentacja strumienia health)
+Log pól health per komunikat: **`gpos=False home=True lpos=True armable=False`**, komunikaty health
+DOCHODZĄ (telemetria płynie). Segment = **`is_global_position_ok` (EKF/GPS global) nigdy True**, NIE
+serwer/mavlink/klient. **Kontrola tor DZIAŁAJĄCY:** `run_act.sh` A1 **GT-fed** (config który armował w B4)
+uruchomiony PONOWNIE → **TEŻ `BRAK health`**. ⇒ awaria **NIE jest LIVE-specyficzna, NIE launcher/topologia**
+— dotyczy KAŻDEGO toru. Środowisko idle (load 1.36, GPU 0%, brak fabryki) ⇒ nie kontencja.
+
+### PRZYCZYNA ŹRÓDŁOWA: leftover `EKF2_GPS_CTRL=0` w persystowanym `parameters.bson`
+Testy **A3 (gate_run_r03, GPS-denied)** ustawiają `EKF2_GPS_CTRL=0` (wyłącz GPS). Wartość **PERSYSTUJE
+w PX4 SITL `rootfs/parameters.bson`** między bootami; zostawiona na 0 (restore nie zapisał się / teardown
+-9 przed save) ⇒ EKF bez GPS ⇒ `is_global_position_ok` nigdy True ⇒ health timeout ⇒ arm-fail.
+**B4 armował ZANIM parametr utknął na 0.** Weryfikacja bson: `\x10EKF2_GPS_CTRL\x00` + int32 = **0**.
+
+**WSZYSTKIE wcześniejsze „przyczyny" (6 env-fail sesja1/2, topologia mti_flight sesja3, „No connection
+to GCS") były POCHODNĄ tego jednego parametru.** „No connection to GCS" = warning przejściowy (był też
+w B4 armującym) — nigdy nie był blokadą.
+
+### D3 — FIX minimalną deltą + WERYFIKACJA
+Reset `EKF2_GPS_CTRL 0→7` (default, GPS ON) w bson (surgical, backup). Boot weryfikacyjny sondą stabilności:
+**`gpos=True home=True lpos=True armable=True`; health OK @ 0.52 s; armed (attempts=1); takeoff alt 7.5;
+hover 10 s OK; land; VERDICT OK.** (results/demo/stability/d3_verify/boot_1/)
+
+**FIX (harness, poza frozen):** `acts/ensure_gps_enabled.py` — reset EKF2_GPS_CTRL→7 w bson PRZED każdym
+bootem LIVE; wpięte do `run_act_live.sh` + `run_stability.sh` (po teardown). Zero zmian frozen
+(świat/spec/sędzia/r01/kamera). Historyczne komentarze w launcherach (obciążenie/detektor jako „przyczyna")
+SUPERSEDED — właściwa przyczyna = parametr GPS.

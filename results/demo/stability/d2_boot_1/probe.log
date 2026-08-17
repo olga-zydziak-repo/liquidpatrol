@@ -1,0 +1,45 @@
+[probe] MAVSDK connected @ 0.0s
+[probe] health#1 gpos=False home=True lpos=True armable=False
+[probe] health#2 gpos=False home=True lpos=True armable=False
+[probe] health#3 gpos=False home=True lpos=True armable=False
+[probe] health#4 gpos=False home=True lpos=True armable=False
+[probe] health#5 gpos=False home=True lpos=True armable=False
+[probe] health#6 gpos=False home=True lpos=True armable=False
+[probe] health#7 gpos=False home=True lpos=True armable=False
+[probe] health#8 gpos=False home=True lpos=True armable=False
+Traceback (most recent call last):
+  File "/home/olga/projects/liquidpatrol/acts/live_stability_probe.py", line 131, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/olga/projects/liquidpatrol/acts/live_stability_probe.py", line 74, in main
+    rec["healthy"] = await asyncio.wait_for(_health(d, rec), timeout=90)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/home/olga/projects/liquidpatrol/acts/live_stability_probe.py", line 30, in _health
+    async for h in d.telemetry.health():
+  File "/home/olga/.local/lib/python3.12/site-packages/mavsdk/telemetry.py", line 3584, in health
+    async for response in health_stream:
+  File "/home/olga/.local/lib/python3.12/site-packages/grpc/aio/_call.py", line 366, in _fetch_stream_responses
+    await self._raise_for_status()
+  File "/home/olga/.local/lib/python3.12/site-packages/grpc/aio/_call.py", line 274, in _raise_for_status
+    raise _create_rpc_error(
+grpc.aio._call.AioRpcError: <AioRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "Stream removed (Socket closed)"
+	debug_error_string = "UNAVAILABLE:Stream removed (Socket closed)"
+>
+Exception ignored in: <function System.__del__ at 0x70c18c5a1760>
+Traceback (most recent call last):
+  File "/home/olga/.local/lib/python3.12/site-packages/mavsdk/system.py", line 146, in __del__
+  File "/home/olga/.local/lib/python3.12/site-packages/mavsdk/system.py", line 186, in _stop_mavsdk_server
+ImportError: sys.meta_path is None, Python is likely shutting down
