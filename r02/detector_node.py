@@ -25,8 +25,14 @@ from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
 from sensor_msgs.msg import Image
 from std_msgs.msg import Float32MultiArray
 
-from r02.config_r02 import IMG_W, IMG_H, DET_HZ, ChannelConfig
+from dataclasses import replace
+from r02.config_r02 import IMG_W, IMG_H, DET_HZ, ChannelConfig, MTI_CENTER_THR
 from r02.target_channel import TargetChannel, Box, EV_ENTRY
+
+# DEMO-B B5P (ANEKS_D5 ratyfikowane): brama LIVE = struktura∧MTI (jak REGATE), gdy DEMO_MTI=1.
+# Bez flagi: zachowanie domyślne (conf-floor) dla charakteryzacji. Zero zmiany PROGÓW (MTI_CENTER_THR,
+# θ_conf, k) — to charakteryzacja frozen; zmienia się WYŁĄCZNIE aktywna brama.
+DEMO_MTI = os.environ.get("DEMO_MTI") == "1"
 
 WEIGHTS = os.environ.get("YOLO_WEIGHTS", ".b0deps/weights/yolov8s-worldv2.pt")
 CH_TOPIC = "/liquidpatrol/target_channel"
@@ -54,12 +60,23 @@ def imgmsg_to_mono(msg) -> np.ndarray:
 class DetectorNode(Node):
     def __init__(self, image_topic, det_hz=DET_HZ, conf_floor=0.001, imgsz=640):
         super().__init__("liquidpatrol_detector")
-        self.channel = TargetChannel(ChannelConfig())
+        cfg = replace(ChannelConfig(), entry_require_mti=True) if DEMO_MTI else ChannelConfig()
+        self.channel = TargetChannel(cfg)
         self.conf_floor = conf_floor
         self.imgsz = imgsz
         self.last_frame = None
         self.frame_stamp = None
         self.t0 = None
+        # DEMO_MTI: tracker MTI (derotacja z vehicle_attitude) + koincydencja box↔komponent (mti_ok)
+        self.demo_mti = DEMO_MTI
+        self.tracker = None; self.q = None; self.last_comps = []
+        if self.demo_mti:
+            from r02.mti import MTITracker, MTIParams
+            self._box_matches = __import__("r02.mti", fromlist=["box_matches_component"]).box_matches_component
+            self.tracker = MTITracker(MTIParams(), delta=3)
+            from px4_msgs.msg import VehicleAttitude
+            self.create_subscription(VehicleAttitude, "/fmu/out/vehicle_attitude", self._att, qos_be())
+            self.get_logger().info("DEMO_MTI=1: brama struktura∧MTI (entry_require_mti=True, conf pasywne)")
         # detektor (fingerprint B0)
         from ultralytics import YOLO
         self.model = YOLO(WEIGHTS)
@@ -77,6 +94,17 @@ class DetectorNode(Node):
     def _on_image(self, msg):
         self.last_frame = imgmsg_to_mono(msg)
         self.frame_stamp = msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9
+        # MTI PRZY PEŁNEJ KADENCJI KLATEK (~15 Hz, jak REGATE mti_flight; delta=3 → baseline ~200 ms).
+        # YOLO/kanał zostają 1 Hz (_on_tick), ale derotacja-residuum MUSI iść z częstotliwością klatek —
+        # przy 1 Hz baseline ~3 s aliasuje z oscylacją 0.3 Hz (n_comps≈0). Push tu, box↔comp match w tiku.
+        if self.demo_mti and self.q is not None:
+            try:
+                self.last_comps, _ = self.tracker.push(self.last_frame, self.q)
+            except Exception:
+                self.last_comps = []
+
+    def _att(self, m):
+        self.q = [float(m.q[0]), float(m.q[1]), float(m.q[2]), float(m.q[3])]   # [w,x,y,z]
 
     def _sim_t(self):
         # sim-time z nagłówka klatki (spójne z zegarem symu / determinizmem aktora)
@@ -105,7 +133,15 @@ class DetectorNode(Node):
         t = self._sim_t()
         box, allb, nbox = self._detect(self.last_frame)
         conf_top1 = box.conf if box is not None else None
-        ev = self.channel.on_frame(box, t)       # zasila ZOH-age (ENTRY k=3, sufit θ_age)
+        # DEMO_MTI: derotacja (MTITracker push frame+q) → komponenty ruchu → mti_ok = koincydencja box↔comp
+        mti_ok = None; n_comps = 0
+        if self.demo_mti:
+            comps = self.last_comps                              # komponenty z toru 15 Hz (_on_image)
+            n_comps = len(comps)
+            mti_ok = self._box_matches(box, comps, MTI_CENTER_THR) if box is not None else False
+            ev = self.channel.on_frame(box, t, mti_ok=mti_ok)   # brama struktura∧MTI (conf pasywne)
+        else:
+            ev = self.channel.on_frame(box, t)   # zasila ZOH-age (ENTRY k=3, sufit θ_age) — conf-floor
         val = self.channel.sample(t)
         # publikacja kanału 5-dim (BEZ conf) — pusty gdy brak locka
         m = Float32MultiArray()
@@ -119,7 +155,9 @@ class DetectorNode(Node):
         # debug/telemetria (conf ŻYJE TYLKO TU — nigdy w kanale)
         dbg = Float32MultiArray()
         dbg.data = [float(nbox), float(conf_top1 or 0.0), 1.0 if ev == EV_ENTRY else 0.0,
-                    1.0 if self.channel.locked else 0.0]
+                    1.0 if self.channel.locked else 0.0,
+                    (1.0 if mti_ok else 0.0) if mti_ok is not None else -1.0,  # -1 = MTI nieaktywne
+                    float(n_comps)]
         self.pub_dbg.publish(dbg)
         if ev == EV_ENTRY:
             self.get_logger().info(f"ENTRY @ sim_t={t:.2f} box={m.data}")

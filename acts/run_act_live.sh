@@ -55,6 +55,7 @@ grep -ci 'time jump\|Resetting time sync' "$OUTDIR/stack.log" > "$OUTDIR/timejum
 export LIVE_DETECTOR_TOPIC="$MONO"
 export DETECTOR_LOG="$OUTDIR/detector.log"
 export YOLO_WEIGHTS="$ROOT/.b0deps/weights/yolov8s-worldv2.pt"
+export DEMO_MTI=1   # ANEKS_D5: brama LIVE = struktura∧MTI (jak REGATE), conf pasywne
 if [ "${FILM_CAPTURE:-0}" = "1" ] && [ -n "$FILM" ]; then
   setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_film.log" 2>&1 &
 fi

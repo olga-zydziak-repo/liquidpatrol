@@ -253,3 +253,15 @@ frozen; zmienia się tylko aktywna brama conf-floor→MTI). Po ratyfikacji: impl
 **Kryterium śmierci NIE osiągnięte** (koniunkt zidentyfikowany: MTI-nieobecność w LIVE; fix istnieje ale
 percepcja ⇒ ratyfikacja). **STOP.** Sędzia `79b1e936` niezmieniony, spec/światy/progi/`r01` NIETKNIĘTE,
 selfcheck 6/6. Narzędzia `dbg_logger.py`/`live_stability_probe.py` ZOSTAJĄ.
+
+---
+
+## AKTUALIZACJA-6 (sesja 5-cd, PROMPT_D_BUILD_5P re-send = ratyfikacja ANEKS_D5) — brama MTI + P3
+
+**ANEKS_D5 ratyfikowane (re-send).** Implementacja bramy `struktura∧MTI` w torze LIVE (`detector_node`
+`DEMO_MTI=1`, MTI przy 15 Hz `_on_image`, `entry_require_mti=True`, zero zmiany progów). Re-sanity:
+brama MTI aktywna ale `mti_ok=0` przy oscylacji spec **±1.0** (n_comps≈0-2). **Sonda P3 (`OSC_OVERRIDE=1.5`,
+SR-J2): mti_ok=1/entry=1/detektor-locked=1** → **P3 POTWIERDZONY: ±1.0 za mała, ±1.5 (charakteryzacja)
+budzi MTI**. FIX = powrót spec ±1.5 (korekta rozbieżności B2) = **ANEKS_D5 propozycja druga → STOP na
+ratyfikacji** (SR-J1 spec frozen). Po ratyfikacji: spec ±1.5 → nowy hash A1/A2 → re-sanity → bramka A2 →
+próby A1→A3→A2. Sędzia `79b1e936` niezmieniony, progi/światy/`r01` nietknięte, selfcheck 6/6, regresja 37.

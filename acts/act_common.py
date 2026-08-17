@@ -51,6 +51,10 @@ def intruder_ned_fn(spec):
     g = spec["geometry"]; tl = spec["timeline_s"]
     ring = _to_ned(g["intruder_ring_enu"])
     osc = float(g.get("intruder_lateral_osc_m", 1.0))
+    # B5P sonda P3 (SR-J2, NIE zmienia spec): override amplitudy oscylacji przez OSC_OVERRIDE — test
+    # rozstrzygający „mti_ok wstaje przy ±1.5 (scharakteryzowane)?" bez dotykania frozen spec.
+    if os.environ.get("OSC_OVERRIDE"):
+        osc = float(os.environ["OSC_OVERRIDE"])
     park = _to_ned(g.get("intruder_parking_enu", [7.0, 0.0, 3.0]))
     far = _to_ned(g["intruder_far_enu"]) if "intruder_far_enu" in g else None
 

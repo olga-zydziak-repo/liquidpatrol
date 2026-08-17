@@ -38,7 +38,8 @@ class DbgLog(Node):
         d = list(m.data)
         rec = {"t": round(time.monotonic() - self.t0, 3), "topic": "dbg",
                "n_box": d[0] if len(d) > 0 else None, "conf_top1": d[1] if len(d) > 1 else None,
-               "entry": d[2] if len(d) > 2 else None, "locked": d[3] if len(d) > 3 else None}
+               "entry": d[2] if len(d) > 2 else None, "locked": d[3] if len(d) > 3 else None,
+               "mti_ok": d[4] if len(d) > 4 else None, "n_comps": d[5] if len(d) > 5 else None}
         self.f.write(json.dumps(rec) + "\n"); self.f.flush()
 
     def _ch(self, m):

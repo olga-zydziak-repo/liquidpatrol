@@ -47,3 +47,27 @@ Po ratyfikacji: implementacja → nowy hash `detector_node` (+ ewent. wpis w ANE
 ## Poza zakresem BEZ ratyfikacji (SR-J1)
 Progi percepcji (θ_conf, θ_age, edge_margin, k, MTI-threshold), spec, światy, sędzia `79b1e936`, `r01/`
 — NIETKNIĘTE. `ensure_gps_enabled` (D3) obowiązuje przed każdym bootem (A3 zostawia EKF2_GPS_CTRL=0).
+
+---
+
+## STATUS IMPLEMENTACJI (sesja 5-cd, po ratyfikacji re-send)
+
+### Zaimplementowane (ratyfikowane): brama LIVE = struktura∧MTI
+`r02/detector_node.py` (gdy `DEMO_MTI=1`): `entry_require_mti=True` + port MTITracker (`r02.mti`) +
+subskrypcja `vehicle_attitude` + `mti_ok = box_matches_component(box, comps, MTI_CENTER_THR)`. **MTI przy
+pełnej kadencji klatek (~15 Hz, `_on_image`), NIE 1 Hz** — przy 1 Hz baseline delta≈3 s aliasuje z
+oscylacją 0.3 Hz (n_comps≈0). ZERO zmiany progów (θ_conf/θ_age/k/MTI_CENTER_THR=0.12 — charakteryzacja
+frozen); zmienia się WYŁĄCZNIE aktywna brama (conf-floor→MTI). run_act_live ustawia `DEMO_MTI=1`.
+Regresja 37 PASS; test_mti/test_channel nietknięte.
+
+### DRUGA WARSTWA odsłonięta → P3 POTWIERDZONY (sonda, SR-J2): oscylacja ±1.0 za mała dla MTI
+Po włączeniu bramy MTI: mti_ok=0, n_comps≈0-2 przy oscylacji **±1.0** (spec). Sonda `probe_p3_osc15`
+(`OSC_OVERRIDE=1.5`, NIE zmienia spec): **mti_ok=1 (4 klatki), n_comps>0 (13), entry=1, detektor
+locked=1** (max n_comps 38). **±1.0 za mała dla koniunktu RUCHU; ±1.5 (SCHARAKTERYZOWANE w REGATE)
+budzi MTI** — dokładnie rozbieżność B2 (spec ±1.0 vs charakteryzacja ±1.5).
+
+## PROPOZYCJA DRUGA (do ratyfikacji): powrót spec do ±1.5 (korekta rozbieżności B2)
+`acts/A1_spec.yaml` (i A2) `intruder_lateral_osc_m: 1.0 → 1.5` (wartość SCHARAKTERYZOWANA REGATE).
+STOP → ratyfikacja Olgi → nowy hash spec A1/A2 (świat NIE dotknięty — oscylacja jest w choreografii
+runnera f(sim_t), nie w SDF) → re-sanity A1 (lock+ENTRY w oknie) → bramka A2 → próby A1→A3→A2.
+**Progu MTI NIE ruszać (frozen).** SR-J1: spec frozen ⇒ ta adnotacja + ratyfikacja przed zastosowaniem.
