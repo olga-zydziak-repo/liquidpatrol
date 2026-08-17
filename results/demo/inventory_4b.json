@@ -1,0 +1,185 @@
+{
+  "aneks": "D5 §4b",
+  "camera_update_rate_hz": 15,
+  "rows": [
+    {
+      "param": "frame_ingest_hz",
+      "regate": 15,
+      "akt_live": 15,
+      "unit": "Hz",
+      "equal": true,
+      "note": "mono_cam/model.sdf update_rate (ten sam sensor OBU torów)"
+    },
+    {
+      "param": "mti_push_hz",
+      "regate": 15.0,
+      "akt_live": 15.0,
+      "unit": "Hz",
+      "equal": true,
+      "note": "REGATE worker 'konsumuje klatki 15 Hz' L238; akt _on_image @kadencja klatek"
+    },
+    {
+      "param": "mti_delta",
+      "regate": 3,
+      "akt_live": 3,
+      "unit": "klatki",
+      "equal": true,
+      "note": "MTITracker(MTIParams(), delta=3) — baseline 200ms @15Hz"
+    },
+    {
+      "param": "decision_hz",
+      "regate": 2.0,
+      "akt_live": 2.0,
+      "unit": "Hz",
+      "equal": true,
+      "note": "REGATE DECISION_HZ L41; akt --det-hz (§4a). k liczony na tej kadencji"
+    },
+    {
+      "param": "channel_publish_hz",
+      "regate": 2.0,
+      "akt_live": 2.0,
+      "unit": "Hz",
+      "equal": true,
+      "note": "= decyzja (REGATE on_frame w decide_once; akt pub_ch w _on_tick)"
+    },
+    {
+      "param": "entry_k",
+      "regate": 3,
+      "akt_live": 3,
+      "unit": "klatki",
+      "equal": true,
+      "note": "streak≥k kolejnych klatek (target_channel L149). @2Hz → okno 1.5s"
+    },
+    {
+      "param": "entry_move_thr",
+      "regate": 0.15,
+      "akt_live": 0.15,
+      "unit": "znorm/klatkę",
+      "equal": true,
+      "note": "ruch środka między klatkami (target_channel L143). Kalibrowany @kadencji decyzji"
+    },
+    {
+      "param": "entry_edge_margin",
+      "regate": 0.1,
+      "akt_live": 0.1,
+      "unit": "znorm",
+      "equal": true,
+      "note": "edge_dist≥margin (central)"
+    },
+    {
+      "param": "mti_center_thr",
+      "regate": 0.12,
+      "akt_live": 0.12,
+      "unit": "znorm",
+      "equal": true,
+      "note": "box_matches_component (mti.py L173)"
+    },
+    {
+      "param": "theta_conf",
+      "regate": 0.1635,
+      "akt_live": 0.1635,
+      "unit": "conf",
+      "equal": true,
+      "note": "PASYWNE gdy entry_require_mti (nie brama)"
+    },
+    {
+      "param": "theta_age_s",
+      "regate": 3.0,
+      "akt_live": 3.0,
+      "unit": "SEKUNDY",
+      "equal": true,
+      "note": "EWAL CZASOWA: (t-t_last_det)+L_deliver > theta_age_s @ target_channel.py:162/186/194; t=sim-time → NIEZALEŻNE od kadencji decyzji"
+    },
+    {
+      "param": "l_deliver_s",
+      "regate": 0.1,
+      "akt_live": 0.1,
+      "unit": "SEKUNDY",
+      "equal": true,
+      "note": "podłoga age (czasowa)"
+    },
+    {
+      "param": "entry_require_mti",
+      "regate": true,
+      "akt_live": true,
+      "unit": "bool",
+      "equal": true,
+      "note": "brama struktura∧MTI; REGATE replace(cfg, entry_require_mti=True), akt DEMO_MTI=1"
+    },
+    {
+      "param": "mti_diff_thr",
+      "regate": 22,
+      "akt_live": 22,
+      "unit": "px",
+      "equal": true,
+      "note": "MTIParams() domyślne (tor push 15Hz)"
+    },
+    {
+      "param": "mti_open_k",
+      "regate": 3,
+      "akt_live": 3,
+      "unit": "px",
+      "equal": true,
+      "note": "MTIParams()"
+    },
+    {
+      "param": "mti_close_k",
+      "regate": 5,
+      "akt_live": 5,
+      "unit": "px",
+      "equal": true,
+      "note": "MTIParams()"
+    },
+    {
+      "param": "mti_border_erode",
+      "regate": 10,
+      "akt_live": 10,
+      "unit": "px",
+      "equal": true,
+      "note": "MTIParams()"
+    },
+    {
+      "param": "mti_min_area_px",
+      "regate": 8,
+      "akt_live": 8,
+      "unit": "px",
+      "equal": true,
+      "note": "MTIParams()"
+    },
+    {
+      "param": "mti_max_area_frac",
+      "regate": 0.2,
+      "akt_live": 0.2,
+      "unit": "frac",
+      "equal": true,
+      "note": "MTIParams()"
+    },
+    {
+      "param": "mti_persist_m",
+      "regate": 3,
+      "akt_live": 3,
+      "unit": "klatki",
+      "equal": true,
+      "note": "komponent w ≥m z M ostatnich (track-before-detect, tor push 15Hz)"
+    },
+    {
+      "param": "mti_persist_window",
+      "regate": 4,
+      "akt_live": 4,
+      "unit": "klatki",
+      "equal": true,
+      "note": "M (tor push 15Hz)"
+    },
+    {
+      "param": "mti_persist_move_thr",
+      "regate": 0.1,
+      "akt_live": 0.1,
+      "unit": "znorm",
+      "equal": true,
+      "note": "MTIParams()"
+    }
+  ],
+  "diffs": [],
+  "theta_age_unit": "SEKUNDY (czasowa) — EXPIRE A2 NIEZALEŻNE od kadencji decyzji",
+  "verdict": "ZGODNE — zero różnic po §4a (--det-hz 2.0)"
+}

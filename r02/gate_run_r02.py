@@ -32,6 +32,12 @@ from r02.config_r02 import (D_SAFE_M, THETA_AGE_S, T_ACK_S, F_FOV, EPS_FP_PER_MI
 # celu z symulatora (projekcja GT do kamery, perfekcyjna detekcja w FOV, conf=1.0) zamiast detektora.
 # JAWNIE ETYKIETOWANE w trace/result/raporcie (precedens 3b: sufit GT-fed vs live-fed osobno).
 GT_FED = os.environ.get("GT_FED") == "1"
+
+# ANEKS_D5 §4a (ratyf. 2026-08-17): kadencja DECYZYJNA toru aktów LIVE = 2.0 Hz == REGATE DECISION_HZ
+# (mti_flight.py L41). Restauracja charakteryzacji (klasa §1.1): DET_HZ w config_r02 NIETKNIĘTY (1 Hz =
+# default R0.2); tu jedno źródło dla --det-hz detektora ORAZ echa manifestu (bez driftu). Bieg z
+# det_hz≠2.0 = INVALID z definicji (SR §4). k=3 @2 Hz → okno ENTRY 1.5 s (jak REGATE), nie 3 s.
+DEMO_DECISION_HZ = 2.0
 from r02.target_channel import TargetChannel, Box
 from r02.observe_guidance import ObserveController
 from r02.gate_harness import project_to_pixel   # EKSPLORACJA: projekcja GT intruza (klasyfikacja true/false)
@@ -983,9 +989,10 @@ def _start_live_detector(r):
                           f"{topic}@sensor_msgs/msg/Image[gz.msgs.Image"],
                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         dlog = os.environ.get("DETECTOR_LOG", "/tmp/detector.log")
-        subprocess.Popen([sys.executable, "-m", "r02.detector_node", "--image-topic", topic],
+        subprocess.Popen([sys.executable, "-m", "r02.detector_node", "--image-topic", topic,
+                          "--det-hz", str(DEMO_DECISION_HZ)],   # §4a: kadencja decyzji == REGATE 2.0 Hz
                          stdout=open(dlog, "w"), stderr=subprocess.STDOUT)
-        print(f"[gate] LIVE bridge+detektor PO arm (topic={topic}, nie-blokująco)")
+        print(f"[gate] LIVE bridge+detektor PO arm (topic={topic}, det_hz={DEMO_DECISION_HZ}, nie-blokująco)")
     except Exception as e:
         print(f"[gate] LIVE detektor start FAIL: {e}")
 
@@ -1012,6 +1019,9 @@ def _emit_act_manifest(r, act):
                               demo_mti=(os.environ.get("DEMO_MTI") == "1"))
         m["judge_sha256"] = jhash
         m["detector"] = "LIVE (r02.detector_node YOLO); GT_FED=0" if not r.gt_mode else "GT-fed"
+        # §4a: echo kadencji decyzji przekazanej detektorowi LIVE (== REGATE 2.0). Bieg z det_hz≠2.0 =
+        # INVALID z definicji. Dla GT-fed brak detektora LIVE → None (kadencja z pętli runnera).
+        m["det_hz"] = DEMO_DECISION_HZ if (not r.gt_mode and os.environ.get("LIVE_DETECTOR_TOPIC")) else None
         m["armed_before_manifest"] = bool(getattr(r.mav, "armed", False))   # dowód: manifest PO arm
         # H0 (5P): echo EKF2_GPS_CTRL z persystowanego bson (stan który PX4 załadował) — cicha regresja
         # ensure_gps_enabled widoczna w prowieniencji PIERWSZEGO biegu, nie po polowaniu. (0=GPS off=przyczyna 5R3)
