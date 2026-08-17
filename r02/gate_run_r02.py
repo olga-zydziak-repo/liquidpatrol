@@ -1012,6 +1012,17 @@ def _emit_act_manifest(r, act):
         m["judge_sha256"] = jhash
         m["detector"] = "LIVE (r02.detector_node YOLO); GT_FED=0" if not r.gt_mode else "GT-fed"
         m["armed_before_manifest"] = bool(getattr(r.mav, "armed", False))   # dowód: manifest PO arm
+        # H0 (5P): echo EKF2_GPS_CTRL z persystowanego bson (stan który PX4 załadował) — cicha regresja
+        # ensure_gps_enabled widoczna w prowieniencji PIERWSZEGO biegu, nie po polowaniu. (0=GPS off=przyczyna 5R3)
+        try:
+            _bson = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                 "PX4-Autopilot/build/px4_sitl_default/rootfs/parameters.bson")
+            if os.path.exists(_bson):
+                _d = open(_bson, "rb").read(); _n = b"EKF2_GPS_CTRL\x00"; _i = _d.find(_n)
+                m["ekf2_gps_ctrl_bson"] = (int.from_bytes(_d[_i+len(_n):_i+len(_n)+4], "little")
+                                           if _i >= 0 else "absent(default 7)")
+        except Exception:
+            m["ekf2_gps_ctrl_bson"] = "read_fail"
         json.dump(m, open(out, "w"), indent=2, ensure_ascii=False)
         print(f"[gate] manifest PO arm → {out} (judge={jhash[:16]}… armed={m['armed_before_manifest']})")
     except Exception as e:

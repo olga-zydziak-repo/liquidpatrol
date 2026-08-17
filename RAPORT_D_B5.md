@@ -221,3 +221,35 @@ adnotacja→ratyfikacja jeśli trzeba).
 - **Zweryfikowane:** T1 3/3 czyste booty (health 0.4–0.56 s) + A1 sanity dron armuje end-to-end.
 - **Kontrakty frozen nietknięte** (świat/spec/sędzia 79b1e936/r01), selfcheck 6/6.
 - **NASTĘPNE:** luka percepcji live (osobny prompt) → potem T2 próby A1→A3→A2.
+
+---
+
+## AKTUALIZACJA-5 (sesja 5, PROMPT_D_BUILD_5P) — luka percepcji live ZDIAGNOZOWANA → ANEKS_D5 (ratyfikacja)
+
+### H0 — higiena prowieniencji GPS
+Manifest per bieg dostaje `ekf2_gps_ctrl_bson` (echo stanu z persystowanego bson — cicha regresja
+`ensure_gps_enabled` widoczna w prowieniencji 1. biegu). Oś czasu przyczyny SPÓJNA: B4 A1/A2/A3 armowały;
+A3 (ostatni w B4) ustawił `EKF2_GPS_CTRL=0` → wszystkie kolejne booty (env-fail1..6, sesje 1–3) padały —
+„B4 armował ZANIM param utknął na 0" potwierdzone.
+
+### P0 — diagnoza (sonda DBG `probe_dbg_1`; SR-J2 probe, NIE próba)
+Trace sanity-live A1: `conj=None` przez cały ring (485/485) — **architektura LIVE: kanał+conj żyją w
+OSOBNYM procesie `detector_node`**, gate'owy patch (b) ich nie widzi; gate dostał `age=None` (kanał pusty).
+Sonda DBG (`/liquidpatrol/detector_debug`): **YOLO WYKRYWA cel** (n_box>0 22/22, 16–32 boxy) ale
+**`conf_top1` median 0.116 < θ_conf 0.1635** (< signal_min 0.169); `entry=0/locked=0`; kanał pusty 22×.
+
+**Wariant rozstrzygnięty (poza czterema z promptu — to KONFIG BRAMY):** LIVE `detector_node` używa
+`entry_require_mti=False` ⇒ brama `box∧central∧conf-floor`; intruz borderline-conf ODRZUCONY. **REGATE
+(charakteryzacja) używał `entry_require_mti=True` — brama `box∧central∧MTI`, conf PASYWNE** — ten sam cel
+lockuje. `detector_node` NIE liczy MTI → spada na conf-floor → rozjazd z charakteryzacją. **NIE oscylacja
+(P3 nie dotyczy — LIVE nie używa MTI), NIE wiring (kanał dociera pusty), NIE geometria (YOLO widzi).**
+
+### FIX = ścieżka ANEKS_D5 (SR-J1: percepcja) → STOP na ratyfikacji Olgi
+Propozycja (ANEKS_D5, NIE zastosowana): przywrócić w torze LIVE scharakteryzowaną bramę `box∧central∧MTI`
+(port MTITracker `mti_flight`→`detector_node` + `entry_require_mti=True`; ZERO zmiany progów — charakteryzacja
+frozen; zmienia się tylko aktywna brama conf-floor→MTI). Po ratyfikacji: implementacja → nowy hash detektora
+→ re-sanity → bramka A2 → próby A1→A3→A2.
+
+**Kryterium śmierci NIE osiągnięte** (koniunkt zidentyfikowany: MTI-nieobecność w LIVE; fix istnieje ale
+percepcja ⇒ ratyfikacja). **STOP.** Sędzia `79b1e936` niezmieniony, spec/światy/progi/`r01` NIETKNIĘTE,
+selfcheck 6/6. Narzędzia `dbg_logger.py`/`live_stability_probe.py` ZOSTAJĄ.

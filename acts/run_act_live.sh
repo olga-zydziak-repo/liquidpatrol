@@ -64,6 +64,11 @@ if [ "${FILM_CAPTURE:-0}" = "1" ] && [ -n "$FILM" ]; then
   ( for i in $(seq 1 40); do python3 "$ROOT/r02/capture_frame.py" "$FILM" "$OUTDIR/frames/f_$(printf %03d $i).npy" 2 >/dev/null 2>&1; sleep 1.2; done ) & GRABBER=$!
 fi
 
+# P0/P1 (5P): logger DBG detektora (sonda, SR-J2 probe_*) — subskrybuje detector_debug/target_channel
+if [ "${DBG_LOG:-0}" = "1" ]; then
+  setsid nohup python3 "$ROOT/acts/dbg_logger.py" "$OUTDIR/dbg.jsonl" 120 > "$OUTDIR/dbg_logger.log" 2>&1 &
+fi
+
 # scenariusz LIVE (BEZ GT_FED) — kanał z detector_node
 TRACE="$OUTDIR/trace.jsonl" SCENARIO="$ACT" PX4_GZ_WORLD="$WORLD" HEADLESS=1 \
   PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 -m r02.gate_run_r02 > "$OUTDIR/act.log" 2>&1
