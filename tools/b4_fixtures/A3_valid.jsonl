@@ -1,0 +1,11 @@
+{"t": "meta", "scen": "S2", "schema_v": 2, "eps_cap": 9.25, "R_E": 32.0, "fixture": true}
+{"t": "tick", "tick": 0, "mono": 1.0, "r_est": 4.0, "margin_R_E": 28.0, "decision": "ALLOW", "reason": null, "state": "PATROL", "pos": [4.0, 0.0, -10.0], "dr": false, "descending": false}
+{"t": "tick", "tick": 1, "mono": 2.0, "r_est": 10.0, "margin_R_E": 22.0, "decision": "ALLOW", "reason": null, "state": "PATROL", "pos": [10.0, 0.0, -10.0], "dr": false, "descending": false}
+{"t": "tick", "tick": 2, "mono": 3.0, "r_est": 16.0, "margin_R_E": 16.0, "decision": "ALLOW", "reason": null, "state": "PATROL", "pos": [16.0, 0.0, -10.0], "dr": false, "descending": false}
+{"t": "event", "mono": 4.0, "ev": "denial_on", "r_est_at_cut": 18.0, "speed_at_cut": 3.0}
+{"t": "event", "mono": 4.09, "ev": "refuse_pos_land"}
+{"t": "tick", "tick": 3, "mono": 4.1, "r_est": 18.0, "margin_R_E": 14.0, "decision": "REFUSE", "reason": "POS_DEGRADED", "state": "POSDEG", "pos": [18.0, 0.0, -10.0], "dr": true, "descending": true}
+{"t": "tick", "tick": 4, "mono": 5.1, "r_est": 18.15, "margin_R_E": 13.85, "decision": "REFUSE", "reason": "POS_DEGRADED", "state": "POSDEG", "pos": [18.15, 0.0, -7.0], "dr": true, "descending": true}
+{"t": "tick", "tick": 5, "mono": 6.1, "r_est": 18.3, "margin_R_E": 13.7, "decision": "REFUSE", "reason": "POS_DEGRADED", "state": "POSDEG", "pos": [18.3, 0.0, -4.0], "dr": true, "descending": true}
+{"t": "event", "mono": 7.5, "ev": "touchdown"}
+{"t": "outcome", "n_pos_enter": 1, "terminal": null}
