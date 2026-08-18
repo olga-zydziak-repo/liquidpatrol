@@ -38,6 +38,14 @@ GT_FED = os.environ.get("GT_FED") == "1"
 # default R0.2); tu jedno źródło dla --det-hz detektora ORAZ echa manifestu (bez driftu). Bieg z
 # det_hz≠2.0 = INVALID z definicji (SR §4). k=3 @2 Hz → okno ENTRY 1.5 s (jak REGATE), nie 3 s.
 DEMO_DECISION_HZ = 2.0
+# ANEKS_D5 §5a (ratyf. 2026-08-18): kadencja RUCHU intruza (teleport) toru aktów == REGATE replacer
+# (mti_flight.py: `time.sleep(0.06)` ≈ 16.7 Hz). Restauracja charakteryzacji (klasa §4a/§1.1): teleport
+# @2 Hz dawał cel STATYCZNY ~7/7.5 klatek (kamera 15 Hz) → filtr trwałości MTI (persist_m/window) odrzucał
+# izolowany ruch skokowy → n_comps=0 in-window → brak ENTRY (RAPORT_D_B5 §FINAL). Oscylacja
+# 1.5·sin(2π·0.3·t) BEZ ZMIAN — zmienia się WYŁĄCZNIE gęstość jej próbkowania. Echo teleport_hz w
+# manifeście; bieg z teleport_hz≠16.7 = INVALID z definicji.
+DEMO_TELEPORT_DT = 0.06
+DEMO_TELEPORT_HZ = round(1.0 / DEMO_TELEPORT_DT, 1)   # 16.7 Hz (== REGATE mti_flight.replacer)
 from r02.target_channel import TargetChannel, Box
 from r02.observe_guidance import ObserveController
 from r02.gate_harness import project_to_pixel   # EKSPLORACJA: projekcja GT intruza (klasyfikacja true/false)
@@ -963,7 +971,7 @@ def _act_setup(r, act):
                     set_pose(WORLD_NAME, round(p[0], 3), round(p[1], 3), round(-p[2], 3))
                 except Exception:
                     pass
-            time.sleep(0.5)                        # ~2 Hz — poza torem decyzji
+            time.sleep(DEMO_TELEPORT_DT)           # ANEKS_D5 §5a: ~16.7 Hz == REGATE replacer (poza torem decyzji)
 
     def start_teleport():
         threading.Thread(target=_telethread, daemon=True).start()
@@ -1022,6 +1030,10 @@ def _emit_act_manifest(r, act):
         # §4a: echo kadencji decyzji przekazanej detektorowi LIVE (== REGATE 2.0). Bieg z det_hz≠2.0 =
         # INVALID z definicji. Dla GT-fed brak detektora LIVE → None (kadencja z pętli runnera).
         m["det_hz"] = DEMO_DECISION_HZ if (not r.gt_mode and os.environ.get("LIVE_DETECTOR_TOPIC")) else None
+        # §5a: echo kadencji RUCHU intruza (teleport) == REGATE ~16.7 Hz. Bieg z teleport_hz≠16.7 = INVALID
+        # z definicji (dotyczy OBU torów — wątek teleportu żyje w gt-fed i live). RAPORT_D_B5 §FINAL: 2 Hz
+        # teleport zabijał MTI in-window (filtr trwałości odrzucał ruch skokowy).
+        m["teleport_hz"] = DEMO_TELEPORT_HZ
         m["armed_before_manifest"] = bool(getattr(r.mav, "armed", False))   # dowód: manifest PO arm
         # H0 (5P): echo EKF2_GPS_CTRL z persystowanego bson (stan który PX4 załadował) — cicha regresja
         # ensure_gps_enabled widoczna w prowieniencji PIERWSZEGO biegu, nie po polowaniu. (0=GPS off=przyczyna 5R3)

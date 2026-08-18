@@ -409,3 +409,85 @@ toru aktów do REGATE** — `gate_run_r02.py:966` `time.sleep(0.5)` → `time.sl
 
 ### STOP
 Decyzja wraca dokumentem CC pełnym tekstem (ratyfikacja fixu teleportu albo inna dyspozycja).
+
+---
+
+## AKTUALIZACJA-9 / §5 (ANEKS_D5 §5 ratyf. — kadencja ruchu intruza) — 5a/5b OK, §5c RTF POZA BUDŻETEM → W3→W3'→O2 STOP
+
+Data: 2026-08-18. Fix teleportu (§5a) i pełny sweep temporalny (§5b) wykonane i czyste, ale **twarda
+bramka kosztu §5c (RTF pod pełnym obciążeniem) NIE przechodzi**: sim biegnie ~0.65× realtime.
+Drzewo werdyktu (prereg ANEKS_D5 §5c/W3/W3'/O1-O3): **W3 → W3' → O2 → STOP programowy z pełnym zrzutem.**
+`certs_selfcheck` 6/6 ×2, sędzia `79b1e936` i `r01` NIETKNIĘTE. **Push = Olga.**
+
+### §5a — teleport 0.5→0.06 s (== REGATE) + echo teleport_hz — WYKONANE
+`gate_run_r02.py`: `DEMO_TELEPORT_DT=0.06`, `DEMO_TELEPORT_HZ=16.7` (weryfikacja grepem: `_telethread`
+sleep w L974, nie ufano numerowi); `time.sleep(0.5)→time.sleep(DEMO_TELEPORT_DT)`; echo `teleport_hz`
+w `_emit_act_manifest` obok `det_hz`/`demo_mti`/`token_gated`/`ekf2_gps_ctrl` (bieg z teleport_hz≠16.7 =
+INVALID). Oscylacja `1.5·sin(2π·0.3·t)` BEZ ZMIAN. Progi/tracker/percepcja/spec/hashe/światy/sędzia/r01
+nietknięte. Regresja **72 passed**.
+
+### §5b — sweep temporalny (AST, 4b-v2) — ZGODNE
+`acts/temporal_sweep_5b.py` (AST, kompletność Z KODU — nie z ręcznej listy): ekstrakcja WSZYSTKICH
+`sleep/create_timer` + stałych temporalnych obu torów (REGATE `mti_flight` vs akt `gate_run_r02`+
+`detector_node`+`act_common`; shared `config_r02`/`target_channel`/`mti`). Rola KLUCZOWA (producent ruchu,
+pominięty w §4b) = sleep GŁÓWNEJ pętli (bezpośrednie dziecko `while`, nie continue-branch trybu off/far):
+**REGATE `mti_flight.py:189`=0.06 s == akt `gate_run_r02.py:974`=0.06 s**; decision 2.0==2.0. **WERDYKT:
+ZGODNE — zero różnic kadencji semantycznej.** `results/demo/temporal_sweep_5b.json`.
+
+### §5c — RTF pod PEŁNYM obciążeniem: robust Δsim/Δwall (pojedyncza subskrypcja /stats)
+Sampler `gz topic -n 1` (per-próbka) był NIEWIARYGODNY — kontenduje z 16.7 Hz `gz service set_pose`
+(bimodalne 0.04/1.0, n=18). Zastąpiony `scratchpad/rtf_stream.py` (JEDNA subskrypcja `/world/W/stats`,
+2700+ próbek, RTF_avg = Δsim/Δwall = ODPORNE na jitter chwilowy).
+
+- **cost_probe_5c_v2 (FILM=1, teleport 16.7Hz, bridge+YOLO): RTF_avg=0.69** (Δwall 46.4 s → Δsim 32 s =
+  **14 s desync wall↔sim**); inst median 0.9997, **min 0.039, p10 0.040, frac<0.5=32%**. `n_entry=0`.
+- **BUDŻET ANEKS-H = RTF~1.0** (R2 sonda: median 0.9998, min 0.978). RTF_avg 0.69 i frac<0.5=32% (stalle do
+  ~4% RTF, których habitat R2 NIGDY nie miał) ⇒ **POZA BUDŻETEM → W3.** (Mediana ~1.0 = pozór; koszt to
+  okresowe głębokie stalle, nie mediana.)
+
+### W3 (read-only) — mechanizm set_pose: TRANSPORT RÓWNY → hipoteza transportu OBALONA (W3')
+- REGATE `mti_flight.py:50` `gz_set_intruder`: `subprocess.run(["gz","service",…set_pose…], capture_output=True)`.
+- akt `r02/intruder_driver.py` `set_pose`: `subprocess.run(["gz","service",…set_pose…], capture_output=True)`.
+- **Identyczny mechanizm (subprocess-per-call), oba @16.7 Hz** (tylko `--timeout 2000` vs `3000`, bez wpływu).
+  REGATE osiąga RTF~1.0 tym SAMYM mechanizmem ⇒ transport NIE jest przyczyną ⇒ **W3'**: różnicowy podejrzany
+  = obciążenie NIEOBECNE w REGATE (zapis klatek/film).
+
+### W3' — ablacja FILM_CAPTURE=0: FILM OCZYSZCZONY, budżet NIE przywrócony → O2
+`ablation_nofilm_5c` (FILM_CAPTURE=0 — w `run_act_live.sh` gate'uje CAŁY podsystem filmowy: bridge L60
+∧ grabber L64; potwierdzone: **brak `bridge_film.log`, 0 klatek**). Reszta identyczna (+DBG_LOG=1, obc.≈0).
+
+| bieg | RTF_avg | median | min | frac<0.5 |
+|---|---|---|---|---|
+| FILM=1 (v2) | 0.689 | 1.000 | 0.039 | 32% |
+| **FILM=0 (ablacja)** | **0.652** | 1.000 | 0.037 | **34%** |
+
+**RTF praktycznie IDENTYCZNY bez filmu (0.65 vs 0.69, stalle 34% vs 32%).** Spowolnienie jest STAŁE ~0.65×
+(każda sim-sekunda = ~13 jednorodnych próbek streamu; bimodalny inst-RTF = artefakt łapania serwera gz
+w busy/idle). **Film OCZYSZCZONY.** Ponieważ pełna ablacja filmu (bridge w całości) NIE przywraca budżetu ⇒
+**O2 terminal: STOP programowy z pełnym zrzutem, BEZ trzeciej ablacji w tej sesji.**
+
+### KOSZT REZYDUALNY (nie ablowany dalej per O2) + hipoteza
+Stalle ~0.65× są w stacku no-film: **mono `ros_gz_bridge` (parameter_bridge 15 Hz 640×480) + YOLO detektor +
+teleport 16.7 Hz (subprocess-per-call)**. **Hipoteza wiodąca (NIE testowana — cap O2):** teleport 16.7 Hz =
+**~8× więcej spawnów `gz service` na sekundę** niż stary 2 Hz (16.7 vs 2 handshake'ów transportu gz/s) →
+churn połączeń okresowo blokuje pętlę serwera gz → stalle. Wcześniejsze biegi 2 Hz (resanity_2hz_*) kończyły
+się „zdrowo" — spójne z tym, że dopiero 16.7 Hz churn tipuje stack. REGATE ma lżejszy, in-process stack
+(bez osobnego `ros_gz_bridge`, XRCE, MAVSDK obok) → toleruje ten sam mechanizm przy RTF~1.0.
+
+### O3 (bonus) — NIEZALICZONY: ENTRY nie pada in-window (bo RTF≠1)
+Warunek O3 = ENTRY in-window przy RTF≈1; RTF był 0.65, więc precondycja niespełniona. DBG (ablacja):
+**in-window `mti_ok=0`, `n_comps` 0–1 (max 1); ENTRY tylko POST-window** (dbg-t 52.9–59.9, park-transition,
+box cy≈0.84). Zgodne z W-kontraktem: teleport liczy fazę z ZEGARA ŚCIENNEGO, percepcja z SIM-TIME; przy
+RTF 0.65 (34% czasu w stallu) faza ruchu w sim-time jest zdesynchronizowana → oscylacja ±1.5 nie generuje
+trwałego MTI. **Te same stalle łamią §5c (koszt) I in-window ENTRY (desync).** Konformancja fazy do sim_t
+(W-kontrakt) do wdrożenia w dokumencie fixu kosztu.
+
+### STOP (O2) — pełny zrzut; decyzja Olgi dokumentem
+Artefakty (surowe): `results/demo/A1/{cost_probe_5c,cost_probe_5c_v2,ablation_nofilm_5c}/` (manifesty z
+`teleport_hz=16.7`, `rtf_stream.jsonl`, trace, dbg, logi; `frames/` gitignore). **§5c NIE przechodzi —
+bramka A2 i próby POZOSTAJĄ zamknięte** (tylko PASS §5c pod pełnym obciążeniem je otwiera). Kierunki do
+ratyfikacji (jeden dokument, jedna gałąź — SR-8): **(a)** trwały klient `set_pose` (gz transport in-process,
+ZERO subprocess churn — ulepszenie PONAD REGATE) ± redukcja obciążenia mono-bridge; **(b)** konformancja
+fazy teleportu do `sim_t` (W-kontrakt: wykonanie spec, nie zmiana) — w tym samym pakiecie; **(c)** po fixie
+POWTÓRKA §5c pod PEŁNYM obciążeniem — dopiero PASS otwiera A2. Progi/percepcja/spec/hashe/światy/sędzia
+`79b1e936`/`r01` NIETKNIĘTE. selfcheck 6/6 ×2.

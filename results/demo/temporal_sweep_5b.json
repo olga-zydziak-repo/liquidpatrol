@@ -1,0 +1,526 @@
+{
+  "aneks": "D5 §5b (4b-v2)",
+  "method": "AST sweep (kompletność z kodu)",
+  "tracks": {
+    "regate": [
+      {
+        "file": "results/R02/mti/mti_flight.py",
+        "module_temporal_consts": {
+          "DECISION_HZ": 2.0
+        },
+        "sleeps_timers": [
+          {
+            "func": "replacer",
+            "lineno": 174,
+            "kind": "sleep",
+            "arg_src": "0.1",
+            "value_s": 0.1
+          },
+          {
+            "func": "replacer",
+            "lineno": 177,
+            "kind": "sleep",
+            "arg_src": "0.1",
+            "value_s": 0.1
+          },
+          {
+            "func": "replacer",
+            "lineno": 179,
+            "kind": "sleep",
+            "arg_src": "0.2",
+            "value_s": 0.2
+          },
+          {
+            "func": "replacer",
+            "lineno": 189,
+            "kind": "sleep",
+            "arg_src": "0.06",
+            "value_s": 0.06
+          },
+          {
+            "func": "main",
+            "lineno": 214,
+            "kind": "sleep",
+            "arg_src": "3",
+            "value_s": 3.0
+          },
+          {
+            "func": "main",
+            "lineno": 221,
+            "kind": "sleep",
+            "arg_src": "0.5",
+            "value_s": 0.5
+          },
+          {
+            "func": "main",
+            "lineno": 222,
+            "kind": "sleep",
+            "arg_src": "4",
+            "value_s": 4.0
+          },
+          {
+            "func": "main",
+            "lineno": 230,
+            "kind": "sleep",
+            "arg_src": "4.0",
+            "value_s": 4.0
+          },
+          {
+            "func": "mti_worker",
+            "lineno": 246,
+            "kind": "sleep",
+            "arg_src": "0.02",
+            "value_s": 0.02
+          },
+          {
+            "func": "mti_worker",
+            "lineno": 251,
+            "kind": "sleep",
+            "arg_src": "0.02",
+            "value_s": 0.02
+          },
+          {
+            "func": "mti_worker",
+            "lineno": 256,
+            "kind": "sleep",
+            "arg_src": "0.005",
+            "value_s": 0.005
+          },
+          {
+            "func": "observe_motion",
+            "lineno": 266,
+            "kind": "sleep",
+            "arg_src": "2.0",
+            "value_s": 2.0
+          },
+          {
+            "func": "run_dwell",
+            "lineno": 317,
+            "kind": "sleep",
+            "arg_src": "2.0",
+            "value_s": 2.0
+          },
+          {
+            "func": "run_dwell",
+            "lineno": 328,
+            "kind": "sleep",
+            "arg_src": "period",
+            "value_s": null
+          },
+          {
+            "func": "main",
+            "lineno": 373,
+            "kind": "sleep",
+            "arg_src": "2.0",
+            "value_s": 2.0
+          },
+          {
+            "func": "main",
+            "lineno": 378,
+            "kind": "sleep",
+            "arg_src": "1.0 / DECISION_HZ",
+            "value_s": 0.5
+          },
+          {
+            "func": "main",
+            "lineno": 390,
+            "kind": "sleep",
+            "arg_src": "1.0",
+            "value_s": 1.0
+          },
+          {
+            "func": "main",
+            "lineno": 396,
+            "kind": "sleep",
+            "arg_src": "1.0 / DECISION_HZ",
+            "value_s": 0.5
+          },
+          {
+            "func": "main",
+            "lineno": 430,
+            "kind": "sleep",
+            "arg_src": "3",
+            "value_s": 3.0
+          }
+        ]
+      }
+    ],
+    "akt": [
+      {
+        "file": "r02/gate_run_r02.py",
+        "module_temporal_consts": {
+          "DEMO_DECISION_HZ": 2.0,
+          "DEMO_TELEPORT_DT": 0.06,
+          "DEMO_TELEPORT_HZ": 16.7,
+          "TRACE_SCHEMA_V": 2.0
+        },
+        "sleeps_timers": [
+          {
+            "func": "_streamer",
+            "lineno": 328,
+            "kind": "sleep",
+            "arg_src": "slp",
+            "value_s": null
+          },
+          {
+            "func": "preflight_scene_sanity",
+            "lineno": 360,
+            "kind": "sleep",
+            "arg_src": "0.05",
+            "value_s": 0.05
+          },
+          {
+            "func": "bring_up",
+            "lineno": 520,
+            "kind": "sleep",
+            "arg_src": "1.5",
+            "value_s": 1.5
+          },
+          {
+            "func": "bring_up",
+            "lineno": 521,
+            "kind": "sleep",
+            "arg_src": "0.2",
+            "value_s": 0.2
+          },
+          {
+            "func": "bring_up",
+            "lineno": 524,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "bring_up",
+            "lineno": 527,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "scenario_G1",
+            "lineno": 577,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "scenario_G1",
+            "lineno": 578,
+            "kind": "sleep",
+            "arg_src": "8",
+            "value_s": 8.0
+          },
+          {
+            "func": "scenario_G1",
+            "lineno": 578,
+            "kind": "sleep",
+            "arg_src": "2",
+            "value_s": 2.0
+          },
+          {
+            "func": "scenario_G2",
+            "lineno": 604,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "scenario_G2",
+            "lineno": 605,
+            "kind": "sleep",
+            "arg_src": "6",
+            "value_s": 6.0
+          },
+          {
+            "func": "scenario_G2",
+            "lineno": 605,
+            "kind": "sleep",
+            "arg_src": "2",
+            "value_s": 2.0
+          },
+          {
+            "func": "scenario_G3",
+            "lineno": 636,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "scenario_G3",
+            "lineno": 637,
+            "kind": "sleep",
+            "arg_src": "6",
+            "value_s": 6.0
+          },
+          {
+            "func": "scenario_G3",
+            "lineno": 637,
+            "kind": "sleep",
+            "arg_src": "2",
+            "value_s": 2.0
+          },
+          {
+            "func": "scenario_G4",
+            "lineno": 665,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "scenario_G4",
+            "lineno": 666,
+            "kind": "sleep",
+            "arg_src": "6",
+            "value_s": 6.0
+          },
+          {
+            "func": "scenario_G4",
+            "lineno": 666,
+            "kind": "sleep",
+            "arg_src": "2",
+            "value_s": 2.0
+          },
+          {
+            "func": "scenario_G5",
+            "lineno": 690,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "scenario_G5",
+            "lineno": 711,
+            "kind": "sleep",
+            "arg_src": "0.02",
+            "value_s": 0.02
+          },
+          {
+            "func": "scenario_G5",
+            "lineno": 715,
+            "kind": "sleep",
+            "arg_src": "2",
+            "value_s": 2.0
+          },
+          {
+            "func": "scenario_CHAR",
+            "lineno": 770,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "scenario_CHAR",
+            "lineno": 783,
+            "kind": "sleep",
+            "arg_src": "6",
+            "value_s": 6.0
+          },
+          {
+            "func": "scenario_CHAR",
+            "lineno": 783,
+            "kind": "sleep",
+            "arg_src": "2",
+            "value_s": 2.0
+          },
+          {
+            "func": "scenario_CHAR2",
+            "lineno": 829,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "scenario_CHAR2",
+            "lineno": 838,
+            "kind": "sleep",
+            "arg_src": "6",
+            "value_s": 6.0
+          },
+          {
+            "func": "scenario_CHAR2",
+            "lineno": 838,
+            "kind": "sleep",
+            "arg_src": "2",
+            "value_s": 2.0
+          },
+          {
+            "func": "scenario_C1",
+            "lineno": 887,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "scenario_C1",
+            "lineno": 888,
+            "kind": "sleep",
+            "arg_src": "2",
+            "value_s": 2.0
+          },
+          {
+            "func": "_telethread",
+            "lineno": 974,
+            "kind": "sleep",
+            "arg_src": "DEMO_TELEPORT_DT",
+            "value_s": 0.06
+          },
+          {
+            "func": "scenario_A1",
+            "lineno": 1073,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "scenario_A1",
+            "lineno": 1074,
+            "kind": "sleep",
+            "arg_src": "6",
+            "value_s": 6.0
+          },
+          {
+            "func": "scenario_A1",
+            "lineno": 1074,
+            "kind": "sleep",
+            "arg_src": "2",
+            "value_s": 2.0
+          },
+          {
+            "func": "scenario_A2",
+            "lineno": 1105,
+            "kind": "sleep",
+            "arg_src": "PERIOD",
+            "value_s": null
+          },
+          {
+            "func": "scenario_A2",
+            "lineno": 1106,
+            "kind": "sleep",
+            "arg_src": "6",
+            "value_s": 6.0
+          },
+          {
+            "func": "scenario_A2",
+            "lineno": 1106,
+            "kind": "sleep",
+            "arg_src": "2",
+            "value_s": 2.0
+          }
+        ]
+      },
+      {
+        "file": "r02/detector_node.py",
+        "module_temporal_consts": {},
+        "sleeps_timers": [
+          {
+            "func": "__init__",
+            "lineno": 91,
+            "kind": "timer",
+            "arg_src": "1.0 / det_hz",
+            "value_s": null
+          }
+        ]
+      },
+      {
+        "file": "acts/act_common.py",
+        "module_temporal_consts": {},
+        "sleeps_timers": []
+      }
+    ],
+    "shared": [
+      {
+        "file": "r02/config_r02.py",
+        "module_temporal_consts": {
+          "DET_HZ": 1.0,
+          "DET_DT": 1.0,
+          "L_DELIVER_S": 0.1,
+          "THETA_AGE_S": 3.0,
+          "D_SAFE_M": 5.32,
+          "T_ACK_S": 4.1,
+          "DEADMAN_TICKS": 6.0
+        },
+        "sleeps_timers": []
+      },
+      {
+        "file": "r02/target_channel.py",
+        "module_temporal_consts": {},
+        "sleeps_timers": []
+      },
+      {
+        "file": "r02/mti.py",
+        "module_temporal_consts": {},
+        "sleeps_timers": []
+      }
+    ]
+  },
+  "motion_cadence": {
+    "regate_main_loop_sleep_s": 0.06,
+    "regate_main_loop_site": [
+      "results/R02/mti/mti_flight.py",
+      189
+    ],
+    "akt_main_loop_sleep_s": 0.06,
+    "akt_main_loop_site": [
+      "r02/gate_run_r02.py",
+      974
+    ],
+    "regate_all_replacer_sleeps": [
+      [
+        "results/R02/mti/mti_flight.py",
+        174,
+        0.1
+      ],
+      [
+        "results/R02/mti/mti_flight.py",
+        177,
+        0.1
+      ],
+      [
+        "results/R02/mti/mti_flight.py",
+        179,
+        0.2
+      ],
+      [
+        "results/R02/mti/mti_flight.py",
+        189,
+        0.06
+      ]
+    ],
+    "akt_all_teleport_sleeps": [
+      [
+        "r02/gate_run_r02.py",
+        974,
+        0.06
+      ]
+    ]
+  },
+  "semantic_diff": [
+    {
+      "param": "intruder_motion_dt_s",
+      "regate": 0.06,
+      "akt": 0.06,
+      "unit": "s",
+      "equal": true,
+      "note": "KADENCJA RUCHU intruza (producent — pominięty w §4b): REGATE replacer sleep vs akt _telethread/DEMO_TELEPORT_DT"
+    },
+    {
+      "param": "intruder_motion_hz",
+      "regate": 16.7,
+      "akt": 16.7,
+      "unit": "Hz",
+      "equal": true,
+      "note": "= 1/dt; REGATE ~16.7 == akt DEMO_TELEPORT_HZ (§5a)"
+    },
+    {
+      "param": "decision_hz",
+      "regate": 2.0,
+      "akt": 2.0,
+      "unit": "Hz",
+      "equal": true,
+      "note": "REGATE DECISION_HZ vs akt DEMO_DECISION_HZ (§4a)"
+    }
+  ],
+  "diffs": [],
+  "verdict": "ZGODNE — zero różnic kadencji semantycznej po §5a"
+}
