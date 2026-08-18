@@ -300,3 +300,112 @@ delty: `_start_live_detector` startuje `detector_node` bez `--det-hz` → dopisa
 2 Hz to wartość MTI-REGATE dla demo). Progi (k=3, θ_conf, θ_age, MTI_CENTER_THR) BEZ ZMIAN.
 **STOP — decyzja wraca dokumentem.** Po ratyfikacji: re-sanity A1 (lock+ENTRY w [23,33.87]) → bramka
 A2 EXPIRE → próby A1→A3→A2. Push = Olga.
+
+---
+
+## AKTUALIZACJA-8 / §FINAL (PROMPT_D_FINAL — ratyfikacja ANEKS_D5 §4) — RE-SANITY A1 @2 Hz OBALA PREMISĘ §4a → STOP (SR-8)
+
+Data: 2026-08-18. **Werdykt sesji: TWARDY STOP przed bramką A2 i przed próbami.** Ratyfikowane §4a/§4b
+wykonane i zweryfikowane, ale **informacyjne re-sanity A1 @2 Hz falsyfikuje premisę §4a** (2 Hz ⇒
+determinizm ⇒ ENTRY w oknie): `n_entry=0` w 2/2 biegach. **Przyczyna źródłowa ZNALEZIONA i różna od
+kadencji decyzji**; fix wymaga dotknięcia choreografii (teleport intruza) ⇒ ratyfikacja Olgi (SR-8).
+
+### Stan wejściowy / higiena
+- **§0 brama (0):** na starcie `origin/master..HEAD` = `6b395be` (niepushowany §4a/§4b) ⇒ STOP zgłoszony;
+  Olga **pushnęła `6b395be`** (`origin/master==HEAD==6b395be`), brama czysta, wznowiono.
+- **`certs_selfcheck` 6/6 ×2** (start i koniec). `r01/proofs/`+`shield.py` NIETKNIĘTE (SR-1).
+  **Sędzia `tools/act_judge.py` sha256=`79b1e9367b85bf7c…` NIETKNIĘTY** (SR-6). Progi/tracker/percepcja/
+  spec/światy — nie ruszane. **Zero prób dowodowych, zero biegów A2** (bramka ENTRY nieosiągnięta).
+
+### §2.1 — Inwentarz 4b: ZGODNE + θ_age zweryfikowane u źródła (PRZED bramką A2, §4b)
+- `acts/inventory_4b.py` re-run w env ROS = **bit-w-bit identyczny** z zacommitowanym
+  `results/demo/inventory_4b.json`; **`diffs: []`, WERDYKT ZGODNE**. §4a wiring potwierdzony w
+  ścieżce LIVE: `DEMO_DECISION_HZ=2.0` (`gate_run_r02.py:40`) → `--det-hz` (`:993`) → echo `det_hz`
+  w manifeście (`:1024`); **`DET_HZ=1.0` w `config_r02.py:22` NIETKNIĘTY** (osobna kadencja klatek R0.2).
+- **θ_age = 3.0 SEKUNDY, EWALUACJA CZASOWA (sim-time), NIE tiki** — zweryfikowane u źródła:
+  `target_channel.py:162/186/194` `age=(t−t_last_det)+l_deliver`, `t`=sim-time (docstring `:182`);
+  dodatkowo `tick_time`@20 Hz osłony (`:196–202`), też czasowe. **⇒ zmiana 1→2 Hz NIE dotyka semantyki
+  EXPIRE w A2** (gdyby age był tikowy, 1 Hz połowiłby starzenie). §4b θ_age werdykt: kalibracja EXPIRE
+  zachowana.
+- **§4c rekonsyliacja P3:** sonda P3 `entry=1` przy ±1.5 @1 Hz = trafienie LOSOWEJ FAZY (okno 3 s @1 Hz
+  między zerami rezyduum); re-sanity determinsytyczne @1 Hz nie trafiało. **Nie sprzeczność** — sonda była
+  jednostrzałowa, re-sanity uśrednia. (Uwaga: @2 Hz — patrz niżej — problem NIE jest już fazą, lecz
+  brakiem sygnału MTI w ogóle podczas oscylacji.)
+
+### §2.2 — Re-sanity A1 @2 Hz: n_entry=0 (2/2), premisa §4a OBALONA
+Dwa biegi LIVE (pełna brama struktura∧MTI, `DEMO_MTI=1`, boot zdrowy, GPS ON, headless):
+`results/demo/A1/resanity_2hz_s6/` i `…/resanity_2hz_dbg_s6/` (drugi z sondą DBG, SR-J2 probe).
+- **Manifest (oba): echa POPRAWNE** — `det_hz=2.0`, `demo_mti=true`, `token_gated=true`,
+  `armed_before_manifest=true`, `ekf2_gps_ctrl_bson=absent(default 7)`, `contention=none`,
+  judge `79b1e936…`, HEAD `6b395be`. Detektor LIVE `pub … @ 2.0 Hz` (log). Boot zdrowy, R3 stall p95=1.01
+  ticka (pętla OK).
+- **Wynik: `n_entry=0`, `granted=false`, ZERO ticków `locked=true`** w OBU biegach. YOLO widzi cel
+  (n_box 14–29/tick, 87/87 ticków), **conf PASYWNE i niskie** (max 0.086–0.192) — MTI jest bramą.
+- **Detektor: dokładnie 1 ENTRY na bieg, POZA oknem.** Mapowanie (kotwica: pierwszy tick trace
+  `k=0 @ t=9.212` = start pętli choreografii = tuż po starcie detektora; wall detektora `763.138`):
+  `wall ≈ runner_t + 753.9`. Okno ring-hold `runner_t[23,49]≈wall[776.9,802.9]`; **jedyny ENTRY @
+  wall 809.6 = runner_t≈55.7 — ~1.7 s PO zamknięciu pętli (hold+5=54), w RTL**; box `cy≈0.80/0.81`
+  (nisko w kadrze = NIE intruz pierścienia, który jest wysoko: alt+1.5).
+
+### PRZYCZYNA ŹRÓDŁOWA (różna od kadencji decyzji): KADENCJA RUCHU intruza 2 Hz ≪ REGATE ~16.7 Hz
+Porównanie 1:1 z frozen charakteryzacją:
+- **REGATE `results/R02/mti/mti_flight.py:189` `replacer()`: `time.sleep(0.06)` → ~16.7 Hz** teleport
+  (per-klatkę, ~kadencja kamery 15 Hz). Oscylacja `1.5·sin(2π·0.3·t)` aplikowana PŁYNNIE → ruch względny
+  na KAŻDEJ klatce → komponenty MTI trwałe → `cov_entry_once=1.0` (REGATE world_demo_v1.1).
+- **Tor aktów `gate_run_r02.py:966` `_telethread()`: `time.sleep(0.5)` → 2 Hz** teleport. Ta sama
+  oscylacja SAMPLOWANA co 0.5 s → intruz STATYCZNY ~7 z ~7.5 klatek między skokami. Kamera 15 Hz.
+- **Mechanizm (dlaczego to zabija MTI, nie tylko „aliasuje"):** MTI = różnicowanie klatek + filtr
+  TRWAŁOŚCI `persist_m=3 / persist_window=4` (komponent w ≥3 z 4 ostatnich klatek). Ruch skokowy 2 Hz
+  daje motion w 1–2 izolowanych klatkach na skok → **filtr trwałości ODRZUCA** → `n_comps=0`. Tylko ruch
+  CIĄGŁY (REGATE per-klatkę; albo w torze aktów — duży zjazd park-transition na końcu) daje trwałe
+  komponenty.
+- **Dowód empiryczny (DBG, `resanity_2hz_dbg_s6/dbg.jsonl`, 87 ticków):**
+  - **W OKNIE pierścienia (dbg-t 23–51, 56 ticków): `mti_ok=1` = 0/56, `n_comps` sporadyczne 0–2
+    (max 2), ENTRY=0, lock=0.** MTI NIGDY nie przeszło bramy podczas oscylacji ±1.5.
+  - **POZA oknem (dbg-t 52–58, duży park-transition + RTL): `n_comps` skok do 39, `mti_ok=1` ×7,
+    k=3 domyka → 1 ENTRY (dbg-t 57.5, cy≈0.81).** To jedyny lock — post-window, nieistotny dla aktu.
+  - Globalnie `mti_ok=1` 7/87 (8%), `n_comps=0` 69/87 (79%), max consecutive `mti_ok`=5 (wszystkie
+    w post-window transicie).
+- **Wniosek:** §4a (`det_hz` 1→2) celował w kadencję DECYZJI; realny bloker to kadencja RUCHU intruza
+  (wejście MTI). Przy 2 Hz teleporcie 15-Hz-owy sygnał MTI jest z natury sporadyczny → żadna kadencja
+  decyzji tego nie naprawi. Premisa §4a (2 Hz ⇒ determinizm ⇒ ENTRY) **obalona pomiarem, 2/2**.
+
+### ZNALEZISKO WTÓRNE: inwentarz §4b był NIEZUPEŁNY (pominął kadencję ruchu intruza)
+§4b miał złapać KAŻDY parametr tikowy rozjeżdżający się z REGATE. Zinwentaryzował kadencje
+decyzji/MTI-push/kanału/klatki (wszystkie równe) ale **NIE ujął kadencji drive'u intruza** (teleport
+0.5 s tor aktów vs 0.06 s REGATE — różnica ~8×). Dlatego werdykt „ZGODNE zero różnic" był prawdziwy w
+swoim zakresie, a mimo to zachowanie się rozjeżdża. **To jest ta różnica, której §4b szukał — poza
+swoją tablicą.** (Uczciwość prowieniencji: tablica inwentarza pozostaje poprawna dla swoich wierszy;
+brakowało wiersza `intruder_teleport_hz`.)
+
+### KONSEKWENCJA: bramka A2 i próby ZABLOKOWANE tą samą przyczyną
+Bramka A2 EXPIRE (§2.3) wymaga NAJPIERW locka ep0 (ENTRY), by było co EXPIROWAĆ; próby A1/A2 (§2.4)
+wymagają ENTRY w oknie. Bez in-window ENTRY — **cały tor dowodowy zablokowany**. Uruchamianie prób
+byłoby brnięciem w znany bloker (3× INVALID gwarantowane) — sprzeczne z „nie brnąć" i FAIL=FAIL.
+**Zero prób. Zero biegów A2.**
+
+### STOP + PROPOZYCJA DO RATYFIKACJI (SR-8 — NIE zaimplementowana)
+Fix minimalną deltą, klasa „restauracja charakteryzacji" jak §4a: **wyrównać kadencję teleportu intruza
+toru aktów do REGATE** — `gate_run_r02.py:966` `time.sleep(0.5)` → `time.sleep(0.06)` (== `mti_flight.py:189`).
+- **Co NIE ruszane:** progi (k=3, θ_conf, θ_age, MTI_CENTER_THR, persist_*), tracker, percepcja
+  (`detector_node`), spec (hashe A1/A2), światy, sędzia `79b1e936`, `r01`. Oscylacja pozostaje
+  `1.5·sin(2π·0.3·t)` — zmienia się WYŁĄCZNIE gęstość jej próbkowania w teleportcie (choreografia
+  runnera, nie SDF, nie spec).
+- **Ryzyka do sprawdzenia po ratyfikacji:** (a) `gz set_pose` @~16.7 Hz — REGATE to robi (`sleep(0.06)`),
+  więc wykonalne, ale zmierzyć obciążenie/latencję usługi gz przy jednoczesnym bridge+YOLO (kontencja);
+  (b) czy `intr_ned` w trace (2 Hz→~16.7 Hz zapis) nie puchnie — logować rozsądnie; (c) re-weryfikacja
+  §4b z DOPISANYM wierszem `intruder_teleport_hz` (REGATE 16.7 / akt 16.7).
+- **Alternatywa (gdyby set_pose @16.7 Hz był zbyt kosztowny):** ruch ciągły przez interpolację pozy w
+  gz (plugin/velocity) zamiast dyskretnego set_pose — większa przebudowa, mniej preferowana.
+- **Po ratyfikacji:** re-sanity A1 (lock+ENTRY w [23,33.87]) → bramka A2 EXPIRE → próby A1→A3→A2.
+
+### Prowieniencja / artefakty tej sesji
+- `results/demo/A1/resanity_2hz_s6/` (bieg 1) i `resanity_2hz_dbg_s6/` (bieg 2 + DBG) — manifesty, trace v2,
+  detector.log, dbg.jsonl; `frames/` gitignore. **NIE-próby** (re-sanity informacyjne, SR-J2 probe) —
+  werdykt percepcji nieraportowalny jako wynik aktu.
+- `results/demo/A1/resanity_5F_2hz/` — bieg poprzedniej sesji PRZERWANY w settle (0 klatek, brak
+  manifestu, brak werdyktu) — odnotowany jako NIE-bieg; zachowany bez interpretacji.
+- **selfcheck 6/6 ×2.** Sędzia i frozen nietknięte. **Push = Olga.**
+
+### STOP
+Decyzja wraca dokumentem CC pełnym tekstem (ratyfikacja fixu teleportu albo inna dyspozycja).
