@@ -16,7 +16,7 @@ Topiki:
 Uruchom (env złożony ROS2+torch): patrz r02/run_detector.sh
 """
 from __future__ import annotations
-import argparse, os, sys, time
+import argparse, json, os, sys, time
 
 import numpy as np
 import rclpy
@@ -70,6 +70,8 @@ class DetectorNode(Node):
         # DEMO_MTI: tracker MTI (derotacja z vehicle_attitude) + koincydencja box↔komponent (mti_ok)
         self.demo_mti = DEMO_MTI
         self.tracker = None; self.q = None; self.last_comps = []
+        # §8a: opcjonalny per-klatkowy log MTI (diff_max/n_comps) — record-only, gdy env ustawiony
+        self._mti_frame_log = open(os.environ["MTI_FRAME_LOG"], "w") if os.environ.get("MTI_FRAME_LOG") else None
         if self.demo_mti:
             from r02.mti import MTITracker, MTIParams
             self._box_matches = __import__("r02.mti", fromlist=["box_matches_component"]).box_matches_component
@@ -99,7 +101,15 @@ class DetectorNode(Node):
         # przy 1 Hz baseline ~3 s aliasuje z oscylacją 0.3 Hz (n_comps≈0). Push tu, box↔comp match w tiku.
         if self.demo_mti and self.q is not None:
             try:
-                self.last_comps, _ = self.tracker.push(self.last_frame, self.q)
+                self.last_comps, mdbg = self.tracker.push(self.last_frame, self.q)
+                # ANEKS_D5 §8a: per-KLATKOWY log mechanizmu MTI (record-only, env MTI_FRAME_LOG) —
+                # diff_max vs próg diff_thr=22 (mti.py:30), n_raw/n_kept komponentów. „Policzony, nie zgadywany".
+                if self._mti_frame_log is not None and isinstance(mdbg, dict) and not mdbg.get("warmup"):
+                    self._mti_frame_log.write(json.dumps({
+                        "t": round(self._sim_t(), 3), "diff_max": mdbg.get("diff_max"),
+                        "n_raw": mdbg.get("n_raw"), "n_kept": mdbg.get("n_kept"),
+                        "valid_frac": mdbg.get("valid_frac")}) + "\n")
+                    self._mti_frame_log.flush()
             except Exception:
                 self.last_comps = []
 

@@ -617,3 +617,45 @@ sprawdzone cov_entry_once=1.0) skoro dowód wskazuje percepcję jako realny blok
 (drenaż reply / niższy apply_hz) by usunąć 3 dipy bez world-pluginu, potem re-ocena. Rekomendacja: **(B)** lub
 **(A)+świadomość, że ENTRY wróci jako osobna gałąź**. `certs_selfcheck` 6/6 ×2, sędzia `79b1e936`/spec/światy/
 progi/`r01` NIETKNIĘTE. Artefakty `results/demo/A1/recheck_5c_7a/`.
+
+---
+
+## AKTUALIZACJA-12 / §8a (ANEKS_D5 §8 ratyf. — percepcja przed kosztem) — PROBE PIONOWEJ OSC: FAIL → PIVOT 7d (§8c)
+
+Data: 2026-08-19. §8a probe: FF 19.4 Hz bez zmian + override PIONOWEJ oscylacji == REGATE. **GATE 8a FAIL**
+(in-window `mti_ok` 1/57, brak k=3, `n_entry=0`, ENTRY tylko post-window). **Mechanizm POLICZONY (nie zgadnięty):
+magnituda ruchu NIE jest limiterem** — `diff_max` ≫ próg wszędzie, komponenty znajdowane; limiter = kept-komponenty
+nie trafiają CENTRALNIE w intruza (rezyduum derotacji tła dominuje przy zawisie). Per §8c: **PIVOT 7d.** Tylko 1
+z ≤2 biegów (wynik NIE graniczny). `certs_selfcheck` 6/6 ×2, sędzia/spec/światy/progi/`r01` NIETKNIĘTE. **STOP —
+CC dostarcza PROMPT_D_PIVOT. Push=Olga.**
+
+### §8a implementacja (probe, spec/światy NIETKNIĘTE)
+- **Override pionowej osc:** `acts/act_common.py::intruder_ned_fn` — env `VOSC_OVERRIDE` (default 0.0 → spec bez
+  zmian); przy 0.6 dodaje `0.6·sin(2π·0.23·t)` do z. **Źródło wartości: `results/R02/mti/mti_flight.py:183`
+  `vosc = 0.6*math.sin(2π·0.23·t)`** (cytat, nie na wiarę). To sonda (SR-J2), restauracja spec dopiero §8b po PASS.
+- **Instrumentacja per-klatkowa (record-only, env `MTI_FRAME_LOG`):** `detector_node._on_image` loguje dbg MTI
+  z `tracker.push` — `diff_max` (vs `diff_thr=22`, `mti.py:30`), `n_raw`, `n_kept` na KLATKĘ (~15 Hz). Regresja 50.
+- **Ważność probe potwierdzona:** intr_ned z in-window range **1.20** (±0.6) — override zadziałał.
+
+### GATE 8a — FAIL (`results/demo/A1/probe_8a_vosc/`)
+- **in-window (dbg-t 23-51): `mti_ok=1` 1/57**, n_comps max 1, n_box>0 57/57. Brak k=3 pod rząd in-window
+  (jedyny in-window mti_ok @dbg-t 25.8, izolowany). `n_entry=0`. ENTRY tylko POST-window (cy≈0.818, park-transition).
+- **≈ identycznie jak §7a bez vosc (in-window mti_ok 0/56)** → **pionowa osc NIE naprawia in-window MTI.**
+
+### MECHANIZM (policzony z per-klatkowego logu, 374 klatki)
+- **`diff_max`: mediana 177, max 199, frac>22 = 100%** — residuum intensywności PRZEKRACZA próg (22) na KAŻDEJ
+  klatce, z dużym zapasem. **Magnituda ruchu celu NIE jest limiterem** (próg trywialnie przekroczony wszędzie).
+- **`n_kept`: mediana 1, frac>0 = 53%** — komponenty MTI SĄ znajdowane (~1/klatkę na połowie klatek).
+- **Ale `mti_ok` (komponent ∧ box centralnie, `MTI_CENTER_THR=0.12`) pada 1/57 in-window** → znajdowane komponenty
+  to głównie **rezyduum tła** (niedoskonała derotacja przy zawisie zostawia duży globalny residuum: `diff_max` 177),
+  NIE intruz. Bez ego-motion (act ZAWISA; REGATE miał OBSERVE-motion → parallax separujący cel od tła) MTI live nie
+  izoluje intruza centralnie — niezależnie od amplitudy/pionowej składowej ruchu celu.
+- **Wniosek:** bloker to LIVE percepcja (derotacja/separacja tła przy zawisie), NIE choreografia ruchu celu. Nie do
+  naprawienia przez tweak spec/osc.
+
+### §8c — PIVOT 7d (decyzja pre-ratyfikowana)
+Percepcja padła probe'em wprost → per §8c: **port rdzenia `mti_flight` (lot+percepcja+ruch celu) jako podstawa
+runnera aktów; na wierzchu token B1, choreografia ze spec, kontrakty manifest/sędzia(`79b1e936`)/trace BEZ ZMIAN.**
+7b (world-plugin) i dalsze łatanie `gate_run_r02` — zamknięte. **CC dostarcza `PROMPT_D_PIVOT`.** Kryterium 8d
+(sanity A1 do końca 20.08) — pivot jest ścieżką. Probe-kod (`VOSC_OVERRIDE`/`MTI_FRAME_LOG`, oba default-off) i
+narzędzia zostają. selfcheck 6/6 ×2. Artefakty `results/demo/A1/probe_8a_vosc/` (+`mti_frame.jsonl`).

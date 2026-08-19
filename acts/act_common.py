@@ -55,9 +55,15 @@ def intruder_ned_fn(spec):
     park = _to_ned(g.get("intruder_parking_enu", [7.0, 0.0, 3.0]))
     far = _to_ned(g["intruder_far_enu"]) if "intruder_far_enu" in g else None
 
+    # ANEKS_D5 §8a PROBE (spec NIETKNIĘTA): env VOSC_OVERRIDE dodaje PIONOWĄ składową oscylacji ==
+    # REGATE `results/R02/mti/mti_flight.py:183` `0.6*sin(2π·0.23·t)`. Default 0.0 → zachowanie spec bez zmian
+    # (tylko boczna ±osc). To sonda percepcji (SR-J2), NIE zmiana spec — restauracja spec dopiero §8b po PASS.
+    _vosc = float(os.environ.get("VOSC_OVERRIDE", "0.0"))
+
     def ring_with_osc(t):
         y = osc * math.sin(2 * math.pi * 0.3 * t)
-        return [ring[0], ring[1] + y, ring[2]]
+        z = _vosc * math.sin(2 * math.pi * 0.23 * t)     # §8a: pionowa (znak nieistotny dla MTI — to RUCH)
+        return [ring[0], ring[1] + y, ring[2] + z]
 
     def fn(t):
         # A1: park → approach → ring_hold → park
