@@ -996,12 +996,14 @@ def _act_setup(r, act):
                 r._teleport_hz_producer = round(n_set / (now - loop_t0), 2)
                 r._teleport_hz_eff = (client.applied_hz() if client is not None else r._teleport_hz_producer)
                 r._teleport_req_lat_ms = getattr(client, "last_lat_ms", None) if client is not None else None
+                r._teleport_ok_rate = client.ok_rate() if client is not None else None
                 last_log = now
         r._teleport_hz_producer = round(n_set / max(time.time() - loop_t0, 1e-6), 2)
         r._teleport_hz_eff = (client.applied_hz() if client is not None else r._teleport_hz_producer)  # §7a: APLIKOWANA
         r._teleport_req_lat_ms = getattr(client, "last_lat_ms", None) if client is not None else None
+        r._teleport_ok_rate = client.ok_rate() if client is not None else None
         print(f"[teleport] APLIKOWANA={r._teleport_hz_eff}Hz producent={r._teleport_hz_producer}Hz "
-              f"req_lat={r._teleport_req_lat_ms}ms backend={r._teleport_backend}")
+              f"req_lat={r._teleport_req_lat_ms}ms ok_rate={r._teleport_ok_rate} backend={r._teleport_backend}")
 
     def start_teleport():
         threading.Thread(target=_telethread, daemon=True).start()
@@ -1121,6 +1123,7 @@ def scenario_A1(r: Runner):
             "min_d": None if r.min_d_observe == float("inf") else round(r.min_d_observe, 2),
             "dsafe_violations": r.dsafe_violations, "granted": granted,
             "teleport_hz_eff": getattr(r, "_teleport_hz_eff", None),      # §7a: kadencja APLIKOWANA (worker)
+            "teleport_ok_rate": getattr(r, "_teleport_ok_rate", None),   # §3: frakcja request ok=True
             "teleport_hz_producer": getattr(r, "_teleport_hz_producer", None),  # §6a: świeżość intr_ned (pętla)
             "teleport_req_lat_ms": getattr(r, "_teleport_req_lat_ms", None),    # §7a: latencja request (diag 108ms)
             "teleport_backend": getattr(r, "_teleport_backend", None),
@@ -1155,6 +1158,7 @@ def scenario_A2(r: Runner):
     crit = {"scenario": "A2", "n_entry": r.n_entry, "n_token_issued": r.n_token_issued,
             "n_token_consumed": r.n_token_consumed, "n_refuse_no_auth": r.n_refuse_no_auth,
             "teleport_hz_eff": getattr(r, "_teleport_hz_eff", None),
+            "teleport_ok_rate": getattr(r, "_teleport_ok_rate", None),
             "teleport_hz_producer": getattr(r, "_teleport_hz_producer", None),
             "teleport_req_lat_ms": getattr(r, "_teleport_req_lat_ms", None),
             "teleport_backend": getattr(r, "_teleport_backend", None),

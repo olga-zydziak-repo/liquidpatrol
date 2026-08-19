@@ -53,7 +53,7 @@ class GzPoseClient:
     @kadencja pętli; worker APLIKUJE pozy @apply_hz. Wybór (worker+FF) vs samo-FF-w-pętli: worker izoluje
     ewent. resztkową latencję od świeżości intr_ned i daje czysty pomiar kadencji APLIKOWANEJ (n_apply)."""
 
-    def __init__(self, world, name="intruder", async_apply=True, apply_hz=20.0, ff_timeout_ms=5):
+    def __init__(self, world, name="intruder", async_apply=True, apply_hz=20.0, ff_timeout_ms=40):
         import threading as _th
         import gz.transport13 as _T
         from gz.msgs10 import pose_pb2, boolean_pb2, clock_pb2
@@ -71,6 +71,7 @@ class GzPoseClient:
         self._lock = _th.Lock()
         self._stop = _th.Event()
         self.n_apply = 0                    # liczba APLIKACJI worker'a (nie producenta)
+        self.n_ok = 0                       # ANEKS_D6 §3: ile request zwróciło ok=True (poza dowiedziona)
         self.last_lat_ms = None             # ostatnia latencja request (diagnoza 108 ms, §7a read-only)
         self._apply_t0 = None
         if async_apply:
@@ -100,10 +101,12 @@ class GzPoseClient:
                 p = self._latest
             if p is not None:
                 t0 = time.time()
-                try:                          # FIRE-AND-FORGET: krótki timeout, reply ignorowany
-                    self.node.request(self.service, self._mk(p), self._Pose, self._Bool, self._ff_timeout_ms)
+                try:                          # ANEKS_D6 §3 wariant C: KONSUMUJ reply (drain, nie akumuluj) —
+                    ok, _ = self.node.request(self.service, self._mk(p), self._Pose, self._Bool, self._ff_timeout_ms)
+                    if ok:                    # timeout 40 ms wystarcza na reply (req_lat ~0.3 ms) → reply zdjęte
+                        self.n_ok += 1        # z kolejki transportu, brak akumulacji → cel dipów 3× (§AKT-11).
                 except Exception:
-                    pass
+                    ok = False
                 self.last_lat_ms = round((time.time() - t0) * 1000.0, 1)
                 self.n_apply += 1
             time.sleep(max(0.0, period - (time.time() - it0)))
@@ -113,6 +116,12 @@ class GzPoseClient:
         if not self.async_apply or self._apply_t0 is None:
             return None
         return round(self.n_apply / max(time.time() - self._apply_t0, 1e-6), 2)
+
+    def ok_rate(self):
+        """§3: frakcja request z ok=True (dowód że pozy SIĘ APLIKUJĄ w symie, nie tylko wysyłają)."""
+        if not self.async_apply or self.n_apply == 0:
+            return None
+        return round(self.n_ok / self.n_apply, 3)
 
     def set_pose(self, x, y, z, timeout_ms=100):
         """§7a async: NIEBLOKUJĄCE — aktualizuje „najnowszą pozę" (worker aplikuje). §6 sync: blokujący request."""
