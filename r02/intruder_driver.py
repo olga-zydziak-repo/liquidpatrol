@@ -44,14 +44,17 @@ def set_pose(world, x, y, z, timeout=4.0):
 class GzPoseClient:
     """ANEKS_D5 §6a: TRWAŁY klient set_pose in-process (gz.transport13) — ZERO spawnów subprocess w pętli
     ruchu intruza (poprzednio `subprocess.run(gz service)` per-call → churn transportu gz → stalle RTF,
-    RAPORT_D_B5 §AKTUALIZACJA-9). Ulepszenie ponad REGATE (mti_flight też per-call CLI). Harness-only.
-    §6b: subskrybuje zegar symulacji `/world/W/clock` → udostępnia sim_t() do liczenia FAZY ruchu z sim-time
-    (a nie z zegara ściennego), co uodparnia trajektorię na resztkowe dipy RTF (W-kontrakt).
+    RAPORT_D_B5 §AKT-9). §6b: subskrybuje zegar symu `/world/W/clock` → sim_t() dla FAZY ruchu z sim-time.
 
-    Jeden `Node` obsługuje ORAZ request set_pose ORAZ subskrypcję clock. Wymaga gz.transport13/gz.msgs10
-    (gz Harmonic). Poza pętlą decyzji — jak dotychczasowy wątek teleportu."""
+    §7a (rezyduum request-reply): request SYNCHRONICZNY blokował ~108 ms/wywołanie (RTF_avg 0.919, kadencja
+    9.25 Hz — RAPORT §AKT-10). Fix: NIEBLOKUJĄCY zapis pozy — WORKER z gniazdem „tylko najnowsza poza"
+    (drop stale, kolejność zachowana bo jeden worker) + request FIRE-AND-FORGET (krótki timeout, reply
+    ignorowany; serwer i tak wykonuje handler set_pose). Producent (pętla ruchu) NIE czeka → intr_ned świeży
+    @kadencja pętli; worker APLIKUJE pozy @apply_hz. Wybór (worker+FF) vs samo-FF-w-pętli: worker izoluje
+    ewent. resztkową latencję od świeżości intr_ned i daje czysty pomiar kadencji APLIKOWANEJ (n_apply)."""
 
-    def __init__(self, world, name="intruder"):
+    def __init__(self, world, name="intruder", async_apply=True, apply_hz=20.0, ff_timeout_ms=5):
+        import threading as _th
         import gz.transport13 as _T
         from gz.msgs10 import pose_pb2, boolean_pb2, clock_pb2
         self._Pose = pose_pb2.Pose
@@ -60,8 +63,19 @@ class GzPoseClient:
         self.service = f"/world/{world}/set_pose"
         self.name = name
         self._sim_t = None
-        # subskrypcja zegara symu (in-process, bez subprocess) — sim_t dla fazy §6b
         self.node.subscribe(clock_pb2.Clock, f"/world/{world}/clock", self._on_clock)
+        # §7a: nieblokujący apply
+        self.async_apply = async_apply
+        self._ff_timeout_ms = ff_timeout_ms
+        self._latest = None                 # (x,y,z) — „tylko najnowsza poza"
+        self._lock = _th.Lock()
+        self._stop = _th.Event()
+        self.n_apply = 0                    # liczba APLIKACJI worker'a (nie producenta)
+        self.last_lat_ms = None             # ostatnia latencja request (diagnoza 108 ms, §7a read-only)
+        self._apply_t0 = None
+        if async_apply:
+            self._worker = _th.Thread(target=self._apply_loop, args=(apply_hz,), daemon=True)
+            self._worker.start()
 
     def _on_clock(self, msg):
         self._sim_t = msg.sim.sec + msg.sim.nsec * 1e-9
@@ -70,14 +84,47 @@ class GzPoseClient:
         """Ostatni sim-time [s] z zegara symu, albo None (zanim pierwsza próbka dojdzie)."""
         return self._sim_t
 
-    def set_pose(self, x, y, z, timeout_ms=100):
-        """Ustaw pozę intruza przez TRWAŁĄ usługę gz (bez subprocess). Zwraca bool (ok)."""
+    def _mk(self, xyz):
         req = self._Pose()
         req.name = self.name
-        req.position.x = float(x); req.position.y = float(y); req.position.z = float(z)
+        req.position.x = float(xyz[0]); req.position.y = float(xyz[1]); req.position.z = float(xyz[2])
         req.orientation.w = 1.0
-        ok, _ = self.node.request(self.service, req, self._Pose, self._Bool, timeout_ms)
+        return req
+
+    def _apply_loop(self, hz):
+        period = 1.0 / hz
+        self._apply_t0 = time.time()
+        while not self._stop.is_set():
+            it0 = time.time()
+            with self._lock:
+                p = self._latest
+            if p is not None:
+                t0 = time.time()
+                try:                          # FIRE-AND-FORGET: krótki timeout, reply ignorowany
+                    self.node.request(self.service, self._mk(p), self._Pose, self._Bool, self._ff_timeout_ms)
+                except Exception:
+                    pass
+                self.last_lat_ms = round((time.time() - t0) * 1000.0, 1)
+                self.n_apply += 1
+            time.sleep(max(0.0, period - (time.time() - it0)))
+
+    def applied_hz(self):
+        """§7a: ZMIERZONA kadencja APLIKOWANA (aplikacje worker'a / czas). None gdy sync."""
+        if not self.async_apply or self._apply_t0 is None:
+            return None
+        return round(self.n_apply / max(time.time() - self._apply_t0, 1e-6), 2)
+
+    def set_pose(self, x, y, z, timeout_ms=100):
+        """§7a async: NIEBLOKUJĄCE — aktualizuje „najnowszą pozę" (worker aplikuje). §6 sync: blokujący request."""
+        if self.async_apply:
+            with self._lock:
+                self._latest = (float(x), float(y), float(z))
+            return True
+        ok, _ = self.node.request(self.service, self._mk((x, y, z)), self._Pose, self._Bool, timeout_ms)
         return ok
+
+    def close(self):
+        self._stop.set()
 
 
 def main():

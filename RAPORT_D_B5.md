@@ -555,3 +555,65 @@ Opcje (per §6a „service ALBO publisher" i 6e „world-plugin"):
 - **(c) diagnoza 108 ms latencji usługi** (czy set_pose jest throttlowany do kroku render/GUI) przed wyborem.
 Po fixie: POWTÓRKA §6d pod pełnym obciążeniem (kryteria §6d bez zmian). Progi/percepcja/spec/hashe/światy/
 sędzia `79b1e936`/`r01` NIETKNIĘTE. Artefakty: `results/demo/A1/recheck_5c_6d/`. selfcheck 6/6 ×2.
+
+---
+
+## AKTUALIZACJA-11 / §7a (ANEKS_D5 §7 ratyf.) — nieblokujący zapis: KADENCJA/LATENCJA NAPRAWIONE, ale stall-profil FAIL + ZNALEZISKO: ENTRY limitowane PERCEPCJĄ (ortogonalne do kosztu)
+
+Data: 2026-08-19. §7a (worker „tylko najnowsza poza" + request FIRE-AND-FORGET) rozwiązuje rezyduum
+request-reply z §6d: **latencja 108 ms → 0.3 ms, kadencja aplikowana 9.25 → 19.41 Hz**. ALE bramka §7a
+(=§6d) **NIE PASS**: profil stalli poza klasą R2 (3 okresowe dipy). **Kluczowo: bieg ujawnił, że
+in-window ENTRY jest limitowane PERCEPCJĄ (borderline MTI), nie kadencją/RTF** — co zmienia oczekiwaną
+wartość gałęzi 7b. `certs_selfcheck` 6/6 ×2, sędzia/spec/światy/progi/`r01` NIETKNIĘTE. **STOP — znalezisko
+materialne, decyzja Olgi. Push=Olga.**
+
+### §7a implementacja
+`GzPoseClient(async_apply=True, apply_hz=20, ff_timeout_ms=5)`: worker aplikuje „najnowszą pozę" (drop stale,
+1 worker = kolejność zachowana) request FF (krótki timeout, reply ignorowany — serwer i tak wykonuje handler).
+Producent (`_telethread`) NIEBLOKUJĄCY → intr_ned świeży @16.2 Hz; worker aplikuje @19.4 Hz. Echo `pose_backend`
+(§7c; bieg z `subprocess(fallback)` = INVALID). Nowe pola SCENARIO_RESULT: `teleport_hz_eff` (APLIKOWANA),
+`teleport_hz_producer`, `teleport_req_lat_ms`. Regresja 72.
+
+### §7d recheck (FILM=1, robust sampler, DBG) — `results/demo/A1/recheck_5c_7a/`
+| metryka | §6d (blokujący) | **§7a (FF)** | R2 (budżet) | bramka |
+|---|---|---|---|---|
+| kadencja APLIKOWANA | 9.25 Hz | **19.41 Hz** | (cel ≥15) | **✓** |
+| req latencja | ~108 ms | **0.3 ms** | — | — |
+| Δsim/Δwall (fit) | 0.919 | **0.976** | ~1.0 | ~borderline |
+| min RTF | 0.915 | 0.116 | 0.978 | **✗** |
+| `frac<0.5` | 0% | **0.7%** (3 dipy) | ~0% | **✗** |
+| p10 | 0.9987 | 0.9989 | 0.9971 | ✓ |
+
+- **Kadencja/latencja: NAPRAWIONE** (FF = ~0.3 ms/wywołanie; aplikowana 19.4 Hz ≥15). Producent nie blokuje.
+- **Stall-profil: FAIL (poza klasą R2)** — 3 dipy do min 0.116, `frac<0.5=0.7%` (R2/§6d miały 0%). Dipy są
+  **OKRESOWE ~12.5 s** (t=10.6/23.1/35.6 s po starcie detektora) — regularność ⇒ nie ciągły flood, lecz
+  prawdop. **artefakt FF: porzucone reply akumulują się w transporcie gz → okresowy cleanup/hitch**. `Δsim/Δwall`
+  0.976 (bliżej budżetu, ale nie 1.0). Klient-side set_pose (blokujący §6d lub FF §7a) zawsze zostawia rezyduum
+  → **7b (sim-side, zero żądań klienta) jest właściwym fixem profilu**.
+
+### ZNALEZISKO MATERIALNE: in-window ENTRY limitowane PERCEPCJĄ, nie kosztem
+`n_entry=0`; **in-window `mti_ok=0/56`, n_comps max 2 — MIMO 19.4 Hz gładkiego ruchu i dobrego RTF.**
+Detektor ENTRY tylko POST-window (cy≈0.79, park-transition). **INWERSJA dowodowa:** §6d (RTF 0.919) miało box
+ENTRY CENTRALNIE (cy 0.497); §7a (LEPSZY RTF 0.976) — box NISKO post-window. Lepszy RTF → GORSZY ENTRY ⇒ ENTRY
+**nie jest** sterowane RTF/kadencją. Przez 5 biegów MTI pierścienia trafia centralnie 2/5, chybia 3/5 =
+borderline/losowe. Hipoteza: **oscylacja ±1.5 boczna przy dronie w ZAWISIE daje przesunięcie klatka-do-klatki
+~poniżej progu MTI diff (22 px)**; REGATE (cov_entry_once=1.0) miał DODATKOWO osc PIONOWĄ 0.6 (`mti_flight:183`)
+**oraz** OBSERVE ego-motion (parallax) — akt ma tylko boczną ±1.5 i zawis. To FROZEN percepcja/spec (SR-2),
+ortogonalna do kosztu §5-7.
+
+### KONSEKWENCJA dla routingu (znalezisko poza pre-rejestracją §7)
+Pre-rejestracja: FAIL 7a → 7b (bez nowego dokumentu). 7b (ruch sim-side world-plugin) usunąłby 3 dipy →
+prawdop. PASS bramki KOSZTU (§6d). **ALE 7b NIE zmienia ruchu percepcyjnego (ta sama ±1.5 osc) → prawdop.
+NIE naprawi in-window ENTRY** (dowód: §7a miał już gładki 19.4 Hz i dobry RTF, a MTI in-window=0). Zatem 7b
+domknąłby KOSZT, lecz re-sanity (ENTRY in-window) nadal by padało → ląduje na progu 7d (pivot: port mti_flight
+jako rdzeń runnera — przynosi sprawdzoną percepcję REGATE: osc pionowa + ego-motion). **Ponieważ to
+znalezisko (ENTRY=percepcja, nie koszt) było POZA założeniami §7, zgłaszam je zamiast cicho brnąć w ciężkie
+7b (world-plugin+regen świata+ratyfikacja hashy) o niepewnym zwrocie.**
+
+### STOP — decyzja Olgi dokumentem (SR-8)
+Opcje: **(A)** mimo to 7b (domknij bramkę KOSZTU §6d; percepcję adresuj osobno po niej) — zgodne z literą
+pre-reg; **(B)** pivot ku 7d TERAZ (port mti_flight jako rdzeń runnera aktów — przynosi ego-motion+osc pionową,
+sprawdzone cov_entry_once=1.0) skoro dowód wskazuje percepcję jako realny bloker; **(C)** tańszy wariant FF
+(drenaż reply / niższy apply_hz) by usunąć 3 dipy bez world-pluginu, potem re-ocena. Rekomendacja: **(B)** lub
+**(A)+świadomość, że ENTRY wróci jako osobna gałąź**. `certs_selfcheck` 6/6 ×2, sędzia `79b1e936`/spec/światy/
+progi/`r01` NIETKNIĘTE. Artefakty `results/demo/A1/recheck_5c_7a/`.

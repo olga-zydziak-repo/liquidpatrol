@@ -960,7 +960,7 @@ def _act_setup(r, act):
         client = None
         try:
             from r02.intruder_driver import GzPoseClient
-            client = GzPoseClient(WORLD_NAME)
+            client = GzPoseClient(WORLD_NAME, async_apply=True, apply_hz=20.0)   # §7a: nieblokujący worker
         except Exception as e:
             print(f"[teleport] GzPoseClient init FAIL ({e}) — fallback subprocess set_pose")
         sim0 = None                               # §6b: kotwica fazy sim_t do zera choreografii (r.t0)
@@ -988,13 +988,20 @@ def _act_setup(r, act):
                     n_set += 1
                 except Exception:
                     pass
-            # §6a: kadencja precyzyjna period=DEMO_TELEPORT_DT (klient in-process ~ms → efektywnie ~16.7 Hz)
+            # §6a: producent @DEMO_TELEPORT_DT (16.7 Hz — świeżość intr_ned); §7a: set_pose NIEBLOKUJĄCE,
+            # worker APLIKUJE pozy osobno → kadencja aplikowana = client.applied_hz() (wielkość bramkowana 7a).
             time.sleep(max(0.0, DEMO_TELEPORT_DT - (time.time() - it0)))
             now = time.time()
-            if now - last_log >= 5.0:             # §6a: pomiar efektywnej kadencji (zapis do raportu)
-                r._teleport_hz_eff = round(n_set / (now - loop_t0), 2); last_log = now
-        r._teleport_hz_eff = round(n_set / max(time.time() - loop_t0, 1e-6), 2)
-        print(f"[teleport] EFEKTYWNA kadencja = {r._teleport_hz_eff} Hz ({n_set} set_pose, backend={r._teleport_backend})")
+            if now - last_log >= 5.0:
+                r._teleport_hz_producer = round(n_set / (now - loop_t0), 2)
+                r._teleport_hz_eff = (client.applied_hz() if client is not None else r._teleport_hz_producer)
+                r._teleport_req_lat_ms = getattr(client, "last_lat_ms", None) if client is not None else None
+                last_log = now
+        r._teleport_hz_producer = round(n_set / max(time.time() - loop_t0, 1e-6), 2)
+        r._teleport_hz_eff = (client.applied_hz() if client is not None else r._teleport_hz_producer)  # §7a: APLIKOWANA
+        r._teleport_req_lat_ms = getattr(client, "last_lat_ms", None) if client is not None else None
+        print(f"[teleport] APLIKOWANA={r._teleport_hz_eff}Hz producent={r._teleport_hz_producer}Hz "
+              f"req_lat={r._teleport_req_lat_ms}ms backend={r._teleport_backend}")
 
     def start_teleport():
         threading.Thread(target=_telethread, daemon=True).start()
@@ -1064,6 +1071,9 @@ def _emit_act_manifest(r, act):
             m["teleport_backend"] = "gz.transport13(persistent)"
         except Exception:
             m["teleport_backend"] = "subprocess(fallback)"
+        # §7c higiena backendu: pose_backend echo; bieg AKTU z 'subprocess(fallback)' = INVALID z definicji
+        # (cichy powrót churnu zakazany). Sędzia/harness czyta to pole.
+        m["pose_backend"] = m["teleport_backend"]
         m["armed_before_manifest"] = bool(getattr(r.mav, "armed", False))   # dowód: manifest PO arm
         # H0 (5P): echo EKF2_GPS_CTRL z persystowanego bson (stan który PX4 załadował) — cicha regresja
         # ensure_gps_enabled widoczna w prowieniencji PIERWSZEGO biegu, nie po polowaniu. (0=GPS off=przyczyna 5R3)
@@ -1106,7 +1116,9 @@ def scenario_A1(r: Runner):
             "n_token_issued": r.n_token_issued, "observe_ticks": r.observe_ticks,
             "min_d": None if r.min_d_observe == float("inf") else round(r.min_d_observe, 2),
             "dsafe_violations": r.dsafe_violations, "granted": granted,
-            "teleport_hz_eff": getattr(r, "_teleport_hz_eff", None),      # §6a: zmierzona kadencja set_pose
+            "teleport_hz_eff": getattr(r, "_teleport_hz_eff", None),      # §7a: kadencja APLIKOWANA (worker)
+            "teleport_hz_producer": getattr(r, "_teleport_hz_producer", None),  # §6a: świeżość intr_ned (pętla)
+            "teleport_req_lat_ms": getattr(r, "_teleport_req_lat_ms", None),    # §7a: latencja request (diag 108ms)
             "teleport_backend": getattr(r, "_teleport_backend", None),
             "note": "REHEARSAL/integracja (B4) — NIE próba (B5); percepcja NIERAPORTOWALNA"}
     r.finish(crit)
@@ -1139,6 +1151,8 @@ def scenario_A2(r: Runner):
     crit = {"scenario": "A2", "n_entry": r.n_entry, "n_token_issued": r.n_token_issued,
             "n_token_consumed": r.n_token_consumed, "n_refuse_no_auth": r.n_refuse_no_auth,
             "teleport_hz_eff": getattr(r, "_teleport_hz_eff", None),
+            "teleport_hz_producer": getattr(r, "_teleport_hz_producer", None),
+            "teleport_req_lat_ms": getattr(r, "_teleport_req_lat_ms", None),
             "teleport_backend": getattr(r, "_teleport_backend", None),
             "max_admission_seq": r.admission_seq, "granted_seqs": sorted(granted_seq),
             "note": "REHEARSAL/integracja (B4) — NIE próba (B5)"}
