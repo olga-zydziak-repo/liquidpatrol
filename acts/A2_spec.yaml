@@ -13,8 +13,12 @@ geometry:                                # identyczna jak A1 (ten sam pierście�
   intruder_ring_enu: [7.86, 0.0, 11.5]   # 3D 8.00 m; source jak A1 (config_r02 INTRUDER_ALT_M/koperta; PRE_D)
   intruder_lateral_osc_m: 1.5            # source: == REGATE ±1.5 (mti_flight.py L182); ANEKS_D5 §1.2
     # (ratyf. 2026-08-17): korekta rozbieżności B2 (P3: ±1.0 za mała dla MTI). Świat nietknięty (osc w runnerze).
-  intruder_far_enu: [70.0, 0.0, 11.5]    # „poza zasięg" — horizontal 70 m ≫ 9 m koperty → brak detekcji → EXPIRE
-    # source: koperta detekcji max 9 m (config_r02 A7); 70 m ≫ 9 → cel niewidoczny → age rośnie > θ_age
+  intruder_far_enu: [30.0, 60.0, 11.5]   # ANEKS_D6 §2: far POZA FOV (nie tylko „daleko") — bo kanał GT-fed
+    # nie modeluje zasięgu; stare [70,0,11.5] było dead-ahead W FOV (az≈0°) → brak EXPIRE (znalezisko B4).
+    # source: geometria kamery mono horizontal_fov=1.74 rad (PX4-Autopilot/.../mono_cam/model.sdf) → krawędź
+    #   HFOV/2=0.87 rad=49.8°. [30,60,11.5]: az=atan2(60,30)=63.4° > 49.8° (margines +13.6°), range 67.1 m
+    #   (nadal „far"). Zweryfikowane project_to_pixel(pos[0,0,-10],yaw0)=None(OUT→EXPIRE); ring[7.86,0,11.5]
+    #   pozostaje in-FOV. Wzorzec = parking A1 [7,0,3] (el=-45° poza VFOV → EXPIRE działa).
   ring_band_m: [7.0, 9.0]                # source: PRE_D §5 / REGATE {7,9}
 
 timeline_s:

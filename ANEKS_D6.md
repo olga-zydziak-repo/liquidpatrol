@@ -60,7 +60,10 @@ EXPIRE działa). Zmiana WYŁĄCZNIE w spec A2 (choreografia runnera f(sim_t)), �
 hash spec A2. **Zakaz** dokładania modelu zasięgu do kanału GT-fed w tej sesji (nowe twierdzenie o
 detektorze — osobny dokument).
 
-- `acts/A2_spec.yaml` sha256 (nowy) = zapisany po zmianie w tej sekcji przy commicie §2.
+- `acts/A2_spec.yaml` sha256 (nowy, FREEZE) = `1a0da2b09aa45e31f3942d30e89cd0ccf94249b823e0d0f58f4ece7496e658a5`
+  (poprzedni `02441d93…` z ANEKS_D5 §1.2 — zastąpiony). Trajektoria A2 zweryfikowana:
+  ring in-FOV (t≤44) → far OUT/None (t 46–51, EXPIRE ~48) → return in-FOV (t≥54, re-ENTRY). A1 spec
+  `48a50c8d…` NIETKNIĘTY.
 
 ## §3 — Koszt: re-bramka §6d w konfiguracji docelowej
 
