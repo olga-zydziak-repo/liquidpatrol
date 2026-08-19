@@ -1057,6 +1057,10 @@ def _emit_act_manifest(r, act):
                               demo_mti=(os.environ.get("DEMO_MTI") == "1"))
         m["judge_sha256"] = jhash
         m["detector"] = "LIVE (r02.detector_node YOLO); GT_FED=0" if not r.gt_mode else "GT-fed"
+        # ANEKS_D6 §1a: JAWNE etykietowanie kanału detekcji. Demo A1/A2 = GT-fed (idealizowany detektor,
+        # konfig B4 gdzie sędzia orzekł VALID); live-MTI NIE jest przedmiotem roszczenia (RAPORT §AKT-12,
+        # koperta 8a). Bieg aktu bez echa `detection_channel: gt_fed` = INVALID z definicji (SR-M3).
+        m["detection_channel"] = "gt_fed" if r.gt_mode else "live"
         # §4a: echo kadencji decyzji przekazanej detektorowi LIVE (== REGATE 2.0). Bieg z det_hz≠2.0 =
         # INVALID z definicji. Dla GT-fed brak detektora LIVE → None (kadencja z pętli runnera).
         m["det_hz"] = DEMO_DECISION_HZ if (not r.gt_mode and os.environ.get("LIVE_DETECTOR_TOPIC")) else None
