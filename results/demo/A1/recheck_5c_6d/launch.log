@@ -1,0 +1,6 @@
+[gps-hygiene] EKF2_GPS_CTRL nieobecny w bson ⇒ default 7 (GPS ON) — OK
+GUI_PROCS=[brak]
+MONO=/world/world_demo_A1/model/x500_mono_cam_0/link/camera_link/sensor/imager/image FILM=/world/world_demo_A1/model/film_cam/link/l/sensor/film/image
+[live] 210 s settle EKF (BEZ bridge/detektora — czysta zbieżność jak B4)
+acts/run_act_live.sh: line 20: 57986 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_film.log" 2>&1
+[live] A1 recheck_5c_6d DONE rc=0 → results/demo/A1/recheck_5c_6d

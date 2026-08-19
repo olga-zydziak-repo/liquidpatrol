@@ -491,3 +491,67 @@ ZERO subprocess churn — ulepszenie PONAD REGATE) ± redukcja obciążenia mono
 fazy teleportu do `sim_t` (W-kontrakt: wykonanie spec, nie zmiana) — w tym samym pakiecie; **(c)** po fixie
 POWTÓRKA §5c pod PEŁNYM obciążeniem — dopiero PASS otwiera A2. Progi/percepcja/spec/hashe/światy/sędzia
 `79b1e936`/`r01` NIETKNIĘTE. selfcheck 6/6 ×2.
+
+---
+
+## AKTUALIZACJA-10 / §6 (ANEKS_D5 §6 ratyf.) — trwały klient set_pose: CHURN POTWIERDZONY i głębokie stalle USUNIĘTE, ale rezyduum ~8% + kadencja 9.25 Hz → STOP na decyzję
+
+Data: 2026-08-19. §6a (trwały klient) + §6b (faza sim_t) zbudowane; §6d (powtórka §5c pod pełnym obciążeniem)
+**dramatycznie poprawia RTF — hipoteza churnu z §5c/O2 POTWIERDZONA** (głębokie stalle znikają), ale **nie
+domyka bramki**: pozostaje ~8% spowolnienie i efektywna kadencja 9.25 Hz < 16.7 (§6a). To NIE 6e (churn nie
+sfalsyfikowany — potwierdzony); rezyduum to INNY, mniejszy efekt = latencja synchronicznej usługi set_pose.
+`certs_selfcheck` 6/6 ×2, sędzia/spec/światy/progi/`r01` NIETKNIĘTE. **STOP — decyzja Olgi dokumentem. Push=Olga.**
+
+### §6a — trwały klient set_pose in-process (zero subprocess churn)
+`r02/intruder_driver.py::GzPoseClient` (gz.transport13 `Node` + gz.msgs10 Pose/Boolean): jeden `Node`,
+`node.request(/world/W/set_pose, Pose, Boolean, timeout)` reużywany — ZERO spawnów procesów w pętli ruchu
+(poprzednio `subprocess.run(gz service)` per-call). `_telethread` przełączony (fallback subprocess gdy
+gz.transport niedostępny). Echo `teleport_backend` w manifeście; **`teleport_backend=gz.transport13(persistent)`
+potwierdzony w biegu**. Regresja 72 passed. Ulepszenie ponad REGATE (który też był per-call CLI).
+
+### §6b — faza ruchu z sim_t (W-kontrakt)
+`GzPoseClient` subskrybuje `/world/W/clock` → `sim_t()`; `_telethread` liczy `phase = sim_t − sim0`
+(kotwica `sim0` do zera choreografii `r.t0`), tick pętli pozostaje wall (sleep). Pozycja intruza = f(sim_t) =
+wykonanie spec (nie zmiana). Trajektoria bez zmian.
+
+### §6d — powtórka §5c (FILM=1, pełne obciążenie), robust sampler
+`results/demo/A1/recheck_5c_6d/` (backend persistent, DBG_LOG=1). Sampler `rtf_stream.py` (jedna subskrypcja
+/stats). **UWAGA metodologiczna:** inst-`real_time_factor` gz uśredniony = 0.9994 (mediana 1.0), ALE
+prawdziwe tempo `Δsim/Δwall` (fit liniowy, odporny na truncację sim_s do sekund) = **0.919** — inst-RTF
+przeocza KRÓTKIE zamrożenia (podczas nich /stats też milczy → niepróbkowane). Prawda = fit + profil ogona.
+
+| metryka | subprocess §5c (FILM=1) | **§6d persistent (FILM=1)** | R2 baseline (budżet ANEKS-H) |
+|---|---|---|---|
+| głębokie stalle `frac<0.5` | 32% | **0.0%** | ~0% |
+| min RTF | 0.039 | **0.915** | 0.978 |
+| p10 | 0.040 | **0.9987** | 0.9971 |
+| mean inst-RTF | ~1.0 (mediana, mylące) | 0.9994 | 0.9998 |
+| **Δsim/Δwall (fit)** | 0.69 | **0.919** | ~1.0 |
+| teleport eff. Hz | ~kilka | **9.25** | (cel 16.7) |
+
+- **CHURN POTWIERDZONY:** usunięcie spawnów subprocess = **głębokie stalle znikają** (`frac<0.5` 32%→**0%**,
+  min 0.039→**0.915**). Profil ogona (frac<0.5, p10) w klasie R2. **6e NIE zachodzi** (stalle nie pozostały).
+- **ALE nie PASS §6d:** (1) `Δsim/Δwall=0.919` — ~8% poniżej budżetu ~1.0 (R2 avg 0.9998), min 0.915 nieco
+  poniżej R2 0.978; (2) **§6a niespełnione: efektywna kadencja 9.25 Hz < 16.7 Hz.**
+- **PRZYCZYNA REZYDUUM:** usługa set_pose jest SYNCHRONICZNA — `node.request` blokuje pętlę ~108 ms/wywołanie
+  (czeka na reply serwera gz), co (a) kapuje kadencję do 9.25 Hz, (b) sprzęga pętlę z krokiem symu i wnosi
+  ~8% narzutu (krótkie zamrożenia niepróbkowane w inst-RTF). Nie churn spawnów (ten usunięty) — latencja
+  request-reply usługi.
+- **Percepcja:** `n_entry=0` nadal, ale MTI trafia CENTRALNIE (box cy≈0.497 vs pre-fix cy≈0.82); DBG in-window
+  mti_ok wciąż głównie na końcu (dbg-t 53–60) — spójne z resztkowym desyncem/kadencją 9.25 Hz. ENTRY prawdop.
+  domyka się po usunięciu rezyduum (RTF→1, kadencja→16.7). (Trend boxa między biegami jest szumny — nie
+  nadinterpretuję.)
+
+### STOP — pełny zrzut; kierunki do ratyfikacji (jedna gałąź, SR-8)
+§5c wciąż nie przechodzi (avg 0.919 < budżet ∧ kadencja 9.25 < 16.7), więc **bramka A2 i próby POZOSTAJĄ
+zamknięte**. Churn potwierdzony i główny efekt usunięty; rezyduum = latencja SYNCHRONICZNEJ usługi set_pose.
+Opcje (per §6a „service ALBO publisher" i 6e „world-plugin"):
+- **(a) WORLD-PLUGIN ruchu intruza po stronie symulatora** (pozycja=f(sim_t) w pętli update świata, poza
+  klientem) — ZERO request-reply, kadencja = krok symu, zero narzutu klienta. Najczystsze; **zmienia świat →
+  nowy hash → ratyfikacja (ANEKS_D2/SR)**. Rekomendacja wiodąca.
+- **(b) NIE-BLOKUJĄCE ustawianie pozy** z klienta (fire-and-forget: request w osobnym wątku / krótki timeout
+  bez oczekiwania na reply — pole `ekwiwalentny publisher` §6a) — mniejsza delta, ale ryzyko gubienia
+  ustawień; do zweryfikowania czy serwer i tak przetwarza żądanie.
+- **(c) diagnoza 108 ms latencji usługi** (czy set_pose jest throttlowany do kroku render/GUI) przed wyborem.
+Po fixie: POWTÓRKA §6d pod pełnym obciążeniem (kryteria §6d bez zmian). Progi/percepcja/spec/hashe/światy/
+sędzia `79b1e936`/`r01` NIETKNIĘTE. Artefakty: `results/demo/A1/recheck_5c_6d/`. selfcheck 6/6 ×2.

@@ -41,6 +41,45 @@ def set_pose(world, x, y, z, timeout=4.0):
                    capture_output=True, text=True, timeout=timeout)
 
 
+class GzPoseClient:
+    """ANEKS_D5 §6a: TRWAŁY klient set_pose in-process (gz.transport13) — ZERO spawnów subprocess w pętli
+    ruchu intruza (poprzednio `subprocess.run(gz service)` per-call → churn transportu gz → stalle RTF,
+    RAPORT_D_B5 §AKTUALIZACJA-9). Ulepszenie ponad REGATE (mti_flight też per-call CLI). Harness-only.
+    §6b: subskrybuje zegar symulacji `/world/W/clock` → udostępnia sim_t() do liczenia FAZY ruchu z sim-time
+    (a nie z zegara ściennego), co uodparnia trajektorię na resztkowe dipy RTF (W-kontrakt).
+
+    Jeden `Node` obsługuje ORAZ request set_pose ORAZ subskrypcję clock. Wymaga gz.transport13/gz.msgs10
+    (gz Harmonic). Poza pętlą decyzji — jak dotychczasowy wątek teleportu."""
+
+    def __init__(self, world, name="intruder"):
+        import gz.transport13 as _T
+        from gz.msgs10 import pose_pb2, boolean_pb2, clock_pb2
+        self._Pose = pose_pb2.Pose
+        self._Bool = boolean_pb2.Boolean
+        self.node = _T.Node()
+        self.service = f"/world/{world}/set_pose"
+        self.name = name
+        self._sim_t = None
+        # subskrypcja zegara symu (in-process, bez subprocess) — sim_t dla fazy §6b
+        self.node.subscribe(clock_pb2.Clock, f"/world/{world}/clock", self._on_clock)
+
+    def _on_clock(self, msg):
+        self._sim_t = msg.sim.sec + msg.sim.nsec * 1e-9
+
+    def sim_t(self):
+        """Ostatni sim-time [s] z zegara symu, albo None (zanim pierwsza próbka dojdzie)."""
+        return self._sim_t
+
+    def set_pose(self, x, y, z, timeout_ms=100):
+        """Ustaw pozę intruza przez TRWAŁĄ usługę gz (bez subprocess). Zwraca bool (ok)."""
+        req = self._Pose()
+        req.name = self.name
+        req.position.x = float(x); req.position.y = float(y); req.position.z = float(z)
+        req.orientation.w = 1.0
+        ok, _ = self.node.request(self.service, req, self._Pose, self._Bool, timeout_ms)
+        return ok
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--world", default="default")

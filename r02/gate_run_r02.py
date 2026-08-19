@@ -954,24 +954,47 @@ def _act_setup(r, act):
     r._teleport_stop = threading.Event()
 
     def _telethread():
+        # ANEKS_D5 §6a: TRWAŁY klient set_pose in-process (zero spawnów subprocess w pętli) — usuwa churn
+        # transportu gz który stalluje RTF (RAPORT §AKT-9). §6b: faza ruchu z sim_t (zegar symu), nie ściennego.
+        from r02.intruder_driver import set_pose as _sp_fallback
+        client = None
         try:
-            from r02.intruder_driver import set_pose
-        except Exception:
-            return
+            from r02.intruder_driver import GzPoseClient
+            client = GzPoseClient(WORLD_NAME)
+        except Exception as e:
+            print(f"[teleport] GzPoseClient init FAIL ({e}) — fallback subprocess set_pose")
+        sim0 = None                               # §6b: kotwica fazy sim_t do zera choreografii (r.t0)
+        n_set = 0; loop_t0 = time.time(); last_log = loop_t0
+        r._teleport_backend = "gz.transport13(persistent)" if client is not None else "subprocess(fallback)"
+        print(f"[teleport] backend={r._teleport_backend} target={DEMO_TELEPORT_HZ}Hz")
         while not r._teleport_stop.is_set():
-            t = time.time() - r.t0 if getattr(r, "t0", None) else 0.0
-            p = ned_fn(t)
-            # B5 LIVE: aktor jest STEROWANY (teleportowany) — jego poza NED to znana GT choreografii
-            # (NIE roszczenie percepcji). Udostępnij ją tracowi (intr_ned) także w trybie live, gdzie
-            # kanał (detector_node, osobny proces) nie zna pozy 3D. Sędzia używa jej do geometrii
-            # (czy intruz był w pierścieniu przy ENTRY) — kontrola choreografii, nie percepcja.
+            it0 = time.time()
+            st = client.sim_t() if client is not None else None
+            if st is not None:                    # §6b: faza z sim-time (kotwiczona do r.t0 przy 1. próbce)
+                if sim0 is None:
+                    sim0 = st - (time.time() - r.t0 if getattr(r, "t0", None) else 0.0)
+                phase = st - sim0
+            else:                                 # rozgrzewka: zegar symu jeszcze niegotowy → zegar ścienny
+                phase = time.time() - r.t0 if getattr(r, "t0", None) else 0.0
+            p = ned_fn(phase)
+            # B5 LIVE: aktor STEROWANY (teleport) — poza NED = znana GT choreografii (NIE percepcja); tracowi.
             r._intr_ned = [round(p[0], 3), round(p[1], 3), round(p[2], 3)] if p is not None else None
             if p is not None:
                 try:
-                    set_pose(WORLD_NAME, round(p[0], 3), round(p[1], 3), round(-p[2], 3))
+                    if client is not None:
+                        client.set_pose(round(p[0], 3), round(p[1], 3), round(-p[2], 3))
+                    else:
+                        _sp_fallback(WORLD_NAME, round(p[0], 3), round(p[1], 3), round(-p[2], 3))
+                    n_set += 1
                 except Exception:
                     pass
-            time.sleep(DEMO_TELEPORT_DT)           # ANEKS_D5 §5a: ~16.7 Hz == REGATE replacer (poza torem decyzji)
+            # §6a: kadencja precyzyjna period=DEMO_TELEPORT_DT (klient in-process ~ms → efektywnie ~16.7 Hz)
+            time.sleep(max(0.0, DEMO_TELEPORT_DT - (time.time() - it0)))
+            now = time.time()
+            if now - last_log >= 5.0:             # §6a: pomiar efektywnej kadencji (zapis do raportu)
+                r._teleport_hz_eff = round(n_set / (now - loop_t0), 2); last_log = now
+        r._teleport_hz_eff = round(n_set / max(time.time() - loop_t0, 1e-6), 2)
+        print(f"[teleport] EFEKTYWNA kadencja = {r._teleport_hz_eff} Hz ({n_set} set_pose, backend={r._teleport_backend})")
 
     def start_teleport():
         threading.Thread(target=_telethread, daemon=True).start()
@@ -1034,6 +1057,13 @@ def _emit_act_manifest(r, act):
         # z definicji (dotyczy OBU torów — wątek teleportu żyje w gt-fed i live). RAPORT_D_B5 §FINAL: 2 Hz
         # teleport zabijał MTI in-window (filtr trwałości odrzucał ruch skokowy).
         m["teleport_hz"] = DEMO_TELEPORT_HZ
+        # §6a: echo backendu set_pose (trwały klient gz.transport vs subprocess-fallback). Zmierzona
+        # efektywna kadencja jest w SCENARIO_RESULT (teleport_hz_eff) — mierzona w trakcie biegu.
+        try:
+            import gz.transport13 as _gzt  # noqa: F401
+            m["teleport_backend"] = "gz.transport13(persistent)"
+        except Exception:
+            m["teleport_backend"] = "subprocess(fallback)"
         m["armed_before_manifest"] = bool(getattr(r.mav, "armed", False))   # dowód: manifest PO arm
         # H0 (5P): echo EKF2_GPS_CTRL z persystowanego bson (stan który PX4 załadował) — cicha regresja
         # ensure_gps_enabled widoczna w prowieniencji PIERWSZEGO biegu, nie po polowaniu. (0=GPS off=przyczyna 5R3)
@@ -1076,6 +1106,8 @@ def scenario_A1(r: Runner):
             "n_token_issued": r.n_token_issued, "observe_ticks": r.observe_ticks,
             "min_d": None if r.min_d_observe == float("inf") else round(r.min_d_observe, 2),
             "dsafe_violations": r.dsafe_violations, "granted": granted,
+            "teleport_hz_eff": getattr(r, "_teleport_hz_eff", None),      # §6a: zmierzona kadencja set_pose
+            "teleport_backend": getattr(r, "_teleport_backend", None),
             "note": "REHEARSAL/integracja (B4) — NIE próba (B5); percepcja NIERAPORTOWALNA"}
     r.finish(crit)
     return True
@@ -1106,6 +1138,8 @@ def scenario_A2(r: Runner):
     r.mav.rtl(); time.sleep(6); r.mav.land(); time.sleep(2)
     crit = {"scenario": "A2", "n_entry": r.n_entry, "n_token_issued": r.n_token_issued,
             "n_token_consumed": r.n_token_consumed, "n_refuse_no_auth": r.n_refuse_no_auth,
+            "teleport_hz_eff": getattr(r, "_teleport_hz_eff", None),
+            "teleport_backend": getattr(r, "_teleport_backend", None),
             "max_admission_seq": r.admission_seq, "granted_seqs": sorted(granted_seq),
             "note": "REHEARSAL/integracja (B4) — NIE próba (B5)"}
     r.finish(crit)

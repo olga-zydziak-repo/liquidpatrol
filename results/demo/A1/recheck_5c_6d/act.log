@@ -1,0 +1,7 @@
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[gate] czekam na MAVSDK health...
+[gate] armed=True down=-9.0 fm=OFFBOARD stream_pub=184 deadman_armed=True (N=6t=0.30000000000000004s)
+[gate] manifest PO arm → results/demo/A1/recheck_5c_6d/manifest.json (judge=79b1e9367b85bf7c… armed=True)
+[gate] LIVE bridge+detektor PO arm (topic=/world/world_demo_A1/model/x500_mono_cam_0/link/camera_link/sensor/imager/image, det_hz=2.0, nie-blokująco)
+[teleport] backend=gz.transport13(persistent) target=16.7Hz
+[gate] RESULT: {"scenario": "A1", "n_entry": 0, "n_refuse_no_auth": 0, "n_token_issued": 0, "observe_ticks": 0, "min_d": null, "dsafe_violations": 0, "granted": false, "teleport_hz_eff": 9.25, "teleport_backend": "gz.transport13(persistent)", "note": "REHEARSAL/integracja (B4) — NIE próba (B5); percepcja NIERAPORTOWALNA", "conf_passive_A6": {"theta_conf": 0.1635, "conf_n": 1272, "conf_max": 0.0506, "conf_p99": 0.029, "n_admitted_entry": 0, "gap_held_in_flight": true}, "stall_dist_R3": {"channel": "monotonic_local", "n": 405, "p50": 0.1009, "p95": 0.202, "p99": 0.3028, "max": 0.323, "max_ticks_@20Hz": 6.46, "p99_ticks_@20Hz": 6.06, "over_6ticks(0.30s)": 6, "over_4ticks(0.20s)": 28}}
