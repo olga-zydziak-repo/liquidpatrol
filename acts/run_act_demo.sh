@@ -30,6 +30,9 @@ LOGDIR="$OUTDIR" WORLD="$WORLD" PX4_GZ_WORLD="$WORLD" MODEL=gz_x500_mono_cam bas
 sleep 3
 echo "GUI_PROCS=[$(pgrep -af 'gz sim -g|gz-gui' | grep -v pgrep || echo brak)]" | tee "$OUTDIR/headless_proof.txt"
 for i in $(seq 1 40); do gz topic -l 2>/dev/null | grep -q "/world/${WORLD}/clock" && break; sleep 1; done
+# ANEKS_D7 §7b: próbnik sim↔wall (bramka habitatu H1/H2/H4). In-process /clock, ubijany przy teardown.
+setsid nohup python3 -m acts.rtf_sampler --world "$WORLD" --out "$OUTDIR/rtf_stream.jsonl" > "$OUTDIR/rtf_sampler.log" 2>&1 &
+RTF_SAMPLER=$!
 FILM=$(gz topic -l 2>/dev/null | grep -iE "film.*image$" | head -1)
 echo "FILM=$FILM" | tee "$OUTDIR/topics.txt"
 sleep 3
@@ -52,7 +55,11 @@ TRACE="$OUTDIR/trace.jsonl" GT_FED=1 SCENARIO="$ACT" PX4_GZ_WORLD="$WORLD" HEADL
   PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 -m r02.gate_run_r02 > "$OUTDIR/act.log" 2>&1
 RC=$?
 kill "$GRABBER" 2>/dev/null
+kill -TERM "$RTF_SAMPLER" 2>/dev/null; sleep 1   # §7b: flush próbnika przed teardown gz
 grep -ci 'time jump\|Resetting time sync' "$OUTDIR/stack.log" > "$OUTDIR/timejump_post.txt" 2>/dev/null || true
 grep -ciE 'High Gyro Bias|velocity unstable|horizontal velocity' "$OUTDIR/px4.log" > "$OUTDIR/ekf_health_hits.txt" 2>/dev/null || echo 0 > "$OUTDIR/ekf_health_hits.txt"
+# ANEKS_D7 §7c: ocena habitatu do artefaktów PRÓBY (H1∧H2). Bieg naruszający = INVALID(habitat), liczy się do ≤3.
+PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 -m acts.habitat_gate "$ACT" "$OUTDIR" --out "$OUTDIR/habitat.json" 2>&1 | tee "$OUTDIR/habitat.log"
+HAB=${PIPESTATUS[0]}
 teardown
-echo "[demo] $ACT $RUN DONE rc=$RC → $OUTDIR"; exit $RC
+echo "[demo] $ACT $RUN DONE rc=$RC habitat_rc=$HAB → $OUTDIR"; exit $RC

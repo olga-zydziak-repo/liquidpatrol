@@ -1086,6 +1086,10 @@ def _emit_act_manifest(r, act):
         # (cichy powrót churnu zakazany). Sędzia/harness czyta to pole.
         m["pose_backend"] = m["teleport_backend"]
         m["armed_before_manifest"] = bool(getattr(r.mav, "armed", False))   # dowód: manifest PO arm
+        # ANEKS_D7 §7b: unix wall biegu-zegara osłony (self.t0 = time.time() przy arm). Trace tick `t` =
+        # time.time()-t0 (wall-elapsed), więc bramka habitatu mapuje okna roszczeń (spec timeline_s, w t)
+        # → unix [t0+start, t0+end] → próbki rtf_stream. Wyłącznie do SELEKCJI okna (choreografia), NIE z RTF.
+        m["arm_wall_unix"] = round(getattr(r, "t0", 0.0), 3)
         # H0 (5P): echo EKF2_GPS_CTRL z persystowanego bson (stan który PX4 załadował) — cicha regresja
         # ensure_gps_enabled widoczna w prowieniencji PIERWSZEGO biegu, nie po polowaniu. (0=GPS off=przyczyna 5R3)
         try:

@@ -24,6 +24,9 @@ LOGDIR="$OUTDIR" WORLD="$WORLD" PX4_GZ_WORLD="$WORLD" MODEL=gz_x500_mono_cam bas
 sleep 3
 echo "GUI_PROCS=[$(pgrep -af 'gz sim -g|gz-gui' | grep -v pgrep || echo brak)]" | tee "$OUTDIR/headless_proof.txt"
 for i in $(seq 1 40); do gz topic -l 2>/dev/null | grep -q "/world/${WORLD}/clock" && break; sleep 1; done
+# ANEKS_D7 §7b: próbnik sim↔wall (bramka habitatu). In-process /clock, ubijany przy teardown.
+setsid nohup python3 -m acts.rtf_sampler --world "$WORLD" --out "$OUTDIR/rtf_stream.jsonl" > "$OUTDIR/rtf_sampler.log" 2>&1 &
+RTF_SAMPLER=$!
 FILM=""; for i in $(seq 1 40); do FILM=$(gz topic -l 2>/dev/null | grep -iE "film.*image$" | head -1); [ -n "$FILM" ] && break; sleep 1; done
 echo "FILM_TOPIC=$FILM" | tee "$OUTDIR/film_topic.txt"
 [ -n "$FILM" ] && { setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge.log" 2>&1 & sleep 3; }
@@ -37,7 +40,12 @@ SCEN="S2" GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 \
   PYTHONPATH=".:.certdeps:${PYTHONPATH:-}" python3 -m r03.gate_run_r03 > "$OUTDIR/act.log" 2>&1
 RC=$?
 kill "$GRABBER" 2>/dev/null
+kill -TERM "$RTF_SAMPLER" 2>/dev/null; sleep 1   # §7b: flush próbnika przed teardown gz
 grep -ci 'time jump\|Resetting time sync' "$OUTDIR/stack.log" > "$OUTDIR/timejump_post.txt" 2>/dev/null || true
 grep -ciE 'High Gyro Bias|velocity unstable|horizontal velocity' "$OUTDIR/px4.log" > "$OUTDIR/ekf_health_hits.txt" 2>/dev/null || echo 0 > "$OUTDIR/ekf_health_hits.txt"
+# ANEKS_D7 §7c: ocena habitatu A3 (H1∧H2 na denial→touchdown) do artefaktów próby.
+B0SP="$ROOT/.b0deps/lib/python3.12/site-packages"
+PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 -m acts.habitat_gate A3 "$OUTDIR" --out "$OUTDIR/habitat.json" 2>&1 | tee "$OUTDIR/habitat.log"
+HAB=${PIPESTATUS[0]}
 teardown
-echo "[A3] $RUN DONE rc=$RC → $OUTDIR"; exit $RC
+echo "[A3] $RUN DONE rc=$RC habitat_rc=$HAB → $OUTDIR"; exit $RC
