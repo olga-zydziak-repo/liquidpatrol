@@ -960,7 +960,11 @@ def _act_setup(r, act):
         client = None
         try:
             from r02.intruder_driver import GzPoseClient
-            client = GzPoseClient(WORLD_NAME, async_apply=True, apply_hz=20.0)   # §7a: nieblokujący worker
+            # §7a nieblokujący worker; ANEKS_D6 §3: APPLY_HZ konfigurowalne (default 20). Przy GT-fed kadencja
+            # APLIKACJI (widoczny intruz→film) NIE wpływa na detekcję (kanał GT-fed=projekcja ned_fn) ani na
+            # geometrię sędziego (intr_ned z producenta @16.7 Hz) → obniżenie zbija koszt server-side set_pose.
+            _apply_hz = float(os.environ.get("APPLY_HZ", "20.0"))
+            client = GzPoseClient(WORLD_NAME, async_apply=True, apply_hz=_apply_hz)
         except Exception as e:
             print(f"[teleport] GzPoseClient init FAIL ({e}) — fallback subprocess set_pose")
         sim0 = None                               # §6b: kotwica fazy sim_t do zera choreografii (r.t0)
@@ -1070,6 +1074,7 @@ def _emit_act_manifest(r, act):
         # z definicji (dotyczy OBU torów — wątek teleportu żyje w gt-fed i live). RAPORT_D_B5 §FINAL: 2 Hz
         # teleport zabijał MTI in-window (filtr trwałości odrzucał ruch skokowy).
         m["teleport_hz"] = DEMO_TELEPORT_HZ
+        m["apply_hz"] = float(os.environ.get("APPLY_HZ", "20.0"))   # §3: kadencja APLIKACJI worker (GT-fed: nie wpływa na detekcję)
         # §6a: echo backendu set_pose (trwały klient gz.transport vs subprocess-fallback). Zmierzona
         # efektywna kadencja jest w SCENARIO_RESULT (teleport_hz_eff) — mierzona w trakcie biegu.
         try:
