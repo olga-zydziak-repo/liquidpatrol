@@ -247,7 +247,7 @@ class Runner:
         self.n_entry = 0; self.n_false_entry = 0
         self.observe_ticks = 0; self.dsafe_violations = 0; self.min_d_observe = float("inf")
         self.entry_t = None; self.intruder_present = False; self.intruder_in_view_t = None
-        self._prev_locked = False
+        self._prev_locked = False; self.locked = False   # locked ustawiane w tick(); init dla odczytu pre-tick
         self.idle_sp = None            # gdy ustawiony: setpoint utrzymania (hover) zamiast patrolu gdy nie-locked
         # TOR B — GT-FED: lokalny kanał zasilany pozą GT (bez detektora/kamery)
         self.gt_mode = GT_FED
