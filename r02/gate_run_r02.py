@@ -233,6 +233,7 @@ class Runner:
         # fix #2: setpoint w OSOBNYM WĄTKU o stałym takcie (odsprzężony od pętli decyzji/kanału),
         # by kontencja CPU detektora nie głodziła strumienia → brak natywnego HOLD z utraty offboard.
         self._sp_lock = threading.Lock(); self._latest_sp = None
+        self._sp_yaw = 0.0    # ANEKS_D8 §3c: yaw setpointu (default 0=fwd/N; probe ego-motion trzyma na celu)
         self._stream_stop = threading.Event(); self._stream_thread = None
         self._stream_last = None; self.stream_max_dt = 0.0; self.stream_pub_count = 0
         # DEAD-MAN (fix G5, decyzja Olgi): brak odświeżenia setpointu przez N ticków ⇒ osłona MARTWA ⇒
@@ -309,6 +310,7 @@ class Runner:
         while not self._stream_stop.is_set():
             with self._sp_lock:
                 sp = None if self._latest_sp is None else list(self._latest_sp)
+                sp_yaw = self._sp_yaw
                 stale = time.monotonic() - self._last_refresh
             # DEAD-MAN: gdy zbrojony (po bring_up) i osłona nie odświeżyła setpointu > deadman_s →
             # MILCZ (nie publikuj) → PX4 traci offboard w COM_OF_LOSS_T → warstwa-0 przejmuje.
@@ -321,7 +323,7 @@ class Runner:
                 if self._stream_last is not None:
                     self.stream_max_dt = max(self.stream_max_dt, now - self._stream_last)
                 self._stream_last = now; self.stream_pub_count += 1
-                try: self.xrce.publish_setpoint(sp)
+                try: self.xrce.publish_setpoint(sp, sp_yaw)
                 except Exception: pass
             nxt += PERIOD
             slp = nxt - time.monotonic()
@@ -1136,11 +1138,32 @@ def scenario_A1(r: Runner):
     _start_live_detector(r)                       # B5: tor LIVE PO arm (nie blokuje MAVSDK/GCS przy arm)
     start_teleport()                              # wątek teleportu widocznego intruza (~2 Hz)
     r.idle_sp = [r.start[0], r.start[1], -ALT_M]
+    # ANEKS_D8 §3c: probe ego-motion (T1) — orbita wokół punktu dwell (home), promień dobrany tak, by
+    # zasięg do świat-stałego intruza pozostał w 7-9 m; yaw trzymany na celu (cel stabilny w kadrze, tło
+    # płynie); v=2.5 m/s zachowane z REGATE (paralaksa/krok MTI = v·Δt), ρ steruje zasięgiem (v=ω·ρ).
+    # Intruz przypięty do świata, spec/osc bez zmian. Ruch TYLKO pre-lock (po ENTRY OBSERVE przejmuje).
+    _probe = os.environ.get("PROBE_EGOMOTION", "0") == "1"
+    _orbit_r = float(os.environ.get("PROBE_ORBIT_R", "1.0"))   # ρ: 7.86±ρ (+DALT 1.5) → zasięg ~7.0-9.0 m
+    _orbit_v = float(os.environ.get("PROBE_ORBIT_V", "2.5"))   # REGATE mti_flight legs_v
+    _omega = _orbit_v / max(_orbit_r, 1e-3)
+    _c0, _c1, _cz = r.start[0], r.start[1], -ALT_M
+    _t_probe0 = None
     grant_delay = AC.grant_delay_s(spec)
     hold_end = spec["timeline_s"]["intruder_ring_hold"][1]
     granted = False; entry_local = None
     while time.time() - r.t0 < hold_end + 5:
         t = time.time() - r.t0
+        if _probe and not r.locked:
+            if _t_probe0 is None:
+                _t_probe0 = t
+            ang = _omega * (t - _t_probe0)
+            r.idle_sp = [_c0 + _orbit_r * math.cos(ang), _c1 + _orbit_r * math.sin(ang), _cz]
+            intr = r._intr_ned                                  # świat-stały cel (worker teleportu)
+            if intr is not None:
+                p = r.mav.pos
+                r._sp_yaw = math.atan2(intr[1] - p[1], intr[0] - p[0])   # bearing NED → yaw na cel
+        elif _probe and r.locked:
+            r._sp_yaw = 0.0                                     # po locku OBSERVE przejmuje — domyślny yaw
         d = r.tick()
         if r.locked and entry_local is None:
             entry_local = t
