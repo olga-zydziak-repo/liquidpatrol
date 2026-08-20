@@ -41,7 +41,9 @@ STRINGS = {
         "ev.denial": "GPS aiding denied (EKF2_GPS_CTRL=0).",
         "ev.refuse_pos": "REFUSE(POS_DEGRADED) — position health lost.",
         "ev.touchdown": "Velocity-descent touchdown inside envelope.",
-        "seg.claim": "PERCEPTION (characterized envelope {lo:.0f}–{hi:.0f} m)",
+        # ANEKS_D6 §1b: roszczenie D3(a) = ZACHOWANIE OSŁONY/BRAMY PRZY DANEJ DETEKCJI (token/dominacja/
+        # EXPIRE/containment), NIE wykrywalność celu. Detekcja = PRZESŁANKA (GT-fed), nie teza.
+        "seg.claim": "CERTIFIED LAYER — OBSERVE hold, safe distance (given GT-fed detection; ring {lo:.0f}–{hi:.0f} m)",
         "seg.transit": "beyond characterized envelope — transit",
         "pl.proved": "PROVED — shield certificates\nP1 (z3, {p1n}/{p1n} unsat) sha:{p1h}\nP4 (PASS) sha:{p4h}\nP5 (PASS, {p5cov}) sha:{p5h}",
         "pl.measured": "MEASURED (this run)\n{lines}",
@@ -49,6 +51,11 @@ STRINGS = {
         "pl.per_admission": "Authorization is per admission episode — no target re-identification (B1 §1.3).",
         "pl.authority_gating": "Authority gating (local HMAC) — demonstration, not secure C2 (B1 §1.7).",
         "pl.trl": "SITL only — TRL 2–3.",
+        # ANEKS_D6 §1c: DWIE plansze OBOWIĄZKOWE (SR-M2 — brak którejkolwiek albo sformułowanie roszczące
+        # percepcję live = naruszenie). Treść 1:1 z aneksu.
+        "pl.detection_channel": "detection channel: ground-truth-fed (idealized detector)",
+        "pl.live_perception": ("live perception characterized separately — REGATE: cov_entry_once=1.0 @7–9 m, "
+                               "ego-motion flight; not claimed in dwell-hold"),
         "pl.cut": "— separate boot / explicit cut —",
         "pl.contrast": "Contrast: AUTO.LAND flyaway {flyaway} m (RAPORT_R03A B1-bis)\nvs velocity-descent touchdown {td} m (this run).",
     },
@@ -204,6 +211,10 @@ def read_cert(name):
 def build_planszas(act, trace, spec, found, S):
     """Plansze obowiązkowe — pola z plików (certy/spec/trace). ŻADNEGO hasha/liczby na sztywno."""
     pls = []
+    # ANEKS_D6 §1c: dyskleimery OBOWIĄZKOWE NA POCZĄTKU dla aktów GT-fed (A1/A2). SR-M2: brak = naruszenie.
+    if act in ("A1", "A2"):
+        pls.append({"kind": "DETECTION_CHANNEL", "text": S["pl.detection_channel"]})
+        pls.append({"kind": "LIVE_PERCEPTION", "text": S["pl.live_perception"]})
     p1 = read_cert("P1"); p4 = read_cert("P4"); p5 = read_cert("P5")
     p1n = len([k for k, v in p1.get("obligations", {}).items() if v == "unsat"])
     pls.append({"kind": "PROVED", "text": S["pl.proved"].format(
