@@ -43,9 +43,13 @@ kill "$GRABBER" 2>/dev/null
 kill -TERM "$RTF_SAMPLER" 2>/dev/null; sleep 1   # §7b: flush próbnika przed teardown gz
 grep -ci 'time jump\|Resetting time sync' "$OUTDIR/stack.log" > "$OUTDIR/timejump_post.txt" 2>/dev/null || true
 grep -ciE 'High Gyro Bias|velocity unstable|horizontal velocity' "$OUTDIR/px4.log" > "$OUTDIR/ekf_health_hits.txt" 2>/dev/null || echo 0 > "$OUTDIR/ekf_health_hits.txt"
-# ANEKS_D7 §7c: ocena habitatu A3 (H1∧H2 na denial→touchdown) do artefaktów próby.
+# ANEKS_D6 §4 / D7: manifest A3 (r03 nie emituje) → habitat (H1∧H2 denial→touchdown) → finalize → sędzia.
 B0SP="$ROOT/.b0deps/lib/python3.12/site-packages"
+PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 -m acts.build_a3_manifest "$OUTDIR" --world-sdf "$ROOT/worlds/${WORLD}.sdf" 2>&1 | tee "$OUTDIR/a3_manifest.log"
 PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 -m acts.habitat_gate A3 "$OUTDIR" --out "$OUTDIR/habitat.json" 2>&1 | tee "$OUTDIR/habitat.log"
 HAB=${PIPESTATUS[0]}
+PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 -m acts.finalize_manifest "$OUTDIR" --world-sdf "$ROOT/worlds/${WORLD}.sdf" 2>&1 | tee "$OUTDIR/finalize.log"
+PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 -m acts.judge_run "$OUTDIR/trace.jsonl" "$ROOT/acts/A3_spec.yaml" "$OUTDIR/manifest.json" --out "$OUTDIR/verdict.json" 2>&1 | tee "$OUTDIR/judge.log"
+JUD=${PIPESTATUS[0]}
 teardown
-echo "[A3] $RUN DONE rc=$RC habitat_rc=$HAB → $OUTDIR"; exit $RC
+echo "[A3] $RUN DONE rc=$RC habitat_rc=$HAB judge_rc=$JUD → $OUTDIR"; exit $RC

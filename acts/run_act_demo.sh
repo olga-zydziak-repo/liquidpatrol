@@ -61,5 +61,9 @@ grep -ciE 'High Gyro Bias|velocity unstable|horizontal velocity' "$OUTDIR/px4.lo
 # ANEKS_D7 §7c: ocena habitatu do artefaktów PRÓBY (H1∧H2). Bieg naruszający = INVALID(habitat), liczy się do ≤3.
 PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 -m acts.habitat_gate "$ACT" "$OUTDIR" --out "$OUTDIR/habitat.json" 2>&1 | tee "$OUTDIR/habitat.log"
 HAB=${PIPESTATUS[0]}
+# domknięcie ANEKS-H w manifeście (B4) → sędzia FROZEN 79b1e936 → verdict.json (ANEKS_D6 §4)
+PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 -m acts.finalize_manifest "$OUTDIR" --world-sdf "$ROOT/worlds/${WORLD}.sdf" 2>&1 | tee "$OUTDIR/finalize.log"
+PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 -m acts.judge_run "$OUTDIR/trace.jsonl" "$ROOT/acts/${ACT}_spec.yaml" "$OUTDIR/manifest.json" --out "$OUTDIR/verdict.json" 2>&1 | tee "$OUTDIR/judge.log"
+JUD=${PIPESTATUS[0]}
 teardown
-echo "[demo] $ACT $RUN DONE rc=$RC habitat_rc=$HAB → $OUTDIR"; exit $RC
+echo "[demo] $ACT $RUN DONE rc=$RC habitat_rc=$HAB judge_rc=$JUD → $OUTDIR"; exit $RC
