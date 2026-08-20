@@ -964,13 +964,23 @@ def _act_setup(r, act):
             # APLIKACJI (widoczny intruz→film) NIE wpływa na detekcję (kanał GT-fed=projekcja ned_fn) ani na
             # geometrię sędziego (intr_ned z producenta @16.7 Hz) → obniżenie zbija koszt server-side set_pose.
             _apply_hz = float(os.environ.get("APPLY_HZ", "20.0"))
-            client = GzPoseClient(WORLD_NAME, async_apply=True, apply_hz=_apply_hz)
+            # ANEKS_D7 §7d: POSE_ASYNC=0 → klient BLOKUJĄCY z §6d (0% głębokich dipów; koszt server-side
+            # set_pose UJEDNOLICONY zamiast bursty stalli worker'a FF które wchodziły w segment roszczenia
+            # A2 → spurious EXPIRE, RAPORT §AKT-13). §3: przy GT-fed kadencja set_pose nie wpływa na detekcję
+            # (intr_ned z producenta @16.7 Hz nietknięte) → decymacja set_pose do APPLY_HZ obniża koszt
+            # server-side (↑Δsim/Δwall) trzymając lockstep. Domyślnie async (A1/A3 PASS); blokujący dla A2 retry.
+            _async = os.environ.get("POSE_ASYNC", "1") != "0"
+            client = GzPoseClient(WORLD_NAME, async_apply=_async, apply_hz=_apply_hz)
         except Exception as e:
             print(f"[teleport] GzPoseClient init FAIL ({e}) — fallback subprocess set_pose")
+            _async = True
         sim0 = None                               # §6b: kotwica fazy sim_t do zera choreografii (r.t0)
         n_set = 0; loop_t0 = time.time(); last_log = loop_t0
+        _blk_dt = 1.0 / max(_apply_hz, 0.1)       # §7d: okres decymacji set_pose w trybie blokującym
+        _last_apply = 0.0
         r._teleport_backend = "gz.transport13(persistent)" if client is not None else "subprocess(fallback)"
-        print(f"[teleport] backend={r._teleport_backend} target={DEMO_TELEPORT_HZ}Hz")
+        r._pose_apply_mode = ("async_ff" if _async else "blocking_6d") if client is not None else "subprocess"
+        print(f"[teleport] backend={r._teleport_backend} mode={r._pose_apply_mode} apply_hz={_apply_hz} target={DEMO_TELEPORT_HZ}Hz")
         while not r._teleport_stop.is_set():
             it0 = time.time()
             st = client.sim_t() if client is not None else None
@@ -984,12 +994,20 @@ def _act_setup(r, act):
             # B5 LIVE: aktor STEROWANY (teleport) — poza NED = znana GT choreografii (NIE percepcja); tracowi.
             r._intr_ned = [round(p[0], 3), round(p[1], 3), round(p[2], 3)] if p is not None else None
             if p is not None:
+                # §7d: w trybie blokującym decymuj set_pose do APPLY_HZ (koszt server-side ↓, lockstep);
+                # tryb async wysyła co tick (set_pose nieblokujące → worker aplikuje @apply_hz).
+                _do_apply = _async or (it0 - _last_apply >= _blk_dt)
                 try:
                     if client is not None:
-                        client.set_pose(round(p[0], 3), round(p[1], 3), round(-p[2], 3))
-                    else:
+                        if _do_apply:
+                            client.set_pose(round(p[0], 3), round(p[1], 3), round(-p[2], 3))
+                            if not _async:
+                                _last_apply = it0; n_set += 1
+                            else:
+                                n_set += 1
+                    elif _do_apply:
                         _sp_fallback(WORLD_NAME, round(p[0], 3), round(p[1], 3), round(-p[2], 3))
-                    n_set += 1
+                        _last_apply = it0; n_set += 1
                 except Exception:
                     pass
             # §6a: producent @DEMO_TELEPORT_DT (16.7 Hz — świeżość intr_ned); §7a: set_pose NIEBLOKUJĄCE,
@@ -1085,6 +1103,9 @@ def _emit_act_manifest(r, act):
         # §7c higiena backendu: pose_backend echo; bieg AKTU z 'subprocess(fallback)' = INVALID z definicji
         # (cichy powrót churnu zakazany). Sędzia/harness czyta to pole.
         m["pose_backend"] = m["teleport_backend"]
+        # ANEKS_D7 §7d: tryb aplikacji pozy (async_ff domyślny; blocking_6d = fallback przy dipie w oknie
+        # roszczenia). Echo do artefaktów/raportu; subprocess(fallback) = INVALID (§7c).
+        m["pose_apply_mode"] = getattr(r, "_pose_apply_mode", "async_ff" if os.environ.get("POSE_ASYNC", "1") != "0" else "blocking_6d")
         m["armed_before_manifest"] = bool(getattr(r.mav, "armed", False))   # dowód: manifest PO arm
         # ANEKS_D7 §7b: unix wall biegu-zegara osłony (self.t0 = time.time() przy arm). Trace tick `t` =
         # time.time()-t0 (wall-elapsed), więc bramka habitatu mapuje okna roszczeń (spec timeline_s, w t)
