@@ -82,15 +82,29 @@ def main():
     a["timejump"] = tj
     a["ekf_health_hits"] = _read_int(os.path.join(args.run_dir, "ekf_health_hits.txt"), 1)
 
-    # rtf z tick-period (metoda B4)
+    # rtf_start/rtf_end = PRÓBKOWANY gz-RTF (mediana po segmencie roszczeń), z habitat.json.
+    # ANEKS_D7: gz-RTF teraz próbkowany (`rtf_sampler`); B4 miał proxy (A1: tick-period; A3: placeholder
+    # 0.992). Uniform, dokładniejszy, sim-derived. Tick-period trzymany jako prowieniencja (rtf_tickperiod):
+    # dla r03 (A3) proxy tick-period=loop-cadence <20 Hz → 0.963 FAŁSZYWIE poniżej pasma, gdy sim RTF ~1.0.
     p50 = _stall_p50(args.run_dir)
-    if p50:
-        rtf = round(TICK_NOMINAL / p50, 3)
+    a["rtf_tickperiod"] = round(TICK_NOMINAL / p50, 3) if p50 else None
+    hb = os.path.join(args.run_dir, "habitat.json")
+    claim_medians = []
+    if os.path.exists(hb):
+        H = json.load(open(hb))
+        claim_medians = [s["metrics"]["median_rtf"] for s in H.get("segments", [])
+                         if s.get("kind") == "claim" and s["metrics"].get("median_rtf") is not None]
+    if claim_medians:
+        rtf = round(min(claim_medians), 3)   # min per-claim mediana (zachowawczo, wciąż sim-derived)
         a["rtf_start"] = rtf; a["rtf_end"] = rtf
-        a["rtf_method"] = f"TICK_NOMINAL(0.05)/stall_dist.p50({p50}) — jak B4"
+        a["rtf_method"] = "min per-claim median(sampled gz-RTF) z habitat.json (ANEKS_D7)"
+    elif p50:
+        rtf = round(TICK_NOMINAL / p50, 3)   # fallback: proxy tick-period (B4) gdy brak habitat
+        a["rtf_start"] = rtf; a["rtf_end"] = rtf
+        a["rtf_method"] = f"FALLBACK tick-period {TICK_NOMINAL}/p50({p50}) — brak habitat.json"
     else:
         a["rtf_start"] = None; a["rtf_end"] = None
-        a["rtf_method"] = "stall_dist.p50 niedostępne"
+        a["rtf_method"] = "brak habitat.json i stall p50"
 
     # world_hash_matches: sha256(frozen world SDF) == manifest.world_hash
     wsdf = args.world_sdf or m.get("world_sdf")
