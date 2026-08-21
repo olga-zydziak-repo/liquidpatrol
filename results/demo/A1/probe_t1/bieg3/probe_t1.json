@@ -1,0 +1,71 @@
+{
+  "outdir": "/home/olga/projects/liquidpatrol/results/demo/A1/probe_t1/bieg3",
+  "verdict": "FAIL",
+  "borderline": false,
+  "non_run(§4d)": false,
+  "criteria": {
+    "entry_in_window": false,
+    "mti_ok_run>=3": true,
+    "box_on_target": true,
+    "central_gate_5c(>=80%)": false
+  },
+  "central_ok_5c": {
+    "n_env_frames": 52,
+    "central_ok_frac": 0.231,
+    "frac_min": 0.8,
+    "cy_margin_med": 0.23,
+    "cy_margin_p90": 0.336,
+    "cx_margin_med": 0.378,
+    "margin_thr": 0.12,
+    "drone_alt_lever": "§5b vertical-centering (PROBE_ALT)"
+  },
+  "detector_ready(§4b)": {
+    "ready_wall_s": 20.422,
+    "timeout": false,
+    "window_clock": "sim_t@detector_ready"
+  },
+  "envelope_held(report-only,§3e)": true,
+  "entry": {
+    "n_entry": 0,
+    "entry_t": null,
+    "range_at_entry_m": null,
+    "ring_dwell_t": [
+      42.0,
+      71.4
+    ],
+    "entry_before_ring(report-only)": false,
+    "first_in_ring_t": 40.501
+  },
+  "range_to_target_m": {
+    "n": 520,
+    "min": 7.48,
+    "med": 7.96,
+    "max": 8.34,
+    "band_frac_7_9": 1.0
+  },
+  "mti": {
+    "n_dbg_ticks": 135,
+    "mti_ok_longest_run": 8,
+    "n_mti_ok": 73,
+    "n_comps_med": 15.0,
+    "n_comps_max": 35.0
+  },
+  "box_channel": {
+    "n_box_samples": 7,
+    "cx_med": 0.411,
+    "cy_med": 0.675,
+    "cx_std": 0.16,
+    "cy_std": 0.202,
+    "central": true
+  },
+  "mti_frame_mechanism": {
+    "n_frames": 283,
+    "diff_max_med": 177,
+    "diff_max_p90": 177,
+    "diff_thr": 22,
+    "diff_over_thr_frac": 1.0,
+    "n_kept_med": 22,
+    "n_kept_max": 42
+  },
+  "note": "PROBE (§3d Bieg 1) — NIE próba, NIE materiał dema; percepcja nieraportowalna jako wynik aktu (SR-J2)"
+}
