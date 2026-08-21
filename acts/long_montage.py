@@ -47,7 +47,7 @@ def phases_A3(rec, tsec):
 def main():
     import cv2
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    from acts.hud_render import make_proj, _enu, _ticks, _tsec, gate_state
+    from acts.hud_render import make_proj, _enu_intr, _ticks, _tsec, gate_state
     from acts.build_clip import _text_card, _wrap
     from tools.gen_subtitles import STRINGS
     S = STRINGS["en"]
@@ -83,14 +83,13 @@ def main():
             MODE, sub = "LAND", None
         col = {"PATROL": (200, 200, 200), "OBSERVE": (120, 200, 120), "REFUSE": (70, 90, 235),
                "LAND": (60, 180, 235)}.get(MODE, (200, 200, 200))
-        # ANEKS_U1R §2b / U2R §6: datum toru GT (box-on-silhouette WARUNKOWE ≤0.5m — intruz renderuje
-        # się blado w filmie, więc trzymamy datum: diament + leader + etykieta). Kolor cyan instrumentowy.
+        # U2R-2 §6: BOX-ON-SILHOUETTE (intruz ciemny/kontrastowy widoczny; rozjazd toru ≤0.5m slaving +
+        # naprawa E/N). Box wokół sylwetki + etykieta „GT-fed track (admitted)". Kolor czerwony.
         if ip is not None:
-            u, v = int(ip[0]), int(ip[1]); DAT = (225, 205, 70)
-            lx, ly = u + 50, v - 44
-            cv2.drawMarker(img, (u, v), DAT, cv2.MARKER_DIAMOND, 24, 2, cv2.LINE_AA)
-            cv2.line(img, (u + 11, v - 11), (lx - 4, ly + 4), DAT, 1, cv2.LINE_AA)
-            cv2.putText(img, f"GT track · {rng:.1f} m", (lx, ly), cv2.FONT_HERSHEY_SIMPLEX, 0.48, DAT, 1, cv2.LINE_AA)
+            u, v = int(ip[0]), int(ip[1]); hw = 48
+            cv2.rectangle(img, (u - hw, v - 30), (u + hw, v + 30), DATUM, 2, cv2.LINE_AA)
+            cv2.putText(img, f"GT-fed track (admitted) · {rng:.1f} m", (u - hw, v - 38),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.46, DATUM, 1, cv2.LINE_AA)
         # MODE bar
         cv2.rectangle(img, (18, 16), (270, 52), (0, 0, 0), -1)
         cv2.rectangle(img, (18, 16), (30, 52), col, -1)
@@ -103,12 +102,12 @@ def main():
         cv2.putText(img, f"sim t = {sim_t:6.1f} s", (W - 250, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (180, 210, 255), 2, cv2.LINE_AA)
         if xn >= 1.5:
             cv2.putText(img, f"time x{xn:.0f}", (W - 250, 68), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (120, 200, 255), 2, cv2.LINE_AA)
-        cv2.putText(img, f"ACT {act} · world v3 · from trace.jsonl (judged VALID)", (24, H - 54),
+        cv2.putText(img, f"ACT {act} · world v3.1 · from trace.jsonl (judged VALID)", (24, H - 54),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.42, (150, 150, 160), 1, cv2.LINE_AA)
         return img
 
     # tytuł + §1c
-    hold(_text_card(cv2, ["LiquidPatrol DEMO-B", "acts: A1 · A3 (world v3)", "certified safety layer — behavior given detection"],
+    hold(_text_card(cv2, ["LiquidPatrol DEMO-B", "acts: A1 · A3 (world v3.1)", "certified safety layer — behavior given detection"],
                     sub="SITL / TRL 2-3 — not an operational system"), 3.5)
     hold(_text_card(cv2, _wrap(cv2, S["pl.detection_channel"], 0.8, W - 160), sub="mandatory disclaimer (ANEKS_D6 §1c)"), 3.5)
     hold(_text_card(cv2, _wrap(cv2, S["pl.live_perception"], 0.7, W - 160), sub="mandatory disclaimer (ANEKS_D6 §1c)"), 3.5)
@@ -158,7 +157,7 @@ def main():
                 r = rec[int(np.argmin(np.abs(T - st)))]
                 ip, rng = None, 0.0
                 if act == "A1" and r.get("intr_ned"):
-                    ip = proj(_enu(r["intr_ned"]))
+                    ip = proj(_enu_intr(r["intr_ned"]))
                     rng = math.sqrt(sum((r["intr_ned"][j] - r["pos"][j]) ** 2 for j in range(3)))
                 tok = None
                 for e in events:
@@ -168,7 +167,7 @@ def main():
         sha = hashlib.sha256("".join(os.path.basename(x) for x in fs).encode()).hexdigest()[:16]
         prov["acts"][act] = {"run_dir": rd, "n_frames": len(fs), "frames_sha16": sha}
 
-    hold(_text_card(cv2, ["END — DEMO-B (world v3)", "detection: GT-fed; markers = certified GT track"], sub="LiquidPatrol"), 3.0)
+    hold(_text_card(cv2, ["END — DEMO-B (world v3.1)", "detection: GT-fed; markers = certified GT track"], sub="LiquidPatrol"), 3.0)
     vw.release()
     json.dump(prov, open(os.path.splitext(args.out)[0] + "_manifest.json", "w"), indent=2, ensure_ascii=False)
     dur = None

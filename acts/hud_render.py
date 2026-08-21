@@ -24,7 +24,7 @@ W, H = 1280, 720
 
 # --- kamera filmowa (world_demo_A1/A3.sdf v1.0; film_cam FREEZE ANEKS_D2) ---
 CAMS = {
-    "A1": dict(C=[10.0, -14.0, 8.0], pitch=0.1783, yaw=1.9799),
+    "A1": dict(C=[11.0, -13.0, 11.5], pitch=-0.0209, yaw=2.0032),   # U2R-2 §3: kamera v3.1 (podniesiona)
     "A3": dict(C=[14.0, -18.0, 7.0], pitch=-0.1649, yaw=1.6263),   # world_demo_A3.sdf film_cam (aim (13,0,4))
 }
 HFOV = 1.20
@@ -39,7 +39,14 @@ def _R(yaw, pitch):
 
 
 def _enu(ned):
+    # DRON: mav.pos = prawdziwy NED [N,E,D] → ENU [E,N,U] (walidacja reproj drona 8 px).
     return np.array([ned[1], ned[0], -ned[2]])
+
+
+def _enu_intr(ned):
+    # INTRUZ: intr_ned to konwencja STEROWNIKA [E,N,-U] (intruder_driver set_pose: gz_x=intr_ned[0]=East).
+    # BEZ zamiany E/N (naprawa rozjazdu markera U1R/U2R — teleport i HUD zgodne). U2R-2 §6.
+    return np.array([ned[0], ned[1], -ned[2]])
 
 
 def make_proj(act):
@@ -189,7 +196,7 @@ def render_act(act, run_dir, control_out=None):
         r = rec_at(t)
         ip, rng = None, 0.0
         if act == "A1" and r.get("intr_ned"):
-            ip = proj(_enu(r["intr_ned"]))
+            ip = proj(_enu_intr(r["intr_ned"]))
             rng = math.sqrt(sum((r["intr_ned"][k] - r["pos"][k]) ** 2 for k in range(3)))
         tok = None
         for e in events:
