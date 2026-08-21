@@ -1,0 +1,68 @@
+{
+  "act": "A1",
+  "verdict": "VALID",
+  "criteria": [
+    {
+      "name": "aneks_h_valid",
+      "ok": true,
+      "detail": {
+        "headless": true,
+        "rtf": [
+          1.0,
+          1.0
+        ],
+        "timejump": 0,
+        "ekf_health_hits": 0,
+        "world_hash_matches": true
+      },
+      "source": "PRE_D §5 (boot ANEKS-H ważny); RTF∈[0.97,1.03], timejump 0"
+    },
+    {
+      "name": "trace_complete",
+      "ok": true,
+      "detail": {
+        "missing": [],
+        "required": [
+          "entry",
+          "refuse_no_auth",
+          "grant",
+          "observe"
+        ]
+      },
+      "source": "PRE_D §5 trace kompletny (asert = gen_subtitles.REQUIRED_EVENTS)"
+    },
+    {
+      "name": "entry_in_dwell_ring",
+      "ok": true,
+      "detail": {
+        "entry_range3d": 8.000270245435463,
+        "band": [
+          7.0,
+          9.0
+        ]
+      },
+      "source": "PRE_D §5 A1 „ENTRY osiągnięte w reżimie dwell 7–9 m"
+    },
+    {
+      "name": "no_auth_before_token",
+      "ok": true,
+      "detail": {
+        "t_refuse_no_auth": 25.003,
+        "t_grant": 28.013
+      },
+      "source": "PRE_D §5 A1 „REFUSE(NO_AUTH) pokazane PRZED tokenem"
+    },
+    {
+      "name": "observe_after_token_dsafe_ok",
+      "ok": true,
+      "detail": {
+        "observe_ticks_after_token": 464,
+        "min_d": 6.55,
+        "floor": 4.82
+      },
+      "source": "PRE_D §5 A1 „po tokenie OBSERVE z 0 naruszeń D_safe (config_r02 D_safe=5.32)"
+    }
+  ],
+  "violated": [],
+  "judge_sha256": "79b1e9367b85bf7c29f97dc5ea9757052be68a26903e48c0a237f941526a671a"
+}
