@@ -1,0 +1,38 @@
+{
+  "script_sha256": "d8c837e074ca61148f880602d22684574d6cbf91f05126747c1f2373bfdd7335",
+  "camera": {
+    "A1": {
+      "C": [
+        10.0,
+        -14.0,
+        8.0
+      ],
+      "pitch": 0.1783,
+      "yaw": 1.9799
+    },
+    "A3": {
+      "C": [
+        14.0,
+        -18.0,
+        7.0
+      ],
+      "pitch": -0.1649,
+      "yaw": 1.6263
+    }
+  },
+  "hfov": 1.2,
+  "acts": {
+    "A1": {
+      "run_dir": "results/demo/A1/proba_1",
+      "n_frames": 29,
+      "frames_sha16": "6a181ce90a99aafd",
+      "time_calibration": "drone-fit t0=5.0 dt=1.85 err=8px n=20"
+    },
+    "A3": {
+      "run_dir": "results/demo/rehearsal/A3/proba_1",
+      "n_frames": 14,
+      "frames_sha16": "2acc279e062ffb96",
+      "time_calibration": "linear t0=0.0 dt=1.52 (A3: no intruder marker)"
+    }
+  }
+}
