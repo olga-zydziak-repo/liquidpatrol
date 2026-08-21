@@ -14,9 +14,12 @@ mkdir -p "$OUTDIR"
 export PROBE_EGOMOTION=1
 export PROBE_ORBIT_R="${PROBE_ORBIT_R:-1.0}"
 export PROBE_ORBIT_V="${PROBE_ORBIT_V:-2.5}"
-# ANEKS_D8 §5b (Bieg 2): dźwignia CENTROWANIA PIONOWEGO — wysokość dwell drona = wysokość pierścienia
-# intruza (11.5 ENU) → DALT_eff~0 → cel na osi kamery (cy~0.5). REGATE elew 10.8° (PROFIL_REGATE:48,91)
-# dała cy 0.28 (proba_1) > próg §5c 0.12; podniesienie drona centruje cel. Range 3D=poziomy 7.55-8.32∈[7,9].
+# ANEKS_D8 §7b (bieg rozstrzygający): WEAVE translacyjny ⊥ LOS (proste nogi ±1.2 m @ 2.5 m/s, yaw na
+# cel, ALT statyczna a priori). Usuwa MECHANIZM przechyłu orbity (bieg3: cy zdominowane bankingiem, nie
+# alt). §5b ALT a priori z geometrii elewacji: drone_alt = intruz ring alt 11.5 (kamera level-forward,
+# PRE_MTI:50) → elew 0 → cy 0.5. NIE używać cy(alt) z biegów 2-3 (skażone przechyłem, §7b).
+export PROBE_MODE="${PROBE_MODE:-weave}"
+export PROBE_WEAVE_A="${PROBE_WEAVE_A:-1.2}"
 export PROBE_ALT="${PROBE_ALT:-11.5}"
 # §3e/§5c instrumentacja
 export MTI_FRAME_LOG="$OUTDIR/mti_frame.jsonl"   # detector_node (dziedziczy env) — per-klatka diff_max/n_kept

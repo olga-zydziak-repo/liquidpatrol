@@ -22,6 +22,8 @@ BAND_LO, BAND_HI = 7.0, 9.0
 EDGE_MARGIN = 0.10        # ENTRY_EDGE_MARGIN — box centralny ⟺ cx,cy ∈ [0.1,0.9]
 CENTRAL_MARGIN = 0.12    # ANEKS_D8 §5c: margines centralności |cy−0.5| ≤ 0.12 (dźwignia pionowa §5b)
 CENTRAL_FRAC_MIN = 0.80  # §5c: central-ok w ≥80% klatek w kopercie
+SIG_STD_MAX = 0.10       # ANEKS_D8 §7c: sygnatura falsyfikowalna — wariancja cy ZAPADA SIĘ pod weave
+ORBIT_CY_STD = 0.19      # baseline orbity (bieg3 pre-lock cy_std) — punkt odniesienia zapadu
 
 
 def _load_jsonl(path):
@@ -178,6 +180,16 @@ def main():
     central_ok_frac = (n_central_ok / len(cy_margins)) if cy_margins else None
     central_gate = central_ok_frac is not None and central_ok_frac >= CENTRAL_FRAC_MIN
 
+    # ── ANEKS_D8 §7c: SYGNATURA FALSYFIKOWALNA (a priori, niezależna od bramki) ──
+    # Hipoteza: cy zdominowane przechyłem. Weave translacyjny (min banking) ⇒ wariancja cy ZAPADA SIĘ
+    # (plateau w nogach, spike'i tylko na nawrotach) vs orbita (ciągły swing, cy_std~0.19). Raportować
+    # BEZ WZGLĘDU na bramkę. Δcy klatka-do-klatki: mediana mała (plateau) + maksima rzadkie (nawroty).
+    cy_series = [d["cy"] for d in env_frames]
+    cy_std = _std(cy_series, _med(cy_series)) if cy_series else None
+    cy_dabs = [abs(cy_series[i] - cy_series[i - 1]) for i in range(1, len(cy_series))]
+    sig_collapse = (cy_std is not None and cy_std < SIG_STD_MAX)   # zapad vs baseline orbity 0.19
+    probe_mode = os.environ.get("PROBE_MODE", "?")
+
     # ── MTI mechanizm (klatki): diff_max vs próg, n_kept ──
     diffs = [m.get("diff_max") for m in mti if m.get("diff_max") is not None]
     nkept = [m.get("n_kept") for m in mti if m.get("n_kept") is not None]
@@ -204,7 +216,15 @@ def main():
                           "frac_min": CENTRAL_FRAC_MIN, "cy_margin_med": round(_med(cy_margins), 3) if cy_margins else None,
                           "cy_margin_p90": round(_pctl(cy_margins, 90), 3) if cy_margins else None,
                           "cx_margin_med": round(_med(cx_margins), 3) if cx_margins else None,
+                          "cy_med": round(_med(cy_series), 3) if cy_series else None,
                           "margin_thr": CENTRAL_MARGIN, "drone_alt_lever": "§5b vertical-centering (PROBE_ALT)"},
+        "signature_7c": {"probe_mode": probe_mode, "cy_std": round(cy_std, 3) if cy_std is not None else None,
+                         "orbit_baseline_std": ORBIT_CY_STD, "std_collapse_thr": SIG_STD_MAX,
+                         "cy_variance_collapsed": sig_collapse, "n_frames": len(cy_series),
+                         "dcy_med": round(_med(cy_dabs), 3) if cy_dabs else None,
+                         "dcy_max": round(max(cy_dabs), 3) if cy_dabs else None,
+                         "cy_series": [round(c, 2) for c in cy_series][:60],
+                         "note": "§7c a priori: weave⇒cy_std zapada (plateau nogi, spike nawroty) vs orbita 0.19; raport niezależny od bramki"},
         "detector_ready(§4b)": {"ready_wall_s": ready_t, "timeout": ready_timeout,
                                  "window_clock": "sim_t@detector_ready" if ready_t is not None else "wall@arm"},
         "envelope_held(report-only,§3e)": envelope_held,

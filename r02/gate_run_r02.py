@@ -1138,6 +1138,9 @@ def _emit_act_manifest(r, act):
         # ANEKS_D8 §5c echo: wysokość dwell drona (stała runnera; dźwignia centrowania pionowego §5b).
         # Intruz ring alt = 11.5 ENU (spec, NIETKNIĘTY); drone_alt→11.5 zeruje DALT_eff (cel na osi kamery).
         m["drone_alt_m"] = float(os.environ.get("PROBE_ALT", str(ALT_M)))
+        # ANEKS_D8 §7b echo: profil ego-motion (orbita vs weave translacyjny ⊥ LOS). Stała runnera.
+        m["probe_motion"] = os.environ.get("PROBE_MODE", "orbit")
+        m["weave_amp_m"] = float(os.environ.get("PROBE_WEAVE_A", "1.2"))
         # §5a: echo kadencji RUCHU intruza (teleport) == REGATE ~16.7 Hz. Bieg z teleport_hz≠16.7 = INVALID
         # z definicji (dotyczy OBU torów — wątek teleportu żyje w gt-fed i live). RAPORT_D_B5 §FINAL: 2 Hz
         # teleport zabijał MTI in-window (filtr trwałości odrzucał ruch skokowy).
@@ -1204,6 +1207,14 @@ def scenario_A1(r: Runner):
     _orbit_r = float(os.environ.get("PROBE_ORBIT_R", "1.0"))   # ρ: 7.86±ρ (+DALT 1.5) → zasięg ~7.0-9.0 m
     _orbit_v = float(os.environ.get("PROBE_ORBIT_V", "2.5"))   # REGATE mti_flight legs_v
     _omega = _orbit_v / max(_orbit_r, 1e-3)
+    # ANEKS_D8 §7b: TRYB WEAVE translacyjny — proste nogi PROSTOPADŁE do linii celu (±A @ v, krótkie nawroty),
+    # yaw na celu, ALT statyczna. Usuwa MECHANIZM przechyłu (orbita ρ=1/ω=2.5 bankowała ciągle → kamera
+    # body-fixed swingowała cy niezależnie od ALT, §6/bieg3). Translacja: min banking (tylko na nawrotach §7c),
+    # tło płynie (ego-motion), zasięg ~stały (prostopadłość). Oś weave zamrożona przy 1. bearing (proste nogi).
+    _mode = os.environ.get("PROBE_MODE", "orbit")
+    _weave_A = float(os.environ.get("PROBE_WEAVE_A", "1.2"))   # amplituda nogi ±A (§7b ~1.2 m)
+    _weave_period = 4.0 * _weave_A / max(_orbit_v, 1e-3)       # pełny cykl 0→+A→−A→0 (constant-speed 2.5 m/s)
+    _perp = None                                              # oś weave (N,E) ⊥ LOS — zamrożona przy 1. tiku
     _c0, _c1, _cz = r.start[0], r.start[1], -_probe_alt   # §5b: dwell na probe alt (centrowanie pionowe)
     _t_probe0 = None
     grant_delay = AC.grant_delay_s(spec)
@@ -1225,12 +1236,25 @@ def scenario_A1(r: Runner):
         if _probe and not r.locked:
             if _t_probe0 is None:
                 _t_probe0 = t
-            ang = _omega * (t - _t_probe0)
-            r.idle_sp = [_c0 + _orbit_r * math.cos(ang), _c1 + _orbit_r * math.sin(ang), _cz]
             intr = r._intr_ned                                  # świat-stały cel (worker teleportu)
-            if intr is not None:
-                p = r.mav.pos
-                r._sp_yaw = math.atan2(intr[1] - p[1], intr[0] - p[0])   # bearing NED → yaw na cel
+            if _mode == "weave":
+                # §7b: nogi translacyjne ⊥ LOS. Oś ⊥ zamrożona przy 1. bearing (proste nogi, brak dryfu osi).
+                if intr is not None:
+                    p = r.mav.pos
+                    b = math.atan2(intr[1] - p[1], intr[0] - p[0])   # bearing NED → yaw na cel
+                    r._sp_yaw = b
+                    if _perp is None:
+                        _perp = (-math.sin(b), math.cos(b))          # ⊥ do LOS (body-right przy yaw=bearing)
+                if _perp is not None:
+                    # trójkąt constant-speed ∈[−A,A]: (2/π)·asin(sin) → proste nogi, ostre nawroty (§7c)
+                    off = _weave_A * (2.0 / math.pi) * math.asin(math.sin(2.0 * math.pi * (t - _t_probe0) / _weave_period))
+                    r.idle_sp = [_c0 + off * _perp[0], _c1 + off * _perp[1], _cz]
+            else:
+                ang = _omega * (t - _t_probe0)
+                r.idle_sp = [_c0 + _orbit_r * math.cos(ang), _c1 + _orbit_r * math.sin(ang), _cz]
+                if intr is not None:
+                    p = r.mav.pos
+                    r._sp_yaw = math.atan2(intr[1] - p[1], intr[0] - p[0])   # bearing NED → yaw na cel
         elif _probe and r.locked:
             r._sp_yaw = 0.0                                     # po locku OBSERVE przejmuje — domyślny yaw
         d = r.tick()
@@ -1253,6 +1277,8 @@ def scenario_A1(r: Runner):
             "detector_ready_s": getattr(r, "_detector_ready_s", None),
             "choreo_sim0": getattr(r, "choreo_sim0", None),
             "drone_alt_m": getattr(r, "_probe_alt", None),   # §5c: dźwignia centrowania pionowego (stała runnera)
+            "probe_motion": os.environ.get("PROBE_MODE", "orbit"),   # §7b: orbita vs weave translacyjny
+            "weave_amp_m": float(os.environ.get("PROBE_WEAVE_A", "1.2")),
             "window_clock_base": ("sim_t@detector_ready" if r.choreo_sim0 is not None else "wall@arm"),
             "note": "REHEARSAL/integracja (B4) — NIE próba (B5); percepcja NIERAPORTOWALNA"}
     r.finish(crit)
