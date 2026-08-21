@@ -1,0 +1,60 @@
+{
+  "outdir": "/home/olga/projects/liquidpatrol/results/demo/A1/probe_t1/proba_2",
+  "verdict": "FAIL",
+  "borderline": false,
+  "non_run(§4d)": false,
+  "criteria": {
+    "entry_in_window": false,
+    "mti_ok_run>=3": true,
+    "box_on_target": true
+  },
+  "detector_ready(§4b)": {
+    "ready_wall_s": 20.139,
+    "timeout": false,
+    "window_clock": "sim_t@detector_ready"
+  },
+  "envelope_held(report-only,§3e)": true,
+  "entry": {
+    "n_entry": 0,
+    "entry_t": null,
+    "range_at_entry_m": null,
+    "ring_dwell_t": [
+      44.8,
+      71.3
+    ],
+    "entry_before_ring(report-only)": false,
+    "first_in_ring_t": 42.964
+  },
+  "range_to_target_m": {
+    "n": 520,
+    "min": 7.7,
+    "med": 8.08,
+    "max": 8.44,
+    "band_frac_7_9": 1.0
+  },
+  "mti": {
+    "n_dbg_ticks": 134,
+    "mti_ok_longest_run": 5,
+    "n_mti_ok": 46,
+    "n_comps_med": 10.5,
+    "n_comps_max": 53.0
+  },
+  "box_channel": {
+    "n_box_samples": 4,
+    "cx_med": 0.415,
+    "cy_med": 0.862,
+    "cx_std": 0.076,
+    "cy_std": 0.088,
+    "central": true
+  },
+  "mti_frame_mechanism": {
+    "n_frames": 945,
+    "diff_max_med": 177,
+    "diff_max_p90": 177,
+    "diff_thr": 22,
+    "diff_over_thr_frac": 1.0,
+    "n_kept_med": 16,
+    "n_kept_max": 53
+  },
+  "note": "PROBE (§3d Bieg 1) — NIE próba, NIE materiał dema; percepcja nieraportowalna jako wynik aktu (SR-J2)"
+}

@@ -1,0 +1,8 @@
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[gate] czekam na MAVSDK health...
+[gate] armed=True down=-9.0 fm=OFFBOARD stream_pub=185 deadman_armed=True (N=6t=0.30000000000000004s)
+[gate] manifest PO arm → /home/olga/projects/liquidpatrol/results/demo/A1/probe_t1/proba_2/manifest.json (judge=79b1e9367b85bf7c… armed=True)
+[gate] LIVE bridge+detektor PO arm (topic=/world/world_demo_A1/model/x500_mono_cam_0/link/camera_link/sensor/imager/image, det_hz=2.0, nie-blokująco)
+[gate] §4b(i) detektor GOTÓW @ 20.139s (sim_t0=235.88400268554688) — start choreografii
+[teleport] backend=gz.transport13(persistent) mode=async_ff apply_hz=20.0 target=16.7Hz
+[gate] RESULT: {"scenario": "A1", "n_entry": 0, "n_refuse_no_auth": 0, "n_token_issued": 0, "observe_ticks": 0, "min_d": null, "dsafe_violations": 0, "granted": false, "teleport_hz_eff": 18.19, "teleport_ok_rate": 0.904, "teleport_hz_producer": 14.32, "teleport_req_lat_ms": 0.2, "teleport_backend": "gz.transport13(persistent)", "detector_ready_s": 20.139, "choreo_sim0": 235.88400268554688, "window_clock_base": "sim_t@detector_ready", "note": "REHEARSAL/integracja (B4) — NIE próba (B5); percepcja NIERAPORTOWALNA", "conf_passive_A6": {"theta_conf": 0.1635, "conf_n": 2008, "conf_max": 0.1253, "conf_p99": 0.0423, "n_admitted_entry": 0, "gap_held_in_flight": true}, "stall_dist_R3": {"channel": "monotonic_local", "n": 1266, "p50": 0.0503, "p95": 0.0506, "p99": 0.0887, "max": 0.1064, "max_ticks_@20Hz": 2.13, "p99_ticks_@20Hz": 1.77, "over_6ticks(0.30s)": 0, "over_4ticks(0.20s)": 0}}
