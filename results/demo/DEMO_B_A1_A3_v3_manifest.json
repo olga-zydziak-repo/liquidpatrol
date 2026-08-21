@@ -1,0 +1,97 @@
+{
+  "script_sha256": "d5d707bd5991e9f25dfe7aba1999605f099ae4539492cc03ede3aa02369ee978",
+  "acts": {
+    "A1": {
+      "run_dir": "results/demo/A1_v3/proba_1",
+      "n_frames": 42,
+      "frames_sha16": "aaa8ebed49b71872"
+    },
+    "A3": {
+      "run_dir": "results/demo/rehearsal/A3/v3_1",
+      "n_frames": 15,
+      "frames_sha16": "a72837d4d0e9fe1e"
+    }
+  },
+  "cutlist": [
+    {
+      "act": "A1",
+      "phase": "takeoff / patrol",
+      "sim_t": [
+        9.7,
+        22.0
+      ],
+      "screen_s": 12.6,
+      "x": 1.0
+    },
+    {
+      "act": "A1",
+      "phase": "intruder approach",
+      "sim_t": [
+        22.0,
+        25.0
+      ],
+      "screen_s": 8.0,
+      "x": 0.4
+    },
+    {
+      "act": "A1",
+      "phase": "ENTRY / REFUSE / OBSERVE",
+      "sim_t": [
+        25.0,
+        52.0
+      ],
+      "screen_s": 27.6,
+      "x": 1.0
+    },
+    {
+      "act": "A1",
+      "phase": "RTL / land",
+      "sim_t": [
+        52.0,
+        54.0
+      ],
+      "screen_s": 8.0,
+      "x": 0.3
+    },
+    {
+      "act": "A3",
+      "phase": "GPS nominal",
+      "sim_t": [
+        0.0,
+        11.9
+      ],
+      "screen_s": 12.1,
+      "x": 1.0
+    },
+    {
+      "act": "A3",
+      "phase": "REFUSE · POS_DEGRADED",
+      "sim_t": [
+        11.9,
+        11.9
+      ],
+      "screen_s": 8.0,
+      "x": 0.0
+    },
+    {
+      "act": "A3",
+      "phase": "controlled descent",
+      "sim_t": [
+        11.9,
+        15.6
+      ],
+      "screen_s": 8.0,
+      "x": 0.5
+    },
+    {
+      "act": "A3",
+      "phase": "touchdown (contained)",
+      "sim_t": [
+        15.6,
+        20.1
+      ],
+      "screen_s": 8.0,
+      "x": 0.6
+    }
+  ]
+}

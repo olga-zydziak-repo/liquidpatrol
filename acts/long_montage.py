@@ -83,12 +83,14 @@ def main():
             MODE, sub = "LAND", None
         col = {"PATROL": (200, 200, 200), "OBSERVE": (120, 200, 120), "REFUSE": (70, 90, 235),
                "LAND": (60, 180, 235)}.get(MODE, (200, 200, 200))
+        # ANEKS_U1R §2b / U2R §6: datum toru GT (box-on-silhouette WARUNKOWE ≤0.5m — intruz renderuje
+        # się blado w filmie, więc trzymamy datum: diament + leader + etykieta). Kolor cyan instrumentowy.
         if ip is not None:
-            u, v = int(ip[0]), int(ip[1])
-            hw = 26
-            cv2.rectangle(img, (u - hw, v - hw), (u + hw, v + hw), DATUM, 2)
-            cv2.putText(img, f"GT-fed track (admitted) · {rng:.1f} m", (u - hw, v - hw - 8),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.46, DATUM, 1, cv2.LINE_AA)
+            u, v = int(ip[0]), int(ip[1]); DAT = (225, 205, 70)
+            lx, ly = u + 50, v - 44
+            cv2.drawMarker(img, (u, v), DAT, cv2.MARKER_DIAMOND, 24, 2, cv2.LINE_AA)
+            cv2.line(img, (u + 11, v - 11), (lx - 4, ly + 4), DAT, 1, cv2.LINE_AA)
+            cv2.putText(img, f"GT track · {rng:.1f} m", (lx, ly), cv2.FONT_HERSHEY_SIMPLEX, 0.48, DAT, 1, cv2.LINE_AA)
         # MODE bar
         cv2.rectangle(img, (18, 16), (270, 52), (0, 0, 0), -1)
         cv2.rectangle(img, (18, 16), (30, 52), col, -1)

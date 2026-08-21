@@ -1,0 +1,84 @@
+{
+  "act": "A3",
+  "run_dir": "/home/olga/projects/liquidpatrol/results/demo/rehearsal/A3/v3_1",
+  "verdict": "VALID",
+  "reason": "H1∧H2 PASS",
+  "thresholds": {
+    "H2_FRAC_LT_05_MAX": 0.0,
+    "H2_P10_MIN": 0.99,
+    "H2_DSIM_DWALL_MIN": 0.95,
+    "note": "D7 §7b: p10/frac z klasy R2; Δsim/Δwall NOWY (dopuszczenie narzutu scenariusza, nie R2)"
+  },
+  "n_rtf_samples": 1581,
+  "H1_lockstep": {
+    "pass": true,
+    "timejump_total": 0,
+    "sim_backsteps": 0,
+    "sim_fwd_jumps": 0
+  },
+  "H3_provenance": {
+    "pass": true,
+    "note": "Metryki kosztu (Δsim/Δwall, frac<0.5, p10) liczone z gz sim-clock (rtf_stream.sim) vs unix wall — z definicji sim-derived. Zegar wewn. osłony (trace `t`, age, θ_age) = time.time()-t0 (wall-elapsed); pod H1-lockstep (RTF≈1, timejump=0) wall≡sim w tolerancji, więc choreografia i semantyka θ_age wierne w sim. Tezy warstwy certyfikowanej (default-deny tokenu, consume/re-admisja=porządek zdarzeń; POS_DEGRADED dominacja; containment=promień touchdown) są niezmiennicze względem ramki zegara. → żadna teza NIE stoi na zegarze ściennym; H1-lockstep jest warunkiem umożliwiającym i sam jest bramkowany.",
+    "quantities": {
+      "sim_derived_cost": [
+        "dsim_dwall",
+        "frac_lt_05",
+        "p10",
+        "min_rtf",
+        "median_rtf"
+      ],
+      "wall_elapsed_internal_but_faithful_under_H1": [
+        "trace.t",
+        "age",
+        "theta_age",
+        "choreography_timeline_s"
+      ],
+      "frame_invariant_result": [
+        "token_default_deny",
+        "consume/readmission_order",
+        "POS_DEGRADED_dominance",
+        "touchdown_radial",
+        "admission_seq"
+      ]
+    }
+  },
+  "segments": [
+    {
+      "name": "patrol_transit",
+      "kind": "transit",
+      "sim_window": [
+        99.024,
+        120.0959999999993
+      ],
+      "src": "spec.segments.patrol_transit [0,on_denial] — mono→sim(gt)",
+      "metrics": {
+        "n": 257,
+        "frac_lt_05": 0.0117,
+        "p10": 0.998,
+        "median_rtf": 0.9999,
+        "min_rtf": 0.039,
+        "dsim_dwall": 0.9279
+      },
+      "label": "beyond characterized envelope — transit"
+    },
+    {
+      "name": "refuse_descent",
+      "kind": "claim",
+      "sim_window": [
+        120.0959999999993,
+        128.57947058823578
+      ],
+      "src": "spec.segments.refuse_descent [on_denial,on_touchdown] — mono→sim(gt)",
+      "metrics": {
+        "n": 103,
+        "frac_lt_05": 0.0,
+        "p10": 0.9982,
+        "median_rtf": 0.9999,
+        "min_rtf": 0.9895,
+        "dsim_dwall": 1.0
+      },
+      "H2_pass": true,
+      "H2_note": "PASS"
+    }
+  ]
+}

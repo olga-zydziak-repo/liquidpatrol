@@ -1,0 +1,57 @@
+{
+  "act": "A3",
+  "verdict": "VALID",
+  "criteria": [
+    {
+      "name": "aneks_h_valid",
+      "ok": true,
+      "detail": {
+        "headless": true,
+        "rtf": [
+          1.0,
+          1.0
+        ],
+        "timejump": 0,
+        "ekf_health_hits": 0,
+        "world_hash_matches": true
+      },
+      "source": "PRE_D §5 (boot ANEKS-H ważny); RTF∈[0.97,1.03], timejump 0"
+    },
+    {
+      "name": "trace_complete",
+      "ok": true,
+      "detail": {
+        "missing": [],
+        "required": [
+          "denial",
+          "refuse_pos",
+          "touchdown"
+        ]
+      },
+      "source": "PRE_D §5 trace kompletny (asert = gen_subtitles.REQUIRED_EVENTS)"
+    },
+    {
+      "name": "refuse_pos_within_015",
+      "ok": true,
+      "detail": {
+        "t_denial": 25229.9646,
+        "t_refuse_pos": 25230.0666,
+        "delta_s": 0.10199999999895226,
+        "max": 0.15
+      },
+      "source": "PRE_D §5 A3 „REFUSE(POS_DEGRADED) ≤ 0.15 s"
+    },
+    {
+      "name": "touchdown_within_R_E",
+      "ok": true,
+      "detail": {
+        "touchdown_seen": true,
+        "touchdown_r_est": 14.71,
+        "R_E": 32.0
+      },
+      "source": "PRE_D §5 A3 „touchdown ≤ R_E (r01.config R_E=32)"
+    }
+  ],
+  "violated": [],
+  "judge_sha256": "79b1e9367b85bf7c29f97dc5ea9757052be68a26903e48c0a237f941526a671a"
+}

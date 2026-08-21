@@ -1,0 +1,39 @@
+{
+  "act": "A3",
+  "head": "6074a46be0b07d580d2d585883360eecaa463898",
+  "world_sdf": "/home/olga/projects/liquidpatrol/worlds/world_demo_A3.sdf",
+  "world_hash": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0",
+  "spec": "acts/A3_spec.yaml",
+  "spec_hash": "e9402bf2a21392843370be5bf4724cca197a2676cee8539adf420461765ef919",
+  "certs": {
+    "P1": "1a076269a04c5325",
+    "P4": "5b9cbdc73198951d",
+    "P5": "7bc53ecb4164f63d"
+  },
+  "token_gated": true,
+  "contention": "none",
+  "seed": null,
+  "trace_schema_v": 2,
+  "aneks_h": {
+    "note": "S2 GPS-denied (R0.3a NIETKNIĘTY); rtf z kadencji ticków r03",
+    "headless": true,
+    "timejump": 0,
+    "ekf_health_hits": 0,
+    "rtf_tickperiod": 0.98,
+    "rtf_start": 1.0,
+    "rtf_end": 1.0,
+    "rtf_method": "min per-claim median(sampled gz-RTF) z habitat.json (ANEKS_D7)",
+    "world_hash_actual": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0",
+    "world_hash_matches": true,
+    "rtf_gz_claim_median": [
+      0.9999
+    ],
+    "rtf_gz_claim_dsim_dwall": [
+      1.0
+    ],
+    "habitat_verdict": "VALID"
+  },
+  "demo_mti": null,
+  "detection_channel": "n/a",
+  "note": "gate_run_r03 SCEN=S2 (GPS-denied) w world_demo_A3 — ANEKS_D6 §4 próba A3"
+}
