@@ -72,6 +72,9 @@ class DetectorNode(Node):
         self.tracker = None; self.q = None; self.last_comps = []
         # §8a: opcjonalny per-klatkowy log MTI (diff_max/n_comps) — record-only, gdy env ustawiony
         self._mti_frame_log = open(os.environ["MTI_FRAME_LOG"], "w") if os.environ.get("MTI_FRAME_LOG") else None
+        # ANEKS_D8 §5c: opcjonalny per-DECYZJĘ log centralności boxu (sim_t + top1 cx,cy,conf + mti_ok/locked)
+        # — record-only, gdy env DECISION_FRAME_LOG. Do ilościowej bramki central-ok ≥80% (§5c) na zegarze sim.
+        self._dec_frame_log = open(os.environ["DECISION_FRAME_LOG"], "w") if os.environ.get("DECISION_FRAME_LOG") else None
         if self.demo_mti:
             from r02.mti import MTITracker, MTIParams
             self._box_matches = __import__("r02.mti", fromlist=["box_matches_component"]).box_matches_component
@@ -169,6 +172,16 @@ class DetectorNode(Node):
                     (1.0 if mti_ok else 0.0) if mti_ok is not None else -1.0,  # -1 = MTI nieaktywne
                     float(n_comps)]
         self.pub_dbg.publish(dbg)
+        # ANEKS_D8 §5c: record-only per-decyzję log centralności (sim_t + top1 cx,cy) — bramka central-ok.
+        if self._dec_frame_log is not None:
+            self._dec_frame_log.write(json.dumps({
+                "t": round(t, 3), "nbox": int(nbox),
+                "cx": round(box.cx, 4) if box is not None else None,
+                "cy": round(box.cy, 4) if box is not None else None,
+                "conf": round(conf_top1, 4) if conf_top1 is not None else None,
+                "mti_ok": (1 if mti_ok else 0) if mti_ok is not None else -1,
+                "locked": 1 if self.channel.locked else 0}) + "\n")
+            self._dec_frame_log.flush()
         if ev == EV_ENTRY:
             self.get_logger().info(f"ENTRY @ sim_t={t:.2f} box={m.data}")
 

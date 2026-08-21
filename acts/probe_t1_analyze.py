@@ -20,6 +20,8 @@ ENTRY_K = 3                 # k=3 pod rząd (config_r02 ENTRY_K)
 DIFF_THR = 22              # MTIParams.diff_thr (mti.py) — próg diff_max
 BAND_LO, BAND_HI = 7.0, 9.0
 EDGE_MARGIN = 0.10        # ENTRY_EDGE_MARGIN — box centralny ⟺ cx,cy ∈ [0.1,0.9]
+CENTRAL_MARGIN = 0.12    # ANEKS_D8 §5c: margines centralności |cy−0.5| ≤ 0.12 (dźwignia pionowa §5b)
+CENTRAL_FRAC_MIN = 0.80  # §5c: central-ok w ≥80% klatek w kopercie
 
 
 def _load_jsonl(path):
@@ -69,6 +71,7 @@ def main():
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     trace = _load_jsonl(os.path.join(outdir, "trace.jsonl"))
     mti = _load_jsonl(os.path.join(outdir, "mti_frame.jsonl"))
+    dec = _load_jsonl(os.path.join(outdir, "dec_frame.jsonl"))   # §5c: per-decyzję sim_t + top1 cx,cy
     dbg_all = _load_jsonl(os.path.join(outdir, "dbg.jsonl"))
     dbg = [d for d in dbg_all if d.get("topic") == "dbg"]
     chan = [d for d in dbg_all if d.get("topic") == "channel"]
@@ -88,6 +91,7 @@ def main():
     # ⟺ zasięg-w-locku ∈ paśmie 7-9 m. To NIE proxy czasowe — to mierzone wielkości geometryczne (§3e).
     ready_ev = next((r for r in trace if isinstance(r, dict) and r.get("event") == "detector_ready"), None)
     ready_t = ready_ev.get("ready_wall_s") if ready_ev else None
+    choreo_sim0 = ready_ev.get("sim_t0") if ready_ev else None    # §5c: kotwica sim fazy choreografii
     ready_timeout = any(isinstance(r, dict) and r.get("event") == "detector_ready_timeout" for r in trace)
 
     # ── ZASIĘG do świat-stałego celu (§3e: koperta 7-9 m) ──
@@ -155,11 +159,28 @@ def main():
     envelope_held = (band_frac is not None and band_frac >= 0.5
                      and _med(r3) is not None and BAND_LO <= _med(r3) <= BAND_HI)
 
+    # ── ANEKS_D8 §5c: BRAMKA ILOŚCIOWA central-ok (dźwignia centrowania pionowego §5b) ──
+    # Okno pierścienia w sim-fazie: [choreo_sim0+ring_lo, choreo_sim0+ring_hi]. Klatki „w kopercie" =
+    # decyzje w tym oknie z boxem (nbox>0). central-ok ⟺ |cy−0.5| ≤ 0.12 (margines pionowy §5b steruje).
+    dec_recs = [d for d in dec if isinstance(d, dict) and d.get("t") is not None]
+    if choreo_sim0 is not None:
+        sim_lo, sim_hi = choreo_sim0 + ring_lo, choreo_sim0 + ring_hi
+        env_frames = [d for d in dec_recs if sim_lo <= d["t"] <= sim_hi and (d.get("nbox") or 0) > 0
+                      and d.get("cy") is not None]
+    else:                                             # brak kotwicy sim → wszystkie klatki z boxem (fallback)
+        env_frames = [d for d in dec_recs if (d.get("nbox") or 0) > 0 and d.get("cy") is not None]
+    cy_margins = [abs(d["cy"] - 0.5) for d in env_frames]
+    cx_margins = [abs(d["cx"] - 0.5) for d in env_frames if d.get("cx") is not None]
+    n_central_ok = sum(1 for m in cy_margins if m <= CENTRAL_MARGIN)
+    central_ok_frac = (n_central_ok / len(cy_margins)) if cy_margins else None
+    central_gate = central_ok_frac is not None and central_ok_frac >= CENTRAL_FRAC_MIN
+
     # ── MTI mechanizm (klatki): diff_max vs próg, n_kept ──
     diffs = [m.get("diff_max") for m in mti if m.get("diff_max") is not None]
     nkept = [m.get("n_kept") for m in mti if m.get("n_kept") is not None]
 
-    passed = bool(entry_in_window and mti_run >= ENTRY_K and box_on_target)
+    # §5c: PASS Biegu 2 = ENTRY in-window ∧ central-ok ≥80% klatek w kopercie (∧ mti k=3 — ENTRY tego wymaga).
+    passed = bool(entry_in_window and mti_run >= ENTRY_K and box_on_target and central_gate)
     borderline = (not passed) and (mti_run in (ENTRY_K - 1, ENTRY_K - 2) or (n_entry > 0 and not entry_in_window)
                                    or (band_frac is not None and 0.3 <= band_frac < 0.5))
     # §4d: bieg który pada WYŁĄCZNIE na mechanice okna/rozgrzewki (timeout gotowości, ZERO percepcji) = NIE-BIEG.
@@ -174,7 +195,13 @@ def main():
             "entry_in_window": entry_in_window,
             "mti_ok_run>=3": mti_run >= ENTRY_K,
             "box_on_target": box_on_target,
+            "central_gate_5c(>=80%)": central_gate,
         },
+        "central_ok_5c": {"n_env_frames": len(env_frames), "central_ok_frac": round(central_ok_frac, 3) if central_ok_frac is not None else None,
+                          "frac_min": CENTRAL_FRAC_MIN, "cy_margin_med": round(_med(cy_margins), 3) if cy_margins else None,
+                          "cy_margin_p90": round(_pctl(cy_margins, 90), 3) if cy_margins else None,
+                          "cx_margin_med": round(_med(cx_margins), 3) if cx_margins else None,
+                          "margin_thr": CENTRAL_MARGIN, "drone_alt_lever": "§5b vertical-centering (PROBE_ALT)"},
         "detector_ready(§4b)": {"ready_wall_s": ready_t, "timeout": ready_timeout,
                                  "window_clock": "sim_t@detector_ready" if ready_t is not None else "wall@arm"},
         "envelope_held(report-only,§3e)": envelope_held,

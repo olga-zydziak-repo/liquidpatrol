@@ -10,12 +10,17 @@ RUN="${1:-proba_1}"
 OUTDIR="${2:-$ROOT/results/demo/A1/probe_t1/$RUN}"
 mkdir -p "$OUTDIR"
 
-# §3c wariant wdrożeniowy (Bieg 1): orbita wokół dwell. ρ=1.0 → zasięg ~7.0-9.0 m; v=2.5 z REGATE.
+# §3c wariant wdrożeniowy: orbita wokół dwell. ρ=1.0 → zasięg ~7.0-9.0 m; v=2.5 z REGATE.
 export PROBE_EGOMOTION=1
 export PROBE_ORBIT_R="${PROBE_ORBIT_R:-1.0}"
 export PROBE_ORBIT_V="${PROBE_ORBIT_V:-2.5}"
-# §3e instrumentacja
+# ANEKS_D8 §5b (Bieg 2): dźwignia CENTROWANIA PIONOWEGO — wysokość dwell drona = wysokość pierścienia
+# intruza (11.5 ENU) → DALT_eff~0 → cel na osi kamery (cy~0.5). REGATE elew 10.8° (PROFIL_REGATE:48,91)
+# dała cy 0.28 (proba_1) > próg §5c 0.12; podniesienie drona centruje cel. Range 3D=poziomy 7.55-8.32∈[7,9].
+export PROBE_ALT="${PROBE_ALT:-11.5}"
+# §3e/§5c instrumentacja
 export MTI_FRAME_LOG="$OUTDIR/mti_frame.jsonl"   # detector_node (dziedziczy env) — per-klatka diff_max/n_kept
+export DECISION_FRAME_LOG="$OUTDIR/dec_frame.jsonl"  # §5c: per-decyzję sim_t + top1 cx,cy (bramka central-ok)
 export DBG_LOG=1                                  # acts/dbg_logger — mti_ok/n_comps/box (kanał)
 export FILM_CAPTURE=0                             # bez filmu: izolacja pomiaru percepcji (load-clean)
 

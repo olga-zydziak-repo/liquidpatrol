@@ -1135,6 +1135,9 @@ def _emit_act_manifest(r, act):
         _live_det = (not r.gt_mode) and bool(os.environ.get("LIVE_DETECTOR_TOPIC"))
         m["window_clock_base"] = "sim_t@detector_ready" if _live_det else "wall@arm"
         m["detector_ready_gated"] = _live_det
+        # ANEKS_D8 §5c echo: wysokość dwell drona (stała runnera; dźwignia centrowania pionowego §5b).
+        # Intruz ring alt = 11.5 ENU (spec, NIETKNIĘTY); drone_alt→11.5 zeruje DALT_eff (cel na osi kamery).
+        m["drone_alt_m"] = float(os.environ.get("PROBE_ALT", str(ALT_M)))
         # §5a: echo kadencji RUCHU intruza (teleport) == REGATE ~16.7 Hz. Bieg z teleport_hz≠16.7 = INVALID
         # z definicji (dotyczy OBU torów — wątek teleportu żyje w gt-fed i live). RAPORT_D_B5 §FINAL: 2 Hz
         # teleport zabijał MTI in-window (filtr trwałości odrzucał ruch skokowy).
@@ -1181,7 +1184,14 @@ def scenario_A1(r: Runner):
     r.bring_up()
     _emit_act_manifest(r, "A1")                    # B5 §0/§2: manifest PO arm (env-fail bootu = nie-próba)
     _start_live_detector(r)                       # B5: tor LIVE PO arm (nie blokuje MAVSDK/GCS przy arm)
-    r.idle_sp = [r.start[0], r.start[1], -ALT_M]   # hover na home (dwell) — utrzymanie w bramce gotowości §4b(i)
+    # ANEKS_D8 §5b: dźwignia CENTROWANIA PIONOWEGO — wysokość dwell drona dobrana z geometrii, by cel padł
+    # na oś kamery (elewacja ~0 → cy~0.5). REGATE: DALT=1.5, R_h=7.86 (PROFIL_REGATE:48,91) → elew 10.8° →
+    # cy 0.28 (proba_1) > próg §5c 0.12. Podniesienie drona do wysokości pierścienia intruza (11.5) zeruje
+    # DALT_eff → cel na osi; pozioma (ρ=1.0) trzyma range 3D = poziomy 7.55-8.32 m ∈ [7,9]. Intruz/spec/progi
+    # NIETKNIĘTE (SR-N1); ALT drona = stała runnera (echo w manifeście §5c). Default ALT_M (brak zmiany).
+    _probe_alt = float(os.environ.get("PROBE_ALT", str(ALT_M)))
+    r._probe_alt = _probe_alt                      # echo do crit/manifestu (§5c)
+    r.idle_sp = [r.start[0], r.start[1], -_probe_alt]   # hover na dwell (probe alt) — w bramce gotowości §4b(i)
     # ANEKS_D8 §4b(i): BRAMKA GOTOWOŚCI DETEKTORA przed startem choreografii+intruza (usuwa ~31s ładowania
     # YOLO z okna dwell, nie maskuje). §4e: obowiązuje przed próbami dowodowymi (GT-fed → no-op natychmiast).
     r.wait_detector_ready(float(os.environ.get("PROBE_READY_TIMEOUT", "90")))
@@ -1194,7 +1204,7 @@ def scenario_A1(r: Runner):
     _orbit_r = float(os.environ.get("PROBE_ORBIT_R", "1.0"))   # ρ: 7.86±ρ (+DALT 1.5) → zasięg ~7.0-9.0 m
     _orbit_v = float(os.environ.get("PROBE_ORBIT_V", "2.5"))   # REGATE mti_flight legs_v
     _omega = _orbit_v / max(_orbit_r, 1e-3)
-    _c0, _c1, _cz = r.start[0], r.start[1], -ALT_M
+    _c0, _c1, _cz = r.start[0], r.start[1], -_probe_alt   # §5b: dwell na probe alt (centrowanie pionowe)
     _t_probe0 = None
     grant_delay = AC.grant_delay_s(spec)
     hold_end = spec["timeline_s"]["intruder_ring_hold"][1]
@@ -1242,6 +1252,7 @@ def scenario_A1(r: Runner):
             # ANEKS_D8 §4b echo: czas gotowości detektora (arm→ready) + baza zegara okna (sim_t@choreo vs wall).
             "detector_ready_s": getattr(r, "_detector_ready_s", None),
             "choreo_sim0": getattr(r, "choreo_sim0", None),
+            "drone_alt_m": getattr(r, "_probe_alt", None),   # §5c: dźwignia centrowania pionowego (stała runnera)
             "window_clock_base": ("sim_t@detector_ready" if r.choreo_sim0 is not None else "wall@arm"),
             "note": "REHEARSAL/integracja (B4) — NIE próba (B5); percepcja NIERAPORTOWALNA"}
     r.finish(crit)
