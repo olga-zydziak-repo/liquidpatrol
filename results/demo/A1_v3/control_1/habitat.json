@@ -1,0 +1,120 @@
+{
+  "act": "A1",
+  "run_dir": "results/demo/A1_v3/control_1",
+  "verdict": "VALID",
+  "reason": "H1∧H2 PASS",
+  "thresholds": {
+    "H2_FRAC_LT_05_MAX": 0.0,
+    "H2_P10_MIN": 0.99,
+    "H2_DSIM_DWALL_MIN": 0.95,
+    "note": "D7 §7b: p10/frac z klasy R2; Δsim/Δwall NOWY (dopuszczenie narzutu scenariusza, nie R2)"
+  },
+  "n_rtf_samples": 3405,
+  "H1_lockstep": {
+    "pass": true,
+    "timejump_total": 0,
+    "sim_backsteps": 0,
+    "sim_fwd_jumps": 0
+  },
+  "H3_provenance": {
+    "pass": true,
+    "note": "Metryki kosztu (Δsim/Δwall, frac<0.5, p10) liczone z gz sim-clock (rtf_stream.sim) vs unix wall — z definicji sim-derived. Zegar wewn. osłony (trace `t`, age, θ_age) = time.time()-t0 (wall-elapsed); pod H1-lockstep (RTF≈1, timejump=0) wall≡sim w tolerancji, więc choreografia i semantyka θ_age wierne w sim. Tezy warstwy certyfikowanej (default-deny tokenu, consume/re-admisja=porządek zdarzeń; POS_DEGRADED dominacja; containment=promień touchdown) są niezmiennicze względem ramki zegara. → żadna teza NIE stoi na zegarze ściennym; H1-lockstep jest warunkiem umożliwiającym i sam jest bramkowany.",
+    "quantities": {
+      "sim_derived_cost": [
+        "dsim_dwall",
+        "frac_lt_05",
+        "p10",
+        "min_rtf",
+        "median_rtf"
+      ],
+      "wall_elapsed_internal_but_faithful_under_H1": [
+        "trace.t",
+        "age",
+        "theta_age",
+        "choreography_timeline_s"
+      ],
+      "frame_invariant_result": [
+        "token_default_deny",
+        "consume/readmission_order",
+        "POS_DEGRADED_dominance",
+        "touchdown_radial",
+        "admission_seq"
+      ]
+    }
+  },
+  "segments": [
+    {
+      "name": "takeoff_patrol_transit",
+      "kind": "transit",
+      "sim_window": [
+        0.0,
+        20.0
+      ],
+      "src": "spec.segments.patrol_transit_in [0,20]",
+      "metrics": {
+        "n": 242,
+        "frac_lt_05": 0.0041,
+        "p10": 0.9988,
+        "median_rtf": 0.9999,
+        "min_rtf": 0.3815,
+        "dsim_dwall": 0.9926
+      },
+      "label": "beyond characterized envelope — transit"
+    },
+    {
+      "name": "approach",
+      "kind": "transit",
+      "sim_window": [
+        20.0,
+        23.0
+      ],
+      "src": "spec.intruder_approach [20,23]",
+      "metrics": {
+        "n": 36,
+        "frac_lt_05": 0.0,
+        "p10": 0.9989,
+        "median_rtf": 0.9997,
+        "min_rtf": 0.9981,
+        "dsim_dwall": 0.9999
+      },
+      "label": "beyond characterized envelope — transit"
+    },
+    {
+      "name": "dwell_observe",
+      "kind": "claim",
+      "sim_window": [
+        23.0,
+        49.0
+      ],
+      "src": "spec.intruder_ring_hold [23,49] = dwell_confirm+OBSERVE (D7 dwell+OBSERVE)",
+      "metrics": {
+        "n": 316,
+        "frac_lt_05": 0.0,
+        "p10": 0.9988,
+        "median_rtf": 0.9999,
+        "min_rtf": 0.9302,
+        "dsim_dwall": 0.9997
+      },
+      "H2_pass": true,
+      "H2_note": "PASS"
+    },
+    {
+      "name": "rtl_land",
+      "kind": "transit",
+      "sim_window": [
+        49.0,
+        null
+      ],
+      "src": "po OBSERVE: RTL/land — brak roszczenia",
+      "metrics": {
+        "n": 162,
+        "frac_lt_05": 0.0,
+        "p10": 0.9989,
+        "median_rtf": 0.9999,
+        "min_rtf": 0.8762,
+        "dsim_dwall": 0.9988
+      },
+      "label": "beyond characterized envelope — transit"
+    }
+  ]
+}

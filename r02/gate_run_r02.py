@@ -403,8 +403,13 @@ class Runner:
         do kamery (perfekcyjna detekcja w FOV, conf=1.0 → przechodzi admisję A6). Live: z ChannelSub."""
         if self.gt_mode:
             if t >= self.gt_next - 1e-9:                    # kadencja detektora 1 Hz
-                intr = self.gt_intruder_fn(t) if self.gt_intruder_fn else None
-                self._intr_ned = [round(float(v), 3) for v in intr] if intr is not None else None  # B3 (f)
+                # PROMPT_D_U2R §3: gdy U2R_SLAVE=1 — model niewolniczo na torze GT: teleport (16.7 Hz) jest
+                # JEDYNYM źródłem intr_ned; kanał GT projektuje POZYCJĘ MODELU (nie ned_fn(wall_t)) → trace
+                # intr_ned ≡ pozycja modelu (usuwa rozjazd wall(kanał) vs sim(model) z U1R §2d). Default off = v1.0.
+                _slave = os.environ.get("U2R_SLAVE") == "1" and self._intr_ned is not None
+                intr = self._intr_ned if _slave else (self.gt_intruder_fn(t) if self.gt_intruder_fn else None)
+                if not _slave:
+                    self._intr_ned = [round(float(v), 3) for v in intr] if intr is not None else None  # B3 (f)
                 box = None
                 if intr is not None:
                     b = project_to_pixel(pos, yaw, intr)     # projekcja GT (None gdy poza FOV level-camera)
@@ -1146,6 +1151,11 @@ def _emit_act_manifest(r, act):
         # teleport zabijał MTI in-window (filtr trwałości odrzucał ruch skokowy).
         m["teleport_hz"] = DEMO_TELEPORT_HZ
         m["apply_hz"] = float(os.environ.get("APPLY_HZ", "20.0"))   # §3: kadencja APLIKACJI worker (GT-fed: nie wpływa na detekcję)
+        # PROMPT_D_U2R §3/§5: echo niewolnictwa modelu intruza na torze GT (single-source). Rozjazd per-faza
+        # mierzony post-hoc z filmu (marker↔sylwetka) → raport; próg ≤0.5 m dopuszcza box-on-silhouette (§6).
+        m["intruder_slaved_to_track"] = (os.environ.get("U2R_SLAVE") == "1")
+        m["intruder_track_source"] = ("teleport ned_fn @16.7Hz == trace intr_ned (single source)"
+                                       if os.environ.get("U2R_SLAVE") == "1" else "gt_intruder_fn(wall_t)")
         # §6a: echo backendu set_pose (trwały klient gz.transport vs subprocess-fallback). Zmierzona
         # efektywna kadencja jest w SCENARIO_RESULT (teleport_hz_eff) — mierzona w trakcie biegu.
         try:

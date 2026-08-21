@@ -1,37 +1,39 @@
 <?xml version="1.0" ?>
-<!-- r02/intruder_model.sdf — aktor-intruz R0.2 (R1). Wizual = sylwetka x500 (mesh z PX4/gz, decyzja
-     Olgi: reużyć zainstalowany mesh zamiast assetu zewn.). Model STATYCZNY (physics OFF), TYLKO wizuale
-     (bez kolizji/inercji) — pozę steruje deterministycznie r02/intruder_driver.py (poza=f(sim_time)).
-     NIE gz <actor> (skinless actor segfaultuje serwer — results/R02/RAPORT_R1.md §1).
-     Meshe model://x500_base/... rozwiązywane przez GZ_SIM_RESOURCE_PATH (PX4 ustawia; x500 drona ich używa). -->
+<!-- r02/intruder_model.sdf — aktor-intruz. PROMPT_D_U2R §3: SCENOGRAFIA — model z PRYMITYWÓW (nie mesh:
+     materiał DAE nadpisywał SDF → intruz szary). Duży (~2.4 m span, widoczny z 8-24 m) + WYSOKI KONTRAST
+     (nasycony pomarańcz — odróżnia się od dekoracji grey/tan/blue/green; detekcja marker-on-silhouette §6).
+     STATYCZNY (physics OFF), TYLKO wizuale (bez kolizji/inercji) — pozę steruje r02/intruder_driver.py.
+     cast_shadows ON (cień dynamicznego intruza użyteczny w HUD). Rollback = v1.0. -->
 <sdf version="1.9">
   <model name="intruder">
     <static>true</static>
     <pose>12 0 10 0 0 0</pose>
     <link name="body">
-      <!-- rama nośna (kadłub + ramiona) -->
-      <visual name="frame">
-        <pose>0 0 .025 0 0 3.141592654</pose>
-        <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/NXP-HGD-CF.dae</uri></mesh></geometry>
+      <!-- kadłub centralny (pomarańcz nasycony) -->
+      <visual name="hull">
+        <geometry><box><size>0.95 0.95 0.32</size></box></geometry>
+        <material><ambient>0.95 0.42 0.05 1</ambient><diffuse>0.98 0.46 0.06 1</diffuse><specular>0.3 0.15 0.05 1</specular></material>
       </visual>
-      <!-- 4 silniki -->
-      <visual name="motor_0"><pose>0.174 0.174 .032 0 0 -.45</pose>
-        <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
-      <visual name="motor_1"><pose>-0.174 0.174 .032 0 0 -.45</pose>
-        <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
-      <visual name="motor_2"><pose>0.174 -0.174 .032 0 0 -.45</pose>
-        <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
-      <visual name="motor_3"><pose>-0.174 -0.174 .032 0 0 -.45</pose>
-        <geometry><mesh><scale>1 1 1</scale><uri>model://x500_base/meshes/5010Base.dae</uri></mesh></geometry></visual>
-      <!-- 4 śmigła (sylwetka propelerów — istotna dla rozpoznania jako UAV) -->
-      <visual name="prop_0"><pose>0.174 0.174 .06 0 0 0</pose>
-        <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_ccw.stl</uri></mesh></geometry></visual>
-      <visual name="prop_1"><pose>-0.174 0.174 .06 0 0 0</pose>
-        <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_cw.stl</uri></mesh></geometry></visual>
-      <visual name="prop_2"><pose>0.174 -0.174 .06 0 0 0</pose>
-        <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_cw.stl</uri></mesh></geometry></visual>
-      <visual name="prop_3"><pose>-0.174 -0.174 .06 0 0 0</pose>
-        <geometry><mesh><scale>0.846 0.846 0.846</scale><uri>model://x500_base/meshes/1345_prop_ccw.stl</uri></mesh></geometry></visual>
+      <!-- 2 skrzyżowane ramiona przez środek (X do 4 rotorów), pomarańcz -->
+      <visual name="arm_0"><pose>0 0 0 0 0 0.7854</pose>
+        <geometry><box><size>0.16 2.5 0.14</size></box></geometry>
+        <material><ambient>0.95 0.42 0.05 1</ambient><diffuse>0.98 0.46 0.06 1</diffuse></material></visual>
+      <visual name="arm_1"><pose>0 0 0 0 0 -0.7854</pose>
+        <geometry><box><size>0.16 2.5 0.14</size></box></geometry>
+        <material><ambient>0.95 0.42 0.05 1</ambient><diffuse>0.98 0.46 0.06 1</diffuse></material></visual>
+      <!-- 4 rotory (ciemne dyski) na końcach ramion -->
+      <visual name="rotor_0"><pose>0.88 0.88 0.12 0 0 0</pose>
+        <geometry><cylinder><radius>0.55</radius><length>0.06</length></cylinder></geometry>
+        <material><ambient>0.08 0.08 0.10 1</ambient><diffuse>0.11 0.11 0.13 1</diffuse></material></visual>
+      <visual name="rotor_1"><pose>-0.88 0.88 0.12 0 0 0</pose>
+        <geometry><cylinder><radius>0.55</radius><length>0.06</length></cylinder></geometry>
+        <material><ambient>0.08 0.08 0.10 1</ambient><diffuse>0.11 0.11 0.13 1</diffuse></material></visual>
+      <visual name="rotor_2"><pose>0.88 -0.88 0.12 0 0 0</pose>
+        <geometry><cylinder><radius>0.55</radius><length>0.06</length></cylinder></geometry>
+        <material><ambient>0.08 0.08 0.10 1</ambient><diffuse>0.11 0.11 0.13 1</diffuse></material></visual>
+      <visual name="rotor_3"><pose>-0.88 -0.88 0.12 0 0 0</pose>
+        <geometry><cylinder><radius>0.55</radius><length>0.06</length></cylinder></geometry>
+        <material><ambient>0.08 0.08 0.10 1</ambient><diffuse>0.11 0.11 0.13 1</diffuse></material></visual>
     </link>
   </model>
 </sdf>
