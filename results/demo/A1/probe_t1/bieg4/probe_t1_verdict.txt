@@ -1,0 +1,84 @@
+{
+  "outdir": "/home/olga/projects/liquidpatrol/results/demo/A1/probe_t1/bieg4",
+  "verdict": "FAIL",
+  "borderline": true,
+  "non_run(§4d)": false,
+  "criteria": {
+    "entry_in_window": false,
+    "mti_ok_run>=3": true,
+    "box_on_target": true,
+    "central_gate_5c(>=80%)": false
+  },
+  "central_ok_5c": {
+    "n_env_frames": 0,
+    "central_ok_frac": null,
+    "frac_min": 0.8,
+    "cy_margin_med": null,
+    "cy_margin_p90": null,
+    "cx_margin_med": null,
+    "cy_med": null,
+    "margin_thr": 0.12,
+    "drone_alt_lever": "§5b vertical-centering (PROBE_ALT)"
+  },
+  "signature_7c": {
+    "probe_mode": "weave",
+    "cy_std": null,
+    "orbit_baseline_std": 0.19,
+    "std_collapse_thr": 0.1,
+    "cy_variance_collapsed": false,
+    "n_frames": 0,
+    "dcy_med": null,
+    "dcy_max": null,
+    "cy_series": [],
+    "note": "§7c a priori: weave⇒cy_std zapada (plateau nogi, spike nawroty) vs orbita 0.19; raport niezależny od bramki"
+  },
+  "detector_ready(§4b)": {
+    "ready_wall_s": 17.889,
+    "timeout": false,
+    "window_clock": "sim_t@detector_ready"
+  },
+  "envelope_held(report-only,§3e)": false,
+  "entry": {
+    "n_entry": 1,
+    "entry_t": 27.255,
+    "range_at_entry_m": 10.98,
+    "ring_dwell_t": [
+      43.0,
+      73.1
+    ],
+    "entry_before_ring(report-only)": false,
+    "first_in_ring_t": null
+  },
+  "range_to_target_m": {
+    "n": 520,
+    "min": 18.33,
+    "med": 25.92,
+    "max": 37.63,
+    "band_frac_7_9": 0.0
+  },
+  "mti": {
+    "n_dbg_ticks": 133,
+    "mti_ok_longest_run": 13,
+    "n_mti_ok": 57,
+    "n_comps_med": 18.0,
+    "n_comps_max": 52.0
+  },
+  "box_channel": {
+    "n_box_samples": 113,
+    "cx_med": 0.776,
+    "cy_med": 0.705,
+    "cx_std": 0.472,
+    "cy_std": null,
+    "central": true
+  },
+  "mti_frame_mechanism": {
+    "n_frames": 255,
+    "diff_max_med": 177,
+    "diff_max_p90": 177,
+    "diff_thr": 22,
+    "diff_over_thr_frac": 1.0,
+    "n_kept_med": 22,
+    "n_kept_max": 61
+  },
+  "note": "PROBE (§3d Bieg 1) — NIE próba, NIE materiał dema; percepcja nieraportowalna jako wynik aktu (SR-J2)"
+}
