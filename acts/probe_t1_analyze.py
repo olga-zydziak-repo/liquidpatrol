@@ -162,13 +162,16 @@ def main():
     # ── ANEKS_D8 §5c: BRAMKA ILOŚCIOWA central-ok (dźwignia centrowania pionowego §5b) ──
     # Okno pierścienia w sim-fazie: [choreo_sim0+ring_lo, choreo_sim0+ring_hi]. Klatki „w kopercie" =
     # decyzje w tym oknie z boxem (nbox>0). central-ok ⟺ |cy−0.5| ≤ 0.12 (margines pionowy §5b steruje).
+    # „W kopercie" = DWELL PRZED-LOCKIEM (range 7-9 m): po ENTRY OBSERVE przejmuje geometrię i CELOWO
+    # odsuwa drona do standoffu (range→16 m, box off-center) — to NIE porażka centrowania, więc frames
+    # locked==1 (OBSERVE) WYKLUCZONE. Okno = ring sim-faza [choreo_sim0+ring_lo, +ring_hi] ∧ box ∧ pre-lock.
     dec_recs = [d for d in dec if isinstance(d, dict) and d.get("t") is not None]
-    if choreo_sim0 is not None:
-        sim_lo, sim_hi = choreo_sim0 + ring_lo, choreo_sim0 + ring_hi
-        env_frames = [d for d in dec_recs if sim_lo <= d["t"] <= sim_hi and (d.get("nbox") or 0) > 0
-                      and d.get("cy") is not None]
-    else:                                             # brak kotwicy sim → wszystkie klatki z boxem (fallback)
-        env_frames = [d for d in dec_recs if (d.get("nbox") or 0) > 0 and d.get("cy") is not None]
+    def _in_ring(d):
+        if choreo_sim0 is None:
+            return True                               # brak kotwicy sim → bez filtra okna
+        return (choreo_sim0 + ring_lo) <= d["t"] <= (choreo_sim0 + ring_hi)
+    env_frames = [d for d in dec_recs if _in_ring(d) and (d.get("nbox") or 0) > 0
+                  and d.get("cy") is not None and d.get("locked") == 0]
     cy_margins = [abs(d["cy"] - 0.5) for d in env_frames]
     cx_margins = [abs(d["cx"] - 0.5) for d in env_frames if d.get("cx") is not None]
     n_central_ok = sum(1 for m in cy_margins if m <= CENTRAL_MARGIN)

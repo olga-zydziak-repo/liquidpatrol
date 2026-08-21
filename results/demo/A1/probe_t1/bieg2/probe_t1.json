@@ -1,0 +1,71 @@
+{
+  "outdir": "results/demo/A1/probe_t1/bieg2",
+  "verdict": "FAIL",
+  "borderline": true,
+  "non_run(§4d)": false,
+  "criteria": {
+    "entry_in_window": true,
+    "mti_ok_run>=3": true,
+    "box_on_target": true,
+    "central_gate_5c(>=80%)": false
+  },
+  "central_ok_5c": {
+    "n_env_frames": 8,
+    "central_ok_frac": 0.125,
+    "frac_min": 0.8,
+    "cy_margin_med": 0.223,
+    "cy_margin_p90": 0.254,
+    "cx_margin_med": 0.376,
+    "margin_thr": 0.12,
+    "drone_alt_lever": "§5b vertical-centering (PROBE_ALT)"
+  },
+  "detector_ready(§4b)": {
+    "ready_wall_s": 17.498,
+    "timeout": false,
+    "window_clock": "sim_t@detector_ready"
+  },
+  "envelope_held(report-only,§3e)": false,
+  "entry": {
+    "n_entry": 1,
+    "entry_t": 46.619,
+    "range_at_entry_m": 7.73,
+    "ring_dwell_t": [
+      41.7,
+      71.3
+    ],
+    "entry_before_ring(report-only)": false,
+    "first_in_ring_t": 40.463
+  },
+  "range_to_target_m": {
+    "n": 518,
+    "min": 7.63,
+    "med": 16.19,
+    "max": 17.74,
+    "band_frac_7_9": 0.336
+  },
+  "mti": {
+    "n_dbg_ticks": 133,
+    "mti_ok_longest_run": 16,
+    "n_mti_ok": 78,
+    "n_comps_med": 12.0,
+    "n_comps_max": 43.0
+  },
+  "box_channel": {
+    "n_box_samples": 78,
+    "cx_med": 0.622,
+    "cy_med": 0.628,
+    "cx_std": 0.374,
+    "cy_std": 0.201,
+    "central": true
+  },
+  "mti_frame_mechanism": {
+    "n_frames": 291,
+    "diff_max_med": 177,
+    "diff_max_p90": 199,
+    "diff_thr": 22,
+    "diff_over_thr_frac": 1.0,
+    "n_kept_med": 17,
+    "n_kept_max": 50
+  },
+  "note": "PROBE (§3d Bieg 1) — NIE próba, NIE materiał dema; percepcja nieraportowalna jako wynik aktu (SR-J2)"
+}
