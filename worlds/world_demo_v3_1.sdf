@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- world_demo_A1 — teren DEMA (R-M1). Nagłówek == default.sdf; DODANE: teksturowany grunt (par? R2).
-     Wygenerowane przez worlds/gen_world_demo_A1.py (seed=20260815). Habitat percepcyjny ZAMROŻONY (hash w ANEKS-H).
+<!-- world_demo_v3_1 — teren DEMA (R-M1). Nagłówek == default.sdf; DODANE: teksturowany grunt (par? R2).
+     Wygenerowane przez worlds/gen_world_demo_v3_1.py (seed=20260815). Habitat percepcyjny ZAMROŻONY (hash w ANEKS-H).
      Liczby percepcyjne MIĘDZY ŚWIATAMI SIĘ NIE PRZENOSZĄ — pomiary MTI/conf wyłącznie w tym świecie. -->
 <sdf version="1.9">
-  <world name="world_demo_A1">
+  <world name="world_demo_v3_1">
     <physics type="ode">
       <max_step_size>0.004</max_step_size>
       <real_time_factor>1.0</real_time_factor>
@@ -1273,24 +1273,6 @@
           <geometry><box><size>2.552 2.218 0.635</size></box></geometry>
           <material><ambient>0.377 0.377 0.407 1</ambient><diffuse>0.377 0.377 0.407 1</diffuse><specular>0.08 0.08 0.08 1</specular></material>
         </visual>
-      </link>
-    </model>
-    <!-- DEMO-B kamera filmowa (par. sonda R2; kadr na centroid aktu A1, FREEZE w ANEKS_D2). -->
-    <model name="film_cam">
-      <static>true</static>
-      <pose>11.000 -13.000 11.500 0 -0.0209 2.0032</pose>
-      <link name="l">
-        <sensor name="film" type="camera">
-          <pose>0 0 0 0 0 0</pose>
-          <camera>
-            <horizontal_fov>1.20</horizontal_fov>
-            <image><width>1280</width><height>720</height></image>
-            <clip><near>0.1</near><far>3000</far></clip>
-          </camera>
-          <always_on>1</always_on>
-          <update_rate>30</update_rate>
-          <visualize>false</visualize>
-        </sensor>
       </link>
     </model>
   </world>
