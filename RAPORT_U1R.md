@@ -51,3 +51,26 @@ o przyczynie ponad zmierzone (§2d). Marker-on-silhouette przeniesione do ewentu
 `DEMO_B_A1_A3_HUD.mp4` (191 kl. @8fps) + `_h264.mp4` (23.9 s, przeglądarkowo-grywalny). Manifest:
 script_sha256, pozy kamer, hfov, per-akt {run_dir, n_frames, frames_sha16, time_calibration}.
 A1: 29 kl. drone-fit 8 px · A3: 14 kl. (brak intruza → tylko MODE/§1c). Sędzia 79b1e936 / spec / świat / v1.0 NIETKNIĘTE.
+
+---
+
+## ERRATUM (2026-08-22, po znalezisku E/N z U2R-2) — nota zamykająca U2R Z1
+Znalezisko U2R-2: `intr_ned` ma konwencję **[E, N, −U]** (sterownik `intruder_driver.set_pose`:
+`gz_x = intr_ned[0] = East`), a `hud_render._enu` zamieniało E↔N. To unieważnia część interpretacji U1R.
+
+**STOI (poprawne):**
+- **Reprojekcja drona 8 px** — używała `_enu(mav.pos)` z `mav.pos = [N,E,D]` (prawdziwy NED), konwencja
+  drona poprawna. Kalibracja frame→time i walidacja geometrii kamery filmowej — WAŻNE.
+- Wniosek jakościowy, że kamera filmowa v1.0 daje małą/bladą sylwetkę intruza — WAŻNY (osobny od E/N).
+
+**SUPERSEDED (zastąpione):**
+- **§2d rozjazd model↔tor (OBSERVE ~2.2 m, PATROL ~8.5 m)** — ZASTĄPIONE. Przestrzeń pomiaru była
+  „światowa" (ENU), ALE „tor" liczono `_enu(intr_ned)` z BŁĘDNĄ zamianą E/N → pozycja toru była
+  przekręcona (~250 px w pikselu / oś zamieniona w świecie). Liczby te NIE są czystym rozjazdem model↔tor.
+  Rzeczywisty rozjazd (slaving, single-source) = sub-0.5 m — potwierdzony w U2R-2 (box NA sylwetce).
+- **§2c spot-check „cień pod markerem"** — ZASTĄPIONE: marker był w przekręconej pozycji (u zamienione),
+  więc „cień pionowo pod markerem" potwierdzał złą lokalizację; nie jest dowodem geometrycznym.
+- **Atrybucja rozjazdu ~250 px do „bladości/divergence"** — BŁĘDNA; właściwa przyczyna = BUG konwencji E/N.
+
+**Materiał v1.0-HUD (`DEMO_B_A1_A3_HUD.mp4` + artefakt HUD) — SUPERSEDED** przez v3.1
+(`DEMO_B_A1_A3_v3_1.mp4`, box-on-silhouette z naprawioną konwencją). Zostaje w repo jako historyczny.

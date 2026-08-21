@@ -46,3 +46,19 @@ POS_DEGRADED 8s · descent 8s · touchdown 8s. Manifest `_manifest.json` (sha kl
 
 ## Prowieniencja / rollback
 Nowe pliki OBOK v1.0/v3 (nietknięte). Rollback = tag v1.0. Commity niepushnięte (push=Olga).
+
+---
+
+## Z2 — audyt konwencji `intr_ned = [E, N, −U]` (nota zamykająca U2R)
+Grep: gdzie konwencja intruza jest konsumowana i czy poza `hud_render`:
+| ścieżka | rola | status |
+|---------|------|--------|
+| `r02/intruder_driver.py` set_pose (`gz_x=intr_ned[0]`) | ŹRÓDŁO konwencji [E,N,−U] | definicja |
+| `r02/gate_run_r02.py` → `gate_harness.project_to_pixel(pos=[N,E,D], intr_ned)` | **brama GT** (ENTRY) | NIETKNIĘTE — mieszanie E/N MASKOWANE (dron ≈origin w dwell → box centralny → ENTRY OK); akty **VALID**, samo-spójne. Zero biegów (Z4). |
+| **sędzia** `tools/act_judge.py` | ocena z trace (decyzje/timeline) | **NIE dotknięty** (poniżej samo-spójnej bramy) |
+| `tools/gen_subtitles.py` | napisy ze spec/certów | **NIE** projektuje intruza |
+| `acts/hud_render.py`, `acts/long_montage.py` | HUD kamery filmowej | **NAPRAWIONE** (`_enu_intr` bez zamiany) |
+| `acts/anim_montage.py` | montaż top-down (mp4) | zamiana kosmetyczna — artefakt SUPERSEDED (nie naprawiany) |
+| `results/demo/DEMO_B_console.html` (replayer HTML) | interaktywny top-down | **NAPRAWIONY** (kosmetyka): intruz `i=[E,N]` zamiast `[N,E]`; artefakt republikowany w miejscu (URL 17a1e37a). Zero biegów. |
+**Wniosek:** poza `hud_render`/`long_montage` (naprawione) i replayerem HTML (naprawiony kosmetycznie),
+konwencja żyje w bramie GT samo-spójnie (akty VALID) — sędzia/spec/światy NIETKNIĘTE, zero biegów (Z4).
