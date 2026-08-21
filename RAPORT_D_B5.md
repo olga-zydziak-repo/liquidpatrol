@@ -659,3 +659,61 @@ runnera aktów; na wierzchu token B1, choreografia ze spec, kontrakty manifest/s
 7b (world-plugin) i dalsze łatanie `gate_run_r02` — zamknięte. **CC dostarcza `PROMPT_D_PIVOT`.** Kryterium 8d
 (sanity A1 do końca 20.08) — pivot jest ścieżką. Probe-kod (`VOSC_OVERRIDE`/`MTI_FRAME_LOG`, oba default-off) i
 narzędzia zostają. selfcheck 6/6 ×2. Artefakty `results/demo/A1/probe_8a_vosc/` (+`mti_frame.jsonl`).
+
+---
+
+## AKTUALIZACJA-13 / ANEKS_D8 §FINAL (PROMPT_D_P3 T1 live-MTI + rozstrzygnięcie GT-fed) — 2026-08-21
+
+Sesja PROMPT_D_P3: reintrodukcja live-MTI (po pivocie 7d zawieszonym). Cel T1: bramka prereg
+`ENTRY in-window ∧ mti_ok k=3 ∧ box na celu`, ≤2 biegi (rozszerzone ratyfikacjami §4/§6/§7).
+Ratyfikacje ANEKS_D8 §3–§8 kolejno adresowały konfundery; **T1 TERMINAL: central admission live
+NIEOSIĄGNIĘTA w 5 biegach → §7e routing: GT-fed A1+A3.**
+
+### Seria biegów live-MTI (koperta live-MTI, §8d) — `results/demo/A1/probe_t1/`
+
+| bieg | profil / dźwignia | wynik | mechanizm |
+|------|-------------------|-------|-----------|
+| proba_1 (§3c) | orbita ρ=1/v=2.5, yaw-na-cel | mechanizm OK (mti_ok run **11**, diff 177, band 0.909) `n_entry=0` | okno WALL zamknięte 3.96 s przed lockiem (YOLO ~31 s po arm) |
+| proba_2 (§4b) | + bramka gotowości detektora + deadline sim-time | clock DZIAŁA, envelope 1.0; `n_entry=0` | ENTRY sim-faza 63.7 (po ring), central admission `struktura∧central∧mti k=3` nie utrzymana in-ring (mti_ok run 5, 4/5 runów≥3 NIE central) |
+| bieg2 (§5b, alt 11.5) | dźwignia centrowania pionowego | ENTRY in-window **1. raz** (7.73 m, run 16, 78 locków); §5c FAIL | cy pre-lock **0.72** (OVERSHOOT — cel poniżej osi) |
+| bieg3 (§6, alt 10.75) | korekta kalibracji ALT | §5c FAIL; envelope 1.0 (7.96 m) | **dźwignia ALT OBALONA POMIAREM**: cy_med 0.70 (BEZ zmiany vs 11.5), cy_std 0.19 (swing 0.24–0.93) |
+| bieg4 (§7, weave ⊥ LOS) | dźwignia INNEJ KLASY (usuwa banking) | SPOILED; §5c niepoliczalne, §7c niekonkludywne | lock w fazie PARK (sim-faza 9) → OBSERVE odleciał 20–30 m → 0 klatek ringu |
+
+**Co SOLIDNE (powtarzalne, 5 biegów):** (1) §4b bramka gotowości detektora + deadline dwell w sim-time
+(usuwa ~31 s zmienności ładowania YOLO, nie maskuje); (2) koperta zasięgu 7–9 m (band_frac 1.0 po
+przekotwiczeniu); (3) mechanizm MTI (`diff_max` med 177 ≫ próg 22, `mti_ok` runy do 16, tło płynie).
+
+**Co ZAWIODŁO:** central admission w oknie ring. **ZAGADKA `cy≈0.68–0.72` (§8b/§8d):** cel siada
+poniżej osi kamery przy KAŻDEJ testowanej wysokości (10.75/11.5) i KAŻDYM profilu (orbita/weave) —
+stała **niezależna od ratyfikowanych dźwigni**. Przyczyna niezidentyfikowana (mount kamery / asymetria
+boxu YOLO / konwencja projekcji). Jedyne cy 0.28 (proba_1) = niesporównywalny locked-channel median.
+Hipoteza przechyłu (banking orbity) **nie potwierdzona** (weave cy_std 0.19 ≈ orbita; ale bieg4 zepsuty
+→ nierozstrzygnięte). **To PIERWSZE pytanie przyszłej nogi „koperta live-MTI" (kolejka po B6).** Nota:
+lock weave na celu parkingowym potwierdza SIŁĘ MTI profilu translacyjnego poza ringiem.
+
+### §7e / §8c — rozstrzygnięcie: próby dowodowe GT-fed A1 + A3
+
+Pivot `mti_flight` **ZDJĘTY** (§7e: proste nogi = profil mti_flight; ich porażka na tej samej fizyce
+falsyfikuje przesłankę pivotu). Wykonano §7e — **pierwsza ważna** próba/akt, sędzia FROZEN `79b1e936`,
+habitat H1∧H2, hasze spec/świata zgodne z frozen:
+
+| akt | próba | verdict | sędzia | habitat | spec/world hash |
+|-----|-------|---------|--------|---------|-----------------|
+| **A1** | `results/demo/A1/proba_1` | **VALID** | 79b1e9367b85bf7c | H1∧H2 PASS | MATCH (48a50c8d / d7e3db24) |
+| **A3** | `results/demo/rehearsal/A3/proba_1` | **VALID** | 79b1e9367b85bf7c | PASS | MATCH (e9402bf2 / 486a0cea) |
+| A2 | — | **WYKLUCZONE** | — | — | GT-fed A2 ZAKAZANE (§2b konflikt sędzia↔GT-fed; A2 proba_1/2 INVALID) |
+
+Kanał detekcji A1 = `gt_fed` (ANEKS_D6 §1a echo w manifeście). Próby zgodne z bieżącym frozen (re-run
+zbędny — ryzyko niedeterministycznego INVALID). ensure_gps przed bootem (manifest `ekf2_gps_ctrl_bson`).
+
+### §8e — brzmienie roszczenia dema
+
+Roszczenie = **ANEKS_D6 §1b**: warstwa autoryzacji/osłony jest certyfikowana **PRZY DANEJ detekcji**
+(kanał detekcji = **przesłanka**, nie teza). Demo A1/A3 pod kanałem `gt_fed` (idealizowany detektor;
+konfig B4 VALID). Live-MTI NIE jest przedmiotem roszczenia — jest zmierzoną **kopertą** (mechanizm+zasięg
+udowodnione, central admission otwarta) do przyszłej nogi. Plansze ANEKS_D6 §1c OBOWIĄZKOWE w B6.
+
+### STOP → B6
+
+T1 zamknięty (TERMINAL §7f/§8b). Próby dowodowe A1+A3 VALID (frozen). NASTĘPNE: **B6 montaż** — film
+wyłącznie z prób osądzonych (A1 proba_1 + A3 proba_1), plansze §1c. Push = Olga.
