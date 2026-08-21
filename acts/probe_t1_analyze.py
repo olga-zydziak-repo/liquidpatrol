@@ -81,17 +81,40 @@ def main():
 
     recs = [r for r in trace if isinstance(r, dict) and "pos" in r and "k" in r]
 
+    # ── ANEKS_D8 §4b: bramka gotowości detektora — zegar choreografii/okna kotwiczony do TEJ chwili
+    # (nie do arm). trace `t` jest ścienny-od-arm; okno pierścienia [ring_lo,ring_hi] jest w sim-fazie
+    # od startu choreografii. Zamiast konwersji sim↔wall (RTF nieznane a priori) używamy sygnałów
+    # ZEGARO-AGNOSTYCZNYCH: (a) intruz „na pierścieniu" ⟺ plateau wysokości intr_ned; (b) ENTRY-in-window
+    # ⟺ zasięg-w-locku ∈ paśmie 7-9 m. To NIE proxy czasowe — to mierzone wielkości geometryczne (§3e).
+    ready_ev = next((r for r in trace if isinstance(r, dict) and r.get("event") == "detector_ready"), None)
+    ready_t = ready_ev.get("ready_wall_s") if ready_ev else None
+    ready_timeout = any(isinstance(r, dict) and r.get("event") == "detector_ready_timeout" for r in trace)
+
     # ── ZASIĘG do świat-stałego celu (§3e: koperta 7-9 m) ──
-    ranges = []          # (t, range3d, range_h)
+    ranges = []          # (t, range3d, range_h, alt_up)
     for r in recs:
         intr = r.get("intr_ned"); pos = r.get("pos")
         if intr and pos and len(intr) == 3 and len(pos) >= 3:
             dN, dE, dD = intr[0] - pos[0], intr[1] - pos[1], intr[2] - pos[2]
-            ranges.append((r["t"], math.sqrt(dN * dN + dE * dE + dD * dD), math.hypot(dN, dE)))
-    # zawężenie do okna pierścienia (cel na pierścieniu)
-    rng_ring = [x for x in ranges if ring_lo <= x[0] <= ring_hi] or ranges
+            ranges.append((r["t"], math.sqrt(dN * dN + dE * dE + dD * dD), math.hypot(dN, dE), -intr[2]))
+    # okno „intruz na pierścieniu" z PLATEAU WYSOKOŚCI intruza (ring z wyższe niż park; zegaro-agnostyczne).
+    alts = [x[3] for x in ranges]
+    alt_max = max(alts) if alts else None
+    def _at_ring(x):     # x=(t,r3,rh,alt_up); na pierścieniu ⟺ blisko szczytu wysokości (nie park/approach)
+        return alt_max is not None and x[3] >= alt_max - 1.5
+    rng_ring = [x for x in ranges if _at_ring(x)] or ranges
     r3 = [x[1] for x in rng_ring]
     band_frac = (sum(1 for v in r3 if BAND_LO <= v <= BAND_HI) / len(r3)) if r3 else None
+    # zakres czasowy okna pierścienia (raport) + szybkie odpytanie zasięgu w chwili t
+    ring_t_lo = min((x[0] for x in rng_ring), default=None)
+    ring_t_hi = max((x[0] for x in rng_ring), default=None)
+    def _range_at(t):
+        best = None; bestd = 1e9
+        for (tt, v, _rh, _a) in ranges:
+            dd = abs(tt - t)
+            if dd < bestd:
+                bestd = dd; best = v
+        return best
 
     # ── ENTRY / lock (trace autorytatywny) ──
     entry_t = None; prev_lock = False; n_entry = 0
@@ -102,9 +125,14 @@ def main():
             if entry_t is None:
                 entry_t = r["t"]
         prev_lock = lk
-    entry_in_window = entry_t is not None and ring_lo <= entry_t <= ring_hi + 5.0
+    # §4b: ENTRY-in-window ZEGARO-AGNOSTYCZNE = ENTRY po gotowości detektora ∧ zasięg-w-locku w paśmie 7-9 m
+    # (±0.5 m na osc/DALT). Zastępuje stałe okno ścienne [ring_lo,ring_hi+5] (nietrafne po przekotwiczeniu).
+    rng_at_entry = _range_at(entry_t) if entry_t is not None else None
+    after_ready = (ready_t is None) or (entry_t is not None and entry_t >= ready_t - 0.5)
+    entry_in_window = bool(entry_t is not None and after_ready
+                           and rng_at_entry is not None and (BAND_LO - 0.5) <= rng_at_entry <= (BAND_HI + 0.5))
     # raport-nie-brama: pierwsze wejście celu w pierścień (zasięg pierwszy raz w paśmie) vs ENTRY
-    first_in_ring_t = next((t for (t, v, _) in ranges if BAND_LO <= v <= BAND_HI), None)
+    first_in_ring_t = next((t for (t, v, _rh, _a) in ranges if BAND_LO <= v <= BAND_HI), None)
     entry_before_ring = (entry_t is not None and first_in_ring_t is not None and entry_t < first_in_ring_t)
 
     # ── mti_ok k=3 pod rząd (dbg det-kadencja) ──
@@ -134,18 +162,24 @@ def main():
     passed = bool(entry_in_window and mti_run >= ENTRY_K and box_on_target)
     borderline = (not passed) and (mti_run in (ENTRY_K - 1, ENTRY_K - 2) or (n_entry > 0 and not entry_in_window)
                                    or (band_frac is not None and 0.3 <= band_frac < 0.5))
+    # §4d: bieg który pada WYŁĄCZNIE na mechanice okna/rozgrzewki (timeout gotowości, ZERO percepcji) = NIE-BIEG.
+    non_run = bool(ready_timeout or (ready_t is not None and len(dbg) == 0 and len(mti) == 0))
 
     rep = {
         "outdir": outdir,
         "verdict": "PASS" if passed else "FAIL",
         "borderline": borderline,
+        "non_run(§4d)": non_run,
         "criteria": {
             "entry_in_window": entry_in_window,
             "mti_ok_run>=3": mti_run >= ENTRY_K,
             "box_on_target": box_on_target,
         },
+        "detector_ready(§4b)": {"ready_wall_s": ready_t, "timeout": ready_timeout,
+                                 "window_clock": "sim_t@detector_ready" if ready_t is not None else "wall@arm"},
         "envelope_held(report-only,§3e)": envelope_held,
-        "entry": {"n_entry": n_entry, "entry_t": entry_t, "ring_window": [ring_lo, ring_hi],
+        "entry": {"n_entry": n_entry, "entry_t": entry_t, "range_at_entry_m": round(rng_at_entry, 2) if rng_at_entry is not None else None,
+                  "ring_dwell_t": [round(ring_t_lo, 1) if ring_t_lo is not None else None, round(ring_t_hi, 1) if ring_t_hi is not None else None],
                   "entry_before_ring(report-only)": entry_before_ring, "first_in_ring_t": first_in_ring_t},
         "range_to_target_m": {"n": len(rng_ring), "min": round(min(r3), 2) if r3 else None,
                                "med": round(_med(r3), 2) if r3 else None, "max": round(max(r3), 2) if r3 else None,

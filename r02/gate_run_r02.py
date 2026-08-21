@@ -249,6 +249,10 @@ class Runner:
         self.entry_t = None; self.intruder_present = False; self.intruder_in_view_t = None
         self._prev_locked = False; self.locked = False   # locked ustawiane w tick(); init dla odczytu pre-tick
         self.idle_sp = None            # gdy ustawiony: setpoint utrzymania (hover) zamiast patrolu gdy nie-locked
+        # ANEKS_D8 §4b: zegar choreografii kotwiczony do GOTOWOŚCI detektora (nie do arm). Usuwa ~31s
+        # zmienności ładowania YOLO z okna dwell (nie maskuje). choreo_wall0=czas ścienny startu choreografii;
+        # choreo_sim0=sim_t (zegar symu) w tym momencie → kotwica fazy intruza (§6b) i deadline dwell (§4b ii).
+        self.choreo_wall0 = None; self.choreo_sim0 = None; self._detector_ready_s = None
         # TOR B — GT-FED: lokalny kanał zasilany pozą GT (bez detektora/kamery)
         self.gt_mode = GT_FED
         self.gt_channel = TargetChannel(ChannelConfig()) if GT_FED else None
@@ -511,6 +515,35 @@ class Runner:
     def _yaw(self):
         # R0.2: PRAWDZIWY yaw z attitude (exec_lib.Mav.yaw, NED rad) — domknięte dla latającego OBSERVE.
         return self.mav.yaw
+
+    def wait_detector_ready(self, timeout_s=90.0):
+        """ANEKS_D8 §4b(i): START CHOREOGRAFII bramkowany GOTOWOŚCIĄ detektora LIVE. Detektor gotów ⟺
+        pierwsza publikacja inferencji (YOLO załadowany ∧ 1. klatka odebrana ∧ 1. tik → kanał/boxy z sim_t).
+        Podczas czekania HOVER na idle_sp z tikiem @20 Hz (karmi dead-mana, spina ROS → odbiera publikacje).
+        Kotwiczy choreo_wall0/choreo_sim0 do chwili gotowości → intruz (§6b) i deadline dwell (§4b ii) startują
+        DOPIERO po rozgrzewce (usuwa ~31s zmienności z okna, §4b nie maskuje). GT-fed / brak detektora LIVE →
+        gotowy natychmiast (no-op). Zwraca (ready_wall_s, sim_t0) lub (None,None) na timeout (bieg=NIE-BIEG §4d).
+        §4e: obowiązuje we wszystkich runnerach aktów przed próbami dowodowymi."""
+        t_start = time.time()
+        if self.gt_mode or not os.environ.get("LIVE_DETECTOR_TOPIC"):
+            self.choreo_wall0 = t_start; self.choreo_sim0 = None; self._detector_ready_s = 0.0
+            return 0.0, None
+        while time.time() - t_start < timeout_s:
+            self.tick()                       # hover@idle_sp; karmi dead-mana; spina ROS (publikacje detektora)
+            if self.chan.stamp is not None and self.boxes_sub.sim_t is not None:
+                rs = round(time.time() - self.t0, 3)
+                self.choreo_wall0 = time.time(); self.choreo_sim0 = float(self.boxes_sub.sim_t)
+                self._detector_ready_s = rs
+                self.tf.write(json.dumps({"k": self.k, "t": rs, "event": "detector_ready",
+                                          "ready_wall_s": rs, "sim_t0": self.choreo_sim0}) + "\n"); self.tf.flush()
+                print(f"[gate] §4b(i) detektor GOTÓW @ {rs}s (sim_t0={self.choreo_sim0}) — start choreografii")
+                return rs, self.choreo_sim0
+            time.sleep(PERIOD)
+        self.tf.write(json.dumps({"k": self.k, "t": round(time.time()-self.t0, 3),
+                                  "event": "detector_ready_timeout", "timeout_s": timeout_s}) + "\n"); self.tf.flush()
+        print(f"[gate] §4b(i) TIMEOUT gotowości detektora ({timeout_s}s) — bieg = NIE-BIEG (§4d)")
+        self.choreo_wall0 = time.time(); self.choreo_sim0 = None; self._detector_ready_s = None
+        return None, None
 
     def bring_up(self):
         print("[gate] czekam na MAVSDK health...")
@@ -988,7 +1021,13 @@ def _act_setup(r, act):
             st = client.sim_t() if client is not None else None
             if st is not None:                    # §6b: faza z sim-time (kotwiczona do r.t0 przy 1. próbce)
                 if sim0 is None:
-                    sim0 = st - (time.time() - r.t0 if getattr(r, "t0", None) else 0.0)
+                    # ANEKS_D8 §4b(i): jeśli choreografia bramkowana gotowością detektora — kotwicz fazę
+                    # intruza do TEJ chwili (choreo_sim0), nie do arm. Inaczej ~31s ładowania YOLO zjadałoby
+                    # okno ring_hold intruza (park→approach→ring liczone od arm). Ten sam zegar co deadline §4b(ii).
+                    if getattr(r, "choreo_sim0", None) is not None:
+                        sim0 = r.choreo_sim0
+                    else:
+                        sim0 = st - (time.time() - r.t0 if getattr(r, "t0", None) else 0.0)
                 phase = st - sim0
             else:                                 # rozgrzewka: zegar symu jeszcze niegotowy → zegar ścienny
                 phase = time.time() - r.t0 if getattr(r, "t0", None) else 0.0
@@ -1090,6 +1129,12 @@ def _emit_act_manifest(r, act):
         # §4a: echo kadencji decyzji przekazanej detektorowi LIVE (== REGATE 2.0). Bieg z det_hz≠2.0 =
         # INVALID z definicji. Dla GT-fed brak detektora LIVE → None (kadencja z pętli runnera).
         m["det_hz"] = DEMO_DECISION_HZ if (not r.gt_mode and os.environ.get("LIVE_DETECTOR_TOPIC")) else None
+        # ANEKS_D8 §4b echo (baza zegara okna/polityka): choreografia+intruz+deadline dwell bramkowane
+        # GOTOWOŚCIĄ detektora LIVE (sim_t@ready), nie arm (wall). Zmierzony czas gotowości → SCENARIO_RESULT
+        # (detector_ready_s). GT-fed / brak detektora → zegar arm (wall), gotowy natychmiast.
+        _live_det = (not r.gt_mode) and bool(os.environ.get("LIVE_DETECTOR_TOPIC"))
+        m["window_clock_base"] = "sim_t@detector_ready" if _live_det else "wall@arm"
+        m["detector_ready_gated"] = _live_det
         # §5a: echo kadencji RUCHU intruza (teleport) == REGATE ~16.7 Hz. Bieg z teleport_hz≠16.7 = INVALID
         # z definicji (dotyczy OBU torów — wątek teleportu żyje w gt-fed i live). RAPORT_D_B5 §FINAL: 2 Hz
         # teleport zabijał MTI in-window (filtr trwałości odrzucał ruch skokowy).
@@ -1136,8 +1181,11 @@ def scenario_A1(r: Runner):
     r.bring_up()
     _emit_act_manifest(r, "A1")                    # B5 §0/§2: manifest PO arm (env-fail bootu = nie-próba)
     _start_live_detector(r)                       # B5: tor LIVE PO arm (nie blokuje MAVSDK/GCS przy arm)
-    start_teleport()                              # wątek teleportu widocznego intruza (~2 Hz)
-    r.idle_sp = [r.start[0], r.start[1], -ALT_M]
+    r.idle_sp = [r.start[0], r.start[1], -ALT_M]   # hover na home (dwell) — utrzymanie w bramce gotowości §4b(i)
+    # ANEKS_D8 §4b(i): BRAMKA GOTOWOŚCI DETEKTORA przed startem choreografii+intruza (usuwa ~31s ładowania
+    # YOLO z okna dwell, nie maskuje). §4e: obowiązuje przed próbami dowodowymi (GT-fed → no-op natychmiast).
+    r.wait_detector_ready(float(os.environ.get("PROBE_READY_TIMEOUT", "90")))
+    start_teleport()                              # wątek teleportu — intruz kotwiczony do choreo_sim0 (§6b/§4b i)
     # ANEKS_D8 §3c: probe ego-motion (T1) — orbita wokół punktu dwell (home), promień dobrany tak, by
     # zasięg do świat-stałego intruza pozostał w 7-9 m; yaw trzymany na celu (cel stabilny w kadrze, tło
     # płynie); v=2.5 m/s zachowane z REGATE (paralaksa/krok MTI = v·Δt), ρ steruje zasięgiem (v=ω·ρ).
@@ -1150,9 +1198,20 @@ def scenario_A1(r: Runner):
     _t_probe0 = None
     grant_delay = AC.grant_delay_s(spec)
     hold_end = spec["timeline_s"]["intruder_ring_hold"][1]
+    # ANEKS_D8 §4b(ii): DEADLINE DWELL W SIM-TIME (nie wall) — zegar okna = faza sim od startu choreografii
+    # (choreo_sim0), TEN SAM kontrakt co faza intruza §6b. Margines §4b(iii) dobrany PO (i)+(ii). GT-fed / brak
+    # sim_t → fallback wall (zachowanie ewidencyjne niezmienione). Orbita drona zostaje WALL-time (konserwacja
+    # 2.5 m/s / paralaksy na krok klatki §3c) — envelope 7-9m niezależny od fazy orbity (ρ=1m « 8m).
+    _live = (not r.gt_mode) and bool(os.environ.get("LIVE_DETECTOR_TOPIC"))
+    _win_margin = float(os.environ.get("PROBE_WIN_MARGIN", "8.0"))
+    def _phase_now():
+        st = r.boxes_sub.sim_t
+        if r.choreo_sim0 is not None and st is not None:
+            return st - r.choreo_sim0            # faza sim od gotowości detektora (== zegar intruza §6b)
+        return time.time() - (r.choreo_wall0 or r.t0)   # fallback wall
     granted = False; entry_local = None
-    while time.time() - r.t0 < hold_end + 5:
-        t = time.time() - r.t0
+    while (_phase_now() < hold_end + _win_margin) if _live else (time.time() - r.t0 < hold_end + 5):
+        t = time.time() - (r.choreo_wall0 or r.t0)         # zegar orbity/grantu: WALL od startu choreografii
         if _probe and not r.locked:
             if _t_probe0 is None:
                 _t_probe0 = t
@@ -1180,6 +1239,10 @@ def scenario_A1(r: Runner):
             "teleport_hz_producer": getattr(r, "_teleport_hz_producer", None),  # §6a: świeżość intr_ned (pętla)
             "teleport_req_lat_ms": getattr(r, "_teleport_req_lat_ms", None),    # §7a: latencja request (diag 108ms)
             "teleport_backend": getattr(r, "_teleport_backend", None),
+            # ANEKS_D8 §4b echo: czas gotowości detektora (arm→ready) + baza zegara okna (sim_t@choreo vs wall).
+            "detector_ready_s": getattr(r, "_detector_ready_s", None),
+            "choreo_sim0": getattr(r, "choreo_sim0", None),
+            "window_clock_base": ("sim_t@detector_ready" if r.choreo_sim0 is not None else "wall@arm"),
             "note": "REHEARSAL/integracja (B4) — NIE próba (B5); percepcja NIERAPORTOWALNA"}
     r.finish(crit)
     return True
@@ -1191,8 +1254,9 @@ def scenario_A2(r: Runner):
     r.bring_up()
     _emit_act_manifest(r, "A2")                    # B5 §0/§2: manifest PO arm
     _start_live_detector(r)                       # B5: tor LIVE PO arm
-    start_teleport()
     r.idle_sp = [r.start[0], r.start[1], -ALT_M]
+    r.wait_detector_ready(float(os.environ.get("PROBE_READY_TIMEOUT", "90")))  # §4b(i)/§4e (GT-fed → no-op)
+    start_teleport()
     grant_delay = AC.grant_delay_s(spec)
     ep1_end = spec["timeline_s"]["ep1_ring_hold"][1]
     granted_seq = set(); prev_seq = -1; ep_entry_local = 0.0
