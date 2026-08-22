@@ -33,6 +33,7 @@ POS_REFUSE_BOUND_S = DEBOUNCE_TICKS * DT + DT   # (a) D13: debounce + 1 tick = 0
 
 # --- akcja bezpieczna: zejście STEROWANE PRĘDKOŚCIĄ, dwufazowe (D5 zrew. §3quater) ---
 # AUTO.LAND (position-hold) WYKLUCZONY (flyaway 42 m pod DR). Lista zamknięta komend osłony:
+# ERRATUM_42M (PRE_K1 §0): "42 m" asserted 09.08, run not preserved — superseded by K1 measurement (PRE_K1); see results/K1/ERRATUM_42M.md
 #   {velocity-setpoint (patrol/OBSERVE), velocity-descent (POS_DEGRADED)}.
 V_DESC_FAST = 1.5                        # MPC_Z_VEL_MAX_DN (limit VRS PX4) — faza 1 do H_SWITCH
 V_DESC_LAND = 0.7                        # MPC_LAND_SPEED — faza 2 do touchdown

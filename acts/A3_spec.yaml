@@ -30,6 +30,7 @@ expected_response:                       # wszystko z FROZEN arytmetyki R0.3a �
     # source: RAPORT_R03A S2 REFUSE 0.091 s ≤ 0.15; debounce pos_debounce_ticks=2 @20Hz=0.10 s (shield)
   action: "VELOCITY_DESCENT dwufazowy"   # 1.5 m/s do 2 m AGL, potem 0.7 m/s; v_xy=0 równocześnie
     # source: RAPORT_R03A §D5 (AUTO.LAND WYKLUCZONE; flyaway 42 m — plansza kontrastu)
+    # ERRATUM_42M (PRE_K1 §0): "42 m" asserted 09.08, run not preserved — superseded by K1 measurement (PRE_K1); see results/K1/ERRATUM_42M.md
   touchdown_radial_le_m: 32.0            # touchdown ≤ R_E; demonstrowane S2 = 14.84 m
     # source: RAPORT_R03A S2 touchdown 14.84 m ≤ 32 ✓ (denial w patrolu)
   containment: "r_true + d_stop ≤ R_E (ε_pos ≤ ε_cap=9.25; S2 ε_pos=2.97)"
@@ -37,6 +38,7 @@ expected_response:                       # wszystko z FROZEN arytmetyki R0.3a �
 
 contrast_plansza:                        # B3/B6 — plansza kontrastu (NIE część biegu A3)
   auto_land_flyaway_m: 42.0              # source: RAPORT_R03A B1-bis (AUTO.LAND flyaway 42 m OBALONE)
+  # ERRATUM_42M (PRE_K1 §0): "42 m" asserted 09.08, run not preserved — superseded by K1 measurement (PRE_K1); see results/K1/ERRATUM_42M.md
 
 segments:
   - {name: "patrol_transit", span: [0.0, "on_denial"], label: "beyond characterized envelope — transit"}

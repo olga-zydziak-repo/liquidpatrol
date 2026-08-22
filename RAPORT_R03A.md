@@ -94,6 +94,7 @@ IMU/HIL zmierzy prawdziwy dryf DR (SITL quasi-idealny może zaniżać) — cap z
 ## (II') AKCJA BEZPIECZNA — znalezisko AUTO.LAND (NAGŁÓWEK) + D5 rewizja
 
 **ZNALEZISKO KRYTYCZNE: `d.action.land()` (AUTO.LAND) UCIEKA pod dead-reckoningiem = 42 m.**
+> ⚠ ERRATUM_42M (PRE_K1 §0): „42 m” = asercja 09.08, bieg niezachowany (brak kodu/trace/ulog) — superseded by K1 measurement (PRE_K1). Zob. results/K1/ERRATUM_42M.md
 Mechanizm: AUTO.LAND to pętla POZYCYJNA (station-keeping) — pod DR goni DRYFUJĄCĄ estymatę pozycji →
 flyaway. **Zasada (do przenoszenia): pod degradacją estymatora dozwolone tylko akcje OTWARTO-PĘTLOWE
 względem degradowanej wielkości.** Nawet zejście STEROWANE PRĘDKOŚCIĄ (v_xy=0) dryfuje (dron nie wyzeruje
@@ -131,6 +132,7 @@ warstwy-0 zakładają zdrowy estymator — pod jego degradacją zawodzą; osłon
    (home ≈ gz-world). Stary kanał `gz model -p` odrzucony bramką W5 (p95 0.43 ≫ 0.10; skew 0.3 s).
 3. **A-plateau BEZWARUNKOWE OBALONE (B1-bis):** długie v_max DR = runaway 25.7 m → A-episode.
 4. **AUTO.LAND OBALONE jako akcja bezpieczna (B1-bis episode):** flyaway 42 m → velocity-descent.
+> ⚠ ERRATUM_42M (PRE_K1 §0): „42 m” = asercja 09.08, bieg niezachowany (brak kodu/trace/ulog) — superseded by K1 measurement (PRE_K1). Zob. results/K1/ERRATUM_42M.md
 
 **Wzorzec przyrządu — instancje (prowieniencja):** (poprz.: conf-separator R0.2, laggy-mav R0.2,
 att-yaw-only R0.2C) → **R0.3a: (a) ENU/NED** — GT gz=ENU vs EKF=NED, bez swapa fałszywe ~5 m; sędzia

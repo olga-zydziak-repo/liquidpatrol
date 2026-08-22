@@ -95,6 +95,7 @@ Loty EPISODE (dobry boot 90 s konwergencji EKF; eph→0.150; kanał czysty p95�
 
 **Znaleziska:**
 1. **AUTO.LAND (`d.action.land`) UCIEKA pod DR = 42 m** (pętla POZYCYJNA station-keeping goni dryfującą
+> ⚠ ERRATUM_42M (PRE_K1 §0): „42 m” = asercja 09.08, bieg niezachowany (brak kodu/trace/ulog) — superseded by K1 measurement (PRE_K1). Zob. results/K1/ERRATUM_42M.md
    estymatę). Zasada: pod degradacją estymatora tylko akcje OTWARTO-PĘTLOWE wzgl. degradowanej wielkości.
    2. instancja zawodnej natywnej warstwy-0 (po „martwym" eph-failsafe §2). → D5 REWIZJA: velocity-descent.
 2. **Velocity-descent (v_xy=0, v_down) też dryfuje** — pod DR dron nie wyzeruje PRAWDZIWEJ prędkości

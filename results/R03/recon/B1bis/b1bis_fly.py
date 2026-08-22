@@ -116,6 +116,7 @@ async def main():
             await asyncio.sleep(0.05)
         # AKCJA BEZPIECZNA = ZEJŚCIE STEROWANE PRĘDKOŚCIĄ, v_xy=0 RÓWNOCZEŚNIE (D5 zrew. §3quater).
         # NIE d.action.land() (AUTO.LAND = position-hold → flyaway 42 m pod DR). Profil DWUFAZOWY:
+        # ERRATUM_42M (PRE_K1 §0): "42 m" asserted 09.08, run not preserved — superseded by K1 measurement (PRE_K1); see results/K1/ERRATUM_42M.md
         # faza1 v_desc_fast=MPC_Z_VEL_MAX_DN=1.5 m/s do ~2 m AGL; faza2 MPC_LAND_SPEED=0.7 do touchdown.
         # Czas zejścia = DŹWIGNIA dryfu (krótszy epizod DR = mniejszy ε_pos).
         ev("refuse_land")

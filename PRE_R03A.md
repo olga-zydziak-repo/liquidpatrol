@@ -285,6 +285,7 @@ prawdziwej prędkości (brak aidingu) → dryf ~proporcjonalny do CZASU epizodu 
 
 **ZNALEZISKO KRYTYCZNE — AUTO.LAND UCIEKA (do nagłówka raportu §II'/III):** `d.action.land()`
 (AUTO.LAND) pod DR = **flyaway 42 m** — pętla POZYCYJNA (station-keeping) goni DRYFUJĄCĄ estymatę.
+> ⚠ ERRATUM_42M (PRE_K1 §0): „42 m” = asercja 09.08, bieg niezachowany (brak kodu/trace/ulog) — superseded by K1 measurement (PRE_K1). Zob. results/K1/ERRATUM_42M.md
 **Zasada: pod degradacją estymatora dozwolone tylko akcje OTWARTO-PĘTLOWE względem degradowanej
 wielkości.** 2. instancja wzorca „zawodna natywna warstwa-0" (po eph-failsafe „martwym" §2).
 
@@ -292,6 +293,7 @@ wielkości.** 2. instancja wzorca „zawodna natywna warstwa-0" (po eph-failsafe
 akcja po REFUSE(POS) = **zejście STEROWANE PRĘDKOŚCIĄ z `v_xy=0` zadawanym RÓWNOCZEŚNIE**
 (`VelocityNed(0,0,v_down)`). **`d.action.land`/AUTO.LAND WYKLUCZONE z listy zamkniętej komend osłony**
 (uzasadnienie: runaway 42 m, pętla pozycyjna na skażonej estymacie). RTL już wykluczony (global pos, R2).
+> ⚠ ERRATUM_42M (PRE_K1 §0): „42 m” = asercja 09.08, bieg niezachowany (brak kodu/trace/ulog) — superseded by K1 measurement (PRE_K1). Zob. results/K1/ERRATUM_42M.md
 
 **Profil zejścia DWUFAZOWY (ZAMROŻONY TERAZ, kryterium NIEZALEŻNE):**
 - Faza 1 (szybka): `v_desc_fast = MPC_Z_VEL_MAX_DN = 1.5 m/s` (limit PX4 dla trybów prędkościowych =
@@ -325,6 +327,7 @@ NA/PONAD R-G. Uzasadnienie: nie wolno ufać barierze na dryfującym p.
 `VelocityNed(0,0,v_down)` z `v_xy=0` równocześnie, profil dwufazowy (1.5→0.7 m/s, §3quater).
 RTL **wykluczony** (global pos, R2). **AUTO.LAND (`d.action.land`) WYKLUCZONE z listy zamkniętej**
 (flyaway 42 m pod DR — pętla pozycyjna goni skażoną estymatę; §3quater). Lista zamknięta komend osłony
+> ⚠ ERRATUM_42M (PRE_K1 §0): „42 m” = asercja 09.08, bieg niezachowany (brak kodu/trace/ulog) — superseded by K1 measurement (PRE_K1). Zob. results/K1/ERRATUM_42M.md
 = {velocity-setpoint (patrol/OBSERVE), velocity-descent (POS_DEGRADED)}; AUTO.LAND/RTL poza listą.
 Zapisane w trace. [OBALONE B1-bis: „Land = komenda trybu" — AUTO.LAND niestabilny pod DR.]
 

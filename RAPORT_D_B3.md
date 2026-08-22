@@ -56,6 +56,7 @@ programowo** z `r01/proofs/certs/P*.json` (SR-E3: hash/liczba na sztywno = narus
   hashe `model_sha256` z P*.json), MEASURED (liczby z trace z podanym źródłem), operator=skrypt (A5),
   „per admission — no re-identification" (B1 §1.3), „authority gating, not secure C2" (B1 §1.7),
   „SITL only — TRL 2–3", CUT (A2, osobne booty), CONTRAST A3 (AUTO.LAND flyaway `42 m` czytane ze
+> ⚠ ERRATUM_42M (PRE_K1 §0): „42 m” = asercja 09.08, bieg niezachowany (brak kodu/trace/ulog) — superseded by K1 measurement (PRE_K1). Zob. results/K1/ERRATUM_42M.md
   **spec** `A3_spec.contrast_plansza` z cytatem RAPORT_R03A vs touchdown zmierzony z trace).
 - **Język:** EN (parametr `--lang`, treści w słowniku `STRINGS`); **decyzja EN do zatwierdzenia przez
   Olgę** — generator gotowy na dodanie PL jako drugiego klucza słownika bez zmian logiki.
@@ -73,6 +74,7 @@ oznaczone `"fixture": true` — NIE dowód, NIE pomiar).
 | `no_hex64_literal_in_templates` | żaden szablon STRINGS nie zawiera literału hex≥16 (SR-E3) |
 | `proved_plansza_reads_hash_from_cert` | PROVED zawiera AKTUALNY hash z P1/P5.json (czytany z pliku) |
 | `contrast_number_from_spec_not_hardcoded` | „42" NIE w szablonie; flyaway pochodzi ze spec |
+> ⚠ ERRATUM_42M (PRE_K1 §0): „42 m” = asercja 09.08, bieg niezachowany (brak kodu/trace/ulog) — superseded by K1 measurement (PRE_K1). Zob. results/K1/ERRATUM_42M.md
 | `backward_compat_archival_regate_trace_loads` | archiwalny `regate2/trace.jsonl` ładuje się (v1, ticks>0, bez wywrotki) |
 
 Regresja (nienaruszalność): `r01/test_core` 10, `r01/test_token_authz` 12, `r02/{channel,mti,guidance,

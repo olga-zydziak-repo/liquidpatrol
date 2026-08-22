@@ -252,6 +252,7 @@ def build_planszas(act, trace, spec, found, S):
         td = f"{r_ests[-1]:.2f}" if r_ests else str(cp.get("touchdown_radial_le_m", "?"))
         pls.append({"kind": "CONTRAST", "text": S["pl.contrast"].format(
             flyaway=cp.get("auto_land_flyaway_m", "?"), td=td)})
+            # ERRATUM_42M (PRE_K1 §0): "42 m" asserted 09.08, run not preserved — superseded by K1 measurement (PRE_K1); see results/K1/ERRATUM_42M.md
     return pls
 
 

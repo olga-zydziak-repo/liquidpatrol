@@ -42,6 +42,7 @@ per-cel (§3) → drugi cel wymaga **nowego tokenu**.
 **AKT 3 — GPS-denied.** Denial w patrolu (`EKF2_GPS_CTRL=0`); flaga → `REFUSE(POS_DEGRADED)`
 (zmierzone **0.091 s** ≤ 0.15) → velocity-descent dwufazowy (1.5→0.7 m/s) → touchdown w kopercie
 (zmierzone 14.84 m ≤ R_E 32). **Plansza kontrastu:** natywny `AUTO.LAND` w tym reżimie **ucieka 42 m
+> ⚠ ERRATUM_42M (PRE_K1 §0): „42 m” = asercja 09.08, bieg niezachowany (brak kodu/trace/ulog) — superseded by K1 measurement (PRE_K1). Zob. results/K1/ERRATUM_42M.md
 (zmierzone, `RAPORT_R03A` §II')**.
 
 **Poza nogą D:** finał R0.4 (VIO) — osobny cykl. Dead-man/zombie — **plansza z liczbami R0.2**
@@ -184,6 +185,7 @@ prowieniencja przyrządu); plansza otwierająca **„SITL only · TRL 2–3"**; 
   (`ANEKS_MTI_2`).
 - **AKT 3:** `MEASURED` REFUSE 0.091 s, touchdown 14.84 m (RAPORT_R03A, S2); kontrast `MEASURED`
   AUTO.LAND flyaway 42 m. `PROVED` P2/P2-ε geofence.
+> ⚠ ERRATUM_42M (PRE_K1 §0): „42 m” = asercja 09.08, bieg niezachowany (brak kodu/trace/ulog) — superseded by K1 measurement (PRE_K1). Zob. results/K1/ERRATUM_42M.md
 - **Plansze R5-b** (poza kopertą) na KAŻDYM tranzycie intruza (patrz §7 R5).
 
 ---

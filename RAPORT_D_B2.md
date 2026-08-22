@@ -48,6 +48,7 @@ grantem (DECISION 20 Hz `TICK_HZ` r01.config; DET 1 Hz `DET_HZ` config_r02 → N
 (`V_MAX=3`, `A_BRAKE=2` → d_stop=2.25; ε_cap=9.25 RAPORT_R03A). r_inj 18 ≤ 20.5 ⇒ **touchdown ≤
 r_inj+ε_cap+d_stop = 29.5 < R_E=32** (containment; S2 demonstrował 14.84 m). `REFUSE(POS_DEGRADED)
 ≤ 0.15 s` (S2 0.091). velocity-descent dwufazowy (AUTO.LAND wykluczony; plansza kontrastu 42 m).
+> ⚠ ERRATUM_42M (PRE_K1 §0): „42 m” = asercja 09.08, bieg niezachowany (brak kodu/trace/ulog) — superseded by K1 measurement (PRE_K1). Zob. results/K1/ERRATUM_42M.md
 
 **Tranzyty (D3(b)):** każdy segment `transit` oznaczony `beyond characterized envelope`; roszczenie
 percepcji WYŁĄCZNIE w dwell/OBSERVE (D3(a)).
