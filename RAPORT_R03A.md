@@ -1,5 +1,11 @@
 # RAPORT_R03A — R0.3a GPS-DENIED: osłona konsumuje zdrowie własnej pozycji
 
+> **ERRATUM #2 (scope V_MAX, 2026-08-23 — `ERRATUM_VMAX.md`, ANEKS_K1-8):** `V_MAX=3.0` był limitem
+> ZADANYM (norma setpointu), nie faktycznym. Pomiar K1 (GT): prosta 3.16 / **zakręt 5.34 m/s** (EKF
+> zaniża ~1.6). `d_stop=2.85` i „margines 11.69 m" (niżej) liczone z limitem zadanym/estymowanym.
+> Twierdzenie re-instancjonowane dla `V_env=6.0`: `d_stop(6.0)=10.2`, `C_margin=1.146 m > 0` — gwarancja
+> stoi w zmierzonej obwiedni. Patrz `ERRATUM_VMAX.md`.
+
 Data: 2026-08-10 (build) / 2026-08-11 (DIAG + bramka 4/4 live). PX4 **v1.16.2**. Reżim: build wg
 `PROMPT_R03A_BUILD2`; kryteria dwustronne ZAMROŻONE przed pomiarem; każda liczba z etykietą przyrządu;
 rozbieżności jawne; księgowość trójwynikowa. **GT (gz) WYŁĄCZNIE sędzią — nigdy w decyzji.** STOP na
@@ -38,6 +44,9 @@ Koperta `R_E=32` NIETYKANA (kurczymy własną trasę, nie rozciągamy świata). 
 **BRAMKA 4/4 LIVE PASS** (sesja DIAG-2, 2026-08-11; świeże booty, GT sędzią, osłona w pętli).
 POS_DEGRADED = ODWRACALNY (`terminal=None`, `n_pos_enter=1`) — nie latch (D6). S4 cięcie przy narożniku
 na v_max (r_est=18.02, v=3.14 m/s), min margines zawierania 11.69 m. S3 re-ALLOW dopiero po M (histereza,
+<!-- ERRATUM #2 (ANEKS_K1-8): v=3.14 to ESTYMATA EKF; faktyczna GT w narożniku wyższa (K1: EKF zaniża
+     ~1.6 m/s). „11.69 m" policzone z limitem zadanym/estymowanym, nie faktycznym. Re-instancja dla
+     V_env=6.0 → d_stop(6.0)=10.2; C_margin(K1)=1.146>0. Patrz ERRATUM_VMAX.md. -->
 zero oscylacji). Instrument ε live jest ZGRUBNY (`healthy_p95` 0.30–0.52 m, okno zdrowe ~14 s, parowanie
 mono/skew, GT throttled) — powyżej charakteryzacyjnej bramki W5 (≤0.10, B1-bis), ALE kryterium D13c to
 `ε_pos ≤ ε_cap`, spełnione z szerokim marginesem we wszystkich epizodach; `healthy_p95` jest notą, nie

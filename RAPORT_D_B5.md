@@ -1,5 +1,10 @@
 # RAPORT_D_B5 — DEMO-B blok B5: sanity-live A1 zablokowane (SR-G6 STOP) + infrastruktura LIVE
 
+> **ERRATUM #2 (scope V_MAX, 2026-08-23 — `ERRATUM_VMAX.md`, ANEKS_K1-8):** ta sama dynamika lotu
+> (offboard velocity, ta sama trasa/limit); „V_MAX=3.0" = limit ZADANY, nie faktyczny. Faktyczna GT
+> w zakręcie 5.34 m/s (EKF zaniża ~1.6). Twierdzenie zawierania re-instancjonowane dla `V_env=6.0`
+> (`C_margin=1.146 m > 0`). Patrz `ERRATUM_VMAX.md`.
+
 Data: 2026-08-17. Zakres: B5 — sanity-live, próby dowodowe, detektor LIVE. **STOP na SR-G6**
 (cztery niepowodzenia środowiska boot/health w konfiguracji LIVE; przyczyna niedomknięta →
 „nie brnąć"). Reżim bez zmian; **push = Olga**.

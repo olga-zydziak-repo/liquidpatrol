@@ -473,3 +473,17 @@ NIEDOSZACOWUJE GT (3.74 vs 5.37).
 V_MAX=3.0 przyjęte przez d_stop twierdzenia. To NIE „inne źródło" (nie pion, nie jednostki) — to
 faktyczna > zadana w zakręcie. **Wykracza poza K1 (scope P2-ε w R0.3a); nie do przypisu → STOP przed
 N@0.2, osobna decyzja Olgi.** Bez lotu N.
+
+## §W7 — ANEKS_K1-8 V2–V5: obwiednia V_env, checkpoint, erratum #2
+
+**V2 (offline, S@0.2 boot3, 4 źródła):** ‖v_GT‖ = central diff pozycji GT (ENU, gz), Δt=sim (lockstep),
+pół-okno 0.2 s. Tabela regime'ów: prosta GT 3.16 · **zakręt GT 5.34** · takeoff 5.26 · descent 5.79 ·
+landing-skid 7.94. EKF /fmu i ulog vlp = TEN SAM estymator → zakręt 3.74 (zaniżają GT o ~1.6). setpoint
+=3.0 (konstr.). r_apex_max(GT, narożnik-0)=20.654. GT czysty (cięciwa zaniża na krzywej → 5.34 dolne).
+**V3 (prereg):** V_true_max(zakręt,GT)=5.342 → V_env=6.0 → d_stop(6.0)=10.2 (T_REACT=0.20/A_BRAKE=2.0,
+r01/config.py:25-26) → **C_margin = 32−(20.654+10.2) = 1.146 > 0 → K1 BIEGNIE DALEJ.** Realny koincydentny
+max(r+d_stop(v))=23.94 (margines 8.06). Checkpoint per boot `vmax_check`: ‖v_GT‖_max(offboard→denial) ≤
+V_env=6.0; przekroczenie=FLAGA (nie unieważnia, §4 bez zmian). boot3: v_gt_max_cruise=5.342 PASS.
+**V4:** `ERRATUM_VMAX.md` + adnotacje in-place RAPORT_R03A (nagłówek + linia „11.69 m") i RAPORT_D_B5.
+**V5:** stała-ograniczenie-fizyczne ⇒ zmierzone max w manifeście + asercja obwiedni. „Limit zadany ≠
+limit faktyczny" ∈ „asercja ≠ pomiar". `k1_finalize.V_ENV=6.0` (zamrożona), `_gt_cruise_vmax`.

@@ -106,6 +106,34 @@ def _ulog_sim_offset(ulog_path, gt, ev_by):
     return round(gnear["sim"] - hrt_offb, 4)
 
 
+# ANEKS_K1-8 V3/V5: obwiednia prędkości faktycznej ZAMROŻONA. V_true_max(zakręt, GT, S@0.2 boot3)=5.342
+# → V_env = ceil((5.342+0.5)/0.5)*0.5 = 6.0. d_stop(6.0)=6.0*0.20+6.0²/(2*2.0)=10.2 m.
+# C_margin = R_E − (r_apex_max + d_stop) = 32 − (20.654 + 10.2) = 1.146 m > 0 → gwarancja stoi.
+# Każdy boot: ‖v_GT‖_max w cruise (offboard→denial) ≤ V_env. Przekroczenie = FLAGA (nie unieważnia, §4 bez zmian).
+V_ENV = 6.0
+
+
+def _gt_cruise_vmax(gt, sim_lo, sim_hi, half=0.2):
+    """‖v_GT‖_max poziome (central diff, sim-Δt, pół-okno 0.2 s) w oknie cruise [sim_lo, sim_hi]."""
+    G = [g for g in gt if "sim" in g and "x" in g and "y" in g]
+    best, where = 0.0, None
+    for i in range(len(G)):
+        if not (sim_lo <= G[i]["sim"] <= sim_hi):
+            continue
+        lo = hi = i
+        while lo > 0 and G[i]["sim"] - G[lo]["sim"] < half:
+            lo -= 1
+        while hi < len(G) - 1 and G[hi]["sim"] - G[i]["sim"] < half:
+            hi += 1
+        dt = G[hi]["sim"] - G[lo]["sim"]
+        if dt < 1e-6:
+            continue
+        v = math.hypot((G[hi]["x"] - G[lo]["x"]) / dt, (G[hi]["y"] - G[lo]["y"]) / dt)
+        if v > best:
+            best, where = v, G[i]["sim"]
+    return round(best, 3), (round(where, 3) if where is not None else None)
+
+
 def _stalls_from_rtf(out_dir):
     """F1 (ANEKS_K1-6): lista głębokich stalli (rtf<0.5) z rtf_stream.jsonl — artefakt środowiska (D8),
     do manifestu per boot. Zwraca {'n', 'list':[{sim0,sim1,dwall,dsim,rtf}], 'period_hint_s'}."""
@@ -429,6 +457,22 @@ def main():
                                        for (t, v, n) in nav]
     manifest["stall_in_reaction_window"] = stall_in_reaction
     manifest["sanity"] = sanity
+
+    # ANEKS_K1-8 V3/V5: checkpoint ‖v_GT‖_max w cruise (offboard→denial) ≤ V_env — FLAGA jeśli przekroczy
+    vmax_check = None
+    if t_inj_sim is not None:
+        offb = ev_by.get("offboard")
+        sim_offb = None
+        if offb:
+            gn = _nearest(gt, offb["mono"], "sim")
+            sim_offb = gn["sim"] if gn else None
+        if sim_offb is not None:
+            vgt, vwhere = _gt_cruise_vmax(gt, sim_offb, t_inj_sim)
+            vmax_check = {"v_gt_max_cruise": vgt, "sim_at_max": vwhere, "V_env": V_ENV,
+                          "pass": bool(vgt <= V_ENV), "window_s": [round(sim_offb, 3), round(t_inj_sim, 3)],
+                          "note": "‖v_GT‖ FAKTYCZNA w cruise. >V_env=FLAGA (V3), nie unieważnia; §4 bez zmian. "
+                                  "EKF zaniża faktyczną w zakręcie (~1.6 m/s) — osłona liczy na estymacie."}
+    manifest["vmax_check"] = vmax_check
     with open(os.path.join(a.out_dir, "manifest.json"), "w") as f:
         json.dump(manifest, f, indent=2, default=_jdefault)
 

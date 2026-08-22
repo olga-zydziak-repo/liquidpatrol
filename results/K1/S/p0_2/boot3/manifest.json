@@ -178,5 +178,16 @@
         "post_touchdown": true
       }
     ]
+  },
+  "vmax_check": {
+    "v_gt_max_cruise": 5.342,
+    "sim_at_max": 111.6,
+    "V_env": 6.0,
+    "pass": true,
+    "window_s": [
+      103.628,
+      111.6
+    ],
+    "note": "\u2016v_GT\u2016 FAKTYCZNA w cruise. >V_env=FLAGA (V3), nie uniewa\u017cnia; \u00a74 bez zmian. EKF zani\u017ca faktyczn\u0105 w zakr\u0119cie (~1.6 m/s) \u2014 os\u0142ona liczy na estymacie."
   }
 }
