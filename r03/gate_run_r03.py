@@ -30,6 +30,9 @@ from r03 import config as C
 SCEN = os.environ.get("SCEN", "S2")
 OUT = os.environ.get("GATE_OUT", f"/tmp/r03gate/{SCEN}.jsonl")
 S1_MIN = float(os.environ.get("S1_MIN", "5"))
+# K1 (PRE_K1 §2, ramię S): wstrzyknięcie na PIERWSZEJ nodze po PIERWSZYM narożniku, przy UŁAMKU nogi
+# K1_POINT ∈ {0.2,0.35,0.5,0.65,0.8}. Osłona/zejście/config NIETKNIĘTE — tylko punkt wstrzyknięcia.
+K1_POINT = float(os.environ.get("K1_POINT", "0.5"))
 WORLD = os.environ.get("PX4_GZ_WORLD", "default")
 MODEL = os.environ.get("B1_MODEL", "x500_mono_cam_0")
 GT_TOPIC = f"/world/{WORLD}/dynamic_pose/info"
@@ -226,14 +229,23 @@ async def main():
             seg_i += 1
         tgt = (wp[0], wp[1], -ALT)
         # denial injection
+        _k1_fa = None
         if SCEN == "S4":
             trigger = (not denial_done) and seg_i >= 1 and dist < 3.0 and now >= 8.0  # przy narożniku, v_max
+        elif SCEN == "K1":
+            _leg = math.hypot(wps[1][0] - wps[0][0], wps[1][1] - wps[0][1])   # długość 1. nogi po narożniku
+            _k1_fa = (_leg - dist) / _leg if (seg_i == 1 and _leg > 1e-6) else -1.0
+            trigger = (not denial_done) and seg_i == 1 and _k1_fa >= K1_POINT  # ułamek nogi
         else:
             trigger = (not denial_done) and now >= denial_at
         if trigger:
             await d.param.set_param_int("EKF2_GPS_CTRL", 0)
-            _w({"t": "event", "mono": round(time.monotonic(), 4), "ev": "denial_on",
-                "r_est_at_cut": round(r_est, 3), "speed_at_cut": round(math.hypot(vel[0], vel[1]), 3)})
+            _ev = {"t": "event", "mono": round(time.monotonic(), 4), "ev": "denial_on",
+                   "r_est_at_cut": round(r_est, 3), "speed_at_cut": round(math.hypot(vel[0], vel[1]), 3)}
+            if SCEN == "K1":
+                _ev["k1_point"] = K1_POINT
+                _ev["k1_f_along"] = round(_k1_fa, 3) if _k1_fa is not None else None
+            _w(_ev)
             print(f"[gate {SCEN}] denial_on r_est={r_est:.2f} v={math.hypot(vel[0],vel[1]):.2f}", flush=True)
             denial_done = True; denial_t = now
         # recovery (S3): 0→7 w locie
@@ -276,7 +288,8 @@ async def main():
         tick += 1
         if SCEN == "S1" and now >= s1_dur:
             ev("s1_done"); break
-        if now > (denial_at + 90 if denial_done else max(s1_dur, 400) + 30):
+        _to_ref = (denial_t if denial_t is not None else denial_at)   # K1: denial_at=1e9 → użyj denial_t
+        if now > (_to_ref + 90 if denial_done else max(s1_dur, 400) + 30):
             ev("timeout"); break
         await asyncio.sleep(C.DT)
 

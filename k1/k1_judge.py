@@ -275,8 +275,10 @@ def _land_ack_us(ud):
 # ----------------------------- ε_pos touchdown (ramię S) -----------------------------
 
 def eps_pos_touchdown(ekf_path, gt, t_touch):
-    """ε_pos = ||EKF_ned − GT_ned|| przy touchdown (ramię S, D13). GT ENU→NED: north=y, east=x.
-    Zwraca ε_pos [m] lub None. Prosta: najbliższe próbki EKF/GT do t_touch (sim)."""
+    """ε_pos = ||e(touchdown) − e0|| (ramię S, D13). e(t)=EKF_ned − GT_ned; GT ENU→NED: north=y, east=x.
+    Parowanie EKF↔GT po MONO (wspólny zegar odbioru — EKF ma mono+ts px4, NIE sim); e0 = baseline
+    zdrowego okna (pierwsze BASE_WIN_S) usuwa stały offset ramki home↔gz-world. Zwraca ε_pos [m] lub None."""
+    BASE_WIN_S = 5.0
     ekf = []
     with open(ekf_path) as f:
         for line in f:
@@ -287,20 +289,40 @@ def eps_pos_touchdown(ekf_path, gt, t_touch):
                 r = json.loads(line)
             except Exception:
                 continue
-            if r.get("t") not in (None, "ekf"):
-                continue
-            if "sim" in r and "x" in r and "y" in r:
+            if r.get("t") == "ekf" and "mono" in r and "x" in r and "y" in r:
                 ekf.append(r)
-    if not ekf:
+    return _eps_core(ekf, gt, t_touch, BASE_WIN_S)
+
+
+def _eps_core(ekf, gt, t_touch, BASE_WIN_S=5.0):
+    gtm = [g for g in gt if "mono" in g]
+    if not ekf or not gtm:
         return None
-    ekf.sort(key=lambda r: r["sim"])
-    e = min(ekf, key=lambda r: abs(r["sim"] - t_touch))
-    g = _interp_xy(gt, t_touch)
-    if g is None or abs(e["sim"] - t_touch) > GT_MATCH_TOL_S:
+    ekf.sort(key=lambda r: r["mono"])
+    gtm.sort(key=lambda r: r["mono"])
+
+    def e_vec(er, gr):
+        return (er["x"] - gr["y"], er["y"] - gr["x"])     # NED − (ENU→NED swap): north=gr.y, east=gr.x
+
+    def nearest_gt(mono):
+        return min(gtm, key=lambda r: abs(r["mono"] - mono))
+
+    # baseline e0 z pierwszych BASE_WIN_S (zawis w home — stały offset ramki)
+    t0 = ekf[0]["mono"]
+    base = [e_vec(e, nearest_gt(e["mono"])) for e in ekf if e["mono"] <= t0 + BASE_WIN_S]
+    if not base:
+        base = [e_vec(ekf[0], nearest_gt(ekf[0]["mono"]))]
+    e0 = (sum(b[0] for b in base) / len(base), sum(b[1] for b in base) / len(base))
+
+    # touchdown mono z wiersza GT najbliższego t_touch (sim)
+    gt_td = min(gt, key=lambda r: abs(r.get("sim", 1e18) - t_touch))
+    tm = gt_td.get("mono")
+    if tm is None:
         return None
-    gx, gy, _ = g
-    north_gt, east_gt = gy, gx           # ENU→NED (swap, R-2)
-    return round(math.hypot(e["x"] - north_gt, e["y"] - east_gt), 3)
+    e = min(ekf, key=lambda r: abs(r["mono"] - tm))
+    g = nearest_gt(tm)
+    ev = e_vec(e, g)
+    return round(math.hypot(ev[0] - e0[0], ev[1] - e0[1]), 3)
 
 
 # ----------------------------- assemble -----------------------------
@@ -437,6 +459,25 @@ def selftest():
     ok = ok and cb
     print(f"-- breach TRUE gdy r_max>{R_E}: r_max={m['r_max']} breach={m['breach']} "
           f"{'PASS' if cb else 'FAIL'}")
+
+    # ε_pos (ramię S): stały offset ramki off + dryf przy touchdown → ε = ||dryf||
+    off_n, off_e = 0.4, -0.3          # offset home↔world (NED)
+    dn, de = 1.5, 2.0                 # dryf EKF przy touchdown
+    gtE, gtN = 2.0, 1.0               # GT stały ENU (E,N) → NED (north=1, east=2)
+    ekf, gtl = [], []
+    dt = 0.1
+    for i in range(200):              # 0..20 s
+        t = round(i * dt, 4)
+        drift = (i >= 150)            # dryf od 15 s (touchdown ~19.9 s)
+        ekf.append({"t": "ekf", "mono": t,
+                    "x": gtN + off_n + (dn if drift else 0.0),      # NED north
+                    "y": gtE + off_e + (de if drift else 0.0)})     # NED east
+        gtl.append({"t": "gt", "mono": t, "sim": 1000.0 + t, "x": gtE, "y": gtN, "z": 5.0})
+    eps = _eps_core(ekf, gtl, t_touch=1000.0 + 19.9)
+    ce = eps is not None and abs(eps - math.hypot(dn, de)) < 0.02
+    ok = ok and ce
+    print(f"-- ε_pos (offset ramki usunięty, dryf {math.hypot(dn,de):.2f}): got={eps} "
+          f"exp={round(math.hypot(dn,de),3)} {'PASS' if ce else 'FAIL'}")
 
     print(f"\nWYNIK: {'PASS — sędzia zwalidowany, wolno liczyć biegi K1' if ok else 'FAIL — NIE liczyć'}")
     return ok

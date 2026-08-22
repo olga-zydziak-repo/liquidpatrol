@@ -32,8 +32,14 @@ cytatów wymaganych przed biegami. (Korekta nazw: `EstimatorChecks.cpp`→`estim
 ## §3.2 — sędzia `k1_judge.py` ZAMROŻONY
 
 ```
-sha256(k1/k1_judge.py) = 36c7c22acf9eac7605c9e70d160d783b6c5c2dd8a1bee8cb6360af1fc0517048
+sha256(k1/k1_judge.py) = 4e0dc0afffda099837a002191a5540fd95d6de13cb88e7233433d67b1b998ae1
 ```
+**Rewizja PRZED pierwszym bootem (dry-run harnessu, 2026-08-22):** poprzedni hash `36c7c22a` miał błąd
+kontraktu `eps_pos_touchdown` (zakładał, że wiersze EKF niosą `sim`; gate emituje EKF z `mono`+`ts`,
+bez `sim`) → ε_pos zwracało null. Poprawka: parowanie EKF↔GT po **mono** (wspólny zegar) + odjęcie
+baseline offsetu ramki (e0 z okna zdrowego). **ZERO biegów dotkniętych** (żaden boot nie zaszedł;
+bug złapany w dry-run przed bramą bootów). Unit-test ε_pos dodany (dryf 2.5 m z usuniętym offsetem → PASS).
+`k1_finalize.FROZEN_JUDGE_SHA` zaktualizowany; SR-K3 tripwire działa (odmówił liczenia przy starym haszu).
 Metryki per bieg (GT z gz sim-time + ulog PX4): `r_max`, `r_td`, `x_exc`, `t_td`, `breach (r_max>R_E)`,
 sekwencja `nav_state` z czasami (`vehicle_status`), `t_xy_valid_off` (`vehicle_local_position.xy_valid`),
 `t_dead_reckoning_on` (`estimator_status_flags.cs_inertial_dead_reckoning`), ack `NAV_LAND`
