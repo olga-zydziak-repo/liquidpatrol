@@ -233,8 +233,13 @@ async def main():
         if SCEN == "S4":
             trigger = (not denial_done) and seg_i >= 1 and dist < 3.0 and now >= 8.0  # przy narożniku, v_max
         elif SCEN == "K1":
+            # ANEKS_K1-6 F2: f_along względem AKTUALNEGO celu wps[seg_i] po seg_i+=1 (osobny _cur_dist);
+            # `dist` powyżej to odległość do STAREGO wp (narożnik-0, <1.0 m) → stale-dist → f≈0.97, K1_POINT
+            # ignorowany. `dist`/tgt/setpoint NIETKNIĘTE (gałąź K1 wyłącznie).
             _leg = math.hypot(wps[1][0] - wps[0][0], wps[1][1] - wps[0][1])   # długość 1. nogi po narożniku
-            _k1_fa = (_leg - dist) / _leg if (seg_i == 1 and _leg > 1e-6) else -1.0
+            _cur = wps[seg_i % len(wps)]
+            _cur_dist = math.hypot(_cur[0] - pos[0], _cur[1] - pos[1])
+            _k1_fa = (_leg - _cur_dist) / _leg if (seg_i == 1 and _leg > 1e-6) else -1.0
             trigger = (not denial_done) and seg_i == 1 and _k1_fa >= K1_POINT  # ułamek nogi
         else:
             trigger = (not denial_done) and now >= denial_at

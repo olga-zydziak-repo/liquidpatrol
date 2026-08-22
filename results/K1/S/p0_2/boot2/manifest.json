@@ -1,0 +1,181 @@
+{
+  "arm": "S",
+  "point": 0.2,
+  "boot_n": 2,
+  "kind": "diag",
+  "sha_harness": "19967de2ed5d35cc05f05f408def8f9de265d9f71136c99b40b074cebcd3a01c",
+  "harness_file": "r03/gate_run_r03.py",
+  "sha_k1_judge": "4e0dc0afffda099837a002191a5540fd95d6de13cb88e7233433d67b1b998ae1",
+  "k1_judge_frozen": true,
+  "shield_frozen": true,
+  "shield_pins": {
+    "r01/shield.py": {
+      "want": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "got": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "ok": true
+    },
+    "r03/config.py": {
+      "want": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "got": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "ok": true
+    },
+    "r03/gate_run_r03.py": {
+      "want": "19967de2ed5d35cc05f05f408def8f9de265d9f71136c99b40b074cebcd3a01c",
+      "got": "19967de2ed5d35cc05f05f408def8f9de265d9f71136c99b40b074cebcd3a01c",
+      "ok": true
+    }
+  },
+  "ulog": "results/K1/S/p0_2/boot2/boot.ulg",
+  "ulog_exists": true,
+  "stamps": {
+    "denial_on_mono": 12281.631,
+    "t_inj_sim": 112.372,
+    "px4_inj_us": 112392000.0,
+    "ulog_sim_C": -0.02,
+    "gt_dt": 0.0152,
+    "refuse_sim": 112.448,
+    "touchdown_sim": 115.332,
+    "touchdown_event_sim": 120.784
+  },
+  "harness_valid": true,
+  "harness_poison": {},
+  "habitat_verdict": "VALID",
+  "certs_selfcheck": {
+    "log": "results/K1/S/p0_2/boot2/certs_selfcheck.log",
+    "pass": true,
+    "rc": 0
+  },
+  "provenance_arm_s": "os\u0142ona w stanie 6db3393 (4/4 a088367 \u2192 D_B1 01f47e8 token \u2192 D_B3 e732c10 trace v2 \u2192 5a6a18d erratum); \u015bcie\u017cka POS_DEGRADED\u2192D5 bajt-identyczna z 4/4 wg ANEKS_SHA \u00a7W2",
+  "n_gt": 818,
+  "n_ekf": 1719,
+  "n_events": 8,
+  "events": [
+    "armed",
+    "takeoff",
+    "offboard",
+    "denial_on",
+    "refuse_pos_land",
+    "h_switch",
+    "touchdown",
+    "done"
+  ],
+  "stall_in_reaction_window": {
+    "window_s": [
+      112.372,
+      112.448
+    ],
+    "n_stall": 0,
+    "overlap": false,
+    "min_rtf": 1.0
+  },
+  "sanity": {
+    "t_td": {
+      "measured_s": 2.96,
+      "h0_m": 5.178,
+      "profil_D5": {
+        "V_DESC_FAST": 1.5,
+        "V_DESC_LAND": 0.7,
+        "H_SWITCH_AGL": 2.0,
+        "desc_fast_dur_gate_s": 4.0
+      },
+      "expected_from_h0_s": 3.119,
+      "note": "h0 z GT (nie nomina\u0142 8 m \u2014 wczesny punkt, dron w climbie). Gate prze\u0142\u0105cza faz\u0119 PO CZASIE (nomina\u0142 ALT=8) \u2192 przy h0<8 touchdown w fazie1 (1.5 m/s), st\u0105d t_td\u2248(h0-0.5)/1.5."
+    },
+    "nav_seq_annotated": [
+      {
+        "rel_s": -112.392,
+        "nav": "AUTO_LOITER",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": -15.98,
+        "nav": "AUTO_PRECLAND",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": -6.848,
+        "nav": "OFFBOARD",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": 4.068,
+        "nav": "DESCEND",
+        "post_touchdown": true
+      },
+      {
+        "rel_s": 6.292,
+        "nav": "OFFBOARD",
+        "post_touchdown": true
+      }
+    ]
+  },
+  "point_label": "corner0-passthrough",
+  "run_valid": false,
+  "invalid_reason": "spec-mismatch",
+  "spec_check": {
+    "k1_point": 0.2,
+    "k1_f_along": 0.966,
+    "abs_df": 0.766,
+    "r_est_at_cut": 18.957,
+    "r_expected": 16.41,
+    "r_tol_m": 2.0,
+    "fa_tol": 0.02,
+    "fa_ok": false,
+    "r_ok": false,
+    "spec_match": false
+  },
+  "stalls": {
+    "n": 6,
+    "list": [
+      {
+        "sim0": 4.94,
+        "sim1": 5.012,
+        "dwall": 0.176,
+        "dsim": 0.072,
+        "rtf": 0.409
+      },
+      {
+        "sim0": 6.256,
+        "sim1": 6.312,
+        "dwall": 3.224,
+        "dsim": 0.056,
+        "rtf": 0.017
+      },
+      {
+        "sim0": 38.312,
+        "sim1": 38.356,
+        "dwall": 3.12,
+        "dsim": 0.044,
+        "rtf": 0.014
+      },
+      {
+        "sim0": 70.448,
+        "sim1": 70.468,
+        "dwall": 3.085,
+        "dsim": 0.02,
+        "rtf": 0.006
+      },
+      {
+        "sim0": 100.524,
+        "sim1": 100.592,
+        "dwall": 0.888,
+        "dsim": 0.068,
+        "rtf": 0.077
+      },
+      {
+        "sim0": 101.656,
+        "sim1": 101.712,
+        "dwall": 3.124,
+        "dsim": 0.056,
+        "rtf": 0.018
+      }
+    ],
+    "n_deep_ge2s": 4,
+    "period_hint_s": [
+      32.06,
+      32.14,
+      31.21
+    ]
+  },
+  "relabel_note": "ANEKS_K1-6 F4: przeetykietowane kind=diag, point=corner0-passthrough (f\u22480.97, mislabel defektu stale-dist sprzed naprawy F2). Wy\u0142\u0105czone z tabel \u00a7I; \u015blad w \u00a7V. sha_harness = kod SPRZED naprawy (odzwierciedla to, czym latano)."
+}

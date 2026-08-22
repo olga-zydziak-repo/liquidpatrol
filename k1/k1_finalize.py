@@ -10,7 +10,7 @@ Sędzia dostaje: --gt=trace (filtr t=='gt'), --ekf=trace (S, ε_pos), --ulog, --
 
 Manifest R5: arm, point, boot_n, kind, sha_harness, sha_k1_judge, ulog, stemple, preflight, habitat.
 """
-import os, sys, json, argparse, hashlib
+import os, sys, json, argparse, hashlib, math
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))          # k1/
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repo root
@@ -106,6 +106,40 @@ def _ulog_sim_offset(ulog_path, gt, ev_by):
     return round(gnear["sim"] - hrt_offb, 4)
 
 
+def _stalls_from_rtf(out_dir):
+    """F1 (ANEKS_K1-6): lista głębokich stalli (rtf<0.5) z rtf_stream.jsonl — artefakt środowiska (D8),
+    do manifestu per boot. Zwraca {'n', 'list':[{sim0,sim1,dwall,dsim,rtf}], 'period_hint_s'}."""
+    p = os.path.join(out_dir, "rtf_stream.jsonl")
+    if not os.path.exists(p):
+        return {"n": 0, "list": [], "period_hint_s": None}
+    rows = []
+    with open(p) as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                rows.append(json.loads(line))
+            except Exception:
+                pass
+    out, prev = [], None
+    for r in rows:
+        if prev is not None and "wall" in r and "sim" in r:
+            dw = r["wall"] - prev["wall"]
+            ds = r["sim"] - prev["sim"]
+            rr = ds / dw if dw > 1e-9 else 1.0
+            if rr < 0.5:
+                out.append({"sim0": round(prev["sim"], 3), "sim1": round(r["sim"], 3),
+                            "dwall": round(dw, 3), "dsim": round(ds, 3), "rtf": round(rr, 3)})
+        prev = r
+    deep = [s for s in out if s["dwall"] >= 2.0]
+    period = None
+    if len(deep) >= 2:
+        difs = [round(deep[i]["sim0"] - deep[i - 1]["sim0"], 2) for i in range(1, len(deep))]
+        period = difs
+    return {"n": len(out), "list": out, "n_deep_ge2s": len(deep), "period_hint_s": period}
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--trace", required=True)
@@ -128,6 +162,32 @@ def main():
 
     denial = ev_by.get("denial_on")
     stamps = {"denial_on_mono": denial.get("mono") if denial else None}
+
+    # F3 (ANEKS_K1-6): checkpoint geometryczny — wstrzyknięcie w spec punktu K1_POINT.
+    # |k1_f_along − K1_POINT| ≤ 0.02 ∧ r_est_at_cut zgodne z geometrią punktu. Niezgodność ⇒ bieg
+    # NIEWAŻNY z etykietą spec-mismatch (bez tego boot z f≈0.97 przeszedłby z fałszywą etykietą punktu).
+    spec_check = None
+    if denial is not None:
+        fa = denial.get("k1_f_along")
+        kp = denial.get("k1_point", a.point)
+        r_meas = denial.get("r_est_at_cut")
+        exp_r = None
+        try:
+            from r03 import config as _Cgeo
+            _wps = _Cgeo.corner_waypoints_r03()
+            if kp is not None:
+                _ex = _wps[0][0] + kp * (_wps[1][0] - _wps[0][0])
+                _ey = _wps[0][1] + kp * (_wps[1][1] - _wps[0][1])
+                exp_r = math.hypot(_ex, _ey)
+        except Exception:
+            exp_r = None
+        fa_ok = (fa is not None and kp is not None and abs(fa - kp) <= 0.02)
+        r_ok = (r_meas is not None and exp_r is not None and abs(r_meas - exp_r) <= 2.0)
+        spec_check = {"k1_point": kp, "k1_f_along": fa,
+                      "abs_df": (round(abs(fa - kp), 4) if (fa is not None and kp is not None) else None),
+                      "r_est_at_cut": r_meas, "r_expected": (round(exp_r, 3) if exp_r is not None else None),
+                      "r_tol_m": 2.0, "fa_tol": 0.02, "fa_ok": fa_ok, "r_ok": r_ok,
+                      "spec_match": bool(fa_ok and r_ok)}
     t_inj_sim = px4_inj_us = ulog_sim_C = None
     if denial:
         gnear = _nearest(gt, denial["mono"], "sim")
@@ -238,8 +298,25 @@ def main():
                         "D_B3 e732c10 trace v2 → 5a6a18d erratum); ścieżka POS_DEGRADED→D5 "
                         "bajt-identyczna z 4/4 wg ANEKS_SHA §W2")
 
+    # F3: spec-mismatch ⇒ bieg nieważny; relabel punktu na corner0-passthrough gdy f≈narożnik
+    spec_match = (spec_check or {}).get("spec_match", True)
+    kind_eff = a.kind
+    point_label = None
+    invalid_reason = None
+    if spec_check is not None and not spec_match:
+        kind_eff = "diag"
+        invalid_reason = "spec-mismatch"
+        _fa = spec_check.get("k1_f_along")
+        if _fa is not None and _fa >= 0.9:
+            point_label = "corner0-passthrough"
+
     manifest = {
-        "arm": a.arm, "point": a.point, "boot_n": a.boot, "kind": a.kind,
+        "arm": a.arm, "point": a.point, "boot_n": a.boot, "kind": kind_eff,
+        "point_label": point_label,
+        "run_valid": (spec_match if spec_check is not None else None),
+        "invalid_reason": invalid_reason,
+        "spec_check": spec_check,
+        "stalls": _stalls_from_rtf(a.out_dir),
         "sha_harness": sha256_file(a.harness_file), "harness_file": a.harness_file,
         "sha_k1_judge": judge_sha, "k1_judge_frozen": judge_frozen,
         "shield_frozen": shield_frozen, "shield_pins": shield_detail,

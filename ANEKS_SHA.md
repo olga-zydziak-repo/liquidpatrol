@@ -369,3 +369,67 @@ Naprawione PRZED zamknieciem STOP-u R2 (surowe dane bootow kompletne → re-fina
 3. **ANEKS_K1-4**: segment roszczenia = touchdown FIZYCZNY (GT z≤0.5), nie timer bramki (~8 s);
    H1 stall-w-oknie-reakcji (informacyjny); H2(a) t_td vs profil D5 z config (gate przelacza faze PO
    CZASIE → przy h0<8 touchdown w fazie1); H2(b) nav_seq znakowany post-touchdown; numpy jdefault.
+
+## §W3 — naprawa defektu K1_POINT (ANEKS_K1-6 F2) — diff verbatim, gałąź K1 wyłącznie
+
+**Defekt (stale-dist):** po `if dist < 1.0: seg_i += 1` wyrażenie `f_along` liczyło `(_leg - dist)/_leg`
+ze STALE `dist` (odległość do STAREGO celu = narożnik-0, <1.0 m) → `f_along ∈ [0.965, 1.0]` na 1. ticku
+`seg_i==1` → wstrzyknięcie odpalało NATYCHMIAST przy narożniku-0 dla KAŻDEGO `K1_POINT ≤ 0.96`.
+Skutek: `K1_POINT` ignorowany, pięć punktów {0.2,0.35,0.5,0.65,0.8} kolapsowało do jednego (r≈19 m).
+Dowód z danych: S@0.2 boot2 i N@0.2 boot1 — oba `k1_f_along=0.966`, r_est≈18.96/18.99 (identyczne).
+
+**Naprawa:** `f_along` liczony względem AKTUALNEGO celu `wps[seg_i]` PO inkrementacji (osobny
+`_cur_dist`); `dist`/tgt/setpoint NIETKNIĘTE. Zmiana OGRANICZONA do gałęzi `SCEN=="K1"` (gate) /
+triggera K1 (ramię N). Blok is_pos/zejścia/shield.step NIETKNIĘTY. S2/S3/S4 identyczne (test
+`test_injection_point_S2_S3_S4_unchanged` PASS). Oba ramiona: rdzeń `(_leg - _cur_dist)/_leg`
+bajt-identyczny (test `test_K1_branch_identical_both_arms` PASS). Trajektoria syntetyczna: dla
+5 punktów `|f_along − K1_POINT| ≤ 0.0025` (test `test_K1_point_honored_on_trajectory` PASS);
+wariant narożnikowy `f≈0` nie odpala (`test_K1_corner_variant_not_passthrough` PASS).
+
+### k1/k1_arm_n.py (ramię N)
+```diff
+@@ async def main():
+         if dist < 1.0:
+             seg_i += 1
+-        # trigger K1: pierwsza noga po pierwszym narożniku (seg_i==1), ułamek nogi
++        # trigger K1: ... f_along względem AKTUALNEGO celu wps[seg_i] po inkrementacji (defekt stale-dist)
+         _leg = math.hypot(wps[1][0] - wps[0][0], wps[1][1] - wps[0][1])
+-        _fa = (_leg - dist) / _leg if (seg_i == 1 and _leg > 1e-6) else -1.0
++        _cur = wps[seg_i % len(wps)]
++        _cur_dist = math.hypot(_cur[0] - pos[0], _cur[1] - pos[1])
++        _fa = (_leg - _cur_dist) / _leg if (seg_i == 1 and _leg > 1e-6) else -1.0
+         if (not injected) and seg_i == 1 and _fa >= K1_POINT:
+```
+
+### r03/gate_run_r03.py (ramię S) — gałąź `elif SCEN == "K1":`
+```diff
+         elif SCEN == "K1":
++            # ANEKS_K1-6 F2: f_along względem AKTUALNEGO celu wps[seg_i] po seg_i+=1 (osobny _cur_dist)
+             _leg = math.hypot(wps[1][0] - wps[0][0], wps[1][1] - wps[0][1])
+-            _k1_fa = (_leg - dist) / _leg if (seg_i == 1 and _leg > 1e-6) else -1.0
++            _cur = wps[seg_i % len(wps)]
++            _cur_dist = math.hypot(_cur[0] - pos[0], _cur[1] - pos[1])
++            _k1_fa = (_leg - _cur_dist) / _leg if (seg_i == 1 and _leg > 1e-6) else -1.0
+             trigger = (not denial_done) and seg_i == 1 and _k1_fa >= K1_POINT  # ułamek nogi
+```
+
+### SHIELD_PINS re-baseline (F2c) — TYLKO gate; shield.py/config.py NIEZMIENIONE
+```diff
+-    "r03/gate_run_r03.py": "19967de2ed5d35cc05f05f408def8f9de265d9f71136c99b40b074cebcd3a01c",
++    "r03/gate_run_r03.py": "72619513c682e76892c531ec3dae2d918da08da92017605dcba50103977cf58a",
+```
+shield.py `1c584964…`, config.py `4c440e42…` — bez zmian (weryfikacja: `k1_shield_pins.py` self-check
+3/3 OK). Test `test_shield_pins_frozen` PASS z nowym pinem gate.
+
+## §W4 — checkpoint geometryczny (ANEKS_K1-6 F3) + relabel diag (F4) + stalle (F1)
+- **F3:** `k1_finalize` liczy `spec_check` = `|k1_f_along − K1_POINT| ≤ 0.02 ∧ |r_est_at_cut − r_geom| ≤ 2 m`.
+  Niezgodność ⇒ `run_valid=False`, `invalid_reason="spec-mismatch"`, `kind="diag"`, gdy `f≥0.9` →
+  `point_label="corner0-passthrough"`. (Sędzia 4e0dc0af NIETKNIĘTY — to warstwa finalize/manifest.)
+- **F1:** manifest per boot: `stalls` (rtf<0.5 z rtf_stream) + `n_deep_ge2s` + `period_hint_s`.
+  Stall ~32 s = artefakt środowiska (D8), OBECNY W OBU RAMIONACH (S boot2 też: 4 deep, period ~32 s) —
+  niezależny od ramienia; N boot1 INVALID(habitat) tylko dlatego, że jeden stall trafił w krótkie okno
+  roszczenia. Bez zmian w harnessie/kryterium (F1).
+- **F4:** S@0.2 boot2 i N@0.2 boot1 przeetykietowane `kind=diag`, `point_label=corner0-passthrough`,
+  `run_valid=False` (mislabel f≈0.97 sprzed naprawy). `sha_harness` NIETKNIĘTY (kod, którym latano).
+  Wyłączone z tabel §I; w §V jako ślad instrumentu. Budżet (S,0.2)/(N,0.2) = 3 loty OD NOWA; licznik
+  env-fail (N) zostaje 2 (środowisko, nie punkt). Relabel = z logu eventów, jednakowy dla obu ramion.

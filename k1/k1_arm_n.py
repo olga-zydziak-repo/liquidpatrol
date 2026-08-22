@@ -181,9 +181,15 @@ async def main():
         dist = math.hypot(dx, dy)
         if dist < 1.0:
             seg_i += 1
-        # trigger K1: pierwsza noga po pierwszym narożniku (seg_i==1), ułamek nogi
+        # trigger K1: pierwsza noga po pierwszym narożniku (seg_i==1), ułamek nogi.
+        # UWAGA (ANEKS_K1-6 F2): `dist` powyżej to odległość do wp SPRZED ewentualnego seg_i+=1
+        # (stary cel = narożnik-0, <1.0 m). f_along liczymy względem AKTUALNEGO celu wps[seg_i]
+        # po inkrementacji — inaczej f_along skacze do ~0.97 na 1. ticku seg_i==1 (defekt stale-dist,
+        # K1_POINT ignorowany). Osobny _cur_dist; `dist`/setpoint NIETKNIĘTE.
         _leg = math.hypot(wps[1][0] - wps[0][0], wps[1][1] - wps[0][1])
-        _fa = (_leg - dist) / _leg if (seg_i == 1 and _leg > 1e-6) else -1.0
+        _cur = wps[seg_i % len(wps)]
+        _cur_dist = math.hypot(_cur[0] - pos[0], _cur[1] - pos[1])
+        _fa = (_leg - _cur_dist) / _leg if (seg_i == 1 and _leg > 1e-6) else -1.0
         if (not injected) and seg_i == 1 and _fa >= K1_POINT:
             # R3(i): param set EKF2_GPS_CTRL=0, stempel = ack paramu
             await d.param.set_param_int("EKF2_GPS_CTRL", 0)
