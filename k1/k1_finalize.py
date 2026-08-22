@@ -143,10 +143,15 @@ def main():
     judge_sha = sha256_file(os.path.join(os.path.dirname(os.path.abspath(__file__)), "k1_judge.py"))
     judge_frozen = (judge_sha == FROZEN_JUDGE_SHA)
 
+    # W2(b) — asercja hashy osłony (ramię S): niezgodność ⇒ bieg nieważny
+    import k1_shield_pins as SP
+    shield_frozen, shield_detail = SP.check_shield_frozen()
+
     manifest = {
         "arm": a.arm, "point": a.point, "boot_n": a.boot, "kind": a.kind,
         "sha_harness": sha256_file(a.harness_file), "harness_file": a.harness_file,
         "sha_k1_judge": judge_sha, "k1_judge_frozen": judge_frozen,
+        "shield_frozen": shield_frozen, "shield_pins": shield_detail,
         "ulog": a.ulog, "ulog_exists": bool(a.ulog and os.path.exists(a.ulog)),
         "stamps": stamps,
         "harness_valid": (meta or {}).get("harness_valid"),
@@ -164,6 +169,9 @@ def main():
     judge_out = {"skipped": True, "reason": None}
     if not judge_frozen:
         judge_out["reason"] = f"SR-K3: k1_judge sha {judge_sha[:16]} != frozen {FROZEN_JUDGE_SHA[:16]}"
+    elif a.arm == "S" and not shield_frozen:
+        bad = [k for k, v in shield_detail.items() if not v["ok"]]
+        judge_out["reason"] = f"W2(b): osłona niezamrożona {bad} — bieg S NIEWAŻNY"
     elif t_inj_sim is None:
         judge_out["reason"] = "brak denial_on / t_inj_sim — nie mogę policzyć"
     else:
