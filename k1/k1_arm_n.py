@@ -14,7 +14,7 @@ Params NIE dotykane poza EKF2_GPS_CTRL (SR-K6); restore po touchdown.
 
 Env: GATE_OUT (jsonl trace), K1_POINT, PX4_GZ_WORLD, B1_MODEL. Boot już wstał (≥90 s konwergencji).
 """
-import os, json, time, math, threading
+import os, sys, json, time, math, threading
 import asyncio
 import rclpy
 from rclpy.node import Node
@@ -242,6 +242,14 @@ async def main():
     _running = False
     _f.close()
     print("[k1N] KONIEC", flush=True)
+    # czyste wyjście: dane sflushowane; omijamy abortujące destruktory C++ (rclpy/gz threads przy
+    # interpreter-shutdown dawały 'terminate called' → SIGABRT/core dump, exit 134). os._exit(0).
+    try:
+        rclpy.shutdown()
+    except Exception:
+        pass
+    sys.stdout.flush(); sys.stderr.flush()
+    os._exit(0)
 
 
 if __name__ == "__main__":
