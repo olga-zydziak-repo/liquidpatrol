@@ -147,6 +147,23 @@ def main():
     import k1_shield_pins as SP
     shield_frozen, shield_detail = SP.check_shield_frozen()
 
+    # K3 (ANEKS_K1-3): wynik certs_selfcheck (ramię S) — parsowany z logu, do manifestu
+    certs = {"log": a.certs_selfcheck, "pass": None, "rc": None}
+    if a.certs_selfcheck and os.path.exists(a.certs_selfcheck):
+        txt = open(a.certs_selfcheck, errors="replace").read()
+        certs["pass"] = ("WERDYKT certs_selfcheck: PASS" in txt)
+        for ln in txt.splitlines():
+            if "rc=" in ln:
+                try:
+                    certs["rc"] = int(ln.split("rc=")[-1].strip().split()[0])
+                except Exception:
+                    pass
+
+    # K2 (ANEKS_K1-3): linia pochodzenia osłony — jawne założenie ramienia S (→ RAPORT_K1)
+    PROVENANCE_ARM_S = ("osłona w stanie 6db3393 (4/4 a088367 → D_B1 01f47e8 token → "
+                        "D_B3 e732c10 trace v2 → 5a6a18d erratum); ścieżka POS_DEGRADED→D5 "
+                        "bajt-identyczna z 4/4 wg ANEKS_SHA §W2")
+
     manifest = {
         "arm": a.arm, "point": a.point, "boot_n": a.boot, "kind": a.kind,
         "sha_harness": sha256_file(a.harness_file), "harness_file": a.harness_file,
@@ -157,7 +174,8 @@ def main():
         "harness_valid": (meta or {}).get("harness_valid"),
         "harness_poison": (meta or {}).get("harness_poison"),
         "habitat_verdict": hab,
-        "certs_selfcheck_log": a.certs_selfcheck,
+        "certs_selfcheck": certs,
+        "provenance_arm_s": (PROVENANCE_ARM_S if a.arm == "S" else None),
         "n_gt": len(gt), "n_ekf": len(ekf), "n_events": len(events),
         "events": [e.get("ev") for e in events],
     }
