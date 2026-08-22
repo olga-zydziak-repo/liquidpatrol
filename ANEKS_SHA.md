@@ -487,3 +487,24 @@ V_env=6.0; przekroczenie=FLAGA (nie unieważnia, §4 bez zmian). boot3: v_gt_max
 **V4:** `ERRATUM_VMAX.md` + adnotacje in-place RAPORT_R03A (nagłówek + linia „11.69 m") i RAPORT_D_B5.
 **V5:** stała-ograniczenie-fizyczne ⇒ zmierzone max w manifeście + asercja obwiedni. „Limit zadany ≠
 limit faktyczny" ∈ „asercja ≠ pomiar". `k1_finalize.V_ENV=6.0` (zamrożona), `_gt_cruise_vmax`.
+
+## §W8 — ANEKS_K1-9 R2/R3/R4: checkpoint A_BRAKE, parowanie+wysokość, nota landing-skid
+
+**R2 (checkpoint A_BRAKE, ramię S):** z ‖v_GT‖ po REFUSE — t_brake do ‖v‖<0.3, a_meas=v_REFUSE/t_brake,
+flaga a_meas ≥ A_BRAKE=2.0 (`k1_finalize._abrake_check`). Przekroczenie w dół = FLAGA (nie unieważnia,
+§4 bez zmian; do RAPORT §IV jako naruszenie przesłanki). Policzone WSTECZ (zero lotów):
+- **boot3** (f=0.2, turn-exit): v_refuse=5.473 · t_brake=2.94 s · **a_meas=1.862 < 2.0 → FLAGA** (pass=false).
+- **boot2** (corner0-passthrough f=0.966, apex wolny): v_refuse=3.228 · t_brake=1.312 · **a_meas=2.461 ≥ 2.0 → PASS**.
+Wniosek: przesłanka A_BRAKE spełniona przy niskiej v wstrzyknięcia, NARUSZONA przy szybkim turn-exit
+(0.2). Osłona odpowiada zejściem D5 (nie hamowaniem poziomym) → dron zachowuje pęd poziomy schodząc.
+
+**R3 (parowanie + wysokość):** `PAIR_TOL += dz_m:0.5` (ZAMROŻONE). `pairing_check` liczy
+|z_inj_S − z_inj_N| ≤ 0.5 m na `inj_info.z_gt` (wysokość fizyczna GT). `inj_info` dostaje z_gt/z_ekf.
+Selftest dz PASS. Jeśli 0.2 wypada w climbie — własność geometrii (G3), ale oba ramiona w tym samym climbie.
+
+**R4 (nota do RAPORT §V):** landing-skid EKF 16.6 m/s pod denialem (GT fiz. 7.9) — poza scope K1, ale to
+MECHANIZM, na którym natywny blind-land pracuje (EKF diverguje pod GPS-denied); wróci przy interpretacji
+ramienia N po 5/5.
+
+**R1:** V3 ratyfikowane — V_env=6.0 zamrożone, C_margin=1.146 podany wprost obok 11.69 w RAPORT_R03A
+(adnotacja) i ERRATUM_VMAX.md.

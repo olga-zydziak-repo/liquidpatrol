@@ -113,13 +113,11 @@ def _ulog_sim_offset(ulog_path, gt, ev_by):
 V_ENV = 6.0
 
 
-def _gt_cruise_vmax(gt, sim_lo, sim_hi, half=0.2):
-    """‖v_GT‖_max poziome (central diff, sim-Δt, pół-okno 0.2 s) w oknie cruise [sim_lo, sim_hi]."""
+def _gt_speed_series(gt, half=0.2):
+    """[(sim, ‖v_GT‖_poziome)] — central diff pozycji GT, Δt=sim, pół-okno 0.2 s."""
     G = [g for g in gt if "sim" in g and "x" in g and "y" in g]
-    best, where = 0.0, None
+    out = []
     for i in range(len(G)):
-        if not (sim_lo <= G[i]["sim"] <= sim_hi):
-            continue
         lo = hi = i
         while lo > 0 and G[i]["sim"] - G[lo]["sim"] < half:
             lo -= 1
@@ -129,9 +127,43 @@ def _gt_cruise_vmax(gt, sim_lo, sim_hi, half=0.2):
         if dt < 1e-6:
             continue
         v = math.hypot((G[hi]["x"] - G[lo]["x"]) / dt, (G[hi]["y"] - G[lo]["y"]) / dt)
-        if v > best:
-            best, where = v, G[i]["sim"]
-    return round(best, 3), (round(where, 3) if where is not None else None)
+        out.append((G[i]["sim"], v))
+    return out
+
+
+def _gt_cruise_vmax(gt, sim_lo, sim_hi, half=0.2):
+    """‖v_GT‖_max poziome w oknie cruise [sim_lo, sim_hi]."""
+    seg = [(s, v) for (s, v) in _gt_speed_series(gt, half) if sim_lo <= s <= sim_hi]
+    if not seg:
+        return 0.0, None
+    s, v = max(seg, key=lambda t: t[1])
+    return round(v, 3), round(s, 3)
+
+
+def _abrake_check(gt, refuse_sim, A_BRAKE=2.0, v_stop=0.3, half=0.2):
+    """ANEKS_K1-9 R2: z ‖v_GT‖ PO REFUSE — t_brake do ‖v‖<v_stop, a_meas=v_REFUSE/t_brake, flaga ≥A_BRAKE.
+    (Uwaga interpretacyjna: osłona odpowiada ZEJŚCIEM D5, nie hamowaniem poziomym — a_meas mierzy
+    faktyczne wyhamowanie poziome po REFUSE; a_meas<A_BRAKE = naruszenie przesłanki d_stop, FLAGA.)"""
+    ser = _gt_speed_series(gt, half)
+    post = [(s, v) for (s, v) in ser if s >= refuse_sim]
+    if not post:
+        return None
+    v_ref = post[0][1]
+    t_brake = None
+    for (s, v) in post:
+        if v < v_stop:
+            t_brake = s - refuse_sim
+            break
+    a_meas = (v_ref / t_brake) if (t_brake is not None and t_brake > 1e-6) else None
+    return {"v_refuse_gt": round(v_ref, 3), "v_stop": v_stop,
+            "t_brake_s": (round(t_brake, 3) if t_brake is not None else None),
+            "reached_stop": t_brake is not None,
+            "a_meas": (round(a_meas, 3) if a_meas is not None else None),
+            "A_BRAKE": A_BRAKE,
+            "pass": (bool(a_meas is not None and a_meas >= A_BRAKE)),
+            "note": "a_meas = wyhamowanie POZIOME po REFUSE. <A_BRAKE=naruszenie przesłanki d_stop → "
+                    "FLAGA (nie unieważnia, §4 bez zmian; RAPORT §IV). Osłona odpowiada zejściem D5, "
+                    "nie hamowaniem poziomym — dron zachowuje pęd poziomy schodząc."}
 
 
 def _stalls_from_rtf(out_dir):
@@ -240,11 +272,17 @@ def main():
             dts = gtc[hi]["sim"] - gtc[lo]["sim"]
             if abs(dts) > 1e-6:
                 vh_gt = round(math.hypot(gtc[hi]["x"] - gtc[lo]["x"], gtc[hi]["y"] - gtc[lo]["y"]) / dts, 3)
+        # ANEKS_K1-9 R3: wysokość wstrzyknięcia do parowania. z_gt = AGL fizyczne (GT ENU up);
+        # z_ekf = −z_NED (EKF down). Parujemy na z_gt (fizyczne, instrument czysty).
+        gz_near = _nearest(gt, denial["mono"], "z")
+        z_gt = (round(gz_near["z"], 3) if gz_near else None)
+        z_ekf = (round(-en.get("z", 0.0), 3) if (en and en.get("z") is not None) else None)
         inj_info = {"src": "ekf_nearest_denial",
                     "vx_ekf": vx, "vy_ekf": vy,
                     "speed_h_ekf": (round(vh_ekf, 3) if vh_ekf is not None else None),
                     "heading_deg_ekf": (round(hd_ekf, 3) if hd_ekf is not None else None),
                     "r_est_ekf": (round(math.hypot(en.get("x", 0.0), en.get("y", 0.0)), 3) if en else None),
+                    "z_gt": z_gt, "z_ekf": z_ekf,
                     "speed_h_gt": vh_gt,
                     "speed_h_cmd": 3.0,
                     "note": "speed_h_cmd = norma zadana harnessu (V_MAX). speed_h_gt/ekf = FAKTYCZNA "
@@ -473,6 +511,12 @@ def main():
                           "note": "‖v_GT‖ FAKTYCZNA w cruise. >V_env=FLAGA (V3), nie unieważnia; §4 bez zmian. "
                                   "EKF zaniża faktyczną w zakręcie (~1.6 m/s) — osłona liczy na estymacie."}
     manifest["vmax_check"] = vmax_check
+
+    # ANEKS_K1-9 R2: checkpoint A_BRAKE (ramię S) — wyhamowanie poziome po REFUSE ≥ A_BRAKE=2.0 (flaga)
+    abrake_check = None
+    if a.arm == "S" and refuse_sim is not None:
+        abrake_check = _abrake_check(gt, refuse_sim)
+    manifest["abrake_check"] = abrake_check
     with open(os.path.join(a.out_dir, "manifest.json"), "w") as f:
         json.dump(manifest, f, indent=2, default=_jdefault)
 

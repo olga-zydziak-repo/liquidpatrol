@@ -24,7 +24,7 @@ PT_TOL = 1e-6
 # ANEKS_K1-7 G2: progi checku parowania S↔N (ZAMROŻONE przed 1. biegiem N). Warstwa agregatu, NIE sędzia.
 # Kinematyka wstrzyknięcia z manifest.inj_info (oba ramiona z EKF — spójny instrument). Niezgodność ⇒
 # punkt NIESPAROWANY, oba loty jako diag, punkt liczy się ponownie w budżecie lotów.
-PAIR_TOL = {"dr_m": 1.0, "dspeed_mps": 0.3, "dheading_deg": 10.0}
+PAIR_TOL = {"dr_m": 1.0, "dspeed_mps": 0.3, "dheading_deg": 10.0, "dz_m": 0.5}   # dz_m: ANEKS_K1-9 R3
 
 
 def _ang_diff(a, b):
@@ -42,16 +42,20 @@ def pairing_check(inj_N, inj_S, tol=PAIR_TOL):
     rN, rS = inj_N.get("r_est_ekf"), inj_S.get("r_est_ekf")
     vN, vS = inj_N.get("speed_h_ekf"), inj_S.get("speed_h_ekf")
     hN, hS = inj_N.get("heading_deg_ekf"), inj_S.get("heading_deg_ekf")
+    zN, zS = inj_N.get("z_gt"), inj_S.get("z_gt")      # R3: wysokość fizyczna (GT)
     dr = (abs(rN - rS) if (rN is not None and rS is not None) else None)
     dv = (abs(vN - vS) if (vN is not None and vS is not None) else None)
     dh = _ang_diff(hN, hS)
+    dz = (abs(zN - zS) if (zN is not None and zS is not None) else None)
     dr_ok = (dr is not None and dr <= tol["dr_m"])
     dv_ok = (dv is not None and dv <= tol["dspeed_mps"])
     dh_ok = (dh is not None and dh <= tol["dheading_deg"])
-    paired = bool(dr_ok and dv_ok and dh_ok)
+    dz_ok = (dz is not None and dz <= tol["dz_m"])
+    paired = bool(dr_ok and dv_ok and dh_ok and dz_ok)
     return paired, {"dr_m": (round(dr, 3) if dr is not None else None), "dr_ok": dr_ok,
                     "dspeed_mps": (round(dv, 3) if dv is not None else None), "dspeed_ok": dv_ok,
                     "dheading_deg": (round(dh, 3) if dh is not None else None), "dheading_ok": dh_ok,
+                    "dz_m": (round(dz, 3) if dz is not None else None), "dz_ok": dz_ok,
                     "tol": tol, "paired": paired}
 
 
@@ -242,13 +246,13 @@ def selftest():
     ok = ok and ci
     print(f"-- info/narożnik wykluczone: n_pairs={a['n_pairs']} (exp 1) {'PASS' if ci else 'FAIL'}")
 
-    # G2: check parowania — progi zamrożone
-    def _inj(r, v, h):
-        return {"r_est_ekf": r, "speed_h_ekf": v, "heading_deg_ekf": h}
-    paired, det = pairing_check(_inj(13.0, 3.7, 45.0), _inj(13.5, 3.5, 50.0))
-    cp = (paired is True and det["dr_ok"] and det["dspeed_ok"] and det["dheading_ok"])
+    # G2: check parowania — progi zamrożone (r,v,heading,z)
+    def _inj(r, v, h, z=4.2):
+        return {"r_est_ekf": r, "speed_h_ekf": v, "heading_deg_ekf": h, "z_gt": z}
+    paired, det = pairing_check(_inj(13.0, 3.7, 45.0, 4.2), _inj(13.5, 3.5, 50.0, 4.5))
+    cp = (paired is True and det["dr_ok"] and det["dspeed_ok"] and det["dheading_ok"] and det["dz_ok"])
     ok = ok and cp
-    print(f"-- G2 sparowane (dr .5≤1, dv .2≤.3, dh 5≤10): paired={paired} {'PASS' if cp else 'FAIL'}")
+    print(f"-- G2 sparowane (dr .5, dv .2, dh 5, dz .3): paired={paired} {'PASS' if cp else 'FAIL'}")
     paired, det = pairing_check(_inj(13.0, 3.7, 45.0), _inj(15.0, 3.5, 50.0))  # dr=2.0>1.0
     cu = (paired is False and det["dr_ok"] is False)
     ok = ok and cu
@@ -257,6 +261,10 @@ def selftest():
     cu2 = (paired is False and det["dheading_ok"] is False)
     ok = ok and cu2
     print(f"-- G2 niesparowane (dh=15>10): paired={paired} {'PASS' if cu2 else 'FAIL'}")
+    paired, det = pairing_check(_inj(13.0, 3.7, 45.0, 4.2), _inj(13.2, 3.6, 46.0, 5.0))  # dz=0.8>0.5
+    cu3 = (paired is False and det["dz_ok"] is False)
+    ok = ok and cu3
+    print(f"-- G2 niesparowane (dz=0.8>0.5, R3): paired={paired} {'PASS' if cu3 else 'FAIL'}")
     # G2 integracja: niesparowany punkt WYKLUCZONY z kryterium (oba → diag)
     runs = [_mk("N", 0.2, 20.0, True), _mk("S", 0.2, 3.0, False),
             _mk("N", 0.5, 10.0, False), _mk("S", 0.5, 3.0, False)]

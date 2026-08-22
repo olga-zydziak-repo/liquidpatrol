@@ -177,5 +177,30 @@
       31.21
     ]
   },
-  "relabel_note": "ANEKS_K1-6 F4: przeetykietowane kind=diag, point=corner0-passthrough (f\u22480.97, mislabel defektu stale-dist sprzed naprawy F2). Wy\u0142\u0105czone z tabel \u00a7I; \u015blad w \u00a7V. sha_harness = kod SPRZED naprawy (odzwierciedla to, czym latano)."
+  "relabel_note": "ANEKS_K1-6 F4: przeetykietowane kind=diag, point=corner0-passthrough (f\u22480.97, mislabel defektu stale-dist sprzed naprawy F2). Wy\u0142\u0105czone z tabel \u00a7I; \u015blad w \u00a7V. sha_harness = kod SPRZED naprawy (odzwierciedla to, czym latano).",
+  "vmax_check": {
+    "v_gt_max_cruise": 3.231,
+    "sim_at_max": 112.372,
+    "V_env": 6.0,
+    "pass": true,
+    "window_s": [
+      105.524,
+      112.372
+    ]
+  },
+  "abrake_check": {
+    "v_refuse_gt": 3.228,
+    "v_stop": 0.3,
+    "t_brake_s": 1.312,
+    "reached_stop": true,
+    "a_meas": 2.461,
+    "A_BRAKE": 2.0,
+    "pass": true,
+    "note": "a_meas = wyhamowanie POZIOME po REFUSE. <A_BRAKE=naruszenie przes\u0142anki d_stop \u2192 FLAGA (nie uniewa\u017cnia, \u00a74 bez zmian; RAPORT \u00a7IV). Os\u0142ona odpowiada zej\u015bciem D5, nie hamowaniem poziomym \u2014 dron zachowuje p\u0119d poziomy schodz\u0105c."
+  },
+  "inj_info": {
+    "z_gt": 5.178,
+    "z_ekf": 4.809
+  },
+  "retro_note_k1_9": "ANEKS_K1-9 R2/R3: vmax_check/abrake_check/inj_info.z policzone wstecz; sha_harness NIETKNI\u0118TY (kod sprzed naprawy)."
 }

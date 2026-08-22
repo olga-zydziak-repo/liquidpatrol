@@ -26,6 +26,8 @@
     "speed_h_ekf": 3.738,
     "heading_deg_ekf": -91.292,
     "r_est_ekf": 12.931,
+    "z_gt": 4.234,
+    "z_ekf": 3.598,
     "speed_h_gt": 5.37,
     "speed_h_cmd": 3.0,
     "note": "speed_h_cmd = norma zadana harnessu (V_MAX). speed_h_gt/ekf = FAKTYCZNA (ANEKS_K1-7 G4: w zakr\u0119cie faktyczna >> zadana \u2192 za\u0142o\u017cenie d_stop@v=3.0 nie trzyma)."
@@ -189,5 +191,15 @@
       111.6
     ],
     "note": "\u2016v_GT\u2016 FAKTYCZNA w cruise. >V_env=FLAGA (V3), nie uniewa\u017cnia; \u00a74 bez zmian. EKF zani\u017ca faktyczn\u0105 w zakr\u0119cie (~1.6 m/s) \u2014 os\u0142ona liczy na estymacie."
+  },
+  "abrake_check": {
+    "v_refuse_gt": 5.473,
+    "v_stop": 0.3,
+    "t_brake_s": 2.94,
+    "reached_stop": true,
+    "a_meas": 1.862,
+    "A_BRAKE": 2.0,
+    "pass": false,
+    "note": "a_meas = wyhamowanie POZIOME po REFUSE. <A_BRAKE=naruszenie przes\u0142anki d_stop \u2192 FLAGA (nie uniewa\u017cnia, \u00a74 bez zmian; RAPORT \u00a7IV). Os\u0142ona odpowiada zej\u015bciem D5, nie hamowaniem poziomym \u2014 dron zachowuje p\u0119d poziomy schodz\u0105c."
   }
 }
