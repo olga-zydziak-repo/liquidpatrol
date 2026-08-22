@@ -508,3 +508,14 @@ ramienia N po 5/5.
 
 **R1:** V3 ratyfikowane — V_env=6.0 zamrożone, C_margin=1.146 podany wprost obok 11.69 w RAPORT_R03A
 (adnotacja) i ERRATUM_VMAX.md.
+
+## §W9 — ANEKS_K1-10 P2: dstop_check (dosłowna przesłanka twierdzenia na locie)
+
+`k1_finalize` (ramię S, nie sędzia): `dstop_check = x_exc ≤ v_REFUSE_GT·0.20 + v_REFUSE_GT²/(2·2.0)`.
+FAIL nie unieważnia biegu — wchodzi do §I obok wyniku („przesłanka naruszona") i §IV. Wstecz:
+- **boot2** (corner0-passthrough): x_exc=2.264 ≤ bound 3.251 → **PASS**.
+- **boot3** (f=0.2 turn-exit): x_exc=16.518 vs bound 8.583 → **FAIL** (v_REFUSE=5.473).
+P3: FAIL nie zmienia N@0.2 ani nie zatrzymuje serii (gwarancja globalna V3 stoi na OBWIEDNI V_env, nie
+na 1 locie). RAPORT_K1: „przy wyjściu z zakrętu z v>5 m/s droga po REFUSE przekracza bound — wynik
+o OSŁONIE, nie o instrumencie". 3. taki FAIL w serii ⇒ STOP + rewizja A_BRAKE w erratum #2 (nie w PRE).
+P1: flaga a_meas (boot3 1.862<2.0) zostaje w RAPORT §IV z adnotacją „miara uśrednia ogon regulatora".

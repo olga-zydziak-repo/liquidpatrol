@@ -517,6 +517,24 @@ def main():
     if a.arm == "S" and refuse_sim is not None:
         abrake_check = _abrake_check(gt, refuse_sim)
     manifest["abrake_check"] = abrake_check
+
+    # ANEKS_K1-10 P2: dstop_check — DOSŁOWNA instancja przesłanki twierdzenia na tym locie (ramię S):
+    #   x_exc ≤ v_REFUSE_GT·T_REACT + v_REFUSE_GT²/(2·A_BRAKE).  FAIL nie unieważnia biegu, ale wchodzi
+    #   do §I (obok wyniku, „przesłanka naruszona") i §IV. Gwarancja globalna V3 stoi na OBWIEDNI (V_env),
+    #   nie na 1 locie (P3). 3. taki FAIL w serii ⇒ STOP + rewizja A_BRAKE w erratum #2 (nie w PRE).
+    dstop_check = None
+    if (a.arm == "S" and abrake_check is not None
+            and isinstance(judge_out, dict) and judge_out.get("x_exc") is not None):
+        vref = abrake_check.get("v_refuse_gt")
+        if vref is not None:
+            bound = vref * 0.20 + vref ** 2 / (2 * 2.0)
+            xexc = judge_out["x_exc"]
+            dstop_check = {"x_exc": xexc, "v_refuse_gt": vref, "T_REACT": 0.20, "A_BRAKE": 2.0,
+                           "bound_dstop": round(bound, 3), "pass": bool(xexc <= bound),
+                           "note": "dosłowna przesłanka: x_exc ≤ v_REFUSE·T_REACT + v_REFUSE²/(2·A_BRAKE). "
+                                   "FAIL=przesłanka naruszona (nie unieważnia; §I obok wyniku + §IV). "
+                                   "Gwarancja globalna V3 na obwiedni V_env, nie na 1 locie (P3)."}
+    manifest["dstop_check"] = dstop_check
     with open(os.path.join(a.out_dir, "manifest.json"), "w") as f:
         json.dump(manifest, f, indent=2, default=_jdefault)
 

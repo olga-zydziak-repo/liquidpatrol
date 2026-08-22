@@ -201,5 +201,14 @@
     "A_BRAKE": 2.0,
     "pass": false,
     "note": "a_meas = wyhamowanie POZIOME po REFUSE. <A_BRAKE=naruszenie przes\u0142anki d_stop \u2192 FLAGA (nie uniewa\u017cnia, \u00a74 bez zmian; RAPORT \u00a7IV). Os\u0142ona odpowiada zej\u015bciem D5, nie hamowaniem poziomym \u2014 dron zachowuje p\u0119d poziomy schodz\u0105c."
+  },
+  "dstop_check": {
+    "x_exc": 16.518,
+    "v_refuse_gt": 5.473,
+    "T_REACT": 0.2,
+    "A_BRAKE": 2.0,
+    "bound_dstop": 8.583,
+    "pass": false,
+    "note": "dos\u0142owna przes\u0142anka: x_exc \u2264 v_REFUSE\u00b7T_REACT + v_REFUSE\u00b2/(2\u00b7A_BRAKE). FAIL=przes\u0142anka naruszona (nie uniewa\u017cnia; \u00a7I obok wyniku + \u00a7IV). Gwarancja globalna V3 na obwiedni V_env, nie na 1 locie (P3)."
   }
 }
