@@ -59,6 +59,30 @@ def _nearest(rows, mono, key):
     return min(cand, key=lambda r: abs(r["mono"] - mono))
 
 
+def _ulog_sim_offset(ulog_path, gt, ev_by):
+    """C takie że sim = ulog_hrt/1e6 + C (ulog boot-relative == gz sim pod lockstep, mały offset
+    boot px4↔gz). Kotwica: pierwsze wejście OFFBOARD — nav_state==14 w ulogu ↔ event 'offboard' w trace.
+    Zwraca C [s] lub None."""
+    try:
+        ud, _ = J.read_ulog(ulog_path)
+    except Exception:
+        return None
+    vs = ud.get("vehicle_status", {})
+    hrt_offb = None
+    for t, v in zip(vs.get("timestamp", []), vs.get("nav_state", [])):
+        if int(v) == 14:                       # NAVIGATION_STATE_OFFBOARD
+            hrt_offb = t / 1e6
+            break
+    offb = ev_by.get("offboard")
+    if hrt_offb is None or offb is None:
+        return None
+    gcand = [g for g in gt if "mono" in g and "sim" in g]
+    if not gcand:
+        return None
+    gnear = min(gcand, key=lambda r: abs(r["mono"] - offb["mono"]))
+    return round(gnear["sim"] - hrt_offb, 4)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--trace", required=True)
@@ -81,17 +105,20 @@ def main():
 
     denial = ev_by.get("denial_on")
     stamps = {"denial_on_mono": denial.get("mono") if denial else None}
-    t_inj_sim = px4_inj_us = None
+    t_inj_sim = px4_inj_us = ulog_sim_C = None
     if denial:
         gnear = _nearest(gt, denial["mono"], "sim")
-        enear = _nearest(ekf, denial["mono"], "ts")
         if gnear:
             t_inj_sim = gnear["sim"]
-        if enear:
-            px4_inj_us = enear["ts"] * 1e6
-        stamps.update(t_inj_sim=t_inj_sim, px4_inj_us=px4_inj_us,
-                      gt_dt=round(abs(gnear["mono"] - denial["mono"]), 4) if gnear else None,
-                      ekf_dt=round(abs(enear["mono"] - denial["mono"]), 4) if enear else None)
+        # ulog↔sim: ulog hrt jest BOOT-RELATIVE (== gz sim pod lockstep), ekf.ts jest EPOCH — NIE używać
+        # ekf.ts do pinu. C = sim − ulog_hrt z kotwicy OFFBOARD (nav_state 14 ↔ event 'offboard').
+        # px4_inj_us dobrane tak, by offset sędziego = C: offset = t_inj_sim − px4_inj_us/1e6 = C.
+        ulog_sim_C = _ulog_sim_offset(a.ulog, gt, ev_by) if a.ulog and os.path.exists(a.ulog) else None
+        if t_inj_sim is not None:
+            C = ulog_sim_C if ulog_sim_C is not None else 0.0
+            px4_inj_us = (t_inj_sim - C) * 1e6
+        stamps.update(t_inj_sim=t_inj_sim, px4_inj_us=px4_inj_us, ulog_sim_C=ulog_sim_C,
+                      gt_dt=round(abs(gnear["mono"] - denial["mono"]), 4) if gnear else None)
     # R3 stemple ramienia N
     for k in ("land_cmd_sent", "land_ack"):
         if k in ev_by:
