@@ -30,8 +30,15 @@ TICK = DT                      # 0.05 s (20 Hz osłona)
 
 # ------------------------- model projekcji kamery (idealny detektor) --------
 def project_to_pixel(pos, yaw, intr):
-    """Prawdziwy intruz NED → (cx,cy,w,h)|None. None gdy poza FOV / za dronem.
-    Odwrotność observe_guidance.bearing_from_pixel (spójna geometria)."""
+    """Prawdziwy intruz → (cx,cy,w,h)|None. None gdy poza FOV / za dronem.
+    Odwrotność observe_guidance.bearing_from_pixel (spójna geometria).
+
+    PROMPT_K1 §A / nota Z2: pos to NED [N,E,D], a intr to DRV [E,N,-U] (patrz common.frames) —
+    RÓŻNE ramki. Odejmowanie element-po-elemencie miesza E/N. Jest to MASKOWANE (dron ≈ origin w dwell →
+    składowe drona ~0), a CAŁA brama GT jest SAMO-SPÓJNA w tej konwencji (yaw-na-cel i ten rzut używają
+    intr[0] tak samo → box centralny → ENTRY → akty VALID). Naprawa (np. common.frames.drv2ned(intr))
+    ZMIENIA zachowanie bramy i wymaga walidacji biegami → NIE w tej sesji diagnostycznej (§0). Dług do
+    domknięcia w build K1 z biegami. NIE zmieniać tu behawioru bez re-certyfikacji."""
     wx, wy, wz = intr[0] - pos[0], intr[1] - pos[1], intr[2] - pos[2]
     # świat → body (obrót o −yaw wokół z)
     bx = math.cos(yaw) * wx + math.sin(yaw) * wy

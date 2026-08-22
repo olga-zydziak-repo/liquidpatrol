@@ -46,6 +46,9 @@ DEMO_DECISION_HZ = 2.0
 # manifeście; bieg z teleport_hz≠16.7 = INVALID z definicji.
 DEMO_TELEPORT_DT = 0.06
 DEMO_TELEPORT_HZ = round(1.0 / DEMO_TELEPORT_DT, 1)   # 16.7 Hz (== REGATE mti_flight.replacer)
+import sys as _sys_k1, os as _os_k1
+_sys_k1.path.insert(0, _os_k1.path.dirname(_os_k1.path.dirname(_os_k1.path.abspath(__file__))))
+from common import frames as _frames
 from r02.target_channel import TargetChannel, Box
 from r02.observe_guidance import ObserveController
 from r02.gate_harness import project_to_pixel   # EKSPLORACJA: projekcja GT intruza (klasyfikacja true/false)
@@ -1043,16 +1046,17 @@ def _act_setup(r, act):
                 # §7d: w trybie blokującym decymuj set_pose do APPLY_HZ (koszt server-side ↓, lockstep);
                 # tryb async wysyła co tick (set_pose nieblokujące → worker aplikuje @apply_hz).
                 _do_apply = _async or (it0 - _last_apply >= _blk_dt)
+                gz = _frames.drv2gz(p)   # PROMPT_K1 §A: DRV[E,N,-U]→gz[x=E,y=N,z=U] przez common.frames (bez lok. swapu)
                 try:
                     if client is not None:
                         if _do_apply:
-                            client.set_pose(round(p[0], 3), round(p[1], 3), round(-p[2], 3))
+                            client.set_pose(round(gz[0], 3), round(gz[1], 3), round(gz[2], 3))
                             if not _async:
                                 _last_apply = it0; n_set += 1
                             else:
                                 n_set += 1
                     elif _do_apply:
-                        _sp_fallback(WORLD_NAME, round(p[0], 3), round(p[1], 3), round(-p[2], 3))
+                        _sp_fallback(WORLD_NAME, round(gz[0], 3), round(gz[1], 3), round(gz[2], 3))
                         _last_apply = it0; n_set += 1
                 except Exception:
                     pass

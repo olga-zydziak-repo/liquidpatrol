@@ -19,6 +19,9 @@ Uruchom: python3 -m acts.hud_render --out results/demo/DEMO_B_A1_A3_HUD.mp4
 from __future__ import annotations
 import argparse, glob, hashlib, json, math, os, sys
 import numpy as np
+import sys as _sys, os as _os
+_sys.path.insert(0, _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))))
+from common import frames as _frames
 
 W, H = 1280, 720
 
@@ -39,14 +42,13 @@ def _R(yaw, pitch):
 
 
 def _enu(ned):
-    # DRON: mav.pos = prawdziwy NED [N,E,D] → ENU [E,N,U] (walidacja reproj drona 8 px).
-    return np.array([ned[1], ned[0], -ned[2]])
+    # DRON: mav.pos = NED [N,E,D] → ENU. PROMPT_K1 §A: przez common.frames (bez lokalnego swapu).
+    return np.array(_frames.ned2enu(ned), float)
 
 
 def _enu_intr(ned):
-    # INTRUZ: intr_ned to konwencja STEROWNIKA [E,N,-U] (intruder_driver set_pose: gz_x=intr_ned[0]=East).
-    # BEZ zamiany E/N (naprawa rozjazdu markera U1R/U2R — teleport i HUD zgodne). U2R-2 §6.
-    return np.array([ned[0], ned[1], -ned[2]])
+    # INTRUZ: trace intr_ned = DRV [E,N,-U] → ENU (bez zamiany E/N). PROMPT_K1 §A: przez common.frames.
+    return np.array(_frames.drv2enu(ned), float)
 
 
 def make_proj(act):
