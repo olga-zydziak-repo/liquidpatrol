@@ -19,6 +19,13 @@ import k1_judge as J
 FROZEN_JUDGE_SHA = "4e0dc0afffda099837a002191a5540fd95d6de13cb88e7233433d67b1b998ae1"
 
 
+def _jdefault(o):
+    """Konwersja skalarów numpy (np.float64/np.bool_) do natywnych typów przy json.dump."""
+    if hasattr(o, "item"):
+        return o.item()
+    raise TypeError(f"nie-serializowalny: {type(o)}")
+
+
 def sha256_file(p):
     h = hashlib.sha256()
     with open(p, "rb") as f:
@@ -57,6 +64,22 @@ def _nearest(rows, mono, key):
     if not cand:
         return None
     return min(cand, key=lambda r: abs(r["mono"] - mono))
+
+
+def _physical_touchdown_sim(gt, t_inj_sim, ground=0.5, airborne=1.0):
+    """sim FIZYCZNEGO touchdownu (GT z≤ground po locie ≥airborne), po wstrzyknięciu. Mirror sędziego.
+    (Zdarzenie 'touchdown' w trace to timer bramki ~8 s — NIE fizyczny; do roszczenia H1 liczy się fizyczny.)"""
+    seen = False
+    for r in gt:
+        if r.get("sim", -1) < t_inj_sim:
+            if r.get("z", 0.0) >= airborne:
+                seen = True
+            continue
+        if r.get("z", 0.0) >= airborne:
+            seen = True
+        if seen and r.get("z", 0.0) <= ground:
+            return r["sim"]
+    return None
 
 
 def _ulog_sim_offset(ulog_path, gt, ev_by):
@@ -129,14 +152,19 @@ def main():
         refuse_sim = rn["sim"] if rn else None
         stamps["refuse_sim"] = refuse_sim
 
-    # touchdown sim (do segmentu roszczenia habitatu)
-    touchdown_sim = None
+    # touchdown: FIZYCZNY (GT z≤0.5) do roszczenia H1; zdarzenie-timer bramki = informacyjne
+    touchdown_event_sim = None
     if "touchdown" in ev_by:
         tn = _nearest(gt, ev_by["touchdown"]["mono"], "sim")
-        touchdown_sim = tn["sim"] if tn else None
-    stamps["touchdown_sim"] = touchdown_sim
+        touchdown_event_sim = tn["sim"] if tn else None
+    touchdown_sim = _physical_touchdown_sim(gt, t_inj_sim) if t_inj_sim is not None else None
+    stamps["touchdown_sim"] = touchdown_sim                     # FIZYCZNY (segment roszczenia)
+    stamps["touchdown_event_sim"] = touchdown_event_sim         # timer bramki (informacyjny)
 
-    # habitat (H1 lockstep + H2 na segmencie roszczenia [t_inj_sim, touchdown_sim]) — progi frozen
+    # H1 (ANEKS_K1-4): nakładka stalla (rtf<0.5) na okno reakcji denial→REFUSE (S) / denial→ack-land (N)
+    stall_in_reaction = None
+
+    # habitat (H1 lockstep + H2 na segmencie roszczenia [t_inj_sim, touchdown_FIZYCZNY]) — progi frozen
     hab = None
     hab_detail = None
     try:
@@ -145,6 +173,17 @@ def main():
         samples = HG.load_rtf(a.out_dir)
         if samples:
             h1 = HG.h1_lockstep(a.out_dir, samples)
+            # H1 (ANEKS_K1-4): stall (rtf<0.5) nakładający się na okno reakcji — INFORMACYJNE, nie bramkuje
+            react_end = refuse_sim if a.arm == "S" else (
+                (lambda ln: (_nearest(gt, ln["mono"], "sim") or {}).get("sim"))(ev_by["land_ack"])
+                if "land_ack" in ev_by else None)
+            if t_inj_sim is not None and react_end is not None:
+                lo, hi = min(t_inj_sim, react_end), max(t_inj_sim, react_end)
+                stalls = [s for s in samples if lo <= s.get("sim", -1) <= hi and s.get("rtf", 1) < 0.5]
+                stall_in_reaction = {"window_s": [round(lo, 3), round(hi, 3)],
+                                     "n_stall": len(stalls),
+                                     "overlap": len(stalls) > 0,
+                                     "min_rtf": round(min([s["rtf"] for s in stalls], default=1.0), 3)}
             seg_m = None
             dsim_ok = None
             a3_strict = None
@@ -155,16 +194,17 @@ def main():
                     seg_m = HG.seg_metrics(seg)
                     # PRE_K1 §2: bieg ważny habitatowo = timejump=0 ∧ Δsim/Δwall ≥ 0.95 w epizodzie.
                     # (p10≥0.99 / frac<0.5=0 to progi A3-strict — INFORMACYJNE, NIE bramka K1.)
-                    dsim_ok = seg_m.get("dsim_dwall", 0.0) >= HG.H2_DSIM_DWALL_MIN
+                    dsim_ok = bool(seg_m.get("dsim_dwall", 0.0) >= HG.H2_DSIM_DWALL_MIN)
                     a3_strict = HG.h2_pass(seg_m)   # [bool, reason] — tylko do wglądu
             verdict = "VALID" if (h1.get("pass") and dsim_ok) else "INVALID(habitat)"
             hab = verdict
             hab_detail = {"criterion": "PRE_K1 §2: timejump=0 ∧ Δsim/Δwall≥0.95",
                           "h1": h1, "dsim_dwall_ok": dsim_ok, "h2_claim": seg_m,
                           "a3_strict_h2_informacyjne": a3_strict,
-                          "claim_seg_s": [t_inj_sim, touchdown_sim], "n_seg": len(seg)}
+                          "stall_in_reaction_window": stall_in_reaction,
+                          "claim_seg_s_PHYS": [t_inj_sim, touchdown_sim], "n_seg": len(seg)}
             with open(os.path.join(a.out_dir, "habitat.json"), "w") as f:
-                json.dump({"verdict": verdict, **hab_detail}, f, indent=2)
+                json.dump({"verdict": verdict, **hab_detail}, f, indent=2, default=_jdefault)
     except Exception as e:
         hab_detail = {"error": str(e)}
     if a.habitat and os.path.exists(a.habitat):     # override zewn.
@@ -215,7 +255,7 @@ def main():
     }
     os.makedirs(a.out_dir, exist_ok=True)
     with open(os.path.join(a.out_dir, "manifest.json"), "w") as f:
-        json.dump(manifest, f, indent=2)
+        json.dump(manifest, f, indent=2, default=_jdefault)
 
     # --- sędzia (jeśli mamy komplet do policzenia) ---
     judge_out = {"skipped": True, "reason": None}
@@ -236,7 +276,41 @@ def main():
         except Exception as e:
             judge_out = {"error": str(e), "t_inj_sim": t_inj_sim, "px4_inj_us": px4_inj_us}
     with open(os.path.join(a.out_dir, "judge.json"), "w") as f:
-        json.dump(judge_out, f, indent=2)
+        json.dump(judge_out, f, indent=2, default=_jdefault)
+
+    # H2 (ANEKS_K1-4): sanity warstwy finalize/raportu (sędzia nietknięty) — do STOP-u R2
+    sanity = {}
+    if isinstance(judge_out, dict) and judge_out.get("t_td_s") is not None:
+        ginj = min([g for g in gt if "sim" in g], key=lambda r: abs(r["sim"] - t_inj_sim), default=None)
+        h0 = round(ginj["z"], 3) if ginj else None
+        from r03 import config as C                              # stałe D5 z config, NIE z pamięci
+        sw = C.H_SWITCH_AGL
+        GROUND = 0.5                                              # próg touchdownu GT (jak sędzia)
+        ALT_NOM = 8.0                                             # gate: desc_fast_dur na NOMINALE (nie h0)
+        desc_fast_dur = (ALT_NOM - sw) / C.V_DESC_FAST           # gate przełącza fazę PO CZASIE (~4.0 s)
+        t_exp = None
+        if h0 is not None:
+            t_ph1 = (h0 - GROUND) / C.V_DESC_FAST                # czas do z=0.5 gdyby cała faza1
+            if t_ph1 <= desc_fast_dur:                           # touchdown przed h_switch (czas) → faza1
+                t_exp = t_ph1
+            else:                                                # przełącza na 0.7 po desc_fast_dur
+                h_sw = h0 - C.V_DESC_FAST * desc_fast_dur
+                t_exp = desc_fast_dur + (h_sw - GROUND) / C.V_DESC_LAND
+        sanity["t_td"] = {"measured_s": judge_out["t_td_s"], "h0_m": h0,
+                          "profil_D5": {"V_DESC_FAST": C.V_DESC_FAST, "V_DESC_LAND": C.V_DESC_LAND,
+                                        "H_SWITCH_AGL": sw, "desc_fast_dur_gate_s": round(desc_fast_dur, 3)},
+                          "expected_from_h0_s": round(t_exp, 3) if t_exp is not None else None,
+                          "note": ("h0 z GT (nie nominał 8 m — wczesny punkt, dron w climbie). "
+                                   "Gate przełącza fazę PO CZASIE (nominał ALT=8) → przy h0<8 touchdown "
+                                   "w fazie1 (1.5 m/s), stąd t_td≈(h0-0.5)/1.5.")}
+        tdr = judge_out["t_td_s"]
+        nav = (judge_out.get("ulog") or {}).get("nav_state_seq") or []
+        sanity["nav_seq_annotated"] = [{"rel_s": t, "nav": n, "post_touchdown": (t > tdr)}
+                                       for (t, v, n) in nav]
+    manifest["stall_in_reaction_window"] = stall_in_reaction
+    manifest["sanity"] = sanity
+    with open(os.path.join(a.out_dir, "manifest.json"), "w") as f:
+        json.dump(manifest, f, indent=2, default=_jdefault)
 
     print(json.dumps({"manifest": "manifest.json", "judge": "judge.json",
                       "t_inj_sim": t_inj_sim, "px4_inj_us": px4_inj_us,

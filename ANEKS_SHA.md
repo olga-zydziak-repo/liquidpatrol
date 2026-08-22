@@ -335,3 +335,37 @@ i decyzja, nie poprawka.
 - **W2: spelniony CO DO TRESCI** (oslona bajt-identyczna vs baza `6db3393`; POS_DEGRADED/D5 nietkniete;
   asercja per-bieg + test) — **ale wymaga ratyfikacji BAZY** (`6db3393` zamiast nieosiagalnego
   `a088367`). Bez tej ratyfikacji nie pushuje/bootuje.
+
+
+---
+
+## H3 (ANEKS_K1-4) — zasieg bugu #2 (truthy h2_pass) — DEMO-B NIETKNIETE
+
+**H3(a): bug truthy zyl WYLACZNIE w `k1_finalize`, nie w module wspoldzielonym.**
+`h2_pass` zwraca krotke `(bool, reason)`. Bledne uzycie (traktowanie krotki jako bool) bylo w
+`k1/k1_finalize.py:127-128 @ 0ce4d8e`:
+```
+127:                     seg_ok = HG.h2_pass(seg_m)
+128:             verdict = "VALID" if (h1.get("pass") and seg_ok) else "INVALID(habitat)"
+```
+(`seg_ok` = krotka `(bool,str)` → zawsze truthy → verdict zawsze VALID.)
+
+Modul wspoldzielony `acts/habitat_gate.py` konsumuje `h2_pass` **poprawnie** — `ok, why = h2_pass(m)`
+(`:259`), i tak bylo od jego POWSTANIA. Historia pliku = JEDEN commit:
+```
+9d9f7e3 D_B7 §7b/§7c: bramka HABITATU commitowana PRZED próbami (antyselekcja)
+```
+Plik nie istnial @ a088367/e732c10 (BRAK PLIKU). → **habitat_gate byl zawsze poprawny; DEMO-B (A1
+v1.0/v3/v3.1, A3) osadzane tym gate'em NIE sa dotkniete.**
+
+**H3(c): bug tylko w k1_finalize — jedna linia, koniec.** H3(b) (re-ewaluacja DEMO-B, tabela
+przed/po) NIEWYZWOLONE. Zero flipow w DEMO-B (nie bylo czego flipowac). RAPORT_K1 dostaje jedna linie;
+brak erratum #2 dla DEMO-B.
+
+## Fixy instrumentacji K1 (finalize/glue, sedzia 4e0dc0af nietkniety)
+Naprawione PRZED zamknieciem STOP-u R2 (surowe dane bootow kompletne → re-finalize deterministyczny):
+1. **pin ulog→sim** (`4cd7410`): ekf.ts EPOCH → kotwica OFFBOARD, C≈−0.03 s.
+2. **bramka habitatu → PRE §2** (`cf317ef`): truthy fix + prog Δsim/Δwall≥0.95 (A3-strict informacyjny).
+3. **ANEKS_K1-4**: segment roszczenia = touchdown FIZYCZNY (GT z≤0.5), nie timer bramki (~8 s);
+   H1 stall-w-oknie-reakcji (informacyjny); H2(a) t_td vs profil D5 z config (gate przelacza faze PO
+   CZASIE → przy h0<8 touchdown w fazie1); H2(b) nav_seq znakowany post-touchdown; numpy jdefault.
