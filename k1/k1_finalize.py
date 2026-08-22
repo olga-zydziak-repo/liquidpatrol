@@ -145,17 +145,24 @@ def main():
         samples = HG.load_rtf(a.out_dir)
         if samples:
             h1 = HG.h1_lockstep(a.out_dir, samples)
-            seg_ok = None
             seg_m = None
+            dsim_ok = None
+            a3_strict = None
+            seg = []
             if t_inj_sim is not None and touchdown_sim is not None:
                 seg = [s for s in samples if t_inj_sim <= s.get("sim", -1) <= touchdown_sim]
                 if len(seg) >= 3:
                     seg_m = HG.seg_metrics(seg)
-                    seg_ok = HG.h2_pass(seg_m)
-            verdict = "VALID" if (h1.get("pass") and seg_ok) else "INVALID(habitat)"
+                    # PRE_K1 §2: bieg ważny habitatowo = timejump=0 ∧ Δsim/Δwall ≥ 0.95 w epizodzie.
+                    # (p10≥0.99 / frac<0.5=0 to progi A3-strict — INFORMACYJNE, NIE bramka K1.)
+                    dsim_ok = seg_m.get("dsim_dwall", 0.0) >= HG.H2_DSIM_DWALL_MIN
+                    a3_strict = HG.h2_pass(seg_m)   # [bool, reason] — tylko do wglądu
+            verdict = "VALID" if (h1.get("pass") and dsim_ok) else "INVALID(habitat)"
             hab = verdict
-            hab_detail = {"h1": h1, "h2_claim": seg_m, "h2_pass": seg_ok,
-                          "claim_seg_s": [t_inj_sim, touchdown_sim], "n_seg": len(seg) if t_inj_sim and touchdown_sim else 0}
+            hab_detail = {"criterion": "PRE_K1 §2: timejump=0 ∧ Δsim/Δwall≥0.95",
+                          "h1": h1, "dsim_dwall_ok": dsim_ok, "h2_claim": seg_m,
+                          "a3_strict_h2_informacyjne": a3_strict,
+                          "claim_seg_s": [t_inj_sim, touchdown_sim], "n_seg": len(seg)}
             with open(os.path.join(a.out_dir, "habitat.json"), "w") as f:
                 json.dump({"verdict": verdict, **hab_detail}, f, indent=2)
     except Exception as e:
