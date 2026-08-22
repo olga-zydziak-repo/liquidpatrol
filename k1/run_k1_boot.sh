@@ -18,7 +18,17 @@ B0SP="$ROOT/.b0deps/lib/python3.12/site-packages"
 teardown(){ pkill -9 -f 'gz sim' 2>/dev/null; pkill -9 -f 'px4' 2>/dev/null; pkill -9 -f MicroXRCEAgent 2>/dev/null
   pkill -9 -f mavsdk_server 2>/dev/null; pkill -9 -f 'gate_run_r03' 2>/dev/null; pkill -9 -f 'k1_arm_n' 2>/dev/null
   pkill -9 -f 'rtf_sampler' 2>/dev/null; pkill -9 -f 'ruby.*gz' 2>/dev/null; sleep 2; }
+
+# B4 (ANEKS_K1-5): dowód czystej maszyny (orphany przed teardownem) + cooldown od poprzedniego bootu.
+# Cooldown ≥5 min egzekwuje orkiestrator (odstęp między wywołaniami); tu tylko POMIAR do manifestu.
+ORPH_PAT='gz sim|px4 |MicroXRCEAgent|mavsdk_server|gate_run_r03|k1_arm_n|rtf_sampler|ruby.*gz'
+# pgrep -c drukuje '0' i kończy się kodem 1 przy braku trafień → NIE dokładać '|| echo 0' (dawało "0\n0")
+ORPH_PRE=$(pgrep -fc "$ORPH_PAT" 2>/dev/null); ORPH_PRE=${ORPH_PRE:-0}
+LAST_END_F="$ROOT/results/K1/.last_boot_end"; NOW_T=$(date +%s)
+if [ -f "$LAST_END_F" ]; then COOLDOWN=$(( NOW_T - $(cat "$LAST_END_F") )); else COOLDOWN=-1; fi
 teardown
+ORPH_POST=$(pgrep -fc "$ORPH_PAT" 2>/dev/null); ORPH_POST=${ORPH_POST:-0}
+python3 -c "import json;json.dump({'orphans_pre_teardown':$ORPH_PRE,'orphans_post_teardown':$ORPH_POST,'cooldown_s_since_last_boot':$COOLDOWN,'one_boot_per_cycle':True},open('$OUTDIR/b4_state.json','w'))"
 
 # R4: certs_selfcheck (ramię S) — log przed bootem
 if [ "$ARM" = "S" ]; then
@@ -66,4 +76,5 @@ PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 k1/k1_finalize.py \
   --trace "$OUTDIR/trace.jsonl" --arm "$ARM" --point "$POINT" --boot "$BOOT_N" --kind "$KIND" \
   $ULGARG --harness-sha-file "$HARNESS_FILE" --out-dir "$OUTDIR" $CERTS 2>&1 | tee "$OUTDIR/finalize.log"
 
+date +%s > "$ROOT/results/K1/.last_boot_end"   # B4: znacznik końca bootu (cooldown następnego)
 echo "[K1 $ARM p$POINT b$BOOT_N] DONE rc=$RC → $OUTDIR"; exit $RC

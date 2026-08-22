@@ -183,11 +183,44 @@ def main():
             exp_r = None
         fa_ok = (fa is not None and kp is not None and abs(fa - kp) <= 0.02)
         r_ok = (r_meas is not None and exp_r is not None and abs(r_meas - exp_r) <= 2.0)
+        # ANEKS_K1-7 G1: człon r-geometrii ZDJĘTY jako bramka (model idealnej łamanej błędny przy
+        # skracaniu narożnika — GT pokazuje r od ~20.7 na wierzchołku do ~12.9 w zakręcie na tej samej
+        # nodze). f_along kotwiczy geometrię punktu; r_ok/r_expected zostają WYŁĄCZNIE informacyjnie.
         spec_check = {"k1_point": kp, "k1_f_along": fa,
                       "abs_df": (round(abs(fa - kp), 4) if (fa is not None and kp is not None) else None),
+                      "fa_tol": 0.02, "fa_ok": fa_ok,
                       "r_est_at_cut": r_meas, "r_expected": (round(exp_r, 3) if exp_r is not None else None),
-                      "r_tol_m": 2.0, "fa_tol": 0.02, "fa_ok": fa_ok, "r_ok": r_ok,
-                      "spec_match": bool(fa_ok and r_ok)}
+                      "r_tol_m": 2.0, "r_ok": r_ok, "r_geom_informational": True,
+                      "spec_match": bool(fa_ok)}   # G1: bramka = tylko f_along (r zdjęty)
+
+    # ANEKS_K1-7 G1/G2: kinematyka wstrzyknięcia (INFORMACYJNIE + do checku parowania w agregacie).
+    # Liczona w finalize z NAJBLIŻSZEGO wiersza EKF do denialu — jednakowo dla obu ramion (N nie loguje
+    # speed_at_cut w evencie; S tak — więc żeby S↔N było spójne, oba bierzemy z EKF tu). Plus GT |v|.
+    inj_info = None
+    if denial is not None:
+        en = _nearest(ekf, denial["mono"], "vx")
+        vx = en.get("vx") if en else None
+        vy = en.get("vy") if en else None
+        vh_ekf = (math.hypot(vx, vy) if (vx is not None and vy is not None) else None)
+        hd_ekf = (math.degrees(math.atan2(vy, vx)) if vh_ekf is not None else None)  # EKF NED: vx=N, vy=E
+        # GT |v| poziome: różnica centralna wokół mono denialu (GT ma sim-stemple)
+        vh_gt = None
+        gtc = [g for g in gt if "mono" in g and "sim" in g]
+        if len(gtc) >= 3:
+            gi = min(range(len(gtc)), key=lambda i: abs(gtc[i]["mono"] - denial["mono"]))
+            lo = max(0, gi - 6); hi = min(len(gtc) - 1, gi + 6)
+            dts = gtc[hi]["sim"] - gtc[lo]["sim"]
+            if abs(dts) > 1e-6:
+                vh_gt = round(math.hypot(gtc[hi]["x"] - gtc[lo]["x"], gtc[hi]["y"] - gtc[lo]["y"]) / dts, 3)
+        inj_info = {"src": "ekf_nearest_denial",
+                    "vx_ekf": vx, "vy_ekf": vy,
+                    "speed_h_ekf": (round(vh_ekf, 3) if vh_ekf is not None else None),
+                    "heading_deg_ekf": (round(hd_ekf, 3) if hd_ekf is not None else None),
+                    "r_est_ekf": (round(math.hypot(en.get("x", 0.0), en.get("y", 0.0)), 3) if en else None),
+                    "speed_h_gt": vh_gt,
+                    "speed_h_cmd": 3.0,
+                    "note": "speed_h_cmd = norma zadana harnessu (V_MAX). speed_h_gt/ekf = FAKTYCZNA "
+                            "(ANEKS_K1-7 G4: w zakręcie faktyczna >> zadana → założenie d_stop@v=3.0 nie trzyma)."}
     t_inj_sim = px4_inj_us = ulog_sim_C = None
     if denial:
         gnear = _nearest(gt, denial["mono"], "sim")
@@ -298,25 +331,35 @@ def main():
                         "D_B3 e732c10 trace v2 → 5a6a18d erratum); ścieżka POS_DEGRADED→D5 "
                         "bajt-identyczna z 4/4 wg ANEKS_SHA §W2")
 
-    # F3: spec-mismatch ⇒ bieg nieważny; relabel punktu na corner0-passthrough gdy f≈narożnik
-    spec_match = (spec_check or {}).get("spec_match", True)
+    # ANEKS_K1-7 G1: run_valid = habitat VALID ∧ |k1_f_along − K1_POINT| ≤ 0.02 (r zdjęty jako bramka).
+    fa_ok = (spec_check or {}).get("fa_ok", None)
+    hab_ok = (hab == "VALID")
+    run_valid = (bool(fa_ok) and hab_ok) if (spec_check is not None) else None
     kind_eff = a.kind
     point_label = None
     invalid_reason = None
-    if spec_check is not None and not spec_match:
+    if run_valid is False:
         kind_eff = "diag"
-        invalid_reason = "spec-mismatch"
-        _fa = spec_check.get("k1_f_along")
+        reasons = []
+        if not fa_ok:
+            reasons.append("f_along-mismatch")
+        if not hab_ok:
+            reasons.append("habitat-invalid")
+        invalid_reason = "+".join(reasons) if reasons else "invalid"
+        _fa = (spec_check or {}).get("k1_f_along")
         if _fa is not None and _fa >= 0.9:
             point_label = "corner0-passthrough"
 
     manifest = {
         "arm": a.arm, "point": a.point, "boot_n": a.boot, "kind": kind_eff,
         "point_label": point_label,
-        "run_valid": (spec_match if spec_check is not None else None),
+        "run_valid": run_valid,
         "invalid_reason": invalid_reason,
         "spec_check": spec_check,
+        "inj_info": inj_info,
         "stalls": _stalls_from_rtf(a.out_dir),
+        "b4": (json.load(open(os.path.join(a.out_dir, "b4_state.json")))
+               if os.path.exists(os.path.join(a.out_dir, "b4_state.json")) else None),
         "sha_harness": sha256_file(a.harness_file), "harness_file": a.harness_file,
         "sha_k1_judge": judge_sha, "k1_judge_frozen": judge_frozen,
         "shield_frozen": shield_frozen, "shield_pins": shield_detail,

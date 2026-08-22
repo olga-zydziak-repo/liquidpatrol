@@ -433,3 +433,43 @@ shield.py `1c584964…`, config.py `4c440e42…` — bez zmian (weryfikacja: `k1
   `run_valid=False` (mislabel f≈0.97 sprzed naprawy). `sha_harness` NIETKNIĘTY (kod, którym latano).
   Wyłączone z tabel §I; w §V jako ślad instrumentu. Budżet (S,0.2)/(N,0.2) = 3 loty OD NOWA; licznik
   env-fail (N) zostaje 2 (środowisko, nie punkt). Relabel = z logu eventów, jednakowy dla obu ramion.
+
+## §W5 — ANEKS_K1-7 G1/G2: r-check zdjęty jako bramka + check parowania S↔N
+
+**G1 (mój błąd projektowy w ANEKS_K1-6 F3):** człon r-geometrii ZDJĘTY jako bramka. Model `r_expected`
+= promień idealnej łamanej — błędny przy skracaniu narożnika (GT: r od ~20.7 na wierzchołku do ~12.9
+w zakręcie na TEJ SAMEJ nodze; przy f≈0.2 punkt leży w transiencie skrętu). `f_along` już kotwiczy
+geometrię punktu. Nowa bramka: **`run_valid = habitat VALID ∧ |k1_f_along − K1_POINT| ≤ 0.02`**.
+`r_est`, `speed`, `heading`, wektor v (`inj_info`) zostają w manifeście WYŁĄCZNIE informacyjnie
+(`spec_check.r_geom_informational=True`, `r_ok` liczony ale nie bramkuje). `k1_finalize` (sędzia
+4e0dc0af NIETKNIĘTY). **S@0.2 boot3 = WAŻNY (1/5)**: habitat VALID ∧ f_along=0.21 (|Δ|=0.01).
+
+**G2 (warstwa agregatu, NIE sędzia):** check parowania S↔N — progi ZAMROŻONE przed 1. biegiem N:
+`|r_inj_S − r_inj_N| ≤ 1.0 m ∧ |‖v‖_inj_S − ‖v‖_inj_N| ≤ 0.3 m/s ∧ |Δheading| ≤ 10°`
+(`k1_aggregate.PAIR_TOL`). Kinematyka z `manifest.inj_info` (oba ramiona z EKF — spójny instrument;
+N nie loguje speed_at_cut w evencie, więc oba z EKF w finalize). Niezgodność ⇒ punkt NIESPAROWANY,
+oba loty → diag, punkt wykluczony z kryterium i liczony ponownie w budżecie. `pairing_check()` +
+integracja w `aggregate(runs, inj_by)` + 4 selftesty PASS. `--manifests` glob w main.
+
+## §W6 — ANEKS_K1-7 G4: prędkość w zakręcie > założenie twierdzenia (STOP przed N@0.2)
+
+**Egzekucja limitu (cytat):** oba ramiona zadają setpoint znormalizowany:
+`vn, ve = (VMAX*dx/dist, VMAX*dy/dist)` (`k1_arm_n.py:213`, `gate_run_r03.py:291`) → ‖(vn,ve)‖ = VMAX
+= **NORMA**, nie per-oś. Vertical zadany = 0. `V_MAX = 3.0` (`r01/config.py:24`, „clamp prędkości
+poziomej"). **`speed_at_cut = hypot(vel[0], vel[1])`** (`gate_run_r03.py:249`) = FAKTYCZNA estymata EKF.
+
+**Założenie twierdzenia (cytat):** `DELTA_MARGIN = d_stop = V_MAX·T_REACT_S + V_MAX²/(2·A_BRAKE) =
+0.6 + 2.25 = 2.85 m` (`r01/config.py:27`), z `V_MAX=3.0`. Twierdzenie zawierania:
+`(r_est ≤ R_route') ∧ (ε_pos ≤ ε_cap) ∧ (r_true ≤ r_est+ε_pos) ⇒ r_true + d_stop ≤ R_E`
+(`RAPORT_R03A.md:19`, `PRE_R03A.md:14/154-156`). `d_stop` = FIZYCZNA droga hamowania → zależy od
+FAKTYCZNEJ ‖v‖. Twierdzenie zakłada więc ‖v‖ ≤ V_MAX = 3.0.
+
+**Pomiar @ wstrzyknięciu 0.2 (S boot3):** commanded=3.0 · EKF=3.738 · **GT (fizyczna)=5.37 m/s**.
+d_stop przy tych: 2.85 (zał.) / 4.24 (EKF) / **8.28 m (GT)**. Cruise na prostej ≈3.16 (GT); spike do
+5.37 jest transientem skręcania (0.2 w zakręcie, wektor v NIE ∥ noga — ANEKS_K1-7 G3). EKF
+NIEDOSZACOWUJE GT (3.74 vs 5.37).
+
+**Werdykt G4:** norma ≤3.0 egzekwowana na ZADANEJ, ale FAKTYCZNA (3.74 EKF / 5.37 GT) przekracza
+V_MAX=3.0 przyjęte przez d_stop twierdzenia. To NIE „inne źródło" (nie pion, nie jednostki) — to
+faktyczna > zadana w zakręcie. **Wykracza poza K1 (scope P2-ε w R0.3a); nie do przypisu → STOP przed
+N@0.2, osobna decyzja Olgi.** Bez lotu N.
