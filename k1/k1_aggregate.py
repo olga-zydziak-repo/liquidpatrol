@@ -7,12 +7,14 @@ x_exc, breach. Parowanie PO PUNKCIE (N vs S). Liczy:
   - breach_N, breach_S  (liczba / 5 punktów),
   - Δx_exc = x_exc_N − x_exc_S per punkt,
   - mediana(Δx_exc), pooled_std (odchylenie std Δ po punktach), IQR(Δ),
-  - WERDYKT wg §4 (zamrożone, dwustronne):
+  - WERDYKT wg §4 (zamrożone, dwustronne) — liczony WYŁĄCZNIE na punktach SPAROWANYCH (ANEKS_K1-11 D4):
+      NIEWYKONANE — sparowanych < 4 z 5 (D4)          → STOP + osobna decyzja
       (−) breach_S ≥ 1                              → STOP (SR-K7), pierwszeństwo
       (+) breach_S=0 ∧ breach_N≥1 ∧ med(Δ)>pooled_std   KONTRAST STOI
       (±) breach_N=0 ∧ breach_S=0 ∧ med(Δ)>pooled_std    przewaga ilościowa bez naruszenia
       (0) breach_N=0 ∧ |med(Δ)|≤pooled_std          NULL — kryterium śmierci pozycji 1
       MIXED — każdy inny układ (pełna tabela, bez zaokrąglania do litery)
+    Mianowniki (+)/(±)/(0) = liczba punktów SPAROWANYCH (D4), nie 5.
 
 Liczone WYŁĄCZNIE na punktach prostej (narożniki/δ=10s informacyjne — flaga is_corner/info wyklucza).
 """
@@ -20,10 +22,14 @@ import sys, os, json, glob, argparse, statistics
 
 CRIT_POINTS = [0.2, 0.35, 0.5, 0.65, 0.8]   # PRE §2/D3 — punkty kryterialne prostej
 PT_TOL = 1e-6
+N_CRIT = len(CRIT_POINTS)                    # 5 punktów kryterialnych
+MIN_PAIRED = 4                              # ANEKS_K1-11 D4: ≥4 sparowanych z 5, inaczej K1 NIEWYKONANE
 
-# ANEKS_K1-7 G2: progi checku parowania S↔N (ZAMROŻONE przed 1. biegiem N). Warstwa agregatu, NIE sędzia.
-# Kinematyka wstrzyknięcia z manifest.inj_info (oba ramiona z EKF — spójny instrument). Niezgodność ⇒
-# punkt NIESPAROWANY, oba loty jako diag, punkt liczy się ponownie w budżecie lotów.
+# ANEKS_K1-7 G2 / K1-11 D2: progi checku parowania S↔N (ZAMROŻONE przed 1. biegiem N). Warstwa agregatu,
+# NIE sędzia. Kinematyka wstrzyknięcia z manifest.inj_info (oba ramiona z EKF — spójny instrument).
+# D2: parowanie liczone WYŁĄCZNIE na parach bootów WAŻNYCH (run_valid≠False). Niezgodność ⇒ punkt
+# NIESPAROWANY (status UNPAIRED), oba loty jako diag. Budżet per (ramię,punkt)=3 loty ŁĄCZNIE — BEZ
+# resetu z powodu niesparowania. Punkt bez ważnej pary po wyczerpaniu obu budżetów = UNPAIRED (final).
 PAIR_TOL = {"dr_m": 1.0, "dspeed_mps": 0.3, "dheading_deg": 10.0, "dz_m": 0.5}   # dz_m: ANEKS_K1-9 R3
 
 
@@ -124,17 +130,21 @@ def aggregate(runs, inj_by=None):
         if N and S:
             kinematically_paired = (pcheck is None) or bool(pcheck.get("paired"))  # brak inj_by ⇒ nie egzekwuj
             if not kinematically_paired:
-                row["excluded"] = "unpaired-kinematics"      # oba loty → diag, punkt do powtórki
+                row["excluded"] = "unpaired-kinematics"      # D2: oba loty → diag, BEZ resetu budżetu
+                row["status"] = "UNPAIRED"
                 unpaired_points.append(pt)
             else:
                 d = N["x_exc"] - S["x_exc"]
                 row["delta_x_exc"] = round(d, 3)
                 deltas.append(d)
                 paired_points.append(pt)
+                row["status"] = "paired"
                 if N["breach"]:
                     breach_N += 1
                 if S["breach"]:
                     breach_S += 1
+        else:
+            row["status"] = "incomplete"                     # brak jednego ramienia (budżet niewyczerpany)
         rows.append(row)
 
     n_pairs = len(deltas)
@@ -145,6 +155,9 @@ def aggregate(runs, inj_by=None):
 
     return {
         "n_pairs": n_pairs,
+        "paired_of": N_CRIT,                       # D4: z ilu punktów kryterialnych
+        "min_paired_required": MIN_PAIRED,         # D4: próg wykonalności
+        "k1_executable": bool(n_pairs >= MIN_PAIRED),
         "paired_points": paired_points,
         "unpaired_points": unpaired_points,
         "breach_N": breach_N, "breach_S": breach_S,
@@ -160,24 +173,32 @@ def aggregate(runs, inj_by=None):
 
 
 def _verdict(bN, bS, med, pstd, n_pairs):
+    # ANEKS_K1-11 D4: werdykt §4 WYŁĄCZNIE na sparowanych; wymóg ≥MIN_PAIRED z N_CRIT.
     if n_pairs == 0:
         return "INCOMPLETE", "brak sparowanych punktów N/S"
+    if n_pairs < MIN_PAIRED:
+        return "NIEWYKONANE", (
+            f"sparowanych {n_pairs}/{N_CRIT} < {MIN_PAIRED} wymagane (D4) — K1 w obecnej formie "
+            "NIEWYKONANE → STOP i osobna decyzja (kandydaci: parowanie przez wspólny stan startowy "
+            "zamiast wspólnego f, albo N-tylko charakteryzacja bez kontrastu). Uwaga: w trakcie serii to "
+            "jest zarazem stan 'za mało danych' — ocenę wyczerpania budżetów robi warstwa decyzji, nie agregat")
+    # od tu n_pairs ≥ MIN_PAIRED; mianowniki (+)/(±)/(0) = n_pairs sparowanych
     if bS >= 1:
-        return "(-)", (f"breach_S={bS}≥1 — naruszenie P2-ε w scope; STOP (SR-K7), raport, "
-                       "osobna decyzja; nie stroimy, nie powtarzamy")
+        return "(-)", (f"breach_S={bS}≥1 (z {n_pairs} sparowanych) — naruszenie P2-ε w scope; STOP "
+                       "(SR-K7), raport, osobna decyzja; nie stroimy, nie powtarzamy")
     gt = (med is not None and med > pstd)
     if bS == 0 and bN >= 1 and gt:
-        return "(+)", (f"KONTRAST STOI: breach_S=0 ∧ breach_N={bN}≥1 ∧ mediana(Δ)={round(med,3)}"
-                       f">pooled_std={round(pstd,3)}")
+        return "(+)", (f"KONTRAST STOI: breach_S=0 ∧ breach_N={bN}≥1 (z {n_pairs} sparowanych) ∧ "
+                       f"mediana(Δ)={round(med,3)}>pooled_std={round(pstd,3)}")
     if bN == 0 and bS == 0 and gt:
-        return "(±)", (f"PRZEWAGA ILOŚCIOWA bez naruszenia: breach_N=breach_S=0 ∧ mediana(Δ)="
-                       f"{round(med,3)}>pooled_std={round(pstd,3)}")
+        return "(±)", (f"PRZEWAGA ILOŚCIOWA bez naruszenia: breach_N=breach_S=0 (z {n_pairs} sparowanych) "
+                       f"∧ mediana(Δ)={round(med,3)}>pooled_std={round(pstd,3)}")
     if bN == 0 and med is not None and abs(med) <= pstd:
-        return "(0)", (f"NULL (kryterium śmierci pozycji 1): breach_N=0 ∧ |mediana(Δ)|="
-                       f"{round(abs(med),3)}≤pooled_std={round(pstd,3)}")
-    return "MIXED", (f"układ nie mapuje się na literę: breach_N={bN}, breach_S={bS}, "
-                     f"mediana(Δ)={round(med,3) if med is not None else None}, pooled_std={round(pstd,3)} "
-                     "— raport z pełną tabelą, bez zaokrąglania")
+        return "(0)", (f"NULL (kryterium śmierci pozycji 1): breach_N=0 (z {n_pairs} sparowanych) ∧ "
+                       f"|mediana(Δ)|={round(abs(med),3)}≤pooled_std={round(pstd,3)}")
+    return "MIXED", (f"układ nie mapuje się na literę: breach_N={bN}, breach_S={bS} (z {n_pairs} "
+                     f"sparowanych), mediana(Δ)={round(med,3) if med is not None else None}, "
+                     f"pooled_std={round(pstd,3)} — raport z pełną tabelą, bez zaokrąglania")
 
 
 # ----------------------------- UNIT-TEST -----------------------------
@@ -276,6 +297,42 @@ def selftest():
     print(f"-- G2 integracja: unpaired={a['unpaired_points']} n_pairs={a['n_pairs']} bN={a['breach_N']} "
           f"(0.2 wykluczony, breach N z 0.2 nie liczony) {'PASS' if ce else 'FAIL'}")
 
+    # D4: <4 sparowanych → NIEWYKONANE (STOP), k1_executable=False
+    runs = []
+    for pt in CRIT_POINTS[:3]:
+        runs += [_mk("N", pt, 10.0, breach=False), _mk("S", pt, 3.0, breach=False)]
+    a = aggregate(runs)
+    cd = (a["verdict"] == "NIEWYKONANE" and a["n_pairs"] == 3 and a["k1_executable"] is False)
+    ok = ok and cd
+    print(f"-- D4 <4 sparowanych → NIEWYKONANE: verdict={a['verdict']} n_pairs={a['n_pairs']} "
+          f"k1_executable={a['k1_executable']} {'PASS' if cd else 'FAIL'}")
+
+    # D4: dokładnie 4 sparowane → werdykt liczony, mianownik 4, k1_executable=True
+    runs = []
+    for pt in CRIT_POINTS[:4]:
+        runs += [_mk("N", pt, 10.0, breach=False), _mk("S", pt, 3.0, breach=False)]
+    a = aggregate(runs)
+    cd2 = (a["verdict"] == "(±)" and a["n_pairs"] == 4 and a["k1_executable"] is True)
+    ok = ok and cd2
+    print(f"-- D4 =4 sparowane → werdykt (mianownik 4): verdict={a['verdict']} n_pairs={a['n_pairs']} "
+          f"{'PASS' if cd2 else 'FAIL'}")
+
+    # D4×D2: 5 punktów ale 2 niesparowane kinematycznie → 3 sparowane → NIEWYKONANE
+    runs, inj_by = [], {}
+    for i, pt in enumerate(CRIT_POINTS):
+        runs += [_mk("N", pt, 10.0, breach=False), _mk("S", pt, 3.0, breach=False)]
+        if i < 2:   # 0.2, 0.35: dr duże → niesparowane
+            inj_by[(round(pt, 3), "N")] = _inj(13.0, 3.5, 45.0)
+            inj_by[(round(pt, 3), "S")] = _inj(20.0, 3.5, 45.0)
+        else:       # sparowane
+            inj_by[(round(pt, 3), "N")] = _inj(13.0, 3.5, 45.0)
+            inj_by[(round(pt, 3), "S")] = _inj(13.2, 3.5, 46.0)
+    a = aggregate(runs, inj_by=inj_by)
+    cd3 = (a["n_pairs"] == 3 and len(a["unpaired_points"]) == 2 and a["verdict"] == "NIEWYKONANE")
+    ok = ok and cd3
+    print(f"-- D4×D2: 2 niesparowane z 5 → 3 sparowane → NIEWYKONANE: unpaired={a['unpaired_points']} "
+          f"n_pairs={a['n_pairs']} verdict={a['verdict']} {'PASS' if cd3 else 'FAIL'}")
+
     print(f"\nWYNIK: {'PASS — agregat zwalidowany' if ok else 'FAIL'}")
     return ok
 
@@ -295,7 +352,19 @@ def main():
         paths += glob.glob(a.glob, recursive=True)
     if not paths:
         ap.error("podaj pliki wyników albo --glob albo --selftest")
-    # G2: inj_info z manifestów (tylko biegi ważne — run_valid nie False) keyed po (point, arm)
+    # ANEKS_K1-11 D2: parowanie WYŁĄCZNIE na bootach WAŻNYCH. Judge.json nie niesie run_valid →
+    # filtrujemy po siostrzanym manifest.json. Do kryterium wchodzi TYLKO run_valid is True — diag
+    # (False), niedokończony/stary (None/brak klucza) i judge bez manifestu są WYKLUCZONE.
+    kept = []
+    for p in paths:
+        mp = os.path.join(os.path.dirname(p), "manifest.json")
+        try:
+            if os.path.exists(mp) and json.load(open(mp)).get("run_valid") is True:
+                kept.append(p)
+        except Exception:
+            pass                                  # nieczytelny manifest ⇒ poza kryterium
+    paths = kept
+    # G2/D2: inj_info z manifestów WAŻNYCH (run_valid is True) keyed po (point, arm)
     inj_by = None
     if a.manifests:
         inj_by = {}
@@ -304,7 +373,7 @@ def main():
                 m = json.load(open(mp))
             except Exception:
                 continue
-            if m.get("run_valid") is False:      # niesparuj z lotem diag/invalid
+            if m.get("run_valid") is not True:   # tylko boot ważny wchodzi do parowania (D2)
                 continue
             pt, arm, inj = m.get("point"), m.get("arm"), m.get("inj_info")
             if pt is not None and arm and inj:

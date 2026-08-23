@@ -519,3 +519,36 @@ P3: FAIL nie zmienia N@0.2 ani nie zatrzymuje serii (gwarancja globalna V3 stoi 
 na 1 locie). RAPORT_K1: „przy wyjściu z zakrętu z v>5 m/s droga po REFUSE przekracza bound — wynik
 o OSŁONIE, nie o instrumencie". 3. taki FAIL w serii ⇒ STOP + rewizja A_BRAKE w erratum #2 (nie w PRE).
 P1: flaga a_meas (boot3 1.862<2.0) zostaje w RAPORT §IV z adnotacją „miara uśrednia ogon regulatora".
+
+## §W10 — ANEKS_K1-11: decyzje R2 (budżet N, status 0.2, poprawka agregacji)
+
+**D1 (N@0.2):** lecieć dalej w budżecie (2/3 zostały), protokół B4 bez zmian. Większa ekspozycja N na
+D8 (okno claim ~8 s vs S ~3 s) = własność mierzonych mechanizmów, NIE powód do zmiany kryterium
+habitatu; zdanie do RAPORT §IV (już zapisane po S boot2).
+
+**D2 (parowanie tylko na ważnych + budżet bez resetu):** `k1_aggregate` — parowanie i kryterium
+liczone WYŁĄCZNIE na bootach `run_valid is True` (filtr po siostrzanym `manifest.json`; diag=False,
+niedokończony/stary=None i judge bez manifestu WYKLUCZONE). Status per-punkt: `paired` /
+`UNPAIRED` (oba ramiona ważne lecz kinematyka poza tol) / `incomplete` (brak ważnego boota ramienia).
+Budżet per (ramię,punkt) = **3 loty ŁĄCZNIE, BEZ resetu** z powodu niesparowania (doprecyzowanie G2).
+Punkt bez ważnej pary po wyczerpaniu obu budżetów = UNPAIRED (final).
+
+**D3 (0.2 zostaje):** punkt 0.2 pozostaje w spec i w kryterium — żadnego przesuwania ani „informacyjny".
+Dane 0.2 (oba ramiona, wszystkie booty, z dstop_check w tym FAIL 16.518 S boot3) idą do RAPORT §I
+niezależnie od statusu parowania, z etykietą statusu.
+
+**D4 (poprawka agregacji, ZAMROŻONA przed 0.35–0.8):** werdykt §4 liczony na punktach SPAROWANYCH;
+wymóg **≥4 sparowanych z 5**; mianowniki (+)/(±)/(0) = liczba sparowanych. `<4` ⇒ werdykt
+**NIEWYKONANE** (`k1_executable=False`) → STOP + osobna decyzja (kandydaci wtedy: parowanie przez
+wspólny stan startowy zamiast wspólnego f, albo N-tylko charakteryzacja bez kontrastu). Nowe pola:
+`paired_of=5`, `min_paired_required=4`, `k1_executable`, per-row `status`. Jawność: poprawka powstała
+po 1 nieudanym zestawieniu na 0.2 i PRZED danymi z pozostałych punktów; jeśli po serii jedynym
+niesparowanym okaże się 0.2, RAPORT mówi to wprost razem z dstop FAIL (czytelnik ocenia, czy
+wykluczenie działa na korzyść osłony). 3 nowe selftesty (14/14 PASS).
+
+**D5 (licznik dstop-FAIL, P3):** **dstop FAIL #1/3 = S@0.2 boot3** (x_exc 16.518 > bound 8.583,
+v_REFUSE 5.473). Do §I (obok wyniku, „przesłanka naruszona") i §IV; przy 5/5 wraca jako wynik o
+osłonie przy szybkim wyjściu z zakrętu, nie jako przypis. **3. taki FAIL ⇒ STOP + rewizja A_BRAKE w
+erratum #2.** Licznik biegnie tu: [FAIL#1 S@0.2 boot3].
+
+**D6:** push f3709d3 (Olga) → cooldown → N@0.2 boot4 → standardowy STOP R2 po każdej próbie punktu.
