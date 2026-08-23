@@ -552,3 +552,37 @@ osłonie przy szybkim wyjściu z zakrętu, nie jako przypis. **3. taki FAIL ⇒ 
 erratum #2.** Licznik biegnie tu: [FAIL#1 S@0.2 boot3].
 
 **D6:** push f3709d3 (Olga) → cooldown → N@0.2 boot4 → standardowy STOP R2 po każdej próbie punktu.
+
+## §W11 — ANEKS_K1-13: skażony boot, bramka flight-quality (J1–J5)
+
+**J1 (S@0.2 boot3 → diag flight-quality):** re-finalize in-place → run_valid False, kind diag,
+invalid_reason `flight-quality-drift`. Kryterium jawne/symetryczne/ślepe na wynik: r@offboard=10.27
+przy ≤1.33 u 5/6 bootów (dryf ~10 m N w takeoffie). judge.json/habitat.json BAJT-IDENTYCZNE
+(deterministyczne); spec_check/inj_info/dstop/abrake/vmax/sha NIETKNIĘTE. Dane w §V + `e1_divergence.png`.
+
+**J2 (dstop FAIL #1 NIE znika, licznik NIE zeruje):** [FAIL#1 S@0.2 boot3] zostaje — zmienia się
+ZNACZENIE nie ISTNIENIE. Przestaje być „zachowaniem punktu 0.2", zostaje POMIAREM przesłanki przy
+v_REFUSE=5.47: z tej prędkości osłona przejechała x_exc=16.5 m > bound 8.6 — prawda o osłonie
+niezależnie od tego, jak dron doszedł do 5.47. Podwójna adnotacja §I/§IV: **dojście skażone, liczba
+realna.** Zerowanie działałoby na korzyść osłony → NIE robimy. Licznik: [FAIL#1 S@0.2 boot3].
+
+**J3 (V_env=6.0 zamrożone):** premisa V_true_max=5.34 ze skażonego S boot3; czyste booty sugerują
+niższą obwiednię, ale obniżanie po danych = strojenie marginesu na korzyść gwarancji → NIE. Adnotacja
+w ERRATUM_VMAX: obwiednia konserwatywna, zmierzona na locie z dryfem; C_margin=1.146 = DOLNE oszacowanie.
+
+**J4 (bramka pre-injection, ZAMROŻONA):** `k1_finalize` — `preinj_check`: r@offboard=hypot(x,y) GT
+najbliższego eventu `offboard` ≤ **2.0 m** (separacja 1.33 vs 10.27). Symetryczna dla ramion, mierzona
+PRZED wstrzyknięciem, ślepa na wynik. Naruszenie ⇒ run_valid False + `flight-quality-drift` (diag);
+lot LICZY się do budżetu (poleciał — duch SR-K5). Sędzia 4e0dc0af NIETKNIĘTY. Zweryfikowane: boot3
+FAIL(10.27), boot4 PASS(1.329). pytest test_k1 7/7 + test_k1_shield 5/5.
+
+**J5 (przyczyna dryfu — ROZSTRZYGNIĘTE, ulog S boot3):** w oknie takeoff-climb (ulog ~102–109 s po
+„Takeoff detected"@96.04): `vehicle_local_position.xy_reset_counter` 4→5 @t=102.14 s ze skokiem
+pozycji ~5.5 m (reset poziomy EKF), koincydentnie z health-failami `High Gyro Bias`@103.37 +
+`High Accelerometer Bias`@105.38 i skokiem `timesync time jump`@108.65 (rodzina ~32 s = D8:
+13.28/55.09/86.98/108.65). Reset EKF zaburzył position-hold takeoffu → fizyczny dryf ~10 m.
+INTERMITTENT (rodzina D8/timesync), **bramka J4 chwyta**. Zdanie do §IV.
+
+**J6 budżety:** (S,0.2) 1/3 zużyty (boot3 diag flight-quality), 2 zostają; (N,0.2) 2/3, 1 zostaje;
+N boot4 = ważny kandydat pary (r@inj=18.08). Po pushu (1cee41d + commit J1–J5): re-lot S@0.2 →
+parowanie z N boot4.

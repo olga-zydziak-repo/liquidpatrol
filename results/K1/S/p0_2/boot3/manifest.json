@@ -2,10 +2,16 @@
   "arm": "S",
   "point": 0.2,
   "boot_n": 3,
-  "kind": "crit",
+  "kind": "diag",
   "point_label": null,
-  "run_valid": true,
-  "invalid_reason": null,
+  "run_valid": false,
+  "invalid_reason": "flight-quality-drift",
+  "preinj_check": {
+    "r_offboard_m": 10.27,
+    "r_max_m": 2.0,
+    "pass": false,
+    "note": "J4: dryf toru w takeoffie przed wstrzykni\u0119ciem. r@offboard>2.0 \u21d2 diag(flight-quality); lot liczy si\u0119 do bud\u017cetu (SR-K5). \u015alepe na wynik."
+  },
   "spec_check": {
     "k1_point": 0.2,
     "k1_f_along": 0.21,

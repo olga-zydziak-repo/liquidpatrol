@@ -48,6 +48,17 @@ twierdzenia (nie bug K1, nie bug osłony).
 - **RAPORT_D_B5**: dynamika lotu ta sama (offboard velocity, ta sama trasa/limit); „V_MAX=3.0" tam też
   = limit zadany.
 
+## Adnotacja (ANEKS_K1-13 J3) — premisa V_true_max ze skażonego lotu
+`V_true_max = 5.342 m/s` zmierzono na **S@0.2 boot3, który ANEKS_K1-13 J1 przeklasyfikował na
+diag(flight-quality)**: dryf ~10 m w takeoffie (EKF xy-reset @t=102.14 s + D8 timesync jump; r@offboard
+=10.27 przy ≤1.33 u 5/6 bootów) sprawił, że dron ściął narożnik agresywnie → wysoka faktyczna ‖v‖ w
+zakręcie (5.34) i wysokie v_REFUSE (5.47). Czyste booty (r@inj≈18, na linii) sugerują NIŻSZĄ faktyczną
+prędkość w zakręcie, więc **niższą obwiednię**. Mimo to `V_env=6.0` **zostaje zamrożone** — obniżanie po
+danych byłoby strojeniem marginesu na korzyść gwarancji (ANEKS_K1-8 V5, „asercja≠pomiar"). Zatem:
+**obwiednia V_env=6.0 jest KONSERWATYWNA, zmierzona na locie z dryfem; `C_margin=1.146 m` = DOLNE
+oszacowanie** (czysty lot dałby wyższy margines). dstop FAIL#1 (x_exc 16.518 > 8.583) pozostaje
+zapisany (J2): dojście skażone, liczba realna — pomiar przesłanki przy v_REFUSE=5.47.
+
 ## Reguła od teraz (ANEKS_K1-8 V5)
 Każda stała wchodząca do twierdzenia jako ograniczenie wielkości FIZYCZNEJ dostaje w manifeście
 zmierzone maksimum z biegu + asercję względem obwiedni. **„Limit zadany ≠ limit faktyczny"** dołącza

@@ -6,6 +6,12 @@
   "point_label": null,
   "run_valid": true,
   "invalid_reason": null,
+  "preinj_check": {
+    "r_offboard_m": 1.329,
+    "r_max_m": 2.0,
+    "pass": true,
+    "note": "J4: dryf toru w takeoffie przed wstrzykni\u0119ciem. r@offboard>2.0 \u21d2 diag(flight-quality); lot liczy si\u0119 do bud\u017cetu (SR-K5). \u015alepe na wynik."
+  },
   "spec_check": {
     "k1_point": 0.2,
     "k1_f_along": 0.201,
@@ -81,7 +87,7 @@
     "one_boot_per_cycle": true
   },
   "sha_harness": "70ddc60d9f613db5118e600464e7514eb6a7ddb0d40d1144f0e0f5f3fc22f66a",
-  "harness_file": "/home/olga/projects/liquidpatrol/k1/k1_arm_n.py",
+  "harness_file": "k1/k1_arm_n.py",
   "sha_k1_judge": "4e0dc0afffda099837a002191a5540fd95d6de13cb88e7233433d67b1b998ae1",
   "k1_judge_frozen": true,
   "shield_frozen": true,
@@ -102,7 +108,7 @@
       "ok": true
     }
   },
-  "ulog": "/home/olga/projects/liquidpatrol/results/K1/N/p0_2/boot4/boot.ulg",
+  "ulog": "results/K1/N/p0_2/boot4/boot.ulg",
   "ulog_exists": true,
   "stamps": {
     "denial_on_mono": 4048.3027,

@@ -397,10 +397,28 @@ def main():
                         "D_B3 e732c10 trace v2 → 5a6a18d erratum); ścieżka POS_DEGRADED→D5 "
                         "bajt-identyczna z 4/4 wg ANEKS_SHA §W2")
 
+    # ANEKS_K1-13 J4: bramka PRE-INJECTION (flight-quality). r@offboard = hypot(x,y) GT najbliższego
+    # eventu 'offboard' ≤ 2.0 m. Separacja zmierzona: 5/6 bootów ≤1.33, S boot3 skażony=10.27 (dryf ~10m
+    # w takeoffie). Symetryczna dla ramion; mierzona PRZED wstrzyknięciem, ślepa na wynik; sędzia nietknięty.
+    # Naruszenie ⇒ diag(flight-quality); lot LICZY się do budżetu (poleciał — duch SR-K5).
+    PREINJ_R_MAX = 2.0
+    preinj_check = None
+    _offb_ev = ev_by.get("offboard")
+    if _offb_ev:
+        _gn = _nearest(gt, _offb_ev["mono"], "sim")
+        if _gn is not None:
+            _r_off = math.hypot(float(_gn.get("x", 0.0)), float(_gn.get("y", 0.0)))
+            preinj_check = {"r_offboard_m": round(_r_off, 3), "r_max_m": PREINJ_R_MAX,
+                            "pass": bool(_r_off <= PREINJ_R_MAX),
+                            "note": "J4: dryf toru w takeoffie przed wstrzyknięciem. r@offboard>2.0 ⇒ "
+                                    "diag(flight-quality); lot liczy się do budżetu (SR-K5). Ślepe na wynik."}
+    preinj_ok = (preinj_check is None) or bool(preinj_check["pass"])
+
     # ANEKS_K1-7 G1: run_valid = habitat VALID ∧ |k1_f_along − K1_POINT| ≤ 0.02 (r zdjęty jako bramka).
+    # ANEKS_K1-13 J4: ∧ preinj_ok (r@offboard ≤ 2.0).
     fa_ok = (spec_check or {}).get("fa_ok", None)
     hab_ok = (hab == "VALID")
-    run_valid = (bool(fa_ok) and hab_ok) if (spec_check is not None) else None
+    run_valid = (bool(fa_ok) and hab_ok and preinj_ok) if (spec_check is not None) else None
     kind_eff = a.kind
     point_label = None
     invalid_reason = None
@@ -411,6 +429,8 @@ def main():
             reasons.append("f_along-mismatch")
         if not hab_ok:
             reasons.append("habitat-invalid")
+        if not preinj_ok:
+            reasons.append("flight-quality-drift")
         invalid_reason = "+".join(reasons) if reasons else "invalid"
         _fa = (spec_check or {}).get("k1_f_along")
         if _fa is not None and _fa >= 0.9:
@@ -421,6 +441,7 @@ def main():
         "point_label": point_label,
         "run_valid": run_valid,
         "invalid_reason": invalid_reason,
+        "preinj_check": preinj_check,
         "spec_check": spec_check,
         "inj_info": inj_info,
         "stalls": _stalls_from_rtf(a.out_dir),
