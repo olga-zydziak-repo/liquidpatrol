@@ -1,0 +1,114 @@
+{
+  "arm": "S",
+  "point": 0.2,
+  "boot_n": 5,
+  "kind": "crit",
+  "point_label": null,
+  "run_valid": null,
+  "invalid_reason": null,
+  "preinj_check": null,
+  "spec_check": null,
+  "inj_info": null,
+  "stalls": {
+    "n": 6,
+    "list": [
+      {
+        "sim0": 31.788,
+        "sim1": 31.856,
+        "dwall": 1.38,
+        "dsim": 0.068,
+        "rtf": 0.049
+      },
+      {
+        "sim0": 64.016,
+        "sim1": 64.096,
+        "dwall": 1.386,
+        "dsim": 0.08,
+        "rtf": 0.058
+      },
+      {
+        "sim0": 96.3,
+        "sim1": 96.332,
+        "dwall": 1.349,
+        "dsim": 0.032,
+        "rtf": 0.024
+      },
+      {
+        "sim0": 128.56,
+        "sim1": 128.568,
+        "dwall": 1.325,
+        "dsim": 0.008,
+        "rtf": 0.006
+      },
+      {
+        "sim0": 160.74,
+        "sim1": 160.8,
+        "dwall": 1.405,
+        "dsim": 0.06,
+        "rtf": 0.043
+      },
+      {
+        "sim0": 192.952,
+        "sim1": 193.028,
+        "dwall": 1.407,
+        "dsim": 0.076,
+        "rtf": 0.054
+      }
+    ],
+    "n_deep_ge2s": 0,
+    "period_hint_s": null
+  },
+  "b4": {
+    "orphans_pre_teardown": 0,
+    "orphans_post_teardown": 0,
+    "cooldown_s_since_last_boot": 313,
+    "one_boot_per_cycle": true
+  },
+  "sha_harness": "72619513c682e76892c531ec3dae2d918da08da92017605dcba50103977cf58a",
+  "harness_file": "/home/olga/projects/liquidpatrol/r03/gate_run_r03.py",
+  "sha_k1_judge": "4e0dc0afffda099837a002191a5540fd95d6de13cb88e7233433d67b1b998ae1",
+  "k1_judge_frozen": true,
+  "shield_frozen": true,
+  "shield_pins": {
+    "r01/shield.py": {
+      "want": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "got": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "ok": true
+    },
+    "r03/config.py": {
+      "want": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "got": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "ok": true
+    },
+    "r03/gate_run_r03.py": {
+      "want": "72619513c682e76892c531ec3dae2d918da08da92017605dcba50103977cf58a",
+      "got": "72619513c682e76892c531ec3dae2d918da08da92017605dcba50103977cf58a",
+      "ok": true
+    }
+  },
+  "ulog": "/home/olga/projects/liquidpatrol/results/K1/S/p0_2/boot5/boot.ulg",
+  "ulog_exists": true,
+  "stamps": {
+    "denial_on_mono": null,
+    "touchdown_sim": null,
+    "touchdown_event_sim": null
+  },
+  "harness_valid": true,
+  "harness_poison": {},
+  "habitat_verdict": "INVALID(habitat)",
+  "certs_selfcheck": {
+    "log": "/home/olga/projects/liquidpatrol/results/K1/S/p0_2/boot5/certs_selfcheck.log",
+    "pass": true,
+    "rc": 0
+  },
+  "provenance_arm_s": "os\u0142ona w stanie 6db3393 (4/4 a088367 \u2192 D_B1 01f47e8 token \u2192 D_B3 e732c10 trace v2 \u2192 5a6a18d erratum); \u015bcie\u017cka POS_DEGRADED\u2192D5 bajt-identyczna z 4/4 wg ANEKS_SHA \u00a7W2",
+  "n_gt": 3732,
+  "n_ekf": 0,
+  "n_events": 0,
+  "events": [],
+  "stall_in_reaction_window": null,
+  "sanity": {},
+  "vmax_check": null,
+  "abrake_check": null,
+  "dstop_check": null
+}
