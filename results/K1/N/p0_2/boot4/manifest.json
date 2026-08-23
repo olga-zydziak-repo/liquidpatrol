@@ -1,0 +1,213 @@
+{
+  "arm": "N",
+  "point": 0.2,
+  "boot_n": 4,
+  "kind": "crit",
+  "point_label": null,
+  "run_valid": true,
+  "invalid_reason": null,
+  "spec_check": {
+    "k1_point": 0.2,
+    "k1_f_along": 0.201,
+    "abs_df": 0.001,
+    "fa_tol": 0.02,
+    "fa_ok": true,
+    "r_est_at_cut": 17.785,
+    "r_expected": 16.41,
+    "r_tol_m": 2.0,
+    "r_ok": true,
+    "r_geom_informational": true,
+    "spec_match": true
+  },
+  "inj_info": {
+    "src": "ekf_nearest_denial",
+    "vx_ekf": -0.0999,
+    "vy_ekf": -3.243,
+    "speed_h_ekf": 3.245,
+    "heading_deg_ekf": -91.764,
+    "r_est_ekf": 17.774,
+    "z_gt": 5.91,
+    "z_ekf": 5.242,
+    "speed_h_gt": 3.115,
+    "speed_h_cmd": 3.0,
+    "note": "speed_h_cmd = norma zadana harnessu (V_MAX). speed_h_gt/ekf = FAKTYCZNA (ANEKS_K1-7 G4: w zakr\u0119cie faktyczna >> zadana \u2192 za\u0142o\u017cenie d_stop@v=3.0 nie trzyma)."
+  },
+  "stalls": {
+    "n": 5,
+    "list": [
+      {
+        "sim0": 3.2,
+        "sim1": 3.264,
+        "dwall": 0.938,
+        "dsim": 0.064,
+        "rtf": 0.068
+      },
+      {
+        "sim0": 35.452,
+        "sim1": 35.5,
+        "dwall": 0.885,
+        "dsim": 0.048,
+        "rtf": 0.054
+      },
+      {
+        "sim0": 67.716,
+        "sim1": 67.748,
+        "dwall": 0.951,
+        "dsim": 0.032,
+        "rtf": 0.034
+      },
+      {
+        "sim0": 98.116,
+        "sim1": 98.148,
+        "dwall": 0.756,
+        "dsim": 0.032,
+        "rtf": 0.042
+      },
+      {
+        "sim0": 99.212,
+        "sim1": 99.272,
+        "dwall": 0.897,
+        "dsim": 0.06,
+        "rtf": 0.067
+      }
+    ],
+    "n_deep_ge2s": 0,
+    "period_hint_s": null
+  },
+  "b4": {
+    "orphans_pre_teardown": 0,
+    "orphans_post_teardown": 0,
+    "cooldown_s_since_last_boot": 78244,
+    "one_boot_per_cycle": true
+  },
+  "sha_harness": "70ddc60d9f613db5118e600464e7514eb6a7ddb0d40d1144f0e0f5f3fc22f66a",
+  "harness_file": "/home/olga/projects/liquidpatrol/k1/k1_arm_n.py",
+  "sha_k1_judge": "4e0dc0afffda099837a002191a5540fd95d6de13cb88e7233433d67b1b998ae1",
+  "k1_judge_frozen": true,
+  "shield_frozen": true,
+  "shield_pins": {
+    "r01/shield.py": {
+      "want": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "got": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "ok": true
+    },
+    "r03/config.py": {
+      "want": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "got": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "ok": true
+    },
+    "r03/gate_run_r03.py": {
+      "want": "72619513c682e76892c531ec3dae2d918da08da92017605dcba50103977cf58a",
+      "got": "72619513c682e76892c531ec3dae2d918da08da92017605dcba50103977cf58a",
+      "ok": true
+    }
+  },
+  "ulog": "/home/olga/projects/liquidpatrol/results/K1/N/p0_2/boot4/boot.ulg",
+  "ulog_exists": true,
+  "stamps": {
+    "denial_on_mono": 4048.3027,
+    "t_inj_sim": 114.32,
+    "px4_inj_us": 114332000.0,
+    "ulog_sim_C": -0.012,
+    "gt_dt": 0.0074,
+    "land_cmd_sent": {
+      "mono": 4048.3028
+    },
+    "land_ack": {
+      "mono": 4048.3228,
+      "result": "ACCEPTED"
+    },
+    "touchdown_sim": 121.476,
+    "touchdown_event_sim": 121.536
+  },
+  "harness_valid": true,
+  "harness_poison": false,
+  "habitat_verdict": "VALID",
+  "certs_selfcheck": {
+    "log": null,
+    "pass": null,
+    "rc": null
+  },
+  "provenance_arm_s": null,
+  "n_gt": 1019,
+  "n_ekf": 3159,
+  "n_events": 8,
+  "events": [
+    "armed",
+    "takeoff",
+    "offboard",
+    "denial_on",
+    "land_cmd_sent",
+    "land_ack",
+    "touchdown",
+    "done"
+  ],
+  "stall_in_reaction_window": {
+    "window_s": [
+      114.32,
+      114.32
+    ],
+    "n_stall": 0,
+    "overlap": false,
+    "min_rtf": 1.0
+  },
+  "sanity": {
+    "t_td": {
+      "measured_s": 7.156,
+      "h0_m": 5.91,
+      "profil_D5": {
+        "V_DESC_FAST": 1.5,
+        "V_DESC_LAND": 0.7,
+        "H_SWITCH_AGL": 2.0,
+        "desc_fast_dur_gate_s": 4.0
+      },
+      "expected_from_h0_s": 3.607,
+      "note": "h0 z GT (nie nomina\u0142 8 m \u2014 wczesny punkt, dron w climbie). Gate prze\u0142\u0105cza faz\u0119 PO CZASIE (nomina\u0142 ALT=8) \u2192 przy h0<8 touchdown w fazie1 (1.5 m/s), st\u0105d t_td\u2248(h0-0.5)/1.5."
+    },
+    "nav_seq_annotated": [
+      {
+        "rel_s": -114.332,
+        "nav": "AUTO_LOITER",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": -20.068,
+        "nav": "AUTO_PRECLAND",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": -10.756,
+        "nav": "OFFBOARD",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": 0.008,
+        "nav": "AUTO_LAND",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": 4.016,
+        "nav": "DESCEND",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": 9.26,
+        "nav": "OFFBOARD",
+        "post_touchdown": true
+      }
+    ]
+  },
+  "vmax_check": {
+    "v_gt_max_cruise": 3.112,
+    "sim_at_max": 114.32,
+    "V_env": 6.0,
+    "pass": true,
+    "window_s": [
+      103.564,
+      114.32
+    ],
+    "note": "\u2016v_GT\u2016 FAKTYCZNA w cruise. >V_env=FLAGA (V3), nie uniewa\u017cnia; \u00a74 bez zmian. EKF zani\u017ca faktyczn\u0105 w zakr\u0119cie (~1.6 m/s) \u2014 os\u0142ona liczy na estymacie."
+  },
+  "abrake_check": null,
+  "dstop_check": null
+}
