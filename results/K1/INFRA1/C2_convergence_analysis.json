@@ -1,0 +1,41 @@
+{
+  "task": "INFRA2-C2 read-only convergence analysis (ANEKS_INFRA2-2 S2), zero bootów",
+  "source": "ulog results/K1/E/p0_0/boot1 (shakeout I2b) vs results/K1/N/p0_2/boot4 (zaarmował, stary harness)",
+  "S2a_sim_time_in_window": {
+    "boot1_sim_span_s": 273.0,
+    "boot1_wall_span_s": 287.2,
+    "boot1_RTF_avg": 0.948,
+    "note": "harness poddał się @300s wall ≈ 273s sim — sim upłynęło DOSYĆ (nie brak czasu sim)"
+  },
+  "S2b_estimator_convergence_boot1": {
+    "ekf_innov_flags_all_zero_from_sim_s": 20.6,
+    "longest_clean_window_s": 252.4,
+    "vel_test_ratio_end": 0.004,
+    "pos_test_ratio_end": 0.004,
+    "hgt_test_ratio_end": 0.007,
+    "gyro_bias_mag_end_rad_s": 0.00046,
+    "gyro_bias_mag_max_rad_s": 0.135,
+    "verdict": "EKF ZBIEGŁ (innowacje czyste od sim 20.6s, okno 252s) — NIE 'realna niezbieżność'",
+    "but": "pre_flight_checks_pass=0 zawsze, armed=0/544, gcs_connection_lost=1 przez WSZYSTKIE 544 próbki, 0x 'Ready for takeoff'"
+  },
+  "S2c_compare_N_boot4_armed": {
+    "harness": "STARY (pre-I2b, brak convergence_s.txt) — sleep 90 → moduł lotu startuje BEZWARUNKOWO",
+    "ekf_innov_all_zero_from_sim_s": 0.0,
+    "gcs_connection_lost_cleared_at_sim_s": 92.1,
+    "pre_flight_checks_pass_1_at_sim_s": 92.1,
+    "armed_at_sim_s": 94.2,
+    "verdict": "EKF gotowy @0s; OSTATNIĄ bramką był GCS (pass=1 dokładnie gdy gcs 1→0 @92s, gdy MAVSDK modułu lotu się podłączył)"
+  },
+  "ROOT_CAUSE": {
+    "name": "DEADLOCK harnessu I2b",
+    "chain": "I2b czeka na 'Ready for takeoff' PRZED startem modułu lotu → 'Ready' wymaga pre_flight_checks_pass=1 → wymaga wyczyszczenia 'No connection to GCS' → wymaga klienta MAVSDK/GCS → to moduł lotu, który I2b odracza DO PO 'Ready'. Circular.",
+    "proof": "boot1 (I2b): moduł lotu NIGDY nie ruszył (act.log=env-fail I2b), 0 MAVSDK w stack.log, gcs_lost=1 na zawsze, EKF czysty od 20s → 'Ready' strukturalnie nieosiągalne. N boot4 (stary): GCS wyczyścił się gdy moduł lotu/MAVSDK ruszył → arm.",
+    "scope": "KAŻDY boot z I2b (E/S/N po INFRA-1) nie może osiągnąć 'Ready' niezależnie od zdrowia maszyny/lockstepu."
+  },
+  "IMPLICATION_INFRA1": {
+    "shakeout_N3_verdict": "NIEWAŻNY jako dowód 'trwałej patologii mostu gz↔PX4'",
+    "why": "shakeout boot0/boot1 użył harnessu I2b → deadlock przed próbą arm → NIGDY nie przetestował czy maszyna armuje po resecie. EKF boot1 faktycznie zbiegł (czysty 252s) — silna przesłanka, że maszyna była zdrowa, a blokerem był harness, nie most.",
+    "distinct_original_failure": "S boot4/5/6 (stary harness) = INNY tryb: moduł lotu RUSZYŁ, MAVSDK podłączony, arm DENIED przez health (High Gyro Bias/velocity) — realny arm-fail, NIE deadlock. Ten tryb pozostaje realny i nieobjaśniony przez deadlock."
+  },
+  "S2_VERDICT": "boot1 env-fail = DEADLOCK HARNESSU I2b (ani realna niezbieżność EKF, ani zwykły wall-timeout zbieżnego estymatora). EKF zbiegł @sim 20s; sygnał 'Ready' nieosiągalny bo wymaga MAVSDK którego I2b odracza. ⇒ bliżej strony 'trywialny fix harnessu' niż 'niezbieżność'; C5(render) NIE jest właściwym następnym pomiarem (deadlock nie ma związku z renderem)."
+}

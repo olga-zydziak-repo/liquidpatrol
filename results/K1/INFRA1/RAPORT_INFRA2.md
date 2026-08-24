@@ -78,18 +78,42 @@ Dane surowe: `C1_clock_analysis.json`.
 
 **WERDYKT C1: lockstep AKTYWNY i zdrowy.** „time jump detected" **NIE jest awarią lockstepu** — to artefakt `uxrce_dds` Timesync (referowanego do zegara ściennego) pod deep-stallami RTF w wall-time. **Zawęża N1:** gz NIE psuje zegara sim (jest idealny 4ms); zamraża sim w wall-time. Ponieważ EKF pracuje na osi sim (czystej), mechanizm N1 „timejump→EKF-reset→gyro-bias" wymaga rewizji — ale to **domena C2 (Q4: nie wchodzę)**.
 
-### C5 — alternatywny backend renderu (jeden boot, gałąź E) — **ODROCZONY (maszyna obciążona)**
+### S1 (ANEKS_INFRA2-2). Obalone hipotezy CC — kampania INFRA (rejestr)
+
+1. **Hipoteza obciążenia CPU (M4)** — OBALONA pomiarem (INFRA-1 §1): arm-fail niezależny od load (boot6@18 ≡ boot0@2.25).
+2. **„Headless ⇒ lockstep stabilny" (`run_stack.sh:34-37`)** — SFALSYFIKOWANA (INFRA-1 §4): boot1 headless, pętla timejump trwa.
+3. **Łańcuch przyczynowy N1 „stall → timejump → EKF (reset/gyro-bias)"** — OBALONY przez C1+C2: zegar sim idealny (Δt IMU 4000µs, 0 stalli), „time jump" = artefakt uxrce Timesync (`Timesync.cpp:69`), a EKF (na osi sim) **zbiegł** (innowacje czyste od sim 20.6s). Timejump NIE psuje EKF.
+
+### C2 (ANEKS_INFRA2-2 S2) — zbieżność vs timeout, READ-ONLY na ulogu — WERDYKT: **DEADLOCK HARNESSU I2b**
+
+**(a) czas sim w oknie:** boot1 sim span **273 s** (RTF_avg 0.948, wall 287 s) — harness poddał się @300 s wall ≈ 273 s sim. **Czasu sim było dosyć.**
+
+**(b) zbieżność estymatora na osi sim (boot1):** wszystkie `pre_flt_fail_innov_*` = 0 **ciągiem od sim 20.6 s do 273 s** (okno 252 s); `vel/pos/hgt_test_ratio` końcowe 0.004/0.004/0.007; `gyro_bias|.|` koniec **0.00046 rad/s** (max 0.135 wcześnie). **EKF ZBIEGŁ — to NIE „realna niezbieżność".** ALE: `pre_flight_checks_pass=0` zawsze, `armed=0/544`, **`gcs_connection_lost=1` przez wszystkie 544 próbki**, 0× „Ready for takeoff".
+
+**(c) porównanie z N boot4 (zaarmował, STARY harness):** EKF czysty od sim **0 s**; `gcs_connection_lost` 1→0 @sim **92.1 s**; `pre_flight_checks_pass=1` @**92.1 s** (dokładnie wtedy); armed @94.2 s. ⇒ **OSTATNIĄ bramką był GCS**, wyczyszczony gdy moduł lotu (MAVSDK) się podłączył (stary flow `sleep 90`→moduł startuje bezwarunkowo).
+
+**PRZYCZYNA ŹRÓDŁOWA — DEADLOCK I2b:** I2b czeka na „Ready for takeoff" PRZED startem modułu lotu. „Ready" ⇐ `pre_flight_checks_pass=1` ⇐ wyczyszczenie „No connection to GCS" ⇐ klient MAVSDK/GCS ⇐ **moduł lotu, który I2b odracza DO PO „Ready". Circular.** Dowód: boot1 moduł lotu NIGDY nie ruszył (`act.log`=komunikat env-fail I2b), 0 MAVSDK w `stack.log`, GCS nieczyszczony, EKF czysty → „Ready" strukturalnie nieosiągalne. **Każdy boot z I2b (E/S/N po INFRA-1) nie osiągnie „Ready" niezależnie od zdrowia maszyny.**
+
+**KONSEKWENCJA DLA INFRA-1 (istotna):** **werdykt shakeoutu N3 (FAIL → „trwała patologia mostu gz↔PX4") jest NIEWAŻNY jako dowód.** Shakeout boot0/boot1 użył harnessu I2b → deadlock **przed** próbą arm → NIGDY nie przetestował, czy maszyna armuje po resecie. EKF boot1 faktycznie zbiegł (czysty 252 s) — silna przesłanka, że blokerem był harness, nie most. **Osobno:** pierwotne env-faile S boot4/5/6 (STARY harness) to INNY, realny tryb — moduł lotu ruszył, MAVSDK podłączony, arm **DENIED** przez health (`arm niegotowe retry #0..#15`, 40×) — ten tryb pozostaje realny i nieobjaśniony przez deadlock. Dane: `C2_convergence_analysis.json`.
+
+**WERDYKT S2:** boot1 = **deadlock harnessu I2b** (ani niezbieżność EKF, ani zwykły wall-timeout). Bliżej strony „trywialny fix harnessu" (S3) niż „niezbieżność". **C5 (render) NIE jest właściwym następnym pomiarem** — deadlock nie ma związku z renderem.
+
+### C5 — alternatywny backend renderu (jeden boot, gałąź E) — **ODROCZONY (nie warrantowany przez C2)**
 
 Przygotowany: transientna zmiana `run_k1_boot.sh:12` → `GALLIUM_DRIVER=llvmpipe LIBGL_ALWAYS_SOFTWARE=1` (software render), reszta identyczna, kryterium = N3. **Boot NIE wykonany:** bramka I2a poprawnie zablokowała start — maszyna obciążona **niezależnym zadaniem Olgi** `src.runner.gate2 --run-id gate2-krok3 --jobs 8` (8 workerów, 8/24 rdzeni, loadavg≈8 ≥ próg 8.0). **Nie tknięto zadania Olgi.** Uruchomienie C5 pod tym obciążeniem skaziłoby pomiar dokładnie konfundatorem load↔render, który INFRA-1 wyeliminował (gdyby load chwilowo dipnął <8.0, boot ruszyłby skażony). Transient zrewertowany do byte-identycznego (`run_k1_boot.sh` clean, frozen-4 ✓). **C5 czeka na wolne okno maszyny** (po zakończeniu `gate2-krok3` albo w oknie wskazanym przez Olgę). Wynik binarny wejdzie tu po wykonaniu.
 
 ### §2-PROP (Q2). Propozycja poprawki konfiguracyjnej — **PROPOZYCJA, NIE WDROŻONA** (SI-1: wymaga ratyfikacji Olgi)
 
-C1 wykazał rozjazd osi (sim↔wall), ale **NIE wykazał błędnej konfiguracji lockstepu** (lockstep zdrowy). Stąd propozycja NIE jest zmianą lockstepu. Dwie ścieżki, obie do ratyfikacji, żadna nie wdrożona:
+Po C2 właściwym celem jest **deadlock harnessu I2b** (nie lockstep, nie render, nie uxrce). Propozycje do ratyfikacji, żadna nie wdrożona, zasada „jedna zmiana" (SI-1):
 
-- **P1 (driver, preferowana kolejność): najpierw POMIAR C5, potem ewentualna zmiana renderu.** Skoro deep-stall wall-time (~32 s okres) to rzeczywisty driver, a env wymusza render D3D12/GPU (`env_gpu.sh`), to zmiana backendu renderu jest kandydatem na remedium — ale **dopiero po** binarnym pomiarze C5 (software render). Bez pomiaru = zgadywanie. Żadnej zmiany `env_gpu.sh`/renderu teraz.
-- **P2 (symptom, warunkowa): `UXRCE_DDS_SYNCT=0`.** Param `UXRCE_DDS_SYNCT` (`module.yaml:88`, domyślnie >0) włącza filtr Timesync referowany do zegara ściennego agenta — źródło komunikatów „time jump". W SITL hrt≡sim, więc referencja do zegara ściennego jest **z założenia nietrafna** pod RTF<1. `=0` uciszyłby timejumpy i użył hrt/sim bezpośrednio (`uxrce_dds_client.cpp:215,327`). **ZASTRZEŻENIE ROZSTRZYGAJĄCE:** reset Timesync dotyka wyłącznie znakowania czasem wiadomości DDS, **nie EKF** (EKF pracuje na hrt/sim, która jest czysta) — więc **czy `SYNCT=0` naprawia ARM (`High Gyro Bias`/`velocity unstable`) jest NIEZNANE i leży w C2 (Q4: nie wchodzę).** P2 = kandydat do przetestowania w C2, nie remedium tu i teraz.
+- **P0 (GŁÓWNA, per S3) — usuń deadlock I2b.** I2b (`run_k1_boot.sh:73-87`) gatuje START modułu lotu na „Ready for takeoff", którego nie da się osiągnąć bez modułu lotu (MAVSDK→GCS). Dwa czyste warianty (jeden do wyboru przy ratyfikacji):
+  - **P0a (rewert):** przywróć stary flow — moduł lotu startuje po `sleep 90` **bezwarunkowo** (jak N boot4/S4/5/6/R0.3a — wszystkie armowały). Najmniej kodu, znany-dobry.
+  - **P0b (re-key sygnału):** jeśli chcemy zachować „arm-po-zbieżności", odmierzaj zbieżność z **osi sim / stanu EKF** (np. `pre_flt_fail_innov_*`=0 przez K s sim, dostępne w uORB/ulog), NIE ze stringa „Ready" (który zależy od GCS). Wtedy moduł lotu (MAVSDK) musi też startować w oknie oczekiwania, by GCS mógł się wyczyścić — inaczej deadlock wraca.
+  - **Uwaga S3:** „odmierzanie okna w czasie sim zamiast wall" (pierwotna trywialna hipoteza Olgi) **NIE wystarcza** — sygnał „Ready" jest nieosiągalny niezależnie od długości okna. To deadlock, nie zwykły timeout.
+- **P1 (render) — ZDJĘTA z kolejki jako następny krok.** C2 pokazał, że blokerem shakeoutu był harness, nie render. C5 pozostaje pomiarem opcjonalnym (jakość danych gz) **tylko na sygnał Olgi**, nie jako następstwo.
+- **P2 (`UXRCE_DDS_SYNCT=0`) — zdegradowana do kosmetyki.** Uciszyłaby komunikaty „time jump" (`module.yaml:88`), ale C1/C2 pokazały, że timejump NIE psuje EKF ani nie blokuje arm (bloker=GCS/deadlock). Nie remedium; ewentualnie higiena logów, osobno.
 
-**Rekomendacja:** nie wdrażać nic przed (i) pomiarem C5 i (ii) werdyktem C2 co do rzeczywistej przyczyny ARM-fail. C1 przesunął podejrzenie z „skażony zegar sim" na „zdrowy zegar sim + artefakt timesync + otwarte pytanie o EKF".
+**Rekomendacja:** wdrożyć wyłącznie **P0** (jeden wariant, po ratyfikacji), potem — skoro shakeout I2b był nieważny — **powtórzyć bramkę zdrowia maszyny na naprawionym harnessie** (pusty boot E armuje end-to-end), zanim zapadną decyzje kalendarzowe INFRA-1/K1.
 
 ## §3. Protokół badawczy (jak nie oszukać samych siebie)
 
