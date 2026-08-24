@@ -71,9 +71,32 @@ zgodnie z oczekiwaniem.
 **Reset operatorski (N2, Olga):** zamknięcie sesji wykonawcy → `wsl --shutdown` → ~60 s → pełny restart
 maszyny jeśli możliwe (czyści stan sterownika GPU — korzeń D8). Odnotowany w manifeście shakeoutu.
 
-## §4. Bramka 10 bootów — CZEKA na shakeout PASS po resecie
+## §4. Shakeout po resecie — WYKONANY, werdykt FAIL ⇒ dziesiątka NIE odpalona (N3)
 
-(Uzupełnić po resecie: tabela 10 kolejnych pustych bootów, n_arm/n_habitat_valid, werdykt ≥9/10.)
+Reset operatorski (N2, Olga): `wsl --shutdown` + pełny restart maszyny (GPU driver wyczyszczony),
+push `400c8d4`. Odnotowane w manifeście: `session.env_restart=1`, `cooldown_s_since_last_boot=6127`.
+
+Dokładnie JEDEN shakeout (`E 0.0 boot1`, `results/K1/E/p0_0/boot1/`), bez powtórki. Wynik frozen-check
+(`tools/infra1_shakeout_check.py`, sha zamrożony przed resetem, `shakeout_check.json`):
+
+| pole | wartość | próg | ok? |
+|------|--------:|:----:|:---:|
+| arm_ok | **false** | true | ✗ |
+| n_timejumps (px4.log) | **8** | ≤ 1 | ✗ |
+| deep_stalls rtf<0.5 | **8** (min_rtf 0.004) | 0 | ✗ |
+| conv_s (`Ready for takeoff`) | **−1** (timeout 300 s) | ≥0 | ✗ |
+| ekf_health_hits | 3 | — | — |
+
+**Werdykt: FAIL.** Rozstrzygające: boot1 padł **po** pełnym resecie operatorskim, przy **niskim**
+obciążeniu (`loadavg [1.98, 1.78, 0.79]`), **headless** (`GUI_PROCS=[brak]`) — a mimo to identyczny
+profil co boot0 pre-reset (arm=false, tj 8≈8, deep 8≈9). To domyka dowód N1: pętla timejump jest
+**TRWAŁĄ własnością mostu gz↔PX4**, niezależną od (a) obciążenia CPU, (b) stanu sterownika GPU po
+restarcie, (c) kontencji GUI. Nawet udokumentowana w `run_stack.sh:34-37` przesłanka „headless ⇒
+lockstep stabilny, arm przechodzi" jest tu **sfalsyfikowana** — headless NIE zapobiega pętli na tej
+maszynie w tym stanie.
+
+**Zgodnie z zamrożoną interpretacją N3: FAIL ⇒ STOP, dziesiątka (I3) NIE jest odpalana**, osobny
+dokument **`RAPORT_INFRA2.md`** (most gz↔PX4). Kod NIEZMIENIONY. Bez drugiego shakeoutu.
 
 ## §5. Nota do RAPORT_K1 §IV (charakterystyka env)
 
