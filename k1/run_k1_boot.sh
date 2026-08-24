@@ -39,6 +39,25 @@ fi
 # higiena EKF2_GPS_CTRL (B5R3): reset persisted param do 7 przed bootem (leftover po GPS-denied)
 python3 acts/ensure_gps_enabled.py > "$OUTDIR/gps_hygiene.txt" 2>&1
 
+# INFRA-1 I2a (jedna zmiana, semantyka „nie startuj/nie armuj na chorej maszynie"): bramka obciążenia
+# PRZED startem stacku. loadavg(1-min) < LOAD_MAX; czekaj do LOAD_WAIT_MAX próbkując co 30 s; przekroczenie
+# ⇒ env-block (boot się NIE zaczyna; nie liczy się nigdzie — to nie lot ani env-fail arm). Zmiana
+# WYŁĄCZNIE przed-lotowa, symetryczna dla ramion; nie dotyka segmentu roszczenia (denial→touchdown).
+LOAD_MAX="${K1_LOAD_MAX:-8.0}"; LOAD_WAIT_MAX="${K1_LOAD_WAIT_MAX:-600}"
+_lt0=$(date +%s); _load_ok=0; _l1="?"
+while :; do
+  _l1=$(cut -d' ' -f1 /proc/loadavg)
+  if awk "BEGIN{exit !($_l1 < $LOAD_MAX)}"; then _load_ok=1; break; fi
+  [ $(( $(date +%s) - _lt0 )) -ge "$LOAD_WAIT_MAX" ] && break
+  echo "[K1 $ARM p$POINT b$BOOT_N] load $_l1 ≥ $LOAD_MAX — czekam (env-load-wait)"; sleep 30
+done
+if [ "$_load_ok" != "1" ]; then
+  echo "ENV-BLOCK load1=$_l1 max=$LOAD_MAX wait=${LOAD_WAIT_MAX}s" | tee "$OUTDIR/env_block.txt"
+  python3 -c "import json;json.dump({'arm':'$ARM','point':$POINT,'boot_n':$BOOT_N,'kind':'env-block','run_valid':None,'load1_at_block':float('$_l1'),'load_max':$LOAD_MAX,'reason':'loadavg1>=LOAD_MAX przez LOAD_WAIT_MAX s — boot nie wystartowal (I2a)'},open('$OUTDIR/manifest.json','w'),indent=2)"
+  teardown
+  echo "[K1 $ARM p$POINT b$BOOT_N] ENV-BLOCK (load $_l1) — nie liczy sie"; exit 3
+fi
+
 BOOT_T0=$(date +%s)
 LOGDIR="$OUTDIR" WORLD="$WORLD" PX4_GZ_WORLD="$WORLD" MODEL=gz_x500_mono_cam bash run_stack.sh > "$OUTDIR/stack.log" 2>&1
 sleep 3
@@ -46,13 +65,36 @@ echo "GUI_PROCS=[$(pgrep -af 'gz sim -g|gz-gui' | grep -v pgrep || echo brak)]" 
 for i in $(seq 1 40); do gz topic -l 2>/dev/null | grep -q "/world/${WORLD}/clock" && break; sleep 1; done
 setsid nohup python3 -m acts.rtf_sampler --world "$WORLD" --out "$OUTDIR/rtf_stream.jsonl" > "$OUTDIR/rtf_sampler.log" 2>&1 &
 RTF=$!
-echo "[K1 $ARM p$POINT b$BOOT_N] 90 s preflight EKF"; sleep 90
+# INFRA-1 I2b: arm po ZBIEŻNOŚCI estymatora, nie po zegarze. Sygnał JUŻ logowany (nie nowa telemetria):
+# commander 'Ready for takeoff!' w px4.log — obecny w bootach udanych (N4/S2), NIEobecny w env-failach
+# (S4/5/6, które utknęły w Preflight Fail: High Gyro Bias / horizontal velocity unstable po time-jumpach
+# lockstepu). Min settle 90 s ZACHOWANE (nie armuj wcześniej niż 90 s — porównywalność z lotami sprzed
+# hartowania). Timeout 300 s od startu bootu ⇒ env-fail „jak dotąd" (nie armujemy na chorej maszynie).
+echo "[K1 $ARM p$POINT b$BOOT_N] settle min 90 s (I2b)"; sleep 90
+CONV_DEADLINE=$(( BOOT_T0 + 300 )); CONV_OK=0
+while [ "$(date +%s)" -lt "$CONV_DEADLINE" ]; do
+  if grep -q 'Ready for takeoff' "$OUTDIR/px4.log" 2>/dev/null; then CONV_OK=1; break; fi
+  sleep 3
+done
+CONV_S=$(( $(date +%s) - BOOT_T0 )); [ "$CONV_OK" = "1" ] || CONV_S=-1
+echo "$CONV_S" > "$OUTDIR/convergence_s.txt"
+echo "[K1 $ARM p$POINT b$BOOT_N] convergence ok=$CONV_OK conv_s=${CONV_S}s"
 grep -ci 'time jump\|Resetting time sync' "$OUTDIR/stack.log" > "$OUTDIR/timejump_pre.txt" 2>/dev/null || echo 0 > "$OUTDIR/timejump_pre.txt"
 
-if [ "$ARM" = "S" ]; then
+if [ "$CONV_OK" != "1" ]; then
+  # I2b: brak zbieżności w 300 s ⇒ env-fail, NIE armujemy (nie startujemy modułu lotu).
+  echo "[gate] ENV-FAIL: brak 'Ready for takeoff' w 300 s — nie armuje na chorej maszynie (I2b)" > "$OUTDIR/act.log"
+  RC=2; HARNESS_FILE="$ROOT/k1/run_k1_boot.sh"
+elif [ "$ARM" = "S" ]; then
   SCEN="K1" K1_POINT="$POINT" GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 \
     PYTHONPATH=".:.certdeps:${PYTHONPATH:-}" python3 -m r03.gate_run_r03 > "$OUTDIR/act.log" 2>&1
   RC=$?; HARNESS_FILE="$ROOT/r03/gate_run_r03.py"
+elif [ "$ARM" = "E" ]; then
+  # INFRA-1 I3: scenariusz PUSTY (arm→takeoff→60 s hover OFFBOARD→land), BEZ denialu/sędziego/K1.
+  # Waliduje wyłącznie hartowanie bootu (I2). Moduł lotu w tools/ (nie dotyka osłony/sędziego/kryteriów).
+  HOVER_S="${K1_HOVER_S:-60}" GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 \
+    PYTHONPATH=".:${PYTHONPATH:-}" python3 tools/infra1_empty_flight.py > "$OUTDIR/act.log" 2>&1
+  RC=$?; HARNESS_FILE="$ROOT/tools/infra1_empty_flight.py"
 else
   K1_POINT="$POINT" GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 \
     PYTHONPATH=".:.certdeps:${PYTHONPATH:-}" python3 k1/k1_arm_n.py > "$OUTDIR/act.log" 2>&1
@@ -69,12 +111,19 @@ if [ -n "$ULG" ]; then cp "$ULG" "$OUTDIR/boot.ulg"; echo "$ULG" > "$OUTDIR/ulog
 
 teardown
 
-# finalize: manifest R5 + habitat (H1∧H2 claim denial→touchdown) + sędzia frozen → judge.json
-ULGARG=""; [ -f "$OUTDIR/boot.ulg" ] && ULGARG="--ulog $OUTDIR/boot.ulg"
-CERTS=""; [ "$ARM" = "S" ] && CERTS="--certs-selfcheck $OUTDIR/certs_selfcheck.log"
-PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 k1/k1_finalize.py \
-  --trace "$OUTDIR/trace.jsonl" --arm "$ARM" --point "$POINT" --boot "$BOOT_N" --kind "$KIND" \
-  $ULGARG --harness-sha-file "$HARNESS_FILE" --out-dir "$OUTDIR" $CERTS 2>&1 | tee "$OUTDIR/finalize.log"
+# finalize
+if [ "$ARM" = "E" ]; then
+  # INFRA-1: manifest pustego bootu (arm_ok/habitat hover/conv_s/load/mem) — sędzia/osłona/kryteria NIETKNIĘTE.
+  PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 tools/infra1_empty_finalize.py \
+    --out-dir "$OUTDIR" --boot "$BOOT_N" --rc "$RC" --harness-sha-file "$HARNESS_FILE" 2>&1 | tee "$OUTDIR/finalize.log"
+else
+  # manifest R5 + habitat (H1∧H2 claim denial→touchdown) + sędzia frozen → judge.json
+  ULGARG=""; [ -f "$OUTDIR/boot.ulg" ] && ULGARG="--ulog $OUTDIR/boot.ulg"
+  CERTS=""; [ "$ARM" = "S" ] && CERTS="--certs-selfcheck $OUTDIR/certs_selfcheck.log"
+  PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 k1/k1_finalize.py \
+    --trace "$OUTDIR/trace.jsonl" --arm "$ARM" --point "$POINT" --boot "$BOOT_N" --kind "$KIND" \
+    $ULGARG --harness-sha-file "$HARNESS_FILE" --out-dir "$OUTDIR" $CERTS 2>&1 | tee "$OUTDIR/finalize.log"
+fi
 
 date +%s > "$ROOT/results/K1/.last_boot_end"   # B4: znacznik końca bootu (cooldown następnego)
 echo "[K1 $ARM p$POINT b$BOOT_N] DONE rc=$RC → $OUTDIR"; exit $RC

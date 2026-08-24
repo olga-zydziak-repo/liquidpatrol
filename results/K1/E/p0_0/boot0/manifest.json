@@ -1,0 +1,42 @@
+{
+  "arm": "E",
+  "point": 0.0,
+  "boot_n": 0,
+  "kind": "empty",
+  "rc": 2,
+  "arm_ok": false,
+  "took_off": false,
+  "landed": false,
+  "conv_s": -1,
+  "session": {
+    "mem_free_kb": 29320456,
+    "mem_available_kb": 30677200,
+    "loadavg": [
+      2.25,
+      0.77,
+      0.32
+    ],
+    "session_boot_count": 1,
+    "env_restart": "wsl-shutdown",
+    "captured_at": "finalize"
+  },
+  "b4": {
+    "orphans_pre_teardown": 0,
+    "orphans_post_teardown": 0,
+    "cooldown_s_since_last_boot": 28846,
+    "one_boot_per_cycle": true
+  },
+  "timejump_pre": 0,
+  "timejump_post": 0,
+  "ekf_health_hits": 3,
+  "hover_window_sim": [
+    null,
+    null
+  ],
+  "n_gt": 0,
+  "n_ekf": 0,
+  "events": [],
+  "habitat_verdict": "INVALID(habitat)",
+  "sha_harness": "55b26742c6fba274718742734c18c19bdaf9d49dab46dea6d32c6f91b5732fe5",
+  "harness_file": "/home/olga/projects/liquidpatrol/k1/run_k1_boot.sh"
+}
