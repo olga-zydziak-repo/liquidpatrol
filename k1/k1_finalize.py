@@ -436,8 +436,37 @@ def main():
         if _fa is not None and _fa >= 0.9:
             point_label = "corner0-passthrough"
 
+    # ANEKS_K1-14 §0.4: kontekst sesji/maszyny do manifestu (warstwa manifestu, NIE sędzia).
+    # mem_free/load z /proc (chwila finalize, po teardownie — loadavg 5/15 min pokrywa okno bootu);
+    # session_boot_count + env_restart z env (ustawiane przez orkiestratora, run_k1_boot.sh nietknięty).
+    def _proc_meminfo_kb(key):
+        try:
+            for ln in open("/proc/meminfo"):
+                if ln.startswith(key + ":"):
+                    return int(ln.split()[1])
+        except Exception:
+            pass
+        return None
+
+    def _loadavg():
+        try:
+            return [float(x) for x in open("/proc/loadavg").read().split()[:3]]
+        except Exception:
+            return None
+
+    _sbc = os.environ.get("K1_SESSION_BOOT_COUNT")
+    session_env = {
+        "mem_free_kb": _proc_meminfo_kb("MemFree"),
+        "mem_available_kb": _proc_meminfo_kb("MemAvailable"),
+        "loadavg": _loadavg(),
+        "session_boot_count": (int(_sbc) if _sbc not in (None, "") else None),
+        "env_restart": (os.environ.get("K1_ENV_RESTART") or None),
+        "captured_at": "finalize",
+    }
+
     manifest = {
         "arm": a.arm, "point": a.point, "boot_n": a.boot, "kind": kind_eff,
+        "session": session_env,
         "point_label": point_label,
         "run_valid": run_valid,
         "invalid_reason": invalid_reason,
