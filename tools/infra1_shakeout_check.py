@@ -28,23 +28,46 @@ def main():
     a = ap.parse_args()
     d = a.dir
 
-    # arm_ok + okno preflight→arm z trace
+    # X1 (ANEKS_INFRA1-4): okno deep-stall = PX4 start → arm na OSI SIM, ŹRÓDŁO = ulog (nie trace).
+    # Poprzednie okno [gt0_trace, arm] było ~3 s (trace startuje po 90 s settle) → mierzyło odcinek
+    # start-modułu→arm, nie preflight. Nowe okno obejmuje pełny preflight (PX4 start → arm) na tej samej
+    # osi sim co rtf_stream (lockstep gz clock, dowód C1). Fallback do trace gdy ulog niedostępny.
     armed_sim = None
     arm_ok = False
-    gt0_sim = None
+    px4_start_sim = None
+    window_source = None
     try:
-        for line in open(os.path.join(d, "trace.jsonl"), errors="replace"):
-            line = line.strip()
-            if not line:
-                continue
-            r = json.loads(line)
-            if r.get("t") == "gt" and gt0_sim is None:
-                gt0_sim = r.get("sim")
-            if r.get("t") == "event" and r.get("ev") == "armed":
-                arm_ok = True
-                armed_sim = r.get("sim")
+        from pyulog import ULog
+        import numpy as np
+        u = ULog(os.path.join(d, "boot.ulg"), ["actuator_armed"])
+        px4_start_sim = float(u.start_timestamp) / 1e6
+        ds = u.get_dataset("actuator_armed")
+        ts = ds.data["timestamp"]; ar = ds.data["armed"]
+        idx = np.where(ar == 1)[0]
+        if len(idx):
+            arm_ok = True
+            armed_sim = float(ts[idx[0]]) / 1e6
+        window_source = "ulog"
     except Exception as e:
-        print(f"[shakeout] trace read err: {e}")
+        print(f"[shakeout] ulog read err ({e}) → fallback trace")
+
+    if window_source is None:  # fallback: stare źródło (trace) gdy brak ulog/pyulog
+        gt0 = None
+        try:
+            for line in open(os.path.join(d, "trace.jsonl"), errors="replace"):
+                line = line.strip()
+                if not line:
+                    continue
+                r = json.loads(line)
+                if r.get("t") == "gt" and gt0 is None:
+                    gt0 = r.get("sim")
+                if r.get("t") == "event" and r.get("ev") == "armed":
+                    arm_ok = True
+                    armed_sim = r.get("sim")
+            px4_start_sim = gt0
+            window_source = "trace(fallback)"
+        except Exception as e:
+            print(f"[shakeout] trace read err: {e}")
 
     # n_timejumps z px4.log (ta sama fraza co diagnoza)
     n_tj = 0
@@ -58,7 +81,7 @@ def main():
     # głębokie stalle rtf<0.5 w oknie preflight→arm (jeśli brak armed_sim, całe okno do końca rtf)
     deep_pre = None
     try:
-        lo = gt0_sim if gt0_sim is not None else -1e18
+        lo = px4_start_sim if px4_start_sim is not None else -1e18
         hi = armed_sim if armed_sim is not None else 1e18
         deep_pre = 0
         for line in open(os.path.join(d, "rtf_stream.jsonl"), errors="replace"):
@@ -84,7 +107,8 @@ def main():
     out = {"verdict": verdict, "arm_ok": arm_ok, "gate": "arm_ok ∧ deep_stalls==0 (timejump raportowany)",
            "n_timejumps": n_tj, "tj_reported_only": True, "tj_advisory_max": TJ_MAX, "tj_within_advisory": tj_ok,
            "deep_stalls_preflight_to_arm": deep_pre, "deep_stall_rtf_thr": DEEP_STALL_RTF,
-           "window_sim": [gt0_sim, armed_sim], "interpretation": interp, "dir": d}
+           "window_sim": [px4_start_sim, armed_sim], "window_source": window_source,
+           "interpretation": interp, "dir": d}
     with open(os.path.join(d, "shakeout_check.json"), "w") as f:
         json.dump(out, f, indent=2)
     print(json.dumps(out, indent=2, ensure_ascii=False))

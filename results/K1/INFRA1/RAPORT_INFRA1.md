@@ -107,6 +107,22 @@ maszynie w tym stanie.
 **Zgodnie z zamrożoną interpretacją N3: FAIL ⇒ STOP, dziesiątka (I3) NIE jest odpalana**, osobny
 dokument **`RAPORT_INFRA2.md`** (most gz↔PX4). Kod NIEZMIENIONY. Bez drugiego shakeoutu.
 
+## §4-bis. Charakterystyka habitatu z ważnego shakeoutu (ANEKS_INFRA1-4 X2) + prior dla I3
+
+Ważny shakeout **E boot3** (po rewercie I2b, ANEKS_INFRA1-3 W3): **arm_ok=TRUE @sim 93.16** (fakt), pełny
+lot→touchdown 0.44 m. Deep-stalle w oknie **preflight→arm** (poprawka okna X1: PX4 start→arm z ulogu):
+
+| okno | źródło | deep-stalle rtf<0.5 | werdykt sub-bramki |
+|------|--------|:---:|:---:|
+| [89.94, 93.16] (~3 s, stare) | trace | 0 | (był PASS) |
+| **[0.0, 93.16] (pełny preflight)** | **ulog** | **5** (sim 2.1/2.1/24.4/56.6/88.9) | FAIL |
+
+**arm_ok nie zależy od tego** — arm jest faktem, deadlock naprawiony. 5 deep-stalli to charakterystyka
+habitatu **pod kontencją gate2** (boot3 biegł równolegle z `src.runner.gate2 --jobs 8`). To **prior dla
+I3**: na w pełni czystej maszynie (X3: load<1.0, gate2 zakończone) spodziewamy się mniej deep-stalli;
+liczba i habitat raportowane per boot w dziesiątce. Kryterium PASS I3 bez zmian (≥9/10 arm ∧ habitat
+VALID pustego lotu). X4: kontencja w środku serii ⇒ seria od nowa (nie doliczana).
+
 ## §5. Nota do RAPORT_K1 §IV (charakterystyka env)
 
 Rodzina D8/B5 w tej kampanii: gz RTF deep-stalls (rtf do 0.01, ~9/boot) + pętla PX4 `time jump
