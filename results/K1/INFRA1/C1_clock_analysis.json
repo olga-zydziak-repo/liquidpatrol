@@ -1,0 +1,42 @@
+{
+  "task": "INFRA2-C1 read-only clock/lockstep analysis",
+  "source_ulog": "results/K1/E/p0_0/boot1/boot.ulg",
+  "px4_sw": "v1.16.2",
+  "gz_sim": "8.14.0",
+  "config": {
+    "gz_launch": "gz sim --verbose=1 -r -s <world>.sdf  (px4-rc.gzsim:54; -r=run, -s=server-only, HEADLESS→bez gui)",
+    "bridge": "gz_bridge start -w default -n x500_mono_cam_0  (px4-rc.gzsim:133; moduł PX4 gz_bridge)",
+    "lockstep": "AKTYWNY — [lockstep_scheduler] setting initial absolute time (px4.log)",
+    "imu_rate_hz": 250,
+    "imu_rate_src": "IMU_INTEG_RATE 250 (px4-rc.simulator:4)",
+    "world_physics": {"type": "ode", "max_step_size_s": 0.004, "real_time_factor": 1.0, "real_time_update_rate": 250, "src": "Tools/simulation/gz/worlds/default.sdf"},
+    "PX4_SIM_SPEED_FACTOR": "NIE ustawiony (px4-rc.gzsim:139 pominięte) → brak override RTF",
+    "render_env": "GALLIUM_DRIVER=d3d12 (env_gpu.sh) — NVIDIA RTX 5070 Ti via WSL2 D3D12"
+  },
+  "timejump_attribution": {
+    "log_string": "time jump detected. Resetting time synchroniser.",
+    "source": "src/lib/timesync/Timesync.cpp:69",
+    "used_by": "modules/uxrce_dds_client (PX4 hrt/sim ↔ zegar hosta agenta ROS2)",
+    "threshold": {"MAX_DEVIATION_SAMPLE_ms": 100, "MAX_CONSECUTIVE_HIGH_DEVIATION": 10, "MAX_RTT_SAMPLE_ms": 10, "note": ">10 kolejnych próbek offsetu >100ms ⇒ reset filtra; komentarz Timesync.cpp:67 'most likely due to a time jump on the offboard system'"}
+  },
+  "axis_b_sim_vs_difference": {
+    "sensor_combined_n": 68291,
+    "imu_dt_us": {"min": 4000, "max": 4000, "median": 4000, "backward_jumps": 0, "stalls_gt_50ms": 0, "verdict": "sim-clock (hrt) IDEALNIE monotoniczny i jednorodny — oś SIM bez skoków/stalli"},
+    "timesync_status_n": 275,
+    "observed_offset_span_s": 15.48,
+    "estimated_offset_span_s": 16.27,
+    "offset_jumps_gt_100ms": 9,
+    "offset_jumps_hrt_s": [2.14, 3.12, 18.32, 49.96, 82.42, 147.02, 179.64, 211.12, 243.45],
+    "offset_jump_magnitudes_s": [2.130, 0.471, 2.386, 2.134, 2.242, 2.011, 2.243, 1.644, 2.302],
+    "verdict": "skoki WYŁĄCZNIE w RÓŻNICY sim↔wall (uxrce Timesync), nie w sim, nie w hrt"
+  },
+  "axis_c_correlation_rtf": {
+    "rtf_deep_stalls_lt_0.5": 8,
+    "deep_stall_sim_s": [2.144, 17.48, 49.704, 81.96, 146.456, 178.684, 210.932, 243.184],
+    "min_rtf": 0.0035,
+    "period_s_approx": 32,
+    "mapping": "8 deep-stalli RTF (wall-time) = 8 skoków offsetu timesync 1:1; każdy stall ~2s freeze sim vs wall → offset >100ms → time-jump"
+  },
+  "C1_VERDICT": "lockstep AKTYWNY (sim-clock zdrowy: 4000µs jednorodny, 0 stalli, 0 cofnięć w 68291 próbkach). 'time jump detected' NIE jest awarią lockstepu — to reset filtra uxrce_dds Timesync wywołany deep-stallami RTF w WALL-time (sim zamarza ~2s względem zegara agenta co ~32s). Rozjazd jest w OSI RÓŻNICY sim↔wall, nie w osi sim.",
+  "refines_N1": "N1 mówiło 'gz stutteruje zegar sim' — C1 zawęża: gz NIE psuje zegara sim (jest idealny); zamraża sim w WALL-time (deep-stall RTF), a obserwowalny 'time jump' to artefakt uxrce timesync referowanego do zegara ściennego. Sim-clock nietknięty ⇒ mechanizm 'timejump→EKF-reset→gyro-bias' z N1 wymaga rewizji (oś sim, na której działa EKF, jest czysta) — to jednak DOMENA C2 (Q4: nie wchodzę)."
+}
