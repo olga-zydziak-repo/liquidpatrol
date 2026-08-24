@@ -83,6 +83,7 @@ Dane surowe: `C1_clock_analysis.json`.
 1. **Hipoteza obciążenia CPU (M4)** — OBALONA pomiarem (INFRA-1 §1): arm-fail niezależny od load (boot6@18 ≡ boot0@2.25).
 2. **„Headless ⇒ lockstep stabilny" (`run_stack.sh:34-37`)** — SFALSYFIKOWANA (INFRA-1 §4): boot1 headless, pętla timejump trwa.
 3. **Łańcuch przyczynowy N1 „stall → timejump → EKF (reset/gyro-bias)"** — OBALONY przez C1+C2: zegar sim idealny (Δt IMU 4000µs, 0 stalli), „time jump" = artefakt uxrce Timesync (`Timesync.cpp:69`), a EKF (na osi sim) **zbiegł** (innowacje czyste od sim 20.6s). Timejump NIE psuje EKF.
+4. **Środek zaradczy I2b („arm po zbieżności = czekaj na Ready")** — WŁASNY środek CC, OBALONY przez C2: nie tylko nie leczył, ale **wprowadzał deadlock** (Ready⇐GCS⇐MAVSDK⇐moduł lotu, który I2b odraczał), gwarantując env-fail każdego bootu. To pierwsza obalona pozycja, która jest MOIM remedium, nie hipotezą o świecie. Skutek: werdykt shakeoutu N3 wycofany (ANEKS_INFRA1-3 W1), I2b zrewertowany (W2, P0a).
 
 ### C2 (ANEKS_INFRA2-2 S2) — zbieżność vs timeout, READ-ONLY na ulogu — WERDYKT: **DEADLOCK HARNESSU I2b**
 

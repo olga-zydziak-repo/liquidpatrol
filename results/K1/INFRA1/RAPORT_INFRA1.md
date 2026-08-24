@@ -73,6 +73,15 @@ maszyny jeśli możliwe (czyści stan sterownika GPU — korzeń D8). Odnotowany
 
 ## §4. Shakeout po resecie — WYKONANY, werdykt FAIL ⇒ dziesiątka NIE odpalona (N3)
 
+> **⚠️ ADNOTACJA (ANEKS_INFRA1-3 W1, 2026-08-24): WERDYKT N3 (FAIL) WYCOFANY JAKO NIEWAŻNY.**
+> C2 (RAPORT_INFRA2 §C2, `C2_convergence_analysis.json`) dowiódł, że shakeout boot0/boot1 mierzył
+> **deadlock harnessu I2b**, nie zdolność maszyny do arm: „Ready for takeoff" (sygnał I2b) jest
+> nieosiągalny, bo wymaga wyczyszczenia „No connection to GCS" ⇐ klienta MAVSDK ⇐ modułu lotu, który
+> I2b odraczał do PO „Ready". W boot1 moduł lotu nigdy nie ruszył, a **EKF i tak zbiegł** (innowacje
+> czyste od sim 20.6 s, okno 252 s). ⇒ **„trwała patologia mostu gz↔PX4" NIE jest ustalona.** Naprawa:
+> rewert I2b (P0a, ANEKS_INFRA1-3 W2) + ważny shakeout z poprawionym kryterium (W3). Poniższa tabela
+> i wniosek §4 pozostają jako zapis nieważnego pomiaru — nie jako dowód.
+
 Reset operatorski (N2, Olga): `wsl --shutdown` + pełny restart maszyny (GPU driver wyczyszczony),
 push `400c8d4`. Odnotowane w manifeście: `session.env_restart=1`, `cooldown_s_since_last_boot=6127`.
 

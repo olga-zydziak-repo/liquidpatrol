@@ -65,27 +65,15 @@ echo "GUI_PROCS=[$(pgrep -af 'gz sim -g|gz-gui' | grep -v pgrep || echo brak)]" 
 for i in $(seq 1 40); do gz topic -l 2>/dev/null | grep -q "/world/${WORLD}/clock" && break; sleep 1; done
 setsid nohup python3 -m acts.rtf_sampler --world "$WORLD" --out "$OUTDIR/rtf_stream.jsonl" > "$OUTDIR/rtf_sampler.log" 2>&1 &
 RTF=$!
-# INFRA-1 I2b: arm po ZBIEŻNOŚCI estymatora, nie po zegarze. Sygnał JUŻ logowany (nie nowa telemetria):
-# commander 'Ready for takeoff!' w px4.log — obecny w bootach udanych (N4/S2), NIEobecny w env-failach
-# (S4/5/6, które utknęły w Preflight Fail: High Gyro Bias / horizontal velocity unstable po time-jumpach
-# lockstepu). Min settle 90 s ZACHOWANE (nie armuj wcześniej niż 90 s — porównywalność z lotami sprzed
-# hartowania). Timeout 300 s od startu bootu ⇒ env-fail „jak dotąd" (nie armujemy na chorej maszynie).
-echo "[K1 $ARM p$POINT b$BOOT_N] settle min 90 s (I2b)"; sleep 90
-CONV_DEADLINE=$(( BOOT_T0 + 300 )); CONV_OK=0
-while [ "$(date +%s)" -lt "$CONV_DEADLINE" ]; do
-  if grep -q 'Ready for takeoff' "$OUTDIR/px4.log" 2>/dev/null; then CONV_OK=1; break; fi
-  sleep 3
-done
-CONV_S=$(( $(date +%s) - BOOT_T0 )); [ "$CONV_OK" = "1" ] || CONV_S=-1
-echo "$CONV_S" > "$OUTDIR/convergence_s.txt"
-echo "[K1 $ARM p$POINT b$BOOT_N] convergence ok=$CONV_OK conv_s=${CONV_S}s"
+# INFRA-1 ANEKS_INFRA1-3 W2 (P0a): REWERT I2b. Moduł lotu startuje BEZWARUNKOWO po 90 s settle —
+# stan znany-dobry (N boot4 / S4-6 / R0.3a armowały). I2b czekał na 'Ready for takeoff' PRZED startem
+# modułu lotu, co tworzyło DEADLOCK: 'Ready'⇐pre_flight_checks_pass⇐wyczyszczenie 'No connection to GCS'
+# ⇐klient MAVSDK⇐moduł lotu, który I2b odraczał (dowód C2, RAPORT_INFRA2 §C2). I2a (bramka obciążenia,
+# wyżej) ZACHOWANA — nie brała udziału w deadlocku. timejump raportowany (nie bramkujący, per C1).
+echo "[K1 $ARM p$POINT b$BOOT_N] settle 90 s preflight EKF"; sleep 90
 grep -ci 'time jump\|Resetting time sync' "$OUTDIR/stack.log" > "$OUTDIR/timejump_pre.txt" 2>/dev/null || echo 0 > "$OUTDIR/timejump_pre.txt"
 
-if [ "$CONV_OK" != "1" ]; then
-  # I2b: brak zbieżności w 300 s ⇒ env-fail, NIE armujemy (nie startujemy modułu lotu).
-  echo "[gate] ENV-FAIL: brak 'Ready for takeoff' w 300 s — nie armuje na chorej maszynie (I2b)" > "$OUTDIR/act.log"
-  RC=2; HARNESS_FILE="$ROOT/k1/run_k1_boot.sh"
-elif [ "$ARM" = "S" ]; then
+if [ "$ARM" = "S" ]; then
   SCEN="K1" K1_POINT="$POINT" GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 \
     PYTHONPATH=".:.certdeps:${PYTHONPATH:-}" python3 -m r03.gate_run_r03 > "$OUTDIR/act.log" 2>&1
   RC=$?; HARNESS_FILE="$ROOT/r03/gate_run_r03.py"

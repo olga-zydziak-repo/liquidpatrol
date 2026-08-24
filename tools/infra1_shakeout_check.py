@@ -2,13 +2,17 @@
 """
 tools/infra1_shakeout_check.py — INFRA-1 ANEKS_INFRA1-2 N3: ZAMROŻONE kryterium shakeoutu po resecie.
 
-Kryterium (zamrożone PRZED uruchomieniem shakeoutu, commit przed resetem):
-  PASS ⟺ arm_ok ∧ n_timejumps ≤ 1 ∧ (brak głębokiego stalla rtf<0.5 w oknie preflight→arm)
+Kryterium (ANEKS_INFRA1-3 W3, poprawka wynikająca z C1/C2):
+  PASS ⟺ arm_ok ∧ (brak głębokiego stalla rtf<0.5 w oknie preflight→arm)
   FAIL ⟺ cokolwiek innego.
-Interpretacja (też zamrożona):
-  PASS ⇒ zły stan lockstepu był PRZEJŚCIOWy po restarcie → wracamy do I3 (dziesiątka) na NIEZMIENIONYM kodzie.
-  FAIL ⇒ pętla timejump = TRWAŁA własność habitatu → STOP, osobny dokument INFRA-2 (most gz↔PX4).
+  n_timejumps: RAPORTOWANY, NIE bramkujący — C1 wykazał, że „time jump" to artefakt licznika uxrce
+  Timesync (Timesync.cpp:69) referowanego do zegara ściennego; nie dotyka osi sim (Δt IMU 4000µs
+  jednorodny) ani EKF. Dlatego przestaje bramkować (był fałszywym negatywem dla zdrowych bootów).
+Interpretacja:
+  PASS ⇒ maszyna armuje end-to-end → wracamy do I3 (dziesiątka) na harnessie po rewercie I2b (P0a).
+  FAIL ⇒ dopiero wtedy wracamy do pytania o habitat, z S boot4/5/6 jako jedynym realnym trybem awarii.
 Dokładnie JEDEN shakeout — brak powtórki (powtarzanie do skutku = selekcja).
+Uwaga: poprzedni werdykt N3 (na harnessie I2b) WYCOFANY jako nieważny (mierzył deadlock, nie arm).
 
 Użycie: python3 tools/infra1_shakeout_check.py --dir results/K1/E/p0_0/bootS
 """
@@ -70,14 +74,15 @@ def main():
     except Exception:
         deep_pre = None
 
-    tj_ok = (n_tj is not None and n_tj <= TJ_MAX)
+    tj_ok = (n_tj is not None and n_tj <= TJ_MAX)  # RAPORTOWANE, już nie bramkuje (W3)
     stall_ok = (deep_pre is not None and deep_pre == 0)
-    verdict = "PASS" if (arm_ok and tj_ok and stall_ok) else "FAIL"
-    interp = ("PRZEJŚCIOWY zły lockstep po restarcie → wracamy do I3 (10 liczonych), kod NIEZMIENIONY"
+    verdict = "PASS" if (arm_ok and stall_ok) else "FAIL"  # W3: timejump zdjęty z bramki (artefakt uxrce, C1)
+    interp = ("maszyna armuje end-to-end → wracamy do I3 (10 liczonych) na harnessie po rewercie I2b"
               if verdict == "PASS" else
-              "TRWAŁA pętla timejump = własność habitatu → STOP, osobny dokument INFRA-2 (most gz↔PX4)")
+              "FAIL → pytanie o habitat, z S boot4/5/6 jako jedynym realnym trybem awarii")
 
-    out = {"verdict": verdict, "arm_ok": arm_ok, "n_timejumps": n_tj, "tj_max": TJ_MAX,
+    out = {"verdict": verdict, "arm_ok": arm_ok, "gate": "arm_ok ∧ deep_stalls==0 (timejump raportowany)",
+           "n_timejumps": n_tj, "tj_reported_only": True, "tj_advisory_max": TJ_MAX, "tj_within_advisory": tj_ok,
            "deep_stalls_preflight_to_arm": deep_pre, "deep_stall_rtf_thr": DEEP_STALL_RTF,
            "window_sim": [gt0_sim, armed_sim], "interpretation": interp, "dir": d}
     with open(os.path.join(d, "shakeout_check.json"), "w") as f:
