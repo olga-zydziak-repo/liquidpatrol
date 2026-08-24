@@ -1,0 +1,17 @@
+{
+  "verdict": "PASS",
+  "arm_ok": true,
+  "gate": "arm_ok \u2227 deep_stalls==0 (timejump raportowany)",
+  "n_timejumps": 6,
+  "tj_reported_only": true,
+  "tj_advisory_max": 1,
+  "tj_within_advisory": false,
+  "deep_stalls_preflight_to_arm": 0,
+  "deep_stall_rtf_thr": 0.5,
+  "window_sim": [
+    89.94,
+    93.16
+  ],
+  "interpretation": "maszyna armuje end-to-end \u2192 wracamy do I3 (10 liczonych) na harnessie po rewercie I2b",
+  "dir": "results/K1/E/p0_0/boot3"
+}
