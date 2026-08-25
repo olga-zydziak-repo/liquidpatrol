@@ -21,11 +21,15 @@ sweep(){ pkill -9 -f 'gz sim' 2>/dev/null; pkill -9 -f 'px4 ' 2>/dev/null; pkill
   pkill -9 -f rtf_sampler 2>/dev/null; sleep 3; }
 
 # X4: kontencja = znane cudze zadanie żyje LUB obcy proces >50% CPU spoza naszego stacku. Zwraca 0=jest.
+# ANEKS_INFRA2-3 Y2: heurystyka „>50% CPU" łapała WŁASNY tooling kontenerowy (runc/containerd/moby)
+# na migawkowych spajkach `runc exec` przy load1=0.00 → fałszywy X4 ABORT (I3 boot9). Naprawa: wykluczyć
+# własne procesy po NAZWIE (nie po progu CPU). Docker/containerd to infrastruktura HARNESSU, nie cudze zadanie.
+SELF_PROCS='run_k1_boot|px4|gz sim|ruby.*gz|MicroXRCE|mavsdk|rtf_sampler|infra1_empty_flight|infra1_campaign|pyulog|ulog|python3 -c|awk |grep |ps |runc|containerd|dockerd|docker-proxy|docker |moby|buildkit|containerd-shim'
 foreign_busy(){
   pgrep -f "$FOREIGN_PAT" >/dev/null 2>&1 && { echo "foreign=$FOREIGN_PAT"; return 0; }
   local hit
   hit=$(ps -eo pcpu,args --sort=-pcpu 2>/dev/null | awk 'NR>1 && $1>50' \
-    | grep -vE 'run_k1_boot|px4|gz sim|ruby.*gz|MicroXRCE|mavsdk|rtf_sampler|infra1_empty_flight|infra1_campaign|pyulog|ulog|python3 -c|awk |grep |ps ' \
+    | grep -vE "$SELF_PROCS" \
     | head -1)
   [ -n "$hit" ] && { echo "foreign_cpu=[$hit]"; return 0; }
   return 1

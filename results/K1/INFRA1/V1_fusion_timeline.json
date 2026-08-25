@@ -1,0 +1,385 @@
+{
+  "4": {
+    "boot": "4",
+    "arm_sim": 93.3,
+    "cs_first_true": {
+      "cs_tilt_align": 14.57,
+      "cs_yaw_align": 15.68,
+      "cs_vehicle_at_rest": 2.29,
+      "cs_baro_hgt": 3.73,
+      "cs_mag": 15.68,
+      "cs_mag_hdg": 15.74,
+      "cs_mag_3d": 100.52,
+      "cs_gnss_pos": 15.68,
+      "cs_gnss_vel": 15.68,
+      "cs_gps_hgt": 3.44,
+      "cs_in_air": 95.17
+    },
+    "fault_first_true": {
+      "cs_baro_fault": null,
+      "cs_mag_fault": null,
+      "cs_mag_field_disturbed": 173.88,
+      "fs_bad_hdg": null,
+      "fs_bad_mag_x": null,
+      "fs_bad_mag_y": null,
+      "fs_bad_mag_z": null,
+      "fs_bad_acc_vertical": null,
+      "fs_bad_acc_clipping": null
+    },
+    "reset_counts": {
+      "reset_count_quat": {
+        "final": 3,
+        "incs": 3
+      },
+      "reset_count_pos_ne": {
+        "final": 5,
+        "incs": 4
+      },
+      "reset_count_vel_ne": {
+        "final": 4,
+        "incs": 3
+      },
+      "reset_count_vel_d": {
+        "final": 4,
+        "incs": 3
+      },
+      "reset_count_pod_d": {
+        "final": 2,
+        "incs": 1
+      }
+    },
+    "time_slip": {
+      "max": 0.0,
+      "end": 0.0
+    },
+    "filter_fault_flags_max": 0,
+    "lp_reset_final": {
+      "xy_reset_counter": 5,
+      "z_reset_counter": 2,
+      "vxy_reset_counter": 4,
+      "vz_reset_counter": 4,
+      "heading_reset_counter": 3
+    },
+    "event_counts": {
+      "reset_hgt_to_baro": 12,
+      "reset_pos_to_gps": 162,
+      "reset_vel_to_gps": 161,
+      "reset_vel_to_zero": 2,
+      "reset_pos_to_last_known": 2
+    },
+    "class": "PASS-recover"
+  },
+  "7": {
+    "boot": "7",
+    "arm_sim": 94.77,
+    "cs_first_true": {
+      "cs_tilt_align": 1.88,
+      "cs_yaw_align": 2.94,
+      "cs_vehicle_at_rest": 1.66,
+      "cs_baro_hgt": 2.13,
+      "cs_mag": 2.94,
+      "cs_mag_hdg": 3.01,
+      "cs_mag_3d": 101.37,
+      "cs_gnss_pos": 2.95,
+      "cs_gnss_vel": 2.95,
+      "cs_gps_hgt": 1.92,
+      "cs_in_air": 96.67
+    },
+    "fault_first_true": {
+      "cs_baro_fault": null,
+      "cs_mag_fault": null,
+      "cs_mag_field_disturbed": null,
+      "fs_bad_hdg": null,
+      "fs_bad_mag_x": null,
+      "fs_bad_mag_y": null,
+      "fs_bad_mag_z": null,
+      "fs_bad_acc_vertical": null,
+      "fs_bad_acc_clipping": null
+    },
+    "reset_counts": {
+      "reset_count_quat": {
+        "final": 2,
+        "incs": 2
+      },
+      "reset_count_pos_ne": {
+        "final": 4,
+        "incs": 4
+      },
+      "reset_count_vel_ne": {
+        "final": 3,
+        "incs": 3
+      },
+      "reset_count_vel_d": {
+        "final": 2,
+        "incs": 1
+      },
+      "reset_count_pod_d": {
+        "final": 2,
+        "incs": 1
+      }
+    },
+    "time_slip": {
+      "max": 0.0,
+      "end": 0.0
+    },
+    "filter_fault_flags_max": 0,
+    "lp_reset_final": {
+      "xy_reset_counter": 4,
+      "z_reset_counter": 2,
+      "vxy_reset_counter": 3,
+      "vz_reset_counter": 2,
+      "heading_reset_counter": 2
+    },
+    "event_counts": {
+      "reset_hgt_to_baro": 1,
+      "reset_pos_to_gps": 171,
+      "reset_vel_to_gps": 170,
+      "reset_vel_to_zero": 2,
+      "reset_pos_to_last_known": 3
+    },
+    "class": "PASS-clean"
+  },
+  "1": {
+    "boot": "1",
+    "arm_sim": null,
+    "cs_first_true": {
+      "cs_tilt_align": 6.57,
+      "cs_yaw_align": 7.68,
+      "cs_vehicle_at_rest": 2.13,
+      "cs_baro_hgt": 3.57,
+      "cs_mag": 7.68,
+      "cs_mag_hdg": 7.74,
+      "cs_mag_3d": null,
+      "cs_gnss_pos": 7.7,
+      "cs_gnss_vel": 7.7,
+      "cs_gps_hgt": 3.31,
+      "cs_in_air": null
+    },
+    "fault_first_true": {
+      "cs_baro_fault": null,
+      "cs_mag_fault": null,
+      "cs_mag_field_disturbed": null,
+      "fs_bad_hdg": null,
+      "fs_bad_mag_x": null,
+      "fs_bad_mag_y": null,
+      "fs_bad_mag_z": null,
+      "fs_bad_acc_vertical": 33.46,
+      "fs_bad_acc_clipping": null
+    },
+    "reset_counts": {
+      "reset_count_quat": {
+        "final": 1,
+        "incs": 1
+      },
+      "reset_count_pos_ne": {
+        "final": 12,
+        "incs": 11
+      },
+      "reset_count_vel_ne": {
+        "final": 11,
+        "incs": 10
+      },
+      "reset_count_vel_d": {
+        "final": 32,
+        "incs": 31
+      },
+      "reset_count_pod_d": {
+        "final": 10,
+        "incs": 9
+      }
+    },
+    "time_slip": {
+      "max": 0.0,
+      "end": 0.0
+    },
+    "filter_fault_flags_max": 1024,
+    "lp_reset_final": {
+      "xy_reset_counter": 12,
+      "z_reset_counter": 10,
+      "vxy_reset_counter": 11,
+      "vz_reset_counter": 32,
+      "heading_reset_counter": 1
+    },
+    "event_counts": {
+      "reset_hgt_to_baro": 35,
+      "reset_pos_to_gps": 186,
+      "reset_vel_to_gps": 185,
+      "reset_vel_to_zero": 4,
+      "reset_pos_to_last_known": 4
+    },
+    "class": "FAIL"
+  },
+  "3": {
+    "boot": "3",
+    "arm_sim": null,
+    "cs_first_true": {
+      "cs_tilt_align": 31.73,
+      "cs_yaw_align": 32.82,
+      "cs_vehicle_at_rest": 2.29,
+      "cs_baro_hgt": 3.73,
+      "cs_mag": 32.82,
+      "cs_mag_hdg": 32.89,
+      "cs_mag_3d": null,
+      "cs_gnss_pos": 32.84,
+      "cs_gnss_vel": 32.84,
+      "cs_gps_hgt": 3.44,
+      "cs_in_air": null
+    },
+    "fault_first_true": {
+      "cs_baro_fault": null,
+      "cs_mag_fault": null,
+      "cs_mag_field_disturbed": null,
+      "fs_bad_hdg": null,
+      "fs_bad_mag_x": null,
+      "fs_bad_mag_y": null,
+      "fs_bad_mag_z": null,
+      "fs_bad_acc_vertical": 54.82,
+      "fs_bad_acc_clipping": null
+    },
+    "reset_counts": {
+      "reset_count_quat": {
+        "final": 1,
+        "incs": 1
+      },
+      "reset_count_pos_ne": {
+        "final": 7,
+        "incs": 6
+      },
+      "reset_count_vel_ne": {
+        "final": 6,
+        "incs": 5
+      },
+      "reset_count_vel_d": {
+        "final": 14,
+        "incs": 13
+      },
+      "reset_count_pod_d": {
+        "final": 6,
+        "incs": 5
+      }
+    },
+    "time_slip": {
+      "max": 0.0,
+      "end": 0.0
+    },
+    "filter_fault_flags_max": 1024,
+    "lp_reset_final": {
+      "xy_reset_counter": 7,
+      "z_reset_counter": 6,
+      "vxy_reset_counter": 6,
+      "vz_reset_counter": 14,
+      "heading_reset_counter": 1
+    },
+    "event_counts": {
+      "reset_hgt_to_baro": 47,
+      "reset_pos_to_gps": 170,
+      "reset_vel_to_gps": 169,
+      "reset_vel_to_zero": 2,
+      "reset_pos_to_last_known": 2
+    },
+    "class": "FAIL"
+  },
+  "5": {
+    "boot": "5",
+    "arm_sim": null,
+    "cs_first_true": {
+      "cs_tilt_align": 29.98,
+      "cs_yaw_align": 31.07,
+      "cs_vehicle_at_rest": 2.15,
+      "cs_baro_hgt": 3.59,
+      "cs_mag": 31.07,
+      "cs_mag_hdg": 31.14,
+      "cs_mag_3d": null,
+      "cs_gnss_pos": 31.1,
+      "cs_gnss_vel": 31.1,
+      "cs_gps_hgt": 3.31,
+      "cs_in_air": null
+    },
+    "fault_first_true": {
+      "cs_baro_fault": null,
+      "cs_mag_fault": null,
+      "cs_mag_field_disturbed": null,
+      "fs_bad_hdg": null,
+      "fs_bad_mag_x": null,
+      "fs_bad_mag_y": null,
+      "fs_bad_mag_z": null,
+      "fs_bad_acc_vertical": 40.66,
+      "fs_bad_acc_clipping": null
+    },
+    "reset_counts": {
+      "reset_count_quat": {
+        "final": 1,
+        "incs": 1
+      },
+      "reset_count_pos_ne": {
+        "final": 7,
+        "incs": 6
+      },
+      "reset_count_vel_ne": {
+        "final": 6,
+        "incs": 5
+      },
+      "reset_count_vel_d": {
+        "final": 22,
+        "incs": 21
+      },
+      "reset_count_pod_d": {
+        "final": 7,
+        "incs": 6
+      }
+    },
+    "time_slip": {
+      "max": 0.0,
+      "end": 0.0
+    },
+    "filter_fault_flags_max": 1024,
+    "lp_reset_final": {
+      "xy_reset_counter": 7,
+      "z_reset_counter": 7,
+      "vxy_reset_counter": 6,
+      "vz_reset_counter": 22,
+      "heading_reset_counter": 1
+    },
+    "event_counts": {
+      "reset_hgt_to_baro": 55,
+      "reset_pos_to_gps": 164,
+      "reset_vel_to_gps": 163,
+      "reset_vel_to_zero": 2,
+      "reset_pos_to_last_known": 2
+    },
+    "class": "FAIL"
+  },
+  "_d_px4log_all8": {
+    "HighGyroBias": {
+      "b1": 42,
+      "b2": 17,
+      "b3": 8,
+      "b5": 13,
+      "b4": 0,
+      "b6": 0,
+      "b7": 0,
+      "b8": 1
+    },
+    "horiz_vel_unstable": {
+      "b1": 30,
+      "b2": 20,
+      "b3": 13,
+      "b5": 25,
+      "b4": 3,
+      "b6": 1,
+      "b7": 0,
+      "b8": 1
+    },
+    "baro": "brak storm 'No valid Baro' (0-1 linii); baro OK",
+    "ekf2_missing": "1 benign na starcie (b7=0)",
+    "note": "HighGyroBias 8-42 w FAIL vs 0-1 w PASS \u2014 separacja; baro zdrowe"
+  },
+  "_c_background_streams": {
+    "air_data_baro": "kadencja 60ms czysta (0% poza) FAIL i PASS; hold 6-12 (kwantyzacja, benign) \u2014 baro NIE zamro\u017cone",
+    "mag": "hold=0 w obu (brak zamro\u017cenia); kadencja mag zmienno-rate (artefakt tolerancji medianowej), nie defekt",
+    "role": "tylko t\u0142o dla (a) \u2014 \u017ar\u00f3d\u0142a wspomagaj\u0105ce obecne i nie-martwe w FAIL"
+  },
+  "V1_VERDICT": "O\u015a CZASU R\u00d3\u017bNICUJE KLASY \u2014 ale NIE przez brak/op\u00f3\u017anienie \u017ar\u00f3d\u0142a",
+  "V1_verdict_detail": "Separatory (czyste): filter_fault_flags FAIL=1024 vs PASS=0; fs_bad_acc_vertical FAIL wszystkie (33-55s) vs PASS nigdy; sztorm reset\u00f3w pionu: reset_count_vel_d FAIL 14-32 vs PASS 2-4, reset_hgt_to_baro FAIL 35-55 vs PASS 1-12; px4 HighGyroBias 8-42 vs 0-1. NIE-separatory: kolejno\u015b\u0107 wej\u015bcia \u017ar\u00f3de\u0142 IDENTYCZNA (tilt->yaw->mag/gnss), baro @~3.5s, gnss @align we WSZYSTKICH; alignment-latency NIE separuje (b1-FAIL @6.6s align WCZE\u015aNIEJ ni\u017c b4-recover @14.6s); time_slip=0.0 wsz\u0119dzie; baro/mag streamy nie-martwe (hold~0). => ZATRZASK NIE koreluje z brakiem/op\u00f3\u017anieniem \u017ar\u00f3d\u0142a wspomagaj\u0105cego; koreluje z WEWN\u0118TRZNYM sztormem faultu pionu (acc_vertical + height/vel_d reset + filter_fault 1024). Kolejno\u015b\u0107 czasowa: bias wysoki @~20s (Z1) POPRZEDZA fs_bad_acc_vertical @33-55s \u2014 fakt z tabeli, bez rozstrzygania kierunku przyczyny (zakaz interpretacji ponad tabel\u0119, V2).",
+  "V2_stop": "O\u015b czasu R\u00d3\u017bNICUJE, ale hipoteza V1 (brak/op\u00f3\u017anienie \u017ar\u00f3d\u0142a) NIE potwierdzona \u2014 separator jest wewn\u0119trzny (fault pionu/reset storm), jego KORZE\u0143 nieodczytywalny z tej tabeli. STOP offline. Nast\u0119pny = eksperyment r\u00f3\u017cnicowy na parametrach inicjalizacji EKF / \u017ar\u00f3dle faultu acc_vertical, OSOBNY dokument, nie ta sesja."
+}

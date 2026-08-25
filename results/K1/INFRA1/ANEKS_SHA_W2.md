@@ -282,3 +282,38 @@ index a50f153..60c34ec 100755
    bash k1/run_k1_boot.sh E 0.0 "$n" > "$ROOT/results/K1/INFRA1/boot${n}.launch.log" 2>&1
    rc=$?
 ```
+
+---
+
+## ANEKS_INFRA2-3 Y2 — naprawa fałszywego dodatniego X4 (przyrząd, nie harness lotu)
+
+**Powód:** I3 (2026-08-25) przerwana przy boot9 przez X4 ABORT, wyzwolony przez `runc … exec`
+(Docker/containerd/moby) na chwilowym 100% CPU przy `load1=0.00` — własny tooling kontenerowy harnessu
+(wywołania Bash lecą przez docker), NIE cudze zadanie Olgi. Heurystyka `foreign_busy()` „obcy proces
+>50% CPU spoza whitelisty" nie wykluczała warstwy kontenerowej → fałszywy dodatni.
+
+**Zmiana (`tools/infra1_campaign.sh`, narzędzie diagnostyczne — NIE harness lotu, sędzia/osłona/piny
+NIETKNIĘTE):** wykluczyć własne procesy po NAZWIE (runc/containerd/dockerd/docker-proxy/docker/moby/
+buildkit/containerd-shim), nie po progu CPU.
+
+```diff
+ # X4: kontencja = znane cudze zadanie żyje LUB obcy proces >50% CPU spoza naszego stacku. Zwraca 0=jest.
++# ANEKS_INFRA2-3 Y2: heurystyka „>50% CPU" łapała WŁASNY tooling kontenerowy (runc/containerd/moby)
++# na migawkowych spajkach `runc exec` przy load1=0.00 → fałszywy X4 ABORT (I3 boot9). Naprawa: wykluczyć
++# własne procesy po NAZWIE (nie po progu CPU). Docker/containerd to infrastruktura HARNESSU, nie cudze zadanie.
++SELF_PROCS='run_k1_boot|px4|gz sim|ruby.*gz|MicroXRCE|mavsdk|rtf_sampler|infra1_empty_flight|infra1_campaign|pyulog|ulog|python3 -c|awk |grep |ps |runc|containerd|dockerd|docker-proxy|docker |moby|buildkit|containerd-shim'
+ foreign_busy(){
+   pgrep -f "$FOREIGN_PAT" >/dev/null 2>&1 && { echo "foreign=$FOREIGN_PAT"; return 0; }
+   local hit
+   hit=$(ps -eo pcpu,args --sort=-pcpu 2>/dev/null | awk 'NR>1 && $1>50' \
+-    | grep -vE 'run_k1_boot|px4|gz sim|ruby.*gz|MicroXRCE|mavsdk|rtf_sampler|infra1_empty_flight|infra1_campaign|pyulog|ulog|python3 -c|awk |grep |ps ' \
++    | grep -vE "$SELF_PROCS" \
+     | head -1)
+   [ -n "$hit" ] && { echo "foreign_cpu=[$hit]"; return 0; }
+   return 1
+ }
+```
+
+**Zakres:** pgrep znanego wzorca (`src.runner.gate2`) ZOSTAJE — realne zadania Olgi nadal łapane.
+Zmienia się tylko druga furtka (próg CPU), która teraz pomija warstwę kontenerową. `bash -n` OK.
+**Nie zmienia werdyktu Y1** (I3 = FAIL 4/8, ustalone na długo przed abortem).

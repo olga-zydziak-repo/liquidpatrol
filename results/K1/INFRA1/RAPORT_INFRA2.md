@@ -136,9 +136,131 @@ Pakiet na **2026-09-01** = **DEMO-B v1.0 + erraty + `RAPORT_K1_B1_STOP.md`** jak
 noga K1 wstrzymana na infrastrukturze symulatora, nie na logice osłony/sędziego (te są zamrożone i
 zweryfikowane). INFRA-2 to praca do zaplanowania, nie „czekanie aż maszyna sama się naprawi".
 
+## §2-WYK2. WYKONANE (ANEKS_INFRA2-3, CC 2026-08-25): I3 FAIL + mechanizm bias żyroskopu
+
+I3 (dziesiątka) odpalona na CZYSTEJ maszynie po rewercie deadlocku I2b — **WERDYKT FAIL: 4/8 arm** (pełna
+tabela + analiza w `RAPORT_INFRA1.md §6`). To domyka pytanie „czy po naprawie deadlocku maszyna armuje":
+**nie niezawodnie** — arm-fail intermittentny ~50%, load-niezależny, to realny tryb S boot4/5/6.
+
+**Mechanizm ZLOKALIZOWANY (Y4, offline z ulogów):** w bootach FAIL estymata **bias żyroskopu EKF ucieka
+do ~0.14–0.15 rad/s** (monotoniczna dywergencja, nie wolna zbieżność), w PASS zostaje ~0 (0.0002). Bloker
+arm = **`Preflight Fail: High Gyro Bias`** (nie innowacje — `pre_flt_fail_innov` czyste w OBU klasach).
+⇒ **300 s okno jest bez znaczenia** — bias nie zbiega, on dywerguje; więcej czasu pogarsza. To **nie
+wyścig o sekundy** — to genuinie zła estymata.
+
+**Hipoteza rozgrzewki (CC#5, Y3): OBALONA danymi** — deep-stalle płaskie (7–8/boot, PASS≈FAIL), boot5
+(5. boot, fail między PASS) łamie monotoniczność, oś czasu-WSL skażona (uptime dryf). Nie ma
+deterministycznego „rozgrzania". Zostaje: stochastyczna dywergencja bias pod deep-stallami mostu.
+
+**Kierunek (Y5):** Y4 NIE wyszło puste — wskazuje wprost na most gz↔PX4 jako źródło: **deep RTF-stalle
+(rtf do 0.001, 7–8/boot w KAŻDYM bocie) psują całkowanie IMU w EKF → runaway gyro bias**, ale liczba
+stalli sama nie różnicuje PASS/FAIL, więc bloker jest w **fazie/timingu stalli** względem inicjalizacji
+estymatora, albo w treści danych IMU dostarczanych przez most podczas stalla (np. zdublowane/opóźnione
+próbki, całkowane jako fałszywy obrót). **Pierwszy pomiar INFRA-2 właściwego = C5 (render/backend GPU)**
+jako najtańszy sprawdzian, czy backend renderu zmienia częstość/głębokość stalli mostu (i przez to
+częstość dywergencji bias). C5 tylko na sygnał Olgi (SI: jeden boot gałąź E, llvmpipe/software).
+
+## §2-WYK3. WYKONANE (ANEKS_INFRA2-4, CC 2026-08-26): Z1 forensyka IMU — WERDYKT: **STRUMIEŃ ZDROWY**
+
+Offline, zero bootów, na ulogach I3: FAIL {boot1,3,5} vs PASS {boot4,7}. Cztery miary (`Z1_imu_forensics.json`,
+`tools/infra2_imu_forensics.py`):
+
+| miara | FAIL {1,3,5} | PASS {4,7} | werdykt |
+|-------|--------------|------------|---------|
+| **(a) Δt `sensor_combined`** | 100.0% w 4000±100 µs, 0 dup, 0 gap, maxgap=4000 µs | 100% (b7: 1 gap 8000 µs, benign) | **czysta cadencja** |
+| **(b) sample-and-hold (6 wartości bitowo=)** | **0 próbek**, 0 runów | 0 próbek | **brak zamrożenia** |
+| **(c) okna 1 s zerowej wariancji gyro** | **0/214** | 0/174 | **brak martwych okien** |
+| **(d) surowy gyro std, okno preflight [10,85] s** | **~0.00062 rad/s /oś** | **~0.00062 rad/s /oś** | **IDENTYCZNY** |
+
+Piki gyro >0.05 rad/s w PASS (19079 w b4, absmax 26 rad/s) = **REALNY LOT po arm** (konfundator lot-vs-brak-lotu),
+nie defekt strumienia — po ograniczeniu do wspólnego okna preflight [10,85] s (oba na ziemi) gyro/accel są
+statystycznie **nieodróżnialne** (accel ≈ [0.05, 0.07, −9.80] = grawitacja; b7 lekko przechylony).
+
+**Zagadka rozstrzygająca:** karmiony **czystym, płaskim gyro** (std 0.0006), EKF i tak produkuje dziko różne
+biasy. Trajektoria `|gyro_bias|`:
+
+| boot | @20 s | @50 s | @85 s | koniec | arm |
+|------|------:|------:|------:|-------:|:---:|
+| FAIL b1 | 0.147 | 0.183 | 0.177 | 0.150 | — |
+| FAIL b3 | 0.107 | 0.127 | 0.134 | 0.138 | — |
+| FAIL b5 | 0.137 | 0.134 | 0.155 | 0.150 | — |
+| PASS b4 | 0.121 | 0.088 | 0.087 | **0.036** | 93.3 s |
+| PASS b7 | 0.0001 | 0.0001 | 0.0001 | 0.0002 | 94.8 s |
+
+Dyskryminator to **nie „czy bias urósł"** (b4 urósł jak faile) lecz **„czy zszedł poniżej progu przed oknem
+arm"**: w FAIL bias **zatrzaskuje się 0.10–0.19 od sim ~20 s i NIE wraca**; b4 startuje wysoko, ale estymator
+**odzyskuje** (→0.036); b7 czysty od startu. Bias jest już wysoki @20 s, gdy surowy gyro jest płaski.
+
+**WERDYKT Z1: strumień IMU ZDROWY** (cadencja + wartości, obie klasy identyczne). **Dywergencja biasu to
+fenomen EKF-WEWNĘTRZNY** — inicjalizacja/konwergencja stanu bias albo kolejność fuzji, NIE most dostarczający
+zepsute próbki IMU.
+
+**Z2 — gałąź „zdrowy strumień" (per ANEKS): C5 NIE jest warrantowany przyczynowo.** Prerejestrowana premisa
+C5 (mniej deep-stalli ⇒ mniej odcinków hold ⇒ bias ~0 ⇒ arm) jest **falsyfikowana u podstawy**: hold=0 w
+ogóle, IMU czyste niezależnie od stalli, a bias jest wysoki od sim ~20 s. Redukcja stalli renderu nie ma
+kanału, przez który miałaby leczyć bias. **STOP — decyzja na danych, bez zgadywania.** Następny cut
+(init/konwergencja EKF, kolejność fuzji, mag/baro) = osobny ANEKS od Olgi; NIE uruchamiam nic poza Z1.
+
+## §2-WYK4. WYKONANE (ANEKS_INFRA2-5rev, CC 2026-08-26): V1 oś czasu źródeł — RÓŻNICUJE, ale NIE przez brak źródła
+
+Offline, zero bootów, ulogi I3: b4 (odzysk 0.12→0.036), b7 (czysty), FAIL {1,3,5} (zatrzask).
+`tools/infra2_fusion_timeline.py` + `V1_fusion_timeline.json`.
+
+**(a) Wejście źródeł do fuzji [sim s] — `estimator_status_flags`:**
+
+| boot | klasa | arm | tilt_align | yaw_align | baro_hgt | mag | gnss_pos | gps_hgt |
+|------|-------|----:|-----------:|----------:|---------:|----:|---------:|--------:|
+| 4 | PASS-recover | 93.3 | 14.57 | 15.68 | 3.73 | 15.68 | 15.68 | 3.44 |
+| 7 | PASS-clean | 94.8 | 1.88 | 2.94 | 2.13 | 2.94 | 2.95 | 1.92 |
+| 1 | FAIL | — | 6.57 | 7.68 | 3.57 | 7.68 | 7.70 | 3.31 |
+| 3 | FAIL | — | 31.73 | 32.82 | 3.73 | 32.82 | 32.84 | 3.44 |
+| 5 | FAIL | — | 29.98 | 31.07 | 3.59 | 31.07 | 31.10 | 3.31 |
+
+Kolejność wejścia **identyczna** we wszystkich (tilt→yaw→mag/gnss; baro @~3.5 s, gnss @alignment).
+**Alignment-latency NIE separuje** — b1 (FAIL) wyrównał @6.6 s, WCZEŚNIEJ niż b4 (recover) @14.6 s.
+Wszystkie źródła obecne w każdym bocie; brak brakującego/martwego źródła.
+
+**(b/e) Resety, time_slip, filter_fault — TU jest separacja:**
+
+| boot | klasa | filter_fault | fs_bad_acc_vertical | reset_count_vel_d | reset_hgt_to_baro (zdarz.) | time_slip |
+|------|-------|-------------:|--------------------:|------------------:|---------------------------:|----------:|
+| 4 | PASS-recover | **0** | nigdy | 4 | 12 | 0.0 |
+| 7 | PASS-clean | **0** | nigdy | 2 | 1 | 0.0 |
+| 1 | FAIL | **1024** | 33.46 s | **32** | **35** | 0.0 |
+| 3 | FAIL | **1024** | 54.82 s | **14** | **47** | 0.0 |
+| 5 | FAIL | **1024** | 40.66 s | **22** | **55** | 0.0 |
+
+**(c) tło:** baro (`vehicle_air_data`) kadencja 60 ms czysta (0% poza), hold 6–12 (kwantyzacja, benign) —
+NIE zamrożone; mag (`vehicle_magnetometer`) hold=0 w obu — NIE zamrożone. Źródła wspomagające żywe.
+**(d) px4.log ×8:** `High Gyro Bias` = 42/17/8/13 (FAIL b1/2/3/5) vs 0/0/0/1 (PASS b4/6/7/8);
+`horizontal velocity unstable` = 30/20/13/25 vs 3/1/0/1; brak sztormu „No valid Baro"; `ekf2 missing data`
+= 1 benign na starcie. Separacja HighGyroBias FAIL↔PASS spójna z tabelą (b).
+
+**WERDYKT V1: oś czasu RÓŻNICUJE klasy — ale NIE przez brak/opóźnienie źródła wspomagającego.**
+Separatory (czyste): `filter_fault_flags` FAIL=1024/PASS=0; `fs_bad_acc_vertical` FAIL wszystkie/PASS nigdy;
+sztorm resetów pionu (`reset_count_vel_d` 14–32 vs 2–4, `reset_hgt_to_baro` 35–55 vs 1–12). Nie-separatory:
+kolejność/dostępność źródeł, alignment-latency, `time_slip` (0.0 wszędzie), żywotność baro/mag. **Zatrzask
+koreluje z WEWNĘTRZNYM sztormem faultu pionu (acc_vertical + height/vel_d reset + filter_fault 1024), nie
+z brakiem źródła.** Fakt czasowy z tabeli: bias wysoki @~20 s (Z1) POPRZEDZA `fs_bad_acc_vertical` @33–55 s —
+podane bez rozstrzygania kierunku przyczyny.
+
+**V2 — STOP offline.** Oś czasu różnicuje, lecz hipoteza V1 (brak/opóźnienie źródła) NIE potwierdzona;
+separator jest wewnętrzny, a jego KORZEŃ (dlaczego pion faultuje / co destabilizuje filtr) jest
+nieodczytywalny z tej tabeli — bez interpretacji ponad tabelę. Następny krok = **eksperyment różnicowy na
+parametrach inicjalizacji EKF / źródle faultu `acc_vertical`, OSOBNY dokument**, nie ta sesja.
+
 ## §5. Co JEST już ustalone (nie badać ponownie)
 
 - Obciążenie CPU NIE jest driverem (INFRA-1 §1, pomiar). ✗ nie wracać.
+- Strumień IMU (cadencja + wartości) ZDROWY w FAIL — brak hold, brak gap, gyro identyczny z PASS (Z1). ✗ nie wracać.
+- Zatrzask NIE koreluje z brakiem/opóźnieniem źródła wspomagającego — wszystkie wchodzą w tej samej kolejności (V1). ✗ nie wracać.
+- Separator FAIL↔PASS = fault pionu: filter_fault=1024, fs_bad_acc_vertical, sztorm reset_hgt/vel_d (V1). → dalej: różnicowy init EKF.
+- time_slip=0.0 w FAIL i PASS — zegar estymatora nie ślizga (V1, spójne z C1). ✗ nie badać.
+- Bias diverguje na CZYSTYM płaskim gyro ⇒ przyczyna EKF-wewnętrzna, nie most/IMU (Z1). → dalej: init/fuzja/mag/baro.
+- C5 (render backend) NIE warrantowany przyczynowo — premisa hold-pod-stallami falsyfikowana (Z1/Z2). ✗ nie strzelać.
+- Okno 300 s NIE jest za krótkie — bias żyroskopu DYWERGUJE, nie zbiega wolno (Y4). ✗ nie „dać więcej czasu".
+- Rozgrzewka (numer bootu / czas-od-startu) NIE tłumaczy fail (Y3, boot5 wyłom, stalle płaskie). ✗ nie wracać.
+- Timejumpy NIE różnicują arm (6–7 w PASS i FAIL) — artefakt uxrce (C1). ✗ nie bramkować nimi.
 - Kontencja GUI NIE jest driverem — boot1 headless a pętla trwa (`GUI_PROCS=[brak]`). ✗ nie wracać.
 - Stan sterownika GPU po restarcie NIE leczy — reset operatorski wykonany, FAIL identyczny. ✗ nie wracać.
 - Osłona/sędzia/kryteria K1 zamrożone i nietknięte przez całe INFRA-1/2 (hashe w RAPORT_INFRA1). ✗ nie ruszać.

@@ -1,0 +1,438 @@
+{
+  "FAIL": {
+    "1": {
+      "dir": "results/K1/E/p0_0/boot1",
+      "n_samples": 53236,
+      "n_rtf_pts": 2579,
+      "n_deep_stall_pts": 8,
+      "n_stall_intervals": 8,
+      "d_content": {
+        "gyro_mean_xyz": [
+          -9e-06,
+          -4e-05,
+          5.9e-05
+        ],
+        "gyro_std_xyz": [
+          0.000616,
+          0.000618,
+          0.000615
+        ],
+        "gyro_absmax": 0.00324,
+        "gyro_absmax_sim_s": 55.436,
+        "gyro_absmax_in_stall": false,
+        "accel_mean_z": -9.8036,
+        "accel_std_mag": 0.39263,
+        "n_spikes_gt_0p05": 0,
+        "spikes_in_stall": 0,
+        "frac_spikes_in_stall": 0.0
+      },
+      "a_dt": {
+        "dup_stamps": 0,
+        "gaps_gt_tol": 0,
+        "short_lt_tol": 0,
+        "outside_4000pm100": 0,
+        "within_tol": 53235,
+        "pct_within": 100.0,
+        "max_gap_us": 4000.0,
+        "top_gaps": [
+          {
+            "sim_s": 215.068,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.092,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.132,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.128,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.124,
+            "dt_us": 4000.0
+          }
+        ]
+      },
+      "b_hold": {
+        "hold_samples": 0,
+        "pct_hold": 0.0,
+        "n_runs": 0,
+        "hold_in_stall": 0,
+        "frac_hold_in_stall": 0.0,
+        "top_runs": []
+      },
+      "c_var": {
+        "total_1s_windows": 214,
+        "zero_var_windows": 0,
+        "zero_var_in_stall": 0,
+        "frac_zerovar_in_stall": 0.0,
+        "var_eps": 1e-12
+      }
+    },
+    "3": {
+      "dir": "results/K1/E/p0_0/boot3",
+      "n_samples": 53233,
+      "n_rtf_pts": 2582,
+      "n_deep_stall_pts": 8,
+      "n_stall_intervals": 8,
+      "d_content": {
+        "gyro_mean_xyz": [
+          -5e-06,
+          -4e-05,
+          5.4e-05
+        ],
+        "gyro_std_xyz": [
+          0.000613,
+          0.000617,
+          0.000617
+        ],
+        "gyro_absmax": 0.0031,
+        "gyro_absmax_sim_s": 24.456,
+        "gyro_absmax_in_stall": false,
+        "accel_mean_z": -9.8037,
+        "accel_std_mag": 0.39268,
+        "n_spikes_gt_0p05": 0,
+        "spikes_in_stall": 0,
+        "frac_spikes_in_stall": 0.0
+      },
+      "a_dt": {
+        "dup_stamps": 0,
+        "gaps_gt_tol": 0,
+        "short_lt_tol": 0,
+        "outside_4000pm100": 0,
+        "within_tol": 53232,
+        "pct_within": 100.0,
+        "max_gap_us": 4000.0,
+        "top_gaps": [
+          {
+            "sim_s": 215.212,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.244,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.284,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.28,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.276,
+            "dt_us": 4000.0
+          }
+        ]
+      },
+      "b_hold": {
+        "hold_samples": 0,
+        "pct_hold": 0.0,
+        "n_runs": 0,
+        "hold_in_stall": 0,
+        "frac_hold_in_stall": 0.0,
+        "top_runs": []
+      },
+      "c_var": {
+        "total_1s_windows": 214,
+        "zero_var_windows": 0,
+        "zero_var_in_stall": 0,
+        "frac_zerovar_in_stall": 0.0,
+        "var_eps": 1e-12
+      }
+    },
+    "5": {
+      "dir": "results/K1/E/p0_0/boot5",
+      "n_samples": 53217,
+      "n_rtf_pts": 2582,
+      "n_deep_stall_pts": 8,
+      "n_stall_intervals": 8,
+      "d_content": {
+        "gyro_mean_xyz": [
+          -1.3e-05,
+          -3.7e-05,
+          5.6e-05
+        ],
+        "gyro_std_xyz": [
+          0.000619,
+          0.000619,
+          0.000612
+        ],
+        "gyro_absmax": 0.00303,
+        "gyro_absmax_sim_s": 24.476,
+        "gyro_absmax_in_stall": false,
+        "accel_mean_z": -9.8037,
+        "accel_std_mag": 0.39272,
+        "n_spikes_gt_0p05": 0,
+        "spikes_in_stall": 0,
+        "frac_spikes_in_stall": 0.0
+      },
+      "a_dt": {
+        "dup_stamps": 0,
+        "gaps_gt_tol": 0,
+        "short_lt_tol": 0,
+        "outside_4000pm100": 0,
+        "within_tol": 53216,
+        "pct_within": 100.0,
+        "max_gap_us": 4000.0,
+        "top_gaps": [
+          {
+            "sim_s": 215.012,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.088,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.128,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.124,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 73.12,
+            "dt_us": 4000.0
+          }
+        ]
+      },
+      "b_hold": {
+        "hold_samples": 0,
+        "pct_hold": 0.0,
+        "n_runs": 0,
+        "hold_in_stall": 0,
+        "frac_hold_in_stall": 0.0,
+        "top_runs": []
+      },
+      "c_var": {
+        "total_1s_windows": 214,
+        "zero_var_windows": 0,
+        "zero_var_in_stall": 0,
+        "frac_zerovar_in_stall": 0.0,
+        "var_eps": 1e-12
+      }
+    }
+  },
+  "PASS": {
+    "4": {
+      "dir": "results/K1/E/p0_0/boot4",
+      "n_samples": 43322,
+      "n_rtf_pts": 2098,
+      "n_deep_stall_pts": 7,
+      "n_stall_intervals": 7,
+      "d_content": {
+        "gyro_mean_xyz": [
+          0.000663,
+          -0.01339,
+          -0.158735
+        ],
+        "gyro_std_xyz": [
+          0.990488,
+          0.986826,
+          1.933414
+        ],
+        "gyro_absmax": 26.28354,
+        "gyro_absmax_sim_s": 173.796,
+        "gyro_absmax_in_stall": false,
+        "accel_mean_z": -9.7973,
+        "accel_std_mag": 6.07783,
+        "n_spikes_gt_0p05": 19079,
+        "spikes_in_stall": 63,
+        "frac_spikes_in_stall": 0.003
+      },
+      "a_dt": {
+        "dup_stamps": 0,
+        "gaps_gt_tol": 0,
+        "short_lt_tol": 0,
+        "outside_4000pm100": 0,
+        "within_tol": 43321,
+        "pct_within": 100.0,
+        "max_gap_us": 4000.0,
+        "top_gaps": [
+          {
+            "sim_s": 175.568,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 60.032,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 60.064,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 60.06,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 60.056,
+            "dt_us": 4000.0
+          }
+        ]
+      },
+      "b_hold": {
+        "hold_samples": 0,
+        "pct_hold": 0.0,
+        "n_runs": 0,
+        "hold_in_stall": 0,
+        "frac_hold_in_stall": 0.0,
+        "top_runs": []
+      },
+      "c_var": {
+        "total_1s_windows": 174,
+        "zero_var_windows": 0,
+        "zero_var_in_stall": 0,
+        "frac_zerovar_in_stall": 0.0,
+        "var_eps": 1e-12
+      }
+    },
+    "7": {
+      "dir": "results/K1/E/p0_0/boot7",
+      "n_samples": 43063,
+      "n_rtf_pts": 2055,
+      "n_deep_stall_pts": 7,
+      "n_stall_intervals": 7,
+      "d_content": {
+        "gyro_mean_xyz": [
+          0.000154,
+          -6e-05,
+          -0.009365
+        ],
+        "gyro_std_xyz": [
+          0.029607,
+          0.024179,
+          0.151425
+        ],
+        "gyro_absmax": 2.53164,
+        "gyro_absmax_sim_s": 105.124,
+        "gyro_absmax_in_stall": false,
+        "accel_mean_z": -9.7928,
+        "accel_std_mag": 0.76111,
+        "n_spikes_gt_0p05": 2127,
+        "spikes_in_stall": 21,
+        "frac_spikes_in_stall": 0.01
+      },
+      "a_dt": {
+        "dup_stamps": 0,
+        "gaps_gt_tol": 1,
+        "short_lt_tol": 0,
+        "outside_4000pm100": 1,
+        "within_tol": 43061,
+        "pct_within": 99.998,
+        "max_gap_us": 8000.0,
+        "top_gaps": [
+          {
+            "sim_s": 98.212,
+            "dt_us": 8000.0
+          },
+          {
+            "sim_s": 173.004,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 58.156,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 58.184,
+            "dt_us": 4000.0
+          },
+          {
+            "sim_s": 58.18,
+            "dt_us": 4000.0
+          }
+        ]
+      },
+      "b_hold": {
+        "hold_samples": 0,
+        "pct_hold": 0.0,
+        "n_runs": 0,
+        "hold_in_stall": 0,
+        "frac_hold_in_stall": 0.0,
+        "top_runs": []
+      },
+      "c_var": {
+        "total_1s_windows": 174,
+        "zero_var_windows": 0,
+        "zero_var_in_stall": 0,
+        "frac_zerovar_in_stall": 0.0,
+        "var_eps": 1e-12
+      }
+    }
+  },
+  "Z1_preflight_window_10_85s": {
+    "note": "oba na ziemi przed arm; surowy gyro identyczny FAIL vs PASS",
+    "gyro_std_rad_s_all_boots": "~0.00062 kazda os, FAIL i PASS jednakowo",
+    "accel_mean": "~[0.05,0.07,-9.80] (grawitacja), b7 lekko przechylony [-0.35,0.41,-9.79]",
+    "biasmag_in_window": {
+      "FAIL_b1": [
+        0.103,
+        0.186
+      ],
+      "FAIL_b3": [
+        0.087,
+        0.134
+      ],
+      "FAIL_b5": [
+        0.134,
+        0.163
+      ],
+      "PASS_b4": [
+        0.087,
+        0.142
+      ],
+      "PASS_b7": [
+        7.1e-05,
+        0.00018
+      ]
+    }
+  },
+  "Z1_bias_trajectory": {
+    "FAIL_b1": {
+      "s20": 0.147,
+      "s50": 0.183,
+      "s85": 0.177,
+      "end": 0.15,
+      "arm": null
+    },
+    "FAIL_b3": {
+      "s20": 0.107,
+      "s50": 0.127,
+      "s85": 0.134,
+      "end": 0.138,
+      "arm": null
+    },
+    "FAIL_b5": {
+      "s20": 0.137,
+      "s50": 0.134,
+      "s85": 0.155,
+      "end": 0.15,
+      "arm": null
+    },
+    "PASS_b4": {
+      "s20": 0.121,
+      "s50": 0.088,
+      "s85": 0.087,
+      "end": 0.036,
+      "arm": 93.3
+    },
+    "PASS_b7": {
+      "s20": 7e-05,
+      "s50": 8e-05,
+      "s85": 9e-05,
+      "end": 0.00017,
+      "arm": 94.8
+    }
+  },
+  "Z1_VERDICT": "STREAM IMU ZDROWY",
+  "Z1_verdict_detail": "Cadencja \u0394t 100% w 4000\u00b1100us (0 dup, 0 gap; 1 benign 8000us gap w PASS b7). Sample-and-hold: 0 probek bitowo identycznych w ZADNYM bocie. Zero-variance okna: 0. Surowy gyro w oknie preflight [10,85] IDENTYCZNY FAIL vs PASS (std ~0.00062 rad/s). Piki>0.05 rad/s w PASS = REALNY LOT po arm (konfundator), nie defekt. MIMO czystego plaskiego gyro bias EKF zatrzaskuje sie 0.10-0.19 od sim~20 w FAIL i nie wraca; PASS b4 startuje wysoko ale odzyskuje ->0.036; b7 czysty. => dywergencja biasu jest FENOMENEM EKF-WEWNETRZNYM (init/konwergencja/fuzja), NIE strumienia IMU.",
+  "Z2_branch": "Z1=zdrowy => C5 NIE jest warrantowany przyczynowo: jego premisa (mniej stalli=>mniej hold=>bias~0) FALSYFIKOWANA u podstawy (0 hold, IMU czyste niezaleznie od stalli, bias wysoki od sim20). STOP i decyzja na danych. Mechanizm biasu gdzie indziej: init/konwergencja EKF, kolejnosc fuzji, mag/baro. Bez zgadywania - nastepny cut = ANEKS od Olgi."
+}

@@ -1,0 +1,50 @@
+=== INFRA-1 campaign START=1 COUNT=10 cooldown=300s Tue Aug 25 13:55:31 CEST 2026 ===
+[campaign] X3 OK: load1=0.46 < 1.0, brak cudzych zadań — start serii.
+[campaign] boot1 : orphans_pre=0 load1=0.46 Tue Aug 25 13:55:31 CEST 2026
+[campaign] boot1 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=-1 load1=0.62 ekf_hits=4
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot2 : orphans_pre=0 load1=0.08 Tue Aug 25 14:04:33 CEST 2026
+[campaign] boot2 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=0.32 ekf_hits=1
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot3 : orphans_pre=0 load1=0.26 Tue Aug 25 14:13:32 CEST 2026
+[campaign] boot3 DONE rc=2 | arm_ok=False landed=False habitat=INVALID(habitat) conv_s=None load1=2.52 ekf_hits=4
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot4 : orphans_pre=0 load1=0.08 Tue Aug 25 14:23:13 CEST 2026
+[campaign] boot4 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=1.34 ekf_hits=2
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot5 : orphans_pre=0 load1=0.15 Tue Aug 25 14:32:16 CEST 2026
+[campaign] boot5 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=4.81 ekf_hits=2
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot6 : orphans_pre=0 load1=0.15 Tue Aug 25 14:41:12 CEST 2026
+[campaign] boot6 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=1.83 ekf_hits=2
+[campaign] cooldown 300s przed nastepnym...
+[campaign] X4 ABORT: kontencja w środku serii (done=6/10): foreign_cpu=[ 119 .venv/bin/python scripts/measure_model.py --repo Qwen/Qwen3.5-4B --revision 851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a --quant 8bit --diagnostics-only --out reports/diag_qwen35_8bit.json] load1=1.02 — SERIA SKAŻONA, licz od nowa (nie doliczam).
+=== INFRA-1 campaign START=1 COUNT=10 cooldown=300s Tue Aug 25 16:41:19 CEST 2026 ===
+[campaign] X3 REFUSE start: load1=0.42 (max 1.0) foreign=[foreign=src.runner.gate2] — maszyna NIE spoczynkowa. I3 tylko na czystej.
+=== INFRA-1 campaign START=1 COUNT=10 cooldown=300s Tue Aug 25 16:42:08 CEST 2026 ===
+[campaign] X3 OK: load1=0.27 < 1.0, brak cudzych zadań — start serii.
+[campaign] boot1 : orphans_pre=0 load1=0.27 Tue Aug 25 16:42:09 CEST 2026
+[campaign] boot1 DONE rc=2 | arm_ok=False landed=False habitat=INVALID(habitat) conv_s=-1 load1=6.06 ekf_hits=72
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot2 : orphans_pre=0 load1=0.33 Tue Aug 25 16:51:50 CEST 2026
+[campaign] boot2 DONE rc=2 | arm_ok=False landed=False habitat=INVALID(habitat) conv_s=None load1=0.96 ekf_hits=37
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot3 : orphans_pre=0 load1=0.09 Tue Aug 25 17:01:34 CEST 2026
+[campaign] boot3 DONE rc=2 | arm_ok=False landed=False habitat=INVALID(habitat) conv_s=None load1=4.9 ekf_hits=21
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot4 : orphans_pre=0 load1=0.18 Tue Aug 25 17:11:15 CEST 2026
+[campaign] boot4 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=0.74 ekf_hits=3
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot5 : orphans_pre=0 load1=0.18 Tue Aug 25 17:20:17 CEST 2026
+[campaign] boot5 DONE rc=2 | arm_ok=False landed=False habitat=INVALID(habitat) conv_s=None load1=2.05 ekf_hits=38
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot6 : orphans_pre=0 load1=0.09 Tue Aug 25 17:29:59 CEST 2026
+[campaign] boot6 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=1.19 ekf_hits=1
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot7 : orphans_pre=0 load1=0.03 Tue Aug 25 17:38:55 CEST 2026
+[campaign] boot7 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=0.77 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot8 : orphans_pre=0 load1=0.06 Tue Aug 25 17:47:56 CEST 2026
+[campaign] boot8 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=0.77 ekf_hits=2
+[campaign] cooldown 300s przed nastepnym...
+[campaign] X4 ABORT: kontencja w środku serii (done=8/10): foreign_cpu=[ 100 runc --root /var/run/docker/runtime-runc/moby --log /run/containerd/io.containerd.runtime.v2.task/moby/3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63/log.json --log-format json --systemd-cgroup exec --process /tmp/runc-process2311766664 --detach --pid-file /run/containerd/io.containerd.runtime.v2.task/moby/3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63/cec2fd33bdbb7dd6a4310f4125f2907e5aad4d0fed892196b12942b7dffa6cba.pid 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63] load1=0.00 — SERIA SKAŻONA, licz od nowa (nie doliczam).

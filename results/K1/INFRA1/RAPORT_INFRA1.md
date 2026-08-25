@@ -123,6 +123,112 @@ I3**: na w pełni czystej maszynie (X3: load<1.0, gate2 zakończone) spodziewamy
 liczba i habitat raportowane per boot w dziesiątce. Kryterium PASS I3 bez zmian (≥9/10 arm ∧ habitat
 VALID pustego lotu). X4: kontencja w środku serii ⇒ seria od nowa (nie doliczana).
 
+## §6. I3 WYKONANE — WERDYKT FAIL, mechanizm = dywergencja bias żyroskopu (ANEKS_INFRA2-3)
+
+**I3 (dziesiątka) odpalona 2026-08-25 16:42 na czystej maszynie (X3 OK: load1=0.27, brak cudzych zadań).
+Przerwana przez X4 przy boot9 (fałszywy dodatni, patrz Y2 niżej), ale werdykt jest jednoznaczny już z
+ośmiu bootów: bramka ≥9/10 NIEOSIĄGNIĘTA — 4/8 arm, 4/8 fail. BEZ ŁAGODZENIA.** (Y1)
+
+| boot | wallclock start | load1 start | arm | ekf_hits | deep-stalle rtf<0.5 | min_rtf | timejumps |
+|------|-----------------|:-----------:|:---:|:--------:|:-------------------:|:-------:|:---------:|
+| 1 | 16:42:09 | 0.27 | ✗ | **72** | 8 | 0.004 | 6 |
+| 2 | 16:51:50 | 0.33 | ✗ | **37** | 7 | 0.003 | 7 |
+| 3 | 17:01:34 | 0.09 | ✗ | **21** | 8 | 0.007 | 7 |
+| 4 | 17:11:15 | 0.18 | ✓ | 3 | 7 | 0.008 | 6 |
+| 5 | 17:20:17 | 0.18 | ✗ | **38** | 8 | 0.001 | 7 |
+| 6 | 17:29:59 | 0.09 | ✓ | 1 | 7 | 0.011 | 6 |
+| 7 | 17:38:55 | 0.03 | ✓ | 0 | 7 | 0.012 | 6 |
+| 8 | 17:47:56 | 0.06 | ✓ | 2 | 8 | 0.011 | 6 |
+
+**Arm-fail koreluje z `ekf_health_hits` (PASS: 0–3; FAIL: 21–72), NIE z load** (starty 0.03–0.33
+spoczynkowe wszędzie) **ani z timejumpami** (6–7 w każdym bocie, nie różnicują — zgodne z C1: artefakt
+licznika uxrce) **ani z deep-stallami** (7–8 w KAŻDYM bocie, PASS≈FAIL — Y3 niżej).
+
+**Uczciwa nota o interpretacji (Y1):** optymistyczna lektura pojedynczego shakeoutu W3 (boot3 PASS ⇒
+„maszyna armuje end-to-end") była **szczęściem jednego bootu** — to moja **czwarta zła interpretacja** w
+tym śledztwie. Jeden PASS z rozkładu ~50/50 nie jest dowodem zdolności. Rewert I2b (P0a) naprawił
+DEADLOCK (booty dochodzą do decyzji arm i albo armują, albo dostają health-denial — nie wieszają się),
+ale **spodni arm-fail-by-health został i jest losowy**. To dokładnie tryb S boot4/5/6, który C2 wskazał
+jako jedyny realny po usunięciu deadlocku.
+
+### §6a. Y4 — mechanizm: bias żyroskopu DYWERGUJE (nie „za mało czasu")
+
+Pomiar offline z ulogów (`estimator_sensor_bias.gyro_bias`, `estimator_status.pre_flt_fail_innov_*`):
+
+| boot | arm | sim_len | `\|gyro_bias\|` start→end | max | `pre_flt_fail_innov` |
+|------|:---:|:-------:|:------------------------:|:---:|----------------------|
+| 1 | ✗ | 214.8 s | 0.000 → **0.150** | 0.186 | CZYSTE od sim 2.1 s |
+| 3 | ✗ | 214.8 s | 0.000 → **0.138** | 0.140 | CZYSTE od sim 2.3 s |
+| 5 | ✗ | 214.8 s | 0.000 → **0.150** | 0.163 | CZYSTE od sim 2.2 s |
+| 7 | ✓ | 173.0 s | 0.000 → **0.0002** | 0.010 | CZYSTE od sim 0.9 s |
+
+**Rozstrzygnięcie Y4:** w bootach FAIL estymata bias żyroskopu **ucieka monotonicznie do ~0.14–0.15
+rad/s** (~8–9 °/s — ogromna); w PASS zostaje przy zerze. To **NIE jest wyścig o margines 300 s** — bias
+się nie zbiega, on dywerguje; dłuższe okno pogarsza, nie ratuje. Bloker arm w px4.log potwierdzony:
+**`Preflight Fail: High Gyro Bias`** (42×) + `horizontal velocity unstable` (30×). Uwaga: innowacyjne
+kontrole preflight (`pre_flt_fail_innov`) są **czyste w OBU** klasach — więc blokuje wyłącznie człon
+High-Gyro-Bias, nie innowacje. Kandydat na przyczynę: deep RTF-stalle mostu gz↔PX4 psują całkowanie IMU
+w EKF → runaway bias — ale patrz Y3: liczba stalli sama nie różnicuje, więc to zależność subtelniejsza
+(faza/timing stalli względem inicjalizacji EKF albo genuinie stochastyczna dywergencja).
+
+### §6b. Y3 — hipoteza rozgrzewki CC#5: NIE POTWIERDZONA
+
+Trzy osie, offline, zero bootów:
+- **(a) wallclock:** starty rozłożone 16:42→17:47 co ~9.5 min (tabela §6). Oś „czas-od-startu-WSL"
+  **SKAŻONA**: `uptime -s` w WSL2 liczone z `now − /proc/uptime` dryfuje przez host-sleep (pokazywało
+  14:03:18, a pierwszy — zvoidowany — przebieg biegł już 13:55). Do tego czas-od-startu i numer-bootu są
+  **współliniowe** w tej serii (booty sekwencyjne co ~9.5 min) — nie da się ich rozdzielić z jednego przebiegu.
+- **(b) ekf_hits vs numer bootu:** faile na pozycjach 1,2,3,**5**; PASS na 4,6,7,8. Jest **łagodny
+  bias wczesny** (3 z 4 faili w pierwszych 3 bootach), ale **boot5 (piąty, fail ekf=38 między dwoma PASS)
+  łamie monotoniczność** — nie ma czystego progu „pierwsze K padają, reszta przechodzi".
+- **(c) fizyczny kandydat rozgrzewki = deep-stalle: PŁASKI.** 7–8 deep-stalli w KAŻDYM bocie, PASS≈FAIL
+  (§6 tabela). Gdyby rozgrzewka działała przez ustępowanie stalli, późne booty miałyby ich mniej — nie mają.
+- **boot5 jako wyłom:** ma **najgłębszy pojedynczy stall całej serii (min_rtf 0.001)** i najwięcej
+  timejumpów (7) — mikroskopijne poszlaki „stall-driven", ale booty 6/7/8 przeszły przy podobnych liczbach.
+  Niekonkluzywne. `mem_free` niedostępne w manifeście (pole nie istnieje).
+
+**Werdykt Y3 (wprost, per instrukcję):** hipoteza rozgrzewki **nie przeżywa danych**. Zostaje:
+**stochastyczna dywergencja bias żyroskopu pod deep-stallami mostu, ~50% intermittentna, nietłumaczona
+przez numer bootu, load, timejumpy ani liczbę stalli.** Idziemy dalej bez rozgrzewki.
+
+### §6c. Y2 — X4 fałszywy dodatni (naprawiony jako przyrząd)
+
+Abort przy boot9 wywołał **przejściowy `runc … exec`** (Docker/containerd/moby) na chwilowym 100% CPU
+przy **load1=0.00** — to własny tooling kontenerowy harnessu (wywołania Bash lecą przez docker), NIE
+zadanie Olgi. Heurystyka `foreign_busy()` „obcy proces >50% CPU" łapała migawkowe spajki `runc exec`.
+**Naprawa (Y2): wykluczyć własne procesy kontenerowe po NAZWIE (runc/containerd/dockerd/docker/moby/
+buildkit), nie po progu CPU.** Diff w `ANEKS_SHA_W2.md`. **Nie zmienia werdyktu Y1** — seria i tak
+leciała 4/8 na długo przed abortem.
+
+### §6d. W0a — wersja PX4 serii 4/4 R0.3a = OBECNA (v1.16.2); różnica 4/4↔4/8 jako otwarta obserwacja
+
+**W0a (offline, zero bootów, cytat z repo):** PX4-Autopilot to zagnieżdżone repo git (gitignorowane w
+liquidpatrol — brak pinu submodułu). Reflog rozstrzyga historię HEAD:
+
+```
+54f0455ffc HEAD@{2026-08-05 00:22:34 +0200}: checkout: moving from main to v1.16.2
+9f4bc80006 HEAD@{2026-08-05 00:15:20 +0200}: clone: from https://github.com/PX4/PX4-Autopilot.git
+```
+
+Dwa jedyne ruchy HEAD: clone (05.08) → natychmiast checkout **v1.16.2** (05.08), potem NIC. `describe`
+i `tag --points-at 54f0455` = **v1.16.2**. Seria R0.3a gate biegła **10–11.08** (najstarszy artefakt
+`S4/boot3/boot.log` = 10.08 14:35 — nic sprzed 05.08, PX4 wtedy nie istniał w repo). ⇒ **seria 4/4 R0.3a
+biegła na PX4 v1.16.2, commit `54f0455ffcd755534539a7cf33a09a20bf71d29d` — IDENTYCZNIE jak dziś (I3).**
+
+**⇒ Ścieżka W0c: wersja identyczna.** Eksperyment wersyjny (W0b) NIE jest wyzwalany; E1 (watchdog wg
+INFRA2-6) bez zmian. Zatrzask NIE przyszedł z wersją PX4.
+
+**Otwarta obserwacja (4/4 wtedy vs 4/8 dziś) — uczciwie:**
+- Ta sama wersja, więc różnica częstości **nie jest** regresją wersji.
+- **Zjawisko biasu ISTNIAŁO już w serii 4/4:** `High Gyro Bias` w px4.log R0.3a: S3/boot1 = 1 linia,
+  S4/boot1 = 4 linie — a mimo to te booty **zaarmowały** (odzysk, jak I3 PASS-recover b4). Czyli 4/4 nie
+  było „czystą maszyną bez zjawiska", lecz **czterema odzyskami z rzędu** tego samego intermittentnego
+  procesu.
+- Przy p_arm ≈ 0.5 (I3: 4/8) cztery arm z rzędu = **0.5⁴ = 1/16 ≈ 6.25%** — rzadkie, ale nie niemożliwe.
+  Jeśli p_arm było wtedy wyższe (inne warunki sesji: GUI, termika, uptime WSL, obciążenie), 4/4 jest mniej
+  zaskakujące. **Z danych NIE rozróżnimy „szczęścia przy p≈0.5" od „niekontrolowanej różnicy warunków"** —
+  obie hipotezy zostają otwarte, żadna nie jest wersyjna.
+
 ## §5. Nota do RAPORT_K1 §IV (charakterystyka env)
 
 Rodzina D8/B5 w tej kampanii: gz RTF deep-stalls (rtf do 0.01, ~9/boot) + pętla PX4 `time jump

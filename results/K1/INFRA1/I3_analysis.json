@@ -1,0 +1,35 @@
+{
+  "aneks": "ANEKS_INFRA2-3",
+  "date": "2026-08-25",
+  "I3_verdict": "FAIL",
+  "gate": ">=9/10 arm AND habitat VALID — NIEOSIAGNIETA",
+  "series_start_wall": "16:42:08 CEST",
+  "aborted_at_boot": 9,
+  "abort_reason": "X4 false-positive: runc exec (docker/containerd) 100% CPU momentary, load1=0.00",
+  "boots": [
+    {"n":1,"wall":"16:42:09","load1_start":0.27,"arm":false,"ekf_hits":72,"deep_stalls":8,"min_rtf":0.004,"tj":6,"gyro_bias_end":0.150,"gyro_bias_max":0.186,"sim_len_s":214.8,"innov_clean_from_s":2.1},
+    {"n":2,"wall":"16:51:50","load1_start":0.33,"arm":false,"ekf_hits":37,"deep_stalls":7,"min_rtf":0.003,"tj":7},
+    {"n":3,"wall":"17:01:34","load1_start":0.09,"arm":false,"ekf_hits":21,"deep_stalls":8,"min_rtf":0.007,"tj":7,"gyro_bias_end":0.138,"gyro_bias_max":0.140,"sim_len_s":214.8,"innov_clean_from_s":2.3},
+    {"n":4,"wall":"17:11:15","load1_start":0.18,"arm":true,"ekf_hits":3,"deep_stalls":7,"min_rtf":0.008,"tj":6},
+    {"n":5,"wall":"17:20:17","load1_start":0.18,"arm":false,"ekf_hits":38,"deep_stalls":8,"min_rtf":0.001,"tj":7,"gyro_bias_end":0.150,"gyro_bias_max":0.163,"sim_len_s":214.8,"innov_clean_from_s":2.2,"outlier":"najglebszy stall serii (0.001), najwiecej tj (7), fail miedzy PASS"},
+    {"n":6,"wall":"17:29:59","load1_start":0.09,"arm":true,"ekf_hits":1,"deep_stalls":7,"min_rtf":0.011,"tj":6},
+    {"n":7,"wall":"17:38:55","load1_start":0.03,"arm":true,"ekf_hits":0,"deep_stalls":7,"min_rtf":0.012,"tj":6,"gyro_bias_end":0.0002,"gyro_bias_max":0.010,"sim_len_s":173.0,"innov_clean_from_s":0.9},
+    {"n":8,"wall":"17:47:56","load1_start":0.06,"arm":true,"ekf_hits":2,"deep_stalls":8,"min_rtf":0.011,"tj":6}
+  ],
+  "Y4_mechanism": {
+    "finding": "gyro_bias DYWERGUJE w FAIL (->0.14-0.15 rad/s), zostaje ~0 w PASS",
+    "arm_blocker": "Preflight Fail: High Gyro Bias (42x boot1) + horizontal velocity unstable (30x)",
+    "pre_flt_fail_innov": "CZYSTE w OBU klasach — nie innowacje blokuja",
+    "verdict": "NIE wyscig o 300s — bias nie zbiega, dywerguje; wiecej czasu = gorzej"
+  },
+  "Y3_warmup_hypothesis": {
+    "id": "CC#5",
+    "verdict": "NIE POTWIERDZONA",
+    "boot_number": "fails 1,2,3,5 — lagodny bias wczesny ale boot5 lamie monotonicznosc",
+    "deep_stalls": "PLASKIE 7-8/boot PASS≈FAIL — fizyczny kandydat rozgrzewki nie dziala",
+    "wsl_uptime_axis": "SKAZONA (uptime -s dryf w WSL2), wspolliniowa z numerem bootu",
+    "residual": "stochastyczna dywergencja bias pod deep-stallami mostu, ~50% intermittentna"
+  },
+  "Y2_x4_fix": "foreign_busy() wyklucza wlasny tooling kontenerowy po nazwie (runc/containerd/moby), nie po progu CPU",
+  "Y5_next": "INFRA-2 wlasciwe na most gz↔PX4; C5 (render backend) = pierwszy pomiar, tylko na sygnal Olgi"
+}
