@@ -1,0 +1,6 @@
+certs_selfcheck rc=0
+GUI_PROCS=[brak]
+[K1 S p0.35 b1] watchdog EKF2 (preflight-only) pid=131225
+[K1 S p0.35 b1] settle 90 s preflight EKF
+{"manifest": "manifest.json", "judge": "judge.json", "t_inj_sim": 112.448, "px4_inj_us": 112476000.0, "judge_frozen": true, "verdict_fields": ["R_E", "arm", "breach", "eps_pos_touchdown_m", "home_enu", "inj_xy_enu", "n_epi", "n_gt", "params", "point", "r_max", "r_max_rel_t_s", "r_td", "t_inj_sim", "t_refuse_rel_s", "t_td_s", "touchdown_found", "ulog", "x_exc"]}
+[K1 S p0.35 b1] DONE rc=0 → /home/olga/projects/liquidpatrol/results/K1/S/p0_35/boot1

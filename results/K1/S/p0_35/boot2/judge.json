@@ -1,0 +1,67 @@
+{
+  "arm": "S",
+  "t_inj_sim": 114.368,
+  "home_enu": [
+    -0.003,
+    -0.0
+  ],
+  "inj_xy_enu": [
+    4.466,
+    14.43
+  ],
+  "r_max": 15.106,
+  "r_max_rel_t_s": 0.0,
+  "r_td": 14.069,
+  "x_exc": 2.719,
+  "t_td_s": 4.0,
+  "breach": false,
+  "R_E": 32.0,
+  "touchdown_found": true,
+  "n_gt": 1020,
+  "n_epi": 338,
+  "point": 0.35,
+  "ulog": {
+    "offset_s": -0.008,
+    "nav_state_seq": [
+      [
+        -114.376,
+        4,
+        "AUTO_LOITER"
+      ],
+      [
+        -21.176,
+        17,
+        "AUTO_PRECLAND"
+      ],
+      [
+        -11.144,
+        14,
+        "OFFBOARD"
+      ],
+      [
+        4.096,
+        12,
+        "DESCEND"
+      ],
+      [
+        8.08,
+        14,
+        "OFFBOARD"
+      ]
+    ],
+    "t_xy_valid_off_rel_s": 3.98,
+    "t_dead_reckoning_on_rel_s": 0.3,
+    "nav_land_ack": null,
+    "pin": "px4_inj_us"
+  },
+  "params": {
+    "EKF2_GPS_CTRL": 7,
+    "COM_POS_LOW_ACT": 3,
+    "COM_POS_FS_EPH": 5.0,
+    "MPC_LAND_SPEED": 0.699999988079071,
+    "EKF2_HGT_REF": 0,
+    "COM_OF_LOSS_T": 1.0
+  },
+  "t_refuse_rel_s": 0.08,
+  "eps_pos_touchdown_m": 0.933
+}
