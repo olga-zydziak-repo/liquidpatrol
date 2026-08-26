@@ -1,0 +1,237 @@
+{
+  "spec": "INFRA2-6/E1 \u2014 boot detekcyjny (E1g), OLD-code (fbav parse bug z\u0142apany+naprawiony po tym boocie)",
+  "boot": 90,
+  "note": "load1=7.29 podczas boota \u2014 NIE warunek czystej maszyny E1d (X3<1.0); arm+reinit ZACH\u0118CAJ\u0104CE, nie bramkowane",
+  "outcome": {
+    "arm_ok": true,
+    "took_off": true,
+    "landed": true,
+    "habitat": "INVALID(habitat)",
+    "armed_sim": 89.224,
+    "ekf_health_hits": 2,
+    "load1": 7.29
+  },
+  "watchdog": {
+    "n_reinits": 1,
+    "reinit_sims": [
+      60.268
+    ],
+    "reinit_reasons": [
+      "SLOW_bias>0.08_no_decrease_30s"
+    ],
+    "reinit_before_arm": true,
+    "bias_max_absmax": 0.13585,
+    "bias_at_end_absmax": 0.00013,
+    "bias_at_arm_absmax": 7e-05,
+    "first_fault_sim": {
+      "filter_fault_1024": null,
+      "fs_bad_acc_vertical": null
+    },
+    "armed_sim": 89.224,
+    "n_samples": 34,
+    "n_poll_fail": 1,
+    "reinits": [
+      {
+        "idx": 1,
+        "reason": "SLOW_bias>0.08_no_decrease_30s",
+        "sim": 60.268,
+        "wall": 1787738930.096,
+        "consec_fault": 0,
+        "action": {
+          "rc_stop": 0,
+          "rc_start": 0,
+          "cmd_wall_s": 2.109
+        },
+        "bias_before": {
+          "absmax": 0.13585,
+          "norm": 0.13724,
+          "xyz": [
+            -0.01656,
+            -0.01026,
+            -0.13585
+          ],
+          "fff": 0,
+          "fbav": null
+        },
+        "bias_after": {
+          "absmax": 0.00017,
+          "norm": 0.000195,
+          "xyz": [
+            -0.00017,
+            -9e-05,
+            -3e-05
+          ],
+          "fff": 0,
+          "fbav": null
+        }
+      }
+    ]
+  },
+  "bias_trajectory": [
+    {
+      "sim": 5.092,
+      "absmax": 0.05245,
+      "fff": 0
+    },
+    {
+      "sim": 10.14,
+      "absmax": 0.09179,
+      "fff": 0
+    },
+    {
+      "sim": 15.06,
+      "absmax": 0.10121,
+      "fff": 0
+    },
+    {
+      "sim": 20.104,
+      "absmax": 0.07735,
+      "fff": 0
+    },
+    {
+      "sim": 25.16,
+      "absmax": 0.06234,
+      "fff": 0
+    },
+    {
+      "sim": 30.208,
+      "absmax": 0.09682,
+      "fff": 0
+    },
+    {
+      "sim": 35.256,
+      "absmax": 0.09091,
+      "fff": 0
+    },
+    {
+      "sim": 40.268,
+      "absmax": 0.11353,
+      "fff": 0
+    },
+    {
+      "sim": 45.316,
+      "absmax": 0.12347,
+      "fff": 0
+    },
+    {
+      "sim": 50.268,
+      "absmax": 0.12648,
+      "fff": 0
+    },
+    {
+      "sim": 55.452,
+      "absmax": 0.13211,
+      "fff": 0
+    },
+    {
+      "sim": 60.268,
+      "absmax": 0.13585,
+      "fff": 0
+    },
+    {
+      "sim": 65.748,
+      "absmax": 0.00017,
+      "fff": 0
+    },
+    {
+      "sim": 69.344,
+      "absmax": 4e-05,
+      "fff": 0
+    },
+    {
+      "sim": 74.328,
+      "absmax": 6e-05,
+      "fff": 0
+    },
+    {
+      "sim": 79.28,
+      "absmax": 9e-05,
+      "fff": 0
+    },
+    {
+      "sim": 84.136,
+      "absmax": 7e-05,
+      "fff": 0
+    },
+    {
+      "sim": 89.172,
+      "absmax": 7e-05,
+      "fff": 0
+    },
+    {
+      "sim": 93.748,
+      "absmax": 0.00027,
+      "fff": 0
+    },
+    {
+      "sim": 98.44,
+      "absmax": 0.0001,
+      "fff": 0
+    },
+    {
+      "sim": 103.472,
+      "absmax": 0.0008,
+      "fff": 0
+    },
+    {
+      "sim": 107.696,
+      "absmax": 0.00074,
+      "fff": 0
+    },
+    {
+      "sim": 112.736,
+      "absmax": 0.00062,
+      "fff": 0
+    },
+    {
+      "sim": 118.608,
+      "absmax": 0.00041,
+      "fff": 0
+    },
+    {
+      "sim": 123.648,
+      "absmax": 0.00024,
+      "fff": 0
+    },
+    {
+      "sim": 128.692,
+      "absmax": 0.00012,
+      "fff": 0
+    },
+    {
+      "sim": 133.732,
+      "absmax": 0.0001,
+      "fff": 0
+    },
+    {
+      "sim": 138.772,
+      "absmax": 0.0001,
+      "fff": 0
+    },
+    {
+      "sim": 143.812,
+      "absmax": 0.00011,
+      "fff": 0
+    },
+    {
+      "sim": 148.852,
+      "absmax": 0.00012,
+      "fff": 0
+    },
+    {
+      "sim": 153.892,
+      "absmax": 0.00012,
+      "fff": 0
+    },
+    {
+      "sim": 158.932,
+      "absmax": 0.00013,
+      "fff": 0
+    },
+    {
+      "sim": 163.936,
+      "absmax": 0.00013,
+      "fff": 0
+    }
+  ]
+}

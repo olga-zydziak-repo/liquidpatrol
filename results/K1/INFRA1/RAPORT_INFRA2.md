@@ -249,6 +249,41 @@ separator jest wewnętrzny, a jego KORZEŃ (dlaczego pion faultuje / co destabil
 nieodczytywalny z tej tabeli — bez interpretacji ponad tabelę. Następny krok = **eksperyment różnicowy na
 parametrach inicjalizacji EKF / źródle faultu `acc_vertical`, OSOBNY dokument**, nie ta sesja.
 
+## §2-WYK5. WYKONANE (INFRA2-6/E1, CC 2026-08-26): watchdog reinitu EKF2 zbudowany + boot detekcyjny
+
+**Zmiana (SI-1, WYŁĄCZNIE gałąź E harnessu — infra, nie certyfikowany lot):** watchdog reinitu EKF2
+wewnątrz bootu. Sędzia (`k1_judge.py`), osłona, piny, certyfikowana ścieżka S∧N — NIETKNIĘTE.
+- `tools/infra2_ekf_watchdog.py` (nowy, E1a-c): read-only sampler co ~5 s po sockecie daemona PX4
+  (`px4-listener` → `/tmp/px4-sock-0`) pól `estimator_status.filter_fault_flags`,
+  `estimator_status_flags.fs_bad_acc_vertical`, `estimator_sensor_bias.gyro_bias[0..2]` (sim-czas = uORB
+  timestamp). Trigger: **FAST** = `filter_fault_flags==1024 ∨ fs_bad_acc_vertical` w 2 kolejnych próbkach;
+  **SLOW** (fallback) = `|gyro_bias|>0.08` bez trendu malejącego przez 30 s (sim) po sim 60 s. Akcja:
+  `ekf2 stop`→`ekf2 start`, stemple sim/wall + bias przed/po, MAKS 2 reinity/boot. Zero abortu/relaunchu/
+  zmiany EKF2_*/okna arm (E1c, E1h).
+- `k1/run_k1_boot.sh` (jedna zmiana, gałąź E): start watchdoga po starcie stacku, kill (SIGTERM) po module lotu.
+- `tools/infra1_empty_finalize.py` (tools): blok `watchdog` w manifeście (E1e) — n_reinits, reinit_sims/reasons,
+  reinit_before_arm, bias_max/at_arm/at_end, first_fault_sim, armed_sim.
+
+**Boot detekcyjny (E1g, `boot90`, `E1_detection_boot90.json`) — łańcuch detekcja→reinit→odzysk POTWIERDZONY:**
+bias dywergował 0.052@sim5 → 0.092@10 → **0.136@60** (monotonicznie, sygnatura Y4/Z1; `fff` cały czas 0 —
+sztorm pionu nie wybuchł, więc **SLOW fallback** złapał, dokładnie jego rola). **SLOW trigger @sim60.27**
+(bias 0.136>0.08, brak spadku 30 s) → `ekf2 stop/start` rc 0/0 (2.1 s) → **bias runął 0.136→0.00017** →
+dron **zaarmował @sim89.2 z biasem 7e-05** (`reinit_before_arm=True`, arm_ok/took_off/landed=True). Zatrzask
+NIE wrócił po reinicie (brak sygnału śmierci E1f przy n=1).
+
+**Zastrzeżenia (uczciwie):**
+- boot90 biegł pod **load1=7.29** — NIE warunek czystej maszyny E1d (X3<1.0). Arm+reinit są **zachęcające,
+  nie bramkowane**; `habitat=INVALID` to artefakt kontencji (Δsim/Δwall na oknie hoveru), nie watchdoga. n=1
+  nie dowodzi ≥9/10 — to robi dopiero dziesiątka E1d na czystej maszynie.
+- Ścieżka **FAST/fbav nie wystrzeliła end-to-end** (fff nigdy 1024 w tym boocie). Przy pierwszym boocie
+  parser `fs_bad_acc_vertical` czytał `\d+`, a listener drukuje bool `True/False` → pole = null. **Bug
+  złapany i naprawiony** (regex `True|False|\d+`, test statyczny na realnym wyjściu listenera PASS); SLOW
+  udowodniona end-to-end, FAST zweryfikowana parserowo vs żywe wyjście.
+
+**STAN E1g:** commit E1a-c/-e + dowód → **STOP na push (Olga)** → po sygnale dziesiątka E1d
+(≥9/10 arm ∧ habitat VALID, kontrola 4/8 z I3), booty z reinitem raportowane osobno (E1e), kryterium śmierci
+E1f czynne.
+
 ## §5. Co JEST już ustalone (nie badać ponownie)
 
 - Obciążenie CPU NIE jest driverem (INFRA-1 §1, pomiar). ✗ nie wracać.

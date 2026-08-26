@@ -94,6 +94,39 @@ def main():
     landed = "touchdown" in evs
     hs = ev_by.get("hover_start", {}).get("sim")
     he = ev_by.get("hover_end", {}).get("sim")
+    armed_sim = ev_by.get("armed", {}).get("sim")
+
+    # E1e: blok watchdoga EKF2 (INFRA2-6/E1) — n_reinits, trajektoria biasu, first-fault, reinit-przed-arm.
+    wd_block = None
+    wpath = os.path.join(od, "ekf_watchdog.json")
+    if os.path.exists(wpath):
+        try:
+            wd = json.load(open(wpath))
+            reinit_sims = [r.get("sim") for r in wd.get("reinits", []) if r.get("sim") is not None]
+            reinit_before_arm = bool(armed_sim is not None and any(rs < armed_sim for rs in reinit_sims))
+            wd_block = {
+                "n_reinits": wd.get("n_reinits", 0),
+                "reinit_sims": reinit_sims,
+                "reinit_reasons": [r.get("reason") for r in wd.get("reinits", [])],
+                "reinit_before_arm": reinit_before_arm,
+                "bias_max_absmax": wd.get("bias_max"),
+                "bias_at_end_absmax": (wd.get("bias_last") or {}).get("bias_absmax"),
+                "bias_at_arm_absmax": None,
+                "first_fault_sim": wd.get("first_fault_sim"),
+                "armed_sim": armed_sim,
+                "n_samples": len(wd.get("samples", [])),
+                "n_poll_fail": wd.get("n_poll_fail"),
+                "reinits": wd.get("reinits", []),
+            }
+            # bias przy arm: ostatnia próbka watchdoga z sim ≤ armed_sim
+            if armed_sim is not None:
+                cand = [s for s in wd.get("samples", [])
+                        if s.get("sim") is not None and s.get("bias_absmax") is not None
+                        and s["sim"] <= armed_sim]
+                if cand:
+                    wd_block["bias_at_arm_absmax"] = cand[-1]["bias_absmax"]
+        except Exception as e:
+            wd_block = {"error": repr(e)}
 
     # habitat na oknie hoveru — ten sam kod i próg co K1 (PRE_K1 §2)
     hab_verdict, hab_detail = "INVALID(habitat)", {}
@@ -140,13 +173,17 @@ def main():
         "hover_window_sim": [hs, he],
         "n_gt": len(gt), "n_ekf": len(ekf), "events": [e.get("ev") for e in events],
         "habitat_verdict": hab_verdict,
+        "armed_sim": armed_sim,
+        "watchdog": wd_block,
         "sha_harness": sha256_file(a.harness_file), "harness_file": a.harness_file,
     }
     with open(os.path.join(od, "manifest.json"), "w") as f:
         json.dump(manifest, f, indent=2)
     print(json.dumps({"boot": a.boot, "arm_ok": arm_ok, "landed": landed,
                       "habitat": hab_verdict, "conv_s": manifest["conv_s"],
-                      "loadavg1": (manifest["session"]["loadavg"] or [None])[0]}))
+                      "loadavg1": (manifest["session"]["loadavg"] or [None])[0],
+                      "wd_reinits": (wd_block or {}).get("n_reinits"),
+                      "wd_bias_max": (wd_block or {}).get("bias_max_absmax")}))
 
 
 if __name__ == "__main__":

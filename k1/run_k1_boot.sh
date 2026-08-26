@@ -65,6 +65,17 @@ echo "GUI_PROCS=[$(pgrep -af 'gz sim -g|gz-gui' | grep -v pgrep || echo brak)]" 
 for i in $(seq 1 40); do gz topic -l 2>/dev/null | grep -q "/world/${WORLD}/clock" && break; sleep 1; done
 setsid nohup python3 -m acts.rtf_sampler --world "$WORLD" --out "$OUTDIR/rtf_stream.jsonl" > "$OUTDIR/rtf_sampler.log" 2>&1 &
 RTF=$!
+# INFRA2-6/E1 (SI-1, TYLKO gałąź E — infra, nie certyfikowany lot K1): watchdog reinitu EKF2 wewnątrz
+# bootu. Read-only sampler co 5 s po sockecie daemona PX4 (px4-listener) + `ekf2 stop/start` przy triggerze
+# zatrzasku (V1). ŻADNEGO abortu/relaunchu/zmiany EKF2_*/okna arm. Osłona/sędzia/piny/harness lotu S∧N NIETKNIĘTE.
+WD=""
+if [ "$ARM" = "E" ]; then
+  setsid nohup python3 tools/infra2_ekf_watchdog.py \
+    --px4-bin "$ROOT/PX4-Autopilot/build/px4_sitl_default/bin" \
+    --out "$OUTDIR/ekf_watchdog.json" > "$OUTDIR/ekf_watchdog.log" 2>&1 &
+  WD=$!
+  echo "[K1 $ARM p$POINT b$BOOT_N] E1 watchdog EKF2 pid=$WD" | tee -a "$OUTDIR/ekf_watchdog.log"
+fi
 # INFRA-1 ANEKS_INFRA1-3 W2 (P0a): REWERT I2b. Moduł lotu startuje BEZWARUNKOWO po 90 s settle —
 # stan znany-dobry (N boot4 / S4-6 / R0.3a armowały). I2b czekał na 'Ready for takeoff' PRZED startem
 # modułu lotu, co tworzyło DEADLOCK: 'Ready'⇐pre_flight_checks_pass⇐wyczyszczenie 'No connection to GCS'
@@ -89,7 +100,9 @@ else
   RC=$?; HARNESS_FILE="$ROOT/k1/k1_arm_n.py"
 fi
 
-kill -TERM "$RTF" 2>/dev/null; sleep 1
+kill -TERM "$RTF" 2>/dev/null
+[ -n "$WD" ] && { kill -TERM "$WD" 2>/dev/null; sleep 7; }   # E1: watchdog dopisuje ekf_watchdog.json na SIGTERM
+sleep 1
 grep -ci 'time jump\|Resetting time sync' "$OUTDIR/stack.log" > "$OUTDIR/timejump_post.txt" 2>/dev/null || echo 0 > "$OUTDIR/timejump_post.txt"
 grep -ciE 'High Gyro Bias|velocity unstable|horizontal velocity' "$OUTDIR/px4.log" > "$OUTDIR/ekf_health_hits.txt" 2>/dev/null || echo 0 > "$OUTDIR/ekf_health_hits.txt"
 
