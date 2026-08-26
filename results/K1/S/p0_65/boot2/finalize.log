@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/olga/projects/liquidpatrol/k1/k1_finalize.py", line 623, in <module>
+    main()
+  File "/home/olga/projects/liquidpatrol/k1/k1_finalize.py", line 218, in main
+    gt, ekf, events, meta, outcome = load_trace(a.trace)
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "/home/olga/projects/liquidpatrol/k1/k1_finalize.py", line 39, in load_trace
+    with open(path) as f:
+         ^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/home/olga/projects/liquidpatrol/results/K1/S/p0_65/boot2/trace.jsonl'

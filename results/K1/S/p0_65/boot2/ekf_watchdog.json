@@ -1,0 +1,428 @@
+{
+  "spec": "INFRA2-6/E1",
+  "instance": 0,
+  "px4_bin": "/home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin",
+  "params": {
+    "FFF_LATCH": 1024,
+    "BIAS_SLOW": 0.08,
+    "SLOW_AFTER_SIM": 60.0,
+    "SLOW_WIN_SIM": 30.0,
+    "FAST_CONSEC": 2,
+    "MAX_REINITS": 2,
+    "POLL_S": 5.0,
+    "bias_metric": "max_abs_axis"
+  },
+  "started_wall": 1787787687.216,
+  "samples": [
+    {
+      "wall": 1787787687.247,
+      "sim": 2.48,
+      "fff": null,
+      "fbav": null,
+      "gyro_bias": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "bias_absmax": 0.0,
+      "bias_norm": 0.0
+    },
+    {
+      "wall": 1787787695.517,
+      "sim": 7.5,
+      "fff": 1024,
+      "fbav": 1,
+      "gyro_bias": [
+        -0.05713,
+        -0.00614,
+        0.04323
+      ],
+      "bias_absmax": 0.05713,
+      "bias_norm": 0.071905
+    },
+    {
+      "wall": 1787787700.555,
+      "sim": 12.548,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.14781,
+        -0.00409,
+        0.0397
+      ],
+      "bias_absmax": 0.14781,
+      "bias_norm": 0.153103
+    },
+    {
+      "wall": 1787787705.59,
+      "sim": 17.532,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.13801,
+        -0.00056,
+        0.03389
+      ],
+      "bias_absmax": 0.13801,
+      "bias_norm": 0.142111
+    },
+    {
+      "wall": 1787787710.624,
+      "sim": 22.612,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.10599,
+        0.06626,
+        -0.00287
+      ],
+      "bias_absmax": 0.10599,
+      "bias_norm": 0.12503
+    },
+    {
+      "wall": 1787787715.662,
+      "sim": 27.5,
+      "fff": 1024,
+      "fbav": 1,
+      "gyro_bias": [
+        -0.08932,
+        -0.01595,
+        0.0313
+      ],
+      "bias_absmax": 0.08932,
+      "bias_norm": 0.09598
+    },
+    {
+      "wall": 1787787720.698,
+      "sim": 32.684,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.07944,
+        -0.11271,
+        0.13266
+      ],
+      "bias_absmax": 0.13266,
+      "bias_norm": 0.191345
+    },
+    {
+      "wall": 1787787725.725,
+      "sim": 37.708,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.07335,
+        -0.11622,
+        0.14413
+      ],
+      "bias_absmax": 0.14413,
+      "bias_norm": 0.19915
+    },
+    {
+      "wall": 1787787733.985,
+      "sim": 42.748,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.07206,
+        -0.10674,
+        0.15
+      ],
+      "bias_absmax": 0.15,
+      "bias_norm": 0.197702
+    },
+    {
+      "wall": 1787787739.017,
+      "sim": 47.788,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.07067,
+        -0.08741,
+        0.14448
+      ],
+      "bias_absmax": 0.14448,
+      "bias_norm": 0.183055
+    },
+    {
+      "wall": 1787787744.05,
+      "sim": 52.812,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.06977,
+        -0.08091,
+        0.14658
+      ],
+      "bias_absmax": 0.14658,
+      "bias_norm": 0.181384
+    },
+    {
+      "wall": 1787787749.081,
+      "sim": 57.82,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.0671,
+        -0.06975,
+        0.15
+      ],
+      "bias_absmax": 0.15,
+      "bias_norm": 0.178515
+    },
+    {
+      "wall": 1787787754.111,
+      "sim": 62.404,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.06609,
+        -0.06647,
+        0.15
+      ],
+      "bias_absmax": 0.15,
+      "bias_norm": 0.176879
+    },
+    {
+      "wall": 1787787761.164,
+      "sim": 69.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -8e-05,
+        7e-05,
+        4e-05
+      ],
+      "bias_absmax": 8e-05,
+      "bias_norm": 0.000114
+    },
+    {
+      "wall": 1787787769.419,
+      "sim": 74.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -8e-05,
+        8e-05,
+        4e-05
+      ],
+      "bias_absmax": 8e-05,
+      "bias_norm": 0.00012
+    },
+    {
+      "wall": 1787787774.459,
+      "sim": 79.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -9e-05,
+        9e-05,
+        4e-05
+      ],
+      "bias_absmax": 9e-05,
+      "bias_norm": 0.000133
+    },
+    {
+      "wall": 1787787779.49,
+      "sim": 84.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -9e-05,
+        0.0001,
+        5e-05
+      ],
+      "bias_absmax": 0.0001,
+      "bias_norm": 0.000144
+    },
+    {
+      "wall": 1787787784.521,
+      "sim": 89.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -8e-05,
+        9e-05,
+        4e-05
+      ],
+      "bias_absmax": 9e-05,
+      "bias_norm": 0.000127
+    },
+    {
+      "wall": 1787787789.551,
+      "sim": 94.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -8e-05,
+        0.0001,
+        3e-05
+      ],
+      "bias_absmax": 0.0001,
+      "bias_norm": 0.000132
+    },
+    {
+      "wall": 1787787794.583,
+      "sim": 99.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -7e-05,
+        0.0001,
+        3e-05
+      ],
+      "bias_absmax": 0.0001,
+      "bias_norm": 0.000126
+    },
+    {
+      "wall": 1787787802.857,
+      "sim": 104.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -7e-05,
+        0.0001,
+        2e-05
+      ],
+      "bias_absmax": 0.0001,
+      "bias_norm": 0.000124
+    },
+    {
+      "wall": 1787787807.892,
+      "sim": 109.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -7e-05,
+        0.0001,
+        2e-05
+      ],
+      "bias_absmax": 0.0001,
+      "bias_norm": 0.000124
+    },
+    {
+      "wall": 1787787812.922,
+      "sim": 114.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -6e-05,
+        0.0001,
+        2e-05
+      ],
+      "bias_absmax": 0.0001,
+      "bias_norm": 0.000118
+    },
+    {
+      "wall": 1787787817.964,
+      "sim": 119.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -6e-05,
+        9e-05,
+        2e-05
+      ],
+      "bias_absmax": 9e-05,
+      "bias_norm": 0.00011
+    },
+    {
+      "wall": 1787787823.011,
+      "sim": 124.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -7e-05,
+        9e-05,
+        2e-05
+      ],
+      "bias_absmax": 9e-05,
+      "bias_norm": 0.000116
+    },
+    {
+      "wall": 1787787828.062,
+      "sim": 129.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -7e-05,
+        0.0001,
+        2e-05
+      ],
+      "bias_absmax": 0.0001,
+      "bias_norm": 0.000124
+    },
+    {
+      "wall": 1787787836.324,
+      "sim": 134.488,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -8e-05,
+        0.00011,
+        2e-05
+      ],
+      "bias_absmax": 0.00011,
+      "bias_norm": 0.000137
+    }
+  ],
+  "reinits": [
+    {
+      "idx": 1,
+      "reason": "SLOW_bias>0.08_no_decrease_30s",
+      "sim": 62.404,
+      "wall": 1787787761.164,
+      "consec_fault": 0,
+      "action": {
+        "rc_stop": 0,
+        "rc_start": 0,
+        "cmd_wall_s": 2.032
+      },
+      "bias_before": {
+        "absmax": 0.15,
+        "norm": 0.176879,
+        "xyz": [
+          -0.06609,
+          -0.06647,
+          0.15
+        ],
+        "fff": 0,
+        "fbav": 0
+      },
+      "bias_after": {
+        "absmax": 8e-05,
+        "norm": 0.000114,
+        "xyz": [
+          -8e-05,
+          7e-05,
+          4e-05
+        ],
+        "fff": 0,
+        "fbav": 0
+      }
+    }
+  ],
+  "n_reinits": 1,
+  "bias_max": 0.15,
+  "bias_last": {
+    "wall": 1787787836.324,
+    "sim": 134.488,
+    "fff": 0,
+    "fbav": 0,
+    "gyro_bias": [
+      -8e-05,
+      0.00011,
+      2e-05
+    ],
+    "bias_absmax": 0.00011,
+    "bias_norm": 0.000137
+  },
+  "first_fault_sim": {
+    "filter_fault_1024": 7.5,
+    "fs_bad_acc_vertical": 7.5
+  },
+  "n_poll_fail": 0,
+  "preflight_only": true,
+  "armed_sim": null,
+  "stopped_reason": null
+}
