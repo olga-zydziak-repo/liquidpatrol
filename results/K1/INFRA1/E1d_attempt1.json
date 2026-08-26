@@ -1,0 +1,132 @@
+{
+  "spec": "INFRA2-6/E1 \u2014 E1d attempt-1 (dziesi\u0105tka), commit watchdog 2690986",
+  "verdict": "X4-INVALID (nie liczy si\u0119 jako bramka) \u2014 ska\u017cona cudzym jobem; rerun od zera na czystej maszynie",
+  "x4_abort": {
+    "boot": 109,
+    "foreign": "/home/olga/projects/dreamforge-arc/.venv/bin/python3 scripts/arc_a01_qwen_dev32.py",
+    "cpu_pct": 106,
+    "note": "X4 pr\u00f3bkuje na starcie boota; qwen cichy przy startach 100-108, tripn\u0105\u0142 @109; mid-boot degradowa\u0142 habitat wcze\u015bniej"
+  },
+  "tally": {
+    "done_before_abort": 9,
+    "arm_ok": 9,
+    "habitat_VALID": 2,
+    "boots_with_reinit": 5,
+    "reinit_all_armed": true
+  },
+  "habitat_confound": "habitat VALID (105,106) trafi\u0142y w przerw\u0119 qwena (load 0.69/1.06); INVALID (load 2.8-5.9) pod qwenem; boot106 VALID MIMO reinitu \u21d2 habitat=kontencja qwena, nie watchdog/most",
+  "boots": [
+    {
+      "boot": 100,
+      "arm_ok": true,
+      "landed": true,
+      "habitat": "INVALID(habitat)",
+      "load1": 2.8,
+      "ekf_hits": 2,
+      "n_reinits": 1,
+      "reinit_reason": "SLOW_bias>0.08_no_decrease_30s",
+      "bias_max": 0.15,
+      "bias_at_arm": 6e-05
+    },
+    {
+      "boot": 101,
+      "arm_ok": true,
+      "landed": false,
+      "habitat": "INVALID(habitat)",
+      "load1": 4.47,
+      "ekf_hits": 0,
+      "n_reinits": 0,
+      "reinit_reason": null,
+      "bias_max": 0.1013,
+      "bias_at_arm": 0.05662
+    },
+    {
+      "boot": 102,
+      "arm_ok": true,
+      "landed": true,
+      "habitat": "INVALID(habitat)",
+      "load1": 5.91,
+      "ekf_hits": 1,
+      "n_reinits": 0,
+      "reinit_reason": null,
+      "bias_max": 0.13464,
+      "bias_at_arm": 0.00178
+    },
+    {
+      "boot": 103,
+      "arm_ok": true,
+      "landed": true,
+      "habitat": "INVALID(habitat)",
+      "load1": 4.44,
+      "ekf_hits": 0,
+      "n_reinits": 1,
+      "reinit_reason": "SLOW_bias>0.08_no_decrease_30s",
+      "bias_max": 0.11824,
+      "bias_at_arm": 5e-05
+    },
+    {
+      "boot": 104,
+      "arm_ok": true,
+      "landed": true,
+      "habitat": "INVALID(habitat)",
+      "load1": 4.77,
+      "ekf_hits": 9,
+      "n_reinits": 1,
+      "reinit_reason": "FAST_fault2x(fff==1024|fs_bad_acc_vertical)",
+      "bias_max": 0.15,
+      "bias_at_arm": 6e-05
+    },
+    {
+      "boot": 105,
+      "arm_ok": true,
+      "landed": true,
+      "habitat": "VALID",
+      "load1": 0.69,
+      "ekf_hits": 0,
+      "n_reinits": 0,
+      "reinit_reason": null,
+      "bias_max": 0.04262,
+      "bias_at_arm": 0.00015
+    },
+    {
+      "boot": 106,
+      "arm_ok": true,
+      "landed": true,
+      "habitat": "VALID",
+      "load1": 1.06,
+      "ekf_hits": 22,
+      "n_reinits": 1,
+      "reinit_reason": "SLOW_bias>0.08_no_decrease_30s",
+      "bias_max": 0.15,
+      "bias_at_arm": 5e-05
+    },
+    {
+      "boot": 107,
+      "arm_ok": true,
+      "landed": true,
+      "habitat": "INVALID(habitat)",
+      "load1": 2.04,
+      "ekf_hits": 0,
+      "n_reinits": 0,
+      "reinit_reason": null,
+      "bias_max": 0.05491,
+      "bias_at_arm": 0.00531
+    },
+    {
+      "boot": 108,
+      "arm_ok": true,
+      "landed": true,
+      "habitat": "INVALID(habitat)",
+      "load1": 5.64,
+      "ekf_hits": 4,
+      "n_reinits": 1,
+      "reinit_reason": "FAST_fault2x(fff==1024|fs_bad_acc_vertical)",
+      "bias_max": 0.05364,
+      "bias_at_arm": 6e-05
+    },
+    {
+      "boot": 109,
+      "status": "X4_ABORT_or_missing"
+    }
+  ]
+}

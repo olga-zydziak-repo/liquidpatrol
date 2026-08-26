@@ -48,3 +48,70 @@
 [campaign] boot8 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=0.77 ekf_hits=2
 [campaign] cooldown 300s przed nastepnym...
 [campaign] X4 ABORT: kontencja w środku serii (done=8/10): foreign_cpu=[ 100 runc --root /var/run/docker/runtime-runc/moby --log /run/containerd/io.containerd.runtime.v2.task/moby/3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63/log.json --log-format json --systemd-cgroup exec --process /tmp/runc-process2311766664 --detach --pid-file /run/containerd/io.containerd.runtime.v2.task/moby/3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63/cec2fd33bdbb7dd6a4310f4125f2907e5aad4d0fed892196b12942b7dffa6cba.pid 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63] load1=0.00 — SERIA SKAŻONA, licz od nowa (nie doliczam).
+=== INFRA-1 campaign START=100 COUNT=10 cooldown=300s Wed Aug 26 12:42:39 CEST 2026 ===
+[campaign] X3 OK: load1=0.13 < 1.0, brak cudzych zadań — start serii.
+[campaign] boot100 : orphans_pre=0 load1=0.13 Wed Aug 26 12:42:39 CEST 2026
+[campaign] boot100 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=2.8 ekf_hits=2
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot101 : orphans_pre=0 load1=0.10 Wed Aug 26 12:51:49 CEST 2026
+[campaign] boot101 DONE rc=0 | arm_ok=True landed=False habitat=INVALID(habitat) conv_s=None load1=4.47 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot102 : orphans_pre=0 load1=0.18 Wed Aug 26 13:02:28 CEST 2026
+[campaign] boot102 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=5.91 ekf_hits=1
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot103 : orphans_pre=0 load1=0.62 Wed Aug 26 13:11:38 CEST 2026
+[campaign] boot103 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=4.44 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot104 : orphans_pre=0 load1=0.37 Wed Aug 26 13:20:48 CEST 2026
+[campaign] boot104 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=4.77 ekf_hits=9
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot105 : orphans_pre=0 load1=0.23 Wed Aug 26 13:30:01 CEST 2026
+[campaign] boot105 DONE rc=0 | arm_ok=True landed=True habitat=VALID conv_s=None load1=0.69 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot106 : orphans_pre=0 load1=0.08 Wed Aug 26 13:39:03 CEST 2026
+[campaign] boot106 DONE rc=0 | arm_ok=True landed=True habitat=VALID conv_s=None load1=1.06 ekf_hits=22
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot107 : orphans_pre=0 load1=0.01 Wed Aug 26 13:47:58 CEST 2026
+[campaign] boot107 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=2.04 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot108 : orphans_pre=0 load1=0.12 Wed Aug 26 13:56:55 CEST 2026
+[campaign] boot108 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=5.64 ekf_hits=4
+[campaign] cooldown 300s przed nastepnym...
+[campaign] X4 ABORT: kontencja w środku serii (done=9/10): foreign_cpu=[ 106 /home/olga/projects/dreamforge-arc/.venv/bin/python3 scripts/arc_a01_qwen_dev32.py] load1=1.18 — SERIA SKAŻONA, licz od nowa (nie doliczam).
+=== INFRA-1 campaign START=110 COUNT=10 cooldown=300s Wed Aug 26 14:45:11 CEST 2026 ===
+[campaign] X3 OK: load1=0.08 < 1.0, brak cudzych zadań — start serii.
+[campaign] boot110 : orphans_pre=0 load1=0.08 Wed Aug 26 14:45:11 CEST 2026
+[campaign] boot110 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=1.8 ekf_hits=3
+[campaign] cooldown 300s przed nastepnym...
+=== INFRA-1 campaign START=120 COUNT=10 cooldown=300s Wed Aug 26 14:53:09 CEST 2026 ===
+[campaign] X3 OK: load1=0.19 < 1.0, brak cudzych zadań — start serii.
+[campaign] boot120 : orphans_pre=0 load1=0.19 Wed Aug 26 14:53:09 CEST 2026
+[campaign] boot120 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=1.34 ekf_hits=6
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot121 : orphans_pre=0 load1=0.01 Wed Aug 26 15:02:12 CEST 2026
+[campaign] boot121 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=0.41 ekf_hits=1
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot122 : orphans_pre=0 load1=0.12 Wed Aug 26 15:11:23 CEST 2026
+[campaign] boot122 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=1.19 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot123 : orphans_pre=0 load1=0.05 Wed Aug 26 15:20:28 CEST 2026
+[campaign] boot123 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=1.79 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot124 : orphans_pre=0 load1=0.13 Wed Aug 26 15:29:35 CEST 2026
+[campaign] boot124 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=1.8 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot125 : orphans_pre=0 load1=0.04 Wed Aug 26 15:38:39 CEST 2026
+[campaign] boot125 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=0.49 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot126 : orphans_pre=0 load1=0.25 Wed Aug 26 15:47:51 CEST 2026
+[campaign] boot126 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=0.93 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot127 : orphans_pre=0 load1=0.19 Wed Aug 26 15:56:56 CEST 2026
+[campaign] boot127 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=1.78 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot128 : orphans_pre=0 load1=0.02 Wed Aug 26 16:06:39 CEST 2026
+[campaign] boot128 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=2.1 ekf_hits=3
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot129 : orphans_pre=0 load1=0.07 Wed Aug 26 16:15:47 CEST 2026
+[campaign] boot129 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=1.49 ekf_hits=1
+=== INFRA-1 campaign KONIEC: 10 bootow Wed Aug 26 16:19:28 CEST 2026 ===

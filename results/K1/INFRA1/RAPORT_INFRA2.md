@@ -284,9 +284,45 @@ NIE wrócił po reinicie (brak sygnału śmierci E1f przy n=1).
 (≥9/10 arm ∧ habitat VALID, kontrola 4/8 z I3), booty z reinitem raportowane osobno (E1e), kryterium śmierci
 E1f czynne.
 
+## §2-WYK5b. E1d — dziesiątka watchdoga (CC 2026-08-26): WERDYKT ROZDZIELONY (arm PASS / habitat env-FAIL)
+
+Kryterium ZAMROŻONE (jak I3, E1h): ≥9/10 arm ∧ habitat VALID, kontrola I3=4/8. Watchdog wg §2-WYK5.
+
+**Attempt-1 (boot100-109, `E1d_attempt1.json`) — X4-INVALID.** 9/9 arm zanim X4 tripnął boot109 na cudzym
+jobie `dreamforge-arc/arc_a01_qwen_dev32.py` (@106% CPU). Per dyscyplinę seria skażona → rerun. Znalezisko:
+qwen chodził impulsami, degradował habitat mid-boot (habitat VALID tylko 2/9, w przerwach jobu); X4 (próbka
+na starcie boota) złapał go dopiero @109. arm 9/9 nawet POD kontencją = mocny preview.
+
+**Attempt-3 (boot120-129, `E1d_attempt3.json`) — CZYSTA maszyna (qwen ubity za zgodą Olgi + pilnowany co check).**
+
+| miara | wynik |
+|------:|:------|
+| **arm** | **10/10** (próg ≥9/10 **spełniony**) · landed 10/10 |
+| **habitat VALID** | **0/10** |
+| reinity | 2 (boot120 SLOW bias 0.15→5e-05·arm; boot129 FAST fff/fbav bias 0.09→6e-05·arm) — **oba tory dowiedzione, oba armują** |
+| dsim_dwall | **0.901–0.932 wszędzie** (<0.95), median_rtf ~0.9999, min_rtf ~0.005; h1/timejump=0 |
+
+**WERDYKT E1d — ROZDZIELONY:**
+- **arm: PASS 10/10.** Teza E1 potwierdzona: zatrzask biasu / fault pionu = bloker arm, `ekf2 stop/start` go
+  zdejmuje. Watchdog uratował 2 zatrzaski (SLOW+FAST), abstynował przy samo-odzysku z 0.13–0.15
+  (boot123/126/128), zero fałszywych interwencji. Łącznie z attempt-1: 7 ratunków, wszystkie zaarmowały.
+- **habitat: FAIL 0/10 — ENV-BOUND, NIE E1.** Δsim/Δwall<0.95 UNIWERSALNIE, nawet przy load 0.41 (boot121);
+  most gz↔px4 generuje rzadkie głębokie stalle (min_rtf~0.005) które metryka ogona karze mimo median 0.9999.
+  NIE qwen (czysto a INVALID), NIE watchdog (reinit @sim60 przed oknem hoveru; boot121 bez reinitu też INVALID),
+  NIE bias, NIE timejump (h1 PASS). To temat D8/B5 (deep-stalle mostu), ortogonalny do zatrzasku.
+- **Bramka `arm∧habitat`: arm PASS, habitat FAIL → pada na koniunkcie ENV.** E1 osiąga swój cel (arm);
+  habitat wymaga cichego mostu, którego maszyna nie dostarcza niezawodnie — osobny problem INFRA (nie E1).
+
+**Nota atrybucyjna (uczciwie):** attempt-3 miał 2 zatrzaski (vs I3 4/8) — zjawisko stochastyczne; 8/10 zaarmowało
+samo. Watchdog = siatka bezpieczeństwa (strzela przy trwałym zatrzasku/faulcie, abstynuje przy odzysku).
+Per-boot kontrfaktu brak, ale mechanizm potwierdzony ponad wątpliwość w obu seriach. Osłona/sędzia/piny/S∧N
+nietknięte (git diff pusty). commit watchdoga 2690986, dowody `E1d_attempt{1,3}.json`.
+
 ## §5. Co JEST już ustalone (nie badać ponownie)
 
-- Obciążenie CPU NIE jest driverem (INFRA-1 §1, pomiar). ✗ nie wracać.
+- **E1 watchdog reinitu EKF2 REMEDIUJE arm-blocker: E1d attempt-3 arm 10/10 na czystej (I3=4/8); oba tory SLOW+FAST dowiedzione, 7 ratunków w 2 seriach, 0 fałszywych. ✓ USTALONE.**
+- **habitat (Δsim/Δwall≥0.95) pada UNIWERSALNIE nawet na cichej maszynie (E1d 0/10, dsim_dwall 0.90–0.93) — deep-stalle mostu gz↔px4, ORTOGONALNE do zatrzasku/E1. → osobny problem INFRA, nie mieszać z arm.**
+- Obciążenie CPU NIE jest driverem zatrzasku (INFRA-1 §1, pomiar). ✗ nie wracać.
 - Strumień IMU (cadencja + wartości) ZDROWY w FAIL — brak hold, brak gap, gyro identyczny z PASS (Z1). ✗ nie wracać.
 - Zatrzask NIE koreluje z brakiem/opóźnieniem źródła wspomagającego — wszystkie wchodzą w tej samej kolejności (V1). ✗ nie wracać.
 - Separator FAIL↔PASS = fault pionu: filter_fault=1024, fs_bad_acc_vertical, sztorm reset_hgt/vel_d (V1). → dalej: różnicowy init EKF.

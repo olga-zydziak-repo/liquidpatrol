@@ -1,0 +1,30 @@
+=== INFRA-1 campaign START=100 COUNT=10 cooldown=300s Wed Aug 26 12:42:39 CEST 2026 ===
+[campaign] X3 OK: load1=0.13 < 1.0, brak cudzych zadań — start serii.
+[campaign] boot100 : orphans_pre=0 load1=0.13 Wed Aug 26 12:42:39 CEST 2026
+[campaign] boot100 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=2.8 ekf_hits=2
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot101 : orphans_pre=0 load1=0.10 Wed Aug 26 12:51:49 CEST 2026
+[campaign] boot101 DONE rc=0 | arm_ok=True landed=False habitat=INVALID(habitat) conv_s=None load1=4.47 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot102 : orphans_pre=0 load1=0.18 Wed Aug 26 13:02:28 CEST 2026
+[campaign] boot102 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=5.91 ekf_hits=1
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot103 : orphans_pre=0 load1=0.62 Wed Aug 26 13:11:38 CEST 2026
+[campaign] boot103 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=4.44 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot104 : orphans_pre=0 load1=0.37 Wed Aug 26 13:20:48 CEST 2026
+[campaign] boot104 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=4.77 ekf_hits=9
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot105 : orphans_pre=0 load1=0.23 Wed Aug 26 13:30:01 CEST 2026
+[campaign] boot105 DONE rc=0 | arm_ok=True landed=True habitat=VALID conv_s=None load1=0.69 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot106 : orphans_pre=0 load1=0.08 Wed Aug 26 13:39:03 CEST 2026
+[campaign] boot106 DONE rc=0 | arm_ok=True landed=True habitat=VALID conv_s=None load1=1.06 ekf_hits=22
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot107 : orphans_pre=0 load1=0.01 Wed Aug 26 13:47:58 CEST 2026
+[campaign] boot107 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=2.04 ekf_hits=0
+[campaign] cooldown 300s przed nastepnym...
+[campaign] boot108 : orphans_pre=0 load1=0.12 Wed Aug 26 13:56:55 CEST 2026
+[campaign] boot108 DONE rc=0 | arm_ok=True landed=True habitat=INVALID(habitat) conv_s=None load1=5.64 ekf_hits=4
+[campaign] cooldown 300s przed nastepnym...
+[campaign] X4 ABORT: kontencja w środku serii (done=9/10): foreign_cpu=[ 106 /home/olga/projects/dreamforge-arc/.venv/bin/python3 scripts/arc_a01_qwen_dev32.py] load1=1.18 — SERIA SKAŻONA, licz od nowa (nie doliczam).
