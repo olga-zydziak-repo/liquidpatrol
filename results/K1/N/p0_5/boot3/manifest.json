@@ -1,0 +1,173 @@
+{
+  "arm": "N",
+  "point": 0.5,
+  "boot_n": 3,
+  "kind": "crit",
+  "session": {
+    "mem_free_kb": 29491916,
+    "mem_available_kb": 30436452,
+    "loadavg": [
+      0.59,
+      0.35,
+      0.16
+    ],
+    "session_boot_count": null,
+    "env_restart": null,
+    "captured_at": "finalize"
+  },
+  "watchdog": {
+    "n_reinits": 1,
+    "reinit_sims": [
+      60.76
+    ],
+    "reinit_reasons": [
+      "FAST_fault2x(fff==1024|fs_bad_acc_vertical)"
+    ],
+    "bias_max_absmax": 0.15,
+    "armed_sim": null,
+    "stopped_reason": null,
+    "preflight_only": true,
+    "reinits": [
+      {
+        "idx": 1,
+        "reason": "FAST_fault2x(fff==1024|fs_bad_acc_vertical)",
+        "sim": 60.76,
+        "wall": 1787780333.906,
+        "consec_fault": 2,
+        "action": {
+          "rc_stop": 0,
+          "rc_start": 0,
+          "cmd_wall_s": 2.033
+        },
+        "bias_before": {
+          "absmax": 0.14391,
+          "norm": 0.174775,
+          "xyz": [
+            -0.09256,
+            -0.03562,
+            0.14391
+          ],
+          "fff": 1024,
+          "fbav": 1
+        },
+        "bias_after": {
+          "absmax": 7e-05,
+          "norm": 9.7e-05,
+          "xyz": [
+            -7e-05,
+            6e-05,
+            3e-05
+          ],
+          "fff": 0,
+          "fbav": 0
+        }
+      }
+    ]
+  },
+  "point_label": null,
+  "run_valid": null,
+  "invalid_reason": null,
+  "preinj_check": null,
+  "spec_check": null,
+  "inj_info": null,
+  "stalls": {
+    "n": 5,
+    "list": [
+      {
+        "sim0": 6.26,
+        "sim1": 6.324,
+        "dwall": 3.65,
+        "dsim": 0.064,
+        "rtf": 0.018
+      },
+      {
+        "sim0": 38.536,
+        "sim1": 38.556,
+        "dwall": 3.33,
+        "dsim": 0.02,
+        "rtf": 0.006
+      },
+      {
+        "sim0": 70.744,
+        "sim1": 70.808,
+        "dwall": 3.246,
+        "dsim": 0.064,
+        "rtf": 0.02
+      },
+      {
+        "sim0": 102.992,
+        "sim1": 103.052,
+        "dwall": 3.069,
+        "dsim": 0.06,
+        "rtf": 0.02
+      },
+      {
+        "sim0": 135.276,
+        "sim1": 135.304,
+        "dwall": 3.339,
+        "dsim": 0.028,
+        "rtf": 0.008
+      }
+    ],
+    "n_deep_ge2s": 5,
+    "period_hint_s": [
+      32.28,
+      32.21,
+      32.25,
+      32.28
+    ]
+  },
+  "b4": {
+    "orphans_pre_teardown": 0,
+    "orphans_post_teardown": 0,
+    "cooldown_s_since_last_boot": 10605,
+    "one_boot_per_cycle": true
+  },
+  "sha_harness": "70ddc60d9f613db5118e600464e7514eb6a7ddb0d40d1144f0e0f5f3fc22f66a",
+  "harness_file": "/home/olga/projects/liquidpatrol/k1/k1_arm_n.py",
+  "sha_k1_judge": "4e0dc0afffda099837a002191a5540fd95d6de13cb88e7233433d67b1b998ae1",
+  "k1_judge_frozen": true,
+  "shield_frozen": true,
+  "shield_pins": {
+    "r01/shield.py": {
+      "want": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "got": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "ok": true
+    },
+    "r03/config.py": {
+      "want": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "got": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "ok": true
+    },
+    "r03/gate_run_r03.py": {
+      "want": "72619513c682e76892c531ec3dae2d918da08da92017605dcba50103977cf58a",
+      "got": "72619513c682e76892c531ec3dae2d918da08da92017605dcba50103977cf58a",
+      "ok": true
+    }
+  },
+  "ulog": "/home/olga/projects/liquidpatrol/results/K1/N/p0_5/boot3/boot.ulg",
+  "ulog_exists": true,
+  "stamps": {
+    "denial_on_mono": null,
+    "touchdown_sim": null,
+    "touchdown_event_sim": null
+  },
+  "harness_valid": true,
+  "harness_poison": false,
+  "habitat_verdict": "INVALID(habitat)",
+  "certs_selfcheck": {
+    "log": null,
+    "pass": null,
+    "rc": null
+  },
+  "provenance_arm_s": null,
+  "n_gt": 1463,
+  "n_ekf": 4547,
+  "n_events": 0,
+  "events": [],
+  "stall_in_reaction_window": null,
+  "sanity": {},
+  "vmax_check": null,
+  "abrake_check": null,
+  "dstop_check": null
+}
