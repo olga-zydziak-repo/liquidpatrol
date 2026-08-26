@@ -14,9 +14,10 @@ E1c  Akcja: `px4-ekf2 stop` → `px4-ekf2 start`. Stemple sim/wall + bias przed/
 E1e  Wynik → ekf_watchdog.json (samples, reinits, n_reinits, bias_max, bias_last, first_fault_sim);
      finalize wstrzykuje blok `watchdog` do manifestu.
 
-Watchdog żyje do SIGTERM (ubijany przez run_k1_boot.sh po module lotu) lub HARD_CAP_S. Read-only na
-uORB przez listener; jedyny efekt uboczny = ekf2 stop/start przy potwierdzonym triggerze. Sędzia/osłona/
-piny/harness lotu K1 NIETKNIĘTE.
+R3/G2 (ANEKS_E1-2): PREFLIGHT-ONLY. Watchdog kończy w chwili armed==1 (poll actuator_armed) — PO ARM
+zero próbek, zero reinitu, segment roszczenia (denial→touchdown) WOLNY od przyrządu. Bez arm żyje do SIGTERM
+(ubijany przez run_k1_boot.sh po module lotu) lub HARD_CAP_S. Read-only na uORB przez listener; jedyny efekt
+uboczny = ekf2 stop/start przy potwierdzonym triggerze PRZED arm. Sędzia/osłona/piny/harness lotu K1 NIETKNIĘTE.
 """
 import os, sys, re, json, time, signal, argparse, subprocess
 
@@ -36,6 +37,7 @@ _RE = {
     "ts": re.compile(r"\btimestamp:\s*(\d+)"),
     "fff": re.compile(r"\bfilter_fault_flags:\s*(\d+)"),
     "fbav": re.compile(r"\bfs_bad_acc_vertical:\s*(True|False|\d+)"),  # listener drukuje bool jako True/False
+    "armed": re.compile(r"\barmed:\s*(True|False|\d+)"),  # actuator_armed.armed (nie prearmed — brak \b)
     "gbias": re.compile(r"\bgyro_bias:\s*\[([^\]]+)\]"),
 }
 
@@ -96,6 +98,21 @@ def sample(binpath):
             "bias_norm": (round(norm, 6) if norm is not None else None)}
 
 
+def poll_armed(binpath):
+    """R3/G2: (armed_bool, sim) z actuator_armed. Watchdog=PREFLIGHT-ONLY → kończy przy armed==1."""
+    rc, out = _px4(binpath, ["listener", "actuator_armed", "1"], LISTENER_TIMEOUT)
+    m = _RE["armed"].search(out or "")
+    armed = None
+    if m:
+        g = m.group(1)
+        armed = 1 if (g == "True" or (g.isdigit() and int(g) != 0)) else 0
+    sim = None
+    mt = _RE["ts"].search(out or "")
+    if mt:
+        sim = round(int(mt.group(1)) / 1e6, 3)
+    return armed, sim
+
+
 def is_fault(s):
     return (s["fff"] == FFF_LATCH) or (s["fbav"] not in (None, 0))
 
@@ -139,6 +156,7 @@ def main():
         "bias_max": None, "bias_last": None,
         "first_fault_sim": {"filter_fault_1024": None, "fs_bad_acc_vertical": None},
         "n_poll_fail": 0,
+        "preflight_only": True, "armed_sim": None, "stopped_reason": None,  # R3/G2
     }
 
     def flush():
@@ -166,6 +184,16 @@ def main():
 
     while not stop_flag["v"]:
         if time.time() - t_start > HARD_CAP_S:
+            state["stopped_reason"] = "hard_cap"
+            break
+        # R3/G2: PREFLIGHT-ONLY — sprawdź arm PRZED próbką/triggerem. armed⇒kończ, segment roszczenia wolny od przyrządu.
+        armed, arm_sim = poll_armed(a.px4_bin)
+        if armed == 1:
+            state["armed_sim"] = arm_sim
+            state["stopped_reason"] = "ARMED_preflight_only"
+            print(f"[WD] ARMED @sim={arm_sim} — sampler STOP (PREFLIGHT-ONLY, R3/G2). "
+                  f"n_samples={len(state['samples'])} n_reinits={state['n_reinits']}", flush=True)
+            flush()
             break
         s = sample(a.px4_bin)
         state["samples"].append(s)

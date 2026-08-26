@@ -335,3 +335,26 @@ nietknięte (git diff pusty). commit watchdoga 2690986, dowody `E1d_attempt{1,3}
 - Kontencja GUI NIE jest driverem — boot1 headless a pętla trwa (`GUI_PROCS=[brak]`). ✗ nie wracać.
 - Stan sterownika GPU po restarcie NIE leczy — reset operatorski wykonany, FAIL identyczny. ✗ nie wracać.
 - Osłona/sędzia/kryteria K1 zamrożone i nietknięte przez całe INFRA-1/2 (hashe w RAPORT_INFRA1). ✗ nie ruszać.
+
+## §final. INFRA-2 ZAMKNIĘTA (ANEKS_E1-2 G4)
+
+**Status domykający — trzy fakty:**
+
+1. **Przyczyna zatrzasku = OTWARTA ZAGADKA.** 7 hipotez obalonych pomiarem (obciążenie, wersja PX4, strumień
+   IMU, brak/opóźnienie źródła fuzji, timejump/zegar, rozgrzewka, GUI/GPU — §5). Zlokalizowana do wnętrza EKF
+   (dywergencja biasu na czystym płaskim gyro + sztorm faultu pionu filter_fault=1024/fs_bad_acc_vertical),
+   ale KORZEŃ (init/fuzja/mag/baro) nierozstrzygnięty. Nie ścigamy dalej w tym dokumencie.
+
+2. **Mitygacja = WATCHDOG (§2-WYK5/5b).** E1d arm 10/10 na czystej (I3=4/8). Koszt zerowy przy braku strzału
+   (8/10 samo-arm, watchdog cicho); przy trwałym zatrzasku/faulcie pionu `ekf2 stop/start` zdejmuje blokera
+   przed oknem arm. Oba tory (SLOW/FAST) dowiedzione, E1f czysty (żaden zatrzask nie wrócił) ⇒ objaw, nie
+   proces samo-podtrzymujący ⇒ gałąź A. Watchdog wchodzi do lotów kryterialnych K1 jako **przyrząd
+   PREFLIGHT-ONLY** (R3/G2): po arm zero próbek, segment roszczenia wolny od przyrządu.
+
+3. **Habitat = SPAJKI MOSTU, zmierzone i OBSŁUGIWANE per-lot.** Deep-stalle gz↔px4 (2.1/boot, min_rtf 0.0014,
+   median 0.9999) ściągają Δsim/Δwall<0.95 na oknie 60 s. K1 sądzi habitat na SEGMENCIE ROSZCZENIA
+   (denial→touchdown), nie na 60 s — frakcja trafienia spajkiem: **S(3s)=8.5%, N(8s)=23.8%** (§7/RAPORT_INFRA1).
+
+**Deep-stalli mostu NIE tykamy.** Ewentualna naprawa = wyłącznie OSOBNY dokument CC, wyzwalany JEDNYM
+warunkiem: frakcja z G1 zaczyna zjadać budżety lotów K1 (habitat-na-segmencie FAIL od spajka realnie marnuje
+loty). Do tego czasu INFRA-2 pozostaje zamknięta tym werdyktem.

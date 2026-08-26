@@ -235,8 +235,58 @@ Rodzina D8/B5 w tej kampanii: gz RTF deep-stalls (rtf do 0.01, ~9/boot) + pętla
 detected` (6–8/boot) niezależna od load (boot6@18 ≡ boot0@2.25) ⇒ intermittent arm-fail projektu to
 własność lockstepu gz↔PX4/rendera, nie obciążenia. Osłona/sędzia/kryteria niezmienione.
 
+## §7. E1d — dziesiątka watchdoga + statystyka spajków mostu (G1, ANEKS_E1-2)
+
+**Werdykt rozdzielony (per ANEKS_E1-1 R2, spisany PRZED serią):** ARM PASS 10/10, HABITAT FAIL 0/10
+env-bound. Gałąź A — K1 wznawia się normalnym budżetem (E1f czysty: żaden zatrzask nie wrócił po reinicie).
+Pełny werdykt + dowody: RAPORT_INFRA2 §2-WYK5b, `E1d_attempt{1,3}.json`.
+
+**Dziesiątka policzona (attempt-3, boot120-129, CZYSTA maszyna, qwen ubity+pilnowany):**
+
+| boot | arm | habitat | reinit | tor | bias_max→@arm |
+|-----:|:---:|:-------:|:------:|:----|:--------------|
+| 120 | ✓ | INVALID | 1 | SLOW | 0.150→5e-05 |
+| 121 | ✓ | INVALID | 0 | — | 0.064→0.009 |
+| 122 | ✓ | INVALID | 0 | — | 0.061→0.058 |
+| 123 | ✓ | INVALID | 0 | — | 0.140→7e-05 (samo-odzysk) |
+| 124 | ✓ | INVALID | 0 | — | 0.128→0.080 |
+| 125 | ✓ | INVALID | 0 | — | 0.104→0.075 |
+| 126 | ✓ | INVALID | 0 | — | 0.139→7e-05 (samo-odzysk) |
+| 127 | ✓ | INVALID | 0 | — | 0.052→0.0003 |
+| 128 | ✓ | INVALID | 0 | — | 0.150→7e-05 (samo-odzysk) |
+| 129 | ✓ | INVALID | 1 | FAST | 0.091→6e-05 |
+
+**arm 10/10 · landed 10/10 · habitat 0/10 · 2 reinity (oba tory, oba armują) · 8/10 samo-arm.**
+
+**Statystyka spajków (`tools/infra1_spike_stats.py` + `G1_spike_stats.json`, okno hoveru = proxy segmentu lotu):**
+głębokie stalle (rtf<0.5) mostu gz↔px4 na CZYSTEJ maszynie: **2.1 spajki/boot (zakres 1–3)**, min_rtf do
+**0.0014** (sim zamarza na moment), median RTF ~0.9999 poza spajkami. Spajki rozrzucone (~co 30–40 s sim).
+
+**Przełożenie na okna roszczenia K1** (frakcja okien trafiona ≥1 spajkiem, jednorodne położenie w oknie hoveru):
+
+| okno roszczenia | frakcja trafiona (średnia) | (max po bootach) |
+|:----------------|:--------------------------:|:----------------:|
+| **S = 3 s** (osłona denial→touchdown) | **8.5 %** | 11.3 % |
+| **N = 8 s** (natywny failsafe) | **23.8 %** | 31.8 % |
+
+⇒ ok. **1/12 roszczeń S** i **~1/4 roszczeń N** miałoby spajk w oknie. To metryka do pilnowania: warunek
+tykania mostu (G4) = ta frakcja zaczyna zjadać budżety lotów K1 (habitat na segmencie roszczenia FAIL z powodu
+spajka). Offline, nie blokuje lotu; istnieje przed pierwszym STOP-em R2 wznowionego K1.
+
+**Zastrzeżenia wykonawcy (verbatim, do §7):**
+- Attempt-1 (boot100-109) był **X4-INVALID** — cudzy job Olgi `dreamforge-arc/arc_a01_qwen_dev32.py` @106% CPU
+  tripnął boot109; X4 (próbka na starcie boota) złapał go dopiero @109, choć qwen impulsami degradował habitat
+  mid-boot wcześniej. 9/9 arm w attempt-1 = mocny preview, ale nie liczony.
+- Czysta seria (attempt-3) miała **tylko 2 zatrzaski** (vs I3 4/8) — **częstość zatrzasku oszacowana słabo**
+  (zjawisko stochastyczne, mała próba); 8/10 zaarmowało samo. **Mechanizm ratunku DOWIEDZIONY** (oba tory,
+  7 ratunków w dwóch seriach, wszystkie armują, zero fałszywych), ale netto-atrybucja „ile z 10 padłoby bez
+  watchdoga" pozostaje statystyczna, bez kontrfaktu per-boot.
+- Habitat FAIL 0/10 **nie unieważnia arm PASS** — R2 (rozdzielenie) spisane przed serią; habitat = spajki
+  mostu, ortogonalne do zatrzasku.
+
 ## Kalendarz (N5) — bez udawania
 
 Jeśli shakeout N3 = FAIL: **K1 nie wznawia się przed INFRA-2**; pakiet na 2026-09-01 = **DEMO-B v1.0
 z erratami + RAPORT_K1_B1_STOP** jako uczciwy status nogi w toku. Planowane teraz, nie „licząc, że
-maszyna sama się naprawi".
+maszyna sama się naprawi". **[AKTUALIZACJA ANEKS_E1-2: INFRA-2 ZAMKNIĘTA werdyktem E1d gałąź A — K1 WZNAWIA
+się (G3), watchdog=mitygacja arm, habitat=spajki obsługiwane per-lot. Ten kalendarz-fallback nieaktywny.]**

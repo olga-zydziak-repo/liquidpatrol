@@ -317,3 +317,37 @@ buildkit/containerd-shim), nie po progu CPU.
 **Zakres:** pgrep znanego wzorca (`src.runner.gate2`) ZOSTAJE — realne zadania Olgi nadal łapane.
 Zmienia się tylko druga furtka (próg CPU), która teraz pomija warstwę kontenerową. `bash -n` OK.
 **Nie zmienia werdyktu Y1** (I3 = FAIL 4/8, ustalone na długo przed abortem).
+
+---
+
+## R3/G2 (ANEKS_E1-2): watchdog EKF2 → PREFLIGHT-ONLY (`tools/infra2_ekf_watchdog.py`, od commitu 2690986)
+
+**Cel (R3):** w lotach kryterialnych K1 watchdog działa WYŁĄCZNIE przed arm; po arm zero próbek — segment
+roszczenia (denial→touchdown) wolny od przyrządu. Reguła I2b: zmiana przed-lotowa dostaje własny test, potem
+zostaje przyrządem.
+
+**Diff (kluczowe hunki):**
+```python
+# nowy regex
++ "armed": re.compile(r"\barmed:\s*(True|False|\d+)"),  # actuator_armed.armed (nie prearmed — brak \b)
+
+# nowa funkcja
++ def poll_armed(binpath):
++     rc, out = _px4(binpath, ["listener", "actuator_armed", "1"], LISTENER_TIMEOUT)
++     ... → (armed_bool, sim)
+
+# stan
++ "preflight_only": True, "armed_sim": None, "stopped_reason": None,  # R3/G2
+
+# pętla główna — arm-check PRZED próbką/triggerem:
++ armed, arm_sim = poll_armed(a.px4_bin)
++ if armed == 1:
++     state["armed_sim"] = arm_sim; state["stopped_reason"] = "ARMED_preflight_only"
++     print("[WD] ARMED @sim=... — sampler STOP (PREFLIGHT-ONLY, R3/G2)")
++     flush(); break
+```
+
+**Test na jednym pustym boocie (boot91, wymóg G2):** `py_compile` OK. Watchdog: 19 próbek przed arm (max
+sim 91.62), wykrył `armed==1` @sim96.73, zalogował `[WD] ARMED @sim=96.728 — sampler STOP (PREFLIGHT-ONLY)`,
+**0 próbek po arm**, `stopped_reason=ARMED_preflight_only`, max_sample_sim ≤ armed_sim. **TEST R3 = PASS**
+(detekcja loguje przed arm, cisza samplera po arm). Sędzia/osłona/piny/harness lotu S∧N NIETKNIĘTE.
