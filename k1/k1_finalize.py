@@ -464,9 +464,34 @@ def main():
         "captured_at": "finalize",
     }
 
+    # H3 (ANEKS_E1-3): blok watchdog EKF2 (preflight-only) do manifestu KAŻDEGO lotu K1 — wd_reinits + stemple.
+    # Reinit dzieje się PRZED arm (watchdog kończy @arm, R3); NIE unieważnia lotu, NIE wchodzi do PAIR_TOL —
+    # etykietowanie asymetrii pary (wd-asym) robi k1_aggregate.pairing_check. Tu tylko surowy zapis.
+    wd_block = None
+    _wp = os.path.join(a.out_dir, "ekf_watchdog.json")
+    if os.path.exists(_wp):
+        try:
+            _wd = json.load(open(_wp))
+            wd_block = {
+                "n_reinits": _wd.get("n_reinits", 0),
+                "reinit_sims": [r.get("sim") for r in _wd.get("reinits", [])],
+                "reinit_reasons": [r.get("reason") for r in _wd.get("reinits", [])],
+                "bias_max_absmax": _wd.get("bias_max"),
+                "armed_sim": _wd.get("armed_sim"),
+                "stopped_reason": _wd.get("stopped_reason"),
+                "preflight_only": _wd.get("preflight_only"),
+                "reinits": _wd.get("reinits", []),
+            }
+        except Exception as e:
+            wd_block = {"error": repr(e)}
+    # n_reinits do inj_info → dopływa do k1_aggregate.pairing_check (etykieta wd-asym pary)
+    if isinstance(inj_info, dict) and isinstance(wd_block, dict):
+        inj_info["n_reinits"] = wd_block.get("n_reinits")
+
     manifest = {
         "arm": a.arm, "point": a.point, "boot_n": a.boot, "kind": kind_eff,
         "session": session_env,
+        "watchdog": wd_block,
         "point_label": point_label,
         "run_valid": run_valid,
         "invalid_reason": invalid_reason,

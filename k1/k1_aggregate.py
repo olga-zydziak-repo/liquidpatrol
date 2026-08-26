@@ -58,11 +58,19 @@ def pairing_check(inj_N, inj_S, tol=PAIR_TOL):
     dh_ok = (dh is not None and dh <= tol["dheading_deg"])
     dz_ok = (dz is not None and dz <= tol["dz_m"])
     paired = bool(dr_ok and dv_ok and dh_ok and dz_ok)
+    # H3 (ANEKS_E1-3): higiena parowania watchdoga. Reinit dzieje się PRZED arm (preflight-only) — NIE wchodzi
+    # do PAIR_TOL i NIE zmienia `paired`. Para, w której DOKŁADNIE JEDNO ramię miało reinit, dostaje etykietę
+    # pair-note: wd-asym (czytelnik widzi asymetrię stanu początkowego EKF). n_reinits z manifest.watchdog
+    # (orchestrator wkłada do inj_info). Graceful: brak danych ⇒ None, brak etykiety.
+    wdN, wdS = inj_N.get("n_reinits"), inj_S.get("n_reinits")
+    wd_asym = ((wdN or 0) > 0) != ((wdS or 0) > 0)
     return paired, {"dr_m": (round(dr, 3) if dr is not None else None), "dr_ok": dr_ok,
                     "dspeed_mps": (round(dv, 3) if dv is not None else None), "dspeed_ok": dv_ok,
                     "dheading_deg": (round(dh, 3) if dh is not None else None), "dheading_ok": dh_ok,
                     "dz_m": (round(dz, 3) if dz is not None else None), "dz_ok": dz_ok,
-                    "tol": tol, "paired": paired}
+                    "tol": tol, "paired": paired,
+                    "wd_reinits_N": wdN, "wd_reinits_S": wdS,
+                    "pair_note": ("wd-asym" if wd_asym else None)}
 
 
 def _median(xs):
@@ -286,6 +294,18 @@ def selftest():
     cu3 = (paired is False and det["dz_ok"] is False)
     ok = ok and cu3
     print(f"-- G2 niesparowane (dz=0.8>0.5, R3): paired={paired} {'PASS' if cu3 else 'FAIL'}")
+    # H3 (ANEKS_E1-3): wd-asym — reinit NIE zmienia paired; para z DOKŁADNIE jednym reinitem → pair_note=wd-asym
+    def _injw(r, v, h, z, nr):
+        d = _inj(r, v, h, z); d["n_reinits"] = nr; return d
+    paired, det = pairing_check(_injw(13.0, 3.7, 45.0, 4.2, 1), _injw(13.2, 3.6, 45.5, 4.3, 0))  # tylko N reinit
+    cw1 = (paired is True and det["pair_note"] == "wd-asym" and det["dr_ok"])
+    paired2, det2 = pairing_check(_injw(13.0, 3.7, 45.0, 4.2, 1), _injw(13.2, 3.6, 45.5, 4.3, 2))  # oba reinit
+    cw2 = (paired2 is True and det2["pair_note"] is None)
+    paired3, det3 = pairing_check(_injw(13.0, 3.7, 45.0, 4.2, 0), _injw(13.2, 3.6, 45.5, 4.3, 0))  # żaden
+    cw3 = (det3["pair_note"] is None)
+    ok = ok and cw1 and cw2 and cw3
+    print(f"-- H3 wd-asym (1 reinit→nota, oba→brak, żaden→brak; paired NIETKNIĘTY): "
+          f"{'PASS' if (cw1 and cw2 and cw3) else 'FAIL'}")
     # G2 integracja: niesparowany punkt WYKLUCZONY z kryterium (oba → diag)
     runs = [_mk("N", 0.2, 20.0, True), _mk("S", 0.2, 3.0, False),
             _mk("N", 0.5, 10.0, False), _mk("S", 0.5, 3.0, False)]

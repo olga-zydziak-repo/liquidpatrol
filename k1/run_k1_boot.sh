@@ -68,14 +68,15 @@ RTF=$!
 # INFRA2-6/E1 (SI-1, TYLKO gałąź E — infra, nie certyfikowany lot K1): watchdog reinitu EKF2 wewnątrz
 # bootu. Read-only sampler co 5 s po sockecie daemona PX4 (px4-listener) + `ekf2 stop/start` przy triggerze
 # zatrzasku (V1). ŻADNEGO abortu/relaunchu/zmiany EKF2_*/okna arm. Osłona/sędzia/piny/harness lotu S∧N NIETKNIĘTE.
+# ANEKS_E1-3 H1: launch watchdoga BEZWARUNKOWY (E∧S∧N) — mitygacja arm w KAŻDYM boocie/locie K1.
+# Watchdog jest PREFLIGHT-ONLY (kończy @arm, R3/G2 — dowiedzione boot91): segment roszczenia (denial→touchdown)
+# wolny od przyrządu. Sędzia/osłona/shield/piny NIETKNIĘTE. wd_reinits do manifestu (H3, k1_finalize/infra1_empty).
 WD=""
-if [ "$ARM" = "E" ]; then
-  setsid nohup python3 tools/infra2_ekf_watchdog.py \
-    --px4-bin "$ROOT/PX4-Autopilot/build/px4_sitl_default/bin" \
-    --out "$OUTDIR/ekf_watchdog.json" > "$OUTDIR/ekf_watchdog.log" 2>&1 &
-  WD=$!
-  echo "[K1 $ARM p$POINT b$BOOT_N] E1 watchdog EKF2 pid=$WD" | tee -a "$OUTDIR/ekf_watchdog.log"
-fi
+setsid nohup python3 tools/infra2_ekf_watchdog.py \
+  --px4-bin "$ROOT/PX4-Autopilot/build/px4_sitl_default/bin" \
+  --out "$OUTDIR/ekf_watchdog.json" > "$OUTDIR/ekf_watchdog.log" 2>&1 &
+WD=$!
+echo "[K1 $ARM p$POINT b$BOOT_N] watchdog EKF2 (preflight-only) pid=$WD" | tee -a "$OUTDIR/ekf_watchdog.log"
 # INFRA-1 ANEKS_INFRA1-3 W2 (P0a): REWERT I2b. Moduł lotu startuje BEZWARUNKOWO po 90 s settle —
 # stan znany-dobry (N boot4 / S4-6 / R0.3a armowały). I2b czekał na 'Ready for takeoff' PRZED startem
 # modułu lotu, co tworzyło DEADLOCK: 'Ready'⇐pre_flight_checks_pass⇐wyczyszczenie 'No connection to GCS'

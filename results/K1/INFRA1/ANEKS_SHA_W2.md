@@ -351,3 +351,40 @@ zostaje przyrządem.
 sim 91.62), wykrył `armed==1` @sim96.73, zalogował `[WD] ARMED @sim=96.728 — sampler STOP (PREFLIGHT-ONLY)`,
 **0 próbek po arm**, `stopped_reason=ARMED_preflight_only`, max_sample_sim ≤ armed_sim. **TEST R3 = PASS**
 (detekcja loguje przed arm, cisza samplera po arm). Sędzia/osłona/piny/harness lotu S∧N NIETKNIĘTE.
+
+---
+
+## ANEKS_E1-3 H1/H3: watchdog na WSZYSTKICH ramionach + higiena parowania
+
+**H1 — `run_k1_boot.sh:72` launch bezwarunkowy (E∧S∧N), diff verbatim:**
+```diff
++# ANEKS_E1-3 H1: launch watchdoga BEZWARUNKOWY (E∧S∧N) — mitygacja arm w KAŻDYM boocie/locie K1.
++# Watchdog jest PREFLIGHT-ONLY (kończy @arm, R3/G2 — dowiedzione boot91): segment roszczenia (denial→touchdown)
++# wolny od przyrządu. Sędzia/osłona/shield/piny NIETKNIĘTE. wd_reinits do manifestu (H3).
+ WD=""
+-if [ "$ARM" = "E" ]; then
+-  setsid nohup python3 tools/infra2_ekf_watchdog.py \
+-    --px4-bin "$ROOT/PX4-Autopilot/build/px4_sitl_default/bin" \
+-    --out "$OUTDIR/ekf_watchdog.json" > "$OUTDIR/ekf_watchdog.log" 2>&1 &
+-  WD=$!
+-  echo "[K1 $ARM p$POINT b$BOOT_N] E1 watchdog EKF2 pid=$WD" | tee -a "$OUTDIR/ekf_watchdog.log"
+-fi
++setsid nohup python3 tools/infra2_ekf_watchdog.py \
++  --px4-bin "$ROOT/PX4-Autopilot/build/px4_sitl_default/bin" \
++  --out "$OUTDIR/ekf_watchdog.json" > "$OUTDIR/ekf_watchdog.log" 2>&1 &
++WD=$!
++echo "[K1 $ARM p$POINT b$BOOT_N] watchdog EKF2 (preflight-only) pid=$WD" | ...
+```
+
+**H3 — higiena parowania (`k1_finalize.py` + `k1_aggregate.py`, oba nie-zamrożone):**
+- `k1_finalize.py`: blok `watchdog` do manifestu KAŻDEGO lotu K1 (n_reinits + reinit stamps + armed_sim +
+  stopped_reason); `n_reinits` skopiowany do `inj_info` → dopływa do pairing.
+- `k1_aggregate.pairing_check`: reinit **NIE** wchodzi do PAIR_TOL, **NIE** zmienia `paired`; para z DOKŁADNIE
+  jednym ramieniem-reinitem → `pair_note: "wd-asym"`. Reguła zamrożona; selftest `k1_aggregate` = True
+  (wd-asym: 1→nota, oba→brak, żaden→brak; G2 pairing nietknięty).
+
+**H2 — test na jednym pustym boocie z ARM=S (boot99):** watchdog wystartował w gałęzi S, **18 próbek przed arm**
+(max sim 88.25), **n_reinits=1** (bias 0.15 — boot S zatrzasnął się, watchdog uratował → arm @sim93.71),
+**0 próbek po arm**, `stopped_reason=ARMED_preflight_only`. Manifest S: blok `watchdog` obecny (n_reinits=1),
+`inj_info.n_reinits=1`, `run_valid=True`. **TEST H2 = PASS** (detekcja przed arm, cisza po; blok w manifeście S).
+Sędzia/osłona/shield/piny NIETKNIĘTE (`git diff` pusty).
