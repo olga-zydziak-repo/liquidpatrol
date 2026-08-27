@@ -414,3 +414,27 @@ python3 acts/ensure_mag_baseline.py > "$OUTDIR/mag_hygiene.txt" 2>&1
 
 **N2(a) test statyczny PASS:** po restore bson czyta X/Y/Z == baseline float32 (MATCH×3).
 `EKF2_MAG_CHK_STR` NIETYKANE (N3/E5). Piny (`git diff HEAD` na k1_judge/shield/config/gate_run_r03) = pusty.
+
+**N2(b) — DWA kolejne puste booty E z higieną (27.08, `results/K1/E/p0_2/boot130`, `boot131`):**
+
+| boot | arm_ok | armed_sim | mag-fail (px4.log) | nowy tryb mag | CAL preflight | habitat |
+|------|--------|-----------|--------------------|---------------|---------------|---------|
+| 130  | ✓ true | 93.16 | **0** | brak | baseline (hygiena OK) | INVALID(habitat) |
+| 131  | ✓ true | 93.31 | **0** | brak | baseline (hygiena OK) | INVALID(habitat) |
+
+**Trzy kryteria N2(b) spełnione oba booty:** arm bez mag-faila (`arm_ok=true`, `magnetic
+interference`/`mag_field_disturbed` = 0 w px4.log), zero nowego trybu mag, CAL po restore == baseline
+w preflighcie (`mag_hygiene.txt`: "już = baseline — OK"). `ekf_health_hits` 6/9 = gyro/velocity
+(domena watchdoga, ortogonalne do mag). `habitat=INVALID` = znany problem env-bound (deep-stalle
+mostu gz↔px4, D8/B5) — ORTOGONALNY do kryteriów mag N2; N2 pyta wyłącznie o mag.
+
+**PEŁZANIE ODTWORZONE NA ŻYWO (korroboracja MAG-1):** persystowany CAL po parze booów DRYFUJE —
+`YOFF -0.1369396 -> -0.1488392` (w stronę zatrzasku fail -0.1506), XOFF/ZOFF też się ruszają. Puste
+zawisy 60 s DOPROWADZIŁY EKF do nauczenia+zapisu biasu mag → dokładnie mechanizm MAG-1. Ponieważ
+higiena biegnie na STARCIE każdego bootu, preflight następnego bootu zresetuje -0.1488 z powrotem do
+baseline przed arm — mitygacja działa jak zaprojektowano (pełzanie narasta w locie, zerowane MIĘDZY
+bootami). **N3 death NIE wyzwolony** (mag-fail=0 w obu, nie ≥2 z czystym CAL).
+
+**N2 WERDYKT = PASS** (N2(a) statyczny MATCH×3 + N2(b) 2/2 booty arm mag-clean). Piny (`git diff HEAD`
+na k1_judge/shield/config/gate_run_r03) = pusty po obu bootach. `.ulg`/`.magbak` niezaśledzone.
+**Per N5: STOP na push CAŁEJ kolejki (Olga) → sygnał → S@0.65 boot3.**
