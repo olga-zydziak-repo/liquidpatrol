@@ -1,0 +1,186 @@
+{
+  "n_pairs": 4,
+  "paired_of": 5,
+  "min_paired_required": 4,
+  "k1_executable": true,
+  "paired_points": [
+    0.2,
+    0.35,
+    0.65,
+    0.8
+  ],
+  "unpaired_points": [
+    0.5
+  ],
+  "breach_N": 0,
+  "breach_S": 0,
+  "median_delta_x_exc": 2.494,
+  "pooled_std": 0.905,
+  "iqr_delta": 1.4725,
+  "verdict": "(\u00b1)",
+  "rationale": "PRZEWAGA ILO\u015aCIOWA bez naruszenia: breach_N=breach_S=0 (z 4 sparowanych) \u2227 mediana(\u0394)=2.494>pooled_std=0.905",
+  "R_E": 32.0,
+  "pairing_tol": {
+    "dr_m": 1.0,
+    "dspeed_mps": 0.3,
+    "dheading_deg": 10.0,
+    "dz_m": 0.5
+  },
+  "table": [
+    {
+      "point": 0.2,
+      "x_exc_N": 5.808,
+      "x_exc_S": 2.502,
+      "breach_N": false,
+      "breach_S": false,
+      "src_N": "judge.json",
+      "src_S": "judge.json",
+      "pairing": {
+        "dr_m": 0.995,
+        "dr_ok": true,
+        "dspeed_mps": 0.087,
+        "dspeed_ok": true,
+        "dheading_deg": 0.864,
+        "dheading_ok": true,
+        "dz_m": 0.477,
+        "dz_ok": true,
+        "tol": {
+          "dr_m": 1.0,
+          "dspeed_mps": 0.3,
+          "dheading_deg": 10.0,
+          "dz_m": 0.5
+        },
+        "paired": true,
+        "wd_reinits_N": null,
+        "wd_reinits_S": 1,
+        "pair_note": "wd-asym"
+      },
+      "delta_x_exc": 3.306,
+      "status": "paired"
+    },
+    {
+      "point": 0.35,
+      "x_exc_N": 4.52,
+      "x_exc_S": 2.719,
+      "breach_N": false,
+      "breach_S": false,
+      "src_N": "judge.json",
+      "src_S": "judge.json",
+      "pairing": {
+        "dr_m": 0.043,
+        "dr_ok": true,
+        "dspeed_mps": 0.005,
+        "dspeed_ok": true,
+        "dheading_deg": 0.03,
+        "dheading_ok": true,
+        "dz_m": 0.052,
+        "dz_ok": true,
+        "tol": {
+          "dr_m": 1.0,
+          "dspeed_mps": 0.3,
+          "dheading_deg": 10.0,
+          "dz_m": 0.5
+        },
+        "paired": true,
+        "wd_reinits_N": 1,
+        "wd_reinits_S": 1,
+        "pair_note": null
+      },
+      "delta_x_exc": 1.801,
+      "status": "paired"
+    },
+    {
+      "point": 0.5,
+      "x_exc_N": 5.108,
+      "x_exc_S": 5.212,
+      "breach_N": false,
+      "breach_S": false,
+      "src_N": "judge.json",
+      "src_S": "judge.json",
+      "pairing": {
+        "dr_m": 0.715,
+        "dr_ok": true,
+        "dspeed_mps": 0.082,
+        "dspeed_ok": true,
+        "dheading_deg": 0.277,
+        "dheading_ok": true,
+        "dz_m": 0.972,
+        "dz_ok": false,
+        "tol": {
+          "dr_m": 1.0,
+          "dspeed_mps": 0.3,
+          "dheading_deg": 10.0,
+          "dz_m": 0.5
+        },
+        "paired": false,
+        "wd_reinits_N": 1,
+        "wd_reinits_S": 0,
+        "pair_note": "wd-asym"
+      },
+      "excluded": "unpaired-kinematics",
+      "status": "UNPAIRED"
+    },
+    {
+      "point": 0.65,
+      "x_exc_N": 5.047,
+      "x_exc_S": 3.47,
+      "breach_N": false,
+      "breach_S": false,
+      "src_N": "judge.json",
+      "src_S": "judge.json",
+      "pairing": {
+        "dr_m": 0.108,
+        "dr_ok": true,
+        "dspeed_mps": 0.018,
+        "dspeed_ok": true,
+        "dheading_deg": 2.352,
+        "dheading_ok": true,
+        "dz_m": 0.414,
+        "dz_ok": true,
+        "tol": {
+          "dr_m": 1.0,
+          "dspeed_mps": 0.3,
+          "dheading_deg": 10.0,
+          "dz_m": 0.5
+        },
+        "paired": true,
+        "wd_reinits_N": 1,
+        "wd_reinits_S": 0,
+        "pair_note": "wd-asym"
+      },
+      "delta_x_exc": 1.577,
+      "status": "paired"
+    },
+    {
+      "point": 0.8,
+      "x_exc_N": 5.99,
+      "x_exc_S": 2.802,
+      "breach_N": false,
+      "breach_S": false,
+      "src_N": "judge.json",
+      "src_S": "judge.json",
+      "pairing": {
+        "dr_m": 0.054,
+        "dr_ok": true,
+        "dspeed_mps": 0.037,
+        "dspeed_ok": true,
+        "dheading_deg": 0.844,
+        "dheading_ok": true,
+        "dz_m": 0.283,
+        "dz_ok": true,
+        "tol": {
+          "dr_m": 1.0,
+          "dspeed_mps": 0.3,
+          "dheading_deg": 10.0,
+          "dz_m": 0.5
+        },
+        "paired": true,
+        "wd_reinits_N": 0,
+        "wd_reinits_S": 1,
+        "pair_note": "wd-asym"
+      },
+      "delta_x_exc": 3.188,
+      "status": "paired"
+    }
+  ]
+}
