@@ -1,0 +1,37 @@
+{
+  "verdict": "VALID",
+  "criterion": "PRE_K1 \u00a72: timejump=0 \u2227 \u0394sim/\u0394wall\u22650.95",
+  "h1": {
+    "pass": true,
+    "timejump_total": 0,
+    "sim_backsteps": 0,
+    "sim_fwd_jumps": 0
+  },
+  "dsim_dwall_ok": true,
+  "h2_claim": {
+    "n": 106,
+    "frac_lt_05": 0.0,
+    "p10": 0.9992,
+    "median_rtf": 0.9999,
+    "min_rtf": 0.9172,
+    "dsim_dwall": 0.9998
+  },
+  "a3_strict_h2_informacyjne": [
+    true,
+    "PASS"
+  ],
+  "stall_in_reaction_window": {
+    "window_s": [
+      117.088,
+      117.108
+    ],
+    "n_stall": 0,
+    "overlap": false,
+    "min_rtf": 1.0
+  },
+  "claim_seg_s_PHYS": [
+    117.088,
+    125.76
+  ],
+  "n_seg": 106
+}

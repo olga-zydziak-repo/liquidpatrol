@@ -1,0 +1,246 @@
+{
+  "arm": "N",
+  "point": 0.65,
+  "boot_n": 1,
+  "kind": "diag",
+  "session": {
+    "mem_free_kb": 29954936,
+    "mem_available_kb": 30983048,
+    "loadavg": [
+      3.75,
+      1.33,
+      0.94
+    ],
+    "session_boot_count": null,
+    "env_restart": null,
+    "captured_at": "finalize"
+  },
+  "watchdog": {
+    "n_reinits": 0,
+    "reinit_sims": [],
+    "reinit_reasons": [],
+    "bias_max_absmax": 0.03374,
+    "armed_sim": 96.708,
+    "stopped_reason": "ARMED_preflight_only",
+    "preflight_only": true,
+    "reinits": []
+  },
+  "point_label": null,
+  "run_valid": false,
+  "invalid_reason": "habitat-invalid",
+  "preinj_check": {
+    "r_offboard_m": 1.109,
+    "r_max_m": 2.0,
+    "pass": true,
+    "note": "J4: dryf toru w takeoffie przed wstrzykni\u0119ciem. r@offboard>2.0 \u21d2 diag(flight-quality); lot liczy si\u0119 do bud\u017cetu (SR-K5). \u015alepe na wynik."
+  },
+  "spec_check": {
+    "k1_point": 0.65,
+    "k1_f_along": 0.653,
+    "abs_df": 0.003,
+    "fa_tol": 0.02,
+    "fa_ok": true,
+    "r_est_at_cut": 14.693,
+    "r_expected": 14.691,
+    "r_tol_m": 2.0,
+    "r_ok": true,
+    "r_geom_informational": true,
+    "spec_match": true
+  },
+  "inj_info": {
+    "src": "ekf_nearest_denial",
+    "vx_ekf": -0.1656,
+    "vy_ekf": -3.1522,
+    "speed_h_ekf": 3.157,
+    "heading_deg_ekf": -93.007,
+    "r_est_ekf": 14.704,
+    "z_gt": 5.697,
+    "z_ekf": 5.045,
+    "speed_h_gt": 3.255,
+    "speed_h_cmd": 3.0,
+    "note": "speed_h_cmd = norma zadana harnessu (V_MAX). speed_h_gt/ekf = FAKTYCZNA (ANEKS_K1-7 G4: w zakr\u0119cie faktyczna >> zadana \u2192 za\u0142o\u017cenie d_stop@v=3.0 nie trzyma).",
+    "n_reinits": 0
+  },
+  "stalls": {
+    "n": 5,
+    "list": [
+      {
+        "sim0": 23.188,
+        "sim1": 23.24,
+        "dwall": 2.68,
+        "dsim": 0.052,
+        "rtf": 0.019
+      },
+      {
+        "sim0": 55.392,
+        "sim1": 55.46,
+        "dwall": 2.66,
+        "dsim": 0.068,
+        "rtf": 0.026
+      },
+      {
+        "sim0": 87.624,
+        "sim1": 87.692,
+        "dwall": 2.678,
+        "dsim": 0.068,
+        "rtf": 0.025
+      },
+      {
+        "sim0": 97.22,
+        "sim1": 97.224,
+        "dwall": 0.398,
+        "dsim": 0.004,
+        "rtf": 0.01
+      },
+      {
+        "sim0": 119.448,
+        "sim1": 119.532,
+        "dwall": 2.696,
+        "dsim": 0.084,
+        "rtf": 0.031
+      }
+    ],
+    "n_deep_ge2s": 4,
+    "period_hint_s": [
+      32.2,
+      32.23,
+      31.82
+    ]
+  },
+  "b4": {
+    "orphans_pre_teardown": 0,
+    "orphans_post_teardown": 0,
+    "cooldown_s_since_last_boot": 648,
+    "one_boot_per_cycle": true
+  },
+  "sha_harness": "70ddc60d9f613db5118e600464e7514eb6a7ddb0d40d1144f0e0f5f3fc22f66a",
+  "harness_file": "/home/olga/projects/liquidpatrol/k1/k1_arm_n.py",
+  "sha_k1_judge": "4e0dc0afffda099837a002191a5540fd95d6de13cb88e7233433d67b1b998ae1",
+  "k1_judge_frozen": true,
+  "shield_frozen": true,
+  "shield_pins": {
+    "r01/shield.py": {
+      "want": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "got": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "ok": true
+    },
+    "r03/config.py": {
+      "want": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "got": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "ok": true
+    },
+    "r03/gate_run_r03.py": {
+      "want": "72619513c682e76892c531ec3dae2d918da08da92017605dcba50103977cf58a",
+      "got": "72619513c682e76892c531ec3dae2d918da08da92017605dcba50103977cf58a",
+      "ok": true
+    }
+  },
+  "ulog": "/home/olga/projects/liquidpatrol/results/K1/N/p0_65/boot1/boot.ulg",
+  "ulog_exists": true,
+  "stamps": {
+    "denial_on_mono": 1883.5607,
+    "t_inj_sim": 115.784,
+    "px4_inj_us": 115796000.0,
+    "ulog_sim_C": -0.012,
+    "gt_dt": 0.0035,
+    "land_cmd_sent": {
+      "mono": 1883.5607
+    },
+    "land_ack": {
+      "mono": 1883.5843,
+      "result": "ACCEPTED"
+    },
+    "touchdown_sim": 123.12,
+    "touchdown_event_sim": 123.2
+  },
+  "harness_valid": true,
+  "harness_poison": false,
+  "habitat_verdict": "INVALID(habitat)",
+  "certs_selfcheck": {
+    "log": null,
+    "pass": null,
+    "rc": null
+  },
+  "provenance_arm_s": null,
+  "n_gt": 1066,
+  "n_ekf": 3348,
+  "n_events": 8,
+  "events": [
+    "armed",
+    "takeoff",
+    "offboard",
+    "denial_on",
+    "land_cmd_sent",
+    "land_ack",
+    "touchdown",
+    "done"
+  ],
+  "stall_in_reaction_window": {
+    "window_s": [
+      115.784,
+      115.824
+    ],
+    "n_stall": 0,
+    "overlap": false,
+    "min_rtf": 1.0
+  },
+  "sanity": {
+    "t_td": {
+      "measured_s": 7.336,
+      "h0_m": 5.697,
+      "profil_D5": {
+        "V_DESC_FAST": 1.5,
+        "V_DESC_LAND": 0.7,
+        "H_SWITCH_AGL": 2.0,
+        "desc_fast_dur_gate_s": 4.0
+      },
+      "expected_from_h0_s": 3.465,
+      "note": "h0 z GT (nie nomina\u0142 8 m \u2014 wczesny punkt, dron w climbie). Gate prze\u0142\u0105cza faz\u0119 PO CZASIE (nomina\u0142 ALT=8) \u2192 przy h0<8 touchdown w fazie1 (1.5 m/s), st\u0105d t_td\u2248(h0-0.5)/1.5."
+    },
+    "nav_seq_annotated": [
+      {
+        "rel_s": -115.796,
+        "nav": "AUTO_LOITER",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": -22.616,
+        "nav": "AUTO_PRECLAND",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": -12.98,
+        "nav": "OFFBOARD",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": 0.016,
+        "nav": "AUTO_LAND",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": 4.024,
+        "nav": "DESCEND",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": 9.46,
+        "nav": "OFFBOARD",
+        "post_touchdown": true
+      }
+    ]
+  },
+  "vmax_check": {
+    "v_gt_max_cruise": 3.563,
+    "sim_at_max": 105.06,
+    "V_env": 6.0,
+    "pass": true,
+    "window_s": [
+      102.804,
+      115.784
+    ],
+    "note": "\u2016v_GT\u2016 FAKTYCZNA w cruise. >V_env=FLAGA (V3), nie uniewa\u017cnia; \u00a74 bez zmian. EKF zani\u017ca faktyczn\u0105 w zakr\u0119cie (~1.6 m/s) \u2014 os\u0142ona liczy na estymacie."
+  },
+  "abrake_check": null,
+  "dstop_check": null
+}
