@@ -388,3 +388,29 @@ sim 91.62), wykrył `armed==1` @sim96.73, zalogował `[WD] ARMED @sim=96.728 —
 **0 próbek po arm**, `stopped_reason=ARMED_preflight_only`. Manifest S: blok `watchdog` obecny (n_reinits=1),
 `inj_info.n_reinits=1`, `run_valid=True`. **TEST H2 = PASS** (detekcja przed arm, cisza po; blok w manifeście S).
 Sędzia/osłona/shield/piny NIETKNIĘTE (`git diff` pusty).
+
+---
+
+## MAG-2 N1 — higiena CAL_MAG0 (nowy plik `acts/ensure_mag_baseline.py` + wpięcie w harness)
+
+**Snapshot baseline (VERBATIM, S@0.2 boot7, float32 — liczby, nie odwołanie do pliku):**
+```
+CAL_MAG0_XOFF = -0.00601893151178956
+CAL_MAG0_YOFF = -0.1369396150112152
+CAL_MAG0_ZOFF =  0.1544266939163208
+```
+Zapisywane do parameters.bson jako BSON double (typ 0x01, 8B) = float32(baseline) rzutowany na
+double; PX4 przy starcie rzutuje z powrotem na float. Mechanizm 1:1 jak `ensure_gps_enabled.py`:
+edycja `PX4-Autopilot/build/px4_sitl_default/rootfs/parameters.bson` in-place PRZED startem PX4
+(backup `.magbak`), aktywne w preflighcie przed arm. Symetryczne S/N/E, wyłącznie przed-lotowe.
+
+**Wpięcie `k1/run_k1_boot.sh`** (zaraz po higienie GPS, przed bramką load / startem stacku):
+```sh
+# higiena CAL_MAG0 (MAG-2 N1): reset persisted offset kalibracji mag do baseline S@0.2 b7 przed
+# bootem (przeciw pełzaniu uczonego biasu mag między bootami -> "Strong magnetic interference",
+# MAG-1). Symetryczne S/N/E, wyłącznie przed-lotowe; sędzia/osłona/piny/E5 nietknięte.
+python3 acts/ensure_mag_baseline.py > "$OUTDIR/mag_hygiene.txt" 2>&1
+```
+
+**N2(a) test statyczny PASS:** po restore bson czyta X/Y/Z == baseline float32 (MATCH×3).
+`EKF2_MAG_CHK_STR` NIETYKANE (N3/E5). Piny (`git diff HEAD` na k1_judge/shield/config/gate_run_r03) = pusty.

@@ -39,6 +39,11 @@ fi
 # higiena EKF2_GPS_CTRL (B5R3): reset persisted param do 7 przed bootem (leftover po GPS-denied)
 python3 acts/ensure_gps_enabled.py > "$OUTDIR/gps_hygiene.txt" 2>&1
 
+# higiena CAL_MAG0 (MAG-2 N1): reset persisted offset kalibracji mag do baseline S@0.2 b7 przed
+# bootem (przeciw pełzaniu uczonego biasu mag między bootami -> "Strong magnetic interference",
+# MAG-1). Symetryczne S/N/E, wyłącznie przed-lotowe; sędzia/osłona/piny/E5 nietknięte.
+python3 acts/ensure_mag_baseline.py > "$OUTDIR/mag_hygiene.txt" 2>&1
+
 # INFRA-1 I2a (jedna zmiana, semantyka „nie startuj/nie armuj na chorej maszynie"): bramka obciążenia
 # PRZED startem stacku. loadavg(1-min) < LOAD_MAX; czekaj do LOAD_WAIT_MAX próbkując co 30 s; przekroczenie
 # ⇒ env-block (boot się NIE zaczyna; nie liczy się nigdzie — to nie lot ani env-fail arm). Zmiana
