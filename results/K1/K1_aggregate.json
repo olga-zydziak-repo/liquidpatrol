@@ -376,14 +376,23 @@
     }
   ],
   "dstop_fail_counter": {
-    "paired_points_pass": "4/4 (0.20/0.35/0.65/0.80 dstop PASS)",
-    "only_valid_dstop_fail": "S/p0_5/boot1 (x_exc 5.212 > bound 2.953) — punkt 0.50 UNPAIRED",
+    "canonical_valid": "1 wśród bootów WAŻNYCH (S/p0_5/boot1, x_exc 5.212 > bound 2.953; punkt 0.50 UNPAIRED)",
+    "paired_points": "0/4 (0.20/0.35/0.65/0.80 dstop PASS)",
+    "full_composition_incl_diag": [
+      "S/p0_2/boot3 (diag)",
+      "S/p0_35/boot1 (diag)",
+      "S/p0_5/boot1 (VALID)",
+      "S/p0_5/boot2 (diag)"
+    ],
+    "count_all_gated": 4,
+    "count_valid": 1,
     "moved_by_0p65_0p80": false,
-    "note": "loty 0.65/0.80 NIE ruszyły licznika: 0.65 boot3 x_exc 3.47<=3.61 PASS; 0.80 boot1 2.802<=3.388 PASS. Historyczne 1/3 = S@0.2 boot3-stary (diag, run_valid=False)."
+    "ruling_3strikes": "S@0.2 boot3-stary (diag, run_valid=False) NIE liczy sie do 3-strikes: SR-K5 dotyczy WAZNOSCI (habitat/preinj), nie proxy dstop; dstop nie bramkuje waznosci (§4 bez zmian).",
+    "note": "loty 0.65/0.80 NIE ruszyly licznika: 0.65 boot3 x_exc 3.47<=3.61 PASS; 0.80 boot1 2.802<=3.388 PASS."
   },
   "abrake_fail_series": [
     "S/p0_5/boot1 a_meas 0.823 (UNPAIRED)",
     "S/p0_65/boot3 a_meas 1.584 (dstop PASS)"
   ],
-  "note_0p5_selection": "f=0.50 ma DWA wazne booty N (boot1 z_gt 5.918, boot2 6.352) + S boot1 (5.380). Najblizsza wazna kombinacja S1xN1 dz=0.538 chybia PAIR_TOL(dz<=0.5) o 0.038; S1xN2 dz=0.972. Reprezentant w tabeli = N boot2 (glob-order w aggregate.setdefault); punkt UNPAIRED wg reguly P2 niezaleznie od wyboru. S boot3@0.50 nie istnieje (nie latal); N boot3/4 env-fail; S boot2 diag."
+  "note_0p5_selection": "f=0.50 ma DWA wazne booty N (boot1 z_gt 5.918, boot2 6.352) + S boot1 (5.380). Najblizsza wazna kombinacja S1xN1 dz=0.538 chybia PAIR_TOL(dz<=0.5) o 0.038; S1xN2 dz=0.972. Reprezentant w tabeli = N boot2 (glob-order w aggregate.setdefault); punkt UNPAIRED wg reguly P2 niezaleznie od wyboru. S boot3@0.50 = ENV-FAIL (P3 kontynuowany per ANEKS_K1-17: polecial, rc=3 health-timeout, sztorm mag wielo-faultowy; finalize crashnal na braku trace.jsonl -> brak manifestu) -> zamknal 0.50 per M1. N boot3/4 env-fail; S boot2 diag."
 }

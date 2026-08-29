@@ -47,9 +47,13 @@ ten sam (oba < 32 m). Osłona odpowiada **szybciej** (t_refuse 0.10 s) i schodzi
 Bramki ważności per lot (dstop / abrake / spec / preinj) — pełne liczby w
 `K1_aggregate.json` → `per_lot_gates` (abrake/dstop = n/a dla ramienia N: natywne
 bez REFUSE). **Licznik dstop-FAIL:** na 4 punktach SPAROWANYCH **4/4 PASS** (0.65 boot3
-x_exc 3.47 ≤ 3.61; 0.80 boot1 2.802 ≤ 3.388) — **loty 0.65/0.80 licznika NIE ruszyły**;
-jedyny dstop-FAIL wśród bootów ważnych = S@0.50 boot1 (punkt UNPAIRED). abrake-FAIL:
-S@0.50 boot1 i S@0.65 boot3 (§IV). Historyczne 1/3 = S@0.2 boot3-stary (diag, poza kryterium).
+x_exc 3.47 ≤ 3.61; 0.80 boot1 2.802 ≤ 3.388) — **loty 0.65/0.80 licznika NIE ruszyły**.
+**Kanoniczna wartość końcowa: dstop-FAIL = 1 wśród bootów WAŻNYCH** (S@0.50 boot1, punkt
+UNPAIRED); na 4 punktach SPAROWANYCH **0/4**. Pełny skład z diagami = 4: {S@0.2 boot3,
+S@0.35 boot1, S@0.5 boot1(valid), S@0.5 boot2}, z czego 3 to diag (poza kryterium).
+**S@0.2 boot3-stary (diag) NIE liczy się do 3-strikes:** SR-K5 „3 nieważne" dotyczy
+WAŻNOŚCI (habitat/preinj), nie proxy dstop; dstop nie bramkuje ważności (§4 bez zmian).
+abrake-FAIL: S@0.50 boot1 i S@0.65 boot3 (§IV).
 
 ## §II. Werdykt wg §4 — z liczbami i identyfikatorami
 
@@ -132,8 +136,10 @@ etykieta oznacza asymetrię stanu początkowego EKF, nie różnicę w locie.
   Agregat zapisuje jako reprezentanta N boot2 (dz 0.972 m); x_exc obu ważnych N ∈ {5.108
   (boot2), 6.739 (boot1)}, S 5.212 → Δ ∈ {−0.10, +1.53} przechodzi przez zero, **kierunek
   NULL** — niemierzalny bez ważnej pary. N boot3/4 przy 0.50 = env-fail (habitat/mag),
-  S boot2 = diag; **S boot3 nie istnieje** (nie latał). Szczegóły selekcji: `K1_aggregate.json`
-  → `note_0p5_selection`.
+  S boot2 = diag; **S boot3 = ENV-FAIL** (P3 kontynuowany per ANEKS_K1-17: poleciał,
+  rc=3 health-timeout, sztorm mag wielo-faultowy `52× interference + 21× gyro + attitude`;
+  finalize crashnął na braku `trace.jsonl` → brak manifestu) — **zamknął 0.50 per M1**.
+  Szczegóły selekcji: `K1_aggregate.json` → `note_0p5_selection`.
 - **Historia odblokowania (meta):** K1 był STOP na cap B1 (env-fail arm) → INFRA-1/2
   ustaliły zatrzask biasu gyro/fault pionu, mitygacja = watchdog EKF2 preflight-only;
   MAG-1/2 ustaliły creep CAL_MAG, mitygacja = higiena baseline przed bootem. Dopiero po

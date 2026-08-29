@@ -438,3 +438,14 @@ bootami). **N3 death NIE wyzwolony** (mag-fail=0 w obu, nie ≥2 z czystym CAL).
 **N2 WERDYKT = PASS** (N2(a) statyczny MATCH×3 + N2(b) 2/2 booty arm mag-clean). Piny (`git diff HEAD`
 na k1_judge/shield/config/gate_run_r03) = pusty po obu bootach. `.ulg`/`.magbak` niezaśledzone.
 **Per N5: STOP na push CAŁEJ kolejki (Olga) → sygnał → S@0.65 boot3.**
+
+---
+
+**[ANEKS_K1-19 R6 — licznik dstop-FAIL, wartość kanoniczna]** dstop-FAIL końcowy serii K1 = **1 wśród
+bootów WAŻNYCH** (S/p0_5/boot1, x_exc 5.212 > bound 2.953; punkt 0.50 UNPAIRED); na 4 punktach
+SPAROWANYCH **0/4**. Pełny skład z diagami = 4: {S@0.2 boot3, S@0.35 boot1, S@0.5 boot1(valid),
+S@0.5 boot2} — 3 z nich diag (poza kryterium). **ROZSTRZYGNIĘCIE:** S@0.2 boot3-stary (diag,
+run_valid=False) **NIE liczy się do 3-strikes** — SR-K5 („3 nieważne booty ⇒ punkt niewykonany")
+dotyczy WAŻNOŚCI (habitat/preinj/health), nie proxy dstop; dstop-FAIL jest FLAGĄ, nie bramkuje ważności
+(§4 bez zmian). Dawne „1/3" łączyło dwa różne liczniki i jest wycofane. Źródło: `K1_aggregate.json`
+→ `dstop_fail_counter`.
