@@ -10,7 +10,7 @@ przez ANEKS_K1-15..18 (+ INFRA-1/2, MAG-1/2). Agregat: `results/K1/K1_aggregate.
 breach_S = 0/4** — zarówno natywny failsafe PX4 pod utratą GNSS, jak i osłona
 **zawierają** promień R_E = 32 m w KAŻDYM zmierzonym punkcie. Osłona ogranicza
 wychylenie poza punkt denialu o **medianę Δx_exc = 2.494 m** (IQR 1.47,
-pooled_std 0.905; mediana > pooled_std ⇒ przewaga istotna względem rozrzutu).
+pooled_std 0.905; mediana przewagi przekracza rozrzut międzyparowy: 2.494 > 0.905).
 Roszczenie „ucieczki" natywnego PX4 **nie stoi** w tej geometrii SITL — degraduje
 się do ilościowego: osłona wychyla mniej, ale obie konfiguracje mieszczą się w R_E.
 
@@ -44,12 +44,20 @@ Mechanizm zawierania różny (N: natywny land+koasting; S: REFUSE→D5), skutek 
 ten sam (oba < 32 m). Osłona odpowiada **szybciej** (t_refuse 0.10 s) i schodzi
 **wcześniej** (t_td ~4 s), stąd systematycznie mniejsze x_exc.
 
+Bramki ważności per lot (dstop / abrake / spec / preinj) — pełne liczby w
+`K1_aggregate.json` → `per_lot_gates` (abrake/dstop = n/a dla ramienia N: natywne
+bez REFUSE). **Licznik dstop-FAIL:** na 4 punktach SPAROWANYCH **4/4 PASS** (0.65 boot3
+x_exc 3.47 ≤ 3.61; 0.80 boot1 2.802 ≤ 3.388) — **loty 0.65/0.80 licznika NIE ruszyły**;
+jedyny dstop-FAIL wśród bootów ważnych = S@0.50 boot1 (punkt UNPAIRED). abrake-FAIL:
+S@0.50 boot1 i S@0.65 boot3 (§IV). Historyczne 1/3 = S@0.2 boot3-stary (diag, poza kryterium).
+
 ## §II. Werdykt wg §4 — z liczbami i identyfikatorami
 
 Kryterium (±) z PRE_K1 §4: `breach_N = 0 ∧ breach_S = 0 ∧ mediana(Δx_exc) > pooled_std`.
 Zmierzone (agregat na parach WAŻNYCH, `k1_aggregate` frozen; `K1_aggregate.json`):
 
-- **n_pairs = 4** (0.20, 0.35, 0.65, 0.80); **UNPAIRED = 0.50** (dz = 0.972 m > 0.5, R3).
+- **n_pairs = 4** (0.20, 0.35, 0.65, 0.80); **UNPAIRED = 0.50** (najbliższa ważna
+  kombinacja dz = 0.538 m > 0.5 — chybia bramkę parowania PAIR_TOL o 0.038 m; reguła P2; §V).
 - **breach_N = 0, breach_S = 0** (oba ramiona, 4/4 par).
 - **Δx_exc (N−S):** 0.20 → 3.306; 0.35 → 1.801; 0.65 → 1.577; 0.80 → 3.188.
 - **mediana(Δx_exc) = 2.494 m**, IQR = 1.472, **pooled_std = 0.905 m** ⇒ mediana > pooled_std.
@@ -83,6 +91,19 @@ Zagrożenia z góry (§5):
 - **Denial = EKF2_GPS_CTRL=0** ≡ utrata danych dla flag EKF (audyt §4b); scope = clean
   loss, nie spoofing.
 
+Zagrożenia wierności parowania (ANEKS_K1-16 P4 + proxy hamowania):
+- **Rozrzut z_gt przy f = 0.50 (0.538–0.972 m):** wysokości fizyczne wstrzyknięcia (GT)
+  trzech ważnych bootów rozjechały się — S boot1 5.380 m, N boot1 5.918 m, N boot2 6.352 m
+  → pary dz ∈ {0.538, 0.972} m, obie > PAIR_TOL (dz ≤ 0.5). Punkt 0.50 nie mógł sparować
+  (§V); zagrożenie nazwane w ANEKS_K1-16 (P4).
+- **Proxy hamowania (abrake) — 2 naruszenia w serii:** a_meas = wyhamowanie POZIOME po
+  REFUSE, próg A_BRAKE = 2.0 m/s². (1) pierwsze: **S@0.50 boot1, a_meas 0.823** (także
+  dstop-FAIL; punkt UNPAIRED). (2) drugie: **S@0.65 boot3, a_meas 1.584 < 2.0** (dstop PASS:
+  x_exc 3.47 ≤ bound 3.61). [Najwcześniejsze licząc diag: S@0.20 boot3, a_meas 1.862,
+  run_valid=False.] FLAGA **nie unieważnia** (§4 bez zmian). Mechanizm: osłona odpowiada
+  **zejściem D5**, nie hamowaniem poziomym — dron zachowuje pęd poziomy schodząc, więc proxy
+  mierzy **co innego** niż osłona wykonuje. Per-lot: `K1_aggregate.json` → `per_lot_gates`.
+
 Noty uczciwości serii (MAG-2 N4):
 1. **Pary 0.20 i 0.35 przeleciały pod RÓŻNYMI, pełznącymi wartościami CAL_MAG** (higiena
    CAL wdrożona dopiero od wznowienia 0.65, commit 5c0120a) — sparowały jednak na
@@ -102,10 +123,17 @@ etykieta oznacza asymetrię stanu początkowego EKF, nie różnicę w locie.
 
 ## §V. Informacyjne (poza kryterium)
 
-- **0.50 UNPAIRED** (slot D4): N boot2 × S boot1 ważne, ale dz = 0.972 m > 0.5 (R3) —
-  wysokości wstrzyknięcia rozjechane; wykluczone z kryterium, x_exc obu ~5.1–5.2 m
-  (gdyby sparowane, Δ ≈ −0.10, w kierunku NULL — ale niemierzalne bez pary). N boot3/4
-  i S boot3 przy 0.50 = env-fail (habitat/mag), nie liczone.
+- **0.50 UNPAIRED** (slot D4): przy f = 0.50 **trzy** booty ważne — S boot1 (z_gt 5.380),
+  N boot1 (5.918), N boot2 (6.352). Najbliższa ważna kombinacja **S1×N1 dz = 0.538 m**
+  **chybia bramkę parowania PAIR_TOL (dz ≤ 0.5) o 0.038 m** → punkt niesparowany.
+  Antyselekcja: próg dz = 0.5 pochodzi z PAIR_TOL w PRE_K1 (RATYF. 22.08, **PRZED** serią),
+  a reguła **P2** (zamrożona przy pierwszym konflikcie, ANEKS_K1-16) nie ustąpiła nawet
+  przy chybieniu 0.038 — wykluczenie nastąpiło **z reguły, nie po obejrzeniu Δx_exc**.
+  Agregat zapisuje jako reprezentanta N boot2 (dz 0.972 m); x_exc obu ważnych N ∈ {5.108
+  (boot2), 6.739 (boot1)}, S 5.212 → Δ ∈ {−0.10, +1.53} przechodzi przez zero, **kierunek
+  NULL** — niemierzalny bez ważnej pary. N boot3/4 przy 0.50 = env-fail (habitat/mag),
+  S boot2 = diag; **S boot3 nie istnieje** (nie latał). Szczegóły selekcji: `K1_aggregate.json`
+  → `note_0p5_selection`.
 - **Historia odblokowania (meta):** K1 był STOP na cap B1 (env-fail arm) → INFRA-1/2
   ustaliły zatrzask biasu gyro/fault pionu, mitygacja = watchdog EKF2 preflight-only;
   MAG-1/2 ustaliły creep CAL_MAG, mitygacja = higiena baseline przed bootem. Dopiero po
