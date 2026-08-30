@@ -1,0 +1,43 @@
+== t+15s loadavg=0.11
+== t+30s loadavg=0.17
+ 744316 14.0 Sl   gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+ 744535  5.7 Sl   /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+== t+45s loadavg=0.21
+ 744316 42.3 Sl   gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+ 744133  9.5 Ssl  /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin/px4 -i 0 -d /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/etc
+ 744639  4.5 Ssl  python3 -m acts.rtf_sampler --world default --out /home/olga/projects/liquidpatrol/results/INFRA3/A2/S/p0_65/boot4/rtf_stream.jsonl
+== t+60s loadavg=0.23
+ 744316 44.9 Sl   gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+ 744133 11.2 Ssl  /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin/px4 -i 0 -d /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/etc
+ 744639  4.3 Ssl  python3 -m acts.rtf_sampler --world default --out /home/olga/projects/liquidpatrol/results/INFRA3/A2/S/p0_65/boot4/rtf_stream.jsonl
+== t+75s loadavg=0.72
+ 744316 45.7 Sl   gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+ 744133 12.0 Ssl  /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin/px4 -i 0 -d /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/etc
+ 744639  4.2 Ssl  python3 -m acts.rtf_sampler --world default --out /home/olga/projects/liquidpatrol/results/INFRA3/A2/S/p0_65/boot4/rtf_stream.jsonl
+== t+90s loadavg=0.63
+ 744316 46.3 Sl   gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+ 744133 12.4 Ssl  /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin/px4 -i 0 -d /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/etc
+ 744639  4.2 Ssl  python3 -m acts.rtf_sampler --world default --out /home/olga/projects/liquidpatrol/results/INFRA3/A2/S/p0_65/boot4/rtf_stream.jsonl
+== t+105s loadavg=0.49
+ 744316 46.5 Sl   gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+ 744133 12.7 Ssl  /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin/px4 -i 0 -d /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/etc
+ 744639  4.1 Ssl  python3 -m acts.rtf_sampler --world default --out /home/olga/projects/liquidpatrol/results/INFRA3/A2/S/p0_65/boot4/rtf_stream.jsonl
+== t+120s loadavg=1.12
+ 744316 46.7 Sl   gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+ 744133 12.8 Ssl  /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin/px4 -i 0 -d /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/etc
+ 744639  4.1 Ssl  python3 -m acts.rtf_sampler --world default --out /home/olga/projects/liquidpatrol/results/INFRA3/A2/S/p0_65/boot4/rtf_stream.jsonl
+== t+135s loadavg=0.94
+ 744316 47.1 Sl   gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+ 744133 12.9 Ssl  /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin/px4 -i 0 -d /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/etc
+ 745222  5.8 Sl   python3 -m r03.gate_run_r03
+ 744639  4.1 Ssl  python3 -m acts.rtf_sampler --world default --out /home/olga/projects/liquidpatrol/results/INFRA3/A2/S/p0_65/boot4/rtf_stream.jsonl
+ 745243  2.3 Sl   /home/olga/.local/lib/python3.12/site-packages/mavsdk/bin/mavsdk_server -p 50051 --sysid 245 --compid 190 udpin://0.0.0.0:14540
+== t+150s loadavg=0.73
+ 744316 47.2 Sl   gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+ 744133 13.0 Ssl  /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin/px4 -i 0 -d /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/etc
+ 745222  6.3 Sl   python3 -m r03.gate_run_r03
+ 744639  4.0 Ssl  python3 -m acts.rtf_sampler --world default --out /home/olga/projects/liquidpatrol/results/INFRA3/A2/S/p0_65/boot4/rtf_stream.jsonl
+ 745243  2.6 Sl   /home/olga/.local/lib/python3.12/site-packages/mavsdk/bin/mavsdk_server -p 50051 --sysid 245 --compid 190 udpin://0.0.0.0:14540
+== t+165s loadavg=0.64
+ 744316 47.3 Sl   gz sim --verbose=1 -r -s /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf
+ 744133 13.0 Ssl  /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin/px4 -i 0 -d /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/etc

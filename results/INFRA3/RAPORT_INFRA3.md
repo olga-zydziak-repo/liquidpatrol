@@ -57,38 +57,41 @@ Wrapper = kopia `run_k1_boot.sh`, diff 3 linie (OUTDIR + marker read + marker wr
 nota §6). Referencja: `results/K1/S/p0_65/boot3` (x_exc 3.470, r_max 15.448, t_refuse 0.10, t_td 3.680,
 seq LOITER→PRECLAND→OFFBOARD→DESCEND→OFFBOARD). Sędzia `4e0dc0af`. B4 pre-series: brak procesu >50% CPU.
 
-Trzy booty (SKAŻONA-decider per ANEKS_INFRA3-2 §3 — patrz §6/N4). ref = `results/K1/S/p0_65/boot3(K1)`.
+Skład serii (ANEKS_INFRA3-2 §3 SKAŻONA → ANEKS_INFRA3-3 §2 nowy budżet decydenta). ref = `results/K1/S/p0_65/boot3(K1)`.
+**boot4 = decydent na czystej maszynie (pierwszy ważny+porównywalny, rozstrzyga).** boot1–2 = etykieta
+odchylenia procesowego (liczby pełne, w progach). boot3 = diag env-fail (habitat INVALID, nie liczony).
 
-| metryka (etykieta) | ref | **boot1** | **boot2** | **boot3** | próg | próg-ok |
-|---|---|---|---|---|---|---|
-| **run_valid ∧ habitat** | VALID | **VALID** | **VALID** | **INVALID(habitat)** | ważny | boot3 ✗ |
-| pairing dr [m] (nav) | — | 0.789 | 0.312 | 0.105 | ≤1.0 | ✅ |
-| pairing dv [m/s] (nav) | — | 0.008 | 0.024 | 0.021 | ≤0.3 | ✅ |
-| pairing dhead [°] (nav) | — | 6.215 | 2.885 | 2.265 | ≤10 | ✅ |
-| pairing dz [m] (sim GT) | — | 0.481 | 0.426 | 0.438 | ≤0.5 | ✅ |
-| breach | False | **False** | **False** | **False** | False | ✅ |
-| nav_state_seq (ulog) | 5-stan | identyczna | identyczna | identyczna | ==, bez AUTO_LAND | ✅ |
-| t_refuse_rel_s (nav) | 0.10 | **0.10** | **0.08** | **0.12** | [0.05,0.15] | ✅ |
-| x_exc [m] (sim GT) | 3.470 | **3.112** (\|Δ\|0.358) | **2.914** (\|Δ\|0.556) | **3.04** (\|Δ\|0.430) | \|Δ\|≤0.905 | ✅ |
-| t_td_s (ulog) | 3.680 | **3.4** (\|Δ\|0.28) | **4.06** (\|Δ\|0.38) | **4.12** (\|Δ\|0.44) | \|Δ\|≤0.5 | ✅ |
-| controller / _sha (meta+manifest) | — | route/`e0fcc7d2…` | route/`e0fcc7d2…` | route/`e0fcc7d2…` | route | ✅ |
+| metryka (etykieta) | ref | boot1(dev) | boot2(dev) | boot3(diag) | **boot4 DECYDENT** | próg | ok |
+|---|---|---|---|---|---|---|---|
+| **run_valid ∧ habitat** | VALID | VALID | VALID | INVALID(hab) | **VALID** | ważny | ✅ |
+| pairing dr [m] (nav) | — | 0.789 | 0.312 | 0.105 | **0.462** | ≤1.0 | ✅ |
+| pairing dv [m/s] (nav) | — | 0.008 | 0.024 | 0.021 | **0.050** | ≤0.3 | ✅ |
+| pairing dhead [°] (nav) | — | 6.215 | 2.885 | 2.265 | **3.437** | ≤10 | ✅ |
+| pairing dz [m] (sim GT) | — | 0.481 | 0.426 | 0.438 | **0.131** | ≤0.5 | ✅ |
+| breach | False | False | False | False | **False** | False | ✅ |
+| nav_state_seq (ulog) | 5-stan | identyczna | identyczna | identyczna | **identyczna** | ==, bez AUTO_LAND | ✅ |
+| t_refuse_rel_s (nav) | 0.10 | 0.10 | 0.08 | 0.12 | **0.12** | [0.05,0.15] | ✅ |
+| x_exc [m] (sim GT) | 3.470 | 3.112 | 2.914 | 3.04 | **2.72** (\|Δ\|0.750) | \|Δ\|≤0.905 | ✅ |
+| t_td_s (ulog) | 3.680 | 3.4 | 4.06 | 4.12 | **3.8** (\|Δ\|0.120) | \|Δ\|≤0.5 | ✅ |
+| controller / _sha (meta+manifest) | — | route/`e0fcc7d2` | route/`e0fcc7d2` | route/`e0fcc7d2` | **route/`e0fcc7d2`** | route | ✅ |
 
-Cytaty: `results/INFRA3/A2/S/p0_65/boot{1,2,3}/{judge.json,manifest.json}`.
-`controller_sha` = sha256 `r03/controllers/route_follower.py` = `e0fcc7d2…` (w meta i manifeście WSZYSTKICH trzech lotów).
+Cytaty: `results/INFRA3/A2/S/p0_65/boot{1,2,3,4}/{judge.json,manifest.json}`.
+`controller_sha` = sha256 `r03/controllers/route_follower.py` = `e0fcc7d2…` (w meta i manifeście WSZYSTKICH lotów).
+**boot4 habitat:** H1 timejump=0 PASS, H2 Δsim/Δwall=**1.0** (czysto, zero stalla) — kontrast do boot3 (0.6127).
+boot4 higiena: inwentarz pre/post/during verbatim (`proc_inventory_boot4_{pre,during,post}.txt`); during-sampler
+złapał WYŁĄCZNIE własny stack (gz/px4/rtf_sampler) — zero cudzego procesu w trakcie; loadavg pre 0.04.
 
-**boot3 diagnoza (habitat INVALID):** H1(timejump)=0 PASS; H2 Δsim/Δwall=0.6127<0.95 — POJEDYNCZY głęboki stall
-na segmencie roszczenia (frac<0.5=0.0196≈1/51 próbek, min_rtf 0.0213, mediana 1.0), **NIE w oknie reakcji**
-(`stall_in_reaction_window`: n_stall=0, min_rtf=1.0). Znany env-bound stall mostu gz↔px4 (RAPORT_INFRA1/E1d/P3),
-niezależny od skażenia i od refaktora. Wszystkie PROGI A2.3 boot3 spełnione — nieważność wyłącznie na bramce habitatu.
+**boot3 diagnoza (env-fail, diag):** H1=0 PASS; H2 Δsim/Δwall=0.6127<0.95 — POJEDYNCZY głęboki stall na segmencie
+roszczenia (frac<0.5=0.0196, min_rtf 0.0213), **NIE w oknie reakcji** (n_stall=0). env-bound stall gz↔px4
+(RAPORT_INFRA1/E1d/P3), ortogonalny do refaktora; wszystkie progi A2.3 spełnione, nieważność tylko na habitacie.
 
-### Werdykt A2: **NIEROZSTRZYGNIĘTE** (ANEKS_INFRA3-2 §3, gałąź SKAŻONA).
-Booty 1–2: ważne, porównywalne, WSZYSTKIE progi A2.3 spełnione — ale na maszynie z cudzymi procesami
-(dreamforge-arc + druga sesja Claude, §6/N4) → etykieta odchylenia procesowego, dane NIE unieważnione
-(bramki ważności przeszły). boot3 (decydent na czystej maszynie): **nieważny** (habitat env-bound) → per §3
-budżet ≤3 wyczerpany ⇒ **NIEROZSTRZYGNIĘTE, STOP, decyzja dokumentem CC. Revert pinu NIE automatyczny.**
-Nota techniczna: RÓWNOWAŻNOŚĆ refaktora NIE jest podważona — wszystkie 3 booty: breach=False, sekwencja nav
-identyczna, x_exc/t_td/t_refuse w progach A2.3, controller_sha poprawny, parowanie w PAIR_TOL; A1.3 = 4221
-ticków bit-identycznych. Jedyny fail boot3 = stochastyczna bramka habitatu (P3), ortogonalna do kontroler/osłona.
+### Werdykt A2: **PASS** (decydent boot4 ważny+porównywalny, wszystkie progi A2.3; ANEKS_INFRA3-3 §2).
+Ścieżka: seria A2 na skażonej maszynie NIEROZSTRZYGNIĘTA (ANEKS-2 §3, boot3 env-fail) → CC odrzucił „PASS mimo
+nieważności" i revert (ANEKS-3 §2 b/c) → nowy budżet decydenta na czystej maszynie → **boot4 rozstrzyga PASS**.
+Refaktor kontroler/osłona równoważny; osłona identyczna z natywnym blokiem setpointów. Dowód niezależny od
+środowiska: A1.3 = 4221 ticków bit-identycznych; 4/4 loty (1,2,3,4) w progach A2.3 z poprawnym controller_sha.
+Predykcje: P2 ✓ (pod skażeniem), P3 ✓ (habitat env INVALID w boot3), P5 ✓ (boot4 ważny+w progach za 1. razem),
+P4 kierunkowo (dz najciaśniej: 0.131–0.481 przy 0.5). Werdykt A2 do potwierdzenia linią CC „A2 PASS" (ANEKS-3 §5).
 Predykcje: P2 częściowo (2 loty porównywalne, progi w oknie, ale ważność decydenta padła na env); P3 zamanifestowana
 (habitat INVALID env-bound) już w A2; P4 kierunkowo (dz najciaśniejszy margines: 0.481/0.426/0.438 przy 0.5).
 
