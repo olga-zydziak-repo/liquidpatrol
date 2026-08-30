@@ -1,0 +1,62 @@
+# harness/proc_allowlist.txt — allowlista wzorców linii poleceń (ANEKS_INFRA3-3 §3).
+# Bramka procesowa `harness/proc_gate.py` blokuje boot, jeśli proces user-space z CPU>2%
+# NIE pasuje do żadnego wzorca (regex, ERE). Edytowane WYŁĄCZNIE commitem.
+# Jeden wzorzec na linię; # = komentarz; puste linie ignorowane.
+
+# --- stack symulacji / lotu ---
+bin/px4
+gz sim
+ruby.*gz
+gz-transport
+gz sensors
+MicroXRCEAgent
+mavsdk_server
+parameter_bridge
+ros_gz_bridge
+ros2 run
+python3? -m acts\.
+python3? -m r03\.
+python3? -m r02\.
+python3? .*k1/k1_arm_n\.py
+python3? .*k1/k1_finalize\.py
+python3? .*tools/infra1_empty_flight\.py
+python3? .*tools/infra1_empty_finalize\.py
+python3? .*tools/infra2_ekf_watchdog\.py
+python3? .*acts/(rtf_sampler|capture_frame|build_a3_manifest|habitat_gate|finalize_manifest|judge_run|ensure_gps_enabled|ensure_mag_baseline)
+python3? .*harness/
+capture_frame\.py
+px4-listener
+
+# --- wykonawca (jedna sesja + narzędzia harnessu) ---
+(^|/)claude($| )
+(^|/)node($| )
+(^|/)bash\b
+/bin/sh
+ugrep
+(^|/)tail\b
+(^|/)ps\b
+(^|/)top\b
+(^|/)grep\b
+(^|/)awk\b
+(^|/)sed\b
+(^|/)sleep\b
+(^|/)find\b
+(^|/)git\b
+pgrep|pkill
+
+# --- system ---
+(^|/)init$|/init\b
+/sbin/init
+systemd
+\(sd-pam\)
+dbus
+polkit
+containerd
+dockerd
+wsl-pro-service
+postgres
+udevd
+journald
+timesyncd
+agetty
+sshd

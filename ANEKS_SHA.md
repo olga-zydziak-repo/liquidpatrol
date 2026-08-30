@@ -711,3 +711,35 @@ kontrolery NIE pinowane — tożsamość niesie `controller_sha` per boot.
   (`session`: mem_free/loadavg — snapshot środowiska, nie odchylenie D5); realna różnica = tylko nowe pola
   `controller`/`controller_sha` (null dla starego trace). Przepisanie meta→manifest zweryfikowane na trace z
   wstrzykniętym meta (`controller_sha` wychodzi w manifeście → A2.3 spełnialne po locie).
+
+## §W13 — INFRA-3 B1: wrapper bootu programu `harness/run_boot.sh` (mechanizmy + źródło)
+
+Nienoga badawcza. Kompozycja ISTNIEJĄCYCH mechanizmów w JEDNYM wrapperze; przyrządy zamkniętych serii
+(`k1/run_k1_boot.sh`, `acts/run_act.sh`, `acts/run_A3.sh`) NIETKNIĘTE. Każdy mechanizm ↔ plik źródłowy:
+
+| krok | mechanizm | skopiowane/wywołane z |
+|---|---|---|
+| 1 | B4 orphany+cooldown+b4_state, `proc_inventory{,_pre}.txt` | `k1/run_k1_boot.sh:22–31` (marker program-wide `results/.last_boot_end` + fallback `results/K1/`) |
+| 1 | **BRAMKA PROCESOWA §3** (`harness/proc_gate.py` + `proc_allowlist.txt`) | NOWY (ANEKS_INFRA3-3 §3): `top -b -n 2 -d 5`, cudzy proces >2% CPU lub loadavg>1.5 ⇒ env-block+stub, exit 3 |
+| 2 | certs_selfcheck (gate_r03) | `k1/run_k1_boot.sh:33–37` |
+| 3 | higiena GPS / CAL_MAG (zawsze) | `acts/ensure_gps_enabled.py`, `acts/ensure_mag_baseline.py` (jak `run_k1_boot.sh:39–45`) |
+| 4 | bramka obciążenia I2a (LOAD_MAX 8.0, 10 min) | `k1/run_k1_boot.sh:47–64` (semantyka env-block bez zmian) |
+| 5 | świat + hash (`harness/world_hash.sh`) | `acts/run_act.sh:16–17` (worlds/) + stock z `PX4-Autopilot/Tools/simulation/gz/worlds/` |
+| 6 | stack, headless, /clock, RTF, watchdog EKF2 (BEZWARUNKOWY, max 2 reinity), settle (MIN 90), timejump_pre | `k1/run_k1_boot.sh:66–91` (`run_stack.sh`, `acts.rtf_sampler`, `tools/infra2_ekf_watchdog.py`) |
+| 7 | intruz spawn + `model_in_state` (dowód R02C), film bridge (opc.) | `acts/run_act.sh:30–38` (`gz service create` na `r02/intruder_model.sdf`, `gz model --list`) |
+| 8 | moduł lotu (gate_r03 / arm_n / empty), passthrough SCEN/K1_POINT/CONTROLLER | `k1/run_k1_boot.sh:93–107` (gate_run_r03 / k1_arm_n / `tools/infra1_empty_flight.py`) |
+| 9 | post: term RTF/watchdog, timejump_post, health, ulog→boot.ulg + **ulog_sha.txt** (sha256+rozmiar) | `k1/run_k1_boot.sh:109–117` + sha256 pointer (NOWY, §B1.1 pkt 9) |
+| 10 | finalize wg FLIGHT + **łapacz klasy stub** (`harness/stub_manifest.py`) + augment (`harness/augment_manifest.py`) | `k1/k1_finalize.py` / `tools/infra1_empty_finalize.py`; stub=lekcja R5 (brak manifestu ≠ brak bootu) |
+| 11 | marker końca program-wide `results/.last_boot_end` | `k1/run_k1_boot.sh:135` (ścieżka program-wide) |
+
+sha256 nowych plików (@B1):
+- `harness/run_boot.sh` `9e87a1df34167326ca69537f16a93cbf27c76cb6c48ac3591f948f944ee2634f`
+- `harness/proc_gate.py` `764bd3cdb21ff1d23b7f6186cd05ef05db37144d9b27b7e3972c42b842aeecbc`
+- `harness/proc_allowlist.txt` `33c80992fc4b59a42c10a3f2bdfaa5ba412c179550aebfef3fec5cdb5276a161`
+- `harness/stub_manifest.py` `9d963eb4246b07cad2ce7f9c4c25d648b7b265f6d028c4624df613e85168ea33`
+- `harness/augment_manifest.py` `88e637208213793f0de925eb5ec3c442f9f3a34221a84cd77b24aa25b0bcec56`
+- `harness/world_hash.sh` `c765e3d17883066fec68ae3d949ad871de906a91abd1d497214b1dab7cd4c342`
+
+Augmentacja manifestu (world_hash/ulog_sha/ulog_bytes/model_in_state) = warstwa wrappera, NIE dotyka sędziego
+ani logiki finalize (sędziowie 4e0dc0af/79b1e936 NIETKNIĘTE). Test `tests_harness_infra3.py` B1.2 (i)–(v) 6/6 PASS.
+B1 NIE dotyka niczego pinowanego (SR-3 nie dotyczy — brak zmian w gate/osłonie/config); STOP-u brak, B2 startuje od razu.
