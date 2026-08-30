@@ -52,31 +52,45 @@ się zgadza → sędzia liczy). Manifest porównywany z wyłączeniem pól pomia
 (`session`: mem_free/loadavg — snapshot środowiska, D5 ANEKS_INFRA3-1); realna różnica = tylko nowe pola
 `controller`/`controller_sha`. Przepisanie meta→manifest zweryfikowane na trace z wstrzykniętym meta.
 
-### Dwa loty równoważności (A2.1, `tools/run_k1_boot_infra3.sh`, `CONTROLLER=route`, KIND=crit)
+### Loty równoważności (A2.1, `tools/run_k1_boot_infra3.sh`, `CONTROLLER=route`, KIND=crit)
 Wrapper = kopia `run_k1_boot.sh`, diff 3 linie (OUTDIR + marker read + marker write → `results/INFRA3/`;
 nota §6). Referencja: `results/K1/S/p0_65/boot3` (x_exc 3.470, r_max 15.448, t_refuse 0.10, t_td 3.680,
 seq LOITER→PRECLAND→OFFBOARD→DESCEND→OFFBOARD). Sędzia `4e0dc0af`. B4 pre-series: brak procesu >50% CPU.
 
-| metryka (etykieta) | ref boot3 | **boot1** | **boot2** | próg | ok |
-|---|---|---|---|---|---|
-| run_valid ∧ habitat | VALID | **VALID** | **VALID** | ważny | ✅ |
-| pairing dr [m] (nav) | — | 0.789 | 0.312 | ≤1.0 | ✅ |
-| pairing dv [m/s] (nav) | — | 0.008 | 0.024 | ≤0.3 | ✅ |
-| pairing dhead [°] (nav) | — | 6.215 | 2.885 | ≤10 | ✅ |
-| pairing dz [m] (sim GT) | — | 0.481 | 0.426 | ≤0.5 | ✅ |
-| breach | False | **False** | **False** | False | ✅ |
-| nav_state_seq (ulog) | 5-stan | identyczna | identyczna | ==, bez AUTO_LAND | ✅ |
-| t_refuse_rel_s (nav) | 0.10 | **0.10** | **0.08** | [0.05,0.15] | ✅ |
-| x_exc [m] (sim GT) | 3.470 | **3.112** (\|Δ\|0.358) | **2.914** (\|Δ\|0.556) | \|Δ\|≤0.905 | ✅ |
-| t_td_s (ulog) | 3.680 | **3.4** (\|Δ\|0.28) | **4.06** (\|Δ\|0.38) | \|Δ\|≤0.5 | ✅ |
-| controller / _sha (meta+manifest) | — | route / `e0fcc7d2…` | route / `e0fcc7d2…` | route | ✅ |
+Trzy booty (SKAŻONA-decider per ANEKS_INFRA3-2 §3 — patrz §6/N4). ref = `results/K1/S/p0_65/boot3(K1)`.
 
-Cytaty: `results/INFRA3/A2/S/p0_65/boot1/{judge.json,manifest.json}`, `.../boot2/{judge.json,manifest.json}`.
-`controller_sha` = sha256 `r03/controllers/route_follower.py` = `e0fcc7d2…` (w meta i manifeście obu lotów).
+| metryka (etykieta) | ref | **boot1** | **boot2** | **boot3** | próg | próg-ok |
+|---|---|---|---|---|---|---|
+| **run_valid ∧ habitat** | VALID | **VALID** | **VALID** | **INVALID(habitat)** | ważny | boot3 ✗ |
+| pairing dr [m] (nav) | — | 0.789 | 0.312 | 0.105 | ≤1.0 | ✅ |
+| pairing dv [m/s] (nav) | — | 0.008 | 0.024 | 0.021 | ≤0.3 | ✅ |
+| pairing dhead [°] (nav) | — | 6.215 | 2.885 | 2.265 | ≤10 | ✅ |
+| pairing dz [m] (sim GT) | — | 0.481 | 0.426 | 0.438 | ≤0.5 | ✅ |
+| breach | False | **False** | **False** | **False** | False | ✅ |
+| nav_state_seq (ulog) | 5-stan | identyczna | identyczna | identyczna | ==, bez AUTO_LAND | ✅ |
+| t_refuse_rel_s (nav) | 0.10 | **0.10** | **0.08** | **0.12** | [0.05,0.15] | ✅ |
+| x_exc [m] (sim GT) | 3.470 | **3.112** (\|Δ\|0.358) | **2.914** (\|Δ\|0.556) | **3.04** (\|Δ\|0.430) | \|Δ\|≤0.905 | ✅ |
+| t_td_s (ulog) | 3.680 | **3.4** (\|Δ\|0.28) | **4.06** (\|Δ\|0.38) | **4.12** (\|Δ\|0.44) | \|Δ\|≤0.5 | ✅ |
+| controller / _sha (meta+manifest) | — | route/`e0fcc7d2…` | route/`e0fcc7d2…` | route/`e0fcc7d2…` | route | ✅ |
 
-### Werdykt A2: **PASS** (2/2 loty ważne i porównywalne spełniają WSZYSTKIE punkty A2.3).
-Refaktor kontroler/osłona jest równoważny; osłona zachowuje się identycznie z natywnym blokiem setpointów.
-Predykcja P2 trafiona (2 loty porównywalne w 2 bootach, t_refuse w oknie, |x_exc−3.470|≤0.905 w obu).
+Cytaty: `results/INFRA3/A2/S/p0_65/boot{1,2,3}/{judge.json,manifest.json}`.
+`controller_sha` = sha256 `r03/controllers/route_follower.py` = `e0fcc7d2…` (w meta i manifeście WSZYSTKICH trzech lotów).
+
+**boot3 diagnoza (habitat INVALID):** H1(timejump)=0 PASS; H2 Δsim/Δwall=0.6127<0.95 — POJEDYNCZY głęboki stall
+na segmencie roszczenia (frac<0.5=0.0196≈1/51 próbek, min_rtf 0.0213, mediana 1.0), **NIE w oknie reakcji**
+(`stall_in_reaction_window`: n_stall=0, min_rtf=1.0). Znany env-bound stall mostu gz↔px4 (RAPORT_INFRA1/E1d/P3),
+niezależny od skażenia i od refaktora. Wszystkie PROGI A2.3 boot3 spełnione — nieważność wyłącznie na bramce habitatu.
+
+### Werdykt A2: **NIEROZSTRZYGNIĘTE** (ANEKS_INFRA3-2 §3, gałąź SKAŻONA).
+Booty 1–2: ważne, porównywalne, WSZYSTKIE progi A2.3 spełnione — ale na maszynie z cudzymi procesami
+(dreamforge-arc + druga sesja Claude, §6/N4) → etykieta odchylenia procesowego, dane NIE unieważnione
+(bramki ważności przeszły). boot3 (decydent na czystej maszynie): **nieważny** (habitat env-bound) → per §3
+budżet ≤3 wyczerpany ⇒ **NIEROZSTRZYGNIĘTE, STOP, decyzja dokumentem CC. Revert pinu NIE automatyczny.**
+Nota techniczna: RÓWNOWAŻNOŚĆ refaktora NIE jest podważona — wszystkie 3 booty: breach=False, sekwencja nav
+identyczna, x_exc/t_td/t_refuse w progach A2.3, controller_sha poprawny, parowanie w PAIR_TOL; A1.3 = 4221
+ticków bit-identycznych. Jedyny fail boot3 = stochastyczna bramka habitatu (P3), ortogonalna do kontroler/osłona.
+Predykcje: P2 częściowo (2 loty porównywalne, progi w oknie, ale ważność decydenta padła na env); P3 zamanifestowana
+(habitat INVALID env-bound) już w A2; P4 kierunkowo (dz najciaśniejszy margines: 0.481/0.426/0.438 przy 0.5).
 
 ---
 
@@ -122,6 +136,17 @@ Predykcja P2 trafiona (2 loty porównywalne w 2 bootach, t_refuse w oknie, |x_ex
   obie zmiany mieszczą się w dwóch pojęciach (ścieżka wyjścia + marker). Zero innych różnic (SR-7: brak `results/K1`).
 - **N3 (dz blisko progu, P4):** pairing `dz` = 0.481 (boot1) / 0.426 (boot2) przy tol 0.5 — rozrzut z_gt
   wstrzyknięcia (lekcja 0.50) jest realnym ryzykiem porównywalności, w obu lotach zmieścił się.
+- **N4 (higiena procesowa serii A2 — gałąź SKAŻONA, ANEKS_INFRA3-2 §2/§3):** booty 1–2 poleciały przy
+  aktywnych cudzych procesach (inwentarz `proc_inventory_preseries.txt`): pilot `dreamforge-arc`
+  (`arc_a12a_controlled_repair_pilot.py`, 3.5% CPU) + druga sesja Claude (`872 claude --continue`). Próg
+  B4 (>50% CPU) nie przekroczony, ale reguła kampanii („zero cudzych procesów") naruszona → CLARIFY-A2 C2
+  odpowiedź: NIE (bez wygładzania). Per §3 booty 1–2 = etykieta odchylenia procesowego, dane NIE unieważnione.
+  **boot3 = decydent na czystej maszynie:** przed bootem `dreamforge-arc` sam zszedł; sesję `872` ubiłem za
+  wyraźną zgodą Olgi („ubij 872"), SIGTERM, potwierdzone martwe; inwentarz `proc_inventory_boot3_pre.txt`
+  verbatim (loadavg 0.09, jedyny konsument CPU olga = moja sesja `598227`; pozostały 2 osierocone idle
+  log-followery 0% CPU `4684 tail`/`4687 ugrep` po `872` — zero kontencji). boot3 poleciał czysto, ale
+  **habitat INVALID** (env-bound stall, §2) → per §3 **NIEROZSTRZYGNIĘTE**. Diagnoza CC: podejrzany #1 = env-habitat
+  (P3), NIE skażenie 1–2, NIE refaktor (wszystkie progi A2.3 spełnione we wszystkich 3 bootach). Hipoteza, nie werdykt.
 - **Błąd w logice setpointów:** brak (A1.1 „nota, nie fix") — nie znaleziono.
 - **CONTROLLER=route:** przekazane env przy wywołaniu wrappera (wrapper bajt-czysty poza 3 liniami ścieżek);
   gate i tak konstruuje kontroler z default `route`, więc `controller_sha` pojawia się niezależnie.
