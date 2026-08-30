@@ -1,0 +1,12 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga      608029  3.5  7.2 74376000 2347476 ?    Sl   16:08   1:57 /home/olga/projects/dreamforge-arc/.venv/bin/python3 scripts/arc_a12a_controlled_repair_pilot.py --run
+olga      598227  3.4  1.4 73817824 481292 pts/2 Rl+  15:42   2:47 claude
+olga         872  2.2  1.9 75382644 616732 pts/0 Rl+  Aug29  52:45 claude --continue
+root         244  0.2  0.1 2533872 52128 ?       Ssl  Aug29   5:04 /usr/bin/containerd
+root         344  0.1  0.2 2722296 77824 ?       Ssl  Aug29   2:48 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         626  0.0  0.0 1234128 12708 ?       Sl   Aug29   1:55 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root      624577  0.0  0.0 1756628 13580 ?       Ssl  17:03   0:00 /usr/libexec/wsl-pro-service
+dnsmasq      650  0.0  0.0 216768 28448 ?        Ss   Aug29   0:13 postgres
+root      598146  0.0  0.0   3200  1252 ?        S    15:42   0:00 /init
+root          40  0.0  0.0  75052 28648 ?        S<s  Aug29   0:08 /usr/lib/systemd/systemd-journald
+olga      608105  0.0  0.0   4896  3632 ?        Ss   16:08   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1787958845562-15mp7u.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && eval 'LOG=results/runs/a12a_run_stdout.log REC=results/runs/arc_a12a_controlled_repair_pilot_fa0c387010c5/selection_records.jsonl last=0 while true; do   n=$( [ -f "$REC" ] && wc -l < "$REC" || echo 0 )   if [ "$n" -gt "$last" ]; then     grep "^\[A12A\]" "$LOG" 2>/dev/null | sed -n "$((last+1)),${n}p"     last=$n   fi   if [ "$n" -ge 72 ]; then echo "DONE 72/72 — A12A run complete"; break; fi   if ! kill -0 608025 2>/dev/null; then     echo "PROCESS 608025 EXITED at $n/72"     grep -iE "Traceback|Error|abort|RESOURCE|OFFLOAD|Killed|OOM|RUN_PHASE" "$LOG" 2>/dev/null | tail -6     break   fi   sleep 20 done' && pwd -P >| /tmp/claude-7c43-cwd
