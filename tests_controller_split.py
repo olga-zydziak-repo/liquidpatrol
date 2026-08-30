@@ -172,6 +172,28 @@ def test_synthetic_corner_crossing():
     assert c["v_ned"] == rc["v_ned"]
 
 
+def test_descending_no_increment():
+    """(C2 ANEKS_INFRA3-1) jedyna gałąź klauzuli bramkującej, której korpus lotów NIE ćwiczy:
+    descending=True ∧ dist<1.0 ⇒ seg_i BEZ inkrementu — w OBU implementacjach identycznie."""
+    wps = [(10.0, 0.0, -8.0), (0.0, 10.0, -8.0)]
+    ALT = 8.0
+    pos = (9.5, 0.0, -8.0)                      # dist do wps[0] = 0.5 < 1.0
+    assert math.hypot(10.0 - pos[0], 0.0) < 1.0
+    # RouteFollower: descending=True → brak inkrementu (seg_i zostaje 0)
+    ctrl = RouteFollower(wps=wps, vmax=VMAX, alt=ALT, wp_reach_m=1.0); ctrl.reset()
+    r = ctrl.step(0, pos, (0, 0, 0), 0.0, True)
+    assert r["seg_i"] == 0, "descending=True nie może inkrementować seg_i (RouteFollower)"
+    # referencja (stary blok): descending=True → brak inkrementu
+    st = _RefState()
+    rr = ref_step(st, pos, True, wps, ALT)
+    assert rr["seg_i"] == 0, "descending=True nie może inkrementować seg_i (referencja)"
+    # kontrast: descending=False PRZY TEJ SAMEJ pozycji → inkrement (obie)
+    ctrl2 = RouteFollower(wps=wps, vmax=VMAX, alt=ALT, wp_reach_m=1.0); ctrl2.reset()
+    st2 = _RefState()
+    assert ctrl2.step(0, pos, (0, 0, 0), 0.0, False)["seg_i"] == 1
+    assert ref_step(st2, pos, False, wps, ALT)["seg_i"] == 1
+
+
 if __name__ == "__main__":
     print("=== A1.3 test równoważności RouteFollower ↔ stary blok (3065b8b) ===")
     print(f"sha r01/shield.py = {_sha(os.path.join(ROOT, 'r01/shield.py'))[:16]}  want {SHIELD_SHA[:16]}")
@@ -191,6 +213,8 @@ if __name__ == "__main__":
     print(f"\nŁącznie ticków porównanych bit-w-bit: {grand}  → WSZYSTKIE IDENTYCZNE")
     test_synthetic_corner_crossing()
     print("test syntetyczny przejścia narożnika: OK")
+    test_descending_no_increment()
+    print("test descending=True ∧ dist<1.0 ⇒ brak inkrementu seg_i (obie impl.): OK")
     test_r03_v1_skipped()
     print("R0.3a v1 (bez tick): pominięte zgodnie z A1.3(ii)")
     print("\nA1.3 PASS")

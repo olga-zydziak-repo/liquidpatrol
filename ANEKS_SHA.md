@@ -587,59 +587,127 @@ INTERMITTENT (rodzina D8/timesync), **bramka J4 chwyta**. Zdanie do §IV.
 N boot4 = ważny kandydat pary (r@inj=18.08). Po pushu (1cee41d + commit J1–J5): re-lot S@0.2 →
 parowanie z N boot4.
 
-## §W12 — INFRA-3 A1: rozcięcie kontroler/osłona (re-baseline pinu gate → PO STOP-1)
 
-Nienoga badawcza (pozycja 1a planu). Cel: wypięcie źródła setpointów z pętli osłony, żeby ławka/sieć
-wpinały nowy kontroler bez dotykania osłony. Osłona (`r01/shield.py`), config (`r03/config.py`), sędzia
-K1 (`k1/k1_judge.py`), sędzia DEMO-B (`tools/act_judge.py`) — sha NIEZMIENIONE (weryfikacja niżej).
+## §W12 — INFRA-3 A1: rozcięcie kontroler/osłona (re-baseline pinu gate → PO STOP-1) [A1b: sha256, diff verbatim]
 
-**Nowy pakiet** `r03/controllers/` (`base.py` interfejs `SetpointSource`, `route_follower.py` `RouteFollower`
-= JEDYNY dziś kontroler, `__init__.py` `make_controller`/`controller_sha`). RouteFollower odtwarza DOKŁADNIE
-stary blok setpointów (3065b8b linie 225–230 + 291): wp(stary)→dx,dy,dist→inkrement seg_i→tgt(stary wp)→
-v_ned(stary wp); zwraca seg_i PO inkremencie (tak czyta trigger K1 `_cur=wps[seg_i]`, S4 `seg_i>=1`).
+Nienoga badawcza (pozycja 1a planu). Źródło setpointów wypięte z pętli osłony do `r03/controllers/`
+(ławka/sieć wpinają kontroler bez dotykania osłony, SR-9). Osłona (`r01/shield.py`), config (`r03/config.py`),
+sędzia K1 (`k1/k1_judge.py`), sędzia DEMO-B (`tools/act_judge.py`) — sha256 NIEZMIENIONE.
 
-**Diff `r03/gate_run_r03.py` (verbatim) — dotyka WYŁĄCZNIE: importu, konstrukcji kontrolera, wiersza meta,
-bloku setpointów, wiersza v_ned (SR-3 spełniony):**
+**Pakiet** `r03/controllers/`: `base.py` (interfejs `SetpointSource`, kontrakt PROMPT_INFRA3 §A1.1 —
+`step(tick, pos_ned, vel_ned, now_s, descending)` zwraca `tgt_ned`/`v_ned`/`yaw`/`seg_i`/`dist`/`wps`/`extra`),
+`route_follower.py` (`RouteFollower` = JEDYNY dziś kontroler, odtwarza DOKŁADNIE stary blok 3065b8b 225–230+291),
+`__init__.py` (`make_controller`/`controller_sha`).
 
-```
-@@ importy @@
-+from r03.controllers import make_controller, controller_sha
-@@ przed meta (konstrukcja kontrolera) @@
+**sha256 (etykieta przyrządu: sha256 zawartości pliku, NIE id bloba git):**
+
+| plik | @3065b8b (stary) | @31fe970 (nowy) |
+|---|---|---|
+| `r03/gate_run_r03.py` | `72619513c682e76892c531ec3dae2d918da08da92017605dcba50103977cf58a` | `c3ccabe04b9cae8ea57cfa899b8e363451fe9a6b4dbaffc8b1b0910ad192b729` |
+| `k1/k1_finalize.py` | `cfe1d95dcbfc2e02dfa23dbfce1cb45659fe65bb1708527309b044b3037b4201` | `8c4682a1a3b13dd181fa43cf34bf877919b85c8c1781e51f46cde56e7ff45079` |
+| `r03/controllers/base.py` | — (nowy) | `7fc45cf2216d4a9eae86fa9ee714d70354fafbc64721f76bff7c0575bb9fb8f9` |
+| `r03/controllers/route_follower.py` | — (nowy) | `e0fcc7d2d8728c6c6be9f88c756127c453cd8c3184a76a8b9ef3929b19716266` |
+| `r03/controllers/__init__.py` | — (nowy) | `940081f754eca5aa49ad8bed6a059ed9c77b6fec59b756339bd89d7e5e4cc16f` |
+
+`controller_sha` w meta/manifeście (route) = sha256 `route_follower.py` = `e0fcc7d2…` (potwierdzone `controller_sha(ctrl)`).
+KOREKTA A1b: w pierwotnym STOP-1 sha `k1_finalize` podano jako `944a2f1…` — to było id bloba git, NIE sha256.
+sha256 stary = `cfe1d95d…` (zgodne z pomiarem CC), nowy = `8c4682a1…`. Reszta shas w STOP-1 była już sha256.
+
+**Diff `r03/gate_run_r03.py` + `k1/k1_finalize.py` (verbatim, `git diff 3065b8b 31fe970`):**
+```diff
+diff --git a/k1/k1_finalize.py b/k1/k1_finalize.py
+index 944a2f1..0955cf0 100644
+--- a/k1/k1_finalize.py
++++ b/k1/k1_finalize.py
+@@ -508,6 +508,8 @@ def main():
+         "stamps": stamps,
+         "harness_valid": (meta or {}).get("harness_valid"),
+         "harness_poison": (meta or {}).get("harness_poison"),
++        "controller": (meta or {}).get("controller"),            # INFRA-3 A1: przepisanie z meta (SR-2 dozwolone)
++        "controller_sha": (meta or {}).get("controller_sha"),    # INFRA-3 A1: przepisanie z meta (SR-2 dozwolone)
+         "habitat_verdict": hab,
+         "certs_selfcheck": certs,
+         "provenance_arm_s": (PROVENANCE_ARM_S if a.arm == "S" else None),
+diff --git a/r03/gate_run_r03.py b/r03/gate_run_r03.py
+index a1f4ae6..26fec23 100644
+--- a/r03/gate_run_r03.py
++++ b/r03/gate_run_r03.py
+@@ -26,6 +26,7 @@ from mavsdk.action import ActionError
+ 
+ from r01.shield import PatrolShield, REFUSE, POS_DEGRADED, M_PATROL
+ from r03 import config as C
++from r03.controllers import make_controller, controller_sha   # INFRA-3 A1: źródło setpointów wypięte z pętli
+ 
+ SCEN = os.environ.get("SCEN", "S2")
+ OUT = os.environ.get("GATE_OUT", f"/tmp/r03gate/{SCEN}.jsonl")
+@@ -155,10 +156,19 @@ async def main():
+     shield.pos_debounce_ticks = C.DEBOUNCE_TICKS
+     shield.pos_hyst_ticks = int(round(C.HYST_M_S / C.DT))
+ 
++    # KONTROLER (INFRA-3 A1): źródło setpointów wypięte z pętli osłony; wybór env CONTROLLER
++    # (default "route" ⇒ S1–S4/K1 bit-identyczne — RouteFollower odtwarza stary blok 225–230+291).
++    # Osłona/zejście/trigger K1/S4 NIETKNIĘTE — czytają cmd["seg_i"/"dist"/"wps"], semantyka bez zmian.
 +    ctrl = make_controller(os.environ.get("CONTROLLER", "route"),
 +                           wps=C.corner_waypoints_r03(), vmax=VMAX, alt=ALT)
 +    ctrl.reset()
 +    _ctrl_sha = controller_sha(ctrl)
-@@ wiersz meta @@
++
+     fh = open(OUT, "w"); _f = fh; _running = True
+     _w({"t": "meta", "scen": SCEN, "schema_v": TRACE_SCHEMA_V, "eps_cap": C.EPS_CAP, "R_E": shield.cfg.r_e,
+         "half_p": C.HALF_P, "vmax": VMAX, "debounce": C.DEBOUNCE_TICKS,
+         "harness_valid": (not poison), "harness_poison": poison,
 +        "controller": ctrl.name, "controller_sha": _ctrl_sha,
-@@ blok setpointów (225–230 → wywołanie) @@
+         "note": "osłona w pętli; GT=sędzia; velocity-descent dwufazowy na POS_DEGRADED"})
+     gn.subscribe(Pose_V, GT_TOPIC, gt_cb)
+ 
+@@ -221,13 +231,10 @@ async def main():
+         vel = (float(m.vx), float(m.vy), 0.0)
+         dr = bool(m.dead_reckoning)
+         r_est = math.hypot(pos[0], pos[1])
+-        # waypoint / dist (potrzebne PRZED triggerem S4)
 -        wp = wps[seg_i % len(wps)]
 -        dx, dy = wp[0] - pos[0], wp[1] - pos[1]
 -        dist = math.hypot(dx, dy)
 -        if dist < 1.0 and not descending:
 -            seg_i += 1
 -        tgt = (wp[0], wp[1], -ALT)
++        # setpoint z kontrolera (INFRA-3 A1); trigger S4/K1 czyta cmd (semantyka bez zmian).
++        # RouteFollower odtwarza stary blok: wp(stary)→dx,dy,dist→inkrement seg_i→tgt(stary), seg_i PO inkremencie.
 +        cmd = ctrl.step(tick, pos, vel, now, descending)
 +        seg_i = cmd["seg_i"]; dist = cmd["dist"]; tgt = cmd["tgt_ned"]; wps = cmd["wps"]
-@@ wiersz v_ned (291) @@
+         # denial injection
+         _k1_fa = None
+         if SCEN == "S4":
+@@ -288,7 +295,7 @@ async def main():
+                 if re_allow_t is not None and (now - re_allow_t) > 3.0:
+                     ev("s3_reallow_confirmed"); break
+             else:
 -                vn, ve = (VMAX * dx / dist, VMAX * dy / dist) if dist > 1e-3 else (0.0, 0.0)
-+                vn, ve = cmd["v_ned"][0], cmd["v_ned"][1]
++                vn, ve = cmd["v_ned"][0], cmd["v_ned"][1]   # INFRA-3 A1: setpoint prędkości z kontrolera
+                 await d.offboard.set_velocity_ned(VelocityNedYaw(vn, ve, 0, 0))
+         tick += 1
+         if SCEN == "S1" and now >= s1_dur:
 ```
 
-**Pin gate: `72619513…` (3065b8b) → `c3ccabe04b9cae8ea57cfa899b8e363451fe9a6b4dbaffc8b1b0910ad192b729`.**
-Re-baseline w `k1/k1_shield_pins.py` NASTĘPUJE DOPIERO PO ratyfikacji STOP-1 (§A2.0) — do tego czasu
-`k1_finalize` słusznie oznacza bieg S jako NIEWAŻNY (osłona niezamrożona), co potwierdzono w regresji.
+**Dozwolone hunki `gate_run_r03.py` (§C1 ANEKS_INFRA3-1):** (i) import pakietu; (ii) konstrukcja `ctrl`
+z env `CONTROLLER` default `route` + `reset()`; (iii) meta +`controller`/+`controller_sha`; (iv) blok
+wp/dx/dy/dist/seg_i/tgt → `ctrl.step(...)` z odczytem `seg_i`/`dist`/`wps` (triggery S4/K1); (v) wiersz
+ALLOW `set_velocity_ned` z `cmd["v_ned"]`. ŻADNEGO hunku w gałęzi `is_pos`/zejścia D5, `shield.step`,
+denialu/recovery, timeoutach, `outcome`/restore — potwierdzone diffem powyżej. `k1_finalize.py` = 2 linie
+przepisania `controller`/`controller_sha` meta→manifest (SR-2 dozwolone); sędzia 4e0dc0af i logika werdyktu NIETKNIĘTE.
 
-**`k1/k1_finalize.py` — jedyna dozwolona zmiana (SR-2: „przepisanie dwóch nowych pól meta → manifest"):**
-2 linie, przepisanie `controller`/`controller_sha` z meta do manifestu (sha `944a2f1…`→`8c4682a1…`).
-Sędzia (4e0dc0af) i logika werdyktu NIETKNIĘTE. Dla starego trace (bez controller w meta) pola = null
-(wsteczna zgodność); `results/K1/` NIE re-finalizowane.
+**Pin gate: `72619513…` → `c3ccabe04b9cae8ea57cfa899b8e363451fe9a6b4dbaffc8b1b0910ad192b729`.** Re-baseline
+w `k1/k1_shield_pins.py` DOPIERO w A2.0 (po skuteczności ANEKS_INFRA3-1 §C3). `base.py` (`7fc45cf2…`) wchodzi
+do `SHIELD_PINS` jako 4. wpis (D2: kontrakt kontroler↔osłona = warstwa osłony). `route_follower.py` i przyszłe
+kontrolery NIE pinowane — tożsamość niesie `controller_sha` per boot.
 
 **Weryfikacja (offline, bez SITL):**
-- sha po zmianie: `r01/shield.py`=`1c584964…` ✅, `r03/config.py`=`4c440e42…` ✅, `k1/k1_judge.py`=`4e0dc0af…` ✅,
-  `tools/act_judge.py`=`79b1e936…` ✅ (wszystkie NIEZMIENIONE).
-- test równoważności `tests_controller_split.py` (A1.3): **4221 ticków ze 11 lotów S/K1 bit-w-bit IDENTYCZNE**
-  (tgt, v_ned, seg_i, dist), test syntetyczny narożnika PASS, R0.3a v1 pominięte. pytest 4/4.
-- regresja glue (A1.4, kopia `results/K1/S/p0_65/boot3`, stary gate przywrócony w drzewie → pin się zgadza):
-  **judge.json BAJT-IDENTYCZNY**; manifest różni się wyłącznie o nowe pola `controller`/`controller_sha`
-  (null dla starego trace) + artefakty ścieżek/`session` (mem/loadavg — niedeterministyczny snapshot środowiska).
-  Przepisanie meta→manifest zweryfikowane na trace z wstrzykniętym meta (controller_sha wychodzi w manifeście).
+- test równoważności `tests_controller_split.py` (A1.3 + asercja C2): **4221 ticków / 11 lotów S/K1 bit-w-bit
+  IDENTYCZNE** (tgt, v_ned, seg_i, dist); test syntetyczny narożnika PASS; **asercja C2 `descending=True ∧
+  dist<1.0 ⇒ seg_i BEZ inkrementu` (obie impl.) PASS** — jedyna gałąź klauzuli bramkującej niećwiczona przez
+  korpus; R0.3a v1 pominięte. **pytest 5/5.**
+- regresja glue (A1.4): `judge.json` BAJT-IDENTYCZNY (kopia `results/K1/S/p0_65/boot3`, stary gate przywrócony
+  w drzewie → pin się zgadza). Manifest porównywany Z WYŁĄCZENIEM pól pomiarowych chwili uruchomienia
+  (`session`: mem_free/loadavg — snapshot środowiska, nie odchylenie D5); realna różnica = tylko nowe pola
+  `controller`/`controller_sha` (null dla starego trace). Przepisanie meta→manifest zweryfikowane na trace z
+  wstrzykniętym meta (`controller_sha` wychodzi w manifeście → A2.3 spełnialne po locie).
