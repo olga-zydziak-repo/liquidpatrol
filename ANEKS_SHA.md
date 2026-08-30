@@ -586,3 +586,60 @@ INTERMITTENT (rodzina D8/timesync), **bramka J4 chwyta**. Zdanie do §IV.
 **J6 budżety:** (S,0.2) 1/3 zużyty (boot3 diag flight-quality), 2 zostają; (N,0.2) 2/3, 1 zostaje;
 N boot4 = ważny kandydat pary (r@inj=18.08). Po pushu (1cee41d + commit J1–J5): re-lot S@0.2 →
 parowanie z N boot4.
+
+## §W12 — INFRA-3 A1: rozcięcie kontroler/osłona (re-baseline pinu gate → PO STOP-1)
+
+Nienoga badawcza (pozycja 1a planu). Cel: wypięcie źródła setpointów z pętli osłony, żeby ławka/sieć
+wpinały nowy kontroler bez dotykania osłony. Osłona (`r01/shield.py`), config (`r03/config.py`), sędzia
+K1 (`k1/k1_judge.py`), sędzia DEMO-B (`tools/act_judge.py`) — sha NIEZMIENIONE (weryfikacja niżej).
+
+**Nowy pakiet** `r03/controllers/` (`base.py` interfejs `SetpointSource`, `route_follower.py` `RouteFollower`
+= JEDYNY dziś kontroler, `__init__.py` `make_controller`/`controller_sha`). RouteFollower odtwarza DOKŁADNIE
+stary blok setpointów (3065b8b linie 225–230 + 291): wp(stary)→dx,dy,dist→inkrement seg_i→tgt(stary wp)→
+v_ned(stary wp); zwraca seg_i PO inkremencie (tak czyta trigger K1 `_cur=wps[seg_i]`, S4 `seg_i>=1`).
+
+**Diff `r03/gate_run_r03.py` (verbatim) — dotyka WYŁĄCZNIE: importu, konstrukcji kontrolera, wiersza meta,
+bloku setpointów, wiersza v_ned (SR-3 spełniony):**
+
+```
+@@ importy @@
++from r03.controllers import make_controller, controller_sha
+@@ przed meta (konstrukcja kontrolera) @@
++    ctrl = make_controller(os.environ.get("CONTROLLER", "route"),
++                           wps=C.corner_waypoints_r03(), vmax=VMAX, alt=ALT)
++    ctrl.reset()
++    _ctrl_sha = controller_sha(ctrl)
+@@ wiersz meta @@
++        "controller": ctrl.name, "controller_sha": _ctrl_sha,
+@@ blok setpointów (225–230 → wywołanie) @@
+-        wp = wps[seg_i % len(wps)]
+-        dx, dy = wp[0] - pos[0], wp[1] - pos[1]
+-        dist = math.hypot(dx, dy)
+-        if dist < 1.0 and not descending:
+-            seg_i += 1
+-        tgt = (wp[0], wp[1], -ALT)
++        cmd = ctrl.step(tick, pos, vel, now, descending)
++        seg_i = cmd["seg_i"]; dist = cmd["dist"]; tgt = cmd["tgt_ned"]; wps = cmd["wps"]
+@@ wiersz v_ned (291) @@
+-                vn, ve = (VMAX * dx / dist, VMAX * dy / dist) if dist > 1e-3 else (0.0, 0.0)
++                vn, ve = cmd["v_ned"][0], cmd["v_ned"][1]
+```
+
+**Pin gate: `72619513…` (3065b8b) → `c3ccabe04b9cae8ea57cfa899b8e363451fe9a6b4dbaffc8b1b0910ad192b729`.**
+Re-baseline w `k1/k1_shield_pins.py` NASTĘPUJE DOPIERO PO ratyfikacji STOP-1 (§A2.0) — do tego czasu
+`k1_finalize` słusznie oznacza bieg S jako NIEWAŻNY (osłona niezamrożona), co potwierdzono w regresji.
+
+**`k1/k1_finalize.py` — jedyna dozwolona zmiana (SR-2: „przepisanie dwóch nowych pól meta → manifest"):**
+2 linie, przepisanie `controller`/`controller_sha` z meta do manifestu (sha `944a2f1…`→`8c4682a1…`).
+Sędzia (4e0dc0af) i logika werdyktu NIETKNIĘTE. Dla starego trace (bez controller w meta) pola = null
+(wsteczna zgodność); `results/K1/` NIE re-finalizowane.
+
+**Weryfikacja (offline, bez SITL):**
+- sha po zmianie: `r01/shield.py`=`1c584964…` ✅, `r03/config.py`=`4c440e42…` ✅, `k1/k1_judge.py`=`4e0dc0af…` ✅,
+  `tools/act_judge.py`=`79b1e936…` ✅ (wszystkie NIEZMIENIONE).
+- test równoważności `tests_controller_split.py` (A1.3): **4221 ticków ze 11 lotów S/K1 bit-w-bit IDENTYCZNE**
+  (tgt, v_ned, seg_i, dist), test syntetyczny narożnika PASS, R0.3a v1 pominięte. pytest 4/4.
+- regresja glue (A1.4, kopia `results/K1/S/p0_65/boot3`, stary gate przywrócony w drzewie → pin się zgadza):
+  **judge.json BAJT-IDENTYCZNY**; manifest różni się wyłącznie o nowe pola `controller`/`controller_sha`
+  (null dla starego trace) + artefakty ścieżek/`session` (mem/loadavg — niedeterministyczny snapshot środowiska).
+  Przepisanie meta→manifest zweryfikowane na trace z wstrzykniętym meta (controller_sha wychodzi w manifeście).

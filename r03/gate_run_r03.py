@@ -26,6 +26,7 @@ from mavsdk.action import ActionError
 
 from r01.shield import PatrolShield, REFUSE, POS_DEGRADED, M_PATROL
 from r03 import config as C
+from r03.controllers import make_controller, controller_sha   # INFRA-3 A1: źródło setpointów wypięte z pętli
 
 SCEN = os.environ.get("SCEN", "S2")
 OUT = os.environ.get("GATE_OUT", f"/tmp/r03gate/{SCEN}.jsonl")
@@ -155,10 +156,19 @@ async def main():
     shield.pos_debounce_ticks = C.DEBOUNCE_TICKS
     shield.pos_hyst_ticks = int(round(C.HYST_M_S / C.DT))
 
+    # KONTROLER (INFRA-3 A1): źródło setpointów wypięte z pętli osłony; wybór env CONTROLLER
+    # (default "route" ⇒ S1–S4/K1 bit-identyczne — RouteFollower odtwarza stary blok 225–230+291).
+    # Osłona/zejście/trigger K1/S4 NIETKNIĘTE — czytają cmd["seg_i"/"dist"/"wps"], semantyka bez zmian.
+    ctrl = make_controller(os.environ.get("CONTROLLER", "route"),
+                           wps=C.corner_waypoints_r03(), vmax=VMAX, alt=ALT)
+    ctrl.reset()
+    _ctrl_sha = controller_sha(ctrl)
+
     fh = open(OUT, "w"); _f = fh; _running = True
     _w({"t": "meta", "scen": SCEN, "schema_v": TRACE_SCHEMA_V, "eps_cap": C.EPS_CAP, "R_E": shield.cfg.r_e,
         "half_p": C.HALF_P, "vmax": VMAX, "debounce": C.DEBOUNCE_TICKS,
         "harness_valid": (not poison), "harness_poison": poison,
+        "controller": ctrl.name, "controller_sha": _ctrl_sha,
         "note": "osłona w pętli; GT=sędzia; velocity-descent dwufazowy na POS_DEGRADED"})
     gn.subscribe(Pose_V, GT_TOPIC, gt_cb)
 
@@ -221,13 +231,10 @@ async def main():
         vel = (float(m.vx), float(m.vy), 0.0)
         dr = bool(m.dead_reckoning)
         r_est = math.hypot(pos[0], pos[1])
-        # waypoint / dist (potrzebne PRZED triggerem S4)
-        wp = wps[seg_i % len(wps)]
-        dx, dy = wp[0] - pos[0], wp[1] - pos[1]
-        dist = math.hypot(dx, dy)
-        if dist < 1.0 and not descending:
-            seg_i += 1
-        tgt = (wp[0], wp[1], -ALT)
+        # setpoint z kontrolera (INFRA-3 A1); trigger S4/K1 czyta cmd (semantyka bez zmian).
+        # RouteFollower odtwarza stary blok: wp(stary)→dx,dy,dist→inkrement seg_i→tgt(stary), seg_i PO inkremencie.
+        cmd = ctrl.step(tick, pos, vel, now, descending)
+        seg_i = cmd["seg_i"]; dist = cmd["dist"]; tgt = cmd["tgt_ned"]; wps = cmd["wps"]
         # denial injection
         _k1_fa = None
         if SCEN == "S4":
@@ -288,7 +295,7 @@ async def main():
                 if re_allow_t is not None and (now - re_allow_t) > 3.0:
                     ev("s3_reallow_confirmed"); break
             else:
-                vn, ve = (VMAX * dx / dist, VMAX * dy / dist) if dist > 1e-3 else (0.0, 0.0)
+                vn, ve = cmd["v_ned"][0], cmd["v_ned"][1]   # INFRA-3 A1: setpoint prędkości z kontrolera
                 await d.offboard.set_velocity_ned(VelocityNedYaw(vn, ve, 0, 0))
         tick += 1
         if SCEN == "S1" and now >= s1_dur:

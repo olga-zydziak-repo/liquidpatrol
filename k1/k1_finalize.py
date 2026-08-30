@@ -508,6 +508,8 @@ def main():
         "stamps": stamps,
         "harness_valid": (meta or {}).get("harness_valid"),
         "harness_poison": (meta or {}).get("harness_poison"),
+        "controller": (meta or {}).get("controller"),            # INFRA-3 A1: przepisanie z meta (SR-2 dozwolone)
+        "controller_sha": (meta or {}).get("controller_sha"),    # INFRA-3 A1: przepisanie z meta (SR-2 dozwolone)
         "habitat_verdict": hab,
         "certs_selfcheck": certs,
         "provenance_arm_s": (PROVENANCE_ARM_S if a.arm == "S" else None),
