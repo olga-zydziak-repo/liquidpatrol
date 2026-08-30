@@ -1,0 +1,74 @@
+{
+  "arm": "E",
+  "point": 0.0,
+  "boot_n": 2,
+  "kind": "empty",
+  "rc": 0,
+  "arm_ok": true,
+  "took_off": true,
+  "landed": true,
+  "conv_s": null,
+  "session": {
+    "mem_free_kb": 29700400,
+    "mem_available_kb": 30847144,
+    "loadavg": [
+      1.0,
+      0.77,
+      0.41
+    ],
+    "session_boot_count": null,
+    "env_restart": null,
+    "captured_at": "finalize"
+  },
+  "b4": {
+    "orphans_pre_teardown": 0,
+    "orphans_post_teardown": 0,
+    "cooldown_s_since_last_boot": 319,
+    "cooldown_src": "results",
+    "one_boot_per_cycle": true
+  },
+  "timejump_pre": 0,
+  "timejump_post": 0,
+  "ekf_health_hits": 0,
+  "hover_window_sim": [
+    103.164,
+    162.808
+  ],
+  "n_gt": 2645,
+  "n_ekf": 8310,
+  "events": [
+    "armed",
+    "takeoff",
+    "offboard",
+    "hover_start",
+    "hover_end",
+    "land_cmd",
+    "touchdown",
+    "done"
+  ],
+  "habitat_verdict": "INVALID(habitat)",
+  "armed_sim": 93.164,
+  "watchdog": {
+    "n_reinits": 0,
+    "reinit_sims": [],
+    "reinit_reasons": [],
+    "reinit_before_arm": false,
+    "bias_max_absmax": 0.06088,
+    "bias_at_end_absmax": 0.00267,
+    "bias_at_arm_absmax": 0.00267,
+    "first_fault_sim": {
+      "filter_fault_1024": null,
+      "fs_bad_acc_vertical": null
+    },
+    "armed_sim": 93.164,
+    "n_samples": 19,
+    "n_poll_fail": 1,
+    "reinits": []
+  },
+  "sha_harness": "c41276ffe0a7bd74a97bb35bef38bb2bc2992aa17cfba512ea447df51f8521b7",
+  "harness_file": "/home/olga/projects/liquidpatrol/tools/infra1_empty_flight.py",
+  "world_hash": "stock:default 457a363a22c437b788a4aaf1e2335aa149efce4e5b988cdc108065663cd879b2  /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf",
+  "world_hash_kind": "stock",
+  "ulog_sha": "f7f7c0e61ff0d35513bf4ac676ea18134558329c03c683d015609d5a595ad3cf",
+  "ulog_bytes": 50844738
+}

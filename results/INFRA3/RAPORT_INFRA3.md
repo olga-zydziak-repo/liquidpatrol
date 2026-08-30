@@ -99,7 +99,51 @@ Predykcje: P2 częściowo (2 loty porównywalne, progi w oknie, ale ważność d
 
 ## §3. B — jeden wrapper bootu programu
 
-[OCZEKUJE — seria B rusza po ratyfikacji STOP-2 i pushu Olgi. §B1 (harness/run_boot.sh + test) + §B2 (6 bootów).]
+### B1 — `harness/run_boot.sh` (mechanizmy ↔ źródło: ANEKS_SHA §W13)
+Kompozycja ISTNIEJĄCYCH mechanizmów (przyrządy zamkniętych serii `k1/run_k1_boot.sh`, `acts/run_act.sh`,
+`run_A3.sh` NIETKNIĘTE). Kroki 1–11 §B1.1: B4+cooldown (marker program-wide `results/.last_boot_end`
++fallback K1) · **bramka procesowa §3** (`proc_gate.py`+`proc_allowlist.txt`: `top -b -n2 -d5`, cudzy >2% CPU
+lub loadavg>1.5 ⇒ env-block+stub) · certs(gate_r03) · higiena GPS/CAL_MAG · I2a · świat+hash
+(`world_hash.sh`, worlds/ i stock) · stack/headless/clock/RTF/watchdog(bezwarunkowy, max 2 reinity)/settle(min 90)/timejump ·
+intruz+`model_in_state`+film(opc.) · moduł lotu(empty/gate_r03/arm_n) · ulog→`ulog_sha.txt`(sha256+rozmiar) ·
+finalize+**łapacz stub**(`stub_manifest.py`, lekcja R5)+augment(`augment_manifest.py`: world_hash/ulog_sha/model_in_state→manifest,
+NIE dotyka sędziego) · marker końca. sha256 6 plików: §W13.
+
+**Test `tests_harness_infra3.py` B1.2 (verbatim): 6/6 PASS**
+```
+(i)   stub-manifest na finalize-fail (crash_reason, run_valid=null, idempotencja): OK
+(ii)  ulog_sha (sha256+rozmiar == hashlib): OK
+(iii) world_hash worlds/ (world_demo_A3) i stock (default): OK
+(iv)  SETTLE_S=30 odrzucone (exit 2, OUTDIR nie powstaje): OK
+(v)   §3 bramka: yes-eater blokuje z PID, po ubiciu przepuszcza; allowlista (claude pasuje, yes nie): OK
+pytest tests_harness_infra3.py + tests_controller_split.py: 11 passed
+```
+
+### B2 — bramka zdrowia: 6 bootów kolejnych (`results/INFRA3/B/boot{1..6}`)
+boot1–5 `FLIGHT=empty WORLD=default` (arm→takeoff→60 s hover OFFBOARD→land); boot6 `FLIGHT=empty
+WORLD=world_demo_A3 INTRUDER=1`. Kampania 01:09–01:58, cooldown 300 s między bootami, maszyna czysta
+(bramka §3 CLEAN każdy boot), zero równoległych prac.
+
+| boot | świat | arm_ok (cytat px4.log) | wd_reinits | komplet 13/13 | habitat (nie-bramkujący) | model_in_state |
+|---|---|---|---|---|---|---|
+| boot1 | stock default | **True** „Armed by external command" | 1 | ✅ | INVALID (timejump 0) | — |
+| boot2 | stock default | **True** „Armed by external command" | 0 | ✅ | INVALID (timejump 0) | — |
+| boot3 | stock default | **True** „Armed by external command" | 0 | ✅ | INVALID (timejump 0) | — |
+| boot4 | stock default | **True** „Armed by external command" | 0 | ✅ | **VALID** | — |
+| boot5 | stock default | **True** „Armed by external command" | 1 | ✅ | INVALID (timejump 0) | — |
+| boot6 | repo world_demo_A3 | **True** „Armed by external command" | 0 | ✅ | INVALID (timejump 0) | **1** (spawn data:true) |
+
+Komplet artefaktów (13): b4_state, proc_inventory, gps_hygiene, mag_hygiene, headless_proof, world_hash,
+rtf_stream, ekf_watchdog, timejump_pre/post, ekf_health_hits, ulog_sha, manifest — **6/6 bootów pełne**
+(miss=none). `ulog_sha.txt` = sha256+rozmiar (49–52 MB) każdy. Żaden boot nie potrzebował stub (finalize
+przeszedł 6/6, kind=empty). wd reinity 1/0/0/0/1/0 (preflight-only, raportowane osobno, nie dyskwalifikują).
+
+### Werdykt B2: **PASS**
+- arm **6/6** ≥ 5/6 ✅ · komplet artefaktów **6/6** ✅ · boot6 intruz obecny **1/1** ✅.
+- habitat hover: 5 INVALID / 1 VALID, wszystkie timejump=0 — RAPORTOWANY, NIE bramkujący (RAPORT_INFRA1 §7:
+  env-bound na oknie hoveru, znana cecha mostu; P3 zamanifestowana zgodnie z predykcją).
+Wrapper `harness/run_boot.sh` zdrowy: składa wszystkie mechanizmy, bramka procesowa §3 działa (CLEAN 6/6),
+world-hash/ulog_sha/model_in_state w manifeście, łapacz stub gotowy (nie wyzwolony — brak awarii finalize).
 
 ---
 

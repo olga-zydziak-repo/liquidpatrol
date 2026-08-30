@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga      598227  1.9  1.5 74042244 511408 pts/2 Sl+  Aug30  11:11 claude
+olga      757735  1.6  0.0   5024  3840 ?        S    01:36   0:00 bash harness/run_boot.sh
+root         244  0.2  0.1 2533872 51704 ?       Ssl  Aug29   6:03 /usr/bin/containerd
+root         344  0.1  0.2 2722296 77584 ?       Ssl  Aug29   3:24 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         626  0.0  0.0 1234128 12236 ?       Sl   Aug29   2:20 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      650  0.0  0.0 216768 28448 ?        Ss   Aug29   0:16 postgres
+root          40  0.0  0.0  75052 30200 ?        S<s  Aug29   0:10 /usr/lib/systemd/systemd-journald
+olga        4687  0.0  0.0 1307916 6848 ?        S    Aug29   0:07 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl --line-buffered -iE preflight\]|VERDICT=|Traceback|Error|ABORT|RAM>=|killed
+root           1  0.0  0.0  22292 13496 ?        Ss   Aug29   0:05 /sbin/init
+polkitd      200  0.0  0.0 308172  8036 ?        Ssl  Aug29   0:04 /usr/lib/polkit-1/polkitd --no-debug
+root      598146  0.0  0.0   3200  1252 ?        S    Aug30   0:00 /init
+root         761  0.0  0.0   3200  1244 ?        S    Aug29   0:04 /init
+systemd+     119  0.0  0.0  91060  8024 ?        Ssl  Aug29   0:03 /usr/lib/systemd/systemd-timesyncd
+root          86  0.0  0.0  26288  7392 ?        Ss   Aug29   0:03 /usr/lib/systemd/systemd-udevd
+message+     195  0.0  0.0   9776  5540 ?        Ss   Aug29   0:02 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+dnsmasq      783  0.0  0.0 216768 10212 ?        Ss   Aug29   0:01 postgres: walwriter 
+dnsmasq      755  0.0  0.0 216924  7276 ?        Ss   Aug29   0:01 postgres: background writer 
+syslog       227  0.0  0.0 222516  6040 ?        Ssl  Aug29   0:01 /usr/sbin/rsyslogd -n -iNONE
+olga      748882  0.0  0.0   4896  3576 ?        Ss   01:10   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1788097186306-dnh07w.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && eval 'cd /home/olga/projects/liquidpatrol ROOT=/home/olga/projects/liquidpatrol BASE=results/INFRA3/B mkdir -p $BASE echo "B2 campaign start $(date)" > $BASE/campaign.log for n in 1 2 3 4 5; do   echo "=== boot$n empty/default START $(date +%H:%M:%S) ===" | tee -a $BASE/campaign.log   FLIGHT=empty WORLD=default BOOT_N=$n bash harness/run_boot.sh > $BASE/boot$n.runner.log 2>&1   rc=$?   vld=$(python3 -c "import json;print(json.load(open('"'"'$BASE/boot$n/manifest.json'"'"')).get('"'"'kind'"'"'),json.load(open('"'"'$BASE/boot$n/manifest.json'"'"')).get('"'"'run_valid'"'"'))" 2>/dev/null || echo "no-manifest")   echo "=== boot$n DONE rc=$rc kind/valid=[$vld] $(date +%H:%M:%S) ===" | tee -a $BASE/campaign.log   echo "cooldown 300s..." | tee -a $BASE/campaign.log; sleep 300 done echo "=== boot6 empty/world_demo_A3 INTRUDER START $(date +%H:%M:%S) ===" | tee -a $BASE/campaign.log FLIGHT=empty WORLD=world_demo_A3 INTRUDER=1 BOOT_N=6 bash harness/run_boot.sh > $BASE/boot6.runner.log 2>&1 rc=$? echo "=== boot6 DONE rc=$rc mis=$(cat $BASE/boot6/model_in_state.txt 2>/dev/null) $(date +%H:%M:%S) ===" | tee -a $BASE/campaign.log echo "B2 CAMPAIGN DONE $(date)" | tee -a $BASE/campaign.log' < /dev/null && pwd -P >| /tmp/claude-f744-cwd

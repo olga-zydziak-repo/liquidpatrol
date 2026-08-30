@@ -1,0 +1,113 @@
+{
+  "arm": "E",
+  "point": 0.0,
+  "boot_n": 5,
+  "kind": "empty",
+  "rc": 0,
+  "arm_ok": true,
+  "took_off": true,
+  "landed": true,
+  "conv_s": null,
+  "session": {
+    "mem_free_kb": 29532440,
+    "mem_available_kb": 30809528,
+    "loadavg": [
+      0.34,
+      0.4,
+      0.43
+    ],
+    "session_boot_count": null,
+    "env_restart": null,
+    "captured_at": "finalize"
+  },
+  "b4": {
+    "orphans_pre_teardown": 0,
+    "orphans_post_teardown": 0,
+    "cooldown_s_since_last_boot": 319,
+    "cooldown_src": "results",
+    "one_boot_per_cycle": true
+  },
+  "timejump_pre": 0,
+  "timejump_post": 0,
+  "ekf_health_hits": 3,
+  "hover_window_sim": [
+    102.86,
+    162.86
+  ],
+  "n_gt": 2537,
+  "n_ekf": 7994,
+  "events": [
+    "armed",
+    "takeoff",
+    "offboard",
+    "hover_start",
+    "hover_end",
+    "land_cmd",
+    "touchdown",
+    "done"
+  ],
+  "habitat_verdict": "INVALID(habitat)",
+  "armed_sim": 93.28,
+  "watchdog": {
+    "n_reinits": 1,
+    "reinit_sims": [
+      10.524
+    ],
+    "reinit_reasons": [
+      "FAST_fault2x(fff==1024|fs_bad_acc_vertical)"
+    ],
+    "reinit_before_arm": true,
+    "bias_max_absmax": 0.0027,
+    "bias_at_end_absmax": 8e-05,
+    "bias_at_arm_absmax": 8e-05,
+    "first_fault_sim": {
+      "filter_fault_1024": 6.084,
+      "fs_bad_acc_vertical": 6.084
+    },
+    "armed_sim": 93.28,
+    "n_samples": 18,
+    "n_poll_fail": 1,
+    "reinits": [
+      {
+        "idx": 1,
+        "reason": "FAST_fault2x(fff==1024|fs_bad_acc_vertical)",
+        "sim": 10.524,
+        "wall": 1788133558.268,
+        "consec_fault": 2,
+        "action": {
+          "rc_stop": 0,
+          "rc_start": 0,
+          "cmd_wall_s": 2.031
+        },
+        "bias_before": {
+          "absmax": 0.00197,
+          "norm": 0.002528,
+          "xyz": [
+            -0.00197,
+            -0.00054,
+            0.00149
+          ],
+          "fff": 1024,
+          "fbav": 1
+        },
+        "bias_after": {
+          "absmax": 0.00028,
+          "norm": 0.000303,
+          "xyz": [
+            -0.00028,
+            4e-05,
+            -0.00011
+          ],
+          "fff": 0,
+          "fbav": 0
+        }
+      }
+    ]
+  },
+  "sha_harness": "c41276ffe0a7bd74a97bb35bef38bb2bc2992aa17cfba512ea447df51f8521b7",
+  "harness_file": "/home/olga/projects/liquidpatrol/tools/infra1_empty_flight.py",
+  "world_hash": "stock:default 457a363a22c437b788a4aaf1e2335aa149efce4e5b988cdc108065663cd879b2  /home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds/default.sdf",
+  "world_hash_kind": "stock",
+  "ulog_sha": "0447c23bc2001846d10ce1b5f049c56157e7c00e328830a114a01f9fd2a9614d",
+  "ulog_bytes": 49625342
+}
