@@ -194,6 +194,14 @@ world-hash/ulog_sha/model_in_state w manifeście, łapacz stub gotowy (nie wyzwo
   log-followery 0% CPU `4684 tail`/`4687 ugrep` po `872` — zero kontencji). boot3 poleciał czysto, ale
   **habitat INVALID** (env-bound stall, §2) → per §3 **NIEROZSTRZYGNIĘTE**. Diagnoza CC: podejrzany #1 = env-habitat
   (P3), NIE skażenie 1–2, NIE refaktor (wszystkie progi A2.3 spełnione we wszystkich 3 bootach). Hipoteza, nie werdykt.
+- **N5 (martwe inicjalizacje przed pętlą gate'a — nota, NIE fix):** po rozcięciu kontroler/osłona
+  pre-pętlowe inicjalizacje `wps = C.corner_waypoints_r03()` (`r03/gate_run_r03.py:210`), `seg_i = 0`
+  (`:216`) i `dist = 1e9` (`:217`) stały się MARTWE — pętla nadpisuje je co tick z kontrolera
+  (`seg_i = cmd["seg_i"]; dist = cmd["dist"]; ... wps = cmd["wps"]`, `:237`) PRZED jakimkolwiek odczytem
+  (ścieżka `if m is None: continue` też ich nie czyta). W oryginale (3065b8b) były żywe (blok setpointów
+  liczył je inline). ZOSTAWIONE świadomie: (1) A1.1 „jeśli błąd — nota, nie napraw"; (2) usunięcie tknęłoby
+  plik pinowany poza dozwolonymi hunkami SR-3, a po A2.0 `gate_run_r03.py` jest zapięty (`c3ccabe0`).
+  Efekt: zerowy (nadpisywane, nie czytane); to porządek kosmetyczny do ewentualnego przyszłego okna zmiany pinu.
 - **Błąd w logice setpointów:** brak (A1.1 „nota, nie fix") — nie znaleziono.
 - **CONTROLLER=route:** przekazane env przy wywołaniu wrappera (wrapper bajt-czysty poza 3 liniami ścieżek);
   gate i tak konstruuje kontroler z default `route`, więc `controller_sha` pojawia się niezależnie.
