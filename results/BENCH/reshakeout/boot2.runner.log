@@ -1,0 +1,14 @@
+[run_boot b2] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b2] watchdog EKF2 (preflight-only, max 2 reinity) pid=1525984
+model_in_state=1
+[run_boot b2] settle 90s preflight EKF
+usage: k1_finalize.py [-h] --trace TRACE --arm {N,S} --point POINT --boot BOOT
+                      [--kind {crit,info}] [--ulog ULOG] --harness-sha-file
+                      HARNESS_FILE [--habitat HABITAT]
+                      [--certs-selfcheck CERTS_SELFCHECK] --out-dir OUT_DIR
+k1_finalize.py: error: argument --arm: invalid choice: 'E' (choose from 'N', 'S')
+[run_boot b2] finalize rc=2 lub brak manifestu → stub_manifest
+[stub] zapisano stub manifest → /home/olga/projects/liquidpatrol/results/BENCH/reshakeout/boot2/manifest.json (finalize_rc=2)
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b2] DONE flight=bench world=world_demo_A3 rc=0 finalize=2 → /home/olga/projects/liquidpatrol/results/BENCH/reshakeout/boot2

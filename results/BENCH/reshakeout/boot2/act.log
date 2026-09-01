@@ -1,0 +1,20 @@
+[bench] armed sim=98.06 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/BENCH/reshakeout/boot2/episode_control.json
+[bench] takeoff sim=98.08 {}
+[bench] offboard sim=109.40 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=109.50 {'episode_id': 0, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.096, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=109.50 {'episode_id': 0, 'scenario_id': 'c00_s01', 't0_sim': 109.5}
+[bench] episode_end sim=182.44 {'episode_id': 0, 't_entry': 2.91, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=191.94 {'episode_id': 5, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.1, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=191.94 {'episode_id': 5, 'scenario_id': 'c05_s01', 't0_sim': 191.94}
+[bench] episode_end sim=264.21 {'episode_id': 5, 't_entry': 2.24, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=271.37 {'episode_id': 10, 'status': 'OK', 'n_setpose': 19, 'wait_sim': 0.956, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=271.37 {'episode_id': 10, 'scenario_id': 'c10_s01', 't0_sim': 271.372}
+[bench] episode_end sim=341.72 {'episode_id': 10, 't_entry': 0.3, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=348.71 {'episode_id': 11, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=348.71 {'episode_id': 11, 'scenario_id': 'c11_s01', 't0_sim': 348.708}
+[bench] episode_end sim=418.71 {'episode_id': 11, 't_entry': None, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=426.89 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/BENCH/reshakeout/boot2/trace.jsonl (demo n=5615)
