@@ -90,6 +90,25 @@ def test_start_gate_invalid_after_two_timeouts():
     assert r["status"] == "INVALID_START" and r["attempts"] == 2
 
 
+def test_run_episode_interruptible(monkeypatch=None):
+    """fix v1.2: should_stop() przerywa run_episode (mover nie kłóci się z bramką następnego epizodu)."""
+    m = S.gen_manifest()
+    ep = S.find_episode(m, 1.0, 180, seed=1)          # ep długi (110 s)
+    clk = SynthClock(0.0, 0.02)
+    calls = {"n": 0}
+    gt = []
+    im = IntruderMotion(set_pose_fn=lambda x, y, z: None, clock_fn=clk.now, get_applied_gz_fn=None)
+    def should_stop():
+        calls["n"] += 1
+        return calls["n"] > 20                          # przerwij po 20 iteracjach
+    im.run_episode(ep, 0.0, ep["ep_dur_s"], gt.append, step_fn=clk.step, should_stop=should_stop)
+    assert im.n_gt <= 21, f"run_episode nie przerwał się: n_gt={im.n_gt}"   # << pełne 110s/0.02=5500
+    # bez should_stop leci do dur
+    clk2 = SynthClock(0.0, 0.02); im2 = IntruderMotion(lambda x, y, z: None, clk2.now)
+    im2.run_episode(ep, 0.0, 2.0, [].append, step_fn=clk2.step)
+    assert im2.n_gt > 90
+
+
 def test_start_gate_deterministic():
     start = [1.0, 2.0, -10.0]
     def run():

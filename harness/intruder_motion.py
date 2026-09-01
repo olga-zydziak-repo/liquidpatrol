@@ -78,11 +78,15 @@ class IntruderMotion:
         self.n_setpose = 0
         self.n_gt = 0
 
-    def run_episode(self, ep, t0_sim, dur_sim, gt_writer, step_fn=None):
+    def run_episode(self, ep, t0_sim, dur_sim, gt_writer, step_fn=None, should_stop=None):
         """Prowadzi intruza wg position_at(ep, sim_now−t0) aż t_rel ≥ dur_sim. gt_writer(row) na każdą iterację.
-        step_fn() (test: advance synthetic clock / live: sleep) — po każdej iteracji."""
+        step_fn() (test: advance synthetic clock / live: sleep) — po każdej iteracji. `should_stop()` (opc.)
+        PRZERYWA episode gdy sterowanie zmieniło epizod/fazę (fix v1.2: mover nie kłóci się z bramką startu
+        następnego epizodu — bez tego run_episode ep_prev trwał pełne ep_dur_s i nadpisywał pozę startową)."""
         last_sp = None
         while True:
+            if should_stop is not None and should_stop():
+                break
             sim_now = self.clock_fn()
             if sim_now is None:
                 break
@@ -161,9 +165,18 @@ def main():
             break
         if phase == "start" and ctl.get("episode_id") != seen:
             seen = ctl.get("episode_id")
-            ep = manifest["episodes"][ctl["episode_id"]]
+            this_id = ctl["episode_id"]
+            ep = manifest["episodes"][this_id]
             t0 = ctl.get("t0_sim") or (clock_fn() or 0.0)
-            im.run_episode(ep, t0, ep["ep_dur_s"], gt_writer)
+
+            def _should_stop():
+                """PRZERWIJ gdy sterowanie już nie jest 'start' dla TEGO epizodu (fix v1.2)."""
+                try:
+                    c = json.load(open(control)) if os.path.exists(control) else {}
+                except Exception:
+                    return False
+                return not (c.get("phase") == "start" and c.get("episode_id") == this_id)
+            im.run_episode(ep, t0, ep["ep_dur_s"], gt_writer, should_stop=_should_stop)
         time.sleep(0.1)
     gtf.close()
 
