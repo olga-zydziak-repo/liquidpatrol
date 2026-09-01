@@ -6,7 +6,7 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
-from harness.intruder_motion import IntruderMotion, scenario_to_gz, gz_to_ned
+from harness.intruder_motion import IntruderMotion, scenario_to_gz, gz_to_ned, intruder_start_gate, TOL_START
 from bench import scenarios as S
 
 
@@ -60,6 +60,45 @@ def test_frame_roundtrip():
     assert cmd_ned == [3.0, 7.0, -10.0]
     assert gz == [7.0, 3.0, 10.0]                 # [E,N,U]
     assert gz_to_ned(gz) == [3.0, 7.0, -10.0]     # applied → NED == cmd_ned
+
+
+def test_start_gate_ok_after_settle():
+    """Poza ≤ TOL po kilku set_pose ⇒ OK; n_setpose liczone; wait_sim > 0."""
+    start = [3.0, 7.0, -10.0]
+    clk = SynthClock(0.0, 0.1)
+    calls = {"n": 0}
+    # intruz „dojeżdża" do startu po 3 wywołaniach set_pose
+    def get_applied():
+        if calls["n"] < 3:
+            return [3.0 + 5.0, 7.0, -10.0]      # daleko (5 m)
+        return [3.0 + 0.05, 7.0 + 0.03, -10.0]  # w tolerancji (~0.06 m)
+    def set_pose():
+        calls["n"] += 1
+    r = intruder_start_gate(set_pose, get_applied, clk.now, start, tol=TOL_START,
+                            timeout_sim=5.0, step_fn=clk.step)
+    assert r["status"] == "OK", r
+    assert r["n_setpose"] >= 3 and r["attempts"] == 1
+    assert r["wait_sim"] >= 0.0
+
+
+def test_start_gate_invalid_after_two_timeouts():
+    """Poza NIGDY nie osiąga TOL ⇒ 2 timeouty (5 s każdy) ⇒ INVALID_START."""
+    start = [0.0, 0.0, -10.0]
+    clk = SynthClock(0.0, 0.5)
+    r = intruder_start_gate(lambda: None, lambda: [10.0, 0.0, -10.0], clk.now, start,
+                            tol=TOL_START, timeout_sim=5.0, step_fn=clk.step)
+    assert r["status"] == "INVALID_START" and r["attempts"] == 2
+
+
+def test_start_gate_deterministic():
+    start = [1.0, 2.0, -10.0]
+    def run():
+        clk = SynthClock(0.0, 0.1); c = {"n": 0}
+        def ga():
+            c["n"] += 1
+            return [1.0 + (2.0 if c["n"] < 5 else 0.05), 2.0, -10.0]
+        return intruder_start_gate(lambda: None, ga, clk.now, start, step_fn=clk.step)
+    assert run() == run()
 
 
 if __name__ == "__main__":

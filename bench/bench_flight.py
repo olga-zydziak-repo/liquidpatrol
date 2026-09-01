@@ -40,6 +40,7 @@ from r01.config import V_MAX
 from r03 import config as C
 from r03.controllers import make_controller, controller_sha
 from harness.track_feed import FeedB, TrackFeedGz
+from harness.intruder_motion import scenario_to_gz, gz_to_ned, TOL_START, SETPOSE_HZ
 from bench import scenarios as S
 from bench.demo_logger import DemoLogger, make_row
 from common.frames import enu2ned
@@ -210,6 +211,39 @@ async def main():
     tick = 0
     home_ned = [0.0, 0.0, -C.ALT_M]
 
+    from r02.intruder_driver import GzPoseClient
+
+    async def _intruder_start_gate(ep):
+        """§2 async twin: komenderuj set_pose do pozy startowej + hover, czekaj aż GT intruza ≤ TOL_START.
+        5 s sim → retry → 5 s sim → INVALID_START. Zamyka własny GzPoseClient po prestart (nie kłóci się
+        z intruder_motion w epizodzie)."""
+        px, py, pz = S.position_at(ep, 0.0)
+        gz_start, start_ned = scenario_to_gz(px, py, pz)
+        cli = GzPoseClient(WORLD, apply_hz=SETPOSE_HZ)
+        n_set = 0; total_wait = 0.0; status = "INVALID_START"; pose = None; attempts = 0
+        try:
+            for attempt in range(2):
+                t0 = _sim_t[0]; attempts = attempt + 1
+                while _sim_t[0] - t0 < 5.0:
+                    cli.set_pose(*gz_start); n_set += 1
+                    await d.offboard.set_velocity_ned(VelocityNedYaw(0, 0, 0, 0))   # hover — nie zrywaj offboardu
+                    g = _intr_start_pose["gz"]
+                    if g is not None:
+                        ap = gz_to_ned(g)
+                        if math.dist(ap, start_ned) <= TOL_START:
+                            total_wait += _sim_t[0] - t0; status = "OK"; pose = ap
+                            return {"status": status, "n_setpose": n_set, "wait_sim": round(total_wait, 3),
+                                    "pose": [round(v, 4) for v in ap], "attempts": attempts,
+                                    "start_ned": [round(v, 4) for v in start_ned]}
+                    await asyncio.sleep(DT)
+                total_wait += _sim_t[0] - t0
+            g = _intr_start_pose["gz"]; pose = gz_to_ned(g) if g else None
+            return {"status": status, "n_setpose": n_set, "wait_sim": round(total_wait, 3),
+                    "pose": [round(v, 4) for v in pose] if pose else None, "attempts": attempts,
+                    "start_ned": [round(v, 4) for v in start_ned]}
+        finally:
+            cli.close()
+
     async def _fly_to_home_hover(deadline_s):
         """Reset: leć do hoveru na home; zwraca True gdy w bramce (home±1, |v|<0.3)."""
         t0 = _sim_t[0]
@@ -243,6 +277,13 @@ async def main():
         if not (in_gate and pos_ok):
             ev("start_gate_fail", episode_id=ep["episode_id"], in_gate=in_gate, pos_ok=pos_ok, intr_ok=intr_ok)
             break                              # bramka niespełniona → lądowanie, epizody dotąd ważne
+        # BRAMKA STARTU INTRUZA (§2): czekaj aż intruz w pozie startowej ≤ TOL_START (async twin logiki
+        # `intruder_start_gate`, ta sama pętla TOL/retry/INVALID_START — wysyła hover setpoint by nie zerwać offboardu)
+        sg = await _intruder_start_gate(ep)
+        ev("intruder_start_gate", episode_id=ep["episode_id"], **sg)
+        if sg["status"] != "OK":
+            ev("invalid_start", episode_id=ep["episode_id"], reason="intruz nie w pozie startowej", **sg)
+            continue                           # INVALID_START — epizod nie liczony, następny
         t0_sim = _sim_t[0]
         _write_control("start", episode_id=ep["episode_id"], t0_sim=t0_sim)
         ev("episode_start", episode_id=ep["episode_id"], scenario_id=ep["scenario_id"], t0_sim=round(t0_sim, 3))

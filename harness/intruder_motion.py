@@ -11,6 +11,7 @@ applied z pose/info (gz-ENU) → NED = drv2ned(enu2drv(gz)). GT sędziego = APPL
 `IntruderMotion` — rdzeń z wstrzykiwanymi zależnościami (testowalny bez gz). `main()` — spina z gz.
 """
 import json
+import math
 import os
 import sys
 import time
@@ -22,6 +23,39 @@ from bench import scenarios as S
 from common.frames import ned2drv, drv2gz, enu2drv, drv2ned
 
 SETPOSE_HZ = 20.0
+
+# TOL_START (FAKT): p95 błędu set_pose (|poza_zastosowana − komenda|) w danych shakeoutu = 0.10 m
+# (boot1/boot2 gt_intruder.jsonl, mean 0.05 / p50 0.04 / p95 0.10; max 21 m = tranzient teleportu granicznego).
+# TOL_START = 0.20 m = 2× p95 → komfortowo powyżej szumu set_pose, poniżej istotnego błędu pozycji.
+TOL_START = 0.20
+
+
+def intruder_start_gate(set_pose_fn, get_applied_ned_fn, clock_fn, start_ned,
+                        tol=TOL_START, timeout_sim=5.0, step_fn=None):
+    """Bramka startu intruza (PROMPT_BENCH_RESHAKEOUT §2). Komenderuje set_pose do `start_ned` i czeka aż
+    poza ZASTOSOWANA (GT z pose/info) będzie ≤ tol. Timeout `timeout_sim` sim → jeden pełny retry →
+    drugi timeout ⇒ INVALID_START. Czysta logika (deps wstrzykiwane) → testowalna bez gz.
+    Zwraca {status: OK|INVALID_START, n_setpose, wait_sim, pose, attempts}."""
+    n_set = 0
+    total_wait = 0.0
+    for attempt in range(2):                       # próba 0 + jeden pełny retry
+        t0 = clock_fn()
+        while clock_fn() - t0 < timeout_sim:
+            set_pose_fn()
+            n_set += 1
+            ap = get_applied_ned_fn()
+            if ap is not None:
+                d = math.sqrt(sum((ap[k] - start_ned[k]) ** 2 for k in range(3)))
+                if d <= tol:
+                    total_wait += clock_fn() - t0
+                    return {"status": "OK", "n_setpose": n_set, "wait_sim": round(total_wait, 3),
+                            "pose": [round(v, 4) for v in ap], "attempts": attempt + 1}
+            if step_fn:
+                step_fn()
+        total_wait += clock_fn() - t0
+    ap = get_applied_ned_fn()
+    return {"status": "INVALID_START", "n_setpose": n_set, "wait_sim": round(total_wait, 3),
+            "pose": [round(v, 4) for v in ap] if ap else None, "attempts": 2}
 
 
 def scenario_to_gz(px, py, pz):
