@@ -11,9 +11,11 @@ import inspect
 
 from r03.controllers.base import SetpointSource
 from r03.controllers.route_follower import RouteFollower
+from r03.controllers.orbit_executor import OrbitExecutor
 
 _REGISTRY = {
     "route": RouteFollower,
+    "orbit": OrbitExecutor,
 }
 
 

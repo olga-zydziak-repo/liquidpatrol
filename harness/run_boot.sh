@@ -21,7 +21,7 @@ FILM="${FILM:-0}"
 KIND="${KIND:-crit}"
 # ARM/POINT: nazewnictwo finalize. empty→E; gate_r03/arm_n wymagają POINT.
 case "$FLIGHT" in
-  empty)    ARM="${ARM:-E}"; POINT="${POINT:-0.0}";;
+  empty|bench) ARM="${ARM:-E}"; POINT="${POINT:-0.0}";;
   gate_r03) ARM="${ARM:-S}"; POINT="${POINT:?POINT wymagany dla gate_r03}";;
   arm_n)    ARM="${ARM:-N}"; POINT="${POINT:?POINT wymagany dla arm_n}";;
   *) echo "FLIGHT nieznany: $FLIGHT (empty|gate_r03|arm_n)"; exit 2;;
@@ -144,6 +144,7 @@ case "$FLIGHT" in
     K1_HOVER_S="${K1_HOVER_S:-60}" GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 \
       PYTHONPATH=".:${PYTHONPATH:-}" python3 tools/infra1_empty_flight.py > "$OUTDIR/act.log" 2>&1
     RC=$?; HARNESS_FILE="$ROOT/tools/infra1_empty_flight.py";;
+  bench) GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 PYTHONPATH=".:.certdeps:${PYTHONPATH:-}" python3 -m bench.bench_flight > "$OUTDIR/act.log" 2>&1; RC=$?; HARNESS_FILE="$ROOT/bench/bench_flight.py";;
 esac
 
 # ============ 9. post: term RTF/watchdog, timejump_post, health, ulog + sha ============
