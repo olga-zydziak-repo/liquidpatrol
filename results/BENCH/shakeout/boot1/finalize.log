@@ -1,0 +1,7 @@
+usage: k1_finalize.py [-h] --trace TRACE --arm {N,S} --point POINT --boot BOOT
+                      [--kind {crit,info}] [--ulog ULOG] --harness-sha-file
+                      HARNESS_FILE [--habitat HABITAT]
+                      [--certs-selfcheck CERTS_SELFCHECK] --out-dir OUT_DIR
+k1_finalize.py: error: argument --arm: invalid choice: 'E' (choose from 'N', 'S')
+[stub] zapisano stub manifest → /home/olga/projects/liquidpatrol/results/BENCH/shakeout/boot1/manifest.json (finalize_rc=2)
+[augment] world_hash=True ulog_sha=True model_in_state=True
