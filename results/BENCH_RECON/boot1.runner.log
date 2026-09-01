@@ -1,0 +1,8 @@
+[run_boot b1] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b1] watchdog EKF2 (preflight-only, max 2 reinity) pid=1284323
+model_in_state=1
+[run_boot b1] settle 90s preflight EKF
+{"boot": 1, "arm_ok": true, "landed": true, "habitat": "VALID", "conv_s": null, "loadavg1": 1.38, "wd_reinits": 0, "wd_bias_max": 0.00026}
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b1] DONE flight=empty world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/BENCH_RECON/boot1
