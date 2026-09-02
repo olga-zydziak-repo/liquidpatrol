@@ -1,3 +1,8 @@
+> **dokument spoza łańcucha CC, nieważny jako ratyfikacja — obowiązuje ANEKS_BENCH-1 (CC, 1.09)**
+> (przeniesiony do external/ per ANEKS_BENCH-1a C6; zachowany dla śladu, nie stanowi linii ratyfikacyjnej)
+
+---
+
 # ANEKS_BENCH-1 — zgoda na kampanię blok1/48 (po STOP-1b)
 
 LiquidPatrol · pozycja 2 (ławka) · CC 2.09.2026 · wejście: RAPORT_BENCH_BUILD.md + RAPORT_RESHAKEOUT.md
