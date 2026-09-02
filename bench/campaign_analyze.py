@@ -107,6 +107,31 @@ def aggregate_p_exec(episode_verdicts):
             "guard_success_vs_stall": guard}
 
 
+def aggregate_campaign(manifests, queue_state=None):
+    """Roll-up całej kampanii z manifestów bench_finalize (per boot). Liczy po PIERWSZEJ ważnej (V2′) próbie
+    każdego scenariusza; scenariusze bez ważnej próby = UNRESOLVED (z kolejki jeśli podana), wykluczone z p_exec.
+    manifests = lista dictów manifestu (kolejność bootów). queue_state = dict stanu kolejki (opc., autorytatywny
+    dla UNRESOLVED)."""
+    first_valid = {}                                     # scenario_id → {attempt, success_D6}
+    seen = {}                                            # scenario_id → min attempt widziany (diag)
+    for m in manifests:
+        for ep in sorted(m.get("episodes", []), key=lambda e: e.get("attempt", 0)):
+            sid = ep.get("scenario_id")
+            seen[sid] = min(seen.get(sid, 10 ** 9), ep.get("attempt", 0))
+            if ep.get("valid_V2p") and sid not in first_valid:
+                first_valid[sid] = {"attempt": ep.get("attempt", 0), "success_D6": bool(ep.get("success_D6"))}
+    if queue_state is not None:
+        unresolved = [e["scenario_id"] for e in queue_state.get("unresolved", [])]
+    else:
+        unresolved = sorted(sid for sid in seen if sid not in first_valid)
+    resolved = sorted(first_valid)
+    succ = [sid for sid in resolved if first_valid[sid]["success_D6"]]
+    p, lo, hi = wilson(len(succ), len(resolved))
+    return {"n_resolved": len(resolved), "n_success": len(succ), "n_unresolved": len(unresolved),
+            "p_exec": p, "wilson95": [lo, hi], "unresolved_ids": unresolved,
+            "resolved_first_valid": {sid: first_valid[sid] for sid in resolved}}
+
+
 def _stall_table(verdicts):
     """Tabela strażnika R1: per epizod sukces D6 vs liczba/najdłuższy deep-stall (tekst płaski, bez ramek)."""
     lines = ["scenario_id            valid  D6    n_deep  longest_s  dsim/dwall"]

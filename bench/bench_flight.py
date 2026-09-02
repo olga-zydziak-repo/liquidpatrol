@@ -129,6 +129,16 @@ async def _wait_health(d):
 
 
 def _resolve_episodes(manifest):
+    q = os.environ.get("BENCH_QUEUE", "")
+    if q:                                          # kampania (C8): weź in_flight z kolejki (driver popnął), NIE listę
+        from bench.campaign_queue import CampaignQueue
+        batch = CampaignQueue(q).current_batch()
+        eps = []
+        for b in batch[:N_EP]:
+            ep = dict(manifest["episodes"][b["episode_id"]])
+            ep["attempt"] = b["attempt"]           # propagacja attempt → ep_meta → demo/judge/manifest
+            eps.append(ep)
+        return eps
     if EP_IDS.strip():
         ids = [int(x) for x in EP_IDS.split(",") if x.strip()]
         return [manifest["episodes"][i] for i in ids][:N_EP]
@@ -288,7 +298,8 @@ async def main():
         _write_control("start", episode_id=ep["episode_id"], t0_sim=t0_sim)
         ev("episode_start", episode_id=ep["episode_id"], scenario_id=ep["scenario_id"], t0_sim=round(t0_sim, 3))
 
-        ep_meta = {"episode_id": ep["episode_id"], "scenario_id": ep["scenario_id"], "seed": ep["seed"], "attempt": 0}
+        ep_meta = {"episode_id": ep["episode_id"], "scenario_id": ep["scenario_id"], "seed": ep["seed"],
+                   "attempt": ep.get("attempt", 0)}
         t_entry = None
         refuse_count = 0
         breach = False
