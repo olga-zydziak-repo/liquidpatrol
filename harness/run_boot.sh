@@ -168,6 +168,11 @@ if [ "$FLIGHT" = "empty" ]; then
   PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 tools/infra1_empty_finalize.py \
     --out-dir "$OUTDIR" --boot "$BOOT_N" --rc "$RC" --harness-sha-file "$HARNESS_FILE" 2>&1 | tee "$OUTDIR/finalize.log"
   FIN_RC=${PIPESTATUS[0]}
+elif [ "$FLIGHT" = "bench" ]; then                        # ANEKS_BENCH-1a §2 R2: manifest ławki (nie k1_finalize)
+  ULGARG=""; [ -f "$OUTDIR/boot.ulg" ] && ULGARG="--ulog $OUTDIR/boot.ulg"
+  PYTHONPATH="$B0SP:$ROOT:${PYTHONPATH:-}" python3 bench/bench_finalize.py \
+    --out-dir "$OUTDIR" --boot "$BOOT_N" --rc "$RC" --harness-sha-file "$HARNESS_FILE" --arm "$ARM" --point "$POINT" $ULGARG 2>&1 | tee "$OUTDIR/finalize.log"
+  FIN_RC=${PIPESTATUS[0]}
 else
   ULGARG=""; [ -f "$OUTDIR/boot.ulg" ] && ULGARG="--ulog $OUTDIR/boot.ulg"
   CERTS=""; [ "$FLIGHT" = "gate_r03" ] && CERTS="--certs-selfcheck $OUTDIR/certs_selfcheck.log"
