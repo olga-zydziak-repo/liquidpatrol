@@ -1,11 +1,20 @@
 #!/usr/bin/env python3
-"""bench/campaign_analyze.py — analiza kampanii blok1/48 (ANEKS_BENCH-1 §2/§3).
+"""bench/campaign_analyze.py — analiza kampanii blok1/48 (ANEKS_BENCH-1 §3 + ANEKS_BENCH-1a §2 R1).
 
-D9 = V3 (ERRATUM ANEKS §2): epizod NIEWAŻNY wyłącznie gdy najdłuższy pojedynczy stall > 3 s wall (+ timejump=0).
-Realizowane WARSTWĄ ANALIZY przez override params sędziego `bench_judge` (frozen 8ec0fcfb… NIETKNIĘTY):
-V3_campaign = {dsw_min:0, timejump:0, max_deep_stall:∞, longest_stall_s:3.0} → valid ⇔ timejump=0 ∧ longest≤3.0.
+D9 = V2′ (ROZSTRZYGNIĘCIE ANEKS_BENCH-1a §2 R1): epizod WAŻNY ⇔ najdłuższy pojedynczy deep-stall
+(rtf<0.5) ≤ 1.5 s wall ∧ Δsim/Δwall ≥ 0.90 ∧ timejump=0. LICZBA zdarzeń deep raportowana per epizod,
+NIEBRAMKUJĄCA (cap „≤3" z V2 zdjęty — jednopróbkowe blipy 4×0.05 s to szum próbnika, nie choroba mostu;
+przed patologią wielu stalli chroni Δ).
 
-`judge_boot(outdir)` — per epizod z trace+gt_intruder+rtf (jak w shakeout). `wilson(k,n)` — przedział Wilsona.
+Realizowane WARSTWĄ ANALIZY przez override slotu „V2" params sędziego `bench_judge` (frozen 8ec0fcfb…
+NIETKNIĘTY): V2′ = {dsw_min:0.90, max_deep_stall:∞, longest_stall_s:1.5, timejump:0} → judge liczy
+valid_V2 z tych progów, tu czytane jako `valid_campaign_V2p`. Sędzia liczy V1/V2/V3 i tak; bramkowanie
+robi TA agregacja.
+
+Strażnik (R1): kampania raportuje sukces D6 vs liczba deep-stalli (tabela); korelacja ujemna ⇒ rewizja
+V2′ dokumentem, nie cicho.
+
+`judge_boot(outdir)` — per epizod z trace+gt_intruder+rtf. `wilson(k,n)` — przedział Wilsona.
 `blok1_episode_ids(manifest)` — 48 id (bloki seed 1-4 × 12 komórek) w kolejności manifestu.
 """
 import json
@@ -18,8 +27,9 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 from bench.bench_judge import judge_episode, _load_drone_ned, _load_intr_ned, _load_rtf, _interp_ned
 
-# D9 = V3 (ANEKS §2): nieważny wyłącznie gdy najdłuższy stall > 3 s wall.
-D9_V3_PARAMS = {"V3": {"dsw_min": 0.0, "timejump": 0, "max_deep_stall": 10 ** 9, "longest_stall_s": 3.0}}
+# D9 = V2′ (ANEKS_BENCH-1a §2 R1): ważny ⇔ najdłuższy deep-stall ≤ 1.5 s wall ∧ Δsim/Δwall ≥ 0.90 ∧ timejump=0.
+# Override slotu „V2" sędziego frozen: max_deep_stall=∞ ⇒ LICZBA stalli NIE bramkuje; longest 1.5 s NADAL bramkuje.
+D9_V2P_PARAMS = {"V2": {"dsw_min": 0.90, "max_deep_stall": 10 ** 9, "longest_stall_s": 1.5, "timejump": 0}}
 
 
 def blok1_episode_ids(manifest):
@@ -38,8 +48,8 @@ def wilson(k, n, z=1.96):
 
 
 def judge_boot(outdir, params=None):
-    """Zwraca listę werdyktów epizodów w boocie (trace+gt_intruder+rtf). D9=V3 (valid_V3) = ważność kampanii."""
-    p = dict(D9_V3_PARAMS)
+    """Zwraca listę werdyktów epizodów w boocie (trace+gt_intruder+rtf). D9=V2′ (valid_campaign_V2p) = ważność kampanii."""
+    p = dict(D9_V2P_PARAMS)
     if params:
         p.update(params)
     trace = os.path.join(outdir, "trace.jsonl")
@@ -75,20 +85,36 @@ def judge_boot(outdir, params=None):
                     dm3 = min(dm3, math.sqrt(sum((ip[k] - q[k]) ** 2 for k in range(3))))
         v["episode_id"] = ep["id"]; v["scenario_id"] = ep["sid"]
         v["d_min_orbit"] = round(dm3, 3) if dm3 < 1e9 else None
-        v["valid_campaign_D9V3"] = v["valid_V3"]        # D9=V3
+        v["valid_campaign_V2p"] = v["valid_V2"]         # D9 = V2′ (slot V2 nadpisany progami V2′)
+        v["n_deep_stall"] = v["stalls"]["n_deep"]       # LICZBA raportowana, NIEBRAMKUJĄCA (R1)
         out.append(v)
     return out
 
 
 def aggregate_p_exec(episode_verdicts):
-    """p_exec = udane D6 / WAŻNE (D9=V3). Zwraca dict z liczbami + Wilson."""
-    valid = [v for v in episode_verdicts if v["valid_campaign_D9V3"]]
+    """p_exec = udane D6 / WAŻNE (D9=V2′). Zwraca dict z liczbami + Wilson + strażnik sukces-vs-stalle."""
+    valid = [v for v in episode_verdicts if v["valid_campaign_V2p"]]
     succ = [v for v in valid if v["success_D6"]]
     p, lo, hi = wilson(len(succ), len(valid))
+    # strażnik R1: rozkład sukcesu D6 wobec obecności deep-stalli (0 vs ≥1) na epizodach WAŻNYCH
+    with0 = [v for v in valid if v["n_deep_stall"] == 0]
+    with1 = [v for v in valid if v["n_deep_stall"] >= 1]
+    guard = {"stall0_n": len(with0), "stall0_succ": sum(1 for v in with0 if v["success_D6"]),
+             "stall1p_n": len(with1), "stall1p_succ": sum(1 for v in with1 if v["success_D6"])}
     return {"n_episodes": len(episode_verdicts), "n_valid": len(valid), "n_success": len(succ),
             "p_exec": p, "wilson95": [lo, hi],
-            "n_invalid_D9V3": len(episode_verdicts) - len(valid),
-            "v2_flag": sum(1 for v in episode_verdicts if not v["valid_V2"])}
+            "n_invalid_V2p": len(episode_verdicts) - len(valid),
+            "guard_success_vs_stall": guard}
+
+
+def _stall_table(verdicts):
+    """Tabela strażnika R1: per epizod sukces D6 vs liczba/najdłuższy deep-stall (tekst płaski, bez ramek)."""
+    lines = ["scenario_id            valid  D6    n_deep  longest_s  dsim/dwall"]
+    for v in verdicts:
+        lines.append("{:<22} {:<6} {:<5} {:<7} {:<10} {}".format(
+            str(v.get("scenario_id")), str(v.get("valid_campaign_V2p")), str(v["success_D6"]),
+            v["stalls"]["n_deep"], v["stalls"]["longest_s"], v["stalls"]["dsim_dwall"]))
+    return "\n".join(lines)
 
 
 if __name__ == "__main__":
@@ -101,7 +127,9 @@ if __name__ == "__main__":
         vs = judge_boot(od)
         allv += vs
         for v in vs:
-            print(f"{v['scenario_id']}: D6={v['success_D6']} valid(D9V3)={v['valid_campaign_D9V3']} "
+            print(f"{v['scenario_id']}: D6={v['success_D6']} valid(V2')={v['valid_campaign_V2p']} "
                   f"frac[6,10]={v['frac_band_6_10']} d_min={v['d_min_m']} dorb={v['d_min_orbit']} "
-                  f"REFUSE={v['refuse_count']} breach={v['breach']}")
-    print(json.dumps(aggregate_p_exec(allv)))
+                  f"n_deep={v['n_deep_stall']} longest={v['stalls']['longest_s']}s REFUSE={v['refuse_count']} breach={v['breach']}")
+    print("\n# strażnik R1 — sukces D6 vs deep-stalle")
+    print(_stall_table(allv))
+    print("\n" + json.dumps(aggregate_p_exec(allv)))
