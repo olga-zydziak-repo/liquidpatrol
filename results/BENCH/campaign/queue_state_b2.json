@@ -1,28 +1,8 @@
 {
   "block": 2,
   "n_total": 72,
-  "batches": 0,
+  "batches": 1,
   "pending": [
-    {
-      "episode_id": 48,
-      "scenario_id": "c00_s05",
-      "attempt": 1
-    },
-    {
-      "episode_id": 49,
-      "scenario_id": "c01_s05",
-      "attempt": 1
-    },
-    {
-      "episode_id": 50,
-      "scenario_id": "c02_s05",
-      "attempt": 1
-    },
-    {
-      "episode_id": 51,
-      "scenario_id": "c03_s05",
-      "attempt": 1
-    },
     {
       "episode_id": 52,
       "scenario_id": "c04_s05",
@@ -365,6 +345,31 @@
     }
   ],
   "in_flight": [],
-  "done": [],
+  "done": [
+    {
+      "episode_id": 48,
+      "scenario_id": "c00_s05",
+      "attempt": 1,
+      "result": "valid"
+    },
+    {
+      "episode_id": 49,
+      "scenario_id": "c01_s05",
+      "attempt": 1,
+      "result": "valid"
+    },
+    {
+      "episode_id": 50,
+      "scenario_id": "c02_s05",
+      "attempt": 1,
+      "result": "valid"
+    },
+    {
+      "episode_id": 51,
+      "scenario_id": "c03_s05",
+      "attempt": 1,
+      "result": "valid"
+    }
+  ],
   "unresolved": []
 }
