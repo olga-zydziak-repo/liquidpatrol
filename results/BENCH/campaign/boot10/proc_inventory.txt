@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga      173829 22.4  0.1  59088 38256 ?        S    15:17   0:35 .venv/bin/python -c  from pathlib import Path from dreamforge_arc.a24a_sketch.arc import run_a25 as R out = Path('/tmp/claude-1000/-home-olga-projects-dreamforge-arc/fe74508e-b78e-4107-8bf5-d7ed6736dfef/scratchpad/a25_run2') R.build_instances(out) R.cmd_run(out) 
+olga         969  4.4  1.6 74619256 536908 pts/0 Sl+  08:55  17:16 claude
+olga      183327  3.3  0.0   5028  3788 ?        S    15:19   0:00 bash harness/run_boot.sh
+olga       60518  2.1  1.4 74269240 482564 pts/2 Sl+  12:42   3:26 claude --continue
+root         248  0.1  0.1 2459372 52384 ?       Ssl  08:54   0:40 /usr/bin/containerd
+root         347  0.1  0.2 2796544 78496 ?       Ssl  08:54   0:23 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         585  0.0  0.0 1233616 12092 ?       Sl   08:54   0:17 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root         728  0.0  0.0   3200  1248 ?        S    08:54   0:02 /init
+dnsmasq      609  0.0  0.0 216768 28332 ?        Ss   08:54   0:01 postgres
+root           1  0.0  0.0  21932 13368 ?        Ss   08:54   0:00 /sbin/init
+root       60479  0.0  0.0   3200  1256 ?        S    12:42   0:00 /init
+root          40  0.0  0.0  50468 17348 ?        S<s  08:54   0:00 /usr/lib/systemd/systemd-journald
+polkitd      199  0.0  0.0 308176  8196 ?        Ssl  08:54   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          86  0.0  0.0  26128  7120 ?        Ss   08:54   0:00 /usr/lib/systemd/systemd-udevd
+systemd+     182  0.0  0.0  91064  8028 ?        Ssl  08:54   0:00 /usr/lib/systemd/systemd-timesyncd
+message+     194  0.0  0.0   9780  5436 ?        Ss   08:54   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+dnsmasq      719  0.0  0.0 216924  7212 ?        Ss   08:54   0:00 postgres: background writer 
+dnsmasq      721  0.0  0.0 216768 10276 ?        Ss   08:54   0:00 postgres: walwriter 
+root         203  0.0  0.0  17984  8840 ?        Ss   08:54   0:00 /usr/lib/systemd/systemd-logind

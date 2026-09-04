@@ -5,3 +5,10 @@
 [monitor 15:14:56] boot-9 wrapper rc=0
 [augment] world_hash=True ulog_sha=True model_in_state=True
 [run_boot b9] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/BENCH/campaign/boot9r
+[boot10 15:15:51] czekam na proc_gate CLEAN...
+[boot10 15:15:57] HOST CLEAN
+[boot10] batch: [{"episode_id": 40, "scenario_id": "c04_s04", "attempt": 1}, {"episode_id": 41, "scenario_id": "c05_s04", "attempt": 1}, {"episode_id": 42, "scenario_id": "c06_s04", "attempt": 1}, {"episode_id": 43, "scenario_id": "c07_s04", "attempt": 1}]
+[boot10] cooldown 239s
+[boot10 15:20:05] wrapper rc=3
+R.cmd_run(out)
+[run_boot b10] ENV-BLOCK (proc_gate §3) — boot nie startuje
