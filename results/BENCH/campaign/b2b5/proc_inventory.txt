@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga      335738 78.8  0.4 158072 139932 ?       S    21:21  10:19 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z
+olga         969  3.5  1.7 74652100 580420 pts/0 Sl+  08:55  27:12 claude
+olga       60518  1.7  1.5 74307220 504896 pts/2 Sl+  12:42   9:09 claude --continue
+root         248  0.2  0.1 2533616 52748 ?       Ssl  08:54   1:33 /usr/bin/containerd
+root         347  0.1  0.2 2796544 77560 ?       Ssl  08:54   0:51 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         585  0.0  0.0 1233616 12528 ?       Sl   08:54   0:37 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      609  0.0  0.0 216768 28332 ?        Ss   08:54   0:04 postgres
+root         728  0.0  0.0   3200  1248 ?        S    08:54   0:03 /init
+polkitd      199  0.0  0.0 308176  8196 ?        Ssl  08:54   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root           1  0.0  0.0  21932 13368 ?        Ss   08:54   0:01 /sbin/init
+root          40  0.0  0.0  50468 17884 ?        S<s  08:54   0:01 /usr/lib/systemd/systemd-journald
+root       60479  0.0  0.0   3200  1256 ?        S    12:42   0:00 /init
+olga      333660  0.0  0.0   4760  3532 ?        S    21:16   0:00 bash /tmp/claude-1000/-home-olga-projects-liquidpatrol/1bed6871-5d6c-4d93-a18c-647f9ebb6a6a/scratchpad/run_next_boot.sh 5 b2b5
+root          86  0.0  0.0  26128  7120 ?        Ss   08:54   0:00 /usr/lib/systemd/systemd-udevd
+systemd+     182  0.0  0.0  91064  8028 ?        Ssl  08:54   0:00 /usr/lib/systemd/systemd-timesyncd
+dnsmasq      719  0.0  0.0 216924  7212 ?        Ss   08:54   0:00 postgres: background writer 
+dnsmasq      721  0.0  0.0 216768 10276 ?        Ss   08:54   0:00 postgres: walwriter 
+message+     194  0.0  0.0   9780  5436 ?        Ss   08:54   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         210  0.0  0.0  17396  6480 ?        Ss   08:54   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev

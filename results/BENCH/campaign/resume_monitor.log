@@ -123,3 +123,26 @@ R.cmd_run(out)
 [boot4 21:16:20] wrapper rc=0
 [augment] world_hash=True ulog_sha=True model_in_state=True
 [run_boot b4] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/BENCH/campaign/b2b4
+[boot5 21:16:58] cooldown 262s (przed czekaniem na host)
+[boot5 21:21:20] czekam na proc_gate CLEAN...
+[boot5 21:21:25] brudny: 334925 44.1 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d controls-sym --out results/a26b_sonnet_proponent_20260904T192048Z load=1.09
+[boot5 21:22:15] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.79
+[boot5 21:23:06] brudny: 335738 98.4 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.91
+[boot5 21:23:56] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=1.00
+[boot5 21:24:47] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=1.00
+[boot5 21:25:37] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=1.00
+[boot5 21:26:27] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=1.04
+[boot5 21:27:18] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=1.02
+[boot5 21:28:08] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=1.00
+[boot5 21:28:58] brudny: 335738 25.3 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.87
+[boot5 21:29:49] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.72
+[boot5 21:30:39] brudny: 335738 98.6 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.88
+[boot5 21:31:29] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.95
+[boot5 21:32:20] brudny: 335738 99.6 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=1.01
+[boot5 21:33:10] brudny: 335738 22.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.77
+[boot5 21:34:00] brudny: 335738 56.6 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.94
+[boot5 21:34:51] HOST CLEAN
+[boot5] batch: [{"episode_id": 64, "scenario_id": "c04_s06", "attempt": 1}, {"episode_id": 65, "scenario_id": "c05_s06", "attempt": 1}, {"episode_id": 66, "scenario_id": "c06_s06", "attempt": 1}, {"episode_id": 67, "scenario_id": "c07_s06", "attempt": 1}]
+[boot5 21:42:40] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b5] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/BENCH/campaign/b2b5
