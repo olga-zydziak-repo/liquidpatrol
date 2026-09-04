@@ -64,3 +64,23 @@ R.cmd_run(out)
 [boot1 20:05:35] wrapper rc=0
 [augment] world_hash=True ulog_sha=True model_in_state=True
 [run_boot b1] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/BENCH/campaign/b2b1
+[boot2 20:06:02] cooldown 273s (przed czekaniem na host)
+[boot2 20:10:35] czekam na proc_gate CLEAN...
+[boot2 20:10:40] brudny: 303596 100.0 .venv/bin/python - load=1.46
+[boot2 20:11:30] brudny: 303596 100.0 .venv/bin/python - load=1.36
+[boot2 20:12:21] brudny: LOADAVG 1.68 > 1.5 load=1.68
+[boot2 20:13:11] brudny: 303596 98.6 .venv/bin/python - load=1.29
+[boot2 20:14:01] brudny: 303596 100.0 .venv/bin/python - load=1.21
+[boot2 20:14:51] brudny: 303596 98.4 .venv/bin/python - load=1.21
+[boot2 20:15:42] brudny: 303596 100.0 .venv/bin/python - load=1.37
+[boot2 20:16:32] brudny: 303596 99.2 .venv/bin/python - load=1.30
+[boot2 20:17:22] brudny: 303596 100.0 .venv/bin/python - load=1.39
+[boot2 20:18:12] brudny: 303596 100.0 .venv/bin/python - load=1.21
+[boot2 20:19:03] brudny: 303596 100.0 .venv/bin/python - load=1.16
+[boot2 20:19:53] brudny: 303596 100.0 .venv/bin/python - load=1.07
+[boot2 20:20:43] brudny: 303596 98.2 .venv/bin/python - load=1.03
+[boot2 20:21:33] HOST CLEAN
+[boot2] batch: [{"episode_id": 52, "scenario_id": "c04_s05", "attempt": 1}, {"episode_id": 53, "scenario_id": "c05_s05", "attempt": 1}, {"episode_id": 54, "scenario_id": "c06_s05", "attempt": 1}, {"episode_id": 55, "scenario_id": "c07_s05", "attempt": 1}]
+[boot2 20:29:20] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b2] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/BENCH/campaign/b2b2
