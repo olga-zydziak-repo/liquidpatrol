@@ -146,3 +146,18 @@ R.cmd_run(out)
 [boot5 21:42:40] wrapper rc=0
 [augment] world_hash=True ulog_sha=True model_in_state=True
 [run_boot b5] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/BENCH/campaign/b2b5
+[boot6 21:43:04] cooldown 276s (przed czekaniem na host)
+[boot6 21:47:40] czekam na proc_gate CLEAN...
+[boot6 21:47:46] brudny: 335738 23.4 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=1.08
+[boot6 21:48:36] brudny: 335738 2.8 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.79
+[boot6 21:49:26] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.91
+[boot6 21:50:16] brudny: 335738 23.8 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.96
+[boot6 21:51:08] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=0.99
+[boot6 21:51:58] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=1.00
+[boot6 21:52:48] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=1.05
+[boot6 21:53:38] brudny: 335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z load=1.02
+[boot6 21:54:29] HOST CLEAN
+[boot6] batch: [{"episode_id": 68, "scenario_id": "c08_s06", "attempt": 1}, {"episode_id": 69, "scenario_id": "c09_s06", "attempt": 1}, {"episode_id": 70, "scenario_id": "c10_s06", "attempt": 1}, {"episode_id": 71, "scenario_id": "c11_s06", "attempt": 1}]
+[boot6 21:54:38] wrapper rc=3
+335738 100.0 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 p1-sonnet --out results/a26b_sonnet_proponent_20260904T192048Z
+[run_boot b6] ENV-BLOCK (proc_gate §3) — boot nie startuje
