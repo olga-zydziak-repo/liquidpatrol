@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga         969  5.2  1.6 74586476 543492 pts/0 Sl+  08:55  15:20 claude
+olga       82407  2.9  0.0   5028  3880 ?        S    13:45   0:00 bash harness/run_boot.sh
+olga       60518  2.5  1.4 74197668 459788 pts/2 Sl+  12:42   1:36 claude --continue
+root         248  0.1  0.1 2385640 52264 ?       Ssl  08:54   0:31 /usr/bin/containerd
+root         347  0.1  0.2 2796288 78212 ?       Ssl  08:54   0:18 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         585  0.0  0.0 1233616 11952 ?       Sl   08:54   0:13 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root         728  0.0  0.0   3200  1248 ?        S    08:54   0:02 /init
+dnsmasq      609  0.0  0.0 216768 28332 ?        Ss   08:54   0:01 postgres
+root           1  0.0  0.0  21932 13368 ?        Ss   08:54   0:00 /sbin/init
+root       60479  0.0  0.0   3200  1256 ?        S    12:42   0:00 /init
+root          40  0.0  0.0  50468 16992 ?        S<s  08:54   0:00 /usr/lib/systemd/systemd-journald
+polkitd      199  0.0  0.0 308176  8196 ?        Ssl  08:54   0:00 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     182  0.0  0.0  91064  8028 ?        Ssl  08:54   0:00 /usr/lib/systemd/systemd-timesyncd
+root          86  0.0  0.0  26128  7120 ?        Ss   08:54   0:00 /usr/lib/systemd/systemd-udevd
+message+     194  0.0  0.0   9780  5436 ?        Ss   08:54   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+dnsmasq      719  0.0  0.0 216924  7212 ?        Ss   08:54   0:00 postgres: background writer 
+dnsmasq      721  0.0  0.0 216768 10276 ?        Ss   08:54   0:00 postgres: walwriter 
+root         203  0.0  0.0  17984  8840 ?        Ss   08:54   0:00 /usr/lib/systemd/systemd-logind
+systemd+     181  0.0  0.0  21348 13200 ?        Ss   08:54   0:00 /usr/lib/systemd/systemd-resolved

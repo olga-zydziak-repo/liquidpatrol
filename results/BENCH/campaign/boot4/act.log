@@ -1,0 +1,20 @@
+[bench] armed sim=97.06 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/BENCH/campaign/boot4/episode_control.json
+[bench] takeoff sim=97.08 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] offboard sim=108.63 {}
+[bench] intruder_start_gate sim=108.73 {'episode_id': 12, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=108.73 {'episode_id': 12, 'scenario_id': 'c00_s02', 't0_sim': 108.732}
+[bench] episode_end sim=178.91 {'episode_id': 12, 't_entry': 0.13, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=188.31 {'episode_id': 13, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=188.31 {'episode_id': 13, 'scenario_id': 'c01_s02', 't0_sim': 188.308}
+[bench] episode_end sim=260.94 {'episode_id': 13, 't_entry': 2.6, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=271.00 {'episode_id': 14, 'status': 'OK', 'n_setpose': 8, 'wait_sim': 0.36, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=271.00 {'episode_id': 14, 'scenario_id': 'c02_s02', 't0_sim': 271.0}
+[bench] episode_end sim=343.36 {'episode_id': 14, 't_entry': 2.34, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=354.66 {'episode_id': 15, 'status': 'OK', 'n_setpose': 36, 'wait_sim': 1.86, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=354.66 {'episode_id': 15, 'scenario_id': 'c03_s02', 't0_sim': 354.664}
+[bench] episode_end sim=427.13 {'episode_id': 15, 't_entry': 2.44, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=436.58 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/BENCH/campaign/boot4/trace.jsonl (demo n=5668)
