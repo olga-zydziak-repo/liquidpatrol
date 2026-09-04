@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga         969  4.3  1.6 74619256 536368 pts/0 Sl+  08:55  17:24 claude
+olga      233109  3.2  0.0   5028  3788 ?        S    15:35   0:00 bash harness/run_boot.sh
+olga       60518  2.1  1.4 74270104 481500 pts/2 Sl+  12:42   3:45 claude --continue
+root         248  0.1  0.1 2459372 52332 ?       Ssl  08:54   0:42 /usr/bin/containerd
+root         347  0.1  0.2 2796544 78508 ?       Ssl  08:54   0:24 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         585  0.0  0.0 1233616 12532 ?       Sl   08:54   0:17 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root         728  0.0  0.0   3200  1248 ?        S    08:54   0:02 /init
+dnsmasq      609  0.0  0.0 216768 28332 ?        Ss   08:54   0:02 postgres
+root           1  0.0  0.0  21932 13368 ?        Ss   08:54   0:00 /sbin/init
+root       60479  0.0  0.0   3200  1256 ?        S    12:42   0:00 /init
+root          40  0.0  0.0  50468 17348 ?        S<s  08:54   0:00 /usr/lib/systemd/systemd-journald
+polkitd      199  0.0  0.0 308176  8196 ?        Ssl  08:54   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          86  0.0  0.0  26128  7120 ?        Ss   08:54   0:00 /usr/lib/systemd/systemd-udevd
+systemd+     182  0.0  0.0  91064  8028 ?        Ssl  08:54   0:00 /usr/lib/systemd/systemd-timesyncd
+message+     194  0.0  0.0   9780  5436 ?        Ss   08:54   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+olga      188941  0.0  0.0   4760  3524 ?        S    15:21   0:00 bash /tmp/claude-1000/-home-olga-projects-liquidpatrol/1bed6871-5d6c-4d93-a18c-647f9ebb6a6a/scratchpad/run_next_boot.sh 10 boot10r
+dnsmasq      719  0.0  0.0 216924  7212 ?        Ss   08:54   0:00 postgres: background writer 
+dnsmasq      721  0.0  0.0 216768 10276 ?        Ss   08:54   0:00 postgres: walwriter 
+root         203  0.0  0.0  17984  8840 ?        Ss   08:54   0:00 /usr/lib/systemd/systemd-logind

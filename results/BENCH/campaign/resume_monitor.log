@@ -12,3 +12,27 @@
 [boot10 15:20:05] wrapper rc=3
 R.cmd_run(out)
 [run_boot b10] ENV-BLOCK (proc_gate §3) — boot nie startuje
+[boot10 15:21:27] cooldown 0s (przed czekaniem na host)
+[boot10 15:21:27] czekam na proc_gate CLEAN...
+[boot10 15:21:32] brudny: 173829 20.2 .venv/bin/python -c  load=1.14
+[boot10 15:22:23] brudny: 173829 19.6 .venv/bin/python -c  load=1.06
+[boot10 15:23:13] brudny: 173829 20.2 .venv/bin/python -c  load=0.93
+[boot10 15:24:03] brudny: 173829 22.4 .venv/bin/python -c  load=0.86
+[boot10 15:24:53] brudny: 173829 22.2 .venv/bin/python -c  load=0.92
+[boot10 15:25:44] brudny: 173829 22.2 .venv/bin/python -c  load=0.97
+[boot10 15:26:34] brudny: 173829 37.6 .venv/bin/python -c  load=0.86
+[boot10 15:27:24] brudny: 173829 56.5 .venv/bin/python -c  load=1.00
+[boot10 15:28:14] brudny: 173829 21.0 .venv/bin/python -c  load=0.87
+[boot10 15:29:05] brudny: 173829 21.2 .venv/bin/python -c  load=0.88
+[boot10 15:29:55] brudny: 173829 10.4 .venv/bin/python -c  load=0.73
+[boot10 15:30:45] brudny: 173829 36.8 .venv/bin/python -c  load=0.95
+[boot10 15:31:35] brudny: 173829 36.3 .venv/bin/python -c  load=0.93
+[boot10 15:32:26] brudny: 173829 36.5 .venv/bin/python -c  load=1.19
+[boot10 15:33:16] brudny: 173829 70.4 .venv/bin/python -c  load=1.16
+[boot10 15:34:06] brudny: 173829 21.0 .venv/bin/python -c  load=0.99
+[boot10 15:34:56] brudny: 173829 85.8 .venv/bin/python -c  load=0.76
+[boot10 15:35:47] HOST CLEAN
+[boot10] batch: [{"episode_id": 44, "scenario_id": "c08_s04", "attempt": 1}, {"episode_id": 45, "scenario_id": "c09_s04", "attempt": 1}, {"episode_id": 46, "scenario_id": "c10_s04", "attempt": 1}, {"episode_id": 47, "scenario_id": "c11_s04", "attempt": 1}]
+[boot10 15:43:22] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b10] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/BENCH/campaign/boot10r

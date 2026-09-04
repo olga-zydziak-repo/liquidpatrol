@@ -1,0 +1,20 @@
+[bench] armed sim=97.04 {}
+[bench] takeoff sim=97.06 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/BENCH/campaign/boot10r/episode_control.json
+[bench] offboard sim=108.24 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=108.33 {'episode_id': 44, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.088, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=108.34 {'episode_id': 44, 'scenario_id': 'c08_s04', 't0_sim': 108.332}
+[bench] episode_end sim=180.22 {'episode_id': 44, 't_entry': 1.85, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=185.75 {'episode_id': 45, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=185.75 {'episode_id': 45, 'scenario_id': 'c09_s04', 't0_sim': 185.752}
+[bench] episode_end sim=255.88 {'episode_id': 45, 't_entry': 0.1, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=261.46 {'episode_id': 46, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.136, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=261.47 {'episode_id': 46, 'scenario_id': 'c10_s04', 't0_sim': 261.46}
+[bench] episode_end sim=331.50 {'episode_id': 46, 't_entry': 0.01, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=339.26 {'episode_id': 47, 'status': 'OK', 'n_setpose': 5, 'wait_sim': 0.244, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=339.26 {'episode_id': 47, 'scenario_id': 'c11_s04', 't0_sim': 339.264}
+[bench] episode_end sim=409.29 {'episode_id': 47, 't_entry': None, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=413.66 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/BENCH/campaign/boot10r/trace.jsonl (demo n=5552)
