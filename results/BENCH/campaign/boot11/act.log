@@ -1,0 +1,20 @@
+[bench] armed sim=97.05 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/BENCH/campaign/boot11/episode_control.json
+[bench] takeoff sim=97.09 {}
+[bench] offboard sim=108.51 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=108.61 {'episode_id': 3, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.096, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=108.61 {'episode_id': 3, 'scenario_id': 'c03_s01', 't0_sim': 108.612}
+[bench] episode_end sim=181.29 {'episode_id': 3, 't_entry': 2.65, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=190.89 {'episode_id': 5, 'status': 'OK', 'n_setpose': 7, 'wait_sim': 0.1, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=190.89 {'episode_id': 5, 'scenario_id': 'c05_s01', 't0_sim': 190.892}
+[bench] episode_end sim=263.66 {'episode_id': 5, 't_entry': 2.74, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=270.73 {'episode_id': 32, 'status': 'OK', 'n_setpose': 11, 'wait_sim': 0.516, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=270.75 {'episode_id': 32, 'scenario_id': 'c08_s03', 't0_sim': 270.732}
+[bench] episode_end sim=340.77 {'episode_id': 32, 't_entry': 0.02, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=345.80 {'episode_id': 33, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=345.80 {'episode_id': 33, 'scenario_id': 'c09_s03', 't0_sim': 345.796}
+[bench] episode_end sim=417.86 {'episode_id': 33, 't_entry': 2.04, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=421.73 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/BENCH/campaign/boot11/trace.jsonl (demo n=5657)
