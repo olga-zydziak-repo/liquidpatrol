@@ -77,5 +77,12 @@ Raport: p_exec + Wilson 95 %, mediana+IQR frakcji i omiatania (D6 nienasycone, P
 ## KRYTERIA WIDMOWE — WYCOFANE (nie stosować)
 - **Bramka repowtarzalności Δfrac ≤ 0.006 ∧ Δd_min ≤ 0.1 vs reshakeout b2**: rodowód **P-RS1 (widmowa sesja), BRAK numerowanego dokumentu CC** ⇒ WYCOFANA (**ANEKS_BENCH-2 §1 U1, §2 R1/R2**). Nie wchodzi na wejście kampanii ani jako próg per boot.
 
+## M. BLOK 2 — spójność międzyblokowa (kampania, dokument)
+Źródło: **ANEKS_BENCH-3 §2 R1/R2/R4**.
+- **R1**: MIANOWNIK pozycji 3 = p_exec **bloku 1** (0.9167 [0.8045,0.9671]), zdef. ANEKS-0 P3. Wyniki bloku 2 **NIE** przeliczają mianownika.
+- **R2 (bramka spójności)**: sukces bloku 2 z Wilsonem; **jeśli CI bloku 2 rozłączne PONIŻEJ CI bloku 1 ⇒ STOP**, diagnoza dokumentem (dryf env / rozkład ziaren), decyzja o mianowniku = CC, nie cicha korekta.
+- **R4 ((+) PASS ławki)**: ogłaszany gdy licznik udanych demonstracji **blok1+blok2 ≥ 90** → STOP-R3 = RAPORT_BENCH końcowy. Blok 1 dał 44; blok 2 (72 ep) domyka zbiór.
+- Reszta kryteriów (A–L) obowiązuje bez zmian (R3: ten sam zamrożony instrument, kolejka, warunki wejścia, strażnik d_min międzysesyjny K).
+
 ## PRECONDYCJA (nie bramka, ale unieważnia serię przy naruszeniu)
 - **FROZEN-7 bajt-w-bajt** (SR-3 / PRE §7): bench_judge `8ec0fcfb`, features `9adc1505`, track_feed `674d78ab`, orbit_executor `840514361e`, executor_params `12c14adb`, scenario_manifest `e0527026`, piny. Egzekutor NIGDY nie strojony. Przyrząd kampanii zamrożony (FREEZE_CAMPAIGN): campaign_analyze `f31e81e3`, campaign_queue `89619514`, bench_finalize `508856dc`; harness lotu bench_flight `b8eb68ca` v1.3.
