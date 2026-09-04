@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga         969  5.0  1.6 74586476 521108 pts/0 Sl+  08:53  12:48 claude
+olga       60518  3.1  1.4 74197668 453056 pts/2 Sl+  12:40   0:47 claude --continue
+olga       67529  1.4  0.0   5028  3884 ?        S    13:05   0:00 bash harness/run_boot.sh
+root         248  0.1  0.1 2385384 52376 ?       Ssl  08:52   0:28 /usr/bin/containerd
+root         347  0.1  0.2 2796288 78008 ?       Ssl  08:52   0:16 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         585  0.0  0.0 1233616 12148 ?       Sl   08:52   0:11 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root         728  0.0  0.0   3200  1248 ?        S    08:52   0:02 /init
+dnsmasq      609  0.0  0.0 216768 28332 ?        Ss   08:52   0:01 postgres
+root       65888  0.0  0.0 1756628 13924 ?       Ssl  13:01   0:00 /usr/libexec/wsl-pro-service
+olga       66193  0.0  0.0   6308  5548 pts/3    Ss+  13:02   0:00 -bash
+root       60479  0.0  0.0   3200  1256 ?        S    12:40   0:00 /init
+root           1  0.0  0.0  21932 13368 ?        Ss   08:52   0:00 /sbin/init
+root          40  0.0  0.0  50468 16780 ?        S<s  08:52   0:00 /usr/lib/systemd/systemd-journald
+polkitd      199  0.0  0.0 308176  8196 ?        Ssl  08:52   0:00 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     182  0.0  0.0  91064  8028 ?        Ssl  08:52   0:00 /usr/lib/systemd/systemd-timesyncd
+message+     194  0.0  0.0   9780  5436 ?        Ss   08:52   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          86  0.0  0.0  26128  7120 ?        Ss   08:52   0:00 /usr/lib/systemd/systemd-udevd
+dnsmasq      719  0.0  0.0 216924  7212 ?        Ss   08:52   0:00 postgres: background writer 
+dnsmasq      721  0.0  0.0 216768 10276 ?        Ss   08:52   0:00 postgres: walwriter 
