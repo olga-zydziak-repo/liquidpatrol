@@ -1,0 +1,20 @@
+[bench] armed sim=98.05 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/BENCH/campaign/boot3/episode_control.json
+[bench] takeoff sim=98.07 {}
+[bench] offboard sim=109.50 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=109.60 {'episode_id': 8, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=109.60 {'episode_id': 8, 'scenario_id': 'c08_s01', 't0_sim': 109.6}
+[bench] episode_end sim=181.58 {'episode_id': 8, 't_entry': 1.94, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=192.36 {'episode_id': 9, 'status': 'OK', 'n_setpose': 54, 'wait_sim': 2.752, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=192.36 {'episode_id': 9, 'scenario_id': 'c09_s01', 't0_sim': 192.356}
+[bench] episode_end sim=264.30 {'episode_id': 9, 't_entry': 1.93, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=268.03 {'episode_id': 10, 'status': 'OK', 'n_setpose': 5, 'wait_sim': 0.22, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=268.06 {'episode_id': 10, 'scenario_id': 'c10_s01', 't0_sim': 268.064}
+[bench] episode_end sim=338.10 {'episode_id': 10, 't_entry': None, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=345.58 {'episode_id': 11, 'status': 'OK', 'n_setpose': 10, 'wait_sim': 0.46, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=345.58 {'episode_id': 11, 'scenario_id': 'c11_s01', 't0_sim': 345.584}
+[bench] episode_end sim=415.74 {'episode_id': 11, 't_entry': 0.14, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=423.77 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/BENCH/campaign/boot3/trace.jsonl (demo n=5590)
