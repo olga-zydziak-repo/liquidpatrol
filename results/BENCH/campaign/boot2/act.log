@@ -1,0 +1,20 @@
+[bench] armed sim=98.06 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/BENCH/campaign/boot2/episode_control.json
+[bench] takeoff sim=98.09 {}
+[bench] offboard sim=109.57 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=109.66 {'episode_id': 4, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.092, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=109.67 {'episode_id': 4, 'scenario_id': 'c04_s01', 't0_sim': 109.668}
+[bench] episode_end sim=181.97 {'episode_id': 4, 't_entry': 2.27, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=192.92 {'episode_id': 5, 'status': 'OK', 'n_setpose': 31, 'wait_sim': 1.56, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=192.92 {'episode_id': 5, 'scenario_id': 'c05_s01', 't0_sim': 192.916}
+[bench] episode_end sim=265.01 {'episode_id': 5, 't_entry': 2.08, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=271.76 {'episode_id': 6, 'status': 'OK', 'n_setpose': 9, 'wait_sim': 0.408, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=271.76 {'episode_id': 6, 'scenario_id': 'c06_s01', 't0_sim': 271.756}
+[bench] episode_end sim=342.07 {'episode_id': 6, 't_entry': 0.3, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=345.98 {'episode_id': 7, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.152, 'pose': [0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=345.98 {'episode_id': 7, 'scenario_id': 'c07_s01', 't0_sim': 345.98}
+[bench] episode_end sim=417.72 {'episode_id': 7, 't_entry': 1.73, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=423.76 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/BENCH/campaign/boot2/trace.jsonl (demo n=5640)
