@@ -1,0 +1,20 @@
+[bench] armed sim=97.06 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/BENCH/campaign/boot5/episode_control.json
+[bench] takeoff sim=97.08 {}
+[bench] offboard sim=108.62 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=108.72 {'episode_id': 16, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=108.72 {'episode_id': 16, 'scenario_id': 'c04_s02', 't0_sim': 108.724}
+[bench] episode_end sim=180.94 {'episode_id': 16, 't_entry': 2.17, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=187.29 {'episode_id': 17, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=187.29 {'episode_id': 17, 'scenario_id': 'c05_s02', 't0_sim': 187.292}
+[bench] episode_end sim=259.46 {'episode_id': 17, 't_entry': 2.14, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=267.48 {'episode_id': 18, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=267.48 {'episode_id': 18, 'scenario_id': 'c06_s02', 't0_sim': 267.476}
+[bench] episode_end sim=339.54 {'episode_id': 18, 't_entry': 2.04, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=344.31 {'episode_id': 19, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.196, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=344.31 {'episode_id': 19, 'scenario_id': 'c07_s02', 't0_sim': 344.308}
+[bench] episode_end sim=414.43 {'episode_id': 19, 't_entry': 0.1, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=419.31 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/BENCH/campaign/boot5/trace.jsonl (demo n=5649)

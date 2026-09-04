@@ -1,0 +1,8 @@
+[run_boot b5] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b5] watchdog EKF2 (preflight-only, max 2 reinity) pid=87174
+model_in_state=1
+[run_boot b5] settle 90s preflight EKF
+[bench_finalize] manifest.json boot=5 n_episodes=4 valid_V2p=4 success_D6=3 n_demo=5649
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b5] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/BENCH/campaign/boot5
