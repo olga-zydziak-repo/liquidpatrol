@@ -84,3 +84,23 @@ Wobec PRE §1: **p_exec ≥ 0.80 na ≥36 ważnych ∧ 0 REFUSE ∧ 0 breach ∧
 - Kolejki: `queue_state.json` (blok1, complete), `queue_state_b2.json` (blok2, complete).
 
 **STOP-R3 — czeka na ratyfikację CC: ogłoszenie (+) PASS ławki, potem PRE_NET (pozycja 3)** — tam otwarte pole DAgger (ANEKS-0 §3) i cap 2 sesji treningu wracają do Olgi.
+
+## §9. Odchylenia (ANEKS_BENCH-4 §2 C1)
+
+**O1 — hartowanie runnera sesji na flapping 100 %-CPU (odchylenie łagodne).**
+Podczas bloku 2 dreamforge-arc `a26 run_d2` był zadaniem o utrzymanym ~100 % CPU z chwilowymi dipami. Pierwotny driver sesji czekał na pojedynczy odczyt `proc_gate CLEAN`, po czym popował paczkę i startował boot — łapał chwilowy dip (b2b6r ENV-BLOCK: CLEAN o 22:04:43 → a26 wrócił w 10 s → env-block). Utwardzenie: wymóg **SUSTAINED CLEAN = 3 kolejne odczyty `proc_gate CLEAN` w odstępach 30 s (~90 s); dowolny odczyt „brudny" zeruje streak do 0**. Dopiero po potwierdzeniu startuje pop+boot.
+
+- **Plik:** `<scratchpad_sesji>/run_next_boot.sh` — **driver orkiestracji sesji, NIE w repozytorium, NIE w żadnym commicie** (efemeryczny; steruje KIEDY wywołać boot, nie zmienia werdyktu bramki).
+- **Commit:** brak — plik nie jest wersjonowany w repo. Zapis semantyki i kodu = ten paragraf (jedyny trwały ślad).
+- **`harness/run_boot.sh` i `harness/proc_gate.py`: NIETKNIĘTE** — zweryfikowane `git diff HEAD` puste, harness/ bez zmian. Sama bramka procesowa (§3/SR-6, blokująca boot wewnątrz wrappera) jest bajt-identyczna; runner tylko odracza WYWOŁANIE nietkniętej bramki, nie modyfikuje jej progu (>2 % CPU / loadavg>1,5) ani werdyktu. Dlatego diff verbatim (C1) nie dotyczy.
+- **Wpływ:** ograniczony do decyzji o STARCIE bootu. Dane lotów, sędzia, kolejka, metryki D6/V2′ — nietknięte. 16 env-fail epizodów (4 env-blocki) wróciło do kolejki bez inkrementu (D8), zero strat; wszystkie później domknięte.
+
+Semantyka „sustained" (fragment runnera, dla rekordu):
+```
+clean_streak=0
+while [ $clean_streak -lt 3 ]; do
+  if proc_gate --self $$ ; then clean_streak=$((clean_streak+1))   # CLEAN → +1
+  else clean_streak=0 ; fi                                          # brudny → reset
+  [ $clean_streak -lt 3 ] && sleep 30
+done   # 3× CLEAN co 30s → dopiero teraz pop+boot
+```
