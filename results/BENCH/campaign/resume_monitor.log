@@ -831,3 +831,13 @@ R.cmd_run(out)
 [boot16 06:00:43] wrapper rc=0
 [augment] world_hash=True ulog_sha=True model_in_state=True
 [run_boot b16] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/BENCH/campaign/b2b16
+[boot17 06:01:11] cooldown 272s (przed czekaniem na host)
+[boot17 06:05:53] czekam na SUSTAINED CLEAN (3× co 30s)...
+[boot17 06:05:58] CLEAN 1/3 load=0.06
+[boot17 06:06:34] CLEAN 2/3 load=0.11
+[boot17 06:07:11] CLEAN 3/3 load=0.06
+[boot17 06:07:11] SUSTAINED CLEAN potwierdzone
+[boot17] batch: [{"episode_id": 68, "scenario_id": "c08_s06", "attempt": 1}, {"episode_id": 69, "scenario_id": "c09_s06", "attempt": 1}, {"episode_id": 70, "scenario_id": "c10_s06", "attempt": 1}, {"episode_id": 71, "scenario_id": "c11_s06", "attempt": 1}]
+[boot17 06:15:09] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b17] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/BENCH/campaign/b2b17
