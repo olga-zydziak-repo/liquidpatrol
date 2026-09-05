@@ -105,9 +105,17 @@
     ]
   },
   "gate_N3i": {
-    "n_pass": 9,
-    "n_cells": 12,
-    "verdict": "FAIL",
+    "rule": "per_rollout>=20/24 (ANEKS_NET-1 \u00a72)",
+    "n_rollout_pass": 21,
+    "n_rollout_total": 24,
+    "verdict": "PASS",
+    "view_cells_both": 9,
+    "view_cells_either": 12,
+    "fail_cells": [
+      "c03",
+      "c07",
+      "c08"
+    ],
     "table": [
       {
         "cell": "c00",

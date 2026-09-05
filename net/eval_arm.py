@@ -59,16 +59,25 @@ def main(arm):
     n = len(vals)
     median = vals[n // 2]
     q1 = vals[n // 4]; q3 = vals[(3 * n) // 4]
-    table, n_pass = gate_arm(model)
-    verdict = "PASS" if n_pass >= 10 else "FAIL"
+    table, n_pass_both = gate_arm(model)
+    # ANEKS_NET-1 §2: bramka = PER ROLLOUT ≥20/24 (widoki per-komórka opisowo)
+    n_roll = sum(1 for r in table for p in r["per_seed"] if p["ok"])
+    n_tot = sum(len(r["per_seed"]) for r in table)
+    n_either = sum(1 for r in table if any(p["ok"] for p in r["per_seed"]))
+    verdict = "PASS" if n_roll >= 20 else "FAIL"
+    fail_cells = [r["cell"] for r in table if not all(p["ok"] for p in r["per_seed"])]
     out = {"arm": arm, "param_count": int(model.param_count()),
            "test_rms": {"median": round(median, 4), "iqr": [round(q1, 4), round(q3, 4)],
                         "min": round(vals[0], 4), "max": round(vals[-1], 4),
                         "per_episode": [{"sid": s, "rms": round(r, 4)} for s, r in rms]},
-           "gate_N3i": {"n_pass": n_pass, "n_cells": len(table), "verdict": verdict, "table": table}}
+           "gate_N3i": {"rule": "per_rollout>=20/24 (ANEKS_NET-1 §2)",
+                        "n_rollout_pass": n_roll, "n_rollout_total": n_tot, "verdict": verdict,
+                        "view_cells_both": n_pass_both, "view_cells_either": n_either,
+                        "fail_cells": fail_cells, "table": table}}
     outp = os.path.join(ROOT, "results", "NET", arm, "eval.json")
     json.dump(out, open(outp, "w"), indent=2)
-    print(f"[{arm}] TEST RMS median={median:.4f} IQR[{q1:.4f},{q3:.4f}] | bramka N3(i) {n_pass}/12 = {verdict}")
+    print(f"[{arm}] TEST RMS median={median:.4f} IQR[{q1:.4f},{q3:.4f}] | bramka N3(i) per-rollout {n_roll}/{n_tot} = {verdict} "
+          f"(widok komórek: oba={n_pass_both}/12, którekolwiek={n_either}/12)")
     for r in table:
         seeds = " ".join(f"s{p['seed']}:{'OK' if p['ok'] else 'x'}(entry={p['t_entry']},frac={p['frac']},dmin={p['d_min']})"
                          for p in r["per_seed"])

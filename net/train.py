@@ -104,7 +104,10 @@ def train_ncp():
     curves = {"train": [], "val": []}
     best = {"val": 1e18, "params": None}
     ntr = Mtr.sum() * 3; nva = Mva.sum() * 3
+    sched = c.get("lr_schedule")
     for ep in range(c["epochs"]):
+        if sched and ep in sched["milestones"]:
+            opt.lr *= sched["gamma"]
         Yh, caches = m.forward_seq(Xtr, Mtr)
         d = (Yh - Ytr) * Mtr[:, :, None]
         tl = float(np.sum(d * d) / ntr)
