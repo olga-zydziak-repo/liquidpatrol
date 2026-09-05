@@ -1,0 +1,378 @@
+{
+  "arm": "mlp",
+  "param_count": 2467,
+  "test_rms": {
+    "median": 0.1788,
+    "iqr": [
+      0.1644,
+      0.2078
+    ],
+    "min": 0.1545,
+    "max": 0.232,
+    "per_episode": [
+      {
+        "sid": "c00_s04",
+        "rms": 0.1853
+      },
+      {
+        "sid": "c00_s08",
+        "rms": 0.1872
+      },
+      {
+        "sid": "c01_s04",
+        "rms": 0.1644
+      },
+      {
+        "sid": "c01_s08",
+        "rms": 0.1562
+      },
+      {
+        "sid": "c02_s04",
+        "rms": 0.1632
+      },
+      {
+        "sid": "c02_s08",
+        "rms": 0.1654
+      },
+      {
+        "sid": "c03_s04",
+        "rms": 0.1545
+      },
+      {
+        "sid": "c03_s08",
+        "rms": 0.1638
+      },
+      {
+        "sid": "c04_s04",
+        "rms": 0.1657
+      },
+      {
+        "sid": "c04_s08",
+        "rms": 0.1957
+      },
+      {
+        "sid": "c05_s04",
+        "rms": 0.1659
+      },
+      {
+        "sid": "c06_s04",
+        "rms": 0.2078
+      },
+      {
+        "sid": "c06_s08",
+        "rms": 0.1686
+      },
+      {
+        "sid": "c07_s04",
+        "rms": 0.1788
+      },
+      {
+        "sid": "c07_s08",
+        "rms": 0.1594
+      },
+      {
+        "sid": "c08_s04",
+        "rms": 0.2127
+      },
+      {
+        "sid": "c08_s08",
+        "rms": 0.208
+      },
+      {
+        "sid": "c09_s04",
+        "rms": 0.2032
+      },
+      {
+        "sid": "c09_s08",
+        "rms": 0.1727
+      },
+      {
+        "sid": "c10_s04",
+        "rms": 0.232
+      },
+      {
+        "sid": "c10_s08",
+        "rms": 0.2158
+      },
+      {
+        "sid": "c11_s04",
+        "rms": 0.2173
+      },
+      {
+        "sid": "c11_s08",
+        "rms": 0.2046
+      }
+    ]
+  },
+  "gate_N3i": {
+    "n_pass": 9,
+    "n_cells": 12,
+    "verdict": "FAIL",
+    "table": [
+      {
+        "cell": "c00",
+        "v_intr": 0.0,
+        "bearing": 0,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 3.149999999999997,
+            "frac": 0.9483,
+            "d_min": 6.961,
+            "ok": true
+          },
+          {
+            "seed": 8,
+            "t_entry": 3.049999999999997,
+            "frac": 0.9902,
+            "d_min": 7.491,
+            "ok": true
+          }
+        ],
+        "cell_ok": true
+      },
+      {
+        "cell": "c01",
+        "v_intr": 0.0,
+        "bearing": 90,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 3.2999999999999963,
+            "frac": 0.952,
+            "d_min": 6.703,
+            "ok": true
+          },
+          {
+            "seed": 8,
+            "t_entry": 3.349999999999996,
+            "frac": 0.9449,
+            "d_min": 7.092,
+            "ok": true
+          }
+        ],
+        "cell_ok": true
+      },
+      {
+        "cell": "c02",
+        "v_intr": 0.0,
+        "bearing": 180,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 3.049999999999997,
+            "frac": 0.9114,
+            "d_min": 7.102,
+            "ok": true
+          },
+          {
+            "seed": 8,
+            "t_entry": 3.099999999999997,
+            "frac": 0.9081,
+            "d_min": 6.956,
+            "ok": true
+          }
+        ],
+        "cell_ok": true
+      },
+      {
+        "cell": "c03",
+        "v_intr": 0.0,
+        "bearing": 270,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 3.1999999999999966,
+            "frac": 0.8394,
+            "d_min": 7.493,
+            "ok": false
+          },
+          {
+            "seed": 8,
+            "t_entry": 3.149999999999997,
+            "frac": 0.9048,
+            "d_min": 7.137,
+            "ok": true
+          }
+        ],
+        "cell_ok": false
+      },
+      {
+        "cell": "c04",
+        "v_intr": 0.5,
+        "bearing": 0,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 2.6499999999999986,
+            "frac": 0.914,
+            "d_min": 6.714,
+            "ok": true
+          },
+          {
+            "seed": 8,
+            "t_entry": 2.799999999999998,
+            "frac": 0.9631,
+            "d_min": 6.161,
+            "ok": true
+          }
+        ],
+        "cell_ok": true
+      },
+      {
+        "cell": "c05",
+        "v_intr": 0.5,
+        "bearing": 90,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 2.7499999999999982,
+            "frac": 0.9193,
+            "d_min": 7.462,
+            "ok": true
+          },
+          {
+            "seed": 8,
+            "t_entry": 2.799999999999998,
+            "frac": 0.9892,
+            "d_min": 7.203,
+            "ok": true
+          }
+        ],
+        "cell_ok": true
+      },
+      {
+        "cell": "c06",
+        "v_intr": 0.5,
+        "bearing": 180,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 2.549999999999999,
+            "frac": 0.9373,
+            "d_min": 6.307,
+            "ok": true
+          },
+          {
+            "seed": 8,
+            "t_entry": 2.549999999999999,
+            "frac": 0.88,
+            "d_min": 7.017,
+            "ok": true
+          }
+        ],
+        "cell_ok": true
+      },
+      {
+        "cell": "c07",
+        "v_intr": 0.5,
+        "bearing": 270,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 2.6499999999999986,
+            "frac": 0.8593,
+            "d_min": 7.145,
+            "ok": true
+          },
+          {
+            "seed": 8,
+            "t_entry": 2.5999999999999988,
+            "frac": 0.8242,
+            "d_min": 5.687,
+            "ok": false
+          }
+        ],
+        "cell_ok": false
+      },
+      {
+        "cell": "c08",
+        "v_intr": 1.0,
+        "bearing": 0,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 2.25,
+            "frac": 0.7748,
+            "d_min": 5.464,
+            "ok": false
+          },
+          {
+            "seed": 8,
+            "t_entry": 2.25,
+            "frac": 0.9025,
+            "d_min": 6.472,
+            "ok": true
+          }
+        ],
+        "cell_ok": false
+      },
+      {
+        "cell": "c09",
+        "v_intr": 1.0,
+        "bearing": 90,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 2.3,
+            "frac": 0.9197,
+            "d_min": 6.0,
+            "ok": true
+          },
+          {
+            "seed": 8,
+            "t_entry": 2.25,
+            "frac": 0.8939,
+            "d_min": 5.601,
+            "ok": true
+          }
+        ],
+        "cell_ok": true
+      },
+      {
+        "cell": "c10",
+        "v_intr": 1.0,
+        "bearing": 180,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 2.1000000000000005,
+            "frac": 0.8908,
+            "d_min": 6.097,
+            "ok": true
+          },
+          {
+            "seed": 8,
+            "t_entry": 2.1500000000000004,
+            "frac": 0.8568,
+            "d_min": 6.306,
+            "ok": true
+          }
+        ],
+        "cell_ok": true
+      },
+      {
+        "cell": "c11",
+        "v_intr": 1.0,
+        "bearing": 270,
+        "per_seed": [
+          {
+            "seed": 4,
+            "t_entry": 2.2,
+            "frac": 0.8961,
+            "d_min": 6.431,
+            "ok": true
+          },
+          {
+            "seed": 8,
+            "t_entry": 2.2,
+            "frac": 0.895,
+            "d_min": 6.106,
+            "ok": true
+          }
+        ],
+        "cell_ok": true
+      }
+    ]
+  }
+}
