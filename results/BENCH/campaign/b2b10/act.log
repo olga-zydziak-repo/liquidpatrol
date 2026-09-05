@@ -1,0 +1,20 @@
+[bench] armed sim=99.46 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/BENCH/campaign/b2b10/episode_control.json
+[bench] takeoff sim=99.48 {}
+[bench] offboard sim=111.05 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=111.15 {'episode_id': 92, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=111.15 {'episode_id': 92, 'scenario_id': 'c08_s08', 't0_sim': 111.152}
+[bench] episode_end sim=183.13 {'episode_id': 92, 't_entry': 1.94, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=189.93 {'episode_id': 93, 'status': 'OK', 'n_setpose': 13, 'wait_sim': 0.612, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=189.93 {'episode_id': 93, 'scenario_id': 'c09_s08', 't0_sim': 189.928}
+[bench] episode_end sim=261.96 {'episode_id': 93, 't_entry': 2.03, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=268.46 {'episode_id': 94, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.152, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=268.46 {'episode_id': 94, 'scenario_id': 'c10_s08', 't0_sim': 268.464}
+[bench] episode_end sim=338.48 {'episode_id': 94, 't_entry': None, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=346.41 {'episode_id': 95, 'status': 'OK', 'n_setpose': 15, 'wait_sim': 0.72, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=346.43 {'episode_id': 95, 'scenario_id': 'c11_s08', 't0_sim': 346.42}
+[bench] episode_end sim=418.39 {'episode_id': 95, 't_entry': 1.94, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=422.40 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/BENCH/campaign/b2b10/trace.jsonl (demo n=5634)

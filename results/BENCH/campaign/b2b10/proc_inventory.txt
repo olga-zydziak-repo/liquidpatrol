@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga      510587 69.6  0.7 248124 229668 ?       S    02:52  52:30 .venv/bin/python -m dreamforge_arc.a26_model_sketch.run_d2 measure --out results/a26b_sonnet_proponent_20260904T192048Z --arms SKETCH_SONNET,PROGRAM_SONNET --run-label run1
+olga         969  2.8  1.8 74652276 589296 pts/0 Sl+  Sep04  32:07 claude
+olga       60518  1.4  1.5 74309872 514680 pts/2 Sl+  Sep04  13:16 claude --continue
+root         248  0.1  0.1 2533616 52432 ?       Ssl  Sep04   2:10 /usr/bin/containerd
+root         347  0.1  0.2 2796544 78324 ?       Ssl  Sep04   1:13 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         585  0.0  0.0 1233616 12632 ?       Sl   Sep04   0:53 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      609  0.0  0.0 216768 28332 ?        Ss   Sep04   0:06 postgres
+root         728  0.0  0.0   3200  1248 ?        S    Sep04   0:03 /init
+olga      535331  0.0  0.0   4760  3520 ?        S    03:16   0:00 bash /tmp/claude-1000/-home-olga-projects-liquidpatrol/1bed6871-5d6c-4d93-a18c-647f9ebb6a6a/scratchpad/run_next_boot.sh 10 b2b10
+root          40  0.0  0.0  50468 18552 ?        S<s  Sep04   0:01 /usr/lib/systemd/systemd-journald
+root           1  0.0  0.0  21932 13368 ?        Ss   Sep04   0:01 /sbin/init
+polkitd      199  0.0  0.0 308176  8196 ?        Ssl  Sep04   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root          86  0.0  0.0  26128  7120 ?        Ss   Sep04   0:01 /usr/lib/systemd/systemd-udevd
+systemd+     182  0.0  0.0  91064  8028 ?        Ssl  Sep04   0:00 /usr/lib/systemd/systemd-timesyncd
+root       60479  0.0  0.0   3200  1256 ?        S    Sep04   0:00 /init
+message+     194  0.0  0.0   9780  5436 ?        Ss   Sep04   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+dnsmasq      719  0.0  0.0 216924  7212 ?        Ss   Sep04   0:00 postgres: background writer 
+dnsmasq      721  0.0  0.0 216768 10276 ?        Ss   Sep04   0:00 postgres: walwriter 
+root         210  0.0  0.0  17396  6480 ?        Ss   Sep04   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
