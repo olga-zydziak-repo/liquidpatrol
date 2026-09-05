@@ -2,112 +2,116 @@
   "arm": "ncp",
   "param_count": 1903,
   "test_rms": {
-    "median": 0.3737,
+    "median": 0.2147,
     "iqr": [
-      0.3666,
-      0.3946
+      0.2069,
+      0.2332
     ],
-    "min": 0.3536,
-    "max": 0.4135,
+    "min": 0.1896,
+    "max": 0.2901,
     "per_episode": [
       {
         "sid": "c00_s04",
-        "rms": 0.3536
+        "rms": 0.2011
       },
       {
         "sid": "c00_s08",
-        "rms": 0.3703
+        "rms": 0.2069
       },
       {
         "sid": "c01_s04",
-        "rms": 0.3632
+        "rms": 0.2069
       },
       {
         "sid": "c01_s08",
-        "rms": 0.3677
+        "rms": 0.2024
       },
       {
         "sid": "c02_s04",
-        "rms": 0.3643
+        "rms": 0.2151
       },
       {
         "sid": "c02_s08",
-        "rms": 0.3662
+        "rms": 0.2085
       },
       {
         "sid": "c03_s04",
-        "rms": 0.3683
+        "rms": 0.1896
       },
       {
         "sid": "c03_s08",
-        "rms": 0.3666
+        "rms": 0.2019
       },
       {
         "sid": "c04_s04",
-        "rms": 0.3688
+        "rms": 0.2084
       },
       {
         "sid": "c04_s08",
-        "rms": 0.367
+        "rms": 0.2093
       },
       {
         "sid": "c05_s04",
-        "rms": 0.3767
+        "rms": 0.2147
       },
       {
         "sid": "c06_s04",
-        "rms": 0.3739
+        "rms": 0.2276
       },
       {
         "sid": "c06_s08",
-        "rms": 0.3774
+        "rms": 0.2079
       },
       {
         "sid": "c07_s04",
-        "rms": 0.3649
+        "rms": 0.2168
       },
       {
         "sid": "c07_s08",
-        "rms": 0.3737
+        "rms": 0.1991
       },
       {
         "sid": "c08_s04",
-        "rms": 0.386
+        "rms": 0.2316
       },
       {
         "sid": "c08_s08",
-        "rms": 0.3946
+        "rms": 0.2332
       },
       {
         "sid": "c09_s04",
-        "rms": 0.4073
+        "rms": 0.2672
       },
       {
         "sid": "c09_s08",
-        "rms": 0.3983
+        "rms": 0.225
       },
       {
         "sid": "c10_s04",
-        "rms": 0.3852
+        "rms": 0.2415
       },
       {
         "sid": "c10_s08",
-        "rms": 0.4064
+        "rms": 0.2901
       },
       {
         "sid": "c11_s04",
-        "rms": 0.4135
+        "rms": 0.2691
       },
       {
         "sid": "c11_s08",
-        "rms": 0.4009
+        "rms": 0.2579
       }
     ]
   },
   "gate_N3i": {
-    "n_pass": 1,
-    "n_cells": 12,
-    "verdict": "FAIL",
+    "rule": "per_rollout>=20/24 (ANEKS_NET-1 \u00a72)",
+    "n_rollout_pass": 24,
+    "n_rollout_total": 24,
+    "verdict": "PASS",
+    "view_cells_both": 12,
+    "view_cells_either": 12,
+    "fail_cells": [],
     "table": [
       {
         "cell": "c00",
@@ -116,20 +120,20 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 4.049999999999994,
-            "frac": 0.8857,
-            "d_min": 3.388,
-            "ok": false
+            "t_entry": 2.6499999999999986,
+            "frac": 1.0,
+            "d_min": 6.944,
+            "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 3.949999999999994,
-            "frac": 0.8161,
-            "d_min": 3.528,
-            "ok": false
+            "t_entry": 2.6999999999999984,
+            "frac": 1.0,
+            "d_min": 7.011,
+            "ok": true
           }
         ],
-        "cell_ok": false
+        "cell_ok": true
       },
       {
         "cell": "c01",
@@ -138,20 +142,20 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 3.149999999999997,
-            "frac": 0.8384,
-            "d_min": 3.255,
-            "ok": false
+            "t_entry": 3.1999999999999966,
+            "frac": 1.0,
+            "d_min": 6.954,
+            "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 3.149999999999997,
-            "frac": 0.8656,
-            "d_min": 3.46,
-            "ok": false
+            "t_entry": 3.1999999999999966,
+            "frac": 1.0,
+            "d_min": 7.268,
+            "ok": true
           }
         ],
-        "cell_ok": false
+        "cell_ok": true
       },
       {
         "cell": "c02",
@@ -160,20 +164,20 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 3.2499999999999964,
-            "frac": 0.884,
-            "d_min": 2.622,
-            "ok": false
+            "t_entry": 3.399999999999996,
+            "frac": 1.0,
+            "d_min": 7.24,
+            "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 3.2499999999999964,
-            "frac": 0.7718,
-            "d_min": 3.57,
-            "ok": false
+            "t_entry": 3.399999999999996,
+            "frac": 1.0,
+            "d_min": 7.186,
+            "ok": true
           }
         ],
-        "cell_ok": false
+        "cell_ok": true
       },
       {
         "cell": "c03",
@@ -182,16 +186,16 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 3.149999999999997,
-            "frac": 0.9548,
-            "d_min": 4.475,
+            "t_entry": 3.2499999999999964,
+            "frac": 1.0,
+            "d_min": 7.217,
             "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 3.099999999999997,
-            "frac": 0.9005,
-            "d_min": 4.486,
+            "t_entry": 3.2999999999999963,
+            "frac": 1.0,
+            "d_min": 7.264,
             "ok": true
           }
         ],
@@ -204,20 +208,20 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 2.8999999999999977,
-            "frac": 0.8199,
-            "d_min": 2.195,
-            "ok": false
+            "t_entry": 2.3,
+            "frac": 1.0,
+            "d_min": 6.883,
+            "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 2.799999999999998,
-            "frac": 0.7946,
-            "d_min": 4.281,
-            "ok": false
+            "t_entry": 2.3,
+            "frac": 1.0,
+            "d_min": 6.595,
+            "ok": true
           }
         ],
-        "cell_ok": false
+        "cell_ok": true
       },
       {
         "cell": "c05",
@@ -226,20 +230,20 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 2.5999999999999988,
-            "frac": 0.735,
-            "d_min": 3.146,
-            "ok": false
+            "t_entry": 2.499999999999999,
+            "frac": 1.0,
+            "d_min": 6.942,
+            "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 2.5999999999999988,
-            "frac": 0.735,
-            "d_min": 4.187,
-            "ok": false
+            "t_entry": 2.4499999999999993,
+            "frac": 1.0,
+            "d_min": 6.523,
+            "ok": true
           }
         ],
-        "cell_ok": false
+        "cell_ok": true
       },
       {
         "cell": "c06",
@@ -248,20 +252,20 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 2.6499999999999986,
-            "frac": 0.8772,
-            "d_min": 2.888,
-            "ok": false
+            "t_entry": 2.849999999999998,
+            "frac": 1.0,
+            "d_min": 6.683,
+            "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 2.6999999999999984,
-            "frac": 0.967,
-            "d_min": 5.267,
+            "t_entry": 2.849999999999998,
+            "frac": 1.0,
+            "d_min": 6.305,
             "ok": true
           }
         ],
-        "cell_ok": false
+        "cell_ok": true
       },
       {
         "cell": "c07",
@@ -270,20 +274,20 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 2.499999999999999,
-            "frac": 0.7439,
-            "d_min": 3.946,
-            "ok": false
+            "t_entry": 2.7499999999999982,
+            "frac": 1.0,
+            "d_min": 7.242,
+            "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 2.4499999999999993,
-            "frac": 0.8207,
-            "d_min": 3.877,
-            "ok": false
+            "t_entry": 2.7499999999999982,
+            "frac": 1.0,
+            "d_min": 6.908,
+            "ok": true
           }
         ],
-        "cell_ok": false
+        "cell_ok": true
       },
       {
         "cell": "c08",
@@ -292,20 +296,20 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 2.3,
-            "frac": 0.8011,
-            "d_min": 3.162,
-            "ok": false
+            "t_entry": 2.000000000000001,
+            "frac": 1.0,
+            "d_min": 6.922,
+            "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 2.25,
-            "frac": 0.8982,
-            "d_min": 6.036,
+            "t_entry": 1.950000000000001,
+            "frac": 0.9774,
+            "d_min": 6.251,
             "ok": true
           }
         ],
-        "cell_ok": false
+        "cell_ok": true
       },
       {
         "cell": "c09",
@@ -314,20 +318,20 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 2.2,
-            "frac": 0.8595,
-            "d_min": 4.031,
+            "t_entry": 2.1000000000000005,
+            "frac": 0.9952,
+            "d_min": 7.372,
             "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 2.2,
-            "frac": 0.8993,
-            "d_min": 3.382,
-            "ok": false
+            "t_entry": 2.000000000000001,
+            "frac": 0.985,
+            "d_min": 7.133,
+            "ok": true
           }
         ],
-        "cell_ok": false
+        "cell_ok": true
       },
       {
         "cell": "c10",
@@ -336,20 +340,20 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 2.25,
-            "frac": 0.9138,
-            "d_min": 4.946,
+            "t_entry": 2.3999999999999995,
+            "frac": 0.9892,
+            "d_min": 5.785,
             "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 2.25,
-            "frac": 0.5162,
-            "d_min": 3.025,
-            "ok": false
+            "t_entry": 2.3999999999999995,
+            "frac": 1.0,
+            "d_min": 6.865,
+            "ok": true
           }
         ],
-        "cell_ok": false
+        "cell_ok": true
       },
       {
         "cell": "c11",
@@ -358,20 +362,20 @@
         "per_seed": [
           {
             "seed": 4,
-            "t_entry": 2.1000000000000005,
-            "frac": 0.6681,
-            "d_min": 3.591,
-            "ok": false
+            "t_entry": 2.3499999999999996,
+            "frac": 0.9401,
+            "d_min": 5.259,
+            "ok": true
           },
           {
             "seed": 8,
-            "t_entry": 2.0500000000000007,
-            "frac": 0.5349,
-            "d_min": 3.901,
-            "ok": false
+            "t_entry": 2.3499999999999996,
+            "frac": 1.0,
+            "d_min": 6.386,
+            "ok": true
           }
         ],
-        "cell_ok": false
+        "cell_ok": true
       }
     ]
   }

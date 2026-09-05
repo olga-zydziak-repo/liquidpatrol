@@ -11,12 +11,18 @@ LiquidPatrol · noga sieci · sesja 2 · pierwszy commit S2. Od tej chwili wymie
 - Preprocessing wejścia (adapter, features.py nietknięte): clip_age(≤1.0) + standaryzacja statystykami TRAIN (mean/std zapisane w `model.npz`).
 - Wynik S1: val_mse 0.0308, TEST RMS med 0.179; bramka 21/24 (per rollout) = PASS.
 
-## NCP-20 — NIE zamrożone (ścieżka sesji 2 wg ANEKS_NET-1 §3)
+## NCP-20 — ZAMROŻONE (PASS bramki N3(i) = 24/24 rolloutów po retrainie N-B3, ANEKS_NET-1 §3)
 
-NCP FAIL bramki w S1 (underfit). Sesja 2: N-B3 (retrain cap×5 + lr sched) → [DAgger] → TEST (2. i ostatni). Zamrożenie NCP nastąpi w RAPORT_NET_S2/STOP-N2 tylko jeśli przejdzie bramkę §2. Jeśli FAIL — NCP odpada (§3.4), leci sam MLP.
+- Plik wag: `results/NET/ncp/model.npz`
+- **weights_sha (sha256, pełny):** `0337d5eae1471bb99ef329d939be195a9ea846017045b8ddac22f3d97bc2ae36`
+- Architektura: NCP-20 (CfC closed-form, ~20 neuronów), głowa tanh×V_MAX + clip_v; **1903 parametry**.
+- Config N-B3 (ZAMROŻONY, `net/train_config.json` sekcja `ncp`): hidden=20, bb=20, lr=0.003, epochs=1000, lr_schedule milestones[500,800] gamma 0.5, seed=1, grad_clip=5.0, Adam. Selekcja: VAL (ziarno 2), najlepsza epoka 984/1000. DAgger NIE użyty (VAL-proxy seed 2 = 12/12 ⇒ skip).
+- Preprocessing: clip_age(≤1.0)+standaryzacja TRAIN (w model.npz).
+- Wynik S2: val_mse 0.0485 (S1 0.141 underfit → naprawa capu epok), TEST RMS med 0.215; bramka 24/24 = PASS. TEST dotknięty 2× (S1+S2, ostatni).
 
 ## Pełne hashe (weryfikowalne)
 
 ```
+ncp/model.npz : 0337d5eae1471bb99ef329d939be195a9ea846017045b8ddac22f3d97bc2ae36
 mlp/model.npz : 1d1900235724e938557cf9c614e39935483d51edd75f174cce7c8fb3d72f2270
 ```

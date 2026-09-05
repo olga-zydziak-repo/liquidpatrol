@@ -142,6 +142,25 @@ def oracle_sanity_12():
     return res
 
 
+def gate_on_seeds(model, seeds):
+    """Rollout FEED-B na 12 komórek × podane ziarna. Zwraca (tabela, n_rollout_pass, n_total)."""
+    m = S.gen_manifest()
+    table = []
+    for cell in S.CELLS:
+        ci = f"c{cell['cell_index']:02d}"
+        per_seed = []
+        for sd in seeds:
+            ep = S.find_episode(m, cell["v_intr"], cell["bearing_deg"], seed=sd)
+            te, fr, dm = _rollout(ep, NetController(model, ep), "B", seed=sd)
+            per_seed.append({"seed": sd, "t_entry": te, "frac": round(fr, 4),
+                             "d_min": round(dm, 3) if dm else None, "ok": analog_d6(te, fr, dm)})
+        table.append({"cell": ci, "v_intr": cell["v_intr"], "bearing": cell["bearing_deg"],
+                      "per_seed": per_seed, "cell_ok": all(p["ok"] for p in per_seed)})
+    n_pass = sum(1 for r in table for p in r["per_seed"] if p["ok"])
+    n_tot = sum(len(r["per_seed"]) for r in table)
+    return table, n_pass, n_tot
+
+
 def gate_arm(model):
     """Bramka N3(i) dla ramienia: rollout FEED-B na 12 komórek × ziarna TEST (4,8). Zwraca (tabela, n_pass)."""
     m = S.gen_manifest()
