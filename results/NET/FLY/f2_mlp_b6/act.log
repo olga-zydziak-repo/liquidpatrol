@@ -1,0 +1,21 @@
+[bench] armed sim=100.48 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NET/FLY/f2_mlp_b6/episode_control.json
+[bench] takeoff sim=100.51 {}
+[bench] offboard sim=111.70 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=111.80 {'episode_id': 20, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.096, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=111.80 {'episode_id': 20, 'scenario_id': 'c08_s02', 't0_sim': 111.804}
+[bench] episode_end sim=183.90 {'episode_id': 20, 't_entry': 2.06, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=189.09 {'episode_id': 21, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=189.09 {'episode_id': 21, 'scenario_id': 'c09_s02', 't0_sim': 189.088}
+[bench] episode_end sim=261.16 {'episode_id': 21, 't_entry': 2.04, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=270.80 {'episode_id': 22, 'status': 'OK', 'n_setpose': 25, 'wait_sim': 1.256, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=270.80 {'episode_id': 22, 'scenario_id': 'c10_s02', 't0_sim': 270.796}
+[bench] episode_end sim=342.87 {'episode_id': 22, 't_entry': 2.05, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=350.98 {'episode_id': 23, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.12, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=351.01 {'episode_id': 23, 'scenario_id': 'c11_s02', 't0_sim': 350.988}
+[bench] episode_end sim=421.01 {'episode_id': 23, 't_entry': 0.02, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=425.60 {'in_gate': True}
+terminate called without an active exception
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NET/FLY/f2_mlp_b6/trace.jsonl (demo n=5611)
