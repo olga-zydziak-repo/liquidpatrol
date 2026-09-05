@@ -1,0 +1,20 @@
+[bench] armed sim=99.66 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NET/FLY/f2_ncp_b2/episode_control.json
+[bench] takeoff sim=99.69 {}
+[bench] offboard sim=111.08 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=111.19 {'episode_id': 4, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=111.19 {'episode_id': 4, 'scenario_id': 'c04_s01', 't0_sim': 111.188}
+[bench] episode_end sim=183.36 {'episode_id': 4, 't_entry': 2.12, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=190.00 {'episode_id': 5, 'status': 'OK', 'n_setpose': 16, 'wait_sim': 0.76, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=190.00 {'episode_id': 5, 'scenario_id': 'c05_s01', 't0_sim': 190.004}
+[bench] episode_end sim=260.12 {'episode_id': 5, 't_entry': 0.1, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=267.34 {'episode_id': 6, 'status': 'OK', 'n_setpose': 12, 'wait_sim': 0.56, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=267.34 {'episode_id': 6, 'scenario_id': 'c06_s01', 't0_sim': 267.336}
+[bench] episode_end sim=338.98 {'episode_id': 6, 't_entry': 1.63, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=344.33 {'episode_id': 7, 'status': 'OK', 'n_setpose': 2, 'wait_sim': 0.068, 'pose': [0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=344.35 {'episode_id': 7, 'scenario_id': 'c07_s01', 't0_sim': 344.34}
+[bench] episode_end sim=416.72 {'episode_id': 7, 't_entry': 2.36, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=423.62 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NET/FLY/f2_ncp_b2/trace.jsonl (demo n=5632)
