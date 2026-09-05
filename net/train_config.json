@@ -1,0 +1,6 @@
+{
+  "vmax": 3.0,
+  "note": "Hiperparametry ZAMROŻONE w N-B1 przed pierwszą epoką (PRE_NET N2, SR-4). Selekcja modelu wyłącznie na VAL (ziarno 2). Strata MSE. Standaryzacja wejść ze statystyk TRAIN po clip_age.",
+  "ncp": {"hidden": 20, "bb": 20, "lr": 0.003, "epochs": 200, "seed": 1, "grad_clip": 5.0, "beta1": 0.9, "beta2": 0.999},
+  "mlp": {"hidden": 32, "k": 5, "lr": 0.001, "batch": 512, "epochs": 80, "seed": 1, "grad_clip": 5.0, "beta1": 0.9, "beta2": 0.999}
+}
