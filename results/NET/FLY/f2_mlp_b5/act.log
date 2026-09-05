@@ -1,0 +1,21 @@
+[bench] armed sim=99.52 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NET/FLY/f2_mlp_b5/episode_control.json
+[bench] takeoff sim=99.55 {}
+[bench] offboard sim=111.11 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=111.21 {'episode_id': 16, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=111.21 {'episode_id': 16, 'scenario_id': 'c04_s02', 't0_sim': 111.212}
+[bench] episode_end sim=183.59 {'episode_id': 16, 't_entry': 2.37, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=191.22 {'episode_id': 17, 'status': 'OK', 'n_setpose': 48, 'wait_sim': 2.508, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=191.22 {'episode_id': 17, 'scenario_id': 'c05_s02', 't0_sim': 191.22}
+[bench] episode_end sim=263.40 {'episode_id': 17, 't_entry': 2.14, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=271.48 {'episode_id': 18, 'status': 'OK', 'n_setpose': 12, 'wait_sim': 0.56, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=271.48 {'episode_id': 18, 'scenario_id': 'c06_s02', 't0_sim': 271.476}
+[bench] episode_end sim=343.52 {'episode_id': 18, 't_entry': 2.03, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=349.05 {'episode_id': 19, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=349.05 {'episode_id': 19, 'scenario_id': 'c07_s02', 't0_sim': 349.048}
+[bench] episode_end sim=421.39 {'episode_id': 19, 't_entry': 2.29, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=425.75 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NET/FLY/f2_mlp_b5/trace.jsonl (demo n=5691)
+terminate called without an active exception
