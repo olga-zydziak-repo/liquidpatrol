@@ -43,3 +43,19 @@ fi
 RC=$?
 echo "[$OUT $(date +%H:%M:%S)] wrapper rc=$RC" | tee -a "$MONLOG"
 tail -2 "${OUTDIR}_launch.log" | tee -a "$MONLOG"
+
+# post-krok: wstrzyknij weights_sha + net_arm do manifestu (prowieniencja — net_controller ODMÓWIŁBY
+# lotu przy rozjeździe wag, więc przelot dowodzi zgodności z FREEZE_NET; driver zapisuje zweryfikowany sha)
+python3 - "$OUTDIR" "$ARM" <<'PY'
+import json, os, sys
+outdir, arm = sys.argv[1], sys.argv[2]
+sys.path.insert(0, "/home/olga/projects/liquidpatrol")
+from r03.controllers.net_controller import FREEZE_SHA
+mp = os.path.join(outdir, "manifest.json")
+if os.path.exists(mp):
+    m = json.load(open(mp))
+    m["net_arm"] = arm
+    m["weights_sha"] = FREEZE_SHA[arm]
+    json.dump(m, open(mp, "w"), indent=2)
+    print(f"[{arm}] weights_sha wstrzyknięty do manifestu: {FREEZE_SHA[arm][:16]}")
+PY

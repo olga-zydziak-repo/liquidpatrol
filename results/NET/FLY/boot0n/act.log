@@ -1,0 +1,20 @@
+[bench] armed sim=99.02 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NET/FLY/boot0n/episode_control.json
+[bench] takeoff sim=99.05 {}
+[bench] offboard sim=110.26 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=110.36 {'episode_id': 0, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.096, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=110.37 {'episode_id': 0, 'scenario_id': 'c00_s01', 't0_sim': 110.364}
+[bench] episode_end sim=183.24 {'episode_id': 0, 't_entry': 2.87, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=191.66 {'episode_id': 5, 'status': 'OK', 'n_setpose': 78, 'wait_sim': 3.96, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=191.66 {'episode_id': 5, 'scenario_id': 'c05_s01', 't0_sim': 191.66}
+[bench] episode_end sim=263.98 {'episode_id': 5, 't_entry': 2.29, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=271.38 {'episode_id': 10, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.112, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=271.42 {'episode_id': 10, 'scenario_id': 'c10_s01', 't0_sim': 271.384}
+[bench] episode_end sim=341.42 {'episode_id': 10, 't_entry': 0.03, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=348.58 {'episode_id': 11, 'status': 'OK', 'n_setpose': 5, 'wait_sim': 0.204, 'pose': [0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=348.58 {'episode_id': 11, 'scenario_id': 'c11_s01', 't0_sim': 348.576}
+[bench] episode_end sim=418.60 {'episode_id': 11, 't_entry': None, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=424.64 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NET/FLY/boot0n/trace.jsonl (demo n=5615)
