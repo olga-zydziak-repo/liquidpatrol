@@ -1,0 +1,20 @@
+[bench] armed sim=99.40 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NET/FLY/f2_ncp_b1/episode_control.json
+[bench] takeoff sim=99.43 {}
+[bench] offboard sim=110.82 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=110.92 {'episode_id': 0, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=110.92 {'episode_id': 0, 'scenario_id': 'c00_s01', 't0_sim': 110.924}
+[bench] episode_end sim=183.84 {'episode_id': 0, 't_entry': 2.88, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=188.75 {'episode_id': 1, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.196, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=188.75 {'episode_id': 1, 'scenario_id': 'c01_s01', 't0_sim': 188.752}
+[bench] episode_end sim=261.54 {'episode_id': 1, 't_entry': 2.75, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=271.07 {'episode_id': 2, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=271.07 {'episode_id': 2, 'scenario_id': 'c02_s01', 't0_sim': 271.072}
+[bench] episode_end sim=343.56 {'episode_id': 2, 't_entry': 2.49, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=353.51 {'episode_id': 3, 'status': 'OK', 'n_setpose': 12, 'wait_sim': 0.56, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=353.51 {'episode_id': 3, 'scenario_id': 'c03_s01', 't0_sim': 353.508}
+[bench] episode_end sim=426.00 {'episode_id': 3, 't_entry': 2.5, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=434.68 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NET/FLY/f2_ncp_b1/trace.jsonl (demo n=5720)
