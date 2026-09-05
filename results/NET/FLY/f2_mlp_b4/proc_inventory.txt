@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga     1095151  3.3  0.0   5028  3884 ?        S    20:39   0:00 bash harness/run_boot.sh
+olga         969  2.1  1.8 74691344 609632 pts/0 Sl+  Sep04  45:10 claude
+olga       60518  1.6  1.7 74507964 551508 pts/2 Sl+  Sep04  31:11 claude --continue
+root         248  0.1  0.1 2533616 52348 ?       Ssl  Sep04   4:01 /usr/bin/containerd
+root         347  0.1  0.2 2796544 78184 ?       Ssl  Sep04   2:17 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         585  0.0  0.0 1233616 12264 ?       Sl   Sep04   1:38 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      609  0.0  0.0 216768 28332 ?        Ss   Sep04   0:11 postgres
+root          40  0.0  0.0  58660 24036 ?        S<s  Sep04   0:04 /usr/lib/systemd/systemd-journald
+root         728  0.0  0.0   3200  1248 ?        S    Sep04   0:04 /init
+root           1  0.0  0.0  21932 13388 ?        Ss   Sep04   0:03 /sbin/init
+polkitd      199  0.0  0.0 308176  8200 ?        Ssl  Sep04   0:03 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     182  0.0  0.0  91064  8028 ?        Ssl  Sep04   0:02 /usr/lib/systemd/systemd-timesyncd
+root       60479  0.0  0.0   3200  1256 ?        S    Sep04   0:01 /init
+root          86  0.0  0.0  26128  7100 ?        Ss   Sep04   0:02 /usr/lib/systemd/systemd-udevd
+message+     194  0.0  0.0   9780  5448 ?        Ss   Sep04   0:01 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+dnsmasq      721  0.0  0.0 216768 10276 ?        Ss   Sep04   0:01 postgres: walwriter 
+dnsmasq      719  0.0  0.0 216924  7212 ?        Ss   Sep04   0:01 postgres: background writer 
+root         203  0.0  0.0  17984  8840 ?        Ss   Sep04   0:00 /usr/lib/systemd/systemd-logind
+root         210  0.0  0.0  17396  6480 ?        Ss   Sep04   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
