@@ -1,0 +1,20 @@
+[bench] armed sim=99.65 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NET/FLY/f2_mlp_b3/episode_control.json
+[bench] takeoff sim=99.67 {}
+[bench] offboard sim=111.27 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=111.37 {'episode_id': 8, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=111.37 {'episode_id': 8, 'scenario_id': 'c08_s01', 't0_sim': 111.372}
+[bench] episode_end sim=183.39 {'episode_id': 8, 't_entry': 2.0, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=188.00 {'episode_id': 9, 'status': 'OK', 'n_setpose': 9, 'wait_sim': 0.444, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=188.00 {'episode_id': 9, 'scenario_id': 'c09_s01', 't0_sim': 188.0}
+[bench] episode_end sim=259.95 {'episode_id': 9, 't_entry': 1.93, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=266.55 {'episode_id': 10, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=266.55 {'episode_id': 10, 'scenario_id': 'c10_s01', 't0_sim': 266.548}
+[bench] episode_end sim=336.56 {'episode_id': 10, 't_entry': None, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=344.33 {'episode_id': 11, 'status': 'OK', 'n_setpose': 13, 'wait_sim': 0.612, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=344.33 {'episode_id': 11, 'scenario_id': 'c11_s01', 't0_sim': 344.332}
+[bench] episode_end sim=416.07 {'episode_id': 11, 't_entry': 1.73, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=424.70 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NET/FLY/f2_mlp_b3/trace.jsonl (demo n=5629)
