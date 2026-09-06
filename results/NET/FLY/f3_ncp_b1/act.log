@@ -1,0 +1,20 @@
+[bench] armed sim=99.55 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NET/FLY/f3_ncp_b1/episode_control.json
+[bench] takeoff sim=99.58 {}
+[bench] offboard sim=111.08 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=111.19 {'episode_id': 0, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=111.19 {'episode_id': 0, 'scenario_id': 'c00_s11', 't0_sim': 111.188}
+[bench] episode_end sim=183.90 {'episode_id': 0, 't_entry': 2.7, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=190.44 {'episode_id': 1, 'status': 'OK', 'n_setpose': 30, 'wait_sim': 1.508, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=190.44 {'episode_id': 1, 'scenario_id': 'c01_s11', 't0_sim': 190.44}
+[bench] episode_end sim=263.00 {'episode_id': 1, 't_entry': 2.55, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=272.70 {'episode_id': 2, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.108, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=272.70 {'episode_id': 2, 'scenario_id': 'c02_s11', 't0_sim': 272.696}
+[bench] episode_end sim=345.08 {'episode_id': 2, 't_entry': 2.38, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=353.50 {'episode_id': 3, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.14, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=353.50 {'episode_id': 3, 'scenario_id': 'c03_s11', 't0_sim': 353.496}
+[bench] episode_end sim=426.26 {'episode_id': 3, 't_entry': 2.75, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=434.71 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NET/FLY/f3_ncp_b1/trace.jsonl (demo n=5710)
