@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga     1470116 71.8  0.1 187048 32356 ?        Rl   14:04   0:00 /usr/bin/python3 /opt/ros/jazzy/bin/ros2 topic list
+olga     1470110  6.2  0.0   5020  3720 ?        S    14:04   0:00 bash harness/run_boot.sh
+olga         969  2.2  1.9 75224016 615660 pts/0 Sl+  Sep04  69:13 claude
+olga       60518  1.7  1.7 74961352 561108 pts/2 Sl+  Sep04  48:30 claude --continue
+root         248  0.1  0.1 2533616 53040 ?       Ssl  Sep04   6:07 /usr/bin/containerd
+root         347  0.1  0.2 2796544 78476 ?       Ssl  Sep04   3:29 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         585  0.0  0.0 1233616 12168 ?       Sl   Sep04   2:28 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root     1469816  0.0  0.0 1756628 13952 ?       Ssl  14:03   0:00 /usr/libexec/wsl-pro-service
+dnsmasq      609  0.0  0.0 216768 28332 ?        Ss   Sep04   0:17 postgres
+olga     1455188  0.0  0.0   5024  3872 ?        S    13:05   0:00 bash net/run_demo_v2.sh 1 demo_b1 22,9,20
+root          40  0.0  0.0  58660 26516 ?        S<s  Sep04   0:07 /usr/lib/systemd/systemd-journald
+root         728  0.0  0.0   3200  1248 ?        S    Sep04   0:06 /init
+root           1  0.0  0.0  21932 13408 ?        Ss   Sep04   0:05 /sbin/init
+polkitd      199  0.0  0.0 308176  8200 ?        Ssl  Sep04   0:04 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     182  0.0  0.0  91064  8028 ?        Ssl  Sep04   0:03 /usr/lib/systemd/systemd-timesyncd
+root          86  0.0  0.0  26128  7100 ?        Ss   Sep04   0:03 /usr/lib/systemd/systemd-udevd
+root       60479  0.0  0.0   3200  1256 ?        S    Sep04   0:02 /init
+message+     194  0.0  0.0   9780  5448 ?        Ss   Sep04   0:02 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+dnsmasq      719  0.0  0.0 216924  7212 ?        Ss   Sep04   0:01 postgres: background writer 
