@@ -12,8 +12,10 @@ BN="$1"; NAME="$2"; EPIDS="$3"; MANIFEST="${4:-}"
 OUTDIR="$ROOT/results/DEMO_V2/$NAME"
 MON="$ROOT/results/DEMO_V2/demo_monitor.log"
 mkdir -p "$OUTDIR/frames" "$ROOT/results/DEMO_V2"
+set +u  # skrypty setup ROS odwołują się do nieustawionych zmiennych
 source /opt/ros/jazzy/setup.bash 2>/dev/null || true
 source "$ROOT/ros2_ws/install/setup.bash" 2>/dev/null || true
+set -u
 
 # cooldown + sustained-clean (3× co 30s)
 now=$(date +%s); last=$(cat results/.last_boot_end 2>/dev/null || echo 0)
