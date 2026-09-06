@@ -1,0 +1,20 @@
+[bench] armed sim=99.50 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NET/FLY/f2_mlp_b12/episode_control.json
+[bench] takeoff sim=99.52 {}
+[bench] offboard sim=111.05 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=111.15 {'episode_id': 44, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.096, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=111.16 {'episode_id': 44, 'scenario_id': 'c08_s04', 't0_sim': 111.156}
+[bench] episode_end sim=183.04 {'episode_id': 44, 't_entry': 1.84, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=189.62 {'episode_id': 45, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.132, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=189.63 {'episode_id': 45, 'scenario_id': 'c09_s04', 't0_sim': 189.616}
+[bench] episode_end sim=259.77 {'episode_id': 45, 't_entry': 0.11, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=261.04 {'episode_id': 46, 'status': 'OK', 'n_setpose': 7, 'wait_sim': 0.308, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=261.04 {'episode_id': 46, 'scenario_id': 'c10_s04', 't0_sim': 261.04}
+[bench] episode_end sim=331.24 {'episode_id': 46, 't_entry': 0.2, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=338.36 {'episode_id': 47, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=338.36 {'episode_id': 47, 'scenario_id': 'c11_s04', 't0_sim': 338.356}
+[bench] episode_end sim=410.41 {'episode_id': 47, 't_entry': 2.04, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=415.18 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NET/FLY/f2_mlp_b12/trace.jsonl (demo n=5593)
