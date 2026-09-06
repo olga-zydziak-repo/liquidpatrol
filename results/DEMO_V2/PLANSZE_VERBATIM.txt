@@ -1,0 +1,54 @@
+PLANSZE DEMO_V2.mp4 — TEKST VERBATIM (dokładnie to, co na ekranie)
+LiquidPatrol pozycja 5 · render commit 2a8563e · cv2 (font Hershey, ASCII)
+========================================================================
+
+[1] KARTA OTWIERAJĄCA — dyskleimer (4.0 s)
+  tytuł: DEMONSTRATION - NOT A MEASUREMENT
+  No number here enters any ledger. Seeds chosen openly for the film.
+  Verdicts live in RAPORT_NET (ANEKS_NET-4).
+  podpis: LiquidPatrol | position 5 | NCP-20 (CfC)
+
+[2] KARTA KANONU — roszczenie ANEKS_NET-4 §2 WOLNO (5.0 s)
+  tytuł: A 20-neuron CfC network (~1.9k params),
+  trained by pure imitation on 114 demonstrations,
+  matches the teacher's SITL flight success (45/48 vs 44/48;
+  47/48 concordant pairs) and passes the pre-registered 0.9*p_exec gate,
+  under an emulated track-feed (10 Hz, 0.2 s, sigma 0.5 m).
+  podpis: canon ANEKS_NET-4 sec2 | commit 2a8563e
+
+[3] KARTA PROWIENIENCJI — demo_b1 (4.0 s)
+  scenarios: c10_s02, c09_s01, c08_s02
+  controller=net (NCP-20)  weights_sha=0337d5eae1471bb9
+  controller_sha=e8c1b6583a62  world_hash=adc918032bc0
+  feed: FEED-B 10 Hz, 0.2 s, sigma 0.5 m  |  D6 3/3
+  seed-deterministic intruder; flight similar, not identical
+  podpis: provenance | demo_b1
+
+[4] PASEK DOLNY na klatkach demo_b1 (przez cały segment filmowy)
+  baner: NCP-20 CfC orbiting intruder under PatrolShield  |  c10_s02, c09_s01, c08_s02
+
+[5] KARTA PROWIENIENCJI — demo_b2 (4.0 s)
+  scenarios: c00_s11, c08_s11
+  controller=net (NCP-20)  weights_sha=0337d5eae1471bb9
+  controller_sha=e8c1b6583a62  world_hash=adc918032bc0
+  feed: FEED-B 10 Hz, 0.2 s, sigma 0.5 m  |  D6 2/2
+  seed-deterministic intruder; flight similar, not identical
+  podpis: provenance | demo_b2
+
+[6] PASEK DOLNY na klatkach demo_b2
+  baner: NCP-20 CfC orbiting intruder under PatrolShield  |  c00_s11, c08_s11
+
+[FOOTER] STOPKA OSŁONY — na KAŻDEJ klatce filmowej (dokładnie jak PROMPT_DEMO_V2 D3):
+  the network flies through the same certified gate and shield as every controller in the program; the shield did not need to intervene
+
+[7] KARTA ZAMYKAJĄCA — kanon (5.0 s)
+  tytuł: Controller swap (script -> network) under UNCHANGED certs and pins,
+  weights identity verified at every start (weights_sha).
+  Intruder trajectory is deterministic; the network's flight is
+  similar, not identical (the feed samples noise from the seed).
+  podpis: canon ANEKS_NET-4 sec2
+
+========================================================================
+Kolejność ekranu: [1]→[2]→[3]→klatki b1(pasek [4]+footer)→[5]→klatki b2(pasek [6]+footer)→[7].
+Zgodność kanonu §2: plansze wyłącznie z WOLNO; footer dokładny; BRAK „sieć lepsza"/istotności/
+„failsafe zawodzi"/„native ucieka". DEMO≠POMIAR.
