@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga     1312949  3.5  0.0   5028  3888 ?        S    03:32   0:00 bash harness/run_boot.sh
+olga         969  2.0  1.8 74833180 609768 pts/0 Sl+  Sep04  52:08 claude
+olga       60518  1.6  1.7 74534984 558040 pts/2 Sl+  Sep04  37:46 claude --continue
+root         248  0.1  0.1 2533616 52884 ?       Ssl  Sep04   4:41 /usr/bin/containerd
+root     1312841  0.1  0.0 1756628 13848 ?       Ssl  03:31   0:00 /usr/libexec/wsl-pro-service
+root         347  0.1  0.2 2796544 78152 ?       Ssl  Sep04   2:41 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         585  0.0  0.0 1233616 12552 ?       Sl   Sep04   1:55 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      609  0.0  0.0 216768 28332 ?        Ss   Sep04   0:13 postgres
+root          40  0.0  0.0  58660 25744 ?        S<s  Sep04   0:05 /usr/lib/systemd/systemd-journald
+root         728  0.0  0.0   3200  1248 ?        S    Sep04   0:04 /init
+root           1  0.0  0.0  21932 13388 ?        Ss   Sep04   0:04 /sbin/init
+polkitd      199  0.0  0.0 308176  8200 ?        Ssl  Sep04   0:03 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     182  0.0  0.0  91064  8028 ?        Ssl  Sep04   0:02 /usr/lib/systemd/systemd-timesyncd
+root       60479  0.0  0.0   3200  1256 ?        S    Sep04   0:02 /init
+root          86  0.0  0.0  26128  7100 ?        Ss   Sep04   0:02 /usr/lib/systemd/systemd-udevd
+message+     194  0.0  0.0   9780  5448 ?        Ss   Sep04   0:02 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+dnsmasq      719  0.0  0.0 216924  7212 ?        Ss   Sep04   0:01 postgres: background writer 
+dnsmasq      721  0.0  0.0 216768 10276 ?        Ss   Sep04   0:01 postgres: walwriter 
+root         203  0.0  0.0  17984  8840 ?        Ss   Sep04   0:00 /usr/lib/systemd/systemd-logind
