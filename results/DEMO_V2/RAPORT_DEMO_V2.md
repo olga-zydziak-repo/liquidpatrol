@@ -41,3 +41,11 @@ intervene" — nic mocniejszego. BRAK: „sieć lepsza", języka istotności, �
 ## §7. STOP-D1
 Artefakty: DEMO_V2.mp4 + ten raport + commit. Czeka na ratyfikację CC (ANEKS_NET-5) → push → pozycja 5
 zamknięta → tryb katalogu (nota GRU/k=20, SPRIND follow-up, backlog §8). Wykonawca po STOP: nic.
+
+## §8. ERRATUM #3 (ANEKS_K2-0 §2 E2)
+Footer filmu zmieniony ze „the network flies through the same certified gate and shield…" na
+**„the network flies under the same frozen shield and through the same controller socket as every
+controller in the program; the shield did not need to intervene"** (bez „certified gate" — recon K2/R1:
+ławka to WŁASNA pętla, nie gate; certs_selfcheck w niej nie biegł; POS_DEGRADED nieuzbrojony `pos_flag=None`).
+DEMO_V2.mp4 = wersja poprawiona; stary plik zachowany jako `DEMO_V2_v1_erratum3.mp4`. PLANSZE_VERBATIM.txt
+zregenerowane. Reguła trwała (E3): materiały nazywają pętlę po imieniu + listują uzbrojone gałęzie.

@@ -15,9 +15,26 @@ import numpy as np
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
-from acts.build_clip import _text_card, _wrap, _overlay_lower_third, _load_frame, W, H
+from acts.build_clip import _text_card, _wrap, _load_frame, W, H
 
-FOOTER = "the network flies through the same certified gate and shield as every controller in the program; the shield did not need to intervene"
+
+def _overlay(cv2, frame, banner, footer):
+    """Lower-third jak DEMO-B, ale footer auto-skalowany by ZMIEŚCIĆ się w kadrze (zdanie kanonu §2/E2
+    jest mandatowane verbatim — nie wolno go obciąć)."""
+    img = frame.copy(); ov = img.copy()
+    cv2.rectangle(ov, (0, H - 130), (W, H), (0, 0, 0), -1)
+    cv2.addWeighted(ov, 0.55, img, 0.45, 0, img)
+    y = H - 95
+    for ln in _wrap(cv2, banner, 0.7, W - 60)[:2]:
+        cv2.putText(img, ln, (30, y), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2, cv2.LINE_AA)
+        y += 34
+    fs = 0.5
+    while fs > 0.28 and cv2.getTextSize(footer, cv2.FONT_HERSHEY_SIMPLEX, fs, 1)[0][0] > W - 44:
+        fs -= 0.02
+    cv2.putText(img, footer, (22, H - 16), cv2.FONT_HERSHEY_SIMPLEX, fs, (150, 200, 255), 1, cv2.LINE_AA)
+    return img
+
+FOOTER = "the network flies under the same frozen shield and through the same controller socket as every controller in the program; the shield did not need to intervene"
 
 # Kanon roszczeń ANEKS_NET-4 §2 (EN, tylko WOLNO — plansze)
 CANON_OPEN = [
@@ -90,7 +107,7 @@ def main():
                 fr = _load_frame(cv2, f)
             except Exception:
                 continue
-            vw.write(_overlay_lower_third(cv2, fr, banner, FOOTER))
+            vw.write(_overlay(cv2, fr, banner, FOOTER))
 
     # karty zamykające: kanon + nota trajektorii
     hold(_text_card(cv2, CANON_CLOSE, sub="canon ANEKS_NET-4 sec2"), 5.0)
