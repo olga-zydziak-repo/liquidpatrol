@@ -31,7 +31,7 @@ NCP odwzorowuje wzorzec D6 nauczyciela niemal 1:1 (47/48). MLP rozjeżdża się 
 
 ## §5. REFUSE-ledger osłony (sekcja tezy programu)
 
-**NCP: 0 REFUSE · MLP: 0 REFUSE** w całej kampanii (F2+F3, 132 epizody). Teza „osłona zawiera zły kontroler" NIE została wystawiona na próbę przez REFUSE — bo nawet słaby MLP nie naruszał koperty R_E (jego porażki to jakość orbity: niedopełniony sweep/frac, d_min<4 wobec INTRUZA — a osłona chroni dom R_E=32, nie separację od intruza). To istotny wynik: zła sieć degraduje MISJĘ (p_net niski), nie BEZPIECZEŃSTWO (0 breach/0 REFUSE). Osłona pozostała cicha, bo złość MLP była w domenie jakości, nie koperty.
+**NCP: 0 REFUSE · MLP: 0 REFUSE** w całej kampanii (F2+F3, 132 epizody). Teza „osłona zawiera zły kontroler" NIE została wystawiona na próbę przez REFUSE — bo nawet słaby MLP nie naruszał koperty R_E (jego porażki to jakość orbity: niedopełniony sweep/frac, d_min<4 wobec INTRUZA — a osłona chroni dom R_E=32, nie separację od intruza). To istotny wynik: **zła sieć degraduje MISJĘ (p_net niski), nie BEZPIECZEŃSTWO (0 breach/0 REFUSE)**. Osłona pozostała cicha, bo złość MLP była w domenie jakości, nie koperty. **Zawieranie tutaj = clip_v + geometria koperty (R_E) i dysku intruza — NIE aktywna interwencja osłony** (aktywna interwencja/REFUSE zmierzona w K1 pod denialem, nie tutaj; ledger PUSTY 0/132). Zakaz roszczenia „osłona zawierała złą sieć" (ANEKS_NET-4 §2).
 
 ## §6. Świeże ziarna s11-s13 (luka uogólnienia, raport-only, tylko NCP-PASS)
 
@@ -68,4 +68,18 @@ Napięcie P-N3↔P-N8 rozstrzygnięte przez loty na korzyść P-N8. Księga nogi
 
 **Slot lecący = NCP-20 (CfC).** p_net 0.9375 ≥ próg 0.825, near-teacher, 0 breach/REFUSE, granica dziedziczona = proximity nauczyciela (c07/c09), luka uogólnienia mała (0.089 fresh). **MLP odpada** (0.167 ≪ próg). **Teza „liquid" ROZSTRZYGNIĘTA POZYTYWNIE w locie: pamięć ciągła (CfC) transferuje do SITL, okno k=5 nie** — mimo że offline NULL (oba przeszły rollout). To główny wynik nogi.
 
-**Czeka na CC (ANEKS_NET-4):** werdykt nogi + los slotu (sieć NCP vs skryptowy egzekutor jako kanoniczny — NCP 0.9375 vs egzekutor 0.9167, sieć ciut wyżej ale w granicach szumu; pary 47/48 zgodne), materiał do pozycji 5 (re-render/demo). Wykonawca po STOP: nic. Olga: push wszystkiego F0-F3 + raport.
+**Los slotu (ratyf. ANEKS_NET-4 §1): slot lecący = NCP-20** (wagi 0337d5ea, nietykalne); **egzekutor skryptowy = kotwica na stałe**; MLP odchodzi z pełnymi danymi jako najcenniejszy negatyw programu. NCP 45/48 vs egzekutor 44/48, 1 para niezgodna = szum — **ZAKAZ roszczenia „sieć lepsza od egzekutora"** (ANEKS_NET-4 §2, klasa K1, brak języka istotności). Materiał do pozycji 5 (re-render/demo v2). Olga: push wszystkiego F0-F3 + raport.
+
+## §11. Kanon roszczeń (ANEKS_NET-4 §2 — obowiązuje tu, w pozycji 5 i każdym materiale zewnętrznym)
+
+**WOLNO twierdzić:**
+- „20-neuronowa sieć CfC (~1.9k parametrów), wytrenowana czystą imitacją na 114 demonstracjach, osiąga w locie SITL skuteczność nauczyciela (45/48 vs 44/48; 47/48 par zgodnych na identycznych scenariuszach) i przechodzi prerejestrowany próg 0.9·p_exec; pod emulowanym track-feedem (10 Hz, 0.2 s, σ 0.5 m)".
+- „Pamięć-przez-dynamikę transferuje przez lukę model-punktowy → SITL, której pamięć-przez-okno 0.25 s nie przeżywa (8/48) — przy TYM zadaniu, feedzie i czystej imitacji".
+- „Wymiana kontrolera (skrypt → sieć) pod niezmienionymi certami i pinami, z tożsamością wag weryfikowaną przy każdym starcie".
+
+**NIE WOLNO twierdzić:**
+- „sieć lepsza od egzekutora" — 1 para niezgodna = szum; zakaz języka istotności (klasa K1).
+- „liquid > MLP w ogólności" — k = 5 to jeden punkt przestrzeni okien; kontrola GRU nieodpalona (nota z triggerem, ANEKS_NET-4 §3).
+- „osłona zawierała złą sieć" — ledger REFUSE PUSTY (0/132); zawieranie = clip_v + geometria koperty i dysku intruza; aktywna interwencja osłony zmierzona w K1 pod denialem, NIE tutaj. MLP degradował MISJĘ, nie bezpieczeństwo (§5).
+
+Odsyłacz: ANEKS_NET-4 (CC 6.09.2026), §2 kanon roszczeń, §1 werdykty, §3 Z-F1 + trigger kontroli GRU.
