@@ -21,7 +21,7 @@ FOOTER = "the network flies through the same certified gate and shield as every 
 
 # Kanon roszczeń ANEKS_NET-4 §2 (EN, tylko WOLNO — plansze)
 CANON_OPEN = [
-    "DEMONSTRATION — NOT A MEASUREMENT",
+    "DEMONSTRATION - NOT A MEASUREMENT",
     "No number here enters any ledger. Seeds chosen openly for the film.",
     "Verdicts live in RAPORT_NET (ANEKS_NET-4).",
 ]
@@ -71,8 +71,8 @@ def main():
             vw.write(img)
 
     # karty otwierające: dyskleimer + roszczenie kanonu
-    hold(_text_card(cv2, CANON_OPEN, sub="LiquidPatrol · position 5 · NCP-20 (CfC)"), 4.0)
-    hold(_text_card(cv2, CANON_CLAIMS, sub=f"canon ANEKS_NET-4 §2 · commit {commit}"), 5.0)
+    hold(_text_card(cv2, CANON_OPEN, sub="LiquidPatrol | position 5 | NCP-20 (CfC)"), 4.0)
+    hold(_text_card(cv2, CANON_CLAIMS, sub=f"canon ANEKS_NET-4 sec2 | commit {commit}"), 5.0)
 
     for rd in a.run_dirs:
         p = _prov(rd)
@@ -80,11 +80,11 @@ def main():
         prov_lines = [f"scenarios: {p['eps']}",
                       f"controller=net (NCP-20)  weights_sha={p['weights_sha']}",
                       f"controller_sha={p['controller_sha']}  world_hash={p['world_hash']}",
-                      f"feed: FEED-B 10 Hz, 0.2 s, sigma 0.5 m  ·  D6 {p['d6']}/{p['n_ep']}",
+                      f"feed: FEED-B 10 Hz, 0.2 s, sigma 0.5 m  |  D6 {p['d6']}/{p['n_ep']}",
                       "seed-deterministic intruder; flight similar, not identical"]
-        hold(_text_card(cv2, prov_lines, sub=f"provenance · {os.path.basename(rd)}"), 4.0)
+        hold(_text_card(cv2, prov_lines, sub=f"provenance | {os.path.basename(rd)}"), 4.0)
         frames = sorted(glob.glob(os.path.join(rd, "frames", "f_*.npy")))[::a.stride]
-        banner = f"NCP-20 CfC orbiting intruder under PatrolShield  ·  {p['eps']}"
+        banner = f"NCP-20 CfC orbiting intruder under PatrolShield  |  {p['eps']}"
         for f in frames:
             try:
                 fr = _load_frame(cv2, f)
@@ -93,7 +93,7 @@ def main():
             vw.write(_overlay_lower_third(cv2, fr, banner, FOOTER))
 
     # karty zamykające: kanon + nota trajektorii
-    hold(_text_card(cv2, CANON_CLOSE, sub="canon ANEKS_NET-4 §2"), 5.0)
+    hold(_text_card(cv2, CANON_CLOSE, sub="canon ANEKS_NET-4 sec2"), 5.0)
     vw.release()
     print(f"[demo_v2] zapisano {a.out}")
 
