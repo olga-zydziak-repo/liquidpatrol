@@ -8,7 +8,7 @@
 set -u
 ROOT=/home/olga/projects/liquidpatrol
 cd "$ROOT"
-DOUT="$1"; DQ="$2"; NBN="${3:-}"; NOUT="${4:-}"; NARM="${5:-}"; NQ="${6:-}"
+DOUT="$1"; DQ="$2"; NBN="${3:-}"; NOUT="${4:-}"; NARM="${5:-}"; NQ="${6:-}"; NMAN="${7:-}"
 name=$(basename "$DOUT")
 
 if grep -q "ENV-BLOCK" "${DOUT}_launch.log" 2>/dev/null; then
@@ -36,5 +36,5 @@ if [ -n "$NBN" ]; then
   echo "[next] pop $NARM b→ $NOUT"
   python3 -m bench.campaign_queue pop --state "$NQ" --n 4 \
     | python3 -c "import json,sys;print('  batch',[e['scenario_id'] for e in json.load(sys.stdin)])"
-  bash net/run_fly_boot.sh "$NBN" "$NOUT" "$NARM" crit "$NQ"
+  bash net/run_fly_boot.sh "$NBN" "$NOUT" "$NARM" crit "$NQ" "$NMAN"
 fi

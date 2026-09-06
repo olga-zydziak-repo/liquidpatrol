@@ -8,7 +8,7 @@
 set -u
 ROOT=/home/olga/projects/liquidpatrol
 cd "$ROOT"
-BN="$1"; OUT="$2"; ARM="$3"; MODE="$4"; QSTATE="${5:-}"
+BN="$1"; OUT="$2"; ARM="$3"; MODE="$4"; QSTATE="${5:-}"; MANIFEST="${6:-}"
 OUTDIR="$ROOT/results/NET/FLY/$OUT"
 MONLOG="$ROOT/results/NET/FLY/fly_monitor.log"
 mkdir -p "$ROOT/results/NET/FLY"
@@ -37,7 +37,8 @@ if [ "$MODE" = "diag" ]; then
   env $COMMON KIND=diag BENCH_EPISODE_IDS="0,5,10,11" \
     bash harness/run_boot.sh > "${OUTDIR}_launch.log" 2>&1
 else
-  env $COMMON KIND=crit BENCH_QUEUE="$QSTATE" \
+  MENV=""; [ -n "$MANIFEST" ] && MENV="BENCH_MANIFEST=$MANIFEST"        # F3: fresh manifest s11-s13
+  env $COMMON KIND=crit BENCH_QUEUE="$QSTATE" $MENV \
     bash harness/run_boot.sh > "${OUTDIR}_launch.log" 2>&1
 fi
 RC=$?
