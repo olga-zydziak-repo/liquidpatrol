@@ -1,0 +1,20 @@
+[bench] armed sim=99.47 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NET/FLY/f3_ncp_b7/episode_control.json
+[bench] takeoff sim=99.50 {}
+[bench] offboard sim=111.08 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=111.19 {'episode_id': 24, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.096, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=111.19 {'episode_id': 24, 'scenario_id': 'c00_s13', 't0_sim': 111.188}
+[bench] episode_end sim=183.87 {'episode_id': 24, 't_entry': 2.67, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=189.46 {'episode_id': 25, 'status': 'OK', 'n_setpose': 11, 'wait_sim': 0.508, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=189.46 {'episode_id': 25, 'scenario_id': 'c01_s13', 't0_sim': 189.456}
+[bench] episode_end sim=261.84 {'episode_id': 25, 't_entry': 2.34, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=271.58 {'episode_id': 26, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.16, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=271.62 {'episode_id': 26, 'scenario_id': 'c02_s13', 't0_sim': 271.596}
+[bench] episode_end sim=344.40 {'episode_id': 26, 't_entry': 2.77, 'refuse': 0, 'breach': False}
+[bench] intruder_start_gate sim=350.28 {'episode_id': 27, 'status': 'OK', 'n_setpose': 29, 'wait_sim': 1.46, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=350.28 {'episode_id': 27, 'scenario_id': 'c03_s13', 't0_sim': 350.276}
+[bench] episode_end sim=422.75 {'episode_id': 27, 't_entry': 2.44, 'refuse': 0, 'breach': False}
+[bench] reset_done sim=431.63 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NET/FLY/f3_ncp_b7/trace.jsonl (demo n=5710)
