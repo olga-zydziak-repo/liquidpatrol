@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga         919  1.5  1.6 74574112 526476 pts/0 Sl+  Sep08  14:16 claude --continue
+root         249  0.2  0.1 2385640 50996 ?       Ssl  Sep08   2:34 /usr/bin/containerd
+root         348  0.1  0.2 2574836 78512 ?       Ssl  Sep08   1:20 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         589  0.1  0.0 1233872 12512 ?       Sl   Sep08   0:55 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root      220004  0.0  0.0 1756628 13268 ?       Ssl  01:36   0:00 /usr/libexec/wsl-pro-service
+dnsmasq      613  0.0  0.0 216768 28584 ?        Ss   Sep08   0:05 postgres
+polkitd      200  0.0  0.0 308176  8036 ?        Ssl  Sep08   0:02 /usr/lib/polkit-1/polkitd --no-debug
+root           1  0.0  0.0  21920 13228 ?        Ss   Sep08   0:01 /sbin/init
+root          40  0.0  0.0  66856 20220 ?        S<s  Sep08   0:01 /usr/lib/systemd/systemd-journald
+systemd+     186  0.0  0.0  91064  8016 ?        Ssl  Sep08   0:01 /usr/lib/systemd/systemd-timesyncd
+dnsmasq      743  0.0  0.0 216924  7172 ?        Ss   Sep08   0:00 postgres: background writer 
+dnsmasq      745  0.0  0.0 216768 10120 ?        Ss   Sep08   0:00 postgres: walwriter 
+root          88  0.0  0.0  26532  7640 ?        Ss   Sep08   0:00 /usr/lib/systemd/systemd-udevd
+message+     195  0.0  0.0   9776  5520 ?        Ss   Sep08   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         211  0.0  0.0  17396  6416 ?        Ss   Sep08   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+root         720  0.0  0.0   3200  1248 ?        S    Sep08   0:00 /init
+root         205  0.0  0.0  17988  8892 ?        Ss   Sep08   0:00 /usr/lib/systemd/systemd-logind
+dnsmasq      746  0.0  0.0 218364  8840 ?        Ss   Sep08   0:00 postgres: autovacuum launcher 
+systemd+     182  0.0  0.0  21348 13304 ?        Ss   Sep08   0:00 /usr/lib/systemd/systemd-resolved
