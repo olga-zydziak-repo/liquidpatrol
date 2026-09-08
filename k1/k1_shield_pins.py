@@ -21,10 +21,16 @@ SHIELD_PINS = {
     # INFRA-3 A2.0 (D1, ANEKS_INFRA3-1 §3 / ANEKS_SHA §W12): re-baseline po rozcięciu kontroler/osłona.
     # gate wypina źródło setpointów do r03/controllers/ (RouteFollower bit-identyczny, 4221 ticków A1.3).
     # Diff WYŁĄCZNIE import/konstrukcja ctrl/meta/blok setpointów/v_ned (SR-3). Wzór F2c (§W3).
-    "r03/gate_run_r03.py": "c3ccabe04b9cae8ea57cfa899b8e363451fe9a6b4dbaffc8b1b0910ad192b729",
+    # K2 B2 (ANEKS_K2-2, ceremonia INFRA-3 A1): re-baseline po EKSTRAKCJI zejścia D5 z pętli do współdzielonej
+    # funkcji safe_descend_step. Diff WYŁĄCZNIE import + wywołanie z marshallingiem stanu (2 huki, SR-2);
+    # bit-w-bit na 4221 tickach (1791 descending) z results/K1/S/** = identyczne cmd. Pin c3ccabe0… → 5647ae20….
+    "r03/gate_run_r03.py": "5647ae20565426f7c30731ad7f5ca7cbca2c9c8d4d113178485aae57bc06bfe9",
     # INFRA-3 A2.0 (D2): KONTRAKT kontroler↔osłona = warstwa osłony → base.py pinowany (4. wpis).
     # route_follower.py i przyszłe kontrolery (orbit/net) NIE pinowane — tożsamość niesie controller_sha per boot.
     "r03/controllers/base.py": "7fc45cf2216d4a9eae86fa9ee714d70354fafbc64721f76bff7c0575bb9fb8f9",
+    # K2 B2 (ANEKS_K2-2): zejście D5 = warstwa osłony → safe_descend.py pinowany (5. wpis). Współdzielone
+    # przez gate (pętla R0.3a) i bench_flight (pętla ławki, uzbrojenie K2) — jeden tor zejścia dla wszystkich nóg.
+    "r03/controllers/safe_descend.py": "e3c1040b83edc490939681b9f85f86dcc39b67708d7f08bd207b64b07335322c",
 }
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
