@@ -27,6 +27,7 @@ from mavsdk.action import ActionError
 from r01.shield import PatrolShield, REFUSE, POS_DEGRADED, M_PATROL
 from r03 import config as C
 from r03.controllers import make_controller, controller_sha   # INFRA-3 A1: źródło setpointów wypięte z pętli
+from r03.controllers.safe_descend import safe_descend_step    # K2 B2: D5 wypięte z pętli (współdzielone z ławką)
 
 SCEN = os.environ.get("SCEN", "S2")
 OUT = os.environ.get("GATE_OUT", f"/tmp/r03gate/{SCEN}.jsonl")
@@ -273,18 +274,15 @@ async def main():
             "pos": [round(v, 3) for v in pos], "dr": bool(dr), "descending": bool(descending)})
 
         if is_pos:
-            if not descending:
-                descending = True; desc_t0 = time.monotonic(); ev("refuse_pos_land")
-            el = time.monotonic() - desc_t0
-            if el < desc_fast_dur:
-                vdesc = C.V_DESC_FAST
-            else:
-                if not h_switched:
-                    ev("h_switch"); h_switched = True
-                vdesc = C.V_DESC_LAND
+            _sd = {"descending": descending, "desc_t0": desc_t0, "h_switched": h_switched, "td": td}
+            _sd_cfg = {"v_desc_fast": C.V_DESC_FAST, "v_desc_land": C.V_DESC_LAND,
+                       "desc_fast_dur": desc_fast_dur, "desc_total": desc_total}
+            vdesc, _sd_evs, _sd_td, _sd = safe_descend_step(_sd, time.monotonic(), _sd_cfg)
+            descending, desc_t0, h_switched, td = _sd["descending"], _sd["desc_t0"], _sd["h_switched"], _sd["td"]
+            for _e in _sd_evs:
+                ev(_e)
             await d.offboard.set_velocity_ned(VelocityNedYaw(0, 0, vdesc, 0))
-            if el >= desc_total and not td:
-                ev("touchdown"); td = True
+            if _sd_td:
                 break                                   # S2/S4 (i S3 bez re-ALLOW przed touchdown)
         else:
             # ALLOW (patrol LUB re-ALLOW po histerezie w S3)

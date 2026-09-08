@@ -39,6 +39,7 @@ from r01.shield import PatrolShield, REFUSE, POS_DEGRADED, M_PATROL
 from r01.config import V_MAX
 from r03 import config as C
 from r03.controllers import make_controller, controller_sha
+from r03.controllers.safe_descend import safe_descend_step, new_state   # K2 B3: D5 współdzielone z gate
 from harness.track_feed import FeedB, TrackFeedGz
 from harness.intruder_motion import scenario_to_gz, gz_to_ned, TOL_START, SETPOSE_HZ
 from bench import scenarios as S
@@ -59,6 +60,12 @@ DT = C.DT
 TICK_HZ = C.TICK_HZ
 T_ORB = 70.0
 ENTRY_MAX = 25.0
+# K2 B4: hook denialu. K2_INJECT_T = sekundy po t_entry do wstrzyknięcia EKF2_GPS_CTRL=0.
+# BRAK zmiennej ⇒ zero denialu (loty nominalne IDENTYCZNE jak dotąd).
+K2_INJECT_T = float(os.environ["K2_INJECT_T"]) if os.environ.get("K2_INJECT_T") else None
+_SD_CFG = {"v_desc_fast": C.V_DESC_FAST, "v_desc_land": C.V_DESC_LAND,
+           "desc_fast_dur": max(0.0, (C.ALT_M - C.H_SWITCH_AGL) / C.V_DESC_FAST),
+           "desc_total": max(0.0, (C.ALT_M - C.H_SWITCH_AGL) / C.V_DESC_FAST) + C.H_SWITCH_AGL / C.V_DESC_LAND + 1.5}
 RESET_MAX = 30.0
 QOS = QoSProfile(depth=1, history=HistoryPolicy.KEEP_LAST, reliability=ReliabilityPolicy.BEST_EFFORT)
 
@@ -181,9 +188,20 @@ async def main():
 
     fh = open(OUT, "w"); _f = fh; _running = True
     ctrl_sha = controller_sha(make_controller(CONTROLLER, params=exec_params, orbit_dir="CCW", vmax=V_MAX))
+    # K2 B5: certs_selfcheck dla FLIGHT=bench (dotąd biegł tylko dla gate_r03; wynik do trace+sidecar)
+    try:
+        _cs = subprocess.run([sys.executable, "-m", "r01.proofs.certs_selfcheck"],
+                             cwd=ROOT, capture_output=True, text=True,
+                             env={**os.environ, "PYTHONPATH": f".:.certdeps:{os.environ.get('PYTHONPATH','')}"})
+        _cs_rc = _cs.returncode
+        with open(os.path.join(OUTDIR, "certs_selfcheck.log"), "w") as _cf:
+            _cf.write(_cs.stdout + _cs.stderr + f"\ncerts_selfcheck rc={_cs_rc}\n")
+    except Exception as _e:
+        _cs_rc = -1
     _w({"t": "meta", "flight": "bench", "world": WORLD, "controller": CONTROLLER,
         "controller_sha": ctrl_sha, "exec_params_sha": exec_params_sha, "R_E": shield.cfg.r_e,
-        "n_episodes": len(episodes), "T_orb": T_ORB, "vmax": V_MAX})
+        "n_episodes": len(episodes), "T_orb": T_ORB, "vmax": V_MAX,
+        "certs_selfcheck_rc": _cs_rc, "k2_inject_t": K2_INJECT_T})
     gn.subscribe(Clock, f"/world/{WORLD}/clock", _clock_cb)
     gn.subscribe(Pose_V, f"/world/{WORLD}/dynamic_pose/info", _dronegt_cb)
     gn.subscribe(Pose_V, f"/world/{WORLD}/pose/info", _intr_pose_cb)
@@ -303,6 +321,7 @@ async def main():
         t_entry = None
         refuse_count = 0
         breach = False
+        denial_done = False; t_inj_sim = None; sd_state = new_state(); denied = False   # K2 B3/B4
         ep_wall0 = time.monotonic()
         while True:
             if time.monotonic() - ep_wall0 > 180.0:      # bezpiecznik wall (stack padł / hang) — D8 ≤10 min/boot
@@ -323,9 +342,29 @@ async def main():
             dband = cmd["extra"].get("d")
             if t_entry is None and dband is not None and 6.0 <= dband <= 10.0:
                 t_entry = t_rel
-            d_dec = shield.step(tick, own, vel, tgt, mode=M_PATROL, pos_flag=None)
-            allow = d_dec["decision"] != REFUSE
-            if not allow:
+            dr = bool(getattr(m, "dead_reckoning", False))
+            # K2 B4: hook denialu — EKF2_GPS_CTRL=0 w t_entry+K2_INJECT_T (deterministycznie, raz)
+            if (K2_INJECT_T is not None and t_entry is not None and not denial_done
+                    and t_rel >= t_entry + K2_INJECT_T):
+                await d.param.set_param_int("EKF2_GPS_CTRL", 0)
+                denial_done = True; t_inj_sim = now_sim
+                ev("denial", episode_id=ep["episode_id"], t_inj_sim=round(now_sim, 3), inj_t_rel=round(t_rel, 3))
+            pf = dr if denial_done else None                 # K2 B3: pos_flag z dead-reckoning (wzór gate:267)
+            d_dec = shield.step(tick, own, vel, tgt, mode=M_PATROL, pos_flag=pf)
+            is_pos = (d_dec["decision"] == REFUSE and d_dec.get("reason") == POS_DEGRADED)
+            if is_pos:
+                # K2 B3: REFUSE(POS) → zejście D5 (ta sama funkcja co gate) do touchdown → koniec bootu
+                if refuse_count == 0:
+                    refuse_count += 1
+                    ev("refuse", episode_id=ep["episode_id"], reason=POS_DEGRADED,
+                       r_est=round(r_est, 2), t_rel=round(t_rel, 3))
+                vdesc, sd_evs, sd_td, sd_state = safe_descend_step(sd_state, time.monotonic(), _SD_CFG)
+                for _e in sd_evs:
+                    ev(_e, episode_id=ep["episode_id"])
+                await d.offboard.set_velocity_ned(VelocityNedYaw(0, 0, vdesc, 0))
+                if sd_td:
+                    denied = True
+            elif d_dec["decision"] == REFUSE:
                 refuse_count += 1
                 ev("refuse", episode_id=ep["episode_id"], reason=d_dec.get("reason"), r_est=round(r_est, 2))
                 await d.offboard.set_velocity_ned(VelocityNedYaw(0, 0, 0, 0))
@@ -337,17 +376,22 @@ async def main():
             demo.log(make_row(now_sim, tick, ep_meta, own, vel, fs, cmd["v_ned"], phase, 0,
                               CONTROLLER, ctrl_sha or "na", exec_params_sha))
             tick += 1
-            done = (t_entry is not None and t_rel >= t_entry + T_ORB) or (refuse_count > 0) or breach
+            done = (t_entry is not None and t_rel >= t_entry + T_ORB) or denied or breach
+            if d_dec["decision"] == REFUSE and not is_pos:
+                done = True                    # GEOFENCE/inny REFUSE — hover + koniec epizodu (jak dotąd)
             if t_entry is None and t_rel > ENTRY_MAX + 5.0 and t_rel > 40.0:
                 done = True                    # nie weszło — kończ epizod (do sędziego a-FAIL)
             if done:
                 break
             await asyncio.sleep(DT)
         ev("episode_end", episode_id=ep["episode_id"], t_entry=(round(t_entry, 2) if t_entry else None),
-           refuse=refuse_count, breach=breach)
+           refuse=refuse_count, breach=breach,
+           t_inj_sim=(round(t_inj_sim, 3) if t_inj_sim is not None else None), denied=denied)
         _write_control("idle")
         if breach:
             ev("breach_stop"); break           # SR-6 breach ⇒ STOP natychmiast
+        if denied:
+            ev("denial_boot_end", episode_id=ep["episode_id"]); break   # K2 B3: denial kończy boot (D5 wykonane)
 
     # zejście
     _running_reset = await _fly_to_home_hover(RESET_MAX)
