@@ -1,11 +1,6 @@
 {
   "pending": [
     {
-      "scenario_id": "c00_s01",
-      "episode_id": 0,
-      "attempt": 1
-    },
-    {
       "scenario_id": "c03_s01",
       "episode_id": 3,
       "attempt": 1
@@ -61,7 +56,19 @@
       "attempt": 1
     }
   ],
-  "done": [],
+  "done": [
+    {
+      "scenario_id": "c00_s01",
+      "valid": true,
+      "t_refuse": 0.10800000000000409,
+      "x_exc": 1.618,
+      "t_td_s": 12.052,
+      "breach": false,
+      "touchdown": true,
+      "verdict_pass": true,
+      "reasons": []
+    }
+  ],
   "unresolved": [],
   "eps_cap": 9.25,
   "t_inj": 30
