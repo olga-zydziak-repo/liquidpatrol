@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga      179399  3.0  0.0   5024  3876 ?        S    23:34   0:00 bash harness/run_boot.sh
+olga        1014  1.4  1.6 74729544 523256 pts/0 Sl+  11:49  10:26 claude --continue
+root         246  0.2  0.1 2386152 51728 ?       Ssl  11:48   1:37 /usr/bin/containerd
+root         345  0.1  0.2 2500592 81108 ?       Ssl  11:48   0:53 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         583  0.0  0.0 1233872 12140 ?       Sl   11:48   0:38 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      607  0.0  0.0 216768 28408 ?        Ss   11:48   0:04 postgres
+root          40  0.0  0.0  50380 17544 ?        S<s  11:48   0:01 /usr/lib/systemd/systemd-journald
+root           1  0.0  0.0  21888 13288 ?        Ss   11:48   0:01 /sbin/init
+polkitd      197  0.0  0.0 308176  8016 ?        Ssl  11:48   0:01 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     177  0.0  0.0  91064  7976 ?        Ssl  11:48   0:01 /usr/lib/systemd/systemd-timesyncd
+message+     192  0.0  0.0   9784  5532 ?        Ss   11:48   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          86  0.0  0.0  26532  7536 ?        Ss   11:48   0:00 /usr/lib/systemd/systemd-udevd
+dnsmasq      715  0.0  0.0 216768 10092 ?        Ss   11:48   0:00 postgres: walwriter 
+dnsmasq      713  0.0  0.0 216924  7024 ?        Ss   11:48   0:00 postgres: background writer 
+root         722  0.0  0.0   3200  1248 ?        S    11:48   0:00 /init
+root         202  0.0  0.0  17984  8888 ?        Ss   11:48   0:00 /usr/lib/systemd/systemd-logind
+root         209  0.0  0.0  17396  6364 ?        Ss   11:48   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+systemd+     163  0.0  0.0  21348 13236 ?        Ss   11:48   0:00 /usr/lib/systemd/systemd-resolved
+olga         766  0.0  0.0  20396 11576 ?        Ss   11:48   0:00 /usr/lib/systemd/systemd --user
