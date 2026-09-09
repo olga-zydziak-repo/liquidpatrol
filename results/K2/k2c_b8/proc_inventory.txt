@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        1014  1.5  1.6 74729544 529180 pts/0 Sl+  Sep09  11:16 claude --continue
+root         246  0.2  0.1 2386152 50800 ?       Ssl  Sep09   1:42 /usr/bin/containerd
+root         345  0.1  0.2 2500592 80848 ?       Ssl  Sep09   0:56 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         583  0.0  0.0 1233872 12320 ?       Sl   Sep09   0:40 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      607  0.0  0.0 216768 28408 ?        Ss   Sep09   0:04 postgres
+root          40  0.0  0.0  50380 17788 ?        S<s  Sep09   0:01 /usr/lib/systemd/systemd-journald
+root           1  0.0  0.0  21888 13292 ?        Ss   Sep09   0:01 /sbin/init
+polkitd      197  0.0  0.0 308176  8016 ?        Ssl  Sep09   0:01 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     177  0.0  0.0  91064  7976 ?        Ssl  Sep09   0:01 /usr/lib/systemd/systemd-timesyncd
+message+     192  0.0  0.0   9784  5532 ?        Ss   Sep09   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          86  0.0  0.0  26532  7536 ?        Ss   Sep09   0:00 /usr/lib/systemd/systemd-udevd
+dnsmasq      713  0.0  0.0 216924  7024 ?        Ss   Sep09   0:00 postgres: background writer 
+dnsmasq      715  0.0  0.0 216768 10092 ?        Ss   Sep09   0:00 postgres: walwriter 
+root         722  0.0  0.0   3200  1248 ?        S    Sep09   0:00 /init
+root         202  0.0  0.0  17984  8888 ?        Ss   Sep09   0:00 /usr/lib/systemd/systemd-logind
+root         209  0.0  0.0  17396  6364 ?        Ss   Sep09   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+systemd+     163  0.0  0.0  21348 13236 ?        Ss   Sep09   0:00 /usr/lib/systemd/systemd-resolved
+syslog       210  0.0  0.0 222520  5968 ?        Ssl  Sep09   0:00 /usr/sbin/rsyslogd -n -iNONE
+olga         766  0.0  0.0  20396 11576 ?        Ss   Sep09   0:00 /usr/lib/systemd/systemd --user
