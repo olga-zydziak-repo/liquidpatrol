@@ -29,6 +29,7 @@ ENVX="FLIGHT=bench CONTROLLER=net NET_ARM=ncp FILM=0 WORLD=world_demo_A3 INTRUDE
 [ "$EPIDS" != "-" ] && ENVX="$ENVX BENCH_EPISODE_IDS=$EPIDS"
 [ "$INJ" != "-" ]   && ENVX="$ENVX K2_INJECT_T=$INJ"
 [ -n "$QUEUE" ] && [ "$QUEUE" != "-" ] && ENVX="$ENVX BENCH_QUEUE=$QUEUE"
+[ "${K2_ARM_MONITOR:-}" = "1" ] && ENVX="$ENVX K2_ARM_MONITOR=1"
 env $ENVX bash harness/run_boot.sh > "${OUTDIR}_launch.log" 2>&1
 RC=$?
 echo "[$OUT $(date +%H:%M:%S)] wrapper rc=$RC" | tee -a "$MON"
