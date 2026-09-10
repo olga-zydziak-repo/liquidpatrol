@@ -87,7 +87,7 @@ Osłona przejmuje **tylko** gdy pozycja realnie degraduje — nie na fałszywym 
 ## §6. Kanon (K6) i dług
 
 - **K6:** noga PASS (12/12). Ścieżka REFUSE→D5 osłony działa pod kontrolerem uczonym i realnym denialem GNSS; wychylenie ≪ eps_cap, zero przebić, odmowa w budżecie K1.
-- **Dług D1** (ANEKS_K2-4 §2): domyślny stan monitora — obecnie `pos_flag=None` gdy brak denialu/braku flagi `K2_ARM_MONITOR`. Po STOP-K2c przełączyć na **armed-by-default** z legacy `K2_LEGACY_UNARMED` (do decyzji CC).
-- **Push:** wszystkie commity kampanii (1e58658 → 788bb26) **NIEPUSHOWANE** (push=Olga).
+- **Dług D1 SPŁACONY** (ANEKS_K2-6 §4): ławka jest teraz **uzbrojona domyślnie** — `pos_flag` z dead-reckoning po wejściu w pasmo zawsze; flaga `K2_LEGACY_UNARMED=1` przywraca stan sprzed K2 wyłącznie do replay-testów. Obietnica PRE_K2 K1(a) dowieziona; znalezisko R1 (`bench_flight:326 pos_flag=None`) zamknięte u źródła. Test: boot bez flag ⇒ `k2_arm_monitor=True` w meta; z flagą legacy ⇒ stan sprzed K2. Piny osłony nietknięte (`bench_flight.py` niepinowany).
+- **Push:** wszystkie commity kampanii (1e58658 → 788bb26) + commit D1 **NIEPUSHOWANE** (push=Olga).
 
-**STOP-K2c** — czekam na ratyfikację werdyktu PASS (12/12) i decyzję o losie slotu / długu D1.
+**STOP-K2c ratyfikowany (ANEKS_K2-6): PASS 12/12, noga CLOSED.** Dług D1 spłacony (ten commit). Po pushu Olgi pozycja 6 schodzi z tablicy.

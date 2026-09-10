@@ -63,8 +63,13 @@ ENTRY_MAX = 25.0
 # K2 B4: hook denialu. K2_INJECT_T = sekundy po t_entry do wstrzyknięcia EKF2_GPS_CTRL=0.
 # BRAK zmiennej ⇒ zero denialu (loty nominalne IDENTYCZNE jak dotąd).
 K2_INJECT_T = float(os.environ["K2_INJECT_T"]) if os.environ.get("K2_INJECT_T") else None
-# K4b: uzbrojenie monitora POS w nominale (bez denialu) — pos_flag=dr od wejścia w pasmo, test 0 fałszywych REFUSE(POS).
-K2_ARM_MONITOR = os.environ.get("K2_ARM_MONITOR") == "1"
+# K2 D1 (ANEKS_K2-6 §4, domyka znalezisko R1 u źródła + erratum #3): ławka UZBROJONA DOMYŚLNIE —
+# pos_flag z dead-reckoning po wejściu w pasmo ZAWSZE (obietnica PRE_K2 K1(a) dowieziona). Flaga
+# K2_LEGACY_UNARMED=1 przywraca stan sprzed K2 (monitor pos_flag=None) WYŁĄCZNIE do replay-testów
+# bit-zgodności ze starymi seriami. Poprzednio K2_ARM_MONITOR było opt-in (ANEKS_K2-4 D1); teraz
+# uzbrojenie jest domyślne. k2_arm_monitor w meta = efektywny stan uzbrojenia.
+K2_LEGACY_UNARMED = os.environ.get("K2_LEGACY_UNARMED") == "1"
+K2_ARM_MONITOR = not K2_LEGACY_UNARMED
 _SD_CFG = {"v_desc_fast": C.V_DESC_FAST, "v_desc_land": C.V_DESC_LAND,
            "desc_fast_dur": max(0.0, (C.ALT_M - C.H_SWITCH_AGL) / C.V_DESC_FAST),
            "desc_total": max(0.0, (C.ALT_M - C.H_SWITCH_AGL) / C.V_DESC_FAST) + C.H_SWITCH_AGL / C.V_DESC_LAND + 1.5}
@@ -351,8 +356,8 @@ async def main():
                 await d.param.set_param_int("EKF2_GPS_CTRL", 0)
                 denial_done = True; t_inj_sim = now_sim
                 ev("denial", episode_id=ep["episode_id"], t_inj_sim=round(now_sim, 3), inj_t_rel=round(t_rel, 3))
-            # K2 B3: pos_flag z dead-reckoning (wzór gate:267). Uzbrojony po denialu (K2_INJECT_T) LUB
-            # w nominale gdy K2_ARM_MONITOR (K4b) — w obu razach dopiero po wejściu w pasmo (faza orbity).
+            # K2 B3/D1: pos_flag z dead-reckoning (wzór gate:267). Uzbrojony po denialu (K2_INJECT_T) LUB
+            # domyślnie po wejściu w pasmo (faza orbity) — chyba że K2_LEGACY_UNARMED (replay).
             arm = (denial_done or (K2_ARM_MONITOR and t_entry is not None))
             pf = dr if arm else None
             d_dec = shield.step(tick, own, vel, tgt, mode=M_PATROL, pos_flag=pf)
