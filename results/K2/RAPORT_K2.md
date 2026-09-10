@@ -79,7 +79,7 @@ Osłona przejmuje **tylko** gdy pozycja realnie degraduje — nie na fałszywym 
 | wagi NCP | `net/frozen/ncp.npz` sha `0337d5ea` (==FREEZE_NET); `weights_sha` w manifeście każdego bootu |
 | osłona (5 pinów) | shield.py `1c584964` · config.py `4c440e42` · gate_run_r03.py `5647ae20` · base.py `7fc45cf2` · **safe_descend.py `e3c1040b`** (D5 współdzielone gate↔ławka) — `check_shield_frozen()`=True |
 | sędzia epizodu | `bench/k2_judge.py` frozen `b4ef92ce` (V2′ do T_inj + k1_judge.gt_metrics po T_inj) |
-| sędzia ławki | bench_judge V2′ `8ec0fcfb` · features `9adc1505` · scenario_manifest `e0527026` |
+| sędzia ławki | bench_judge V2′ `8ec0fcfb` · features `9adc1505` · scenario_manifest (results/BENCH/scenario_manifest.json) `e0527026` |
 | D5 (ekstrakcja) | `safe_descend_step` bit-w-bit vs blok inline gate_run_r03 na 4221 tickach (1791 descending) — ANEKS_K2-2 ceremonia INFRA-3 |
 
 ---
@@ -88,6 +88,29 @@ Osłona przejmuje **tylko** gdy pozycja realnie degraduje — nie na fałszywym 
 
 - **K6:** noga PASS (12/12). Ścieżka REFUSE→D5 osłony działa pod kontrolerem uczonym i realnym denialem GNSS; wychylenie ≪ eps_cap, zero przebić, odmowa w budżecie K1.
 - **Dług D1 SPŁACONY** (ANEKS_K2-6 §4): ławka jest teraz **uzbrojona domyślnie** — `pos_flag` z dead-reckoning po wejściu w pasmo zawsze; flaga `K2_LEGACY_UNARMED=1` przywraca stan sprzed K2 wyłącznie do replay-testów. Obietnica PRE_K2 K1(a) dowieziona; znalezisko R1 (`bench_flight:326 pos_flag=None`) zamknięte u źródła. Test: boot bez flag ⇒ `k2_arm_monitor=True` w meta; z flagą legacy ⇒ stan sprzed K2. Piny osłony nietknięte (`bench_flight.py` niepinowany).
-- **Push:** wszystkie commity kampanii (1e58658 → 788bb26) + commit D1 **NIEPUSHOWANE** (push=Olga).
+- **Push:** wykonany — origin/master zawiera commity kampanii (1e58658 → 788bb26) i commit D1. [aktualizacja stanu: CC 11.09]
 
 **STOP-K2c ratyfikowany (ANEKS_K2-6): PASS 12/12, noga CLOSED.** Dług D1 spłacony (ten commit). Po pushu Olgi pozycja 6 schodzi z tablicy.
+
+---
+
+## §7. Kanon roszczeń K2 (na podstawie ANEKS_K2-6 §2 — obowiązuje w każdym materiale zewnętrznym)
+
+Re-publikacja do repo: CC 11.09.2026. Oryginalny pełny tekst ANEKS_K2-6 żył w sesji CC (audyt v2:
+kanon nie był dotąd commitowany); treść poniżej zrekonstruowana i potwierdzona przeciw §1–§4 tego
+raportu oraz `results/K2/MAPA_KRYTERIOW.md:31`. Od chwili skuteczności ANEKS_K2-7 poniższy tekst
+jest kanonem obowiązującym.
+
+**WOLNO twierdzić:**
+- „Pod realnym denialem GNSS (`EKF2_GPS_CTRL=0`) w trakcie orbity kontrolera uczonego osłona wykryła
+  degradację i odmówiła — REFUSE(POS_DEGRADED) — w 0.104–0.116 s, po czym wykonała współdzielone
+  zejście D5 do przyziemienia 12/12, bez naruszenia koperty R_E; w SITL, pod emulowanym track-feedem
+  (FEED-B)".
+- „Ramię (−): 0 fałszywych REFUSE(POS) w 24 uzbrojonych epizodach nominalnych (12 K4b + 12 faz
+  przed denialem)".
+
+**NIE WOLNO twierdzić:**
+- „system bezpieczny" / „system certyfikowany" ani żadnej ekstrapolacji poza SITL i zmierzony habitat.
+- przeliczać 12/12 na „niezawodność ≥ X %" — n=12 dowodzi istnienia i spójności mechanizmu, nie stopy.
+
+Prowieniencja liczb: §2–§4 tego raportu (ledger §3 verbatim). Odsyłacz: ANEKS_K2-6 (CC, 10.09.2026) §2.

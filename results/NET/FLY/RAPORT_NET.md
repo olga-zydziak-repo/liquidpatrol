@@ -68,7 +68,7 @@ Napięcie P-N3↔P-N8 rozstrzygnięte przez loty na korzyść P-N8. Księga nogi
 
 ## §10. WERDYKT NOGI SIECI + STOP-F1
 
-**Slot lecący = NCP-20 (CfC).** p_net 0.9375 ≥ próg 0.825, near-teacher, 0 breach/REFUSE, granica dziedziczona = proximity nauczyciela (c07/c09), luka uogólnienia mała (0.089 fresh). **MLP odpada** (0.167 ≪ próg). **Teza „liquid" ROZSTRZYGNIĘTA POZYTYWNIE w locie: pamięć ciągła (CfC) transferuje do SITL, okno k=5 nie** — mimo że offline NULL (oba przeszły rollout). To główny wynik nogi.
+**Slot lecący = NCP-20 (CfC).** p_net 0.9375 ≥ próg 0.825, near-teacher, 0 breach/REFUSE, granica dziedziczona = proximity nauczyciela (c07/c09), luka uogólnienia mała (fresh 0.889, Δ≈0.05) [errata CC 11.09: było „0.089" — przekłamany zapis; wartości źródłowe w §6: 32/36 = 0.8889]. **MLP odpada** (0.167 ≪ próg). **Teza „liquid" ROZSTRZYGNIĘTA POZYTYWNIE w locie: pamięć ciągła (CfC) transferuje do SITL, okno k=5 nie** — mimo że offline NULL (oba przeszły rollout). To główny wynik nogi.
 
 **Los slotu (ratyf. ANEKS_NET-4 §1): slot lecący = NCP-20** (wagi 0337d5ea, nietykalne); **egzekutor skryptowy = kotwica na stałe**; MLP odchodzi z pełnymi danymi jako najcenniejszy negatyw programu. NCP 45/48 vs egzekutor 44/48, 1 para niezgodna = szum — **ZAKAZ roszczenia „sieć lepsza od egzekutora"** (ANEKS_NET-4 §2, klasa K1, brak języka istotności). Materiał do pozycji 5 (re-render/demo v2). Olga: push wszystkiego F0-F3 + raport.
 
