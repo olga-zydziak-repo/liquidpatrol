@@ -62,3 +62,45 @@ v_max przez `min`) — jeden mutant (min↔max), zaklasyfikowany jako (i)-analog
 
 **Razem: 27 mutantów** (braking 1 · geofence 9 · pos_monitor 11 · safe_descend 6).
 Wyniki per mutant (M4) + iteracje grid2 → sekcja „## Wyniki M" dopisana w CM2 (lista powyżej nietykalna).
+
+## Wyniki M (CM2) — bieg `tests_fv_mutants.py run`
+
+Oracle = produkcja. Sanity IDENTITY (mut='none') = 0 rozbieżności (szablon wierny). **WYKRYTE 27/27 = 100%.**
+Zero przeżywających ⇒ `fv_diff_grid2.json` NIEPOTRZEBNA (0 iteracji grid2). Wykrycie (early-exit, pierwsza rozbieżność):
+
+| mutant | funkcja | wykryty przez |
+|--------|---------|---------------|
+| bd_clamp_min_max | braking | siatka braking_dist#0 |
+| gf_re_strict | geofence | siatka geofence#2 |
+| gf_pr_strict | geofence | siatka geofence#7 |
+| gf_vet_strict | geofence | siatka geofence#11 |
+| gf_vep_strict | geofence | siatka geofence#12 |
+| gf_neg_re | geofence | siatka geofence#0 |
+| gf_neg_pr | geofence | siatka geofence#0 |
+| gf_neg_ve | geofence | siatka geofence#0 |
+| gf_swap_re_pr | geofence | fuzz seed0#2 |
+| gf_swap_pr_ve | geofence | fuzz seed0#6 |
+| pm_deb_strict | pos_monitor | siatka pos_monitor#0 |
+| pm_hyst_strict | pos_monitor | siatka pos_monitor#3 |
+| pm_deb_plus1 | pos_monitor | siatka pos_monitor#0 |
+| pm_deb_minus1 | pos_monitor | siatka pos_monitor#0 |
+| pm_hyst_plus1 | pos_monitor | siatka pos_monitor#3 |
+| pm_hyst_minus1 | pos_monitor | siatka pos_monitor#3 |
+| pm_badinc2 | pos_monitor | siatka pos_monitor#0 |
+| pm_neg_flag | pos_monitor | siatka pos_monitor#0 |
+| pm_neg_refuse_guard | pos_monitor | siatka pos_monitor#0 |
+| pm_neg_refuse_exit | pos_monitor | siatka pos_monitor#3 |
+| pm_swap_branches | pos_monitor | siatka pos_monitor#0 |
+| sd_fast_strict | safe_descend | siatka safe_descend#0 |
+| sd_total_strict | safe_descend | siatka safe_descend#1 |
+| sd_neg_descending | safe_descend | siatka safe_descend#0 (crash el=now−None ⇒ wykrycie) |
+| sd_neg_hswitch | safe_descend | siatka safe_descend#0 |
+| sd_neg_td | safe_descend | siatka safe_descend#1 |
+| sd_swap_phase | safe_descend | siatka safe_descend#0 |
+
+Nota: `pm_neg_flag` (iii) i `pm_swap_branches` (iv) są behawioralnie zbieżne (negacja selektora `if pos_flag`
+= zamiana bloku True↔else) — dwa wpisy katalogu, oba zabite; różnią się KLASĄ mutacji, nie efektem.
+Wykrycie dominująco przez siatkę deterministyczną (25/27); tylko dwa swap-mutanty geofence wymagały fuzz
+(potrzeba dwóch warunków bramki prawdziwych jednocześnie przy różnych detalach — brzegowa siatka trafia
+progi pojedynczo). **M5:** finalny bieg pełnej różnicówki (siatka+fuzz 4×10⁵+fikstura 4221/1791) na
+niemutowanym lustrze = 0 rozbieżności.
