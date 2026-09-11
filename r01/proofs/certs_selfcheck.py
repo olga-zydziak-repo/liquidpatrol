@@ -36,6 +36,7 @@ PROVER_OF = {
     "P5.json": "conformance.py",
     "P2_eps.json": "eps_verify.py",     # R0.3a: P2-ε (forma plateau/A-episode)
     "P6_d5.json": "d5_verify.py",       # FV/O1: D5 safe_descend_step (lustro ≡ produkcja)
+    "P7_posmon.json": "posmon_verify.py",  # FV/O2: histereza _pos_monitor (enumeracja grafu + z3)
 }
 
 

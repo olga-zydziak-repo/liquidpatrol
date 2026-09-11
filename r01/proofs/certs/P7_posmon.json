@@ -1,0 +1,52 @@
+{
+  "property": "P7_posmon",
+  "verdict": "PROVED",
+  "method": "wyczerpująca enumeracja osiągalnego grafu FSM (BFS) na lustrze ≡ produkcja (fv_mirror.pos_monitor_step; różnicówka S1 + M-krok 27/27); z3-indukcja kroku jako duplikat",
+  "obligations": {
+    "a_enter_only_True_and_bad_eq_deb_minus_1": "PASS",
+    "a_min_True_run_to_enter": 2,
+    "b_exit_only_False_and_healthy_eq_hyst_minus_1": "PASS",
+    "b_min_False_run_to_exit": 100,
+    "c_min_reenter_cycle": 102
+  },
+  "checks": {
+    "a_ok": true,
+    "a_min_run_eq_deb": true,
+    "b_ok": true,
+    "b_min_run_eq_hyst": true,
+    "c_cycle_eq_hyst_plus_deb": true
+  },
+  "z3_duplicate": {
+    "z3_a_step": "unsat",
+    "z3_b_step": "unsat"
+  },
+  "graph": {
+    "n_states": 103,
+    "n_edges": 206,
+    "alphabet": [
+      "True",
+      "False"
+    ],
+    "none_input": "no-op (shield.py:80-81) — pętla własna, poza grafem"
+  },
+  "theorem": "(a) r:False→True tylko na True ∧ pos_bad=debounce−1; min bieg True do wejścia = debounce; (b) r:True→False tylko na False ∧ pos_healthy=hyst−1; min bieg False do wyjścia = hyst; (c) min cykl zdegradowany→czysty→zdegradowany = hyst+debounce",
+  "constants": {
+    "debounce_ticks": 2,
+    "hyst_ticks": 100,
+    "debounce_source": "r01/shield.py:72 (pos_debounce_ticks=2) == r03/config.py:30 DEBOUNCE_TICKS",
+    "hyst_source": "r01/shield.py:73-74 (int(round(5.0/dt))) ; dt=0.05 (r01/config.py:41) ⇒ 100; HYST_M_S=5.0 (r03/config.py:31)",
+    "min_reenter_cycle": 102
+  },
+  "abstraction": "pos_bad saturowany do debounce (min(pos_bad,deb)) — SOUND: pos_bad czytany wyłącznie przez `>=debounce` (shield.py:85) i resetowany do 0 na False (shield.py:89); wartość powyżej debounce nie wpływa na decyzję ani przyszłość. pos_healthy∈{0..hyst-1} z natury (reset przy >=hyst, shield.py:91-94).",
+  "assumptions": [
+    "Semantyka wg LUSTRA ≡ produkcja: fv_mirror.pos_monitor_step bit-w-bit z r01/shield.py:76-94 (różnicówka tests_fv_diff.py: siatka+fuzz 4×10⁵+fikstura, 0 rozbieżności; M-krok: 27/27 mutantów wykrytych).",
+    "None ⇒ monitor nieaktywny (bez zmian, shield.py:80-81) — no-op, poza alfabetem grafu.",
+    "Stałe debounce/hyst z config (V5, cytaty w 'constants')."
+  ],
+  "code_refs": {
+    "mirror": "r01/proofs/fv_mirror.py:pos_monitor_step",
+    "production": "r01/shield.py:76-94 (_pos_monitor)",
+    "config": "r01/shield.py:72-74 + r03/config.py:30-31 + r01/config.py:41"
+  },
+  "model_sha256": "563b1372d777e7580d700d2f6ac4112a4efcf7d5d1da287c2a7ffdff71432398"
+}
