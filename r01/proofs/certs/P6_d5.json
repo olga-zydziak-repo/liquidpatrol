@@ -1,0 +1,45 @@
+{
+  "property": "P6_d5",
+  "verdict": "PROVED",
+  "method": "z3 (arytmetyka wymierna, kwantyfikacja po el) na lustrze D5 ≡ produkcja (safe_descend.py:20-49; różnicówka tests_fv_diff.py 0 rozbieżności)",
+  "z3_lib": "5.0.0",
+  "obligations": {
+    "a_fast_before_switch": "unsat",
+    "a_land_at_after_switch": "unsat",
+    "a_boundary_at_dfd_is_land": "unsat",
+    "b_vdesc_nonneg": "unsat",
+    "b_vdesc_noninc": "unsat",
+    "c_touchdown_in_land_phase": "unsat",
+    "c_touchdown_reached_at_Nstar": "unsat",
+    "c_Nstar_minimal": "unsat",
+    "d_vdesc_le_profile": "unsat",
+    "d_vdesc_ge_zero": "unsat"
+  },
+  "theorem": "A1-zegar (now niemalejące) ∧ desc_t0=now_0 ∧ el=now−desc_t0 ⇒ (a) vdesc=vf⇔el<dfd, vl⇔el≥dfd (brzeg dfd=land, wg `<`); (b) 0≤vdesc nierosnąca ⇒ wysokość zadana monotonicznie nierosnąca; (c) touchdown⇔el≥dtot, osiągane w N*=⌈dtot/Δ⌉ krokach (minimalne); (d) 0≤vdesc≤vf (komenda ograniczona profilem)",
+  "constants_rational": {
+    "v_desc_fast": "3/2",
+    "v_desc_land": "7/10",
+    "H_SWITCH_AGL": "2",
+    "ALT_M": "10",
+    "dt": "1/20",
+    "desc_fast_dur": "16/3",
+    "desc_total": "407/42"
+  },
+  "desc_fast_dur_float": 5.333333333333333,
+  "desc_total_float": 9.69047619047619,
+  "N_star": 194,
+  "N_star_derivation": "⌈desc_total/Δ⌉ = ⌈407/42/1/20⌉ = ⌈193.8095⌉ = 194 kroków fazy zejścia (Δ=dt=0.05s ⇒ t_touchdown=9.700s)",
+  "assumptions": [
+    "A1-zegar: now NIEMALEJĄCE. Produkcja: now=time.monotonic() (bench_flight.py:371, gate_run_r03.py:280) — monotonic z definicji nie cofa. desc_t0=now pierwszego kroku (safe_descend.py:33-34); el=now−desc_t0≥0.",
+    "Stałe profilu z config (V5): V_DESC_FAST=1.5, V_DESC_LAND=0.7, H_SWITCH_AGL=2.0 (r03/config.py:38-40); ALT_M=10.0 (r01/config.py:19); dt=1/TICK_HZ=0.05 (r01/config.py:41). desc_fast_dur/desc_total jak produkcja (bench_flight.py:73-75 == gate_run_r03.py:223-224).",
+    "Kroki dyskretne now_k=k·Δ, Δ=dt: model N*. Przy Δ<dt touchdown nie później niż ⌈dtot/Δ⌉ — N* rośnie proporcjonalnie do gęstości; wartość w cercie dla Δ=dt (kadencja pętli 20 Hz).",
+    "Lustro ≡ produkcja: fv_mirror.safe_descend_step_mirror bit-w-bit z safe_descend_step (tests_fv_diff.py: siatka 54 + fuzz 4×10⁵ + fikstura 4221/1791, 0 rozbieżności)."
+  ],
+  "code_refs": {
+    "mirror": "r01/proofs/fv_mirror.py:safe_descend_step_mirror",
+    "production": "r03/controllers/safe_descend.py:20-49",
+    "profile": "r03/config.py:38-40 + r01/config.py:19,41",
+    "clock": "bench_flight.py:371 / gate_run_r03.py:280 (now=time.monotonic())"
+  },
+  "model_sha256": "5a60060e494bbbe3ece7b04c44ccce61ce0e6b4f437823011b17527ed3fb549a"
+}
