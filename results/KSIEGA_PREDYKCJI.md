@@ -124,8 +124,29 @@ case-insensitive):
 
 ---
 
+## NOGA FV (poz.1b) — weryfikacja formalna jądra osłony
+
+Rozliczenie predykcji PRE_FV §9 + ANEKS_FV-1 §6 przy RAPORT_FV (`results/FV/RAPORT_FV.md:§5`).
+Sesje S1 (lustro+różnicówka+O1), S2 (M-krok+O2), S3 (O3+O4). Werdykt bramki nogi = **PASS**
+(O1∧O2 dowiedzione ∧ różnicówka czysta ∧ M-krok 27/27; `results/FV/RAPORT_FV.md:§1`).
+
+- **P-FV-1 — ✓** (O1 dowiedzione w ≤1 sesji dowodowej od startu S1; O1 PROVED w S1, P6_d5 dde0a7e):
+  `results/FV/RAPORT_FV.md:§5`.
+- **P-FV-2 — ✗** (niezrealizowana: różnicówka miała znaleźć ≥1 rozbieżność wymagającą poprawki LUSTRA;
+  0 rozbieżności w S1 i M5, lustro 1:1 za pierwszym biegiem): `results/FV/RAPORT_FV.md:§5`.
+- **P-FV-3 — ✓** (O4(a)+(b) domknięte w ≤1 sesji; L1+L2 w S3): `results/FV/RAPORT_FV.md:§5`.
+- **P-FV-4 — ✓** (wszystkie mutanty wykryte bez grid2; 27/27, 0 iteracji; ANEKS_FV-1 §6):
+  `results/FV/RAPORT_FV.md:§5` oraz `results/FV/RAPORT_FV_S2.md:15-16`.
+
+**Suma FV (czyste ✓/✗): 3 ✓ / 1 ✗** (P-FV-1,3,4 ✓; P-FV-2 ✗).
+
+---
+
 ## OTWARTE (prerejestrowane 11.09.2026, CC v2)
-- P-CC2-1: jeśli noga FV otwarta, część (ii) w wariancie „własności samej sieci CfC narzędziem
-  off-the-shelf" kończy się wynikiem częściowym albo śmiercią na pokryciu narzędzi — p≈0.7.
+- ~~P-CC2-1~~ **ROZLICZONE — ✓ (częściowy):** część (ii) „własności samej sieci CfC narzędziem
+  off-the-shelf" zakończona wynikiem CZĘŚCIOWYM (p≈0.7 trafione). Złożenie osłona∘sieć DOWIEDZIONE
+  (O4/L1+L2, `results/FV/RAPORT_FV.md:§3`), wnętrze CfC niedowiedzione — desk-note „częściowy"
+  (`results/FV/NOTA_UNROLL.md:§5`). Przeniesione z OTWARTE do rozliczonych.
 - P-CC2-2: follow-up SPRIND dostaje merytoryczną odpowiedź w ≤3 tygodnie od wysyłki — p≈0.3.
-Rozliczenie: przy raportach nogi FV i warstwy 0.
+  **ZOSTAJE OTWARTE.**
+Rozliczenie: P-CC2-1 przy RAPORT_FV (powyżej); P-CC2-2 przy warstwie 0 / odpowiedzi SPRIND.

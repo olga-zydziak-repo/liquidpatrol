@@ -1,0 +1,55 @@
+{
+  "property": "P8_geo_cont",
+  "verdict": "PROVED",
+  "gating": false,
+  "method": "z3 NRA (zawieranie d2) na lustrze geofence ≡ produkcja (shield.py:101-112; różnicówka tests_fv_diff.py + M-krok tests_fv_mutants.py: 0 rozbieżności, 27/27 mutantów wykrytych)",
+  "z3_lib": "5.0.0",
+  "obligations": {
+    "G1_containment": "unsat",
+    "G3_nonempty": "sat",
+    "G2_containment_vmax3p1": "unsat"
+  },
+  "solver_ms": {
+    "G1_containment": 0.3,
+    "G3_nonempty": 2.2,
+    "G2_containment_vmax3p1": 0.2
+  },
+  "theorem": "∀ (pos,vel,target) ∈ D: ¬_geofence_violation(pos,vel,target) ⇒ pr + vn²/(2·a_brake) ≤ R_E  (antecedent Inv_P2 z P2.json), gdzie pr=hypot(pos_x,pos_y), vn=hypot(vx,vy).",
+  "domain": {
+    "abs_v_le_v_max": "vn ≤ v_max (clamp; na D klamp min(·,v_max) nieaktywny ⇒ vh=vn)",
+    "positions_in_envelope": "pr ≤ R_env = 37 (GF_MAX_HOR_DIST, r01/config.py:35)",
+    "vertical": "-V_E ≤ pos_z,target_z ≤ V_E, V_E = 20 (r01/config.py:31)"
+  },
+  "constants_rational": {
+    "predicate": {
+      "r_e": "32",
+      "v_e": "20",
+      "R_env": "37",
+      "v_max_cfg": "3"
+    },
+    "inv_P2_from_P2.json": {
+      "v_max": "3",
+      "R_E": "32",
+      "a_brake": "2"
+    },
+    "inv_P2_vmax3p1": {
+      "v_max": "31/10",
+      "R_E": "32",
+      "a_brake": "2"
+    }
+  },
+  "semantic_note": "produkcyjny _braking_dist używa min(hypot(vx,vy), v_max) (shield.py:98); na domenie D (vn≤v_max) klamp nieaktywny ⇒ braking = vn²/(2·a_brake) = człon bariery Inv_P2. Klamp odwzorowany 1:1 z3.If(vn≤v_max, vn, v_max), równość vh=vn wynika z ograniczenia domeny (nie z ręcznego uproszczenia).",
+  "assumptions": [
+    "Lustro ≡ produkcja dla _geofence_violation: fv_mirror.geofence_violation 1:1 z r01/shield.py:101-112 (+_braking_dist :97-99, _radial :51-52); różnicówka tests_fv_diff.py (siatka 54 + fuzz 4×10⁵ + fikstura 4221/1791) 0 rozbieżności + M-krok tests_fv_mutants.py 27/27.",
+    "Inv_P2 = antecedent twierdzenia P2.json (PROVED); stałe wymierne wczytane z P2.json / P2_vmax3p1.json (nie przepisane). Konkluzja pr≤R_E przez P2 (nie powtarzana tu).",
+    "r_e predykatu (config, r01/config.py:30) = R_E Inv_P2 (P2.json) = 32 — zawieranie zależy od r_e ≤ R_E (nie jest wektorowo trywialne).",
+    "V_env=6.0 (limit środowiska ≠ zadany) POZA zakresem O3 — erratum #2 (ERRATUM_VMAX.md), PRE_FV §3/O3; predykat NIE pokrywa V_env."
+  ],
+  "code_refs": {
+    "mirror": "r01/proofs/fv_mirror.py:geofence_violation",
+    "production": "r01/shield.py:101-112 (_braking_dist :97-99, _radial :51-52)",
+    "inv_source": "r01/proofs/certs/P2.json (theorem, constants_rational)",
+    "config": "r01/config.py:24,30,31,35"
+  },
+  "model_sha256": "6f7c59d67ffc61e51bc4f7a4b39553839b12e2a6b319732ab1aa90a7b5078e22"
+}

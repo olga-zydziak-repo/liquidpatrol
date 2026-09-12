@@ -37,6 +37,7 @@ PROVER_OF = {
     "P2_eps.json": "eps_verify.py",     # R0.3a: P2-ε (forma plateau/A-episode)
     "P6_d5.json": "d5_verify.py",       # FV/O1: D5 safe_descend_step (lustro ≡ produkcja)
     "P7_posmon.json": "posmon_verify.py",  # FV/O2: histereza _pos_monitor (enumeracja grafu + z3)
+    "P8_geo_cont.json": "geo_cont_verify.py",  # FV/O3: zawieranie geofence↔P2 (z3 NRA, niebramkujące)
 }
 
 

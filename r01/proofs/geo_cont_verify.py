@@ -136,7 +136,7 @@ def _check(assertions, want_model=False, timeout_ms=600000):
     t0 = time.monotonic()
     r = s.check()
     dt = time.monotonic() - t0
-    status = {z3.unsat: "unsat", z3.sat: "sat"}.get(r, str(r))
+    status = "unsat" if r == z3.unsat else ("sat" if r == z3.sat else str(r))
     model = None
     if want_model and r == z3.sat:
         m = s.model()
