@@ -143,10 +143,17 @@ Sesje S1 (lustro+różnicówka+O1), S2 (M-krok+O2), S3 (O3+O4). Werdykt bramki n
 ---
 
 ## OTWARTE (prerejestrowane 11.09.2026, CC v2)
-- ~~P-CC2-1~~ **ROZLICZONE — ✓ (częściowy):** część (ii) „własności samej sieci CfC narzędziem
-  off-the-shelf" zakończona wynikiem CZĘŚCIOWYM (p≈0.7 trafione). Złożenie osłona∘sieć DOWIEDZIONE
-  (O4/L1+L2, `results/FV/RAPORT_FV.md:§3`), wnętrze CfC niedowiedzione — desk-note „częściowy"
-  (`results/FV/NOTA_UNROLL.md:§5`). Przeniesione z OTWARTE do rozliczonych.
+- ~~P-CC2-1~~ **ROZLICZONE — ✓:** przewidywany wynik „częściowy albo śmierć na pokryciu narzędzi" (p≈0.7)
+  ZISZCZONY jako CZĘŚCIOWY — predykcja trafiona. Księga jest binarna: kategoria „✓-częściowy" nie
+  istnieje ⇒ zapis **✓**. Uzasadnienie: część (ii) „własności samej sieci CfC narzędziem off-the-shelf"
+  zakończona desk-note „częściowy" (`results/FV/NOTA_UNROLL.md:§5`); wnętrze CfC niedowiedzione. Kanał
+  komendy kontrolera dowiedziony (K1, `results/FV/RAPORT_FV.md:§3` po erracie ANEKS_FV-1c). Przeniesione
+  z OTWARTE do rozliczonych.
+- **P-CC2-3 (prereg 13.09.2026 CC, przed lekturą raportu) — ✓:** „L2 w RAPORT_FV instancjonuje O3 na
+  v_cmd zamiast vel — wymaga korekty" (p≈0.6). ROZSTRZYGNIĘTE KODEM PINOWANYM: `_geofence_violation`/
+  `_braking_dist` liczą po vel mierzonym (r01/shield.py:97-112; gate_run_r03.py:232/268,
+  bench_flight.py:342/363), v_cmd dopiero po ALLOW — A-TRACK niedowiedziony i empirycznie łamany
+  (K1/ANEKS_K1-8). Errata doc-only CO5 (ANEKS_FV-1c §3), `results/FV/RAPORT_FV.md:§O4/§7`.
 - P-CC2-2: follow-up SPRIND dostaje merytoryczną odpowiedź w ≤3 tygodnie od wysyłki — p≈0.3.
   **ZOSTAJE OTWARTE.**
-Rozliczenie: P-CC2-1 przy RAPORT_FV (powyżej); P-CC2-2 przy warstwie 0 / odpowiedzi SPRIND.
+Rozliczenie: P-CC2-1 i P-CC2-3 przy RAPORT_FV (powyżej); P-CC2-2 przy warstwie 0 / odpowiedzi SPRIND.
