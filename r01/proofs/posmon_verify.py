@@ -233,6 +233,12 @@ def main():
             "(różnicówka tests_fv_diff.py: siatka+fuzz 4×10⁵+fikstura, 0 rozbieżności; M-krok: 27/27 mutantów wykrytych).",
             "None ⇒ monitor nieaktywny (bez zmian, shield.py:80-81) — no-op, poza alfabetem grafu.",
             "Stałe debounce/hyst z config (V5, cytaty w 'constants').",
+            "ABSTRAKCJA SATURACJI (jawna, SOUND — inaczej graf nieskończony): pos_bad NIE jest capowany "
+            "w kodzie (shield.py:83 `self._pos_bad += 1`), ale czytany WYŁĄCZNIE przez porównanie "
+            "`pos_bad >= debounce` (shield.py:85) i resetowany do 0 na wejściu False (shield.py:89). "
+            "Zatem saturacja pos_bad := min(pos_bad, debounce) po każdym kroku zachowuje zachowanie "
+            "(każde pos_bad ≥ debounce jest nieodróżnialne przez jedyne odczytanie); enumeracja na "
+            "stanie abstrakcyjnym (min(pos_bad,deb), pos_healthy, pos_refuse) jest pełna i sound.",
         ],
         "code_refs": {
             "mirror": "r01/proofs/fv_mirror.py:pos_monitor_step",

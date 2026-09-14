@@ -84,8 +84,10 @@ Rozliczenie predykcji recon PRE_K2 / ANEKS_K2-1 w `results/K2/RAPORT_K2.md:33-37
   pasma 2.0–3.5 m — osłona wychyla mniej, niż zakładał recon: `results/K2/RAPORT_K2.md:35`.
 - **P-K2-1 — ✗ (niezrealizowana):** przewidywany defekt przy pierwszym wykonaniu REFUSE+D5 nie wystąpił;
   diag i 12 epizodów czyste za pierwszym strzałem: `results/K2/RAPORT_K2.md:37`.
+- **P-K2-5 — ✓** (0 fałszywych REFUSE w nominale przy uzbrojonym monitorze POS, p≈0.8; TRAFIONE):
+  `results/K2/RAPORT_K4b.md:17` (pominięte przy pierwszej konsolidacji — dopisane ANEKS_FV-2 §4).
 
-**Suma K2: 2 ✓ / 2 ✗** — obie ✗ są „bezpieczne": jedna to zejście poniżej przewidzianego wychylenia
+**Suma K2: 3 ✓ / 2 ✗** — obie ✗ są „bezpieczne": jedna to zejście poniżej przewidzianego wychylenia
 (P-K2-3), druga to niewystąpienie przewidzianego defektu (P-K2-1).
 
 ---
@@ -97,9 +99,9 @@ Liczone wyłącznie z rozliczeń w plikach, czyste ✓/✗ (partiale kierunkowe 
 - INFRA-3: **3 ✓ / 0 ✗** (+1 kierunkowa: P4).
 - Ławka: **7 ✓ / 4 ✗**.
 - Sieć: **7 ✓ / 2 ✗**.
-- K2: **2 ✓ / 2 ✗**.
+- K2: **3 ✓ / 2 ✗** (P-K2-5 dopisane, ANEKS_FV-2 §4).
 
-**RAZEM (zakres obowiązkowy): 19 ✓ / 8 ✗** (+1 kierunkowa INFRA-3 P4, poza sumą).
+**RAZEM (zakres obowiązkowy): 20 ✓ / 8 ✗** (+1 kierunkowa INFRA-3 P4, poza sumą).
 Uwaga interpretacyjna z plików: ławka odnotowuje wynik 7/4 jako „poniżej progu predykcje-jako-prior;
 dane rządzą" (`results/BENCH/RAPORT_BENCH.md:74`); obie ✗ K2 są w kierunku bezpiecznym
 (`results/K2/RAPORT_K2.md:35,37`).

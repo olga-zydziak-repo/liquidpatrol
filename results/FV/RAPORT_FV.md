@@ -151,30 +151,37 @@ cercie.
 Suma FV (czyste ✓/✗): **3 ✓ / 1 ✗** (P-FV-1,3,4 ✓; P-FV-2 ✗) + P-CC2-1(FV) ✓-częściowy. Edycja
 `results/KSIEGA_PREDYKCJI.md` (sekcja „NOGA FV") naniesiona w tej sesji.
 
-## §6. PROPOZYCJA kanonu roszczeń FV (rama ANEKS_FV-1c §4; NIE obowiązujący — brzmienie finalne = ANEKS_FV-2)
+## §6. KANON OBOWIĄZUJĄCY — ANEKS_FV-2 (zastępuje propozycję)
 
-> **WOLNO** — wyłącznie wyliczanie własności z domenami i założeniami:
-> - D5 (`safe_descend_step`): własności (a)–(d) dowiedzione przy założeniu zegara niemalejącego;
->   N*=194, t_touchdown 9.700 s (cert P6_d5). Lustro 1:1 zwalidowane różnicówką i M-krokiem.
-> - Histereza (`_pos_monitor`): (a) REFUSE(POS) po ≥2 kolejnych tickach, (b) wyjście po ≥100 czystych,
->   (c) min cykl 102 — dowiedzione na PEŁNYM osiągalnym grafie 103 stanów / 206 krawędzi (cert P7).
-> - Predykat geofence implementacji ≡ model certu P2 na D = {|vel| ≤ 3.0, pr ≤ 37, |z| ≤ 20}
->   (spójność kształtu i stałych; zastępuje próbkową konformancję P5 dla tego predykatu; cert P8,
->   niebramkujący; zmienna = vel MIERZONE).
-> - Kanał komendy kontrolera uczonego ograniczony architektonicznie: |v_cmd| ≤ v_max niezależnie od wag
->   (L1 głowa tanh·V_MAX + L2 clip_v). Twierdzenie o KONTROLERZE, rozłączne od zawierania osłony.
-> - Wiązanie model↔kod: siatka 54 + fuzz 4×10⁵ + fikstura 4221/1791 ticków, 0 rozbieżności; 27/27
->   mutantów wykrytych (moc przyrządu zmierzona).
+> **WOLNO** — wyłącznie wyliczanie własności z domenami i założeniami; każde zdanie niesie założenie
+> „lustro ≡ produkcja (różnicówka + mutanty)":
+> - Zejście D5 (`safe_descend_step`): (a) przełączenie faz na H_SWITCH, (b) wysokość zadana monotonicznie
+>   nierosnąca, (c) touchdown w N*=194 krokach (t=9.700 s przy dt=0.05; desc_total 407/42 s z formuły
+>   produkcyjnej `bench_flight.py:75`, w tym +1.5 s dociśnięcia), (d) 0 ≤ v_desc ≤ 1.5 — dowiedzione przy
+>   założeniu zegara niemalejącego (cert P6_d5).
+> - Histereza (`_pos_monitor`): (a) REFUSE(POS) po ≥2 kolejnych tickach degradacji, (b) wyjście po ≥100
+>   czystych, (c) minimalny cykl re-degradacji 102 — dowiedzione na PEŁNYM osiągalnym grafie 103 stanów /
+>   206 krawędzi pod abstrakcją saturacji licznika, której soundness wynika z kodu (shield.py:83 brak capu
+>   / :85 jedyne porównanie ≥debounce / :89 reset do 0) (cert P7_posmon).
+> - Predykat geofence implementacji ≡ model certu P2 na D = {|vel| ≤ 3.0, pr ≤ 37, |z| ≤ 20}, zmienna =
+>   prędkość MIERZONA; spójność kształtu i stałych (r_e = R_E = 32, a_brake = 2); zastępuje próbkową
+>   konformancję P5 dla tego predykatu (cert P8_geo_cont, niebramkujący).
+> - Kanał komendy kontrolera uczonego: |v_cmd| ≤ v_max architektonicznie (głowa tanh·V_MAX + clip_v),
+>   niezależnie od wag i stanu — twierdzenie o KONTROLERZE, rozłączne od zawierania osłony.
+> - Wiązanie model↔kod: siatka 54 punktów na brzegach progów (prerejestrowana przed biegiem), fuzz 4×10⁵
+>   na funkcję (ziarna 0–4), fikstura 4221/1791 ticków z lotów K1/S (manifest sha: `results/FV/FIXTURE_D5_MANIFEST.json`)
+>   — 0 rozbieżności; moc przyrządu: 27/27 wstrzykniętych mutantów wykrytych.
+> - Replikacja niezależna CC (inna maszyna, inna wersja z3): identyczne werdykty i obligacje P6/P7/P8.
 >
 > **NIE WOLNO:**
-> - „formally verified system" / „osłona zweryfikowana formalnie" bez wyliczenia własności i domen
->   (PRE_FV §5 — zdanie nie istnieje).
-> - „sieć nie może wyprowadzić drona poza R_E" — wymaga pomostu A-TRACK (|vel|≤|v_cmd|), niedowiedzionego
->   i empirycznie łamanego (K1/ANEKS_K1-8, ERRATUM_VMAX); NIE wynika z K1 ∧ K2.
-> - jakiejkolwiek gwarancji przy |vel| > 3.0 (erratum #2; poza D predykat z klampem ZANIŻA drogę
->   hamowania — sufit 3²/(2·2)=2.25 m niezależnie od rzeczywistej prędkości).
-> - ekstrapolacji poza model/SITL; twierdzeń o wnętrzu CfC (NOTA_UNROLL: częściowy); pomijania założenia
->   „lustro ≡ produkcja" przy cytowaniu któregokolwiek certu FV.
+> - „formally verified system" / „osłona zweryfikowana formalnie" — bez wyliczenia własności i domen
+>   zdanie nie istnieje.
+> - „sieć nie może wyprowadzić drona poza R_E" — wymaga A-TRACK (|vel| ≤ |v_cmd|), niedowiedzionego
+>   i zmierzonego jako fałszywy w zakrętach (K1: cmd 3.00 / EKF 3.74 / GT 5.34; ERRATUM_VMAX).
+> - jakiejkolwiek gwarancji przy |vel| > 3.0: poza D predykat z klampem ZANIŻA drogę hamowania (sufit
+>   2.25 m); pokrycie V_env=6.0 jest wyłącznie empiryczne (C_margin 1.146 m), nie dowiedzione.
+> - ekstrapolacji poza model/SITL; twierdzeń o wnętrzu CfC (NOTA_UNROLL: częściowy); cytowania
+>   fikstury bez manifestu; pomijania założenia „lustro ≡ produkcja" przy cytowaniu certów FV.
 
 ## §7. Odchylenia sesji i nogi
 
@@ -199,6 +206,15 @@ Suma FV (czyste ✓/✗): **3 ✓ / 1 ✗** (P-FV-1,3,4 ✓; P-FV-2 ✗) + P-CC2
 - **Reżim czysty:** zero bootów/GPU/treningu/instalacji; produkcja importowana, nieedytowana;
   `fv_diff_grid.json` nietykalna; jedyna edycja pinowanego obszaru = +1 linia mapy `certs_selfcheck.py`
   (P8, diff verbatim w §8). SR-FV-1..7 czyste.
+- **Replikacja niezależna CC (ANEKS_FV-2 §1):** inna maszyna, z3 5.1.0 vs 5.0.0 w certach; piny 5/5,
+  `certs_selfcheck` 9/9; P6_d5 (10/10 unsat, N*=194), P7_posmon (graf 103/206, a=2/b=100/c=102, z3 unsat),
+  P8_geo_cont (G1 unsat/G2 unsat/G3 sat) — certy zregenerowane identyczne poza `z3_lib`/`solver_ms`.
+  Prereg O3 potwierdzony patchem (jedna linia dekodera). Werdykt nogi = **PASS** (ANEKS_FV-2 §2).
+- **Fikstura D5 — prowieniencja (ANEKS_FV-2 §4):** bare-glob `results/K1/S/**/trace.jsonl` niestabilny
+  (seria punktów K1 dodała pliki po S1; 3 ślady puste 0-tick); zip repo bez `.git` zawierał 6/11 śladów
+  (→ 2588 zamiast 4221 u CC). Domknięte manifestem `results/FV/FIXTURE_D5_MANIFEST.json` (11 plików +
+  sha256 + ticki, suma 4221/1791); `test_fixture_d5_4221` pinowany manifestem (skip przy niepełnym
+  zestawie, assert przy komplecie). 5 z 11 śladów untracked — decyzja o commicie po stronie Olgi (CO6 raport).
 
 ## §8. Domknięcia SR (S3-E, SR-FV-7)
 

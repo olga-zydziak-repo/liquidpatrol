@@ -357,12 +357,39 @@ def test_fuzz_safe_descend():
             assert prod_d5_seq(s, d5) == mir_d5_seq(s, d5), (seed, s)
 
 
+def _read_tick_seq(path):
+    """Sekwencja descending per tick (predykat ticka 1:1 z _d5_fixture: linia z '\"t\": \"tick\"')."""
+    seq = []
+    for line in open(path):
+        if '"t": "tick"' in line:
+            try:
+                r = json.loads(line)
+            except Exception:
+                continue
+            seq.append(bool(r.get("descending")))
+    return seq
+
+
 def test_fixture_d5_4221():
+    """(c) regresja fikstury D5, PINOWANA manifestem (ANEKS_FV-2 §4): bare-glob niestabilny
+    (seria punktów K1 dodała pliki po S1). Brak któregokolwiek z 11 plików manifestu ⇒ pytest.skip
+    z listą brakujących (repo bez .git / niepełny klon); komplet ⇒ assert sha ∧ 4221/1791 ∧
+    różnicówka prod↔lustro na krokach descending."""
+    import hashlib as _hl
+    man = json.load(open(os.path.join(ROOT, "results/FV/FIXTURE_D5_MANIFEST.json")))
     th = _th(); d5 = M.d5_cfg()
-    fx = _d5_fixture()
-    tot = sum(len(s) for _, s in fx); ndesc = 0
-    assert tot == 4221, tot
-    for _, seq in fx:
+    missing = [e["path"] for e in man["files"] if not os.path.exists(os.path.join(ROOT, e["path"]))]
+    if missing:
+        import pytest
+        pytest.skip("fikstura niepełna (%d/%d brak): %s"
+                    % (len(missing), len(man["files"]), ", ".join(missing)))
+    tot = 0; ndesc = 0
+    for e in man["files"]:
+        p = os.path.join(ROOT, e["path"])
+        assert _hl.sha256(open(p, "rb").read()).hexdigest() == e["sha256"], ("sha", e["path"])
+        seq = _read_tick_seq(p)
+        assert len(seq) == e["ticks"], (e["path"], len(seq))
+        tot += len(seq)
         st_p = PROD_D5_STATE(); st_m = M.new_descend_state()
         for idx, desc in enumerate(seq):
             if not desc:
@@ -371,8 +398,9 @@ def test_fixture_d5_4221():
             now = idx * th["dt"]
             rp = PROD_D5(st_p, now, d5); st_p = rp[3]
             rm = M.safe_descend_step_mirror(st_m, now, d5); st_m = rm[3]
-            assert (rp[0], rp[1], rp[2], st_p) == (rm[0], rm[1], rm[2], st_m), (idx, now)
-    assert ndesc == 1791, ndesc
+            assert (rp[0], rp[1], rp[2], st_p) == (rm[0], rm[1], rm[2], st_m), (e["path"], idx, now)
+    assert tot == man["totals"]["ticks_total"] == 4221, tot
+    assert ndesc == man["totals"]["ticks_descending"] == 1791, ndesc
 
 
 def test_p1_consistency():

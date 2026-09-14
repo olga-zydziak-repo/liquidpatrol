@@ -1,0 +1,76 @@
+{
+  "description": "Fikstura D5 (rożnicówka §4c PRE_FV): kanoniczny zbiór śladów lotu K1/S dających 4221 ticków / 1791 descending. Pinuje DOKŁADNY zestaw plików — bare-glob results/K1/S/**/trace.jsonl jest niestabilny (seria punktów K1 dodała pliki po S1; 3 ślady puste 0-tick pomijane przez loader). Predykat ticka: linia zawiera '\"t\": \"tick\"'. Generowany w CO6 (ANEKS_FV-2 §4).",
+  "totals": {
+    "n_files": 11,
+    "ticks_total": 4221,
+    "ticks_descending": 1791
+  },
+  "files": [
+    {
+      "path": "results/K1/S/p0_2/boot1/trace.jsonl",
+      "sha256": "62f2947a926cf5de5ae0ad604c554da9fcd31ee9bebc6c7b229a42021b019e24",
+      "ticks": 300,
+      "descending": 155
+    },
+    {
+      "path": "results/K1/S/p0_2/boot2/trace.jsonl",
+      "sha256": "07ea84e2271de06debc5e6bbf419cdc4c52f312fd3c7befc0a74b17a3141f5fa",
+      "ticks": 286,
+      "descending": 157
+    },
+    {
+      "path": "results/K1/S/p0_2/boot3/trace.jsonl",
+      "sha256": "04664587910e4ca3c2ae6a179b85417c0c405e92d3cf64a50319ae8263501be0",
+      "ticks": 313,
+      "descending": 159
+    },
+    {
+      "path": "results/K1/S/p0_2/boot7/trace.jsonl",
+      "sha256": "3834b24431c41db8d67a5a8c339991858ccdc877212a2fa17dacbddc3349c2f1",
+      "ticks": 367,
+      "descending": 165
+    },
+    {
+      "path": "results/K1/S/p0_2/boot99/trace.jsonl",
+      "sha256": "415b2e54c23615ef31b23c892cd808509c00b896e645eec7cff96d6bb7d4085c",
+      "ticks": 367,
+      "descending": 165
+    },
+    {
+      "path": "results/K1/S/p0_35/boot1/trace.jsonl",
+      "sha256": "4ba91818a59b901f7ba3897757b6123d8003d9ddc053ffe9cd910b21089b1ad2",
+      "ticks": 357,
+      "descending": 165
+    },
+    {
+      "path": "results/K1/S/p0_35/boot2/trace.jsonl",
+      "sha256": "988a205e2e7c7bf913d2544882a48cf611e9e183a55c0f0ab4db42f8b2dc5a0a",
+      "ticks": 394,
+      "descending": 165
+    },
+    {
+      "path": "results/K1/S/p0_5/boot1/trace.jsonl",
+      "sha256": "8dfbd875ad9bf5d30289cc2ea34d743986d59337820a7f31927173bdebc5e023",
+      "ticks": 407,
+      "descending": 165
+    },
+    {
+      "path": "results/K1/S/p0_5/boot2/trace.jsonl",
+      "sha256": "06049967e8f674bad18f92cbe4f3e80220a7e9c3c155f489543655e80c986193",
+      "ticks": 528,
+      "descending": 165
+    },
+    {
+      "path": "results/K1/S/p0_65/boot3/trace.jsonl",
+      "sha256": "5d2326b1416bad7f235841c26b5033bfd60729deb3dad968fd98ae39beee9948",
+      "ticks": 428,
+      "descending": 165
+    },
+    {
+      "path": "results/K1/S/p0_8/boot1/trace.jsonl",
+      "sha256": "e2968d8168b67aa8968359891f6430afa1d8f15c56b9b84b6eeed2d05c8987dd",
+      "ticks": 474,
+      "descending": 165
+    }
+  ]
+}
