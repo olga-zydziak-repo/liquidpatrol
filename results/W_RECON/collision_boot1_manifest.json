@@ -1,0 +1,65 @@
+{
+  "arm": "E",
+  "point": 0.0,
+  "boot_n": 1,
+  "kind": "empty",
+  "rc": 137,
+  "arm_ok": false,
+  "took_off": false,
+  "landed": false,
+  "conv_s": null,
+  "session": {
+    "mem_free_kb": 29288156,
+    "mem_available_kb": 30558760,
+    "loadavg": [
+      1.03,
+      0.84,
+      0.46
+    ],
+    "session_boot_count": null,
+    "env_restart": null,
+    "captured_at": "finalize"
+  },
+  "b4": {
+    "orphans_pre_teardown": 0,
+    "orphans_post_teardown": 0,
+    "cooldown_s_since_last_boot": 99,
+    "cooldown_src": "results",
+    "one_boot_per_cycle": true
+  },
+  "timejump_pre": 0,
+  "timejump_post": 0,
+  "ekf_health_hits": 0,
+  "hover_window_sim": [
+    null,
+    null
+  ],
+  "n_gt": 0,
+  "n_ekf": 0,
+  "events": [],
+  "habitat_verdict": "INVALID(habitat)",
+  "armed_sim": null,
+  "watchdog": {
+    "n_reinits": 0,
+    "reinit_sims": [],
+    "reinit_reasons": [],
+    "reinit_before_arm": false,
+    "bias_max_absmax": 0.07232,
+    "bias_at_end_absmax": 0.00289,
+    "bias_at_arm_absmax": null,
+    "first_fault_sim": {
+      "filter_fault_1024": null,
+      "fs_bad_acc_vertical": null
+    },
+    "armed_sim": null,
+    "n_samples": 17,
+    "n_poll_fail": 0,
+    "reinits": []
+  },
+  "sha_harness": "c41276ffe0a7bd74a97bb35bef38bb2bc2992aa17cfba512ea447df51f8521b7",
+  "harness_file": "/home/olga/projects/liquidpatrol/tools/infra1_empty_flight.py",
+  "world_hash": "921bdda7a975321c524a557e8ae0204e457a11011ef17f9b21adf09def046be2  worlds/world_wind_s0.sdf",
+  "world_hash_kind": "repo",
+  "ulog_sha": "542e5bd26dde4de43c671c13c53b23199ccf09b43d91961e1064bbae631601a6",
+  "ulog_bytes": 23501790
+}

@@ -1,0 +1,61 @@
+{
+  "arm": "E",
+  "point": 0.0,
+  "boot_n": 3,
+  "kind": "empty",
+  "rc": 2,
+  "arm_ok": false,
+  "took_off": false,
+  "landed": false,
+  "conv_s": null,
+  "session": {
+    "mem_free_kb": 29242964,
+    "mem_available_kb": 30568116,
+    "loadavg": [
+      0.73,
+      0.69,
+      0.55
+    ],
+    "session_boot_count": null,
+    "env_restart": null,
+    "captured_at": "finalize"
+  },
+  "b4": {
+    "orphans_pre_teardown": 2,
+    "orphans_post_teardown": 0,
+    "cooldown_s_since_last_boot": 259,
+    "cooldown_src": "results",
+    "one_boot_per_cycle": true
+  },
+  "timejump_pre": 0,
+  "timejump_post": null,
+  "ekf_health_hits": null,
+  "hover_window_sim": [
+    null,
+    null
+  ],
+  "n_gt": 434,
+  "n_ekf": 1354,
+  "events": [],
+  "habitat_verdict": "INVALID(habitat)",
+  "armed_sim": null,
+  "watchdog": {
+    "n_reinits": 0,
+    "reinit_sims": [],
+    "reinit_reasons": [],
+    "reinit_before_arm": false,
+    "bias_max_absmax": 0.09645,
+    "bias_at_end_absmax": 0.00376,
+    "bias_at_arm_absmax": null,
+    "first_fault_sim": {
+      "filter_fault_1024": null,
+      "fs_bad_acc_vertical": null
+    },
+    "armed_sim": null,
+    "n_samples": 21,
+    "n_poll_fail": 1,
+    "reinits": []
+  },
+  "sha_harness": "c41276ffe0a7bd74a97bb35bef38bb2bc2992aa17cfba512ea447df51f8521b7",
+  "harness_file": "tools/infra1_empty_flight.py"
+}
