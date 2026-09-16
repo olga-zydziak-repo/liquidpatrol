@@ -1,0 +1,50 @@
+{
+  "arm": "N",
+  "point": 0.2,
+  "boot_n": 2,
+  "kind": "crit",
+  "sha_harness": "a994748b9b2df67a13844afb714c6083761073887e324ccb1ffafff469dccc56",
+  "harness_file": "/home/olga/projects/liquidpatrol/k1/k1_arm_n.py",
+  "sha_k1_judge": "4e0dc0afffda099837a002191a5540fd95d6de13cb88e7233433d67b1b998ae1",
+  "k1_judge_frozen": true,
+  "shield_frozen": true,
+  "shield_pins": {
+    "r01/shield.py": {
+      "want": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "got": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "ok": true
+    },
+    "r03/config.py": {
+      "want": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "got": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "ok": true
+    },
+    "r03/gate_run_r03.py": {
+      "want": "19967de2ed5d35cc05f05f408def8f9de265d9f71136c99b40b074cebcd3a01c",
+      "got": "19967de2ed5d35cc05f05f408def8f9de265d9f71136c99b40b074cebcd3a01c",
+      "ok": true
+    }
+  },
+  "ulog": "/home/olga/projects/liquidpatrol/results/K1/N/p0_2/boot2/boot.ulg",
+  "ulog_exists": true,
+  "stamps": {
+    "denial_on_mono": null,
+    "touchdown_sim": null,
+    "touchdown_event_sim": null
+  },
+  "harness_valid": true,
+  "harness_poison": false,
+  "habitat_verdict": "INVALID(habitat)",
+  "certs_selfcheck": {
+    "log": null,
+    "pass": null,
+    "rc": null
+  },
+  "provenance_arm_s": null,
+  "n_gt": 3911,
+  "n_ekf": 12204,
+  "n_events": 0,
+  "events": [],
+  "stall_in_reaction_window": null,
+  "sanity": {}
+}

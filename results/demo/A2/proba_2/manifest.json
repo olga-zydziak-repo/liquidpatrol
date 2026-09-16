@@ -1,0 +1,53 @@
+{
+  "act": "A2",
+  "head": "d1a2001f95bdd1c8a4f7f944fabc86b2c9bebb2f",
+  "world_sdf": "/home/olga/projects/liquidpatrol/worlds/world_demo_A2.sdf",
+  "world_hash": "dd0c85e26ea20615346f6ac837b15ff1ffef6a215908a3b007a38dd70b8d8ce4",
+  "spec": "acts/A2_spec.yaml",
+  "spec_hash": "1a0da2b09aa45e31f3942d30e89cd0ccf94249b823e0d0f58f4ece7496e658a5",
+  "certs": {
+    "P1": "1a076269a04c5325",
+    "P4": "5b9cbdc73198951d",
+    "P5": "7bc53ecb4164f63d"
+  },
+  "token_gated": true,
+  "contention": "none",
+  "seed": null,
+  "trace_schema_v": 2,
+  "aneks_h": {
+    "headless": true,
+    "note": "ANEKS-H domknięty po biegu",
+    "timejump": 0,
+    "ekf_health_hits": 0,
+    "rtf_tickperiod": 0.986,
+    "rtf_start": 1.0,
+    "rtf_end": 1.0,
+    "rtf_method": "min per-claim median(sampled gz-RTF) z habitat.json (ANEKS_D7)",
+    "world_hash_actual": "dd0c85e26ea20615346f6ac837b15ff1ffef6a215908a3b007a38dd70b8d8ce4",
+    "world_hash_matches": true,
+    "rtf_gz_claim_median": [
+      0.9996,
+      0.9998,
+      0.9997
+    ],
+    "rtf_gz_claim_dsim_dwall": [
+      0.9981,
+      0.9979,
+      0.9963
+    ],
+    "habitat_verdict": "VALID"
+  },
+  "demo_mti": false,
+  "judge_sha256": "79b1e9367b85bf7c29f97dc5ea9757052be68a26903e48c0a237f941526a671a",
+  "detector": "GT-fed",
+  "detection_channel": "gt_fed",
+  "det_hz": null,
+  "teleport_hz": 16.7,
+  "apply_hz": 2.0,
+  "teleport_backend": "gz.transport13(persistent)",
+  "pose_backend": "gz.transport13(persistent)",
+  "pose_apply_mode": "blocking_6d",
+  "armed_before_manifest": true,
+  "arm_wall_unix": 1787229239.98,
+  "ekf2_gps_ctrl_bson": "absent(default 7)"
+}

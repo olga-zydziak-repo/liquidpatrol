@@ -1,0 +1,60 @@
+{
+  "outdir": "results/demo/A1/probe_t1/proba_1",
+  "verdict": "FAIL",
+  "borderline": false,
+  "non_run(§4d)": false,
+  "criteria": {
+    "entry_in_window": false,
+    "mti_ok_run>=3": true,
+    "box_on_target": true
+  },
+  "detector_ready(§4b)": {
+    "ready_wall_s": null,
+    "timeout": false,
+    "window_clock": "wall@arm"
+  },
+  "envelope_held(report-only,§3e)": true,
+  "entry": {
+    "n_entry": 0,
+    "entry_t": null,
+    "range_at_entry_m": null,
+    "ring_dwell_t": [
+      27.5,
+      54.0
+    ],
+    "entry_before_ring(report-only)": false,
+    "first_in_ring_t": 25.074
+  },
+  "range_to_target_m": {
+    "n": 440,
+    "min": 7.8,
+    "med": 8.16,
+    "max": 8.46,
+    "band_frac_7_9": 1.0
+  },
+  "mti": {
+    "n_dbg_ticks": 50,
+    "mti_ok_longest_run": 11,
+    "n_mti_ok": 20,
+    "n_comps_med": 9.5,
+    "n_comps_max": 36.0
+  },
+  "box_channel": {
+    "n_box_samples": 9,
+    "cx_med": 0.517,
+    "cy_med": 0.28,
+    "cx_std": 0.052,
+    "cy_std": 0.18,
+    "central": true
+  },
+  "mti_frame_mechanism": {
+    "n_frames": 123,
+    "diff_max_med": 177,
+    "diff_max_p90": 206,
+    "diff_thr": 22,
+    "diff_over_thr_frac": 1.0,
+    "n_kept_med": 19,
+    "n_kept_max": 43
+  },
+  "note": "PROBE (§3d Bieg 1) — NIE próba, NIE materiał dema; percepcja nieraportowalna jako wynik aktu (SR-J2)"
+}

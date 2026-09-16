@@ -1,0 +1,22 @@
+[gps-hygiene] EKF2_GPS_CTRL nieobecny w bson ⇒ default 7 (GPS ON) — OK
+GUI_PROCS=[brak]
+FILM=/world/world_demo_A1/model/film_cam/link/l/sensor/film/image
+[demo] 210 s settle EKF (jak B4/B5)
+
+=== HABITAT A1 → VALID (H1∧H2 PASS) ===
+H1 lockstep: PASS  timejump=0 backsteps=0 fwd_jumps=0  (n_rtf=3392)
+  [transit] takeoff_patrol_transit sim[0.0,20.0] n= 230 frac<0.5=0.013 p10=0.9986 Δs/Δw=0.9107 min=0.0489  (H4: raport, bez bramki)
+  [transit] approach             sim[20.0,23.0] n=  36 frac<0.5=0.0 p10=0.9978 Δs/Δw=1.0 min=0.9932  (H4: raport, bez bramki)
+  [claim ] dwell_observe        sim[23.0,49.0] n= 317 frac<0.5=0.0 p10=0.9989 Δs/Δw=1.0 min=0.9853 → PASS
+  [transit] rtl_land             sim[49.0,None] n= 161 frac<0.5=0.0 p10=0.9989 Δs/Δw=1.0 min=0.9961  (H4: raport, bez bramki)
+→ habitat.json: results/demo/A1_v3_1/control_1/habitat.json
+[finalize] results/demo/A1_v3_1/control_1: headless=True rtf=1.0 timejump=0 ekf_hits=0 world_hash_matches=True
+=== SĘDZIA A1: VALID (judge 79b1e9367b85bf7c…) ===
+  OK   aneks_h_valid: {'headless': True, 'rtf': [1.0, 1.0], 'timejump': 0, 'ekf_health_hits': 0, 'world_hash_matches': True}
+  OK   trace_complete: {'missing': [], 'required': ['entry', 'refuse_no_auth', 'grant', 'observe']}
+  OK   entry_in_dwell_ring: {'entry_range3d': 7.963900802998491, 'band': [7.0, 9.0]}
+  OK   no_auth_before_token: {'t_refuse_no_auth': 25.016, 't_grant': 28.021}
+  OK   observe_after_token_dsafe_ok: {'observe_ticks_after_token': 463, 'min_d': 6.52, 'floor': 4.82}
+→ verdict.json: results/demo/A1_v3_1/control_1/verdict.json
+acts/run_act_demo.sh: line 19: 143340 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_film.log" 2>&1
+[demo] A1 control_1 DONE rc=0 habitat_rc=0 judge_rc=0 → results/demo/A1_v3_1/control_1

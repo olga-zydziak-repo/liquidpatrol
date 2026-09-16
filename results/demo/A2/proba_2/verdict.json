@@ -1,0 +1,70 @@
+{
+  "act": "A2",
+  "verdict": "INVALID",
+  "criteria": [
+    {
+      "name": "aneks_h_valid",
+      "ok": true,
+      "detail": {
+        "headless": true,
+        "rtf": [
+          1.0,
+          1.0
+        ],
+        "timejump": 0,
+        "ekf_health_hits": 0,
+        "world_hash_matches": true
+      },
+      "source": "PRE_D §5 (boot ANEKS-H ważny); RTF∈[0.97,1.03], timejump 0"
+    },
+    {
+      "name": "trace_complete",
+      "ok": true,
+      "detail": {
+        "missing": [],
+        "required": [
+          "entry",
+          "refuse_no_auth",
+          "grant",
+          "observe",
+          "expire",
+          "readmit",
+          "grant2"
+        ]
+      },
+      "source": "PRE_D §5 trace kompletny (asert = gen_subtitles.REQUIRED_EVENTS)"
+    },
+    {
+      "name": "expire_at_theta_age",
+      "ok": true,
+      "detail": {
+        "t_expire": 46.949,
+        "max_age": 2.9944,
+        "theta_age": 3.0
+      },
+      "source": "PRE_D §5 A2 „EXPIRE na θ_age (config_r02 θ_age=3.0)"
+    },
+    {
+      "name": "readmit_full_conjunction",
+      "ok": false,
+      "detail": {
+        "admission_seq": 1,
+        "conj_at_readmit": "box∧central∧mti_ok"
+      },
+      "source": "PRE_D §5 A2 re-admisja pełną koniunkcją + B1 admission_seq"
+    },
+    {
+      "name": "new_token_required",
+      "ok": true,
+      "detail": {
+        "t_grant2": 59.045,
+        "expire_consumed": true
+      },
+      "source": "PRE_D §5 A2 (per-cel) nowy token wymagany + B1 consume_tokens"
+    }
+  ],
+  "violated": [
+    "readmit_full_conjunction"
+  ],
+  "judge_sha256": "79b1e9367b85bf7c29f97dc5ea9757052be68a26903e48c0a237f941526a671a"
+}

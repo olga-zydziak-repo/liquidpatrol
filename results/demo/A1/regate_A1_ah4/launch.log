@@ -1,0 +1,6 @@
+[gps-hygiene] EKF2_GPS_CTRL nieobecny w bson ⇒ default 7 (GPS ON) — OK
+GUI_PROCS=[brak]
+FILM=/world/world_demo_A1/model/film_cam/link/l/sensor/film/image
+[demo] 210 s settle EKF (jak B4/B5)
+acts/run_act_demo.sh: line 19: 332698 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_film.log" 2>&1
+[demo] A1 regate_A1_ah4 DONE rc=0 → /home/olga/projects/liquidpatrol/results/demo/A1/regate_A1_ah4

@@ -1,0 +1,6 @@
+GUI_PROCS=[brak]
+[K1 E p0.0 b102] E1 watchdog EKF2 pid=24427
+[K1 E p0.0 b102] settle 90 s preflight EKF
+k1/run_k1_boot.sh: line 104: 24426 Aborted                 (core dumped) setsid nohup python3 -m acts.rtf_sampler --world "$WORLD" --out "$OUTDIR/rtf_stream.jsonl" > "$OUTDIR/rtf_sampler.log" 2>&1
+{"boot": 102, "arm_ok": true, "landed": true, "habitat": "INVALID(habitat)", "conv_s": null, "loadavg1": 5.91, "wd_reinits": 0, "wd_bias_max": 0.13464}
+[K1 E p0.0 b102] DONE rc=0 → /home/olga/projects/liquidpatrol/results/K1/E/p0_0/boot102

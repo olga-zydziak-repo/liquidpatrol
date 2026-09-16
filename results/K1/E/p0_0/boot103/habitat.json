@@ -1,0 +1,25 @@
+{
+  "verdict": "INVALID(habitat)",
+  "criterion": "PRE_K1 \u00a72 (na oknie hoveru): timejump=0 \u2227 \u0394sim/\u0394wall\u22650.95",
+  "h1": {
+    "pass": true,
+    "timejump_total": 0,
+    "sim_backsteps": 0,
+    "sim_fwd_jumps": 0
+  },
+  "dsim_dwall_ok": false,
+  "hover_seg": {
+    "n": 712,
+    "frac_lt_05": 0.0042,
+    "p10": 0.9974,
+    "median_rtf": 0.9998,
+    "min_rtf": 0.0156,
+    "dsim_dwall": 0.9186
+  },
+  "hover_window_sim": [
+    100.556,
+    159.148
+  ],
+  "arm_ok": true,
+  "landed": true
+}

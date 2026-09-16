@@ -1,0 +1,7 @@
+=== SĘDZIA A1: VALID (judge 79b1e9367b85bf7c…) ===
+  OK   aneks_h_valid: {'headless': True, 'rtf': [1.0, 1.0], 'timejump': 0, 'ekf_health_hits': 0, 'world_hash_matches': True}
+  OK   trace_complete: {'missing': [], 'required': ['entry', 'refuse_no_auth', 'grant', 'observe']}
+  OK   entry_in_dwell_ring: {'entry_range3d': 7.963900802998491, 'band': [7.0, 9.0]}
+  OK   no_auth_before_token: {'t_refuse_no_auth': 25.016, 't_grant': 28.021}
+  OK   observe_after_token_dsafe_ok: {'observe_ticks_after_token': 463, 'min_d': 6.52, 'floor': 4.82}
+→ verdict.json: results/demo/A1_v3_1/control_1/verdict.json

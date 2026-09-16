@@ -1,0 +1,8 @@
+
+=== HABITAT A1 → INVALID(habitat) (H2 FAIL na 1 segm. roszczeń) ===
+H1 lockstep: PASS  timejump=0 backsteps=0 fwd_jumps=0  (n_rtf=3360)
+  [transit] takeoff_patrol_transit sim[0.0,20.0] n= 239 frac<0.5=0.0084 p10=0.9989 Δs/Δw=0.9662 min=0.0761  (H4: raport, bez bramki)
+  [transit] approach             sim[20.0,23.0] n=  37 frac<0.5=0.0 p10=0.9985 Δs/Δw=0.9974 min=0.8673  (H4: raport, bez bramki)
+  [claim ] dwell_observe        sim[23.0,49.0] n= 273 frac<0.5=0.0037 p10=0.999 Δs/Δw=0.9328 min=0.0079 → FAIL: frac<0.5=0.0037>0.0; Δsim/Δwall=0.9328<0.95
+  [transit] rtl_land             sim[49.0,None] n= 162 frac<0.5=0.0062 p10=0.9992 Δs/Δw=0.7937 min=0.0011  (H4: raport, bez bramki)
+→ habitat.json: results/demo/A1_v2/control_1/habitat.json

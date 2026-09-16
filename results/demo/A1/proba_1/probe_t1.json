@@ -1,0 +1,53 @@
+{
+  "outdir": "results/demo/A1/proba_1",
+  "verdict": "FAIL",
+  "borderline": false,
+  "criteria": {
+    "entry_in_window": true,
+    "mti_ok_run>=3": false,
+    "box_on_target": false
+  },
+  "envelope_held(report-only,§3e)": true,
+  "entry": {
+    "n_entry": 1,
+    "entry_t": 25.048,
+    "ring_window": [
+      23.0,
+      49.0
+    ],
+    "entry_before_ring(report-only)": false,
+    "first_in_ring_t": 21.033
+  },
+  "range_to_target_m": {
+    "n": 492,
+    "min": 6.58,
+    "med": 7.02,
+    "max": 9.93,
+    "band_frac_7_9": 0.537
+  },
+  "mti": {
+    "n_dbg_ticks": 0,
+    "mti_ok_longest_run": 0,
+    "n_mti_ok": 0,
+    "n_comps_med": null,
+    "n_comps_max": null
+  },
+  "box_channel": {
+    "n_box_samples": 0,
+    "cx_med": null,
+    "cy_med": null,
+    "cx_std": null,
+    "cy_std": null,
+    "central": false
+  },
+  "mti_frame_mechanism": {
+    "n_frames": 0,
+    "diff_max_med": null,
+    "diff_max_p90": null,
+    "diff_thr": 22,
+    "diff_over_thr_frac": null,
+    "n_kept_med": null,
+    "n_kept_max": null
+  },
+  "note": "PROBE (§3d Bieg 1) — NIE próba, NIE materiał dema; percepcja nieraportowalna jako wynik aktu (SR-J2)"
+}

@@ -1,0 +1,21 @@
+486a0cea3bf2d946e8e9f559428b7f3dcf13cb2e9804935764e4f02395334c60  /home/olga/projects/liquidpatrol/worlds/world_demo_A3.sdf
+GUI_PROCS=[brak]
+FILM_TOPIC=/world/world_demo_A3/model/film_cam/link/l/sensor/film/image
+[A3] 90 s preflight EKF (B1-bis)
+[a3-manifest] → /home/olga/projects/liquidpatrol/results/demo/rehearsal/A3/proba_1/manifest.json (head=a8567f354118 world_hash=486a0cea3bf2d946…)
+
+=== HABITAT A3 → VALID (H1∧H2 PASS) ===
+H1 lockstep: PASS  timejump=0 backsteps=0 fwd_jumps=0  (n_rtf=1570)
+  [transit] patrol_transit       sim[99.02,118.68360591132992] n= 240 frac<0.5=0.0208 p10=0.995 Δs/Δw=0.684 min=0.016  (H4: raport, bez bramki)
+  [claim ] refuse_descent       sim[118.68360591132992,127.14911392405058] n= 103 frac<0.5=0.0 p10=0.9961 Δs/Δw=1.0 min=0.9906 → PASS
+→ habitat.json: /home/olga/projects/liquidpatrol/results/demo/rehearsal/A3/proba_1/habitat.json
+[finalize] /home/olga/projects/liquidpatrol/results/demo/rehearsal/A3/proba_1: headless=True rtf=0.963 timejump=0 ekf_hits=0 world_hash_matches=True
+=== SĘDZIA A3: INVALID (judge 79b1e9367b85bf7c…) ===
+  FAIL aneks_h_valid: {'headless': True, 'rtf': [0.963, 0.963], 'timejump': 0, 'ekf_health_hits': 0, 'world_hash_matches': True}
+  OK   trace_complete: {'missing': [], 'required': ['denial', 'refuse_pos', 'touchdown']}
+  OK   refuse_pos_within_015: {'t_denial': 1677.3256, 't_refuse_pos': 1677.4294, 'delta_s': 0.10380000000009204, 'max': 0.15}
+  OK   touchdown_within_R_E: {'touchdown_seen': True, 'touchdown_r_est': 15.174, 'R_E': 32.0}
+NARUSZONE: ['aneks_h_valid']
+→ verdict.json: /home/olga/projects/liquidpatrol/results/demo/rehearsal/A3/proba_1/verdict.json
+acts/run_A3.sh: line 18: 10725 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge.log" 2>&1
+[A3] proba_1 DONE rc=0 habitat_rc=0 judge_rc=1 → /home/olga/projects/liquidpatrol/results/demo/rehearsal/A3/proba_1

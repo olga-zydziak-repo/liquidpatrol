@@ -1,0 +1,6 @@
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[gate] czekam na MAVSDK health...
+[gate] armed=True down=-9.0 fm=OFFBOARD stream_pub=193 deadman_armed=True (N=6t=0.30000000000000004s)
+[gate] manifest PO arm → /home/olga/projects/liquidpatrol/results/demo/A2/proba_1/manifest.json (judge=79b1e9367b85bf7c… armed=True)
+[teleport] backend=gz.transport13(persistent) target=16.7Hz
+[gate] RESULT: {"scenario": "A2", "n_entry": 4, "n_token_issued": 4, "n_token_consumed": 4, "n_refuse_no_auth": 231, "teleport_hz_eff": 18.46, "teleport_ok_rate": 0.664, "teleport_hz_producer": 12.16, "teleport_req_lat_ms": 0.9, "teleport_backend": "gz.transport13(persistent)", "max_admission_seq": 3, "granted_seqs": [0, 1, 2, 3], "note": "REHEARSAL/integracja (B4) — NIE próba (B5)", "conf_passive_A6": {"theta_conf": 0.1635, "conf_n": 0, "conf_max": null, "conf_p99": null, "n_admitted_entry": 0, "gap_held_in_flight": null}, "stall_dist_R3": {"channel": "monotonic_local", "n": 1205, "p50": 0.0507, "p95": 0.0875, "p99": 0.0916, "max": 0.107, "max_ticks_@20Hz": 2.14, "p99_ticks_@20Hz": 1.83, "over_6ticks(0.30s)": 0, "over_4ticks(0.20s)": 0}, "gt_fed": true, "gt_irregularity": {"seed": 1, "dropout_p": 0.0, "burst_p": 0.0, "burst_len": 5, "noise_std": 0.0, "n_dropout": 0, "n_expire": 4}}

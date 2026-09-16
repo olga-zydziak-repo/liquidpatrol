@@ -1,0 +1,26 @@
+[gps-hygiene] EKF2_GPS_CTRL nieobecny w bson ⇒ default 7 (GPS ON) — OK
+GUI_PROCS=[brak]
+FILM=/world/world_demo_A2/model/film_cam/link/l/sensor/film/image
+[demo] 210 s settle EKF (jak B4/B5)
+
+=== HABITAT A2 → VALID (H1∧H2 PASS) ===
+H1 lockstep: PASS  timejump=0 backsteps=0 fwd_jumps=0  (n_rtf=3591)
+  [transit] takeoff_patrol_transit sim[0.0,20.0] n= 208 frac<0.5=0.0096 p10=0.9473 Δs/Δw=0.8154 min=0.0211  (H4: raport, bez bramki)
+  [transit] approach             sim[20.0,23.0] n=  36 frac<0.5=0.0 p10=0.9972 Δs/Δw=1.0 min=0.9954  (H4: raport, bez bramki)
+  [claim ] ep0_dwell_observe    sim[23.0,45.0] n= 268 frac<0.5=0.0 p10=0.9958 Δs/Δw=0.9981 min=0.8797 → PASS
+  [claim ] leave_expire         sim[45.0,51.0] n=  45 frac<0.5=0.0 p10=0.9975 Δs/Δw=0.9979 min=0.9313 → PASS
+  [transit] intruder_return      sim[51.0,54.0] n=  28 frac<0.5=0.0357 p10=0.9979 Δs/Δw=1.0 min=0.0132  (H4: raport, bez bramki)
+  [claim ] ep1_dwell_observe    sim[54.0,74.0] n= 243 frac<0.5=0.0 p10=0.9958 Δs/Δw=0.9963 min=0.7709 → PASS
+  [transit] rtl_land             sim[74.0,None] n= 162 frac<0.5=0.0062 p10=0.9928 Δs/Δw=0.768 min=0.0169  (H4: raport, bez bramki)
+→ habitat.json: /home/olga/projects/liquidpatrol/results/demo/A2/proba_2/habitat.json
+[finalize] /home/olga/projects/liquidpatrol/results/demo/A2/proba_2: headless=True rtf=1.0 timejump=0 ekf_hits=0 world_hash_matches=True
+=== SĘDZIA A2: INVALID (judge 79b1e9367b85bf7c…) ===
+  OK   aneks_h_valid: {'headless': True, 'rtf': [1.0, 1.0], 'timejump': 0, 'ekf_health_hits': 0, 'world_hash_matches': True}
+  OK   trace_complete: {'missing': [], 'required': ['entry', 'refuse_no_auth', 'grant', 'observe', 'expire', 'readmit', 'grant2']}
+  OK   expire_at_theta_age: {'t_expire': 46.949, 'max_age': 2.9944, 'theta_age': 3.0}
+  FAIL readmit_full_conjunction: {'admission_seq': 1, 'conj_at_readmit': 'box∧central∧mti_ok'}
+  OK   new_token_required: {'t_grant2': 59.045, 'expire_consumed': True}
+NARUSZONE: ['readmit_full_conjunction']
+→ verdict.json: /home/olga/projects/liquidpatrol/results/demo/A2/proba_2/verdict.json
+acts/run_act_demo.sh: line 19: 18682 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_film.log" 2>&1
+[demo] A2 proba_2 DONE rc=0 habitat_rc=0 judge_rc=1 → /home/olga/projects/liquidpatrol/results/demo/A2/proba_2

@@ -1,0 +1,8 @@
+=== SĘDZIA A2: INVALID (judge 79b1e9367b85bf7c…) ===
+  OK   aneks_h_valid: {'headless': True, 'rtf': [1.0, 1.0], 'timejump': 0, 'ekf_health_hits': 0, 'world_hash_matches': True}
+  OK   trace_complete: {'missing': [], 'required': ['entry', 'refuse_no_auth', 'grant', 'observe', 'expire', 'readmit', 'grant2']}
+  OK   expire_at_theta_age: {'t_expire': 46.949, 'max_age': 2.9944, 'theta_age': 3.0}
+  FAIL readmit_full_conjunction: {'admission_seq': 1, 'conj_at_readmit': 'box∧central∧mti_ok'}
+  OK   new_token_required: {'t_grant2': 59.045, 'expire_consumed': True}
+NARUSZONE: ['readmit_full_conjunction']
+→ verdict.json: /home/olga/projects/liquidpatrol/results/demo/A2/proba_2/verdict.json

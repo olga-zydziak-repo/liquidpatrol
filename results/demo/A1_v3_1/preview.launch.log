@@ -1,0 +1,3 @@
+FILM=/world/world_demo_A1/model/film_cam/link/l/sensor/film/image
+acts/preview_ring.sh: line 12: 139769 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUT/bridge.log" 2>&1
+[preview] done → results/demo/A1_v3_1/preview/preview.npy

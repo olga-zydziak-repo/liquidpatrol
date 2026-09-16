@@ -1,0 +1,7 @@
+=== SĘDZIA A3: INVALID (judge 79b1e9367b85bf7c…) ===
+  FAIL aneks_h_valid: {'headless': True, 'rtf': [0.963, 0.963], 'timejump': 0, 'ekf_health_hits': 0, 'world_hash_matches': True}
+  OK   trace_complete: {'missing': [], 'required': ['denial', 'refuse_pos', 'touchdown']}
+  OK   refuse_pos_within_015: {'t_denial': 1677.3256, 't_refuse_pos': 1677.4294, 'delta_s': 0.10380000000009204, 'max': 0.15}
+  OK   touchdown_within_R_E: {'touchdown_seen': True, 'touchdown_r_est': 15.174, 'R_E': 32.0}
+NARUSZONE: ['aneks_h_valid']
+→ verdict.json: /home/olga/projects/liquidpatrol/results/demo/rehearsal/A3/proba_1/verdict.json

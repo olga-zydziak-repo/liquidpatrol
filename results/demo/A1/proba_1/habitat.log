@@ -1,0 +1,8 @@
+
+=== HABITAT A1 → VALID (H1∧H2 PASS) ===
+H1 lockstep: PASS  timejump=0 backsteps=0 fwd_jumps=0  (n_rtf=3339)
+  [transit] takeoff_patrol_transit sim[0.0,20.0] n= 205 frac<0.5=0.0146 p10=0.851 Δs/Δw=0.807 min=0.0261  (H4: raport, bez bramki)
+  [transit] approach             sim[20.0,23.0] n=  36 frac<0.5=0.0 p10=0.9946 Δs/Δw=0.997 min=0.9202  (H4: raport, bez bramki)
+  [claim ] dwell_observe        sim[23.0,49.0] n= 316 frac<0.5=0.0 p10=0.9954 Δs/Δw=0.9955 min=0.8411 → PASS
+  [transit] rtl_land             sim[49.0,None] n= 134 frac<0.5=0.0075 p10=0.9712 Δs/Δw=0.8424 min=0.0033  (H4: raport, bez bramki)
+→ habitat.json: /home/olga/projects/liquidpatrol/results/demo/A1/proba_1/habitat.json

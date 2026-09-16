@@ -1,0 +1,31 @@
+{
+  "act": "A2",
+  "head": "0141831d6946fdb454d4c791ab0aff1b1306a48f",
+  "world_sdf": "/home/olga/projects/liquidpatrol/worlds/world_demo_A2.sdf",
+  "world_hash": "dd0c85e26ea20615346f6ac837b15ff1ffef6a215908a3b007a38dd70b8d8ce4",
+  "spec": "acts/A2_spec.yaml",
+  "spec_hash": "1a0da2b09aa45e31f3942d30e89cd0ccf94249b823e0d0f58f4ece7496e658a5",
+  "certs": {
+    "P1": "1a076269a04c5325",
+    "P4": "5b9cbdc73198951d",
+    "P5": "7bc53ecb4164f63d"
+  },
+  "token_gated": true,
+  "contention": "none",
+  "seed": null,
+  "trace_schema_v": 2,
+  "aneks_h": {
+    "headless": null,
+    "note": "ANEKS-H domknięty po biegu"
+  },
+  "demo_mti": false,
+  "judge_sha256": "79b1e9367b85bf7c29f97dc5ea9757052be68a26903e48c0a237f941526a671a",
+  "detector": "GT-fed",
+  "detection_channel": "gt_fed",
+  "det_hz": null,
+  "teleport_hz": 16.7,
+  "teleport_backend": "gz.transport13(persistent)",
+  "pose_backend": "gz.transport13(persistent)",
+  "armed_before_manifest": true,
+  "ekf2_gps_ctrl_bson": "absent(default 7)"
+}

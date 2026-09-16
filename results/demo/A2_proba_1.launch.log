@@ -1,0 +1,26 @@
+[gps-hygiene] EKF2_GPS_CTRL nieobecny w bson ⇒ default 7 (GPS ON) — OK
+GUI_PROCS=[brak]
+FILM=/world/world_demo_A2/model/film_cam/link/l/sensor/film/image
+[demo] 210 s settle EKF (jak B4/B5)
+
+=== HABITAT A2 → INVALID(habitat) (H2 FAIL na 2 segm. roszczeń) ===
+H1 lockstep: PASS  timejump=0 backsteps=0 fwd_jumps=0  (n_rtf=3626)
+  [transit] takeoff_patrol_transit sim[0.0,20.0] n= 242 frac<0.5=0.0041 p10=0.8933 Δs/Δw=0.9645 min=0.4219  (H4: raport, bez bramki)
+  [transit] approach             sim[20.0,23.0] n=  36 frac<0.5=0.0 p10=0.9964 Δs/Δw=0.9999 min=0.9926  (H4: raport, bez bramki)
+  [claim ] ep0_dwell_observe    sim[23.0,45.0] n= 235 frac<0.5=0.0043 p10=0.9964 Δs/Δw=0.8207 min=0.003 → FAIL: frac<0.5=0.0043>0.0; Δsim/Δwall=0.8207<0.95
+  [claim ] leave_expire         sim[45.0,51.0] n=  73 frac<0.5=0.0 p10=0.9953 Δs/Δw=0.9922 min=0.7636 → PASS
+  [transit] intruder_return      sim[51.0,54.0] n=  37 frac<0.5=0.0 p10=0.9971 Δs/Δw=0.9999 min=0.996  (H4: raport, bez bramki)
+  [claim ] ep1_dwell_observe    sim[54.0,74.0] n= 210 frac<0.5=0.0048 p10=0.9961 Δs/Δw=0.8242 min=0.0288 → FAIL: frac<0.5=0.0048>0.0; Δsim/Δwall=0.8242<0.95
+  [transit] rtl_land             sim[74.0,None] n= 162 frac<0.5=0.0 p10=0.9948 Δs/Δw=0.9959 min=0.8721  (H4: raport, bez bramki)
+→ habitat.json: /home/olga/projects/liquidpatrol/results/demo/A2/proba_1/habitat.json
+[finalize] /home/olga/projects/liquidpatrol/results/demo/A2/proba_1: headless=True rtf=0.999 timejump=0 ekf_hits=0 world_hash_matches=True
+=== SĘDZIA A2: INVALID (judge 79b1e9367b85bf7c…) ===
+  OK   aneks_h_valid: {'headless': True, 'rtf': [0.999, 0.999], 'timejump': 0, 'ekf_health_hits': 0, 'world_hash_matches': True}
+  OK   trace_complete: {'missing': [], 'required': ['entry', 'refuse_no_auth', 'grant', 'observe', 'expire', 'readmit', 'grant2']}
+  OK   expire_at_theta_age: {'t_expire': 34.081, 'max_age': 2.9733, 'theta_age': 3.0}
+  FAIL readmit_full_conjunction: {'admission_seq': 1, 'conj_at_readmit': 'box∧central∧mti_ok'}
+  OK   new_token_required: {'t_grant2': 37.202, 'expire_consumed': True}
+NARUSZONE: ['readmit_full_conjunction']
+→ verdict.json: /home/olga/projects/liquidpatrol/results/demo/A2/proba_1/verdict.json
+acts/run_act_demo.sh: line 19: 14162 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_film.log" 2>&1
+[demo] A2 proba_1 DONE rc=0 habitat_rc=3 judge_rc=1 → /home/olga/projects/liquidpatrol/results/demo/A2/proba_1

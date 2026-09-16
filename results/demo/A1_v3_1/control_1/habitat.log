@@ -1,0 +1,8 @@
+
+=== HABITAT A1 → VALID (H1∧H2 PASS) ===
+H1 lockstep: PASS  timejump=0 backsteps=0 fwd_jumps=0  (n_rtf=3392)
+  [transit] takeoff_patrol_transit sim[0.0,20.0] n= 230 frac<0.5=0.013 p10=0.9986 Δs/Δw=0.9107 min=0.0489  (H4: raport, bez bramki)
+  [transit] approach             sim[20.0,23.0] n=  36 frac<0.5=0.0 p10=0.9978 Δs/Δw=1.0 min=0.9932  (H4: raport, bez bramki)
+  [claim ] dwell_observe        sim[23.0,49.0] n= 317 frac<0.5=0.0 p10=0.9989 Δs/Δw=1.0 min=0.9853 → PASS
+  [transit] rtl_land             sim[49.0,None] n= 161 frac<0.5=0.0 p10=0.9989 Δs/Δw=1.0 min=0.9961  (H4: raport, bez bramki)
+→ habitat.json: results/demo/A1_v3_1/control_1/habitat.json

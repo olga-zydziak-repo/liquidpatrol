@@ -1,0 +1,112 @@
+{
+  "arm": "S",
+  "point": 0.2,
+  "boot_n": 1,
+  "kind": "crit",
+  "sha_harness": "19967de2ed5d35cc05f05f408def8f9de265d9f71136c99b40b074cebcd3a01c",
+  "harness_file": "r03/gate_run_r03.py",
+  "sha_k1_judge": "4e0dc0afffda099837a002191a5540fd95d6de13cb88e7233433d67b1b998ae1",
+  "k1_judge_frozen": true,
+  "shield_frozen": true,
+  "shield_pins": {
+    "r01/shield.py": {
+      "want": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "got": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+      "ok": true
+    },
+    "r03/config.py": {
+      "want": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "got": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+      "ok": true
+    },
+    "r03/gate_run_r03.py": {
+      "want": "19967de2ed5d35cc05f05f408def8f9de265d9f71136c99b40b074cebcd3a01c",
+      "got": "19967de2ed5d35cc05f05f408def8f9de265d9f71136c99b40b074cebcd3a01c",
+      "ok": true
+    }
+  },
+  "ulog": "results/K1/S/p0_2/boot1/boot.ulg",
+  "ulog_exists": true,
+  "stamps": {
+    "denial_on_mono": 11735.3955,
+    "t_inj_sim": 107.864,
+    "px4_inj_us": 107892000.00000001,
+    "ulog_sim_C": -0.028,
+    "gt_dt": 0.0021,
+    "refuse_sim": 107.956,
+    "touchdown_sim": 111.78,
+    "touchdown_event_sim": 116.096
+  },
+  "harness_valid": true,
+  "harness_poison": {},
+  "habitat_verdict": "VALID",
+  "certs_selfcheck": {
+    "log": "results/K1/S/p0_2/boot1/certs_selfcheck.log",
+    "pass": true,
+    "rc": 0
+  },
+  "provenance_arm_s": "os\u0142ona w stanie 6db3393 (4/4 a088367 \u2192 D_B1 01f47e8 token \u2192 D_B3 e732c10 trace v2 \u2192 5a6a18d erratum); \u015bcie\u017cka POS_DEGRADED\u2192D5 bajt-identyczna z 4/4 wg ANEKS_SHA \u00a7W2",
+  "n_gt": 842,
+  "n_ekf": 1699,
+  "n_events": 8,
+  "events": [
+    "armed",
+    "takeoff",
+    "offboard",
+    "denial_on",
+    "refuse_pos_land",
+    "h_switch",
+    "touchdown",
+    "done"
+  ],
+  "stall_in_reaction_window": {
+    "window_s": [
+      107.864,
+      107.956
+    ],
+    "n_stall": 0,
+    "overlap": false,
+    "min_rtf": 1.0
+  },
+  "sanity": {
+    "t_td": {
+      "measured_s": 3.916,
+      "h0_m": 6.205,
+      "profil_D5": {
+        "V_DESC_FAST": 1.5,
+        "V_DESC_LAND": 0.7,
+        "H_SWITCH_AGL": 2.0,
+        "desc_fast_dur_gate_s": 4.0
+      },
+      "expected_from_h0_s": 3.803,
+      "note": "h0 z GT (nie nomina\u0142 8 m \u2014 wczesny punkt, dron w climbie). Gate prze\u0142\u0105cza faz\u0119 PO CZASIE (nomina\u0142 ALT=8) \u2192 przy h0<8 touchdown w fazie1 (1.5 m/s), st\u0105d t_td\u2248(h0-0.5)/1.5."
+    },
+    "nav_seq_annotated": [
+      {
+        "rel_s": -107.892,
+        "nav": "AUTO_LOITER",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": -16.732,
+        "nav": "AUTO_PRECLAND",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": -6.844,
+        "nav": "OFFBOARD",
+        "post_touchdown": false
+      },
+      {
+        "rel_s": 4.076,
+        "nav": "DESCEND",
+        "post_touchdown": true
+      },
+      {
+        "rel_s": 8.076,
+        "nav": "OFFBOARD",
+        "post_touchdown": true
+      }
+    ]
+  }
+}
