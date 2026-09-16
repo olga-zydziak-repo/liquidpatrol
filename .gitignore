@@ -23,3 +23,7 @@ results/demo/*/*/trace.jsonl
 results/demo/*/*/agent.log
 results/demo/*/*/px4.log
 results/DEMO_V2/**/frames/
+# [ANEKS_REPO-1a §4] stan wrappera brudzi drzewo każdym bootem; ulogi zostają lokalnie,
+# prowieniencja = sha256 ulogu w manifeście bootu (już istnieje). Pliki już śledzone pozostają śledzone.
+results/.last_boot_end
+results/**/*.ulg
