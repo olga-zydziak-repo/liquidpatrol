@@ -1,0 +1,44 @@
+{
+  "arm": "E",
+  "point": 0.0,
+  "boot_n": 3,
+  "kind": "empty",
+  "rc": 2,
+  "arm_ok": false,
+  "took_off": false,
+  "landed": false,
+  "conv_s": null,
+  "session": {
+    "mem_free_kb": 27883636,
+    "mem_available_kb": 30552288,
+    "loadavg": [
+      4.9,
+      2.15,
+      1.22
+    ],
+    "session_boot_count": 1,
+    "env_restart": "wsl-shutdown",
+    "captured_at": "finalize"
+  },
+  "b4": {
+    "orphans_pre_teardown": 0,
+    "orphans_post_teardown": 0,
+    "cooldown_s_since_last_boot": 333,
+    "one_boot_per_cycle": true
+  },
+  "timejump_pre": 0,
+  "timejump_post": 0,
+  "ekf_health_hits": 21,
+  "hover_window_sim": [
+    null,
+    null
+  ],
+  "n_gt": 3904,
+  "n_ekf": 12231,
+  "events": [
+    "arm_fail"
+  ],
+  "habitat_verdict": "INVALID(habitat)",
+  "sha_harness": "c41276ffe0a7bd74a97bb35bef38bb2bc2992aa17cfba512ea447df51f8521b7",
+  "harness_file": "/home/olga/projects/liquidpatrol/tools/infra1_empty_flight.py"
+}
