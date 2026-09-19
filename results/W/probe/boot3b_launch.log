@@ -1,0 +1,9 @@
+[w_launcher] START world=world_wind_s3 OUTDIR=/home/olga/projects/liquidpatrol/results/W/probe/boot3b_s3 FLIGHT=empty hover=90 lock=73984 gz_res=/home/olga/projects/liquidpatrol/worlds/wind_models
+[run_boot b3] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b3] watchdog EKF2 (preflight-only, max 2 reinity) pid=74616
+[run_boot b3] settle 90s preflight EKF
+{"boot": 3, "arm_ok": true, "landed": false, "habitat": "INVALID(habitat)", "conv_s": null, "loadavg1": 1.44, "wd_reinits": 0, "wd_bias_max": 0.00062}
+[augment] world_hash=True ulog_sha=True model_in_state=None
+[run_boot b3] DONE flight=empty world=world_wind_s3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/W/probe/boot3b_s3
+[w_launcher] DONE rc=0 world=world_wind_s3 → /home/olga/projects/liquidpatrol/results/W/probe/boot3b_s3

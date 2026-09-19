@@ -1,0 +1,113 @@
+{
+  "arm": "E",
+  "point": 0.0,
+  "boot_n": 2,
+  "kind": "empty",
+  "rc": 0,
+  "arm_ok": true,
+  "took_off": true,
+  "landed": true,
+  "conv_s": null,
+  "session": {
+    "mem_free_kb": 29494264,
+    "mem_available_kb": 30893876,
+    "loadavg": [
+      1.23,
+      0.6,
+      0.42
+    ],
+    "session_boot_count": null,
+    "env_restart": null,
+    "captured_at": "finalize"
+  },
+  "b4": {
+    "orphans_pre_teardown": 1,
+    "orphans_post_teardown": 0,
+    "cooldown_s_since_last_boot": 410,
+    "cooldown_src": "results",
+    "one_boot_per_cycle": true
+  },
+  "timejump_pre": 0,
+  "timejump_post": 0,
+  "ekf_health_hits": 9,
+  "hover_window_sim": [
+    102.944,
+    192.9
+  ],
+  "n_gt": 3545,
+  "n_ekf": 11127,
+  "events": [
+    "armed",
+    "takeoff",
+    "offboard",
+    "hover_start",
+    "hover_end",
+    "land_cmd",
+    "touchdown",
+    "done"
+  ],
+  "habitat_verdict": "INVALID(habitat)",
+  "armed_sim": 93.276,
+  "watchdog": {
+    "n_reinits": 1,
+    "reinit_sims": [
+      61.816
+    ],
+    "reinit_reasons": [
+      "SLOW_bias>0.08_no_decrease_30s"
+    ],
+    "reinit_before_arm": true,
+    "bias_max_absmax": 0.15,
+    "bias_at_end_absmax": 0.0001,
+    "bias_at_arm_absmax": 0.0001,
+    "first_fault_sim": {
+      "filter_fault_1024": null,
+      "fs_bad_acc_vertical": null
+    },
+    "armed_sim": 93.276,
+    "n_samples": 18,
+    "n_poll_fail": 1,
+    "reinits": [
+      {
+        "idx": 1,
+        "reason": "SLOW_bias>0.08_no_decrease_30s",
+        "sim": 61.816,
+        "wall": 1789819914.607,
+        "consec_fault": 0,
+        "action": {
+          "rc_stop": 0,
+          "rc_start": 0,
+          "cmd_wall_s": 2.032
+        },
+        "bias_before": {
+          "absmax": 0.15,
+          "norm": 0.150362,
+          "xyz": [
+            0.00252,
+            0.01012,
+            -0.15
+          ],
+          "fff": 0,
+          "fbav": 0
+        },
+        "bias_after": {
+          "absmax": 0.00024,
+          "norm": 0.000258,
+          "xyz": [
+            -0.00024,
+            -8e-05,
+            -5e-05
+          ],
+          "fff": 0,
+          "fbav": 0
+        }
+      }
+    ]
+  },
+  "sha_harness": "c41276ffe0a7bd74a97bb35bef38bb2bc2992aa17cfba512ea447df51f8521b7",
+  "harness_file": "/home/olga/projects/liquidpatrol/tools/infra1_empty_flight.py",
+  "world_hash": "b8380e8ad9ffa10cdbd1aaeb05fde81e4415af3e4ac11974c8297d1c09f5bb5b  worlds/world_wind_s1p5.sdf",
+  "world_hash_kind": "repo",
+  "ulog_sha": "aee17995b10818ff7dbe8c258df84eea04974ee0a6bb1d1ba997072461cbe009",
+  "ulog_bytes": 58958263
+}
