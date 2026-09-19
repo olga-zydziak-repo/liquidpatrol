@@ -159,3 +159,13 @@ Sesje S1 (lustro+różnicówka+O1), S2 (M-krok+O2), S3 (O3+O4). Werdykt bramki n
 - P-CC2-2: follow-up SPRIND dostaje merytoryczną odpowiedź w ≤3 tygodnie od wysyłki — p≈0.3.
   **ZOSTAJE OTWARTE.**
 Rozliczenie: P-CC2-1 i P-CC2-3 przy RAPORT_FV (powyżej); P-CC2-2 przy warstwie 0 / odpowiedzi SPRIND.
+
+### NOGA W (wiatr, poz.2b) — prerejestrowane 19.09.2026 (PRE_W §13, ANEKS_W-0 §3)
+- **P-W-1:** 0 REFUSE jakiegokolwiek rodzaju na całej siatce kryterialnej — p≈0.75.
+- **P-W-2:** próba arm z ziemi przy 4.5 m/s = FAIL — p≈0.7.
+- **P-W-3:** W-A hover 3 m/s: dead_reckoning=false przez całe okno, eph_max < 1 m — p≈0.75.
+- **P-W-4:** parowanie NCP↔executor przy 3 m/s: ≤2 różnice netto (brak załamania architektury
+  pod stałym wiatrem) — p≈0.55.
+- **P-W-5:** przechył średni w hoverze W-A rośnie monotonicznie z poziomem i separuje 0 od 3 m/s — p≈0.8.
+Rozliczenie: wyłącznie przy RAPORT_W (ANEKS_W-2). Status wstępny P-W-2/3/5 możliwy po W-A (S1),
+BEZ rozliczania (SR: rozliczenie tylko przy RAPORT_W).

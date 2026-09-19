@@ -70,6 +70,10 @@ K2_INJECT_T = float(os.environ["K2_INJECT_T"]) if os.environ.get("K2_INJECT_T") 
 # uzbrojenie jest domyślne. k2_arm_monitor w meta = efektywny stan uzbrojenia.
 K2_LEGACY_UNARMED = os.environ.get("K2_LEGACY_UNARMED") == "1"
 K2_ARM_MONITOR = not K2_LEGACY_UNARMED
+# W (noga wiatru, PRE_W §2): W_ARM_ALWAYS=1 uzbraja pos_flag od wejścia w OFFBOARD (nie od t_entry),
+# bo kampania W jest bez denialu i bez potrzeby wejścia w pasmo intruza. default OFF = bit-zgodne
+# z linią bazową (arm zależy wyłącznie od t_entry gdy flaga wyłączona). Jedyna zmiana harnessu nogi W.
+W_ARM_ALWAYS = os.environ.get("W_ARM_ALWAYS") == "1"
 _SD_CFG = {"v_desc_fast": C.V_DESC_FAST, "v_desc_land": C.V_DESC_LAND,
            "desc_fast_dur": max(0.0, (C.ALT_M - C.H_SWITCH_AGL) / C.V_DESC_FAST),
            "desc_total": max(0.0, (C.ALT_M - C.H_SWITCH_AGL) / C.V_DESC_FAST) + C.H_SWITCH_AGL / C.V_DESC_LAND + 1.5}
@@ -358,7 +362,7 @@ async def main():
                 ev("denial", episode_id=ep["episode_id"], t_inj_sim=round(now_sim, 3), inj_t_rel=round(t_rel, 3))
             # K2 B3/D1: pos_flag z dead-reckoning (wzór gate:267). Uzbrojony po denialu (K2_INJECT_T) LUB
             # domyślnie po wejściu w pasmo (faza orbity) — chyba że K2_LEGACY_UNARMED (replay).
-            arm = (denial_done or (K2_ARM_MONITOR and t_entry is not None))
+            arm = (denial_done or (K2_ARM_MONITOR and (W_ARM_ALWAYS or t_entry is not None)))
             pf = dr if arm else None
             d_dec = shield.step(tick, own, vel, tgt, mode=M_PATROL, pos_flag=pf)
             is_pos = (d_dec["decision"] == REFUSE and d_dec.get("reason") == POS_DEGRADED)
