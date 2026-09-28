@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/olga/projects/liquidpatrol/bench/bench_flight.py", line 434, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/base_events.py", line 687, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/olga/projects/liquidpatrol/bench/bench_flight.py", line 201, in main
+    ctrl_sha = controller_sha(make_controller(CONTROLLER, params=exec_params, orbit_dir="CCW", vmax=V_MAX))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/olga/projects/liquidpatrol/r03/controllers/__init__.py", line 28, in make_controller
+    return cls(**kw)
+           ^^^^^^^^^
+TypeError: RouteFollower.__init__() got an unexpected keyword argument 'params'
+Exception ignored in: <function System.__del__ at 0x7b4f245d1120>
+Traceback (most recent call last):
+  File "/home/olga/.local/lib/python3.12/site-packages/mavsdk/system.py", line 146, in __del__
+  File "/home/olga/.local/lib/python3.12/site-packages/mavsdk/system.py", line 186, in _stop_mavsdk_server
+ImportError: sys.meta_path is None, Python is likely shutting down

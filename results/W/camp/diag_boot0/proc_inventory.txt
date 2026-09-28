@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga         980 15.2  1.4 73742176 459952 pts/0 Sl+  21:58   1:48 claude
+olga        4811  1.1  0.0   5032  3880 ?        S    22:10   0:00 bash harness/run_boot.sh
+root         248  0.1  0.1 2681084 55532 ?       Ssl  21:58   0:01 /usr/bin/containerd
+root         345  0.1  0.2 2573816 81468 ?       Ssl  21:58   0:00 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         588  0.0  0.0 1233616 11988 ?       Sl   21:58   0:00 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root         727  0.0  0.0   3200  1248 ?        S    21:58   0:00 /init
+root           1  0.0  0.0  21980 13320 ?        Ss   21:58   0:00 /sbin/init
+dnsmasq      612  0.0  0.0 216768 28444 ?        Ss   21:58   0:00 postgres
+root          86  0.0  0.0  26536  7644 ?        Ss   21:58   0:00 /usr/lib/systemd/systemd-udevd
+root          40  0.0  0.0  50468 16388 ?        S<s  21:58   0:00 /usr/lib/systemd/systemd-journald
+root         253  0.0  0.0 107056 23272 ?        Ssl  21:58   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+olga         774  0.0  0.0  20392 11608 ?        Ss   21:58   0:00 /usr/lib/systemd/systemd --user
+polkitd      200  0.0  0.0 308180  8196 ?        Ssl  21:58   0:00 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     176  0.0  0.0  21352 13200 ?        Ss   21:58   0:00 /usr/lib/systemd/systemd-resolved
+syslog       212  0.0  0.0 222524  6060 ?        Ssl  21:58   0:00 /usr/sbin/rsyslogd -n -iNONE
+systemd+     177  0.0  0.0  91068  8028 ?        Ssl  21:58   0:00 /usr/lib/systemd/systemd-timesyncd
+dnsmasq      718  0.0  0.0 216924  7152 ?        Ss   21:58   0:00 postgres: background writer 
+root         205  0.0  0.0  17988  8848 ?        Ss   21:58   0:00 /usr/lib/systemd/systemd-logind
+message+     195  0.0  0.0   9780  5496 ?        Ss   21:58   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
