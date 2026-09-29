@@ -153,7 +153,7 @@ def _wrap(s, width=40):
     return out
 
 
-def draw_panel(panel, rd, cfg, sim, trail):
+def draw_panel(panel, rd, cfg, sim, trail, t_cap=None):
     panel[:] = PANEL_BG
     x0 = 30
     _txt(panel, "LIQUIDPATROL - DEMO_V3", (x0, 42), 0.62, DIM, 1)
@@ -218,7 +218,7 @@ def draw_panel(panel, rd, cfg, sim, trail):
             trk = d["trk_pos_ned"]
             cv2.circle(panel, (int(mcx + trk[1] * scale), int(mcy - trk[0] * scale)), 4, RED, -1)
     # caption
-    cap = caption_at(cfg["_captions"], t_rel)
+    cap = caption_at(cfg["_captions"], t_rel if t_cap is None else t_cap)
     if cap:
         lines = _wrap(cap, 46)
         y = H - 46 - 20 * 3 - 18 - 30 * len(lines)
@@ -232,7 +232,7 @@ def draw_panel(panel, rd, cfg, sim, trail):
         y += 20
 
 
-def compose(rd, cfg, sim, trail):
+def compose(rd, cfg, sim, trail, t_cap=None, speed=1):
     canvas = np.zeros((H, W, 3), np.uint8); canvas[:] = BG
     fr = rd.frame_at(sim)
     if fr.ndim == 2:
@@ -244,7 +244,9 @@ def compose(rd, cfg, sim, trail):
     y0 = (H - fh) // 2
     canvas[y0:y0 + fh, 0:FLIGHT_W] = fr
     panel = canvas[:, FLIGHT_W:W]
-    draw_panel(panel, rd, cfg, sim, trail)
+    draw_panel(panel, rd, cfg, sim, trail, t_cap=t_cap)
+    if speed and speed > 1:
+        cv2.putText(canvas, f"x{speed:g}", (24, 60), F, 1.4, (60, 200, 245), 3, cv2.LINE_AA)
     return canvas
 
 
@@ -327,12 +329,43 @@ def cmd_sanity(run_dir, act_json, sims, outdir):
     print(json.dumps(rep, indent=1))
 
 
+def cmd_cut(run_dir, cut_json, out_mp4):
+    """ANEKS_DEMO3-3: cut dynamiczny — segmenty [t0,t1,speed] (speed=N => xN, N<=8, marker jawny);
+    captions kluczowane czasem WYJSCIOWYM (reflow, zdania nietykalne); sim_t stale widoczny (panel)."""
+    cfg = json.load(open(cut_json))
+    timed, cards = load_captions(cfg["captions"])
+    cfg["_captions"] = timed.get(cfg["cap_key"], [])
+    cfg["_footer"] = cards["FOOTER"]
+    rd = RunData(run_dir)
+    vw = cv2.VideoWriter(out_mp4, cv2.VideoWriter_fourcc(*"mp4v"), FPS, (W, H))
+    trail = []
+    t_out = 0.0
+    last_trail_sim = -1e9
+    for seg in cfg["segments"]:
+        sp = seg.get("speed", 1)
+        assert sp <= 8, "N>8 zakazane (ANEKS_DEMO3-3)"
+        n = int(round((seg["t1"] - seg["t0"]) / sp * FPS))
+        for k in range(n):
+            sim = seg["t0"] + k * sp / FPS
+            if sim - last_trail_sim >= 2.0:
+                d = rd.demo_at(sim)
+                if d:
+                    own = d["own_pos_ned"]; trail.append((own[1], own[0], (90, 130, 90)))
+                last_trail_sim = sim
+            vw.write(compose(rd, cfg, sim, trail, t_cap=t_out, speed=sp))
+            t_out += 1.0 / FPS
+    vw.release()
+    print(f"[cut] {out_mp4}  {t_out:.1f} s wyjscia z {len(cfg['segments'])} segmentow")
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1]
     if cmd == "act":
         cmd_act(sys.argv[2], sys.argv[3], sys.argv[4])
     elif cmd == "title":
         cmd_title(sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+    elif cmd == "cut":
+        cmd_cut(sys.argv[2], sys.argv[3], sys.argv[4])
     elif cmd == "concat":
         cmd_concat(sys.argv[2], sys.argv[3:])
     elif cmd == "sanity":

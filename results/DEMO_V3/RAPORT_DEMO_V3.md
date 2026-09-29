@@ -150,3 +150,50 @@ klatki; touchdown zachodzi po zamknięciu trace'u (teardown), poza materiałem.
    pełna treść w repo — do werdyktu kanoniczności ANEKS_DEMO3-2 (EN renderingi zdań WOLNO).
 4. „sha wideo" w outro = samoreferencja — prowieniencja w outro bez sha; sha w §12 (precedens
    DEMO_V2 §1).
+
+
+---
+
+# SESJA 3 (ANEKS_DEMO3-2 C1–C3 + ANEKS_DEMO3-3 SHORT) — post-produkcja, zero bootów
+
+## §14. C1–C3 wykonane (wszystkie tekstowe/renderowe)
+- **C1**: karta OUTRO niesie pełny zakres kanonu W — dopisana linia „All results: SITL,
+  emulated track feed (10 Hz / 0.2 s / sigma 0.5 m); wind campaign flown in one scenario
+  geometry (cell c11), constant wind vector."
+- **C2**: OUTRO/NET „preregistered 0.9 threshold" → „preregistered threshold of 0.9x its
+  teacher's success rate".
+- **C3 ZWERYFIKOWANE (kod + trace, nie zgadywane):** D5 (`safe_descend_step`) biegnie
+  WYŁĄCZNIE w gałęzi `is_pos` = REFUSE(POS_DEGRADED) — `bench/bench_flight.py:372-380`;
+  dla GEOFENCE działa `bench/bench_flight.py:384-386` (`set_velocity_ned(0,0,0,0)` = hover)
+  + `:394-395` (`done=True`, „hover + koniec epizodu"). Trace take_2: ZERO eventów D5;
+  opadanie po refuse (19.3→9.8 m do reset_done 193.01, potem lądowanie) = reset epizodu
+  + koniec lotu po stronie HARNESSU. ⇒ caption ACT3 finałowy: „The climb is refused and
+  held; the flight ends in a controlled descent." (wariant harnessowy z C3; „shield takes
+  over" usunięte — klasa erratum #3 domknięta).
+
+## §15. Wersje wideo (polityka DEMO_V2: nic nie znika)
+| plik | długość | sha256 |
+|------|---------|--------|
+| `DEMO_V3_rc1.mp4` (przed C1–C3) | 362.6 s | `eac816983fcea2fb03e28ac8ad7d2a4bf9dcb0c64c808f0177480be5d0c10e81` |
+| `DEMO_V3.mp4` (obowiązująca, C1–C3) | 362.6 s | `8228218d8398b157050f26e43526f8c17461d09d440d8dcd47a8d4524a9503f0` |
+| `DEMO_V3_SHORT.mp4` (ANEKS_DEMO3-3) | **171.0 s (2:51)** | `280dc9a237978af08cc2aecdce91eb7ff83a6a33737921d831183c6093454da1` |
+
+## §16. DEMO_V3_SHORT — cutlista (podkomenda `cut`; sim_t stale widoczny, marker ×N jawny)
+| akt | segmenty sim [t0,t1]×N | wyjście |
+|-----|------------------------|---------|
+| intro | karta INTRO (tekst nietknięty) | 5.0 s |
+| 1 | [85,93]×4 · [93,113]×4 · [113,123]×1 · [123,156]×1 (orbita ~1 okrążenie 1:1) | 50.0 s |
+| 2 | [87,95]×8 · [95,115]×4 · [115,130]×1 · [130,153]×1 (orbita <1 okr. 1:1) | 44.0 s |
+| 3 | [89,99]×8 · [99,119]×4 · [119,158]×4 · **[158,199]×1 = CAŁY segment sejwu 41 s 1:1** (REFUSE @ wyjście 39.7 s aktu) | 57.0 s |
+| outro | karta OUTRO pełna (po C1/C2) | 15.0 s |
+Max N=8 ≤ 8; orbity 1:1 ≤2 okrążeń per akt (kompresje ×N to kategoria przelotów, z markerem).
+Captions skrótu: sekcja ACT1S/ACT2S/ACT3S w CAPTIONS_VERBATIM — **zdania byte-identyczne
+z pełnymi** (weryfikowalne diffem), wyłącznie reflow czasowy na sekundy wyjściowe; pominięte
+w skrócie (cut, nie edycja): ACT1 „A quadrotor waits…" i „End of the first take…", ACT2
+„The observation orbit holds…" i „End of the second take.", z pełnej listy — reszta obecna.
+
+## §17. Higiena sesji 3
+Zero bootów (post-produkcja na osądzonych klatkach). ARCH-1: `ANEKS_DEMO3-2.md` (kopia
+z Downloads, byte-identyczna) + `ANEKS_DEMO3-3.md` (verbatim z sesji) w korzeniu. Jeden
+commit (ten). Skuteczność ANEKS_DEMO3-2 = z chwilą tego commita (§3.2). Push = Olga.
+Ostatnia bramka filmu = seans Olgi.
