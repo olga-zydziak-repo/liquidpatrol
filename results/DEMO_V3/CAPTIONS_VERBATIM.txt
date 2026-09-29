@@ -1,0 +1,30 @@
+# CAPTIONS_VERBATIM — DEMO_V3 (PROMPT_DEMO_V3 §5/§6). Wersja robocza: czasy [@ t0-t1] w sim_t
+# względnym aktu, do finalizacji po bootach; TEKSTY finalne do werdyktu kanoniczności (ANEKS_DEMO3-1).
+# Kategorie dozwolone (D3-2): (a) zdania OPISOWE o tym, co widać; (b) zdania kanonów — wierne EN
+# renderingi zdań WOLNO z RAPORT_W §5 / RAPORT_NET §11 / RAPORT_K2 §7 (precedens EN: DEMO_V2 §6).
+# Zero innych kategorii. Footer stały (brzmienie DYKTOWANE w PROMPT_DEMO_V3 §6).
+
+[FOOTER] the network flies through the same frozen shield in the bench loop; ALL shield branches armed (geofence, envelope, position-health); in Act 3 the shield's preventive refusal is shown
+
+[INTRO] LIQUIDPATROL - DEMO V3\n\nOne continuous take per act: a 20-neuron liquid network flies patrol-and-observe\nunder a frozen safety shield, in calm air and in constant wind.\n\nSITL; emulated track feed; seeds chosen for demonstration -\nverdict numbers cited from ratified reports.
+
+[ACT1 @ 4-18] Takeoff from home. The quadrotor climbs to its 10 m patrol altitude. Calm air in this act.
+[ACT1 @ 22-40] In command: a 20-neuron liquid network (CfC, ~1.9k parameters), trained by pure imitation on 114 demonstrations; its weight identity is verified at every start.
+[ACT1 @ 48-62] A separate aircraft crosses the area. The network approaches and settles into a slow observation orbit.
+[ACT1 @ 70-92] Canon (NET): in SITL flight the network matches its scripted teacher (45/48 vs 44/48; 47/48 agreeing pairs on identical scenarios), under an emulated track feed (10 Hz, 0.2 s, sigma 0.5 m).
+[ACT1 @ 100-116] Every value on this panel is rendered from the flight's own logs and manifests - nothing is drawn by hand.
+[ACT1 @ 124-140] The orbit continues at walking pace. The mini-map shows the geofence R_E = 32 m; the flight stays well inside.
+
+[ACT2 @ 4-20] Same task, same network - now with a constant 1.5 m/s wind blowing east (panel arrow). The aircraft leans into it.
+[ACT2 @ 28-46] Canon (W): under constant wind up to 3 m/s, 17 armed flights produced zero false refusals of any kind and zero position-health refusals; dead-reckoning stayed false in every one.
+[ACT2 @ 54-70] The tilt readout comes from the flight log: the wind signature is a steady lean, growing with wind level (medians ~3 deg calm, ~9 deg at 1.5 m/s, ~10-13 deg at 3 m/s).
+[ACT2 @ 78-94] Wind is a disturbance here, not a failure: the estimator stays healthy and the shield stays quiet.
+[ACT2 @ 102-118] The observation orbit holds its band; timing and distances on the panel are read from the same logs that the campaign judges read.
+
+[ACT3 @ 4-20] Act 3 is a demo re-flight of the exact campaign configuration (3 m/s wind, same seed, same network) in which the shield made its first active intervention.
+[ACT3 @ 26-44] Watch the altitude bar: the network slowly drifts upward, toward the red line - the vertical envelope V_E = 20 m.
+[ACT3 @ 52-68] The drift is a property of the learned controller, present in the wind-model habitat already at zero wind; wind and seed modulate its size.
+[ACT3 @ 76-96] Canon (W): the shield's refusal was preventive and on the COMMAND (|target z| > V_E) - position 19.79 m, still below the envelope, estimator healthy (0.024 m vertical error). One measured case: existence and mechanism, not a rate.
+[ACT3 @ 100-114] The shield takes over: refuse, hover, controlled descent. The geofence margin never dropped below 6.4 m in the whole campaign.
+
+[OUTRO] Canon (W): zero false refusals of any kind and zero position-health refusals in 17 armed\nflights under constant wind up to 3 m/s; the false-refusal criterion was frozen before the campaign.\n\nCanon (NET): a 20-neuron liquid network, trained by imitation, matches its scripted teacher in\nSITL flight (45/48 vs 44/48; 47/48 agreeing pairs) and passes the preregistered 0.9 threshold.\n\nCanon (K2): under real GNSS denial during the learned controller's orbit, the shield refused in\n0.104-0.116 s and flew the shared descent to touchdown 12/12, never breaching the R_E envelope.\n\nProvenance: worlds world_wind_v3_s0/s1p5/s3 (sha in per-boot manifests) - weights NCP-20\n0337d5ea (verified at start) - repo: DEMO_V3 session commit; video sha in RAPORT_DEMO_V3.
