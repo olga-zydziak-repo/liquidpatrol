@@ -160,12 +160,21 @@ Sesje S1 (lustro+różnicówka+O1), S2 (M-krok+O2), S3 (O3+O4). Werdykt bramki n
   **ZOSTAJE OTWARTE.**
 Rozliczenie: P-CC2-1 i P-CC2-3 przy RAPORT_FV (powyżej); P-CC2-2 przy warstwie 0 / odpowiedzi SPRIND.
 
-### NOGA W (wiatr, poz.2b) — prerejestrowane 19.09.2026 (PRE_W §13, ANEKS_W-0 §3)
-- **P-W-1:** 0 REFUSE jakiegokolwiek rodzaju na całej siatce kryterialnej — p≈0.75.
-- **P-W-2:** próba arm z ziemi przy 4.5 m/s = FAIL — p≈0.7.
-- **P-W-3:** W-A hover 3 m/s: dead_reckoning=false przez całe okno, eph_max < 1 m — p≈0.75.
-- **P-W-4:** parowanie NCP↔executor przy 3 m/s: ≤2 różnice netto (brak załamania architektury
-  pod stałym wiatrem) — p≈0.55.
-- **P-W-5:** przechył średni w hoverze W-A rośnie monotonicznie z poziomem i separuje 0 od 3 m/s — p≈0.8.
-Rozliczenie: wyłącznie przy RAPORT_W (ANEKS_W-2). Status wstępny P-W-2/3/5 możliwy po W-A (S1),
-BEZ rozliczania (SR: rozliczenie tylko przy RAPORT_W).
+## NOGA W (wiatr, poz.2b) — ROZLICZONE przy RAPORT_W (ANEKS_W-2 §4, 29.09.2026)
+Prerejestrowane 19.09.2026 (PRE_W §13, ANEKS_W-0 §3):
+- **P-W-1 ✗:** „0 REFUSE jakiegokolwiek rodzaju na całej siatce kryterialnej" (p≈0.75) —
+  PADA: REFUSE(GEOFENCE) L3/net_s02, PRAWDZIWY (`results/W/RAPORT_W.md:§2`). Chybienie
+  przyniosło główny wynik nogi; dokładnie po to REFUSE⇒STOP było zamrożone.
+- **P-W-2 ✗:** „próba arm z ziemi przy 4.5 m/s = FAIL" (p≈0.7) — PADA: 4.5 armuje
+  (W-A boot4, arm_ok=True; RAPORT_W_A).
+- **P-W-3 — POZA SUMĄ (nietestowalna):** „W-A hover 3 m/s: dr=false, eph_max<1" (p≈0.75) —
+  hover @3.0 nie zaistniał (no-climb = artefakt modułu infra1, `results/W/RAPORT_W.md:§4`);
+  warunek antecedensu pusty.
+- **P-W-4 — POZA SUMĄ (nietestowalna):** „parowanie NCP↔executor @3 m/s: ≤2 różnice netto"
+  (p≈0.55) — siatka L3 przerwana OBOWIĄZKOWYM STOP po 2 parach; 2 pary to za mało na zdanie
+  o ≤2 różnicach netto (dolatywanie po znalezisku = selekcja).
+- **P-W-5 ✓:** przechył monotoniczny z poziomem i separuje 0 od 3 m/s (p≈0.8) — mediany
+  ~3° → ~9° → ~10–13°, parytet ramion (`results/W/RAPORT_W.md:§3`).
+
+**Suma nogi W: 1 ✓ / 2 ✗ (+2 poza sumą z przyczynami).** Kalibracja CC: obie ✗ to
+przewidywania o zachowaniu środowiska/systemu pod wiatrem — reguła 9 potwierdzona kolejny raz.
