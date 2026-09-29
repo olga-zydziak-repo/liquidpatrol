@@ -1,133 +1,161 @@
-RAPORT_W_S2 — STOP-W2: R-NC boot-0 rozbity PRZED lotem (CONTROLLER=route niewykonalny w zamrożonym przyrządzie)
-==============================================================================================================
-CC · 28.09.2026 · PROMPT_W_S2 · autoryzacja ANEKS_W-1. Raport STOP (nie raport kampanii —
-kampania W-B NIE wystartowała; zero epizodów kryterialnych, zero REFUSE, zero breach).
-
-Hashe S1 (ANEKS_W-1 §1, linia pierwsza per prompt §0.1):
-`2529c5a0b9060653f311f79793d70bb71ed1111d` [CB] · `d7663100879ea7283ad9bd645ce2d1ba2dd79438` [CW-A].
-Commit C-F (FREEZE_W): `c1fb143deabe51344890536d8eb57a30c91df88d` — wykonany i WYPCHNIĘTY.
+RAPORT_W_S2 — sesja S2 nogi W: R-NC + kampania W-B 16/18 → STOP-W2 (S2-C: REFUSE R-G na L3/net_s02)
+====================================================================================================
+CC · 29.09.2026 · PROMPT_W_S2 · autoryzacje: ANEKS_W-1 + ANEKS_W-1b (errata route→orbit).
+Hashe (§0.1, linia pierwsza): S1 [CB] `2529c5a0b9060653f311f79793d70bb71ed1111d` ·
+S1 [CW-A] `d7663100879ea7283ad9bd645ce2d1ba2dd79438` · C-F `c1fb143deabe51344890536d8eb57a30c91df88d` ·
+STOP-crash `39bf7b7c24acc907ece290a9cdef85bdd0981fa2` · ARCH-1b `2803aad8985e48ce83761d012d4ea2f16a370e57`.
 
 
-§0. Stan zastany i bramka wejścia
----------------------------------
-Sesja bieżąca (28.09) jest WZNOWIENIEM: poprzednia sesja S2 (20–21.09) wykonała §1 (C-F)
-i odpaliła boot-0 R-NC, po czym urwała się na jego crashu bez raportu i bez commitu artefaktów
-(katalog `results/W/camp/diag_boot0/` untracked, bez manifestu).
-
-- §0.1: `git fetch` → `git log origin/master..HEAD` PUSTE ⇒ „dalej" (S1 + C-F wypchnięte).
-- §0.3 integralność freeze: sha256 wszystkich 11 plików tabeli FREEZE_W §1 przeliczone
-  z drzewa roboczego — **11/11 zgodne** (w_judge e68040ae… · tests_w_judge 00886e9f… ·
-  w_launcher 28df8928… · w_tilt b22be3d0… · tests_w_arm_always f0b189f5… · bench_flight
-  3a52e19f… · s0 921bdda7… · s1p5 b8380e8a… · s3 73214a2d… · s4p5 cf9df7b8… ·
-  x500_base/model.sdf 13c9174d…). Przyrząd NIE był cicho zmieniany.
-- Zero zmian kodu w tej sesji (S2-A). Zero nowych bootów w tej sesji (STOP §2 niżej
-  rozpoznany PRZED jakimkolwiek startem).
-
-
-§1. Boot-0 R-NC (20.09, sesja poprzednia) — przebieg faktograficzny
--------------------------------------------------------------------
-OUTDIR `results/W/camp/diag_boot0/` (przez w_launcher: lock, pgrep czysty, proc_gate CLEAN
-loadavg=0.26). Stack wstał normalnie: MicroXRCEAgent OK, PX4 SITL model gz_x500_mono_cam,
-world=world_wind_s3 HEADLESS=1, rtf_sampler na /world/world_wind_s3/clock, b4_state
-orphans 0/0.
-
-Moduł lotu FLIGHT=bench: **crash przed uzbrojeniem** — `act.log` (verbatim, koniec śladu):
-
-    File ".../bench/bench_flight.py", line 201, in main
-      ctrl_sha = controller_sha(make_controller(CONTROLLER, params=exec_params, orbit_dir="CCW", vmax=V_MAX))
-    File ".../r03/controllers/__init__.py", line 28, in make_controller
-      return cls(**kw)
-    TypeError: RouteFollower.__init__() got an unexpected keyword argument 'params'
-
-Skutki: `trace.jsonl` 0 linii, BRAK manifestu, BRAK ulog, zero armu, zero lotu. Nie było
-drugiego podejścia (`diag_boot0_r` nie istnieje).
+§0. Przebieg sesji i podstawy formalne
+--------------------------------------
+1. 20–21.09 (sesja urwana): C-F FREEZE_W `c1fb143deabe51344890536d8eb57a30c91df88d`;
+   boot-0 R-NC z literalnym `CONTROLLER=route` → crash przyrządu PRZED armem (TypeError
+   fabryki). Raport crashu + ślad: commit `39bf7b7` (wersja tego pliku z 28.09, verbatim
+   w historii git) — kategoria „crash przyrządu", POZA budżetem (ANEKS_W-1b §3).
+2. 28.09: ANEKS_W-1b (errata: „route-executor"≡`CONTROLLER=orbit`; crash nie liczy się do
+   budżetu ani do licznika R-NC). ARCH-1: `ANEKS_W-1b.md` commit `2803aad`. Push `39bf7b7`
+   na origin potwierdzony PRZED kontynuacją. Sha egzekutora zweryfikowane:
+   orbit_executor.py `840514361e4ae5e93ddbb0dd31a7dae81832805b90abccc334d84bbd043730d4`,
+   executor_params.json (plik) `12c14adb83efc762e2b2c8f3119d747bdcac5ae865250e9be7ed4a7c40844d9c`
+   (w manifestach pole exec_params_sha = sha kanonicznego JSON `5a724499…` — obie tożsamości
+   spójne, jak w całej historii ławki).
+3. FREEZE_W: 11/11 sha zgodnych z drzewem (weryfikacja 28.09). Zero zmian kodu w S2 (S2-A);
+   jedyne commity = dokumenty + wyniki.
+4. Wyłączność: każdy boot przez w_launcher (lock+pgrep+guard OUTDIR), zero kolizji,
+   cooldowny ≥300 s trzymane (wbudowane przed każdym startem). Host po sesji czysty
+   (pgrep gz/px4/agent pusty).
 
 
-§2. Atrybucja defektu — fakty z kodu (bez interpretacji ponad źródła)
----------------------------------------------------------------------
-1. Rejestr `r03/controllers/__init__.py`: `route`→RouteFollower · `orbit`→OrbitExecutor ·
-   `net`→NetController.
-2. `RouteFollower.__init__(self, wps, vmax, alt, wp_reach_m=1.0)` (route_follower.py:24) —
-   kontroler TRASY gate_r03; NIE przyjmuje `params`/`orbit_dir`/`home_ned`.
-3. Zamrożony `bench_flight.py` woła fabrykę bezwarunkowo z `params=…, orbit_dir=…`
-   (linie 201 i 306) ⇒ `CONTROLLER=route` z FLIGHT=bench crashuje DETERMINISTYCZNIE,
-   zawsze, przed armem. To nie jest flake ani habitat.
-4. `bench_flight.py:56`: `CONTROLLER = os.environ.get("CONTROLLER", "orbit")` (docstring:
-   „CONTROLLER (orbit)"). Gałąź `bench)` run_boot.sh nie nadpisuje env ⇒ crash DOWODZI,
-   że poprzednia sesja jawnie ustawiła `CONTROLLER=route` — czyli wykonała ANEKS_W-1 §3
-   LITERALNIE (S2-B), zgodnie z literą protokołu.
-5. Historia ławki (grep meta w results/K2 + results/NET + results/BENCH): ramię
-   deterministyczne ZAWSZE `controller: "orbit"` (OrbitExecutor, controller_sha
-   840514361e4ae5e93ddbb0dd31a7dae81832805b90abccc334d84bbd043730d4; 35+ epizodów),
-   ramię uczone `"net"`. Wartość `route` z FLIGHT=bench nie poleciała nigdy.
-6. PRE_W §2 (ratyfikowane) nazywa ramiona: „**route-executor**, NCP-20". ANEKS_W-1 §3
-   literalizuje to jako `CONTROLLER=route`. W przestrzeni nazw przyrzędu ławki egzekutor
-   deterministyczny to `orbit`; `route` to inny byt (kontroler trasy r03).
-
-Wniosek: defekt NIE leży w zamrożonym kodzie (przyrząd działa dla orbit/net jak w K2/NET),
-lecz w RATYFIKOWANYM PARAMETRZE protokołu (ANEKS_W-1 §3 / PROMPT_W_S2 §2): wartość
-`CONTROLLER=route` jest niewykonalna. Klasa erratum nazewniczego („liczba/nazwa bez
-pokrycia w przyrządzie"), wykryta na boot-0, przed jakimkolwiek pomiarem kryterialnym.
-
-§2a. Dlaczego STOP, a nie cicha podmiana na `orbit`
-- S2-B: „R-NC wykonywana LITERALNIE — żadnego strojenia". Podmiana parametru = odstępstwo
-  od litery ratyfikowanej.
-- PROMPT §0.3: defekt ujawniony po freeze ⇒ STOP i pytanie — nigdy cicha poprawka.
-- Precedens K1 (ANEKS_K1-19 F3a): STOP = pytanie PRZED edycją treści ratyfikowanej.
-Intencja PRE_W §2 („route-executor" = egzekutor deterministyczny = `orbit`) jest moim
-zdaniem jednoznaczna, ale rozstrzygnięcie należy do ratyfikacji, nie do CC.
+§1. R-NC boot-0 (diag @3.0, `camp/diag_boot0_r`) — GAŁĄŹ (a)
+------------------------------------------------------------
+c11_s01 (episode_id 11), CONTROLLER=orbit, W_ARM_ALWAYS=1, world_wind_s3, kind=diag.
+- **Wznoszenie z ziemi: TAK** — z_max GT = 12.05 m (NO-CLIMB z W-A był artefaktem modułu
+  infra1, nie wiatru; pętla ławki wznosi i lata @3.0 normalnie).
+- **Wejście w pasmo wg bench_judge: TAK** — t_entry = 17.34 s; frac[6,10] = 0.684.
+- **Habitat V2′: VALID** (dsim_dwall 0.9381 ≥ 0.90, longest_stall 0.0, timejump 0).
+- REFUSE 0, breach false, dr_any False.
+⇒ Siatka pełna: {0, 1.5, 3.0} × {orbit, net} × {s01,s02,s03} = 18 bootów. Kontynuacja
+automatyczna (jedno podejście, licznik R-NC 1/2).
 
 
-§3. Pytania do ratyfikacji (oczekuję ANEKS_W-1a albo rozstrzygnięcia w ANEKS_W-2)
----------------------------------------------------------------------------------
-Q1. Czy „route-executor" z PRE_W §2 wykonuje się jako `CONTROLLER=orbit` (OrbitExecutor,
-    sha 84051436…, jedyny egzekutor deterministyczny ławki)? Ramię nadal raportowane
-    w siatce jako „executor"; `net` bez zmian. [propozycja CC: TAK]
-Q2. Budżet ≤27 bootów LOTNYCH (ANEKS_W-1 §4): czy crash boot-0 liczy się do budżetu?
-    Zero armu i zero lotu (trace pusty, brak manifestu), ale cykl bootowy env został
-    zużyty. [propozycja CC: NIE liczy się jako lotny — analogia diag/env-fail z K1 SR-K5
-    „ważność, nie proxy"; odnotowany osobno]
-Q3. R-NC „≤2 podejścia" (H2-b, próg wznoszenia): czy próba z 20.09 konsumuje 1. podejście?
-    Pomiar wznoszenia w ogóle nie zaszedł (crash przed armem). [propozycja CC: NIE —
-    podejścia liczą się od pierwszego startu wykonalnego; po ratyfikacji Q1 boot-0 idzie
-    od zera: `diag_boot0_r` jako pierwsze podejście, guard §9 blokuje reuse katalogu
-    z manifestem — tu manifestu brak, ale katalog z artefaktami crashu zostaje committed
-    jako ślad, więc retry idzie do NOWEGO katalogu `diag_boot0_r`]
-Do decyzji: zero bootów przed numerowaną ratyfikacją (sygnały bez numeru odrzucam).
+§2. Kampania kryterialna — tabela per epizod (16 bootów wykonanych, STOP po 16.)
+--------------------------------------------------------------------------------
+Kolejność literalna: poziomy rosnąco, przeplot ramion per ziarno. Wiatr ENU +x.
+Kolumny: valid V2′ (dsw) · t_entry · frac[6,10] · d_min approach [m] · r_max [m] (margines
+do R_E=32) · eps_cap_used [m z 9.25] · vmax GT [m/s] (V_ENV=6.0, flaga przekr.) · z_max GT
+[m] · dr_any · REFUSE.
+
+| boot | V2′(dsw) | t_e | frac | d_min | r_max(marg) | eps | vGT | z_max | dr | REF |
+|------|----------|------|-------|-------|--------------|------|------|-------|----|-----|
+| L0/orbit_s01   | VALID(.960) | 16.69 | 0.698 | 6.07 | 23.43 (8.57) | 0.68 | 3.43 | 11.77 | F | 0 |
+| L0/net_s01     | VALID(.951) | 14.56 | 0.844 | 6.98 | 25.21 (6.79) | 2.46 | 2.37 | 18.45 | F | 0 |
+| L0/orbit_s02   | VALID(.948) | 13.94 | 0.769 | 3.55 | 19.39 (12.61)| 0.00 | 2.46 | 12.40 | F | 0 |
+| L0/net_s02     | VALID(.944) | 13.99 | 0.899 | 5.64 | 20.52 (11.48)| 0.00 | 2.24 | 13.88 | F | 0 |
+| L0/orbit_s03   | VALID(.937) | 14.27 | 0.815 | 4.17 | 24.89 (7.11) | 2.14 | 2.46 | 12.16 | F | 0 |
+| L0/net_s03     | VALID(.938) |  9.17 | 0.831 | 6.41 | 17.38 (14.62)| 0.00 | 3.73 | 14.91 | F | 0 |
+| L1p5/orbit_s01 | VALID(.911) | 14.46 | 0.797 | 1.27 | 25.40 (6.60) | 2.65 | 2.59 | 11.78 | F | 0 |
+| L1p5/net_s01   | VALID(.938) | 14.40 | 0.886 | 1.70 | 25.12 (6.88) | 2.37 | 2.58 | 13.48 | F | 0 |
+| L1p5/orbit_s02 | VALID(.939) | 14.38 | 0.756 | 4.78 | 18.90 (13.10)| 0.00 | 2.47 | 11.93 | F | 0 |
+| L1p5/net_s02   | VALID(.938) | 14.34 | 0.877 | 6.65 | 20.89 (11.11)| 0.00 | 2.45 | 16.44 | F | 0 |
+| L1p5/orbit_s03 | VALID(.938) | 14.38 | 0.835 | 3.84 | 25.23 (6.77) | 2.48 | 2.55 | 12.18 | F | 0 |
+| L1p5/net_s03   | VALID(.936) | 14.31 | 0.833 | 3.42 | 25.12 (6.88) | 2.37 | 2.56 | 12.40 | F | 0 |
+| L3/orbit_s01   | VALID(.939) | 14.86 | 0.786 | 1.18 | 25.35 (6.65) | 2.60 | 2.59 | 12.08 | F | 0 |
+| L3/net_s01     | VALID(.908) | 14.64 | 0.845 | 1.86 | 25.51 (6.49) | 2.76 | 2.53 | 12.96 | F | 0 |
+| L3/orbit_s02   | VALID(.939) | 14.68 | 0.771 | 4.68 | 18.39 (13.61)| 0.00 | 2.48 | 11.89 | F | 0 |
+| **L3/net_s02** | VALID(.930) | 14.58 | 0.856 | 6.03 | 20.53 (11.47)| 0.00 | 2.70 | **19.77** | F | **1 GEOFENCE** |
+
+NIEWYKONANE (STOP §3): L3/orbit_s03, L3/net_s03. Flaga vmax>V_ENV: 0/16. Breach R_E: 0/16.
+Kadencja t_entry/frac/d_min z bench_judge (sędzia bazowy niezmieniony); w_judge tylko dokłada w_*.
 
 
-§4. Uzupełnienie danych W-A (PROMPT §0.5 / ANEKS_W-1 §2 — zero relotów)
-------------------------------------------------------------------------
-Z istniejących artefaktów `results/W/probe/**` (wa_metrics.json: ekf_eph_max;
-habitat.json: hover_seg.dsim_dwall, hover_seg.min_rtf) — przeliczone w tej sesji,
-zgodne 1:1 z tabelą ANEKS_W-1 §2:
+§3. STOP S2-C — REFUSE na L3/net_s02: pełna klasyfikacja (główny pomiar nogi)
+------------------------------------------------------------------------------
+**Zdarzenie:** `ev=refuse, reason=GEOFENCE, r_est=19.98, sim=179.556` (t_rel=68.5 s epizodu,
+tuż przed końcem T_orb=70); następnie protokołowy hover + episode_end + reset_done. Breach
+R_E: NIE (r_max=20.53, margines 11.47 m). Trace/ulog/manifest komplet w
+`results/W/camp/L3/net_s02/` (ulog_sha w manifeście; boot.ulg poza gitem per gitignore).
 
+**Tor tripu (rekonstrukcja z osłony r01/shield.py:101-112 + stanu):** bariera R-G, gałąź
+PIONOWA: EKF |z|=19.787 < V_E=20.0 w ticku tripu ⇒ zadziałała gałąź celu
+`|target_z| > V_E` — NCP podał cel poniżej pułapu obwiedni (cmd_vz NED mediana −0.118 m/s
+przez ostatnie 30 s = uporczywa komenda wznoszenia przy z≈19.8). Bariera zadziałała
+PREWENCYJNIE, zanim pozycja przekroczyła obwiednię.
+
+**Klasyfikacja (PRE_W §5 + liczby okna):** REFUSE **NIE jest z toru POS** —
+dead_reckoning=False cały lot, w_judge n_refuse(POS)=0. Okno 1 s przed tripem (20 ticków,
+metoda w_judge): |EKF−GT| poziom mediana **0.099 m** (max 0.108), pion mediana **0.024 m**
+(max 0.026), eph 0.151. Estymator ZDROWY, stan realny ⇒ w nomenklaturze nogi to REFUSE
+**PRAWDZIWY** (osłona zatrzymała RZECZYWISTE wyjście poza obwiednię pionową; mediana błędu
+0.099 ≪ ε_false=2.0 — nawet gdyby liczyć regułą POS, nie byłby to fałszywy alarm toru
+estymacji, tylko poprawna reakcja na stan).
+
+**Mechanizm (z profilu GT):** z(t_rel) epizodu = 8.2 → 11.4 → 11.8 → 14.6 → 17.1 → 15.7 →
+18.8 → trip 19.78 m — systematyczny CREEP WYSOKOŚCI ramienia net. Wzorzec z_max całej
+kampanii: **orbit 11.77–12.40 m na wszystkich poziomach** (pion trzymany), **net 12.40–19.77 m
+Z L0 WŁĄCZNIE** (18.45 m przy wietrze ZERO, L0/net_s01) ⇒ skłonność do luźnego pionu jest
+WŁASNOŚCIĄ ramienia NCP (obecna bez wiatru), amplituda moduluje się per ziarno/poziom;
+do obwiedni dobił dopiero L3/net_s02. To pomiar degradacji pod przesunięciem domeny
+z zadziałaniem osłony — nie awaria przyrządu.
+
+**Nota rc:** proces bench_flight zakończył się rc=134 („terminate called without an active
+exception") PO linii `[bench] done` — artefakt teardownu C++ (gz/rclpy destruktor) po
+domknięciu lotu i zapisów; finalize przebiegł, manifest 1. klasy istnieje. Nie wpływa na dane.
+
+
+§4. Pary orbit↔net per (poziom, ziarno) — opisowo (zakaz języka istotności)
+---------------------------------------------------------------------------
+- frac[6,10]: net wyższy w 7/8 par (mediana net 0.850 vs orbit 0.786); wyjątek (1.5,s03)
+  parytet 0.833 vs 0.835.
+- r_max: pary zbieżne (Δ typ. <2 m); oba ramiona zawsze ≤25.51, margines ≥6.49 do R_E.
+- d_min approach: wspólny wzorzec per ziarno (s01@1.5/3.0 blisko 1.2–1.9 m w OBU ramionach —
+  własność geometrii ziarna, nie ramienia).
+- pion: patrz §3 — jedyna wyraźna asymetria ramion (orbit trzyma ALT, net pełza w górę).
+- t_entry: stabilne ~14–17 s wszędzie (wiatr nie opóźnia wejścia w pasmo).
+
+Przechył (w_tilt, okno=cały ulog — trace ławki nie emituje eventów hoveru; porównawczo OK):
+mediana per poziom: L0 2.14–3.85° · L1p5 8.08–9.90° · L3 9.69–12.79° — monotoniczny podpis
+wiatru, parytet ramion. (boot-0 diag: 1.40 — dłuższy segment naziemny w ulogu rozcieńcza
+medianę; nieporównywalny wprost.) p95: L0 12.6–17.3° · L1p5 18.7–21.9° · L3 25.7–29.0°.
+
+
+§5. Statystyka habitatów (V2′)
+------------------------------
+17/17 bootów lotnych VALID: dsim_dwall min 0.908 / mediana 0.938 / max 0.960 (wszystkie
+≥0.90), longest_stall 0.0 s wszędzie (n_deep_stall 0–3, niebramkujące per D9=V2′),
+timejump 0. eph nominał ~0.151 wszędzie. ZERO env-fail, ZERO ponowień, ZERO kolizji.
+
+
+§6. Uzupełnienie danych W-A (§0.5 — bez zmian od wersji 28.09, zweryfikowane źródłowo)
+--------------------------------------------------------------------------------------
 | boot | poziom | eph_max | Δsim/Δwall | min_rtf |
-|---------|-----------|--------|--------|--------|
-| 1 s0    | 0.0       | 0.1536 | 0.9437 | 0.0146 |
-| 2 s1p5  | 1.5       | 0.1535 | 0.9353 | 0.0057 |
-| 3 s3    | 3.0       | 0.1524 | 0.9364 | 0.0018 |
-| 3b s3   | 3.0 retry | 0.1524 | 0.9581 | 0.0316 |
-| 4 s4p5  | 4.5       | 0.1524 | 0.9875 | 0.0091 |
-
-Habitaty W-A 5/5 INVALID (Δsim/Δwall<0.95 na 4/5, głębokie dipy min_rtf) — env-bound,
-niebramkujące w W-A (kalibracja); zgodne z ANEKS_W-1 §2.
+|------|--------|---------|------------|---------|
+| 1 s0 | 0.0 | 0.1536 | 0.9437 | 0.0146 |
+| 2 s1p5 | 1.5 | 0.1535 | 0.9353 | 0.0057 |
+| 3 s3 | 3.0 | 0.1524 | 0.9364 | 0.0018 |
+| 3b s3 | 3.0 retry | 0.1524 | 0.9581 | 0.0316 |
+| 4 s4p5 | 4.5 | 0.1524 | 0.9875 | 0.0091 |
+(ANEKS_W-1b §5: przyjęte; INVALID W-A dotyczyło progu 0.95 przyrządu W-A, niebramkujące.)
 
 
-§5. Budżet i stan siatki
+§7. Budżet i stan siatki
 ------------------------
-Epizody kryterialne wykonane: **0/18**. Booty lotne zużyte w S2: **0** (crash 20.09 bez
-lotu — klasyfikacja per Q2). Budżet ANEKS_W-1 §4: pozostaje ≤27 lotnych (przy Q2=NIE).
-R-NC nierozstrzygnięta ⇒ skład siatki (18 vs 12) NIEZNANY. Statystyka habitatów kampanii:
-brak (zero epizodów).
+Booty lotne S2: **17/27** (boot-0 + 16 kryterialnych; crash 20.09 poza budżetem per
+ANEKS_W-1b §3, drugi crash nie wystąpił). Siatka: **16/18** — komplety L0 (6/6 VALID)
+i L1p5 (6/6 VALID); L3: orbit 2/2 wykonanych VALID, net 2/2 wykonanych VALID (w tym s02
+z REFUSE), s03 obu ramion NIEWYKONANE (STOP S2-C literalny: zero dalszych bootów po REFUSE).
+Reguła ≥2/3 ważnych ziaren per komórka: L0×2 i L1p5×2 spełnione 3/3; L3×orbit i L3×net mają
+po 2 ważne z 2 wykonanych — czy 2/3 przy nieodlecianym trzecim ziarnie wystarcza do werdyktu
+komórki, rozstrzyga ANEKS_W-2 (nie przesądzam). Kanon REFUSE: ledger = 1 (GEOFENCE,
+prawdziwy, L3/net/s02); tor POS przez całą kampanię CZYSTY (dr=False 17/17, 0 REFUSE(POS)).
 
 
-§6. Higiena repo (REPO-1 / S2-F)
---------------------------------
-`git status --porcelain` na wejściu sesji:
+§8. Higiena repo (REPO-1/S2-F) + hashe z git
+--------------------------------------------
+Hashe pełne w nagłówku (z `git log`). Porcelain przed commitem wyników: untracked
+`results/W/camp/{L0,L1p5,L3, diag_boot0_r}` + launch logi + zmodyfikowany RAPORT_W_S2.md;
+po commicie drzewo czyste (porcelain pusty — stan finalny w komunikacie sesji). Pliki
+dotknięte: wyłącznie ANEKS_W-1b.md (ARCH-1) + results/W/** (lista zamknięta §0.4). ulogi
+poza gitem (gitignore), tożsamość przez ulog_sha w manifestach. Push = Olga.
 
-    ?? results/W/camp/
-
-Po tej sesji: commit artefaktów crashu boot-0 (`results/W/camp/diag_boot0/`, po ścieżce,
-bez ulog — ulog nie powstał) + niniejszy raport ⇒ drzewo czyste. Pliki dotknięte w sesji:
-WYŁĄCZNIE `results/W/RAPORT_W_S2.md` (nowy). Lista zamknięta §0.4 dotrzymana. Push = Olga.
+Ratyfikacja wróci jako **ANEKS_W-2** (werdykt nogi + kanon per PRE §14); sygnały bez
+numeru odrzucam.

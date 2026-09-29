@@ -1,0 +1,53 @@
+{
+  "base": {
+    "t_entry_s": 17.34,
+    "frac_band_6_10": 0.6841,
+    "frac_tight_7_9": 0.4654,
+    "sweep_deg": 765.5,
+    "d_min_m": 3.018,
+    "refuse_count": 0,
+    "breach": false,
+    "success_D6": false,
+    "fail_reasons": [
+      "b_frac",
+      "d_dmin"
+    ],
+    "stalls": {
+      "n_deep": 7,
+      "longest_s": 0.0,
+      "dsim_dwall": 0.9093,
+      "timejump": 0
+    },
+    "valid_V1": false,
+    "valid_V2": false,
+    "valid_V3": true
+  },
+  "w": {
+    "eps_false_m": 2.0,
+    "window_s": 1.0,
+    "n_ticks_max": 20,
+    "wind_vec_enu": [
+      3.0,
+      0.0,
+      0.0
+    ],
+    "refuses": [],
+    "n_refuse": 0,
+    "n_refuse_false": 0,
+    "n_refuse_true": 0,
+    "flag_gspeed_gt_max": 2.431,
+    "flag_gspeed_over_venv": false,
+    "flag_r_max": 22.44,
+    "flag_r_margin_to_re": 9.56,
+    "flag_eps_cap_used": 0.0,
+    "dir_dist": {
+      "tailwind": 817,
+      "headwind": 706,
+      "crosswind": 1050,
+      "none": 707
+    },
+    "V_ENV": 6.0,
+    "R_E": 32.0,
+    "EPS_CAP": 9.25
+  }
+}

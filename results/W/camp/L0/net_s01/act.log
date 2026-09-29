@@ -1,0 +1,11 @@
+[bench] armed sim=99.18 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/W/camp/L0/net_s01/episode_control.json
+[bench] takeoff sim=99.22 {}
+[bench] offboard sim=111.24 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=111.34 {'episode_id': 11, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=111.34 {'episode_id': 11, 'scenario_id': 'c11_s01', 't0_sim': 111.34}
+[bench] episode_end sim=183.30 {'episode_id': 11, 't_entry': 1.93, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] reset_done sim=190.90 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/W/camp/L0/net_s01/trace.jsonl (demo n=1427)

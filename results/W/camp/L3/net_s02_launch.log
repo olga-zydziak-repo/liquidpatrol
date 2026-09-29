@@ -1,0 +1,11 @@
+[w_launcher] START world=world_wind_s3 OUTDIR=/home/olga/projects/liquidpatrol/results/W/camp/L3/net_s02 FLIGHT=bench hover=90 lock=191461 gz_res=/home/olga/projects/liquidpatrol/worlds/wind_models
+[run_boot b17] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b17] watchdog EKF2 (preflight-only, max 2 reinity) pid=192095
+model_in_state=1
+[run_boot b17] settle 90s preflight EKF
+harness/run_boot.sh: line 133: 192715 Aborted                 (core dumped) GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 PYTHONPATH=".:.certdeps:${PYTHONPATH:-}" python3 -m bench.bench_flight > "$OUTDIR/act.log" 2>&1
+[bench_finalize] manifest.json boot=17 n_episodes=1 valid_V2p=1 success_D6=0 n_demo=1349
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b17] DONE flight=bench world=world_wind_s3 rc=134 finalize=0 → /home/olga/projects/liquidpatrol/results/W/camp/L3/net_s02
+[w_launcher] DONE rc=134 world=world_wind_s3 → /home/olga/projects/liquidpatrol/results/W/camp/L3/net_s02

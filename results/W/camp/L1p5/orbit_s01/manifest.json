@@ -1,0 +1,40 @@
+{
+  "kind": "camp",
+  "flight": "bench",
+  "boot": 8,
+  "rc": 0,
+  "arm": "E",
+  "point": "0.0",
+  "harness_file": "/home/olga/projects/liquidpatrol/bench/bench_flight.py",
+  "sha_harness": "3a52e19f2979b40c858d7c0b28996dec81244bbb315a7c91ebcae99b7884a049",
+  "controller": "orbit",
+  "controller_sha": "840514361e4ae5e93ddbb0dd31a7dae81832805b90abccc334d84bbd043730d4",
+  "feed_sha": "da9ef2f4466eac87acf298e80000ad19430d69fe9c12c6ae3d7de8a0ced250c9",
+  "executor_params_sha": "5a7244996d89be70bd720a2b0eb8b6f6dea1a2d8f3f2fd7cf356292426f28716",
+  "ulog_sha": "ab631ce0541ca0f66ebc9d371796fc7ed1333d99fe7f6394bac5b1a9f88a277f",
+  "ulog_bytes": 60430080,
+  "world_hash": "b8380e8ad9ffa10cdbd1aaeb05fde81e4415af3e4ac11974c8297d1c09f5bb5b  worlds/world_wind_s1p5.sdf",
+  "world_ref": "worlds/world_wind_s1p5.sdf",
+  "proc_gate": "CLEAN loadavg=0.04 (cpu_max=2.0, load1_max=1.5)",
+  "n_demo_rows": 1433,
+  "n_episodes": 1,
+  "n_valid_V2p": 1,
+  "n_success_D6": 0,
+  "episodes": [
+    {
+      "episode_id": 11,
+      "scenario_id": "c11_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": false,
+      "n_deep_stall": 4,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9113,
+      "d_min_m": 7.059,
+      "refuse_count": 0,
+      "breach": false
+    }
+  ],
+  "world_hash_kind": "repo",
+  "model_in_state": true
+}

@@ -1,0 +1,10 @@
+[w_launcher] START world=world_wind_s0 OUTDIR=/home/olga/projects/liquidpatrol/results/W/camp/L0/orbit_s02 FLIGHT=bench hover=90 lock=150571 gz_res=/home/olga/projects/liquidpatrol/worlds/wind_models
+[run_boot b4] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b4] watchdog EKF2 (preflight-only, max 2 reinity) pid=151206
+model_in_state=1
+[run_boot b4] settle 90s preflight EKF
+[bench_finalize] manifest.json boot=4 n_episodes=1 valid_V2p=1 success_D6=0 n_demo=1432
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b4] DONE flight=bench world=world_wind_s0 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/W/camp/L0/orbit_s02
+[w_launcher] DONE rc=0 world=world_wind_s0 → /home/olga/projects/liquidpatrol/results/W/camp/L0/orbit_s02
