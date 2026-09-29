@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       52997 78.5  0.2 543112 70020 ?        Sl   14:18   0:00 python3 /home/olga/projects/liquidpatrol/results/DEMO_V3/tools/film_recorder.py /world/world_wind_v3_s3/model/film_cam/link/l/sensor/film/image /home/olga/projects/liquidpatrol/results/DEMO_V3/act3/take_1 8 1500
+olga       53003  3.7  0.0   5028  3732 ?        S    14:18   0:00 bash harness/run_boot.sh
+olga        1272  3.2  1.5 76330476 506156 pts/0 Sl+  11:32   5:29 claude --continue
+olga       52980  1.8  0.0   5028  3820 ?        S    14:18   0:00 bash results/DEMO_V3/tools/run_demo_v3_boot.sh world_wind_v3_s3 act3/take_1 23 net 5
+root         247  0.1  0.1 2385644 50296 ?       Ssl  11:30   0:17 /usr/bin/containerd
+root         343  0.1  0.2 2574072 76836 ?       Ssl  11:30   0:10 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         585  0.0  0.0 1233872 12220 ?       Sl   11:30   0:07 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      613  0.0  0.0 216768 28644 ?        Ss   11:30   0:00 postgres
+root           1  0.0  0.0  22296 13588 ?        Ss   11:30   0:00 /sbin/init
+root         724  0.0  0.0   3200  1248 ?        S    11:30   0:00 /init
+root          40  0.0  0.0  50472 17072 ?        S<s  11:30   0:00 /usr/lib/systemd/systemd-journald
+polkitd      197  0.0  0.0 308180  8120 ?        Ssl  11:30   0:00 /usr/lib/polkit-1/polkitd --no-debug
+message+     192  0.0  0.0   9784  5584 ?        Ss   11:30   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     172  0.0  0.0  91068  7980 ?        Ssl  11:30   0:00 /usr/lib/systemd/systemd-timesyncd
+root          86  0.0  0.0  26408  7412 ?        Ss   11:30   0:00 /usr/lib/systemd/systemd-udevd
+dnsmasq      715  0.0  0.0 216924  7292 ?        Ss   11:30   0:00 postgres: background writer 
+root         202  0.0  0.0  17988  8860 ?        Ss   11:30   0:00 /usr/lib/systemd/systemd-logind
+dnsmasq      717  0.0  0.0 216768 10208 ?        Ss   11:30   0:00 postgres: walwriter 
+olga         769  0.0  0.0  20396 11596 ?        Ss   11:30   0:00 /usr/lib/systemd/systemd --user

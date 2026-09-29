@@ -87,3 +87,66 @@ commitem: nowe worlds/gen_world_wind_v3.py + world_wind_v3_s*.sdf, results/DEMO_
 (tools, captions, gate, raport), zmodyfikowany .gitignore. Po commicie drzewo czyste.
 Push = Olga (razem z zaległymi e526612 + 4550af8, jeśli jeszcze nie poszły).
 Sygnały bez numeru odrzucam; do ratyfikacji zero bootów.
+
+
+---
+
+# SESJA 2 (po ANEKS_DEMO3-1) — akty + montaż → STOP-D3
+
+## §7. Bramka wejścia S2 + ARCH-1
+origin/master zawierał e526612+4550af8+1c7cc22 (push Olgi) ⇒ dalej. ARCH-1: `ANEKS_DEMO3-1.md`
+pierwszym commitem sesji 2. Bramka świata per ANEKS_DEMO3-1 §2: **V2′ ∧ kadr-check = PASS
+retroaktywnie** (control_1/2: 0.9383/0.9366 ≥0.90, tj 0, kadr OK); reguła DEMO-1 przyjęta.
+
+## §8. Booty aktów (ziarna JAWNE, uzasadnienia 1-zdaniowe; wszystkie: net, W_ARM_ALWAYS=1, FILM=1)
+| akt | boot | świat (sha) | epizod | V2′ (dsw) | REFUSE | z_max | max przerwa sim klatek |
+|-----|------|-------------|--------|-----------|--------|-------|------------------------|
+| 1 | act1/take_1 | v3_s0 (98a9aa92) | c10_s02 (ep22) | VALID (0.9213) | 0 | 13.8 | **0.26 s** |
+| 2 | act2/take_1 | v3_s1p5 (aa625ff1) | c11_s01 (ep11) | VALID (0.9296) | 0 | 13.6 | **0.43 s** |
+| 3 | act3/take_1 | v3_s3 (b23ce93e) | c11_s02 (ep23) | VALID (0.9396) | 0 (brak repro) | 15.1 | 1.12 s (nie-materiał) |
+| 3 | act3/take_2 | v3_s3 (b23ce93e) | c11_s02 (ep23) | VALID (0.9238) | **1 GEOFENCE** | 19.4 | **0.82 s** |
+
+Uzasadnienia ziaren: c10_s02 = wzór D1a DEMO_V2 (pełne podejście + orbita RUCHOMEGO intruza);
+c11_s01 = ziarno, pod którego zmierzoną kopertę xy ustawiona jest kamera świata s1p5 (poziom 1.5
+wybrany dla czytelności: ciaśniejszy kadr niż s0, przechył ~2× względem L0); c11_s02 = DOKŁADNIE
+konfiguracja kryterialna sejwu (ANEKS_DEMO3-1/§4 promptu). Poziom aktu 2 = 1.5 (nie 3.0), bo akt 3
+i tak niesie 3.0 — film pokazuje drabinę 0 → 1.5 → 3.0.
+
+## §9. Akt 3 — REPRODUKCJA SEJWU (podejście 2/2)
+take_1: refuse 0, z_max 15.08 (emergent nie zaszedł — boot zachowany, zaraportowany).
+take_2: **REFUSE(GEOFENCE) @ sim 181.68 (t_rel epizodu 68.0 — kryterialny: 68.5), r_est 19.94,
+z_max GT 19.42, breach false** — sejw zreprodukowany na żywo; panel podpisuje akt jako
+„demo re-flight", liczby roszczeniowe w captions cytowane z epizodu KRYTERIALNEGO (RAPORT_W §2).
+Fallback trace-driven NIEPOTRZEBNY.
+
+## §10. Warunek płynności (ANEKS_DEMO3-1 §2)
+Oś czasu montażu budowana ze STEMPLI SIM-TIME klatek (frames_index.jsonl), nie z fps.
+Maksymalna przerwa sim między kolejnymi klatkami w materiale aktów: 0.26 / 0.43 / 0.82 s —
+**wszystkie <1 s, zero widocznych freeze'ów ⇒ PASS, zero powtórek z tego tytułu**.
+
+## §11. Sanity panelu (3 klatki kontrolne, wzór U1R; `results/DEMO_V3/sanity/`)
+| akt | sim_t | MODE (panel=trace) | z_gt | tilt | wiatr cfg |
+|-----|-------|--------------------|------|------|-----------|
+| 1 | 150.0 | OBSERVE (phase=orbit) | 11.985 | 8.84 | 0,0,0 |
+| 2 | 160.0 | OBSERVE (phase=orbit) | 13.756 | 17.16 | 1.5,0,0 |
+| 3 | 182.2 | REFUSE (reason GEOFENCE) | 19.016 | 17.66 | 3.0,0,0 |
+Wartości panelu = wartości źródłowe z konstrukcji (renderer czyta wyłącznie trace/demo/ulog/
+manifest); PNG + sanity.json w repo. Minimapa (ANEKS_DEMO3-1 §4): pozycje = own/trk z demo.jsonl.
+
+## §12. Artefakt finalny
+`results/DEMO_V3/DEMO_V3.mp4` — **362.6 s (6:03)**, 1920×1080 @ 10 fps, mp4v (cv2, bez ffmpeg),
+37 478 472 B, sha256 `eac816983fcea2fb03e28ac8ad7d2a4bf9dcb0c64c808f0177480be5d0c10e81`.
+Kompozycja: intro 8 s → akt1 114.2 s → akt2 115.4 s → akt3 110.0 s → outro 15 s; **4 cięcia,
+wyłącznie na granicach aktów**; materiał aktów = czas symulacji 1:1. Segmenty pośrednie usunięte
+(odtwarzalne lokalnie z klatek + act.json). Klatki źródłowe ~11 GB lokalnie (gitignore).
+Nota: akt kończy się na końcu trace'u (opadanie ~5 m AGL) — panel pozostaje uczciwy do ostatniej
+klatki; touchdown zachodzi po zamknięciu trace'u (teardown), poza materiałem.
+
+## §13. Odchylenia/noty sesji 2
+1. Budżet bootów: **6/8** (2 bramka + 4 akty; limit dotrzymany). Sesje: 2/2.
+2. take_1 aktu 3 miał max przerwę 1.12 s — nie jest materiałem; warunek płynności dotyczy
+   materiału aktów (wszystkie <1 s).
+3. CAPTIONS_VERBATIM.txt: czasy sfinalizowane po bootach (+8 s pre-roll dla długości celowej);
+   pełna treść w repo — do werdyktu kanoniczności ANEKS_DEMO3-2 (EN renderingi zdań WOLNO).
+4. „sha wideo" w outro = samoreferencja — prowieniencja w outro bez sha; sha w §12 (precedens
+   DEMO_V2 §1).

@@ -1,0 +1,13 @@
+[w_launcher] START world=world_wind_v3_s3 OUTDIR=/home/olga/projects/liquidpatrol/results/W/../DEMO_V3/act3/take_1 FLIGHT=bench hover=90 lock=52998 gz_res=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share
+[run_boot b5] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b5] watchdog EKF2 (preflight-only, max 2 reinity) pid=53646
+FILM_TOPIC=/world/world_wind_v3_s3/model/film_cam/link/l/sensor/film/image
+model_in_state=1
+[run_boot b5] settle 90s preflight EKF
+harness/run_boot.sh: line 120: 53699 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM_TOPIC}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge.log" 2>&1
+[bench_finalize] manifest.json boot=5 n_episodes=1 valid_V2p=1 success_D6=0 n_demo=1429
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b5] DONE flight=bench world=world_wind_v3_s3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/W/../DEMO_V3/act3/take_1
+[w_launcher] DONE rc=0 world=world_wind_v3_s3 → /home/olga/projects/liquidpatrol/results/W/../DEMO_V3/act3/take_1
+[run_demo_v3_boot] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DEMO_V3/act3/take_1 (frames: 1135)

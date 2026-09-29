@@ -156,7 +156,7 @@ def _wrap(s, width=40):
 def draw_panel(panel, rd, cfg, sim, trail):
     panel[:] = PANEL_BG
     x0 = 30
-    _txt(panel, "LIQUIDPATROL  ·  DEMO_V3", (x0, 42), 0.62, DIM, 1)
+    _txt(panel, "LIQUIDPATROL - DEMO_V3", (x0, 42), 0.62, DIM, 1)
     _txt(panel, cfg["label"], (x0, 78), 0.7, FG, 2)
     t_rel = sim - cfg["t0"]
     _txt(panel, f"sim_t {sim:8.2f} s", (x0, 112), 0.6, FG, 1)
@@ -206,7 +206,7 @@ def draw_panel(panel, rd, cfg, sim, trail):
     # minimapa top-down (dodatek ponad liste §5 — flagowane w raporcie)
     mcx, mcy, mr = PANEL_W - 150, 520, 105
     cv2.circle(panel, (mcx, mcy), mr, DIM, 1)                       # R_E=32
-    _txt(panel, "top-down  ·  circle = R_E", (mcx - 95, mcy + mr + 22), 0.42, DIM, 1)
+    _txt(panel, "top-down / circle = R_E = 32 m", (mcx - 105, mcy + mr + 22), 0.42, DIM, 1)
     scale = mr / R_E
     cv2.circle(panel, (mcx, mcy), 3, FG, -1)                        # home
     for (px, py, col) in trail:
@@ -220,8 +220,9 @@ def draw_panel(panel, rd, cfg, sim, trail):
     # caption
     cap = caption_at(cfg["_captions"], t_rel)
     if cap:
-        y = 950
-        for line in _wrap(cap, 46):
+        lines = _wrap(cap, 46)
+        y = H - 46 - 20 * 3 - 18 - 30 * len(lines)
+        for line in lines:
             _txt(panel, line, (x0, y), 0.55, FG, 1)
             y += 30
     # footer E3 (staly przez film)
