@@ -1,0 +1,20 @@
+[bench] armed sim=99.50 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/LIQ/camp/r3_ncp/episode_control.json
+[bench] takeoff sim=99.54 {}
+[bench] offboard sim=110.92 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=111.02 {'episode_id': 8, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=111.02 {'episode_id': 8, 'scenario_id': 'c08_s01', 't0_sim': 111.024}
+[bench] episode_end sim=183.02 {'episode_id': 8, 't_entry': 1.94, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=191.71 {'episode_id': 9, 'status': 'OK', 'n_setpose': 7, 'wait_sim': 0.304, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=191.71 {'episode_id': 9, 'scenario_id': 'c09_s01', 't0_sim': 191.708}
+[bench] episode_end sim=263.68 {'episode_id': 9, 't_entry': 1.94, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=267.14 {'episode_id': 10, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=267.14 {'episode_id': 10, 'scenario_id': 'c10_s01', 't0_sim': 267.136}
+[bench] episode_end sim=337.18 {'episode_id': 10, 't_entry': None, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=343.78 {'episode_id': 11, 'status': 'OK', 'n_setpose': 7, 'wait_sim': 0.304, 'pose': [0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=343.78 {'episode_id': 11, 'scenario_id': 'c11_s01', 't0_sim': 343.78}
+[bench] episode_end sim=415.52 {'episode_id': 11, 't_entry': 1.73, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] reset_done sim=421.72 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/LIQ/camp/r3_ncp/trace.jsonl (demo n=5613)

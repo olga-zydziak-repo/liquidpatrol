@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga      138349  2.8  0.0   5032  3868 ?        S    20:42   0:00 bash harness/run_boot.sh
+olga       51639  1.1  1.4 73816536 480468 pts/3 Sl+  15:38   3:38 claude
+root         278  0.1  0.1 2681340 49560 ?       Ssl  12:19   0:53 /usr/bin/containerd
+root         429  0.1  0.2 2574584 75724 ?       Ssl  12:19   0:32 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         672  0.0  0.0 1233616 12136 ?       Sl   12:19   0:23 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      696  0.0  0.0 216768 28560 ?        Ss   12:19   0:02 postgres
+root      136950  0.0  0.0 1830364 13912 ?       Ssl  20:36   0:00 /usr/libexec/wsl-pro-service
+root           1  0.0  0.0  21896 13284 ?        Ss   12:19   0:00 /sbin/init
+polkitd      204  0.0  0.0 308188  8144 ?        Ssl  12:19   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          40  0.0  0.0  50476 17288 ?        S<s  12:19   0:00 /usr/lib/systemd/systemd-journald
+root          89  0.0  0.0  26668  7680 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd-udevd
+root       51598  0.0  0.0   3200  1252 ?        S    15:38   0:00 /init
+dnsmasq      828  0.0  0.0 216768 10348 ?        Ss   12:19   0:00 postgres: walwriter 
+systemd+     186  0.0  0.0  91068  7988 ?        Ssl  12:19   0:00 /usr/lib/systemd/systemd-timesyncd
+dnsmasq      826  0.0  0.0 216924  7380 ?        Ss   12:19   0:00 postgres: background writer 
+message+     195  0.0  0.0   9800  5548 ?        Ss   12:19   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         227  0.0  0.0  17400  6332 ?        Ss   12:19   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+root         210  0.0  0.0  17992  8872 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd-logind
+syslog       235  0.0  0.0 222524  5960 ?        Ssl  12:19   0:00 /usr/sbin/rsyslogd -n -iNONE
