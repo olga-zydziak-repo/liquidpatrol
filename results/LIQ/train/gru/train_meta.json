@@ -1,0 +1,26 @@
+{
+ "arm": "gru",
+ "seed": 1,
+ "cfg": {
+  "hidden": 21,
+  "lr": 0.003,
+  "epochs": 1000,
+  "seed": 1,
+  "grad_clip": 5.0,
+  "beta1": 0.9,
+  "beta2": 0.999,
+  "lr_schedule": {
+   "milestones": [
+    500,
+    800
+   ],
+   "gamma": 0.5
+  }
+ },
+ "params": 1956,
+ "best_val_epoch": 999,
+ "best_val_mse": 0.04901448780642267,
+ "final_train_mse": 0.04634975784204568,
+ "wall_time_s": 397.3,
+ "numpy": "1.26.4"
+}

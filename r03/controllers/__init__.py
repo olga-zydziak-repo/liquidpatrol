@@ -13,11 +13,14 @@ from r03.controllers.base import SetpointSource
 from r03.controllers.route_follower import RouteFollower
 from r03.controllers.orbit_executor import OrbitExecutor
 from r03.controllers.net_controller import NetController
+from r03.controllers.liq_controller import LiqGru, LiqMlp20
 
 _REGISTRY = {
     "route": RouteFollower,
     "orbit": OrbitExecutor,
     "net": NetController,
+    "gru": LiqGru,          # LIQ (PRE_LIQ §7, SR-9): kontrola rekurencji, wagi net/frozen/gru.npz
+    "mlp20": LiqMlp20,      # LIQ (PRE_LIQ §7, SR-9): kontrola okna k=20, wagi net/frozen/mlp20.npz
 }
 
 

@@ -1,0 +1,28 @@
+{
+ "arm": "mlp20",
+ "seed": 1,
+ "cfg": {
+  "hidden": 11,
+  "k": 20,
+  "lr": 0.003,
+  "epochs": 1000,
+  "seed": 1,
+  "grad_clip": 5.0,
+  "beta1": 0.9,
+  "beta2": 0.999,
+  "lr_schedule": {
+   "milestones": [
+    500,
+    800
+   ],
+   "gamma": 0.5
+  },
+  "batch": 512
+ },
+ "params": 1939,
+ "best_val_epoch": 989,
+ "best_val_mse": 0.01793874752933553,
+ "final_train_mse": 0.01663572135213305,
+ "wall_time_s": 214.1,
+ "numpy": "1.26.4"
+}
