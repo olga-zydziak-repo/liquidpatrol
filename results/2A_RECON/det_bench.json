@@ -1,0 +1,27 @@
+{
+ "weights": ".b0deps/weights/yolov8s-worldv2.pt",
+ "weights_sha8": "9b2c17ab",
+ "device": "cuda",
+ "gpu": "NVIDIA GeForce RTX 5070 Ti Laptop GPU",
+ "torch": "2.11.0+cu128",
+ "imgsz": 640,
+ "conf": 0.001,
+ "classes": [
+  "drone"
+ ],
+ "frames": [
+  "results/R02/r1_frames/base.png",
+  "results/R02/r1_frames/intruder.png",
+  "results/R02/gate_live/flight.png",
+  "results/R02/gate_live/static.png"
+ ],
+ "n_warmup": 10,
+ "n_meas": 200,
+ "ms": {
+  "mean": 7.24,
+  "p50": 6.52,
+  "p95": 13.06,
+  "max": 25.15,
+  "min": 4.97
+ }
+}
