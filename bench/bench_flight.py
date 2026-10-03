@@ -118,7 +118,11 @@ def _dronegt_cb(msg):
         if p.name == MODEL:
             sim = msg.header.stamp.sec + msg.header.stamp.nsec / 1e9
             _w({"t": "gt", "mono": round(now, 4), "sim": round(sim, 4),
-                "x": round(p.position.x, 5), "y": round(p.position.y, 5), "z": round(p.position.z, 5)})
+                "x": round(p.position.x, 5), "y": round(p.position.y, 5), "z": round(p.position.z, 5),
+                # 2A D5 (PRE_2A §2): orientacja drona — pole ADDYTYWNE; kwaternion gz pose
+                # (świat gz-ENU → body gz: x przód, y lewo, z góra), kolejność [w,x,y,z].
+                "qw": round(p.orientation.w, 6), "qx": round(p.orientation.x, 6),
+                "qy": round(p.orientation.y, 6), "qz": round(p.orientation.z, 6)})
             _drone_gt_last[0] = now
             return
 
@@ -306,8 +310,15 @@ async def main():
         ctrl = make_controller(CONTROLLER, params=exec_params, orbit_dir=ep["orbit_dir"],
                                vmax=V_MAX, home_ned=(0.0, 0.0, -C.ALT_M))
         ctrl.reset()
-        feed = FeedB(ep["seed"], f=10.0)
-        tf = TrackFeedGz(WORLD, feed)          # subskrybuje pose/info → feed
+        # 2A D6 (PRE_2A §2): wybór producenta feedu z rejestru po FEED=env; default "B"
+        # zachowuje dzisiejsze zachowanie CO DO LINII (gałąź poniżej = dawne dwie linie verbatim).
+        _feed_name = os.environ.get("FEED", "B")
+        if _feed_name == "B":
+            feed = FeedB(ep["seed"], f=10.0)
+            tf = TrackFeedGz(WORLD, feed)          # subskrybuje pose/info → feed
+        else:
+            from harness.feed_registry import make_feed
+            feed, tf = make_feed(_feed_name, seed=ep["seed"], world=WORLD)
         # bramka startu: dron na home, intruz w pozie startowej
         in_gate = await _fly_to_home_hover(RESET_MAX)
         m = ekf.m
