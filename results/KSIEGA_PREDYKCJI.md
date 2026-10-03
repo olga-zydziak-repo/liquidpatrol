@@ -178,3 +178,25 @@ Prerejestrowane 19.09.2026 (PRE_W §13, ANEKS_W-0 §3):
 
 **Suma nogi W: 1 ✓ / 2 ✗ (+2 poza sumą z przyczynami).** Kalibracja CC: obie ✗ to
 przewidywania o zachowaniu środowiska/systemu pod wiatrem — reguła 9 potwierdzona kolejny raz.
+
+## NOGA LIQ (kontrola architektury, ex-K3) — ROZLICZONE przy RAPORT_LIQ (ANEKS_LIQ-2 §5, 03.10.2026)
+Prerejestrowane 29.09.2026 (PRE_LIQ §8); progi drabiny i kryterium śmierci zamrożone przed
+pierwszą epoką treningu kontroli; errata progu sondy PRZED pomiarem (ANEKS_LIQ-1 §3).
+- **P-LIQ-1 ✓:** GRU przechodzi bramkę offline (p≈0.9) — PASS 24/24
+  (`results/LIQ/RAPORT_LIQ_S1.md` §3).
+- **P-LIQ-2 ✗:** MLP-k20 przechodzi bramkę offline (p≈0.7) — PADA: 1/24 (dyspersja ziaren
+  init 0–1/24) przy NAJLEPSZYM val-MSE z trójki (`results/LIQ/RAPORT_LIQ_S1.md` §3).
+- **P-LIQ-3 ✗ — predykcja modalna CC pada:** werdykt W2∪W3 = śmierć etykiety (p≈0.6) —
+  zaszedł wariant klasy W1 (W1′, Δ(GRU)=+16 przy progu W1′ +6), któremu dawałem 0.2
+  (`results/LIQ/RAPORT_LIQ.md` §1).
+- **P-LIQ-4 ✗:** sonda STOCK: pełzanie NIEOBECNE 2/2 (p≈0.65; próg po erracie ≤14.0) —
+  wyszło NIEROZSTRZYGAJĄCE: s02 z_max 14.26 w przerwie 14.0–15.0
+  (`results/LIQ/RAPORT_LIQ.md` §4).
+- **P-LIQ-5 ✓:** NCP świeże ≥ 43/48 (p≈0.75) — dokładnie 43/48, na progu
+  (`results/LIQ/RAPORT_LIQ.md` §2).
+
+**Suma nogi LIQ: 2 ✓ / 3 ✗.** Kalibracja CC (wpis do księgi błędów): wszystkie trzy ✗ mają
+TEN SAM kierunek — niedoszacowanie wyników komponentu uczonego/liquid; łącznie z nogą W
+(P-W-1, P-W-2) to pięć chybień w jedną stronę przy zerze w drugą. Reguła 9 (predykcje CC
+nie są priorami) potwierdzona i zaostrzona: w ocenach jakościowych stosuję korektę na
+udokumentowany kierunek błędu.
