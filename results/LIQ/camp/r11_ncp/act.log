@@ -1,0 +1,21 @@
+[bench] armed sim=99.45 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/LIQ/camp/r11_ncp/episode_control.json
+[bench] takeoff sim=99.48 {}
+[bench] offboard sim=110.98 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=111.08 {'episode_id': 40, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=111.08 {'episode_id': 40, 'scenario_id': 'c04_s04', 't0_sim': 111.076}
+[bench] episode_end sim=183.39 {'episode_id': 40, 't_entry': 2.27, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=191.45 {'episode_id': 41, 'status': 'OK', 'n_setpose': 25, 'wait_sim': 1.26, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=191.45 {'episode_id': 41, 'scenario_id': 'c05_s04', 't0_sim': 191.452}
+[bench] episode_end sim=261.80 {'episode_id': 41, 't_entry': 0.3, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=269.20 {'episode_id': 42, 'status': 'OK', 'n_setpose': 38, 'wait_sim': 1.908, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=269.20 {'episode_id': 42, 'scenario_id': 'c06_s04', 't0_sim': 269.204}
+[bench] episode_end sim=339.42 {'episode_id': 42, 't_entry': 0.2, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=347.66 {'episode_id': 43, 'status': 'OK', 'n_setpose': 7, 'wait_sim': 0.308, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=347.66 {'episode_id': 43, 'scenario_id': 'c07_s04', 't0_sim': 347.664}
+[bench] episode_end sim=417.89 {'episode_id': 43, 't_entry': 0.2, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] reset_done sim=426.28 {'in_gate': True}
+terminate called without an active exception
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/LIQ/camp/r11_ncp/trace.jsonl (demo n=5557)
