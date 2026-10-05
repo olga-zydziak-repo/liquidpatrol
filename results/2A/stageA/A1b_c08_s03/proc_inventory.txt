@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       12462  9.2  1.6 75887616 517680 pts/2 Sl+  14:00  10:08 claude
+olga       90715  3.0  0.0   5024  3700 ?        S    15:49   0:00 bash harness/run_boot.sh
+olga       90691  1.1  0.0   5028  3876 ?        S    15:49   0:00 bash /home/olga/projects/liquidpatrol/results/2A/tools/stageA_boot.sh 3 A1b_c08_s03 32
+root         246  1.0  0.2 3135252 76908 ?       Ssl  13:18   1:35 /usr/bin/containerd
+root         366  0.8  0.3 6334948 110252 ?      Ssl  13:18   1:19 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         821  0.1  0.0 1233872 12136 ?       Sl   13:18   0:09 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+olga       34940  0.0  0.2 871068 71352 ?        Sl   14:50   0:03 /usr/bin/python3 -c from ros2cli.daemon.daemonize import main; main() --name ros2-daemon --ros-domain-id 0 --rmw-implementation rmw_fastrtps_cpp
+root       12420  0.0  0.0   3200  1260 ?        S    14:00   0:01 /init
+root          92  0.0  0.0  26796  7784 ?        Ss   13:18   0:02 /usr/lib/systemd/systemd-udevd
+root           1  0.0  0.0  22024 13352 ?        Ss   13:18   0:01 /sbin/init
+dnsmasq      845  0.0  0.0 216768 28764 ?        Ss   13:18   0:00 postgres
+olga        1005  0.0  0.0  20432 11548 ?        Ss   13:18   0:00 /usr/lib/systemd/systemd --user
+root          43  0.0  0.0  50480 18172 ?        S<s  13:18   0:00 /usr/lib/systemd/systemd-journald
+message+     195  0.0  0.0   9804  5548 ?        Ss   13:18   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+polkitd      204  0.0  0.0 308188  8084 ?        Ssl  13:18   0:00 /usr/lib/polkit-1/polkitd --no-debug
+avahi        193  0.0  0.0   8712  4748 ?        Ss   13:18   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
+syslog       227  0.0  0.0 222524  6040 ?        Ssl  13:18   0:00 /usr/sbin/rsyslogd -n -iNONE
+systemd+     118  0.0  0.0  91068  8004 ?        Ssl  13:18   0:00 /usr/lib/systemd/systemd-timesyncd
+root         208  0.0  0.0  17992  8832 ?        Ss   13:18   0:00 /usr/lib/systemd/systemd-logind

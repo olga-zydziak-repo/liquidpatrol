@@ -1,0 +1,31 @@
+{
+ "mode": "demo",
+ "src": "results/2A/stageA/A2b_c11_s01",
+ "latency_s": null,
+ "err_ned_m": {
+  "n": 1412,
+  "mean": 0.717,
+  "p50": 0.685,
+  "p95": 1.265,
+  "max": 1.944
+ },
+ "decomp": {
+  "angular_deg": {
+   "n": 1412,
+   "mean": 3.692,
+   "p50": 3.494,
+   "p95": 7.456,
+   "max": 10.713
+  },
+  "range_abs_m": {
+   "n": 1412,
+   "mean": 0.393,
+   "p50": 0.34,
+   "p95": 0.948,
+   "max": 1.8
+  },
+  "range_bias_m": 0.062
+ },
+ "fresh_cadence_hz_p50": 9.62,
+ "n_fresh": 663
+}

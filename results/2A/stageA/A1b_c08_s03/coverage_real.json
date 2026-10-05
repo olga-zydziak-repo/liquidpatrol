@@ -1,0 +1,51 @@
+{
+ "bootdir": "results/2A/stageA/A1b_c08_s03",
+ "episodes": [
+  {
+   "episode_id": 32,
+   "t0": 108.68,
+   "t1": 180.99
+  }
+ ],
+ "coverage": {
+  "approach": {
+   "n_ticks": 88,
+   "in_frame": 79,
+   "frac": 0.8977
+  },
+  "orbit": {
+   "n_ticks": 2169,
+   "in_frame": 2169,
+   "frac": 1.0
+  }
+ },
+ "coverage_per_episode": {
+  "ep32_approach": {
+   "n": 88,
+   "in": 79,
+   "frac": 0.8977
+  },
+  "ep32_orbit": {
+   "n": 2169,
+   "in": 2169,
+   "frac": 1.0
+  }
+ },
+ "gate_A_i": {
+  "approach": false,
+  "orbit": true
+ },
+ "quat": {
+  "n_gt_rows": 2981,
+  "n_with_quat": 2981,
+  "norm_min": 0.999999,
+  "norm_max": 1.000001,
+  "max_step_deg": 8.091,
+  "vs_px4_attitude": {
+   "n": 621,
+   "p50_deg": 0.642,
+   "p95_deg": 1.83,
+   "max_deg": 3.744
+  }
+ }
+}

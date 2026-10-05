@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       12462  9.2  1.6 75928152 530828 pts/2 Sl+  14:00  10:54 claude
+olga       94688  3.2  0.0   5024  3740 ?        S    15:58   0:00 bash harness/run_boot.sh
+root         246  1.0  0.2 3135252 79908 ?       Ssl  13:18   1:35 /usr/bin/containerd
+root         366  0.8  0.3 6334948 111436 ?      Ssl  13:18   1:20 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         821  0.1  0.0 1233872 12432 ?       Sl   13:18   0:10 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+olga       34940  0.0  0.2 870992 72052 ?        Sl   14:50   0:03 /usr/bin/python3 -c from ros2cli.daemon.daemonize import main; main() --name ros2-daemon --ros-domain-id 0 --rmw-implementation rmw_fastrtps_cpp
+root       12420  0.0  0.0   3200  1260 ?        S    14:00   0:02 /init
+root          92  0.0  0.0  26796  7784 ?        Ss   13:18   0:02 /usr/lib/systemd/systemd-udevd
+root           1  0.0  0.0  22024 13360 ?        Ss   13:18   0:01 /sbin/init
+dnsmasq      845  0.0  0.0 216768 28764 ?        Ss   13:18   0:01 postgres
+root       93389  0.0  0.0 1756632 13216 ?       Ssl  15:54   0:00 /usr/libexec/wsl-pro-service
+olga       93984  0.0  0.0   4900  3628 ?        Ss   15:55   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1791201891900-b1eg7p.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && eval 'until grep -qE "proc_gate §3 CLEAN|ENV-BLOCK" results/2A/stageA/A2b_c11_s01_launch.log 2>/dev/null; do sleep 5; done; grep -E "proc_gate|ENV-BLOCK" results/2A/stageA/A2b_c11_s01_launch.log | head -2' < /dev/null && pwd -P >| /tmp/claude-a5db-cwd
+olga        1005  0.0  0.0  20432 11548 ?        Ss   13:18   0:00 /usr/lib/systemd/systemd --user
+root          43  0.0  0.0  50480 18284 ?        S<s  13:18   0:00 /usr/lib/systemd/systemd-journald
+message+     195  0.0  0.0   9804  5548 ?        Ss   13:18   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+olga       93342  0.0  0.0   4900  3660 ?        Ss   15:53   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1791201891900-b1eg7p.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && eval 'D=results/2A/stageA : > /tmp/a2b_prev.txt while true; do   for f in $D/A2b_driver.log $D/A2b_c11_s01/act.log $D/A2b_c11_s01/shadow_stdout.log; do     [ -f "$f" ] || continue     grep -hE "\[stageA|ENV-BLOCK|ODMOWA|armed|episode_start|episode_end|refuse|breach|HEALTH TIMEOUT|ARM FAILED|RuntimeError|Traceback|\[shadow\] DONE" "$f" 2>/dev/null   done | sort -u > /tmp/a2b_cur.txt   comm -13 /tmp/a2b_prev.txt /tmp/a2b_cur.txt   cp /tmp/a2b_cur.txt /tmp/a2b_prev.txt   grep -q "DONE rc=" $D/A2b_driver.log 2>/dev/null && { echo "A2B DRIVER KONIEC"; break; }   sleep 20 done' < /dev/null && pwd -P >| /tmp/claude-61b6-cwd
+polkitd      204  0.0  0.0 308188  8084 ?        Ssl  13:18   0:00 /usr/lib/polkit-1/polkitd --no-debug
+avahi        193  0.0  0.0   8712  4748 ?        Ss   13:18   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
+syslog       227  0.0  0.0 222524  6040 ?        Ssl  13:18   0:00 /usr/sbin/rsyslogd -n -iNONE

@@ -1,0 +1,40 @@
+{
+ "mode": "shadow-pooled",
+ "src": [
+  "results/2A/stageA/A1b_c08_s03",
+  "results/2A/stageA/A2b_c11_s01"
+ ],
+ "latency_s": {
+  "n": 469,
+  "mean": 0.038,
+  "p50": 0.036,
+  "p95": 0.052,
+  "max": 0.1
+ },
+ "err_ned_m": {
+  "n": 1489,
+  "mean": 14.116,
+  "p50": 7.911,
+  "p95": 40.933,
+  "max": 67.225
+ },
+ "decomp": {
+  "angular_deg": {
+   "n": 1489,
+   "mean": 31.555,
+   "p50": 34.925,
+   "p95": 58.452,
+   "max": 67.762
+  },
+  "range_abs_m": {
+   "n": 1489,
+   "mean": 12.003,
+   "p50": 5.88,
+   "p95": 40.126,
+   "max": 66.87
+  },
+  "range_bias_m": 8.24
+ },
+ "fresh_cadence_hz_p50": 7.58,
+ "n_fresh": 469
+}

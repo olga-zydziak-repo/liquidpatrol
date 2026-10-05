@@ -1,0 +1,37 @@
+{
+ "mode": "shadow",
+ "src": "results/2A/stageA/A1b_c08_s03/shadow_feed.jsonl",
+ "latency_s": {
+  "n": 123,
+  "mean": 0.039,
+  "p50": 0.036,
+  "p95": 0.072,
+  "max": 0.08
+ },
+ "err_ned_m": {
+  "n": 448,
+  "mean": 12.541,
+  "p50": 8.161,
+  "p95": 42.584,
+  "max": 47.699
+ },
+ "decomp": {
+  "angular_deg": {
+   "n": 448,
+   "mean": 40.262,
+   "p50": 45.648,
+   "p95": 60.658,
+   "max": 66.031
+  },
+  "range_abs_m": {
+   "n": 448,
+   "mean": 9.792,
+   "p50": 5.308,
+   "p95": 42.078,
+   "max": 46.63
+  },
+  "range_bias_m": 5.834
+ },
+ "fresh_cadence_hz_p50": 3.79,
+ "n_fresh": 123
+}

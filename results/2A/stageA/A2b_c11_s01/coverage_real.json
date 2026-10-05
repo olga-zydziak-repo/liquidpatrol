@@ -1,0 +1,51 @@
+{
+ "bootdir": "results/2A/stageA/A2b_c11_s01",
+ "episodes": [
+  {
+   "episode_id": 11,
+   "t0": 108.56,
+   "t1": 180.56
+  }
+ ],
+ "coverage": {
+  "approach": {
+   "n_ticks": 91,
+   "in_frame": 59,
+   "frac": 0.6484
+  },
+  "orbit": {
+   "n_ticks": 2173,
+   "in_frame": 2173,
+   "frac": 1.0
+  }
+ },
+ "coverage_per_episode": {
+  "ep11_approach": {
+   "n": 91,
+   "in": 59,
+   "frac": 0.6484
+  },
+  "ep11_orbit": {
+   "n": 2173,
+   "in": 2173,
+   "frac": 1.0
+  }
+ },
+ "gate_A_i": {
+  "approach": false,
+  "orbit": true
+ },
+ "quat": {
+  "n_gt_rows": 2994,
+  "n_with_quat": 2994,
+  "norm_min": 0.999999,
+  "norm_max": 1.000001,
+  "max_step_deg": 7.489,
+  "vs_px4_attitude": {
+   "n": 1232,
+   "p50_deg": 1.776,
+   "p95_deg": 3.55,
+   "max_deg": 12.612
+  }
+ }
+}

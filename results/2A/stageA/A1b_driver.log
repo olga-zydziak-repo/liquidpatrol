@@ -1,0 +1,6 @@
+[stageA A1b_c08_s03] cooldown 0s
+[stageA A1b_c08_s03] run_boot pid=90715 ep=32 (FEED=B default, SHADOW po armed)
+[stageA A1b_c08_s03] SHADOW po armed: bridge pid=92439 shadow pid=92440 topic=/world/world_demo_A3/model/x500_mono_cam_0/link/camera_link/sensor/imager/image det_hz=full
+/home/olga/projects/liquidpatrol/results/2A/tools/stageA_boot.sh: line 84: 92439 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_shadow.log" 2>&1
+[stageA] manifest: net_arm=ncp weights_sha=0337d5eae1471bb9 frames=152 set_sha=e7e88a98d0272d71
+[stageA A1b_c08_s03] DONE rc=0 → /home/olga/projects/liquidpatrol/results/2A/stageA/A1b_c08_s03
