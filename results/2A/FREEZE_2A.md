@@ -13,9 +13,13 @@ po tym commicie = nowa decyzja do ratyfikacji, nie poprawka.
 | `results/2A/tools/percep_judge.py` (sędzia percepcji) | `363c37b79abb7479fb71ce5815712f5e83d05615ecefe591cae4559908cc155e` |
 | `bench/bench_flight.py` PRZED edycjami (baza, PRE D6) | `3a52e19f2979b40c858d7c0b28996dec81244bbb315a7c91ebcae99b7884a049` |
 | `bench/bench_flight.py` PO dwóch edycjach | `2972a48a081e42bb4cd4de1690c47c678287df6f6a739d01dc8b862c20b15b00` |
+| `bench/bench_flight.py` PO N1 (ANEKS_2A-1 §3: rad→deg na granicy MAVSDK — TRZECIA edycja, jawne rozszerzenie D6) | `05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43` |
+| `harness/feed_vision.py` PO N2 (ANEKS_2A-1 §3: REFRESH bramkowany + sufit θ_age feedu) | `0a97512106d8ca708c77329fd2bff50e8fe9b5fc0b06da5fa6b7eb5992a2f5de` |
 
 `feed_sha` FEED-V (sha256 JSON parametrów, analog FeedB):
-`ffccf86b59d5055f2efe50f716a82a1fce777bf87e7010a8a9d14260c964ad7b`
+`ffccf86b59d5055f2efe50f716a82a1fce777bf87e7010a8a9d14260c964ad7b` (S1, PRZED N2)
+`d6a3367b210f47e79b2ea9b33151235d3a2a0ac21c4ad2b93dfa93092673a895` (PO N2 — params
++ refresh_gate/refresh_gate_m)
 
 ## Stałe geometrii i parametry FEED-V (echo z kodu, harness/feed_vision.py)
 
@@ -32,6 +36,13 @@ po tym commicie = nowa decyzja do ratyfikacji, nie poprawka.
   edge_margin 0.10, move_thr 0.15, θ_age 3.0 s, L_deliver 0.10 s (wartości z
   `r02/config_r02.py`, READ-ONLY); koincydencja MTI center_thr 0.12; MTIParams domyślne
   (`r02/mti.py:28-41`).
+- **REFRESH bramkowany (ANEKS_2A-1 N2):** odświeżenie tracku wyłącznie boxem, który
+  (a) spełnia koniunkcję admisyjną NA KLATCE (central z `last_conj` kanału ∧ mti_ok) ALBO
+  (b) leży ≤ **REFRESH_GATE_M = 3.0 m** od predykcji tracku (last_pos + trk_vel·Δt).
+  Kalibracja promienia z danych S2: FeedB p95 1.26 m + ruch celu w oknie ZOH + jitter
+  zasięgu pinhole ~1 m, a FP tła ≥5 m (768/810) — separacja klas z marginesem.
+  Sufit wieku tracku FEEDU = θ_age 3.0 s (kanał frozen odświeża swój wiek każdym boxem
+  przy locku, więc wygaśnięcie orzeka FEED: reset kanału ⇒ pełna re-admisja ENTRY k=3).
 - **Kontrakt (D4):** pozycja pinhole RAW (bez EMA, jak FeedB), trk_vel = linreg **1.0 s** sim,
   świeże próbki = kadencja klatek (nominal 15 Hz, cel ≥ ~10 Hz po stracie klatek/detekcji),
   track_valid = lock kanału ∧ istnieje pozycja; hold-last, age w sim-time.

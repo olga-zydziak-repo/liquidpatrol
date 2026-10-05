@@ -395,7 +395,12 @@ async def main():
                 await d.offboard.set_velocity_ned(VelocityNedYaw(0, 0, 0, 0))
             else:
                 v = cmd["v_ned"]
-                await d.offboard.set_velocity_ned(VelocityNedYaw(v[0], v[1], v[2], cmd.get("yaw", 0.0)))
+                # ANEKS_2A-1 N1: kontrolery emitują yaw w RADIANACH (atan2, konwencja wewnętrzna
+                # bez zmian); pole VelocityNedYaw jest STOPNIOWE (yaw_deg) — konwersja jednostek
+                # WYŁĄCZNIE na tej granicy. Przed N1 surowe radiany (±π→±3.14°) trzymały nos ~N
+                # przez pięć nóg (nośne dopiero dla kamery — RAPORT_2A_S2 §3).
+                await d.offboard.set_velocity_ned(
+                    VelocityNedYaw(v[0], v[1], v[2], math.degrees(cmd.get("yaw", 0.0))))
             if r_est > shield.cfg.r_e:
                 breach = True; ev("breach", episode_id=ep["episode_id"], r_est=round(r_est, 2))
             demo.log(make_row(now_sim, tick, ep_meta, own, vel, fs, cmd["v_ned"], phase, 0,

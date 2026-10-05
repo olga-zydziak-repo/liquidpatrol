@@ -35,7 +35,7 @@ ROOT = "/home/olga/projects/liquidpatrol"
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
-FEED_SHA_FREEZE = "ffccf86b59d5055f2efe50f716a82a1fce777bf87e7010a8a9d14260c964ad7b"  # FREEZE_2A
+FEED_SHA_FREEZE = "d6a3367b210f47e79b2ea9b33151235d3a2a0ac21c4ad2b93dfa93092673a895"  # FREEZE_2A po N2 (ANEKS_2A-1)
 STATE_SOURCES = {"pos_ekf": "/fmu/out/vehicle_local_position",
                  "att": "/fmu/out/vehicle_attitude"}          # echo z feed_vision.py:241-244 (zaszyte)
 

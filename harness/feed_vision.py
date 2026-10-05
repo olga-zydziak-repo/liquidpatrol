@@ -9,7 +9,9 @@ GT nie występuje w tym pliku w żadnej postaci — GT żyje wyłącznie u sędz
 Tor: klatka (sim-time ze stempla) → YOLO-World top-1 (D4, wagi frozen 9b2c17ab, guard SR-2)
 → MTI (derotacja z attitude, r02/mti.py READ-ONLY import) → admisja STRUKTURA∧MTI przez
 TargetChannel (ENTRY k=3, sufit θ_age; r02/target_channel.py READ-ONLY import) → pinhole
-box→NED (D1: Z = f_px·W_real/w_px, kierunek z (cx,cy) + quat pokładowy) → kontrakt R1:
+box→NED (D1: Z = f_px·W_real/w_px, kierunek z (cx,cy) + quat pokładowy) → REFRESH bramkowany
+(ANEKS_2A-1 N2: koniunkcja admisyjna NA KLATCE albo okno REFRESH_GATE_M wokół predykcji;
+inaczej ZOH — top-1 tła nigdy nie odświeża tracku) → kontrakt R1:
 {trk_pos_ned, trk_vel_ned (linreg 1 s sim), track_age_s, track_valid, feed_sha}.
 
 Tryby: LIVE (FeedVisionLive: subskrypcje ROS2, własny spin-thread — zero edycji pętli
@@ -29,6 +31,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import time
 
@@ -46,6 +49,11 @@ WEIGHTS_SHA = "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792"
 WEIGHTS_DEFAULT = ".b0deps/weights/yolov8s-worldv2.pt"
 VEL_WINDOW_S = 1.0                          # D4: trk_vel jak FeedB (linreg 1 s sim)
 FRAME_HZ_NOMINAL = 15.0                     # kamera stock (D3)
+# ANEKS_2A-1 N2: promień okna bramkowania REFRESH wokół predykcji tracku [m] (decyzja
+# wykonawcza, echo w FREEZE_2A). Kalibracja klas z danych S2: błąd całkowity FeedB p95
+# 1.26 m (kalibracja S1) + ruch celu ≤1 m/s w oknie ZOH + jitter zasięgu pinhole ~1 m
+# przy widocznym celu — a FP tła leżały ≥5 m (768/810 powyżej progu 5 m, RAPORT_2A_S2 §4).
+REFRESH_GATE_M = 3.0
 
 
 def box_to_ned(box: Box, own_pos_ned, q_frd2ned):
@@ -125,7 +133,9 @@ class FeedVision:
                        "entry_k": self.cfg.entry_k, "entry_require_mti": True,
                        "mti_center_thr": MTI_CENTER_THR, "theta_age_s": self.cfg.theta_age_s,
                        "vel_window_s": VEL_WINDOW_S, "frame_hz_nominal": FRAME_HZ_NOMINAL,
-                       "pos": "pinhole_raw", "trk_vel": "linreg_1s_sim"}
+                       "pos": "pinhole_raw", "trk_vel": "linreg_1s_sim",
+                       "refresh_gate": "admisja(central∧mti) OR okno predykcji (ANEKS_2A-1 N2)",
+                       "refresh_gate_m": REFRESH_GATE_M}
         self.feed_sha = hashlib.sha256(json.dumps(self.params, sort_keys=True).encode()).hexdigest()
         self._own = None                 # (sim_t, pos_ned[3], q[4] wxyz) — ostatni stan pokładowy
         self._last_pos = None
@@ -134,6 +144,7 @@ class FeedVision:
         self.n_frames = 0
         self.n_boxes = 0
         self.n_fresh = 0                 # admitowane aktualizacje tracku
+        self.n_feed_expire = 0           # N2: wygaśnięcia tracku feedu (sufit θ_age po stronie feedu)
         self._log = open(log_path, "w") if log_path else None
 
     # --- wejścia ------------------------------------------------------------
@@ -159,19 +170,53 @@ class FeedVision:
     def _ingest(self, t, box, mti_ok):
         if box is not None:
             self.n_boxes += 1
+        expired_now = False
+        if (self.channel.locked and self._last_fresh_sim is not None
+                and t - self._last_fresh_sim > self.cfg.theta_age_s):
+            # ANEKS_2A-1 N2: sufit wieku TRACKU FEEDU (ten sam θ_age co kanał). Kanał frozen
+            # odświeża swój wiek KAŻDYM boxem przy locku (target_channel.py:123 „Refresh locka
+            # NIE stosuje ani edge-margin, ani conf/MTI"), więc tło podtrzymywałoby lock w
+            # nieskończoność — wygaśnięcie orzeka FEED i wymusza PEŁNĄ re-admisję
+            # (ENTRY k=3 struktura∧MTI) przez reset kanału (API, nie edycja frozen).
+            self.channel.reset()
+            self._last_pos = None
+            self._issued = []
+            self.n_feed_expire += 1
+            expired_now = True
         ev = self.channel.on_frame(box, t, mti_ok=mti_ok)
-        fresh = bool(self.channel.locked and box is not None)
+        if ev is None and expired_now:
+            ev = "FEED_EXPIRE"
+        fresh = False
+        gate = None
         pos = None
-        if fresh and self._own is not None:
-            pos = box_to_ned(box, self._own[1], self._own[2])
-            if pos is not None:
-                self._last_pos = pos
-                self._last_fresh_sim = t
-                self._issued.append((t, pos))
-                self.n_fresh += 1
-                lo = t - VEL_WINDOW_S - 0.5
-                if len(self._issued) > 4 and self._issued[0][0] < lo:
-                    self._issued = [s for s in self._issued if s[0] >= lo]
+        if self.channel.locked and box is not None and self._own is not None:
+            cand = box_to_ned(box, self._own[1], self._own[2])
+            if cand is not None:
+                # ANEKS_2A-1 N2: REFRESH bramkowany — track odświeża WYŁĄCZNIE box, który
+                # (a) spełnia koniunkcję admisyjną struktura∧MTI NA TEJ KLATCE (central z
+                #     last_conj kanału — ta sama geometria co brama ENTRY — ∧ mti_ok), ALBO
+                # (b) mieści się w oknie REFRESH_GATE_M wokół predykcji tracku
+                #     (last_pos + trk_vel·Δt od ostatniej świeżej).
+                # Brak zgodnego boxa ⇒ ZOH z rosnącym age (lustro semantyki dropu FeedB),
+                # NIGDY refresh z top-1 tła (lekcja S2: 768/810 FP-admisji po ENTRY).
+                if self.channel.last_conj["central"] and bool(mti_ok):
+                    gate = "mti"
+                elif self._last_pos is not None:
+                    dt = t - self._last_fresh_sim if self._last_fresh_sim is not None else 0.0
+                    vel = self._trk_vel(t)
+                    pred = [self._last_pos[k] + vel[k] * dt for k in range(3)]
+                    if math.dist(cand, pred) <= REFRESH_GATE_M:
+                        gate = "window"
+                if gate is not None:
+                    pos = cand
+                    fresh = True
+                    self._last_pos = pos
+                    self._last_fresh_sim = t
+                    self._issued.append((t, pos))
+                    self.n_fresh += 1
+                    lo = t - VEL_WINDOW_S - 0.5
+                    if len(self._issued) > 4 and self._issued[0][0] < lo:
+                        self._issued = [s for s in self._issued if s[0] >= lo]
         if self._log:
             self._log.write(json.dumps({
                 "t_frame": round(t, 4), "wall": round(time.monotonic(), 4),
@@ -179,6 +224,7 @@ class FeedVision:
                         if box else None),
                 "conf": (round(box.conf, 4) if box and box.conf is not None else None),
                 "mti_ok": mti_ok, "ev": ev, "locked": self.channel.locked, "fresh": fresh,
+                "gate": gate,
                 "own_pos_ned": ([round(x, 4) for x in self._own[1]] if self._own else None),
                 "own_q": ([round(x, 6) for x in self._own[2]] if self._own else None),
                 "trk_pos_ned": ([round(x, 4) for x in pos] if pos else None)}) + "\n")
