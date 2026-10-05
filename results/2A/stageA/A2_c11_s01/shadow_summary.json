@@ -1,0 +1,23 @@
+{
+ "n_frames": 539,
+ "n_boxes": 413,
+ "n_fresh": 45,
+ "n_frames_saved": 146,
+ "n_skip_preready": 0,
+ "n_skip_dethz": 0,
+ "push_frame_wall_ms": {
+  "n": 539,
+  "p50": 15.75,
+  "p95": 46.82,
+  "max": 972.15
+ },
+ "weights_sha": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+ "feed_sha": "ffccf86b59d5055f2efe50f716a82a1fce777bf87e7010a8a9d14260c964ad7b",
+ "image_topic": "/world/world_demo_A3/model/x500_mono_cam_0/link/camera_link/sensor/imager/image",
+ "state_sources": {
+  "pos_ekf": "/fmu/out/vehicle_local_position",
+  "att": "/fmu/out/vehicle_attitude"
+ },
+ "det_hz": null,
+ "sim_last": 199.572
+}

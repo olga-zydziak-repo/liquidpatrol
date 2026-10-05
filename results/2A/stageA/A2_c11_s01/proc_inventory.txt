@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       12462 11.0  1.5 73892080 488576 pts/2 Sl+  14:00   6:17 claude
+olga       37107  3.3  0.0   5024  3704 ?        S    14:57   0:00 bash harness/run_boot.sh
+root         246  0.2  0.2 3068048 67896 ?       Ssl  13:18   0:14 /usr/bin/containerd
+root         366  0.2  0.3 6635924 107028 ?      Ssl  13:18   0:11 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga       34940  0.1  0.2 871068 71204 ?        Sl   14:50   0:00 /usr/bin/python3 -c from ros2cli.daemon.daemonize import main; main() --name ros2-daemon --ros-domain-id 0 --rmw-implementation rmw_fastrtps_cpp
+root         821  0.1  0.0 1233872 12184 ?       Sl   13:18   0:07 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root       12420  0.0  0.0   3200  1260 ?        S    14:00   0:01 /init
+root          92  0.0  0.0  26800  7784 ?        Ss   13:18   0:01 /usr/lib/systemd/systemd-udevd
+dnsmasq      845  0.0  0.0 216768 28764 ?        Ss   13:18   0:00 postgres
+root           1  0.0  0.0  22024 13344 ?        Ss   13:18   0:00 /sbin/init
+olga       36504  0.0  0.0   4900  3560 ?        Ss   14:55   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1791201891900-b1eg7p.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && eval 'until grep -qE "proc_gate §3 CLEAN|ENV-BLOCK" results/2A/stageA/A2_c11_s01_launch.log 2>/dev/null; do sleep 5; done; grep -E "proc_gate|ENV-BLOCK" results/2A/stageA/A2_c11_s01_launch.log | head -2' < /dev/null && pwd -P >| /tmp/claude-2d13-cwd
+olga       35716  0.0  0.0   4900  3612 ?        Ss   14:52   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1791201891900-b1eg7p.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && eval 'D=results/2A/stageA : > /tmp/a2_prev.txt while true; do   for f in $D/A2_driver.log $D/A2_c11_s01/act.log $D/A2_c11_s01/shadow_stdout.log; do     [ -f "$f" ] || continue     grep -hE "\[stageA|ENV-BLOCK|ODMOWA|armed|episode_start|episode_end|refuse|breach|HEALTH TIMEOUT|ARM FAILED|RuntimeError|Traceback|\[shadow\] DONE" "$f" 2>/dev/null   done | sort -u > /tmp/a2_cur.txt   comm -13 /tmp/a2_prev.txt /tmp/a2_cur.txt   cp /tmp/a2_cur.txt /tmp/a2_prev.txt   grep -q "DONE rc=" $D/A2_driver.log 2>/dev/null && { echo "A2 DRIVER KONIEC"; break; }   sleep 20 done' < /dev/null && pwd -P >| /tmp/claude-2154-cwd
+root       35382  0.0  0.0 1756632 13800 ?       Ssl  14:51   0:00 /usr/libexec/wsl-pro-service
+root          43  0.0  0.0  50480 16968 ?        S<s  13:18   0:00 /usr/lib/systemd/systemd-journald
+polkitd      204  0.0  0.0 308188  8080 ?        Ssl  13:18   0:00 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     118  0.0  0.0  91068  8004 ?        Ssl  13:18   0:00 /usr/lib/systemd/systemd-timesyncd
+dnsmasq      927  0.0  0.0 216924  7272 ?        Ss   13:18   0:00 postgres: background writer 
+olga        1005  0.0  0.0  20328 11424 ?        Ss   13:18   0:00 /usr/lib/systemd/systemd --user
+dnsmasq      935  0.0  0.0 216768 10248 ?        Ss   13:18   0:00 postgres: walwriter 

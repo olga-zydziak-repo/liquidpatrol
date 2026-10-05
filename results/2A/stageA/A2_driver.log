@@ -1,0 +1,6 @@
+[stageA A2_c11_s01] cooldown 272s
+[stageA A2_c11_s01] run_boot pid=37107 ep=11 (FEED=B default, SHADOW po armed)
+[stageA A2_c11_s01] SHADOW po armed: bridge pid=38826 shadow pid=38827 topic=/world/world_demo_A3/model/x500_mono_cam_0/link/camera_link/sensor/imager/image det_hz=full
+/home/olga/projects/liquidpatrol/results/2A/tools/stageA_boot.sh: line 84: 38826 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_shadow.log" 2>&1
+[stageA] manifest: net_arm=ncp weights_sha=0337d5eae1471bb9 frames=146 set_sha=419f5e43f3d4e91a
+[stageA A2_c11_s01] DONE rc=0 → /home/olga/projects/liquidpatrol/results/2A/stageA/A2_c11_s01
