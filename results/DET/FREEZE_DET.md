@@ -12,7 +12,7 @@ trening zacznie się dopiero w S2 po ANEKS_DET-1.
 | `.b0deps/weights/yolov8n.pt` (baza fine-tune, ścieżka główna) | `f59b3d833e2ff32e194b5bb8e08d211dc7c5bdf144b90d2c8412c47ccfc83b36` | pobrane 06.10, assets v8.4.0, 6 549 796 B |
 | `.b0deps/weights/yolov8s.pt` (baza eskalacji — RAZ, PRE §4) | `1f47a78bf100391c2a140b7ac73a1caae18c32779be7d310658112f7ac9aa78a` | pobrane 06.10, assets v8.4.0, 22 588 772 B |
 | `.b0deps/weights/yolov8s-worldv2.pt` (detektor 2A — tylko shadow dolotu i T4) | `9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792` | FREEZE_2A verbatim |
-| `net/frozen/det_v2.pt` | — (po S2) | finalny model + sha przy STOP-DET2 |
+| `net/frozen/det_v2.pt` **(FINALNY, S2)** | `775ead150b9937453168538cb97c55f69166e27ddc2d93f71b3710e0e49832ce` | = best.pt v8n seed1 (epoka 69/99, EarlyStop p30, 0.733 h, 0 fallbacków OOM); eskalacja v8s NIE zaszła (VAL p95 0.725/0.778 ≪ 3.0); TEST raz: **T2 pooled p95 1.365 m PASS**, T1 100.0/99.8 % |
 
 ## sha256 narzędzi
 

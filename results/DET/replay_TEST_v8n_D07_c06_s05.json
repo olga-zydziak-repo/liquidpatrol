@@ -1,0 +1,32 @@
+{
+ "bootdir": "results/DET/collect/D07_c06_s05",
+ "detector": "/tmp/claude-1000/-home-olga-projects-liquidpatrol/2c314ee8-3250-47e4-80a0-de474991d407/scratchpad/runs/det_v8n_seed1/weights/best.pt",
+ "detector_sha": "775ead150b9937453168538cb97c55f69166e27ddc2d93f71b3710e0e49832ce",
+ "n_frames_replayed": 949,
+ "n_frames_no_own": 0,
+ "wall_s": 12.7,
+ "err_fresh_vs_gt": {
+  "n": 686,
+  "p50": 1.234,
+  "p95": 1.388,
+  "max": 1.602
+ },
+ "top1_on_target": {
+  "n_fov": 691,
+  "n_on": 691,
+  "pct": 100.0
+ },
+ "admisja": {
+  "events": {
+   "ENTRY": 1,
+   "REFRESH": 708,
+   "FEED_EXPIRE": 1
+  },
+  "fresh_gates": {
+   "mti": 688,
+   "window": 8
+  },
+  "n_boxes": 724,
+  "n_fresh": 696
+ }
+}

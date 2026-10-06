@@ -1,0 +1,14 @@
+{
+ "epochs_run": 99,
+ "best_epoch": 69,
+ "early_stop": "patience 30 @99",
+ "wall_h": 0.733,
+ "batch": 16,
+ "oom_fallback": 0,
+ "best": {
+  "metrics/precision(B)": 0.9851,
+  "metrics/recall(B)": 0.9852,
+  "metrics/mAP50(B)": 0.9795,
+  "metrics/mAP50-95(B)": 0.7167
+ }
+}
