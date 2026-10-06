@@ -1,0 +1,28 @@
+[bench] armed sim=99.24 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/2A/probeC/C1_c11_s01/episode_control.json
+[bench] takeoff sim=99.28 {}
+[bench] offboard sim=110.85 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+/home/olga/projects/liquidpatrol/.b0deps/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+Exception in thread Thread-4 (_spin):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/olga/projects/liquidpatrol/harness/feed_vision.py", line 299, in _spin
+    rclpy.spin_once(self._node, timeout_sec=0.05)
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 226, in spin_once
+    executor.spin_once(timeout_sec=timeout_sec)
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 924, in spin_once
+    self._enter_spin()
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 222, in _enter_spin
+    raise RuntimeError('Executor is already spinning')
+RuntimeError: Executor is already spinning
+[bench] intruder_start_gate sim=115.12 {'episode_id': 11, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=115.12 {'episode_id': 11, 'scenario_id': 'c11_s01', 't0_sim': 115.12}
+[bench] episode_end sim=155.13 {'episode_id': 11, 't_entry': None, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] reset_done sim=155.13 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/2A/probeC/C1_c11_s01/trace.jsonl (demo n=791)
