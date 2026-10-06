@@ -32,9 +32,23 @@ def _mk_v(seed, world):
     return feed, feed
 
 
+def _mk_v2(seed, world):
+    """FEED=V2 (PRE_DET §6, ANEKS_DET-2): percepcja w OSOBNYM procesie (harness/
+    percep_proc.py, det_v2 + rdzeń FeedVision read-only); tu wyłącznie cienki klient
+    UDS — zero rclpy/torch w procesie ławki. Ścieżki z env DETV2_SOCK / DETV2_CLIENT_LOG
+    (ustawia driver etapowy). seed ignorowany jak w V (percepcja deterministyczna
+    względem klatek)."""
+    from harness.feed_vision_proc import FeedVisionProc   # import leniwy
+    import os
+    feed = FeedVisionProc(sock_path=os.environ["DETV2_SOCK"],
+                          log_path=os.environ.get("DETV2_CLIENT_LOG"))
+    return feed, feed
+
+
 _REGISTRY = {
     "B": _mk_b,     # FEED-B emulowany (ANEKS_BENCH-0 D1) — default, zachowanie dzisiejsze
     "V": _mk_v,     # FEED-V percepcyjny (PRE_2A) — kamera pokładowa → YOLO → MTI → pinhole
+    "V2": _mk_v2,   # FEED-V2 (PRE_DET): det_v2 w osobnym procesie percepcji, klient UDS
 }
 
 

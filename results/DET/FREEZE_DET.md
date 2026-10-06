@@ -32,6 +32,23 @@ fresh wyłącznie gate=mti). Zastrzeżenie jawne: klatki A2b zapisane w S2b z de
 2 Hz (dt 0.528 s) — replay waliduje się na nich, korpus dolotu jest 15 Hz.
 Artefakt: `results/DET/t4_replay_A2b_world.json`.
 
+## Runtime FEED=V2 (S3, ANEKS_DET-2)
+
+**feed_sha_v2 = `8015bd12d7e8852bdc2e773d8b32c335a21752ea6209c6f245364809e4ed4a9c`**
+(= sha256(params rdzenia FeedVision acc81df7 z podmianą detector→det_v2(yolov8n-ft),
+weights_sha→775ead15…); JEDEN punkt prawdy: `harness/det_v2.feed_sha_v2()` — używany
+przez proces percepcji i klienta).
+
+| plik | sha256 (16) | rola |
+|---|---|---|
+| `harness/det_v2.py` | e801f7d592a023ed | wrapper det_v2 (guard SR-2, bez progu conf) + feed_sha_v2() |
+| `harness/percep_proc.py` | 38a3a7656c53d857 | proces percepcji: rdzeń FeedVision READ-ONLY + DetV2, dedykowany egzekutor (N3-C), UDS |
+| `harness/feed_vision_proc.py` | 79633489708d287d | klient FEED=V2 (zero rclpy, kontrakt R1 verbatim, log E2E) |
+| `harness/feed_registry.py` PO wpisie V2 (additive) | ee1481f99729319d | rejestr B/V/V2 (bazowy 2629bc40 z FREEZE_2A) |
+| `results/DET/tools/detS3_smoke.sh` | a3071542b2f2e6b8 | driver smoke (percep+bridge po armed, teardown SIGTERM) |
+| `results/DET/tools/detS3_analyze.py` | 2d921776f84a2c6c | sędzia smoke (bramki runtime, żywość, S-BEZP) |
+| `results/DET/tools/test_aneks_det2.py` | 3c185deea79ac772 | testy przed lotem (4: kontrakt/UDS/kolizja/cykl życia) |
+
 ## Przepis treningu (echo PRE §4, FROZEN)
 
 ultralytics 8.4.115 (pin .b0deps) · torch 2.11.0+cu128 · `model=yolov8n.pt
