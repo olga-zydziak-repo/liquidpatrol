@@ -1,0 +1,49 @@
+{
+  "kind": "2a",
+  "flight": "bench",
+  "boot": 2,
+  "rc": 0,
+  "arm": "E",
+  "point": "0.0",
+  "harness_file": "/home/olga/projects/liquidpatrol/bench/bench_flight.py",
+  "sha_harness": "05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43",
+  "controller": "net",
+  "controller_sha": "e8c1b6583a6237a53567817a1b7036e51a9d7da5f1e92d5018da8e9781215167",
+  "feed_sha": "d6a3367b210f47e79b2ea9b33151235d3a2a0ac21c4ad2b93dfa93092673a895",
+  "executor_params_sha": "5a7244996d89be70bd720a2b0eb8b6f6dea1a2d8f3f2fd7cf356292426f28716",
+  "ulog_sha": "3d6d38acc070be1223bb760948b3036463a96fc434a063e1a6aa60e4212f86e6",
+  "ulog_bytes": 59763145,
+  "world_hash": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0  worlds/world_demo_A3.sdf",
+  "world_ref": "worlds/world_demo_A3.sdf",
+  "proc_gate": "CLEAN loadavg=0.17 (cpu_max=2.0, load1_max=1.5)",
+  "n_demo_rows": 1435,
+  "n_episodes": 1,
+  "n_valid_V2p": 1,
+  "n_success_D6": 0,
+  "episodes": [
+    {
+      "episode_id": 32,
+      "scenario_id": "c08_s03",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": false,
+      "n_deep_stall": 4,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9502,
+      "d_min_m": 6.966,
+      "refuse_count": 0,
+      "breach": false
+    }
+  ],
+  "world_hash_kind": "repo",
+  "model_in_state": true,
+  "net_arm": "ncp",
+  "weights_sha": "0337d5eae1471bb99ef329d939be195a9ea846017045b8ddac22f3d97bc2ae36",
+  "feed_v": {
+    "role": "FEED=V AKTYWNY (karmi kontroler; C-sonda ANEKS_2A-2 \u00a73)",
+    "topic": "/world/world_demo_A3/model/x500_mono_cam_0/link/camera_link/sensor/imager/image",
+    "feed_v_jsonl_sha256": "cb748f47e7c9209123bab8075f4d6abee81623897e6b9ee806cfe76afa186e09",
+    "pythonpath_b0sp": true,
+    "nota_prowieniencja": "numpy w procesie \u0142awki 2.4.4 (B0SP) zamiast 1.26.4 \u2014 wym\u00f3g torch in-process; precedens finalize run_boot:173"
+  }
+}

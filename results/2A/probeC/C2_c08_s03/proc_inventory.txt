@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        4456  8.1  1.4 74101060 477528 pts/0 Sl+  11:31   3:52 claude
+root         251  0.1  0.2 3363744 68344 ?       Ssl  11:20   0:05 /usr/bin/containerd
+olga       23231  0.1  0.2 805532 71132 ?        Sl   12:12   0:00 /usr/bin/python3 -c from ros2cli.daemon.daemonize import main; main() --name ros2-daemon --ros-domain-id 0 --rmw-implementation rmw_fastrtps_cpp
+root         361  0.1  0.2 9070296 93240 ?       Ssl  11:20   0:04 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga       24892  0.1  0.0   4900  3580 ?        Ss   12:14   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1791278981887-kcy9f9.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && eval 'f=results/2A/probeC/C2_driver.log; t=results/2A/probeC/C2_c08_s03/trace.jsonl seen="" while true; do   for pat in "ODMOWA" "ENV-BLOCK" "run_boot pid" "bridge po armed" "armed nie nadszedł" "DONE rc"; do     if [ -z "$(echo "$seen" | grep -F "$pat")" ] && grep -qF "$pat" "$f" 2>/dev/null; then       grep -F "$pat" "$f" | head -1; seen="$seen$pat "; fi   done   for ev in armed offboard episode_start refuse breach episode_end start_gate_fail episode_wall_timeout; do     if [ -z "$(echo "$seen" | grep -F "x$ev")" ] && grep -q "\"ev\": \"$ev\"" "$t" 2>/dev/null; then       grep "\"ev\": \"$ev\"" "$t" | head -1 | cut -c1-300; seen="$seen x$ev "; fi   done   echo "$seen" | grep -qF "DONE rc" && break   sleep 5 done' < /dev/null && pwd -P >| /tmp/claude-242a-cwd
+root         863  0.0  0.0 1233872 11896 ?       Sl   11:20   0:02 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root        1001  0.0  0.0   3200  1248 ?        S    11:20   0:00 /init
+root           1  0.0  0.0  22032 13372 ?        Ss   11:20   0:00 /sbin/init
+dnsmasq      890  0.0  0.0 216768 28516 ?        Ss   11:20   0:00 postgres
+root          40  0.0  0.0  50476 16704 ?        S<s  11:20   0:00 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26536  7624 ?        Ss   11:20   0:00 /usr/lib/systemd/systemd-udevd
+polkitd      197  0.0  0.0 308188  8196 ?        Ssl  11:20   0:00 /usr/lib/polkit-1/polkitd --no-debug
+message+     192  0.0  0.0   9792  5528 ?        Ss   11:20   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     183  0.0  0.0  91068  8012 ?        Ssl  11:20   0:00 /usr/lib/systemd/systemd-timesyncd
+olga        1048  0.0  0.0  20440 11656 ?        Ss   11:20   0:00 /usr/lib/systemd/systemd --user
+dnsmasq      969  0.0  0.0 216924  7360 ?        Ss   11:20   0:00 postgres: background writer 
+syslog       210  0.0  0.0 222524  6108 ?        Ssl  11:20   0:00 /usr/sbin/rsyslogd -n -iNONE
+systemd+     182  0.0  0.0  21352 13180 ?        Ss   11:20   0:00 /usr/lib/systemd/systemd-resolved
+root         250  0.0  0.0 107064 23420 ?        Ssl  11:20   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal

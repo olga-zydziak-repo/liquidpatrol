@@ -1,0 +1,82 @@
+{
+  "outdir": "results/2A/probeC/C2_c08_s03",
+  "s_bezp": {
+    "breach_count": 0,
+    "breach_events": [],
+    "refuse_count": 0,
+    "refuse_branches": {},
+    "refuse_events": []
+  },
+  "s_misja": {
+    "n_ticks": 1435,
+    "frac_track_valid": 0.547,
+    "frac_hover_hold_cmd": 0.5561,
+    "phase_hist": {
+      "hold": 798,
+      "approach": 258,
+      "orbit": 379
+    },
+    "orbit_entry": true,
+    "t_entry": 2.76,
+    "z_min_ned_m": -17.55,
+    "z_max_ned_m": -7.15,
+    "r_est_max_m": 12.22,
+    "margin_to_RE_min_m": 19.78,
+    "track_r_from_home": {
+      "p50": 6.595919344564486,
+      "p95": 35.28513059349504,
+      "max": 53.021534653384,
+      "n_beyond_RE": 146
+    },
+    "track_err_vs_gt_m": {
+      "p50": 9.85549718126894,
+      "p95": 35.76942332970997,
+      "max": 48.57171427827105,
+      "n": 785
+    }
+  },
+  "feed_v": {
+    "n_frames": 592,
+    "n_boxes": 504,
+    "n_fresh": 101,
+    "events": {
+      "ENTRY": 2,
+      "REFRESH": 279,
+      "FEED_EXPIRE": 1
+    },
+    "fresh_gates": {
+      "mti": 83,
+      "window": 18
+    },
+    "feed_hz": 7.23
+  },
+  "feed_liveness_aneks3": {
+    "t0_sim": 112.672,
+    "n_frames_30s": 181,
+    "n_fresh_30s": 72,
+    "alive": true
+  },
+  "manifest": {
+    "kind": "2a",
+    "rc": 0,
+    "net_arm": "ncp",
+    "weights_sha": "0337d5eae1471bb99ef329d939be195a9ea846017045b8ddac22f3d97bc2ae36",
+    "feed_sha": "d6a3367b210f47e79b2ea9b33151235d3a2a0ac21c4ad2b93dfa93092673a895",
+    "n_valid_V2p": 1,
+    "episodes": [
+      {
+        "episode_id": 32,
+        "scenario_id": "c08_s03",
+        "attempt": 0,
+        "valid_V2p": true,
+        "success_D6": false,
+        "n_deep_stall": 4,
+        "longest_stall_s": 0.0,
+        "dsim_dwall": 0.9502,
+        "d_min_m": 6.966,
+        "refuse_count": 0,
+        "breach": false
+      }
+    ]
+  }
+}

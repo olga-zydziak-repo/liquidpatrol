@@ -1,0 +1,32 @@
+[bench] armed sim=97.08 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/2A/probeC/C2_c08_s03/episode_control.json
+[bench] takeoff sim=97.12 {}
+[bench] offboard sim=108.69 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+/home/olga/projects/liquidpatrol/.b0deps/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+[bench] intruder_start_gate sim=112.67 {'episode_id': 32, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=112.67 {'episode_id': 32, 'scenario_id': 'c08_s03', 't0_sim': 112.672}
+[bench] episode_end sim=185.46 {'episode_id': 32, 't_entry': 2.76, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] reset_done sim=189.02 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+Exception in thread Thread-4 (_spin):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner
+[bench] done -> /home/olga/projects/liquidpatrol/results/2A/probeC/C2_c08_s03/trace.jsonl (demo n=1435)
+    self.run()
+  File "/usr/lib/python3.12/threading.py", line 1010, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/olga/projects/liquidpatrol/harness/feed_vision.py", line 306, in _spin
+    self._ex.spin_once(timeout_sec=0.05)
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 926, in spin_once
+    self._spin_once_impl(timeout_sec)
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 907, in _spin_once_impl
+    handler, entity, node = self.wait_for_ready_callbacks(
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 877, in wait_for_ready_callbacks
+    return next(self._cb_iter)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 785, in _wait_for_ready_callbacks
+    raise ExternalShutdownException()
+rclpy.executors.ExternalShutdownException

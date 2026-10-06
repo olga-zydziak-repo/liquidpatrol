@@ -1,0 +1,73 @@
+{
+  "outdir": "results/2A/probeC/C1r_c11_s01",
+  "s_bezp": {
+    "breach_count": 0,
+    "breach_events": [],
+    "refuse_count": 0,
+    "refuse_branches": {},
+    "refuse_events": []
+  },
+  "s_misja": {
+    "n_ticks": 789,
+    "frac_track_valid": 0.0,
+    "frac_hover_hold_cmd": 1.0,
+    "phase_hist": {
+      "hold": 789
+    },
+    "orbit_entry": false,
+    "t_entry": null,
+    "z_min_ned_m": -8.52,
+    "z_max_ned_m": -8.34,
+    "r_est_max_m": 0.09,
+    "margin_to_RE_min_m": 31.91,
+    "track_r_from_home": {
+      "p50": null,
+      "p95": null,
+      "max": null,
+      "n_beyond_RE": 0
+    },
+    "track_err_vs_gt_m": {
+      "p50": null,
+      "p95": null,
+      "max": null,
+      "n": 0
+    }
+  },
+  "feed_v": {
+    "n_frames": 306,
+    "n_boxes": 256,
+    "n_fresh": 0,
+    "events": {},
+    "fresh_gates": {},
+    "feed_hz": 6.68
+  },
+  "feed_liveness_aneks3": {
+    "t0_sim": 116.756,
+    "n_frames_30s": 195,
+    "n_fresh_30s": 0,
+    "alive": true
+  },
+  "manifest": {
+    "kind": "2a",
+    "rc": 0,
+    "net_arm": "ncp",
+    "weights_sha": "0337d5eae1471bb99ef329d939be195a9ea846017045b8ddac22f3d97bc2ae36",
+    "feed_sha": "d6a3367b210f47e79b2ea9b33151235d3a2a0ac21c4ad2b93dfa93092673a895",
+    "n_valid_V2p": 1,
+    "episodes": [
+      {
+        "episode_id": 11,
+        "scenario_id": "c11_s01",
+        "attempt": 0,
+        "valid_V2p": true,
+        "success_D6": false,
+        "n_deep_stall": 2,
+        "longest_stall_s": 0.0,
+        "dsim_dwall": 0.9588,
+        "d_min_m": 1.597,
+        "refuse_count": 0,
+        "breach": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+[probeC C1r_c11_s01] cooldown 0s
+[probeC C1r_c11_s01] run_boot pid=19680 ep=11 (FEED=V AKTYWNY, topic=/world/world_demo_A3/model/x500_mono_cam_0/link/camera_link/sensor/imager/image)
+[probeC C1r_c11_s01] bridge po armed: pid=23105 topic=/world/world_demo_A3/model/x500_mono_cam_0/link/camera_link/sensor/imager/image
+results/2A/tools/probeC_boot.sh: line 77: 23105 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_feedv.log" 2>&1
+[probeC] manifest: net_arm=ncp weights_sha=0337d5eae1471bb9 feed_v_sha=92187d653d8919b0
+[probeC C1r_c11_s01] DONE rc=0 → /home/olga/projects/liquidpatrol/results/2A/probeC/C1r_c11_s01

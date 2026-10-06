@@ -1,0 +1,16 @@
+[bench] armed sim=99.49 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/2A/probeC/C1r_c11_s01/episode_control.json
+[bench] takeoff sim=99.53 {}
+[bench] offboard sim=110.98 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+/home/olga/projects/liquidpatrol/.b0deps/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+[bench] intruder_start_gate sim=116.76 {'episode_id': 11, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.096, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=116.76 {'episode_id': 11, 'scenario_id': 'c11_s01', 't0_sim': 116.756}
+[bench] episode_end sim=156.78 {'episode_id': 11, 't_entry': None, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] reset_done sim=156.78 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/2A/probeC/C1r_c11_s01/trace.jsonl (demo n=789)
+Exception in thread Thread-4 (_spin):
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/threading.py", line 1073, in _bootstrap_inner

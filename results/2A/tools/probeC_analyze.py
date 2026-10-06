@@ -139,7 +139,20 @@ def main(outdir):
         if dt > 0:
             feed_stats["feed_hz"] = round(len(feed) / dt, 2)
 
-    out = {"outdir": outdir, "s_bezp": s_bezp, "s_misja": s_misja, "feed_v": feed_stats}
+    # --- ŻYWOŚĆ feedu (ANEKS_2A-3 §4, warunek klasy V2′ — ważność INSTRUMENTU):
+    # w pierwszych 30 s epizodu ≥1 świeża próbka tracku ALBO ≥10 klatek przetworzonych.
+    ep_start = ev_all("episode_start")
+    liveness = None
+    if ep_start:
+        t0 = ep_start[0]["t0_sim"]
+        w = [r for r in feed if t0 <= r["t_frame"] <= t0 + 30.0]
+        n_fr = len(w)
+        n_fresh30 = sum(1 for r in w if r.get("fresh"))
+        liveness = {"t0_sim": t0, "n_frames_30s": n_fr, "n_fresh_30s": n_fresh30,
+                    "alive": bool(n_fresh30 >= 1 or n_fr >= 10)}
+
+    out = {"outdir": outdir, "s_bezp": s_bezp, "s_misja": s_misja, "feed_v": feed_stats,
+           "feed_liveness_aneks3": liveness}
     # kind/valid z manifestu, jeśli jest
     mp = os.path.join(outdir, "manifest.json")
     if os.path.exists(mp):
