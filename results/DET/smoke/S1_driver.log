@@ -1,0 +1,6 @@
+[detS3 S1_c10_s01] cooldown 0s
+[detS3 S1_c10_s01] run_boot pid=243117 ep=10 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/smoke/S1_c10_s01/percep.sock)
+[detS3 S1_c10_s01] po armed: bridge pid=246540 percep pid=246541
+results/DET/tools/detS3_smoke.sh: line 69: 246540 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS3] manifest: net_arm=ncp feed_v2 percep_sha=95e54151e2186695
+[detS3 S1_c10_s01] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/smoke/S1_c10_s01

@@ -1,0 +1,76 @@
+{
+ "outdir": "results/DET/smoke/S1_c10_s01",
+ "bramki_runtime": {
+  "kadencja_przetwarzania_hz_p50": 14.71,
+  "PASS_kadencja": true,
+  "e2e_p95_s": 0.084,
+  "PASS_e2e": true,
+  "n_frames": 877,
+  "n_e2e": 626
+ },
+ "zywosc_aneks2a3": {
+  "t0": 110.396,
+  "n_frames_30s": 247,
+  "n_fresh_30s": 108,
+  "alive": true
+ },
+ "s_bezp": {
+  "breach_count": 0,
+  "refuse_count": 0,
+  "refuse_branches": {},
+  "refuse_events": []
+ },
+ "opisowe": {
+  "kadencja_swiezych_hz_p50": 14.71,
+  "n_fresh": 521,
+  "admisja_ev": {
+   "ENTRY": 2,
+   "REFRESH": 521,
+   "FEED_EXPIRE": 2
+  },
+  "fresh_gates": {
+   "mti": 519,
+   "window": 2
+  },
+  "err_vs_gt_fresh": {
+   "n": 488,
+   "p50": 0.335,
+   "p95": 0.716,
+   "max": 4.879
+  },
+  "t_entry": null,
+  "r_est_max": 17.83,
+  "z_min_ned": -12.96,
+  "frac_track_valid": 0.7589,
+  "frac_hover_cmd": 0.2744
+ },
+ "manifest": {
+  "kind": "det",
+  "rc": 0,
+  "net_arm": "ncp",
+  "feed_sha": "8015bd12d7e8852bdc2e773d8b32c335a21752ea6209c6f245364809e4ed4a9c",
+  "n_valid_V2p": 1,
+  "episodes": [
+   {
+    "episode_id": 10,
+    "scenario_id": "c10_s01",
+    "attempt": 0,
+    "valid_V2p": true,
+    "success_D6": false,
+    "n_deep_stall": 5,
+    "longest_stall_s": 0.0,
+    "dsim_dwall": 0.9698,
+    "d_min_m": 2.018,
+    "refuse_count": 0,
+    "breach": false
+   }
+  ],
+  "feed_v2": {
+   "role": "FEED=V2 AKTYWNY (det_v2 w osobnym procesie percepcji; smoke S3)",
+   "det_v2_sha": "775ead150b9937453168538cb97c55f69166e27ddc2d93f71b3710e0e49832ce",
+   "percep_feed_sha256": "95e54151e2186695b2d72cfd3e9927c1b8c02d563ef6221839b66c2cf373d4d9",
+   "client_e2e_sha256": "5d51efa50a77e5e448a713ac62d5989b41264b2534c1621eb604f2a014c6bde4",
+   "nota_prowieniencja": "numpy \u0142awki 2.4.4 (B0SP, import r02.mti przez klienta) \u2014 jak S4 2A"
+  }
+ }
+}

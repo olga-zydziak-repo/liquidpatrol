@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        4456  2.4  1.7 75981388 548980 pts/0 Sl+  Oct06  18:49 claude
+root         251  0.1  0.2 3364512 78484 ?       Ssl  Oct06   1:33 /usr/bin/containerd
+root         361  0.1  0.3 9070552 111604 ?      Ssl  Oct06   1:07 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         863  0.0  0.0 1233872 12536 ?       Sl   Oct06   0:43 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      890  0.0  0.0 216768 28516 ?        Ss   Oct06   0:04 postgres
+root        1001  0.0  0.0   3200  1248 ?        S    Oct06   0:02 /init
+polkitd      197  0.0  0.0 308188  8200 ?        Ssl  Oct06   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root           1  0.0  0.0  22032 13372 ?        Ss   Oct06   0:01 /sbin/init
+root          40  0.0  0.0  50476 18428 ?        S<s  Oct06   0:01 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26536  7624 ?        Ss   Oct06   0:00 /usr/lib/systemd/systemd-udevd
+systemd+     183  0.0  0.0  91068  8012 ?        Ssl  Oct06   0:00 /usr/lib/systemd/systemd-timesyncd
+dnsmasq      969  0.0  0.0 216924  7360 ?        Ss   Oct06   0:00 postgres: background writer 
+dnsmasq      971  0.0  0.0 216768 10248 ?        Ss   Oct06   0:00 postgres: walwriter 
+message+     192  0.0  0.0   9792  5536 ?        Ss   Oct06   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         211  0.0  0.0  17400  6364 ?        Ss   Oct06   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+root         201  0.0  0.0  17988  8848 ?        Ss   Oct06   0:00 /usr/lib/systemd/systemd-logind
+syslog       210  0.0  0.0 222524  6124 ?        Ssl  Oct06   0:00 /usr/sbin/rsyslogd -n -iNONE
+root           7  0.0  0.0   3220  2148 hvc0     Sl+  Oct06   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+dnsmasq      972  0.0  0.0 218364  8888 ?        Ss   Oct06   0:00 postgres: autovacuum launcher 
