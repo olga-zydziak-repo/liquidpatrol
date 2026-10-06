@@ -289,6 +289,13 @@ class FeedVisionLive(FeedVision):
         self._node.create_subscription(VehicleAttitude, "/fmu/out/vehicle_attitude",
                                        self._on_att, qos)
         self._node.create_subscription(Image, self.image_topic, self._on_image, qos_be())
+        # ANEKS_2A-3 N3-C: DEDYKOWANY egzekutor dla węzła feedu. rclpy.spin_once(node)
+        # używa egzekutora GLOBALNEGO, który w bench_flight już spinuje wątek EKF
+        # (bench_flight.py:248-251) ⇒ 'Executor is already spinning' i śmierć wątku _spin
+        # pierwszym wywołaniem (boot C1 sondy, RAPORT_2A_S3 §2b; repro probeC_repro_executor).
+        from rclpy.executors import SingleThreadedExecutor
+        self._ex = SingleThreadedExecutor()
+        self._ex.add_node(self._node)
         self._running = True
         self._th = threading.Thread(target=self._spin, daemon=True)
         self._th.start()
@@ -296,7 +303,7 @@ class FeedVisionLive(FeedVision):
     def _spin(self):
         import rclpy
         while self._running and rclpy.ok():
-            rclpy.spin_once(self._node, timeout_sec=0.05)
+            self._ex.spin_once(timeout_sec=0.05)
 
     def _on_pos(self, m):
         self._pos = [float(m.x), float(m.y), float(m.z)]

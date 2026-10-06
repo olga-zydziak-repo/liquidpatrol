@@ -15,11 +15,14 @@ po tym commicie = nowa decyzja do ratyfikacji, nie poprawka.
 | `bench/bench_flight.py` PO dwóch edycjach | `2972a48a081e42bb4cd4de1690c47c678287df6f6a739d01dc8b862c20b15b00` |
 | `bench/bench_flight.py` PO N1 (ANEKS_2A-1 §3: rad→deg na granicy MAVSDK — TRZECIA edycja, jawne rozszerzenie D6) | `05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43` |
 | `harness/feed_vision.py` PO N2 (ANEKS_2A-1 §3: REFRESH bramkowany + sufit θ_age feedu) | `0a97512106d8ca708c77329fd2bff50e8fe9b5fc0b06da5fa6b7eb5992a2f5de` |
+| `harness/feed_vision.py` PO N3-C (ANEKS_2A-3 §3: dedykowany SingleThreadedExecutor węzła feedu — naprawa kolizji egzekutora globalnego z bootu C1; rdzeń YOLO/MTI/admisja/pinhole NIETKNIĘTY) | `acc81df76acf4570af6629edefb77f9ee0051a0eadcdeaf9da9cf270ba74dcce` |
 
 `feed_sha` FEED-V (sha256 JSON parametrów, analog FeedB):
 `ffccf86b59d5055f2efe50f716a82a1fce777bf87e7010a8a9d14260c964ad7b` (S1, PRZED N2)
 `d6a3367b210f47e79b2ea9b33151235d3a2a0ac21c4ad2b93dfa93092673a895` (PO N2 — params
 + refresh_gate/refresh_gate_m)
+PO N3-C feed_sha **BEZ ZMIAN** (= d6a3367b…): naprawa dotyczy wyłącznie transportu
+(egzekutor/wątek spin), nie dotyka słownika `params` — zweryfikowane wykonaniem 06.10.
 
 ## Stałe geometrii i parametry FEED-V (echo z kodu, harness/feed_vision.py)
 
