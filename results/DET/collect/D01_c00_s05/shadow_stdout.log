@@ -1,0 +1,13 @@
+/home/olga/projects/liquidpatrol/.b0deps/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+[shadow] weights_sha=9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792 (SR-2 PASS) device=cuda
+[shadow] feed_sha=d6a3367b210f47e79b2ea9b33151235d3a2a0ac21c4ad2b93dfa93092673a895 == FREEZE_2A
+[shadow] topic=/world/world_demo_A3/model/x500_mono_cam_0/link/camera_link/sensor/imager/image state_sources={'pos_ekf': '/fmu/out/vehicle_local_position', 'att': '/fmu/out/vehicle_attitude'} det_hz=full(15)
+[shadow] sim=122.2 frames=73 boxes=70 fresh=0 saved=73
+[shadow] sim=137.2 frames=165 boxes=157 fresh=14 saved=165
+[shadow] sim=152.1 frames=248 boxes=232 fresh=44 saved=248
+[shadow] sim=167.1 frames=328 boxes=309 fresh=84 saved=328
+[shadow] sim=182.1 frames=409 boxes=377 fresh=85 saved=409
+[shadow] sim=197.1 frames=487 boxes=448 fresh=117 saved=487
+[shadow] DONE {"n_frames": 537, "n_boxes": 498, "n_fresh": 166, "n_frames_saved": 537, "n_skip_preready": 0, "n_skip_dethz": 0, "push_frame_wall_ms": {"n": 537, "p50": 15.39, "p95": 55.01, "max": 1160.26}, "weights_sha": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792", "feed_sha": "d6a3367b210f47e79b2ea9b33151235d3a2a0ac21c4ad2b93dfa93092673a895", "image_topic": "/world/world_demo_A3/model/x500_mono_cam_0/link/camera_link/sensor/imager/image", "state_sources": {"pos_ekf": "/fmu/out/vehicle_local_position", "att": "/fmu/out/vehicle_attitude"}, "det_hz": null, "sim_last": 205.328}
+terminate called without an active exception

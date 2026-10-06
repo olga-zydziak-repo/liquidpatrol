@@ -1,0 +1,50 @@
+{
+  "kind": "det",
+  "flight": "bench",
+  "boot": 12,
+  "rc": 0,
+  "arm": "E",
+  "point": "0.0",
+  "harness_file": "/home/olga/projects/liquidpatrol/bench/bench_flight.py",
+  "sha_harness": "05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43",
+  "controller": "net",
+  "controller_sha": "e8c1b6583a6237a53567817a1b7036e51a9d7da5f1e92d5018da8e9781215167",
+  "feed_sha": "da9ef2f4466eac87acf298e80000ad19430d69fe9c12c6ae3d7de8a0ced250c9",
+  "executor_params_sha": "5a7244996d89be70bd720a2b0eb8b6f6dea1a2d8f3f2fd7cf356292426f28716",
+  "ulog_sha": "d49f4ad7922169cb2d341f73fd1198aa217338fe3819c156d50bea4c564d77ed",
+  "ulog_bytes": 58368000,
+  "world_hash": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0  worlds/world_demo_A3.sdf",
+  "world_ref": "worlds/world_demo_A3.sdf",
+  "proc_gate": "CLEAN loadavg=0.03 (cpu_max=2.0, load1_max=1.5)",
+  "n_demo_rows": 1427,
+  "n_episodes": 1,
+  "n_valid_V2p": 1,
+  "n_success_D6": 1,
+  "episodes": [
+    {
+      "episode_id": 119,
+      "scenario_id": "c11_s10",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 3,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9897,
+      "d_min_m": 6.956,
+      "refuse_count": 0,
+      "breach": false
+    }
+  ],
+  "world_hash_kind": "repo",
+  "model_in_state": true,
+  "net_arm": "ncp",
+  "weights_sha": "0337d5eae1471bb99ef329d939be195a9ea846017045b8ddac22f3d97bc2ae36",
+  "shadow": {
+    "role": "SHADOW zrzut korpusu DET (kontrolera nie karmi; lot na FEED=B)",
+    "det_hz": null,
+    "frames_hz": 1000.0,
+    "n_frames_jpg": 749,
+    "frames_set_sha256": "a4606014c9c1254ddc3cf9713bc59ab111de70cc732c274e31e8b9d6a8c2b3f2",
+    "shadow_feed_sha256": "0c6573bdf5fc463d52fec2c5a8a94a83f869398a5ad1b1d9e88b1d88ff4ccb13"
+  }
+}

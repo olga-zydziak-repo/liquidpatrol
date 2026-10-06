@@ -1,0 +1,6 @@
+[detS1 D10_c09_s08] cooldown 290s
+[detS1 D10_c09_s08] run_boot pid=102160 ep=93 (FEED=B default, SHADOW zrzut PEŁNEJ kadencji po armed)
+[detS1 D10_c09_s08] SHADOW po armed: bridge pid=103783 shadow pid=103784 frames-hz=1000 (każda klatka)
+results/DET/tools/detS1_boot.sh: line 66: 103783 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_shadow.log" 2>&1
+[detS1] manifest: net_arm=ncp weights_sha=0337d5eae1471bb9 frames=756 set_sha=d7aaf483d4129506
+[detS1 D10_c09_s08] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/collect/D10_c09_s08

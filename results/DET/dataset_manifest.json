@@ -1,0 +1,129 @@
+{
+ "dataset_yaml": "path: /home/olga/projects/liquidpatrol/results/DET/dataset\ntrain: images/train\nval: images/val\nnc: 1\nnames: [intruder]\n",
+ "labels_set_sha256": "33dbebbac379c461cfeda1ec7eedfc534386d969b38f149566f87dacdccc7f95",
+ "n_records": 6714,
+ "per_cell": {
+  "c00": {
+   "D01_c00_s05": {
+    "neg": 6,
+    "pos": 400,
+    "split": "train"
+   }
+  },
+  "c01": {
+   "D02_c01_s06": {
+    "neg": 0,
+    "pos": 499,
+    "split": "train"
+   }
+  },
+  "c02": {
+   "D03_c02_s07": {
+    "neg": 12,
+    "pos": 579,
+    "split": "val"
+   }
+  },
+  "c03": {
+   "D04_c03_s08": {
+    "neg": 2,
+    "pos": 411,
+    "split": "train"
+   }
+  },
+  "c04": {
+   "D05_c04_s09": {
+    "neg": 5,
+    "pos": 499,
+    "split": "val"
+   }
+  },
+  "c05": {
+   "D06_c05_s10": {
+    "neg": 0,
+    "pos": 420,
+    "split": "train"
+   }
+  },
+  "c06": {
+   "D07_c06_s05": {
+    "neg": 8,
+    "pos": 691,
+    "split": "test"
+   }
+  },
+  "c07": {
+   "D08_c07_s06": {
+    "neg": 7,
+    "pos": 428,
+    "split": "train"
+   }
+  },
+  "c08": {
+   "A1_c08_s03_r4": {
+    "neg": 79,
+    "pos": 52,
+    "split": "train"
+   },
+   "A1b_c08_s03": {
+    "neg": 0,
+    "pos": 120,
+    "split": "train"
+   },
+   "D09_c08_s07": {
+    "neg": 3,
+    "pos": 435,
+    "split": "train"
+   }
+  },
+  "c09": {
+   "D10_c09_s08": {
+    "neg": 0,
+    "pos": 576,
+    "split": "test"
+   }
+  },
+  "c10": {
+   "D11_c10_s09": {
+    "neg": 8,
+    "pos": 620,
+    "split": "train"
+   }
+  },
+  "c11": {
+   "A2_c11_s01": {
+    "neg": 72,
+    "pos": 42,
+    "split": "train"
+   },
+   "A2b_c11_s01": {
+    "neg": 2,
+    "pos": 134,
+    "split": "train"
+   },
+   "D12_c11_s10": {
+    "neg": 8,
+    "pos": 596,
+    "split": "train"
+   }
+  }
+ },
+ "split_rule": "PRE_DET par.3 FROZEN: TEST c06+c09, VAL c02+c04, TRAIN reszta",
+ "totals": {
+  "test": {
+   "n_boots": 2,
+   "neg": 8,
+   "pos": 1267
+  },
+  "train": {
+   "n_boots": 12,
+   "neg": 187,
+   "pos": 4157
+  },
+  "val": {
+   "n_boots": 2,
+   "neg": 17,
+   "pos": 1078
+  }
+ }
+}

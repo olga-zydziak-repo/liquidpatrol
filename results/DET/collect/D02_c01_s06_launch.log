@@ -1,0 +1,9 @@
+[run_boot b2] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b2] watchdog EKF2 (preflight-only, max 2 reinity) pid=75032
+model_in_state=1
+[run_boot b2] settle 90s preflight EKF
+harness/run_boot.sh: line 133: 75824 Aborted                 (core dumped) GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 PYTHONPATH=".:.certdeps:${PYTHONPATH:-}" python3 -m bench.bench_flight > "$OUTDIR/act.log" 2>&1
+[bench_finalize] manifest.json boot=2 n_episodes=1 valid_V2p=1 success_D6=1 n_demo=1450
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b2] DONE flight=bench world=world_demo_A3 rc=134 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/collect/D02_c01_s06

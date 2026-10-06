@@ -1,0 +1,24 @@
+{
+ "n_frames": 555,
+ "flags": {
+  "F2_no_intruder_gt": 74,
+  "F3_behind": 5,
+  "F3_out_of_fov": 2,
+  "OK": 428,
+  "F1_no_gt": 46
+ },
+ "pos": 428,
+ "neg": 7,
+ "val_vs_yolo": {
+  "n_yolo_box": 491,
+  "n_z_etykieta_OK": 374,
+  "n_yolo_na_celu": 20,
+  "frac_na_celu": 0.0535,
+  "iou_na_celu": {
+   "n": 20,
+   "p50": 0.601,
+   "p90": 0.678,
+   "min": 0.282
+  }
+ }
+}

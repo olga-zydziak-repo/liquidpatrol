@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        4456  4.8  1.5 75851680 512704 pts/0 Sl+  11:39  11:58 claude
+olga       95252  3.2  0.0   5024  3704 ?        S    15:45   0:00 bash harness/run_boot.sh
+root         251  0.1  0.2 3363744 67744 ?       Ssl  11:28   0:25 /usr/bin/containerd
+olga       72587  0.1  0.2 871380 71340 ?        Sl   14:45   0:04 /usr/bin/python3 -c from ros2cli.daemon.daemonize import main; main() --name ros2-daemon --ros-domain-id 0 --rmw-implementation rmw_fastrtps_cpp
+root         361  0.1  0.2 9070296 92972 ?       Ssl  11:28   0:19 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         863  0.0  0.0 1233872 11908 ?       Sl   11:28   0:12 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root        1001  0.0  0.0   3200  1248 ?        S    11:28   0:01 /init
+dnsmasq      890  0.0  0.0 216768 28516 ?        Ss   11:28   0:01 postgres
+root       92153  0.0  0.0 1830364 13992 ?       Ssl  15:36   0:00 /usr/libexec/wsl-pro-service
+root           1  0.0  0.0  22032 13372 ?        Ss   11:28   0:00 /sbin/init
+root          40  0.0  0.0  50476 17556 ?        S<s  11:28   0:00 /usr/lib/systemd/systemd-journald
+olga       70915  0.0  0.0 1307920 6776 ?        S    14:43   0:00 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl --line-buffered -E START|DONE|CHECK|ABORT|KOMPLET|ENV-BLOCK|ODMOWA
+polkitd      197  0.0  0.0 308188  8196 ?        Ssl  11:28   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          86  0.0  0.0  26536  7624 ?        Ss   11:28   0:00 /usr/lib/systemd/systemd-udevd
+systemd+     183  0.0  0.0  91068  8012 ?        Ssl  11:28   0:00 /usr/lib/systemd/systemd-timesyncd
+message+     192  0.0  0.0   9792  5528 ?        Ss   11:28   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+dnsmasq      969  0.0  0.0 216924  7360 ?        Ss   11:28   0:00 postgres: background writer 
+dnsmasq      971  0.0  0.0 216768 10248 ?        Ss   11:28   0:00 postgres: walwriter 
+root         201  0.0  0.0  17988  8848 ?        Ss   11:28   0:00 /usr/lib/systemd/systemd-logind
