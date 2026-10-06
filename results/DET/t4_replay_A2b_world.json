@@ -1,0 +1,31 @@
+{
+ "bootdir": "results/2A/stageA/A2b_c11_s01",
+ "detector": "world",
+ "detector_sha": "9b2c17ab6124a913e9b3a5c170617920d91b0f01111a8479da69f00e2cf27792",
+ "n_frames_replayed": 174,
+ "n_frames_no_own": 0,
+ "wall_s": 3.3,
+ "err_fresh_vs_gt": {
+  "n": 10,
+  "p50": 2.483,
+  "p95": 31.489,
+  "max": 31.489
+ },
+ "top1_on_target": {
+  "n_fov": 134,
+  "n_on": 14,
+  "pct": 10.4
+ },
+ "admisja": {
+  "events": {
+   "ENTRY": 2,
+   "REFRESH": 19,
+   "FEED_EXPIRE": 2
+  },
+  "fresh_gates": {
+   "mti": 10
+  },
+  "n_boxes": 148,
+  "n_fresh": 10
+ }
+}
