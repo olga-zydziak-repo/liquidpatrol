@@ -200,3 +200,31 @@ TEN SAM kierunek — niedoszacowanie wyników komponentu uczonego/liquid; łącz
 (P-W-1, P-W-2) to pięć chybień w jedną stronę przy zerze w drugą. Reguła 9 (predykcje CC
 nie są priorami) potwierdzona i zaostrzona: w ocenach jakościowych stosuję korektę na
 udokumentowany kierunek błędu.
+
+## NOGA 2A (percepcja w pętli) — ROZLICZONE przy RAPORT_2A (ANEKS_2A-4 §4, 06.10.2026)
+Prerejestrowane 03.10.2026 (PRE_2A §P, ratyf. przed S1):
+- **P-2A-1 ✗:** „bramka A przechodzi w ≤2 bootach (pokrycie + dsw)" (p≈0.75) — PADA na
+  ukrytej usterce yaw (radiany w stopniowe pole MAVSDK): pokrycie rzeczywiste 0.11–0.61
+  vs próg 0.90; naprawa N1 + powtórka = 4 booty łącznie (`results/2A/RAPORT_2A_S2.md` §3,
+  `RAPORT_2A_S2b.md` §4).
+- **P-2A-2 ✗:** „bramka B czasowa (kadencja+latencja) PASS" (p≈0.7) — PADA literą
+  kadencji (7.58 Hz < 8 po N2); latencja PASS (0.052 s). Errata ANEKS_2A-2 §2 wyjaśnia
+  mechanizm (świeżość = jakość∧czas po bramkowaniu REFRESH; surowy tor czasowy zdrowy
+  14.7 Hz/15 ms/52 ms) — wyjaśnienie NIE unieważnia predykcji: litera padła.
+- **P-2A-3 ✗:** „błąd FEED-V p95 ≤ 3.0 m" (p≈0.55) — PADA z atrybucją: 40.9 m (S2b),
+  mechanizm = top-1 detektora poza celem w ~88–97% klatek orbity na tle naziemnym;
+  projekcja niewinna (pinhole na celu 0.65–0.80 m) (`results/2A/RAPORT_2A_S2b.md` §5).
+- **P-2A-4 — POZA SUMĄ (nietestowalna):** werdykt kampanii C po Δ (p≈0.5/0.25/0.25) —
+  kampania parowana NIE poleciała (wyjątek ekonomiczny ANEKS_2A-2 §2 po uczciwym FAIL-u
+  błędu); antecedens pusty.
+- **P-2A-5 — POZA SUMĄ (nietestowalna):** „≥1 REFUSE jakiejkolwiek gałęzi pod FEED-V
+  w kampanii" (p≈0.25) — kampania nie poleciała; nota: w C-sondzie 2 bootów REFUSE=0
+  (pogoń za fantomem szatkowana higieną toru percepcji zanim doszła do pasma geofence'u,
+  `results/2A/RAPORT_2A_S4.md` §3-4).
+
+**Suma nogi 2A: 0 ✓ / 3 ✗ (+2 poza sumą z przyczynami).** Kalibracja CC (wpis do księgi
+błędów): wszystkie trzy ✗ to PRZESZACOWANIE gotowości integracyjnej nowego toru —
+kierunek PRZECIWNY do serii z W/LIQ (tam: niedoszacowanie wyników komponentu uczonego).
+Nowa reguła kalibracyjna: w PRE nóg integracyjnych (pierwszy przelot nowego toru przez
+LIVE) predykcje bramek technicznych dostają jawną korektę W DÓŁ; predykcje wyników
+naukowych — korektę W GÓRĘ (reguła 9 bez zmian: żadne nie są priorami).
