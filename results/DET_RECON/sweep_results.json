@@ -1,0 +1,121 @@
+{
+ "n_frames": 348,
+ "bg_counts": {
+  "terrain": 348
+ },
+ "variants": {
+  "P1_kanon@640": {
+   "terrain": {
+    "n": 348,
+    "top1_on_pct": 5.5,
+    "any_on_pct": 13.8,
+    "conf_on_p50": 0.0021,
+    "conf_top1_off_p50": 0.0068
+   },
+   "ms_per_frame": 17.1
+  },
+  "P2_quad@640": {
+   "terrain": {
+    "n": 348,
+    "top1_on_pct": 3.2,
+    "any_on_pct": 5.2,
+    "conf_on_p50": 0.0032,
+    "conf_top1_off_p50": 0.0029
+   },
+   "ms_per_frame": 11.1
+  },
+  "P3_multi@640": {
+   "terrain": {
+    "n": 348,
+    "top1_on_pct": 6.9,
+    "any_on_pct": 25.0,
+    "conf_on_p50": 0.0023,
+    "conf_top1_off_p50": 0.0104
+   },
+   "ms_per_frame": 11.9
+  },
+  "P4_opis@640": {
+   "terrain": {
+    "n": 348,
+    "top1_on_pct": 3.7,
+    "any_on_pct": 21.0,
+    "conf_on_p50": 0.0021,
+    "conf_top1_off_p50": 0.0166
+   },
+   "ms_per_frame": 12.7
+  },
+  "P5_aircraft@640": {
+   "terrain": {
+    "n": 348,
+    "top1_on_pct": 4.6,
+    "any_on_pct": 42.2,
+    "conf_on_p50": 0.0028,
+    "conf_top1_off_p50": 0.0882
+   },
+   "ms_per_frame": 16.8
+  },
+  "P1_kanon@960": {
+   "terrain": {
+    "n": 348,
+    "top1_on_pct": 4.0,
+    "any_on_pct": 7.8,
+    "conf_on_p50": 0.0024,
+    "conf_top1_off_p50": 0.0042
+   },
+   "ms_per_frame": 13.2
+  },
+  "P3_multi@960": {
+   "terrain": {
+    "n": 348,
+    "top1_on_pct": 7.5,
+    "any_on_pct": 14.9,
+    "conf_on_p50": 0.0025,
+    "conf_top1_off_p50": 0.0055
+   },
+   "ms_per_frame": 13.9
+  },
+  "P1_kanon@1280": {
+   "terrain": {
+    "n": 348,
+    "top1_on_pct": 6.9,
+    "any_on_pct": 10.6,
+    "conf_on_p50": 0.0019,
+    "conf_top1_off_p50": 0.0026
+   },
+   "ms_per_frame": 16.2
+  },
+  "P3_multi@1280": {
+   "terrain": {
+    "n": 348,
+    "top1_on_pct": 10.3,
+    "any_on_pct": 19.3,
+    "conf_on_p50": 0.002,
+    "conf_top1_off_p50": 0.0038
+   },
+   "ms_per_frame": 16.4
+  }
+ },
+ "best_variant": "P3_multi@1280",
+ "conf_threshold_table": {
+  "0.005": {
+   "frames_TP_pct": 7.2,
+   "frames_FPbox_pct": 27.9
+  },
+  "0.01": {
+   "frames_TP_pct": 3.2,
+   "frames_FPbox_pct": 16.4
+  },
+  "0.02": {
+   "frames_TP_pct": 1.7,
+   "frames_FPbox_pct": 7.5
+  },
+  "0.05": {
+   "frames_TP_pct": 0.9,
+   "frames_FPbox_pct": 2.6
+  },
+  "0.1": {
+   "frames_TP_pct": 0.3,
+   "frames_FPbox_pct": 0.3
+  }
+ }
+}
