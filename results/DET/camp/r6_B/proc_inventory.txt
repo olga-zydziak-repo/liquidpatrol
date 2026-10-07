@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       70900  3.5  0.0   5024  3640 ?        S    11:58   0:00 bash harness/run_boot.sh
+olga        1143  2.2  1.5 73887396 495356 pts/0 Sl+  08:58   4:08 claude
+root         246  0.1  0.2 2920520 71108 ?       Ssl  08:58   0:20 /usr/bin/containerd
+root         355  0.1  0.3 8407156 97652 ?       Ssl  08:58   0:14 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         845  0.0  0.0 1233872 12236 ?       Sl   08:58   0:07 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      870  0.0  0.0 216768 28520 ?        Ss   08:58   0:00 postgres
+root           1  0.0  0.0  22016 13416 ?        Ss   08:58   0:00 /sbin/init
+root          40  0.0  0.0  50480 17868 ?        S<s  08:58   0:00 /usr/lib/systemd/systemd-journald
+message+     192  0.0  0.0   9800  5528 ?        Ss   08:58   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         984  0.0  0.0   3200  1252 ?        S    08:58   0:00 /init
+olga       69360  0.0  0.0   5028  3828 ?        S    11:52   0:00 bash /home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh 25 r6_B B 6 20,21,22,23
+polkitd      197  0.0  0.0 308188  8180 ?        Ssl  08:58   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          86  0.0  0.0  26304  7380 ?        Ss   08:58   0:00 /usr/lib/systemd/systemd-udevd
+olga       11374  0.0  0.0 1307920 6820 ?        S    09:31   0:00 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered RUNDA|boot_n=|DONE rc|nieważny|powtórka|STOP|BUDGET|S-BEZP|ENV-BLOCK|ODMOWA|PADŁA|armed nie|KAMPANIA
+olga        1030  0.0  0.0  20336 11360 ?        Ss   08:58   0:00 /usr/lib/systemd/systemd --user
+systemd+     183  0.0  0.0  91068  8020 ?        Ssl  08:58   0:00 /usr/lib/systemd/systemd-timesyncd
+syslog       210  0.0  0.0 222524  6088 ?        Ssl  08:58   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         202  0.0  0.0  17988  8856 ?        Ss   08:58   0:00 /usr/lib/systemd/systemd-logind
+dnsmasq      954  0.0  0.0 216924  7364 ?        Ss   08:58   0:00 postgres: background writer 

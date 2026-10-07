@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        1143  5.1  1.4 73819128 454936 pts/0 Sl+  08:50   2:28 claude
+root         246  0.1  0.2 2920520 69680 ?       Ssl  08:50   0:04 /usr/bin/containerd
+root         355  0.1  0.3 8406900 96888 ?       Ssl  08:50   0:03 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         845  0.0  0.0 1233872 12260 ?       Sl   08:50   0:02 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root           1  0.0  0.0  22016 13400 ?        Ss   08:50   0:00 /sbin/init
+root         984  0.0  0.0   3200  1252 ?        S    08:50   0:00 /init
+dnsmasq      870  0.0  0.0 216768 28520 ?        Ss   08:50   0:00 postgres
+root          40  0.0  0.0  50480 16644 ?        S<s  08:50   0:00 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26304  7380 ?        Ss   08:50   0:00 /usr/lib/systemd/systemd-udevd
+polkitd      197  0.0  0.0 308188  8176 ?        Ssl  08:50   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga       14519  0.0  0.0   5028  3900 ?        S    09:32   0:00 bash /home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh 15 r1_V2 V2 1 0,1,2,3
+message+     192  0.0  0.0   9800  5516 ?        Ss   08:50   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     183  0.0  0.0  91068  8020 ?        Ssl  08:50   0:00 /usr/lib/systemd/systemd-timesyncd
+olga       11374  0.0  0.0 1307920 6824 ?        S    09:23   0:00 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered RUNDA|boot_n=|DONE rc|nieważny|powtórka|STOP|BUDGET|S-BEZP|ENV-BLOCK|ODMOWA|PADŁA|armed nie|KAMPANIA
+olga        1030  0.0  0.0  20336 11360 ?        Ss   08:50   0:00 /usr/lib/systemd/systemd --user
+root         247  0.0  0.0 107064 23304 ?        Ssl  08:50   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+dnsmasq      954  0.0  0.0 216924  7364 ?        Ss   08:50   0:00 postgres: background writer 
+syslog       210  0.0  0.0 222524  6080 ?        Ssl  08:50   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         202  0.0  0.0  17988  8856 ?        Ss   08:50   0:00 /usr/lib/systemd/systemd-logind

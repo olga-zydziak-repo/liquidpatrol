@@ -1,0 +1,236 @@
+{
+ "outdir": "/home/olga/projects/liquidpatrol/results/DET/camp/r11_V2",
+ "det_arm": "V2",
+ "det_round": 11,
+ "rc": 0,
+ "feed_sha": "8015bd12d7e8852bdc2e773d8b32c335a21752ea6209c6f245364809e4ed4a9c",
+ "weights_sha": "0337d5eae1471bb9",
+ "n_episodes": 4,
+ "n_valid_final": 4,
+ "episodes": [
+  {
+   "episode_id": 40,
+   "scenario_id": "c04_s04",
+   "valid_V2p": true,
+   "alive_feed": true,
+   "valid_final": true,
+   "success_D6": true,
+   "d_min_m": 7.254,
+   "refuse_count": 0,
+   "breach": false,
+   "n_deep_stall": 2,
+   "longest_stall_s": 0.0,
+   "dsim_dwall": 0.9959,
+   "telemetry": {
+    "err_fresh": {
+     "n": 453,
+     "p50": 0.458,
+     "p95": 0.648,
+     "max": 1.756
+    },
+    "err_consumed_demo": {
+     "n": 1377,
+     "p50": 0.446,
+     "p95": 0.79,
+     "max": 17.362
+    },
+    "err_d_lt6": {
+     "n": 0,
+     "p50": null,
+     "p95": null,
+     "max": null
+    },
+    "err_d_ge6": {
+     "n": 453,
+     "p50": 0.458,
+     "p95": 0.648,
+     "max": 1.756
+    },
+    "frac_track_valid": 1.0,
+    "r_max": 17.97,
+    "z_max_alt": 13.62,
+    "feed_v2": {
+     "n_frames": 466,
+     "n_fresh": 453,
+     "n_feed_expire": 0,
+     "n_entry": 0,
+     "alive_30s": {
+      "n_frames_30s": 203,
+      "n_fresh_30s": 190,
+      "alive": true
+     }
+    }
+   }
+  },
+  {
+   "episode_id": 41,
+   "scenario_id": "c05_s04",
+   "valid_V2p": true,
+   "alive_feed": true,
+   "valid_final": true,
+   "success_D6": false,
+   "d_min_m": 6.577,
+   "refuse_count": 0,
+   "breach": false,
+   "n_deep_stall": 0,
+   "longest_stall_s": 0.0,
+   "dsim_dwall": 1.0,
+   "telemetry": {
+    "err_fresh": {
+     "n": 282,
+     "p50": 0.418,
+     "p95": 0.697,
+     "max": 3.101
+    },
+    "err_consumed_demo": {
+     "n": 853,
+     "p50": 0.41,
+     "p95": 11.306,
+     "max": 12.3
+    },
+    "err_d_lt6": {
+     "n": 0,
+     "p50": null,
+     "p95": null,
+     "max": null
+    },
+    "err_d_ge6": {
+     "n": 282,
+     "p50": 0.418,
+     "p95": 0.697,
+     "max": 3.101
+    },
+    "frac_track_valid": 0.615,
+    "r_max": 21.08,
+    "z_max_alt": 13.13,
+    "feed_v2": {
+     "n_frames": 490,
+     "n_fresh": 282,
+     "n_feed_expire": 1,
+     "n_entry": 1,
+     "alive_30s": {
+      "n_frames_30s": 208,
+      "n_fresh_30s": 0,
+      "alive": true
+     }
+    }
+   }
+  },
+  {
+   "episode_id": 42,
+   "scenario_id": "c06_s04",
+   "valid_V2p": true,
+   "alive_feed": true,
+   "valid_final": true,
+   "success_D6": false,
+   "d_min_m": 2.894,
+   "refuse_count": 0,
+   "breach": false,
+   "n_deep_stall": 0,
+   "longest_stall_s": 0.0,
+   "dsim_dwall": 0.9998,
+   "telemetry": {
+    "err_fresh": {
+     "n": 1,
+     "p50": 0.484,
+     "p95": 0.484,
+     "max": 0.484
+    },
+    "err_consumed_demo": {
+     "n": 64,
+     "p50": 23.817,
+     "p95": 24.531,
+     "max": 24.628
+    },
+    "err_d_lt6": {
+     "n": 0,
+     "p50": null,
+     "p95": null,
+     "max": null
+    },
+    "err_d_ge6": {
+     "n": 1,
+     "p50": 0.484,
+     "p95": 0.484,
+     "max": 0.484
+    },
+    "frac_track_valid": 0.0465,
+    "r_max": 2.48,
+    "z_max_alt": 10.94,
+    "feed_v2": {
+     "n_frames": 387,
+     "n_fresh": 1,
+     "n_feed_expire": 1,
+     "n_entry": 0,
+     "alive_30s": {
+      "n_frames_30s": 162,
+      "n_fresh_30s": 1,
+      "alive": true
+     }
+    }
+   }
+  },
+  {
+   "episode_id": 43,
+   "scenario_id": "c07_s04",
+   "valid_V2p": true,
+   "alive_feed": true,
+   "valid_final": true,
+   "success_D6": true,
+   "d_min_m": 4.973,
+   "refuse_count": 0,
+   "breach": false,
+   "n_deep_stall": 0,
+   "longest_stall_s": 0.0,
+   "dsim_dwall": 1.0,
+   "telemetry": {
+    "err_fresh": {
+     "n": 406,
+     "p50": 0.478,
+     "p95": 0.581,
+     "max": 3.938
+    },
+    "err_consumed_demo": {
+     "n": 1372,
+     "p50": 0.478,
+     "p95": 0.605,
+     "max": 3.945
+    },
+    "err_d_lt6": {
+     "n": 11,
+     "p50": 0.657,
+     "p95": 2.109,
+     "max": 3.938
+    },
+    "err_d_ge6": {
+     "n": 395,
+     "p50": 0.478,
+     "p95": 0.574,
+     "max": 0.681
+    },
+    "frac_track_valid": 0.7223,
+    "r_max": 20.65,
+    "z_max_alt": 13.0,
+    "feed_v2": {
+     "n_frames": 540,
+     "n_fresh": 407,
+     "n_feed_expire": 0,
+     "n_entry": 1,
+     "alive_30s": {
+      "n_frames_30s": 154,
+      "n_fresh_30s": 21,
+      "alive": true
+     }
+    }
+   }
+  }
+ ],
+ "s_bezp": {
+  "breach_events": 0,
+  "refuse_events": 0,
+  "refuse_branches": {},
+  "refuse_detail": []
+ },
+ "stop_now": false,
+ "missing_manifest": false
+}

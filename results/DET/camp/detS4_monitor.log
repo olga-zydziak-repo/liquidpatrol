@@ -1,0 +1,541 @@
+=== RUNDA 1 (eps 0,1,2,3; kolejność B V2) 09:22:49 ===
+[detS4 r1_B 09:22:49] cooldown 0s
+[detS4 r1_B 09:22:49] cooldown 0s
+[detS4 r1_B 09:22:49] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r1_B 09:22:49] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r1_B 09:22:54] CLEAN 1/3
+[detS4 r1_B 09:23:31] CLEAN 2/3
+[detS4 r1_B 09:24:08] CLEAN 3/3
+[detS4 r1_B 09:24:08] SUSTAINED CLEAN
+[detS4 r1_B 09:24:08] SUSTAINED CLEAN
+[detS4 r1_B 09:32:29] wrapper rc=0
+[detS4 r1_B 09:32:29] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b14] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r1_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b14] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r1_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=1
+[detS4 r1_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r1_B
+[detS4 r1_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r1_B
+[camp] r1_B boot_n=14 rc=0
+[detS4 r1_V2 09:32:30] cooldown 299s
+[detS4 r1_V2 09:32:30] cooldown 299s
+[detS4 r1_V2 09:37:44] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r1_V2 09:37:44] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r1_V2 09:37:50] CLEAN 1/3
+[detS4 r1_V2 09:38:26] CLEAN 2/3
+[detS4 r1_V2 09:39:05] CLEAN 3/3
+[detS4 r1_V2 09:39:05] SUSTAINED CLEAN
+[detS4 r1_V2 09:39:05] SUSTAINED CLEAN
+[detS4 r1_V2] run_boot pid=16092 eps=0,1,2,3 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r1_V2/percep.sock)
+[detS4 r1_V2] run_boot pid=16092 eps=0,1,2,3 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r1_V2/percep.sock)
+[detS4 r1_V2] po armed: bridge pid=17738 percep pid=17739
+[detS4 r1_V2] po armed: bridge pid=17738 percep pid=17739
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 17738 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r1_V2 09:45:20] wrapper rc=0
+[detS4 r1_V2 09:45:20] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b15] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r1_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b15] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r1_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=1
+[detS4 r1_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r1_V2
+[detS4 r1_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r1_V2
+[camp] r1_V2 boot_n=15 rc=0
+=== RUNDA 1 DONE 09:45:20 ===
+=== RUNDA 2 (eps 4,5,6,7; kolejność V2 B) 09:45:20 ===
+[detS4 r2_V2 09:45:20] cooldown 297s
+[detS4 r2_V2 09:45:20] cooldown 297s
+[detS4 r2_V2 09:50:33] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r2_V2 09:50:33] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r2_V2 09:50:38] CLEAN 1/3
+[detS4 r2_V2 09:51:16] CLEAN 2/3
+[detS4 r2_V2 09:51:53] CLEAN 3/3
+[detS4 r2_V2 09:51:53] SUSTAINED CLEAN
+[detS4 r2_V2 09:51:53] SUSTAINED CLEAN
+[detS4 r2_V2] run_boot pid=20512 eps=4,5,6,7 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r2_V2/percep.sock)
+[detS4 r2_V2] run_boot pid=20512 eps=4,5,6,7 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r2_V2/percep.sock)
+[detS4 r2_V2] po armed: bridge pid=22176 percep pid=22177
+[detS4 r2_V2] po armed: bridge pid=22176 percep pid=22177
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 22176 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r2_V2 09:58:07] wrapper rc=0
+[detS4 r2_V2 09:58:07] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b16] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r2_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b16] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r2_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=2
+[detS4 r2_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r2_V2
+[detS4 r2_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r2_V2
+[camp] r2_V2 boot_n=16 rc=0
+[detS4 r2_B 09:58:07] cooldown 298s
+[detS4 r2_B 09:58:07] cooldown 298s
+[detS4 r2_B 10:03:22] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r2_B 10:03:22] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r2_B 10:03:29] CLEAN 1/3
+[detS4 r2_B 10:04:06] CLEAN 2/3
+[detS4 r2_B 10:04:43] CLEAN 3/3
+[detS4 r2_B 10:04:43] SUSTAINED CLEAN
+[detS4 r2_B 10:04:43] SUSTAINED CLEAN
+[detS4 r2_B 10:12:51] wrapper rc=0
+[detS4 r2_B 10:12:51] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b17] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r2_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b17] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r2_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=2
+[detS4 r2_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r2_B
+[detS4 r2_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r2_B
+[camp] r2_B boot_n=17 rc=0
+=== RUNDA 2 DONE 10:12:51 ===
+=== RUNDA 3 (eps 8,9,10,11; kolejność B V2) 10:12:51 ===
+[detS4 r3_B 10:12:51] cooldown 300s
+[detS4 r3_B 10:12:51] cooldown 300s
+[detS4 r3_B 10:18:07] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r3_B 10:18:07] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r3_B 10:18:14] CLEAN 1/3
+[detS4 r3_B 10:18:51] CLEAN 2/3
+[detS4 r3_B 10:19:28] CLEAN 3/3
+[detS4 r3_B 10:19:28] SUSTAINED CLEAN
+[detS4 r3_B 10:19:28] SUSTAINED CLEAN
+[detS4 r3_B 10:27:42] wrapper rc=0
+[detS4 r3_B 10:27:42] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b18] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r3_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b18] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r3_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=3
+[detS4 r3_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r3_B
+[detS4 r3_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r3_B
+[camp] r3_B boot_n=18 rc=0
+[detS4 r3_V2 10:27:42] cooldown 300s
+[detS4 r3_V2 10:27:42] cooldown 300s
+[detS4 r3_V2 10:33:01] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r3_V2 10:33:01] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r3_V2 10:33:06] CLEAN 1/3
+[detS4 r3_V2 10:33:43] CLEAN 2/3
+[detS4 r3_V2 10:34:21] CLEAN 3/3
+[detS4 r3_V2 10:34:21] SUSTAINED CLEAN
+[detS4 r3_V2 10:34:21] SUSTAINED CLEAN
+[detS4 r3_V2] run_boot pid=38028 eps=8,9,10,11 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r3_V2/percep.sock)
+[detS4 r3_V2] run_boot pid=38028 eps=8,9,10,11 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r3_V2/percep.sock)
+[detS4 r3_V2] po armed: bridge pid=39670 percep pid=39671
+[detS4 r3_V2] po armed: bridge pid=39670 percep pid=39671
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 39670 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r3_V2 10:42:04] wrapper rc=0
+[detS4 r3_V2 10:42:04] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b19] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r3_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b19] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r3_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=3
+[detS4 r3_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r3_V2
+[detS4 r3_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r3_V2
+[camp] r3_V2 boot_n=19 rc=0
+=== RUNDA 3 DONE 10:42:04 ===
+=== RUNDA 4 (eps 12,13,14,15; kolejność V2 B) 10:42:04 ===
+[detS4 r4_V2 10:42:04] cooldown 296s
+[detS4 r4_V2 10:42:04] cooldown 296s
+[detS4 r4_V2 10:47:15] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r4_V2 10:47:15] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r4_V2 10:47:21] CLEAN 1/3
+[detS4 r4_V2 10:47:57] CLEAN 2/3
+[detS4 r4_V2 10:48:34] CLEAN 3/3
+[detS4 r4_V2 10:48:34] SUSTAINED CLEAN
+[detS4 r4_V2 10:48:34] SUSTAINED CLEAN
+[detS4 r4_V2] run_boot pid=42724 eps=12,13,14,15 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r4_V2/percep.sock)
+[detS4 r4_V2] run_boot pid=42724 eps=12,13,14,15 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r4_V2/percep.sock)
+[detS4 r4_V2] po armed: bridge pid=44368 percep pid=44369
+[detS4 r4_V2] po armed: bridge pid=44368 percep pid=44369
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 44368 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r4_V2 10:54:48] wrapper rc=0
+[detS4 r4_V2 10:54:48] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b20] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r4_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b20] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r4_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=4
+[detS4 r4_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r4_V2
+[detS4 r4_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r4_V2
+[camp] r4_V2 boot_n=20 rc=0
+[detS4 r4_B 10:54:48] cooldown 298s
+[detS4 r4_B 10:54:48] cooldown 298s
+[detS4 r4_B 11:00:04] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r4_B 11:00:04] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r4_B 11:00:09] CLEAN 1/3
+[detS4 r4_B 11:00:48] CLEAN 2/3
+[detS4 r4_B 11:01:25] CLEAN 3/3
+[detS4 r4_B 11:01:25] SUSTAINED CLEAN
+[detS4 r4_B 11:01:25] SUSTAINED CLEAN
+[detS4 r4_B 11:09:45] wrapper rc=0
+[detS4 r4_B 11:09:45] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b21] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r4_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b21] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r4_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=4
+[detS4 r4_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r4_B
+[detS4 r4_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r4_B
+[camp] r4_B boot_n=21 rc=0
+=== RUNDA 4 DONE 11:09:45 ===
+=== RUNDA 5 (eps 16,17,18,19; kolejność B V2) 11:09:45 ===
+[detS4 r5_B 11:09:45] cooldown 300s
+[detS4 r5_B 11:09:45] cooldown 300s
+[detS4 r5_B 11:15:02] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r5_B 11:15:02] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r5_B 11:15:08] CLEAN 1/3
+[detS4 r5_B 11:15:45] CLEAN 2/3
+[detS4 r5_B 11:16:22] CLEAN 3/3
+[detS4 r5_B 11:16:22] SUSTAINED CLEAN
+[detS4 r5_B 11:16:22] SUSTAINED CLEAN
+[detS4 r5_B 11:24:35] wrapper rc=0
+[detS4 r5_B 11:24:35] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b22] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r5_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b22] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r5_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=5
+[detS4 r5_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r5_B
+[detS4 r5_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r5_B
+[camp] r5_B boot_n=22 rc=0
+[detS4 r5_V2 11:24:35] cooldown 300s
+[detS4 r5_V2 11:24:35] cooldown 300s
+[detS4 r5_V2 11:29:52] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r5_V2 11:29:52] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r5_V2 11:29:57] CLEAN 1/3
+[detS4 r5_V2 11:30:35] CLEAN 2/3
+[detS4 r5_V2 11:31:14] CLEAN 3/3
+[detS4 r5_V2 11:31:14] SUSTAINED CLEAN
+[detS4 r5_V2 11:31:14] SUSTAINED CLEAN
+[detS4 r5_V2] run_boot pid=61824 eps=16,17,18,19 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r5_V2/percep.sock)
+[detS4 r5_V2] run_boot pid=61824 eps=16,17,18,19 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r5_V2/percep.sock)
+[detS4 r5_V2] po armed: bridge pid=63488 percep pid=63489
+[detS4 r5_V2] po armed: bridge pid=63488 percep pid=63489
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 63488 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r5_V2 11:38:06] wrapper rc=0
+[detS4 r5_V2 11:38:06] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b23] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r5_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b23] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r5_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=5
+[detS4 r5_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r5_V2
+[detS4 r5_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r5_V2
+[camp] r5_V2 boot_n=23 rc=0
+=== RUNDA 5 DONE 11:38:06 ===
+=== RUNDA 6 (eps 20,21,22,23; kolejność V2 B) 11:38:06 ===
+[detS4 r6_V2 11:38:06] cooldown 298s
+[detS4 r6_V2 11:38:06] cooldown 298s
+[detS4 r6_V2 11:43:23] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r6_V2 11:43:23] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r6_V2 11:43:28] CLEAN 1/3
+[detS4 r6_V2 11:44:05] CLEAN 2/3
+[detS4 r6_V2 11:44:42] CLEAN 3/3
+[detS4 r6_V2 11:44:42] SUSTAINED CLEAN
+[detS4 r6_V2 11:44:42] SUSTAINED CLEAN
+[detS4 r6_V2] run_boot pid=66354 eps=20,21,22,23 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r6_V2/percep.sock)
+[detS4 r6_V2] run_boot pid=66354 eps=20,21,22,23 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r6_V2/percep.sock)
+[detS4 r6_V2] po armed: bridge pid=68001 percep pid=68002
+[detS4 r6_V2] po armed: bridge pid=68001 percep pid=68002
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 68001 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r6_V2 11:51:56] wrapper rc=0
+[detS4 r6_V2 11:51:56] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b24] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r6_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b24] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r6_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=6
+[detS4 r6_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r6_V2
+[detS4 r6_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r6_V2
+[camp] r6_V2 boot_n=24 rc=0
+[detS4 r6_B 11:51:57] cooldown 297s
+[detS4 r6_B 11:51:57] cooldown 297s
+[detS4 r6_B 11:57:12] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r6_B 11:57:12] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r6_B 11:57:17] CLEAN 1/3
+[detS4 r6_B 11:57:54] CLEAN 2/3
+[detS4 r6_B 11:58:32] CLEAN 3/3
+[detS4 r6_B 11:58:32] SUSTAINED CLEAN
+[detS4 r6_B 11:58:32] SUSTAINED CLEAN
+[detS4 r6_B 12:06:47] wrapper rc=0
+[detS4 r6_B 12:06:47] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b25] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r6_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b25] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r6_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=6
+[detS4 r6_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r6_B
+[detS4 r6_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r6_B
+[camp] r6_B boot_n=25 rc=0
+=== RUNDA 6 DONE 12:06:47 ===
+=== RUNDA 7 (eps 24,25,26,27; kolejność B V2) 12:06:47 ===
+[detS4 r7_B 12:06:48] cooldown 299s
+[detS4 r7_B 12:06:48] cooldown 299s
+[detS4 r7_B 12:12:01] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r7_B 12:12:01] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r7_B 12:12:06] CLEAN 1/3
+[detS4 r7_B 12:12:44] CLEAN 2/3
+[detS4 r7_B 12:13:21] CLEAN 3/3
+[detS4 r7_B 12:13:21] SUSTAINED CLEAN
+[detS4 r7_B 12:13:21] SUSTAINED CLEAN
+[detS4 r7_B 12:21:42] wrapper rc=0
+[detS4 r7_B 12:21:42] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b26] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r7_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b26] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r7_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=7
+[detS4 r7_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r7_B
+[detS4 r7_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r7_B
+[camp] r7_B boot_n=26 rc=0
+[detS4 r7_V2 12:21:43] cooldown 299s
+[detS4 r7_V2 12:21:43] cooldown 299s
+[detS4 r7_V2 12:26:59] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r7_V2 12:26:59] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r7_V2 12:27:06] CLEAN 1/3
+[detS4 r7_V2 12:27:43] CLEAN 2/3
+[detS4 r7_V2 12:28:20] CLEAN 3/3
+[detS4 r7_V2 12:28:20] SUSTAINED CLEAN
+[detS4 r7_V2 12:28:20] SUSTAINED CLEAN
+[detS4 r7_V2] run_boot pid=79795 eps=24,25,26,27 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r7_V2/percep.sock)
+[detS4 r7_V2] run_boot pid=79795 eps=24,25,26,27 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r7_V2/percep.sock)
+[detS4 r7_V2] po armed: bridge pid=81562 percep pid=81563
+[detS4 r7_V2] po armed: bridge pid=81562 percep pid=81563
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 81562 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r7_V2 12:34:37] wrapper rc=0
+[detS4 r7_V2 12:34:37] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b27] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r7_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b27] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r7_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=7
+[detS4 r7_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r7_V2
+[detS4 r7_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r7_V2
+[camp] r7_V2 boot_n=27 rc=0
+=== RUNDA 7 DONE 12:34:38 ===
+=== RUNDA 8 (eps 28,29,30,31; kolejność V2 B) 12:34:38 ===
+[detS4 r8_V2 12:34:38] cooldown 297s
+[detS4 r8_V2 12:34:38] cooldown 297s
+[detS4 r8_V2 12:39:52] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r8_V2 12:39:52] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r8_V2 12:39:57] CLEAN 1/3
+[detS4 r8_V2 12:40:34] CLEAN 2/3
+[detS4 r8_V2 12:41:12] CLEAN 3/3
+[detS4 r8_V2 12:41:12] SUSTAINED CLEAN
+[detS4 r8_V2 12:41:12] SUSTAINED CLEAN
+[detS4 r8_V2] run_boot pid=84951 eps=28,29,30,31 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r8_V2/percep.sock)
+[detS4 r8_V2] run_boot pid=84951 eps=28,29,30,31 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r8_V2/percep.sock)
+[detS4 r8_V2] po armed: bridge pid=86595 percep pid=86596
+[detS4 r8_V2] po armed: bridge pid=86595 percep pid=86596
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 86595 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r8_V2 12:47:28] wrapper rc=0
+[detS4 r8_V2 12:47:28] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b28] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r8_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b28] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r8_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=8
+[detS4 r8_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r8_V2
+[detS4 r8_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r8_V2
+[camp] r8_V2 boot_n=28 rc=0
+[detS4 r8_B 12:47:28] cooldown 298s
+[detS4 r8_B 12:47:28] cooldown 298s
+[detS4 r8_B 12:52:45] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r8_B 12:52:45] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r8_B 12:52:50] CLEAN 1/3
+[detS4 r8_B 12:53:27] CLEAN 2/3
+[detS4 r8_B 12:54:04] CLEAN 3/3
+[detS4 r8_B 12:54:04] SUSTAINED CLEAN
+[detS4 r8_B 12:54:04] SUSTAINED CLEAN
+[detS4 r8_B 13:02:10] wrapper rc=0
+[detS4 r8_B 13:02:10] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b29] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r8_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b29] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r8_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=8
+[detS4 r8_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r8_B
+[detS4 r8_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r8_B
+[camp] r8_B boot_n=29 rc=0
+=== RUNDA 8 DONE 13:02:10 ===
+=== RUNDA 9 (eps 32,33,34,35; kolejność B V2) 13:02:10 ===
+[detS4 r9_B 13:02:10] cooldown 300s
+[detS4 r9_B 13:02:10] cooldown 300s
+[detS4 r9_B 13:07:29] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r9_B 13:07:29] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r9_B 13:07:37] CLEAN 1/3
+[detS4 r9_B 13:08:14] CLEAN 2/3
+[detS4 r9_B 13:08:51] CLEAN 3/3
+[detS4 r9_B 13:08:51] SUSTAINED CLEAN
+[detS4 r9_B 13:08:51] SUSTAINED CLEAN
+[detS4 r9_B 13:17:04] wrapper rc=0
+[detS4 r9_B 13:17:04] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b30] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r9_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b30] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r9_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=9
+[detS4 r9_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r9_B
+[detS4 r9_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r9_B
+[camp] r9_B boot_n=30 rc=0
+[detS4 r9_V2 13:17:04] cooldown 300s
+[detS4 r9_V2 13:17:04] cooldown 300s
+[detS4 r9_V2 13:22:23] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r9_V2 13:22:23] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r9_V2 13:22:28] CLEAN 1/3
+[detS4 r9_V2 13:23:06] CLEAN 2/3
+[detS4 r9_V2 13:23:43] CLEAN 3/3
+[detS4 r9_V2 13:23:43] SUSTAINED CLEAN
+[detS4 r9_V2 13:23:43] SUSTAINED CLEAN
+[detS4 r9_V2] run_boot pid=98059 eps=32,33,34,35 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r9_V2/percep.sock)
+[detS4 r9_V2] run_boot pid=98059 eps=32,33,34,35 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r9_V2/percep.sock)
+[detS4 r9_V2] po armed: bridge pid=99705 percep pid=99706
+[detS4 r9_V2] po armed: bridge pid=99705 percep pid=99706
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 99705 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r9_V2 13:31:48] wrapper rc=0
+[detS4 r9_V2 13:31:48] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b31] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r9_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b31] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r9_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=9
+[detS4 r9_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r9_V2
+[detS4 r9_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r9_V2
+[camp] r9_V2 boot_n=31 rc=0
+=== RUNDA 9 DONE 13:31:48 ===
+=== RUNDA 10 (eps 36,37,38,39; kolejność V2 B) 13:31:48 ===
+[detS4 r10_V2 13:31:48] cooldown 298s
+[detS4 r10_V2 13:31:48] cooldown 298s
+[detS4 r10_V2 13:37:04] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r10_V2 13:37:04] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r10_V2 13:37:10] CLEAN 1/3
+[detS4 r10_V2 13:37:49] CLEAN 2/3
+[detS4 r10_V2 13:38:27] CLEAN 3/3
+[detS4 r10_V2 13:38:27] SUSTAINED CLEAN
+[detS4 r10_V2 13:38:27] SUSTAINED CLEAN
+[detS4 r10_V2] run_boot pid=102864 eps=36,37,38,39 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r10_V2/percep.sock)
+[detS4 r10_V2] run_boot pid=102864 eps=36,37,38,39 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r10_V2/percep.sock)
+[detS4 r10_V2] po armed: bridge pid=104508 percep pid=104509
+[detS4 r10_V2] po armed: bridge pid=104508 percep pid=104509
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 104508 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r10_V2 13:44:35] wrapper rc=0
+[detS4 r10_V2 13:44:35] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b32] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r10_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b32] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r10_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=10
+[detS4 r10_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r10_V2
+[detS4 r10_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r10_V2
+[camp] r10_V2 boot_n=32 rc=0
+[detS4 r10_B 13:44:35] cooldown 298s
+[detS4 r10_B 13:44:35] cooldown 298s
+[detS4 r10_B 13:49:38] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r10_B 13:49:38] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r10_B 13:49:44] CLEAN 1/3
+[detS4 r10_B 13:50:19] CLEAN 2/3
+[detS4 r10_B 13:50:55] CLEAN 3/3
+[detS4 r10_B 13:50:55] SUSTAINED CLEAN
+[detS4 r10_B 13:50:55] SUSTAINED CLEAN
+[detS4 r10_B 13:58:58] wrapper rc=0
+[detS4 r10_B 13:58:58] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b33] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r10_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b33] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r10_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=10
+[detS4 r10_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r10_B
+[detS4 r10_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r10_B
+[camp] r10_B boot_n=33 rc=0
+=== RUNDA 10 DONE 13:58:59 ===
+=== RUNDA 11 (eps 40,41,42,43; kolejność B V2) 13:58:59 ===
+[detS4 r11_B 13:58:59] cooldown 299s
+[detS4 r11_B 13:58:59] cooldown 299s
+[detS4 r11_B 14:04:03] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r11_B 14:04:03] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r11_B 14:04:08] CLEAN 1/3
+[detS4 r11_B 14:04:45] CLEAN 2/3
+[detS4 r11_B 14:05:20] CLEAN 3/3
+[detS4 r11_B 14:05:20] SUSTAINED CLEAN
+[detS4 r11_B 14:05:20] SUSTAINED CLEAN
+[detS4 r11_B 14:13:13] wrapper rc=0
+[detS4 r11_B 14:13:13] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b34] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r11_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b34] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r11_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=11
+[detS4 r11_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r11_B
+[detS4 r11_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r11_B
+[camp] r11_B boot_n=34 rc=0
+[detS4 r11_V2 14:13:13] cooldown 300s
+[detS4 r11_V2 14:13:13] cooldown 300s
+[detS4 r11_V2 14:18:13] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r11_V2 14:18:13] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r11_V2 14:18:18] CLEAN 1/3
+[detS4 r11_V2 14:18:53] CLEAN 2/3
+[detS4 r11_V2 14:19:29] CLEAN 3/3
+[detS4 r11_V2 14:19:29] SUSTAINED CLEAN
+[detS4 r11_V2 14:19:29] SUSTAINED CLEAN
+[detS4 r11_V2] run_boot pid=116134 eps=40,41,42,43 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r11_V2/percep.sock)
+[detS4 r11_V2] run_boot pid=116134 eps=40,41,42,43 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r11_V2/percep.sock)
+[detS4 r11_V2] po armed: bridge pid=117786 percep pid=117787
+[detS4 r11_V2] po armed: bridge pid=117786 percep pid=117787
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 117786 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r11_V2 14:27:37] wrapper rc=0
+[detS4 r11_V2 14:27:37] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b35] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r11_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b35] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r11_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=11
+[detS4 r11_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r11_V2
+[detS4 r11_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r11_V2
+[camp] r11_V2 boot_n=35 rc=0
+=== RUNDA 11 DONE 14:27:38 ===
+=== RUNDA 12 (eps 44,45,46,47; kolejność V2 B) 14:27:38 ===
+[detS4 r12_V2 14:27:38] cooldown 297s
+[detS4 r12_V2 14:27:38] cooldown 297s
+[detS4 r12_V2 14:32:35] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r12_V2 14:32:35] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r12_V2 14:32:40] CLEAN 1/3
+[detS4 r12_V2 14:33:15] CLEAN 2/3
+[detS4 r12_V2 14:33:50] CLEAN 3/3
+[detS4 r12_V2 14:33:50] SUSTAINED CLEAN
+[detS4 r12_V2 14:33:50] SUSTAINED CLEAN
+[detS4 r12_V2] run_boot pid=121052 eps=44,45,46,47 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r12_V2/percep.sock)
+[detS4 r12_V2] run_boot pid=121052 eps=44,45,46,47 (FEED=V2, sock=/home/olga/projects/liquidpatrol/results/DET/camp/r12_V2/percep.sock)
+[detS4 r12_V2] po armed: bridge pid=122707 percep pid=122708
+[detS4 r12_V2] po armed: bridge pid=122707 percep pid=122708
+/home/olga/projects/liquidpatrol/results/DET/tools/detS4_boot.sh: line 87: 122707 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[detS4 r12_V2 14:40:34] wrapper rc=0
+[detS4 r12_V2 14:40:34] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b36] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r12_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b36] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r12_V2
+[detS4] manifest: net_arm=ncp det_arm=V2 runda=12
+[detS4 r12_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r12_V2
+[detS4 r12_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r12_V2
+[camp] r12_V2 boot_n=36 rc=0
+[detS4 r12_B 14:40:35] cooldown 297s
+[detS4 r12_B 14:40:35] cooldown 297s
+[detS4 r12_B 14:45:32] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r12_B 14:45:32] czekam na SUSTAINED CLEAN (3× co 30s)...
+[detS4 r12_B 14:45:37] CLEAN 1/3
+[detS4 r12_B 14:46:12] CLEAN 2/3
+[detS4 r12_B 14:46:47] CLEAN 3/3
+[detS4 r12_B 14:46:47] SUSTAINED CLEAN
+[detS4 r12_B 14:46:47] SUSTAINED CLEAN
+[detS4 r12_B 14:54:36] wrapper rc=0
+[detS4 r12_B 14:54:36] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b37] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r12_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b37] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r12_B
+[detS4] manifest: net_arm=ncp det_arm=B runda=12
+[detS4 r12_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r12_B
+[detS4 r12_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DET/camp/r12_B
+[camp] r12_B boot_n=37 rc=0
+=== RUNDA 12 DONE 14:54:36 ===
+[camp] KAMPANIA DONE (rundy 1-12)

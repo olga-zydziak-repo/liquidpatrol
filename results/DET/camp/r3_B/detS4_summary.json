@@ -1,0 +1,196 @@
+{
+ "outdir": "/home/olga/projects/liquidpatrol/results/DET/camp/r3_B",
+ "det_arm": "B",
+ "det_round": 3,
+ "rc": 0,
+ "feed_sha": "da9ef2f4466eac87acf298e80000ad19430d69fe9c12c6ae3d7de8a0ced250c9",
+ "weights_sha": "0337d5eae1471bb9",
+ "n_episodes": 4,
+ "n_valid_final": 4,
+ "episodes": [
+  {
+   "episode_id": 8,
+   "scenario_id": "c08_s01",
+   "valid_V2p": true,
+   "alive_feed": true,
+   "valid_final": true,
+   "success_D6": true,
+   "d_min_m": 6.654,
+   "refuse_count": 0,
+   "breach": false,
+   "n_deep_stall": 4,
+   "longest_stall_s": 0.0,
+   "dsim_dwall": 0.9482,
+   "telemetry": {
+    "err_fresh": {
+     "n": 1413,
+     "p50": 0.691,
+     "p95": 1.324,
+     "max": 1.998
+    },
+    "err_consumed_demo": {
+     "n": 1413,
+     "p50": 0.691,
+     "p95": 1.324,
+     "max": 1.998
+    },
+    "err_d_lt6": {
+     "n": 0,
+     "p50": null,
+     "p95": null,
+     "max": null
+    },
+    "err_d_ge6": {
+     "n": 1413,
+     "p50": 0.691,
+     "p95": 1.324,
+     "max": 1.998
+    },
+    "frac_track_valid": 0.9958,
+    "r_max": 23.62,
+    "z_max_alt": 13.19,
+    "feed_v2": null
+   }
+  },
+  {
+   "episode_id": 9,
+   "scenario_id": "c09_s01",
+   "valid_V2p": true,
+   "alive_feed": true,
+   "valid_final": true,
+   "success_D6": true,
+   "d_min_m": 6.552,
+   "refuse_count": 0,
+   "breach": false,
+   "n_deep_stall": 2,
+   "longest_stall_s": 0.0,
+   "dsim_dwall": 0.953,
+   "telemetry": {
+    "err_fresh": {
+     "n": 1412,
+     "p50": 0.692,
+     "p95": 1.321,
+     "max": 9.758
+    },
+    "err_consumed_demo": {
+     "n": 1412,
+     "p50": 0.692,
+     "p95": 1.321,
+     "max": 9.758
+    },
+    "err_d_lt6": {
+     "n": 0,
+     "p50": null,
+     "p95": null,
+     "max": null
+    },
+    "err_d_ge6": {
+     "n": 1412,
+     "p50": 0.692,
+     "p95": 1.321,
+     "max": 9.758
+    },
+    "frac_track_valid": 1.0,
+    "r_max": 26.24,
+    "z_max_alt": 13.38,
+    "feed_v2": null
+   }
+  },
+  {
+   "episode_id": 10,
+   "scenario_id": "c10_s01",
+   "valid_V2p": true,
+   "alive_feed": true,
+   "valid_final": true,
+   "success_D6": true,
+   "d_min_m": 6.383,
+   "refuse_count": 0,
+   "breach": false,
+   "n_deep_stall": 2,
+   "longest_stall_s": 0.0,
+   "dsim_dwall": 0.9524,
+   "telemetry": {
+    "err_fresh": {
+     "n": 1406,
+     "p50": 0.687,
+     "p95": 1.292,
+     "max": 9.471
+    },
+    "err_consumed_demo": {
+     "n": 1406,
+     "p50": 0.687,
+     "p95": 1.292,
+     "max": 9.471
+    },
+    "err_d_lt6": {
+     "n": 0,
+     "p50": null,
+     "p95": null,
+     "max": null
+    },
+    "err_d_ge6": {
+     "n": 1406,
+     "p50": 0.687,
+     "p95": 1.292,
+     "max": 9.471
+    },
+    "frac_track_valid": 1.0,
+    "r_max": 22.48,
+    "z_max_alt": 12.64,
+    "feed_v2": null
+   }
+  },
+  {
+   "episode_id": 11,
+   "scenario_id": "c11_s01",
+   "valid_V2p": true,
+   "alive_feed": true,
+   "valid_final": true,
+   "success_D6": true,
+   "d_min_m": 6.887,
+   "refuse_count": 0,
+   "breach": false,
+   "n_deep_stall": 2,
+   "longest_stall_s": 0.0,
+   "dsim_dwall": 0.9521,
+   "telemetry": {
+    "err_fresh": {
+     "n": 1409,
+     "p50": 0.68,
+     "p95": 1.275,
+     "max": 3.003
+    },
+    "err_consumed_demo": {
+     "n": 1409,
+     "p50": 0.68,
+     "p95": 1.275,
+     "max": 3.003
+    },
+    "err_d_lt6": {
+     "n": 0,
+     "p50": null,
+     "p95": null,
+     "max": null
+    },
+    "err_d_ge6": {
+     "n": 1409,
+     "p50": 0.68,
+     "p95": 1.275,
+     "max": 3.003
+    },
+    "frac_track_valid": 1.0,
+    "r_max": 22.81,
+    "z_max_alt": 13.18,
+    "feed_v2": null
+   }
+  }
+ ],
+ "s_bezp": {
+  "breach_events": 0,
+  "refuse_events": 0,
+  "refuse_branches": {},
+  "refuse_detail": []
+ },
+ "stop_now": false,
+ "missing_manifest": false
+}

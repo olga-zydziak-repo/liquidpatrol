@@ -1,0 +1,6 @@
+[rtf_sampler] START /world/world_demo_A3/clock → /home/olga/projects/liquidpatrol/results/DET/camp/r5_B/rtf_stream.jsonl
+[rtf_sampler] STOP n=5190
+pybind11::handle::dec_ref() is being called while the GIL is either not held or invalid. Please see https://pybind11.readthedocs.io/en/stable/advanced/misc.html#common-sources-of-global-interpreter-lock-errors for debugging advice.
+If you are convinced there is no bug in your code, you can #define PYBIND11_NO_ASSERT_GIL_HELD_INCREF_DECREFto disable this check. In that case you have to ensure this #define is consistently used for all translation units linked into a given pybind11 extension, otherwise there will be ODR violations.The failing pybind11::handle::dec_ref() call was triggered on a tuple object.
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  pybind11::handle::dec_ref() PyGILState_Check() failure.
