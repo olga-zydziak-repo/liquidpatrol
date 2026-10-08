@@ -228,3 +228,30 @@ kierunek PRZECIWNY do serii z W/LIQ (tam: niedoszacowanie wyników komponentu uc
 Nowa reguła kalibracyjna: w PRE nóg integracyjnych (pierwszy przelot nowego toru przez
 LIVE) predykcje bramek technicznych dostają jawną korektę W DÓŁ; predykcje wyników
 naukowych — korektę W GÓRĘ (reguła 9 bez zmian: żadne nie są priorami).
+
+## NOGA DET (detektor-v2) — ROZLICZONE przy RAPORT_DET (ANEKS_DET-4 §6, 08.10.2026)
+Prerejestrowane 06.10.2026 (`PRE_DET.md:221-227`) — pierwsze PRE z jawnie zastosowaną
+korektą kierunkową z ANEKS_2A-4 (bramki integracyjne ↓, komponent uczony ↑):
+- **P-DET-1 ✓:** dolot 12/12 VALID w jednej sesji bez puli (p≈0.55, integracyjna ↓
+  z 0.70) — 12/12 za pierwszym podejściem, pula 0/2 nietknięta
+  (`results/DET/RAPORT_DET_S1.md` §0/§3).
+- **P-DET-2 ✓:** v8n BEZ eskalacji osiąga T1 ≥80 % na TEST (p≈0.80, uczona ↑ z 0.65)
+  — T1 100.0/99.8 %, eskalacja v8s nieuruchomiona (`results/DET/RAPORT_DET_S2.md` §3–§4).
+- **P-DET-3 ✓:** model finalny przechodzi T2 ≤3.0 m na TEST (p≈0.75, uczona ↑ z 0.60)
+  — p95 pooled 1.365 m, zapas 2.2× (`results/DET/RAPORT_DET_S2.md` §4).
+- **P-DET-4 ✓:** smoke obie bramki runtime za 1. podejściem (p≈0.50, integracyjna ↓
+  z 0.70) — 14.71 Hz ≥8 i E2E p95 0.084 s ≤0.25, 1 boot, naprawczych 0/2
+  (`results/DET/RAPORT_DET_S3.md` §2).
+- **P-DET-5 ✗:** Δ≤4 w kampanii C (p≈0.55) — wyszło **Δ=34** (pass(B)=47, pass(V2)=13
+  na 48 parach; `results/DET/RAPORT_DET_S4.md` §4).
+- pod-predykcja (≥1 REFUSE jakiejkolwiek gałęzi pod V2 w kampanii, p≈0.20): NIE zaszła
+  — zaszła strona 0.80 (REFUSE=0 we wszystkich 96 epizodach obu ramion, liczniki per
+  gałąź puste; `results/DET/RAPORT_DET_S4.md` §7).
+
+**Suma nogi DET: 4 ✓ / 1 ✗.** Kalibracja CC (dwie noty, ANEKS_DET-4 §6): (1) prawo
+dwukierunkowe z ANEKS_2A-4 potwierdzone WEWNĄTRZ jednej nogi — komponent uczony znów
+przebił oczekiwania (detektor po akwizycji DOKŁADNIEJSZY od wyroczni: err_fresh
+0.418/0.648 vs 0.676/1.280 m), a gotowość SYSTEMOWA znów przeszacowana (P-DET-5:
+Δ=34 zamiast ≤4, w całości akwizycyjny); (2) doprecyzowanie reguły: „gotowość
+systemowa" obejmuje geometrię sensoryczną (pole widzenia, choreografia akwizycji),
+nie tylko integrację software'ową.

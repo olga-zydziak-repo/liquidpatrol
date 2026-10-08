@@ -70,6 +70,22 @@ jednym kryterium — co chcesz z programu mieć w horyzoncie 2 miesięcy:
 Wszystko inne czeka w kolejce z triggerami. Otwarcie drugiej nogi przed zamknięciem pierwszej wymaga
 zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasadnie.
 
+## Dopisek stanu katalogu — 08.10.2026 (CO-DET, ANEKS_DET-4 §8)
+
+- **detektor-v2** (pozycja katalogu z `results/2A/RAPORT_2A.md` §8) → **CLOSED**:
+  noga DET wykonana w całości (S0–S4, 37/≤45 bootów, breach 0 / REFUSE 0), werdykt
+  i kanon obowiązujący w `results/DET/RAPORT_DET.md` — „detektor naprawiony
+  i zmierzony; runtime rozwiązany architekturą; koszt pełnej percepcji = akwizycja,
+  nie śledzenie" (Δ=34/48, w całości akwizycyjny).
+- **AKW (akwizycja)** — NOWA pozycja katalogu (ANEKS_DET-4 §8). **Trigger:** przed
+  jakimkolwiek roszczeniem pełnogeometrycznym kamery („dron lata na kamerze w pełnej
+  geometrii"). Zakres: skan yaw w zawisie przedakwizycyjnym jako zachowanie warstwy
+  misji PRZED ENTRY (nie zmiana sieci, nie zmiana osłony); warianty pre-aim/gimbal
+  jako alternatywy. Aktywa gotowe: cały tor V2, kampania-wzorzec do powtórki
+  parowanej AKW-vs-bez, 29 ślepych epizodów jako zbiór odniesienia
+  (`results/DET/RAPORT_DET.md` §8). Najkrótsza ścieżka od Δ=34 do pełnej geometrii:
+  jedno zachowanie przedakwizycyjne, zero nowych komponentów uczonych.
+
 ## Backlog §8 (bez zmian, porządkowe)
 
 Polityka git dla .ulg (decyzja od tygodni odroczona, nieblokująca) · martwe inicjalizacje w gate (przy
