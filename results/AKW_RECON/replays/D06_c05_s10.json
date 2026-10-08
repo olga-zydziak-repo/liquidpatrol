@@ -1,0 +1,32 @@
+{
+ "bootdir": "/home/olga/projects/liquidpatrol/results/DET/collect/D06_c05_s10",
+ "detector": "/home/olga/projects/liquidpatrol/net/frozen/det_v2.pt",
+ "detector_sha": "775ead150b9937453168538cb97c55f69166e27ddc2d93f71b3710e0e49832ce",
+ "n_frames_replayed": 529,
+ "n_frames_no_own": 0,
+ "wall_s": 13.4,
+ "err_fresh_vs_gt": {
+  "n": 416,
+  "p50": 0.204,
+  "p95": 0.506,
+  "max": 1.692
+ },
+ "top1_on_target": {
+  "n_fov": 420,
+  "n_on": 418,
+  "pct": 99.5
+ },
+ "admisja": {
+  "events": {
+   "ENTRY": 2,
+   "REFRESH": 508,
+   "FEED_EXPIRE": 1
+  },
+  "fresh_gates": {
+   "mti": 464,
+   "window": 38
+  },
+  "n_boxes": 524,
+  "n_fresh": 502
+ }
+}
