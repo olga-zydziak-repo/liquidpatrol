@@ -1,0 +1,20 @@
+[bench] armed sim=98.08 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/AKW/camp/smoke_r1_V2_rep/episode_control.json
+[bench] takeoff sim=98.10 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] offboard sim=109.60 {}
+[bench] intruder_start_gate sim=109.72 {'episode_id': 0, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=109.72 {'episode_id': 0, 'scenario_id': 'c00_s01', 't0_sim': 109.724}
+[bench] episode_end sim=184.09 {'episode_id': 0, 't_entry': 4.35, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=189.11 {'episode_id': 1, 'status': 'OK', 'n_setpose': 15, 'wait_sim': 0.712, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=189.11 {'episode_id': 1, 'scenario_id': 'c01_s01', 't0_sim': 189.112}
+[bench] episode_end sim=229.13 {'episode_id': 1, 't_entry': None, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=232.92 {'episode_id': 2, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.192, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=232.92 {'episode_id': 2, 'scenario_id': 'c02_s01', 't0_sim': 232.924}
+[bench] episode_end sim=272.96 {'episode_id': 2, 't_entry': None, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=273.07 {'episode_id': 3, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.1, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=273.07 {'episode_id': 3, 'scenario_id': 'c03_s01', 't0_sim': 273.068}
+[bench] episode_end sim=313.09 {'episode_id': 3, 't_entry': None, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] reset_done sim=313.09 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/AKW/camp/smoke_r1_V2_rep/trace.jsonl (demo n=3835)
