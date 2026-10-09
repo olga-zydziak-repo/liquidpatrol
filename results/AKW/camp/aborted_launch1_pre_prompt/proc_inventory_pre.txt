@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        9607  6.1  1.4 73886836 468352 pts/0 Sl+  11:56   3:46 claude
+olga       26136  3.3  0.0   5028  3736 ?        S    12:57   0:00 bash harness/run_boot.sh
+root         245  0.2  0.2 3290012 69816 ?       Ssl  11:25   0:12 /usr/bin/containerd
+root         381  0.1  0.3 10913596 109424 ?     Ssl  11:25   0:09 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         913  0.0  0.0 1233872 12232 ?       Sl   11:25   0:05 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+olga       25769  0.0  0.0   5028  3908 ?        S    12:56   0:00 bash results/AKW/tools/akw_boot.sh 1 smoke_r1_V2 V2 0 0,1,2,3
+root        1209  0.0  0.0   3200  1260 ?        S    11:25   0:00 /init
+dnsmasq      940  0.0  0.0 216768 28524 ?        Ss   11:25   0:00 postgres
+root           1  0.0  0.0  22372 13656 ?        Ss   11:25   0:00 /sbin/init
+root          52  0.0  0.0  66776 19808 ?        S<s  11:25   0:00 /usr/lib/systemd/systemd-journald
+polkitd      212  0.0  0.0 308188  8136 ?        Ssl  11:25   0:00 /usr/lib/polkit-1/polkitd --no-debug
+message+     204  0.0  0.0   9800  5512 ?        Ss   11:25   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     190  0.0  0.0  91068  8012 ?        Ssl  11:25   0:00 /usr/lib/systemd/systemd-timesyncd
+root          98  0.0  0.0  26264  7260 ?        Ss   11:25   0:00 /usr/lib/systemd/systemd-udevd
+dnsmasq     1032  0.0  0.0 216924  7440 ?        Ss   11:25   0:00 postgres: background writer 
+dnsmasq     1039  0.0  0.0 216768 10448 ?        Ss   11:25   0:00 postgres: walwriter 
+root         218  0.0  0.0  17992  8860 ?        Ss   11:25   0:00 /usr/lib/systemd/systemd-logind
+olga       21914  0.0  0.0   6348  5528 pts/2    Ss+  12:44   0:00 -bash
+olga        1095  0.0  0.0  20436 11636 ?        Ss   11:25   0:00 /usr/lib/systemd/systemd --user
