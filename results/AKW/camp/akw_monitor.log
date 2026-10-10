@@ -30,3 +30,15 @@
 [augment] world_hash=True ulog_sha=True model_in_state=True
 [run_boot b3] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/smoke_r1_V2_rep
 [akw smoke_r1_V2_rep] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/smoke_r1_V2_rep
+[akw resmoke_r1_V2 18:00:32] cooldown 0s
+[akw resmoke_r1_V2 18:00:32] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akw resmoke_r1_V2 18:00:38] CLEAN 1/3
+[akw resmoke_r1_V2 18:01:14] CLEAN 2/3
+[akw resmoke_r1_V2 18:01:50] CLEAN 3/3
+[akw resmoke_r1_V2 18:01:50] SUSTAINED CLEAN
+[akw resmoke_r1_V2] run_boot pid=12937 eps=0,1,2,3 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/resmoke_r1_V2/percep.sock)
+[akw resmoke_r1_V2] po armed: bridge pid=14666 percep pid=14667
+[akw resmoke_r1_V2 18:10:28] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b4] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/resmoke_r1_V2
+[akw resmoke_r1_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/resmoke_r1_V2

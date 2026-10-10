@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        1194 14.2  1.5 73857176 490380 pts/0 Sl+  17:33   4:03 claude
+olga       12937  3.2  0.0   5028  3744 ?        S    18:01   0:00 bash harness/run_boot.sh
+root         247  0.1  0.2 3068176 73236 ?       Ssl  17:32   0:03 /usr/bin/containerd
+root         359  0.1  0.3 6489676 106920 ?      Ssl  17:32   0:02 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         827  0.0  0.0 1233872 12200 ?       Sl   17:32   0:01 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root         964  0.0  0.0   3200  1252 ?        S    17:32   0:00 /init
+root           1  0.0  0.0  22028 13232 ?        Ss   17:32   0:00 /sbin/init
+olga       12586  0.0  0.0   5028  3800 ?        S    18:00   0:00 bash results/AKW/tools/akwS1_boot.sh 4 resmoke_r1_V2 V2 1 0,1,2,3
+dnsmasq      851  0.0  0.0 216768 28408 ?        Ss   17:32   0:00 postgres
+root          40  0.0  0.0  50476 16472 ?        S<s  17:32   0:00 /usr/lib/systemd/systemd-journald
+polkitd      197  0.0  0.0 308188  8104 ?        Ssl  17:32   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          86  0.0  0.0  26668  7632 ?        Ss   17:32   0:00 /usr/lib/systemd/systemd-udevd
+message+     192  0.0  0.0   9796  5532 ?        Ss   17:32   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+olga        1010  0.0  0.0  20436 11584 ?        Ss   17:33   0:00 /usr/lib/systemd/systemd --user
+root         245  0.0  0.0 107064 23200 ?        Ssl  17:32   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+systemd+     176  0.0  0.0  91068  8008 ?        Ssl  17:32   0:00 /usr/lib/systemd/systemd-timesyncd
+avahi        190  0.0  0.0   8760  4784 ?        Ss   17:32   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
+systemd+     175  0.0  0.0  21352 13236 ?        Ss   17:32   0:00 /usr/lib/systemd/systemd-resolved
+dnsmasq      933  0.0  0.0 216924  7092 ?        Ss   17:32   0:00 postgres: background writer 

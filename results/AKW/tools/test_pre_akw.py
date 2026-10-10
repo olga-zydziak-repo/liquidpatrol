@@ -6,9 +6,11 @@
      ramienia B i V2 — pola own_pos/vel, trk_pos_ned, track_age_s, track_valid, t_sim
      niosą komplet wejść kontraktu step) AkwScan zwraca cmd IDENTYCZNY polami
      z NetController dla phase≠hold; na tickach hold różni się WYŁĄCZNIE polem yaw.
-§3.2 profil: rampa ψ(t) 30°/s CCW (yaw atan2 rosnący), wrap do (-π,π], dwell 2.0 s,
-     wznowienie od bieżącego yaw (nigdy powrót do 0), reset() czyści stan;
-     pierwsze hold bez historii tracku: baza = yaw delegata 0.0 (nota wiążąca).
+§3.2 profil (ANEKS_AKW-1 §5 ścieżka II — step-and-stare, test zaktualizowany wraz
+     z profilem; historia: rampa ciągła 30°/s do STOP-AKW1): dwell 2.0 s, potem cykl
+     krok 40° rampą 60°/s (0.667 s) → stare 1.2 s (ψ stała), CCW (yaw atan2 rosnący),
+     wrap do (-π,π], wznowienie od bieżącego yaw (nigdy powrót do 0), reset() czyści
+     stan; pierwsze hold bez historii tracku: baza = yaw delegata 0.0 (nota wiążąca).
 §3.3 rejestr: make_controller("net_akw") działa, controller_sha = sha(akw_scan.py);
      make_controller("net") NIEZMIENIONE (regresja).
 """
@@ -26,7 +28,9 @@ os.environ.setdefault("NET_ARM", "ncp")
 
 from r03.controllers import make_controller, controller_sha
 from r03.controllers.net_controller import NetController
-from r03.controllers.akw_scan import AkwScan, AKW_SCAN_DPS_FROZEN, AKW_DWELL_S_FROZEN
+from r03.controllers.akw_scan import (AkwScan, AKW_SCAN_MODE_FROZEN, AKW_STEP_DEG_FROZEN,
+                                      AKW_SLEW_DPS_FROZEN, AKW_STARE_S_FROZEN,
+                                      AKW_DWELL_S_FROZEN)
 
 DT = 0.05  # pętla 20 Hz
 
@@ -180,12 +184,29 @@ class _StubNet:
 def _akw_ze_stubem():
     akw = AkwScan.__new__(AkwScan)        # bez __init__ delegata (wagi niepotrzebne w teście profilu)
     akw._net = _StubNet()
-    akw.scan_dps = AKW_SCAN_DPS_FROZEN
+    akw.scan_mode = AKW_SCAN_MODE_FROZEN
+    akw.step_deg = AKW_STEP_DEG_FROZEN
+    akw.slew_dps = AKW_SLEW_DPS_FROZEN
+    akw.stare_s = AKW_STARE_S_FROZEN
     akw.dwell_s = AKW_DWELL_S_FROZEN
     akw.scan_frozen = True
-    akw._omega = math.radians(AKW_SCAN_DPS_FROZEN)
+    akw._step_rad = math.radians(AKW_STEP_DEG_FROZEN)
+    akw._slew = math.radians(AKW_SLEW_DPS_FROZEN)
+    akw._step_t = AKW_STEP_DEG_FROZEN / AKW_SLEW_DPS_FROZEN
+    akw._cycle_t = akw._step_t + AKW_STARE_S_FROZEN
     akw.reset()
     return akw
+
+
+def _oczekiwany_offset(t_scan):
+    """Wzorzec NIEZALEŻNY od implementacji: przyrost yaw [rad] cyklu step-and-stare
+    po t_scan [s] od końca dwell (krok 40° @ 60°/s, stare 1.2 s)."""
+    step_t = AKW_STEP_DEG_FROZEN / AKW_SLEW_DPS_FROZEN
+    cyc = step_t + AKW_STARE_S_FROZEN
+    n = int(t_scan // cyc)
+    ph = t_scan - n * cyc
+    return math.radians(n * AKW_STEP_DEG_FROZEN
+                        + min(ph, step_t) * AKW_SLEW_DPS_FROZEN)
 
 
 FEED_BRAK = None
@@ -200,41 +221,58 @@ def _tick(akw, fs, now_s, tick=0):
     return akw.step(tick, POS, VEL, now_s, False)
 
 
-def test_profil_dwell_i_rampa_30dps():
+def test_profil_dwell_i_step_stare():
     akw = _akw_ze_stubem()
     t = 100.0
     yaws = []
-    for i in range(int(8.0 / DT)):          # 8 s hold od zimnego startu
+    for i in range(int(8.0 / DT)):          # 8 s hold od zimnego startu (dwell + 3+ cykle)
         c = _tick(akw, FEED_BRAK, t + i * DT, i)
         assert c["extra"]["phase"] == "hold"
         yaws.append((i * DT, c["yaw"]))
+    step_t = AKW_STEP_DEG_FROZEN / AKW_SLEW_DPS_FROZEN
+    cyc = step_t + AKW_STARE_S_FROZEN
     for dt_rel, y in yaws:
         if dt_rel <= AKW_DWELL_S_FROZEN:
             assert y == 0.0, f"dwell naruszony @ {dt_rel}: {y}"
         else:
-            expected = math.radians(AKW_SCAN_DPS_FROZEN) * (dt_rel - AKW_DWELL_S_FROZEN)
+            expected = _oczekiwany_offset(dt_rel - AKW_DWELL_S_FROZEN)
             expected = math.atan2(math.sin(expected), math.cos(expected))
-            assert abs(y - expected) < 1e-9, f"rampa @ {dt_rel}: {y} vs {expected}"
-    # CCW = yaw ROSNĄCY zaraz po dwell
-    po_dwell = [y for dt_rel, y in yaws if AKW_DWELL_S_FROZEN < dt_rel < AKW_DWELL_S_FROZEN + 1.0]
-    assert all(b > a for a, b in zip(po_dwell, po_dwell[1:]))
+            assert abs(y - expected) < 1e-9, f"profil @ {dt_rel}: {y} vs {expected}"
+    # STARE = ψ STAŁA przez całe okno stare (ω·dt=0 — sedno ścieżki II);
+    # pierwsze stare: (dwell+step_t, dwell+cyc), drugie: przesunięte o cyc
+    for k in (0, 1, 2):
+        lo = AKW_DWELL_S_FROZEN + k * cyc + step_t
+        hi = AKW_DWELL_S_FROZEN + (k + 1) * cyc
+        w = [y for dt_rel, y in yaws if lo + 1e-9 < dt_rel < hi - 1e-9]
+        assert len(w) >= 20 and all(y == w[0] for y in w), f"stare {k} nie trzyma ψ"
+        assert abs(w[0] - math.atan2(math.sin(math.radians((k + 1) * AKW_STEP_DEG_FROZEN)),
+                                     math.cos(math.radians((k + 1) * AKW_STEP_DEG_FROZEN)))) < 1e-9
+    # CCW = yaw NIEMALEJĄCY w obrębie kroku (rosnący na rampie)
+    w_kroku = [y for dt_rel, y in yaws
+               if AKW_DWELL_S_FROZEN < dt_rel < AKW_DWELL_S_FROZEN + step_t]
+    assert all(b > a for a, b in zip(w_kroku, w_kroku[1:]))
 
 
 def test_profil_wrap_pelny_obrot():
     akw = _akw_ze_stubem()
     t = 0.0
-    n = int((AKW_DWELL_S_FROZEN + 360.0 / AKW_SCAN_DPS_FROZEN + 1.0) / DT)  # dwell + 12 s + 1 s
+    step_t = AKW_STEP_DEG_FROZEN / AKW_SLEW_DPS_FROZEN
+    cyc = step_t + AKW_STARE_S_FROZEN
+    n_kroki = int(round(360.0 / AKW_STEP_DEG_FROZEN))                 # 9 kroków = pełny przegląd
+    n = int((AKW_DWELL_S_FROZEN + n_kroki * cyc + 1.0) / DT)          # dwell + 16.8 s + 1 s
     last = None
     for i in range(n):
         c = _tick(akw, FEED_BRAK, t + i * DT, i)
         y = c["yaw"]
         assert -math.pi < y <= math.pi + 1e-12, f"poza wrap: {y}"
         last = (i * DT, y)
-    # po pełnym obrocie (dwell+12 s) ψ wraca w okolice bazy (0): |ψ| = ω·resztka
+    # po 9 pełnych cyklach suma kroków = 360° ⇒ ψ wraca do bazy (0) i trzyma stare/rampę od niej
     dt_rel, y = last
-    expected = math.radians(AKW_SCAN_DPS_FROZEN) * (dt_rel - AKW_DWELL_S_FROZEN) % (2 * math.pi)
+    expected = _oczekiwany_offset(dt_rel - AKW_DWELL_S_FROZEN) % (2 * math.pi)
     expected = math.atan2(math.sin(expected), math.cos(expected))
     assert abs(y - expected) < 1e-9
+    # sanity worst-case przeglądu: 9 cykli = 16.8 s (ANEKS_AKW-1 §5)
+    assert abs(n_kroki * cyc - 16.8) < 1e-6
 
 
 def test_profil_wznowienie_od_biezacego_yaw_nigdy_do_zera():
@@ -247,10 +285,11 @@ def test_profil_wznowienie_od_biezacego_yaw_nigdy_do_zera():
     for i in range(1, int(AKW_DWELL_S_FROZEN / DT)):
         c = _tick(akw, FEED_BRAK, t + i * DT)
         assert c["yaw"] == math.pi / 2, f"dwell nie trzyma ostatniego yaw: {c['yaw']}"
-    # po dwell rampa OD π/2 w górę (CCW), bez skoku do 0
-    # (hold zaczął się w t+DT, więc w t+DWELL+10·DT rampa biegnie 9·DT)
+    # po dwell pierwszy KROK rampą 60°/s OD π/2 w górę (CCW), bez skoku do 0
+    # (hold zaczął się w t+DT, więc w t+DWELL+10·DT profil biegnie 9·DT — wewnątrz rampy kroku)
     c = _tick(akw, FEED_BRAK, t + AKW_DWELL_S_FROZEN + 10 * DT)
-    expected = math.pi / 2 + math.radians(AKW_SCAN_DPS_FROZEN) * (9 * DT)
+    assert 9 * DT < AKW_STEP_DEG_FROZEN / AKW_SLEW_DPS_FROZEN   # wciąż w rampie
+    expected = math.pi / 2 + _oczekiwany_offset(9 * DT)
     assert abs(c["yaw"] - expected) < 1e-9
 
 
@@ -289,7 +328,8 @@ def test_rejestr_net_akw():
     ctrl = make_controller("net_akw")
     assert isinstance(ctrl, AkwScan) and ctrl.name == "net_akw"
     assert controller_sha(ctrl) == _sha256(os.path.join(ROOT, "r03/controllers/akw_scan.py"))
-    assert ctrl.scan_frozen and ctrl.scan_dps == 30.0 and ctrl.dwell_s == 2.0
+    assert ctrl.scan_frozen and ctrl.scan_mode == "step_stare" and ctrl.dwell_s == 2.0
+    assert ctrl.step_deg == 40.0 and ctrl.slew_dps == 60.0 and ctrl.stare_s == 1.2
     # delegacja atrybutów delegata (SR-2 guard już przeszedł w konstruktorze)
     assert ctrl.arm == "ncp" and len(ctrl.weights_sha) == 64
 

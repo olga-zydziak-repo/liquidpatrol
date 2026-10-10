@@ -1,0 +1,75 @@
+{
+ "t_A_s": 23.0,
+ "A_prime": {
+  "pass": true,
+  "n_valid_blind": 3,
+  "episodes": [
+   {
+    "sid": "c01_s01",
+    "valid": true,
+    "t_entry_s": 8.972,
+    "t_first_track_rel": 0.0,
+    "deg_skanu_do_entry": 130.9,
+    "entry_events": [
+     {
+      "t_frame": 194.172,
+      "t_rel": 6.364,
+      "klasa": "F1_cel"
+     }
+    ],
+    "n_reacquisitions": 1,
+    "osc_5s": 1,
+    "A_prime_ok": true
+   },
+   {
+    "sid": "c02_s01",
+    "valid": true,
+    "t_entry_s": 11.616,
+    "t_first_track_rel": 9.048,
+    "deg_skanu_do_entry": 209.2,
+    "entry_events": [
+     {
+      "t_frame": 287.364,
+      "t_rel": 8.972,
+      "klasa": "F1_cel"
+     }
+    ],
+    "n_reacquisitions": 1,
+    "osc_5s": 0,
+    "A_prime_ok": true
+   },
+   {
+    "sid": "c03_s01",
+    "valid": true,
+    "t_entry_s": 15.784,
+    "t_first_track_rel": 13.172,
+    "deg_skanu_do_entry": 334.1,
+    "entry_events": [
+     {
+      "t_frame": 381.612,
+      "t_rel": 13.136,
+      "klasa": "F1_cel"
+     }
+    ],
+    "n_reacquisitions": 1,
+    "osc_5s": 0,
+    "A_prime_ok": true
+   }
+  ]
+ },
+ "C": {
+  "pass": true,
+  "breaches": [],
+  "refuse_wpis": {},
+  "stop_now": false
+ },
+ "B_opisowo": {
+  "kadencja_przetwarzania_hz_p50": 14.71,
+  "PASS_kadencja": true,
+  "e2e_p95_s": 0.084,
+  "PASS_e2e": true,
+  "n_frames": 3283,
+  "n_e2e": 2816
+ },
+ "invalid_any": false
+}

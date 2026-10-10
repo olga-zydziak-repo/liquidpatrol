@@ -1,0 +1,33 @@
+/home/olga/projects/liquidpatrol/.b0deps/lib/python3.12/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+{
+ "bootdir": "/tmp/claude-1000/-home-olga-projects-liquidpatrol/3cad566c-5308-430f-9212-55c581857242/scratchpad/s2a_dec2/D05_c04_s09",
+ "detector": "/home/olga/projects/liquidpatrol/net/frozen/det_v2.pt",
+ "detector_sha": "775ead150b9937453168538cb97c55f69166e27ddc2d93f71b3710e0e49832ce",
+ "n_frames_replayed": 320,
+ "n_frames_no_own": 0,
+ "wall_s": 4.4,
+ "err_fresh_vs_gt": {
+  "n": 243,
+  "p50": 0.517,
+  "p95": 0.755,
+  "max": 0.829
+ },
+ "top1_on_target": {
+  "n_fov": 250,
+  "n_on": 250,
+  "pct": 100.0
+ },
+ "admisja": {
+  "events": {
+   "ENTRY": 1,
+   "REFRESH": 307
+  },
+  "fresh_gates": {
+   "mti": 301,
+   "window": 7
+  },
+  "n_boxes": 317,
+  "n_fresh": 308
+ }
+}
