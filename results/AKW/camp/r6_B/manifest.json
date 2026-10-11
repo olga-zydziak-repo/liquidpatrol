@@ -1,0 +1,101 @@
+{
+  "kind": "akw",
+  "flight": "bench",
+  "boot": 16,
+  "rc": 0,
+  "arm": "E",
+  "point": "0.0",
+  "harness_file": "/home/olga/projects/liquidpatrol/bench/bench_flight.py",
+  "sha_harness": "05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43",
+  "controller": "net_akw",
+  "controller_sha": "b94cdeaef311c46067724eb095eb7ce32c08c9929c15cfa2cc4614619063d375",
+  "feed_sha": "da9ef2f4466eac87acf298e80000ad19430d69fe9c12c6ae3d7de8a0ced250c9",
+  "executor_params_sha": "5a7244996d89be70bd720a2b0eb8b6f6dea1a2d8f3f2fd7cf356292426f28716",
+  "ulog_sha": "61534a043f266f1ef1204f032000752a8e4f28b1dc514dc40d7f6eb49cf16646",
+  "ulog_bytes": 133694240,
+  "world_hash": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0  worlds/world_demo_A3.sdf",
+  "world_ref": "worlds/world_demo_A3.sdf",
+  "proc_gate": "CLEAN loadavg=0.23 (cpu_max=2.0, load1_max=1.5)",
+  "n_demo_rows": 5664,
+  "n_episodes": 4,
+  "n_valid_V2p": 4,
+  "n_success_D6": 2,
+  "episodes": [
+    {
+      "episode_id": 20,
+      "scenario_id": "c08_s02",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 5,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9497,
+      "d_min_m": 7.236,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 21,
+      "scenario_id": "c09_s02",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": false,
+      "n_deep_stall": 2,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9674,
+      "d_min_m": 1.089,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 22,
+      "scenario_id": "c10_s02",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 3,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9518,
+      "d_min_m": 6.87,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 23,
+      "scenario_id": "c11_s02",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": false,
+      "n_deep_stall": 2,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9676,
+      "d_min_m": 0.427,
+      "refuse_count": 0,
+      "breach": false
+    }
+  ],
+  "world_hash_kind": "repo",
+  "model_in_state": true,
+  "net_arm": "ncp",
+  "weights_sha": "0337d5eae1471bb99ef329d939be195a9ea846017045b8ddac22f3d97bc2ae36",
+  "akw_arm": "B",
+  "akw_round": 6,
+  "akw": {
+    "controller": "net_akw",
+    "akw_scan_sha256": "b94cdeaef311c46067724eb095eb7ce32c08c9929c15cfa2cc4614619063d375",
+    "registry_sha256": "4f58d204630b9cf8db3bfb9a98b480c7c24552c8c7632eee9373c18b7cbd656a",
+    "scan_profile": {
+      "mode": "step_stare",
+      "step_deg": 40.0,
+      "slew_dps": 60.0,
+      "stare_s": 1.2,
+      "dwell_s": 2.0,
+      "ratyfikacja": "ANEKS_AKW-2 par.2 (FROZEN b94cdeae)"
+    },
+    "env_akw_override": {
+      "AKW_SCAN_DPS": null,
+      "AKW_DWELL_S": null
+    },
+    "nota": "PRE_AKW par.2: jedyna zmiana systemu = wartosc yaw w fazie hold; oba ramiona CONTROLLER=net_akw (par.5); profil II ANEKS_AKW-2"
+  }
+}

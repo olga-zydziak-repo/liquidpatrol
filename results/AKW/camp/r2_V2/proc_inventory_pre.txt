@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       90575  3.2  0.0   5028  3736 ?        S    23:08   0:00 bash harness/run_boot.sh
+olga        1194  2.9  1.5 73879984 495260 pts/0 Sl+  17:41   9:30 claude
+root         247  0.2  0.2 3068176 67624 ?       Ssl  17:40   0:41 /usr/bin/containerd
+root         359  0.1  0.2 6489676 92816 ?       Ssl  17:40   0:29 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         827  0.0  0.0 1234128 12184 ?       Sl   17:40   0:18 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      851  0.0  0.0 216768 28408 ?        Ss   17:40   0:02 postgres
+root         964  0.0  0.0   3200  1252 ?        S    17:40   0:01 /init
+root           1  0.0  0.0  22028 13240 ?        Ss   17:40   0:00 /sbin/init
+root          40  0.0  0.0  50476 17004 ?        S<s  17:40   0:00 /usr/lib/systemd/systemd-journald
+polkitd      197  0.0  0.0 308188  8104 ?        Ssl  17:40   0:00 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     176  0.0  0.0  91068  8008 ?        Ssl  17:40   0:00 /usr/lib/systemd/systemd-timesyncd
+olga       89054  0.0  0.0   5028  3796 ?        S    23:02   0:00 bash /home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh 7 r2_V2 V2 2 4,5,6,7
+message+     192  0.0  0.0   9796  5532 ?        Ss   17:40   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+olga       80542  0.0  0.0 1307920 6792 ?        S    22:38   0:00 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered RUNDA|STOP|FUSE|nieważny|BUDGET|BEZ manifestu|analiza PADŁA|ENV-BLOCK|ODMOWA|KAMPANIA DONE|\[fuse\]
+root          86  0.0  0.0  26288  7348 ?        Ss   17:40   0:00 /usr/lib/systemd/systemd-udevd
+dnsmasq      933  0.0  0.0 216924  7092 ?        Ss   17:40   0:00 postgres: background writer 
+dnsmasq      940  0.0  0.0 216768 10108 ?        Ss   17:40   0:00 postgres: walwriter 
+root         202  0.0  0.0  17992  8892 ?        Ss   17:40   0:00 /usr/lib/systemd/systemd-logind
+root         208  0.0  0.0  17400  6520 ?        Ss   17:40   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev

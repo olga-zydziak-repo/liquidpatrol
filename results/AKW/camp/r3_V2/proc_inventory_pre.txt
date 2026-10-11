@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        1194  2.7  1.5 73879984 501896 pts/0 Sl+  17:42   9:59 claude
+root         247  0.2  0.2 3068432 67772 ?       Ssl  17:42   0:45 /usr/bin/containerd
+root         359  0.1  0.2 6489676 92820 ?       Ssl  17:42   0:32 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         827  0.0  0.0 1234128 12284 ?       Sl   17:42   0:20 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      851  0.0  0.0 216768 28408 ?        Ss   17:42   0:02 postgres
+root         964  0.0  0.0   3200  1252 ?        S    17:42   0:01 /init
+root           1  0.0  0.0  22028 13240 ?        Ss   17:42   0:01 /sbin/init
+root          40  0.0  0.0  50476 17200 ?        S<s  17:42   0:00 /usr/lib/systemd/systemd-journald
+polkitd      197  0.0  0.0 308188  8104 ?        Ssl  17:42   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga       80542  0.0  0.0 1307920 6796 ?        S    22:39   0:00 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered RUNDA|STOP|FUSE|nieważny|BUDGET|BEZ manifestu|analiza PADŁA|ENV-BLOCK|ODMOWA|KAMPANIA DONE|\[fuse\]
+systemd+     176  0.0  0.0  91068  8008 ?        Ssl  17:42   0:00 /usr/lib/systemd/systemd-timesyncd
+message+     192  0.0  0.0   9796  5532 ?        Ss   17:42   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          86  0.0  0.0  26288  7348 ?        Ss   17:42   0:00 /usr/lib/systemd/systemd-udevd
+dnsmasq      933  0.0  0.0 216924  7092 ?        Ss   17:42   0:00 postgres: background writer 
+dnsmasq      940  0.0  0.0 216768 10108 ?        Ss   17:42   0:00 postgres: walwriter 
+olga       80626  0.0  0.0   4900  3552 ?        Ss   22:39   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1791646396497-di0xiq.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && eval 'while pgrep -f "akwS3_campaign.sh" > /dev/null; do sleep 60; done; echo "akwS3_campaign.sh ZAKONCZYL SIE (DONE albo STOP albo smierc) o $(date +%H:%M:%S)"; tail -3 /home/olga/projects/liquidpatrol/results/AKW/camp/akwS3_monitor.log' < /dev/null && pwd -P >| /tmp/claude-1d14-cwd
+root         202  0.0  0.0  17992  8892 ?        Ss   17:42   0:00 /usr/lib/systemd/systemd-logind
+root         208  0.0  0.0  17400  6520 ?        Ss   17:42   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+systemd+     175  0.0  0.0  21352 13236 ?        Ss   17:42   0:00 /usr/lib/systemd/systemd-resolved

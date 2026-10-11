@@ -55,6 +55,9 @@ Narzędzie desku S2a: `results/AKW/tools/akw_s2a_cliff.py` (NOWE)
 | `results/AKW/tools/test_pre_akw.py` (testy przedlotowe §2; S2 profil II — historia: S1 `6ee42fd5…`) | `5549d9345cab75b480711ca822010e8793e8a8f22cc2b517d4693408dc50c7c9` |
 | `results/AKW/tools/akw_s2a_cliff.py` (desk S2a, NOWY) | `9b014b5758e38ff609da92d95d17b10a584bd3b593ac68d9d09148bf8a76c66a` |
 | `results/AKW/tools/akw_s2_gates.py` (bramki A′/C re-smoke na wyjściu frozen analyzera, NOWY) | `ea30d9fb57025f453450251da35f7af488a8a8affa3bace850c9873b8b33b130` |
+| `results/AKW/tools/akwS3_boot.sh` (S3, NOWA kopia akwS1_boot — zmiany: nazwa/log/samowykluczenie + manifest niesie profil II zamiast historycznego scan_dps_frozen) | `b7ff3ebf03b0957c2a23606717d697cbd1912848e1e8a1946511e9c9bb617478` |
+| `results/AKW/tools/akwS3_campaign.sh` (S3, kopia detS4_campaign + ścieżki + BEZPIECZNIK MODU ANEKS_AKW-2 §3; budżet 27, next_boot_n=5) | `e3bae803c905c2b87e545d7c8413f9a6720661697e08a2b2055acbc1f4bb6bbe` |
+| `results/AKW/tools/akw_pairs.py` (S3, kopia detS4_pairs — zmiany wyłącznie ścieżki/nazwy) | `0f248ed06ef638fc49aa6877e36f4bd2aaca1b45430e8e98a1fe6e097a4e769e` |
 
 ## Dziedziczone VERBATIM (bajty bez zmian — edycja = STOP)
 

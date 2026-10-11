@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        1256  1.2  1.3 74133544 448488 pts/0 Sl+  16:18   0:45 claude --continue
+root         248  0.1  0.2 3216920 67332 ?       Ssl  16:17   0:05 /usr/bin/containerd
+root         362  0.1  0.3 11061060 101876 ?     Ssl  16:17   0:04 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         894  0.0  0.0 1233872 11924 ?       Sl   16:18   0:02 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root           1  0.0  0.0  22020 13444 ?        Ss   16:17   0:00 /sbin/init
+dnsmasq      918  0.0  0.0 216768 28536 ?        Ss   16:18   0:00 postgres
+root          40  0.0  0.0  66868 19968 ?        S<s  16:17   0:00 /usr/lib/systemd/systemd-journald
+polkitd      200  0.0  0.0 308188  8056 ?        Ssl  16:17   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga       20586  0.0  0.0   5028  3684 ?        S    17:11   0:00 bash /home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh 23 r9_V2 V2 9 32,33,34,35
+root          86  0.0  0.0  26272  7248 ?        Ss   16:17   0:00 /usr/lib/systemd/systemd-udevd
+olga        1922  0.0  0.0 1307920 6860 ?        S    16:19   0:00 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered RUNDA|STOP|FUSE|nieważny|BUDGET|BEZ manifestu|analiza PADŁA|ENV-BLOCK|ODMOWA|KAMPANIA DONE|\[fuse\]
+message+     192  0.0  0.0   9800  5528 ?        Ss   16:17   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     183  0.0  0.0  91068  8016 ?        Ssl  16:17   0:00 /usr/lib/systemd/systemd-timesyncd
+olga        1079  0.0  0.0  20440 11592 ?        Ss   16:18   0:00 /usr/lib/systemd/systemd --user
+root         258  0.0  0.0 107064 23328 ?        Ssl  16:17   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root         205  0.0  0.0  17988  8836 ?        Ss   16:17   0:00 /usr/lib/systemd/systemd-logind
+systemd+     182  0.0  0.0  21352 13244 ?        Ss   16:17   0:00 /usr/lib/systemd/systemd-resolved
+dnsmasq     1001  0.0  0.0 216924  7208 ?        Ss   16:18   0:00 postgres: background writer 
+syslog       214  0.0  0.0 222524  5988 ?        Ssl  16:17   0:00 /usr/sbin/rsyslogd -n -iNONE

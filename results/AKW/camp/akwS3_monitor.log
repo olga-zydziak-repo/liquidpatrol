@@ -1,0 +1,587 @@
+=== RUNDA 1 (eps 0,1,2,3; kolejność B V2) 22:37:12 ===
+[akwS3 r1_B 22:37:12] cooldown 0s
+[akwS3 r1_B 22:37:12] cooldown 0s
+[akwS3 r1_B 22:37:12] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r1_B 22:37:12] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r1_B 22:37:17] CLEAN 1/3
+[akwS3 r1_B 22:37:54] CLEAN 2/3
+[akwS3 r1_B 22:38:30] CLEAN 3/3
+[akwS3 r1_B 22:38:30] SUSTAINED CLEAN
+[akwS3 r1_B 22:38:30] SUSTAINED CLEAN
+[akwS3 r1_B 22:46:38] wrapper rc=0
+[akwS3 r1_B 22:46:38] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b5] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r1_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b5] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r1_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=1
+[akwS3 r1_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r1_B
+[akwS3 r1_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r1_B
+[camp] r1_B boot_n=5 rc=0
+[akwS3 r1_V2 22:46:44] cooldown 294s
+[akwS3 r1_V2 22:46:44] cooldown 294s
+[akwS3 r1_V2 22:51:46] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r1_V2 22:51:46] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r1_V2 22:51:52] CLEAN 1/3
+[akwS3 r1_V2 22:52:28] CLEAN 2/3
+[akwS3 r1_V2 22:53:04] CLEAN 3/3
+[akwS3 r1_V2 22:53:04] SUSTAINED CLEAN
+[akwS3 r1_V2 22:53:04] SUSTAINED CLEAN
+[akwS3 r1_V2] run_boot pid=85414 eps=0,1,2,3 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r1_V2/percep.sock)
+[akwS3 r1_V2] run_boot pid=85414 eps=0,1,2,3 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r1_V2/percep.sock)
+[akwS3 r1_V2] po armed: bridge pid=87060 percep pid=87061
+[akwS3 r1_V2] po armed: bridge pid=87060 percep pid=87061
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92: 87060 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r1_V2 23:02:06] wrapper rc=0
+[akwS3 r1_V2 23:02:06] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b6] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r1_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b6] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r1_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=1
+[akwS3 r1_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r1_V2
+[akwS3 r1_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r1_V2
+[camp] r1_V2 boot_n=6 rc=0
+[fuse] r1_V2: mod WOLNY (dt p50 0.1320 s = 7.58 Hz), ślepe@FOV n=1230, admisje fresh=1182, koniunkcja central∧mti=1162
+[fuse] WOLNY mod z admisjami >0 — ryzyko §3 zamknięte pomiarem (wpis do raportu)
+=== RUNDA 1 DONE 23:02:13 ===
+=== RUNDA 2 (eps 4,5,6,7; kolejność V2 B) 23:02:13 ===
+[akwS3 r2_V2 23:02:13] cooldown 290s
+[akwS3 r2_V2 23:02:13] cooldown 290s
+[akwS3 r2_V2 23:07:12] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r2_V2 23:07:12] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r2_V2 23:07:17] CLEAN 1/3
+[akwS3 r2_V2 23:07:54] CLEAN 2/3
+[akwS3 r2_V2 23:08:30] CLEAN 3/3
+[akwS3 r2_V2 23:08:30] SUSTAINED CLEAN
+[akwS3 r2_V2 23:08:30] SUSTAINED CLEAN
+[akwS3 r2_V2] run_boot pid=90575 eps=4,5,6,7 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r2_V2/percep.sock)
+[akwS3 r2_V2] run_boot pid=90575 eps=4,5,6,7 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r2_V2/percep.sock)
+[akwS3 r2_V2] po armed: bridge pid=92227 percep pid=92228
+[akwS3 r2_V2] po armed: bridge pid=92227 percep pid=92228
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92: 92227 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r2_V2 23:16:37] wrapper rc=0
+[akwS3 r2_V2 23:16:37] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b7] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r2_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b7] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r2_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=2
+[akwS3 r2_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r2_V2
+[akwS3 r2_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r2_V2
+[camp] r2_V2 boot_n=7 rc=0
+[fuse] r2_V2: mod WOLNY (dt p50 0.1320 s = 7.58 Hz), ślepe@FOV n=1161, admisje fresh=1142, koniunkcja central∧mti=1143
+[fuse] WOLNY mod z admisjami >0 — ryzyko §3 zamknięte pomiarem (wpis do raportu)
+[akwS3 r2_B 23:16:43] cooldown 292s
+[akwS3 r2_B 23:16:43] cooldown 292s
+[akwS3 r2_B 23:21:44] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r2_B 23:21:44] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r2_B 23:21:49] CLEAN 1/3
+[akwS3 r2_B 23:22:26] CLEAN 2/3
+[akwS3 r2_B 23:23:03] CLEAN 3/3
+[akwS3 r2_B 23:23:03] SUSTAINED CLEAN
+[akwS3 r2_B 23:23:03] SUSTAINED CLEAN
+[akwS3 r2_B 23:31:05] wrapper rc=0
+[akwS3 r2_B 23:31:05] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b8] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r2_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b8] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r2_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=2
+[akwS3 r2_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r2_B
+[akwS3 r2_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r2_B
+[camp] r2_B boot_n=8 rc=0
+=== RUNDA 2 DONE 23:31:11 ===
+=== RUNDA 3 (eps 8,9,10,11; kolejność B V2) 23:31:11 ===
+[akwS3 r3_B 23:31:12] cooldown 293s
+[akwS3 r3_B 23:31:12] cooldown 293s
+[akwS3 r3_B 23:36:14] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r3_B 23:36:14] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r3_B 23:36:19] CLEAN 1/3
+[akwS3 r3_B 23:36:56] CLEAN 2/3
+[akwS3 r3_B 23:37:33] CLEAN 3/3
+[akwS3 r3_B 23:37:33] SUSTAINED CLEAN
+[akwS3 r3_B 23:37:33] SUSTAINED CLEAN
+[akwS3 r3_B 23:45:33] wrapper rc=0
+[akwS3 r3_B 23:45:33] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b9] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r3_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b9] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r3_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=3
+[akwS3 r3_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r3_B
+[akwS3 r3_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r3_B
+[camp] r3_B boot_n=9 rc=0
+[akwS3 r3_V2 23:45:38] cooldown 295s
+[akwS3 r3_V2 23:45:38] cooldown 295s
+[akwS3 r3_V2 23:50:42] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r3_V2 23:50:42] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r3_V2 23:50:49] CLEAN 1/3
+[akwS3 r3_V2 23:51:25] CLEAN 2/3
+[akwS3 r3_V2 23:52:01] CLEAN 3/3
+[akwS3 r3_V2 23:52:01] SUSTAINED CLEAN
+[akwS3 r3_V2 23:52:01] SUSTAINED CLEAN
+[akwS3 r3_V2] run_boot pid=104531 eps=8,9,10,11 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r3_V2/percep.sock)
+[akwS3 r3_V2] run_boot pid=104531 eps=8,9,10,11 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r3_V2/percep.sock)
+[akwS3 r3_V2] po armed: bridge pid=106178 percep pid=106179
+[akwS3 r3_V2] po armed: bridge pid=106178 percep pid=106179
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92: 106178 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r3_V2 00:00:26] wrapper rc=0
+[akwS3 r3_V2 00:00:26] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b10] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r3_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b10] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r3_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=3
+[akwS3 r3_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r3_V2
+[akwS3 r3_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r3_V2
+[camp] r3_V2 boot_n=10 rc=0
+[fuse] r3_V2: mod WOLNY (dt p50 0.1320 s = 7.58 Hz), ślepe@FOV n=1470, admisje fresh=1445, koniunkcja central∧mti=1444
+[fuse] WOLNY mod z admisjami >0 — ryzyko §3 zamknięte pomiarem (wpis do raportu)
+=== RUNDA 3 DONE 00:00:34 ===
+=== RUNDA 4 (eps 12,13,14,15; kolejność V2 B) 00:00:34 ===
+[akwS3 r4_V2 00:00:34] cooldown 290s
+[akwS3 r4_V2 00:00:34] cooldown 290s
+[akwS3 r4_V2 00:05:34] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r4_V2 00:05:34] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r4_V2 00:05:39] CLEAN 1/3
+[akwS3 r4_V2 00:06:16] CLEAN 2/3
+[akwS3 r4_V2 00:06:52] CLEAN 3/3
+[akwS3 r4_V2 00:06:52] SUSTAINED CLEAN
+[akwS3 r4_V2 00:06:52] SUSTAINED CLEAN
+[akwS3 r4_V2] run_boot pid=109628 eps=12,13,14,15 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r4_V2/percep.sock)
+[akwS3 r4_V2] run_boot pid=109628 eps=12,13,14,15 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r4_V2/percep.sock)
+[akwS3 r4_V2] po armed: bridge pid=111309 percep pid=111310
+[akwS3 r4_V2] po armed: bridge pid=111309 percep pid=111310
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92: 111309 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r4_V2 00:15:40] wrapper rc=0
+[akwS3 r4_V2 00:15:40] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b11] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r4_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b11] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r4_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=4
+[akwS3 r4_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r4_V2
+[akwS3 r4_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r4_V2
+[camp] r4_V2 boot_n=11 rc=0
+[fuse] r4_V2: mod WOLNY (dt p50 0.1320 s = 7.58 Hz), ślepe@FOV n=1365, admisje fresh=1352, koniunkcja central∧mti=1330
+[fuse] WOLNY mod z admisjami >0 — ryzyko §3 zamknięte pomiarem (wpis do raportu)
+[akwS3 r4_B 00:15:47] cooldown 291s
+[akwS3 r4_B 00:15:47] cooldown 291s
+[akwS3 r4_B 00:20:50] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r4_B 00:20:50] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r4_B 00:20:55] CLEAN 1/3
+[akwS3 r4_B 00:21:31] CLEAN 2/3
+[akwS3 r4_B 00:22:08] CLEAN 3/3
+[akwS3 r4_B 00:22:08] SUSTAINED CLEAN
+[akwS3 r4_B 00:22:08] SUSTAINED CLEAN
+[akwS3 r4_B 00:30:19] wrapper rc=0
+[akwS3 r4_B 00:30:19] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b12] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r4_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b12] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r4_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=4
+[akwS3 r4_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r4_B
+[akwS3 r4_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r4_B
+[camp] r4_B boot_n=12 rc=0
+=== RUNDA 4 DONE 00:30:25 ===
+=== RUNDA 5 (eps 16,17,18,19; kolejność B V2) 00:30:25 ===
+[akwS3 r5_B 00:30:25] cooldown 294s
+[akwS3 r5_B 00:30:25] cooldown 294s
+[akwS3 r5_B 00:35:29] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r5_B 00:35:29] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r5_B 00:35:34] CLEAN 1/3
+[akwS3 r5_B 00:36:10] CLEAN 2/3
+[akwS3 r5_B 00:36:47] CLEAN 3/3
+[akwS3 r5_B 00:36:47] SUSTAINED CLEAN
+[akwS3 r5_B 00:36:47] SUSTAINED CLEAN
+[akwS3 r5_B 00:44:48] wrapper rc=0
+[akwS3 r5_B 00:44:48] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b13] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r5_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b13] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r5_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=5
+[akwS3 r5_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r5_B
+[akwS3 r5_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r5_B
+[camp] r5_B boot_n=13 rc=0
+[akwS3 r5_V2 00:44:54] cooldown 294s
+[akwS3 r5_V2 00:44:54] cooldown 294s
+[akwS3 r5_V2 00:49:58] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r5_V2 00:49:58] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r5_V2 00:50:03] CLEAN 1/3
+[akwS3 r5_V2 00:50:39] CLEAN 2/3
+[akwS3 r5_V2 00:51:16] CLEAN 3/3
+[akwS3 r5_V2 00:51:16] SUSTAINED CLEAN
+[akwS3 r5_V2 00:51:16] SUSTAINED CLEAN
+[akwS3 r5_V2] run_boot pid=123766 eps=16,17,18,19 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r5_V2/percep.sock)
+[akwS3 r5_V2] run_boot pid=123766 eps=16,17,18,19 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r5_V2/percep.sock)
+[akwS3 r5_V2] po armed: bridge pid=125415 percep pid=125416
+[akwS3 r5_V2] po armed: bridge pid=125415 percep pid=125416
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92: 125415 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r5_V2 00:59:25] wrapper rc=0
+[akwS3 r5_V2 00:59:25] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b14] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r5_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b14] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r5_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=5
+[akwS3 r5_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r5_V2
+[akwS3 r5_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r5_V2
+[camp] r5_V2 boot_n=14 rc=0
+[fuse] r5_V2: mod WOLNY (dt p50 0.1320 s = 7.58 Hz), ślepe@FOV n=1121, admisje fresh=1083, koniunkcja central∧mti=1077
+[fuse] WOLNY mod z admisjami >0 — ryzyko §3 zamknięte pomiarem (wpis do raportu)
+=== RUNDA 5 DONE 00:59:32 ===
+=== RUNDA 6 (eps 20,21,22,23; kolejność V2 B) 00:59:32 ===
+[akwS3 r6_V2 00:59:32] cooldown 291s
+[akwS3 r6_V2 00:59:32] cooldown 291s
+[akwS3 r6_V2 01:04:33] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r6_V2 01:04:33] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r6_V2 01:04:38] CLEAN 1/3
+[akwS3 r6_V2 01:05:14] CLEAN 2/3
+[akwS3 r6_V2 01:05:52] CLEAN 3/3
+[akwS3 r6_V2 01:05:52] SUSTAINED CLEAN
+[akwS3 r6_V2 01:05:52] SUSTAINED CLEAN
+[akwS3 r6_V2] run_boot pid=128723 eps=20,21,22,23 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r6_V2/percep.sock)
+[akwS3 r6_V2] run_boot pid=128723 eps=20,21,22,23 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r6_V2/percep.sock)
+[akwS3 r6_V2] po armed: bridge pid=130370 percep pid=130371
+[akwS3 r6_V2] po armed: bridge pid=130370 percep pid=130371
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92: 130370 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r6_V2 01:14:19] wrapper rc=0
+[akwS3 r6_V2 01:14:19] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b15] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r6_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b15] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r6_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=6
+[akwS3 r6_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r6_V2
+[akwS3 r6_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r6_V2
+[camp] r6_V2 boot_n=15 rc=0
+[fuse] r6_V2: mod SZYBKI (dt p50 0.0680 s = 14.71 Hz), ślepe@FOV n=1598, admisje fresh=1584, koniunkcja central∧mti=1577
+[akwS3 r6_B 01:14:26] cooldown 291s
+[akwS3 r6_B 01:14:26] cooldown 291s
+[akwS3 r6_B 01:19:28] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r6_B 01:19:28] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r6_B 01:19:33] CLEAN 1/3
+[akwS3 r6_B 01:20:10] CLEAN 2/3
+[akwS3 r6_B 01:20:46] CLEAN 3/3
+[akwS3 r6_B 01:20:46] SUSTAINED CLEAN
+[akwS3 r6_B 01:20:46] SUSTAINED CLEAN
+[akwS3 r6_B 01:28:55] wrapper rc=0
+[akwS3 r6_B 01:28:55] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b16] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r6_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b16] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r6_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=6
+[akwS3 r6_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r6_B
+[akwS3 r6_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r6_B
+[camp] r6_B boot_n=16 rc=0
+=== RUNDA 6 DONE 01:29:02 ===
+=== RUNDA 7 (eps 24,25,26,27; kolejność B V2) 01:29:02 ===
+[akwS3 r7_B 01:29:02] cooldown 293s
+[akwS3 r7_B 01:29:02] cooldown 293s
+[akwS3 r7_B 01:34:05] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r7_B 01:34:05] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r7_B 01:34:10] CLEAN 1/3
+[akwS3 r7_B 01:34:45] CLEAN 2/3
+[akwS3 r7_B 01:35:21] CLEAN 3/3
+[akwS3 r7_B 01:35:21] SUSTAINED CLEAN
+[akwS3 r7_B 01:35:21] SUSTAINED CLEAN
+[akwS3 r7_B 01:43:32] wrapper rc=0
+[akwS3 r7_B 01:43:32] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b17] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r7_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b17] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r7_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=7
+[akwS3 r7_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r7_B
+[akwS3 r7_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r7_B
+[camp] r7_B boot_n=17 rc=0
+[akwS3 r7_V2 01:43:38] cooldown 294s
+[akwS3 r7_V2 01:43:38] cooldown 294s
+=== RUNDA 7 (eps 24,25,26,27; kolejność B V2) 16:15:48 ===
+[camp] r7_B już zanalizowany — pomijam (wznowienie)
+[akwS3 r7_V2 16:15:48] cooldown 0s
+[akwS3 r7_V2 16:15:48] cooldown 0s
+[akwS3 r7_V2 16:15:48] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r7_V2 16:15:48] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r7_V2 16:15:53] CLEAN 1/3
+[akwS3 r7_V2 16:16:31] CLEAN 2/3
+[akwS3 r7_V2 16:17:07] CLEAN 3/3
+[akwS3 r7_V2 16:17:07] SUSTAINED CLEAN
+[akwS3 r7_V2 16:17:07] SUSTAINED CLEAN
+[akwS3 r7_V2] run_boot pid=2287 eps=24,25,26,27 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r7_V2/percep.sock)
+[akwS3 r7_V2] run_boot pid=2287 eps=24,25,26,27 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r7_V2/percep.sock)
+[akwS3 r7_V2] po armed: bridge pid=4042 percep pid=4043
+[akwS3 r7_V2] po armed: bridge pid=4042 percep pid=4043
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92:  4042 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r7_V2 16:26:00] wrapper rc=0
+[akwS3 r7_V2 16:26:00] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b19] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r7_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b19] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r7_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=7
+[akwS3 r7_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r7_V2
+[akwS3 r7_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r7_V2
+[camp] r7_V2 boot_n=19 rc=0
+[fuse] r7_V2: mod WOLNY (dt p50 0.1320 s = 7.58 Hz), ślepe@FOV n=1540, admisje fresh=1523, koniunkcja central∧mti=1515
+[fuse] WOLNY mod z admisjami >0 — ryzyko §3 zamknięte pomiarem (wpis do raportu)
+=== RUNDA 7 DONE 16:26:08 ===
+=== RUNDA 8 (eps 28,29,30,31; kolejność V2 B) 16:26:08 ===
+[akwS3 r8_V2 16:26:08] cooldown 289s
+[akwS3 r8_V2 16:26:08] cooldown 289s
+[akwS3 r8_V2 16:31:13] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r8_V2 16:31:13] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r8_V2 16:31:19] CLEAN 1/3
+[akwS3 r8_V2 16:31:56] CLEAN 2/3
+[akwS3 r8_V2 16:32:33] CLEAN 3/3
+[akwS3 r8_V2 16:32:33] SUSTAINED CLEAN
+[akwS3 r8_V2 16:32:33] SUSTAINED CLEAN
+[akwS3 r8_V2] run_boot pid=7498 eps=28,29,30,31 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r8_V2/percep.sock)
+[akwS3 r8_V2] run_boot pid=7498 eps=28,29,30,31 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r8_V2/percep.sock)
+[akwS3 r8_V2] po armed: bridge pid=9148 percep pid=9149
+[akwS3 r8_V2] po armed: bridge pid=9148 percep pid=9149
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92:  9148 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r8_V2 16:41:21] wrapper rc=0
+[akwS3 r8_V2 16:41:21] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b20] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r8_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b20] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r8_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=8
+[akwS3 r8_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r8_V2
+[akwS3 r8_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r8_V2
+[camp] r8_V2 boot_n=20 rc=0
+[fuse] r8_V2: mod WOLNY (dt p50 0.1320 s = 7.58 Hz), ślepe@FOV n=1454, admisje fresh=1419, koniunkcja central∧mti=1427
+[fuse] WOLNY mod z admisjami >0 — ryzyko §3 zamknięte pomiarem (wpis do raportu)
+[akwS3 r8_B 16:41:28] cooldown 291s
+[akwS3 r8_B 16:41:28] cooldown 291s
+[akwS3 r8_B 16:46:35] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r8_B 16:46:35] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r8_B 16:46:41] CLEAN 1/3
+[akwS3 r8_B 16:47:18] CLEAN 2/3
+[akwS3 r8_B 16:47:55] CLEAN 3/3
+[akwS3 r8_B 16:47:55] SUSTAINED CLEAN
+[akwS3 r8_B 16:47:55] SUSTAINED CLEAN
+[akwS3 r8_B 16:56:21] wrapper rc=0
+[akwS3 r8_B 16:56:21] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b21] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r8_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b21] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r8_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=8
+[akwS3 r8_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r8_B
+[akwS3 r8_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r8_B
+[camp] r8_B boot_n=21 rc=0
+=== RUNDA 8 DONE 16:56:25 ===
+=== RUNDA 9 (eps 32,33,34,35; kolejność B V2) 16:56:25 ===
+[akwS3 r9_B 16:56:25] cooldown 296s
+[akwS3 r9_B 16:56:25] cooldown 296s
+[akwS3 r9_B 17:01:42] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r9_B 17:01:42] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r9_B 17:01:47] CLEAN 1/3
+[akwS3 r9_B 17:02:27] CLEAN 2/3
+[akwS3 r9_B 17:03:04] CLEAN 3/3
+[akwS3 r9_B 17:03:04] SUSTAINED CLEAN
+[akwS3 r9_B 17:03:04] SUSTAINED CLEAN
+[akwS3 r9_B 17:11:19] wrapper rc=0
+[akwS3 r9_B 17:11:19] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b22] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r9_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b22] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r9_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=9
+[akwS3 r9_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r9_B
+[akwS3 r9_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r9_B
+[camp] r9_B boot_n=22 rc=0
+[akwS3 r9_V2 17:11:25] cooldown 294s
+[akwS3 r9_V2 17:11:25] cooldown 294s
+[akwS3 r9_V2 17:16:39] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r9_V2 17:16:39] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r9_V2 17:16:46] CLEAN 1/3
+[akwS3 r9_V2 17:17:24] CLEAN 2/3
+[akwS3 r9_V2 17:18:02] CLEAN 3/3
+[akwS3 r9_V2 17:18:02] SUSTAINED CLEAN
+[akwS3 r9_V2 17:18:02] SUSTAINED CLEAN
+[akwS3 r9_V2] run_boot pid=22132 eps=32,33,34,35 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r9_V2/percep.sock)
+[akwS3 r9_V2] run_boot pid=22132 eps=32,33,34,35 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r9_V2/percep.sock)
+[akwS3 r9_V2] po armed: bridge pid=23794 percep pid=23795
+[akwS3 r9_V2] po armed: bridge pid=23794 percep pid=23795
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92: 23794 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r9_V2 17:26:53] wrapper rc=0
+[akwS3 r9_V2 17:26:53] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b23] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r9_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b23] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r9_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=9
+[akwS3 r9_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r9_V2
+[akwS3 r9_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r9_V2
+[camp] r9_V2 boot_n=23 rc=0
+[fuse] r9_V2: mod SZYBKI (dt p50 0.0680 s = 14.71 Hz), ślepe@FOV n=1613, admisje fresh=1581, koniunkcja central∧mti=1586
+=== RUNDA 9 DONE 17:26:59 ===
+=== RUNDA 10 (eps 36,37,38,39; kolejność V2 B) 17:26:59 ===
+[akwS3 r10_V2 17:26:59] cooldown 292s
+[akwS3 r10_V2 17:26:59] cooldown 292s
+[akwS3 r10_V2 17:32:09] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r10_V2 17:32:09] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r10_V2 17:32:16] CLEAN 1/3
+[akwS3 r10_V2 17:32:54] CLEAN 2/3
+[akwS3 r10_V2 17:33:31] CLEAN 3/3
+[akwS3 r10_V2 17:33:31] SUSTAINED CLEAN
+[akwS3 r10_V2 17:33:31] SUSTAINED CLEAN
+[akwS3 r10_V2] run_boot pid=27213 eps=36,37,38,39 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r10_V2/percep.sock)
+[akwS3 r10_V2] run_boot pid=27213 eps=36,37,38,39 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r10_V2/percep.sock)
+[akwS3 r10_V2] po armed: bridge pid=28860 percep pid=28861
+[akwS3 r10_V2] po armed: bridge pid=28860 percep pid=28861
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92: 28860 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r10_V2 17:42:33] wrapper rc=0
+[akwS3 r10_V2 17:42:33] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b24] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r10_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b24] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r10_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=10
+[akwS3 r10_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r10_V2
+[akwS3 r10_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r10_V2
+[camp] r10_V2 boot_n=24 rc=0
+[fuse] r10_V2: mod WOLNY (dt p50 0.1320 s = 7.58 Hz), ślepe@FOV n=1601, admisje fresh=1582, koniunkcja central∧mti=1576
+[fuse] WOLNY mod z admisjami >0 — ryzyko §3 zamknięte pomiarem (wpis do raportu)
+[akwS3 r10_B 17:42:43] cooldown 288s
+[akwS3 r10_B 17:42:43] cooldown 288s
+[akwS3 r10_B 17:47:52] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r10_B 17:47:52] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r10_B 17:47:57] CLEAN 1/3
+[akwS3 r10_B 17:48:35] CLEAN 2/3
+[akwS3 r10_B 17:49:13] CLEAN 3/3
+[akwS3 r10_B 17:49:13] SUSTAINED CLEAN
+[akwS3 r10_B 17:49:13] SUSTAINED CLEAN
+[akwS3 r10_B 17:57:41] wrapper rc=0
+[akwS3 r10_B 17:57:41] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b25] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r10_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b25] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r10_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=10
+[akwS3 r10_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r10_B
+[akwS3 r10_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r10_B
+[camp] r10_B boot_n=25 rc=0
+=== RUNDA 10 DONE 17:57:47 ===
+=== RUNDA 11 (eps 40,41,42,43; kolejność B V2) 17:57:47 ===
+[akwS3 r11_B 17:57:47] cooldown 294s
+[akwS3 r11_B 17:57:47] cooldown 294s
+[akwS3 r11_B 18:03:02] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r11_B 18:03:02] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r11_B 18:03:07] CLEAN 1/3
+[akwS3 r11_B 18:03:45] CLEAN 2/3
+[akwS3 r11_B 18:04:23] CLEAN 3/3
+[akwS3 r11_B 18:04:23] SUSTAINED CLEAN
+[akwS3 r11_B 18:04:23] SUSTAINED CLEAN
+[akwS3 r11_B 18:12:42] wrapper rc=0
+[akwS3 r11_B 18:12:42] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b26] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r11_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b26] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r11_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=11
+[akwS3 r11_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r11_B
+[akwS3 r11_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r11_B
+[camp] r11_B boot_n=26 rc=0
+[akwS3 r11_V2 18:12:47] cooldown 295s
+[akwS3 r11_V2 18:12:47] cooldown 295s
+[akwS3 r11_V2 18:18:05] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r11_V2 18:18:05] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r11_V2 18:18:10] CLEAN 1/3
+[akwS3 r11_V2 18:18:48] CLEAN 2/3
+[akwS3 r11_V2 18:19:26] CLEAN 3/3
+[akwS3 r11_V2 18:19:26] SUSTAINED CLEAN
+[akwS3 r11_V2 18:19:26] SUSTAINED CLEAN
+[akwS3 r11_V2] run_boot pid=41273 eps=40,41,42,43 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r11_V2/percep.sock)
+[akwS3 r11_V2] run_boot pid=41273 eps=40,41,42,43 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r11_V2/percep.sock)
+[akwS3 r11_V2] po armed: bridge pid=43013 percep pid=43014
+[akwS3 r11_V2] po armed: bridge pid=43013 percep pid=43014
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92: 43013 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r11_V2 18:27:58] wrapper rc=0
+[akwS3 r11_V2 18:27:58] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b27] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r11_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b27] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r11_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=11
+[akwS3 r11_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r11_V2
+[akwS3 r11_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r11_V2
+[camp] r11_V2 boot_n=27 rc=0
+[fuse] r11_V2: mod WOLNY (dt p50 0.1320 s = 7.58 Hz), ślepe@FOV n=1274, admisje fresh=1255, koniunkcja central∧mti=1256
+[fuse] WOLNY mod z admisjami >0 — ryzyko §3 zamknięte pomiarem (wpis do raportu)
+=== RUNDA 11 DONE 18:28:05 ===
+=== RUNDA 12 (eps 44,45,46,47; kolejność V2 B) 18:28:05 ===
+[akwS3 r12_V2 18:28:05] cooldown 291s
+[akwS3 r12_V2 18:28:05] cooldown 291s
+[akwS3 r12_V2 18:33:17] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r12_V2 18:33:17] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r12_V2 18:33:22] CLEAN 1/3
+[akwS3 r12_V2 18:34:00] CLEAN 2/3
+[akwS3 r12_V2 18:34:40] CLEAN 3/3
+[akwS3 r12_V2 18:34:40] SUSTAINED CLEAN
+[akwS3 r12_V2 18:34:40] SUSTAINED CLEAN
+[akwS3 r12_V2] run_boot pid=46341 eps=44,45,46,47 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r12_V2/percep.sock)
+[akwS3 r12_V2] run_boot pid=46341 eps=44,45,46,47 (FEED=V2, CONTROLLER=net_akw, sock=/home/olga/projects/liquidpatrol/results/AKW/camp/r12_V2/percep.sock)
+[akwS3 r12_V2] po armed: bridge pid=47987 percep pid=47988
+[akwS3 r12_V2] po armed: bridge pid=47987 percep pid=47988
+/home/olga/projects/liquidpatrol/results/AKW/tools/akwS3_boot.sh: line 92: 47987 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[akwS3 r12_V2 18:43:27] wrapper rc=0
+[akwS3 r12_V2 18:43:27] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b28] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_V2
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b28] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_V2
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=V2 runda=12
+[akwS3 r12_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_V2
+[akwS3 r12_V2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_V2
+[camp] r12_V2 boot_n=28 rc=0
+[fuse] r12_V2: mod WOLNY (dt p50 0.1320 s = 7.58 Hz), ślepe@FOV n=1197, admisje fresh=1158, koniunkcja central∧mti=1160
+[fuse] WOLNY mod z admisjami >0 — ryzyko §3 zamknięte pomiarem (wpis do raportu)
+[akwS3 r12_B 18:43:33] cooldown 292s
+[akwS3 r12_B 18:43:33] cooldown 292s
+[akwS3 r12_B 18:48:48] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r12_B 18:48:48] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r12_B 18:48:53] CLEAN 1/3
+[akwS3 r12_B 18:49:31] CLEAN 2/3
+[akwS3 r12_B 18:50:09] CLEAN 3/3
+[akwS3 r12_B 18:50:09] SUSTAINED CLEAN
+[akwS3 r12_B 18:50:09] SUSTAINED CLEAN
+[akwS3 r12_B 18:58:36] wrapper rc=0
+[akwS3 r12_B 18:58:36] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b29] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_B
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b29] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_B
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=12
+[akwS3 r12_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_B
+[akwS3 r12_B] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_B
+[camp] r12_B boot_n=29 rc=0
+[camp] r12_B nieważny — powtórka r12_Br (zapas 1/3)
+[akwS3 r12_Br 18:58:42] cooldown 294s
+[akwS3 r12_Br 18:58:42] cooldown 294s
+[akwS3 r12_Br 19:04:01] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r12_Br 19:04:01] czekam na SUSTAINED CLEAN (3× co 30s)...
+[akwS3 r12_Br 19:04:06] CLEAN 1/3
+[akwS3 r12_Br 19:04:44] CLEAN 2/3
+[akwS3 r12_Br 19:05:25] CLEAN 3/3
+[akwS3 r12_Br 19:05:25] SUSTAINED CLEAN
+[akwS3 r12_Br 19:05:25] SUSTAINED CLEAN
+[akwS3 r12_Br 19:13:52] wrapper rc=0
+[akwS3 r12_Br 19:13:52] wrapper rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b30] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_Br
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b30] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_Br
+[akw] manifest: net_arm=ncp controller=net_akw akw_arm=B runda=12
+[akwS3 r12_Br] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_Br
+[akwS3 r12_Br] DONE rc=0 → /home/olga/projects/liquidpatrol/results/AKW/camp/r12_Br
+[camp] r12_Br boot_n=30 rc=0
+=== RUNDA 12 DONE 19:13:58 ===
+[camp] KAMPANIA DONE (rundy 7-12)
