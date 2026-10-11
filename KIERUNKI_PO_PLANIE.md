@@ -86,6 +86,24 @@ zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasad
   (`results/DET/RAPORT_DET.md` §8). Najkrótsza ścieżka od Δ=34 do pełnej geometrii:
   jedno zachowanie przedakwizycyjne, zero nowych komponentów uczonych.
 
+## Dopisek stanu katalogu — 11.10.2026 (CO-AKW, ANEKS_AKW-3 §7)
+
+- **AKW (akwizycja)** → **CLOSED**: noga wykonana w całości (S0–S3, 29/≤32 bootów,
+  3 sesje lotne + 2 deski, breach 0 / REFUSE 0 w 25 uzbrojonych bootach), werdykt
+  i kanon obowiązujący w `results/AKW/RAPORT_AKW.md` — „luka geometryczna domknięta
+  zachowaniem; skan nie wystarcza na cel szybki; następne ogniwo: re-akwizycja
+  kierunkowa" (Δ_new=12 ⇒ ŚMIERĆ-AKW progiem zamrożonym; ΔΔ=22 z kwalifikatorem
+  dwóch kampanii; bearingi zrównane 3/3/3/3, rezyduum w całości v=1.0).
+- **RE-AKW (re-akwizycja kierunkowa)** — NOWA pozycja katalogu (ANEKS_AKW-3 §7).
+  **Trigger:** przed roszczeniem pełnej geometrii z celem szybkim. Zakres: dwell +
+  obrót w kierunku ekstrapolowanym z trk_vel_ned (dane już w kontrakcie feedu) przed
+  wznowieniem pełnego skanu — jedno zachowanie w TYM SAMYM wrapperze (akw_scan.py),
+  zero nowych komponentów uczonych, zero zmian osłony/sieci. Aktywa gotowe:
+  3 regresje c08 + 14 porażek V2 jako zbiór odniesienia, dwie kampanie-wzorce
+  (DET S4 + AKW S3), profil II FROZEN b94cdeae, cała ewaluacja
+  (`results/AKW/RAPORT_AKW.md` §8). Najkrótsza ścieżka od 34/48 do pytania
+  „ile naprawdę zostało".
+
 ## Backlog §8 (bez zmian, porządkowe)
 
 Polityka git dla .ulg (decyzja od tygodni odroczona, nieblokująca) · martwe inicjalizacje w gate (przy

@@ -255,3 +255,28 @@ przebił oczekiwania (detektor po akwizycji DOKŁADNIEJSZY od wyroczni: err_fres
 Δ=34 zamiast ≤4, w całości akwizycyjny); (2) doprecyzowanie reguły: „gotowość
 systemowa" obejmuje geometrię sensoryczną (pole widzenia, choreografia akwizycji),
 nie tylko integrację software'ową.
+
+## NOGA AKW (akwizycja — skan yaw) — ROZLICZONE przy RAPORT_AKW (ANEKS_AKW-3 §5, 11.10.2026)
+Prerejestrowane 09.10.2026 (`PRE_AKW.md:125-132`):
+- **P-AKW-1 ✗:** smoke A+B+C PASS za pierwszym bootem (p 0.50, integracyjna ↓) —
+  smoke padł na pierwszym profilu: A 2/3 → powtórka 0/3 (klif ω·dt;
+  `results/AKW/RAPORT_AKW_S1.md` §3).
+- **P-AKW-2 ✓:** zero potwierdzonych fałszywych ENTRY tła w smoke i kampanii (p 0.70)
+  — FP tła 0 w całej nodze; w kampanii wszystkie ENTRY w oknach F1_cel, **F3=0**
+  (pozaoknowe = znana klasa F2 lock-przed-epizodem na stagingu;
+  `results/AKW/RAPORT_AKW_S3.md` §4).
+- **P-AKW-3 ✗** (wynik nogi): Δ_new ≤ 4 (p 0.60) — wyszło **Δ_new=12** (pass(B)=46,
+  pass(V2+skan)=34 na 48 parach) ⇒ ŚMIERĆ-AKW progiem zamrożonym; rezyduum w całości
+  w celu szybkim v=1.0 (Δ=9/12), luka geometryczna domknięta (bearingi 3/3/3/3,
+  +24/−3 vs DET; `results/AKW/RAPORT_AKW.md` §3).
+- **P-AKW-4 ✓:** pass(B)_new ≥ 46/48 (p 0.80) — dokładnie 46/48 (obie porażki B
+  = v=1.0, padły też w V2; dryf vs DET ≤1 pary).
+- **P-AKW-5 ✓:** REFUSE = 0 w całej nodze (p 0.85) — REFUSE 0 we wszystkich 29
+  bootach, gałęzie puste; breach 0.
+
+**Suma nogi AKW: 3 ✓ / 2 ✗.** Kalibracja CC (ANEKS_AKW-3 §5): **TRZECI kolejny
+przestrzał wyniku systemowego (2A → DET-5 → AKW-3)**, tym razem dokładnie
+w interakcji NAZWANEJ-A-NIEZMIERZONEJ (recon R5.8: „intruz ruchomy × skan — desk
+nie rozstrzyga"). Doprecyzowanie reguły kalibracyjnej: predykcja wyniku systemowego
+z nazwaną-a-niezmierzoną interakcją dostaje korektę w dół GŁĘBSZĄ niż standardowa
+(nie ≈0.6, raczej ≈0.4–0.5), dopóki interakcja nie ma pomiaru choćby sondą.
