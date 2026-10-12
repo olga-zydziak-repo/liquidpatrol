@@ -94,6 +94,11 @@ zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasad
   zachowaniem; skan nie wystarcza na cel szybki; następne ogniwo: re-akwizycja
   kierunkowa" (Δ_new=12 ⇒ ŚMIERĆ-AKW progiem zamrożonym; ΔΔ=22 z kwalifikatorem
   dwóch kampanii; bearingi zrównane 3/3/3/3, rezyduum w całości v=1.0).
+  **NOTA-ERRATUM (ANEKS_REAKW-1 §3, 12.10):** zdanie „następne ogniwo: re-akwizycja
+  kierunkowa" było inferencją CC z mechanizmu regresji c08, NIE pomiarem — desk recon
+  RE-AKW zmierzył dźwignię jako fałszywą (konwersja górna 0/14; regresje c08 =
+  interakcja fantom×skan, `results/REAKW_RECON/RECON_REAKW.md`). Werdykt AKW (Δ=12,
+  ŚMIERĆ-AKW) NIETKNIĘTY — erratum dotyczy wyłącznie uzasadnienia pozycji katalogowej.
 - **RE-AKW (re-akwizycja kierunkowa)** — NOWA pozycja katalogu (ANEKS_AKW-3 §7).
   **Trigger:** przed roszczeniem pełnej geometrii z celem szybkim. Zakres: dwell +
   obrót w kierunku ekstrapolowanym z trk_vel_ned (dane już w kontrakcie feedu) przed
@@ -103,6 +108,30 @@ zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasad
   (DET S4 + AKW S3), profil II FROZEN b94cdeae, cała ewaluacja
   (`results/AKW/RAPORT_AKW.md` §8). Najkrótsza ścieżka od 34/48 do pytania
   „ile naprawdę zostało".
+
+## Dopisek stanu katalogu — 12.10.2026 (CO-REAKW, ANEKS_REAKW-1 §5)
+
+- **RE-AKW (re-akwizycja kierunkowa)** → **CLOSED-BY-RECON** (0 bootów, 1 sesja
+  deskowa — pierwsze pełne zabicie kierunku deskiem w programie): dźwignia „pamięć
+  kierunku z trk_vel_ned" SFALSYFIKOWANA przy biurku — górna granica konwersji 0/14
+  na zbiorze odniesienia (5 porażek bez utraty tracku, w 6 pamięć kierunku =
+  antysygnał fantomu stagingu, 2 odrzuca konieczna brama plauzybilności, 1 bez
+  znaczenia); kampania w dowolnym wariancie potwierdziłaby zero z desku za ≥24 booty
+  (`results/REAKW_RECON/RECON_REAKW.md`). KSIĘGA bez rozliczenia (PRE nie powstało).
+- **FANTOM-START** — NOWA pozycja katalogu (ANEKS_REAKW-1 §4; flaga: mechanizm
+  ZMIERZONY tym deskiem). Jeden mechanizm niesie 6/9 utrat w porażkach kampanii AKW:
+  lock F2 na stagingu przed startem epizodu → expire → ślepy start 9.5–26.8 s.
+  Dźwignia po stronie KONSUMENTA/choreografii (percepcja FROZEN): kandydaci do recon
+  — ignorowanie przez konsumenta tracków zaadmitowanych przed startem epizodu;
+  choreografia stagingu w narzędziu-driverze. **Trigger:** przed kampanią wymagającą
+  czystego startu epizodu. Aktywa: 6 nazwanych epizodów + rekordy
+  `results/REAKW_RECON/dir_replay.json`.
+- **POŚCIG-V1** — NOWA pozycja katalogu (ANEKS_REAKW-1 §4; flaga: mechanizm nazwany
+  danymi — track żywy, D6 pada — dźwignia **[MECHANIZM NIEZMIERZONY]**, recon od
+  niej zacznie). 5/14 porażek przy TRZYMANYM tracku + obie porażki ramienia B
+  (wyrocznia pada tak samo) ⇒ deficyt pościgu za celem v=1.0, liga sieci/egzekutora
+  — nie percepcji i nie skanu. **Trigger:** przed roszczeniem pełnej siatki z celem
+  szybkim. Aktywa: 5+2 epizodów z telemetrią obu kampanii (DET S4 + AKW S3).
 
 ## Backlog §8 (bez zmian, porządkowe)
 
