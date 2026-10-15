@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        1252  7.4  1.5 74437548 497760 pts/0 Sl+  11:45   3:12 claude --continue
+root         360  0.1  0.3 10987520 103240 ?     Ssl  11:45   0:04 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         244  0.1  0.2 3290716 70324 ?       Ssl  11:44   0:04 /usr/bin/containerd
+root         898  0.0  0.0 1233872 12048 ?       Sl   11:45   0:01 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root        1037  0.0  0.0   3200  1248 ?        S    11:45   0:00 /init
+root           1  0.0  0.0  21892 13276 ?        Ss   11:44   0:00 /sbin/init
+dnsmasq      921  0.0  0.0 216768 28752 ?        Ss   11:45   0:00 postgres
+root          40  0.0  0.0  66872 16064 ?        S<s  11:44   0:00 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26100  7120 ?        Ss   11:44   0:00 /usr/lib/systemd/systemd-udevd
+root         242  0.0  0.0 107064 23340 ?        Ssl  11:44   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+polkitd      190  0.0  0.0 308188  8028 ?        Ssl  11:44   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga        1083  0.0  0.0  20440 11632 ?        Ss   11:45   0:00 /usr/lib/systemd/systemd --user
+message+     182  0.0  0.0   9804  5540 ?        Ss   11:44   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+avahi        180  0.0  0.0   8712  4744 ?        Ss   11:44   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
+systemd+     166  0.0  0.0  91068  8008 ?        Ssl  11:44   0:00 /usr/lib/systemd/systemd-timesyncd
+systemd+     154  0.0  0.0  21352 13244 ?        Ss   11:44   0:00 /usr/lib/systemd/systemd-resolved
+dnsmasq     1005  0.0  0.0 216924  7508 ?        Ss   11:45   0:00 postgres: background writer 
+syslog       204  0.0  0.0 222524  6048 ?        Ssl  11:44   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         198  0.0  0.0  17992  8836 ?        Ss   11:44   0:00 /usr/lib/systemd/systemd-logind

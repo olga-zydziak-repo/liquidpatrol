@@ -15,6 +15,7 @@ from r03.controllers.orbit_executor import OrbitExecutor
 from r03.controllers.net_controller import NetController
 from r03.controllers.liq_controller import LiqGru, LiqMlp20
 from r03.controllers.akw_scan import AkwScan
+from r03.controllers.fantom_scan import FantomScan
 
 _REGISTRY = {
     "route": RouteFollower,
@@ -23,6 +24,7 @@ _REGISTRY = {
     "gru": LiqGru,          # LIQ (PRE_LIQ §7, SR-9): kontrola rekurencji, wagi net/frozen/gru.npz
     "mlp20": LiqMlp20,      # LIQ (PRE_LIQ §7, SR-9): kontrola okna k=20, wagi net/frozen/mlp20.npz
     "net_akw": AkwScan,     # AKW (PRE_AKW §2, SR-9): skan yaw w hold, delegat NetController (wagi ncp FROZEN)
+    "net_fantom": FantomScan,  # FANTOM (PRE_FANTOM §1, SR-9): kwarantanna startu, delegat AkwScan (profil II FROZEN)
 }
 
 
