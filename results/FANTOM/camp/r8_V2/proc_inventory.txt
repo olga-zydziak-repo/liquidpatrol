@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       55676  2.6  0.0   5028  3644 ?        S    19:37   0:00 bash harness/run_boot.sh
+olga        1110  1.2  1.5 74375772 495952 pts/0 Sl+  16:42   2:14 claude --continue
+root         254  0.1  0.2 3142804 67516 ?       Ssl  16:42   0:15 /usr/bin/containerd
+root         365  0.1  0.2 6636884 94552 ?       Ssl  16:42   0:12 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         841  0.0  0.0 1233872 11796 ?       Sl   16:42   0:08 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      865  0.0  0.0 216768 28424 ?        Ss   16:42   0:01 postgres
+root          40  0.0  0.0  66876 16060 ?        S<s  16:42   0:00 /usr/lib/systemd/systemd-journald
+root           1  0.0  0.0  21980 13312 ?        Ss   16:42   0:00 /sbin/init
+olga       17343  0.0  0.0 1307920 6768 ?        S    17:45   0:00 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered RUNDA|STOP|FUSE|nieważny|BUDGET|BEZ manifestu|analiza PADŁA|ENV-BLOCK|ODMOWA|KAMPANIA DONE|\[fuse\]
+polkitd      205  0.0  0.0 308188  8128 ?        Ssl  16:42   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga       54123  0.0  0.0   5028  3688 ?        S    19:31   0:00 bash /home/olga/projects/liquidpatrol/results/FANTOM/tools/fantomS2_boot.sh 19 r8_V2 V2 8 28,29,30,31
+root          89  0.0  0.0  26164  7236 ?        Ss   16:42   0:00 /usr/lib/systemd/systemd-udevd
+root         981  0.0  0.0   3200  1248 ?        S    16:42   0:00 /init
+systemd+     186  0.0  0.0  91068  7976 ?        Ssl  16:42   0:00 /usr/lib/systemd/systemd-timesyncd
+message+     200  0.0  0.0   9800  5508 ?        Ss   16:42   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+dnsmasq      951  0.0  0.0 216924  7140 ?        Ss   16:42   0:00 postgres: background writer 
+systemd+     178  0.0  0.0  21352 13172 ?        Ss   16:42   0:00 /usr/lib/systemd/systemd-resolved
+olga        1027  0.0  0.0  20440 11532 ?        Ss   16:42   0:00 /usr/lib/systemd/systemd --user
+dnsmasq      959  0.0  0.0 216768 10148 ?        Ss   16:42   0:00 postgres: walwriter 

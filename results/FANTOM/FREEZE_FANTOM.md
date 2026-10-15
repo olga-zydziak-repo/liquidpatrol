@@ -42,3 +42,13 @@ pod ROS env ×2 przebiegi (pełny przegląd plików testowych repo jak AKW S2 + 
 nota: w pierwszym przebiegu pełnego zakresu jednorazowa flaka
 `test_cykl_zycia_percep_proc` (DET-tools, klasa środowiskowa rclpy/proces — test nie
 importuje fantom_scan; dwa kolejne przebiegi czyste, solo-grupa czysta).
+
+## S2 — narzędzia kampanii (kopie; ANEKS_FANTOM-1 §4.3)
+
+| plik | sha256 (pref.) |
+|---|---|
+| `results/FANTOM/tools/fantomS2_boot.sh` (kopia fantomS1_boot; zmiany: nazwa/log/samowykluczenie + poprawka kosmetycznego printu manifestu zlecona §1b) | `d77fbf40` |
+| `results/FANTOM/tools/fantomS2_campaign.sh` (kopia akwS3_campaign; ścieżki FANTOM, driver fantomS2_boot, parowanie fantom_pairs, next_boot_n=2, budżet 27; bezpiecznik modu ANEKS_AKW-2 §3 verbatim) | `27b97e44` |
+| `results/FANTOM/tools/fantom_pairs.py` (kopia akw_pairs; zmiany wyłącznie ścieżkowe) | `f236c136` |
+
+Analiza per boot: frozen `results/AKW/tools/akw_analyze.py` (e9b3bdfb) bez zmian.

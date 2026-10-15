@@ -1,0 +1,20 @@
+[bench] armed sim=98.08 {}
+[bench] takeoff sim=98.11 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/FANTOM/camp/r8_V2/episode_control.json
+[bench] offboard sim=109.32 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=109.47 {'episode_id': 28, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.088, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=109.47 {'episode_id': 28, 'scenario_id': 'c04_s03', 't0_sim': 109.472}
+[bench] episode_end sim=182.88 {'episode_id': 28, 't_entry': 3.39, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=191.02 {'episode_id': 29, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.104, 'pose': [0.0, 15.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 15.0, -10.0]}
+[bench] episode_start sim=191.02 {'episode_id': 29, 'scenario_id': 'c05_s03', 't0_sim': 191.024}
+[bench] episode_end sim=268.15 {'episode_id': 29, 't_entry': 7.09, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=275.91 {'episode_id': 30, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.168, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=275.94 {'episode_id': 30, 'scenario_id': 'c06_s03', 't0_sim': 275.912}
+[bench] episode_end sim=355.74 {'episode_id': 30, 't_entry': 9.79, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=364.26 {'episode_id': 31, 'status': 'OK', 'n_setpose': 12, 'wait_sim': 0.624, 'pose': [-0.0, -15.0, -10.0], 'attempts': 1, 'start_ned': [-0.0, -15.0, -10.0]}
+[bench] episode_start sim=364.28 {'episode_id': 31, 'scenario_id': 'c07_s03', 't0_sim': 364.264}
+[bench] episode_end sim=447.70 {'episode_id': 31, 't_entry': 13.42, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] reset_done sim=455.44 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/FANTOM/camp/r8_V2/trace.jsonl (demo n=6100)

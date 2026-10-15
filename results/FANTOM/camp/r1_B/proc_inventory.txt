@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        1252  5.0  1.5 74470316 510996 pts/0 Sl+  11:50   4:56 claude --continue
+olga       30665  3.3  0.0   5028  3704 ?        S    13:27   0:00 bash harness/run_boot.sh
+root         244  0.1  0.2 3290716 69140 ?       Ssl  11:50   0:08 /usr/bin/containerd
+root         360  0.1  0.3 10987520 98620 ?      Ssl  11:50   0:08 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         898  0.0  0.0 1233872 12148 ?       Sl   11:50   0:04 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+olga       30240  0.0  0.0   5028  3732 ?        S    13:26   0:00 bash /home/olga/projects/liquidpatrol/results/FANTOM/tools/fantomS2_boot.sh 2 r1_B B 1 0,1,2,3
+root       29162  0.0  0.0 1830368 13712 ?       Ssl  13:23   0:00 /usr/libexec/wsl-pro-service
+root        1037  0.0  0.0   3200  1248 ?        S    11:50   0:00 /init
+dnsmasq      921  0.0  0.0 216768 28752 ?        Ss   11:50   0:00 postgres
+root           1  0.0  0.0  21892 13280 ?        Ss   11:50   0:00 /sbin/init
+root          40  0.0  0.0  66872 16224 ?        S<s  11:50   0:00 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26100  7120 ?        Ss   11:50   0:00 /usr/lib/systemd/systemd-udevd
+polkitd      190  0.0  0.0 308188  8028 ?        Ssl  11:50   0:00 /usr/lib/polkit-1/polkitd --no-debug
+message+     182  0.0  0.0   9804  5544 ?        Ss   11:50   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     166  0.0  0.0  91068  8008 ?        Ssl  11:50   0:00 /usr/lib/systemd/systemd-timesyncd
+olga        1083  0.0  0.0  20440 11632 ?        Ss   11:50   0:00 /usr/lib/systemd/systemd --user
+root         242  0.0  0.0 107064 23340 ?        Ssl  11:50   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+avahi        180  0.0  0.0   8712  4744 ?        Ss   11:50   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
+systemd+     154  0.0  0.0  21352 13244 ?        Ss   11:50   0:00 /usr/lib/systemd/systemd-resolved

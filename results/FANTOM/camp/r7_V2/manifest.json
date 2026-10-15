@@ -1,0 +1,160 @@
+{
+  "kind": "fantom",
+  "flight": "bench",
+  "boot": 18,
+  "rc": 0,
+  "arm": "E",
+  "point": "0.0",
+  "harness_file": "/home/olga/projects/liquidpatrol/bench/bench_flight.py",
+  "sha_harness": "05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43",
+  "controller": "net_fantom",
+  "controller_sha": "e435ed7e3f3ce47dd7b3b88651dff02ae76ddb14823ac913e544d849cd09d849",
+  "feed_sha": "8015bd12d7e8852bdc2e773d8b32c335a21752ea6209c6f245364809e4ed4a9c",
+  "executor_params_sha": "5a7244996d89be70bd720a2b0eb8b6f6dea1a2d8f3f2fd7cf356292426f28716",
+  "ulog_sha": "dc911350872757357c225c7eb10019e81165af09e9a20941b3cfb06759efaf20",
+  "ulog_bytes": 144630565,
+  "world_hash": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0  worlds/world_demo_A3.sdf",
+  "world_ref": "worlds/world_demo_A3.sdf",
+  "proc_gate": "CLEAN loadavg=0.06 (cpu_max=2.0, load1_max=1.5)",
+  "n_demo_rows": 6314,
+  "n_episodes": 4,
+  "n_valid_V2p": 4,
+  "n_success_D6": 4,
+  "episodes": [
+    {
+      "episode_id": 24,
+      "scenario_id": "c00_s03",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 2,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 1.0366,
+      "d_min_m": 6.369,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 25,
+      "scenario_id": "c01_s03",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 0,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 1.037,
+      "d_min_m": 6.172,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 26,
+      "scenario_id": "c02_s03",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 1,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 1.0211,
+      "d_min_m": 6.999,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 27,
+      "scenario_id": "c03_s03",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 0,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 1.0231,
+      "d_min_m": 7.651,
+      "refuse_count": 0,
+      "breach": false
+    }
+  ],
+  "world_hash_kind": "repo",
+  "model_in_state": true,
+  "net_arm": "ncp",
+  "weights_sha": "0337d5eae1471bb99ef329d939be195a9ea846017045b8ddac22f3d97bc2ae36",
+  "akw_arm": "V2",
+  "akw_round": 7,
+  "fantom": {
+    "controller": "net_fantom",
+    "fantom_scan_sha256": "e435ed7e3f3ce47dd7b3b88651dff02ae76ddb14823ac913e544d849cd09d849",
+    "akw_scan_sha256": "b94cdeaef311c46067724eb095eb7ce32c08c9929c15cfa2cc4614619063d375",
+    "registry_sha256": "87203d292ac9c9169c6e986e22b534c6c578fd4a597720c2df89cec5d7749bd9",
+    "predykat": {
+      "wybor_T2": "K1",
+      "T_q_s": 3.0,
+      "d_jump_m": 5.0,
+      "eps_K2_nieuzyty_s": 0.5,
+      "marker": "reset() per epizod"
+    },
+    "scan_profile_delegata": {
+      "mode": "step_stare",
+      "step_deg": 40.0,
+      "slew_dps": 60.0,
+      "stare_s": 1.2,
+      "dwell_s": 2.0,
+      "frozen": "b94cdeae (ANEKS_AKW-2 par.2)"
+    },
+    "q_events": [
+      {
+        "ev": "q_enter",
+        "t": 110.452,
+        "fd_valid_at_ref": false
+      },
+      {
+        "ev": "q_exit",
+        "reason": "C",
+        "t": 113.5,
+        "dt": 3.048
+      },
+      {
+        "ev": "q_enter",
+        "t": 195.268,
+        "fd_valid_at_ref": true
+      },
+      {
+        "ev": "q_exit",
+        "reason": "C",
+        "t": 198.308,
+        "dt": 3.04
+      },
+      {
+        "ev": "q_enter",
+        "t": 283.512,
+        "fd_valid_at_ref": false
+      },
+      {
+        "ev": "q_exit",
+        "reason": "C",
+        "t": 286.548,
+        "dt": 3.036
+      },
+      {
+        "ev": "q_enter",
+        "t": 377.576,
+        "fd_valid_at_ref": false
+      },
+      {
+        "ev": "q_exit",
+        "reason": "C",
+        "t": 380.584,
+        "dt": 3.008
+      }
+    ],
+    "nota": "PRE_FANTOM par.1: jedyna zmiana systemu = co konsument robi z trackami sprzed startu epizodu; kwarantanna K1 (A/B/C)"
+  },
+  "feed_v2": {
+    "role": "FEED=V2 AKTYWNY (det_v2 w osobnym procesie percepcji; noga AKW)",
+    "det_v2_sha": "775ead150b9937453168538cb97c55f69166e27ddc2d93f71b3710e0e49832ce",
+    "percep_feed_sha256": "956a6ab5367d0bd161fe2ab4801e8e12ce7db65982b0d5754e199cfef94be875",
+    "client_e2e_sha256": "6dde36c61b07d44e7510d373eff7d321155a5736400aaf29e2cc9615a4c271d8",
+    "client_e2e_full_sha256": "3e9322c5da04a728b9a0c171dc091086eff1fb70099e4f0349f19439b4a62ccf",
+    "nota_client_log": "klient FROZEN otwiera log 'w' per epizod \u2014 client_e2e.jsonl niesie ostatni epizod; pelny przechwyt=client_e2e_full.jsonl (tail -F, driver)",
+    "nota_prowieniencja": "numpy lawki 2.4.4 (B0SP, import r02.mti przez klienta) \u2014 jak S4 2A/DET"
+  }
+}

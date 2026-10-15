@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       26283  2.7  0.0   5028  3748 ?        S    18:13   0:00 bash harness/run_boot.sh
+olga        1110  1.6  1.4 74339000 464496 pts/0 Sl+  16:45   1:28 claude --continue
+root         254  0.1  0.2 3142804 67944 ?       Ssl  16:45   0:08 /usr/bin/containerd
+root         365  0.1  0.2 6636884 96664 ?       Ssl  16:45   0:06 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         841  0.0  0.0 1233872 12156 ?       Sl   16:45   0:03 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      865  0.0  0.0 216768 28424 ?        Ss   16:45   0:00 postgres
+root           1  0.0  0.0  21980 13312 ?        Ss   16:45   0:00 /sbin/init
+root          40  0.0  0.0  66876 16052 ?        S<s  16:45   0:00 /usr/lib/systemd/systemd-journald
+root          89  0.0  0.0  26164  7236 ?        Ss   16:45   0:00 /usr/lib/systemd/systemd-udevd
+polkitd      205  0.0  0.0 308188  8128 ?        Ssl  16:45   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root         981  0.0  0.0   3200  1248 ?        S    16:45   0:00 /init
+olga       24627  0.0  0.0   5028  3652 ?        S    18:07   0:00 bash /home/olga/projects/liquidpatrol/results/FANTOM/tools/fantomS2_boot.sh 13 r5_B B 5 16,17,18,19
+systemd+     186  0.0  0.0  91068  7976 ?        Ssl  16:45   0:00 /usr/lib/systemd/systemd-timesyncd
+olga       17343  0.0  0.0 1307920 6756 ?        S    17:48   0:00 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered RUNDA|STOP|FUSE|nieważny|BUDGET|BEZ manifestu|analiza PADŁA|ENV-BLOCK|ODMOWA|KAMPANIA DONE|\[fuse\]
+systemd+     178  0.0  0.0  21352 13172 ?        Ss   16:45   0:00 /usr/lib/systemd/systemd-resolved
+message+     200  0.0  0.0   9800  5508 ?        Ss   16:45   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+olga        1027  0.0  0.0  20440 11532 ?        Ss   16:45   0:00 /usr/lib/systemd/systemd --user
+root         253  0.0  0.0 107064 23224 ?        Ssl  16:45   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+avahi        198  0.0  0.0   8712  4744 ?        Ss   16:45   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
