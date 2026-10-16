@@ -280,3 +280,28 @@ w interakcji NAZWANEJ-A-NIEZMIERZONEJ (recon R5.8: „intruz ruchomy × skan —
 nie rozstrzyga"). Doprecyzowanie reguły kalibracyjnej: predykcja wyniku systemowego
 z nazwaną-a-niezmierzoną interakcją dostaje korektę w dół GŁĘBSZĄ niż standardowa
 (nie ≈0.6, raczej ≈0.4–0.5), dopóki interakcja nie ma pomiaru choćby sondą.
+
+## NOGA FANTOM (czysty start — kwarantanna K1) — ROZLICZONE przy RAPORT_FANTOM (ANEKS_FANTOM-2 §4, 16.10.2026)
+Prerejestrowane 12.10.2026 (`PRE_FANTOM.md` §6); dźwignia była ZMIERZONA deskiem
+(recon 6/6) — korekta głęboka jawnie NIEzastosowana per ANEKS_AKW-3 §5:
+- **P-F-1 ✓:** smoke za pierwszym podejściem (p 0.65) — PASS A′/B/C, obie podklasy
+  skonwertowane, zapas nieużyty (`results/FANTOM/RAPORT_FANTOM_S1.md` §4).
+- **P-F-2 ✗:** konwersja ≥5/6 N6 w kampanii (p 0.60) — wyszło **3/6**; wszystkie 3
+  porażki z wczesną akwizycją 5.0–6.6 s i przegranym pościgiem (mechanizm startu
+  domknięty, pościg nie; `results/FANTOM/RAPORT_FANTOM.md` §1).
+- **P-F-3 ✓:** Δ_new2 ∈ [5,8] (p 0.55) — dokładnie **7** (strefa opisowa, zdanie ≤4
+  nie padło — pościg został, jak przewidziano).
+- **P-F-4 ✗ literą:** pass(B) ≥ 45 (p 0.75) — wyszło 38, ale przy n_common=40
+  (mianownik skurczony środowiskowo: 8 par straconych narzędziowo); MECHANIZM
+  predykcji potwierdzony wskaźnikiem 95.0% vs 95.8% AKW i nieszkodliwością
+  C-exitów kwarantanny na wyroczni.
+- **P-F-5 ✓:** breach 0 / REFUSE 0 w całej nodze (p 0.85) — 0/0 ×28 bootów.
+- **P-F-6 n.r.:** c09_s01 przechodzi mimo kwarantanny (p 0.60) — para NIEWAŻNA
+  środowiskowo (poza n_common); opisowo: nieważny przebieg D6 ✓ przy 5.2 s.
+
+**Suma nogi FANTOM: 3 ✓ / 2 ✗ / 1 nierozstrzygnięta.** Kalibracja CC (ANEKS_FANTOM-2
+§4, dwa wpisy): (a) **dowód pościgu przenosi się tylko w obrębie tego samego reżimu
+opóźnienia akwizycji** — DET-PASS c08 przy akwizycji ~0 s nie dowodzi pościgu po
+akwizycji 5 s (stąd przestrzał P-F-2 mimo zmierzonej dźwigni startu);
+(b) **predykcje o ramionach formułować jako WSKAŹNIKI albo warunkowo na n_common**,
+nigdy jako liczności bezwzględne — mianownik może skurczyć się narzędziowo (P-F-4).

@@ -132,6 +132,21 @@ zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasad
   (wyrocznia pada tak samo) ⇒ deficyt pościgu za celem v=1.0, liga sieci/egzekutora
   — nie percepcji i nie skanu. **Trigger:** przed roszczeniem pełnej siatki z celem
   szybkim. Aktywa: 5+2 epizodów z telemetrią obu kampanii (DET S4 + AKW S3).
+  **DOPISEK AKTYWÓW (CO-FANTOM, 16.10):** aktywa ROSNĄ — +9 porażek V2 kampanii
+  FANTOM S2 (wszystkie z wczesną akwizycją: pościg czysty, start wyeliminowany
+  jako zmienna zakłócająca) + 2 B-FAILe + telemetria trzech kampanii
+  (DET S4 / AKW S3 / FANTOM S2) + kwarantanna K1 FROZEN e435ed7e w rejestrze
+  (`results/FANTOM/RAPORT_FANTOM.md` §8). Trigger bez zmian.
+
+## Dopisek stanu katalogu — 16.10.2026 (CO-FANTOM, ANEKS_FANTOM-2 §6)
+
+- **FANTOM-START** → **CLOSED**: noga FANTOM wykonana w całości (S0–S2, 28/≤30
+  bootów, breach 0 / REFUSE 0 ×28), werdykt i kanon obowiązujący
+  w `results/FANTOM/RAPORT_FANTOM.md` — „mechanizm startu domknięty pomiarem
+  14/14; konwersja epizodowa 3/6 ograniczona pościgiem; Δ 12→7" (werdykt
+  dwuwarstwowy: pozycja N6 3/6 + regresje 1 = strefa opisowa; siatka Δ_new2=7
+  strefa opisowa, n_common=40; rezerwa programowa 2 nienaruszona — decyzja
+  ANEKS_FANTOM-2 §5: booty kupują wyłącznie informację zmieniającą werdykty).
 
 ## Backlog §8 (bez zmian, porządkowe)
 
