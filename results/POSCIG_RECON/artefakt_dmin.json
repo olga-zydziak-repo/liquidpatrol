@@ -1,0 +1,870 @@
+{
+ "dev_gate_m": 1.0,
+ "cases": [
+  {
+   "label": "V2_11",
+   "dir": "results/FANTOM/camp/r5_V2",
+   "scenario_id": "c05_s02",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "d_dmin"
+    ],
+    "d_min_m": 3.84,
+    "t_entry_s": 6.6,
+    "frac_band_6_10": 0.9671,
+    "sweep_deg": 791.0
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 6.352,
+    "t_entry_s": 6.6,
+    "frac_band_6_10": 0.9671,
+    "sweep_deg": 791.0
+   },
+   "artefakt": {
+    "n_rows_bad": 2,
+    "t_rel_bad": [
+     0.076,
+     0.096
+    ],
+    "max_dev_m": 18.64
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  },
+  {
+   "label": "V2_11",
+   "dir": "results/FANTOM/camp/r9_V2",
+   "scenario_id": "c08_s03",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "c_sweep",
+     "d_dmin"
+    ],
+    "d_min_m": 3.481,
+    "t_entry_s": 5.008,
+    "frac_band_6_10": 0.8317,
+    "sweep_deg": 447.6
+   },
+   "judge_filtered": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "c_sweep",
+     "d_dmin"
+    ],
+    "d_min_m": 3.481,
+    "t_entry_s": 5.008,
+    "frac_band_6_10": 0.8317,
+    "sweep_deg": 447.6
+   },
+   "artefakt": {
+    "n_rows_bad": 0,
+    "t_rel_bad": [],
+    "max_dev_m": 0.0
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "V2_11",
+   "dir": "results/FANTOM/camp/r12_V2",
+   "scenario_id": "c08_s04",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "c_sweep",
+     "d_dmin"
+    ],
+    "d_min_m": 1.633,
+    "t_entry_s": 5.164,
+    "frac_band_6_10": 0.714,
+    "sweep_deg": 594.2
+   },
+   "judge_filtered": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "c_sweep",
+     "d_dmin"
+    ],
+    "d_min_m": 1.633,
+    "t_entry_s": 5.164,
+    "frac_band_6_10": 0.714,
+    "sweep_deg": 594.2
+   },
+   "artefakt": {
+    "n_rows_bad": 0,
+    "t_rel_bad": [],
+    "max_dev_m": 0.0
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "V2_11",
+   "dir": "results/FANTOM/camp/r6_V2",
+   "scenario_id": "c09_s02",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "d_dmin"
+    ],
+    "d_min_m": 1.594,
+    "t_entry_s": 5.136,
+    "frac_band_6_10": 0.9585,
+    "sweep_deg": 739.3
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 7.005,
+    "t_entry_s": 5.136,
+    "frac_band_6_10": 0.9585,
+    "sweep_deg": 739.3
+   },
+   "artefakt": {
+    "n_rows_bad": 2,
+    "t_rel_bad": [
+     0.092,
+     0.112
+    ],
+    "max_dev_m": 14.52
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  },
+  {
+   "label": "V2_11",
+   "dir": "results/FANTOM/camp/r6_V2",
+   "scenario_id": "c10_s02",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "c_sweep",
+     "d_dmin"
+    ],
+    "d_min_m": 1.813,
+    "t_entry_s": 5.008,
+    "frac_band_6_10": 0.6872,
+    "sweep_deg": 601.3
+   },
+   "judge_filtered": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "c_sweep",
+     "d_dmin"
+    ],
+    "d_min_m": 1.813,
+    "t_entry_s": 5.008,
+    "frac_band_6_10": 0.6872,
+    "sweep_deg": 598.6
+   },
+   "artefakt": {
+    "n_rows_bad": 6,
+    "t_rel_bad": [
+     42.468,
+     42.488,
+     42.508,
+     42.528,
+     42.548,
+     42.568
+    ],
+    "max_dev_m": 1.12
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "V2_11",
+   "dir": "results/FANTOM/camp/r9_V2",
+   "scenario_id": "c10_s03",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "c_sweep"
+    ],
+    "d_min_m": 4.12,
+    "t_entry_s": 5.352,
+    "frac_band_6_10": 0.8893,
+    "sweep_deg": 558.7
+   },
+   "judge_filtered": {
+    "success_D6": false,
+    "fail_reasons": [
+     "c_sweep"
+    ],
+    "d_min_m": 4.12,
+    "t_entry_s": 5.352,
+    "frac_band_6_10": 0.8893,
+    "sweep_deg": 558.7
+   },
+   "artefakt": {
+    "n_rows_bad": 3,
+    "t_rel_bad": [
+     0.096,
+     12.188,
+     12.208
+    ],
+    "max_dev_m": 16.97
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "V2_11",
+   "dir": "results/FANTOM/camp/r6_V2",
+   "scenario_id": "c11_s02",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "d_dmin"
+    ],
+    "d_min_m": 1.565,
+    "t_entry_s": 5.204,
+    "frac_band_6_10": 0.6158,
+    "sweep_deg": 886.4
+   },
+   "judge_filtered": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "d_dmin"
+    ],
+    "d_min_m": 1.565,
+    "t_entry_s": 5.204,
+    "frac_band_6_10": 0.6158,
+    "sweep_deg": 886.4
+   },
+   "artefakt": {
+    "n_rows_bad": 0,
+    "t_rel_bad": [],
+    "max_dev_m": 0.0
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "V2_11",
+   "dir": "results/FANTOM/camp/r9_V2",
+   "scenario_id": "c11_s03",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "d_dmin"
+    ],
+    "d_min_m": 0.446,
+    "t_entry_s": 4.908,
+    "frac_band_6_10": 0.7872,
+    "sweep_deg": 701.8
+   },
+   "judge_filtered": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "d_dmin"
+    ],
+    "d_min_m": 0.446,
+    "t_entry_s": 4.908,
+    "frac_band_6_10": 0.7872,
+    "sweep_deg": 701.8
+   },
+   "artefakt": {
+    "n_rows_bad": 1,
+    "t_rel_bad": [
+     0.112
+    ],
+    "max_dev_m": 14.81
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "V2_11",
+   "dir": "results/FANTOM/camp/r12_V2",
+   "scenario_id": "c11_s04",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "d_dmin"
+    ],
+    "d_min_m": 1.0,
+    "t_entry_s": 4.94,
+    "frac_band_6_10": 0.7526,
+    "sweep_deg": 666.8
+   },
+   "judge_filtered": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "d_dmin"
+    ],
+    "d_min_m": 1.0,
+    "t_entry_s": 4.94,
+    "frac_band_6_10": 0.7526,
+    "sweep_deg": 666.8
+   },
+   "artefakt": {
+    "n_rows_bad": 1,
+    "t_rel_bad": [
+     0.084
+    ],
+    "max_dev_m": 25.33
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "V2_11",
+   "dir": "results/AKW/camp/r9_V2",
+   "scenario_id": "c09_s03",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "c_sweep",
+     "d_dmin"
+    ],
+    "d_min_m": 2.517,
+    "t_entry_s": 0.04,
+    "frac_band_6_10": 0.9077,
+    "sweep_deg": 618.5
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 7.413,
+    "t_entry_s": 4.832,
+    "frac_band_6_10": 0.9752,
+    "sweep_deg": 678.7
+   },
+   "artefakt": {
+    "n_rows_bad": 2,
+    "t_rel_bad": [
+     0.052,
+     0.072
+    ],
+    "max_dev_m": 12.42
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  },
+  {
+   "label": "V2_11",
+   "dir": "results/AKW/camp/r3_V2",
+   "scenario_id": "c10_s01",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "c_sweep"
+    ],
+    "d_min_m": 5.425,
+    "t_entry_s": 0.0,
+    "frac_band_6_10": 0.9079,
+    "sweep_deg": 551.3
+   },
+   "judge_filtered": {
+    "success_D6": false,
+    "fail_reasons": [
+     "c_sweep"
+    ],
+    "d_min_m": 5.425,
+    "t_entry_s": 5.12,
+    "frac_band_6_10": 0.9809,
+    "sweep_deg": 594.3
+   },
+   "artefakt": {
+    "n_rows_bad": 1,
+    "t_rel_bad": [
+     0.1
+    ],
+    "max_dev_m": 7.53
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "B_2",
+   "dir": "results/FANTOM/camp/r9_B",
+   "scenario_id": "c09_s03",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "d_dmin"
+    ],
+    "d_min_m": 1.19,
+    "t_entry_s": 1.9,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 797.6
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 7.764,
+    "t_entry_s": 1.9,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 797.6
+   },
+   "artefakt": {
+    "n_rows_bad": 2,
+    "t_rel_bad": [
+     0.052,
+     0.064
+    ],
+    "max_dev_m": 14.62
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  },
+  {
+   "label": "B_2",
+   "dir": "results/FANTOM/camp/r6_B",
+   "scenario_id": "c11_s02",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "d_dmin"
+    ],
+    "d_min_m": 0.629,
+    "t_entry_s": 0.0,
+    "frac_band_6_10": 0.9243,
+    "sweep_deg": 1042.1
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 6.77,
+    "t_entry_s": 2.084,
+    "frac_band_6_10": 0.9524,
+    "sweep_deg": 886.8
+   },
+   "artefakt": {
+    "n_rows_bad": 1,
+    "t_rel_bad": [
+     0.096
+    ],
+    "max_dev_m": 24.25
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  },
+  {
+   "label": "B_AKW",
+   "dir": "results/AKW/camp/r6_B",
+   "scenario_id": "c09_s02",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "d_dmin"
+    ],
+    "d_min_m": 1.089,
+    "t_entry_s": 2.056,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 799.0
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 6.443,
+    "t_entry_s": 2.056,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 799.0
+   },
+   "artefakt": {
+    "n_rows_bad": 2,
+    "t_rel_bad": [
+     0.096,
+     0.116
+    ],
+    "max_dev_m": 16.01
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  },
+  {
+   "label": "B_AKW",
+   "dir": "results/AKW/camp/r6_B",
+   "scenario_id": "c11_s02",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "d_dmin"
+    ],
+    "d_min_m": 0.427,
+    "t_entry_s": 0.0,
+    "frac_band_6_10": 0.9744,
+    "sweep_deg": 1026.5
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 7.125,
+    "t_entry_s": 1.82,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 869.2
+   },
+   "artefakt": {
+    "n_rows_bad": 1,
+    "t_rel_bad": [
+     0.072
+    ],
+    "max_dev_m": 24.35
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  },
+  {
+   "label": "CTRL_5",
+   "dir": "results/FANTOM/camp/r6_V2",
+   "scenario_id": "c08_s02",
+   "judge_full": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 6.714,
+    "t_entry_s": 3.448,
+    "frac_band_6_10": 0.9262,
+    "sweep_deg": 855.5
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 6.714,
+    "t_entry_s": 3.448,
+    "frac_band_6_10": 0.9262,
+    "sweep_deg": 855.5
+   },
+   "artefakt": {
+    "n_rows_bad": 4,
+    "t_rel_bad": [
+     11.436,
+     11.456,
+     11.48,
+     11.5
+    ],
+    "max_dev_m": 1.08
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "CTRL_5",
+   "dir": "results/FANTOM/camp/r9_V2",
+   "scenario_id": "c09_s03",
+   "judge_full": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 5.337,
+    "t_entry_s": 0.04,
+    "frac_band_6_10": 0.8739,
+    "sweep_deg": 795.2
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 5.337,
+    "t_entry_s": 4.94,
+    "frac_band_6_10": 0.9433,
+    "sweep_deg": 733.8
+   },
+   "artefakt": {
+    "n_rows_bad": 4,
+    "t_rel_bad": [
+     0.044,
+     0.064,
+     29.648,
+     29.668
+    ],
+    "max_dev_m": 28.82
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "CTRL_5",
+   "dir": "results/FANTOM/camp/r12_V2",
+   "scenario_id": "c09_s04",
+   "judge_full": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 5.751,
+    "t_entry_s": 5.108,
+    "frac_band_6_10": 0.9196,
+    "sweep_deg": 728.4
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 6.846,
+    "t_entry_s": 5.108,
+    "frac_band_6_10": 0.9196,
+    "sweep_deg": 728.4
+   },
+   "artefakt": {
+    "n_rows_bad": 1,
+    "t_rel_bad": [
+     0.04
+    ],
+    "max_dev_m": 9.95
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "CTRL_5",
+   "dir": "results/FANTOM/camp/r3_V2",
+   "scenario_id": "c10_s01",
+   "judge_full": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 4.981,
+    "t_entry_s": 5.056,
+    "frac_band_6_10": 0.9689,
+    "sweep_deg": 669.6
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 4.981,
+    "t_entry_s": 5.056,
+    "frac_band_6_10": 0.9689,
+    "sweep_deg": 669.6
+   },
+   "artefakt": {
+    "n_rows_bad": 0,
+    "t_rel_bad": [],
+    "max_dev_m": 0.0
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "CTRL_5",
+   "dir": "results/FANTOM/camp/r12_V2",
+   "scenario_id": "c10_s04",
+   "judge_full": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 5.009,
+    "t_entry_s": 5.112,
+    "frac_band_6_10": 0.9526,
+    "sweep_deg": 736.8
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 5.009,
+    "t_entry_s": 5.112,
+    "frac_band_6_10": 0.9526,
+    "sweep_deg": 736.8
+   },
+   "artefakt": {
+    "n_rows_bad": 0,
+    "t_rel_bad": [],
+    "max_dev_m": 0.0
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "TEACHER",
+   "dir": "results/BENCH/campaign/boot2",
+   "scenario_id": "c05_s01",
+   "judge_full": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 8.118,
+    "t_entry_s": 2.076,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 945.5
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 8.118,
+    "t_entry_s": 2.076,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 945.5
+   },
+   "artefakt": {
+    "n_rows_bad": 0,
+    "t_rel_bad": [],
+    "max_dev_m": 0.0
+   },
+   "flip_dmin": false,
+   "flip_D6": false
+  },
+  {
+   "label": "TEACHER",
+   "dir": "results/BENCH/campaign/b2b9",
+   "scenario_id": "c05_s08",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "d_dmin"
+    ],
+    "d_min_m": 2.861,
+    "t_entry_s": 0.0,
+    "frac_band_6_10": 0.95,
+    "sweep_deg": 1047.7
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 7.706,
+    "t_entry_s": 3.524,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 868.9
+   },
+   "artefakt": {
+    "n_rows_bad": 2,
+    "t_rel_bad": [
+     0.084,
+     0.096
+    ],
+    "max_dev_m": 21.45
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  },
+  {
+   "label": "TEACHER",
+   "dir": "results/BENCH/campaign/boot5",
+   "scenario_id": "c07_s02",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "d_dmin"
+    ],
+    "d_min_m": 3.875,
+    "t_entry_s": 0.1,
+    "frac_band_6_10": 0.9651,
+    "sweep_deg": 910.0
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 7.703,
+    "t_entry_s": 2.496,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 891.7
+   },
+   "artefakt": {
+    "n_rows_bad": 2,
+    "t_rel_bad": [
+     0.08,
+     0.1
+    ],
+    "max_dev_m": 15.66
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  },
+  {
+   "label": "TEACHER",
+   "dir": "results/BENCH/campaign/boot6",
+   "scenario_id": "c09_s02",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "d_dmin"
+    ],
+    "d_min_m": 1.178,
+    "t_entry_s": 2.336,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 834.9
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 7.288,
+    "t_entry_s": 2.336,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 834.9
+   },
+   "artefakt": {
+    "n_rows_bad": 1,
+    "t_rel_bad": [
+     0.048
+    ],
+    "max_dev_m": 16.06
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  },
+  {
+   "label": "TEACHER",
+   "dir": "results/BENCH/campaign/boot11",
+   "scenario_id": "c09_s03",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "d_dmin"
+    ],
+    "d_min_m": 2.521,
+    "t_entry_s": 2.092,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 846.2
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 7.176,
+    "t_entry_s": 2.092,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 846.2
+   },
+   "artefakt": {
+    "n_rows_bad": 2,
+    "t_rel_bad": [
+     0.096,
+     0.116
+    ],
+    "max_dev_m": 12.37
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  },
+  {
+   "label": "TEACHER",
+   "dir": "results/BENCH/campaign/b2b17",
+   "scenario_id": "c09_s06",
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "d_dmin"
+    ],
+    "d_min_m": 2.725,
+    "t_entry_s": 1.9,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 954.7
+   },
+   "judge_filtered": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 7.19,
+    "t_entry_s": 1.9,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 954.7
+   },
+   "artefakt": {
+    "n_rows_bad": 2,
+    "t_rel_bad": [
+     0.052,
+     0.072
+    ],
+    "max_dev_m": 16.7
+   },
+   "flip_dmin": true,
+   "flip_D6": true
+  }
+ ]
+}
