@@ -147,6 +147,33 @@ zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasad
   dwuwarstwowy: pozycja N6 3/6 + regresje 1 = strefa opisowa; siatka Δ_new2=7
   strefa opisowa, n_common=40; rezerwa programowa 2 nienaruszona — decyzja
   ANEKS_FANTOM-2 §5: booty kupują wyłącznie informację zmieniającą werdykty).
+  **NOTA (20.10, ANEKS_POSCIG-1 §5): łańcuch Δ 34→12→7 — z erratum DMIN:
+  what-ify obok liter (35→11→7), `results/POSCIG_RECON/ERRATUM_DMIN.md`.**
+
+## Dopisek stanu katalogu — 20.10.2026 (CO-POSCIG, ANEKS_POSCIG-1 §5)
+
+- **POŚCIG-V1** → **CLOSED-BY-RECON (rozpuszczenie mechanizmu)** (0 bootów, 1 sesja
+  deskowa + CO — trzecie pełne zabicie kierunku deskiem): „deficyt pościgu za celem
+  szybkim" nie istnieje jako mechanizm — zbiór odniesienia (11 V2 + 2 B) rozpada się
+  na 3+2B artefakt przyrządu (realnie PASS), 6 akwizycja-transit i 2 near-missy
+  omiatania; sufit kinematyczny nie istnieje (ideał 13/13 od t0), nauczyciel po
+  erratum 120/120. Werdykt i dowody: `ANEKS_POSCIG-1.md` §2,
+  `results/POSCIG_RECON/RECON_POSCIG.md`. Owoc uboczny werdykto-nośny:
+  **ERRATUM-DMIN** (`results/POSCIG_RECON/ERRATUM_DMIN.md`) — artefakt tranzientu
+  teleportu w gt_intruder, 28 flipów w 6 zbiorach, wszystkie werdykty nóg ODPORNE;
+  filtr-świadek |ned−cmd_ned|_xy>1 m liczony ODTĄD obok każdego werdyktu
+  sędziowanego na gt_intruder.
+- **AKW-TRANSIT** — NOWA pozycja katalogu (ANEKS_POSCIG-1 §4; mechanizm ZMIERZONY
+  reconem POŚCIG). 6 epizodów modu B (c08_s03, c08_s04, c10_s02, c11_s02, c11_s03,
+  c11_s04): późna akwizycja 19.5–31.2 s, cel wchodzi <4 m pod ślepy zawis zanim
+  track istnieje — okno sędziego płonie PRZED akwizycją. Dźwignia [NIEZMIERZONA] —
+  poza percepcją (FROZEN): choreografia skanu lub wyżej. **Trigger:** przed
+  roszczeniem pełnej siatki. Aktywa: `results/POSCIG_RECON/r1_feasibility.json` +
+  `r2_behavior.json` + telemetria trzech kampanii (DET S4 / AKW S3 / FANTOM S2).
+- **GT-CZYSTOŚĆ** — NOWA pozycja katalogu (ANEKS_POSCIG-1 §4; narzędziowa, niski
+  priorytet). Utwardzenie u źródła: czystość pierwszych próbek gt_intruder (start
+  logowania po świeżości bufora); wymaga zgody na dotyk frozen bencha /
+  intruder_motion ⇒ własny łańcuch z FREEZE. Do tego czasu filtr-świadek wystarcza.
 
 ## Backlog §8 (bez zmian, porządkowe)
 

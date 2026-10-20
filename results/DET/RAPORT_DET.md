@@ -171,3 +171,15 @@ ENTRY (nie zmiana sieci, nie zmiana osłony); warianty pre-aim/gimbal jako alter
 Porcelain przy CO-DET: tylko {ANEKS_DET-4.md, results/DET/RAPORT_DET.md,
 results/KSIEGA_PREDYKCJI.md, KIERUNKI_PO_PLANIE.md} — jeden commit, zero bootów.
 Push = Olga. STOP.
+
+## NOTA-ERRATUM (ANEKS_POSCIG-1 §3, 20.10.2026)
+
+Treść powyżej = litera (kanon §5 NIETKNIĘTY). Artefakt tranzientu teleportu
+w `gt_intruder` (`results/POSCIG_RECON/ERRATUM_DMIN.md`): w kampanii S4 **1 flip**
+FAIL→PASS — **B r9 c09_s03** (d_min 1.172→7.616; jedyna „porażka wyroczni"
+kampanii była artefaktem przyrządu). **What-if obok litery: pass_B 47→48
+(wyrocznia realnie 48/48), pass_V2 13→13 ⇒ Δ 34→35** — werdykt „percepcja
+limituje wykonanie" ODPORNY na erratum i minimalnie wzmocniony. Reprodukcja
+sędziego na S4: 94/96 co do (werdykt, d_min±0.01); 2 różnice wyłącznie w d_min
+przy zgodnych werdyktach (r4_V2 c01_s02/c02_s02, oba FAIL a_entry, d_min>13 m —
+nie-werdykto-nośne; szczegóły ERRATUM_DMIN §6).

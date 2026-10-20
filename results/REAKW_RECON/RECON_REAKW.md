@@ -205,3 +205,13 @@ MTI, progi admisji), osłony, sieci/wag, rejestru feedów, profilu PEŁNEGO skan
 reguła kalibracyjna ANEKS_AKW-3 §5 ma tu zastosowanie wprost — interakcja była
 nazwana-a-niezmierzona, teraz jest ZMIERZONA deskiem: 0/14). Sygnały bez numeru
 odrzucam. STOP-REAKWR.
+
+## NOTA-ERRATUM (ANEKS_POSCIG-1 §3, 20.10.2026)
+
+Treść powyżej = litera. Artefakt tranzientu teleportu w `gt_intruder`
+(`results/POSCIG_RECON/ERRATUM_DMIN.md`): dwie z pięciu porażek klasy „czysty
+pościg bez utraty tracku" (c06_s04, c09_s02 V2) to fałszywe FAIL-e `d_dmin` —
+**klasa „czysty pościg" 5→3**. Werdykt recon NIETKNIĘTY (konwersja górna 0/14,
+dźwignia kierunkowa sfalsyfikowana — erratum nie dotyka mechanizmu utrat).
+Sama pozycja POŚCIG-V1 (§R5/ANEKS_REAKW-1 §4) została następnie ROZPUSZCZONA
+reconem POŚCIG: `ANEKS_POSCIG-1.md` §2.

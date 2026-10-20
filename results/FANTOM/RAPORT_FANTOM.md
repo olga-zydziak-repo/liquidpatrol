@@ -135,3 +135,16 @@ akwizycją (pościg czysty: start wyeliminowany jako zmienna zakłócająca)** +
 B-FAILe (wyrocznia pada tak samo — v=1.0) + telemetria trzech kampanii
 (DET S4 / AKW S3 / FANTOM S2) + kwarantanna K1 FROZEN e435ed7e w rejestrze.
 Po raz pierwszy w programie całe pozostałe Δ ma JEDEN nazwany mechanizm.
+
+## NOTA-ERRATUM (ANEKS_POSCIG-1 §3, 20.10.2026)
+
+Treść powyżej = litera (kanon §5 NIETKNIĘTY). Artefakt tranzientu teleportu
+w `gt_intruder` (`results/POSCIG_RECON/ERRATUM_DMIN.md`): w kampanii S2 flipy
+FAIL→PASS — V2 c05_s02 (porażka N6!) i c09_s02; B c09_s03 i c11_s02 (oba B-FAILe)
++ c11_s01 (B, epizod NIEWAŻNY — poza n_common, bez wpływu). **What-if obok litery
+(n_common=40): pass_B 38→40, pass_V2 31→33 ⇒ Δ_new2 7→7 (skład zmieniony);
+N6 3/6→4/6** — strefa opisowa bez zmiany progowej. Nota uczciwości: AKW-owa
+porażka c06_s04 też była artefaktowa, więc jej „konwersja" w tej kampanii nie była
+zasługą kwarantanny (mechanizm startu 14/14 bez zmian — mierzony kwarantanną,
+nie D6). Mapa rezyduum po erratum: Δ=7 = 6 akwizycja-transit + 2 near-missy
+omiatania + wariancja (`ANEKS_POSCIG-1.md` §6).

@@ -66,3 +66,18 @@ Nota diagnostyczna dla pozycji 3: nauczyciel skryptowy zawodzi wyłącznie na pr
 ## §7. d_min między sesjami (ANEKS-2 §2 R2)
 
 Jedna sesja — brak porównania międzysesyjnego. Nota boot-0 vs reshakeout b2 (~0.4 m ciaśniej) pozostaje diagnostyczna. Mediana d_min sesji = 7.678. Przyszłe sesje: dryf mediany W DÓŁ = sygnał STOP (nie próg per-boot).
+
+## NOTA-ERRATUM (ANEKS_POSCIG-1 §3, 20.10.2026)
+
+Treść powyżej = litera. Artefakt tranzientu teleportu w `gt_intruder`
+(`results/POSCIG_RECON/ERRATUM_DMIN.md`): **wszystkie 6 porażek D6 nauczyciela
+(blok1: c05_s01 boot11, c07_s02 boot5, c09_s02 boot6, c09_s03 boot11; blok2:
+c05_s08 b2b9, c09_s06 b2b17) to fałszywe FAIL-e `d_dmin`** — po filtrze-świadku
+d_min 7.18–7.71. **What-if obok litery: nauczyciel 114/120 → 120/120 (w tym 40/40
+na v=1.0); blok1 p_exec 44/48 → 48/48.** Klasa „proximity wejścia <3 s" NIE
+istnieje — kolumna `d_min_orbit` §„geometria" pokazywała prawdę już przy pisaniu
+raportu (7.597/7.703/7.288/7.176 = wartości po filtrze co do 0.001); nota
+diagnostyczna dla pozycji 3 (§6, „nauczyciel zawodzi na proximity wejścia
+c05/c07/c09") — bezprzedmiotowa; ocena P-BE3 („klasa = approach-d_min") opisywała
+artefakt przyrządu, nie geometrię. Korekta atrybucji: kanoniczna porażka c05_s01
+to boot11/attempt 2 (boot2/attempt 1 = requeue, epizod był PASS).

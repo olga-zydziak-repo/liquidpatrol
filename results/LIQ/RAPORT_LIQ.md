@@ -201,3 +201,17 @@ kierunek błędu.
 **Noga LIQ: CLOSED — W1′.** Budżet 27/31 bootów, 0 powtórek, 0 INVALID, 0 REFUSE,
 0 breach; kod repo nietknięty poza ratyfikowaną dopiską rejestru (S1). Push = Olga.
 Program wraca do trybu katalogu (ANEKS_LIQ-2 §7): warstwa 0 → 2a.
+
+## NOTA-ERRATUM (ANEKS_POSCIG-1 §3, 20.10.2026)
+
+Treść powyżej = litera (kanon W1′ NIETKNIĘTY). Artefakt tranzientu teleportu
+w `gt_intruder` (`results/POSCIG_RECON/ERRATUM_DMIN.md`): w ławce LIQ **9 flipów** —
+FAIL→PASS: NCP c07_s02(r5), c09_s02(r6), c11_s02(r6), c09_s03(r9), c10_s04(r12);
+GRU c05_s02(r5), c07_s02(r5), c09_s02(r6); **PASS→FAIL: GRU c11_s02(r6)**
+(fałszywe t_entry=0.0 ⇒ sweep 697.8° zamiast realnych 514.0° < 630 — fałszywy
+PASS). **What-if obok litery: NCP 43→48 (48/48!), GRU 27→29 ⇒ rozstęp 16→19 —
+werdykt W1′ (NCP > GRU) ODPORNY na erratum i WZMOCNIONY**; NCP po filtrze równa się
+i przewyższa kanon NET 45/48 (nota dryfu W0 do odczytu ze świadkiem). Wpis o
+„trudnej komórce c11_s02" (odsyłacze, RAPORT_W §2): FAIL NCP na ławce LIQ
+(b_frac+d_dmin) był w całości artefaktowy — po filtrze PASS; opis komórki jako
+trudnej pozostaje zasadny dla GRU (realny FAIL c_sweep po filtrze).

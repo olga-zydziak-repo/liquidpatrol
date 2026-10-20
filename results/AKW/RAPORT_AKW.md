@@ -150,3 +150,15 @@ dwie kampanie-wzorce (DET S4 + AKW S3) do trzeciego pomiaru parowanego, profil I
 FROZEN b94cdeae, cała ewaluacja (driver/parowanie/analyzer/bezpiecznik modu).
 Najkrótsza ścieżka od 34/48 do pytania „ile naprawdę zostało". Wybór nogi należy
 do trybu katalogu.
+
+## NOTA-ERRATUM (ANEKS_POSCIG-1 §3, 20.10.2026)
+
+Treść powyżej = litera (zdania zamrożone NIETKNIĘTE). Recon POŚCIG odkrył artefakt
+tranzientu teleportu w `gt_intruder` (pierwsze 1–2 próbki epizodu z pozą SPRZED
+teleportu — trzy twarze: fałszywe d_min / fałszywe t_entry→okno frac-sweep /
+interpolacja przez skok). Sweep świadka (`results/POSCIG_RECON/ERRATUM_DMIN.md`):
+w kampanii S3 **7 flipów** — FAIL→PASS: V2 c06_s04, c09_s02, c09_s03, c10_s03;
+B c09_s02, c11_s02; **PASS→FAIL: V2 c07_s01** (fałszywe t_entry=0.0 ⇒ sweep 703.3°
+zamiast realnych 619.9° < 630). **What-if obok litery: pass_B 46→48, pass_V2 34→37
+⇒ Δ_new 12→11 — ŚMIERĆ-AKW ODPORNA na erratum (11 ≥ 10).** Dekompozycja rezyduum
+po erratum i rozpuszczenie pozycji POŚCIG-V1: `ANEKS_POSCIG-1.md` §2/§6.
