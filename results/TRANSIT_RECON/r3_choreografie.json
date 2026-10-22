@@ -1,0 +1,2272 @@
+{
+ "progi": {
+  "dh": [
+   5.0,
+   18.0
+  ],
+  "drift_deg_kl": 5.0,
+  "win_s": 1.0,
+  "stozek": 43.45,
+  "dwell": 2.0,
+  "slew": 60.0,
+  "stare": 1.2
+ },
+ "min_360": {
+  "deadline_dh5_radial_v1_s": 10.0,
+  "min_forma_zamknieta": {
+   "t_end_s": 11.35,
+   "koniec_okna_s": 11.15,
+   "n": 4,
+   "step_opt_deg": 68.3
+  },
+  "tabela": [
+   {
+    "step_deg": 40,
+    "n_stare_po_dwell": 7,
+    "koniec_360_s": 15.07,
+    "koniec_okna_1s_najgorszego_azymutu_s": 14.87,
+    "klin_staly": false
+   },
+   {
+    "step_deg": 60,
+    "n_stare_po_dwell": 5,
+    "koniec_360_s": 13.0,
+    "koniec_okna_1s_najgorszego_azymutu_s": 12.8,
+    "klin_staly": false
+   },
+   {
+    "step_deg": 68.3,
+    "n_stare_po_dwell": 4,
+    "koniec_360_s": 11.35,
+    "koniec_okna_1s_najgorszego_azymutu_s": 11.15,
+    "klin_staly": false
+   },
+   {
+    "step_deg": 72,
+    "n_stare_po_dwell": 4,
+    "koniec_360_s": 11.6,
+    "koniec_okna_1s_najgorszego_azymutu_s": 11.4,
+    "klin_staly": false
+   },
+   {
+    "step_deg": 80,
+    "n_stare_po_dwell": 4,
+    "koniec_360_s": 12.13,
+    "koniec_okna_1s_najgorszego_azymutu_s": 11.93,
+    "klin_staly": false
+   },
+   {
+    "step_deg": 86.9,
+    "n_stare_po_dwell": 4,
+    "koniec_360_s": 12.59,
+    "koniec_okna_1s_najgorszego_azymutu_s": 12.39,
+    "klin_staly": false
+   },
+   {
+    "step_deg": 90,
+    "n_stare_po_dwell": 4,
+    "koniec_360_s": 12.8,
+    "koniec_okna_1s_najgorszego_azymutu_s": 12.6,
+    "klin_staly": true
+   },
+   {
+    "step_deg": 120,
+    "n_stare_po_dwell": 3,
+    "koniec_360_s": 11.6,
+    "koniec_okna_1s_najgorszego_azymutu_s": 11.4,
+    "klin_staly": true
+   }
+  ]
+ },
+ "revisit_max_gap_s": {
+  "CH0_40ccw": 13.9,
+  "CH90_90ccw": 34.0,
+  "CH90_baza45": 34.0,
+  "CH87_minimalny5": 12.0,
+  "CH180_naprzemienny": 32.0,
+  "CHFAN_wachlarz40": 30.1
+ },
+ "episodes": {
+  "c08_s03": {
+   "group": "T6",
+   "hz": 5.0,
+   "t_hold0": 0.0,
+   "t_star": 11.28,
+   "t_acq_real": 19.53,
+   "bearing": 0,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 20.8,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 8.6,
+       "t_do": 9.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        6.4,
+        5.4
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 5.2,
+       "t_do": 6.2,
+       "n_kl": 6,
+       "dh_od_do": [
+        9.8,
+        8.8
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  },
+  "c08_s04": {
+   "group": "T6",
+   "hz": 5.0,
+   "t_hold0": 0.0,
+   "t_star": 11.41,
+   "t_acq_real": 26.18,
+   "bearing": 0,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 26.2,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 8.6,
+       "t_do": 9.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        6.4,
+        5.4
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 5.2,
+       "t_do": 6.2,
+       "n_kl": 6,
+       "dh_od_do": [
+        9.8,
+        8.8
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  },
+  "c10_s02": {
+   "group": "T6",
+   "hz": 5.0,
+   "t_hold0": 0.0,
+   "t_star": 11.06,
+   "t_acq_real": 29.18,
+   "bearing": 180,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 8.4,
+       "t_do": 9.4,
+       "n_kl": 6,
+       "dh_od_do": [
+        6.6,
+        5.6
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 9.4,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 6.2,
+       "t_do": 7.2,
+       "n_kl": 6,
+       "dh_od_do": [
+        8.8,
+        7.8
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 7.2,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 29.0,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 6.2,
+       "t_do": 7.2,
+       "n_kl": 6,
+       "dh_od_do": [
+        8.8,
+        7.8
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 7.2,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [
+      {
+       "t_od": 5.0,
+       "t_do": 6.0,
+       "n_kl": 6,
+       "dh_od_do": [
+        10.0,
+        9.0
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 6.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 20.4,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  },
+  "c11_s02": {
+   "group": "T6",
+   "hz": 5.0,
+   "t_hold0": 0.0,
+   "t_star": 11.34,
+   "t_acq_real": 31.16,
+   "bearing": 270,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 30.0,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 9.0,
+       "t_do": 9.8,
+       "n_kl": 5,
+       "dh_od_do": [
+        6.0,
+        5.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 9.8,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 31.6,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 8.8,
+       "t_do": 9.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        6.2,
+        5.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 9.8,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 29.4,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 30.4,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  },
+  "c11_s03": {
+   "group": "T6",
+   "hz": 5.0,
+   "t_hold0": 0.01,
+   "t_star": 10.75,
+   "t_acq_real": 22.26,
+   "bearing": 270,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 22.41,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 9.01,
+       "t_do": 9.81,
+       "n_kl": 5,
+       "dh_od_do": [
+        6.0,
+        5.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 9.81,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 26.21,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 8.81,
+       "t_do": 9.81,
+       "n_kl": 6,
+       "dh_od_do": [
+        6.2,
+        5.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 9.81,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 25.21,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 33.61,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.01,
+       "t_do": 2.01,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.81,
+       "t_do": 3.81,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.01,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  },
+  "c11_s04": {
+   "group": "T6",
+   "hz": 5.0,
+   "t_hold0": 0.0,
+   "t_star": 10.91,
+   "t_acq_real": 25.1,
+   "bearing": 270,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 24.4,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 9.0,
+       "t_do": 9.8,
+       "n_kl": 5,
+       "dh_od_do": [
+        6.0,
+        5.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 9.8,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 26.2,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 8.8,
+       "t_do": 9.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        6.2,
+        5.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 9.8,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 25.2,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 23.0,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  },
+  "c08_s01": {
+   "group": "CTRL",
+   "hz": 14.29,
+   "t_hold0": 0.0,
+   "t_star": 35.0,
+   "t_acq_real": 1.28,
+   "bearing": 0,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 1.96,
+       "n_kl": 29,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.73,
+       "t_do": 3.85,
+       "n_kl": 17,
+       "dh_od_do": [
+        12.3,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 15.75,
+       "t_do": 16.86,
+       "n_kl": 17,
+       "dh_od_do": [
+        6.8,
+        7.8
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 30.72,
+       "t_do": 31.84,
+       "n_kl": 17,
+       "dh_od_do": [
+        14.8,
+        13.7
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 32.54,
+       "t_do": 33.73,
+       "n_kl": 18,
+       "dh_od_do": [
+        13.0,
+        11.8
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 1.96,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 1.96,
+       "n_kl": 29,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 19.73,
+       "t_do": 20.85,
+       "n_kl": 17,
+       "dh_od_do": [
+        10.5,
+        11.5
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 30.51,
+       "t_do": 31.63,
+       "n_kl": 17,
+       "dh_od_do": [
+        15.0,
+        13.9
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 1.96,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [
+      {
+       "t_od": 19.73,
+       "t_do": 20.85,
+       "n_kl": 17,
+       "dh_od_do": [
+        10.5,
+        11.5
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 30.51,
+       "t_do": 31.63,
+       "n_kl": 17,
+       "dh_od_do": [
+        15.0,
+        13.9
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 20.85,
+     "konwersja_geom": true,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 1.96,
+       "n_kl": 29,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 22.04,
+       "t_do": 23.16,
+       "n_kl": 17,
+       "dh_od_do": [
+        12.7,
+        13.8
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 32.61,
+       "t_do": 33.73,
+       "n_kl": 17,
+       "dh_od_do": [
+        12.9,
+        11.8
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 1.96,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 1.96,
+       "n_kl": 29,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 8.54,
+       "t_do": 9.73,
+       "n_kl": 18,
+       "dh_od_do": [
+        6.5,
+        5.3
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 28.2,
+       "t_do": 29.39,
+       "n_kl": 18,
+       "dh_od_do": [
+        17.3,
+        16.1
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 1.96,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 1.96,
+       "n_kl": 29,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.73,
+       "t_do": 3.85,
+       "n_kl": 17,
+       "dh_od_do": [
+        12.3,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 5.25,
+       "t_do": 6.37,
+       "n_kl": 17,
+       "dh_od_do": [
+        9.8,
+        8.6
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 1.96,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 1.96,
+       "n_kl": 29,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.73,
+       "t_do": 3.85,
+       "n_kl": 17,
+       "dh_od_do": [
+        12.3,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 15.75,
+       "t_do": 16.86,
+       "n_kl": 17,
+       "dh_od_do": [
+        6.8,
+        7.8
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 30.72,
+       "t_do": 31.84,
+       "n_kl": 17,
+       "dh_od_do": [
+        14.8,
+        13.7
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 32.54,
+       "t_do": 33.73,
+       "n_kl": 18,
+       "dh_od_do": [
+        13.0,
+        11.8
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 1.96,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  },
+  "c08_s02": {
+   "group": "CTRL",
+   "hz": 5.0,
+   "t_hold0": 0.0,
+   "t_star": 35.0,
+   "t_acq_real": 2.33,
+   "bearing": 0,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 30.8,
+       "t_do": 31.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        17.4,
+        16.4
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 32.6,
+       "t_do": 33.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        15.6,
+        14.6
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 19.8,
+       "t_do": 20.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        7.7,
+        8.7
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 30.6,
+       "t_do": 31.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        17.6,
+        16.6
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [
+      {
+       "t_od": 19.8,
+       "t_do": 20.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        7.7,
+        8.7
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 30.6,
+       "t_do": 31.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        17.6,
+        16.6
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 20.8,
+     "konwersja_geom": true,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 22.0,
+       "t_do": 23.0,
+       "n_kl": 6,
+       "dh_od_do": [
+        9.9,
+        10.9
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 32.6,
+       "t_do": 33.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        15.6,
+        14.6
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 8.6,
+       "t_do": 9.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        6.4,
+        5.4
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 20.6,
+       "t_do": 21.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        8.5,
+        9.5
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 28.4,
+       "t_do": 29.4,
+       "n_kl": 6,
+       "dh_od_do": [
+        16.2,
+        17.2
+       ],
+       "klasa": "CROSS"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 5.2,
+       "t_do": 6.2,
+       "n_kl": 6,
+       "dh_od_do": [
+        9.8,
+        8.8
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 30.8,
+       "t_do": 31.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        17.4,
+        16.4
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 32.6,
+       "t_do": 33.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        15.6,
+        14.6
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  },
+  "c09_s03": {
+   "group": "CTRL",
+   "hz": 3.85,
+   "t_hold0": 0.01,
+   "t_star": 35.0,
+   "t_acq_real": 6.56,
+   "bearing": 90,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 4.69,
+       "t_do": 5.72,
+       "n_kl": 5,
+       "dh_od_do": [
+        10.3,
+        9.3
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 6.5,
+       "t_do": 7.54,
+       "n_kl": 5,
+       "dh_od_do": [
+        8.5,
+        7.5
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 17.67,
+       "t_do": 18.71,
+       "n_kl": 5,
+       "dh_od_do": [
+        8.3,
+        9.2
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 19.49,
+       "t_do": 20.53,
+       "n_kl": 5,
+       "dh_od_do": [
+        9.9,
+        10.8
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 32.74,
+       "t_do": 33.52,
+       "n_kl": 4,
+       "dh_od_do": [
+        15.5,
+        14.7
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 5.72,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 3.65,
+       "t_do": 4.69,
+       "n_kl": 5,
+       "dh_od_do": [
+        11.4,
+        10.3
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 22.61,
+       "t_do": 23.39,
+       "n_kl": 4,
+       "dh_od_do": [
+        12.8,
+        13.2
+       ],
+       "klasa": "CROSS"
+      }
+     ],
+     "t_admit_pred": 4.69,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [
+      {
+       "t_od": 22.61,
+       "t_do": 23.39,
+       "n_kl": 4,
+       "dh_od_do": [
+        12.8,
+        13.2
+       ],
+       "klasa": "CROSS"
+      }
+     ],
+     "t_admit_pred": 23.39,
+     "konwersja_geom": true,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 3.65,
+       "t_do": 4.43,
+       "n_kl": 4,
+       "dh_od_do": [
+        11.4,
+        10.6
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 14.3,
+       "t_do": 15.07,
+       "n_kl": 4,
+       "dh_od_do": [
+        5.7,
+        6.2
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 32.74,
+       "t_do": 33.78,
+       "n_kl": 5,
+       "dh_od_do": [
+        15.5,
+        14.4
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 4.43,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [],
+     "t_admit_pred": null,
+     "konwersja_geom": false,
+     "klasa_1_okna": null
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [
+      {
+       "t_od": 8.58,
+       "t_do": 9.36,
+       "n_kl": 4,
+       "dh_od_do": [
+        6.4,
+        5.6
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 9.36,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.01,
+       "t_do": 1.83,
+       "n_kl": 8,
+       "dh_od_do": [
+        15.0,
+        13.2
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.87,
+       "t_do": 3.65,
+       "n_kl": 4,
+       "dh_od_do": [
+        12.1,
+        11.4
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 14.04,
+       "t_do": 15.07,
+       "n_kl": 5,
+       "dh_od_do": [
+        5.5,
+        6.2
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 15.85,
+       "t_do": 16.89,
+       "n_kl": 5,
+       "dh_od_do": [
+        6.8,
+        7.6
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 28.84,
+       "t_do": 29.88,
+       "n_kl": 5,
+       "dh_od_do": [
+        16.9,
+        17.7
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 30.92,
+       "t_do": 31.7,
+       "n_kl": 4,
+       "dh_od_do": [
+        17.3,
+        16.5
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 1.83,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  },
+  "c09_s04": {
+   "group": "CTRL",
+   "hz": 5.0,
+   "t_hold0": 0.0,
+   "t_star": 35.0,
+   "t_acq_real": 5.8,
+   "bearing": 90,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 4.6,
+       "t_do": 5.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        10.4,
+        9.4
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 6.4,
+       "t_do": 7.4,
+       "n_kl": 6,
+       "dh_od_do": [
+        8.6,
+        7.6
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 27.0,
+       "t_do": 28.0,
+       "n_kl": 6,
+       "dh_od_do": [
+        10.2,
+        11.1
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 29.0,
+       "t_do": 30.0,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.1,
+        12.7
+       ],
+       "klasa": "CROSS"
+      }
+     ],
+     "t_admit_pred": 5.6,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 3.6,
+       "t_do": 4.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        11.4,
+        10.4
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 28.0,
+       "t_do": 29.0,
+       "n_kl": 6,
+       "dh_od_do": [
+        11.1,
+        12.1
+       ],
+       "klasa": "CROSS"
+      }
+     ],
+     "t_admit_pred": 4.6,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [
+      {
+       "t_od": 28.0,
+       "t_do": 29.0,
+       "n_kl": 6,
+       "dh_od_do": [
+        11.1,
+        12.1
+       ],
+       "klasa": "CROSS"
+      }
+     ],
+     "t_admit_pred": 29.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 3.6,
+       "t_do": 4.6,
+       "n_kl": 6,
+       "dh_od_do": [
+        11.4,
+        10.4
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 30.0,
+       "t_do": 31.0,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.7,
+        12.3
+       ],
+       "klasa": "CROSS"
+      }
+     ],
+     "t_admit_pred": 4.6,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [],
+     "t_admit_pred": null,
+     "konwersja_geom": false,
+     "klasa_1_okna": null
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [
+      {
+       "t_od": 8.4,
+       "t_do": 9.6,
+       "n_kl": 7,
+       "dh_od_do": [
+        6.6,
+        5.4
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 23.8,
+       "t_do": 26.0,
+       "n_kl": 12,
+       "dh_od_do": [
+        7.2,
+        9.2
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 29.4,
+       "t_do": 30.4,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.5,
+        12.6
+       ],
+       "klasa": "CROSS"
+      }
+     ],
+     "t_admit_pred": 9.6,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 23.4,
+       "t_do": 24.4,
+       "n_kl": 6,
+       "dh_od_do": [
+        6.8,
+        7.8
+       ],
+       "klasa": "CROSS"
+      },
+      {
+       "t_od": 25.2,
+       "t_do": 26.2,
+       "n_kl": 6,
+       "dh_od_do": [
+        8.5,
+        9.4
+       ],
+       "klasa": "CROSS"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  },
+  "c10_s01": {
+   "group": "CTRL",
+   "hz": 7.69,
+   "t_hold0": 0.0,
+   "t_star": 23.0,
+   "t_acq_real": 9.34,
+   "bearing": 180,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 8.32,
+       "t_do": 9.36,
+       "n_kl": 9,
+       "dh_od_do": [
+        6.7,
+        5.6
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 9.36,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 6.24,
+       "t_do": 7.28,
+       "n_kl": 9,
+       "dh_od_do": [
+        8.8,
+        7.7
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 7.28,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [],
+     "t_admit_pred": null,
+     "konwersja_geom": false,
+     "klasa_1_okna": null
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 6.11,
+       "t_do": 7.28,
+       "n_kl": 10,
+       "dh_od_do": [
+        8.9,
+        7.7
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 7.28,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [
+      {
+       "t_od": 5.07,
+       "t_do": 6.11,
+       "n_kl": 9,
+       "dh_od_do": [
+        9.9,
+        8.9
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 6.11,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 33.68,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 1.95,
+       "n_kl": 16,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.73,
+       "t_do": 3.77,
+       "n_kl": 9,
+       "dh_od_do": [
+        12.3,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 1.95,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  },
+  "c10_s04": {
+   "group": "CTRL",
+   "hz": 5.0,
+   "t_hold0": 0.0,
+   "t_star": 21.06,
+   "t_acq_real": 9.6,
+   "bearing": 180,
+   "ch": {
+    "CH0_40ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 8.4,
+       "t_do": 9.4,
+       "n_kl": 6,
+       "dh_od_do": [
+        6.6,
+        5.6
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 9.4,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_90ccw": {
+     "okna_do_t_star": [
+      {
+       "t_od": 6.2,
+       "t_do": 7.2,
+       "n_kl": 6,
+       "dh_od_do": [
+        8.8,
+        7.8
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 7.2,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH90_baza45": {
+     "okna_do_t_star": [
+      {
+       "t_od": 19.8,
+       "t_do": 20.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        5.0,
+        6.0
+       ],
+       "klasa": "CROSS"
+      }
+     ],
+     "t_admit_pred": 20.8,
+     "konwersja_geom": true,
+     "klasa_1_okna": "CROSS"
+    },
+    "CH87_minimalny5": {
+     "okna_do_t_star": [
+      {
+       "t_od": 6.2,
+       "t_do": 7.2,
+       "n_kl": 6,
+       "dh_od_do": [
+        8.8,
+        7.8
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 7.2,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CH180_naprzemienny": {
+     "okna_do_t_star": [
+      {
+       "t_od": 5.0,
+       "t_do": 6.0,
+       "n_kl": 6,
+       "dh_od_do": [
+        10.0,
+        9.0
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 6.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    },
+    "CHFAN_wachlarz40": {
+     "okna_do_t_star": [],
+     "t_admit_pred": 33.6,
+     "konwersja_geom": false,
+     "klasa_1_okna": "CROSS"
+    },
+    "CHA_ORACLE": {
+     "okna_do_t_star": [
+      {
+       "t_od": 0.0,
+       "t_do": 2.0,
+       "n_kl": 11,
+       "dh_od_do": [
+        15.0,
+        13.0
+       ],
+       "klasa": "RADIAL"
+      },
+      {
+       "t_od": 2.8,
+       "t_do": 3.8,
+       "n_kl": 6,
+       "dh_od_do": [
+        12.2,
+        11.2
+       ],
+       "klasa": "RADIAL"
+      }
+     ],
+     "t_admit_pred": 2.0,
+     "konwersja_geom": true,
+     "klasa_1_okna": "RADIAL"
+    }
+   }
+  }
+ },
+ "orbit": {
+  "c08_s03": [
+   {
+    "r": 2.0,
+    "v": 0.5,
+    "dmin_fazowo_min": 1.18,
+    "dmin_fazowo_med": 3.89,
+    "dmin_fazowo_max": 5.15,
+    "frakcja_faz_dmin_ge_4": 0.46
+   },
+   {
+    "r": 3.0,
+    "v": 0.75,
+    "dmin_fazowo_min": 0.3,
+    "dmin_fazowo_med": 4.54,
+    "dmin_fazowo_max": 6.14,
+    "frakcja_faz_dmin_ge_4": 0.5
+   }
+  ],
+  "c08_s04": [
+   {
+    "r": 2.0,
+    "v": 0.5,
+    "dmin_fazowo_min": 0.12,
+    "dmin_fazowo_med": 1.37,
+    "dmin_fazowo_max": 2.0,
+    "frakcja_faz_dmin_ge_4": 0.0
+   },
+   {
+    "r": 3.0,
+    "v": 0.75,
+    "dmin_fazowo_min": 0.12,
+    "dmin_fazowo_med": 1.72,
+    "dmin_fazowo_max": 3.0,
+    "frakcja_faz_dmin_ge_4": 0.0
+   }
+  ],
+  "c10_s02": [
+   {
+    "r": 2.0,
+    "v": 0.5,
+    "dmin_fazowo_min": 0.09,
+    "dmin_fazowo_med": 2.3,
+    "dmin_fazowo_max": 3.18,
+    "frakcja_faz_dmin_ge_4": 0.0
+   },
+   {
+    "r": 3.0,
+    "v": 0.75,
+    "dmin_fazowo_min": 0.3,
+    "dmin_fazowo_med": 3.18,
+    "dmin_fazowo_max": 4.18,
+    "frakcja_faz_dmin_ge_4": 0.21
+   }
+  ],
+  "c11_s02": [
+   {
+    "r": 2.0,
+    "v": 0.5,
+    "dmin_fazowo_min": 0.12,
+    "dmin_fazowo_med": 1.42,
+    "dmin_fazowo_max": 1.93,
+    "frakcja_faz_dmin_ge_4": 0.0
+   },
+   {
+    "r": 3.0,
+    "v": 0.75,
+    "dmin_fazowo_min": 0.19,
+    "dmin_fazowo_med": 1.87,
+    "dmin_fazowo_max": 2.75,
+    "frakcja_faz_dmin_ge_4": 0.0
+   }
+  ],
+  "c11_s03": [
+   {
+    "r": 2.0,
+    "v": 0.5,
+    "dmin_fazowo_min": 0.12,
+    "dmin_fazowo_med": 1.37,
+    "dmin_fazowo_max": 2.0,
+    "frakcja_faz_dmin_ge_4": 0.0
+   },
+   {
+    "r": 3.0,
+    "v": 0.75,
+    "dmin_fazowo_min": 0.12,
+    "dmin_fazowo_med": 1.87,
+    "dmin_fazowo_max": 3.0,
+    "frakcja_faz_dmin_ge_4": 0.0
+   }
+  ],
+  "c11_s04": [
+   {
+    "r": 2.0,
+    "v": 0.5,
+    "dmin_fazowo_min": 0.05,
+    "dmin_fazowo_med": 0.68,
+    "dmin_fazowo_max": 3.14,
+    "frakcja_faz_dmin_ge_4": 0.0
+   },
+   {
+    "r": 3.0,
+    "v": 0.75,
+    "dmin_fazowo_min": 0.05,
+    "dmin_fazowo_med": 1.39,
+    "dmin_fazowo_max": 3.21,
+    "frakcja_faz_dmin_ge_4": 0.0
+   }
+  ]
+ },
+ "podsumowanie": {
+  "CH0_40ccw": {
+   "T6_geom": 3,
+   "T6_radial_only": 3,
+   "CTRL_admit": 6,
+   "CTRL_pozniej_niz_real": 0
+  },
+  "CH90_90ccw": {
+   "T6_geom": 6,
+   "T6_radial_only": 6,
+   "CTRL_admit": 6,
+   "CTRL_pozniej_niz_real": 0
+  },
+  "CH90_baza45": {
+   "T6_geom": 0,
+   "T6_radial_only": 0,
+   "CTRL_admit": 5,
+   "CTRL_pozniej_niz_real": 5
+  },
+  "CH87_minimalny5": {
+   "T6_geom": 6,
+   "T6_radial_only": 6,
+   "CTRL_admit": 6,
+   "CTRL_pozniej_niz_real": 0
+  },
+  "CH180_naprzemienny": {
+   "T6_geom": 3,
+   "T6_radial_only": 3,
+   "CTRL_admit": 4,
+   "CTRL_pozniej_niz_real": 0
+  },
+  "CHFAN_wachlarz40": {
+   "T6_geom": 2,
+   "T6_radial_only": 2,
+   "CTRL_admit": 6,
+   "CTRL_pozniej_niz_real": 4
+  },
+  "CHA_ORACLE": {
+   "T6_geom": 6,
+   "T6_radial_only": 6,
+   "CTRL_admit": 6,
+   "CTRL_pozniej_niz_real": 0
+  }
+ }
+}

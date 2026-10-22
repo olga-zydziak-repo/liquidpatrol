@@ -1,0 +1,612 @@
+{
+ "metoda": "feas_one POSCIG R1 (ogon; prefix=realne GT drona; s\u0119dzia FROZEN 8ec0fcfb na manife\u015bcie \u2014 \u015bwiadek erratum w R1 obok)",
+ "episodes": [
+  {
+   "sid": "c08_s03",
+   "group": "T6",
+   "v_intr": 1.0,
+   "t_acq_real_s": 19.53,
+   "t_star_s": 11.28,
+   "at_t_star": {
+    "d_min_m": 4.024,
+    "sweep": 665.6,
+    "frac": 0.9347,
+    "t_entry": 5.964
+   },
+   "pierwszy_FAIL_po_s": 11.31,
+   "wyspy_PASS_po": [],
+   "deficyt_akwizycji_s": 8.25,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": false,
+    "fail_reasons": [
+     "c_sweep",
+     "d_dmin"
+    ],
+    "d_min_m": 3.478
+   }
+  },
+  {
+   "sid": "c08_s04",
+   "group": "T6",
+   "v_intr": 1.0,
+   "t_acq_real_s": 26.18,
+   "t_star_s": 11.41,
+   "at_t_star": {
+    "d_min_m": 4.026,
+    "sweep": 662.2,
+    "frac": 0.9306,
+    "t_entry": 6.088
+   },
+   "pierwszy_FAIL_po_s": 11.44,
+   "wyspy_PASS_po": [],
+   "deficyt_akwizycji_s": 14.77,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "d_dmin"
+    ],
+    "d_min_m": 1.632
+   }
+  },
+  {
+   "sid": "c10_s02",
+   "group": "T6",
+   "v_intr": 1.0,
+   "t_acq_real_s": 29.18,
+   "t_star_s": 11.06,
+   "at_t_star": {
+    "d_min_m": 4.035,
+    "sweep": 667.9,
+    "frac": 0.936,
+    "t_entry": 5.92
+   },
+   "pierwszy_FAIL_po_s": 11.09,
+   "wyspy_PASS_po": [],
+   "deficyt_akwizycji_s": 18.12,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "c_sweep",
+     "d_dmin"
+    ],
+    "d_min_m": 1.808
+   }
+  },
+  {
+   "sid": "c11_s02",
+   "group": "T6",
+   "v_intr": 1.0,
+   "t_acq_real_s": 31.16,
+   "t_star_s": 11.34,
+   "at_t_star": {
+    "d_min_m": 4.0,
+    "sweep": 665.4,
+    "frac": 0.9322,
+    "t_entry": 6.108
+   },
+   "pierwszy_FAIL_po_s": 11.38,
+   "wyspy_PASS_po": [],
+   "deficyt_akwizycji_s": 19.82,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "d_dmin"
+    ],
+    "d_min_m": 1.565
+   }
+  },
+  {
+   "sid": "c11_s03",
+   "group": "T6",
+   "v_intr": 1.0,
+   "t_acq_real_s": 22.26,
+   "t_star_s": 10.75,
+   "at_t_star": {
+    "d_min_m": 4.017,
+    "sweep": 672.0,
+    "frac": 0.9425,
+    "t_entry": 5.884
+   },
+   "pierwszy_FAIL_po_s": 10.78,
+   "wyspy_PASS_po": [],
+   "deficyt_akwizycji_s": 11.51,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "d_dmin"
+    ],
+    "d_min_m": 0.444
+   }
+  },
+  {
+   "sid": "c11_s04",
+   "group": "T6",
+   "v_intr": 1.0,
+   "t_acq_real_s": 25.1,
+   "t_star_s": 10.91,
+   "at_t_star": {
+    "d_min_m": 4.008,
+    "sweep": 671.2,
+    "frac": 0.9401,
+    "t_entry": 5.904
+   },
+   "pierwszy_FAIL_po_s": 10.94,
+   "wyspy_PASS_po": [],
+   "deficyt_akwizycji_s": 14.19,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": false,
+    "fail_reasons": [
+     "b_frac",
+     "d_dmin"
+    ],
+    "d_min_m": 1.002
+   }
+  },
+  {
+   "sid": "c08_s01",
+   "group": "CTRL",
+   "v_intr": 1.0,
+   "t_acq_real_s": 1.28,
+   "t_star_s": 35.0,
+   "at_t_star": {
+    "d_min_m": 7.007,
+    "sweep": 809.9,
+    "frac": 1.0,
+    "t_entry": 3.732
+   },
+   "pierwszy_FAIL_po_s": null,
+   "wyspy_PASS_po": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    2.5,
+    3.0,
+    3.5,
+    4.0,
+    4.5,
+    5.0,
+    5.5,
+    6.0,
+    6.5,
+    7.0,
+    7.5,
+    8.0,
+    8.5,
+    9.0,
+    9.5,
+    10.0,
+    10.5,
+    11.0,
+    11.5,
+    12.0,
+    12.5,
+    13.0,
+    13.5,
+    14.0,
+    14.5,
+    15.0,
+    15.5,
+    16.0,
+    16.5,
+    17.0,
+    17.5,
+    18.0,
+    18.5,
+    19.0,
+    19.5,
+    20.0,
+    20.5,
+    21.0,
+    21.5,
+    22.0,
+    22.5,
+    23.0,
+    23.5,
+    24.0,
+    24.5,
+    25.0,
+    25.5,
+    26.0,
+    26.5,
+    27.0,
+    27.5,
+    28.0,
+    28.5,
+    29.0,
+    29.5,
+    30.0,
+    30.5,
+    31.0,
+    31.5,
+    32.0,
+    32.5,
+    33.0,
+    33.5,
+    34.0,
+    34.5,
+    35.0
+   ],
+   "deficyt_akwizycji_s": -33.72,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 8.209
+   }
+  },
+  {
+   "sid": "c08_s02",
+   "group": "CTRL",
+   "v_intr": 1.0,
+   "t_acq_real_s": 2.33,
+   "t_star_s": 35.0,
+   "at_t_star": {
+    "d_min_m": 6.661,
+    "sweep": 729.1,
+    "frac": 0.9431,
+    "t_entry": 4.468
+   },
+   "pierwszy_FAIL_po_s": null,
+   "wyspy_PASS_po": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    2.5,
+    3.0,
+    3.5,
+    4.0,
+    4.5,
+    5.0,
+    5.5,
+    6.0,
+    6.5,
+    7.0,
+    7.5,
+    8.0,
+    8.5,
+    9.0,
+    9.5,
+    10.0,
+    10.5,
+    11.0,
+    11.5,
+    12.0,
+    12.5,
+    13.0,
+    13.5,
+    14.0,
+    14.5,
+    15.0,
+    15.5,
+    16.0,
+    16.5,
+    17.0,
+    17.5,
+    18.0,
+    18.5,
+    19.0,
+    19.5,
+    20.0,
+    20.5,
+    21.0,
+    21.5,
+    22.0,
+    22.5,
+    23.0,
+    23.5,
+    24.0,
+    24.5,
+    25.0,
+    25.5,
+    26.0,
+    26.5,
+    27.0,
+    27.5,
+    28.0,
+    28.5,
+    29.0,
+    29.5,
+    30.0,
+    30.5,
+    31.0,
+    31.5,
+    32.0,
+    32.5,
+    33.0,
+    33.5,
+    34.0,
+    34.5,
+    35.0
+   ],
+   "deficyt_akwizycji_s": -32.67,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 8.198
+   }
+  },
+  {
+   "sid": "c09_s03",
+   "group": "CTRL",
+   "v_intr": 1.0,
+   "t_acq_real_s": 6.56,
+   "t_star_s": 35.0,
+   "at_t_star": {
+    "d_min_m": 6.533,
+    "sweep": 696.5,
+    "frac": 1.0,
+    "t_entry": 5.86
+   },
+   "pierwszy_FAIL_po_s": null,
+   "wyspy_PASS_po": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    2.5,
+    3.0,
+    3.5,
+    4.0,
+    4.5,
+    5.0,
+    5.5,
+    6.0,
+    6.5,
+    7.0,
+    7.5,
+    8.0,
+    8.5,
+    9.0,
+    9.5,
+    10.0,
+    10.5,
+    11.0,
+    11.5,
+    12.0,
+    12.5,
+    13.0,
+    13.5,
+    14.0,
+    14.5,
+    15.0,
+    15.5,
+    16.0,
+    16.5,
+    17.0,
+    17.5,
+    18.0,
+    18.5,
+    19.0,
+    19.5,
+    20.0,
+    20.5,
+    21.0,
+    21.5,
+    22.0,
+    22.5,
+    23.0,
+    23.5,
+    24.0,
+    24.5,
+    25.0,
+    25.5,
+    26.0,
+    26.5,
+    27.0,
+    27.5,
+    28.0,
+    28.5,
+    29.0,
+    29.5,
+    30.0,
+    30.5,
+    31.0,
+    31.5,
+    32.0,
+    32.5,
+    33.0,
+    33.5,
+    34.0,
+    34.5,
+    35.0
+   ],
+   "deficyt_akwizycji_s": -28.44,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 8.198
+   }
+  },
+  {
+   "sid": "c09_s04",
+   "group": "CTRL",
+   "v_intr": 1.0,
+   "t_acq_real_s": 5.8,
+   "t_star_s": 35.0,
+   "at_t_star": {
+    "d_min_m": 7.036,
+    "sweep": 712.7,
+    "frac": 1.0,
+    "t_entry": 6.036
+   },
+   "pierwszy_FAIL_po_s": null,
+   "wyspy_PASS_po": [
+    0.0,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    2.5,
+    3.0,
+    3.5,
+    4.0,
+    4.5,
+    5.0,
+    5.5,
+    6.0,
+    6.5,
+    7.0,
+    7.5,
+    8.0,
+    8.5,
+    9.0,
+    9.5,
+    10.0,
+    10.5,
+    11.0,
+    11.5,
+    12.0,
+    12.5,
+    13.0,
+    13.5,
+    14.0,
+    14.5,
+    15.0,
+    15.5,
+    16.0,
+    16.5,
+    17.0,
+    17.5,
+    18.0,
+    18.5,
+    19.0,
+    19.5,
+    20.0,
+    20.5,
+    21.0,
+    21.5,
+    22.0,
+    22.5,
+    23.0,
+    23.5,
+    24.0,
+    24.5,
+    25.0,
+    25.5,
+    26.0,
+    26.5,
+    27.0,
+    27.5,
+    28.0,
+    28.5,
+    29.0,
+    29.5,
+    30.0,
+    30.5,
+    31.0,
+    31.5,
+    32.0,
+    32.5,
+    33.0,
+    33.5,
+    34.0,
+    34.5,
+    35.0
+   ],
+   "deficyt_akwizycji_s": -29.2,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 8.178
+   }
+  },
+  {
+   "sid": "c10_s01",
+   "group": "CTRL",
+   "v_intr": 1.0,
+   "t_acq_real_s": 9.34,
+   "t_star_s": 23.0,
+   "at_t_star": {
+    "d_min_m": 4.941,
+    "sweep": 630.1,
+    "frac": 0.9553,
+    "t_entry": 6.036
+   },
+   "pierwszy_FAIL_po_s": 23.03,
+   "wyspy_PASS_po": [],
+   "deficyt_akwizycji_s": -13.66,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 5.678
+   }
+  },
+  {
+   "sid": "c10_s04",
+   "group": "CTRL",
+   "v_intr": 1.0,
+   "t_acq_real_s": 9.6,
+   "t_star_s": 21.06,
+   "at_t_star": {
+    "d_min_m": 4.974,
+    "sweep": 630.1,
+    "frac": 0.9539,
+    "t_entry": 5.996
+   },
+   "pierwszy_FAIL_po_s": 21.09,
+   "wyspy_PASS_po": [],
+   "deficyt_akwizycji_s": -11.46,
+   "intercept_w_t_star": {
+    "success_D6": true,
+    "fail_reasons": []
+   },
+   "sim_od_t_acq_real": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 5.67
+   }
+  }
+ ]
+}
