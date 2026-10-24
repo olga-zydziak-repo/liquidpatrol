@@ -149,6 +149,10 @@ zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasad
   ANEKS_FANTOM-2 §5: booty kupują wyłącznie informację zmieniającą werdykty).
   **NOTA (20.10, ANEKS_POSCIG-1 §5): łańcuch Δ 34→12→7 — z erratum DMIN:
   what-ify obok liter (35→11→7), `results/POSCIG_RECON/ERRATUM_DMIN.md`.**
+  **NOTA (25.10, ANEKS_TRANSIT-1 §2): rezyduum kamery (33/40 po erratum) jest od
+  tego aneksu w całości rozliczone — zdanie kanoniczne sufitu profilu misji
+  w dopisku CO-TRANSIT poniżej (`ANEKS_TRANSIT-1.md` §2,
+  `results/TRANSIT_RECON/RECON_TRANSIT.md`).**
 
 ## Dopisek stanu katalogu — 20.10.2026 (CO-POSCIG, ANEKS_POSCIG-1 §5)
 
@@ -174,6 +178,50 @@ zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasad
   priorytet). Utwardzenie u źródła: czystość pierwszych próbek gt_intruder (start
   logowania po świeżości bufora); wymaga zgody na dotyk frozen bencha /
   intruder_motion ⇒ własny łańcuch z FREEZE. Do tego czasu filtr-świadek wystarcza.
+
+## Dopisek stanu katalogu — 25.10.2026 (CO-TRANSIT, ANEKS_TRANSIT-1 §2/§3)
+
+- **AKW-TRANSIT** → **CLOSED-BY-RECON (zmierzony sufit profilu misji)** (0 bootów,
+  1 sesja deskowa + CO — czwarte rozstrzygnięcie kierunku deskiem): sufit o trzech
+  składowych, każda przybita do rzeczy zamrożonej — (1) admisja, nie pokrycie:
+  klasa (ii) 6/6, koincydencja central∧MTI @5 Hz to zmierzona loteria (4/7),
+  @14 Hz pewnik; (2) strefa martwa dh<5.01 m i pas admisji [5,18] m = odbicie
+  korpusu etykiet, cel radialny opuszcza pas o t=10.0 s; (3) przegląd perymetru
+  w nietykalnych kończy okno najgorszego azymutu ≥11.15 s > 10.0 s i > t\*
+  w 3/6 — nie istnieje choreografia skanu bez prioru gwarantująca okno
+  admitowalne (CH90/CH87 „6/6" = overfit do korytarzy siatki: stres +45° 0/6
+  + regresja 5/6 kontroli). Sonda R5(iii) ODRZUCONA (rachunku sufitu żadna stopa
+  nie uchyla). Werdykt i dowody: `ANEKS_TRANSIT-1.md` §2,
+  `results/TRANSIT_RECON/RECON_TRANSIT.md`.
+  **Zdanie kanoniczne (do cytowań):** „Z 7 pozostałych par kamery: 6 to zmierzony
+  sufit PROFILU MISJI — zawis na home + separacja ≥4 m + cel przecinający dysk,
+  przy zamrożonej percepcji i reżimie skanu — o trzech składowych (deterministyczny
+  najazd generatora; loteria admisji czołowej @5 Hz / strefa martwa dh<5; przegląd
+  perymetru 11.15 s > pas admisji 10.0 s); 1 to wariancja pościgu na komórce
+  granicznej. Podniesienie sufitu wymaga dotknięcia rzeczy zamrożonych — to
+  pozycja PERCEPCJA-II, nie choreografia."
+- **PERCEPCJA-II (admisja niezawodna / daleki wzrok)** — NOWA pozycja katalogu
+  (ANEKS_TRANSIT-1 §3; flaga **[MECHANIZM ZMIERZONY / DŹWIGNIE NIEZMIERZONE]**).
+  Jedyny następca realnie podnoszący sufit, bo adresuje jego zamrożone składowe —
+  nowa era percepcji z własnym FREEZE (wzór nogi DET). **Mechanizm ZMIERZONY**
+  (recon TRANSIT, poziom klatki): koincydencja central∧MTI @5 Hz ma margines
+  ~2 klatek na cały łańcuch (k=3 + persystencja 3/4 + warmup), @14.3 Hz działa
+  w setkach; pas admisji [5,18] m = odbicie korpusu etykiet (97% w 5–10 m,
+  max 14.9). **Dźwignie nazwane, NIEZMIERZONE** (recon zaczyna od ich pomiaru):
+  (a) podłoga kadencji percepcji — skąd mody 5.10/7.58/14.71 Hz i co kosztuje
+  gwarancja ≥10 Hz (tor percep_proc / compute, nie progi admisji);
+  (b) persystencja MTI nad celem czołowym (residuum derotacji pod
+  diff_thr/min_area — progi dziś FROZEN); (c) zasięg i rozdzielczość: krzywa
+  P(detekcja|Z) na istniejących klatkach (desk, zero lotów), potem ewentualnie
+  rozdzielczość sensora / korpus dystansowy / imgsz — detektor-v3 pod nową nazwą,
+  taśma etykiet projektowych działa na każdej odległości za darmo.
+  **Zbieżności (jawnie):** TRANSIT (podniesienie sufitu 6 par), daleki wzrok
+  i rozpoznawanie WABIKÓW (ta sama dźwignia rozdzielczości/korpusu), przyszłe
+  sim-to-real (szum realnej kamery w tym samym torze). **Trigger:** przed
+  roszczeniem pełnej siatki v=1.0 ponad dzisiejszy sufit albo przed jakimkolwiek
+  wątkiem wymagającym detekcji >15 m (wabiki, dystans). Aktywa: r1_anatomia
+  (klatka po klatce), progi empiryczne (podłoga dh 5.01, dryf p99 5°/kl), stopa
+  loterii 4/7, korpus Z-stats, T6 jako zbiór odniesienia.
 
 ## Backlog §8 (bez zmian, porządkowe)
 
