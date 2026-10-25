@@ -1,0 +1,9 @@
+[run_boot b5] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b5] watchdog EKF2 (preflight-only, max 2 reinity) pid=70274
+model_in_state=1
+[run_boot b5] settle 90s preflight EKF
+harness/run_boot.sh: line 152: 70273 Aborted                 (core dumped) setsid nohup python3 -m acts.rtf_sampler --world "$WORLD" --out "$OUTDIR/rtf_stream.jsonl" > "$OUTDIR/rtf_sampler.log" 2>&1
+[bench_finalize] manifest.json boot=5 n_episodes=4 valid_V2p=4 success_D6=1 n_demo=6406
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b5] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/PERC2/s2/bB_c1011

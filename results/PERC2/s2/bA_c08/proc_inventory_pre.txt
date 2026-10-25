@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       64763 22.2  0.0 330892 14152 ?        Sl   20:00   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       64756  2.7  0.0   5028  3712 ?        S    20:00   0:00 bash harness/run_boot.sh
+olga        1170  1.7  1.5 74737732 500912 pts/0 Sl+  15:59   4:10 claude --continue
+root         226  0.1  0.2 3290460 68968 ?       Ssl  15:59   0:19 /usr/bin/containerd
+root         346  0.1  0.3 9586676 97612 ?       Ssl  15:59   0:14 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         857  0.0  0.0 1233872 12360 ?       Sl   15:59   0:09 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+olga       64338  0.0  0.0   5028  3876 ?        S    19:59   0:00 bash results/PERC2/tools/perc2_s2_boot.sh 4 bA_c08 8,20,32,44
+dnsmasq      881  0.0  0.0 216768 28596 ?        Ss   15:59   0:01 postgres
+root           1  0.0  0.0  21872 13284 ?        Ss   15:59   0:00 /sbin/init
+root         997  0.0  0.0   3200  1248 ?        S    15:59   0:00 /init
+polkitd      183  0.0  0.0 308188  8092 ?        Ssl  15:59   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          86  0.0  0.0  26012  7092 ?        Ss   15:59   0:00 /usr/lib/systemd/systemd-udevd
+root          40  0.0  0.0  66868 17892 ?        S<s  15:59   0:00 /usr/lib/systemd/systemd-journald
+dnsmasq      985  0.0  0.0 216924  7208 ?        Ss   15:59   0:00 postgres: background writer 
+root         242  0.0  0.0 107064 23204 ?        Ssl  15:59   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+dnsmasq      990  0.0  0.0 216768 10132 ?        Ss   15:59   0:00 postgres: walwriter 
+systemd+     121  0.0  0.0  21352 13208 ?        Ss   15:59   0:00 /usr/lib/systemd/systemd-resolved
+syslog       211  0.0  0.0 222524  6064 ?        Ssl  15:59   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         210  0.0  0.0  17400  6376 ?        Ss   15:59   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev

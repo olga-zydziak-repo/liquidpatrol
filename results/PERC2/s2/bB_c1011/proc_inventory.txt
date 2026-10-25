@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       69556 12.1  0.0 330892 14148 ?        Sl   20:14   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       69549  3.0  0.0   5028  3724 ?        S    20:14   0:00 bash harness/run_boot.sh
+olga        1170  2.0  1.5 74743332 501436 pts/0 Sl+  15:59   5:09 claude --continue
+root         226  0.1  0.2 3290460 68904 ?       Ssl  15:59   0:20 /usr/bin/containerd
+root         346  0.1  0.2 9586676 96664 ?       Ssl  15:59   0:15 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         857  0.0  0.0 1233872 12336 ?       Sl   15:59   0:09 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      881  0.0  0.0 216768 28596 ?        Ss   15:59   0:01 postgres
+root       67695  0.0  0.0 1756636 11788 ?       Ssl  20:07   0:00 /usr/libexec/wsl-pro-service
+olga       68885  0.0  0.0   5028  3848 ?        S    20:11   0:00 bash results/PERC2/tools/perc2_s2_boot.sh 5 bB_c1011 22,23,35,47
+root         997  0.0  0.0   3200  1248 ?        S    15:59   0:00 /init
+root           1  0.0  0.0  21872 13288 ?        Ss   15:59   0:00 /sbin/init
+polkitd      183  0.0  0.0 308188  8092 ?        Ssl  15:59   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          40  0.0  0.0  66868 17960 ?        S<s  15:59   0:00 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26012  7092 ?        Ss   15:59   0:00 /usr/lib/systemd/systemd-udevd
+olga       64385  0.0  0.0 1307916 6788 ?        S    19:59   0:00 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered sonda preflight|SONDA FAIL|PIN|ODMOWA|ENV-BLOCK|nie wstał|wrapper rc|DONE rc
+dnsmasq      985  0.0  0.0 216924  7208 ?        Ss   15:59   0:00 postgres: background writer 
+root         242  0.0  0.0 107064 23204 ?        Ssl  15:59   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+dnsmasq      990  0.0  0.0 216768 10132 ?        Ss   15:59   0:00 postgres: walwriter 
+systemd+     121  0.0  0.0  21352 13208 ?        Ss   15:59   0:00 /usr/lib/systemd/systemd-resolved
