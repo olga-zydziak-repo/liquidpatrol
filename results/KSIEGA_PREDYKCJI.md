@@ -305,3 +305,35 @@ opóźnienia akwizycji** — DET-PASS c08 przy akwizycji ~0 s nie dowodzi pości
 akwizycji 5 s (stąd przestrzał P-F-2 mimo zmierzonej dźwigni startu);
 (b) **predykcje o ramionach formułować jako WSKAŹNIKI albo warunkowo na n_common**,
 nigdy jako liczności bezwzględne — mianownik może skurczyć się narzędziowo (P-F-4).
+
+## NOGA PERCEPCJA-II ścieżka (i) OPS-KADENCJA — ROZLICZONE przy CO-PERC2 (ANEKS_PERC2-2 §3, 26.10.2026)
+Prerejestrowane 25.10.2026 (`PRE_PERC2.md` §4; ratyfikacja 25.10, sha PRE
+24369ed9…1d9e21); dźwignia kadencja→admisja ZMIERZONA deskiem (model DP +
+kotwica c08_s01) — bez korekty głębokiej; remedium stanu hosta było
+nazwane-niezmierzone ⇒ cięcie głębokie na P-P2-1 (0.60) per reguła ANEKS_AKW-3 §5:
+- **P-P2-1 ✓:** istnieje remedium ops dające k=1 stabilnie (p 0.60) — profil
+  FastDDS SHM 16 MB + bufory UDP 4 MB (`results/PERC2/FREEZE_PERC2_OPS.md`;
+  S1 3/≤4 bootów, sonda PASS 40/90/35 s). Nota: mechanizm INNY niż teza —
+  klatki gubił TRANSPORT DDS, nie GPU (`results/PERC2/RAPORT_PERC2_S1.md` §3);
+  cięcie głębokie na nazwanym-niezmierzonym remedium było zasadne.
+- **P-P2-2 ✓:** @k=1 admisja okien czołowych T6 w ≥5/6 (p 0.70) — wyszło
+  **6/6** (runy 4–1084; `results/PERC2/RAPORT_PERC2_S2.md` §2).
+- **P-P2-3 ✓ z kwalifikatorem:** oba c08 (s03, s04) przechodzą D6 @k=1 (p 0.60)
+  — TAK rachunkiem erratum (GT manifest, świadek obok; d_min 5.613/6.733,
+  t_acq 0.10–0.31 s); litera pokładowa dała F przez artefakt tranzientu
+  teleportu (1.251/0.557) — flip odtworzony niezależnie przez CC z surowych
+  plików (ANEKS_PERC2-2 §1; reguła ERRATUM-DMIN).
+- **P-P2-4 ✓:** breach 0 / REFUSE 0 w całej nodze (p 0.85) — 0/0 (S1 bez
+  uzbrojeń; S2: 2 booty uzbrojone, 8/8 epizodów ważnych).
+- **P-P2-5 ✓:** sonda jako predyktor (p 0.65) — 2/2 bootów po PASS sondy
+  trzymało k=1 w locie (dt_p50 0.064–0.068, frac>0.10 = 0.0 we wszystkich
+  8 epizodach; zero spadków po PASS).
+
+**Suma nogi PERCEPCJA-II (i): 5 ✓ / 0 ✗.** Kalibracja CC (ANEKS_PERC2-2 §3,
+dwa wpisy): (a) **dźwignię prerejestrować ODDZIELNIE od atrybucji mechanizmu**
+— tu dźwignia (k=1 środkami ops) przeżyła falsyfikację własnej tezy
+mechanizmowej (GPU→transport DDS) i to jest wzór, nie wyjątek;
+(b) **progi narzędziowe projektować jako pary tendencja-centralna ∧ ogon** —
+druga część progu sondy (frakcja delt >0.10 s) złapała tryb „dziurawy strumień
+z dobrą medianą" (T1: p50 0.068, frac 0.47), którego mediana sama nigdy by
+nie zobaczyła.

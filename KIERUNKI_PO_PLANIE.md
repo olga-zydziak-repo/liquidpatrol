@@ -223,6 +223,30 @@ zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasad
   (klatka po klatce), progi empiryczne (podłoga dh 5.01, dryf p99 5°/kl), stopa
   loterii 4/7, korpus Z-stats, T6 jako zbiór odniesienia.
 
+## Dopisek stanu katalogu — 26.10.2026 (CO-PERC2, ANEKS_PERC2-2 §5)
+
+- **PERCEPCJA-II, ścieżka (i) OPS-KADENCJA** → **CLOSED (SUKCES DŹWIGNI, 5 bootów)**:
+  noga wykonana w całości (recon S0 + PRE + S1 + S2 + CO; 5/≤14 bootów, breach 0 /
+  REFUSE 0, KSIĘGA 5/5), werdykt zdaniem zamrożonym — admisja okna run≥3 w 6/6
+  epizodów T6 @k=1 (falsyfikacja 0/6; kotwice 2/2 PASS); kanon i dowody:
+  `results/PERC2/RAPORT_PERC2_S2.md`, przyrząd ops zamrożony
+  w `results/PERC2/FREEZE_PERC2_OPS.md`.
+  **Zdanie kanoniczne (do cytowań):** „Kadencja percepcji była stratą transportu
+  DDS (klatka 307 kB > segment SHM 512 kB / bufor UDP 208 kB, BEST_EFFORT), nie
+  GPU; gwarancja k=1 środkami ops — profil FastDDS + sonda kadencji + pin
+  prowieniencji — zamienia admisję czołową z loterii w pewnik (6/6 T6, oba c08
+  odzyskane w D6), nie uchyla sufitu przeglądu perymetru (c11/270° FAIL realne,
+  11.15 s > 10.0 s niezależnie od kadencji) i odsprzęga metrologię każdej
+  przyszłej kampanii od stanu hosta."
+  **REŻIM OPS = WARUNEK WEJŚCIA każdej przyszłej nogi kampanijnej** (profil
+  a68a450b + sonda 8df528bb + pin model.sdf 3354ae1e — FREEZE_PERC2_OPS
+  §checklist). **Decyzja o kampanii metrologicznej 24+3: NIE TERAZ**
+  (ANEKS_PERC2-2 §4) — zbiór S2 nielosowy, żadnych roszczeń siatkowych z tej
+  nogi; następna kampania werdyktowa odnowi bazę w czystym reżimie; odwracalne
+  osobnym PRE na kampanię bazową. Ścieżki **(ii) MTI-czołowy** i **(iii)
+  detektor-v3/daleki-wzrok** ZOSTAJĄ w katalogu z triggerami bez zmian
+  (dopisek 25.10 wyżej).
+
 ## Backlog §8 (bez zmian, porządkowe)
 
 Polityka git dla .ulg (decyzja od tygodni odroczona, nieblokująca) · martwe inicjalizacje w gate (przy
