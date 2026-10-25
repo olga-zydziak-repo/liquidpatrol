@@ -1,0 +1,202 @@
+{
+ "gz_poziom_zawsze": "14.71 Hz, frac>0.10 = 0.0 (606 kl/40 s; takze 1362/90 s) \u2014 render sensora NIEWINNY",
+ "mechanizm": "strata wiadomosci w transporcie DDS (FastDDS): klatka mono8 640x480 = 307200 B vs segment SHM 512 KB (~1.6 klatki) i bufor UDP default 208 KB (<1 klatka) przy BEST_EFFORT; rozklad k_hist geometryczny = losowa utrata per wiadomosc",
+ "remedium_skuteczne": "perc2_fastdds_profile.xml (SHM segment 16 MB + bufory UDP 4 MB, useBuiltinTransports=false) przez FASTRTPS_DEFAULT_PROFILES_FILE dla mostu obrazu i percep (env PERC2_FASTDDS_PROFILE w driverze/trialu); strona: WSL, zero komend Windows, zero admina",
+ "macierz": [
+  {
+   "boot": "b1_diag",
+   "proba": "A2_stan_zastany",
+   "remedium": "stan zastany (SHM 512KB, UDP 208KB)",
+   "nota": "",
+   "dt_p50_s_na_klatke": 0.132,
+   "dt_p90_s_na_klatke": 0.328,
+   "frac_delt_gt_0p10": 0.6057,
+   "hz_p50": 7.58,
+   "n_delt": 246,
+   "werdykt": "FAIL",
+   "tryb": "posthoc",
+   "push_wall_ms": {
+    "n": 248,
+    "p50": 16.48,
+    "p95": 26.46,
+    "max": 2819.13
+   },
+   "gz_hz_p50": 14.71,
+   "gz_frac_gt_0p10": 0.0,
+   "gz_n": 606
+  },
+  {
+   "boot": "b1_diag",
+   "proba": "B_roscount_depth1",
+   "remedium": "stan zastany",
+   "typ": "roscount(goly subskrybent)",
+   "dt_p50_s_na_klatke": 0.264,
+   "frac_delt_gt_0p10": 0.9143,
+   "hz_p50": 3.79,
+   "n_klatek": 71,
+   "depth": 1,
+   "busy_ms": 0.0
+  },
+  {
+   "boot": "b1_diag",
+   "proba": "B_roscount_busy17",
+   "remedium": "stan zastany + emulacja 17ms",
+   "typ": "roscount(goly subskrybent)",
+   "dt_p50_s_na_klatke": 0.264,
+   "frac_delt_gt_0p10": 0.8205,
+   "hz_p50": 3.79,
+   "n_klatek": 79,
+   "depth": 1,
+   "busy_ms": 17.0
+  },
+  {
+   "boot": "b1_diag",
+   "proba": "C1_roscount",
+   "remedium": "sysctl rmem/wmem 4MB (stare sockety mostu)",
+   "typ": "roscount(goly subskrybent)",
+   "dt_p50_s_na_klatke": 0.396,
+   "frac_delt_gt_0p10": 0.8409,
+   "hz_p50": 2.53,
+   "n_klatek": 47,
+   "depth": 1,
+   "busy_ms": 0.0
+  },
+  {
+   "boot": "b2r_diag",
+   "proba": "T1_baseline",
+   "remedium": "stan zastany, swiezy host po restarcie (sysctl zresetowany)",
+   "nota": "",
+   "dt_p50_s_na_klatke": 0.068,
+   "dt_p90_s_na_klatke": 0.264,
+   "frac_delt_gt_0p10": 0.4735,
+   "hz_p50": 14.71,
+   "n_delt": 283,
+   "werdykt": "FAIL",
+   "tryb": "posthoc",
+   "push_wall_ms": {
+    "n": 285,
+    "p50": 17.39,
+    "p95": 30.35,
+    "max": 2442.26
+   },
+   "gz_hz_p50": 14.71,
+   "gz_frac_gt_0p10": 0.0,
+   "gz_n": 606
+  },
+  {
+   "boot": "b2r_diag",
+   "proba": "T1_roscount",
+   "remedium": "stan zastany",
+   "typ": "roscount(goly subskrybent)",
+   "dt_p50_s_na_klatke": 0.196,
+   "frac_delt_gt_0p10": 0.6726,
+   "hz_p50": 5.1,
+   "n_klatek": 114,
+   "depth": 1,
+   "busy_ms": 0.0
+  },
+  {
+   "boot": "b2r_diag",
+   "proba": "T2_rmem4M",
+   "remedium": "sysctl 4MB + SWIEZY most (nowe sockety)",
+   "nota": "",
+   "dt_p50_s_na_klatke": 0.132,
+   "dt_p90_s_na_klatke": 0.46,
+   "frac_delt_gt_0p10": 0.6949,
+   "hz_p50": 7.58,
+   "n_delt": 177,
+   "werdykt": "FAIL",
+   "tryb": "posthoc",
+   "push_wall_ms": {
+    "n": 178,
+    "p50": 17.44,
+    "p95": 30.88,
+    "max": 1790.51
+   },
+   "gz_hz_p50": 15.62,
+   "gz_frac_gt_0p10": 0.0,
+   "gz_n": 606
+  },
+  {
+   "boot": "b2r_diag",
+   "proba": "T2_roscount",
+   "remedium": "sysctl 4MB + swiezy most",
+   "typ": "roscount(goly subskrybent)",
+   "dt_p50_s_na_klatke": 0.396,
+   "frac_delt_gt_0p10": 0.9245,
+   "hz_p50": 2.53,
+   "n_klatek": 55,
+   "depth": 1,
+   "busy_ms": 0.0
+  },
+  {
+   "boot": "b2r_diag",
+   "proba": "T3_fastdds_profil",
+   "remedium": "profil FastDDS: SHM 16MB + UDP 4MB, builtin off (most+percep)",
+   "nota": "",
+   "dt_p50_s_na_klatke": 0.068,
+   "dt_p90_s_na_klatke": 0.068,
+   "frac_delt_gt_0p10": 0.0017,
+   "hz_p50": 14.71,
+   "n_delt": 587,
+   "werdykt": "PASS",
+   "tryb": "posthoc",
+   "push_wall_ms": {
+    "n": 659,
+    "p50": 17.8,
+    "p95": 25.15,
+    "max": 1919.83
+   },
+   "gz_hz_p50": 15.62,
+   "gz_frac_gt_0p10": 0.0,
+   "gz_n": 606
+  },
+  {
+   "boot": "b2r_diag",
+   "proba": "T3_roscount",
+   "remedium": "profil FastDDS (most+subskrybent)",
+   "typ": "roscount(goly subskrybent)",
+   "dt_p50_s_na_klatke": 0.068,
+   "frac_delt_gt_0p10": 0.0,
+   "hz_p50": 14.71,
+   "n_klatek": 504,
+   "depth": 1,
+   "busy_ms": 0.0
+  },
+  {
+   "boot": "b2r_diag",
+   "proba": "T4_profil_90s",
+   "remedium": "profil FastDDS, okno 90 s (stabilnosc)",
+   "nota": "",
+   "dt_p50_s_na_klatke": 0.068,
+   "dt_p90_s_na_klatke": 0.068,
+   "frac_delt_gt_0p10": 0.0,
+   "hz_p50": 14.71,
+   "n_delt": 1340,
+   "werdykt": "PASS",
+   "tryb": "posthoc",
+   "push_wall_ms": {
+    "n": 1685,
+    "p50": 19.84,
+    "p95": 33.05,
+    "max": 2086.06
+   },
+   "gz_hz_p50": 15.62,
+   "gz_frac_gt_0p10": 0.0,
+   "gz_n": 1362
+  },
+  {
+   "boot": "b2r_diag",
+   "proba": "T5_live",
+   "remedium": "profil FastDDS, sonda tryb LIVE 35 s",
+   "nota": "",
+   "dt_p50_s_na_klatke": 0.068,
+   "dt_p90_s_na_klatke": 0.068,
+   "frac_delt_gt_0p10": 0.002,
+   "hz_p50": 14.71,
+   "n_delt": 499,
+   "werdykt": "PASS",
+   "tryb": "live window=35.0s"
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "kind": "perc2_s1_diag",
+ "boot": 1,
+ "name": "b1_diag",
+ "world": "world_demo_A3",
+ "world_hash": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0  worlds/world_demo_A3.sdf",
+ "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+ "pin_expected": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+ "armed": false,
+ "judge": null,
+ "t_start_unix": 1792892472,
+ "sondy": [
+  {
+   "proba": "A2_stan_zastany",
+   "sonda": {
+    "label": "A2_stan_zastany",
+    "feed": "/home/olga/projects/liquidpatrol/results/PERC2/s1/b1_diag/percep_feed_A2_stan_zastany.jsonl",
+    "tryb": "posthoc",
+    "prog_frozen": {
+     "dt_p50_max_s_na_klatke": 0.07,
+     "frac_delt_gt_0p10_max": 0.05
+    },
+    "n_delt": 246,
+    "dt_p50_s_na_klatke": 0.132,
+    "dt_p90_s_na_klatke": 0.328,
+    "frac_delt_gt_0p10": 0.6057,
+    "hz_p50": 7.58,
+    "span_sim_s": 39.7,
+    "werdykt": "FAIL"
+   },
+   "gzhz": {
+    "label": "A2_stan_zastany",
+    "topic": "/world/world_demo_A3/model/x500_mono_cam_0/link/camera_link/sensor/imager/image",
+    "window_s": 40.0,
+    "n_frames": 606,
+    "dt_sim_p50": 0.068,
+    "dt_sim_p90": 0.068,
+    "frac_sim_gt_0p10": 0.0,
+    "dt_wall_p50": 0.0662,
+    "hz_sim_p50": 14.71
+   },
+   "gpu": {
+    "proba": "A2_stan_zastany",
+    "pola": "pstate, clocks.sm, [clocks.max.sm,] power.draw, power.limit, temp, util",
+    "pre": "P5, 180 MHz, 3090 MHz, 17.29 W, [N/A], 62, 41 %",
+    "post": "P5, 180 MHz, 20.53 W, [N/A], 63, 28 %"
+   },
+   "push": {
+    "n_img_cb": 248,
+    "n_frames": 248,
+    "n_boxes": 248,
+    "n_fresh": 0,
+    "n_feed_expire": 0,
+    "push_frame_wall_ms": {
+     "n": 248,
+     "p50": 16.48,
+     "p95": 26.46,
+     "max": 2819.13
+    },
+    "det_v2_sha": "775ead150b9937453168538cb97c55f69166e27ddc2d93f71b3710e0e49832ce",
+    "feed_sha_v2": "8015bd12d7e8852bdc2e773d8b32c335a21752ea6209c6f245364809e4ed4a9c",
+    "sim_last": 184.524
+   }
+  }
+ ]
+}

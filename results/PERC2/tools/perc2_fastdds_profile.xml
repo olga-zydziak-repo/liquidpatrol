@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- results/PERC2/tools/perc2_fastdds_profile.xml — remedium C2 (PRE_PERC2 §2.1, liga ops):
+     profil transportu FastDDS dla procesów mostu/subskrybentów obrazu (env
+     FASTRTPS_DEFAULT_PROFILES_FILE, podpinany przez PERC2_FASTDDS_PROFILE w driverze).
+     Obraz mono8 640x480 = ~307 KB/klatka @14.71 Hz: domyślny segment SHM (512 KB)
+     mieści ~1.6 klatki, a domyślny bufor UDP (208 KB) NIE mieści jednej — stąd
+     losowa utrata wiadomości BEST_EFFORT (zmierzona: 606 klatek @gz vs 248 @percep).
+     Tu: segment SHM 16 MB (~52 klatek) + bufory socketów 4 MB. Zero dotyku percepcji. -->
+<profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+  <transport_descriptors>
+    <transport_descriptor>
+      <transport_id>perc2_shm</transport_id>
+      <type>SHM</type>
+      <segment_size>16777216</segment_size>
+    </transport_descriptor>
+    <transport_descriptor>
+      <transport_id>perc2_udp</transport_id>
+      <type>UDPv4</type>
+      <sendBufferSize>4194304</sendBufferSize>
+      <receiveBufferSize>4194304</receiveBufferSize>
+    </transport_descriptor>
+  </transport_descriptors>
+  <participant profile_name="perc2_participant" is_default_profile="true">
+    <rtps>
+      <userTransports>
+        <transport_id>perc2_shm</transport_id>
+        <transport_id>perc2_udp</transport_id>
+      </userTransports>
+      <useBuiltinTransports>false</useBuiltinTransports>
+    </rtps>
+  </participant>
+</profiles>
