@@ -337,3 +337,38 @@ mechanizmowej (GPU→transport DDS) i to jest wzór, nie wyjątek;
 druga część progu sondy (frakcja delt >0.10 s) złapała tryb „dziurawy strumień
 z dobrą medianą" (T1: p50 0.068, frac 0.47), którego mediana sama nigdy by
 nie zobaczyła.
+
+## NOGA WABIK ścieżka (iii) wabik-w-świecie — ROZLICZONE przy CO-WABIK (ANEKS_WABIK-2 §3, 27.10.2026)
+Prerejestrowane 26.10.2026 (`PRE_WABIK.md` §4; ratyfikacja 26.10, sha PRE
+f2cbf63b…cf3c79); cięcie głębokie zastosowane tam, gdzie mechanizm
+nazwany-niezmierzony (P-WB-2 tracker przy 2 obiektach; P-WB-3 TP — w danych
+programu nie było ani jednego wabika):
+- **P-WB-1 ✗:** smoke czysty (p 0.70) — kotwica sędziego ZŁAMANA w konfiguracji
+  A (c08_s01+W-LOITER: D6 FAIL [b_frac] 0.758/0.766, d_min 5.17/5.14 vs
+  historyczne PASS 6.854; `results/WABIK/RAPORT_WABIK_S1.md`).
+- **P-WB-2 ✗:** tracker utrzymuje intruza przy rozdzieleniu azymutalnym
+  (p 0.55) — przeskoki na wabika 25.5 %/24.3 % ticków, wszystkie w fazach
+  werdyktowych; „rozdzielenie azymutalne" unieważnia FAZA ORBITY (stożek
+  omiata 360°); konfiguracja czysta istnieje przy separacji > zasięg (B: 0 %).
+- **P-WB-3 ✗:** TP ≥5/6 w ≤15 s (p 0.65) — FALSYFIKACJA zdaniem zamrożonym:
+  ≤1/6 (flagi-kiedykolwiek 4/6 — warstwa cech działa, pada reguła czasowa;
+  trzy mechanizmy zmierzone: piki v_rad rwą 12-s streaki, ZBLIŻ strukturalnie
+  ~8 s < 12 s, stale-klatki brzegu; `results/WABIK/RAPORT_WABIK_S2.md` §3).
+- **P-WB-4 ✓:** FP 0/3 (p 0.75) — zero flag na c08_s03 / c10_s02 / M-ŁUK
+  (podłoga dh_min 0.04–3.40 blokuje każdego poważnego).
+- **P-WB-5 ✓:** M-POD-ORBITĄ separacja ≥4 m i track 2/2 (p 0.60) — track na
+  celu 1.000 (666/666 ticków, świadek obok), d_min 7.064/6.577, D6 2/2 PASS.
+- **P-WB-6 ✓:** breach 0 / REFUSE 0 w całej nodze (p 0.85) — 0/0 × 5 bootów
+  (13 epizodów uzbrojonych, 13/13 VALID).
+
+**Suma nogi WABIK (iii): 3 ✓ / 3 ✗.** Kalibracja CC (ANEKS_WABIK-2 §3, dwa
+wpisy): (a) **konfiguracje przestrzenne projektować per FAZA lotu
+(scan/track/orbit), nie per epizod** — „inny sektor" nic nie znaczy, gdy
+orbita obraca stożek przez 360° (błąd projektowy CC nazwany w ANEKS-1;
+przewidywalny przy biurku z geometrii skanu); (b) **wymagania ciągłościowe
+przeliczać przez zmierzoną stopę zakłóceń estymaty PRZED zamrożeniem** —
+stopa pików v_rad była mierzalna na NULL przy biurku, a sprzężenie T_FLAG=12 s
+z limitem zdania zamrożonego (≤15 s) zostawiło zero marginesu na szum;
+reguła progowa na strumieniu szumnym wymaga tolerancji przerw z konstrukcji,
+nie z nadziei (dowód kruchości: dwie implementacje tej samej litery różnią
+się czasem flagi o ±50 %).

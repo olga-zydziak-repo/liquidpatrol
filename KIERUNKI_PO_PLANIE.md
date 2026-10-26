@@ -247,6 +247,46 @@ zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasad
   detektor-v3/daleki-wzrok** ZOSTAJĄ w katalogu z triggerami bez zmian
   (dopisek 25.10 wyżej).
 
+## Dopisek stanu katalogu — 27.10.2026 (CO-WABIK, ANEKS_WABIK-2 §4)
+
+- **WABIK, ścieżka (iii) wabik-w-świecie** → **CLOSED** (5/≤11 bootów: S1 2 +
+  S2 3; breach 0 / REFUSE 0; KSIĘGA 3/6): werdykt TRÓJDZIELNY zdaniami
+  zamrożonymi — **T-W-TP: FALSYFIKACJA PROGÓW** (etykieta ≤15 s w ≤1/6;
+  „progi z NULL nie przenoszą się na TP — wracamy do cech"), **T-W-FP:
+  0/3 flag ✓**, **T-W-ORB: 2/2 ✓** (track na celu 1.000 pod zmianą kursu,
+  D6 PASS — pytanie R4-niezmierzone domknięte pozytywnie). Kanon i dowody:
+  `results/WABIK/RAPORT_WABIK_S1.md`, `RAPORT_WABIK_S2.md`, przyrząd
+  w `FREEZE_WABIK.md`.
+  **Zdanie kanoniczne (do cytowań):** „Rozpoznanie behawioralne wabika ma
+  działającą warstwę cech (flagi na rodzinach krążących, zero fałszywych
+  alarmów na poważnych) i sfalsyfikowaną regułę czasową: wymóg 12 s
+  nieprzerwanej zgodności pada na pikach szumu estymaty toru — dwie
+  implementacje tej samej zamrożonej litery różnią się czasem flagi o ±50% —
+  a naprawa (reguła odporna na przerwy) iteruje się offline na zalogowanych
+  feedach za zero bootów."
+- **WABIK-II / REGUŁA CZASOWA** — NOWA pozycja (następca; ANEKS_WABIK-2 §2/§4).
+  Aktywa: feedy 11 epizodów S2 w repo (`results/WABIK/s2/*/percep_feed.jsonl`
+  + `wabik_sig_<sid>.jsonl`), trzy zmierzone mechanizmy padnięcia reguły
+  (piki v_rad rwą streaki; ZBLIŻ strukturalnie < T_FLAG; stale-klatki brzegu).
+  Ścieżka: iteracja reguły OFFLINE na zalogowanych feedach za **0 bootów**
+  (tolerancja przerw / frac_closing w oknie decyzyjnym / zegar od ciągłego
+  segmentu) → FREEZE nowej reguły → potwierdzenie w locie na ŚWIEŻYCH
+  wariantach parametrów trajektorii (anty-overfit — lekcja CH90); wycena
+  ≤4 booty. **Trigger: decyzja Olgi.**
+- **MULTI-TARGET / TOŻSAMOŚĆ TRACKA** — NOWA pozycja (ANEKS_WABIK-1 §2).
+  Aktywa: pomiar przeskoków 25.5 %/24.3 % (dwie implementacje), mechanizm
+  REFRESH-admituje-każdy-box, para kontrastowa konfiguracji A/B
+  (`results/WABIK/s1/*/wabik_smoke.json`). **Trigger:** przed jakimkolwiek
+  roszczeniem z ≥2 obiektami w zasięgu detekcji naraz i przed warstwą decyzji.
+- **IMITACJE / MIKRO-SYGNATURA** — NOWA pozycja (ANEKS_WABIK-2 §4). Krok 1
+  DESKOWY: rachunek widzialności mikro-ruchu w px przy sylwetce ~9 px@15 m
+  i kadencji 14.7 Hz (czy mikro-sygnatura ruchu jest w ogóle mierzalna
+  sensorem programu). **Trigger: po WABIK-II.**
+- **Dopisek do 1b(ii) weryfikacja sieci** (pozycja w Warstwie 1 wyżej —
+  append-only tutaj): rozszerzenie o **XAI / replay aktywacji** — S0 deskowe:
+  kopia modułu + wagi ncp 0337d5ea + replay feedów wszystkich kampanii,
+  **0 bootów**; wchodzi w zakres przy otwarciu 1b(ii).
+
 ## Backlog §8 (bez zmian, porządkowe)
 
 Polityka git dla .ulg (decyzja od tygodni odroczona, nieblokująca) · martwe inicjalizacje w gate (przy
