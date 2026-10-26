@@ -106,3 +106,43 @@ Commit: narzędzia + raport + `democ_werdykty.json` + `DEMO_C_en.srt` + artefakt
 ujęć (3 booty: manifesty/percep_feed/demo/trace/qlog/sondy/indeksy klatek).
 **Push = Olga („wypchnięte" — CC weryfikuje ujęcia sędzią z repo, ZANIM mp4
 pójdzie na zewnątrz).** **STOP-DEMOC-1.**
+
+## Montaż v2 — panel taktyczny z góry (dopisek append-only; PROMPT_DEMO_C_V2, STOP-DEMOC-2)
+
+**Zero nowych bootów; te same trzy ujęcia; werdykty ujęć BEZ ZMIAN** (§2 wyżej).
+Dołożony panel taktyczny renderowany WYŁĄCZNIE z istniejących logów bootów
+d1–d3 (trace/gt_intruder/demo/percep_feed), zsynchronizowany po t_sim — żyje
+w tym samym zegarze i tych samych TEMPO ×n co reszta kadru.
+
+- **Narzędzia NOWE (v1 nietykalne):** `tools/democ_topdown.py` (panel: północ
+  w górę, siatka 5 m, strefa osłony R_E = 32 m podpisana — r01/config.py:30,
+  home, dron/intruz = punkty z blaknącymi ogonami ~12 s, markery ENTRY /
+  REFUSE(POS) / TOUCHDOWN trwałe po zajściu, etykieta „(GT)"; **filtr brzegu
+  startu**: próbki świadka |ned−cmd|_xy>1 m nie są rysowane — ta sama reguła co
+  u sędziego) oraz `tools/democ_overlay_v2.py` (kopia v1 + panel).
+  `democ_cut.py` v1 użyty bez zmian (nowy plik cut niepotrzebny).
+- **Układ (decyzja montażowa):** kamera pokładowa pozostaje widokiem głównym;
+  panel taktyczny 640×640 zajmuje lewą kolumnę W MIEJSCE wkładki świata
+  (miniatura świata była mało czytelna — kamera filmowa kadruje centroid A3,
+  dron bywał poza kadrem — a kontekst przestrzenny daje teraz panel); HUD
+  kompaktowy 640×324 pod panelem.
+- **Akt 3 — wariant §1.4 z DWOMA punktami drona (weszedł):** obie serie są
+  w logach — GT (trace t:gt) pełnym punktem, estymata nawigacji (demo.jsonl
+  own_pos_ned, dostępna przez całe zejście do touchdown) punktem kropkowanym;
+  po denialu estymata ODPŁYWA od prawdy (zmierzone |est−GT|_xy: 0.17 m
+  @+1.6 s → 3.14 m @touchdown) — podpis w HUD i legendzie.
+- **Wyjścia (napisy PL, plansza FROZEN i `DEMO_C_en.srt` bez zmian; tor cv2
+  jak v1):** łącznie >25 MB ⇒ NA DYSKU, sha256:
+
+| plik (na dysku) | sha256 |
+|---|---|
+| `results/DEMO_C/DEMO_C_v2.mp4` (99.1 s, 26 MB) | `e876e58fd535fe3aa8602e6c1856fcaa63ca8aa9959d5e3e0c75fbddbabcbad7` |
+| `results/DEMO_C/DEMO_C_v2_SHORT.mp4` (54.2 s, 14 MB) | `ebe7391e0d32704d7030dfd395bb7c8236586a253714ed0d1e8fbc849d2ed8e5` |
+| `clips/akt1_v2.mp4` | `160241d489c3a75908116b45258d790b051cbceed3bfd5bc38915efd59262eb7` |
+| `clips/akt2_v2.mp4` | `f30254f34785fe80f468fc07cda7bf45644a9c7857f9e7aed5a5cc7196d1684a` |
+| `clips/akt3_v2.mp4` | `98a909eb4390074379d7822e67522df1a7ff1de59db87e84b1c6372c50aefdfe` |
+| `clips/akt1_v2_short.mp4` | `9ae7e5dea220a61bcb951a28700445c1dab281dfbb734b5907053455574a4812` |
+| `clips/akt2_v2_short.mp4` | `ff2f0f61be43d25128d4037b7b0d9270cd25c6749d53bb2585cfba39f39f80a8` |
+| `clips/akt3_v2_short.mp4` | `63920b884077ba5d8c80fe6bf5418e2c8fe745ee119d40209898db63563972e4` |
+
+Segmenty SHORT v2 = 1:1 z NOTA_SHORT.md. **STOP-DEMOC-2.**
