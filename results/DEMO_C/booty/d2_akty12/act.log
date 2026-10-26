@@ -1,0 +1,14 @@
+[bench] armed sim=103.47 {}
+[bench] takeoff sim=103.50 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/DEMO_C/booty/d2_akty12/episode_control.json
+[bench] offboard sim=114.84 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=115.01 {'episode_id': 44, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.092, 'pose': [15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [15.0, 0.0, -10.0]}
+[bench] episode_start sim=115.01 {'episode_id': 44, 'scenario_id': 'c08_s04', 't0_sim': 115.008}
+[bench] episode_end sim=187.45 {'episode_id': 44, 't_entry': 2.4, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=197.23 {'episode_id': 22, 'status': 'OK', 'n_setpose': 81, 'wait_sim': 4.352, 'pose': [-15.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-15.0, 0.0, -10.0]}
+[bench] episode_start sim=197.23 {'episode_id': 22, 'scenario_id': 'c10_s02', 't0_sim': 197.228}
+[bench] episode_end sim=276.25 {'episode_id': 22, 't_entry': 9.01, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] reset_done sim=281.30 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/DEMO_C/booty/d2_akty12/trace.jsonl (demo n=2959)

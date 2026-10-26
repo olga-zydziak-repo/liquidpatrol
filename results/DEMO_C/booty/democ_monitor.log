@@ -1,0 +1,34 @@
+[democ d1_proba] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51 tryb=AKT12 eps=32 inj=-
+[democ d1_proba 02:08:39] cooldown 0s
+[democ d1_proba 02:09:56] SUSTAINED CLEAN
+[democ d1_proba] run_boot pid=158776
+[democ d1_proba] przed uzbrojeniem: bridge=159514 percep=159515(FEED) cam=159516 world=159733 — sonda 35 s
+{"label": "preflight_d1_proba", "feed": "/home/olga/projects/liquidpatrol/results/DEMO_C/booty/d1_proba/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 474, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 14.71, "span_sim_s": 34.6, "werdykt": "PASS"}
+[democ d1_proba 02:10:59] sonda preflight rc=0 (0=PASS)
+[democ d1_proba 02:13:57] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b1] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/booty/d1_proba
+[democ d1_proba] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/booty/d1_proba
+[democ d2_akty12] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51 tryb=AKT12 eps=44,22 inj=-
+[democ d2_akty12 02:14:18] cooldown 279s
+[democ d2_akty12 02:20:20] SUSTAINED CLEAN
+[democ d2_akty12] run_boot pid=162832
+[democ d2_akty12] przed uzbrojeniem: bridge=163547 percep=163548(FEED) cam=163549 world=163784 — sonda 35 s
+{"label": "preflight_d2_akty12", "feed": "/home/olga/projects/liquidpatrol/results/DEMO_C/booty/d2_akty12/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 457, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 14.71, "span_sim_s": 32.7, "werdykt": "PASS"}
+[democ d2_akty12 02:21:21] sonda preflight rc=0 (0=PASS)
+[democ d2_akty12 02:25:52] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b2] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/booty/d2_akty12
+[democ d2_akty12] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/booty/d2_akty12
+[democ d3_akt3] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51 tryb=AKT3 eps=3 inj=30
+[democ d3_akt3 02:26:10] cooldown 282s
+[democ d3_akt3 02:32:16] SUSTAINED CLEAN
+[democ d3_akt3] run_boot pid=167289
+[democ d3_akt3] most filmowy podmieniony na profilowany pid=168245
+[democ d3_akt3] przed uzbrojeniem: bridge=168004 percep=168005(SHADOW) cam=168006 world=168248 — sonda 35 s
+{"label": "preflight_d3_akt3", "feed": "/home/olga/projects/liquidpatrol/results/DEMO_C/booty/d3_akt3/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 462, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 14.71, "span_sim_s": 33.6, "werdykt": "PASS"}
+[democ d3_akt3 02:33:17] sonda preflight rc=0 (0=PASS)
+[democ d3_akt3 02:36:12] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b3] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/booty/d3_akt3
+[democ d3_akt3] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/booty/d3_akt3

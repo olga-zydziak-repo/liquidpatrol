@@ -1,0 +1,39 @@
+1
+00:00:00,000 --> 00:00:06,000
+ACT 1 — THE DRONE SEES: head-on intruder; det_v2 detector on a live camera
+
+2
+00:00:06,000 --> 00:00:14,000
+Green box = detection; TRACK = perception admission (14.7 fps)
+
+3
+00:00:14,000 --> 00:00:31,800
+A 20-neuron liquid network flies the approach and the 6-10 m orbit
+
+4
+00:00:31,800 --> 00:00:38,800
+ACT 2 — THE DRONE SEARCHES: target starts BEHIND (azimuth 180°) — empty camera
+
+5
+00:00:38,800 --> 00:00:45,800
+Step-scan with the whole airframe: 40° steps, perimeter sweep
+
+6
+00:00:45,800 --> 00:01:05,500
+Find, pursue, orbit — all from one 640x480 mono camera
+
+7
+00:01:05,500 --> 00:01:11,500
+ACT 3 — THE DRONE SURVIVES: nominal orbit; perception EMULATED in this act
+
+8
+00:01:11,500 --> 00:01:17,500
+We inject a GPS failure (EKF2_GPS_CTRL=0) — position starts drifting
+
+9
+00:01:17,500 --> 00:01:29,400
+The shield: REFUSE(POS) in ~0.1 s, then a safe D5 descent to touchdown
+
+10
+00:01:29,400 --> 00:01:38,400
+LiquidPatrol — PX4/Gazebo SITL. Zero zone breaches and zero false refusals across ~140 boots. Controller: a 20-neuron liquid network — 48/48 vs GRU 29/48 on the same grid. Home hardware, evenings and weekends.

@@ -1,0 +1,91 @@
+{
+ "zrodla": "akty 1-2: perc2_s2_analyze.analyze_boot (sedzia FROZEN 8ec0fcfb, GT manifest + swiadek OBOK); akt 3: kryterium K2 z trace",
+ "akty12": {
+  "d1_proba": [
+   {
+    "sid": "c08_s03",
+    "valid": true,
+    "breach": false,
+    "refuse_count": 0,
+    "D6_sedzia_manifest_GT": true,
+    "fail_reasons": [],
+    "d_min_sedzia": 5.613,
+    "t_entry": 3.344,
+    "D6_pokladowo": true,
+    "d_min_pokladowo": 5.654,
+    "swiadek": {
+     "n_artefakt": 0,
+     "n_wierszy": 3143
+    },
+    "t_acq_s": 0.73,
+    "kadencja_lotu": {
+     "dt_p50": 0.068,
+     "frac_gt_0p10": 0.0,
+     "n_klatek": 1098
+    },
+    "gt_val_p50_m": 0.064
+   }
+  ],
+  "d2_akty12": [
+   {
+    "sid": "c08_s04",
+    "valid": true,
+    "breach": false,
+    "refuse_count": 0,
+    "D6_sedzia_manifest_GT": true,
+    "fail_reasons": [],
+    "d_min_sedzia": 6.819,
+    "t_entry": 3.372,
+    "D6_pokladowo": true,
+    "d_min_pokladowo": 6.868,
+    "swiadek": {
+     "n_artefakt": 0,
+     "n_wierszy": 3145
+    },
+    "t_acq_s": 0.72,
+    "kadencja_lotu": {
+     "dt_p50": 0.064,
+     "frac_gt_0p10": 0.0,
+     "n_klatek": 1098
+    },
+    "gt_val_p50_m": 0.064
+   },
+   {
+    "sid": "c10_s02",
+    "valid": true,
+    "breach": false,
+    "refuse_count": 0,
+    "D6_sedzia_manifest_GT": true,
+    "fail_reasons": [],
+    "d_min_sedzia": 5.256,
+    "t_entry": 5.888,
+    "D6_pokladowo": true,
+    "d_min_pokladowo": 4.669,
+    "swiadek": {
+     "n_artefakt": 2,
+     "n_wierszy": 3387
+    },
+    "t_acq_s": 8.85,
+    "kadencja_lotu": {
+     "dt_p50": 0.068,
+     "frac_gt_0p10": 0.0,
+     "n_klatek": 1197
+    },
+    "gt_val_p50_m": 0.064
+   }
+  ]
+ },
+ "akt3": {
+  "d3_akt3": {
+   "scenario_id": "c03_s01",
+   "valid": true,
+   "breach": false,
+   "t_inj_sim": 148.172,
+   "t_refuse_po_inj_s": 0.1,
+   "refuse_reason": "POS_DEGRADED",
+   "t_touchdown_po_inj_s": 9.836,
+   "kryterium_K2": "PASS",
+   "refuse_przed_denialem": false
+  }
+ }
+}

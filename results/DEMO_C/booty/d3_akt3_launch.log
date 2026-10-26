@@ -1,0 +1,10 @@
+[run_boot b3] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b3] watchdog EKF2 (preflight-only, max 2 reinity) pid=168069
+FILM_TOPIC=/world/world_demo_A3/model/film_cam/link/l/sensor/film/image
+harness/run_boot.sh: line 120: 168169 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${FILM_TOPIC}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge.log" 2>&1
+model_in_state=1
+[run_boot b3] settle 90s preflight EKF
+[bench_finalize] manifest.json boot=3 n_episodes=1 valid_V2p=1 success_D6=0 n_demo=827
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b3] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/booty/d3_akt3

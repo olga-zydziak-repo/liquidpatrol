@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga      158782 17.5  0.0 330892 14140 ?        Sl   02:09   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga      158776  2.5  0.0   5028  3704 ?        S    02:09   0:00 bash harness/run_boot.sh
+olga        1170  1.5  1.6 74812276 532404 pts/0 Rl+  Oct25   9:38 claude --continue
+root         226  0.1  0.2 3290460 68048 ?       Ssl  Oct25   0:46 /usr/bin/containerd
+root         346  0.0  0.2 9586676 96028 ?       Ssl  Oct25   0:35 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         857  0.0  0.0 1233872 12404 ?       Sl   Oct25   0:22 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+dnsmasq      881  0.0  0.0 216768 28596 ?        Ss   Oct25   0:03 postgres
+root           1  0.0  0.0  22016 13296 ?        Ss   Oct25   0:00 /sbin/init
+root         997  0.0  0.0   3200  1248 ?        S    Oct25   0:00 /init
+polkitd      183  0.0  0.0 308188  8092 ?        Ssl  Oct25   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          40  0.0  0.0  66868 18280 ?        S<s  Oct25   0:00 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26012  7092 ?        Ss   Oct25   0:00 /usr/lib/systemd/systemd-udevd
+systemd+     123  0.0  0.0  91068  7988 ?        Ssl  Oct25   0:00 /usr/lib/systemd/systemd-timesyncd
+dnsmasq      985  0.0  0.0 216924  7208 ?        Ss   Oct25   0:00 postgres: background writer 
+dnsmasq      990  0.0  0.0 216768 10132 ?        Ss   Oct25   0:00 postgres: walwriter 
+message+     178  0.0  0.0   9800  5540 ?        Ss   Oct25   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         210  0.0  0.0  17400  6376 ?        Ss   Oct25   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+root         188  0.0  0.0  17992  8844 ?        Ss   Oct25   0:00 /usr/lib/systemd/systemd-logind
+root         242  0.0  0.0 107064 23204 ?        Ssl  Oct25   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
