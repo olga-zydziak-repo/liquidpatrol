@@ -14,7 +14,10 @@ Kompozycja 1920×1080 @10 fps (kadencja = klatki świata, stemple sim):
          emulowanej WYPALONY przez cały akt.
 Werdykt klipu NIE powstaje tu — mapping take→werdykt liczy democ_judge/raport.
 
-Użycie: democ_overlay.py <bootdir> <sid> <AKT:1|2|3> <t_od_rel> <t_do_rel> <out_mp4>
+Użycie: democ_overlay.py <bootdir> <sid> <AKT:1|2|3> <t_od_rel> <t_do_rel> <out_mp4> [segmenty]
+  segmenty (opcjonalne, wariant SHORT): "t0:t1:tempo,t0:t1:tempo,..." — tempo >1
+  renderowane z JAWNYM podpisem „TEMPO ×N" (PROMPT_DEMO_C §1.2: przyspieszenie
+  dozwolone wyłącznie podpisane; cięcia MIĘDZY fazami, zegar epizodu ciągły).
 """
 import json
 import math
@@ -88,6 +91,10 @@ def put(draw, xy, txt, font, fill=(255, 255, 255)):
 def main():
     bootdir, sid, akt, t_od, t_do, out_mp4 = sys.argv[1], sys.argv[2], int(sys.argv[3]), \
         float(sys.argv[4]), float(sys.argv[5]), sys.argv[6]
+    segments = None
+    if len(sys.argv) > 7:
+        segments = [(float(a), float(b), float(c)) for a, b, c in
+                    (seg.split(":") for seg in sys.argv[7].split(","))]
     # t0 epizodu + eventy
     t0 = None
     events = []
@@ -127,11 +134,21 @@ def main():
     ep = SCEN[sid]
     vw = cv2.VideoWriter(out_mp4, cv2.VideoWriter_fourcc(*"mp4v"), 10.0, (1920, 1080))
     n = 0
-    t_abs = t0 + t_od
-    while t_abs <= t0 + t_do:
+    plan = []
+    if segments:
+        for (a, b, sp) in segments:
+            t = t0 + a
+            while t <= t0 + b:
+                plan.append((t, sp))
+                t += 0.1 * sp
+    else:
+        t = t0 + t_od
+        while t <= t0 + t_do:
+            plan.append((t, 1.0))
+            t += 0.1
+    for (t_abs, speed) in plan:
         twf = zoh(wk, t_abs, 0.5)
         if twf is None:
-            t_abs += 0.1
             continue
         world = cv2.imread(os.path.join(bootdir, "world", "frames", wmap[twf]))
         canvas = np.zeros((1080, 1920, 3), dtype=np.uint8)
@@ -218,8 +235,12 @@ def main():
             put(d, (24, 790), "percepcja EMULOWANA w tym akcie", F_SML, (255, 200, 120))
             put(d, (24, 820), "(obraz pokładowy = podgląd, nie karmi sterowania)", F_SML, (255, 200, 120))
             put(d, (24, 880), "świat ↑ · kamera pokładowa →", F_SML, (120, 120, 130))
-        # napis PL (pasek dolny)
-        tk = trel - t_od
+        # JAWNY podpis tempa (przyspieszenie zawsze podpisane — §1.2)
+        if speed > 1.0:
+            d.rectangle([1600, 4, 1904, 52], fill=(0, 0, 0, 220))
+            put(d, (1620, 8), f"TEMPO ×{speed:g}", F_BIG, (255, 160, 60))
+        # napis PL (pasek dolny) — okna liczone w czasie KLIPU
+        tk = n / 10.0
         cap = next((c[2] for c in CAPTIONS[akt] if c[0] <= tk < c[1]), None)
         if cap:
             d.rectangle([0, 1020, 1920, 1080], fill=(0, 0, 0, 220))
@@ -227,7 +248,6 @@ def main():
         canvas = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
         vw.write(canvas)
         n += 1
-        t_abs += 0.1
     vw.release()
     print(f"[overlay] akt {akt} {sid}: {n} klatek → {out_mp4}")
 
