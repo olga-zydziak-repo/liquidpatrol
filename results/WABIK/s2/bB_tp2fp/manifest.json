@@ -1,0 +1,110 @@
+{
+  "kind": "wabik",
+  "flight": "bench",
+  "boot": 4,
+  "rc": 0,
+  "arm": "E",
+  "point": "0.0",
+  "harness_file": "/home/olga/projects/liquidpatrol/bench/bench_flight.py",
+  "sha_harness": "05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43",
+  "controller": "net_fantom",
+  "controller_sha": "e435ed7e3f3ce47dd7b3b88651dff02ae76ddb14823ac913e544d849cd09d849",
+  "feed_sha": "8015bd12d7e8852bdc2e773d8b32c335a21752ea6209c6f245364809e4ed4a9c",
+  "executor_params_sha": "5a7244996d89be70bd720a2b0eb8b6f6dea1a2d8f3f2fd7cf356292426f28716",
+  "ulog_sha": "390a6a4139afd557df67a3849f60f883a1d0109bcb572b86fd85afdf88249f9b",
+  "ulog_bytes": 137144212,
+  "world_hash": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0  worlds/world_demo_A3.sdf",
+  "world_ref": "worlds/world_demo_A3.sdf",
+  "proc_gate": "CLEAN loadavg=0.14 (cpu_max=2.0, load1_max=1.5)",
+  "n_demo_rows": 6136,
+  "n_episodes": 4,
+  "n_valid_V2p": 4,
+  "n_success_D6": 2,
+  "episodes": [
+    {
+      "episode_id": 4,
+      "scenario_id": "w02a_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 2,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9962,
+      "d_min_m": 7.118,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 5,
+      "scenario_id": "w02b_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 0,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9998,
+      "d_min_m": 7.189,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 6,
+      "scenario_id": "c08_s03",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": false,
+      "n_deep_stall": 0,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9999,
+      "d_min_m": 3.814,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 7,
+      "scenario_id": "c10_s02",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": false,
+      "n_deep_stall": 0,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 1.0,
+      "d_min_m": 1.333,
+      "refuse_count": 0,
+      "breach": false
+    }
+  ],
+  "world_hash_kind": "repo",
+  "model_in_state": true,
+  "wabik": {
+    "traj_id": "-",
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profile": "/home/olga/projects/liquidpatrol/results/PERC2/tools/perc2_fastdds_profile.xml",
+    "sonda_preflight_rc": 0,
+    "sondy": [
+      {
+        "proba": "preflight",
+        "sonda": {
+          "label": "preflight_bB_tp2fp",
+          "feed": "/home/olga/projects/liquidpatrol/results/WABIK/s2/bB_tp2fp/percep_feed.jsonl",
+          "tryb": "live window=35.0s",
+          "prog_frozen": {
+            "dt_p50_max_s_na_klatke": 0.07,
+            "frac_delt_gt_0p10_max": 0.05
+          },
+          "n_delt": 462,
+          "dt_p50_s_na_klatke": 0.068,
+          "dt_p90_s_na_klatke": 0.068,
+          "frac_delt_gt_0p10": 0.0022,
+          "hz_p50": 14.71,
+          "span_sim_s": 31.8,
+          "werdykt": "PASS"
+        }
+      }
+    ],
+    "spawn_proof_gz_model_list": [],
+    "spawn_wabik_ok": false,
+    "uzbrojony_po_sondzie": true,
+    "nota": "wabik POZA sedzia (gt_intruder tylko intruz); GT wabika = wabik_motion.jsonl"
+  }
+}

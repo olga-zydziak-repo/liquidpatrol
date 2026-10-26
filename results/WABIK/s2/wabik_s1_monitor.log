@@ -1,0 +1,33 @@
+[wabikS1 bA_tp1] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51 eps=0,1,2,3 traj=- bman=results/WABIK/wabik_manifest_s2.json
+[wabikS1 bA_tp1 17:37:59] cooldown 0s
+[wabikS1 bA_tp1 17:39:14] SUSTAINED CLEAN
+[wabikS1 bA_tp1] run_boot pid=123994
+[wabikS1 bA_tp1] przed uzbrojeniem: bridge=124711 percep=124712 wabik_motion=brak — sonda 35 s
+{"label": "preflight_bA_tp1", "feed": "/home/olga/projects/liquidpatrol/results/WABIK/s2/bA_tp1/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 468, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 14.71, "span_sim_s": 33.0, "werdykt": "PASS"}
+[wabikS1 bA_tp1 17:40:14] sonda preflight rc=0 (0=PASS)
+[wabikS1 bA_tp1 17:47:45] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b3] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/WABIK/s2/bA_tp1
+[wabikS1 bA_tp1] DONE rc=0 → /home/olga/projects/liquidpatrol/results/WABIK/s2/bA_tp1
+[wabikS1 bB_tp2fp] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51 eps=4,5,6,7 traj=- bman=results/WABIK/wabik_manifest_s2.json
+[wabikS1 bB_tp2fp 17:49:27] cooldown 198s
+[wabikS1 bB_tp2fp 17:54:01] SUSTAINED CLEAN
+[wabikS1 bB_tp2fp] run_boot pid=128911
+[wabikS1 bB_tp2fp] przed uzbrojeniem: bridge=129627 percep=129628 wabik_motion=brak — sonda 35 s
+{"label": "preflight_bB_tp2fp", "feed": "/home/olga/projects/liquidpatrol/results/WABIK/s2/bB_tp2fp/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 462, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0022, "hz_p50": 14.71, "span_sim_s": 31.8, "werdykt": "PASS"}
+[wabikS1 bB_tp2fp 17:54:59] sonda preflight rc=0 (0=PASS)
+[wabikS1 bB_tp2fp 18:02:18] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b4] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/WABIK/s2/bB_tp2fp
+[wabikS1 bB_tp2fp] DONE rc=0 → /home/olga/projects/liquidpatrol/results/WABIK/s2/bB_tp2fp
+[wabikS1 bC_fporb] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51 eps=8,9,10 traj=- bman=results/WABIK/wabik_manifest_s2.json
+[wabikS1 bC_fporb 18:02:47] cooldown 271s
+[wabikS1 bC_fporb 18:08:34] SUSTAINED CLEAN
+[wabikS1 bC_fporb] run_boot pid=133766
+[wabikS1 bC_fporb] przed uzbrojeniem: bridge=134482 percep=134483 wabik_motion=brak — sonda 35 s
+{"label": "preflight_bC_fporb", "feed": "/home/olga/projects/liquidpatrol/results/WABIK/s2/bC_fporb/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 464, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0022, "hz_p50": 14.71, "span_sim_s": 31.8, "werdykt": "PASS"}
+[wabikS1 bC_fporb 18:09:32] sonda preflight rc=0 (0=PASS)
+[wabikS1 bC_fporb 18:15:10] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b5] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/WABIK/s2/bC_fporb
+[wabikS1 bC_fporb] DONE rc=0 → /home/olga/projects/liquidpatrol/results/WABIK/s2/bC_fporb

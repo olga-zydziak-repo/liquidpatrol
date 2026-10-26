@@ -1,0 +1,20 @@
+[bench] armed sim=97.08 {}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/WABIK/s2/bA_tp1/episode_control.json
+[bench] takeoff sim=97.12 {}
+[bench] offboard sim=108.48 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=108.61 {'episode_id': 0, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.1, 'pose': [-7.6604, 6.4279, -10.0], 'attempts': 1, 'start_ned': [-7.6604, 6.4279, -10.0]}
+[bench] episode_start sim=108.61 {'episode_id': 0, 'scenario_id': 'w00a_s01', 't0_sim': 108.612}
+[bench] episode_end sim=187.49 {'episode_id': 0, 't_entry': 8.86, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=194.40 {'episode_id': 1, 'status': 'OK', 'n_setpose': 10, 'wait_sim': 0.46, 'pose': [-9.1925, 7.7135, -10.0], 'attempts': 1, 'start_ned': [-9.1925, 7.7135, -10.0]}
+[bench] episode_start sim=194.40 {'episode_id': 1, 'scenario_id': 'w00b_s01', 't0_sim': 194.396}
+[bench] episode_end sim=274.00 {'episode_id': 1, 't_entry': 9.57, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=281.01 {'episode_id': 2, 'status': 'OK', 'n_setpose': 13, 'wait_sim': 0.612, 'pose': [-16.1245, -8.0, -10.0], 'attempts': 1, 'start_ned': [-16.1245, -8.0, -10.0]}
+[bench] episode_start sim=281.04 {'episode_id': 2, 'scenario_id': 'w01a_s01', 't0_sim': 281.012}
+[bench] episode_end sim=361.84 {'episode_id': 2, 't_entry': 10.82, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] intruder_start_gate sim=371.63 {'episode_id': 3, 'status': 'OK', 'n_setpose': 7, 'wait_sim': 0.308, 'pose': [-13.4164, -12.0, -10.0], 'attempts': 1, 'start_ned': [-13.4164, -12.0, -10.0]}
+[bench] episode_start sim=371.63 {'episode_id': 3, 'scenario_id': 'w01b_s01', 't0_sim': 371.632}
+[bench] episode_end sim=455.58 {'episode_id': 3, 't_entry': 13.9, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False}
+[bench] reset_done sim=461.47 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/WABIK/s2/bA_tp1/trace.jsonl (demo n=6350)

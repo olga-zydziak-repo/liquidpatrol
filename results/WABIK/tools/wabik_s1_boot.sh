@@ -18,8 +18,9 @@
 set -o pipefail
 ROOT="/home/olga/projects/liquidpatrol"; cd "$ROOT"
 BN="${1:?BOOT_N}"; NAME="${2:?NAZWA}"; EPIDS="${3:?EP_IDS}"; TRAJ="${4:--}"; BMAN="${5:--}"
-OUTDIR="$ROOT/results/WABIK/s1/$NAME"
-MONLOG="$ROOT/results/WABIK/s1/wabik_s1_monitor.log"
+SDIR="${WABIK_S_DIR:-s1}"
+OUTDIR="$ROOT/results/WABIK/$SDIR/$NAME"
+MONLOG="$ROOT/results/WABIK/$SDIR/wabik_s1_monitor.log"
 B0SP="$ROOT/.b0deps/lib/python3.12/site-packages"
 WORLD=world_demo_A3
 MONO=/world/$WORLD/model/x500_mono_cam_0/link/camera_link/sensor/imager/image
@@ -27,7 +28,7 @@ MODEL_SDF="$ROOT/PX4-Autopilot/Tools/simulation/gz/models/mono_cam/model.sdf"
 PIN_EXPECTED="3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c"
 PROFIL_SHA16="a68a450b91c2ab51"
 WMAN="$ROOT/results/WABIK/wabik_manifest.json"
-mkdir -p "$ROOT/results/WABIK/s1"
+mkdir -p "$ROOT/results/WABIK/$SDIR"
 
 if [ -z "${WABIK_FASTDDS_PROFILE:-}" ] || [ ! -f "$WABIK_FASTDDS_PROFILE" ]; then
   echo "[wabikS1 $NAME] GUARD: WABIK_FASTDDS_PROFILE nieustawiony — ODMOWA (reżim OPS)" | tee -a "$MONLOG"; exit 5
