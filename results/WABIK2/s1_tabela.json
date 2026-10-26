@@ -1,0 +1,2535 @@
+{
+ "progi_klatkowe_FREEZE_WABIK": {
+  "V_MOVE": 0.3,
+  "V_RAD_MAX": 0.3,
+  "DH_MIN_FLOOR": 5.0,
+  "R_ZONE": 18.0,
+  "WIN": 1.0,
+  "T_FLAG": 12.0
+ },
+ "tabela": [
+  {
+   "wariant": "baza(i)",
+   "n_mechanizmow": 0,
+   "cfg": {
+    "K": 0,
+    "theta": null,
+    "T_dec": null,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 17.62,
+     "t_flag_od_segmentu": 17.62,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.99,
+     "t_flag_od_segmentu": 20.99,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 15.51,
+     "t_flag_od_segmentu": 15.51,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.88,
+     "t_flag_od_segmentu": 12.54,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 21.78,
+     "t_flag_od_segmentu": 21.78,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 17.56,
+     "t_flag_od_segmentu": 17.56,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 0,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 23,
+   "NULL_final": 13,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "A(K=2)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 2,
+    "theta": null,
+    "T_dec": null,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 13.53,
+     "t_flag_od_segmentu": 13.53,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.86,
+     "t_flag_od_segmentu": 20.86,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 15.24,
+     "t_flag_od_segmentu": 15.24,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.88,
+     "t_flag_od_segmentu": 12.54,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 21.78,
+     "t_flag_od_segmentu": 21.78,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 17.56,
+     "t_flag_od_segmentu": 17.56,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 1,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 30,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "A(K=3)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 3,
+    "theta": null,
+    "T_dec": null,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 13.53,
+     "t_flag_od_segmentu": 13.53,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.86,
+     "t_flag_od_segmentu": 20.86,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 15.24,
+     "t_flag_od_segmentu": 15.24,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.88,
+     "t_flag_od_segmentu": 12.54,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 21.78,
+     "t_flag_od_segmentu": 21.78,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 17.56,
+     "t_flag_od_segmentu": 17.56,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 1,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 30,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "A(K=5)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 5,
+    "theta": null,
+    "T_dec": null,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 13.53,
+     "t_flag_od_segmentu": 13.53,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.54,
+     "t_flag_od_segmentu": 12.54,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 15.24,
+     "t_flag_od_segmentu": 15.24,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.88,
+     "t_flag_od_segmentu": 12.54,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 21.78,
+     "t_flag_od_segmentu": 21.78,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 17.56,
+     "t_flag_od_segmentu": 17.56,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 2,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 30,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.8,T=8s)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 0,
+    "theta": 0.8,
+    "T_dec": 8.0,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.72,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 30.69,
+     "t_flag_od_segmentu": 30.69,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 16.17,
+     "t_flag_od_segmentu": 16.17,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 11.94,
+     "t_flag_od_segmentu": 11.94,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 4,
+   "ZBLIZ_le15": 1,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 34,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.8,T=10s)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 0,
+    "theta": 0.8,
+    "T_dec": 10.0,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 22.77,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 39.73,
+     "t_flag_od_segmentu": 39.73,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 17.76,
+     "t_flag_od_segmentu": 17.76,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 13.53,
+     "t_flag_od_segmentu": 13.53,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 3,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 33,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.8,T=12s)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 0,
+    "theta": 0.8,
+    "T_dec": 12.0,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.75,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 19.34,
+     "t_flag_od_segmentu": 19.34,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 15.11,
+     "t_flag_od_segmentu": 15.11,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 3,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 33,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.85,T=8s)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 0,
+    "theta": 0.85,
+    "T_dec": 8.0,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 9.64,
+     "t_flag_od_segmentu": 9.64,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.72,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 16.57,
+     "t_flag_od_segmentu": 16.57,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 12.34,
+     "t_flag_od_segmentu": 12.34,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 4,
+   "ZBLIZ_le15": 1,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 33,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.85,T=10s)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 0,
+    "theta": 0.85,
+    "T_dec": 10.0,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 22.77,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 18.28,
+     "t_flag_od_segmentu": 18.28,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 14.06,
+     "t_flag_od_segmentu": 14.06,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 3,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 33,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.85,T=12s)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 0,
+    "theta": 0.85,
+    "T_dec": 12.0,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.75,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 19.93,
+     "t_flag_od_segmentu": 19.93,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 15.71,
+     "t_flag_od_segmentu": 15.71,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 3,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 32,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.9,T=8s)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 0,
+    "theta": 0.9,
+    "T_dec": 8.0,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.56,
+     "t_flag_od_segmentu": 10.56,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.72,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 22.9,
+     "t_flag_od_segmentu": 22.9,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 16.96,
+     "t_flag_od_segmentu": 16.96,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 12.74,
+     "t_flag_od_segmentu": 12.74,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 3,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 33,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.9,T=10s)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 0,
+    "theta": 0.9,
+    "T_dec": 10.0,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.34,
+     "t_flag_od_segmentu": 12.34,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 22.77,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 18.74,
+     "t_flag_od_segmentu": 18.74,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 14.52,
+     "t_flag_od_segmentu": 14.52,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 3,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 32,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.9,T=12s)",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 0,
+    "theta": 0.9,
+    "T_dec": 12.0,
+    "C": false
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 13.6,
+     "t_flag_od_segmentu": 13.6,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.75,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 20.53,
+     "t_flag_od_segmentu": 20.53,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 16.3,
+     "t_flag_od_segmentu": 16.3,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 3,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 31,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_pierwszej",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "C",
+   "n_mechanizmow": 1,
+   "cfg": {
+    "K": 0,
+    "theta": null,
+    "T_dec": null,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 17.62,
+     "t_flag_od_segmentu": 17.62,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.99,
+     "t_flag_od_segmentu": 20.99,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 15.51,
+     "t_flag_od_segmentu": 15.51,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.88,
+     "t_flag_od_segmentu": 12.54,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 21.78,
+     "t_flag_od_segmentu": 21.78,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 17.56,
+     "t_flag_od_segmentu": 17.56,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 1,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 21,
+   "NULL_final": 11,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "A(K=2)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 2,
+    "theta": null,
+    "T_dec": null,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 13.53,
+     "t_flag_od_segmentu": 13.53,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.86,
+     "t_flag_od_segmentu": 20.86,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 15.24,
+     "t_flag_od_segmentu": 15.24,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.88,
+     "t_flag_od_segmentu": 12.54,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 21.78,
+     "t_flag_od_segmentu": 21.78,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 17.56,
+     "t_flag_od_segmentu": 17.56,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 2,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 29,
+   "NULL_final": 14,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "A(K=3)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 3,
+    "theta": null,
+    "T_dec": null,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 13.53,
+     "t_flag_od_segmentu": 13.53,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.86,
+     "t_flag_od_segmentu": 20.86,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 15.24,
+     "t_flag_od_segmentu": 15.24,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.88,
+     "t_flag_od_segmentu": 12.54,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 21.78,
+     "t_flag_od_segmentu": 21.78,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 17.56,
+     "t_flag_od_segmentu": 17.56,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 2,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 30,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "A(K=5)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 5,
+    "theta": null,
+    "T_dec": null,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 13.53,
+     "t_flag_od_segmentu": 13.53,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.54,
+     "t_flag_od_segmentu": 12.54,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 15.24,
+     "t_flag_od_segmentu": 15.24,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.88,
+     "t_flag_od_segmentu": 12.54,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 21.78,
+     "t_flag_od_segmentu": 21.78,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 17.56,
+     "t_flag_od_segmentu": 17.56,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 3,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 30,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.8,T=8s)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 0,
+    "theta": 0.8,
+    "T_dec": 8.0,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.72,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 30.69,
+     "t_flag_od_segmentu": 30.69,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 16.17,
+     "t_flag_od_segmentu": 16.17,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 11.94,
+     "t_flag_od_segmentu": 11.94,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 5,
+   "ZBLIZ_le15": 1,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 34,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.8,T=10s)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 0,
+    "theta": 0.8,
+    "T_dec": 10.0,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 22.77,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 39.73,
+     "t_flag_od_segmentu": 39.73,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 17.76,
+     "t_flag_od_segmentu": 17.76,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 13.53,
+     "t_flag_od_segmentu": 13.53,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 4,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 33,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.8,T=12s)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 0,
+    "theta": 0.8,
+    "T_dec": 12.0,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.75,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 19.34,
+     "t_flag_od_segmentu": 19.34,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 15.11,
+     "t_flag_od_segmentu": 15.11,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 4,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 33,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.85,T=8s)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 0,
+    "theta": 0.85,
+    "T_dec": 8.0,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 9.64,
+     "t_flag_od_segmentu": 9.64,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.72,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 16.57,
+     "t_flag_od_segmentu": 16.57,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 12.34,
+     "t_flag_od_segmentu": 12.34,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 5,
+   "ZBLIZ_le15": 1,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 33,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.85,T=10s)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 0,
+    "theta": 0.85,
+    "T_dec": 10.0,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 22.77,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 18.28,
+     "t_flag_od_segmentu": 18.28,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 14.06,
+     "t_flag_od_segmentu": 14.06,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 4,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 33,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.85,T=12s)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 0,
+    "theta": 0.85,
+    "T_dec": 12.0,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.75,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 19.93,
+     "t_flag_od_segmentu": 19.93,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 15.71,
+     "t_flag_od_segmentu": 15.71,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 4,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 32,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.9,T=8s)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 0,
+    "theta": 0.9,
+    "T_dec": 8.0,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 8.38,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.56,
+     "t_flag_od_segmentu": 10.56,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 20.72,
+     "t_flag_od_segmentu": 8.38,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 22.9,
+     "t_flag_od_segmentu": 22.9,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 16.96,
+     "t_flag_od_segmentu": 16.96,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 12.74,
+     "t_flag_od_segmentu": 12.74,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 4,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 33,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.9,T=10s)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 0,
+    "theta": 0.9,
+    "T_dec": 10.0,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 10.43,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.34,
+     "t_flag_od_segmentu": 12.34,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 22.77,
+     "t_flag_od_segmentu": 10.43,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 18.74,
+     "t_flag_od_segmentu": 18.74,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 14.52,
+     "t_flag_od_segmentu": 14.52,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 4,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 32,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  },
+  {
+   "wariant": "B(\u03b8=0.9,T=12s)\u00d7C",
+   "n_mechanizmow": 2,
+   "cfg": {
+    "K": 0,
+    "theta": 0.9,
+    "T_dec": 12.0,
+    "C": true
+   },
+   "epizody": {
+    "w00a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w00b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 12.41,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w01a_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 13.6,
+     "t_flag_od_segmentu": 13.6,
+     "t_revoke": null
+    },
+    "w01b_s01": {
+     "ever": true,
+     "final": true,
+     "t_flag_od_pierwszej": 24.75,
+     "t_flag_od_segmentu": 12.41,
+     "t_revoke": null
+    },
+    "w02a_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "w02b_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c08_s03": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "c10_s02": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m00_s01": {
+     "ever": false,
+     "final": false,
+     "t_flag_od_pierwszej": null,
+     "t_flag_od_segmentu": null,
+     "t_revoke": null
+    },
+    "m01_s01": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 20.53,
+     "t_flag_od_segmentu": 20.53,
+     "t_revoke": 33.0
+    },
+    "m01_s02": {
+     "ever": true,
+     "final": false,
+     "t_flag_od_pierwszej": 16.3,
+     "t_flag_od_segmentu": 16.3,
+     "t_revoke": 28.44
+    }
+   },
+   "TP_le15": 4,
+   "ZBLIZ_le15": 0,
+   "FP_flags": 0,
+   "ORB_final_niew": 2,
+   "NULL_ever": 31,
+   "NULL_final": 15,
+   "zegar_kryterium": "t_flag_od_segmentu",
+   "dopuszczony": false
+  }
+ ],
+ "zwyciezca": null
+}
