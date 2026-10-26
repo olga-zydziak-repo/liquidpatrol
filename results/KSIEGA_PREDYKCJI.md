@@ -372,3 +372,19 @@ z limitem zdania zamrożonego (≤15 s) zostawiło zero marginesu na szum;
 reguła progowa na strumieniu szumnym wymaga tolerancji przerw z konstrukcji,
 nie z nadziei (dowód kruchości: dwie implementacje tej samej litery różnią
 się czasem flagi o ±50 %).
+
+## NOGA WABIK-II / REGUŁA CZASOWA — ROZLICZONE przy CO-WABIK2 (ANEKS_WABIK2-1 §3, 27.10.2026)
+Prerejestrowane 27.10.2026 (`PRE_WABIK2.md` §4; ratyfikacja 27.10, sha PRE
+2a1bd2a8…ee7a); noga zamknięta ścieżką śmierci S1 — zero lotów wydanych:
+- **P-W2-1 ✗:** selekcja offline znajduje wariant spełniający pełne kryterium
+  §2.2 (p 0.75) — zbiór dopuszczonych PUSTY na 26 wariantach (krawędź Pareto:
+  TP≥5/6 ⇒ NULL-final=15>13; NULL≤13 ⇒ TP≤1/6;
+  `results/WABIK2/RAPORT_WABIK2_S1.md`, `s1_tabela.json`).
+- **P-W2-2, P-W2-3, P-W2-4: n.r.** — S2 nie poleciała (wzór rozliczeń FANTOM:
+  predykcje sesji, która nie zaszła, bez rozliczenia).
+
+**Suma nogi WABIK-II: 0 ✓ / 1 ✗ / 3 n.r.** Kalibracja CC (ANEKS_WABIK2-1 §3):
+**człony kryterium koniunkcyjnego wyceniać ŁĄCZNIE, nie marginalnie** —
+mechanizmy naprawy trafiły w TP (5/6, flagi w 8.38 s — szybciej niż reguła (i)
+kiedykolwiek), ale właściwym przedmiotem predykcji było sprzężenie TP∧NULL,
+a ono na tej przestrzeni nie zachodzi nigdy.

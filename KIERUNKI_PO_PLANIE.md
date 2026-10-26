@@ -287,6 +287,33 @@ zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasad
   kopia modułu + wagi ncp 0337d5ea + replay feedów wszystkich kampanii,
   **0 bootów**; wchodzi w zakres przy otwarciu 1b(ii).
 
+## Dopisek stanu katalogu — 27.10.2026 (CO-WABIK2, ANEKS_WABIK2-1 §4)
+
+- **WABIK-II / REGUŁA CZASOWA** → **CLOSED-BY-DESK-DEATH (0 bootów)**:
+  śmierć S1 literą PRE_WABIK2 §2.4 — zamknięta przestrzeń 26 wariantów A/B/C
+  wyczerpana, zbiór dopuszczonych pusty (krawędź Pareto: TP≥5/6 ⇒
+  NULL-final=15>13; NULL≤13 ⇒ TP≤1/6); pierwsza noga programu zamknięta
+  w całości przy biurku PO pełnej prerejestracji. Dowody:
+  `results/WABIK2/RAPORT_WABIK2_S1.md`, pełna mapa Pareto
+  `results/WABIK2/s1_tabela.json` (26 wariantów × 126 epizodów).
+  **Zdanie kanoniczne (do cytowań):** „Czysta agregacja czasowa nie domyka
+  rozpoznania wabika przy tym szumie toru: na 26 wariantach zamkniętej
+  przestrzeni TP≥5/6 i czystość populacji normalnej nigdy nie zachodzą naraz
+  (krawędź Pareto: NULL≤13 ⇒ TP≤1/6) — wąskie gardło leży piętro niżej,
+  w jakości predykatu klatkowego (piki v_rad estymaty toru); zero FP
+  i poprawne odwołania trzymają we wszystkich 26 wariantach."
+- **TOR-CECHY (wygładzenie v_rad przed predykatem / estymator toru)** — NOWA
+  pozycja SCALONA, **zbieżna z MULTI-TARGET / TOŻSAMOŚĆ TRACKA** (oba wątki
+  potrzebują porządniejszego toru; jedna pozycja, nie dwie). Aktywa:
+  `s1_tabela.json` jako **bench akceptacyjny offline** (nowa warstwa cech
+  musi dać wariant spełniający stare kryterium selekcji, zanim cokolwiek
+  poleci), mapa przeskoków z WABIK (i) S1 (`results/WABIK/s1/*/
+  wabik_smoke.json`), nota wędrowców v=0.5 (przyszła prerejestracja może
+  rozdzielić tę klasę w kryterium NULL jawnie — ANEKS_WABIK2-1 §2).
+  **Trigger: decyzja Olgi.**
+- Pozycje **IMITACJE / MIKRO-SYGNATURA** i **ODPOWIEDŹ-EKONOMIA** — bez zmian
+  (dopiski 26–27.10 wyżej).
+
 ## Backlog §8 (bez zmian, porządkowe)
 
 Polityka git dla .ulg (decyzja od tygodni odroczona, nieblokująca) · martwe inicjalizacje w gate (przy
