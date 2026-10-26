@@ -1,0 +1,96 @@
+{
+ "pas_m": [
+  5.0,
+  18.0
+ ],
+ "start_siatki_m": 15.0,
+ "v_max": 1.0,
+ "wniosek": "prosta radialna = NAJGORSZY przypadek czasowy (minimum 10.0 s); ka\u017cdy manewr v<=1 wchodz\u0105cy pod 5 m WYD\u0141U\u017bA okno admisji (sufit TRANSIT mo\u017ce tylko ZEL\u017bE\u0106); 'obni\u017cenie' wy\u0142\u0105cznie przez nie-wchodzenie pod 5 m \u2014 wtedy d_min=b>=5 i separacja D6 trzyma bez akwizycji (zagro\u017ceniem przestaje by\u0107 tor, zostaje ROZPOZNANIE)",
+ "niezmierzone": "zmiana kursu celu POD orbit\u0105 (po\u015bcig za manewrem) \u2014 kampanie dowiod\u0142y orbit na celach radialnych v<=1.0; interakcja manewr-pod-orbit\u0105 wymaga lot\u00f3w",
+ "wiersze": [
+  {
+   "rodzina": "prosta radialna (baseline siatki)",
+   "parametr": "\u2014",
+   "rezydencja_s": 10.0,
+   "nota": "minimum osi\u0105gni\u0119te; pas 15\u21925 @1 m/s (litera TRANSIT)"
+  },
+  {
+   "rodzina": "DOLNA GRANICA (twierdzenie)",
+   "parametr": "dowolny tor |v|<=1",
+   "rezydencja_s": 10.0,
+   "nota": "|d dh/dt| <= |v| <= 1 \u21d2 czas 15\u21925 >= 10 s; manewr NIE skraca"
+  },
+  {
+   "rodzina": "styczny przelot (ci\u0119ciwa)",
+   "parametr": "b=5 m",
+   "rezydencja_s": 34.6,
+   "nota": "d_min=5 m \u2014 pod 5 m NIE wchodzi \u21d2 D6-separacja niezagro\u017cona bez akwizycji"
+  },
+  {
+   "rodzina": "styczny przelot (ci\u0119ciwa)",
+   "parametr": "b=8 m",
+   "rezydencja_s": 32.2,
+   "nota": "d_min=8 m \u2014 pod 5 m NIE wchodzi \u21d2 D6-separacja niezagro\u017cona bez akwizycji"
+  },
+  {
+   "rodzina": "styczny przelot (ci\u0119ciwa)",
+   "parametr": "b=12 m",
+   "rezydencja_s": 26.8,
+   "nota": "d_min=12 m \u2014 pod 5 m NIE wchodzi \u21d2 D6-separacja niezagro\u017cona bez akwizycji"
+  },
+  {
+   "rodzina": "styczny przelot (ci\u0119ciwa)",
+   "parametr": "b=15 m",
+   "rezydencja_s": 19.9,
+   "nota": "d_min=15 m \u2014 pod 5 m NIE wchodzi \u21d2 D6-separacja niezagro\u017cona bez akwizycji"
+  },
+  {
+   "rodzina": "styczny przelot (ci\u0119ciwa)",
+   "parametr": "b=17 m",
+   "rezydencja_s": 11.8,
+   "nota": "d_min=17 m \u2014 pod 5 m NIE wchodzi \u21d2 D6-separacja niezagro\u017cona bez akwizycji"
+  },
+  {
+   "rodzina": "\u0142uk (ograniczona krzywizna)",
+   "parametr": "R_c=5 m",
+   "rezydencja_s": 10.0,
+   "nota": "zej\u015bcie po \u0142uku ZAWSZE >= 10 s (twierdzenie); \u0142uk tylko wyd\u0142u\u017ca"
+  },
+  {
+   "rodzina": "\u0142uk (ograniczona krzywizna)",
+   "parametr": "R_c=10 m",
+   "rezydencja_s": 15.7,
+   "nota": "zej\u015bcie po \u0142uku ZAWSZE >= 10 s (twierdzenie); \u0142uk tylko wyd\u0142u\u017ca"
+  },
+  {
+   "rodzina": "\u0142uk (ograniczona krzywizna)",
+   "parametr": "R_c=20 m",
+   "rezydencja_s": 15.7,
+   "nota": "zej\u015bcie po \u0142uku ZAWSZE >= 10 s (twierdzenie); \u0142uk tylko wyd\u0142u\u017ca"
+  },
+  {
+   "rodzina": "loiter na promieniu",
+   "parametr": "r0=6 m",
+   "rezydencja_s": null,
+   "nota": "rezydencja = ca\u0142y epizod (ograniczona tylko EP_DUR 110 s) \u2014 okno admisji NIEOGRANICZONE; sufit przegl\u0105du przestaje wi\u0105za\u0107"
+  },
+  {
+   "rodzina": "loiter na promieniu",
+   "parametr": "r0=10 m",
+   "rezydencja_s": null,
+   "nota": "rezydencja = ca\u0142y epizod (ograniczona tylko EP_DUR 110 s) \u2014 okno admisji NIEOGRANICZONE; sufit przegl\u0105du przestaje wi\u0105za\u0107"
+  },
+  {
+   "rodzina": "loiter na promieniu",
+   "parametr": "r0=17 m",
+   "rezydencja_s": null,
+   "nota": "rezydencja = ca\u0142y epizod (ograniczona tylko EP_DUR 110 s) \u2014 okno admisji NIEOGRANICZONE; sufit przegl\u0105du przestaje wi\u0105za\u0107"
+  },
+  {
+   "rodzina": "zygzak |v|<=1",
+   "parametr": "dowolne k\u0105ty",
+   "rezydencja_s": ">=10 + wyd\u0142u\u017cenie",
+   "nota": "post\u0119p radialny <= v \u21d2 ka\u017cdy zygzak WYD\u0141U\u017bA rezydencj\u0119 vs prosta"
+  }
+ ]
+}
