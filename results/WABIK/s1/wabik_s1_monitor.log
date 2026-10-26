@@ -1,0 +1,24 @@
+[wabikS1 s1_smoke] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51 eps=8 traj=W-LOITER bman=-
+[wabikS1 s1_smoke 15:35:16] cooldown 0s
+[wabikS1 s1_smoke 15:36:32] SUSTAINED CLEAN
+[wabikS1 s1_smoke] run_boot pid=90675
+[wabikS1 s1_smoke] SPAWN wabik OK (position: {x: 6.43, y: -7.66, z: 10.00})
+[wabikS1 s1_smoke] przed uzbrojeniem: bridge=91514 percep=91515 wabik_motion=91513 — sonda 35 s
+{"label": "preflight_s1_smoke", "feed": "/home/olga/projects/liquidpatrol/results/WABIK/s1/s1_smoke/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 503, "dt_p50_s_na_klatke": 0.064, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 15.62, "span_sim_s": 35.3, "werdykt": "PASS"}
+[wabikS1 s1_smoke 15:37:36] sonda preflight rc=0 (0=PASS)
+[wabikS1 s1_smoke 15:40:24] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b1] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/WABIK/s1/s1_smoke
+[wabikS1 s1_smoke] DONE rc=0 → /home/olga/projects/liquidpatrol/results/WABIK/s1/s1_smoke
+[wabikS1 s1_rozdzielony] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51 eps=0 traj=W-LOITER bman=-
+[wabikS1 s1_rozdzielony 15:42:24] cooldown 180s
+[wabikS1 s1_rozdzielony 15:46:39] SUSTAINED CLEAN
+[wabikS1 s1_rozdzielony] run_boot pid=94529
+[wabikS1 s1_rozdzielony] SPAWN wabik OK (position: {x: 6.43, y: -7.66, z: 10.00})
+[wabikS1 s1_rozdzielony] przed uzbrojeniem: bridge=95347 percep=95348 wabik_motion=95346 — sonda 35 s
+{"label": "preflight_s1_rozdzielony", "feed": "/home/olga/projects/liquidpatrol/results/WABIK/s1/s1_rozdzielony/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 506, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.002, "hz_p50": 14.71, "span_sim_s": 34.7, "werdykt": "PASS"}
+[wabikS1 s1_rozdzielony 15:47:42] sonda preflight rc=0 (0=PASS)
+[wabikS1 s1_rozdzielony 15:50:32] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b2] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/WABIK/s1/s1_rozdzielony
+[wabikS1 s1_rozdzielony] DONE rc=0 → /home/olga/projects/liquidpatrol/results/WABIK/s1/s1_rozdzielony
