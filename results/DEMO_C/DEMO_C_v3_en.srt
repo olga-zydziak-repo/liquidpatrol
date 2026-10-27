@@ -1,0 +1,63 @@
+1
+00:00:00,000 --> 00:00:06,000
+ACT 1 — THE DRONE SEES: head-on intruder; det_v2 detector on a live camera
+
+2
+00:00:06,000 --> 00:00:14,000
+Green box = detection; TRACK = perception admission (14.7 fps)
+
+3
+00:00:14,000 --> 00:00:32,100
+A 20-neuron liquid network flies the approach and the 6-10 m orbit
+
+4
+00:00:32,100 --> 00:00:39,100
+ACT 2 — THE DRONE SEARCHES: target starts BEHIND (azimuth 180°) — empty camera
+
+5
+00:00:39,100 --> 00:00:46,100
+Step-scan with the whole airframe: 40° steps, perimeter sweep
+
+6
+00:00:46,100 --> 00:01:06,200
+Find, pursue, orbit — all from one 640x480 mono camera
+
+7
+00:01:06,200 --> 00:01:12,200
+ACT 3 — THE DRONE SURVIVES: nominal orbit; perception EMULATED in this act
+
+8
+00:01:12,200 --> 00:01:18,200
+We inject a GPS failure (EKF2_GPS_CTRL=0) — position starts drifting
+
+9
+00:01:18,200 --> 00:01:30,100
+The shield: REFUSE(POS) in ~0.1 s, then a safe D5 descent to touchdown
+
+10
+00:01:30,100 --> 00:01:37,100
+ACT 4 — THE DRONE SPOTS A DECOY: the object circles, never attacks
+
+11
+00:01:37,100 --> 00:01:45,100
+Motion signature: fast, not closing, never below 5 m
+
+12
+00:01:45,100 --> 00:01:59,700
+Label DECOY once the rule holds — the clock is shown openly
+
+13
+00:01:59,700 --> 00:02:06,700
+ACT 4b — THE FLAG REVERSES: the target starts out like a decoy
+
+14
+00:02:06,700 --> 00:02:15,700
+The classifier raises a tentative flag... but the target CHANGES behaviour
+
+15
+00:02:15,700 --> 00:02:33,800
+Descent below 5 m => the label is REVOKED and the drone pursues
+
+16
+00:02:33,800 --> 00:02:42,800
+LiquidPatrol — PX4/Gazebo SITL. Zero zone breaches and zero false refusals across ~140 boots. Controller: a 20-neuron liquid network — 48/48 vs GRU 29/48 on the same grid. Decoys: recognised by behaviour — zero false alarms in the measurements. Home hardware, evenings and weekends.

@@ -1,0 +1,91 @@
+{
+ "zrodla": "etykieta: wabik_sig v1 475c972e importem (classify/feed_rows 1:1, czasy przeliczone na absolutne); werdykt 4b: perc2_s2_analyze.analyze_boot + SCEN.update(wabik_manifest_s2) \u2014 wzor wabik_s2_analyze",
+ "akt4a": {
+  "sig": {
+   "sid": "w00a_s01",
+   "t0_sim": 110.756,
+   "t_first_trk": 119.528,
+   "wabik_sig_sha16": "475c972e3388c3e3",
+   "summary": {
+    "n_klatek": 1067,
+    "n_W": 1036,
+    "dh_min": 8.32,
+    "etykieta": "wabik",
+    "etykieta_koncowa": "wabik",
+    "t_do_flagi_s": 31.81,
+    "t_odwolania_s": null
+   },
+   "t_flag_abs": 151.338,
+   "t_revoke_abs": null
+  },
+  "tor": [
+   {
+    "sid": "w00a_s01",
+    "valid": true,
+    "breach": false,
+    "refuse_count": 0,
+    "D6_sedzia_manifest_GT": true,
+    "fail_reasons": [],
+    "d_min_sedzia": 7.29,
+    "t_entry": 0.484,
+    "D6_pokladowo": true,
+    "d_min_pokladowo": 7.326,
+    "swiadek": {
+     "n_artefakt": 0,
+     "n_wierszy": 3545
+    },
+    "t_acq_s": 8.82,
+    "kadencja_lotu": {
+     "dt_p50": 0.064,
+     "frac_gt_0p10": 0.0,
+     "n_klatek": 1194
+    },
+    "gt_val_p50_m": 0.064
+   }
+  ]
+ },
+ "akt4b": {
+  "sig": {
+   "sid": "m01_s01",
+   "t0_sim": 111.356,
+   "t_first_trk": 112.068,
+   "wabik_sig_sha16": "475c972e3388c3e3",
+   "summary": {
+    "n_klatek": 1094,
+    "n_W": 213,
+    "dh_min": 4.99,
+    "etykieta": "wabik",
+    "etykieta_koncowa": "-",
+    "t_do_flagi_s": 21.19,
+    "t_odwolania_s": 32.34
+   },
+   "t_flag_abs": 133.258,
+   "t_revoke_abs": 144.408
+  },
+  "werdykt": [
+   {
+    "sid": "m01_s01",
+    "valid": true,
+    "breach": false,
+    "refuse_count": 0,
+    "D6_sedzia_manifest_GT": true,
+    "fail_reasons": [],
+    "d_min_sedzia": 6.83,
+    "t_entry": 3.4,
+    "D6_pokladowo": true,
+    "d_min_pokladowo": 6.888,
+    "swiadek": {
+     "n_artefakt": 0,
+     "n_wierszy": 3246
+    },
+    "t_acq_s": 0.77,
+    "kadencja_lotu": {
+     "dt_p50": 0.068,
+     "frac_gt_0p10": 0.0,
+     "n_klatek": 1098
+    },
+    "gt_val_p50_m": 0.04
+   }
+  ]
+ }
+}

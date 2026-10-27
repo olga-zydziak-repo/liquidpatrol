@@ -1,0 +1,68 @@
+{
+  "kind": "democ_v3",
+  "flight": "bench",
+  "boot": 1,
+  "rc": 0,
+  "arm": "E",
+  "point": "0.0",
+  "harness_file": "/home/olga/projects/liquidpatrol/bench/bench_flight.py",
+  "sha_harness": "05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43",
+  "controller": "net_fantom",
+  "controller_sha": "e435ed7e3f3ce47dd7b3b88651dff02ae76ddb14823ac913e544d849cd09d849",
+  "feed_sha": "8015bd12d7e8852bdc2e773d8b32c335a21752ea6209c6f245364809e4ed4a9c",
+  "executor_params_sha": "5a7244996d89be70bd720a2b0eb8b6f6dea1a2d8f3f2fd7cf356292426f28716",
+  "ulog_sha": "b35da6d26f03090cd353646e959ae7bc54e7d49cf387f5a6e656844d961bede9",
+  "ulog_bytes": 61558241,
+  "world_hash": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0  worlds/world_demo_A3.sdf",
+  "world_ref": "worlds/world_demo_A3.sdf",
+  "proc_gate": "CLEAN loadavg=0.64 (cpu_max=2.0, load1_max=1.5)",
+  "n_demo_rows": 1551,
+  "n_episodes": 1,
+  "n_valid_V2p": 1,
+  "n_success_D6": 1,
+  "episodes": [
+    {
+      "episode_id": 0,
+      "scenario_id": "w00a_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 4,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9811,
+      "d_min_m": 7.326,
+      "refuse_count": 0,
+      "breach": false
+    }
+  ],
+  "world_hash_kind": "repo",
+  "model_in_state": true,
+  "democ_v3": {
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profile": "/home/olga/projects/liquidpatrol/results/PERC2/tools/perc2_fastdds_profile.xml",
+    "sonda_preflight_rc": 0,
+    "sondy": [
+      {
+        "proba": "preflight",
+        "sonda": {
+          "label": "preflight_akt4a_loiter",
+          "feed": "/home/olga/projects/liquidpatrol/results/DEMO_C/s3_wabik/akt4a_loiter/percep_feed.jsonl",
+          "tryb": "live window=35.0s",
+          "prog_frozen": {
+            "dt_p50_max_s_na_klatke": 0.07,
+            "frac_delt_gt_0p10_max": 0.05
+          },
+          "n_delt": 460,
+          "dt_p50_s_na_klatke": 0.068,
+          "dt_p90_s_na_klatke": 0.068,
+          "frac_delt_gt_0p10": 0.0,
+          "hz_p50": 14.71,
+          "span_sim_s": 32.6,
+          "werdykt": "PASS"
+        }
+      }
+    ],
+    "uzbrojony_po_sondzie": true,
+    "nota": "AKT 4: jeden obiekt w swiecie (scenariusz wabika grany torem intruza, litera WABIK S2); klasyfikator wabik_sig v1 475c972e POSTHOC \u2014 nie steruje"
+  }
+}

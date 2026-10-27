@@ -1,0 +1,22 @@
+[democV3 akt4a_loiter] PIN OK profil=a68a450b91c2ab51 eps=0 bman=results/WABIK/wabik_manifest_s2.json
+[democV3 akt4a_loiter 01:37:35] cooldown 0s
+[democV3 akt4a_loiter 01:38:52] SUSTAINED CLEAN
+[democV3 akt4a_loiter] run_boot pid=247243
+[democV3 akt4a_loiter] przed uzbrojeniem: bridge=247950 percep=247951 cam=247952 world=248219 filmbr=248218 — sonda 35 s
+{"label": "preflight_akt4a_loiter", "feed": "/home/olga/projects/liquidpatrol/results/DEMO_C/s3_wabik/akt4a_loiter/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 460, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 14.71, "span_sim_s": 32.6, "werdykt": "PASS"}
+[democV3 akt4a_loiter 01:39:53] sonda preflight rc=0 (0=PASS)
+[democV3 akt4a_loiter 01:42:56] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b1] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/s3_wabik/akt4a_loiter
+[democV3 akt4a_loiter] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/s3_wabik/akt4a_loiter
+[democV3 akt4b_orbita] PIN OK profil=a68a450b91c2ab51 eps=9 bman=results/WABIK/wabik_manifest_s2.json
+[democV3 akt4b_orbita 01:43:31] cooldown 265s
+[democV3 akt4b_orbita 01:49:19] SUSTAINED CLEAN
+[democV3 akt4b_orbita] run_boot pid=251295
+[democV3 akt4b_orbita] przed uzbrojeniem: bridge=252012 percep=252013 cam=252014 world=252273 filmbr=252272 — sonda 35 s
+{"label": "preflight_akt4b_orbita", "feed": "/home/olga/projects/liquidpatrol/results/DEMO_C/s3_wabik/akt4b_orbita/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 495, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.002, "hz_p50": 14.71, "span_sim_s": 33.9, "werdykt": "PASS"}
+[democV3 akt4b_orbita 01:50:21] sonda preflight rc=0 (0=PASS)
+[democV3 akt4b_orbita 01:53:20] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b2] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/s3_wabik/akt4b_orbita
+[democV3 akt4b_orbita] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/s3_wabik/akt4b_orbita

@@ -146,3 +146,74 @@ w tym samym zegarze i tych samych TEMPO ×n co reszta kadru.
 | `clips/akt3_v2_short.mp4` | `63920b884077ba5d8c80fe6bf5418e2c8fe745ee119d40209898db63563972e4` |
 
 Segmenty SHORT v2 = 1:1 z NOTA_SHORT.md. **STOP-DEMOC-2.**
+
+---
+
+## Akt 4 (v3) — „Wabiki" (dopisek po STOP-DEMOC-2; wykonanie PROMPT_DEMOC_V3; RAPORT wyżej NIETKNIĘTY)
+
+**Bramka:** origin=`dccc8804` (CO-WABIK2), gate pusty, porcelain czysty poza
+nazwanymi `??`; FROZEN: wabik_sig v1 `475c972e`, manifesty `046fa12b`/`86268b02`,
+sonda `8df528bb`, profil `a68a450b`, pin model.sdf `3354ae1e…`, SHIELD FROZEN.
+
+**Booty: 2/≤4, komplet za pierwszym podejściem; breach 0 / REFUSE 0 w obu;
+lista odrzuconych take'ów PUSTA.** Reżim OPS per boot (wzór 1:1 wabik_s1_boot):
+pin model.sdf + world_hash PRZED stackiem (2× OK), profil FastDDS na moście
+obrazu/percep/zrzutnikach, sonda kadencji przed uzbrojeniem PASS 2/2
+(preflight rc=0; wynik w manifestach `democ_v3.sondy[]`). Kadencja LOTU:
+dt_p50 0.064/0.068, frac>0.10 = 0.0 w obu. **Jeden obiekt w świecie naraz**
+(litera WABIK S2): scenariusz wabika GRANY TOREM INTRUZA
+(`BENCH_MANIFEST=results/WABIK/wabik_manifest_s2.json`), GT w `gt_intruder`.
+
+**Mapping take→epizod→wynik** (przyrządy zamrożone importem —
+`democ_v3_post.py`: etykieta = wabik_sig v1 `classify/feed_rows` 1:1 na
+percep_feed lotu; werdykt = perc2_s2_analyze.analyze_boot, sędzia FROZEN
+`8ec0fcfb`, GT manifest + świadek OBOK, SCEN.update wzorem wabik_s2_analyze):
+
+- **AKT 4a** `w00a_s01` (boot d1, `s3_wabik/akt4a_loiter`): VALID, breach 0 /
+  REFUSE 0; dron traci i ODZYSKUJE track skanem (t_acq sędziego 8.82 s),
+  orbita obserwacyjna d_min 7.29 m; **etykieta WABIK: TAK, bez odwołania**
+  (n_W 1036/1067 klatek, dh_min tracka 8.32 m > podłoga 5.0);
+  t_do_flagi 31.81 s od pierwszej ważnej klatki trk (= 40.6 s zegara epizodu;
+  dłużej niż 17.62 s tego wpisu w WABIK S2 — ta sama litera, inny lot: szum
+  v_rad rwie streaki, mechanizm nazwany w RAPORT_WABIK_S2; flaga ZASZŁA).
+  Świadek 0/3545. [montaż 0–12 ×1 / 12–34 ×3 / 34–44 ×1; flaga W CZASIE
+  RZECZYWISTYM]
+- **AKT 4b** `m01_s01` M-POD-ORBITĄ (boot d2, `s3_wabik/akt4b_orbita`):
+  VALID, breach 0 / REFUSE 0; **flaga wstępna → cel zmienia zachowanie →
+  ODWOŁANIE → pościg → D6 PASS sędzią pełną literą** — t_do_flagi 21.19 s /
+  t_odwołania 32.34 s (dh_min tracka 4.99 < 5.0 łamie podłogę; zegar epizodu:
+  flaga 21.9 s, odwołanie 33.1 s), t_entry 3.4 s, d_min sędziego 6.83 m
+  (pokładowo 6.888). Świadek 0/3246. [montaż 0–4 ×1 / 4–18 ×2 / 18–26 ×1 /
+  26–30 ×2 / 30–38 ×1 / 38–52 ×3; flaga i odwołanie W CZASIE RZECZYWISTYM]
+
+**Uczciwość klasyfikatora:** etykieta wyliczona POSTHOC z percep_feed tego
+lotu klasyfikatorem FROZEN `475c972e` (strumień 1:1 z live — równoważność
+nazwana w RAPORT_WABIK_S1); napis „klasyfikator diagnostyczny — etykieta
+wyliczona z zapisu lotu, nie steruje dronem" WYPALONY przez cały akt 4;
+sekundnik od flagi jawny; przyspieszenia wyłącznie z plakietką „TEMPO ×N".
+
+**Montaż:** `DEMO_C_v3.mp4` **162.8 s** ≤ 180 (akty 1–3 = gotowe klipy v2
+z dysku bez rerenderu: 32.1+34.1+23.9 s; akt 4a 29.6 s + 4b 34.1 s; plansza
+9 s = tekst FROZEN v1/v2 + NOWA linia FROZEN §3: „Wabiki: rozpoznawane po
+zachowaniu — zero fałszywych alarmów w pomiarach."); 1920×1080@10, napisy PL
+wypalone, `DEMO_C_v3_en.srt` z blokami aktu 4. Tor cv2 mp4v (odchylenie jawne
+jak v1/v2: ffmpeg nie istnieje). Łącznie >25 MB ⇒ **NA DYSKU**, sha256:
+
+| plik (na dysku) | sha256 |
+|---|---|
+| `results/DEMO_C/DEMO_C_v3.mp4` (162.8 s, 46 MB) | `83430d1138270a23ccba6e535e928976db5db99ce1cbbbd8b071aa1a7a74a286` |
+| `clips/akt4a_v3.mp4` | `b831928dd321e7c1705969ca8cfe3b8cd562634821dba617c1bb918029b49580` |
+| `clips/akt4b_v3.mp4` | `956836f6354c3bce7af724e79a9192a83c5770bc2253af8869a9e9b2ffd0491f` |
+
+**Narzędzia NOWE (v1/v2 i democ_topdown NIETKNIĘTE):** `democ_v3_boot.sh`
+(kopia wabik_s1_boot; zmiany deklarowane: katalog s3_wabik, TRAJ zawsze '-',
+FILM=1 + democ_framedump cam/world + podmiana mostu filmowego na profilowany —
+fix zmierzony DEMO-C D1), `democ_overlay_v3.py` (kopia toru v2 + WBUDOWANA
+kopia panelu z obiektem pomarańczowym „wabik"/czerwonym „cel", wskaźnik
+ETYKIETY, napis uczciwości; jedyna poprawka w toku: separator „·"→„/"
+w stopce panelu — cv2.putText nie renderuje UTF-8), `democ_v3_post.py`,
+`democ_cut_v3.py`. Artefakty: `s3_wabik/akt4a_loiter` + `akt4b_orbita`
+(manifesty z blokiem `democ_v3{pin,sondy[],uzbrojony_po_sondzie}`,
+percep_feed, demo, trace, gt_intruder, frames_index; boot.ulg wg polityki
+gitignore, ulog_sha w manifestach), `akt4a/4b_sig.json(+jsonl)`,
+`akt4_werdykty.json`. Klatki jpg NA DYSKU (celowe `??`). **STOP-DEMOC-3.**
