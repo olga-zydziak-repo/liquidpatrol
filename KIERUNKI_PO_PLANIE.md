@@ -319,3 +319,33 @@ zdania, które przekona CC — dotychczas takie zdanie nie padło ani razu zasad
 Polityka git dla .ulg (decyzja od tygodni odroczona, nieblokująca) · martwe inicjalizacje w gate (przy
 następnym uprawnionym dotknięciu pinu) · allowlista procesów jako plik żywy · rozpoznawanie atrap
 (nota z triggerem z 23.08, warunki bez zmian).
+
+## Dopisek stanu katalogu — 27.10.2026 (CO-XAI, ANEKS_XAI-1 §4)
+
+- **Noga XAI-SIECI (ścieżka (ii)+(i) z RECON_XAI)** → **CLOSED, 0/0 bootów**
+  (recon 0 + S1 0 + CO 0) — pierwsza noga programu zamknięta przy biurku
+  SUKCESEM po pełnej prerejestracji (druga strona monety reżimu wobec
+  desk-death WABIK-II). Dowody: `results/XAI/RAPORT_XAI_S1.md`,
+  `results/XAI/FREEZE_XAI.md` (statusy + ZASADA CYTOWANIA),
+  `results/XAI_RECON/RECON_XAI.md` (atlas + kotwica replayu).
+  **Zdanie zamrożone (ANEKS_XAI-1 §2, do cytowań):** „NCP-20 ma dwa
+  twierdzenia architektoniczne klasy dowodowej: T1 |y_k| < 3.0 i T2
+  |h_i| < 1 (w IEEE754: ≤) — dowiedzione symbolicznie, potwierdzone
+  różnicówką 0/74 708 ticków i czułe na mutanty — oraz dwa zmierzone
+  kontrprzykłady-wyniki: (T3) lokalna kontrakcja kroku NIE zachodzi —
+  każdy tick orbity jest krokowo ekspansywny (max ‖J‖₂ 2.58), więc
+  stabilność pierścienia to pytanie o mnożniki Floqueta OKRESU
+  (nazwane-niezmierzone); (T4) znak prawa pościgu NIE jest globalny
+  (21.1% ticków ujemnych) — polityka z fazą orbitalną steruje stycznie,
+  znak żyje per faza." Zdanie kanoniczne programu zyskuje literę:
+  „dowiedziona osłona + sieć z dowiedzionymi twierdzeniami
+  architektonicznymi" (certyfikaty osłony 9/9 + T1/T2 PROVED).
+- **XAI-FLOQUET (T3′)** — NOWA pozycja: mnożniki Floqueta cyklu z replay
+  (monodromia = iloczyn jakobianów po okresie orbity), deskowe 0 bootów;
+  uzbrojone liczbą: krokowo max ‖J‖₂ 2.58, pytanie czy widmo monodromii <1.
+  **Trigger: decyzja Olgi.**
+- **XAI-ZNAK-PER-FAZA (T4′)** — NOWA pozycja: znak ∂y₀/∂sin_brg na pudełkach
+  per faza (approach vs orbit) + przedziałówka wyłącznie na małych pudełkach;
+  frakcje korpusowe już w ręku (21.1% globalnie). **Trigger: decyzja Olgi.**
+- **Nakładka demo „co myśli sieć"** — era montażu; wycena z RECON_XAI §R6(iii)
+  aktualna; nieprekomitowana. **Trigger: decyzja Olgi.**

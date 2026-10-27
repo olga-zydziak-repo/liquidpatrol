@@ -388,3 +388,32 @@ Prerejestrowane 27.10.2026 (`PRE_WABIK2.md` §4; ratyfikacja 27.10, sha PRE
 mechanizmy naprawy trafiły w TP (5/6, flagi w 8.38 s — szybciej niż reguła (i)
 kiedykolwiek), ale właściwym przedmiotem predykcji było sprzężenie TP∧NULL,
 a ono na tej przestrzeni nie zachodzi nigdy.
+
+## NOGA XAI-SIECI — ROZLICZONE przy CO-XAI (ANEKS_XAI-1 §3, 27.10.2026)
+Prerejestrowane 27.10.2026 (`PRE_XAI.md` §3; ratyfikacja 27.10, sha PRE
+95555eb3…0166); noga zamknięta sukcesem za 0 bootów (ścieżka deskowa):
+- **P-XA-1 ✓:** T1+T2 PROVED, różnicówka 0 kontrprzykładów (p 0.85) —
+  T1 0/74 708 (max 2.985176, margines 0.0148), T2 0 (max 0.964907);
+  dowody sympy + sondy przesłanek (`results/XAI/RAPORT_XAI_S1.md` §3).
+- **P-XA-2 ✗:** T4 znak globalny na ≥80% pudełka (p 0.55) — podwójnie NIE:
+  certyfikowane 0.0% (metoda POPRAWNA — zawieranie 40/40) i znak FAKTYCZNIE
+  niestały (21.1% korpusu ujemnych; siatka 47.8%). **Lekcje kalibracyjne:**
+  (a) twierdzenia o ZNAKU prawa sterowania polityki z fazą orbitalną
+  formalizować per FAZA od początku — orbitowanie wymaga sterowania
+  stycznego, globalny znak jest strukturalnie fałszywy; (b) arytmetyki
+  przedziałowej przez ≥3 warstwy tanh nie preregować na pudełkach rzędu
+  p1–p99 całego korpusu — dowozi wyłącznie na małych pudełkach lokalnych.
+- **P-XA-3 ✗:** T3 własność przechodząca różnicówkę i dowód warunkowy
+  (p 0.60) — kandydatka (lokalna kontrakcja kroku) obalona na KAŻDYM
+  z 74 235 ticków założenia (max ‖J‖₂ 2.5766). **Lekcja kalibracyjna:**
+  własności stabilności preregować PARĄ rozstrzygalnych hipotez (kontrakcja
+  kroku = echo vs stabilność okresu = generator), nie pojedynczą kandydatką
+  — wtedy różnicówka rozstrzyga, zamiast tylko obalać; następca (Floquet)
+  od razu nazwany.
+- **P-XA-4 ✓:** każdy dowód FAIL na ≥1 mutancie (p 0.80) — T1 pada na
+  M2_skala/M4_glowa, T2 na M5_bramka; potwierdzone przez CC niezależnie,
+  pełnokorpusowo dla M2/M4 (ANEKS_XAI-1 §1.4).
+
+**Suma nogi XAI: 2 ✓ / 2 ✗.** Obie porażki to predykcje postawione
+z konstrukcji blisko monety (0.55 / 0.60) — kalibracja bez wstydu
+(ANEKS_XAI-1 §3).
