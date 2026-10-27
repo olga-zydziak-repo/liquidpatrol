@@ -1,0 +1,49 @@
+{
+ "mutant": "orig",
+ "mutant_opis": "orygina\u0142",
+ "korpus": "full",
+ "n_ep": 53,
+ "n_tick_infer": 74708,
+ "V_MAX_kontrakt": 3.0,
+ "vmax_modelu": 3.0,
+ "T1": {
+  "max_abs_y_raw": 2.985176,
+  "margines": 0.014824,
+  "kontrprzyklady": 0,
+  "max_norm_v_po_clip": 3.0
+ },
+ "T2": {
+  "max_abs_h": 0.964907,
+  "margines": 0.035093,
+  "kontrprzyklady": 0
+ },
+ "T3": {
+  "zalozenie": [
+   0.1615,
+   0.8405
+  ],
+  "ticki_w_zalozeniu": 74235,
+  "ticki_poza": 473,
+  "max_norma_spektralna": 2.5766,
+  "kontrprzyklady": 74235,
+  "przyklad": {
+   "sid": "c00_s01",
+   "t": 111.132,
+   "norma": 1.2377
+  }
+ },
+ "T4": {
+  "korpus_pos": 58917,
+  "korpus_neg": 15791,
+  "korpus_zero": 0,
+  "przyklad_neg": {
+   "sid": "c00_s01",
+   "t": 111.892,
+   "wartosc": -3e-05
+  },
+  "siatka_pos": 17109,
+  "siatka_neg": 15696,
+  "siatka_zero": 0,
+  "siatka_n": 32805
+ }
+}

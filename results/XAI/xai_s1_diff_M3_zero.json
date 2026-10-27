@@ -1,0 +1,49 @@
+{
+ "mutant": "M3_zero",
+ "mutant_opis": "neuron 10 wyzerowany (kolumny Wg/Wh/Wt + wiersz Wo)",
+ "korpus": "mini",
+ "n_ep": 13,
+ "n_tick_infer": 18433,
+ "V_MAX_kontrakt": 3.0,
+ "vmax_modelu": 3.0,
+ "T1": {
+  "max_abs_y_raw": 2.956982,
+  "margines": 0.043018,
+  "kontrprzyklady": 0,
+  "max_norm_v_po_clip": 3.0
+ },
+ "T2": {
+  "max_abs_h": 0.930773,
+  "margines": 0.069227,
+  "kontrprzyklady": 0
+ },
+ "T3": {
+  "zalozenie": [
+   0.1615,
+   0.8405
+  ],
+  "ticki_w_zalozeniu": 17853,
+  "ticki_poza": 580,
+  "max_norma_spektralna": 2.2916,
+  "kontrprzyklady": 17853,
+  "przyklad": {
+   "sid": "c00_s01",
+   "t": 111.132,
+   "norma": 1.2346
+  }
+ },
+ "T4": {
+  "korpus_pos": 9404,
+  "korpus_neg": 9029,
+  "korpus_zero": 0,
+  "przyklad_neg": {
+   "sid": "c00_s01",
+   "t": 111.788,
+   "wartosc": -0.00097
+  },
+  "siatka_pos": 15480,
+  "siatka_neg": 17325,
+  "siatka_zero": 0,
+  "siatka_n": 32805
+ }
+}

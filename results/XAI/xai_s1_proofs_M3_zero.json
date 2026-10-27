@@ -1,0 +1,63 @@
+{
+ "mutant": "M3_zero",
+ "mutant_opis": "neuron 10 wyzerowany (kolumny Wg/Wh/Wt + wiersz Wo)",
+ "sympy": "1.12",
+ "T1": {
+  "status": "PROVED",
+  "kroki": {
+   "P1a_tozsamosc_glowy": {
+    "zle_sondy": 0,
+    "pass": true
+   },
+   "P1b_vmax": {
+    "vmax": 3.0,
+    "kontrakt": 3.0,
+    "pass": true
+   },
+   "P1c_tanh_lt1": {
+    "solveset": "EmptySet",
+    "pass": true
+   },
+   "P1d_clip_v": {
+    "kwadrat_normy_minus_vmax2": "0",
+    "pass": true
+   },
+   "P1e_wagi_skonczone": {
+    "pass": true
+   }
+  }
+ },
+ "T2": {
+  "status": "PROVED",
+  "kroki": {
+   "P2a_struktura_i_zakresy": {
+    "zle_tozsamosci": 0,
+    "zle_zakresy": 0,
+    "pass": true
+   },
+   "P2b_lematy": {
+    "sigma_le0": "EmptySet",
+    "sigma_ge1": "EmptySet",
+    "tozsamosc_gorna_reszta": "0",
+    "tozsamosc_dolna_reszta": "0",
+    "pozytywnosc_czlonu": true,
+    "pass": true
+   },
+   "P2c_baza_h0": {
+    "h0": "np.zeros (net_controller.py:74; xai_replay)",
+    "pass": true
+   }
+  }
+ },
+ "T3": {
+  "status": "COUNTEREXAMPLE (r\u00f3\u017cnic\u00f3wka) \u2014 dow\u00f3d NIE uruchamiany"
+ },
+ "T4": {
+  "max_cells": 5000,
+  "komorki_zbadane": 5000,
+  "vol_pct_znak_plus": 0.0,
+  "vol_pct_znak_minus": 0.0,
+  "vol_pct_nierozstrzygniete": 100.0,
+  "status": "PARTIAL(0.0%)"
+ }
+}

@@ -1,0 +1,49 @@
+{
+ "mutant": "M4_glowa",
+ "mutant_opis": "g\u0142owa bez tanh: y = zo\u00b7vmax",
+ "korpus": "mini",
+ "n_ep": 13,
+ "n_tick_infer": 18433,
+ "V_MAX_kontrakt": 3.0,
+ "vmax_modelu": 3.0,
+ "T1": {
+  "max_abs_y_raw": 7.822301,
+  "margines": -4.822301,
+  "kontrprzyklady": 782,
+  "max_norm_v_po_clip": 3.0
+ },
+ "T2": {
+  "max_abs_h": 0.924604,
+  "margines": 0.075396,
+  "kontrprzyklady": 0
+ },
+ "T3": {
+  "zalozenie": [
+   0.1615,
+   0.8405
+  ],
+  "ticki_w_zalozeniu": 18345,
+  "ticki_poza": 88,
+  "max_norma_spektralna": 2.1594,
+  "kontrprzyklady": 18345,
+  "przyklad": {
+   "sid": "c00_s01",
+   "t": 111.132,
+   "norma": 1.2377
+  }
+ },
+ "T4": {
+  "korpus_pos": 14625,
+  "korpus_neg": 3808,
+  "korpus_zero": 0,
+  "przyklad_neg": {
+   "sid": "c00_s01",
+   "t": 111.892,
+   "wartosc": -9e-05
+  },
+  "siatka_pos": 15507,
+  "siatka_neg": 17298,
+  "siatka_zero": 0,
+  "siatka_n": 32805
+ }
+}

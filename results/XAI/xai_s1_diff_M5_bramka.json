@@ -1,0 +1,49 @@
+{
+ "mutant": "M5_bramka",
+ "mutant_opis": "gate = 1.2\u00b7\u03c3(zt)",
+ "korpus": "mini",
+ "n_ep": 13,
+ "n_tick_infer": 18433,
+ "V_MAX_kontrakt": 3.0,
+ "vmax_modelu": 3.0,
+ "T1": {
+  "max_abs_y_raw": 2.966919,
+  "margines": 0.033081,
+  "kontrprzyklady": 0,
+  "max_norm_v_po_clip": 3.0
+ },
+ "T2": {
+  "max_abs_h": 0.968727,
+  "margines": 0.031273,
+  "kontrprzyklady": 0
+ },
+ "T3": {
+  "zalozenie": [
+   0.1615,
+   0.8405
+  ],
+  "ticki_w_zalozeniu": 6736,
+  "ticki_poza": 11697,
+  "max_norma_spektralna": 2.171,
+  "kontrprzyklady": 6736,
+  "przyklad": {
+   "sid": "c00_s01",
+   "t": 114.596,
+   "norma": 1.7577
+  }
+ },
+ "T4": {
+  "korpus_pos": 16200,
+  "korpus_neg": 2233,
+  "korpus_zero": 0,
+  "przyklad_neg": {
+   "sid": "c00_s01",
+   "t": 111.688,
+   "wartosc": -0.00031
+  },
+  "siatka_pos": 17715,
+  "siatka_neg": 15090,
+  "siatka_zero": 0,
+  "siatka_n": 32805
+ }
+}

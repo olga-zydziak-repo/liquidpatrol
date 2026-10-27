@@ -1,0 +1,49 @@
+{
+ "mutant": "M2_skala",
+ "mutant_opis": "wszystkie parametry \u00d71.5 + vmax \u00d71.5 (npz-metadana)",
+ "korpus": "mini",
+ "n_ep": 13,
+ "n_tick_infer": 18433,
+ "V_MAX_kontrakt": 3.0,
+ "vmax_modelu": 4.5,
+ "T1": {
+  "max_abs_y_raw": 4.499722,
+  "margines": -1.499722,
+  "kontrprzyklady": 18424,
+  "max_norm_v_po_clip": 3.0
+ },
+ "T2": {
+  "max_abs_h": 0.999011,
+  "margines": 0.000989,
+  "kontrprzyklady": 0
+ },
+ "T3": {
+  "zalozenie": [
+   0.1615,
+   0.8405
+  ],
+  "ticki_w_zalozeniu": 72,
+  "ticki_poza": 18361,
+  "max_norma_spektralna": 3.5225,
+  "kontrprzyklady": 72,
+  "przyklad": {
+   "sid": "c00_s01",
+   "t": 137.324,
+   "norma": 2.5802
+  }
+ },
+ "T4": {
+  "korpus_pos": 951,
+  "korpus_neg": 17482,
+  "korpus_zero": 0,
+  "przyklad_neg": {
+   "sid": "c00_s01",
+   "t": 112.196,
+   "wartosc": -0.00076
+  },
+  "siatka_pos": 7452,
+  "siatka_neg": 25353,
+  "siatka_zero": 0,
+  "siatka_n": 32805
+ }
+}
