@@ -217,3 +217,79 @@ w stopce panelu — cv2.putText nie renderuje UTF-8), `democ_v3_post.py`,
 percep_feed, demo, trace, gt_intruder, frames_index; boot.ulg wg polityki
 gitignore, ulog_sha w manifestach), `akt4a/4b_sig.json(+jsonl)`,
 `akt4_werdykty.json`. Klatki jpg NA DYSKU (celowe `??`). **STOP-DEMOC-3.**
+
+---
+
+## Montaż v3.1 — panel „JAK ROZPOZNAJE" + admisja krok-po-kroku (dopisek po STOP-DEMOC-3; wykonanie PROMPT_DEMOC_V31; wszystko wyżej NIETKNIĘTE)
+
+**Zero nowych bootów, zero SITL; te same ujęcia v3; werdykty i etykiety BEZ
+ZMIAN.** Nowy overlay WYŁĄCZNIE z istniejących logów (percep_feed + akt4*_sig
++ demo/trace/gt + democ_werdykty). STOP-DEMOC-3 był już zacommitowany
+(`466573eb`) ⇒ v3.1 idzie osobnym commitem z tym dopiskiem.
+
+**§1 — akty 4a/4b, żywy panel reguły** (w miejscu pola ETYKIETA): trzy wiersze
+warunków z wartościami per klatka („w ruchu" speed>0.30 / „nie zbliża się"
+v_rad<0.30 / „nie był <5 m" dh_min≥5.0, ✓/✗) + „licznik: X.X / 12 s → —/WABIK/
+ODWOŁANA". Dane per klatka = `akt4a/4b_sig.jsonl` (wiersze wyliczone
+klasyfikatorem FROZEN `475c972e` przy STOP-DEMOC-3 — te same rachunki, które
+policzyły etykietę; v3.1 niczego nie przelicza nową literą). **Kotwica
+w kodzie (asercja):** rekonstrukcja licznika z jsonl odtwarza t_flag/t_revoke
+z `akt4*_sig.json` ≤10 ms (zaokrąglenia t_sim w jsonl): 4a flaga 151.34 vs
+151.338; 4b flaga 133.256 vs 133.258, odwołanie 144.408 = 144.408.
+**Jawność niepełności wyświetlania:** reguła FROZEN ma CZTERY człony —
+czwarty (dh<18 m, strefa) w OBU ujęciach zawsze prawdziwy (dh_max 10.96 m /
+15.55 m), nie wiąże i nie jest wyświetlany; koniunkcja trzech pokazanych
+warunków == W klatka-w-klatkę w 100% wierszy obu jsonl (sprawdzone). Licznik
+rośnie tylko przy komplecie ✓ i zeruje się na piku szumu (widoczne w 4a);
+po zapadnięciu flagi licznik pokazuje 12.0/12 wygaszony (reguła jednostrzałowa
+— flaga zapada raz), warunki dalej żywe. **4b — mechanizm cofnięcia NA
+EKRANIE:** przy ataku „nie zbliża się" przeskakuje na ✗ (v_rad +1.04 @32.5 s),
+potem „nie był <5 m" na ✗ (min 4.99 m) ⇒ ODWOŁANA (33.3 s zegara). Napis
+uczciwości („…nie steruje dronem") bez zmian, wypalony cały akt.
+
+**§2 — akt 1, admisja krok-po-kroku** (klip aktu 1 ZRERENDEROWANY z tych
+samych klatek ujęcia d1_proba/c08_s03; tor v2 1:1 — Panel z democ_topdown
+importem, napisy PL i HUD bez zmian): zwolnienie ×0.5 na fragmencie zegara
+0.2–3.2 s (3.0 s ujęcia → 6.0 s ekranu) z plakietką „TEMPO ×0.5" (plakietka
+odtąd także dla tempa <1); sekwencja 4 podpisów, kotwice WYLICZANE z logów
+w narzędziu (nie z ręki): (1) „ramka detektora — conf 0.77" = pierwsza klatka
+epizodu z boxem conf≥0.5 (sim 115.964, zegar 0.48 s); (2) „3 zgodne klatki:
+centralność + ruch (brama admisji k=3)" = pierwszy run 3 kolejnych klatek
+fresh (116.16/116.228/116.292 — dwie bramkowane koniunkcją admisyjną gate=mti,
+trzecia oknem predykcji gate=window; litera bramy k=3 = r02/target_channel,
+READ-ONLY); (3) „ADMISJA → TRACK (t_acq sędziego 0.73 s)" — t_acq z
+`democ_werdykty.json`; (4) „sieć płynna prowadzi — APPROACH 0.7 s → ORBITA
+2.5 s" = przejścia faz z demo.jsonl (116.208/117.956). Kroki pojawiają się na
+kotwicach sim z dostojnością ≥1.1 s ekranu, panel znika po 16 s klipu.
+**Jawność mechanizmu:** formalny ENTRY-once kanału zaszedł w tym ujęciu 0.57 s
+PRZED zegarem epizodu (sim 114.908, intruz już w świecie przed episode_start);
+w oknie klipu widoczne są bramkowane REFRESH-e tej samej koniunkcji admisyjnej
+— sekwencja podpisów nazywa mechanizm bramy (k=3: centralność+ruch) liczbami
+z tego feedu i nie twierdzi, że ev=ENTRY pada w kadrze.
+
+**Montaż:** `DEMO_C_v31.mp4` **166.0 s** ≤ 180 (akt 1 v31 35.3 s; akty 2–3 =
+klipy v2 z dysku bez rerenderu 34.1+23.9; akt 4a 29.6 + 4b 34.1 — segmenty
+TEMPO 1:1 z v3; plansza 9 s = tekst FROZEN v3 BEZ ZMIAN); 1920×1080@10, tor
+cv2 mp4v (odchylenie jawne jak v1–v3), `DEMO_C_v31_en.srt` (bloki aktu 1
+przepisane pod sekwencję admisji + po jednym bloku o panelu reguły w 4a/4b).
+SHORT: w PROMPT opcjonalny — NIE wykonany. Łącznie >25 MB ⇒ **NA DYSKU**,
+sha256:
+
+| plik (na dysku) | sha256 |
+|---|---|
+| `results/DEMO_C/DEMO_C_v31.mp4` (166.0 s, 47 MB) | `b912c8b3369ff61b5677604a1e7a57507336279ff145c901e0fee5853aaffda5` |
+| `clips/akt1_v31.mp4` | `7cad3d1535651b220c1c53430d0985d6c969971e0ddbd6c1e10ee7c05dc3f1cd` |
+| `clips/akt4a_v31.mp4` | `ade5b5643b6afdaa6a03dfb8ab750b5bf9700513aad0ede66963174b2640adc1` |
+| `clips/akt4b_v31.mp4` | `ed16c110b386190a519b5df9401e31ee2d34230404d3bf89aeccfae3a0b70b31` |
+
+**Narzędzia NOWE — dwa pliki (v1/v2/v3, democ_topdown i democ_cut* NIETKNIĘTE;
+wszystkie FROZEN importem albo wcale):** `tools/democ_overlay_v31.py`
+`b7128e80b61e417e` (tryb akt1 + tryby 4a/4b; wbudowana kopia Panel4 z v3;
+kotwica licznika asercją), `tools/democ_cut_v31.py` `c7064a4a78e399fc`
+(sklejka + srt; plansza FROZEN 1:1 z cut_v3 — §3 PROMPT mówił o jednym nowym
+pliku, drugi doszedł, bo cut_v3 ma zaszyte nazwy wyjść v3 i jego użycie
+nadpisałoby DEMO_C_v3.mp4 — odchylenie jawne, zero edycji istniejących).
+Jedyna poprawka w toku montażu: format `dh_min` na 2 miejsca (zaokrąglenie
+„5.0" przy ✗ myliło przy wartości 4.99). Werdykty, sig-i, manifesty, klatki:
+BEZ ZMIAN. **Push = Olga („wypchnięte" — CC weryfikuje dopisek i ogląda v3.1
+z załącznika). STOP-DEMOC-31.**
