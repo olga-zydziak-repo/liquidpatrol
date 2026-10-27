@@ -293,3 +293,63 @@ Jedyna poprawka w toku montażu: format `dh_min` na 2 miejsca (zaokrąglenie
 „5.0" przy ✗ myliło przy wartości 4.99). Werdykty, sig-i, manifesty, klatki:
 BEZ ZMIAN. **Push = Olga („wypchnięte" — CC weryfikuje dopisek i ogląda v3.1
 z załącznika). STOP-DEMOC-31.**
+
+---
+
+## Montaż v4 / AKT 5 „W głowie sieci" (dopisek po STOP-DEMOC-31; wykonanie PROMPT_DEMOC_V4; wszystko wyżej NIETKNIĘTE)
+
+**Zero nowych bootów; werdykty ujęć BEZ ZMIAN.** Bramka: origin==HEAD ==
+`7564a98e` (CO-XAI; `ANEKS_XAI-1.md` byte-check `65ef4393…` PASS). Aktywacje
+odtworzone replayem: **xai_replay `ac9551ab` IMPORTEM**, wagi ncp `0337d5ea`
+kopią; FREEZE_XAI obowiązuje na ekranie (wyłącznie T1/T2, oba PROVED; T3/T4
+nie wchodzą; zero roszczeń D6).
+
+- **Źródło ujęcia (bez zmian):** boot `d2_akty12`, epizod **c10_s02**
+  (ujęcie aktu 2, VALID, D6 PASS — §2 wyżej); te same klatki (lewa połowa =
+  gotowy klip `akt2_v2.mp4` pomniejszony ×0.5, z własnym HUD) i ten sam
+  `demo.jsonl`; synchronizacja klatka↔tick po czasie, wzór v3.1.
+- **KOTWICA REPLAYU TEGO UJĘCIA** (próg STOP >1e-2 — nie zaszedł):
+  p50 **5.71·10⁻⁴** / p95 **1.18·10⁻³** / max **2.33·10⁻³** m/s,
+  granica hold/inferencja **0 rozjazdów** (1533 ticki, 1361 inferencji);
+  p95 wypalona w napisie uczciwości („…nakładka nie steruje dronem").
+- **Baza PCA:** loadings nie są zapisane literą w JSON-ach atlasu ⇒
+  przeliczona DETERMINISTYCZNIE z korpusu atlasu (48 ep. LIQ NCP po erratum,
+  indeks `erratum_sweep.json`, pula h na tickach inferencji, SVD po
+  centrowaniu, znak: max|ładunek| dodatni) → **`xai_pca_base.json`**
+  (67 586 ticków). **Kotwica bazy (asercja):** frakcje wariancji top5 ==
+  `xai_atlas_ncp.json` co do 4 miejsc; top2 = **87.8%** (podpis na ekranie).
+- **Role neuronów na ekranie** (z atlasu c_role, podpisane „role z korelacji
+  (opisowe)"): n0 „kierunek na cel (sin)" |r|=0.953 · n5 „(cos)" |r|=0.892 ·
+  n11 „cel względny N (rel_x)" |r|=0.913.
+- **AKT 5 = 38.2 s** [segmenty: 0–7.5 ×1 / 7.5–11.5 ×0.5 (akwizycja+wejście
+  w orbitę, plakietka TEMPO ×0.5; lewa połowa: klatka klipu duplikowana —
+  zwolnienie materiału 10 fps) / 11.5–34 ×1; okno przycięte do długości
+  klipu v2 — zegary lewo/prawo zgodne co do klatki]. Prawa połowa:
+  przestrzeń stanu h(t)→PCA (kolor per faza scan/approach/orbita jak
+  w atlasie; **jasny ogon 8 s + wygaszony ślad skumulowany — DODATEK
+  MONTAŻOWY nazwany: okres orbity ~30 s, sam ogon 8 s nie pokazałby
+  pierścienia**; podpis „stabilny cykl = decyzja «krążę»" przy 10–24 s),
+  pasek 20 neuronów, linia twierdzeń (stała): „dowiedzione: |komenda| <
+  3 m/s (T1) · stan ograniczony |h|<1 (T2) — status PROVED, różnicówka
+  0/74 708 ticków".
+- **Montaż:** `DEMO_C_v4.mp4` **204.2 s** ≤ 240 (v3.1 bez planszy 157.0 +
+  akt 5 38.2 + plansza 9.0); plansza v4 = tekst v3.1 + linia „Sterownik:
+  20 neuronów — dowiedzione twierdzenia o ograniczoności (T1/T2), aktywacje
+  audytowalne replayem." (wstawiona przed wierszem zamykającym). Tor cv2
+  mp4v (odchylenie jawne jak v1–v3.1). Napisy PL wypalone;
+  **`DEMO_C_v4_en.srt` NOWY plik** (edycja `DEMO_C_en.srt` zakazana literą
+  „zero edycji istniejących" — odchylenie nazwane; bloki = v3.1 + akt 5 +
+  plansza v4). **SHORT wykonany (tani):** `DEMO_C_v4_SHORT.mp4` 14.1 s =
+  segment pierścienia [6–34 s] ×2 z plakietką TEMPO ×2 (render, nie
+  frame-skip). Wideo łącznie >25 MB ⇒ **NA DYSKU**, sha256:
+
+| plik (na dysku) | sha256 |
+|---|---|
+| `results/DEMO_C/DEMO_C_v4.mp4` (204.2 s, 59 MB) | `128ff4e4d114c40f9d4d81d3b236fcd350c606085821952665903507fd9ae462` |
+| `results/DEMO_C/DEMO_C_v4_SHORT.mp4` (14.1 s, 4.5 MB) | `faa8cf521587bf7dc547afd0985eda358dc35e92282d7bc1461e00a16898974b` |
+| `clips/akt5_v4.mp4` (38.2 s) | `4e76b0f0baf869abe25c129fd123c47b46943e3905b2cbe89cf3587dd59ee356` |
+
+**Narzędzie NOWE (v1–v3.1 NIETYKALNE):** `tools/democ_overlay_v4.py`
+(tryby pca-base / akt5 / cut). W commicie: narzędzie + `xai_pca_base.json`
++ `DEMO_C_v4_en.srt` + ten dopisek. Klatki/wideo na dysku (celowe `??`).
+**STOP-DEMOC-4.**
