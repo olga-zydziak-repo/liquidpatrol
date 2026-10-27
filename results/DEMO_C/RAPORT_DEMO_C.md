@@ -353,3 +353,55 @@ nie wchodzą; zero roszczeń D6).
 (tryby pca-base / akt5 / cut). W commicie: narzędzie + `xai_pca_base.json`
 + `DEMO_C_v4_en.srt` + ten dopisek. Klatki/wideo na dysku (celowe `??`).
 **STOP-DEMOC-4.**
+
+---
+
+## Montaż v5 — „sieć przez całe demo" (dopisek po seansie Olgi nad v4; wszystko wyżej NIETKNIĘTE)
+
+**Uwaga z seansu (ratyfikatorka): „na v4 nie widać nic, jeśli chodzi
+o wyjaśnialność" + prośba o widok sieci przez całe demo i lepszy widok
+neuronów.** v4 NIE wyszło poza repo (push nie zaszedł) — v5 zastępuje v4
+PRZED publikacją; werdykty ujęć i wszystkie liczby BEZ ZMIAN; zero bootów;
+aktywacje wyłącznie replayem (xai_replay `ac9551ab` importem).
+
+- **MINI-MÓZG W ROGU AKTÓW 1 / 2 / 4a / 4b (NOWE):** panel „W GŁOWIE SIECI
+  (replay)" 312×236 px — 20 neuronów (puls: promień ∝|h_i|, kolor = znak)
+  + 3 wyjścia; NAKŁADKA NA GOTOWE KLIPY v3.1/v2 (zero re-renderu aktów,
+  narzędzia v1–v4 nietknięte); mapping klatka→t_sim odtworzony z segmentów
+  TEMPO każdego klipu (litera raportów; asercja liczby klatek PASS 4/4:
+  353/341/296/341). Podpis stały: „20 neuronów · nie steruje dronem".
+  **AKT 3 celowo BEZ nakładki:** NCP tam leci (controller `net`), ale po
+  REFUSE(POS) steruje OSŁONA (zejście D5) — pas sieci sugerowałby widzowi
+  sterowanie siecią podczas manewru osłony.
+- **AKT 5 — nowy widok (38.2 s, te same segmenty i kotwice co v4):**
+  (1) pierścień PCA z zoomem na medianę projekcji ujęcia + ślad skumulowany
+  + ogon 8 s; (2) kompas „kierunek na cel" z lotu obok pierścienia (krążą
+  razem); (3) **nakładka dwóch krzywych NA ŻYWO: neuron n0 vs sin(kierunku
+  na cel) z lotu — |r| POLICZONA Z TEGO UJĘCIA = 0.96** (atlas 0.95;
+  podpis „opisowe"); (4) **„ŻYWA SIEĆ"**: graf 8 wejść (podpisane) →
+  20 neuronów (puls) → komenda [vn ve vd] z wartościami; krawędzie =
+  top-3 |Wo| per wyjście (struktura stała z wag); (5) sekwencja 4 kroków
+  wzorem admisji v3.1 (kotwice: skan / akwizycja 8.9 s / orbita / n0≈sin).
+  Kotwica ujęcia bez zmian: p95 1.18·10⁻³ (wypalona); linia twierdzeń
+  i napis uczciwości bez zmian (tylko T1/T2, zasada cytowania FREEZE_XAI).
+- **Montaż:** `DEMO_C_v5.mp4` **204.2 s** ≤ 240 (akty 1/2/4a/4b z mini-
+  mózgiem, akt 3 oryginalny v2, akt 5 v5, plansza v4 bez zmian);
+  `DEMO_C_v5_en.srt` (bloki v3.1 + akt 5 + plansza v4); **SHORT:**
+  `DEMO_C_v5_SHORT.mp4` 14.1 s = segment pierścienia [6–34]×2 nowym
+  widokiem (TEMPO ×2 wypalone). Wideo >25 MB łącznie ⇒ **NA DYSKU**
+  (+ kopie na pulpicie), sha256:
+
+| plik (na dysku) | sha256 |
+|---|---|
+| `results/DEMO_C/DEMO_C_v5.mp4` (204.2 s, 63 MB) | `a5b999bddce4c6731eaa723d3792949ec5009a89aca47c97289a0843152691e4` |
+| `results/DEMO_C/DEMO_C_v5_SHORT.mp4` (14.1 s) | `41a82761579ded56a838e5163388eb26d15fe89944751ec5d7dfbc4294316c32` |
+| `clips/akt1_v5.mp4` | `27edd74f507d270d79418e87de36f23bc658e1a419805b1e0ed0b695a252bcf9` |
+| `clips/akt2_v5.mp4` | `016fa4fa67e95075c3bb45cad092c884db3351383a3251126b1776c28752b63e` |
+| `clips/akt4a_v5.mp4` | `eb25a5bbebccba5170360ab2aa9d32bba68de5ab258e4c1ae9ed1b161286f9a6` |
+| `clips/akt4b_v5.mp4` | `79a92de2b674174bbbcee4387923d5ee37490c05c0e98712008c3ca7137f092e` |
+| `clips/akt5_v5.mp4` (38.2 s) | `c11d3afb4e526cd8eff44302e6b9c1b4ff6be3416ea92fa24c0f12021c0e573f` |
+
+**Narzędzie NOWE:** `tools/democ_overlay_v5.py` `1da85a7c295ae049`
+(brain-clip / akt5 / cut; v1–v4 nietykalne). Status v4: pliki wideo v4
+zostają na dysku jako historia montażu (sha w dopisku wyżej), do publikacji
+idzie v5. **STOP-DEMOC-5.**
