@@ -1,0 +1,291 @@
+{
+ "arm": "ncp",
+ "n_ep": 48,
+ "n_tick_infer": 67586,
+ "a_separowalnosc": {
+  "n_approach": 3103,
+  "n_orbit": 64483,
+  "fisher_J": 17.157,
+  "recall_approach": 0.7539,
+  "recall_orbit": 0.7077,
+  "balanced_acc": 0.7308,
+  "silhouette_bal2k": 0.057
+ },
+ "b_pca": {
+  "n_90": 3,
+  "n_95": 5,
+  "var_top5": [
+   0.4995,
+   0.3782,
+   0.0371,
+   0.0347,
+   0.0195
+  ]
+ },
+ "c_role": {
+  "neurony": [
+   {
+    "neuron": 0,
+    "max_korelat": "sin_brg",
+    "abs_r": 0.953,
+    "kategoria": "czytelny"
+   },
+   {
+    "neuron": 1,
+    "max_korelat": "rel_y",
+    "abs_r": 0.775,
+    "kategoria": "czesciowy"
+   },
+   {
+    "neuron": 2,
+    "max_korelat": "sin_brg",
+    "abs_r": 0.871,
+    "kategoria": "czytelny"
+   },
+   {
+    "neuron": 3,
+    "max_korelat": "sin_brg",
+    "abs_r": 0.723,
+    "kategoria": "czesciowy"
+   },
+   {
+    "neuron": 4,
+    "max_korelat": "cos_brg",
+    "abs_r": 0.737,
+    "kategoria": "czesciowy"
+   },
+   {
+    "neuron": 5,
+    "max_korelat": "cos_brg",
+    "abs_r": 0.892,
+    "kategoria": "czytelny"
+   },
+   {
+    "neuron": 6,
+    "max_korelat": "sin_brg",
+    "abs_r": 0.842,
+    "kategoria": "czytelny"
+   },
+   {
+    "neuron": 7,
+    "max_korelat": "own_vn",
+    "abs_r": 0.888,
+    "kategoria": "czytelny"
+   },
+   {
+    "neuron": 8,
+    "max_korelat": "cos_brg",
+    "abs_r": 0.842,
+    "kategoria": "czytelny"
+   },
+   {
+    "neuron": 9,
+    "max_korelat": "sin_brg",
+    "abs_r": 0.837,
+    "kategoria": "czytelny"
+   },
+   {
+    "neuron": 10,
+    "max_korelat": "rel_x",
+    "abs_r": 0.799,
+    "kategoria": "czesciowy"
+   },
+   {
+    "neuron": 11,
+    "max_korelat": "rel_x",
+    "abs_r": 0.913,
+    "kategoria": "czytelny"
+   },
+   {
+    "neuron": 12,
+    "max_korelat": "rel_x",
+    "abs_r": 0.79,
+    "kategoria": "czesciowy"
+   },
+   {
+    "neuron": 13,
+    "max_korelat": "rel_y",
+    "abs_r": 0.895,
+    "kategoria": "czytelny"
+   },
+   {
+    "neuron": 14,
+    "max_korelat": "own_vd",
+    "abs_r": 0.571,
+    "kategoria": "czesciowy"
+   },
+   {
+    "neuron": 15,
+    "max_korelat": "rel_y",
+    "abs_r": 0.85,
+    "kategoria": "czytelny"
+   },
+   {
+    "neuron": 16,
+    "max_korelat": "cos_brg",
+    "abs_r": 0.789,
+    "kategoria": "czesciowy"
+   },
+   {
+    "neuron": 17,
+    "max_korelat": "y_ve",
+    "abs_r": 0.776,
+    "kategoria": "czesciowy"
+   },
+   {
+    "neuron": 18,
+    "max_korelat": "y_ve",
+    "abs_r": 0.838,
+    "kategoria": "czytelny"
+   },
+   {
+    "neuron": 19,
+    "max_korelat": "rel_x",
+    "abs_r": 0.752,
+    "kategoria": "czesciowy"
+   }
+  ],
+  "kategorie": {
+   "czytelny": 11,
+   "czesciowy": 9,
+   "splatany": 0
+  }
+ },
+ "d_bramka": {
+  "gate_mean_approach": [
+   0.44,
+   0.522,
+   0.556,
+   0.52,
+   0.555,
+   0.575,
+   0.642,
+   0.369,
+   0.538,
+   0.46,
+   0.569,
+   0.475,
+   0.601,
+   0.551,
+   0.421,
+   0.586,
+   0.499,
+   0.449,
+   0.465,
+   0.472
+  ],
+  "gate_mean_orbit": [
+   0.477,
+   0.525,
+   0.496,
+   0.488,
+   0.462,
+   0.554,
+   0.494,
+   0.477,
+   0.536,
+   0.466,
+   0.489,
+   0.55,
+   0.547,
+   0.551,
+   0.494,
+   0.509,
+   0.499,
+   0.522,
+   0.528,
+   0.449
+  ],
+  "delta_faz_max": 0.148,
+  "n_przejsc": 42,
+  "skok_granicy_ratio": [
+   1.46,
+   1.29,
+   1.04,
+   3.24,
+   1.9,
+   1.38,
+   2.76,
+   2.55,
+   2.35,
+   2.11,
+   2.0,
+   1.24,
+   1.15,
+   0.92,
+   2.35,
+   1.84,
+   1.38,
+   2.86,
+   2.17,
+   1.61
+  ],
+  "n_neuronow_ratio_gt2": 8
+ },
+ "e_saliency_mean_abs": {
+  "approach": [
+   [
+    2.283,
+    0.257,
+    0.014,
+    0.734,
+    0.07,
+    0.059,
+    0.002,
+    0.787
+   ],
+   [
+    0.177,
+    2.249,
+    0.023,
+    0.124,
+    0.42,
+    0.067,
+    0.003,
+    0.191
+   ],
+   [
+    0.117,
+    0.122,
+    0.029,
+    0.068,
+    0.027,
+    0.122,
+    0.003,
+    0.195
+   ]
+  ],
+  "orbit": [
+   [
+    3.64,
+    0.435,
+    0.015,
+    1.199,
+    0.063,
+    0.053,
+    0.003,
+    0.968
+   ],
+   [
+    0.454,
+    3.275,
+    0.015,
+    0.13,
+    0.543,
+    0.077,
+    0.005,
+    0.229
+   ],
+   [
+    0.113,
+    0.083,
+    0.018,
+    0.078,
+    0.033,
+    0.16,
+    0.002,
+    0.192
+   ]
+  ]
+ }
+}
