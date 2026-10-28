@@ -405,3 +405,22 @@ aktywacje wyłącznie replayem (xai_replay `ac9551ab` importem).
 (brain-clip / akt5 / cut; v1–v4 nietykalne). Status v4: pliki wideo v4
 zostają na dysku jako historia montażu (sha w dopisku wyżej), do publikacji
 idzie v5. **STOP-DEMOC-5.**
+
+### Errata napisu uczciwości v5 (pytanie Olgi na seansie; dopisek append-only)
+
+Napis mini-panelu „20 neuronów · nie steruje dronem" był MYLĄCY (przeczenie
+przyklejało się do sieci, a sieć NCP-20 WŁAŚNIE steruje dronem w aktach
+1/2/4a/4b i w ujęciu aktu 5 — intencją było: nakładka/panel z repleyu nie
+steruje niczym). Poprawione na jednoznaczne: mini-panel „W GŁOWIE SIECI —
+ta sieć PROWADZI lot" / „panel = replay zapisu (nie steruje)"; akt 5:
+„sieć NCP-20 PROWADZIŁA ten lot; panel aktywacji odtworzony deterministycznie
+z zapisu (replay) — sam niczym nie steruje". Pliki v5 PODMIENIONE przed
+publikacją (push nie zaszedł); poza napisami zero zmian. Nowe sha256:
+
+| plik (na dysku) | sha256 |
+|---|---|
+| `DEMO_C_v5.mp4` (204.2 s) | `f437b26a53b887571cd1f7b790a6b5512069e08fa53a047f352179adaef2bb13` |
+| `DEMO_C_v5_SHORT.mp4` (14.1 s) | `05a0a935117f7e6ab25cea42cbd7e69412acb46254cfbef4c7e024083641ca1c` |
+| `clips/akt1_v5.mp4` | `6e996199d5daab0d…` · `akt2_v5` `2c19dc2c911b51f9…` · `akt4a_v5` `0b0202b00bcefd7e…` · `akt4b_v5` `47840c98e525bb48…` · `akt5_v5` `4202d2cb2db84c21…` |
+
+Narzędzie: `democ_overlay_v5.py` po erracie `ec59c027dd0a338a`.

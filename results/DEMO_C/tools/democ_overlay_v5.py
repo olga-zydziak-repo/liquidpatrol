@@ -164,8 +164,8 @@ def brain_clip(in_mp4, out_mp4, bootdir, sid, segments):
         draw_brain(fr, reg, rep["h"][i], rep["y"][i], None, edges, mini=True)
         img = Image.fromarray(cv2.cvtColor(fr, cv2.COLOR_BGR2RGB))
         d = ImageDraw.Draw(img, "RGBA")
-        put(d, (reg[0] + 8, reg[1] + 4), "W GŁOWIE SIECI (replay)", F_S15, (255, 220, 120))
-        put(d, (reg[0] + 8, reg[1] + reg[3] - 22), "20 neuronów · nie steruje dronem",
+        put(d, (reg[0] + 8, reg[1] + 4), "W GŁOWIE SIECI — ta sieć PROWADZI lot", F_S15, (255, 220, 120))
+        put(d, (reg[0] + 8, reg[1] + reg[3] - 22), "panel = replay zapisu (nie steruje)",
             F_S15, (200, 180, 140))
         vw.write(cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR))
     vw.release()
@@ -337,8 +337,9 @@ def render_akt5(bootdir, sid, clip_v2, base_json, out_mp4, segments):
         put(d, (24, 920), "dowiedzione: |komenda| < 3 m/s (T1) · stan ograniczony |h|<1 (T2)"
                           " — status PROVED, różnicówka 0/74 708 ticków", F_B28, (120, 255, 160))
         d.rectangle([0, 962, 1920, 1016], fill=(0, 0, 0, 200))
-        put(d, (24, 966), "aktywacje odtworzone deterministycznie z zapisu lotu (replay) — "
-                          "nakładka nie steruje dronem", F_SML, (255, 200, 120))
+        put(d, (24, 966), "sieć NCP-20 PROWADZIŁA ten lot; panel aktywacji odtworzony "
+                          "deterministycznie z zapisu (replay) — sam niczym nie steruje",
+            F_SML, (255, 200, 120))
         put(d, (24, 990), f"kotwica tego ujęcia: p95 |Δv_replay − Δv_log| = "
                           f"{st['p95'] * 1000:.1f}·10⁻³ m/s (max {st['max'] * 1000:.1f}·10⁻³)",
             F_SML, (255, 200, 120))
