@@ -417,3 +417,24 @@ Prerejestrowane 27.10.2026 (`PRE_XAI.md` §3; ratyfikacja 27.10, sha PRE
 **Suma nogi XAI: 2 ✓ / 2 ✗.** Obie porażki to predykcje postawione
 z konstrukcji blisko monety (0.55 / 0.60) — kalibracja bez wstydu
 (ANEKS_XAI-1 §3).
+
+### Dopisek 28.10.2026 — ERRATUM_XAI-1 §4 (append-only)
+
+- **P-XA-2: ✗ → n.r.** (zmierzona wielkość ≠ prerejestrowana: narzędzia
+  liczyły ∂v_n/∂rel_d po Wb[2,:], bo x₂ = rel_d z litery `bench/features.py`,
+  nie „rel_y"/sin_brg — ERRATUM_XAI-1 §2). Lekcja (a) przy P-XA-2 wycofana —
+  oparta na złej wielkości. Lekcja (b) zostaje tylko w części negatywnej:
+  pudełko całego korpusu × 20-wymiarowe pudełko stanu przy 20k komórek nie
+  certyfikuje nic; teza, że metoda dowozi na małych pudełkach, jest hipotezą
+  do sprawdzenia.
+- **P-XA-3:** nawias lekcji („kontrakcja kroku = echo vs stabilność okresu =
+  generator") nieścisły — kontrakcja kroku to warunek wystarczający
+  zapominania, nie hipoteza pary; właściwa para H-echo / H-gen
+  (ERRATUM_XAI-1 §1). Mechanizm echo-vs-generator: **NIEROZSTRZYGNIĘTE**.
+- **Suma nogi XAI po erracie: 2 ✓ / 1 ✗ / 1 n.r.**
+- Nowe wpisy kalibracyjne CC: (1) obalony warunek wystarczający nie potwierdza
+  hipotezy przeciwnej; (2) twierdzenia o sieci formułować na wielkościach
+  jednoznacznych — pochodna po wejściu (indeks i nazwa z features.py) albo po
+  wielkości fizycznej z jawnym „co trzymamy stałe"; (3) weryfikacja CC
+  sprawdza mapowanie indeks → cecha literą kodu, zanim przelicza liczby —
+  zgodność „co do bitu" na złej cesze nic nie znaczy.

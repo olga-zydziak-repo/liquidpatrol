@@ -349,3 +349,38 @@ następnym uprawnionym dotknięciu pinu) · allowlista procesów jako plik żywy
   frakcje korpusowe już w ręku (21.1% globalnie). **Trigger: decyzja Olgi.**
 - **Nakładka demo „co myśli sieć"** — era montażu; wycena z RECON_XAI §R6(iii)
   aktualna; nieprekomitowana. **Trigger: decyzja Olgi.**
+
+## Dopisek 28.10.2026 — ERRATUM_XAI-1 (korekty A/B; zdanie zamrożone ZASTĄPIONE)
+
+**Zdanie zamrożone do cytowań — zastępuje wersję 27.10 (wyżej) na mocy
+ERRATUM_XAI-1 §3:**
+
+> „NCP-20 ma dwa twierdzenia architektoniczne klasy dowodowej: T1 |y_k| < 3.0
+> i T2 |h_i| < 1 (w IEEE754: ≤) — dowiedzione symbolicznie, potwierdzone
+> różnicówką 0/74 708 ticków i czułe na mutanty — oraz jeden zmierzony
+> kontrprzykład: (T3) kontrakcja w jednym kroku nie zachodzi — w każdym kroku
+> orbity istnieje kierunek o wzmocnieniu ≥ 1 (max ‖J‖₂ 2.58), więc stabilność
+> pierścienia to pytanie o zachowanie wielokrokowe (nazwane, niezmierzone).
+> Znak prawa pościgu (T4) w S1 niezmierzony."
+
+Mechanizm echo-vs-generator: **NIEROZSTRZYGNIĘTE** (korekta A — norma kroku
+≥ 1 nie wyklucza kurczenia iloczynu jakobianów; macierze nienormalne).
+T4: **NIE-SFORMALIZOWANE** — S1 zmierzyło ∂v_n/∂rel_d (x₂ = rel_d z litery
+features.py), nie prawo pościgu (korekta B); T4 nie wolno cytować jako wyniku,
+„prawo pościgu" wyłącznie jako opisowe dominanty saliency z atlasu
+(FREEZE_XAI: wiersz T4 i pkt 3 zasady cytowania tracą ważność na mocy
+ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
+
+**Pozycje XAI przeformułowane (ERRATUM_XAI-1 §5):**
+
+- **XAI-FLOQUET (T3′)** — teraz para hipotez **H-echo / H-gen**, dwa testy
+  przy biurku: (a) zapominanie — replay tych samych lotów z losowych stanów
+  początkowych, warunkowo na zalogowanych wejściach, plus warunkowe widmo
+  Lapunowa; (b) autonomia — wejście zamrożone na wartościach z pasma orbity:
+  punkt stały czy oscylacja.
+- **XAI-ZNAK-PER-FAZA → XAI-ZNAK (T4′)** — prawo pościgu od nowa, na
+  wielkościach jednoznacznych: składowa radialna komendy względem celu jako
+  funkcja dystansu (daleko ⇒ zbliża się; blisko ⇒ nie zbliża się) i kierunek
+  orbity (opisowo). Przesłanka „znak żyje per faza" wycofana.
+- Obie pozycje idą razem jako noga **XAI-II** (`PRE_XAI2.md`); **trigger
+  spełniony decyzją Olgi 28.10.**
