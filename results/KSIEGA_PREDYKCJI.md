@@ -438,3 +438,23 @@ z konstrukcji blisko monety (0.55 / 0.60) — kalibracja bez wstydu
   wielkości fizycznej z jawnym „co trzymamy stałe"; (3) weryfikacja CC
   sprawdza mapowanie indeks → cecha literą kodu, zanim przelicza liczby —
   zgodność „co do bitu" na złej cesze nic nie znaczy.
+
+## NOGA XAI-II — ROZLICZONE przy CO-XAI2 (ANEKS_XAI2-1 §3, 28.10.2026)
+Prerejestrowane 28.10.2026 (`PRE_XAI2.md` §4; ratyfikacja 28.10, sha PRE
+0649deea…0acb); noga zamknięta za 0 bootów:
+- **P-XA2-1 (0.60) ✓** — H-ECHO.
+- **P-XA2-2 (0.55) ✓** — T4a 0/1631.
+- **P-XA2-3 (0.60) n.r.** — n = 8 < 30 (klauzula predykcji). Bez klauzuli
+  byłoby ✗: wszystkie 8 obserwacji przeczą.
+- **P-XA2-4 (0.50) ✓** — T4a certyfikowane na 100% ε-rur (jedyne T4 po
+  różnicówce).
+
+**Suma nogi XAI-II: 3 ✓ / 0 ✗ / 1 n.r.**
+
+Lekcje kalibracyjne: (1) próg minimalnego n chroni przed potwierdzeniem na
+małej próbce, nie przed falsyfikacją — w przyszłych PRE kontrprzykład
+falsyfikuje niezależnie od n, a próg n dotyczy tylko statusu PROVED;
+(2) pokrycie dziedziny (ile ticków w ogóle w niej leży) mierzyć przed
+zamrożeniem progu — to nie jest podglądanie wyniku, a d ≤ 4 m dało się
+wykluczyć przed PRE; (3) etykiety kierunków z kodu sprawdzać geometrią, zanim
+trafią do opisu dla ludzi.

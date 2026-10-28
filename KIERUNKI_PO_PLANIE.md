@@ -384,3 +384,49 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   orbity (opisowo). Przesłanka „znak żyje per faza" wycofana.
 - Obie pozycje idą razem jako noga **XAI-II** (`PRE_XAI2.md`); **trigger
   spełniony decyzją Olgi 28.10.**
+
+## Dopisek stanu katalogu — 28.10.2026 (CO-XAI2, ANEKS_XAI2-1 §5)
+
+- **Noga XAI-II** → **CLOSED, 0 bootów** (S1 0 + CO 0); śmierć S1 nie zaszła
+  (krok 0 PASS 3/3). Dowody: `results/XAI2/RAPORT_XAI2_S1.md`,
+  `results/XAI2/FREEZE_XAI2.md` (statusy + ZASADA CYTOWANIA, pkt 3 zaostrzony
+  przez ANEKS_XAI2-1 §2: T4b wyłącznie z „8/8 obserwacji przeczy").
+  **Zdania zamrożone (ANEKS_XAI2-1 §2, do cytowań):**
+  - **T3′ = H-ECHO:** sieć zapomina swój stan początkowy — 1696/1696 losowych
+    startów (32 × 53 loty) zbiega do trajektorii referencyjnej (mediana 2 s,
+    max 10.3 s, różnica komendy po zbieżności ≤ 3.4·10⁻⁶ m/s), λ₁ < 0
+    w 53/53 lotach (orbita −1.8/s); przy wejściu zamrożonym z pasma orbity
+    punkt stały w 193/200 (7 wielostabilnych, 0 okresowych, ρ ≤ 0.969).
+    Pierścień = odbicie obracającego się wejścia, nie własny rytm sieci.
+    Warunkowo na zalogowanych wejściach; zamrożone wejście = sonda.
+  - **T4a PROVED na ε-rurach:** d ∈ [12, 17.3] m ⇒ v_rad > 0 na 1631/1631
+    tickach (min 2.17 m/s), certyfikowane przedziałowo w otoczeniu każdego
+    (ε_x 0.02, ε_h 0.01; 100%); próba globalna 0% — twierdzenie lokalne.
+  - **T4b NIEROZSTRZYGALNE (n = 8)**, z dowodem przeciwnym w małej próbce:
+    jedyne 8 ticków d ≤ 4 m to narodziny tracku i we wszystkich 8 sieć
+    kieruje w stronę celu; zachowanie z bliska w ustalonym locie nieznane.
+  - **T4c (opisowo):** sieć krąży zawsze w tę samą stronę (dominujący znak
+    53/53, ściśle stały 6/53), zgodność z losowanym kierunkiem nauczyciela
+    28/53 (przypadkowa); „CW" = etykieta konwencji kodu, na mapie z północą
+    u góry ruch przeciwny do wskazówek zegara (ANEKS_XAI2-1 §1.4).
+  **Zdanie programowe XAI po obu nogach:** „NCP-20: dwa twierdzenia
+  architektoniczne (T1: komenda < 3 m/s, T2: |h| < 1) dowiedzione dla
+  każdego wejścia; sieć-echo — na zalogowanych lotach zachowanie nie zależy
+  od stanu początkowego (1696/1696 startów zbieżnych w ≤ 10.3 s); z daleka
+  zawsze kieruje w stronę celu (certyfikowane wokół 1631 ticków)."
+- **XAI-FLOQUET (T3′)** → **CLOSED** (H-ECHO; RAPORT_XAI2_S1 §2–§4).
+- **XAI-ZNAK (T4′)** → **CLOSED** (T4a PROVED na ε-rurach / T4b n.r. /
+  T4c opisowo; RAPORT_XAI2_S1 §5).
+- **Nakładka demo „co myśli sieć"** → **CLOSED** (zrobiona w DEMOC v4/v5,
+  STOP-DEMOC-4/5).
+- **GT-CZYSTOŚĆ** → **backlog §8** (filtr-świadek wystarcza).
+- **Pytanie nazwane (NIE pozycja katalogu, ANEKS_XAI2-1 §4):** czy GRU
+  przegrywa z NCP (48/48 vs 29/48; 19 porażek = niedokręcona orbita), bo przy
+  niejednoznacznym nauczycielu uśrednia dwa kierunki krążenia zamiast wybrać
+  jeden (słabsza składowa styczna)? Test przy biurku: znak i moduł v_tan GRU
+  w paśmie 6–10 m na jego lotach LIQ (replay ramienia GRU) i na wejściach NCP;
+  jedna sesja, 0 bootów. Otwarcie wyłącznie decyzją Olgi, z PRE.
+- Stan: wątek XAI zamknięty w całości (dwie nogi, 0 bootów); katalog
+  11 → 8 otwartych pozycji. Następna noga wg kolejności z 28.10:
+  TOR-CECHY ∪ MULTI-TARGET, decyzja Olgi. Opcjonalnie, nieprekomitowane:
+  nakładka demo „32 starty zlewają się w jedną trajektorię".
