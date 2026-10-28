@@ -1,0 +1,74 @@
+{
+ "tabela": {
+  "M6_odwrocenie": {
+   "opis": "M6: Wo,bo → −Wo,−bo",
+   "T4a": {
+    "n": 1631,
+    "cex": 1631
+   },
+   "T4b": {
+    "n": 8,
+    "cex": 0
+   }
+  },
+  "M1_znak": {
+   "opis": "Wh.flat[101] *= -1",
+   "T4a": {
+    "n": 1631,
+    "cex": 0
+   },
+   "T4b": {
+    "n": 8,
+    "cex": 8
+   }
+  },
+  "M2_skala": {
+   "opis": "wszystkie parametry ×1.5 + vmax ×1.5 (npz-metadana)",
+   "T4a": {
+    "n": 1631,
+    "cex": 7
+   },
+   "T4b": {
+    "n": 8,
+    "cex": 8
+   }
+  },
+  "M3_zero": {
+   "opis": "neuron 10 wyzerowany (kolumny Wg/Wh/Wt + wiersz Wo)",
+   "T4a": {
+    "n": 1631,
+    "cex": 0
+   },
+   "T4b": {
+    "n": 8,
+    "cex": 8
+   }
+  },
+  "M4_glowa": {
+   "opis": "głowa bez tanh: y = zo·vmax",
+   "T4a": {
+    "n": 1631,
+    "cex": 0
+   },
+   "T4b": {
+    "n": 8,
+    "cex": 8
+   }
+  },
+  "M5_bramka": {
+   "opis": "gate = 1.2·σ(zt)",
+   "T4a": {
+    "n": 1631,
+    "cex": 0
+   },
+   "T4b": {
+    "n": 8,
+    "cex": 8
+   }
+  }
+ },
+ "M6_obala_przechodzace": {
+  "T4a": true
+ },
+ "M6_pass": true
+}

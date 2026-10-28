@@ -1,0 +1,507 @@
+{
+ "krok0b": {
+  "scenarios_py_70": "orbit_dir = rng.choice([\"CW\", \"CCW\"])",
+  "konsument": "bench_flight.py:310 → orbit_executor.py:93-96 (nauczyciel); sieć bez tego wejścia (features.py: 8 cech)",
+  "mapowanie_znaku": "CCW nauczyciela ⇒ v_tan<0 (tan=(r̂_e,−r̂_n)=−t̂); CW ⇒ v_tan>0"
+ },
+ "rozn": {
+  "T4a": {
+   "n": 1631,
+   "cex": 0,
+   "przyklady": [],
+   "v_rad_min": 2.1646
+  },
+  "T4b": {
+   "n": 8,
+   "cex": 8,
+   "przyklady": [
+    {
+     "sid": "c09_s02",
+     "t": 188.148,
+     "d": 1.988,
+     "v_rad": 1.8592,
+     "czas_od_1_inferencji_s": 0.0
+    },
+    {
+     "sid": "c09_s02",
+     "t": 188.2,
+     "d": 1.979,
+     "v_rad": 1.3269,
+     "czas_od_1_inferencji_s": 0.052
+    },
+    {
+     "sid": "c09_s03",
+     "t": 189.476,
+     "d": 0.571,
+     "v_rad": 0.8089,
+     "czas_od_1_inferencji_s": 0.0
+    }
+   ],
+   "v_rad_max": 1.8592
+  },
+  "d_korpus": [
+   0.57,
+   17.321
+  ]
+ },
+ "T4c": {
+  "epizody": [
+   {
+    "sid": "c00_s01",
+    "n_band": 1359,
+    "frac_vtan_ujemne": 0.1876,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c01_s01",
+    "n_band": 1365,
+    "frac_vtan_ujemne": 0.0542,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c02_s01",
+    "n_band": 1371,
+    "frac_vtan_ujemne": 0.0591,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c03_s01",
+    "n_band": 1370,
+    "frac_vtan_ujemne": 0.2766,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c04_s01",
+    "n_band": 1370,
+    "frac_vtan_ujemne": 0.0898,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c05_s01",
+    "n_band": 1366,
+    "frac_vtan_ujemne": 0.0498,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c06_s01",
+    "n_band": 1328,
+    "frac_vtan_ujemne": 0.0053,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c07_s01",
+    "n_band": 1321,
+    "frac_vtan_ujemne": 0.0015,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c08_s01",
+    "n_band": 1291,
+    "frac_vtan_ujemne": 0.0558,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c09_s01",
+    "n_band": 1348,
+    "frac_vtan_ujemne": 0.4073,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c10_s01",
+    "n_band": 1314,
+    "frac_vtan_ujemne": 0.3904,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c11_s01",
+    "n_band": 1293,
+    "frac_vtan_ujemne": 0.007,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c00_s02",
+    "n_band": 1369,
+    "frac_vtan_ujemne": 0.225,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c01_s02",
+    "n_band": 1370,
+    "frac_vtan_ujemne": 0.0248,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c02_s02",
+    "n_band": 1365,
+    "frac_vtan_ujemne": 0.3714,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c03_s02",
+    "n_band": 1364,
+    "frac_vtan_ujemne": 0.0007,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c04_s02",
+    "n_band": 1364,
+    "frac_vtan_ujemne": 0.1092,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c05_s02",
+    "n_band": 1319,
+    "frac_vtan_ujemne": 0.0,
+    "staly_znak": true,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c06_s02",
+    "n_band": 1363,
+    "frac_vtan_ujemne": 0.0433,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c07_s02",
+    "n_band": 1369,
+    "frac_vtan_ujemne": 0.0,
+    "staly_znak": true,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c08_s02",
+    "n_band": 1345,
+    "frac_vtan_ujemne": 0.1108,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c09_s02",
+    "n_band": 1324,
+    "frac_vtan_ujemne": 0.0008,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c10_s02",
+    "n_band": 1296,
+    "frac_vtan_ujemne": 0.3056,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c11_s02",
+    "n_band": 1183,
+    "frac_vtan_ujemne": 0.0017,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c00_s03",
+    "n_band": 1370,
+    "frac_vtan_ujemne": 0.1701,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c01_s03",
+    "n_band": 1365,
+    "frac_vtan_ujemne": 0.0227,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c02_s03",
+    "n_band": 1373,
+    "frac_vtan_ujemne": 0.0,
+    "staly_znak": true,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c03_s03",
+    "n_band": 1369,
+    "frac_vtan_ujemne": 0.2031,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c04_s03",
+    "n_band": 1367,
+    "frac_vtan_ujemne": 0.0863,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c05_s03",
+    "n_band": 1365,
+    "frac_vtan_ujemne": 0.0132,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c06_s03",
+    "n_band": 1367,
+    "frac_vtan_ujemne": 0.0007,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c07_s03",
+    "n_band": 1358,
+    "frac_vtan_ujemne": 0.0,
+    "staly_znak": true,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c08_s03",
+    "n_band": 1306,
+    "frac_vtan_ujemne": 0.059,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c09_s03",
+    "n_band": 1342,
+    "frac_vtan_ujemne": 0.0253,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c10_s03",
+    "n_band": 1321,
+    "frac_vtan_ujemne": 0.0015,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c11_s03",
+    "n_band": 1321,
+    "frac_vtan_ujemne": 0.0931,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c00_s04",
+    "n_band": 1363,
+    "frac_vtan_ujemne": 0.1864,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c01_s04",
+    "n_band": 1364,
+    "frac_vtan_ujemne": 0.0242,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c02_s04",
+    "n_band": 1369,
+    "frac_vtan_ujemne": 0.0044,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c03_s04",
+    "n_band": 1367,
+    "frac_vtan_ujemne": 0.0015,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c04_s04",
+    "n_band": 1368,
+    "frac_vtan_ujemne": 0.0658,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c05_s04",
+    "n_band": 1321,
+    "frac_vtan_ujemne": 0.0189,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c06_s04",
+    "n_band": 1332,
+    "frac_vtan_ujemne": 0.0023,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c07_s04",
+    "n_band": 1323,
+    "frac_vtan_ujemne": 0.0008,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c08_s04",
+    "n_band": 1323,
+    "frac_vtan_ujemne": 0.1655,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c09_s04",
+    "n_band": 1275,
+    "frac_vtan_ujemne": 0.2329,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c10_s04",
+    "n_band": 1311,
+    "frac_vtan_ujemne": 0.0015,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c11_s04",
+    "n_band": 1234,
+    "frac_vtan_ujemne": 0.0041,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c00_s01",
+    "n_band": 1378,
+    "frac_vtan_ujemne": 0.1836,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c01_s01",
+    "n_band": 1377,
+    "frac_vtan_ujemne": 0.0269,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c02_s01",
+    "n_band": 1377,
+    "frac_vtan_ujemne": 0.0,
+    "staly_znak": true,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   },
+   {
+    "sid": "c03_s01",
+    "n_band": 1378,
+    "frac_vtan_ujemne": 0.0,
+    "staly_znak": true,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CCW"
+   },
+   {
+    "sid": "c08_s03",
+    "n_band": 1328,
+    "frac_vtan_ujemne": 0.0617,
+    "staly_znak": false,
+    "kierunek_sieci": "CW",
+    "orbit_dir_scenariusza": "CW"
+   }
+  ],
+  "agregaty": {
+   "n_epizodow_w_pasmie": 53,
+   "frakcja_staly_znak": 0.1132,
+   "frakcja_kierunek_CCW": 0.0,
+   "frakcja_zgodna_z_orbit_dir": 0.5283
+  }
+ },
+ "T4a": {
+  "n": 1631,
+  "cex": 0,
+  "eps_rury": {
+   "n_rur": 1631,
+   "n_cert": 1631,
+   "pct": 100.0
+  },
+  "proba_globalna": {
+   "budzet": 20000,
+   "komorki": 20000,
+   "d_zakres": [
+    12.0,
+    17.821
+   ],
+   "pct_objetosci_cert": 0.0
+  },
+  "status": "PROVED"
+ },
+ "T4b": {
+  "n": 8,
+  "cex": 8,
+  "eps_rury": null,
+  "proba_globalna": null,
+  "status": "NIEROZSTRZYGALNE"
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "i_mapowanie": {
+  "tabela": [
+   {
+    "i": 0,
+    "nazwa": "rel_n (rel_x)",
+    "mean": -0.04765,
+    "std": 6.10061
+   },
+   {
+    "i": 1,
+    "nazwa": "rel_e (rel_y)",
+    "mean": 0.04715,
+    "std": 6.03381
+   },
+   {
+    "i": 2,
+    "nazwa": "rel_d (rel_z)",
+    "mean": 1.94211,
+    "std": 0.50327
+   },
+   {
+    "i": 3,
+    "nazwa": "own_vn",
+    "mean": -0.00949,
+    "std": 1.39351
+   },
+   {
+    "i": 4,
+    "nazwa": "own_ve",
+    "mean": -0.00012,
+    "std": 1.38686
+   },
+   {
+    "i": 5,
+    "nazwa": "own_vd",
+    "mean": -0.03456,
+    "std": 0.16031
+   },
+   {
+    "i": 6,
+    "nazwa": "track_age_s",
+    "mean": 0.03205,
+    "std": 0.04976
+   },
+   {
+    "i": 7,
+    "nazwa": "track_valid",
+    "mean": 0.99872,
+    "std": 0.03578
+   }
+  ],
+  "pass": true
+ },
+ "ii_replay_wlasny": {
+  "max_dy": 0.0,
+  "prog": 1e-12,
+  "pass": true
+ },
+ "iii_kontrole_klasyfikatora": {
+  "obrot_2d": {
+   "klasa": "OKRESOWY",
+   "p": 50,
+   "oczekiwane": "OKRESOWY p=50"
+  },
+  "kontrakcja": {
+   "klasa": "PUNKT_STALY",
+   "oczekiwane": "PUNKT_STALY"
+  },
+  "pass": true
+ },
+ "pass": true
+}

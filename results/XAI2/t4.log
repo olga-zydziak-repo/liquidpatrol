@@ -1,0 +1,12 @@
+diff: {"T4a": {"n": 1631, "cex": 0}, "T4b": {"n": 8, "cex": 8}}
+T4a rury: {'n_rur': 1631, 'n_cert': 1631, 'pct': 100.0} global: {'budzet': 20000, 'komorki': 20000, 'd_zakres': [12.0, 17.821], 'pct_objetosci_cert': 0.0}
+T4a STATUS: PROVED
+T4b STATUS: NIEROZSTRZYGALNE
+[zapis] results/XAI2/t4.json
+M6_odwrocenie {'opis': 'M6: Wo,bo → −Wo,−bo', 'T4a': {'n': 1631, 'cex': 1631}, 'T4b': {'n': 8, 'cex': 0}}
+M1_znak {'opis': 'Wh.flat[101] *= -1', 'T4a': {'n': 1631, 'cex': 0}, 'T4b': {'n': 8, 'cex': 8}}
+M2_skala {'opis': 'wszystkie parametry ×1.5 + vmax ×1.5 (npz-metadana)', 'T4a': {'n': 1631, 'cex': 7}, 'T4b': {'n': 8, 'cex': 8}}
+M3_zero {'opis': 'neuron 10 wyzerowany (kolumny Wg/Wh/Wt + wiersz Wo)', 'T4a': {'n': 1631, 'cex': 0}, 'T4b': {'n': 8, 'cex': 8}}
+M4_glowa {'opis': 'głowa bez tanh: y = zo·vmax', 'T4a': {'n': 1631, 'cex': 0}, 'T4b': {'n': 8, 'cex': 8}}
+M5_bramka {'opis': 'gate = 1.2·σ(zt)', 'T4a': {'n': 1631, 'cex': 0}, 'T4b': {'n': 8, 'cex': 8}}
+[zapis] results/XAI2/mutanty.json

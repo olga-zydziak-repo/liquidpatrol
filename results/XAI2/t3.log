@@ -1,0 +1,10 @@
+KROK0(i) mapowanie: PASS
+KROK0(ii) max|Δy|=0.000e+00 PASS
+KROK0(iii): {'obrot_2d': {'klasa': 'OKRESOWY', 'p': 50, 'oczekiwane': 'OKRESOWY p=50'}, 'kontrakcja': {'klasa': 'PUNKT_STALY', 'oczekiwane': 'PUNKT_STALY'}, 'pass': True}
+[zapis] results/XAI2/krok0.json
+T3'(a): 1.0 {'p50': 2.044, 'p90': 6.708, 'max': 10.3} {'approach': {'lambda1': -5.9852, 'dt_sum_s': 165.4}, 'orbit': {'lambda1': -1.8153, 'dt_sum_s': 3641.7}}
+T3'(b): {'orbit': {'n': 200, 'klasy': {'PUNKT_STALY': 193, 'WIELOSTABILNY': 7}, 'frakcja_punkt_staly': 0.965, 'frakcja_okresowy': 0.0, 'rho_max': 0.968577, 'rho_p50': 0.892607}, 'approach': {'n': 50, 'klasy': {'PUNKT_STALY': 50}, 'frakcja_punkt_staly': 1.0, 'frakcja_okresowy': 0.0, 'rho_max': 0.923524, 'rho_p50': 0.790987}} WERDYKT: H-ECHO
+M7 k=2: MIESZANY a= 1.0 orbit= {'WIELOSTABILNY': 173, 'PUNKT_STALY': 26, 'INNY': 1}
+M7 k=3: MIESZANY a= 0.918042 orbit= {'INNY': 16, 'WIELOSTABILNY': 99, 'OKRESOWY': 74, 'PUNKT_STALY': 11}
+M7 k=5: H-GEN a= 0.458137 orbit= {'OKRESOWY': 199, 'INNY': 1}
+[zapis] results/XAI2/t3.json
