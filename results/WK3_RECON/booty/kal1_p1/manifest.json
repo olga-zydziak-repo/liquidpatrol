@@ -1,0 +1,83 @@
+{
+  "kind": "wk2_kalib",
+  "flight": "bench",
+  "boot": 1,
+  "rc": 0,
+  "arm": "E",
+  "point": "0.0",
+  "harness_file": "/home/olga/projects/liquidpatrol/bench/bench_flight.py",
+  "sha_harness": "05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43",
+  "controller": "orbit",
+  "controller_sha": "840514361e4ae5e93ddbb0dd31a7dae81832805b90abccc334d84bbd043730d4",
+  "feed_sha": "da9ef2f4466eac87acf298e80000ad19430d69fe9c12c6ae3d7de8a0ced250c9",
+  "executor_params_sha": "5a7244996d89be70bd720a2b0eb8b6f6dea1a2d8f3f2fd7cf356292426f28716",
+  "ulog_sha": "998b4f64c01ccc2a9287b81ab44baae15551bdc4760c6fdf052661c524fae7ea",
+  "ulog_bytes": 59856395,
+  "world_hash": "fe96b0965ccce76aa49db44cd1d5200761356a7a1829efc996359a90e69f2105  worlds/world_wk3_p1.sdf",
+  "world_ref": "worlds/world_wk3_p1.sdf",
+  "proc_gate": "CLEAN loadavg=0.15 (cpu_max=2.0, load1_max=1.5)",
+  "n_demo_rows": 1438,
+  "n_episodes": 1,
+  "n_valid_V2p": 1,
+  "n_success_D6": 1,
+  "episodes": [
+    {
+      "episode_id": 0,
+      "scenario_id": "c00_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 1,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9986,
+      "d_min_m": 8.335,
+      "refuse_count": 0,
+      "breach": false
+    }
+  ],
+  "world_hash_kind": "repo",
+  "model_in_state": true,
+  "wk2": {
+    "rola": "POMIAR WIATRU/FIZYKI (PROMPT_WK3_S0 \u00a7R3) \u2014 nauczyciel, feed emulowany; zero miar misji",
+    "controller": "orbit",
+    "orbit_executor_sha256": "840514361e4ae5e93ddbb0dd31a7dae81832805b90abccc334d84bbd043730d4",
+    "registry_sha256": "87203d292ac9c9169c6e986e22b534c6c578fd4a597720c2df89cec5d7749bd9",
+    "feed": "B (emulowany, bench_flight.py:315)",
+    "percep_feed_sha256": "4f7fb7e723317f61fcb0528aacbc51062dd17c6b1cdf71bb73d2ac85d119cbb9",
+    "nota_percep": "percep+most+sonda przed uzbrojeniem (rytua\u0142 OPS); percep NIE karmi kontrolera"
+  },
+  "perc2": {
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profile": "/home/olga/projects/liquidpatrol/results/PERC2/tools/perc2_fastdds_profile.xml",
+    "sonda_preflight_rc": 0,
+    "sondy": [
+      {
+        "proba": "preflight",
+        "sonda": {
+          "label": "preflight_kal1_p1",
+          "feed": "/home/olga/projects/liquidpatrol/results/WK3_RECON/booty/kal1_p1/percep_feed.jsonl",
+          "tryb": "live window=35.0s",
+          "prog_frozen": {
+            "dt_p50_max_s_na_klatke": 0.07,
+            "frac_delt_gt_0p10_max": 0.05
+          },
+          "n_delt": 504,
+          "dt_p50_s_na_klatke": 0.068,
+          "dt_p90_s_na_klatke": 0.068,
+          "frac_delt_gt_0p10": 0.002,
+          "hz_p50": 14.71,
+          "span_sim_s": 35.2,
+          "werdykt": "PASS"
+        }
+      }
+    ],
+    "uzbrojony_po_sondzie": true
+  },
+  "wk": {
+    "world": "world_wk3_p1",
+    "world_sha256": "fe96b0965ccce76aa49db44cd1d5200761356a7a1829efc996359a90e69f2105",
+    "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+  }
+}

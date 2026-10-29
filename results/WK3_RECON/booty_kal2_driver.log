@@ -1,0 +1,14 @@
+[perc2S2 kal2_p2] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[wk kal2_p2] PIN OK x500_base(wind)=13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214 świat world_wk3_p2=e47ef38030c5095d9a5f09e86349a07a2aadda5c7ec2c085d906553dcbb179dc
+[perc2S2 kal2_p2 19:40:27] cooldown 281s
+[perc2S2 kal2_p2 19:45:08] czekam na SUSTAINED CLEAN (3× co 30s)...
+[perc2S2 kal2_p2 19:46:23] SUSTAINED CLEAN
+[perc2S2 kal2_p2] run_boot pid=124808 eps=0 (FEED=B emulowany, CONTROLLER=orbit — nauczyciel)
+[perc2S2 kal2_p2] PRZED uzbrojeniem: bridge pid=125558 percep pid=125559 — sonda kadencji LIVE 35 s
+[perc2S2 kal2_p2 19:47:23] sonda preflight rc=0 (0=PASS)
+results/WK3_RECON/tools/wk3_calib_boot.sh: line 155: 125558 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[perc2S2 kal2_p2 19:50:13] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b2] DONE flight=bench world=world_wk3_p2 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/WK3_RECON/booty/kal2_p2
+[perc2] manifest: sonda_rc=0 pin=3354ae1e bloki fantom/feed_v2/perc2 wpisane
+[perc2S2 kal2_p2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/WK3_RECON/booty/kal2_p2

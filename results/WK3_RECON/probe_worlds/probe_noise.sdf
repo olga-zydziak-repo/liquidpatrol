@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<sdf version="1.9">
+  <world name="probe_noise">
+    <physics type="ode"><max_step_size>0.004</max_step_size><real_time_factor>1.0</real_time_factor><real_time_update_rate>250</real_time_update_rate></physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-wind-effects-system" name="gz::sim::systems::WindEffects">
+      <force_approximation_scaling_factor>0.63</force_approximation_scaling_factor>
+      <horizontal><magnitude><time_for_rise>0.01</time_for_rise><noise type="gaussian"><mean>0</mean><stddev>0.5</stddev></noise></magnitude></horizontal>
+    </plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <model name="probe">
+      <pose>0 0 50 0 0 0</pose>
+      <link name="body">
+        <gravity>false</gravity>
+        <enable_wind>true</enable_wind>
+        <inertial><mass>1.0</mass><inertia><ixx>0.01</ixx><iyy>0.01</iyy><izz>0.01</izz></inertia></inertial>
+      </link>
+      <plugin filename="gz-sim-pose-publisher-system" name="gz::sim::systems::PosePublisher">
+        <publish_link_pose>false</publish_link_pose><publish_model_pose>true</publish_model_pose>
+        <use_pose_vector_msg>false</use_pose_vector_msg><update_frequency>100</update_frequency>
+      </plugin>
+    </model>
+    <wind><linear_velocity>2 0 0</linear_velocity></wind>
+  </world>
+</sdf>

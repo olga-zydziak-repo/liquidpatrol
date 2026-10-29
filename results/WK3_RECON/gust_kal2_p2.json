@@ -1,0 +1,56 @@
+{
+ "boot": "results/WK3_RECON/booty/kal2_p2",
+ "n": 8755,
+ "litera_sdf": {
+  "W0": 2.0,
+  "A_frac": 0.8,
+  "Pm_s": 4.0,
+  "Ad_deg": 30.0,
+  "Pd_s": 11.0
+ },
+ "k_przy_wietrze_z_litery_bez_wyrazu": 0.489,
+ "k_przy_wietrze_z_litery_z_wyrazem": 0.4854,
+ "bias_NE_przy_literze": [
+  -0.0975,
+  0.0077
+ ],
+ "k_przy_zalozeniu_wiatru_stalego": 0.4089,
+ "bias_NE_wiatr_staly": [
+  -0.0938,
+  0.894
+ ],
+ "wiatr_odtworzony_przez_drona_mag": {
+  "srednia": 2.017,
+  "amplituda": 1.617,
+  "faza_deg": -0.8,
+  "resid_std": 0.2074
+ },
+ "wiatr_litera_mag_w_tych_chwilach": {
+  "srednia": 2.0,
+  "amplituda": 1.6,
+  "faza_deg": -0.0,
+  "resid_std": 0.0
+ },
+ "residuum_wiatru_odtw_vs_litera_m_s": {
+  "p50": 0.3181,
+  "p95": 0.6662
+ },
+ "odpowiedz_predkosci_E_przy_okresie_porywu": {
+  "srednia": 0.0925,
+  "amplituda": 0.3608,
+  "faza_deg": -9.6,
+  "resid_std": 1.1983
+ },
+ "przechyl_orbita_p50_p95_max": [
+  7.74,
+  16.28,
+  34.63
+ ],
+ "frac_probek_v_ponizej_V_MIN": 0.001,
+ "wiatr_odtworzony_kierunek": {
+  "srednia": -5.4707,
+  "amplituda": 31.4455,
+  "faza_deg": 1.6,
+  "resid_std": 17.1067
+ }
+}

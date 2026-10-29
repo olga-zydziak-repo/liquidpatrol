@@ -1,0 +1,32 @@
+[perc2S2 kal1_p1] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[wk kal1_p1] PIN OK x500_base(wind)=13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214 świat world_wk3_p1=fe96b0965ccce76aa49db44cd1d5200761356a7a1829efc996359a90e69f2105
+[perc2S2 kal1_p1 19:34:59] cooldown 0s
+[perc2S2 kal1_p1 19:34:59] czekam na SUSTAINED CLEAN (3× co 30s)...
+[perc2S2 kal1_p1 19:35:04] CLEAN 1/3
+[perc2S2 kal1_p1 19:35:39] CLEAN 2/3
+[perc2S2 kal1_p1 19:36:14] CLEAN 3/3
+[perc2S2 kal1_p1 19:36:14] SUSTAINED CLEAN
+[perc2S2 kal1_p1] run_boot pid=120830 eps=0 (FEED=B emulowany, CONTROLLER=orbit — nauczyciel)
+[perc2S2 kal1_p1] PRZED uzbrojeniem: bridge pid=121592 percep pid=121593 — sonda kadencji LIVE 35 s
+{"label": "preflight_kal1_p1", "feed": "/home/olga/projects/liquidpatrol/results/WK3_RECON/booty/kal1_p1/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 504, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.002, "hz_p50": 14.71, "span_sim_s": 35.2, "werdykt": "PASS"}
+[perc2S2 kal1_p1 19:37:16] sonda preflight rc=0 (0=PASS)
+[perc2S2 kal1_p1 19:40:08] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b1] DONE flight=bench world=world_wk3_p1 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/WK3_RECON/booty/kal1_p1
+[perc2S2 kal1_p1] DONE rc=0 → /home/olga/projects/liquidpatrol/results/WK3_RECON/booty/kal1_p1
+[perc2S2 kal2_p2] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[wk kal2_p2] PIN OK x500_base(wind)=13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214 świat world_wk3_p2=e47ef38030c5095d9a5f09e86349a07a2aadda5c7ec2c085d906553dcbb179dc
+[perc2S2 kal2_p2 19:40:27] cooldown 281s
+[perc2S2 kal2_p2 19:45:08] czekam na SUSTAINED CLEAN (3× co 30s)...
+[perc2S2 kal2_p2 19:45:13] CLEAN 1/3
+[perc2S2 kal2_p2 19:45:48] CLEAN 2/3
+[perc2S2 kal2_p2 19:46:23] CLEAN 3/3
+[perc2S2 kal2_p2 19:46:23] SUSTAINED CLEAN
+[perc2S2 kal2_p2] run_boot pid=124808 eps=0 (FEED=B emulowany, CONTROLLER=orbit — nauczyciel)
+[perc2S2 kal2_p2] PRZED uzbrojeniem: bridge pid=125558 percep pid=125559 — sonda kadencji LIVE 35 s
+{"label": "preflight_kal2_p2", "feed": "/home/olga/projects/liquidpatrol/results/WK3_RECON/booty/kal2_p2/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 495, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.002, "hz_p50": 14.71, "span_sim_s": 33.9, "werdykt": "PASS"}
+[perc2S2 kal2_p2 19:47:23] sonda preflight rc=0 (0=PASS)
+[perc2S2 kal2_p2 19:50:13] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b2] DONE flight=bench world=world_wk3_p2 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/WK3_RECON/booty/kal2_p2
+[perc2S2 kal2_p2] DONE rc=0 → /home/olga/projects/liquidpatrol/results/WK3_RECON/booty/kal2_p2
