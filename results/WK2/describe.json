@@ -1,0 +1,416 @@
+[
+ {
+  "boot": "results/WK2/booty/g0_b1",
+  "wk": {
+   "world": "world_wk2_s063_s0",
+   "world_sha256": "73205686cb62b303b4fb85225b6a07abfce9991ea4b0222126b663c0346787c3",
+   "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+   "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+   "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+  },
+  "pin_mono_cam": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+  "world_hash_txt": "73205686cb62b303b4fb85225b6a07abfce9991ea4b0222126b663c0346787c3  worlds/world_wk2_s063_s0.sdf",
+  "sonda_preflight_rc": 0,
+  "uzbrojony_po_sondzie": true,
+  "sonda": {
+   "dt_p50_s_na_klatke": 0.068,
+   "frac_delt_gt_0p10": 0.002,
+   "hz_p50": 14.71,
+   "werdykt": "PASS"
+  },
+  "n_episodes": 4,
+  "n_valid_V2p": 4,
+  "wiatr": {
+   "hold_n": 555,
+   "hold_ciag_N_sr": -0.0006,
+   "hold_ciag_E_sr": -0.0001,
+   "hold_przechyl_p50": 0.362,
+   "hold_przechyl_p95": 0.783,
+   "hold_dryf_p50_m": 0.475,
+   "hold_dryf_p95_m": 0.879
+  },
+  "przechyl_aktywny_p50": 5.429,
+  "przechyl_aktywny_p95": 7.589,
+  "percep": {
+   "n_frames": 7244,
+   "n_box": 6219,
+   "n_ENTRY": 5,
+   "frac_mti_ok": 0.6463
+  },
+  "epizody": [
+   {
+    "scenario_id": "c00_s01",
+    "alt_max_m": 13.691,
+    "cmd_vz_med": -0.044,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c01_s01",
+    "alt_max_m": 13.433,
+    "cmd_vz_med": -0.028,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c02_s01",
+    "alt_max_m": 12.934,
+    "cmd_vz_med": -0.033,
+    "t_pierwszy_track_valid_s": 9.048,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c03_s01",
+    "alt_max_m": 12.943,
+    "cmd_vz_med": -0.032,
+    "t_pierwszy_track_valid_s": 13.468,
+    "w_kadrze_frac": 1.0
+   }
+  ]
+ },
+ {
+  "boot": "results/WK2/booty/g0_b2",
+  "wk": {
+   "world": "world_wk2_s063_s0",
+   "world_sha256": "73205686cb62b303b4fb85225b6a07abfce9991ea4b0222126b663c0346787c3",
+   "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+   "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+   "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+  },
+  "pin_mono_cam": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+  "world_hash_txt": "73205686cb62b303b4fb85225b6a07abfce9991ea4b0222126b663c0346787c3  worlds/world_wk2_s063_s0.sdf",
+  "sonda_preflight_rc": 0,
+  "uzbrojony_po_sondzie": true,
+  "sonda": {
+   "dt_p50_s_na_klatke": 0.068,
+   "frac_delt_gt_0p10": 0.002,
+   "hz_p50": 14.71,
+   "werdykt": "PASS"
+  },
+  "n_episodes": 4,
+  "n_valid_V2p": 4,
+  "wiatr": {
+   "hold_n": 510,
+   "hold_ciag_N_sr": -0.0012,
+   "hold_ciag_E_sr": -0.0005,
+   "hold_przechyl_p50": 0.367,
+   "hold_przechyl_p95": 0.751,
+   "hold_dryf_p50_m": 0.405,
+   "hold_dryf_p95_m": 0.56
+  },
+  "przechyl_aktywny_p50": 5.515,
+  "przechyl_aktywny_p95": 7.942,
+  "percep": {
+   "n_frames": 6908,
+   "n_box": 6158,
+   "n_ENTRY": 6,
+   "frac_mti_ok": 0.6497
+  },
+  "epizody": [
+   {
+    "scenario_id": "c04_s01",
+    "alt_max_m": 13.505,
+    "cmd_vz_med": -0.0285,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c05_s01",
+    "alt_max_m": 13.319,
+    "cmd_vz_med": 0.0305,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c06_s01",
+    "alt_max_m": 12.593,
+    "cmd_vz_med": -0.058,
+    "t_pierwszy_track_valid_s": 8.736,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c07_s01",
+    "alt_max_m": 13.049,
+    "cmd_vz_med": -0.018,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   }
+  ]
+ },
+ {
+  "boot": "results/WK2/booty/g15_b1",
+  "wk": {
+   "world": "world_wk2_s063_s1p5",
+   "world_sha256": "b8a9c8b7de4c99390e8e37322eb559ea5871777e4190a1ffaa40cc7325563722",
+   "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+   "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+   "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+  },
+  "pin_mono_cam": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+  "world_hash_txt": "b8a9c8b7de4c99390e8e37322eb559ea5871777e4190a1ffaa40cc7325563722  worlds/world_wk2_s063_s1p5.sdf",
+  "sonda_preflight_rc": 0,
+  "uzbrojony_po_sondzie": true,
+  "sonda": {
+   "dt_p50_s_na_klatke": 0.068,
+   "frac_delt_gt_0p10": 0.002,
+   "hz_p50": 14.71,
+   "werdykt": "PASS"
+  },
+  "n_episodes": 4,
+  "n_valid_V2p": 4,
+  "wiatr": {
+   "hold_n": 1015,
+   "hold_ciag_N_sr": 0.0007,
+   "hold_ciag_E_sr": -0.0752,
+   "hold_przechyl_p50": 4.341,
+   "hold_przechyl_p95": 4.925,
+   "hold_dryf_p50_m": 0.985,
+   "hold_dryf_p95_m": 1.24
+  },
+  "przechyl_aktywny_p50": 7.705,
+  "przechyl_aktywny_p95": 11.397,
+  "percep": {
+   "n_frames": 7375,
+   "n_box": 6232,
+   "n_ENTRY": 5,
+   "frac_mti_ok": 0.6156
+  },
+  "epizody": [
+   {
+    "scenario_id": "c00_s01",
+    "alt_max_m": 12.329,
+    "cmd_vz_med": -0.051,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c01_s01",
+    "alt_max_m": 12.049,
+    "cmd_vz_med": -0.051,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 0.9961
+   },
+   {
+    "scenario_id": "c02_s01",
+    "alt_max_m": 11.745,
+    "cmd_vz_med": -0.051,
+    "t_pierwszy_track_valid_s": 12.248,
+    "w_kadrze_frac": 0.9902
+   },
+   {
+    "scenario_id": "c03_s01",
+    "alt_max_m": 11.93,
+    "cmd_vz_med": -0.038,
+    "t_pierwszy_track_valid_s": 30.664,
+    "w_kadrze_frac": 1.0
+   }
+  ]
+ },
+ {
+  "boot": "results/WK2/booty/g15_b2",
+  "wk": {
+   "world": "world_wk2_s063_s1p5",
+   "world_sha256": "b8a9c8b7de4c99390e8e37322eb559ea5871777e4190a1ffaa40cc7325563722",
+   "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+   "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+   "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+  },
+  "pin_mono_cam": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+  "world_hash_txt": "b8a9c8b7de4c99390e8e37322eb559ea5871777e4190a1ffaa40cc7325563722  worlds/world_wk2_s063_s1p5.sdf",
+  "sonda_preflight_rc": 0,
+  "uzbrojony_po_sondzie": true,
+  "sonda": {
+   "dt_p50_s_na_klatke": 0.068,
+   "frac_delt_gt_0p10": 0.002,
+   "hz_p50": 14.71,
+   "werdykt": "PASS"
+  },
+  "n_episodes": 4,
+  "n_valid_V2p": 4,
+  "wiatr": {
+   "hold_n": 914,
+   "hold_ciag_N_sr": 0.0002,
+   "hold_ciag_E_sr": -0.0745,
+   "hold_przechyl_p50": 4.292,
+   "hold_przechyl_p95": 4.854,
+   "hold_dryf_p50_m": 0.74,
+   "hold_dryf_p95_m": 0.883
+  },
+  "przechyl_aktywny_p50": 6.63,
+  "przechyl_aktywny_p95": 11.065,
+  "percep": {
+   "n_frames": 7204,
+   "n_box": 6371,
+   "n_ENTRY": 5,
+   "frac_mti_ok": 0.6506
+  },
+  "epizody": [
+   {
+    "scenario_id": "c04_s01",
+    "alt_max_m": 12.707,
+    "cmd_vz_med": -0.036,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c05_s01",
+    "alt_max_m": 12.445,
+    "cmd_vz_med": -0.009,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c06_s01",
+    "alt_max_m": 12.041,
+    "cmd_vz_med": 0.038,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c07_s01",
+    "alt_max_m": 12.322,
+    "cmd_vz_med": -0.015,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   }
+  ]
+ },
+ {
+  "boot": "results/WK2/booty/g3_b1",
+  "wk": {
+   "world": "world_wk2_s063_s3",
+   "world_sha256": "f8ccc51ca0e47a1a8edaf7418cc6882a89786cd17d6701c9716150698014b164",
+   "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+   "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+   "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+  },
+  "pin_mono_cam": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+  "world_hash_txt": "f8ccc51ca0e47a1a8edaf7418cc6882a89786cd17d6701c9716150698014b164  worlds/world_wk2_s063_s3.sdf",
+  "sonda_preflight_rc": 0,
+  "uzbrojony_po_sondzie": true,
+  "sonda": {
+   "dt_p50_s_na_klatke": 0.068,
+   "frac_delt_gt_0p10": 0.002,
+   "hz_p50": 14.71,
+   "werdykt": "PASS"
+  },
+  "n_episodes": 4,
+  "n_valid_V2p": 4,
+  "wiatr": {
+   "hold_n": 658,
+   "hold_ciag_N_sr": 0.0004,
+   "hold_ciag_E_sr": -0.1489,
+   "hold_przechyl_p50": 8.583,
+   "hold_przechyl_p95": 9.166,
+   "hold_dryf_p50_m": 0.639,
+   "hold_dryf_p95_m": 1.034
+  },
+  "przechyl_aktywny_p50": 10.916,
+  "przechyl_aktywny_p95": 14.919,
+  "percep": {
+   "n_frames": 7325,
+   "n_box": 6394,
+   "n_ENTRY": 4,
+   "frac_mti_ok": 0.6452
+  },
+  "epizody": [
+   {
+    "scenario_id": "c00_s01",
+    "alt_max_m": 13.804,
+    "cmd_vz_med": -0.072,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c01_s01",
+    "alt_max_m": 13.53,
+    "cmd_vz_med": -0.052,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c02_s01",
+    "alt_max_m": 13.485,
+    "cmd_vz_med": -0.058,
+    "t_pierwszy_track_valid_s": 12.16,
+    "w_kadrze_frac": 0.993
+   },
+   {
+    "scenario_id": "c03_s01",
+    "alt_max_m": 13.564,
+    "cmd_vz_med": -0.0585,
+    "t_pierwszy_track_valid_s": 14.188,
+    "w_kadrze_frac": 1.0
+   }
+  ]
+ },
+ {
+  "boot": "results/WK2/booty/g3_b2",
+  "wk": {
+   "world": "world_wk2_s063_s3",
+   "world_sha256": "f8ccc51ca0e47a1a8edaf7418cc6882a89786cd17d6701c9716150698014b164",
+   "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+   "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+   "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+  },
+  "pin_mono_cam": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+  "world_hash_txt": "f8ccc51ca0e47a1a8edaf7418cc6882a89786cd17d6701c9716150698014b164  worlds/world_wk2_s063_s3.sdf",
+  "sonda_preflight_rc": 0,
+  "uzbrojony_po_sondzie": true,
+  "sonda": {
+   "dt_p50_s_na_klatke": 0.068,
+   "frac_delt_gt_0p10": 0.002,
+   "hz_p50": 14.71,
+   "werdykt": "PASS"
+  },
+  "n_episodes": 4,
+  "n_valid_V2p": 4,
+  "wiatr": {
+   "hold_n": 539,
+   "hold_ciag_N_sr": 0.001,
+   "hold_ciag_E_sr": -0.1483,
+   "hold_przechyl_p50": 8.577,
+   "hold_przechyl_p95": 9.069,
+   "hold_dryf_p50_m": 0.447,
+   "hold_dryf_p95_m": 0.737
+  },
+  "przechyl_aktywny_p50": 10.432,
+  "przechyl_aktywny_p95": 15.028,
+  "percep": {
+   "n_frames": 6922,
+   "n_box": 6287,
+   "n_ENTRY": 5,
+   "frac_mti_ok": 0.6768
+  },
+  "epizody": [
+   {
+    "scenario_id": "c04_s01",
+    "alt_max_m": 14.08,
+    "cmd_vz_med": -0.038,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c05_s01",
+    "alt_max_m": 13.874,
+    "cmd_vz_med": -0.018,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c06_s01",
+    "alt_max_m": 13.461,
+    "cmd_vz_med": -0.0225,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c07_s01",
+    "alt_max_m": 13.62,
+    "cmd_vz_med": -0.031,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   }
+  ]
+ }
+]

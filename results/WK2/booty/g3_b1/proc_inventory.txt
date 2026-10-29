@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       82166 13.3  0.0 330892 14140 ?        Sl   17:33   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        1174  2.9  1.3 5725348 430264 pts/0  Sl+  13:29   7:05 claude --continue
+root         249  0.1  0.2 3143060 68832 ?       Ssl  13:29   0:26 /usr/bin/containerd
+root         357  0.1  0.2 7669644 92588 ?       Ssl  13:29   0:19 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         841  0.0  0.0 1233872 12248 ?       Sl   13:29   0:12 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root         975  0.0  0.0   3200  1252 ?        S    13:29   0:03 /init
+dnsmasq      865  0.0  0.0 216768 28648 ?        Ss   13:29   0:01 postgres
+olga       80638  0.0  0.0   4900  3616 ?        Ss   17:27   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1793280569233-ddlbph.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'python3 -c " import json for e in json.load(open('"'"'results/WK2/judge_g15_b1.json'"'"'))['"'"'epizody'"'"']:     j=e['"'"'judge_swiadek'"'"'];print(e['"'"'scenario_id'"'"'],j['"'"'t_entry_s'"'"'],j['"'"'frac_band_6_10'"'"'],j['"'"'sweep_deg'"'"'])"; until grep -q "\[perc2S2 g3_b1\] DONE rc=\|g3_b1.*SONDA FAIL\|g3_b1.*nie wstał\|g3_b1.*STOP bootu\|g3_b1.*ODMOWA" results/WK2/booty/wk2_monitor.log 2>/dev/null; do sleep 20; done; echo done' < /dev/null && pwd -P >| /tmp/claude-75b6-cwd
+root           1  0.0  0.0  22020 13460 ?        Ss   13:29   0:00 /sbin/init
+root          40  0.0  0.0  50476 17236 ?        S<s  13:29   0:00 /usr/lib/systemd/systemd-journald
+polkitd      197  0.0  0.0 308188  8136 ?        Ssl  13:29   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga       80522  0.0  0.0   5032  3852 ?        S    17:27   0:00 bash results/WK2/tools/wk2_boot.sh 4 g3_b1 0,1,2,3 world_wk2_s063_s3
+root          86  0.0  0.0  26668  7692 ?        Ss   13:29   0:00 /usr/lib/systemd/systemd-udevd
+message+     192  0.0  0.0   9800  5536 ?        Ss   13:29   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     183  0.0  0.0  91068  7980 ?        Ssl  13:29   0:00 /usr/lib/systemd/systemd-timesyncd
+dnsmasq      943  0.0  0.0 216924  7300 ?        Ss   13:29   0:00 postgres: background writer 
+dnsmasq      945  0.0  0.0 216768 10188 ?        Ss   13:29   0:00 postgres: walwriter 
+root         202  0.0  0.0  17992  8876 ?        Ss   13:29   0:00 /usr/lib/systemd/systemd-logind
+systemd+     180  0.0  0.0  21352 13212 ?        Ss   13:29   0:00 /usr/lib/systemd/systemd-resolved

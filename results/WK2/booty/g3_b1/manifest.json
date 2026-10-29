@@ -1,0 +1,182 @@
+{
+  "kind": "perc2",
+  "flight": "bench",
+  "boot": 4,
+  "rc": 0,
+  "arm": "E",
+  "point": "0.0",
+  "harness_file": "/home/olga/projects/liquidpatrol/bench/bench_flight.py",
+  "sha_harness": "05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43",
+  "controller": "net_fantom",
+  "controller_sha": "e435ed7e3f3ce47dd7b3b88651dff02ae76ddb14823ac913e544d849cd09d849",
+  "feed_sha": "8015bd12d7e8852bdc2e773d8b32c335a21752ea6209c6f245364809e4ed4a9c",
+  "executor_params_sha": "5a7244996d89be70bd720a2b0eb8b6f6dea1a2d8f3f2fd7cf356292426f28716",
+  "ulog_sha": "d50d5843fad16fb604cc0ffab6fa974fc01577157778adfff1ab146bf070ba2f",
+  "ulog_bytes": 145253148,
+  "world_hash": "f8ccc51ca0e47a1a8edaf7418cc6882a89786cd17d6701c9716150698014b164  worlds/world_wk2_s063_s3.sdf",
+  "world_ref": "worlds/world_wk2_s063_s3.sdf",
+  "proc_gate": "CLEAN loadavg=0.13 (cpu_max=2.0, load1_max=1.5)",
+  "n_demo_rows": 6407,
+  "n_episodes": 4,
+  "n_valid_V2p": 4,
+  "n_success_D6": 4,
+  "episodes": [
+    {
+      "episode_id": 0,
+      "scenario_id": "c00_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 3,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9426,
+      "d_min_m": 7.245,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 1,
+      "scenario_id": "c01_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 3,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9265,
+      "d_min_m": 7.19,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 2,
+      "scenario_id": "c02_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 3,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9336,
+      "d_min_m": 7.101,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 3,
+      "scenario_id": "c03_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 3,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.936,
+      "d_min_m": 7.179,
+      "refuse_count": 0,
+      "breach": false
+    }
+  ],
+  "world_hash_kind": "repo",
+  "model_in_state": true,
+  "net_arm": "ncp",
+  "weights_sha": "0337d5eae1471bb99ef329d939be195a9ea846017045b8ddac22f3d97bc2ae36",
+  "fantom": {
+    "controller": "net_fantom",
+    "fantom_scan_sha256": "e435ed7e3f3ce47dd7b3b88651dff02ae76ddb14823ac913e544d849cd09d849",
+    "akw_scan_sha256": "b94cdeaef311c46067724eb095eb7ce32c08c9929c15cfa2cc4614619063d375",
+    "registry_sha256": "87203d292ac9c9169c6e986e22b534c6c578fd4a597720c2df89cec5d7749bd9",
+    "scan_profile_delegata": {
+      "mode": "step_stare",
+      "step_deg": 40.0,
+      "slew_dps": 60.0,
+      "stare_s": 1.2,
+      "dwell_s": 2.0,
+      "frozen": "b94cdeae (ANEKS_AKW-2 par.2)"
+    },
+    "q_events": [
+      {
+        "ev": "q_enter",
+        "t": 109.292,
+        "fd_valid_at_ref": true
+      },
+      {
+        "ev": "q_exit",
+        "reason": "B",
+        "t": 110.012,
+        "dt": 0.72
+      },
+      {
+        "ev": "q_enter",
+        "t": 191.8,
+        "fd_valid_at_ref": true
+      },
+      {
+        "ev": "q_exit",
+        "reason": "C",
+        "t": 194.844,
+        "dt": 3.044
+      },
+      {
+        "ev": "q_enter",
+        "t": 280.648,
+        "fd_valid_at_ref": false
+      },
+      {
+        "ev": "q_exit",
+        "reason": "C",
+        "t": 283.652,
+        "dt": 3.004
+      },
+      {
+        "ev": "q_enter",
+        "t": 378.196,
+        "fd_valid_at_ref": false
+      },
+      {
+        "ev": "q_exit",
+        "reason": "C",
+        "t": 381.2,
+        "dt": 3.004
+      }
+    ]
+  },
+  "feed_v2": {
+    "role": "FEED=V2 AKTYWNY (det_v2 w osobnym procesie percepcji)",
+    "det_v2_sha": "775ead150b9937453168538cb97c55f69166e27ddc2d93f71b3710e0e49832ce",
+    "percep_feed_sha256": "fb39da2bee8857f394f046edf675eed3362ffcc978dc55e551023be0d77ddf09",
+    "client_e2e_full_sha256": "b790952c793b18eda3a719ad5ef110d5ca75c29b66c8c1da136c12a098584f64",
+    "nota": "percep+most startowane PRZED uzbrojeniem (sonda preflight; ANEKS_PERC2-1 \u00a73.2)"
+  },
+  "perc2": {
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profile": "/home/olga/projects/liquidpatrol/results/PERC2/tools/perc2_fastdds_profile.xml",
+    "sonda_preflight_rc": 0,
+    "sondy": [
+      {
+        "proba": "preflight",
+        "sonda": {
+          "label": "preflight_g3_b1",
+          "feed": "/home/olga/projects/liquidpatrol/results/WK2/booty/g3_b1/percep_feed.jsonl",
+          "tryb": "live window=35.0s",
+          "prog_frozen": {
+            "dt_p50_max_s_na_klatke": 0.07,
+            "frac_delt_gt_0p10_max": 0.05
+          },
+          "n_delt": 498,
+          "dt_p50_s_na_klatke": 0.068,
+          "dt_p90_s_na_klatke": 0.068,
+          "frac_delt_gt_0p10": 0.002,
+          "hz_p50": 14.71,
+          "span_sim_s": 34.0,
+          "werdykt": "PASS"
+        }
+      }
+    ],
+    "uzbrojony_po_sondzie": true
+  },
+  "wk": {
+    "world": "world_wk2_s063_s3",
+    "world_sha256": "f8ccc51ca0e47a1a8edaf7418cc6882a89786cd17d6701c9716150698014b164",
+    "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+  }
+}
