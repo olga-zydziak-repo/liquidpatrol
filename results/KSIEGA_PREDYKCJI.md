@@ -458,3 +458,19 @@ falsyfikuje niezależnie od n, a próg n dotyczy tylko statusu PROVED;
 zamrożeniem progu — to nie jest podglądanie wyniku, a d ≤ 4 m dało się
 wykluczyć przed PRE; (3) etykiety kierunków z kodu sprawdzać geometrią, zanim
 trafią do opisu dla ludzi.
+
+## NOGA WIATR-KAMERA — ROZLICZONE przy CO-WK (ANEKS_WK-1 §3, 29.10.2026)
+Prerejestrowane 29.10.2026 (`PRE_WK.md` §4; ratyfikacja 29.10, sha PRE 281750e7…abebd);
+noga zamknięta werdyktem V-C za 3/≤9 bootów:
+- **P-WK-1 (0.85) ✓** — dym PASS za pierwszym podejściem.
+- **P-WK-2 (0.55) ✗** — WK0 2/8 < 6/8.
+- **P-WK-3 (0.40) n.r.** — etap B nie poleciał.
+- **P-WK-4 (0.90) ✓** — breach 0.
+- **P-WK-5 (0.60) ✗** — zero sejwów GEOFENCE; pełzanie nie wystąpiło.
+
+**Suma nogi WK: 2 ✓ / 2 ✗ / 1 n.r.**
+
+Lekcje kalibracyjne: (1) parametry fizyczne nowego habitatu mierzyć wobec zewnętrznego
+odniesienia PRZED zamrożeniem — opór k ≈ 1.05 /s był do policzenia z istniejących logów W,
+a CC opisał habitat jako „bliżej fizyki", nie mierząc go; (2) predykcje przenoszone z danych
+innej epoki harnessu nazywają tę epokę jako czynnik zakłócający — R3 reconu to zrobił, R2 nie.

@@ -430,3 +430,37 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   11 → 8 otwartych pozycji. Następna noga wg kolejności z 28.10:
   TOR-CECHY ∪ MULTI-TARGET, decyzja Olgi. Opcjonalnie, nieprekomitowane:
   nakładka demo „32 starty zlewają się w jedną trajektorię".
+
+## Dopisek stanu katalogu — 29.10.2026 (CO-WK, ANEKS_WK-1 §5)
+
+- **Noga WIATR-KAMERA** → **CLOSED werdyktem V-C, 3/≤9 bootów** (dym 1 + WK0 2; 6 zaoszczędzonych
+  bramką); śmierć nie zaszła (dym PASS za pierwszym podejściem); breach 0 / REFUSE 0. Dowody:
+  `results/WK/RAPORT_WK_S1.md`, `results/WK_RECON/RECON_WK.md`; prerejestracja `PRE_WK.md`.
+  Noga nie była pozycją katalogu (lista „co jeszcze" raportu programu).
+  **Zdanie zamrożone (ANEKS_WK-1 §2, do cytowań):**
+  > **V-C.** W habitacie z oporem aerodynamicznym (WindEffects ze skalą 1.0; zmierzony opór
+  > k ≈ 1.05 /s, około 9× więcej niż w modelu stock), przy wietrze 0, sieć NCP-20 uczona bez
+  > tego oporu zdaje egzamin misji D6 w 2/8 epizodów na komórkach v ≤ 0.5 (1/7 ważnych), wobec
+  > 8/8 tych samych scenariuszy na kamerze w świecie stock. Mechanizm: orbita jest o ~1/3
+  > wolniejsza — sieć komenderuje ~17% mniejszą prędkość styczną, a autopilot pod oporem realizuje
+  > ~86% komendy — więc obrót wokół celu nie dobija do progu 630° w 70 s. Wszystko inne trzyma:
+  > dystans 6–10 m przez 100% okna, d_min ≥ 7.0 m, cel w kadrze, zero ingerencji osłony,
+  > breach 0. Wiatru 1.5 i 3 m/s nie latano — bramka wiatru 0 nie przeszła.
+
+  **Interpretacja dla tezy „mała sieć umie latać" (cytować razem z V-C):** sieć w tym habitacie
+  leci bezpiecznie i poprawnie, ale za wolno na egzamin tempa; opór habitatu najpewniej
+  kilkukrotnie silniejszy niż dla realnego drona tej klasy (rachunek orientacyjny, do
+  weryfikacji) — test przeciążeniowy przeniesienia między fizykami, nie werdykt o locie
+  w realnym powietrzu.
+  **Pełzanie wysokości (opisowo):** w trybie kamerowym nie wystąpiło (0 sejwów GEOFENCE);
+  atrybucja z ANEKS_W-2 dostaje trzeci kandydujący czynnik: epokę harnessu (kampania W sprzed
+  naprawy yaw N1). Zdanie z RECON_WK §R2 cytować wyłącznie z kwalifikatorem „kampania W,
+  epoka przed N1".
+- **WK-II / OPÓR REALNY** — NOWA pozycja katalogu (ANEKS_WK-1 §4), jedna pozycja, dwa etapy:
+  (a) habitat z oporem skalibrowanym do zewnętrznego odniesienia fizycznego (nowe pliki świata;
+  skala oporu wybrana z fizyki i zapisana w PRE, nigdy dostrajana pod wynik sieci), potem WK0
+  i ewentualnie wiatr na tej samej siatce: 2–7 bootów; (b) tylko jeśli (a) też łamie misję:
+  douczenie sieci w habitacie z oporem — nowe wagi, nowy FREEZE, duża noga. Aktywa: złożenie
+  wiatru z kamerą bez dotykania zamrożonych (`worlds/world_wk_*`, `results/WK/tools/wk_boot.sh`,
+  `wk_judge.py`). **Trigger: decyzja Olgi albo dowolne zdanie o locie w realnej fizyce.**
+- Stan: katalog 8 → 9 otwartych pozycji (doszła WK-II).
