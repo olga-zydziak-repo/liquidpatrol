@@ -1,0 +1,32 @@
+{
+ "k0_stock": 0.1168,
+ "punkty_s_k": [
+  [
+   0.46,
+   0.3219
+  ],
+  [
+   0.63,
+   0.4939
+  ],
+  [
+   1.0,
+   1.0541
+  ]
+ ],
+ "model": "k(s)=k0+a*s^p (log-log MNK na k-k0)",
+ "a": 0.9357,
+ "p": 1.958,
+ "predykcja_w_punktach": {
+  "0.46": 0.3214,
+  "0.63": 0.4955,
+  "1.0": 1.0525
+ },
+ "s_dla_k_0p55_potegowo": 0.675,
+ "s_dla_k_0p55_gdyby_liniowo": 0.462,
+ "k_przy_s_0p63_zmierzone": 0.4939,
+ "tolerancja_celu": [
+  0.44,
+  0.66
+ ]
+}

@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       51045 18.5  0.0 330892 14112 ?        Sl   15:52   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       51037  3.7  0.0   5028  3696 ?        S    15:52   0:00 bash harness/run_boot.sh
+olga        1174  2.6  1.2 5717148 416848 pts/0  Sl+  13:21   3:57 claude --continue
+root         249  0.1  0.2 3143060 68088 ?       Ssl  13:21   0:17 /usr/bin/containerd
+root         357  0.1  0.2 7669644 92436 ?       Ssl  13:21   0:13 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         841  0.0  0.0 1233872 11876 ?       Sl   13:21   0:08 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root         975  0.0  0.0   3200  1252 ?        S    13:21   0:01 /init
+dnsmasq      865  0.0  0.0 216768 28648 ?        Ss   13:21   0:00 postgres
+root           1  0.0  0.0  22020 13460 ?        Ss   13:21   0:00 /sbin/init
+root          40  0.0  0.0  50476 16868 ?        S<s  13:21   0:00 /usr/lib/systemd/systemd-journald
+polkitd      197  0.0  0.0 308188  8136 ?        Ssl  13:21   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga       49665  0.0  0.0   4900  3648 ?        Ss   15:47   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1793280569233-ddlbph.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'until grep -q "\[perc2S2 kal2_s063\] DONE rc=\|kal2_s063.*SONDA FAIL\|kal2_s063.*nie wstał\|kal2_s063.*STOP bootu\|kal2_s063.*ODMOWA" results/WK2_RECON/booty/wk2_monitor.log 2>/dev/null; do sleep 20; done; grep kal2 results/WK2_RECON/booty/wk2_monitor.log | tail -3' < /dev/null && pwd -P >| /tmp/claude-dedf-cwd
+root          86  0.0  0.0  26668  7692 ?        Ss   13:21   0:00 /usr/lib/systemd/systemd-udevd
+systemd+     183  0.0  0.0  91068  7980 ?        Ssl  13:21   0:00 /usr/lib/systemd/systemd-timesyncd
+message+     192  0.0  0.0   9800  5536 ?        Ss   13:21   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+dnsmasq      943  0.0  0.0 216924  7300 ?        Ss   13:21   0:00 postgres: background writer 
+dnsmasq      945  0.0  0.0 216768 10188 ?        Ss   13:21   0:00 postgres: walwriter 
+root         202  0.0  0.0  17992  8876 ?        Ss   13:21   0:00 /usr/lib/systemd/systemd-logind
+olga        1022  0.0  0.0  20436 11584 ?        Ss   13:21   0:00 /usr/lib/systemd/systemd --user
