@@ -474,3 +474,19 @@ Lekcje kalibracyjne: (1) parametry fizyczne nowego habitatu mierzyć wobec zewn�
 odniesienia PRZED zamrożeniem — opór k ≈ 1.05 /s był do policzenia z istniejących logów W,
 a CC opisał habitat jako „bliżej fizyki", nie mierząc go; (2) predykcje przenoszone z danych
 innej epoki harnessu nazywają tę epokę jako czynnik zakłócający — R3 reconu to zrobił, R2 nie.
+
+## NOGA WK-II (opór realny) — ROZLICZONE przy CO-WK2 (ANEKS_WK2-1 §3, 29.10.2026)
+Prerejestrowane 29.10.2026 (`PRE_WK2.md` §4; ratyfikacja 29.10, sha PRE f83973c6…c505);
+noga zamknięta werdyktem V-A2 za 6/≤18 bootów:
+- **P-WK2-1 (0.60) ✓** — G0 8/8.
+- **P-WK2-2 (0.45) ✓** — G3 8/8.
+- **P-WK2-3 (0.55) ✓** — mediana sweep G0/stock 0.858 ≥ 0.85 (margines 0.008 — trafienie na
+  krawędzi, zapisane jako takie).
+- **P-WK2-4 (0.90) ✓** — breach 0.
+
+**Suma nogi WK-II: 4 ✓ / 0 ✗.**
+
+Lekcje kalibracyjne: (1) etykietę narzędzia w PRE („driver bez zmian, parametr X") sprawdzać literą
+tego narzędzia przed zamrożeniem — druga wpadka tej klasy po route→orbit; (2) prognoza nieliniowości
+(opór ~ skala²) chybiła o 41% i uratowała ją tolerancja kalibracji — zapisywać tolerancje przy każdej
+interpolacji z dwóch punktów.

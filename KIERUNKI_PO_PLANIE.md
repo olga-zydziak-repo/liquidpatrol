@@ -464,3 +464,34 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   wiatru z kamerą bez dotykania zamrożonych (`worlds/world_wk_*`, `results/WK/tools/wk_boot.sh`,
   `wk_judge.py`). **Trigger: decyzja Olgi albo dowolne zdanie o locie w realnej fizyce.**
 - Stan: katalog 8 → 9 otwartych pozycji (doszła WK-II).
+
+## Dopisek stanu katalogu — 29.10.2026 (CO-WK2, ANEKS_WK2-1 §5)
+
+- **WK-II / OPÓR REALNY** → **CLOSED werdyktem V-A2, 6/≤18 bootów** (schodek S niepotrzebny); śmierć
+  nie zaszła; breach 0 / REFUSE 0 / sejwy 0. Dowody: `results/WK2/RAPORT_WK2_S1.md`,
+  `results/WK2_RECON/RECON_WK2.md`; prerejestracja `PRE_WK2.md` (errata w przód do §2 — nowy driver
+  `results/WK2/tools/wk2_boot.sh`, ANEKS_WK2-1 §1.2).
+  **Zdanie zamrożone (ANEKS_WK2-1 §2, do cytowań):**
+  > **V-A2.** NCP-20 (20 neuronów, 1903 parametry, uczona bez oporu) prowadzi pełną misję na własnej
+  > kamerze w habitacie z oporem aerodynamicznym z górnego końca realnego pasma (k zmierzone 0.49 /s;
+  > pasmo [0.15, 0.55] /s z PX4 EKF2_MCOEF i Faessler i in. 2018, z zastrzeżeniem masy) przy stałym
+  > wietrze 0 / 1.5 / 3 m/s z jednego kierunku, komórki v ≤ 0.5: **D6 8/8 · 6/8 · 8/8**, breach 0,
+  > sejwy osłony 0, przechył w zawisie 4.3° / 8.6°. Obie porażki przy 1.5 m/s to akwizycja (c03:
+  > track po 30.7 s; c06: utrata tracka na 25 s z d_min 3.3 m po ponownej akwizycji), nie tor orbity
+  > — oba scenariusze zdały przy 0 i 3 m/s. Tempo orbity: sweep 0.83–0.90 stocku (przy k = 1.05:
+  > 0.67), komenda styczna 1.84–1.87 wobec 1.96 m/s, realizacja 0.94 wobec 1.05.
+
+  **Dla tezy „mała sieć umie latać":** granica z nogi WK (k = 1.05 /s, 2/8) leżała 1.9× nad realnym
+  pasmem; w górnym końcu pasma sieć zdaje 22/24. Zdanie do raportu: „sieć uczona w świecie bez oporu
+  przenosi się na opór z górnego końca realnego zakresu i na stały wiatr do 3 m/s; pęka dopiero przy
+  oporze ~2× ponad realny". Nie wolno: „odporna na wiatr", nic o porywach/turbulencji, nic o realnym
+  sprzęcie (kanon W).
+  **Fizyka (opisowo):** wyraz wolny bilansu sił przy wietrze = k·w co do 1–2% (0.745 / 1.49 m/s² przy
+  1.5 / 3 m/s) ⇒ opór, także wirnikowy, liczony względem powietrza (rozstrzyga RECON_WK2 §R1).
+- **WK-II etap (b) „douczenie w habitacie z oporem"** → **SKREŚLONY** (trigger V-D2 nie zaszedł).
+- **PERCEPCJA-II (ii) MTI-czołowy** — dopisany przypadek (pytanie nazwane, NIE nowa pozycja): akwizycja
+  pod wiatrem 1.5 m/s — 2/8 epizodów z późną/utraconą akwizycją (WK2 G1.5 c03, c06) wobec 0/8 przy
+  0 i 3 m/s; przy n = 8 nierozróżnialne od wariancji.
+- Bez zmian: TOR-CECHY ∪ MULTI-TARGET, IMITACJE, daleki wzrok, ODPOWIEDŹ-EKONOMIA, 2c, 2d, 2e.
+- Stan: wątek wiatr+kamera zamknięty w dwóch nogach (9 bootów: 3 + 6), breach 0 / REFUSE 0;
+  katalog 9 → 8 otwartych pozycji.
