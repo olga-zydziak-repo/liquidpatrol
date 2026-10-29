@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       33060 18.5  0.0 330892 14104 ?        Sl   15:01   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       33053  3.7  0.0   5028  3756 ?        S    15:01   0:00 bash harness/run_boot.sh
+olga        1174  2.1  1.2 5713044 398344 pts/0  Sl+  13:18   2:14 claude --continue
+root         249  0.2  0.2 3143060 68452 ?       Ssl  13:17   0:13 /usr/bin/containerd
+root         357  0.1  0.2 7669644 96804 ?       Ssl  13:17   0:09 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         841  0.0  0.0 1233872 12216 ?       Sl   13:17   0:05 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root         975  0.0  0.0   3200  1252 ?        S    13:17   0:00 /init
+dnsmasq      865  0.0  0.0 216768 28648 ?        Ss   13:17   0:00 postgres
+root           1  0.0  0.0  22020 13460 ?        Ss   13:17   0:00 /sbin/init
+olga       31663  0.0  0.0   4900  3612 ?        Ss   14:55   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1793280569233-ddlbph.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'until grep -q "\[perc2S2 wk0_b2\] DONE rc=\|wk0_b2.*SONDA FAIL\|wk0_b2.*nie wstał\|wk0_b2.*STOP bootu\|wk0_b2.*ODMOWA" results/WK/booty/wk_monitor.log; do sleep 20; done; grep "wk0_b2" results/WK/booty/wk_monitor.log | tail -3' < /dev/null && pwd -P >| /tmp/claude-942b-cwd
+root          40  0.0  0.0  50476 16736 ?        S<s  13:17   0:00 /usr/lib/systemd/systemd-journald
+root       30111  0.0  0.0 1756380 13892 ?       Ssl  14:51   0:00 /usr/libexec/wsl-pro-service
+polkitd      197  0.0  0.0 308188  8136 ?        Ssl  13:17   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga       31456  0.0  0.0   5032  3840 ?        S    14:55   0:00 bash results/WK/tools/wk_boot.sh 3 wk0_b2 4,5,6,7 world_wk_s0
+root          86  0.0  0.0  26668  7692 ?        Ss   13:17   0:00 /usr/lib/systemd/systemd-udevd
+message+     192  0.0  0.0   9800  5536 ?        Ss   13:17   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     183  0.0  0.0  91068  7980 ?        Ssl  13:17   0:00 /usr/lib/systemd/systemd-timesyncd
+dnsmasq      943  0.0  0.0 216924  7300 ?        Ss   13:17   0:00 postgres: background writer 
+dnsmasq      945  0.0  0.0 216768 10188 ?        Ss   13:17   0:00 postgres: walwriter 

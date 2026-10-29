@@ -1,0 +1,128 @@
+[
+ {
+  "boot": "results/FANTOM/camp/r1_V2",
+  "wk": {},
+  "pin_mono_cam": null,
+  "world_hash_txt": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0  worlds/world_demo_A3.sdf",
+  "sonda_preflight_rc": null,
+  "uzbrojony_po_sondzie": null,
+  "sonda": {
+   "dt_p50_s_na_klatke": null,
+   "frac_delt_gt_0p10": null,
+   "hz_p50": null,
+   "werdykt": null
+  },
+  "n_episodes": 4,
+  "n_valid_V2p": 2,
+  "wiatr": {
+   "hold_n": 601,
+   "hold_ciag_N_sr": -0.0005,
+   "hold_ciag_E_sr": 0.0011,
+   "hold_przechyl_p50": 0.523,
+   "hold_przechyl_p95": 1.91,
+   "hold_dryf_p50_m": 0.129,
+   "hold_dryf_p95_m": 0.327
+  },
+  "przechyl_aktywny_p50": 3.351,
+  "przechyl_aktywny_p95": 6.595,
+  "percep": {
+   "n_frames": 2826,
+   "n_box": 2374,
+   "n_ENTRY": 4,
+   "frac_mti_ok": 0.816
+  },
+  "epizody": [
+   {
+    "scenario_id": "c00_s01",
+    "alt_max_m": 12.934,
+    "cmd_vz_med": 0.016,
+    "t_pierwszy_track_valid_s": 2.136,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c01_s01",
+    "alt_max_m": 13.161,
+    "cmd_vz_med": 0.015,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c02_s01",
+    "alt_max_m": 12.644,
+    "cmd_vz_med": -0.006,
+    "t_pierwszy_track_valid_s": 9.94,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c03_s01",
+    "alt_max_m": 12.673,
+    "cmd_vz_med": -0.006,
+    "t_pierwszy_track_valid_s": 12.9,
+    "w_kadrze_frac": 1.0
+   }
+  ]
+ },
+ {
+  "boot": "results/FANTOM/camp/r2_V2",
+  "wk": {},
+  "pin_mono_cam": null,
+  "world_hash_txt": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0  worlds/world_demo_A3.sdf",
+  "sonda_preflight_rc": null,
+  "uzbrojony_po_sondzie": null,
+  "sonda": {
+   "dt_p50_s_na_klatke": null,
+   "frac_delt_gt_0p10": null,
+   "hz_p50": null,
+   "werdykt": null
+  },
+  "n_episodes": 4,
+  "n_valid_V2p": 3,
+  "wiatr": {
+   "hold_n": 821,
+   "hold_ciag_N_sr": -0.001,
+   "hold_ciag_E_sr": 0.003,
+   "hold_przechyl_p50": 0.499,
+   "hold_przechyl_p95": 2.245,
+   "hold_dryf_p50_m": 0.303,
+   "hold_dryf_p95_m": 1.28
+  },
+  "przechyl_aktywny_p50": 3.301,
+  "przechyl_aktywny_p95": 8.457,
+  "percep": {
+   "n_frames": 2462,
+   "n_box": 2059,
+   "n_ENTRY": 6,
+   "frac_mti_ok": 0.8002
+  },
+  "epizody": [
+   {
+    "scenario_id": "c04_s01",
+    "alt_max_m": 11.57,
+    "cmd_vz_med": 0.012,
+    "t_pierwszy_track_valid_s": 0.048,
+    "w_kadrze_frac": 0.9811
+   },
+   {
+    "scenario_id": "c05_s01",
+    "alt_max_m": 11.988,
+    "cmd_vz_med": 0.054,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c06_s01",
+    "alt_max_m": 12.123,
+    "cmd_vz_med": 0.024,
+    "t_pierwszy_track_valid_s": 9.648,
+    "w_kadrze_frac": 1.0
+   },
+   {
+    "scenario_id": "c07_s01",
+    "alt_max_m": 11.305,
+    "cmd_vz_med": -0.001,
+    "t_pierwszy_track_valid_s": 0.0,
+    "w_kadrze_frac": 1.0
+   }
+  ]
+ }
+]

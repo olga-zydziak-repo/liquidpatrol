@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       23668 17.8  0.0 330892 14148 ?        Sl   14:33   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       23661  3.5  0.0   5028  3752 ?        S    14:33   0:00 bash harness/run_boot.sh
+olga        1174  1.4  1.1 5713044 381368 pts/0  Sl+  13:15   1:06 claude --continue
+root         249  0.2  0.2 3143060 68384 ?       Ssl  13:15   0:10 /usr/bin/containerd
+root         357  0.1  0.3 7669644 96988 ?       Ssl  13:15   0:08 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         841  0.0  0.0 1233872 12072 ?       Sl   13:15   0:04 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+olga       22940  0.0  0.0   5032  3840 ?        S    14:32   0:00 bash results/WK/tools/wk_boot.sh 1 dym_s3 0 world_wk_s3
+dnsmasq      865  0.0  0.0 216768 28648 ?        Ss   13:15   0:00 postgres
+root           1  0.0  0.0  22020 13460 ?        Ss   13:15   0:00 /sbin/init
+root          40  0.0  0.0  50476 16576 ?        S<s  13:15   0:00 /usr/lib/systemd/systemd-journald
+polkitd      197  0.0  0.0 308188  8136 ?        Ssl  13:15   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root         975  0.0  0.0   3200  1252 ?        S    13:15   0:00 /init
+root          86  0.0  0.0  26668  7692 ?        Ss   13:15   0:00 /usr/lib/systemd/systemd-udevd
+message+     192  0.0  0.0   9800  5536 ?        Ss   13:15   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     183  0.0  0.0  91068  7980 ?        Ssl  13:15   0:00 /usr/lib/systemd/systemd-timesyncd
+dnsmasq      943  0.0  0.0 216924  7300 ?        Ss   13:15   0:00 postgres: background writer 
+dnsmasq      945  0.0  0.0 216768 10188 ?        Ss   13:15   0:00 postgres: walwriter 
+olga        1022  0.0  0.0  20436 11584 ?        Ss   13:15   0:00 /usr/lib/systemd/systemd --user
+root         202  0.0  0.0  17992  8876 ?        Ss   13:15   0:00 /usr/lib/systemd/systemd-logind
