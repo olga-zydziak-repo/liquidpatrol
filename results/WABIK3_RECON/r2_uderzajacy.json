@@ -1,0 +1,3806 @@
+{
+ "podsumowanie": {
+  "uderzajacy": 65,
+  "uderzajacy_v1": 41,
+  "uderzajacy_v05": 24,
+  "niedochodzacy": 50,
+  "niedoch_v0": 36,
+  "niedoch_v05": 14,
+  "kand_U": 37,
+  "kand_U_v05": 21,
+  "kand_U_v1": 16,
+  "kand_U_kier": {
+   "wchodzi": 20,
+   "styczny": 2,
+   "oddala": 15
+  },
+  "kand_U_dh_med": 9.91,
+  "kand_U_tflag_med": 7.6,
+  "kand_U_odw": {
+   "podloga": 25,
+   "atak": 12,
+   "null": 0
+  },
+  "kand_U_trwanie_podloga_med": 11.21,
+  "kand_U_trwanie_atak_med": 4.95,
+  "kand_U_trwanie_med_p90_max": [
+   8.66,
+   42.65,
+   62.59
+  ],
+  "prosto": 50,
+  "prosto_kand": 22,
+  "c08_s01_kand": [
+   [
+    "DET_S4:r3:c08_s01",
+    8.73,
+    -0.947,
+    1.38
+   ],
+   [
+    "AKW_S3:r3:c08_s01",
+    7.48,
+    -0.942,
+    1.58
+   ],
+   [
+    "FANTOM_S2:r3:c08_s01",
+    7.46,
+    -0.928,
+    1.43
+   ]
+  ],
+  "baza_U": 11,
+  "baza_U_final": 1,
+  "baza_U_final_ids": [
+   "AKW_S3:r12:c08_s04"
+  ],
+  "baza_U_kier": {
+   "wchodzi": 0,
+   "styczny": 0,
+   "oddala": 11
+  },
+  "baza_U_vrad_min_max": [
+   0.262,
+   0.872
+  ],
+  "baza_U_dh_med": 14.27,
+  "baza_U_tflag_min": 12.54,
+  "baza_U_trwanie_med_max": [
+   25.34,
+   49.1
+  ],
+  "kand_N_ever_final": [
+   14,
+   10
+  ],
+  "baza_N_ever_final": [
+   12,
+   12
+  ],
+  "krawedz_TP_do_minU": {
+   "0": 0,
+   "1": 12,
+   "2": 19,
+   "3": 16,
+   "4": 24,
+   "5": 26
+  },
+  "n_konfiguracji": 100
+ },
+ "siatka": [
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 3.0,
+   "T": 4.0,
+   "TP_le15": 4,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 30
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 3.0,
+   "T": 6.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 26
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 3.0,
+   "T": 8.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 24
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 3.0,
+   "T": 10.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 24
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 3.0,
+   "T": 12.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 19
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 5.0,
+   "T": 4.0,
+   "TP_le15": 4,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 29
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 5.0,
+   "T": 6.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 26
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 5.0,
+   "T": 8.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 23
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 5.0,
+   "T": 10.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 21
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 5.0,
+   "T": 12.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 17
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 7.0,
+   "T": 4.0,
+   "TP_le15": 4,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 29
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 7.0,
+   "T": 6.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 25
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 7.0,
+   "T": 8.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 22
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 7.0,
+   "T": 10.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 21
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 7.0,
+   "T": 12.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 15
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 9.0,
+   "T": 4.0,
+   "TP_le15": 4,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 29
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 9.0,
+   "T": 6.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 25
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 9.0,
+   "T": 8.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 22
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 9.0,
+   "T": 10.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 21
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 9.0,
+   "T": 12.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 14
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 11.0,
+   "T": 4.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 29
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 11.0,
+   "T": 6.0,
+   "TP_le15": 2,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 25
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 11.0,
+   "T": 8.0,
+   "TP_le15": 2,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 22
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 11.0,
+   "T": 10.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 21
+  },
+  {
+   "ref": "home",
+   "H": 10.0,
+   "R": 11.0,
+   "T": 12.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 13
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 3.0,
+   "T": 4.0,
+   "TP_le15": 4,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 25
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 3.0,
+   "T": 6.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 25
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 3.0,
+   "T": 8.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 21
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 3.0,
+   "T": 10.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 18
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 3.0,
+   "T": 12.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 15
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 5.0,
+   "T": 4.0,
+   "TP_le15": 4,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 24
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 5.0,
+   "T": 6.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 24
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 5.0,
+   "T": 8.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 20
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 5.0,
+   "T": 10.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 17
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 5.0,
+   "T": 12.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 14
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 7.0,
+   "T": 4.0,
+   "TP_le15": 4,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 24
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 7.0,
+   "T": 6.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 23
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 7.0,
+   "T": 8.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 19
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 7.0,
+   "T": 10.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 17
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 7.0,
+   "T": 12.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 12
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 9.0,
+   "T": 4.0,
+   "TP_le15": 4,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 24
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 9.0,
+   "T": 6.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 23
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 9.0,
+   "T": 8.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 19
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 9.0,
+   "T": 10.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 17
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 9.0,
+   "T": 12.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 11
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 11.0,
+   "T": 4.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 24
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 11.0,
+   "T": 6.0,
+   "TP_le15": 2,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 23
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 11.0,
+   "T": 8.0,
+   "TP_le15": 2,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 19
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 11.0,
+   "T": 10.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 17
+  },
+  {
+   "ref": "home",
+   "H": null,
+   "R": 11.0,
+   "T": 12.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 11
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 3.0,
+   "T": 4.0,
+   "TP_le15": 5,
+   "FP": 1,
+   "ORB": 2,
+   "U_etykieta": 44
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 3.0,
+   "T": 6.0,
+   "TP_le15": 5,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 30
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 3.0,
+   "T": 8.0,
+   "TP_le15": 2,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 26
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 3.0,
+   "T": 10.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 25
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 3.0,
+   "T": 12.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 21
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 5.0,
+   "T": 4.0,
+   "TP_le15": 5,
+   "FP": 1,
+   "ORB": 2,
+   "U_etykieta": 40
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 5.0,
+   "T": 6.0,
+   "TP_le15": 5,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 28
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 5.0,
+   "T": 8.0,
+   "TP_le15": 2,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 26
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 5.0,
+   "T": 10.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 24
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 5.0,
+   "T": 12.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 19
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 7.0,
+   "T": 4.0,
+   "TP_le15": 5,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 37
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 7.0,
+   "T": 6.0,
+   "TP_le15": 5,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 26
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 7.0,
+   "T": 8.0,
+   "TP_le15": 2,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 24
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 7.0,
+   "T": 10.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 22
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 7.0,
+   "T": 12.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 16
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 9.0,
+   "T": 4.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 16
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 9.0,
+   "T": 6.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 6
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 9.0,
+   "T": 8.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 4
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 9.0,
+   "T": 10.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 0
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 9.0,
+   "T": 12.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 0
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 11.0,
+   "T": 4.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 11
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 11.0,
+   "T": 6.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 3
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 11.0,
+   "T": 8.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 0
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 11.0,
+   "T": 10.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 0
+  },
+  {
+   "ref": "dron",
+   "H": 10.0,
+   "R": 11.0,
+   "T": 12.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 0
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 3.0,
+   "T": 4.0,
+   "TP_le15": 5,
+   "FP": 1,
+   "ORB": 2,
+   "U_etykieta": 44
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 3.0,
+   "T": 6.0,
+   "TP_le15": 5,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 30
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 3.0,
+   "T": 8.0,
+   "TP_le15": 2,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 26
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 3.0,
+   "T": 10.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 25
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 3.0,
+   "T": 12.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 21
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 5.0,
+   "T": 4.0,
+   "TP_le15": 5,
+   "FP": 1,
+   "ORB": 2,
+   "U_etykieta": 40
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 5.0,
+   "T": 6.0,
+   "TP_le15": 5,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 28
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 5.0,
+   "T": 8.0,
+   "TP_le15": 2,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 26
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 5.0,
+   "T": 10.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 24
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 5.0,
+   "T": 12.0,
+   "TP_le15": 1,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 19
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 7.0,
+   "T": 4.0,
+   "TP_le15": 5,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 37
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 7.0,
+   "T": 6.0,
+   "TP_le15": 5,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 26
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 7.0,
+   "T": 8.0,
+   "TP_le15": 2,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 24
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 7.0,
+   "T": 10.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 22
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 7.0,
+   "T": 12.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 16
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 9.0,
+   "T": 4.0,
+   "TP_le15": 3,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 16
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 9.0,
+   "T": 6.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 6
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 9.0,
+   "T": 8.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 4
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 9.0,
+   "T": 10.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 0
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 9.0,
+   "T": 12.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 0
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 11.0,
+   "T": 4.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 11
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 11.0,
+   "T": 6.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 3
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 11.0,
+   "T": 8.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 0
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 11.0,
+   "T": 10.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 0
+  },
+  {
+   "ref": "dron",
+   "H": null,
+   "R": 11.0,
+   "T": 12.0,
+   "TP_le15": 0,
+   "FP": 0,
+   "ORB": 2,
+   "U_etykieta": 0
+  }
+ ],
+ "epizody": [
+  {
+   "id": "DET_S4:r1:c00_s01",
+   "sid": "c00_s01",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r2:c04_s01",
+   "sid": "c04_s01",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 10.64,
+    "t_rev": 18.54,
+    "przyczyna": "podloga",
+    "v_rad": -0.52,
+    "kier": "wchodzi",
+    "dh": 9.56,
+    "trwanie": 7.9
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r3:c08_s01",
+   "sid": "c08_s01",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 8.73,
+    "t_rev": 10.11,
+    "przyczyna": "podloga",
+    "v_rad": -0.947,
+    "kier": "wchodzi",
+    "dh": 6.8,
+    "trwanie": 1.38
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r3:c10_s01",
+   "sid": "c10_s01",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r4:c00_s02",
+   "sid": "c00_s02",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r5:c04_s02",
+   "sid": "c04_s02",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 52.3,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 7.71,
+    "t_rev": 12.1,
+    "przyczyna": "atak",
+    "v_rad": -0.484,
+    "kier": "wchodzi",
+    "dh": 10.22,
+    "trwanie": 4.39
+   },
+   "baza": {
+    "ever": true,
+    "final": false,
+    "t_flag": 25.21,
+    "t_rev": 49.83,
+    "v_rad": 0.479,
+    "kier": "oddala",
+    "dh": 14.27,
+    "trwanie": 24.62
+   }
+  },
+  {
+   "id": "DET_S4:r6:c08_s02",
+   "sid": "c08_s02",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r6:c09_s02",
+   "sid": "c09_s02",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r7:c00_s03",
+   "sid": "c00_s03",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r8:c04_s03",
+   "sid": "c04_s03",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 22.5,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 7.92,
+    "t_rev": 12.14,
+    "przyczyna": "atak",
+    "v_rad": -0.419,
+    "kier": "wchodzi",
+    "dh": 10.79,
+    "trwanie": 4.22
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r9:c08_s03",
+   "sid": "c08_s03",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 7.59,
+    "t_rev": 8.92,
+    "przyczyna": "podloga",
+    "v_rad": -1.01,
+    "kier": "wchodzi",
+    "dh": 6.16,
+    "trwanie": 1.33
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r9:c09_s03",
+   "sid": "c09_s03",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 5.46,
+    "t_rev": 29.21,
+    "przyczyna": "podloga",
+    "v_rad": 1.181,
+    "kier": "oddala",
+    "dh": 9.99,
+    "trwanie": 23.75
+   },
+   "baza": {
+    "ever": true,
+    "final": false,
+    "t_flag": 14.26,
+    "t_rev": 29.17,
+    "v_rad": 0.783,
+    "kier": "oddala",
+    "dh": 16.48,
+    "trwanie": 14.91
+   }
+  },
+  {
+   "id": "DET_S4:r9:c10_s03",
+   "sid": "c10_s03",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r10:c00_s04",
+   "sid": "c00_s04",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r11:c04_s04",
+   "sid": "c04_s04",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": true,
+    "t_flag": 9.99,
+    "t_rev": null,
+    "przyczyna": null,
+    "v_rad": -0.567,
+    "kier": "wchodzi",
+    "dh": 9.24,
+    "trwanie": 58.11
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 31.88,
+    "t_rev": null,
+    "v_rad": 0.597,
+    "kier": "oddala",
+    "dh": 12.89,
+    "trwanie": 40.19
+   }
+  },
+  {
+   "id": "DET_S4:r11:c05_s04",
+   "sid": "c05_s04",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": true,
+    "t_flag": 7.56,
+    "t_rev": null,
+    "przyczyna": null,
+    "v_rad": 0.041,
+    "kier": "styczny",
+    "dh": 11.74,
+    "trwanie": 32.83
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r11:c07_s04",
+   "sid": "c07_s04",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 40.2,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 5.66,
+    "t_rev": 14.32,
+    "przyczyna": "podloga",
+    "v_rad": 0.269,
+    "kier": "oddala",
+    "dh": 6.49,
+    "trwanie": 8.66
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r12:c08_s04",
+   "sid": "c08_s04",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "DET_S4:r12:c10_s04",
+   "sid": "c10_s04",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r1:c00_s01",
+   "sid": "c00_s01",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r1:c01_s01",
+   "sid": "c01_s01",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r1:c02_s01",
+   "sid": "c02_s01",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r1:c03_s01",
+   "sid": "c03_s01",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r2:c04_s01",
+   "sid": "c04_s01",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": true,
+    "t_flag": 9.42,
+    "t_rev": null,
+    "przyczyna": null,
+    "v_rad": 0.492,
+    "kier": "oddala",
+    "dh": 7.15,
+    "trwanie": 44.8
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 17.82,
+    "t_rev": null,
+    "v_rad": 0.463,
+    "kier": "oddala",
+    "dh": 10.99,
+    "trwanie": 43.5
+   }
+  },
+  {
+   "id": "AKW_S3:r2:c05_s01",
+   "sid": "c05_s01",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 62.4,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 7.1,
+    "t_rev": 51.64,
+    "przyczyna": "atak",
+    "v_rad": -0.357,
+    "kier": "wchodzi",
+    "dh": 7.78,
+    "trwanie": 44.54
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r2:c06_s01",
+   "sid": "c06_s01",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 21.0,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 9.44,
+    "t_rev": 11.32,
+    "przyczyna": "podloga",
+    "v_rad": -0.348,
+    "kier": "wchodzi",
+    "dh": 5.9,
+    "trwanie": 1.88
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r2:c07_s01",
+   "sid": "c07_s01",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 79.7,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 18.42,
+    "t_rev": 28.56,
+    "przyczyna": "atak",
+    "v_rad": 0.485,
+    "kier": "oddala",
+    "dh": 10.82,
+    "trwanie": 10.14
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r3:c08_s01",
+   "sid": "c08_s01",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 7.48,
+    "t_rev": 9.06,
+    "przyczyna": "podloga",
+    "v_rad": -0.942,
+    "kier": "wchodzi",
+    "dh": 6.53,
+    "trwanie": 1.58
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r3:c09_s01",
+   "sid": "c09_s01",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r3:c10_s01",
+   "sid": "c10_s01",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r3:c11_s01",
+   "sid": "c11_s01",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r4:c00_s02",
+   "sid": "c00_s02",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r4:c01_s02",
+   "sid": "c01_s02",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r4:c02_s02",
+   "sid": "c02_s02",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r4:c03_s02",
+   "sid": "c03_s02",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r5:c04_s02",
+   "sid": "c04_s02",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 52.3,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 7.81,
+    "t_rev": 51.2,
+    "przyczyna": "podloga",
+    "v_rad": -0.475,
+    "kier": "wchodzi",
+    "dh": 10.76,
+    "trwanie": 43.39
+   },
+   "baza": {
+    "ever": true,
+    "final": false,
+    "t_flag": 25.68,
+    "t_rev": 51.15,
+    "v_rad": 0.492,
+    "kier": "oddala",
+    "dh": 13.93,
+    "trwanie": 25.47
+   }
+  },
+  {
+   "id": "AKW_S3:r5:c05_s02",
+   "sid": "c05_s02",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 20.2,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r5:c06_s02",
+   "sid": "c06_s02",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 48.0,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 9.3,
+    "t_rev": 33.39,
+    "przyczyna": "atak",
+    "v_rad": 0.354,
+    "kier": "oddala",
+    "dh": 12.13,
+    "trwanie": 24.09
+   },
+   "baza": {
+    "ever": true,
+    "final": false,
+    "t_flag": 13.73,
+    "t_rev": 39.07,
+    "v_rad": 0.337,
+    "kier": "oddala",
+    "dh": 13.41,
+    "trwanie": 25.34
+   }
+  },
+  {
+   "id": "AKW_S3:r5:c07_s02",
+   "sid": "c07_s02",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 57.0,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 7.6,
+    "t_rev": 13.1,
+    "przyczyna": "atak",
+    "v_rad": 0.453,
+    "kier": "oddala",
+    "dh": 9.99,
+    "trwanie": 5.5
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r6:c08_s02",
+   "sid": "c08_s02",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 8.91,
+    "t_rev": 15.58,
+    "przyczyna": "podloga",
+    "v_rad": -0.952,
+    "kier": "wchodzi",
+    "dh": 11.95,
+    "trwanie": 6.67
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r6:c09_s02",
+   "sid": "c09_s02",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r6:c10_s02",
+   "sid": "c10_s02",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r6:c11_s02",
+   "sid": "c11_s02",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r7:c00_s03",
+   "sid": "c00_s03",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r7:c01_s03",
+   "sid": "c01_s03",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r7:c02_s03",
+   "sid": "c02_s03",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r7:c03_s03",
+   "sid": "c03_s03",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r8:c04_s03",
+   "sid": "c04_s03",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 22.5,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r8:c05_s03",
+   "sid": "c05_s03",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": true,
+    "t_flag": 10.7,
+    "t_rev": null,
+    "przyczyna": null,
+    "v_rad": -0.118,
+    "kier": "styczny",
+    "dh": 8.61,
+    "trwanie": 60.8
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 19.2,
+    "t_rev": null,
+    "v_rad": 0.022,
+    "kier": "styczny",
+    "dh": 8.63,
+    "trwanie": 52.8
+   }
+  },
+  {
+   "id": "AKW_S3:r8:c06_s03",
+   "sid": "c06_s03",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": true,
+    "t_flag": 11.71,
+    "t_rev": null,
+    "przyczyna": null,
+    "v_rad": 0.501,
+    "kier": "oddala",
+    "dh": 12.41,
+    "trwanie": 58.35
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 19.67,
+    "t_rev": null,
+    "v_rad": 0.103,
+    "kier": "styczny",
+    "dh": 14.06,
+    "trwanie": 50.95
+   }
+  },
+  {
+   "id": "AKW_S3:r8:c07_s03",
+   "sid": "c07_s03",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 20.3,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 5.57,
+    "t_rev": 6.89,
+    "przyczyna": "podloga",
+    "v_rad": -0.383,
+    "kier": "wchodzi",
+    "dh": 5.73,
+    "trwanie": 1.32
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r9:c08_s03",
+   "sid": "c08_s03",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 4.29,
+    "t_rev": 21.83,
+    "przyczyna": "podloga",
+    "v_rad": 1.11,
+    "kier": "oddala",
+    "dh": 10.95,
+    "trwanie": 17.54
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r9:c09_s03",
+   "sid": "c09_s03",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r9:c10_s03",
+   "sid": "c10_s03",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r9:c11_s03",
+   "sid": "c11_s03",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 4.21,
+    "t_rev": 5.74,
+    "przyczyna": "atak",
+    "v_rad": 1.468,
+    "kier": "oddala",
+    "dh": 11.08,
+    "trwanie": 1.53
+   },
+   "baza": {
+    "ever": true,
+    "final": false,
+    "t_flag": 12.54,
+    "t_rev": 53.33,
+    "v_rad": 0.59,
+    "kier": "oddala",
+    "dh": 16.89,
+    "trwanie": 40.79
+   }
+  },
+  {
+   "id": "AKW_S3:r10:c00_s04",
+   "sid": "c00_s04",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r10:c01_s04",
+   "sid": "c01_s04",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r10:c02_s04",
+   "sid": "c02_s04",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r10:c03_s04",
+   "sid": "c03_s04",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r11:c04_s04",
+   "sid": "c04_s04",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": true,
+    "t_flag": 8.07,
+    "t_rev": null,
+    "przyczyna": null,
+    "v_rad": -0.442,
+    "kier": "wchodzi",
+    "dh": 10.66,
+    "trwanie": 64.21
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 31.28,
+    "t_rev": null,
+    "v_rad": 0.467,
+    "kier": "oddala",
+    "dh": 12.09,
+    "trwanie": 43.89
+   }
+  },
+  {
+   "id": "AKW_S3:r11:c05_s04",
+   "sid": "c05_s04",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": true,
+    "t_flag": 7.44,
+    "t_rev": null,
+    "przyczyna": null,
+    "v_rad": -0.026,
+    "kier": "styczny",
+    "dh": 9.66,
+    "trwanie": 57.57
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 18.48,
+    "t_rev": null,
+    "v_rad": 0.116,
+    "kier": "styczny",
+    "dh": 10.46,
+    "trwanie": 50.95
+   }
+  },
+  {
+   "id": "AKW_S3:r11:c06_s04",
+   "sid": "c06_s04",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": true,
+    "t_flag": 18.89,
+    "t_rev": null,
+    "przyczyna": null,
+    "v_rad": 0.572,
+    "kier": "oddala",
+    "dh": 9.99,
+    "trwanie": 51.11
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 27.06,
+    "t_rev": null,
+    "v_rad": 0.447,
+    "kier": "oddala",
+    "dh": 14.0,
+    "trwanie": 43.56
+   }
+  },
+  {
+   "id": "AKW_S3:r11:c07_s04",
+   "sid": "c07_s04",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 40.2,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 8.37,
+    "t_rev": 26.74,
+    "przyczyna": "podloga",
+    "v_rad": -0.148,
+    "kier": "styczny",
+    "dh": 5.41,
+    "trwanie": 18.37
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r12:c08_s04",
+   "sid": "c08_s04",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 4.58,
+    "t_rev": 34.16,
+    "przyczyna": "atak",
+    "v_rad": 1.164,
+    "kier": "oddala",
+    "dh": 10.7,
+    "trwanie": 29.58
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 37.75,
+    "t_rev": null,
+    "v_rad": 0.872,
+    "kier": "oddala",
+    "dh": 17.47,
+    "trwanie": 12.21
+   }
+  },
+  {
+   "id": "AKW_S3:r12:c09_s04",
+   "sid": "c09_s04",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r12:c10_s04",
+   "sid": "c10_s04",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "AKW_S3:r12:c11_s04",
+   "sid": "c11_s04",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r1:c00_s01",
+   "sid": "c00_s01",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r1:c01_s01",
+   "sid": "c01_s01",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r1:c02_s01",
+   "sid": "c02_s01",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r1:c03_s01",
+   "sid": "c03_s01",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r2:c04_s01",
+   "sid": "c04_s01",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 4.17,
+    "t_rev": 5.24,
+    "przyczyna": "atak",
+    "v_rad": -0.369,
+    "kier": "wchodzi",
+    "dh": 5.73,
+    "trwanie": 1.07
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 18.54,
+    "t_rev": null,
+    "v_rad": 0.457,
+    "kier": "oddala",
+    "dh": 10.95,
+    "trwanie": 42.97
+   }
+  },
+  {
+   "id": "FANTOM_S2:r2:c05_s01",
+   "sid": "c05_s01",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 62.4,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 10.58,
+    "t_rev": 52.62,
+    "przyczyna": "atak",
+    "v_rad": -0.429,
+    "kier": "wchodzi",
+    "dh": 7.08,
+    "trwanie": 42.04
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r2:c06_s01",
+   "sid": "c06_s01",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 21.0,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 6.3,
+    "t_rev": 11.03,
+    "przyczyna": "podloga",
+    "v_rad": -0.495,
+    "kier": "wchodzi",
+    "dh": 7.02,
+    "trwanie": 4.73
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r2:c07_s01",
+   "sid": "c07_s01",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 79.7,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 4.15,
+    "t_rev": 66.74,
+    "przyczyna": "podloga",
+    "v_rad": 0.328,
+    "kier": "oddala",
+    "dh": 9.83,
+    "trwanie": 62.59
+   },
+   "baza": {
+    "ever": true,
+    "final": false,
+    "t_flag": 17.56,
+    "t_rev": 66.66,
+    "v_rad": 0.438,
+    "kier": "oddala",
+    "dh": 15.04,
+    "trwanie": 49.1
+   }
+  },
+  {
+   "id": "FANTOM_S2:r3:c08_s01",
+   "sid": "c08_s01",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 7.46,
+    "t_rev": 8.89,
+    "przyczyna": "podloga",
+    "v_rad": -0.928,
+    "kier": "wchodzi",
+    "dh": 6.62,
+    "trwanie": 1.43
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r3:c09_s01",
+   "sid": "c09_s01",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r3:c10_s01",
+   "sid": "c10_s01",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r3:c11_s01",
+   "sid": "c11_s01",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r4:c00_s02",
+   "sid": "c00_s02",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r4:c01_s02",
+   "sid": "c01_s02",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r4:c02_s02",
+   "sid": "c02_s02",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r4:c03_s02",
+   "sid": "c03_s02",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r5:c04_s02",
+   "sid": "c04_s02",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 52.3,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 10.1,
+    "t_rev": 12.22,
+    "przyczyna": "atak",
+    "v_rad": -0.495,
+    "kier": "wchodzi",
+    "dh": 9.02,
+    "trwanie": 2.12
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r5:c05_s02",
+   "sid": "c05_s02",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 20.2,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r5:c06_s02",
+   "sid": "c06_s02",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 48.0,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 5.86,
+    "t_rev": 39.38,
+    "przyczyna": "podloga",
+    "v_rad": 0.336,
+    "kier": "oddala",
+    "dh": 11.26,
+    "trwanie": 33.52
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r5:c07_s02",
+   "sid": "c07_s02",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 57.0,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 21.03,
+    "t_rev": 57.1,
+    "przyczyna": "podloga",
+    "v_rad": 0.416,
+    "kier": "oddala",
+    "dh": 9.91,
+    "trwanie": 36.07
+   },
+   "baza": {
+    "ever": true,
+    "final": false,
+    "t_flag": 28.71,
+    "t_rev": 57.02,
+    "v_rad": 0.535,
+    "kier": "oddala",
+    "dh": 13.72,
+    "trwanie": 28.31
+   }
+  },
+  {
+   "id": "FANTOM_S2:r6:c08_s02",
+   "sid": "c08_s02",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 7.59,
+    "t_rev": 7.95,
+    "przyczyna": "podloga",
+    "v_rad": -0.965,
+    "kier": "wchodzi",
+    "dh": 5.5,
+    "trwanie": 0.36
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r6:c09_s02",
+   "sid": "c09_s02",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r6:c10_s02",
+   "sid": "c10_s02",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 9.18,
+    "t_rev": 12.12,
+    "przyczyna": "atak",
+    "v_rad": -1.034,
+    "kier": "wchodzi",
+    "dh": 11.24,
+    "trwanie": 2.94
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r6:c11_s02",
+   "sid": "c11_s02",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 7.04,
+    "t_rev": 18.25,
+    "przyczyna": "podloga",
+    "v_rad": -0.67,
+    "kier": "wchodzi",
+    "dh": 16.25,
+    "trwanie": 11.21
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r7:c00_s03",
+   "sid": "c00_s03",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r7:c01_s03",
+   "sid": "c01_s03",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r7:c02_s03",
+   "sid": "c02_s03",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r7:c03_s03",
+   "sid": "c03_s03",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r8:c04_s03",
+   "sid": "c04_s03",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 22.5,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 16.96,
+    "t_rev": 22.02,
+    "przyczyna": "podloga",
+    "v_rad": -0.403,
+    "kier": "wchodzi",
+    "dh": 6.38,
+    "trwanie": 5.06
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r8:c05_s03",
+   "sid": "c05_s03",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 18.86,
+    "t_rev": 68.03,
+    "przyczyna": "atak",
+    "v_rad": 0.201,
+    "kier": "oddala",
+    "dh": 8.97,
+    "trwanie": 49.17
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 26.8,
+    "t_rev": null,
+    "v_rad": 0.311,
+    "kier": "oddala",
+    "dh": 11.01,
+    "trwanie": 45.21
+   }
+  },
+  {
+   "id": "FANTOM_S2:r8:c06_s03",
+   "sid": "c06_s03",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 10.05,
+    "t_rev": 59.85,
+    "przyczyna": "atak",
+    "v_rad": 0.548,
+    "kier": "oddala",
+    "dh": 10.22,
+    "trwanie": 49.8
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 18.48,
+    "t_rev": null,
+    "v_rad": -0.055,
+    "kier": "styczny",
+    "dh": 13.83,
+    "trwanie": 53.99
+   }
+  },
+  {
+   "id": "FANTOM_S2:r8:c07_s03",
+   "sid": "c07_s03",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 20.3,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 6.13,
+    "t_rev": 6.96,
+    "przyczyna": "podloga",
+    "v_rad": -0.455,
+    "kier": "wchodzi",
+    "dh": 5.31,
+    "trwanie": 0.83
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r9:c08_s03",
+   "sid": "c08_s03",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 5.67,
+    "t_rev": 7.79,
+    "przyczyna": "atak",
+    "v_rad": 1.105,
+    "kier": "oddala",
+    "dh": 16.3,
+    "trwanie": 2.12
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r9:c09_s03",
+   "sid": "c09_s03",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r9:c10_s03",
+   "sid": "c10_s03",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r9:c11_s03",
+   "sid": "c11_s03",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 10.62,
+    "t_rev": 52.78,
+    "przyczyna": "podloga",
+    "v_rad": 0.474,
+    "kier": "oddala",
+    "dh": 15.77,
+    "trwanie": 42.16
+   },
+   "baza": {
+    "ever": true,
+    "final": false,
+    "t_flag": 13.0,
+    "t_rev": 52.73,
+    "v_rad": 0.702,
+    "kier": "oddala",
+    "dh": 17.36,
+    "trwanie": 39.73
+   }
+  },
+  {
+   "id": "FANTOM_S2:r10:c00_s04",
+   "sid": "c00_s04",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r10:c01_s04",
+   "sid": "c01_s04",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r10:c02_s04",
+   "sid": "c02_s04",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r10:c03_s04",
+   "sid": "c03_s04",
+   "v": 0.0,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r11:c04_s04",
+   "sid": "c04_s04",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 85.1,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 9.31,
+    "t_rev": 64.24,
+    "przyczyna": "podloga",
+    "v_rad": 0.496,
+    "kier": "oddala",
+    "dh": 10.99,
+    "trwanie": 54.93
+   },
+   "baza": {
+    "ever": true,
+    "final": false,
+    "t_flag": 56.23,
+    "t_rev": 64.15,
+    "v_rad": 0.262,
+    "kier": "oddala",
+    "dh": 7.83,
+    "trwanie": 7.92
+   }
+  },
+  {
+   "id": "FANTOM_S2:r11:c05_s04",
+   "sid": "c05_s04",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": true,
+    "t_flag": 10.45,
+    "t_rev": null,
+    "przyczyna": null,
+    "v_rad": -0.077,
+    "kier": "styczny",
+    "dh": 9.44,
+    "trwanie": 61.21
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 18.22,
+    "t_rev": null,
+    "v_rad": 0.286,
+    "kier": "oddala",
+    "dh": 11.03,
+    "trwanie": 61.44
+   }
+  },
+  {
+   "id": "FANTOM_S2:r11:c06_s04",
+   "sid": "c06_s04",
+   "v": 0.5,
+   "uderzajacy": false,
+   "t_gt_lt5_s": null,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": true,
+    "t_flag": 9.8,
+    "t_rev": null,
+    "przyczyna": null,
+    "v_rad": 0.424,
+    "kier": "oddala",
+    "dh": 10.04,
+    "trwanie": 61.02
+   },
+   "baza": {
+    "ever": true,
+    "final": true,
+    "t_flag": 54.58,
+    "t_rev": null,
+    "v_rad": 0.356,
+    "kier": "oddala",
+    "dh": 9.67,
+    "trwanie": 18.09
+   }
+  },
+  {
+   "id": "FANTOM_S2:r11:c07_s04",
+   "sid": "c07_s04",
+   "v": 0.5,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 40.2,
+   "prosto": false,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 7.94,
+    "t_rev": 27.33,
+    "przyczyna": "podloga",
+    "v_rad": -0.196,
+    "kier": "styczny",
+    "dh": 5.47,
+    "trwanie": 19.39
+   },
+   "baza": {
+    "ever": true,
+    "final": false,
+    "t_flag": 18.94,
+    "t_rev": 27.26,
+    "v_rad": 0.389,
+    "kier": "oddala",
+    "dh": 6.62,
+    "trwanie": 8.32
+   }
+  },
+  {
+   "id": "FANTOM_S2:r12:c08_s04",
+   "sid": "c08_s04",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 17.84,
+    "t_rev": 46.3,
+    "przyczyna": "podloga",
+    "v_rad": -0.994,
+    "kier": "wchodzi",
+    "dh": 7.19,
+    "trwanie": 28.46
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r12:c09_s04",
+   "sid": "c09_s04",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r12:c10_s04",
+   "sid": "c10_s04",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null,
+    "przyczyna": null
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  },
+  {
+   "id": "FANTOM_S2:r12:c11_s04",
+   "sid": "c11_s04",
+   "v": 1.0,
+   "uderzajacy": true,
+   "t_gt_lt5_s": 10.1,
+   "prosto": true,
+   "kand": {
+    "ever": true,
+    "final": false,
+    "t_flag": 5.68,
+    "t_rev": 21.59,
+    "przyczyna": "podloga",
+    "v_rad": 0.903,
+    "kier": "oddala",
+    "dh": 15.86,
+    "trwanie": 15.91
+   },
+   "baza": {
+    "ever": false,
+    "final": false,
+    "t_flag": null,
+    "t_rev": null
+   }
+  }
+ ]
+}

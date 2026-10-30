@@ -529,3 +529,57 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   kamerowych pod wiatrem.
 - Stan: wątek wiatr+kamera (WK, WK-II, WK-III) zamknięty w całości: 13 bootów, breach 0; katalog
   8 otwartych pozycji, bez zmian.
+
+## Dopisek stanu katalogu — 30.10.2026 (CO-WABIK3R, ANEKS_WABIK3-1 §4)
+
+- **WABIK-III „tor i geometria zbliżenia"** → **CLOSED-BY-RECON+DESK (0 bootów,
+  1 sesja deskowa + CO)**. Recon `results/WABIK3_RECON/RECON_WABIK3.md`
+  (12b88e38): R1 feed = top-1 przed bramką, multi-target offline NIE; R2 kandydat
+  DCPA/TCPA (dron·H10·R7·T4) TP≤15 5/6 · FP 0/3 · ORB 2/2 · NULL_final 10/115
+  — odtworzony przez CC co do 0.1 s; R3 tor NIE (0/6 przy 8 estymatorach);
+  R4 IMITACJE zamknąć (MAD 0.21 m ≈ 6.7 px, AUC 0.59); R5 13 NULL-final =
+  12 wędrowców v=0.5 + 1 percepcja. **Pomiar CC (ANEKS_WABIK3-1 §2,
+  odtworzony narzędziem `results/WABIK3_RECON/tools/wabik3_uderzajacy.py`):**
+  115 NULL = 65 uderzających (GT < 5 m w oknie lotu) + 50 niedochodzących;
+  kandydat podpisuje jako wabik **37/65 uderzających** (20 w chwili, gdy idą
+  na home; cofnięcie medianowo 11.2 s później, przy podłodze; c08_s01 w 3/3
+  kampaniach), baza v1 **11/65** (0 wchodzących, wszystkie w fazie oddalania);
+  uczciwa krawędź Pareto (TP≤15 → min uderzających z etykietą, 100
+  konfiguracji): 0→0, 3→16, 5→26 — poniżej poziomu bazy nie ma nic, co
+  flagowałoby w czasie.
+  **Zdanie kanoniczne:** „Geometria zbliżenia skraca etykietę wabika do ≤15 s
+  w 5/6 przypadków, ale na zamrożonym benchu podpisuje jako wabik 37 z 65 celów,
+  które uderzają — 20 z nich, gdy idą prosto na chroniony punkt. Reguła v1
+  nigdy nie podpisuje celu wchodzącego (0/11). Przy jednym obiekcie tor sam
+  w sobie nie odróżnia wabika od celu, który uderzy za chwilę — szybciej niż
+  ten cel sam to pokaże."
+  **Lekcja kryterium:** NULL_final (WABIK-II) nie widział etykiet na celach,
+  które uderzają; każde przyszłe kryterium wabikowe liczy koszt na klasie
+  UDERZAJĄCY (GT < 5 m w oknie lotu) jako „etykieta kiedykolwiek", osobno od
+  wędrowców (klasa nazwana: niedochodzący v=0.5, dziś 14/50).
+- **IMITACJE / MIKRO-SYGNATURA** → **CLOSED-BY-RECON** (R4: szum pozycji celu
+  statycznego MAD 0.21 m ≈ 6.7 px @ 8.5 m, residuum 1 s 3–5 cm, AUC 0.59 —
+  mikro-ruch poniżej rozdzielczości toru tej kamery).
+- **TOR-CECHY** → **CLOSED-BY-RECON** (R3: żaden z 8 estymatorów v_rad przy
+  niezmienionej regule nie przesuwa TP do ≤15 s; jump_0.5 czyści NULL kosztem
+  2 TP). Pozycja scalona TOR-CECHY ∪ MULTI-TARGET rozpada się: zostaje
+  **MULTI-TARGET / TOŻSAMOŚĆ TRACKA** jako jedyna otwarta droga wabikowa,
+  z nową treścią: etykieta jako PRIORYTET między ≥2 obiektami, nie wyprzedzenie
+  uderzenia. Warunek wstępny (R1 ii): zrzut klatek kamery + nowy replay det_v2
+  wszystkich ramek (zero dotyku FROZEN), dopiero potem bench wieloobiektowy.
+  **Trigger: decyzja Olgi po rozmowie z pilotem** (pytanie trzecie: czy obrona
+  odróżnia wabik, czy zakłada uzbrojenie każdego celu — jeśli to drugie,
+  priorytet między obiektami jest jedynym sensem etykiety).
+- **DEMO-C v6 — errata forward do V-A3 (ANEKS_WK3-1 §2):** w reżimie demo
+  (zrzut klatek, WindEffects) take1 c04@P2 był VALID (V2′ 0.950, k 0.490,
+  breach 0) i padł na sędzim D6 przez sweep 570° < 630° — orbita zwalniała
+  i zawracała (38 % ticków z ujemną prędkością styczną, 8 zmian znaku; take2:
+  16 %, 2) — pierwsza porażka pod wiatrem, która nie jest akwizycją. Wynik
+  reżimu demo pod P2: 1/2 (`results/DEMO_C/RAPORT_DEMO_C.md`, Akt 6). Kanon
+  V-A3 (kampania WK-III 7/8) bez zmian; zdanie „jedyna porażka to akwizycja"
+  dotyczy kampanii, nie reżimu demo. Plansza „~140 bootach" → „>150" przy
+  następnym montażu.
+- Stan: wątek wabikowy po trzech nogach i dwóch zamknięciach deskowych:
+  5 bootów łącznie (WABIK S1+S2), breach 0 / REFUSE 0; katalog 8 → 7 otwartych
+  pozycji (IMITACJE zamknięte; pozycja scalona TOR-CECHY ∪ MULTI-TARGET trwa
+  jako MULTI-TARGET z nową treścią, człon TOR-CECHY skreślony).

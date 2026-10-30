@@ -510,3 +510,21 @@ wpisaną w PRE (tu: „dół ≥ x% ponad poziom przy stałym wietrze"), inaczej
 (2) (z ANEKS_WK3-1 §1.5, błąd CC w weryfikacji, złapany przed werdyktem) statystyki przechyłu
 i kadru liczyć wyłącznie w oknach epizodów — między epizodami dron wykonuje manewry
 nienależące do misji.
+
+## ŚCIEŻKA WABIK-III (tor i geometria zbliżenia) — ZAMKNIĘTA DESKIEM przy CO-WABIK3R (ANEKS_WABIK3-1, 30.10.2026)
+Bez PRE i bez predykcji numerowanych (recon 0 bootów → zamknięcie deskowe). Jedna
+ocena CC do rozliczenia: po odtworzeniu R2 CC wycenił przeżycie kandydata na
+świeżych wariantach na „pół na pół" — zanim policzył koszt na uderzających.
+Bench już zawierał 37 kontrprzykładów. **✗ jako kalibracja**: ocena wydana przed
+policzeniem kosztu na właściwej klasie.
+
+Lekcje kalibracyjne: (1) **kryterium odziedziczone z poprzedniej nogi sprawdzać
+przeciw pytaniu bieżącej nogi, zanim się na nim selekcjonuje** — NULL_final był
+dobrą miarą dla WABIK-II („czy etykieta zostaje"), a złą dla WABIK-III („czy
+etykieta wyprzedza uderzenie bez szkody"); koszt liczyć na klasie, której etykieta
+szkodzi (uderzający), jako „kiedykolwiek", nie „na końcu"; (2) „FP 0/N" z próby
+N=3 nie jest własnością reguły, gdy bench ma 65 egzemplarzy tej klasy — zawsze
+liczyć na pełnej populacji, nie na epizodach z etykietą FP; (3) maska względem
+poruszającego się obserwatora mierzy ruch obserwatora (tu: fazę wejścia drona na
+orbitę) — zanim ref=dron wejdzie do kryterium, trzeba pokazać, że gaśnie przy
+celu wchodzącym pod dronem na orbicie (tu: nie gaśnie, 20/37).
