@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga      209620 18.7  0.0 330892 14164 ?        Sl   01:03   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga      209613  3.1  0.0   5028  3724 ?        S    01:03   0:00 bash harness/run_boot.sh
+olga        1174  2.3  1.3 5725348 444928 pts/0  Sl+  Oct29  16:15 claude --continue
+root         249  0.2  0.2 3143060 69296 ?       Ssl  Oct29   1:23 /usr/bin/containerd
+root         357  0.1  0.2 7669644 93140 ?       Ssl  Oct29   1:00 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         841  0.0  0.0 1233872 11936 ?       Sl   Oct29   0:39 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+root         975  0.0  0.0   3200  1252 ?        S    Oct29   0:05 /init
+dnsmasq      865  0.0  0.0 216768 28648 ?        Ss   Oct29   0:04 postgres
+root      205864  0.0  0.0 1756380 12784 ?       Ssl  00:53   0:00 /usr/libexec/wsl-pro-service
+polkitd      197  0.0  0.0 308188  8136 ?        Ssl  Oct29   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root           1  0.0  0.0  22020 13468 ?        Ss   Oct29   0:01 /sbin/init
+root          40  0.0  0.0  50476 17644 ?        S<s  Oct29   0:01 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26668  7692 ?        Ss   Oct29   0:00 /usr/lib/systemd/systemd-udevd
+systemd+     183  0.0  0.0  91068  7980 ?        Ssl  Oct29   0:00 /usr/lib/systemd/systemd-timesyncd
+dnsmasq      943  0.0  0.0 216924  7300 ?        Ss   Oct29   0:00 postgres: background writer 
+dnsmasq      945  0.0  0.0 216768 10188 ?        Ss   Oct29   0:00 postgres: walwriter 
+message+     192  0.0  0.0   9800  5536 ?        Ss   Oct29   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         209  0.0  0.0  17400  6472 ?        Ss   Oct29   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+root         202  0.0  0.0  17992  8876 ?        Ss   Oct29   0:00 /usr/lib/systemd/systemd-logind

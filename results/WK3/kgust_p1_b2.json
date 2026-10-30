@@ -1,0 +1,50 @@
+{
+ "boot": "results/WK3/booty/p1_b2",
+ "n": 34790,
+ "litera_sdf": {
+  "W0": 2.0,
+  "A_frac": 0.4,
+  "Pm_s": 8.0,
+  "Ad_deg": 0.0,
+  "Pd_s": 1.0
+ },
+ "k_przy_wietrze_z_litery_bez_wyrazu": 0.4948,
+ "k_przy_wietrze_z_litery_z_wyrazem": 0.4892,
+ "bias_NE_przy_literze": [
+  0.0162,
+  0.0205
+ ],
+ "k_przy_zalozeniu_wiatru_stalego": 0.4766,
+ "bias_NE_wiatr_staly": [
+  0.0164,
+  1.0087
+ ],
+ "wiatr_odtworzony_przez_drona_mag": {
+  "srednia": 2.0236,
+  "amplituda": 0.8136,
+  "faza_deg": 0.5,
+  "resid_std": 0.0812
+ },
+ "wiatr_litera_mag_w_tych_chwilach": {
+  "srednia": 2.0,
+  "amplituda": 0.8,
+  "faza_deg": -0.0,
+  "resid_std": 0.0
+ },
+ "residuum_wiatru_odtw_vs_litera_m_s": {
+  "p50": 0.0877,
+  "p95": 0.2088
+ },
+ "odpowiedz_predkosci_E_przy_okresie_porywu": {
+  "srednia": -0.0127,
+  "amplituda": 0.1944,
+  "faza_deg": -5.3,
+  "resid_std": 1.3369
+ },
+ "przechyl_orbita_p50_p95_max": [
+  7.6,
+  13.42,
+  23.35
+ ],
+ "frac_probek_v_ponizej_V_MIN": 0.0031
+}
