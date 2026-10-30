@@ -1,0 +1,75 @@
+{
+  "kind": "democ_v6",
+  "flight": "bench",
+  "boot": 1,
+  "rc": 0,
+  "arm": "E",
+  "point": "0.0",
+  "harness_file": "/home/olga/projects/liquidpatrol/bench/bench_flight.py",
+  "sha_harness": "05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43",
+  "controller": "net_fantom",
+  "controller_sha": "e435ed7e3f3ce47dd7b3b88651dff02ae76ddb14823ac913e544d849cd09d849",
+  "feed_sha": "8015bd12d7e8852bdc2e773d8b32c335a21752ea6209c6f245364809e4ed4a9c",
+  "executor_params_sha": "5a7244996d89be70bd720a2b0eb8b6f6dea1a2d8f3f2fd7cf356292426f28716",
+  "ulog_sha": "c9d9fbb3ff7043555c189fda866a93fcfc54e1edd5977eb50e260bc81d22552a",
+  "ulog_bytes": 60923219,
+  "world_hash": "e47ef38030c5095d9a5f09e86349a07a2aadda5c7ec2c085d906553dcbb179dc  worlds/world_wk3_p2.sdf",
+  "world_ref": "worlds/world_wk3_p2.sdf",
+  "proc_gate": "CLEAN loadavg=0.16 (cpu_max=2.0, load1_max=1.5)",
+  "n_demo_rows": 1431,
+  "n_episodes": 1,
+  "n_valid_V2p": 1,
+  "n_success_D6": 0,
+  "episodes": [
+    {
+      "episode_id": 4,
+      "scenario_id": "c04_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": false,
+      "n_deep_stall": 4,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9501,
+      "d_min_m": 6.849,
+      "refuse_count": 0,
+      "breach": false
+    }
+  ],
+  "world_hash_kind": "repo",
+  "model_in_state": true,
+  "democ_v6": {
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profile": "/home/olga/projects/liquidpatrol/results/PERC2/tools/perc2_fastdds_profile.xml",
+    "sonda_preflight_rc": 0,
+    "sondy": [
+      {
+        "proba": "preflight",
+        "sonda": {
+          "label": "preflight_take1_c04",
+          "feed": "/home/olga/projects/liquidpatrol/results/DEMO_C/s6_wiatr/take1_c04/percep_feed.jsonl",
+          "tryb": "live window=35.0s",
+          "prog_frozen": {
+            "dt_p50_max_s_na_klatke": 0.07,
+            "frac_delt_gt_0p10_max": 0.05
+          },
+          "n_delt": 489,
+          "dt_p50_s_na_klatke": 0.064,
+          "dt_p90_s_na_klatke": 0.068,
+          "frac_delt_gt_0p10": 0.0,
+          "hz_p50": 15.62,
+          "span_sim_s": 34.3,
+          "werdykt": "PASS"
+        }
+      }
+    ],
+    "uzbrojony_po_sondzie": true,
+    "nota": "AKT 6 Wiatr: scenariusz P2 nogi WK-III (manifest domyslny), swiat world_wk3_p2, NCP net_fantom FEED=V2, framedump cam pelne + swiat 10 fps"
+  },
+  "wk": {
+    "world": "world_wk3_p2",
+    "world_sha256": "e47ef38030c5095d9a5f09e86349a07a2aadda5c7ec2c085d906553dcbb179dc",
+    "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+  }
+}

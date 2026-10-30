@@ -1,0 +1,48 @@
+{
+ "epizody": [
+  {
+   "boot": "results/DEMO_C/s6_wiatr/take1_c04",
+   "episode_id": 4,
+   "scenario_id": "c04_s01",
+   "valid_V2p": true,
+   "refuse_count": 0,
+   "breach": false,
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "c_sweep"
+    ],
+    "d_min_m": 6.849,
+    "t_entry_s": 2.864,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 570.0
+   },
+   "judge_swiadek": {
+    "success_D6": false,
+    "fail_reasons": [
+     "c_sweep"
+    ],
+    "d_min_m": 6.849,
+    "t_entry_s": 2.864,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 570.0
+   },
+   "swiadek_n_odrzuconych": 0,
+   "rozjazd_pelny_swiadek": false,
+   "refuses": [],
+   "manifest_success_D6": false,
+   "manifest_d_min_m": 6.849,
+   "repro_manifest": true,
+   "gt_alt_max_m": 14.49
+  }
+ ],
+ "booty": [
+  {
+   "boot": "results/DEMO_C/s6_wiatr/take1_c04",
+   "n_breach_events": 0,
+   "refuse_reasons": []
+  }
+ ],
+ "dev_gate_m": 1.0,
+ "eps_false_m": 2.0
+}

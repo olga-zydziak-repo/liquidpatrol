@@ -424,3 +424,253 @@ publikacją (push nie zaszedł); poza napisami zero zmian. Nowe sha256:
 | `clips/akt1_v5.mp4` | `6e996199d5daab0d…` · `akt2_v5` `2c19dc2c911b51f9…` · `akt4a_v5` `0b0202b00bcefd7e…` · `akt4b_v5` `47840c98e525bb48…` · `akt5_v5` `4202d2cb2db84c21…` |
 
 Narzędzie: `democ_overlay_v5.py` po erracie `ec59c027dd0a338a`.
+
+---
+
+## Akt 6 (v6) „Wiatr" + errata planszy (dopisek po STOP-DEMOC-5; wykonanie PROMPT_DEMOC_V6; wszystko wyżej NIETKNIĘTE)
+
+**Bramka:** origin == HEAD == `cef1e214` (CO-WK3), w korzeniu `ANEKS_WK3-1.md`, byte-check
+`f32eb8e7…0550ab` PASS. `origin/master..HEAD` było puste, w porcelain tylko nazwane `??` (wideo, jpg).
+Pierwsza próba bramki (przed CO-WK3) zakończyła się STOP §0.1, bez bootów.
+Piny w logu każdego bootu: mono_cam `3354ae1e`, x500_base (wind) `13c9174d`, świat `world_wk3_p2`
+`e47ef380` (pełne sha), profil FastDDS `a68a450b`. Sonda przed uzbrojeniem PASS 2/2 (15.6 Hz).
+
+**Wybór ujęcia: P2 c04_s01** (cel ruchomy v 0.5, start czołowo 15 m). W nodze WK-III to najczystszy
+epizod z c04–c07: track od startu bez utraty, 0% ticków z celem poza kadrem, t_entry 2.46 s, D6 pełny
+i ze świadkiem ✓. Komórki c05–c07 miały utratę tracka startowego albo 10–15% ticków z celem poza kadrem.
+
+**Booty 2/≤2. Mapping take → epizod → kryteria** (`s6_wiatr/akt6_werdykty.json`; sędzia
+`wk_judge.py` c33c3ff8 = bench_judge 8ec0fcfb + świadek ERRATUM-DMIN obok; k = `wk3_gust.py` 12ea2f2f
+z literą P2 `2 0.8 4 30 11`):
+
+| take | boot | epizod | V2′ (dsim/dwall) | breach / REFUSE | D6 pełny | D6 świadek | sweep | d_min | t_entry | frac 6–10 | k (litera) | ujęcie | w montażu |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| 1 | take1_c04 | c04_s01 | ✓ 0.950 | 0 / 0 | **✗ c_sweep** | ✗ c_sweep | 570.0° | 6.849 | 2.86 s | 1.00 | 0.490 (−0.8%) | **odrzucone** | nie |
+| 2 | take2_c04 | c04_s01 | ✓ 0.951 | 0 / 0 | **✓** | **✓** (odrzuconych 0) | 800.6° | 7.098 | 2.64 s | 1.00 | 0.492 (−0.4%) | **VALID** | **TAK** |
+
+**Lista odrzuconych take'ów: take 1.** Epizod był ważny, ale **D6 FAIL literą sędziego (sweep 570°)**.
+Zapisuję to wprost. To nie jest porażka akwizycji: track był ważny przez cały epizod, a od 2.8 s dron
+był w fazie ORBIT. Orbita szła jednak wolniej i dwa razy zawróciła: narastający kąt wokół celu po
+70 s wyniósł −179° wobec −555° w WK3 p2_b2 tego samego scenariusza. Mediana |v| 1.35 m/s wobec 1.80,
+|komendy| 1.60 wobec 2.02.
+Czynnika nie przypisuję (n = 1). Różnice reżimu wobec lotów WK-III nazywam:
+- zrzut klatek, kamera pełna + świat 10 fps: dsim/dwall 0.950–0.951 wobec 0.9986 w WK-III;
+- start epizodu przesunięty o 0.55 s w fazie sinusa porywu (okres 4 s);
+- dwa krótkie rendery na sucho overlayu (na boocie WK3) szły równolegle z bootem 1 w fazie przed
+  uzbrojeniem i skończyły się ok. 1 min przed startem epizodu (09:34:15 wobec ok. 09:35). Bootu 2
+  nie obciążało nic.
+Take 2 zrobiono w warunkach identycznych (ten sam scenariusz, driver i zrzut), bez strojenia.
+**Wynik reżimu demo pod wiatrem P2: 1/2 epizodów D6.** Linii planszy „15/16" to nie dotyczy, bo ona
+cytuje kampanię WK-III, a demo nie jest kampanią. Liczba jest tu jednak zapisana, żeby nie zniknęła.
+
+**Driver `tools/democ_v6_boot.sh` (sha256 `fef9ac92a5a11342…`)** to kopia `democ_v3_boot.sh`
+(nietkniętego) z blokiem WK z `wk3_boot.sh` 039e368c (nietkniętego). Pełny diff
+(`diff democ_v3_boot.sh democ_v6_boot.sh`), hunki nazwane:
+- **H1 nagłówek/użycie:** `1a2,10`, `13c22`.
+- **H2 bez BENCH_MANIFEST + H3 katalog s6_wiatr:** `16,18c25,27`, `25c37`.
+  H2: manifest domyślny `results/BENCH/scenario_manifest.json`, ten sam co w lotach WK-III.
+- **H4 świat + piny WK:** `20c29,32`, `37,38c49,55`. Pin x500_base, katalog meshes i sha świata są
+  sprawdzane PRZED cooldownem; rozjazd = STOP.
+- **H5 GZ_SIM_RESOURCE_PATH:** `54a72,74`.
+- **H6 KIND=democ_v6, bez BENCH_MANIFEST w env:** `57,58c77,78`.
+- **H7 blok manifestu `democ_v6` + `wk`:** `127c147`, `129c149`, `131c151`, `136c156`, `141,142c161,166`.
+- **H8 etykiety logu democV3→democV6 + samowykluczenie `democ_v6_boot`:** `28c40`, `31,34c43,46`,
+  `42c59`, `46c63`, `49c66`, `63c83`, `101c121`, `106c126`, `108c128`, `112c132`, `124c144`, `144c168`,
+  `146c170`. Ścieżka `/tmp/pg_democv3_$BN.log` zostaje z kopii (kosmetyka, bez wpływu).
+
+```diff
+1a2,10
+> # results/DEMO_C/tools/democ_v6_boot.sh — driver bootu AKTU 6 „Wiatr" (PROMPT_DEMOC_V6 §1). KOPIA
+> # democ_v3_boot.sh (nietknięty) + blok WK z results/WK3/tools/wk3_boot.sh (039e368c, nietknięty):
+> #   (H1) nagłówek/użycie; (H2) bez BENCH_MANIFEST (manifest domyślny = scenariusze P2 nogi WK-III);
+> #   (H3) katalog results/DEMO_C/s6_wiatr (§0.3), log democ_v6_monitor.log;
+> #   (H4) WORLD=world_wk3_p2 z pełnym sha + pin x500_base (wind) 13c9174d obok pinu mono_cam (rozjazd = STOP);
+> #   (H5) prepend GZ_SIM_RESOURCE_PATH na worlds/wind_models (wzór wk3_boot.sh); (H6) KIND=democ_v6;
+> #   (H7) blok manifestu democ_v6 + "wk" (sha świata, piny) — litera bloku "wk" z wk3_boot.sh;
+> #   (H8) samowykluczenie procesowe / etykiety logu.
+> # --- nagłówek kopii (democ_v3_boot.sh) ---
+13c22
+< # Użycie: democ_v3_boot.sh <BOOT_N> <NAZWA> <EP_IDS_csv> <BENCH_MANIFEST>
+---
+> # Użycie: democ_v6_boot.sh <BOOT_N> <NAZWA> <EP_IDS_csv>   (np. 1 take1_c04 4)
+16,18c25,27
+< BN="${1:?BOOT_N}"; NAME="${2:?NAZWA}"; EPIDS="${3:?EP_IDS}"; BMAN="${4:?BENCH_MANIFEST}"
+< OUTDIR="$ROOT/results/DEMO_C/s3_wabik/$NAME"
+< MONLOG="$ROOT/results/DEMO_C/s3_wabik/democ_v3_monitor.log"
+---
+> BN="${1:?BOOT_N}"; NAME="${2:?NAZWA}"; EPIDS="${3:?EP_IDS}"
+> OUTDIR="$ROOT/results/DEMO_C/s6_wiatr/$NAME"
+> MONLOG="$ROOT/results/DEMO_C/s6_wiatr/democ_v6_monitor.log"
+20c29,32
+< WORLD=world_demo_A3
+---
+> WORLD=world_wk3_p2
+> WORLD_SHA_EXPECTED="e47ef38030c5095d9a5f09e86349a07a2aadda5c7ec2c085d906553dcbb179dc"
+> WIND_SDF="$ROOT/worlds/wind_models/x500_base/model.sdf"
+> WIND_PIN_EXPECTED="13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214"
+25c37
+< mkdir -p "$ROOT/results/DEMO_C/s3_wabik"
+---
+> mkdir -p "$ROOT/results/DEMO_C/s6_wiatr"
+28c40
+<   echo "[democV3 $NAME] GUARD: DEMOC_FASTDDS_PROFILE nieustawiony — ODMOWA" | tee -a "$MONLOG"; exit 5
+---
+>   echo "[democV6 $NAME] GUARD: DEMOC_FASTDDS_PROFILE nieustawiony — ODMOWA" | tee -a "$MONLOG"; exit 5
+31,34c43,46
+< [ "$PSHA" != "$PROFIL_SHA16" ] && { echo "[democV3 $NAME] GUARD: profil sha=$PSHA — ODMOWA" | tee -a "$MONLOG"; exit 5; }
+< [ -f "$OUTDIR/manifest.json" ] && { echo "[democV3 $NAME] REPO-2: manifest istnieje — ODMOWA" | tee -a "$MONLOG"; exit 4; }
+< COLL="$(pgrep -af 'run_boot|gz sim|bin/px4|bench_flight|MicroXRCEAgent|percep_proc|framedump' 2>/dev/null | grep -v -e "$$" -e democ_v3_boot -e pgrep)"
+< [ -n "$COLL" ] && { echo "[democV3 $NAME] ENV-BLOCK kolizja:" | tee -a "$MONLOG"; echo "$COLL" | tee -a "$MONLOG"; exit 3; }
+---
+> [ "$PSHA" != "$PROFIL_SHA16" ] && { echo "[democV6 $NAME] GUARD: profil sha=$PSHA — ODMOWA" | tee -a "$MONLOG"; exit 5; }
+> [ -f "$OUTDIR/manifest.json" ] && { echo "[democV6 $NAME] REPO-2: manifest istnieje — ODMOWA" | tee -a "$MONLOG"; exit 4; }
+> COLL="$(pgrep -af 'run_boot|gz sim|bin/px4|bench_flight|MicroXRCEAgent|percep_proc|framedump' 2>/dev/null | grep -v -e "$$" -e democ_v6_boot -e pgrep)"
+> [ -n "$COLL" ] && { echo "[democV6 $NAME] ENV-BLOCK kolizja:" | tee -a "$MONLOG"; echo "$COLL" | tee -a "$MONLOG"; exit 3; }
+37,38c49,55
+< [ "$PIN_GOT" != "$PIN_EXPECTED" ] && { echo "[democV3 $NAME] PIN FAIL model.sdf — STOP" | tee -a "$MONLOG"; exit 6; }
+< echo "[democV3 $NAME] PIN OK profil=$PSHA eps=$EPIDS bman=$BMAN" | tee -a "$MONLOG"
+---
+> [ "$PIN_GOT" != "$PIN_EXPECTED" ] && { echo "[democV6 $NAME] PIN FAIL model.sdf — STOP" | tee -a "$MONLOG"; exit 6; }
+> WIND_PIN_GOT="$(sha256sum "$WIND_SDF" | cut -d' ' -f1)"
+> [ "$WIND_PIN_GOT" != "$WIND_PIN_EXPECTED" ] && { echo "[democV6 $NAME] PIN FAIL x500_base (wind) got=$WIND_PIN_GOT — STOP" | tee -a "$MONLOG"; exit 6; }
+> [ -d "$ROOT/worlds/wind_models/x500_base/meshes" ] || { echo "[democV6 $NAME] brak x500_base/meshes — STOP" | tee -a "$MONLOG"; exit 6; }
+> WORLD_SHA_GOT="$(sha256sum "$ROOT/worlds/$WORLD.sdf" | cut -d' ' -f1)"
+> [ "$WORLD_SHA_GOT" != "$WORLD_SHA_EXPECTED" ] && { echo "[democV6 $NAME] SHA ŚWIATA FAIL $WORLD got=$WORLD_SHA_GOT — STOP" | tee -a "$MONLOG"; exit 6; }
+> echo "[democV6 $NAME] PIN OK mono_cam=${PIN_GOT:0:8} x500_base(wind)=${WIND_PIN_GOT:0:8} świat $WORLD=$WORLD_SHA_GOT profil=$PSHA eps=$EPIDS" | tee -a "$MONLOG"
+42c59
+< echo "[democV3 $NAME $(date +%H:%M:%S)] cooldown ${rem}s" | tee -a "$MONLOG"; sleep $rem
+---
+> echo "[democV6 $NAME $(date +%H:%M:%S)] cooldown ${rem}s" | tee -a "$MONLOG"; sleep $rem
+46c63
+<   else streak=0; echo "[democV3 $NAME $(date +%H:%M:%S)] brudny: $(head -1 /tmp/pg_democv3_$BN.log)" >> "$MONLOG"; fi
+---
+>   else streak=0; echo "[democV6 $NAME $(date +%H:%M:%S)] brudny: $(head -1 /tmp/pg_democv3_$BN.log)" >> "$MONLOG"; fi
+49c66
+< echo "[democV3 $NAME $(date +%H:%M:%S)] SUSTAINED CLEAN" | tee -a "$MONLOG"
+---
+> echo "[democV6 $NAME $(date +%H:%M:%S)] SUSTAINED CLEAN" | tee -a "$MONLOG"
+54a72,74
+> # prepend modelu z enable_wind (blok WK z wk3_boot.sh; gz_env.sh dopisuje stock PO naszym)
+> export GZ_SIM_RESOURCE_PATH="$ROOT/worlds/wind_models${GZ_SIM_RESOURCE_PATH:+:$GZ_SIM_RESOURCE_PATH}"
+> echo "GZ_SIM_RESOURCE_PATH=$GZ_SIM_RESOURCE_PATH" > "$OUTDIR/.gz_resource_path"
+57,58c77,78
+< env FLIGHT=bench CONTROLLER=net_fantom NET_ARM=ncp INTRUDER=1 WORLD=$WORLD FILM=1 KIND=democ_v3 \
+<   BENCH_MANIFEST="$BMAN" BOOT_N="$BN" OUTDIR="$OUTDIR" BENCH_EPISODE_IDS="$EPIDS" \
+---
+> env FLIGHT=bench CONTROLLER=net_fantom NET_ARM=ncp INTRUDER=1 WORLD=$WORLD FILM=1 KIND=democ_v6 \
+>   BOOT_N="$BN" OUTDIR="$OUTDIR" BENCH_EPISODE_IDS="$EPIDS" \
+63c83
+< echo "[democV3 $NAME] run_boot pid=$BOOT" | tee -a "$MONLOG"
+---
+> echo "[democV6 $NAME] run_boot pid=$BOOT" | tee -a "$MONLOG"
+101c121
+<   echo "[democV3 $NAME] przed uzbrojeniem: bridge=$BR percep=$PP cam=$FD world=${WR:-brak} filmbr=${FBR:-brak} — sonda 35 s" | tee -a "$MONLOG"
+---
+>   echo "[democV6 $NAME] przed uzbrojeniem: bridge=$BR percep=$PP cam=$FD world=${WR:-brak} filmbr=${FBR:-brak} — sonda 35 s" | tee -a "$MONLOG"
+106c126
+<   echo "[democV3 $NAME $(date +%H:%M:%S)] sonda preflight rc=$SONDA_RC (0=PASS)" | tee -a "$MONLOG"
+---
+>   echo "[democV6 $NAME $(date +%H:%M:%S)] sonda preflight rc=$SONDA_RC (0=PASS)" | tee -a "$MONLOG"
+108c128
+<     echo "[democV3 $NAME] SONDA FAIL — boot NIE uzbraja się" | tee -a "$MONLOG"
+---
+>     echo "[democV6 $NAME] SONDA FAIL — boot NIE uzbraja się" | tee -a "$MONLOG"
+112c132
+<   echo "[democV3 $NAME] topic kamery nie wstał — kill" | tee -a "$MONLOG"
+---
+>   echo "[democV6 $NAME] topic kamery nie wstał — kill" | tee -a "$MONLOG"
+124c144
+< echo "[democV3 $NAME $(date +%H:%M:%S)] wrapper rc=$RC sonda_rc=$SONDA_RC" | tee -a "$MONLOG"
+---
+> echo "[democV6 $NAME $(date +%H:%M:%S)] wrapper rc=$RC sonda_rc=$SONDA_RC" | tee -a "$MONLOG"
+127c147
+< python3 - "$OUTDIR" "$SONDA_RC" "$PIN_GOT" <<'PY'
+---
+> python3 - "$OUTDIR" "$SONDA_RC" "$PIN_GOT" "$WORLD" "$WORLD_SHA_GOT" "$WIND_PIN_GOT" <<'PY'
+129c149
+< outdir, src, pin = sys.argv[1:4]
+---
+> outdir, src, pin, wk_world, wk_world_sha, wk_wind_pin = sys.argv[1:7]
+131c151
+< m = json.load(open(mp)) if os.path.exists(mp) else {"kind": "democ_v3", "armed": False}
+---
+> m = json.load(open(mp)) if os.path.exists(mp) else {"kind": "democ_v6", "armed": False}
+136c156
+< m["democ_v3"] = {"pin_mono_cam_model_sdf": pin,
+---
+> m["democ_v6"] = {"pin_mono_cam_model_sdf": pin,
+141,142c161,166
+<                  "nota": "AKT 4: jeden obiekt w swiecie (scenariusz wabika grany torem intruza, "
+<                          "litera WABIK S2); klasyfikator wabik_sig v1 475c972e POSTHOC — nie steruje"}
+---
+>                  "nota": "AKT 6 Wiatr: scenariusz P2 nogi WK-III (manifest domyslny), swiat world_wk3_p2, "
+>                          "NCP net_fantom FEED=V2, framedump cam pelne + swiat 10 fps"}
+> m["wk"] = {"world": wk_world, "world_sha256": wk_world_sha,
+>            "pin_x500_base_wind_model_sdf": wk_wind_pin, "pin_mono_cam_model_sdf": pin,
+>            "gz_resource_path": open(os.path.join(outdir, ".gz_resource_path")).read().strip()
+>                                if os.path.exists(os.path.join(outdir, ".gz_resource_path")) else None}
+144c168
+< print(f"[democV3] manifest: sonda_rc={src}")
+---
+> print(f"[democV6] manifest: sonda_rc={src}")
+146c170
+< echo "[democV3 $NAME] DONE rc=$RC → $OUTDIR" | tee -a "$MONLOG"; exit "$RC"
+---
+> echo "[democV6 $NAME] DONE rc=$RC → $OUTDIR" | tee -a "$MONLOG"; exit "$RC"
+```
+
+**Overlay `tools/democ_overlay_v6.py` (sha256 `25bd3f5177b14d9d…`)** to NOWY plik. Importuje tylko do
+odczytu `democ_topdown.Panel`, helpery v2, mini-mózg v5, `xai_replay` ac9551ab i `wk2_k.load` 09e4b440.
+Klatki aktu to tor v2 1:1: panel taktyczny + HUD + kamera ×2 NN, ramki det_v2 wyłącznie z percep_feed.
+Do tego mini-mózg „W GŁOWIE SIECI — ta sieć PROWADZI lot / panel = replay zapisu (nie steruje)".
+**Kotwica replayu tego ujęcia** (asercja, próg 1e-2): p50 6.11·10⁻⁴, p95 **1.16·10⁻³**,
+max 2.08·10⁻³ m/s (1430 ticków, 1415 inferencji). Elementy §2:
+1. **Strzałka wiatru** na panelu (prawy dolny róg, poza R_E). Liczona z **litery świata** wzorem
+   z `wk3_gust.py`: |w| = 2(1 + 0.8 sin(2πt/4)), θ = 30° sin(2πt/11), w_NED = (|w| sin θ, |w| cos θ),
+   t = t_sim. Dron odtworzył tę literę w WK-III (RAPORT_WK3_S1 §2). Pokazuje aktualne |w| i θ oraz
+   podpis stały §2 verbatim + „strzałka = dokąd wieje".
+2. **Przechył z zapisu lotu:** vehicle_attitude ulogu, acos(R[2,2]), wyłącznie w oknie epizodu
+   (lekcja ANEKS_WK3-1 §3). Na ekranie bieżący kąt i „maks. w epizodzie dotąd". W tym ujęciu
+   p50 8.2°, maks. **20.0°** w epizodzie. W samej orbicie wg wk3_gust 8.2 / 13.7 / 16.4°.
+3. **Pasek porywu:** |w|(t) z litery, ostatnie 20 s, linie 0.4/2.0/3.6, znacznik „teraz".
+
+Napis uczciwości §2 jest wypalony przez cały akt (pas nad kamerą). Napisy narracyjne idą verbatim
+z §2, w kolejności 0–8 / 8–17 / 17–(koniec−9) / ostatnie 9 s. Napis „orbita trzyma: dystans
+6–10 m przez całe okno" potwierdza sędzia: frac 6–10 = 1.00, d_min 7.10. „Odporny na wiatr" nie
+pada nigdzie. **Segmenty tempa:** 0–8 s ×1 / 8.1–64 s **×2** (plakietka „TEMPO ×2") / 64.1–72 s ×1.
+Okno kończy się 0.6 s przed końcem epizodu, zegar epizodu jest ciągły i wypalony. Akt trwa
+**44.1 s**, klatki kamery 441/441.
+**Poprawka w toku (nazwana):** cv2 nie renderuje „·", więc stopka panelu `democ_topdown`
+(„panel taktyczny (GT) ?? siatka 5 m", tak samo w aktach 1–2 v2) jest w akcie 6 zamalowana
+i napisana ponownie przez PIL. Akty 1–5 zostają bez zmian.
+
+**§3 errata planszy (obowiązkowa).** Linia v3/v4 „Wabiki: rozpoznawane po zachowaniu — zero
+fałszywych alarmów w pomiarach." była nadmiarowa. Zero dotyczy wyłącznie celów ATAKUJĄCYCH:
+0/3 w locie (RAPORT_WABIK_S2) i 0 w 26 wariantach (WABIK-II). Na 115 zwykłych lotach NULL
+zamrożona reguła kończy z etykietą w **13** (**FREEZE_WABIK**: NULL@12 — 23/115 ever / 13/115
+końcowa; wolne krążące cele v = 0.5 to granica nierozróżnialności). **Plansza v6** to plansza v4
+z linią FROZEN §3 verbatim. Linię złamano na dwa wiersze bez zmiany słowa (inaczej przekracza
+szerokość kadru). Przed wierszem zamykającym dochodzi linia „Wiatr zmienny do 3.6 m/s na kamerze:
+15/16 misji." (WK-III: P1 8/8 + P2 7/8). Tak samo poprawiony blok planszy w `DEMO_C_v6_en.srt`.
+Wersje v3–v5 na dysku zostają z linią sprzed erraty jako historia montażu. **Do publikacji
+idzie v6.**
+
+**§4 montaż:** `DEMO_C_v6.mp4` **248.3 s** ≤ 250. Składa się z v5 po erracie (sha `f437b26a…`,
+sprawdzone) bez planszy, 195.2 s, + akt 6 44.1 s + plansza v6 9 s. Format 1920×1080@10, tor cv2 mp4v
+(odchylenie jawne jak w v1–v5: ffmpeg nie istnieje). `DEMO_C_v6_en.srt` to NOWY plik: bloki v5 bez
+planszy + 4 bloki aktu 6 + plansza v6. SHORT v6 nie powstał (opcjonalny). Wideo ma > 25 MB, więc
+zostaje **NA DYSKU** (kopie na pulpicie jak przy v5). sha256:
+
+| plik (na dysku) | sha256 |
+|---|---|
+| `results/DEMO_C/DEMO_C_v6.mp4` (248.3 s, 79 MB) | `5033018bf7e6f1b87d8efbac99182fee9f29a0e4018b0f68c9e510fe4f3336b6` |
+| `results/DEMO_C/clips/akt6_v6.mp4` (44.1 s, 17 MB) | `bfca966b4255f32a37f0d251076bd994ac114db65d6321378ccf4baa2a3bfab8` |
+| `results/DEMO_C/DEMO_C_v6_en.srt` (w commicie) | `885dbb1c8a9aeb47f0f124264cc5e0da69163f122cf96f5cd6f283b2fba354be` |
+
+**W commicie:** `tools/democ_v6_boot.sh`, `tools/democ_overlay_v6.py`, `DEMO_C_v6_en.srt`,
+`s6_wiatr/` (manifesty z blokami `democ_v6` / `wk`, demo, trace, gt_intruder, percep_feed,
+frames_index, sondy; boot.ulg wg gitignore, ulog_sha w manifeście), `judge_take{1,2}.json`,
+`kgust_take{1,2}.json`, `akt6_werdykty.json`, logi drivera, ten dopisek. Klatki jpg i mp4
+zostają na dysku (celowe `??`). Edycje istniejących plików: wyłącznie ten dopisek (append-only).
+**Push = Olga („wypchnięte"). CC przed publikacją weryfikuje kryteria i k z repo oraz ogląda v6
+z załącznika.** **STOP-DEMOC-6.**

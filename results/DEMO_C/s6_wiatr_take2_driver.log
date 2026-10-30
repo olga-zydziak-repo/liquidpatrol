@@ -1,0 +1,14 @@
+[democV6 take2_c04] PIN OK mono_cam=3354ae1e x500_base(wind)=13c9174d świat world_wk3_p2=e47ef38030c5095d9a5f09e86349a07a2aadda5c7ec2c085d906553dcbb179dc profil=a68a450b91c2ab51 eps=4
+[democV6 take2_c04 09:37:40] cooldown 226s
+[democV6 take2_c04 09:42:52] SUSTAINED CLEAN
+[democV6 take2_c04] run_boot pid=12182
+[democV6 take2_c04] przed uzbrojeniem: bridge=12907 percep=12908 cam=12909 world=13170 filmbr=13169 — sonda 35 s
+[democV6 take2_c04 09:43:54] sonda preflight rc=0 (0=PASS)
+results/DEMO_C/tools/democ_v6_boot.sh: line 136: 12907 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_mono.log" 2>&1
+results/DEMO_C/tools/democ_v6_boot.sh: line 136: 13169 Killed                  setsid nohup env FASTRTPS_DEFAULT_PROFILES_FILE="$DEMOC_FASTDDS_PROFILE" ros2 run ros_gz_bridge parameter_bridge "${FT}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_film_profil.log" 2>&1
+results/DEMO_C/tools/democ_v6_boot.sh: line 141: 12185 Killed                  tail -n +1 -F "$OUTDIR/client_e2e.jsonl" > "$OUTDIR/client_e2e_full.jsonl" 2> /dev/null
+[democV6 take2_c04 09:46:58] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b2] DONE flight=bench world=world_wk3_p2 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/s6_wiatr/take2_c04
+[democV6] manifest: sonda_rc=0
+[democV6 take2_c04] DONE rc=0 → /home/olga/projects/liquidpatrol/results/DEMO_C/s6_wiatr/take2_c04

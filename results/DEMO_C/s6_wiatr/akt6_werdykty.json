@@ -1,0 +1,94 @@
+{
+ "akt": 6,
+ "swiat": "world_wk3_p2",
+ "swiat_sha256": "e47ef38030c5095d9a5f09e86349a07a2aadda5c7ec2c085d906553dcbb179dc",
+ "litera_wiatru": {
+  "W0": 2.0,
+  "A": 0.8,
+  "Pm_s": 4.0,
+  "Ad_deg": 30.0,
+  "Pd_s": 11.0,
+  "zrodlo": "RECON_WK3 R1/R2; wk3_gust.py 12ea2f2f"
+ },
+ "sedzia": "results/WK/tools/wk_judge.py c33c3ff8 (bench_judge 8ec0fcfb + swiadek ERRATUM-DMIN DEV_GATE 1.0 m)",
+ "take": [
+  {
+   "take": 1,
+   "boot": "take1_c04",
+   "epizod": "c04_s01",
+   "valid_V2p": true,
+   "dsim_dwall": 0.9501,
+   "refuse_count": 0,
+   "breach": false,
+   "n_breach_events": 0,
+   "judge_full": {
+    "success_D6": false,
+    "fail_reasons": [
+     "c_sweep"
+    ],
+    "d_min_m": 6.849,
+    "t_entry_s": 2.864,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 570.0
+   },
+   "judge_swiadek": {
+    "success_D6": false,
+    "fail_reasons": [
+     "c_sweep"
+    ],
+    "d_min_m": 6.849,
+    "t_entry_s": 2.864,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 570.0
+   },
+   "swiadek_n_odrzuconych": 0,
+   "k_litera": 0.49,
+   "k_odch_od_0494": -0.0081,
+   "k_w_tolerancji_20pct": true,
+   "przechyl_orbita_p50_p95_max": [
+    7.73,
+    13.75,
+    20.07
+   ],
+   "ujecie_VALID": false,
+   "w_montazu": false
+  },
+  {
+   "take": 2,
+   "boot": "take2_c04",
+   "epizod": "c04_s01",
+   "valid_V2p": true,
+   "dsim_dwall": 0.951,
+   "refuse_count": 0,
+   "breach": false,
+   "n_breach_events": 0,
+   "judge_full": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 7.098,
+    "t_entry_s": 2.644,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 800.6
+   },
+   "judge_swiadek": {
+    "success_D6": true,
+    "fail_reasons": [],
+    "d_min_m": 7.098,
+    "t_entry_s": 2.644,
+    "frac_band_6_10": 1.0,
+    "sweep_deg": 800.6
+   },
+   "swiadek_n_odrzuconych": 0,
+   "k_litera": 0.4921,
+   "k_odch_od_0494": -0.0038,
+   "k_w_tolerancji_20pct": true,
+   "przechyl_orbita_p50_p95_max": [
+    8.2,
+    13.66,
+    16.4
+   ],
+   "ujecie_VALID": true,
+   "w_montazu": true
+  }
+ ]
+}
