@@ -495,3 +495,37 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
 - Bez zmian: TOR-CECHY ∪ MULTI-TARGET, IMITACJE, daleki wzrok, ODPOWIEDŹ-EKONOMIA, 2c, 2d, 2e.
 - Stan: wątek wiatr+kamera zamknięty w dwóch nogach (9 bootów: 3 + 6), breach 0 / REFUSE 0;
   katalog 9 → 8 otwartych pozycji.
+
+## Dopisek stanu katalogu — 30.10.2026 (CO-WK3, ANEKS_WK3-1 §5)
+
+- **WK-III „porywy"** → **CLOSED werdyktem V-A3, 4/≤8 bootów; śmierć nie zaszła; breach 0 / REFUSE 0 /
+  sejwy 0.** Dowody: `results/WK3/RAPORT_WK3_S1.md`, `results/WK3_RECON/RECON_WK3.md`; prerejestracja
+  `PRE_WK3.md` (sha 3758b86f…); ANEKS `ANEKS_WK3-1.md` (sha f32eb8e7…).
+  **Zdanie zamrożone (ANEKS_WK3-1 §2, do cytowań):**
+  > **V-A3.** NCP-20 (20 neuronów, uczona w świecie bez oporu i bez wiatru)
+  > prowadzi pełną misję na własnej kamerze pod wiatrem zmiennym w czasie,
+  > w habitacie z realnym oporem (k ≈ 0.49 /s), komórki v ≤ 0.5: profil
+  > łagodny (średnia 2 m/s, porywy 1.2–2.8 m/s, okres 8 s) **D6 8/8**; profil
+  > ostry (0.4–3.6 m/s, okres 4 s, kierunek ±30° z okresem 11 s) **D6 7/8**,
+  > breach 0, sejwy osłony 0. Jedyna porażka to spóźniona akwizycja celu
+  > (wejście w pas po 26.2 s przy limicie 25 s), po której orbita była pełna.
+  > Tempo orbity 0.89 stocku, przechył w epizodach ≤ 26.3°, cel nigdy nie
+  > wypadł z kadru dołem przed porażką. Sinus deterministyczny — to „wiatr
+  > zmienny o znanym profilu", nie turbulencja.
+
+  **Dla tezy „mała sieć umie latać":** po WK-II wolno było mówić „przy stałym
+  wietrze do 3 m/s"; od dziś: **„pod wiatrem zmiennym w czasie z porywami do
+  3.6 m/s i obrotem kierunku, w habitacie z realnym oporem"**. Kanon W
+  zostaje: nie „odporna na wiatr" (brak turbulencji stochastycznej, brak
+  realnego sprzętu), nic o porywach ponad 3.6 m/s.
+
+  **Mechanizm, który się powtarza (3 nogi):** w WK-II (G1.5) i WK-III (P2)
+  wszystkie 3 porażki sieci na kamerze pod wiatrem to akwizycja/track w pierwszych
+  sekundach (startowy track wygasa po ~3 s, ponowne złapanie trwa 15–20 s),
+  nigdy tor orbity po akwizycji. Sieć lata; percepcja czasem spóźnia start.
+  To wzmacnia istniejącą pozycję PERCEPCJA-II (ii), nie tworzy nowej.
+- **PERCEPCJA-II (ii) MTI-czołowy** — dopisek (ANEKS_WK3-1 §4, NIE nowa pozycja): trzeci przypadek
+  spóźnionej akwizycji pod wiatrem (WK3 P2 c01) obok WK2 G1.5 c03/c06; łącznie 3/32 epizodów
+  kamerowych pod wiatrem.
+- Stan: wątek wiatr+kamera (WK, WK-II, WK-III) zamknięty w całości: 13 bootów, breach 0; katalog
+  8 otwartych pozycji, bez zmian.

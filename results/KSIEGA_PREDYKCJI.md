@@ -490,3 +490,23 @@ Lekcje kalibracyjne: (1) etykietę narzędzia w PRE („driver bez zmian, parame
 tego narzędzia przed zamrożeniem — druga wpadka tej klasy po route→orbit; (2) prognoza nieliniowości
 (opór ~ skala²) chybiła o 41% i uratowała ją tolerancja kalibracji — zapisywać tolerancje przy każdej
 interpolacji z dwóch punktów.
+
+## NOGA WK-III (porywy) — ROZLICZONE przy CO-WK3 (ANEKS_WK3-1 §3, 30.10.2026)
+Prerejestrowane 30.10.2026 (`PRE_WK3.md`; ratyfikacja 30.10, sha PRE 3758b86f…f76e4);
+noga zamknięta werdyktem V-A3 za 4/≤8 bootów:
+- **P-WK3-1 (0.70) ✓** — P1 8/8.
+- **P-WK3-2 (0.45) ✓** — P2 7/8.
+- **P-WK3-3 (0.60) n.r. (adjudykacja CC)** — litera trafiona (P2: 5/8
+  epizodów z celem poza kadrem ≥ 5%), ale ten sam miernik przy stałym wietrze
+  WK-II daje 4–5/8, a 85% wypadnięć to bok w fazie skanu, niezależny od
+  porywów. Predykcja miała mierzyć mechanizm przechyłu, a miernik go nie
+  wyodrębnia — nie zaliczam trafienia na źle postawionym mierniku.
+- **P-WK3-4 (0.90) ✓** — breach 0.
+
+**Suma nogi WK-III: 3 ✓ / 0 ✗ / 1 n.r.**
+
+Lekcje kalibracyjne: (1) predykcja o mechanizmie musi mieć miernik z bazą kontrolną
+wpisaną w PRE (tu: „dół ≥ x% ponad poziom przy stałym wietrze"), inaczej trafia w szum;
+(2) (z ANEKS_WK3-1 §1.5, błąd CC w weryfikacji, złapany przed werdyktem) statystyki przechyłu
+i kadru liczyć wyłącznie w oknach epizodów — między epizodami dron wykonuje manewry
+nienależące do misji.
