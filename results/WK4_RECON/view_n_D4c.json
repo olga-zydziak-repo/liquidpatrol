@@ -1,0 +1,113 @@
+{
+ "boot": "results/WK4_RECON/booty/n_D4c",
+ "wk4": {
+  "seria": "results/WK4_RECON/series/D4.json",
+  "seria_sha256": "a4c085f96fe158d90e120b479e74fed818e1ef37359e9edf8b50983e8e528624",
+  "t_off_s": 40.0,
+  "publikator_sha256": "746a958b2a393b28821119cf13653e9b629a4b45ebca08c4472e21b49bbf2038",
+  "log_publikacji_sha256": "796313ad74a15f1c933315130dd76b67c74376f911e43980227fd9a34fb83155"
+ },
+ "wk": {
+  "world": "world_wk4",
+  "world_sha256": "7acf407ff97e71ef10ce9cad15a12aa591e195703b6360c194d9560f3eedd1b1",
+  "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+  "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+  "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+ },
+ "V2p": {
+  "c00_s01": {
+   "valid": true,
+   "dsim_dwall": 0.9161
+  },
+  "c04_s01": {
+   "valid": true,
+   "dsim_dwall": 0.9448
+  },
+  "c06_s01": {
+   "valid": true,
+   "dsim_dwall": 0.9413
+  },
+  "c04_s02": {
+   "valid": true,
+   "dsim_dwall": 0.9427
+  }
+ },
+ "D6": {
+  "c00_s01": {
+   "pelny": true,
+   "swiadek": true,
+   "powody": [],
+   "d_min": 8.275,
+   "t_entry": 3.112,
+   "frac": 1.0,
+   "sweep": 817.8
+  },
+  "c04_s01": {
+   "pelny": true,
+   "swiadek": true,
+   "powody": [],
+   "d_min": 7.769,
+   "t_entry": 2.684,
+   "frac": 1.0,
+   "sweep": 790.5
+  },
+  "c06_s01": {
+   "pelny": true,
+   "swiadek": true,
+   "powody": [],
+   "d_min": 7.929,
+   "t_entry": 2.808,
+   "frac": 1.0,
+   "sweep": 769.6
+  },
+  "c04_s02": {
+   "pelny": true,
+   "swiadek": true,
+   "powody": [],
+   "d_min": 7.655,
+   "t_entry": 2.544,
+   "frac": 1.0,
+   "sweep": 864.1
+  }
+ },
+ "breach_refuse": [
+  {
+   "boot": "results/WK4_RECON/booty/n_D4c",
+   "n_breach_events": 0,
+   "refuse_reasons": []
+  }
+ ],
+ "kadr_plik": "results/WK4_RECON/kadr_n_D4c.json",
+ "przechyl_epizody": {
+  "c00_s01": [
+   12.61,
+   19.21,
+   25.65
+  ],
+  "c04_s01": [
+   14.52,
+   20.95,
+   30.45
+  ],
+  "c06_s01": [
+   13.02,
+   21.25,
+   35.34
+  ],
+  "c04_s02": [
+   14.19,
+   20.42,
+   26.1
+  ]
+ },
+ "k_z_pliku": {
+  "k": 0.4962,
+  "odch_od_0494": 0.0045,
+  "w_tolerancji_20pct": true,
+  "n": 35016
+ },
+ "residuum_wiatru_odtw_vs_plik_p50_p95": [
+  0.2,
+  0.461
+ ]
+}

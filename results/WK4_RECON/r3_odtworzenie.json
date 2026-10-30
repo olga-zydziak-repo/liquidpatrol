@@ -1,0 +1,149 @@
+{
+ "przebiegi": {
+  "ser_d2_r20a.json": {
+   "rate_Hz": 20.0,
+   "seria": "series/D2.json",
+   "okno_s": [
+    4.0,
+    150.77
+   ],
+   "x": {
+    "rmse": 0.0112,
+    "sigma_rekon/sigma_plik": 0.9974,
+    "srednia_rekon": 2.0199,
+    "srednia_plik": 2.0201,
+    "opoznienie_s": 0.02,
+    "korelacja_max": 0.9991
+   },
+   "y": {
+    "rmse": 0.0139,
+    "sigma_rekon/sigma_plik": 0.9997,
+    "srednia_rekon": -0.0659,
+    "srednia_plik": -0.0658,
+    "opoznienie_s": 0.02,
+    "korelacja_max": 0.9994
+   },
+   "z": {
+    "rmse": 0.0192,
+    "sigma_rekon/sigma_plik": 0.991,
+    "srednia_rekon": -0.0012,
+    "srednia_plik": -0.0012,
+    "opoznienie_s": 0.02,
+    "korelacja_max": 0.9955
+   },
+   "zgodnosc_PRE": true
+  },
+  "ser_d2_r20b.json": {
+   "rate_Hz": 20.0,
+   "seria": "series/D2.json",
+   "okno_s": [
+    4.0,
+    150.77
+   ],
+   "x": {
+    "rmse": 0.0112,
+    "sigma_rekon/sigma_plik": 0.9974,
+    "srednia_rekon": 2.0199,
+    "srednia_plik": 2.0201,
+    "opoznienie_s": 0.02,
+    "korelacja_max": 0.9991
+   },
+   "y": {
+    "rmse": 0.0139,
+    "sigma_rekon/sigma_plik": 0.9997,
+    "srednia_rekon": -0.0659,
+    "srednia_plik": -0.0658,
+    "opoznienie_s": 0.02,
+    "korelacja_max": 0.9994
+   },
+   "z": {
+    "rmse": 0.0192,
+    "sigma_rekon/sigma_plik": 0.991,
+    "srednia_rekon": -0.0012,
+    "srednia_plik": -0.0012,
+    "opoznienie_s": 0.02,
+    "korelacja_max": 0.9955
+   },
+   "zgodnosc_PRE": true
+  },
+  "ser_d2_r10.json": {
+   "rate_Hz": 10.0,
+   "seria": "series/D2.json",
+   "okno_s": [
+    4.0,
+    150.77
+   ],
+   "x": {
+    "rmse": 0.0172,
+    "sigma_rekon/sigma_plik": 0.9968,
+    "srednia_rekon": 2.0199,
+    "srednia_plik": 2.0201,
+    "opoznienie_s": 0.05,
+    "korelacja_max": 0.9987
+   },
+   "y": {
+    "rmse": 0.0207,
+    "sigma_rekon/sigma_plik": 0.9998,
+    "srednia_rekon": -0.0656,
+    "srednia_plik": -0.0658,
+    "opoznienie_s": 0.05,
+    "korelacja_max": 0.9992
+   },
+   "z": {
+    "rmse": 0.0286,
+    "sigma_rekon/sigma_plik": 0.9909,
+    "srednia_rekon": -0.001,
+    "srednia_plik": -0.0012,
+    "opoznienie_s": 0.05,
+    "korelacja_max": 0.9938
+   },
+   "zgodnosc_PRE": true
+  },
+  "ser_d6_r20.json": {
+   "rate_Hz": 20.0,
+   "seria": "series/D6.json",
+   "okno_s": [
+    4.0,
+    150.77
+   ],
+   "x": {
+    "rmse": 0.0582,
+    "sigma_rekon/sigma_plik": 0.9963,
+    "srednia_rekon": 6.1008,
+    "srednia_plik": 6.1014,
+    "opoznienie_s": 0.02,
+    "korelacja_max": 0.9985
+   },
+   "y": {
+    "rmse": 0.0722,
+    "sigma_rekon/sigma_plik": 0.997,
+    "srednia_rekon": -0.2277,
+    "srednia_plik": -0.227,
+    "opoznienie_s": 0.02,
+    "korelacja_max": 0.9982
+   },
+   "z": {
+    "rmse": 0.0991,
+    "sigma_rekon/sigma_plik": 0.9739,
+    "srednia_rekon": 0.0006,
+    "srednia_plik": 0.0007,
+    "opoznienie_s": 0.02,
+    "korelacja_max": 0.9867
+   },
+   "zgodnosc_PRE": true
+  }
+ },
+ "determinizm": {
+  "ser_d2_r20a.json vs ser_d2_r20b.json": {
+   "max_abs_dw": 0.00164,
+   "p99_abs_dw": 0.0,
+   "prog_0p02_ok": true,
+   "publikacje_n_a_b": [
+    3001,
+    3001
+   ],
+   "publikacje_wspolne_t": 3001,
+   "publikacje_t_sim_identyczne_frac": 1.0
+  }
+ }
+}

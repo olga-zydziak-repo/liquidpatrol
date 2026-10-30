@@ -1,0 +1,15 @@
+[perc2S2 n_D4b] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[wk n_D4b] PIN OK x500_base(wind)=13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214 świat world_wk4=7acf407ff97e71ef10ce9cad15a12aa591e195703b6360c194d9560f3eedd1b1
+[perc2S2 n_D4b 22:24:33] cooldown 219s
+[perc2S2 n_D4b 22:28:27] czekam na SUSTAINED CLEAN (3× co 30s)...
+[perc2S2 n_D4b 22:29:49] SUSTAINED CLEAN
+[wk4 n_D4b] publikator %CPU(ps)=2.0 po 90 s
+[wk4 n_D4b] publikator pid=205912 seria D4 sha a4c085f96fe158d9 t_off=40.0
+[perc2S2 n_D4b] run_boot pid=206767 eps=0,4,6,16 (FEED=B emulowany, CONTROLLER=orbit — nauczyciel)
+[perc2S2 n_D4b] topic imagera nie wstał w oknie settle — kill run_boot
+[perc2S2 n_D4b 22:36:31] wrapper rc=143 sonda_rc=9
+model_in_state=0
+[run_boot b1] settle 90s preflight EKF
+[perc2] brak manifest.json (boot nieuzbrojony/ubity) — manifest szkieletowy
+[perc2] manifest: sonda_rc=9 pin=3354ae1e bloki fantom/feed_v2/perc2 wpisane
+[perc2S2 n_D4b] DONE rc=143 → /home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D4b

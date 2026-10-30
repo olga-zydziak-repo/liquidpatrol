@@ -1,0 +1,129 @@
+{
+  "kind": "wk4_kalib",
+  "flight": "bench",
+  "boot": 1,
+  "rc": 0,
+  "arm": "E",
+  "point": "0.0",
+  "harness_file": "/home/olga/projects/liquidpatrol/bench/bench_flight.py",
+  "sha_harness": "05137098abc1c31e6d3f70ca80e6b721487330131fa8a39181355b659f523a43",
+  "controller": "orbit",
+  "controller_sha": "840514361e4ae5e93ddbb0dd31a7dae81832805b90abccc334d84bbd043730d4",
+  "feed_sha": "da9ef2f4466eac87acf298e80000ad19430d69fe9c12c6ae3d7de8a0ced250c9",
+  "executor_params_sha": "5a7244996d89be70bd720a2b0eb8b6f6dea1a2d8f3f2fd7cf356292426f28716",
+  "ulog_sha": "291efff522c18c62f099ab51631a3465f57a6f966ddb68a4d088dda63824f847",
+  "ulog_bytes": 133176429,
+  "world_hash": "7acf407ff97e71ef10ce9cad15a12aa591e195703b6360c194d9560f3eedd1b1  worlds/world_wk4.sdf",
+  "world_ref": "worlds/world_wk4.sdf",
+  "proc_gate": "CLEAN loadavg=0.08 (cpu_max=2.0, load1_max=1.5)",
+  "n_demo_rows": 5671,
+  "n_episodes": 4,
+  "n_valid_V2p": 4,
+  "n_success_D6": 4,
+  "episodes": [
+    {
+      "episode_id": 0,
+      "scenario_id": "c00_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 4,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9161,
+      "d_min_m": 8.275,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 4,
+      "scenario_id": "c04_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 2,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9448,
+      "d_min_m": 7.769,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 6,
+      "scenario_id": "c06_s01",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 2,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9413,
+      "d_min_m": 7.929,
+      "refuse_count": 0,
+      "breach": false
+    },
+    {
+      "episode_id": 16,
+      "scenario_id": "c04_s02",
+      "attempt": 0,
+      "valid_V2p": true,
+      "success_D6": true,
+      "n_deep_stall": 2,
+      "longest_stall_s": 0.0,
+      "dsim_dwall": 0.9427,
+      "d_min_m": 7.655,
+      "refuse_count": 0,
+      "breach": false
+    }
+  ],
+  "world_hash_kind": "repo",
+  "model_in_state": true,
+  "wk4": {
+    "seria": "results/WK4_RECON/series/D4.json",
+    "seria_sha256": "a4c085f96fe158d90e120b479e74fed818e1ef37359e9edf8b50983e8e528624",
+    "t_off_s": 40.0,
+    "publikator_sha256": "746a958b2a393b28821119cf13653e9b629a4b45ebca08c4472e21b49bbf2038",
+    "log_publikacji_sha256": "796313ad74a15f1c933315130dd76b67c74376f911e43980227fd9a34fb83155"
+  },
+  "wk2": {
+    "rola": "RAMI\u0118 ODNIESIENIA (PROMPT_WK4_S0 \u00a7R4) \u2014 nauczyciel, feed emulowany; sie\u0107 NIE lata",
+    "controller": "orbit",
+    "orbit_executor_sha256": "840514361e4ae5e93ddbb0dd31a7dae81832805b90abccc334d84bbd043730d4",
+    "registry_sha256": "87203d292ac9c9169c6e986e22b534c6c578fd4a597720c2df89cec5d7749bd9",
+    "feed": "B (emulowany, bench_flight.py:315)",
+    "percep_feed_sha256": "28d8a4c4324e0baf769dd4a51f2645eda46c82fe136ea78653a849fccacc263a",
+    "nota_percep": "percep+most+sonda przed uzbrojeniem (rytua\u0142 OPS); percep NIE karmi kontrolera"
+  },
+  "perc2": {
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profile": "/home/olga/projects/liquidpatrol/results/PERC2/tools/perc2_fastdds_profile.xml",
+    "sonda_preflight_rc": 0,
+    "sondy": [
+      {
+        "proba": "preflight",
+        "sonda": {
+          "label": "preflight_n_D4c",
+          "feed": "/home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D4c/percep_feed.jsonl",
+          "tryb": "live window=35.0s",
+          "prog_frozen": {
+            "dt_p50_max_s_na_klatke": 0.07,
+            "frac_delt_gt_0p10_max": 0.05
+          },
+          "n_delt": 496,
+          "dt_p50_s_na_klatke": 0.068,
+          "dt_p90_s_na_klatke": 0.068,
+          "frac_delt_gt_0p10": 0.0,
+          "hz_p50": 14.71,
+          "span_sim_s": 35.0,
+          "werdykt": "PASS"
+        }
+      }
+    ],
+    "uzbrojony_po_sondzie": true
+  },
+  "wk": {
+    "world": "world_wk4",
+    "world_sha256": "7acf407ff97e71ef10ce9cad15a12aa591e195703b6360c194d9560f3eedd1b1",
+    "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+  }
+}

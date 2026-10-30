@@ -1,0 +1,73 @@
+{
+ "fy_px": 269.97,
+ "pol_pole_pion_deg": 41.64,
+ "pol_pole_pion_po_marginesie_deg": 40.43,
+ "pol_pole_poziom_deg": 49.85,
+ "przechyl_statyczny": {
+  "U2": {
+   "zawis": 5.8,
+   "zawis_+3sigma_u": 9.0,
+   "orbita_pod_wiatr_+3sigma": 14.0
+  },
+  "U3": {
+   "zawis": 8.6,
+   "zawis_+3sigma_u": 13.3,
+   "orbita_pod_wiatr_+3sigma": 18.1
+  },
+  "U4": {
+   "zawis": 11.4,
+   "zawis_+3sigma_u": 17.5,
+   "orbita_pod_wiatr_+3sigma": 22.1
+  },
+  "U5": {
+   "zawis": 14.1,
+   "zawis_+3sigma_u": 21.5,
+   "orbita_pod_wiatr_+3sigma": 25.9
+  },
+  "U6": {
+   "zawis": 16.8,
+   "zawis_+3sigma_u": 25.3,
+   "orbita_pod_wiatr_+3sigma": 29.4
+  },
+  "U8": {
+   "zawis": 21.9,
+   "zawis_+3sigma_u": 32.3,
+   "orbita_pod_wiatr_+3sigma": 35.8
+  },
+  "U10": {
+   "zawis": 26.7,
+   "zawis_+3sigma_u": 38.3,
+   "orbita_pod_wiatr_+3sigma": 41.3
+  }
+ },
+ "kadr": {
+  "r6": {
+   "cel_pod_osia_deg": 18.4,
+   "wypadniecie_DOL_przy_pitch_nos_w_gore_deg": 22.0,
+   "wypadniecie_GORA_przy_pitch_nos_w_dol_deg": 58.9,
+   "U_statyczne_dla_progu_dol": 8.02,
+   "U_gdy_szczyt_+3sigma_osiaga_prog": 5.12
+  },
+  "r8": {
+   "cel_pod_osia_deg": 14.0,
+   "wypadniecie_DOL_przy_pitch_nos_w_gore_deg": 26.4,
+   "wypadniecie_GORA_przy_pitch_nos_w_dol_deg": 54.5,
+   "U_statyczne_dla_progu_dol": 9.85,
+   "U_gdy_szczyt_+3sigma_osiaga_prog": 6.29
+  },
+  "r10": {
+   "cel_pod_osia_deg": 11.3,
+   "wypadniecie_DOL_przy_pitch_nos_w_gore_deg": 29.1,
+   "wypadniecie_GORA_przy_pitch_nos_w_dol_deg": 51.7,
+   "U_statyczne_dla_progu_dol": 11.06,
+   "U_gdy_szczyt_+3sigma_osiaga_prog": 7.06
+  }
+ },
+ "px4": {
+  "TILTMAX_45_przy_v_rel_m_s": 19.9,
+  "U_srednie_gdy_szczyt_orbity_+3sigma_osiaga_45deg": 11.5,
+  "THR_MAX_1_przy_HOVER_0.6_max_przechyl_utrzymania_wys_deg": 53.1,
+  "XY_VEL_MAX_12_vs_V_MAX_sieci_3": "predkosc GRUNTOWA; wiatr nie zwieksza wymaganej predkosci gruntowej orbity",
+  "uwaga": "MPC_ACC_HOR dotyczy trybów autonomicznych; offboard prędkościowy — nie weryfikowane"
+ }
+}

@@ -1,0 +1,43 @@
+{
+  "run_id": "envblock-b1",
+  "arm": "E",
+  "point": 0.0,
+  "boot_n": 1,
+  "kind": "env-block",
+  "rc": 0,
+  "finalize_rc": 0,
+  "crash_reason": null,
+  "ts": 1793395378.4149606,
+  "run_valid": null,
+  "reason": "proc_gate: cudzy proces >2% CPU lub loadavg>1.5 (\u00a73)",
+  "wk4": {
+    "seria": "results/WK4_RECON/series/D4.json",
+    "seria_sha256": "a4c085f96fe158d90e120b479e74fed818e1ef37359e9edf8b50983e8e528624",
+    "t_off_s": 40.0,
+    "publikator_sha256": "984e9929765dd1abbf8d85f7dab518983bd2ff851b24dd69f224274469e36538",
+    "log_publikacji_sha256": "1e6620ee05ffc813cff030ce9a9869322f822a3b2dc5769c1103f82ff0b074ad"
+  },
+  "wk2": {
+    "rola": "RAMI\u0118 ODNIESIENIA (PROMPT_WK4_S0 \u00a7R4) \u2014 nauczyciel, feed emulowany; sie\u0107 NIE lata",
+    "controller": "orbit",
+    "orbit_executor_sha256": "840514361e4ae5e93ddbb0dd31a7dae81832805b90abccc334d84bbd043730d4",
+    "registry_sha256": "87203d292ac9c9169c6e986e22b534c6c578fd4a597720c2df89cec5d7749bd9",
+    "feed": "B (emulowany, bench_flight.py:315)",
+    "percep_feed_sha256": null,
+    "nota_percep": "percep+most+sonda przed uzbrojeniem (rytua\u0142 OPS); percep NIE karmi kontrolera"
+  },
+  "perc2": {
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profile": null,
+    "sonda_preflight_rc": 9,
+    "sondy": [],
+    "uzbrojony_po_sondzie": false
+  },
+  "wk": {
+    "world": "world_wk4",
+    "world_sha256": "7acf407ff97e71ef10ce9cad15a12aa591e195703b6360c194d9560f3eedd1b1",
+    "pin_x500_base_wind_model_sdf": "13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214",
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "gz_resource_path": "GZ_SIM_RESOURCE_PATH=/home/olga/projects/liquidpatrol/worlds/wind_models:/opt/ros/jazzy/share"
+  }
+}

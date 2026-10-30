@@ -1,0 +1,69 @@
+[perc2S2 n_D4] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[wk n_D4] PIN OK x500_base(wind)=13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214 świat world_wk4=7acf407ff97e71ef10ce9cad15a12aa591e195703b6360c194d9560f3eedd1b1
+[perc2S2 n_D4 22:21:26] cooldown 0s
+[perc2S2 n_D4 22:21:26] czekam na SUSTAINED CLEAN (3× co 30s)...
+[perc2S2 n_D4 22:21:31] CLEAN 1/3
+[perc2S2 n_D4 22:22:08] CLEAN 2/3
+[perc2S2 n_D4 22:22:46] CLEAN 3/3
+[perc2S2 n_D4 22:22:46] SUSTAINED CLEAN
+[wk4 n_D4] publikator pid=203716 seria D4 sha a4c085f96fe158d9 t_off=40.0
+[perc2S2 n_D4] run_boot pid=203726 eps=0,4,6,16 (FEED=B emulowany, CONTROLLER=orbit — nauczyciel)
+[perc2S2 n_D4] topic imagera nie wstał w oknie settle — kill run_boot
+[perc2S2 n_D4 22:23:12] wrapper rc=3 sonda_rc=9
+203716 2.6 python3 /home/olga/projects/liquidpatrol/results/WK4_RECON/tools/wk4_publisher.py /home/olga/projects/liquidpatrol/results/WK4_RECON/series/D4.json a4c085f96fe158d90e120b479e74fed818e1ef37359e9edf8b50983e8e528624 world_wk4 40.0 /home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D4/wind_pub.jsonl 20
+[run_boot b1] ENV-BLOCK (proc_gate §3) — boot nie startuje
+[perc2S2 n_D4] DONE rc=3 → /home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D4
+[perc2S2 n_D4b] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[wk n_D4b] PIN OK x500_base(wind)=13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214 świat world_wk4=7acf407ff97e71ef10ce9cad15a12aa591e195703b6360c194d9560f3eedd1b1
+[perc2S2 n_D4b 22:24:33] cooldown 219s
+[perc2S2 n_D4b 22:28:27] czekam na SUSTAINED CLEAN (3× co 30s)...
+[perc2S2 n_D4b 22:28:32] CLEAN 1/3
+[perc2S2 n_D4b 22:29:10] CLEAN 2/3
+[perc2S2 n_D4b 22:29:49] CLEAN 3/3
+[perc2S2 n_D4b 22:29:49] SUSTAINED CLEAN
+[wk4 n_D4b] publikator %CPU(ps)=2.0 po 90 s
+[wk4 n_D4b] publikator pid=205912 seria D4 sha a4c085f96fe158d9 t_off=40.0
+[perc2S2 n_D4b] run_boot pid=206767 eps=0,4,6,16 (FEED=B emulowany, CONTROLLER=orbit — nauczyciel)
+[perc2S2 n_D4b] topic imagera nie wstał w oknie settle — kill run_boot
+[perc2S2 n_D4b 22:36:31] wrapper rc=143 sonda_rc=9
+model_in_state=0
+[run_boot b1] settle 90s preflight EKF
+[perc2S2 n_D4b] DONE rc=143 → /home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D4b
+[perc2S2 n_D4c] ENV-BLOCK: kolizja procesowa — NIE startuję:
+208682 python3 -m bench.bench_flight
+[perc2S2 n_D4c] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[wk n_D4c] PIN OK x500_base(wind)=13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214 świat world_wk4=7acf407ff97e71ef10ce9cad15a12aa591e195703b6360c194d9560f3eedd1b1
+[perc2S2 n_D4c 22:39:06] cooldown 145s
+[perc2S2 n_D4c 22:41:40] czekam na SUSTAINED CLEAN (3× co 30s)...
+[perc2S2 n_D4c 22:41:46] CLEAN 1/3
+[perc2S2 n_D4c 22:42:23] CLEAN 2/3
+[perc2S2 n_D4c 22:43:03] CLEAN 3/3
+[perc2S2 n_D4c 22:43:03] SUSTAINED CLEAN
+[wk4 n_D4c] publikator %CPU(ps)=1.9 po 90 s
+[wk4 n_D4c] publikator pid=212729 seria D4 sha a4c085f96fe158d9 t_off=40.0
+[perc2S2 n_D4c] run_boot pid=213584 eps=0,4,6,16 (FEED=B emulowany, CONTROLLER=orbit — nauczyciel)
+[perc2S2 n_D4c] PRZED uzbrojeniem: bridge pid=214342 percep pid=214343 — sonda kadencji LIVE 35 s
+{"label": "preflight_n_D4c", "feed": "/home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D4c/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 496, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 14.71, "span_sim_s": 35.0, "werdykt": "PASS"}
+[perc2S2 n_D4c 22:45:46] sonda preflight rc=0 (0=PASS)
+[perc2S2 n_D4c 22:53:13] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b1] DONE flight=bench world=world_wk4 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D4c
+[perc2S2 n_D4c] DONE rc=0 → /home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D4c
+[perc2S2 n_D6] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[wk n_D6] PIN OK x500_base(wind)=13c9174d4195b730e594d2c9b1de9041492885aaffdb1895bbbe787476b7e214 świat world_wk4=7acf407ff97e71ef10ce9cad15a12aa591e195703b6360c194d9560f3eedd1b1
+[perc2S2 n_D6 22:53:32] cooldown 281s
+[perc2S2 n_D6 22:58:34] czekam na SUSTAINED CLEAN (3× co 30s)...
+[perc2S2 n_D6 22:58:40] CLEAN 1/3
+[perc2S2 n_D6 22:59:17] CLEAN 2/3
+[perc2S2 n_D6 22:59:54] CLEAN 3/3
+[perc2S2 n_D6 22:59:54] SUSTAINED CLEAN
+[wk4 n_D6] publikator %CPU(ps)=1.9 po 90 s
+[wk4 n_D6] publikator pid=218657 seria D6 sha 673e09e1e07ac4fe t_off=40.0
+[perc2S2 n_D6] run_boot pid=219511 eps=0,4,6,16 (FEED=B emulowany, CONTROLLER=orbit — nauczyciel)
+[perc2S2 n_D6] PRZED uzbrojeniem: bridge pid=220284 percep pid=220285 — sonda kadencji LIVE 35 s
+{"label": "preflight_n_D6", "feed": "/home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D6/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 493, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.002, "hz_p50": 14.71, "span_sim_s": 33.9, "werdykt": "PASS"}
+[perc2S2 n_D6 23:02:37] sonda preflight rc=0 (0=PASS)
+[perc2S2 n_D6 23:10:07] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b2] DONE flight=bench world=world_wk4 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D6
+[perc2S2 n_D6] DONE rc=0 → /home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D6

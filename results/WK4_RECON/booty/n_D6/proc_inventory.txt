@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga      219518 14.2  0.0 330892 14128 ?        Sl   23:01   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga      219511  3.3  0.0   5028  3680 ?        S    23:01   0:00 bash harness/run_boot.sh
+olga      218657  1.9  0.0 353916 32180 ?        Ssl  23:00   0:01 python3 /home/olga/projects/liquidpatrol/results/WK4_RECON/tools/wk4_publisher.py /home/olga/projects/liquidpatrol/results/WK4_RECON/series/D6.json 673e09e1e07ac4fe66c76fa29d4943ef7cc20b912b88738cd93497c7c232f051 world_wk4 40.0 /home/olga/projects/liquidpatrol/results/WK4_RECON/booty/n_D6/wind_pub.jsonl 20
+olga        1230  1.4  1.2 5725384 399760 pts/0  Sl+  09:59  11:04 claude
+root         246  0.2  0.2 3364512 69804 ?       Ssl  09:59   1:41 /usr/bin/containerd
+root         361  0.1  0.2 10323740 94632 ?      Ssl  09:59   1:11 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         883  0.0  0.0 1233872 12256 ?       Sl   09:59   0:46 /usr/bin/containerd-shim-runc-v2 -namespace moby -id 3c2487b56794f0105b643a3fc48efa73c42444f64389ada6b2d9e4e8822aea63 -address /run/containerd/containerd.sock
+olga      216979  0.0  0.0   5032  3892 ?        S    22:54   0:00 bash results/WK4_RECON/tools/wk4_calib_boot.sh 2 n_D6 0,4,6,16 D6
+dnsmasq      907  0.0  0.0 216768 28512 ?        Ss   09:59   0:04 postgres
+root      217519  0.0  0.0 1756636 13356 ?       Ssl  22:55   0:00 /usr/libexec/wsl-pro-service
+root          40  0.0  0.0  66868 18756 ?        S<s  09:59   0:02 /usr/lib/systemd/systemd-journald
+root           1  0.0  0.0  22032 13408 ?        Ss   09:59   0:02 /sbin/init
+polkitd      197  0.0  0.0 308188  8136 ?        Ssl  09:59   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root        1021  0.0  0.0   3200  1252 ?        S    09:59   0:01 /init
+systemd+     183  0.0  0.0  91068  8012 ?        Ssl  09:59   0:01 /usr/lib/systemd/systemd-timesyncd
+message+     192  0.0  0.0   9804  5528 ?        Ss   09:59   0:01 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          86  0.0  0.0  26668  7620 ?        Ss   09:59   0:00 /usr/lib/systemd/systemd-udevd
+dnsmasq      998  0.0  0.0 216768 10212 ?        Ss   09:59   0:00 postgres: walwriter 
+dnsmasq      991  0.0  0.0 216924  7280 ?        Ss   09:59   0:00 postgres: background writer 
