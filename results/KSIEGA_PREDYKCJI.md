@@ -528,3 +528,31 @@ liczyć na pełnej populacji, nie na epizodach z etykietą FP; (3) maska względ
 poruszającego się obserwatora mierzy ruch obserwatora (tu: fazę wejścia drona na
 orbitę) — zanim ref=dron wejdzie do kryterium, trzeba pokazać, że gaśnie przy
 celu wchodzącym pod dronem na orbicie (tu: nie gaśnie, 20/37).
+
+## NOGA WK-IV (turbulencja i sufit wiatru) — ZAMKNIĘTA DECYZJĄ przed lotami sieci (ANEKS_WK4-0, 31.10.2026)
+Prerejestrowane 31.10.2026 (`PRE_WK4.md`, sha a530ebb5…1891); S1 nie odbyła się
+poza częścią B0 w gołym gz.
+- **P-WK4-5 (0.60) ✗** — przyczyna zacięć NIE leżała po stronie publikatora ani
+  transportu: wariant bez publikatora miał te same „zacięcia" w zegarze
+  ściennym, a wg CLOCK_MONOTONIC zacięć nie było wcale; źródło = skoki
+  CLOCK_REALTIME gościa WSL2 (timesyncd). CC szukał przyczyny w nowej
+  infrastrukturze, bo była nowa — a miernik był stary i mierzył zegar.
+- **P-WK4-1…4, 6, 7: n.r.** (wzór FANTOM / WABIK-II: predykcje sesji, która nie
+  zaszła, bez rozliczenia).
+- **Rozliczalne już dziś — ✗ kalibracyjne CC:** w PROMPT_WK4_S0 §R2 CC napisał,
+  że Dryden przy 2 m/s będzie „łagodniejszy w σ od P2, a szerszy w paśmie";
+  recon pokazał łagodniejszy (σ_x 0.33 vs 1.06) i WOLNIEJSZY (90 % mocy poniżej
+  0.06 Hz vs 0.25–0.34 Hz). Przy adwekcji V = Ū = 2 m/s skale Drydena
+  (L_u ≈ 67 m) dają czasy korelacji rzędu dziesiątek sekund — rachunek, który
+  CC mógł zrobić przed napisaniem zdania.
+
+**Suma nogi WK-IV: 0 ✓ / 1 ✗ / 6 n.r. (+1 ✗ kalibracyjne poza numeracją).**
+
+Lekcje kalibracyjne: (1) gdy miernik ważności pada po zmianie infrastruktury,
+pierwszy A/B to miernik przeciw drugiemu zegarowi, nie infrastruktura przeciw
+sobie — podejrzany „nowy element" był tu fałszywym tropem o pewności 0.60;
+(2) widmo turbulencji porównywać z profilem odniesienia liczbą (σ i f90) PRZED
+tezą o „szerszym paśmie" — intuicja „turbulencja = szybsza" jest fałszywa przy
+małej prędkości adwekcji; (3) recon, który dostał próbnik czasu symulacji vs
+ściennego, znalazł problem przed lotami sieci — zasada zostaje: każda nowa
+infrastruktura świata dostaje taki próbnik w reconie.

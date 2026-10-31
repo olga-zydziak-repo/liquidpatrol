@@ -583,3 +583,42 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   5 bootów łącznie (WABIK S1+S2), breach 0 / REFUSE 0; katalog 8 → 7 otwartych
   pozycji (IMITACJE zamknięte; pozycja scalona TOR-CECHY ∪ MULTI-TARGET trwa
   jako MULTI-TARGET z nową treścią, człon TOR-CECHY skreślony).
+
+## Dopisek stanu katalogu — 31.10.2026 (CO-WK4-0, ANEKS_WK4-0 §2–§4)
+
+- **Noga WK-IV „turbulencja i sufit wiatru"** (pozycja 2b, otwarta 30.10:
+  recon 1f61bc1b, PRE 1c0e1643) → **CLOSED-BY-DECISION przed lotami sieci
+  (0 bootów sieci)**. Recon zweryfikowany przez CC (serie Drydena co do
+  liczby, nauczyciel D6 4/4 przy D4 i D6, k 0.497/0.498). B0 wykonane
+  częściowo w gołym gz (31.10, bez PX4; `results/WK4/`): **zacięcia
+  symulacji z reconu to skoki zegara ściennego gościa WSL2** (realtime −
+  monotonic +2.2–3.3 s co ~35 s, timesyncd; gz wg CLOCK_MONOTONIC 0 zacięć,
+  dsim/dwall 1.000) — nie świat, nie publikator; etap PX4-bez-uzbrojenia
+  i boot kontrolny nieodbyte; remedium `wsl --shutdown` przed sesją.
+  Zamknięcie jest decyzją Olgi 31.10, nie koniecznością. **Kanon wiatru
+  programu pozostaje przy V-A3 (ANEKS_WK3-1 §2):** wiatr zmienny o znanym
+  profilu do 3.6 m/s, nie turbulencja, sufit niezmierzony. PRE_WK4 ważny
+  literą; wznowienie = ponowna ratyfikacja + reszta B0. **Konsekwencja
+  metodologiczna (forward):** V2′ liczony z zegara ściennego zaniża ważność
+  przy skokach zegara, nigdy nie zawyża — werdykty zamkniętych nóg bez
+  rewizji; próbnik RTF przy następnej nodze z lotami zapisuje oba zegary,
+  V2′ z monotonicznego (własny pin). Aktywa: serie D2–D6 z sha, publikator
+  746a958b, świat world_wk4 7acf407f, RECON_WK4, `results/WK4/` (B0). Wątek
+  wiatru (W, WK, WK-II, WK-III, WK-IV) zamknięty w całości.
+- **MULTI-TARGET / TOŻSAMOŚĆ TRACKA** → **CLOSED-BY-DECISION (31.10, Olga:
+  „zamykamy wabik")**. Wątek wabikowy zamknięty w całości na tym stanowisku,
+  z wynikiem: (1) reguła v1 (FREEZE_WABIK) nigdy nie podpisała celu
+  wchodzącego na 65 uderzających (ANEKS_WABIK3-1 §2); (2) trzy dźwignie
+  skrócenia etykiety (czas, tor, geometria) zamknięte deskiem za 0 lotów
+  (ANEKS_WABIK2-1, ANEKS_WABIK3-1); (3) imitacje poniżej rozdzielczości toru
+  kamery (RECON_WABIK3 R4); (4) priorytet między ≥ 2 obiektami nazwany
+  i wyceniony (RECON_WABIK3 R1 ii), nieotwarty. Trigger ponownego otwarcia
+  wyłącznie zewnętrzny: partner z realnymi lotami i sensorami poza kamerą
+  albo odpowiedź praktyka, że obrona odróżnia wabik i chce tego jako
+  polityki kolejności. Aktywa w repo: bench WABIK-II (126 lotów),
+  wabik_sig 475c972e / wabik_sig2 a8397cb4 / wabik3_recon 5dbc94ec /
+  wabik3_uderzajacy, klasa uderzający/niedochodzący.
+- Stan: katalog **7 → 6 otwartych pozycji** (PERCEPCJA-II, ODPOWIEDŹ-EKONOMIA,
+  1b(ii) weryfikacja sieci z pytaniem o GRU, 2c, 2d, 2e). Breach 0 / REFUSE 0
+  programowo bez zmian. Program w trybie katalogu; następne ruchy poza
+  stanowiskiem (warstwa 0: raport EN, karta technologii, rozmowa z pilotem).
