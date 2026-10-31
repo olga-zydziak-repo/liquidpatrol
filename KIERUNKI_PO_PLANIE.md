@@ -622,3 +622,33 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   1b(ii) weryfikacja sieci z pytaniem o GRU, 2c, 2d, 2e). Breach 0 / REFUSE 0
   programowo bez zmian. Program w trybie katalogu; następne ruchy poza
   stanowiskiem (warstwa 0: raport EN, karta technologii, rozmowa z pilotem).
+
+## Dopisek stanu katalogu — 31.10.2026 (CO-DET3-0, ANEKS_DET3-0 §2–§3)
+
+- **PERCEPCJA-II (iii) daleki wzrok / detektor-v3** → **CLOSED-BY-RECON
+  (0 bootów, 1 sesja deskowa + CO — siódme rozstrzygnięcie kierunku deskiem)**.
+  Recon `results/DET3_RECON/RECON_DET3.md` (090521f8), R1 odtworzony przez CC
+  klatka w klatkę: do 14.9 m żaden składnik toru nie traci celu pierwszy (po
+  rozgrzewce: YOLO 11/11, MTI(admisja) 10/11, fresh 10/11 na 12–15 m — jak na
+  8–10 m); w 48 epizodach FANTOM S2 detektor miał cel w **257/263 klatek rampy
+  skanu** przed akwizycją (T6: 6–29 s przed pierwszą fresh). Na obecnej siatce
+  (range0 15 m) zasięg nie zmienia nic; dla range0 25/30 m warunkiem byłoby
+  MTI w zawisie na 20 m (model idealny mówi NIE, dane z residuum derotacji
+  mówią „dalej niż model" — rozstrzygalne tylko pomiarem). Decyzja Olgi 31.10:
+  bez nowej rodziny scenariuszy.
+  **Zdanie kanoniczne:** „Zasięg detektora nie ogranicza akwizycji na obecnym
+  profilu misji; sufit leży w rozgrzewce admisji po wejściu celu w kadr
+  i w geometrii przeglądu, nie we wzroku."
+  **Errata forward:** „jedyny następca realnie podnoszący sufit" (dopisek
+  25.10) nie dotyczy członu (iii) na obecnej siatce. Aktywa: tabela czułości
+  per Z (`r1/r1_tabela.json`), rachunek pikselowy 15–30 m, koszt inferencji
+  vs imgsz, litera admisji (brak progów zasięgu), projekt kolekcji R4,
+  rampa per epizod (`r5_rampa.json`).
+- **Nota (NIE pozycja):** czas wpatrywania skanu 1.2 s pochodzi z epoki 5 Hz;
+  przegląd < 10.0 s wymaga stare < 0.91 s przy kroku 68.3° (TRANSIT, forma
+  zamknięta), a rozgrzewka admisji po wejściu celu w kadr trwa do ~1 s (R1).
+  Pomiar latencji admisji po starcie wpatrywania w reżimie 14.7 Hz z logów
+  PERC2 S2 (0 bootów) rozstrzyga, czy dźwignia istnieje; otwarcie wyłącznie
+  decyzją Olgi.
+- Stan: katalog 6 otwartych pozycji bez zmian (PERCEPCJA-II trwa z członem (ii);
+  (iii) zamknięty). Breach 0 / REFUSE 0 programowo bez zmian.

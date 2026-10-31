@@ -556,3 +556,16 @@ tezą o „szerszym paśmie" — intuicja „turbulencja = szybsza" jest fałszy
 małej prędkości adwekcji; (3) recon, który dostał próbnik czasu symulacji vs
 ściennego, znalazł problem przed lotami sieci — zasada zostaje: każda nowa
 infrastruktura świata dostaje taki próbnik w reconie.
+
+## POZYCJA PERCEPCJA-II (iii) daleki wzrok — ZAMKNIĘTA DESKIEM przy CO-DET3-0 (ANEKS_DET3-0, 31.10.2026)
+Recon bez PRE i bez predykcji numerowanych. Jedna ocena CC do rozliczenia jako
+kalibracja: w raporcie programu i w rozmowie 31.10 CC opisał daleki wzrok jako
+„jedyną pozycję, która rusza zmierzony sufit" — recon pokazał, że na obecnej
+siatce nie rusza go wcale (intruz startuje z 15 m; detektor widzi cel w 97.7 %
+klatek rampy, zanim misja go przyjmie). **✗ kalibracyjne**: ocena wydana bez
+sprawdzenia, gdzie startuje intruz względem granicy korpusu.
+
+Lekcja kalibracyjna: zanim pozycja dostanie etykietę „rusza sufit", sprawdzić
+literą manifestu, czy mechanizm pozycji w ogóle występuje w zakresie, w którym
+sufit jest mierzony (tu: range0 15 m vs korpus do 14.9 m) — recon deskowy
+zrobił to w pierwszym pytaniu i dlatego kosztował 0 bootów.
