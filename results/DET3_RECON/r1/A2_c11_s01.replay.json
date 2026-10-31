@@ -1,0 +1,32 @@
+{
+ "bootdir": "results/2A/stageA/A2_c11_s01",
+ "detector": "/home/olga/projects/liquidpatrol/net/frozen/det_v2.pt",
+ "detector_sha": "775ead150b9937453168538cb97c55f69166e27ddc2d93f71b3710e0e49832ce",
+ "n_frames_replayed": 146,
+ "n_frames_no_own": 0,
+ "wall_s": 3.2,
+ "err_fresh_vs_gt": {
+  "n": 27,
+  "p50": 1.343,
+  "p95": 1.468,
+  "max": 2.46
+ },
+ "top1_on_target": {
+  "n_fov": 42,
+  "n_on": 42,
+  "pct": 100.0
+ },
+ "admisja": {
+  "events": {
+   "ENTRY": 3,
+   "REFRESH": 29,
+   "FEED_EXPIRE": 3
+  },
+  "fresh_gates": {
+   "mti": 18,
+   "window": 9
+  },
+  "n_boxes": 58,
+  "n_fresh": 27
+ }
+}
