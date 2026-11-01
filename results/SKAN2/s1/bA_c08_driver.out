@@ -1,0 +1,13 @@
+[perc2S2 bA_c08] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[perc2S2 bA_c08 23:55:52] cooldown 216s
+[perc2S2 bA_c08 23:59:28] czekam na SUSTAINED CLEAN (3× co 30s)...
+[perc2S2 bA_c08 00:00:44] SUSTAINED CLEAN
+[perc2S2 bA_c08] run_boot pid=4406 eps=8,20,32,44 (FEED=V2, CONTROLLER=net_skan2)
+[perc2S2 bA_c08] PRZED uzbrojeniem: bridge pid=5098 percep pid=5099 — sonda kadencji LIVE 35 s
+[perc2S2 bA_c08 00:01:43] sonda preflight rc=0 (0=PASS)
+results/SKAN2/tools/skan2_s1_boot.sh: line 128:  5098 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[perc2S2 bA_c08 00:08:28] wrapper rc=0 sonda_rc=0
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b2] DONE flight=bench world=world_demo_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/SKAN2/s1/bA_c08
+[perc2] manifest: sonda_rc=0 pin=3354ae1e bloki fantom/feed_v2/perc2 wpisane
+[perc2S2 bA_c08] DONE rc=0 → /home/olga/projects/liquidpatrol/results/SKAN2/s1/bA_c08

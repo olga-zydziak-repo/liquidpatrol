@@ -1,0 +1,13 @@
+# 2026-11-02T00:09:02+01:00 uptime-since 2026-11-01 23:18:49
+$ timedatectl status
+               Local time: Mon 2026-11-02 00:09:02 CET
+           Universal time: Sun 2026-11-01 23:09:02 UTC
+                 RTC time: Sun 2026-11-01 23:09:01
+                Time zone: Europe/Warsaw (CET, +0100)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+$ systemctl is-active systemd-timesyncd
+active
+$ cat /sys/devices/system/clocksource/clocksource0/current_clocksource
+tsc
