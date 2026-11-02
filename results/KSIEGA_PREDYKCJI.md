@@ -569,3 +569,29 @@ Lekcja kalibracyjna: zanim pozycja dostanie etykietę „rusza sufit", sprawdzi�
 literą manifestu, czy mechanizm pozycji w ogóle występuje w zakresie, w którym
 sufit jest mierzony (tu: range0 15 m vs korpus do 14.9 m) — recon deskowy
 zrobił to w pierwszym pytaniu i dlatego kosztował 0 bootów.
+
+## NOGA SKAN-II — ZAMKNIĘTA przy CO-SKAN2 (ANEKS_SKAN2-1, 2.11.2026), werdykt V-A
+- P-SK2-1 (0.55) c11 ≥ 2/3 D6 PASS ze świadkiem — ✓ (3/3).
+- P-SK2-2 (0.70) c11 w pierwszym przejściu t_acq ≤ 8.0 s — ✓ (6.83–7.31).
+- P-SK2-3 (0.65) ≥ 1 chybione pierwsze przejście w 8 epizodach — ✗ (0/8).
+- P-SK2-4 (0.80) c08 4/4 t_acq ≤ 1.0 s — ✗ (c08_s04 2.09 s; stan tracka w t0).
+- P-SK2-5 (0.85) 0 ENTRY FP — ✓.
+- P-SK2-6 (0.90) breach 0 — ✓.
+- ✗ kalibracyjne CC (1): hipoteza PROMPT_SKAN2_S0 celowała w czas wpatrywania;
+  przy 14.7 Hz admisja zachodzi w rampie (recon: 22/36 ENTRY; lot: 5/5).
+- ✗ kalibracyjne CC (2): §0.4 PROMPT_SKAN2_S1 zakładał, że `wsl --shutdown`
+  usuwa skoki zegara; nie usuwa (usuwa zatrzymanie timesyncd). Bramka napisana
+  bez sprawdzenia, kto w torze lotu czyta zegar ścienny (nikt).
+- ✗ kalibracyjne CC (3): PRE_SKAN2 V-A pisze „c08" bez sufiksu, a P-SK2-4
+  „c08 (4 epizody)"; niejednoznaczność rozstrzygnięta literą Q2 dopiero po
+  locie, na korzyść hipotezy. Wykonawca nazwał interpretację przed lotami.
+
+**Suma nogi SKAN-II: 4 ✓ / 2 ✗ / 0 n.r. (+3 ✗ kalibracyjne poza numeracją).**
+
+Lekcje kalibracyjne: (1) przy zmianie kadencji przeliczyć nie tylko stałe,
+ale przesłanki, z których je wyprowadzono — sufit TRANSIT był poprawnym
+rachunkiem na przesłance z innego reżimu; (2) P-SK2-3 i P-SK2-1 = 0.55 były
+zbyt ostrożne: model B-kal przewidział t_acq c11 6.6–7.6 s, lot dał 6.83–7.31;
+gdy model skalibrowany na danych trafia w przedział, następna predykcja może
+mu ufać bardziej; (3) zbiory w kryteriach PRE nazywać identyfikatorami
+epizodów, nie prefiksem komórki.

@@ -652,3 +652,30 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   decyzją Olgi.
 - Stan: katalog 6 otwartych pozycji bez zmian (PERCEPCJA-II trwa z członem (ii);
   (iii) zamknięty). Breach 0 / REFUSE 0 programowo bez zmian.
+
+## Dopisek stanu katalogu — 2.11.2026 (CO-SKAN2, ANEKS_SKAN2-1 §2–§3)
+
+- **SKAN-II „admisja w rampie" (nota DET3 §3 → recon SKAN2R → PRE_SKAN2)** →
+  **CLOSED, werdykt V-A** (2/8 bootów). net_skan2 (krok 68.3°, slew 60°/s,
+  stare 0.4 s, dwell 1.0 s start / 2.0 s po utracie) na siatce PERC2 S2 1:1:
+  T6 bez wiatru **6/6** (baza net_fantom 3/6); c11 3/3, t_acq 6.83–7.31 s
+  (baza 12.23–24.97 s, D6 0/3); c10_s02 4.42 s (8.78); kontrole c08_s01/s02
+  bez regresji; 0 ENTRY FP; breach 0; V2′ 8/8; 8/8 pierwsze przejście.
+  Interpretacja „kontrole" = zbiór PRE §1 Q2 (rozstrzygnięcie CC, ANEKS_SKAN2-1
+  §2); c08_s04 2.09 s (baza 0.10) = stan tracka w t0, nie profil.
+  **Zdanie kanoniczne:** „Przegląd perymetru przeliczony na gwarantowaną
+  kadencję przyjmuje najgorszy azymut przed zamknięciem pasa admisji: T6 bez
+  wiatru 6/6. Sufit profilu misji z TRANSIT był sufitem epoki 5 Hz (bez wiatru,
+  OPS 14.7 Hz, SITL)."
+  **Errata forward:** twierdzenie sufitu TRANSIT (25.10) i zdanie kanoniczne
+  DET3 („sufit … w geometrii przeglądu") obowiązują dla przesłanki 5 Hz;
+  bez wiatru przy 14.7 Hz przesłanka sfalsyfikowana. Z wiatrem bez zmian.
+- **PERCEPCJA-II (ii) MTI-czołowy** — dopisek (NIE nowa pozycja): czwarty
+  przypadek (SKAN2 c08_s04, stojący nos, cel czołowo, koincydencja 0/22);
+  κ per klatka 0–2°/kl 1/23, 4–6°/kl 7/11.
+- Infrastruktura: skoki CLOCK_REALTIME w WSL (od ~26.10) usuwa zatrzymanie
+  systemd-timesyncd na czas sesji (ANEKS_SKAN2-0b; próbniki 0 skoków,
+  zegar2 w locie 0); `wsl --shutdown` nie wystarcza. Reguła dla kolejnych
+  lotów: próbnik 60 s przed bootem.
+- Stan: wątek akwizycji zamknięty; katalog 6 otwartych pozycji bez zmian.
+  Breach 0 / REFUSE 0 programowo bez zmian.
