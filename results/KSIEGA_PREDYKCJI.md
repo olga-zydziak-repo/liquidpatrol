@@ -595,3 +595,26 @@ zbyt ostrożne: model B-kal przewidział t_acq c11 6.6–7.6 s, lot dał 6.83–
 gdy model skalibrowany na danych trafia w przedział, następna predykcja może
 mu ufać bardziej; (3) zbiory w kryteriach PRE nazywać identyfikatorami
 epizodów, nie prefiksem komórki.
+
+## KONT recon + errata K2 (ANEKS_KONT-0, 5.11.2026)
+Recon bez PRE i bez predykcji numerowanych. Rozliczenia kalibracyjne CC:
+- ✗ kalibracyjne (1): hipoteza „sekundy, nie minuty" wpisana do
+  PROMPT_KONT_S0 jako skutek dryfu; budżet obcina ściana natywna PX4.
+  Trafienie z niewłaściwego powodu liczę jako chybienie.
+- ✗ kalibracyjne (2): PROMPT_KONT_S0 cytował ograniczenie renderu
+  obalone w ENGINE-RECON (a610810).
+- ✗ kalibracyjne (3): CC ratyfikował kanon K2 („zejście współdzielone do
+  przyziemienia", t_td 9.8 s) bez sprawdzenia stanu pojazdu (nav_state);
+  lista zdarzeń trace była jedynym przyrządem. Klasa „zadany ≠ faktyczny",
+  czwarta instancja w programie.
+- ✗ kalibracyjne (4): przy pisaniu kanonu K2 CC nie sprawdził, czy
+  przesłanka P2-ε (r_est ≤ R_route′) jest niezmiennikiem lotów sieci.
+  Nie była (44/48).
+
+Lekcje: (1) każde zdarzenie „wykonano X" w trace sprawdzać z ulogu stanu
+pojazdu, zanim trafi do kanonu; (2) przesłanka twierdzenia cytowanego dla
+lotów sieci musi być zmierzona na tych lotach albo egzekwowana przez osłonę;
+(3) .ulg poza gitem sprawił, że kluczowy pomiar (chwila ściany 4.0 s) jest
+w repo niesprawdzalny dla recenzenta — do backlogu: wyciąg z ulogów
+(nav_state, xy_valid, failsafe) commitowany jako jsonl przy każdym boocie
+denialowym.

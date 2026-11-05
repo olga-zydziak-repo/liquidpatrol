@@ -679,3 +679,23 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   lotów: próbnik 60 s przed bootem.
 - Stan: wątek akwizycji zamknięty; katalog 6 otwartych pozycji bez zmian.
   Breach 0 / REFUSE 0 programowo bez zmian.
+
+## Dopisek stanu katalogu — 5.11.2026 (CO-KONT-0, ANEKS_KONT-0)
+
+- **2d KONTYNUACJA PO UTRACIE GNSS** — OTWARTA (recon a606c115, 0 bootów).
+  Ścieżka B (samo IMU) CLOSED: ściana natywna PX4 4.0 s (EKF2_NOAID_TOUT;
+  xy_valid → offboard lost → blind land, 12/12 K2). Ścieżka A (przepływ
+  optyczny + dalmierz, model x500_flow i plugin w buildzie, bez przebudowy)
+  → PRE_KONT przez sondę: flaga cs_gnss_pos (O0), identyczność klatek
+  mono_cam przy dekalu z maską (inaczej nowy świat), kadencja OPS z drugą
+  kamerą, nominał OF_CTRL. Bariera nominalna r_est ≤ R_E − d_stop − ε_b −
+  Δ_D5 częścią projektu KONT, jej koszt mierzony.
+- **ERRATA K2/R0.3a (ANEKS_KONT-0 §2):** E1 zejście w K2: komendy D5 ~4 s,
+  potem natywny failsafe blind land (12/12; R0.3a S4 boot1 też); E2 „t_td
+  9.8 s" = koniec profilu komend, przyziemienie GT 8.7–14.9 s; E3 przesłanka
+  P2-ε (r_est ≤ 19.90) nie jest niezmiennikiem dla sieci — r_max > 19.90
+  w 44/48 scenariuszy, 3/12 denialów K2 poza przesłanką; zawieranie pod
+  utratą GNSS w lotach sieci = POMIAR (12/12 GT), nie dowód; E4 P6_d5 =
+  dowód o komendach, nie o ruchu pojazdu. Werdykty GT bez zmian.
+- Stan: katalog 6 pozycji, 2d w toku. Breach 0 / REFUSE 0 programowo bez
+  zmian.
