@@ -640,3 +640,27 @@ Uwaga CC (bez zmiany predykcji): po S1 P-KONT-3 (T* ≥ 30 s) oceniam niżej,
   drugiego bootu; ryzyko s2d: start EKF z biasem na limicie 0.15
   w 2/3 bootów, raz yaw 20.5° na starcie — asercja yaw w driverach
   od drogi B / S4.
+
+## KONT S2 zamknięte Y-a (ANEKS_KONT-3, 6.11.2026): T* = 22 s, Δ_D5 =
+1.524 m, R_nom = 27.51 m, koszt bariery 0/48; mechanizm = skok yaw D5
+- P-KONT-3 (0.55, T* ≥ 30 s) — ✗ (22 s). P-KONT-4 (0.45, koszt 0) — ✓
+  (0/48 przy R_nom 27.51).
+- ✗ kalibracyjne CC (seria S2): R-3 „skala przepływu" (obalona S2.0);
+  „samozatrucie BSON" (obalone S2b); „sygnatura resetu pozycji"
+  (liczniki 0); hipoteza timestamp_sample 0 (obalona D4a); §3B 2B
+  „równoczesność jedynym wspólnym czynnikiem" (fałsz — skok yaw);
+  rachunkowe: kolejka 1c §4 7≠8 lotów, zdanie Z „≤2.4 m" zamiast
+  „≤2.5 m". Diagnoza właściwego czynnika: wykonawca (NOTA-2B), nie CC.
+- Wady wykonawcy nazwane: d4c bez rozkładu osi rate (S2e wskazał
+  hamowanie); dry-run launchera ręczny zamiast skryptem (8 min);
+  klucz verdict/werdykt; nakładka d4_y na błysku cs_in_air (po lotach,
+  stan skorygowany); freeze przed rozstrzygnięciem reguły.
+- Infrastruktura do S4: launcher s2y obowiązkowy (gz przed PX4);
+  bias na limicie 0.15 w 3/6 bootów s2d i restart watchdoga na ziemi
+  2/6 — mechanizm niezmierzony, bias przy odcięciu w normie 8/8;
+  próbnik zegara + timesyncd stop bez zmian.
+- Lekcja: akcja bezpieczna ma więcej stopni swobody niż jej opis —
+  yaw = 0 siedział w D5 od R0.3a i był łagodny pod GNSS i zliczeniem;
+  nowy estymator zmienia koszt starych akcji. Przy każdej zmianie
+  źródła pozycji audytować WSZYSTKIE składowe komend akcji osłony,
+  nie tylko tę mierzoną.
