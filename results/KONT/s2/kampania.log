@@ -28,3 +28,13 @@
 [kampania 11:09:21] c11_s04_r2: próbnik 0 skoków ok=True
 [kampania 11:15:49] c11_s04_r2 rc=143 boot 14/14: ważny=False (brak odcięcia, ulogu albo pętli) V2p=None eps60=None eps70=None delta=None p95=None rmax=None xy=None flipy=None zejscie=None t_entry=None
 [kampania 11:15:49] KONIEC booty=14 ważne=1 stop=STOP-KONT2-BUDZET
+[kampania 11:52:01] === S2′ ANEKS_KONT-1b start: lot 1/8 c08_s02a_r2, budżet 12, uptime 281.73 s
+[kampania 11:53:01] c11_s02_r3: próbnik 0 skoków ok=True
+[kampania 11:53:01] c11_s02_r3: D1 /dev/shm sprzątanie=False przed=0 po=0 trzymane={}
+[kampania 11:59:23] c11_s02_r3 rc=0 boot 1/12: uzbrojony=True n_frames=3862 sonda=None ważny=True (None) V2p=0.952 eps60=1.029 eps70=1.569 delta=0.946 p95=0.0164 rmax=25.126 xy=True flipy=0 zejscie=koniec_okna t_entry=6.744
+[kampania 12:00:23] c02_s01_r3: próbnik 0 skoków ok=True
+[kampania 12:00:23] c02_s01_r3: D2 /dev/shm sprzątanie=True przed=14 po=0 trzymane={}
+[kampania 12:06:48] c02_s01_r3 rc=143 boot 2/12: uzbrojony=False n_frames=0 sonda=None ważny=False (brak odcięcia, ulogu albo pętli) V2p=None eps60=None eps70=None delta=None p95=None rmax=None xy=None flipy=None zejscie=None t_entry=None
+[kampania 12:06:48] ALARM FAIL sondy przed uzbrojeniem: c02_s01_r3 n_frames=0 sonda=None, seria 1
+[kampania 12:06:48] ALARM STOP-KONT2b: FAIL D2 (kandydat 1 obalony)
+[kampania 12:06:48] KONIEC booty=2 ważne=2 stop=STOP-KONT2b

@@ -1,0 +1,42 @@
+{
+  "kind": "kont_probe",
+  "kont_s2": {
+    "boot": 16,
+    "offset": null,
+    "sonda_rc_frozen": 2,
+    "podloga_10hz_ok": 0,
+    "uzbrojony": false,
+    "sonda": {
+      "label": "preflight_c02_s01_r3",
+      "feed": "/home/olga/projects/liquidpatrol/results/KONT/s2/c02_s01_r3/percep_feed.jsonl",
+      "tryb": "live window=35.0s",
+      "prog_frozen": {
+        "dt_p50_max_s_na_klatke": 0.07,
+        "frac_delt_gt_0p10_max": 0.05
+      },
+      "n_delt": 0,
+      "werdykt": "ZA_MALO_DANYCH"
+    },
+    "echo": null,
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profil_sha16": "a68a450b91c2ab51"
+  },
+  "zegar": {
+    "timesyncd": "inactive",
+    "clocksource": "tsc",
+    "aneks": "ANEKS_SKAN2-0b §2.2"
+  },
+  "kont_s2g": {
+    "aneks": "ANEKS_KONT-1b",
+    "boot_s2p": 2,
+    "diagnoza": "D2",
+    "shm": {
+      "sprzatanie": true,
+      "plikow_przed": 14,
+      "plikow_po": 0,
+      "trzymane_przed": {},
+      "stan": "shm_c02_s01_r3.txt"
+    },
+    "sieroty_term": {}
+  }
+}

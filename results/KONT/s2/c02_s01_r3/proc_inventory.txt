@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        3792 14.8  0.0 330892 14160 ?        Sl   12:05   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        3784  3.5  0.0  16948 11160 ?        S    12:05   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/KONT/s2/c02_s01_r3/zegar2.jsonl
+olga        1021  2.5  1.1 5700820 356712 pts/0  Sl+  11:47   0:28 claude
+olga        2005  0.3  0.0 1341172 7564 ?        S    11:52   0:03 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl --line-buffered -E ALARM|KONIEC| boot [0-9]+/12|sieroty|sprzątanie|D2 PASS|env-block|S2′ ANEKS
+olga        1998  0.2  0.1  71140 51368 ?        S    11:52   0:02 python3 results/KONT/tools/kont_s2_campaign_g.py
+root         250  0.1  0.2 3216472 67284 ?       Ssl  11:47   0:01 /usr/bin/containerd
+root         359  0.0  0.3 10840120 103760 ?     Ssl  11:47   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root           1  0.0  0.0  21912 13180 ?        Ss   11:47   0:00 /sbin/init
+root         914  0.0  0.0   3200  1248 ?        S    11:47   0:00 /init
+root          40  0.0  0.0  50480 16624 ?        S<s  11:47   0:00 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26136  7208 ?        Ss   11:47   0:00 /usr/lib/systemd/systemd-udevd
+olga         958  0.0  0.0  20392 11580 ?        Ss   11:47   0:00 /usr/lib/systemd/systemd --user
+root         248  0.0  0.0 107064 23248 ?        Ssl  11:47   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+polkitd      200  0.0  0.0 308188  8060 ?        Ssl  11:47   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga        3592  0.0  0.0   5032  3784 ?        S    12:00   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s2_boot.sh 16 c02_s01_r3 2
+syslog       212  0.0  0.0 222524  6072 ?        Ssl  11:47   0:00 /usr/sbin/rsyslogd -n -iNONE
+message+     195  0.0  0.0   9796  5540 ?        Ss   11:47   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+avahi        193  0.0  0.0   8764  4748 ?        Ss   11:47   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
+systemd+     182  0.0  0.0  21352 13220 ?        Ss   11:47   0:00 /usr/lib/systemd/systemd-resolved
