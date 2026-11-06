@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Rig testu klatek (PROMPT_KONT_S1 §2): statyczna opakowanie modelu x500_mono_cam_flow, tylko Boot A, nie lata. -->
+<sdf version='1.9'>
+  <model name='probe'>
+    <static>true</static>
+    <include merge='true'>
+      <uri>x500_mono_cam_flow</uri>
+    </include>
+  </model>
+</sdf>

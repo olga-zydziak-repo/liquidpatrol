@@ -1,0 +1,40 @@
+2c2,3
+< # harness/run_boot.sh — JEDEN wrapper bootu programu (PROMPT_INFRA3 §B1.1 + bramka procesowa ANEKS_INFRA3-3 §3).
+---
+> # harness/kont_boot.sh — kopia run_boot.sh nogi KONT (PROMPT_KONT_S1 §1.4): model z przepływem, świat z argumentu, FLIGHT=kont_probe.
+> # Oryginał: harness/run_boot.sh — JEDEN wrapper bootu programu (PROMPT_INFRA3 §B1.1 + bramka procesowa ANEKS_INFRA3-3 §3).
+14c15
+< WORLD="${WORLD:-default}"
+---
+> WORLD="${1:-${WORLD:-world_kont_A3}}"
+24c25
+<   empty|bench) ARM="${ARM:-E}"; POINT="${POINT:-0.0}";;
+---
+>   empty|bench|kont_probe) ARM="${ARM:-E}"; POINT="${POINT:-0.0}";;
+44c45
+<   pkill -9 -f 'infra1_empty_flight' 2>/dev/null; pkill -9 -f 'rtf_sampler' 2>/dev/null
+---
+>   pkill -9 -f 'infra1_empty_flight' 2>/dev/null; pkill -9 -f 'kont_probe' 2>/dev/null; pkill -9 -f 'rtf_sampler' 2>/dev/null
+102c103
+< LOGDIR="$OUTDIR" WORLD="$WORLD" PX4_GZ_WORLD="$WORLD" MODEL=gz_x500_mono_cam bash run_stack.sh > "$OUTDIR/stack.log" 2>&1
+---
+> LOGDIR="$OUTDIR" WORLD="$WORLD" PX4_GZ_WORLD="$WORLD" MODEL=gz_x500_mono_cam_flow PX4_SYS_AUTOSTART=4010 PX4_SIM_MODEL=gz_x500_mono_cam_flow bash run_stack.sh > "$OUTDIR/stack.log" 2>&1
+136c137
+<       GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 \
+---
+>       GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_flow_0 \
+140c141
+<     K1_POINT="${K1_POINT:-$POINT}" GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 \
+---
+>     K1_POINT="${K1_POINT:-$POINT}" GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_flow_0 \
+144c145
+<     K1_HOVER_S="${K1_HOVER_S:-60}" GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 \
+---
+>     K1_HOVER_S="${K1_HOVER_S:-60}" GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_flow_0 \
+147c148,149
+<   bench) GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_0 PYTHONPATH=".:.certdeps:${PYTHONPATH:-}" python3 -m bench.bench_flight > "$OUTDIR/act.log" 2>&1; RC=$?; HARNESS_FILE="$ROOT/bench/bench_flight.py";;
+---
+>   kont_probe) GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_flow_0 PYTHONPATH=".:.certdeps:${PYTHONPATH:-}" python3 results/KONT/tools/kont_probe.py > "$OUTDIR/act.log" 2>&1; RC=$?; HARNESS_FILE="$ROOT/results/KONT/tools/kont_probe.py";;
+>   bench) GATE_OUT="$OUTDIR/trace.jsonl" PX4_GZ_WORLD="$WORLD" HEADLESS=1 B1_MODEL=x500_mono_cam_flow_0 PYTHONPATH=".:.certdeps:${PYTHONPATH:-}" python3 -m bench.bench_flight > "$OUTDIR/act.log" 2>&1; RC=$?; HARNESS_FILE="$ROOT/bench/bench_flight.py";;
+170a173
+> elif [ "$FLIGHT" = "kont_probe" ]; then FIN_RC=0; [ -f "$OUTDIR/manifest.json" ] || echo '{"kind":"kont_probe"}' > "$OUTDIR/manifest.json"

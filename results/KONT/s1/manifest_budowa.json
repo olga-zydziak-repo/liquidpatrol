@@ -1,0 +1,37 @@
+{
+ "bramka_frozen_sha256": {
+  "r01/shield.py": "1c584964ddc85192c1381f5041e8ed3b7b81b984c92b8f33d5c685acd2cba2c2",
+  "r03/config.py": "4c440e4265574b68c2a3341105d5cb0ace07ed683cd0bca43228af356629752a",
+  "harness/run_boot.sh": "a190e59c400794a1e2841dfd5d9dacdbf57695ce432d5f7305a9715fed97ee47",
+  "harness/percep_proc.py": "38a3a7656c53d857a3bcf0d17eda35589ee808bc909cd6ebfe25d228110b661d",
+  "harness/feed_vision.py": "acc81df76acf4570af6629edefb77f9ee0051a0eadcdeaf9da9cf270ba74dcce",
+  "harness/feed_vision_proc.py": "79633489708d287d815596fca9af448650f48a57e894ca62bac0545c6e6bf742",
+  "worlds/world_demo_A3.sdf": "adc918032bc00b08d382b814717d9c77fe0e632362326ff2d5e81cbe715157e0",
+  "PX4-Autopilot/Tools/simulation/gz/models/mono_cam/model.sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+  "PX4-Autopilot/Tools/simulation/gz/models/x500_flow/model.sdf": "23dca39150c710acd1d6c17f85319d6e4d03d5953f0d5823313555dbaa0f398d",
+  "PX4-Autopilot/Tools/simulation/gz/models/optical_flow/model.sdf": "2ddd3d570c6c7b3f916015338aaa7858a283f50026fdd288137d8fce2b22c617"
+ },
+ "porcelain_r01_r03_bench_harness_przed_budowa": 0,
+ "certs_selfcheck": "PASS 9/9",
+ "zrodla_submodul": {
+  "models/x500_mono_cam_flow/model.sdf": "8bf215cafcd79f405e62a872d9455f7993effbf4b7a651a65e80379f6b68d623",
+  "models/x500_mono_cam_flow/model.config": "eaff9be7f932fcf5eca8dc9b304671b45cff826af3a0a0fab53b165d6c5d3c60"
+ },
+ "kopie_repo_zgodne": true,
+ "swiat": {
+  "worlds/world_kont_A3.sdf": "887fe3cca89d1cc57d5a1752e1dc8fc9bade44bac3d825d93045235814a3aabd",
+  "worlds/kont_checker.png": "11910c276559d45770d23a1b8c7aef0b319cc09fce8de4c0e589e95e4381eee1",
+  "tekstura": "proceduralna szachownica bok 1 m, 72x72 pola, odcienie z ziarna 20261106 w dwóch klasach; płyta 72x72 m, góra z=0.01",
+  "visibility_flags": 2,
+  "visibility_mask_imager": 4294967293
+ },
+ "maska_mechanizm": "experimental:params action=replace na camera_link::imager: modify nie dodaje elementu nieobecnego w pinie (sdformat14 Error Code 8); gz sdf -p: jedyna różnica czujnika wobec x500_mono_cam to <visibility_mask>",
+ "roznice_od_literalnego_promptu": [
+  "świat: nazwa world_kont_A3 zamiast world_demo_A3 (PX4 czeka na /world/<PX4_GZ_WORLD>)",
+  "kont_boot.sh: poza MODEL/AUTOSTART/SIM_MODEL/świat także B1_MODEL, gałąź FLIGHT=kont_probe w case, pkill, finalize (patrz diff)",
+  "masa pojazdu +0.071 kg wobec x500_mono_cam (flow 0.05, LW20 0.02, lidar 0.001), kopia z x500_flow"
+ ],
+ "zasady_flow": {
+  "update_rate_flow_hz": 50
+ }
+}
