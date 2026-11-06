@@ -56,3 +56,15 @@
 [kampania 13:16:14] c00_s02_r3: lot /dev/shm sprzątanie=False przed=27
 [kampania 13:26:41] c00_s02_r3 rc=0 boot 5/12: t0_us=7496000 sc=62413 uzbrojony=True n_frames=3878 sonda=PASS ważny=True (None) V2p=0.9418 eps60=3.67 eps70=3.479 delta=0.757 p95=0.0401 rmax=23.261 xy=True flipy=2 zejscie=koniec_okna t_entry=4.904
 [kampania 13:26:41] KONIEC booty=5 ważne=4 stop=STOP-KONT2-PRZESKOK
+[kampania 15:04:10] === S2′ ANEKS_KONT-2b sonda Y start: zaliczone 5, budżet 5/12, uptime 11643.30 s
+[kampania 15:05:11] c11_s04_r3: próbnik 0 skoków ok=True
+[kampania 15:11:41] c11_s04_r3 rc=0 boot 6/12: t0_us=7420000 sc=63009 uzbrojony=True n_frames=3901 sonda=PASS yaw={'yaw_blad_deg': 6.43, 'prog_deg': 10.0, 'ok': True} ważny=True (None) V2p=0.9565 eps60=0.836 eps70=2.377 delta=1.016 p95=0.0758 rmax=25.899 xy=True flipy_powietrze=0 zejscie=koniec_okna t_entry=6.768
+[kampania 15:11:41] c11_s04_r3: restart estymatora na ziemi [(66.456, 0), (68.912, 1)], watchdog: ["[WD] REINIT #1 reason=SLOW_bias>0.08_no_decrease_30s sim=63.968 bias 0.12524→0.00022 act={'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 2.032}"]
+[kampania 15:11:47] REGUŁA Y c11_s04_r3: {'wektor': 0.72, 'kontrola': 1.544, 'ponizej_kontroli': True, 'obrot_3s_deg': 0.1, 'yaw_rate_max': 0.22, 'yaw_rate_orbita_p99': 0.35, 'delta': 1.016, 'wazny': True}
+[kampania 15:12:48] c08_s02b_r2: próbnik 0 skoków ok=True
+[kampania 15:23:10] c08_s02b_r2 rc=0 boot 7/12: t0_us=7504000 sc=63629 uzbrojony=True n_frames=3921 sonda=PASS yaw={'yaw_blad_deg': 6.42, 'prog_deg': 10.0, 'ok': True} ważny=True (None) V2p=0.9528 eps60=1.838 eps70=2.43 delta=0.093 p95=0.0464 rmax=18.833 xy=True flipy_powietrze=0 zejscie=koniec_okna t_entry=8.708
+[kampania 15:23:17] REGUŁA Y c08_s02b_r2: {'wektor': 0.457, 'kontrola': 1.197, 'ponizej_kontroli': True, 'obrot_3s_deg': 0.2, 'yaw_rate_max': 0.28, 'yaw_rate_orbita_p99': 0.42, 'delta': 0.093, 'wazny': True}
+[kampania 15:24:17] c02_s01_r4: próbnik 0 skoków ok=True
+[kampania 15:34:39] c02_s01_r4 rc=0 boot 8/12: t0_us=7440000 sc=63589 uzbrojony=True n_frames=3922 sonda=PASS yaw={'yaw_blad_deg': 6.38, 'prog_deg': 10.0, 'ok': True} ważny=True (None) V2p=0.9525 eps60=0.958 eps70=3.535 delta=0.097 p95=0.0524 rmax=23.35 xy=True flipy_powietrze=0 zejscie=koniec_okna t_entry=7.248
+[kampania 15:34:45] ALARM STOP-KONT2-WYJATEK: ValueError('zero-size array to reduction operation maximum which has no identity')
+[kampania 15:34:45] KONIEC booty=8 ważne=7 loty_y=['c11_s04_r3', 'c08_s02b_r2'] stop=STOP-KONT2-WYJATEK

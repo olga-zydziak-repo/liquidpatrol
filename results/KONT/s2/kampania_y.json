@@ -1,0 +1,31 @@
+{
+ "booty": 8,
+ "wazne": 7,
+ "loty_y": [
+  "c11_s04_r3",
+  "c08_s02b_r2"
+ ],
+ "reguly": {
+  "c11_s04_r3": {
+   "wektor": 0.72,
+   "kontrola": 1.544,
+   "ponizej_kontroli": true,
+   "obrot_3s_deg": 0.1,
+   "yaw_rate_max": 0.22,
+   "yaw_rate_orbita_p99": 0.35,
+   "delta": 1.016,
+   "wazny": true
+  },
+  "c08_s02b_r2": {
+   "wektor": 0.457,
+   "kontrola": 1.197,
+   "ponizej_kontroli": true,
+   "obrot_3s_deg": 0.2,
+   "yaw_rate_max": 0.28,
+   "yaw_rate_orbita_p99": 0.42,
+   "delta": 0.093,
+   "wazny": true
+  }
+ },
+ "stop": "STOP-KONT2-WYJATEK"
+}

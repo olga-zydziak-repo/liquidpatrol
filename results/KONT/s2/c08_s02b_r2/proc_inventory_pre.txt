@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       23751 17.8  0.0 330892 14156 ?        Sl   15:17   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        1021  1.9  1.2 5725420 408020 pts/0  Sl+  11:50   3:58 claude
+olga       21913  1.0  0.2  96724 76888 ?        S    15:04   0:08 python3 results/KONT/tools/kont_s2_campaign_y.py
+olga       21944  0.4  0.0 1341172 7576 ?        S    15:04   0:03 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl --line-buffered -E ALARM|KONIEC| boot [0-9]+/12|sieroty|restart estymatora|env-block|REGUŁA Y|sonda Y start
+root         250  0.1  0.1 3216472 59328 ?       Ssl  11:50   0:13 /usr/bin/containerd
+root         359  0.0  0.2 10840120 85540 ?      Ssl  11:50   0:03 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         914  0.0  0.0   3200  1248 ?        S    11:50   0:01 /init
+root           1  0.0  0.0  21860 13232 ?        Ss   11:50   0:00 /sbin/init
+root          40  0.0  0.0  50480 17168 ?        S<s  11:50   0:00 /usr/lib/systemd/systemd-journald
+olga       23566  0.0  0.0   5032  3792 ?        S    15:12   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s2y_boot.sh 21 c08_s02b_r2 20
+polkitd      200  0.0  0.0 308188  8064 ?        Ssl  11:50   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          86  0.0  0.0  26136  7208 ?        Ss   11:50   0:00 /usr/lib/systemd/systemd-udevd
+message+     195  0.0  0.0   9796  5568 ?        Ss   11:50   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root           7  0.0  0.0   3220  2148 hvc0     Sl+  11:50   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root         214  0.0  0.0  17400  6460 ?        Ss   11:50   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+olga         958  0.0  0.0  20392 11580 ?        Ss   11:50   0:00 /usr/lib/systemd/systemd --user
+syslog       212  0.0  0.0 222524  6072 ?        Ssl  11:50   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         204  0.0  0.0  17988  8832 ?        Ss   11:50   0:00 /usr/lib/systemd/systemd-logind
+avahi        193  0.0  0.0   8764  4748 ?        Ss   11:50   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]

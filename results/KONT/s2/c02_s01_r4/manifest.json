@@ -1,0 +1,109 @@
+{
+  "kind": "kont_probe",
+  "world_hash": "887fe3cca89d1cc57d5a1752e1dc8fc9bade44bac3d825d93045235814a3aabd  worlds/world_kont_A3.sdf",
+  "world_hash_kind": "repo",
+  "ulog_sha": "252d7bcdddbd81a8fc58735e3c4afedb266d77ebaf2c606fbe699292b5f7d79b",
+  "ulog_bytes": 78060125,
+  "model_in_state": true,
+  "kont_s2": {
+    "boot": 22,
+    "offset": {
+      "z_off_m": 0.1825,
+      "okno_sim_s": 6.02,
+      "n": 126,
+      "z_orb_alt_m_kanon": 12.0,
+      "z_orb_alt_m_kom": 11.8175,
+      "home_alt_kom": 9.8175,
+      "feed": "V2"
+    },
+    "sonda_rc_frozen": 0,
+    "podloga_10hz_ok": 1,
+    "uzbrojony": true,
+    "sonda": {
+      "label": "preflight_c02_s01_r4",
+      "feed": "/home/olga/projects/liquidpatrol/results/KONT/s2/c02_s01_r4/percep_feed.jsonl",
+      "tryb": "live window=35.0s",
+      "prog_frozen": {
+        "dt_p50_max_s_na_klatke": 0.07,
+        "frac_delt_gt_0p10_max": 0.05
+      },
+      "n_delt": 469,
+      "dt_p50_s_na_klatke": 0.068,
+      "dt_p90_s_na_klatke": 0.068,
+      "frac_delt_gt_0p10": 0.0021,
+      "hz_p50": 14.71,
+      "span_sim_s": 32.2,
+      "werdykt": "PASS"
+    },
+    "echo": {
+      "preflight": {
+        "EKF2_OF_CTRL": {
+          "przed": 1,
+          "po": 1
+        },
+        "EKF2_RNG_CTRL": {
+          "przed": 1,
+          "po": 1
+        },
+        "EKF2_HGT_REF": {
+          "przed": 0,
+          "po": 0
+        },
+        "EKF2_GPS_CTRL": {
+          "przed": 7,
+          "po": 7
+        }
+      },
+      "cut": [
+        "EKF2_GPS_CTRL",
+        0
+      ],
+      "fuse_r_gt_m": 29.0,
+      "episode_id": 2,
+      "scenario_id": "c02_s01",
+      "window_s": 72.0,
+      "inject_t": 30.0,
+      "hold_s": 15.0,
+      "feed": "V2",
+      "z_off_m": 0.1825,
+      "nota_fuse": "bezpiecznik sondy, nie część projektu (PROMPT_KONT_S1 §3)"
+    },
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profil_sha16": "a68a450b91c2ab51"
+  },
+  "kont_s2d": {
+    "aneks": "ANEKS_KONT-1c §3",
+    "initial_absolute_time_us": 7440000,
+    "faza_ok": true,
+    "dolaczenie": {
+      "prog_s": 0.5,
+      "sim_s_przy_starcie_px4": 0.612,
+      "czekanie_wall_s": 6.7,
+      "ok": true
+    }
+  },
+  "zegar": {
+    "timesyncd": "inactive",
+    "clocksource": "tsc",
+    "aneks": "ANEKS_SKAN2-0b §2.2"
+  },
+  "kont_s2g": {
+    "aneks": "ANEKS_KONT-2b",
+    "boot_s2p": 8,
+    "sonda": "Y",
+    "shm": {
+      "sprzatanie": false,
+      "plikow_przed": 35,
+      "plikow_po": 35,
+      "trzymane_przed": {},
+      "stan": "shm_c02_s01_r4.txt"
+    },
+    "sieroty_term": {},
+    "sensor_combined_n": 63589,
+    "yaw_assert": {
+      "yaw_blad_deg": 6.38,
+      "prog_deg": 10.0,
+      "ok": true
+    }
+  }
+}
