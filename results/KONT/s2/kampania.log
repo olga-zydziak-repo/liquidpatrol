@@ -38,3 +38,9 @@
 [kampania 12:06:48] ALARM FAIL sondy przed uzbrojeniem: c02_s01_r3 n_frames=0 sonda=None, seria 1
 [kampania 12:06:48] ALARM STOP-KONT2b: FAIL D2 (kandydat 1 obalony)
 [kampania 12:06:48] KONIEC booty=2 ważne=2 stop=STOP-KONT2b
+[kampania 12:27:09] === S2′ ANEKS_KONT-1c start: zaliczone ['c08_s02a_r2', 'c11_s02_r3'], budżet 2/12, uptime 2341.45 s, /dev/shm fastrtps 13
+[kampania 12:28:10] c11_s03_r3: próbnik 0 skoków ok=True
+[kampania 12:28:10] c11_s03_r3: D3 /dev/shm sprzątanie=False przed=13
+[kampania 12:35:10] c11_s03_r3 rc=143 boot 3/12: t0_us=None sc=None uzbrojony=False n_frames=None sonda=None ważny=False (brak odcięcia, ulogu albo pętli) V2p=None eps60=None eps70=None delta=None p95=None rmax=None xy=None flipy=None zejscie=None t_entry=None
+[kampania 12:35:10] ALARM STOP-KONT2c: FAIL D3 t0_us=None sc=None sonda=None FileNotFoundError(2, 'No such file or directory')
+[kampania 12:35:11] KONIEC booty=3 ważne=2 stop=STOP-KONT2c

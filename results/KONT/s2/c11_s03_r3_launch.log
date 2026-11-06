@@ -1,0 +1,5 @@
+[run_boot b17] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b17] watchdog EKF2 (preflight-only, max 2 reinity) pid=9078
+model_in_state=0
+[run_boot b17] settle 90s preflight EKF
