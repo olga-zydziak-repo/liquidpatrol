@@ -44,3 +44,15 @@
 [kampania 12:35:10] c11_s03_r3 rc=143 boot 3/12: t0_us=None sc=None uzbrojony=False n_frames=None sonda=None ważny=False (brak odcięcia, ulogu albo pętli) V2p=None eps60=None eps70=None delta=None p95=None rmax=None xy=None flipy=None zejscie=None t_entry=None
 [kampania 12:35:10] ALARM STOP-KONT2c: FAIL D3 t0_us=None sc=None sonda=None FileNotFoundError(2, 'No such file or directory')
 [kampania 12:35:11] KONIEC booty=3 ważne=2 stop=STOP-KONT2c
+[kampania 12:56:18] === S2′ ANEKS_KONT-1d start: zaliczone ['c08_s02a_r2', 'c11_s02_r3'], budżet 2/12, uptime 4038.73 s, /dev/shm fastrtps 15
+[kampania 12:57:18] c11_s03_r4: próbnik 0 skoków ok=True
+[kampania 12:57:18] c11_s03_r4: D3 /dev/shm sprzątanie=False przed=15
+[kampania 13:03:51] c11_s03_r4 rc=0 boot 3/12: t0_us=7424000 sc=63814 uzbrojony=True n_frames=3925 sonda=PASS ważny=True (None) V2p=0.951 eps60=1.523 eps70=2.362 delta=0.763 p95=0.0771 rmax=25.898 xy=True flipy=0 zejscie=koniec_okna t_entry=7.092
+[kampania 13:03:51] D3 PASS: launcher s2d wchodzi do dalszych bootów
+[kampania 13:04:51] c08_s04_r3: próbnik 0 skoków ok=True
+[kampania 13:04:51] c08_s04_r3: lot /dev/shm sprzątanie=False przed=23
+[kampania 13:15:13] c08_s04_r3 rc=0 boot 4/12: t0_us=7496000 sc=62458 uzbrojony=True n_frames=3852 sonda=PASS ważny=True (None) V2p=0.9553 eps60=0.915 eps70=0.496 delta=2.802 p95=0.0634 rmax=25.046 xy=True flipy=0 zejscie=koniec_okna t_entry=2.888
+[kampania 13:16:14] c00_s02_r3: próbnik 0 skoków ok=True
+[kampania 13:16:14] c00_s02_r3: lot /dev/shm sprzątanie=False przed=27
+[kampania 13:26:41] c00_s02_r3 rc=0 boot 5/12: t0_us=7496000 sc=62413 uzbrojony=True n_frames=3878 sonda=PASS ważny=True (None) V2p=0.9418 eps60=3.67 eps70=3.479 delta=0.757 p95=0.0401 rmax=23.261 xy=True flipy=2 zejscie=koniec_okna t_entry=4.904
+[kampania 13:26:41] KONIEC booty=5 ważne=4 stop=STOP-KONT2-PRZESKOK

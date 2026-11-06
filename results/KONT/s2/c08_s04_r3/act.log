@@ -1,0 +1,18 @@
+[kont] armed sim=110.52 {'gt_home': [-0.0, -0.0]}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/KONT/s2/c08_s04_r3/episode_control.json
+[kont] takeoff sim=110.55 {}
+[kont] offboard sim=121.75 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[kont] intruder_start_gate sim=136.25 {'ok': True}
+[kont] episode_start sim=136.28 {'episode_id': 44, 'scenario_id': 'c08_s04', 't0_sim': 136.276}
+[kont] shield_bierna sim=136.28 {'decision': 'ALLOW', 'reason': 'None', 'cut': False}
+[kont] entry sim=139.16 {'t_entry': 2.888}
+[kont] cut sim=169.22 {'t_rel': 32.932, 'param_rtt_s': 0.0074, 'r_gt': 24.83, 'xy_valid': True, 'track_valid': True, 'blad_tracku_m': 0.52}
+[kont] descent_start sim=241.22 {'reason': 'koniec_okna', 'r_gt': 2.82, 't_rel': 104.94, 'okno_s': 72.01}
+[kont] refuse_pos_land sim=241.22 {}
+[kont] h_switch sim=246.31 {}
+[kont] touchdown sim=250.51 {}
+[kont] gt_przyziemienie sim=252.43 {'z': 0.148, 'r_gt': 3.83}
+[kont] descent_end sim=252.43 {'r_max_zejscie': 3.87}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[kont] done -> /home/olga/projects/liquidpatrol/results/KONT/s2/c08_s04_r3/trace.jsonl

@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       15537 16.6  0.0 330892 14116 ?        Sl   13:21   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       15531  3.3  0.0   5028  3700 ?        S    13:21   0:00 bash harness/kont_boot_s2d.sh world_kont_A3
+olga        1021  2.1  1.2 5721320 397916 pts/0  Sl+  11:49   1:57 claude
+olga       11901  0.5  0.0 1341172 7544 ?        S    12:56   0:08 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl --line-buffered -E ALARM|KONIEC| boot [0-9]+/12|sieroty|D3 PASS|env-block|ANEKS_KONT-1d|initial absolute time|FAZA
+olga       11910  0.2  0.2  88200 66388 ?        S    12:56   0:04 python3 results/KONT/tools/kont_s2_campaign_d.py
+root         250  0.1  0.1 3216472 60352 ?       Ssl  11:49   0:05 /usr/bin/containerd
+root         359  0.0  0.2 10840120 86280 ?      Ssl  11:49   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         914  0.0  0.0   3200  1248 ?        S    11:49   0:00 /init
+root           1  0.0  0.0  21912 13240 ?        Ss   11:49   0:00 /sbin/init
+root          40  0.0  0.0  50480 16968 ?        S<s  11:49   0:00 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26136  7208 ?        Ss   11:49   0:00 /usr/lib/systemd/systemd-udevd
+olga       15321  0.0  0.0   5032  3892 ?        S    13:16   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s2d_boot.sh 19 c00_s02_r3 12
+polkitd      200  0.0  0.0 308188  8064 ?        Ssl  11:49   0:00 /usr/lib/polkit-1/polkitd --no-debug
+message+     195  0.0  0.0   9796  5564 ?        Ss   11:49   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root           7  0.0  0.0   3220  2148 hvc0     Sl+  11:49   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+olga         958  0.0  0.0  20392 11580 ?        Ss   11:49   0:00 /usr/lib/systemd/systemd --user
+syslog       212  0.0  0.0 222524  6072 ?        Ssl  11:49   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         248  0.0  0.0 107064 23248 ?        Ssl  11:49   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root         204  0.0  0.0  17988  8832 ?        Ss   11:49   0:00 /usr/lib/systemd/systemd-logind
