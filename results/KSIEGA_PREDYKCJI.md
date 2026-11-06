@@ -618,3 +618,9 @@ lotów sieci musi być zmierzona na tych lotach albo egzekwowana przez osłonę;
 w repo niesprawdzalny dla recenzenta — do backlogu: wyciąg z ulogów
 (nav_state, xy_valid, failsafe) commitowany jako jsonl przy każdym boocie
 denialowym.
+
+## KONT S1 (ANEKS_KONT-1, 6.11.2026)
+- P-KONT-1 (0.50) maska + identyczność klatek — ✓ (T=K=0, 8/8; kontrola N 93–99).
+- P-KONT-2 (0.65) aiding ≥ 70 s bez nav 14→12 — ✓ (72.01 s; nav 14 do przyziemienia).
+Uwaga CC (bez zmiany predykcji): po S1 P-KONT-3 (T* ≥ 30 s) oceniam niżej,
+~0.3, zależnie od diagnozy skali przepływu (R-3).
