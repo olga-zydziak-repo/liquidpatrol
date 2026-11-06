@@ -34,7 +34,7 @@ export PX4_GZ_WORLD="$WORLD"
 # i arm przechodzi. Soak (nie ustawia HEADLESS) → GUI jak dotąd. px4-rc.gzsim: puste/unset => GUI.
 [ -n "${HEADLESS:-}" ] || unset HEADLESS
 # ANEKS_KONT-1c §3: gz przed PX4, bramka czasu sim
-. ./gz_env.sh
+set +u; . ./gz_env.sh; set -u
 setsid nohup gz sim --verbose="${GZ_VERBOSE:-1}" -r -s "${PX4_GZ_WORLDS}/${WORLD}.sdf" > "$LOGDIR/gz_server.log" 2>&1 &
 echo "  gz pid=$!"
 python3 "$ROOT/results/KONT/tools/kont_gz_czas.py" --world "$WORLD" --min 0.5 --out "$LOGDIR/px4_join.json" || { echo "[stack] FAZA: gz nie osiągnął 0.5 s, PX4 nie startuje"; exit 2; }

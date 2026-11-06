@@ -1,0 +1,25 @@
+{
+ "wall_start": 1793966153.2285948,
+ "argv": [
+  "/tmp/claude-1000/-home-olga-projects-liquidpatrol/98683fb6-9e58-4e0d-85ff-4ff59aa4ce17/scratchpad/dry/PX4-Autopilot/build/px4_sitl_default/bin/px4",
+  "-i",
+  "0",
+  "-d",
+  "/tmp/claude-1000/-home-olga-projects-liquidpatrol/98683fb6-9e58-4e0d-85ff-4ff59aa4ce17/scratchpad/dry/PX4-Autopilot/build/px4_sitl_default/etc"
+ ],
+ "cwd": "/home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/rootfs",
+ "gz_world_jak_rcS": "world_kont_A3",
+ "clock_przy_starcie": "system {\n  sec: 1793966156\n  nsec: 895600115\n}\nreal {\n  sec: 8\n  nsec: 144840656\n}\nsim {\n  sec: 2\n  nsec: 732000000\n}\n\n",
+ "scene_info_ok": true,
+ "env": {
+  "PX4_SIM_MODEL": "gz_x500_mono_cam_flow",
+  "PX4_GZ_WORLD": "world_kont_A3",
+  "PX4_SYS_AUTOSTART": "4010",
+  "HEADLESS": "1",
+  "GZ_IP": "127.0.0.1",
+  "GZ_SIM_RESOURCE_PATH": ":/home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/models:/home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds",
+  "GZ_SIM_SYSTEM_PLUGIN_PATH": ":/home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/src/modules/simulation/gz_plugins",
+  "GZ_SIM_SERVER_CONFIG_PATH": "/home/olga/projects/liquidpatrol/PX4-Autopilot/src/modules/simulation/gz_bridge/server.config",
+  "PX4_GZ_WORLDS": "/home/olga/projects/liquidpatrol/PX4-Autopilot/Tools/simulation/gz/worlds"
+ }
+}

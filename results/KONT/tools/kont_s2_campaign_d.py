@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """results/KONT/tools/kont_s2_campaign_d.py — kolejka po ANEKS_KONT-1c (§3, §4). Strażniki 1b bez zmian, import z kont_s2_campaign_g.py (oryginał nietknięty). Boot: kont_s2d_boot.sh. Pierwszy boot = D3 (c11_s03, sesja po bootach, stan /dev/shm jak zastany, bez sprzątania, bo D2 obalił SHM):
 PASS ⇔ initial absolute time ≥ 500 000 µs ∧ sensor_combined płynie (ulog) ∧ sonda PASS; FAIL ⇒ STOP-KONT2c. Faza < 500 000 µs poza D3: boot przerwany, liczy się do budżetu, to nie FAIL sondy; dwa z rzędu ⇒ STOP-KONT2-FAZA. Budżet 12 z 2 użytymi, loty 1–2 zaliczone.
-Plan: §4 aneksu + c02_s01 na końcu, bo §4 wymienia 5 lotów, co z dwoma zaliczonymi daje 7, a PRE §3 wymaga 8 (c02_s01 z planu 1b §4 nie poleciał w D2). Wyjście: kampania_d.json."""
+Plan: §4 aneksu + c02_s01 na końcu, bo §4 wymienia 5 lotów, co z dwoma zaliczonymi daje 7, a PRE §3 wymaga 8 (c02_s01 z planu 1b §4 nie poleciał w D2). Wyjście: kampania_d2.json. Po ANEKS_KONT-1d (wyjątek §2.2, edycja w miejscu): nowe pliki stanu _d2, D3 FAIL przy fazie ≥ 500 000 µs ⇒ STOP-KONT2d, przy niższej lub braku ⇒ STOP-KONT2c „test niewykonany” (§2.4, §3)."""
 import json
 import os
 import re
@@ -49,10 +49,10 @@ def stan(d):
 def main():
     for z in ZALICZONE:
         assert json.load(open(os.path.join(S2, z, "wyniki.json")))["wazny"] is True
-    assert not os.path.exists(os.path.join(S2, "kampania_d.json")), "kampania_d.json istnieje"
-    log(f"=== S2′ ANEKS_KONT-1c start: zaliczone {ZALICZONE}, budżet {UZYTE}/{BUDZET}, uptime {open('/proc/uptime').read().split()[0]} s, /dev/shm fastrtps {len(G.shm_pliki())}")
+    assert not os.path.exists(os.path.join(S2, "kampania_d2.json")), "kampania_d2.json istnieje"
+    log(f"=== S2′ ANEKS_KONT-1d start: zaliczone {ZALICZONE}, budżet {UZYTE}/{BUDZET}, uptime {open('/proc/uptime').read().split()[0]} s, /dev/shm fastrtps {len(G.shm_pliki())}")
     env = {**os.environ, "PERC2_FASTDDS_PROFILE": PROFIL, "PYTHONDONTWRITEBYTECODE": "1"}
-    with open(os.path.join(S2, "zegar_stan_przed_d.txt"), "w") as f:
+    with open(os.path.join(S2, "zegar_stan_przed_d2.txt"), "w") as f:
         subprocess.run("timedatectl status; systemctl is-active systemd-timesyncd; cat /sys/devices/system/clocksource/clocksource0/current_clocksource", shell=True, stdout=f, stderr=subprocess.STDOUT)
     subprocess.run(["sudo", "-n", "systemctl", "stop", "systemd-timesyncd"], check=True)
     stop, booty, wazne, kolejka, fail_streak, faza_streak = None, UZYTE, len(ZALICZONE), list(PLAN), 0, 0
@@ -110,8 +110,8 @@ def main():
                 d3 = (s["t0"] or 0) >= T0_MIN and (s["sc"] or 0) >= SC_MIN and s["uzb"] and s["werdykt"] == "PASS"
                 d3_czeka = False
                 if not d3:
-                    stop = "STOP-KONT2c"
-                    log(f"ALARM {stop}: FAIL D3 t0_us={s['t0']} sc={s['sc']} sonda={s['werdykt']} {s.get('sc_blad', '')}")
+                    stop = "STOP-KONT2d" if (s["t0"] or 0) >= T0_MIN else "STOP-KONT2c"
+                    log(f"ALARM {stop}: {'hipoteza fazy obalona' if stop == 'STOP-KONT2d' else 'test niewykonany'}: FAIL D3 t0_us={s['t0']} sc={s['sc']} sonda={s['werdykt']} {s.get('sc_blad', '')}")
                     break
                 log("D3 PASS: launcher s2d wchodzi do dalszych bootów")
             if not s["faza"]:
@@ -142,10 +142,10 @@ def main():
         raise
     finally:
         subprocess.run(["sudo", "-n", "systemctl", "start", "systemd-timesyncd"])
-        with open(os.path.join(S2, "zegar_stan_po_d.txt"), "w") as f:
+        with open(os.path.join(S2, "zegar_stan_po_d2.txt"), "w") as f:
             subprocess.run("timedatectl status; systemctl is-active systemd-timesyncd", shell=True, stdout=f, stderr=subprocess.STDOUT)
         log(f"KONIEC booty={booty} ważne={wazne} stop={stop}")
-        json.dump({"booty": booty, "wazne": wazne, "stop": stop}, open(os.path.join(S2, "kampania_d.json"), "w"))
+        json.dump({"booty": booty, "wazne": wazne, "stop": stop}, open(os.path.join(S2, "kampania_d2.json"), "w"))
     print("KONIEC", booty, wazne, stop)
 
 
