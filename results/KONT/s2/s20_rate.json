@@ -1,0 +1,219 @@
+{
+ "odniesienia": {},
+ "segmenty": {
+  "nominal": {
+   "R_gt": {
+    "srednia_res_rad_s": [
+     -0.01009,
+     -0.00254
+    ],
+    "sd_res_rad_s": [
+     0.4524,
+     1.1568
+    ],
+    "unc0→v_by": {
+     "stala": 0.0869,
+     "na_omega_z": -0.0006,
+     "na_vbx/R": 0.7176,
+     "na_vby/R": 1.2413,
+     "stala_w_m_s_przy_R": 1.198,
+     "omega_z_sr": -0.0257,
+     "udzial_omega_m_s": 0.0
+    },
+    "unc1→v_bx": {
+     "stala": 0.14193,
+     "na_omega_z": -0.0024,
+     "na_vbx/R": -8.2841,
+     "na_vby/R": -0.9907,
+     "stala_w_m_s_przy_R": 1.956,
+     "omega_z_sr": -0.0257,
+     "udzial_omega_m_s": 0.001
+    }
+   },
+   "R_dalmierz": {
+    "srednia_res_rad_s": [
+     -0.01118,
+     -0.00293
+    ],
+    "sd_res_rad_s": [
+     0.4526,
+     1.1571
+    ],
+    "unc0→v_by": {
+     "stala": 0.08659,
+     "na_omega_z": -0.0006,
+     "na_vbx/R": 0.728,
+     "na_vby/R": 1.2642,
+     "stala_w_m_s_przy_R": 1.209,
+     "omega_z_sr": -0.0257,
+     "udzial_omega_m_s": 0.0
+    },
+    "unc1→v_bx": {
+     "stala": 0.14172,
+     "na_omega_z": -0.0025,
+     "na_vbx/R": -8.4085,
+     "na_vby/R": -1.0042,
+     "stala_w_m_s_przy_R": 1.978,
+     "omega_z_sr": -0.0257,
+     "udzial_omega_m_s": 0.001
+    }
+   },
+   "blad_zyro_ekf_minus_gt_rad_s": [
+    -0.00788,
+    0.00737,
+    -0.10016
+   ],
+   "gyro_bias_przeplywu": [
+    0.00103,
+    -0.00283,
+    0.03533
+   ],
+   "omega_gt_sr": [
+    0.001,
+    -0.0046,
+    -0.0257
+   ],
+   "v_b_sr": [
+    0.368,
+    -1.306,
+    -0.179
+   ]
+  },
+  "po_odcieciu": {
+   "R_gt": {
+    "srednia_res_rad_s": [
+     -0.01321,
+     -0.02187
+    ],
+    "sd_res_rad_s": [
+     0.5629,
+     1.1877
+    ],
+    "unc0→v_by": {
+     "stala": 1.44606,
+     "na_omega_z": -0.0004,
+     "na_vbx/R": 0.9653,
+     "na_vby/R": 11.0137,
+     "stala_w_m_s_przy_R": 20.06,
+     "omega_z_sr": -0.0169,
+     "udzial_omega_m_s": 0.0
+    },
+    "unc1→v_bx": {
+     "stala": -0.35278,
+     "na_omega_z": -0.0001,
+     "na_vbx/R": -12.832,
+     "na_vby/R": -6.4399,
+     "stala_w_m_s_przy_R": -4.894,
+     "omega_z_sr": -0.0169,
+     "udzial_omega_m_s": 0.0
+    }
+   },
+   "R_dalmierz": {
+    "srednia_res_rad_s": [
+     -0.01471,
+     -0.02236
+    ],
+    "sd_res_rad_s": [
+     0.563,
+     1.1879
+    ],
+    "unc0→v_by": {
+     "stala": 1.44623,
+     "na_omega_z": -0.0005,
+     "na_vbx/R": 0.9603,
+     "na_vby/R": 11.1433,
+     "stala_w_m_s_przy_R": 20.314,
+     "omega_z_sr": -0.0169,
+     "udzial_omega_m_s": 0.0
+    },
+    "unc1→v_bx": {
+     "stala": -0.34248,
+     "na_omega_z": -0.0001,
+     "na_vbx/R": -12.9647,
+     "na_vby/R": -6.426,
+     "stala_w_m_s_przy_R": -4.811,
+     "omega_z_sr": -0.0169,
+     "udzial_omega_m_s": 0.0
+    }
+   },
+   "blad_zyro_ekf_minus_gt_rad_s": [
+    -0.01007,
+    -0.00646,
+    -0.14055
+   ],
+   "gyro_bias_przeplywu": [
+    0.00238,
+    -0.00282,
+    0.04576
+   ],
+   "omega_gt_sr": [
+    0.0001,
+    0.0027,
+    -0.0169
+   ],
+   "v_b_sr": [
+    0.592,
+    -1.895,
+    -0.051
+   ]
+  }
+ },
+ "blad_vbx_wg_omega_z": [
+  {
+   "przedzial": [
+    -1,
+    -0.3
+   ],
+   "n": 0,
+   "sr_m_s": null
+  },
+  {
+   "przedzial": [
+    -0.3,
+    -0.1
+   ],
+   "n": 46,
+   "sr_m_s": null
+  },
+  {
+   "przedzial": [
+    -0.1,
+    -0.02
+   ],
+   "n": 156,
+   "sr_m_s": 2.022
+  },
+  {
+   "przedzial": [
+    -0.02,
+    0.02
+   ],
+   "n": 604,
+   "sr_m_s": 0.352
+  },
+  {
+   "przedzial": [
+    0.02,
+    0.1
+   ],
+   "n": 638,
+   "sr_m_s": 0.686
+  },
+  {
+   "przedzial": [
+    0.1,
+    0.3
+   ],
+   "n": 2764,
+   "sr_m_s": -0.25
+  },
+  {
+   "przedzial": [
+    0.3,
+    1
+   ],
+   "n": 1394,
+   "sr_m_s": 0.524
+  }
+ ]
+}
