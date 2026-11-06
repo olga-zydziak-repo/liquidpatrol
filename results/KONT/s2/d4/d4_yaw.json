@@ -1,0 +1,107 @@
+{
+ "loty": {
+  "c08_s02a_r2": {
+   "heading_zejscie_deg": -124.5,
+   "heading_3s_deg": -1.3,
+   "obrot_3s_deg": 123.2,
+   "yaw_rate_max": 2.97,
+   "t_yaw_rate_max": 0.8,
+   "yaw_rate_orbita_p99": 0.44,
+   "wektor_skoku_3s": 3.687,
+   "rezyduum_3s": 2.999,
+   "t_szczyt_slew": 1.12,
+   "delta_kanon": 1.027,
+   "v_styczna": 2.301
+  },
+  "c11_s02_r3": {
+   "heading_zejscie_deg": 50.1,
+   "heading_3s_deg": -1.0,
+   "obrot_3s_deg": 51.1,
+   "yaw_rate_max": 1.59,
+   "t_yaw_rate_max": 0.55,
+   "yaw_rate_orbita_p99": 0.43,
+   "wektor_skoku_3s": 1.818,
+   "rezyduum_3s": 1.21,
+   "t_szczyt_slew": 0.81,
+   "delta_kanon": 0.946,
+   "v_styczna": 2.317
+  },
+  "c11_s03_r4": {
+   "heading_zejscie_deg": 116.4,
+   "heading_3s_deg": 3.9,
+   "obrot_3s_deg": 112.4,
+   "yaw_rate_max": 2.92,
+   "t_yaw_rate_max": 0.84,
+   "yaw_rate_orbita_p99": 0.45,
+   "wektor_skoku_3s": 2.073,
+   "rezyduum_3s": 1.822,
+   "t_szczyt_slew": 1.15,
+   "delta_kanon": 0.763,
+   "v_styczna": 1.547
+  },
+  "c08_s04_r3": {
+   "heading_zejscie_deg": 138.1,
+   "heading_3s_deg": 3.7,
+   "obrot_3s_deg": 134.4,
+   "yaw_rate_max": 3.1,
+   "t_yaw_rate_max": 0.93,
+   "yaw_rate_orbita_p99": 0.37,
+   "wektor_skoku_3s": 3.241,
+   "rezyduum_3s": 2.944,
+   "t_szczyt_slew": 1.08,
+   "delta_kanon": 2.802,
+   "v_styczna": 1.85
+  },
+  "c00_s02_r3": {
+   "heading_zejscie_deg": 55.0,
+   "heading_3s_deg": -1.0,
+   "obrot_3s_deg": 56.0,
+   "yaw_rate_max": 1.73,
+   "t_yaw_rate_max": 0.55,
+   "yaw_rate_orbita_p99": 0.27,
+   "wektor_skoku_3s": 1.252,
+   "rezyduum_3s": 1.299,
+   "t_szczyt_slew": 0.35,
+   "delta_kanon": 0.757,
+   "v_styczna": 1.869
+  }
+ },
+ "korelacje_n5": {
+  "obrot_3s_deg~wektor_skoku_3s": {
+   "pearson": 0.84,
+   "spearman": 0.8
+  },
+  "obrot_3s_deg~rezyduum_3s": {
+   "pearson": 0.91,
+   "spearman": 0.9
+  },
+  "obrot_3s_deg~delta_kanon": {
+   "pearson": 0.58,
+   "spearman": 0.7
+  },
+  "yaw_rate_max~wektor_skoku_3s": {
+   "pearson": 0.8,
+   "spearman": 0.8
+  },
+  "yaw_rate_max~rezyduum_3s": {
+   "pearson": 0.87,
+   "spearman": 0.9
+  },
+  "yaw_rate_max~delta_kanon": {
+   "pearson": 0.5,
+   "spearman": 0.7
+  },
+  "v_styczna~wektor_skoku_3s": {
+   "pearson": 0.28,
+   "spearman": -0.1
+  },
+  "v_styczna~rezyduum_3s": {
+   "pearson": 0.08,
+   "spearman": -0.3
+  },
+  "v_styczna~delta_kanon": {
+   "pearson": -0.1,
+   "spearman": 0.1
+  }
+ }
+}
