@@ -1,0 +1,69 @@
+{
+  "kind": "kont_probe",
+  "world_hash": "887fe3cca89d1cc57d5a1752e1dc8fc9bade44bac3d825d93045235814a3aabd  worlds/world_kont_A3.sdf",
+  "world_hash_kind": "repo",
+  "ulog_sha": "5ec9ee0b4cf888ae4f245a16db755ca0daaeffae8c2f5e24c14729dcf49ab523",
+  "ulog_bytes": 72991202,
+  "model_in_state": true,
+  "kont_s1": {
+    "boot": 2,
+    "sonda_rc_frozen": 0,
+    "podloga_10hz_ok": 1,
+    "uzbrojony": true,
+    "sonda": {
+      "label": "preflight_bootB",
+      "feed": "/home/olga/projects/liquidpatrol/results/KONT/s1/bootB/percep_feed.jsonl",
+      "tryb": "live window=35.0s",
+      "prog_frozen": {
+        "dt_p50_max_s_na_klatke": 0.07,
+        "frac_delt_gt_0p10_max": 0.05
+      },
+      "n_delt": 463,
+      "dt_p50_s_na_klatke": 0.068,
+      "dt_p90_s_na_klatke": 0.068,
+      "frac_delt_gt_0p10": 0.0,
+      "hz_p50": 14.71,
+      "span_sim_s": 32.8,
+      "werdykt": "PASS"
+    },
+    "echo": {
+      "preflight": {
+        "EKF2_OF_CTRL": {
+          "przed": 1,
+          "po": 1
+        },
+        "EKF2_RNG_CTRL": {
+          "przed": 1,
+          "po": 1
+        },
+        "EKF2_HGT_REF": {
+          "przed": 0,
+          "po": 0
+        },
+        "EKF2_GPS_CTRL": {
+          "przed": 7,
+          "po": 7
+        }
+      },
+      "cut": [
+        "EKF2_GPS_CTRL",
+        0
+      ],
+      "fuse_r_gt_m": 29.0,
+      "episode_id": 20,
+      "scenario_id": "c08_s02",
+      "window_s": 72.0,
+      "inject_t": 30.0,
+      "hold_s": 15.0,
+      "feed": "B",
+      "nota_fuse": "bezpiecznik sondy, nie część projektu (PROMPT_KONT_S1 §3)"
+    },
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profil_sha16": "a68a450b91c2ab51"
+  },
+  "zegar": {
+    "timesyncd": "inactive",
+    "clocksource": "tsc",
+    "aneks": "ANEKS_SKAN2-0b §2.2"
+  }
+}

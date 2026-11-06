@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       12116 13.3  0.0 330892 14172 ?        Sl   01:15   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       12110  3.2  0.0   5028  3644 ?        S    01:15   0:00 bash harness/kont_boot.sh world_kont_A3
+olga        1098  1.0  1.0 5725416 354192 pts/0  Sl+  Nov05   3:20 claude --continue
+root         249  0.1  0.2 2847044 67528 ?       Ssl  Nov05   0:23 /usr/bin/containerd
+root          90  0.0  0.0  26244  7340 ?        Ss   Nov05   0:06 /usr/lib/systemd/systemd-udevd
+root         372  0.0  0.3 10250136 108208 ?     Ssl  Nov05   0:05 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root           1  0.0  0.0  22032 13312 ?        Ss   Nov05   0:01 /sbin/init
+polkitd      206  0.0  0.0 308188  8088 ?        Ssl  Nov05   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga       11881  0.0  0.0   5032  3852 ?        S    01:10   0:00 bash results/KONT/tools/kont_s1_boot.sh 2 bootB
+root          43  0.0  0.0  50480 16848 ?        S<s  Nov05   0:00 /usr/lib/systemd/systemd-journald
+root         923  0.0  0.0   3200  1252 ?        S    Nov05   0:00 /init
+message+     201  0.0  0.0   9796  5568 ?        Ss   Nov05   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         228  0.0  0.0  17400  6584 ?        Ss   Nov05   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+systemd+     185  0.0  0.0  21352 13272 ?        Ss   Nov05   0:00 /usr/lib/systemd/systemd-resolved
+syslog       240  0.0  0.0 222524  6008 ?        Ssl  Nov05   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         211  0.0  0.0  17988  8828 ?        Ss   Nov05   0:00 /usr/lib/systemd/systemd-logind
+root           7  0.0  0.0   3220  2148 hvc0     Sl+  Nov05   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root         272  0.0  0.0 107064 23276 ?        Ssl  Nov05   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+olga         969  0.0  0.0  20396 11628 ?        Ss   Nov05   0:00 /usr/lib/systemd/systemd --user

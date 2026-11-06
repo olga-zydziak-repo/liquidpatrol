@@ -10,7 +10,7 @@ import sys
 import numpy as np
 from pyulog import ULog
 
-TOPICS = ["vehicle_status", "vehicle_local_position", "failsafe_flags", "estimator_status_flags", "vehicle_optical_flow",
+TOPICS = ["vehicle_status", "vehicle_local_position", "failsafe_flags", "estimator_status_flags", "vehicle_optical_flow", "sensor_optical_flow",
           "estimator_aid_src_optical_flow", "distance_sensor", "vehicle_land_detected", "estimator_status"]
 TRACK = [("vehicle_status", "nav_state"), ("vehicle_status", "failsafe"), ("vehicle_status", "arming_state"),
          ("vehicle_local_position", "xy_valid"), ("vehicle_local_position", "v_xy_valid"),

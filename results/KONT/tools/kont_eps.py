@@ -9,6 +9,8 @@ import math
 import os
 import sys
 
+import numpy as np
+
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 B = os.path.join(ROOT, "results", "R03", "recon", "B1bis", "instrument")
 sys.path.insert(0, B)
@@ -44,9 +46,18 @@ def eps_curve(d, z_ground=Z_GROUND, fallback_land=None):
     s = [(t - cut, math.hypot(ex - thx, ey - thy)) for (t, ex, ey) in J._paired_series(ekf, gt, True, ts) if cut <= t <= land_win]
     assert abs(max(x for _, x in s) - m["max_drift"]) < 0.01, (max(x for _, x in s), m["max_drift"])
     at = {str(k): next((round(x, 3) for t, x in s if t >= k), None) for k in (1, 2, 4, 5, 10, 15, 20, 30, 40, 50, 60, 70)}
+    # czas sim z wierszy GT (wall ≠ sim przy dsim/dwall < 1); krzywa_1s_sim kluczowana sekundami sim od odcięcia
+    gm, gs = [r["mono"] for r in gt], [r["sim"] for r in gt] if "sim" in gt[0] else None
+    sim_rows = None
+    if gs is not None:
+        sim0 = float(np.interp(cut, gm, gs))
+        sim_rows = [(float(np.interp(t + cut, gm, gs)) - sim0, x) for t, x in s]
     res = {"max_drift": m["max_drift"], "T_home": m["T_home"], "healthy_valid": m["healthy_valid"], "healthy_p95": m["healthy_p95_eps"],
            "skew_applied": m["skew_applied"], "skew_hat_s": m["skew_hat_s"], "t_land_gt_s": round(land - cut, 2) if land else None,
            "eps_at": at, "krzywa_1s": [[k, next(round(x, 3) for t, x in s if t >= k)] for k in range(int(s[-1][0]) + 1)]}
+    if sim_rows:
+        res["krzywa_1s_sim"] = [[k, next(round(x, 3) for t, x in sim_rows if t >= k)] for k in range(int(sim_rows[-1][0]) + 1)]
+        res["okno_sim_s"] = round(sim_rows[-1][0], 2)
     if desc is not None:
         e0 = next((x for t, x in s if t >= desc - cut), None)
         res["t_descent_s"] = round(desc - cut, 2)

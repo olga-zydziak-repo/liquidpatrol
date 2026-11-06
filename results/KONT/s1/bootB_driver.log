@@ -1,0 +1,7 @@
+[kont bootB] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont bootB 01:10:17] cooldown 225s
+[kont bootB 01:15:18] SUSTAINED CLEAN
+[kont bootB] kont_boot pid=12110
+[kont bootB 01:16:20] sonda rc_FROZEN=0 podloga10Hz=1
+results/KONT/tools/kont_s1_boot.sh: line 76: 12780 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[kont bootB 01:20:19] DONE rc=0 sonda=0

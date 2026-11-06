@@ -1,0 +1,305 @@
+{
+ "werdykt_identycznosc": "PASS",
+ "tabela": {
+  "p1_srodek_z10": {
+   "K_max": 0,
+   "K_n": 0,
+   "T_max": 0,
+   "T_n": 0,
+   "N_max": 99,
+   "N_n": 85206,
+   "identyczne": true,
+   "flow_std": 37.6,
+   "imager_std": 50.6
+  },
+  "p2_r20_out": {
+   "K_max": 0,
+   "K_n": 0,
+   "T_max": 0,
+   "T_n": 0,
+   "N_max": 94,
+   "N_n": 26305,
+   "identyczne": true,
+   "flow_std": 31.3,
+   "imager_std": 49.6
+  },
+  "p3_r20_in": {
+   "K_max": 0,
+   "K_n": 0,
+   "T_max": 0,
+   "T_n": 0,
+   "N_max": 95,
+   "N_n": 90977,
+   "identyczne": true,
+   "flow_std": 31.5,
+   "imager_std": 50.5
+  },
+  "p4_r30_out": {
+   "K_max": 0,
+   "K_n": 0,
+   "T_max": 0,
+   "T_n": 0,
+   "N_max": 93,
+   "N_n": 10682,
+   "identyczne": true,
+   "flow_std": 42.3,
+   "imager_std": 40.1
+  },
+  "p5_r30_in": {
+   "K_max": 0,
+   "K_n": 0,
+   "T_max": 0,
+   "T_n": 0,
+   "N_max": 95,
+   "N_n": 94897,
+   "identyczne": true,
+   "flow_std": 42.4,
+   "imager_std": 48.6
+  },
+  "p6_r10_pitch15": {
+   "K_max": 0,
+   "K_n": 0,
+   "T_max": 0,
+   "T_n": 0,
+   "N_max": 95,
+   "N_n": 104455,
+   "identyczne": true,
+   "flow_std": 37.6,
+   "imager_std": 52.2
+  },
+  "p7_z5": {
+   "K_max": 0,
+   "K_n": 0,
+   "T_max": 0,
+   "T_n": 0,
+   "N_max": 95,
+   "N_n": 109790,
+   "identyczne": true,
+   "flow_std": 42.7,
+   "imager_std": 50.0
+  },
+  "p8_r30_out_pitch15": {
+   "K_max": 0,
+   "K_n": 0,
+   "T_max": 0,
+   "T_n": 0,
+   "N_max": 95,
+   "N_n": 30256,
+   "identyczne": true,
+   "flow_std": 38.6,
+   "imager_std": 45.4
+  }
+ },
+ "pozy": {
+  "p1_srodek_z10": [
+   0.0,
+   0.0,
+   10.0,
+   0.0,
+   0.0
+  ],
+  "p2_r20_out": [
+   17.320508075688775,
+   9.999999999999998,
+   12,
+   0.0,
+   0.5235987755982988
+  ],
+  "p3_r20_in": [
+   17.320508075688775,
+   9.999999999999998,
+   12,
+   0.0,
+   3.665191429188092
+  ],
+  "p4_r30_out": [
+   -21.213203435596423,
+   21.213203435596427,
+   12,
+   0.0,
+   2.356194490192345
+  ],
+  "p5_r30_in": [
+   -21.213203435596423,
+   21.213203435596427,
+   12,
+   0.0,
+   5.497787143782138
+  ],
+  "p6_r10_pitch15": [
+   -3.4202014332566852,
+   -9.396926207859085,
+   10,
+   15.0,
+   4.363323129985824
+  ],
+  "p7_z5": [
+   0.8682408883346521,
+   4.92403876506104,
+   5,
+   0.0,
+   4.537856055185257
+  ],
+  "p8_r30_out_pitch15": [
+   15.000000000000004,
+   -25.980762113533157,
+   12,
+   15.0,
+   5.235987755982989
+  ]
+ },
+ "przebiegi": {
+  "R1": {
+   "swiat": "world_demo_A3",
+   "rig": "rig_ref.sdf",
+   "pozy": {
+    "p1_srodek_z10": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p2_r20_out": {
+     "n_kl": 36,
+     "wewn_max": 0
+    },
+    "p3_r20_in": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p4_r30_out": {
+     "n_kl": 38,
+     "wewn_max": 0
+    },
+    "p5_r30_in": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p6_r10_pitch15": {
+     "n_kl": 37,
+     "wewn_max": 0
+    },
+    "p7_z5": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p8_r30_out_pitch15": {
+     "n_kl": 35,
+     "wewn_max": 0
+    }
+   }
+  },
+  "T": {
+   "swiat": "world_kont_A3",
+   "rig": "rig_flow.sdf",
+   "pozy": {
+    "p1_srodek_z10": {
+     "n_kl": 36,
+     "wewn_max": 0
+    },
+    "p2_r20_out": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p3_r20_in": {
+     "n_kl": 36,
+     "wewn_max": 0
+    },
+    "p4_r30_out": {
+     "n_kl": 37,
+     "wewn_max": 0
+    },
+    "p5_r30_in": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p6_r10_pitch15": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p7_z5": {
+     "n_kl": 36,
+     "wewn_max": 0
+    },
+    "p8_r30_out_pitch15": {
+     "n_kl": 35,
+     "wewn_max": 0
+    }
+   }
+  },
+  "R2": {
+   "swiat": "world_demo_A3",
+   "rig": "rig_ref.sdf",
+   "pozy": {
+    "p1_srodek_z10": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p2_r20_out": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p3_r20_in": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p4_r30_out": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p5_r30_in": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p6_r10_pitch15": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p7_z5": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p8_r30_out_pitch15": {
+     "n_kl": 38,
+     "wewn_max": 0
+    }
+   }
+  },
+  "N": {
+   "swiat": "world_kont_A3",
+   "rig": "rig_ref.sdf",
+   "pozy": {
+    "p1_srodek_z10": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p2_r20_out": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p3_r20_in": {
+     "n_kl": 37,
+     "wewn_max": 0
+    },
+    "p4_r30_out": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p5_r30_in": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p6_r10_pitch15": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p7_z5": {
+     "n_kl": 35,
+     "wewn_max": 0
+    },
+    "p8_r30_out_pitch15": {
+     "n_kl": 35,
+     "wewn_max": 0
+    }
+   }
+  }
+ }
+}
