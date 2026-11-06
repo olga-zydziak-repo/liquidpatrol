@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        1909 18.7  0.0 330892 14120 ?        Sl   09:33   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        1902  3.1  0.0  16948 11180 ?        S    09:33   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/KONT/s2/c08_s02a_r2/zegar2.jsonl
+olga        1903  3.1  0.0   5032  3752 ?        S    09:33   0:00 bash harness/kont_boot_s2.sh world_kont_A3
+olga        1069  2.1  1.0 5713116 339756 pts/0  Sl+  09:20   0:17 claude --continue
+root         262  0.1  0.1 2920648 59204 ?       Ssl  09:20   0:01 /usr/bin/containerd
+root         358  0.1  0.3 9955016 97928 ?       Ssl  09:20   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga        1742  0.0  0.1  54268 33852 ?        Ss   09:31   0:00 python3 results/KONT/tools/kont_s2_campaign_r.py
+root           1  0.0  0.0  21864 13388 ?        Ss   09:20   0:00 /sbin/init
+olga        1824  0.0  0.0   5032  3844 ?        S    09:32   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s2_boot.sh 1 c08_s02a_r2 20
+root          87  0.0  0.0  26416  7480 ?        Ss   09:20   0:00 /usr/lib/systemd/systemd-udevd
+root          40  0.0  0.0  50376 16520 ?        S<s  09:20   0:00 /usr/lib/systemd/systemd-journald
+systemd+     178  0.0  0.0  21352 13176 ?        Ss   09:20   0:00 /usr/lib/systemd/systemd-resolved
+olga         942  0.0  0.0  20392 11500 ?        Ss   09:20   0:00 /usr/lib/systemd/systemd --user
+root         255  0.0  0.0 107064 23336 ?        Ssl  09:20   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+polkitd      197  0.0  0.0 308188  8116 ?        Ssl  09:20   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root         898  0.0  0.0   3200  1244 ?        S    09:20   0:00 /init
+syslog       209  0.0  0.0 222524  6032 ?        Ssl  09:20   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         202  0.0  0.0  17988  8824 ?        Ss   09:20   0:00 /usr/lib/systemd/systemd-logind
+message+     192  0.0  0.0   9800  5484 ?        Ss   09:20   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only

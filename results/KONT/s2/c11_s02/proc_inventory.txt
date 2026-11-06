@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        3433 12.9  0.0 330892 14164 ?        Sl   09:45   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        3427  3.2  0.0   5032  3700 ?        S    09:45   0:00 bash harness/kont_boot_s2.sh world_kont_A3
+olga        1069  1.5  1.0 5713116 329088 pts/0  Sl+  09:20   0:23 claude --continue
+olga        1742  0.2  0.1  68204 48256 ?        Ss   09:31   0:01 python3 results/KONT/tools/kont_s2_campaign_r.py
+root         262  0.1  0.1 2920648 59140 ?       Ssl  09:20   0:01 /usr/bin/containerd
+root         358  0.0  0.3 9955016 97996 ?       Ssl  09:20   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root           1  0.0  0.0  21864 13388 ?        Ss   09:20   0:00 /sbin/init
+root          40  0.0  0.0  50376 16584 ?        S<s  09:20   0:00 /usr/lib/systemd/systemd-journald
+root          87  0.0  0.0  26416  7480 ?        Ss   09:20   0:00 /usr/lib/systemd/systemd-udevd
+polkitd      197  0.0  0.0 308188  8116 ?        Ssl  09:20   0:00 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     178  0.0  0.0  21352 13176 ?        Ss   09:20   0:00 /usr/lib/systemd/systemd-resolved
+olga        3269  0.0  0.0   5032  3792 ?        S    09:39   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s2_boot.sh 2 c11_s02 23
+olga         942  0.0  0.0  20392 11500 ?        Ss   09:20   0:00 /usr/lib/systemd/systemd --user
+root         255  0.0  0.0 107064 23336 ?        Ssl  09:20   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root         898  0.0  0.0   3200  1244 ?        S    09:20   0:00 /init
+syslog       209  0.0  0.0 222524  6036 ?        Ssl  09:20   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         202  0.0  0.0  17988  8824 ?        Ss   09:20   0:00 /usr/lib/systemd/systemd-logind
+message+     192  0.0  0.0   9800  5484 ?        Ss   09:20   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         196  0.0  0.0 1026052 11792 ?       Ssl  09:20   0:00 /usr/bin/lttng-sessiond

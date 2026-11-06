@@ -1,0 +1,33 @@
+{
+ "preflight": {
+  "EKF2_OF_CTRL": {
+   "przed": 1,
+   "po": 1
+  },
+  "EKF2_RNG_CTRL": {
+   "przed": 1,
+   "po": 1
+  },
+  "EKF2_HGT_REF": {
+   "przed": 0,
+   "po": 0
+  },
+  "EKF2_GPS_CTRL": {
+   "przed": 7,
+   "po": 7
+  }
+ },
+ "cut": [
+  "EKF2_GPS_CTRL",
+  0
+ ],
+ "fuse_r_gt_m": 29.0,
+ "episode_id": 20,
+ "scenario_id": "c08_s02",
+ "window_s": 72.0,
+ "inject_t": 30.0,
+ "hold_s": 15.0,
+ "feed": "V2",
+ "z_off_m": -0.0296,
+ "nota_fuse": "bezpiecznik sondy, nie część projektu (PROMPT_KONT_S1 §3)"
+}

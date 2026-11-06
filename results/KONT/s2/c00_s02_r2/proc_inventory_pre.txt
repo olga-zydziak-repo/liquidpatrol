@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       30254 16.6  0.0 330892 14128 ?        Sl   11:07   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       30247  3.2  0.0  16948 11180 ?        S    11:07   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/KONT/s2/c00_s02_r2/zegar2.jsonl
+olga       30248  3.2  0.0   5028  3752 ?        S    11:07   0:00 bash harness/kont_boot_s2.sh world_kont_A3
+olga       29056  1.8  0.0 347464 27796 ?        Ssl  11:00   0:07 python3 -m acts.rtf_sampler --world world_kont_A3 --out /home/olga/projects/liquidpatrol/results/KONT/s2/c11_s03_r2/rtf_stream.jsonl
+olga        1069  0.8  0.9 5713116 316104 pts/0  Sl+  09:20   0:56 claude --continue
+root         262  0.1  0.1 2920648 59412 ?       Ssl  09:20   0:06 /usr/bin/containerd
+olga       27150  0.0  0.0  19216 13780 ?        Ss   10:52   0:00 python3 tools/infra2_ekf_watchdog.py --px4-bin /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin --out /home/olga/projects/liquidpatrol/results/KONT/s2/c08_s04_r2/ekf_watchdog.json
+olga       29057  0.0  0.0  19216 13744 ?        Ss   11:00   0:00 python3 tools/infra2_ekf_watchdog.py --px4-bin /home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin --out /home/olga/projects/liquidpatrol/results/KONT/s2/c11_s03_r2/ekf_watchdog.json
+olga        1742  0.0  0.1  67180 47248 ?        Ss   09:31   0:01 python3 results/KONT/tools/kont_s2_campaign_r.py
+root         358  0.0  0.2 9955016 89180 ?       Ssl  09:20   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root           1  0.0  0.0  22280 13724 ?        Ss   09:20   0:00 /sbin/init
+root          40  0.0  0.0  50376 17216 ?        S<s  09:20   0:00 /usr/lib/systemd/systemd-journald
+polkitd      197  0.0  0.0 308188  8116 ?        Ssl  09:20   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          87  0.0  0.0  26412  7476 ?        Ss   09:20   0:00 /usr/lib/systemd/systemd-udevd
+olga        1759  0.0  0.0   4900  3676 ?        Ss   09:31   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1793953841574-x9utiu.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'S=results/KONT/s2; n0=$(wc -l < $S/kampania.log); until [ -f $S/kampania.json ]; do pgrep -f kont_s2_campaign_r >/dev/null || { echo "PROCES ZNIKNAL"; break; }; sleep 30; done; tail -14 $S/kampania.log | cut -c1-240; cat $S/kampania.json 2>/dev/null' && pwd -P >| /tmp/claude-434d-cwd
+root         898  0.0  0.0   3200  1244 ?        S    09:20   0:00 /init
+message+     192  0.0  0.0   9800  5488 ?        Ss   09:20   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     178  0.0  0.0  21352 13176 ?        Ss   09:20   0:00 /usr/lib/systemd/systemd-resolved
+olga         942  0.0  0.0  20392 11500 ?        Ss   09:20   0:00 /usr/lib/systemd/systemd --user

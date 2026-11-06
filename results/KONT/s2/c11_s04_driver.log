@@ -1,0 +1,8 @@
+[kont c11_s04] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont c11_s04 10:17:11] cooldown 239s
+[kont c11_s04 10:22:25] SUSTAINED CLEAN
+[kont c11_s04] kont_boot pid=18839
+[kont c11_s04 10:23:25] sonda rc_FROZEN=2 podloga10Hz=0
+[kont c11_s04] POD PODŁOGĄ — boot się NIE uzbraja
+[kont c11_s04 10:23:37] DONE rc=143 sonda=2
+/home/olga/projects/liquidpatrol/results/KONT/tools/kont_s2_boot.sh: line 81: 19578 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
