@@ -624,3 +624,19 @@ denialowym.
 - P-KONT-2 (0.65) aiding ≥ 70 s bez nav 14→12 — ✓ (72.01 s; nav 14 do przyziemienia).
 Uwaga CC (bez zmiany predykcji): po S1 P-KONT-3 (T* ≥ 30 s) oceniam niżej,
 ~0.3, zależnie od diagnozy skali przepływu (R-3).
+
+## KONT S2 (ANEKS_KONT-2, 6.11.2026)
+- Droga B ratyfikowana przez Olgę: rozliczenia P-KONT-3/4/5/6 przy STOP-KONT2f.
+- ✗ kalibracyjne CC (seria): R-3 „skala przepływu" (obalona S2.0);
+  kandydat „samozatrucie BSON" (obalony S2b); „sygnatura resetu pozycji"
+  (liczniki 0 — poprawna nazwa: szybki odjazd przy zerwanej zgodności
+  pozycja–prędkość); hipoteza timestamp_sample 0 (D4a, bez poparcia);
+  ✗ rachunkowe: kolejka 1c §4 liczyła 7 lotów zamiast 8.
+- Wady wykonawcy nazwane: próba na sucho ręczna zamiast skryptem
+  (1d §2.3, koszt 8 min); klucz `verdict` zamiast `werdykt` w kampanii;
+  korekta S2b §2: `ekf2 missing data` nie jest wyróżnikiem awarii
+  (jest nim urwany sensor_combined).
+- Infrastruktura: launcher s2d (gz przed PX4) usuwa 14/14 FAIL
+  drugiego bootu; ryzyko s2d: start EKF z biasem na limicie 0.15
+  w 2/3 bootów, raz yaw 20.5° na starcie — asercja yaw w driverach
+  od drogi B / S4.
