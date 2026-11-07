@@ -5,7 +5,8 @@ watchdoga), R-2, health, KontShield, selfcheck, meta i ostateczną asercję yaw/
 końca). Atrapy: MAVSDK System (connect, connection_state, param get/set, telemetry.health), GzNode (pompa zegara 10× i poza
 GT drona), EkfSub (heading zadany), rclpy. intruder_motion wyłączony flagą modułu i sprawdzany: nie startuje przed asercją.
 
-Scenariusze (argv[2]): „zdrowy" — po reinicie błąd yaw 6.4°, bias 0.0002 ⇒ 1 reinit, asercja ok, dojście do arm_retry;
+ANEKS_KONT-4d: atrapa rtf_stream.jsonl (tempo 0.97, a w scenariuszu „wolny" 0.86) dla bramki tempa przed uzbrojeniem.
+Scenariusze (argv[2]): „wolny" — tempo 0.86 < 0.93 ⇒ kod 9 przed connect, brak reinitu i asercji; „zdrowy" — po reinicie błąd yaw 6.4°, bias 0.0002 ⇒ 1 reinit, asercja ok, dojście do arm_retry;
 „zly" — błąd 51.6° po każdym reinicie ⇒ 2 reinity, kod wyjścia 7, kont_yaw.json ok=false, intruder_motion nie wystartował.
 Użycie: kont_s4_dryrun_c.py <katalog wyjścia> <zdrowy|zly>. Wyjście: dryrun_c_<scenariusz>.json (scenariusz „zly" kończy
 proces kodem 7 z drivera — wynik zapisuje proces nadrzędny trybem „oba")."""
@@ -28,12 +29,17 @@ class DryRunStop(Exception):
 
 def run(out, scen):
     os.makedirs(out, exist_ok=True)
+    rate = 0.86 if scen == "wolny" else 0.97
+    w0 = time.time() - 70.0
+    with open(os.path.join(out, "rtf_stream.jsonl"), "w") as f:
+        for i in range(700):
+            f.write(json.dumps({"wall": w0 + 0.1 * i, "sim": 20.0 + 0.1 * i * rate, "rtf": rate}) + "\n")
     os.environ.update({"GATE_OUT": os.path.join(out, "trace.jsonl"), "BENCH_EPISODE_IDS": "0,1,2,3", "BENCH_EPISODES": "4",
                        "KONT_MODE": "1", "FEED": "V2", "NET_ARM": "ncp", "CONTROLLER": "net_skan2"})
     ns = {"__name__": "kont_s4_dryrun_c_mod", "__file__": DRIVER}
     exec(compile(open(DRIVER, encoding="utf8").read(), DRIVER, "exec"), ns)
     log = {"reinit": 0, "sample": 0, "kroki": []}
-    yaw_err = {"zdrowy": 6.4, "zly": 51.6}[scen]
+    yaw_err = {"zdrowy": 6.4, "zly": 51.6, "wolny": 6.4}[scen]
     st = {"sim": 100.0, "heading": math.radians(90.0 + 30.0), "params": {}}    # przed reinitem: błąd 30°
 
     def fake_reinit(binpath):
@@ -122,20 +128,24 @@ def main():
         run(os.path.join(out, scen), scen)
         return
     wyn = {}
-    for sc in ("zdrowy", "zly"):
+    for sc in ("zdrowy", "zly", "wolny"):
         r = subprocess.run([sys.executable, __file__, out, sc], capture_output=True, text=True, timeout=600)
         d = os.path.join(out, sc)
         ky = json.load(open(os.path.join(d, "kont_yaw.json"))) if os.path.exists(os.path.join(d, "kont_yaw.json")) else None
         kp = json.load(open(os.path.join(d, "kont_ekf_preflight.json"))) if os.path.exists(os.path.join(d, "kont_ekf_preflight.json")) else None
-        wyn[sc] = {"rc": r.returncode, "kont_yaw": ky, "n_podejsc": len(kp["podejscia"]) if kp else None,
+        kt = json.load(open(os.path.join(d, "kont_tempo.json"))) if os.path.exists(os.path.join(d, "kont_tempo.json")) else None
+        wyn[sc] = {"rc": r.returncode, "kont_yaw": ky, "kont_tempo": kt, "n_podejsc": len(kp["podejscia"]) if kp else None,
                    "stdout_ogon": r.stdout[-600:], "stderr_ogon": r.stderr[-600:]}
     ok_z = (wyn["zdrowy"]["rc"] == 0 and wyn["zdrowy"]["kont_yaw"]["ok"] and wyn["zdrowy"]["n_podejsc"] == 1)
     ok_n = (wyn["zly"]["rc"] == 7 and wyn["zly"]["kont_yaw"]["ok"] is False and wyn["zly"]["n_podejsc"] == 2
             and "intruder" not in wyn["zly"]["stdout_ogon"])
-    wyn["PASS"] = ok_z and ok_n
+    ok_w = (wyn["wolny"]["rc"] == 9 and wyn["wolny"]["kont_tempo"]["ok"] is False and wyn["wolny"]["n_podejsc"] is None
+            and wyn["wolny"]["kont_yaw"] is None)
+    ok_z = ok_z and wyn["zdrowy"]["kont_tempo"]["ok"] is True
+    wyn["PASS"] = ok_z and ok_n and ok_w
     json.dump(wyn, open(os.path.join(out, "dryrun_c.json"), "w"), ensure_ascii=False, indent=1)
     print(json.dumps({"PASS": wyn["PASS"], "zdrowy": [wyn["zdrowy"]["rc"], wyn["zdrowy"]["n_podejsc"]],
-                      "zly": [wyn["zly"]["rc"], wyn["zly"]["n_podejsc"]]}, ensure_ascii=False))
+                      "zly": [wyn["zly"]["rc"], wyn["zly"]["n_podejsc"]], "wolny": [wyn["wolny"]["rc"], wyn["wolny"]["kont_tempo"]]}, ensure_ascii=False))
     sys.exit(0 if wyn["PASS"] else 1)
 
 

@@ -1,0 +1,127 @@
+{
+ "zdrowy": {
+  "rc": 0,
+  "kont_yaw": {
+   "yaw_blad_deg": 6.4,
+   "prog_deg": 10.0,
+   "bias_absmax": 0.0002,
+   "bias_prog": 0.08,
+   "ok": true,
+   "ekf_preflight": [
+    {
+     "podejscie": 1,
+     "przed": {
+      "yaw_blad_deg": 30.0,
+      "bias_absmax": 0.13
+     },
+     "reinit": {
+      "rc_stop": 0,
+      "rc_start": 0,
+      "cmd_wall_s": 0.0,
+      "atrapa": true
+     },
+     "sim_reinit": 101.1,
+     "po": {
+      "yaw_blad_deg": 6.4,
+      "bias_absmax": 0.0002,
+      "sim": 116.9
+     },
+     "ok": true
+    }
+   ]
+  },
+  "kont_tempo": {
+   "aneks": "ANEKS_KONT-4d §1.3",
+   "dsim_dwall_settle": 0.97,
+   "okno_wall_s": 60.0,
+   "n": 601,
+   "prog": 0.93,
+   "zrodlo": "rtf_stream.jsonl",
+   "ok": true
+  },
+  "n_podejsc": 1,
+  "stdout_ogon": "[kont_s4] bramka tempa: 0.97 (okno 60.0 s, n=601) ok=True\n[kont_s4] reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 30.0, 'bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.9}, 'ok': True}\n[bench] yaw_assert sim=123.50 {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'ok': True, 'n_reinit': 1}\n",
+  "stderr_ogon": ""
+ },
+ "zly": {
+  "rc": 7,
+  "kont_yaw": {
+   "yaw_blad_deg": 51.6,
+   "prog_deg": 10.0,
+   "bias_absmax": 0.0002,
+   "bias_prog": 0.08,
+   "ok": false,
+   "ekf_preflight": [
+    {
+     "podejscie": 1,
+     "przed": {
+      "yaw_blad_deg": 30.0,
+      "bias_absmax": 0.13
+     },
+     "reinit": {
+      "rc_stop": 0,
+      "rc_start": 0,
+      "cmd_wall_s": 0.0,
+      "atrapa": true
+     },
+     "sim_reinit": 101.1,
+     "po": {
+      "yaw_blad_deg": 51.6,
+      "bias_absmax": 0.0002,
+      "sim": 116.9
+     },
+     "ok": false
+    },
+    {
+     "podejscie": 2,
+     "przed": {
+      "yaw_blad_deg": 51.6,
+      "bias_absmax": 0.0002
+     },
+     "reinit": {
+      "rc_stop": 0,
+      "rc_start": 0,
+      "cmd_wall_s": 0.0,
+      "atrapa": true
+     },
+     "sim_reinit": 116.9,
+     "po": {
+      "yaw_blad_deg": 51.6,
+      "bias_absmax": 0.0002,
+      "sim": 132.8
+     },
+     "ok": false
+    }
+   ]
+  },
+  "kont_tempo": {
+   "aneks": "ANEKS_KONT-4d §1.3",
+   "dsim_dwall_settle": 0.97,
+   "okno_wall_s": 60.0,
+   "n": 601,
+   "prog": 0.93,
+   "zrodlo": "rtf_stream.jsonl",
+   "ok": true
+  },
+  "n_podejsc": 2,
+  "stdout_ogon": "bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 51.6, 'bias_absmax': 0.0002, 'sim': 116.9}, 'ok': False}\n[kont_s4] reinit EKF2 #2: {'podejscie': 2, 'przed': {'yaw_blad_deg': 51.6, 'bias_absmax': 0.0002}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 116.9, 'po': {'yaw_blad_deg': 51.6, 'bias_absmax': 0.0002, 'sim': 132.8}, 'ok': False}\n[bench] yaw_assert sim=139.60 {'yaw_blad_deg': 51.6, 'bias_absmax': 0.0002, 'ok': False, 'n_reinit': 2}\n[kont_s4] ASERCJA YAW\n",
+  "stderr_ogon": ""
+ },
+ "wolny": {
+  "rc": 9,
+  "kont_yaw": null,
+  "kont_tempo": {
+   "aneks": "ANEKS_KONT-4d §1.3",
+   "dsim_dwall_settle": 0.86,
+   "okno_wall_s": 60.0,
+   "n": 601,
+   "prog": 0.93,
+   "zrodlo": "rtf_stream.jsonl",
+   "ok": false
+  },
+  "n_podejsc": null,
+  "stdout_ogon": "[kont_s4] bramka tempa: 0.86 (okno 60.0 s, n=601) ok=False\n[kont_s4] BRAMKA TEMPA — boot przerwany przed uzbrojeniem\n",
+  "stderr_ogon": ""
+ },
+ "PASS": true
+}

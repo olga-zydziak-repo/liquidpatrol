@@ -6,7 +6,8 @@ Wspólne: ε przez gt_judge importem (sha 447efaa2, test syntetyczny --selftest 
 T_home 1:1 jak kont_s2_analyze.py; czas = sim (ulog PX4 w lockstep = sim); wiek flagi = sim − t_flag, t_flag = pierwsze
 cs_gnss_pos 1→0 w ulogu po t_cut − 0.5 s; koszyk = ⌊wiek flagi⌋ (ANEKS_KONT-3b §1.3); ε_b, Δ_D5 z s2_freeze_bf.json (sha
 ae19f66c, asercja). r_GT = |GT_xy − GT_home_xy| (home = poza GT przy uzbrojeniu).
-Ważność epizodu: selftest GT PASS ∧ V2′ ≥ 0.90 (GT sim/wall od uzbrojenia do końca) ∧ zegar (skan2_zegar --check:
+Ważność epizodu: selftest GT PASS ∧ V2′ kanoniczne per epizod (ANEKS_KONT-4d §1.1: bench/campaign_analyze.judge_boot,
+D9 = Δsim/Δwall ≥ 0.90 z rtf_stream.jsonl ∧ najdłuższy deep-stall ≤ 1.5 s ∧ timejump 0) ∧ zegar (skan2_zegar --check:
 ≤ 3 skoki, |skok| ≤ 1.2 s) ∧ xy_valid (ulog) od t_flag do REFUSE.
 (a) max r_GT ≤ R_E = 32 przez cały epizod do przyziemienia (wiersze gt + tk).
 (b) ∀ par ε w [t_flag, t_REFUSE): ε ≤ ε_b(⌊wiek⌋) ∧ Δ = max ε od REFUSE do przyziemienia GT − ε w chwili REFUSE ≤ 1.524.
@@ -34,6 +35,7 @@ sys.path[:0] = [HERE, GJ, ROOT]
 import gt_judge as J
 import kont_ulog_extract as X
 from harness.intruder_motion import gz_to_ned
+from bench.campaign_analyze import judge_boot                       # ANEKS_KONT-4d §1.1: V2′ jak sędzia
 
 GT_SHA8 = "447efaa2"
 FREEZE = os.path.join(ROOT, "results/KONT/s2/s2_freeze_bf.json")
@@ -92,8 +94,8 @@ def analyze(d):
     gx0, gy0 = armed["gt_home"]
     rgt = lambda g: math.hypot(g["x"] - gx0, g["y"] - gy0)
     end_m = (ev1(evs, "gt_przyziemienie") or ev1(evs, "denial_boot_end") or evs[-1])["mono"]
-    gw = [(g["mono"], g["sim"]) for g in gt if armed["mono"] <= g["mono"] <= end_m]
-    res["v2p"] = round((gw[-1][1] - gw[0][1]) / (gw[-1][0] - gw[0][0]), 4) if len(gw) > 1 else None
+    v2 = {v["episode_id"]: v for v in judge_boot(d)}                    # ANEKS_KONT-4d §1.1
+    res["v2p_epizody"] = {str(k): {"valid": bool(v["valid_campaign_V2p"]), **v["stalls"]} for k, v in v2.items()}
     gm, gs = np.array([g["mono"] for g in gt]), np.array([g["sim"] for g in gt])
     cut = ev1(evs, "denial")
     res["ciecie"] = cut is not None
@@ -114,6 +116,8 @@ def analyze(d):
              "r_g_nom_wszystkie": sum(1 for r in rows if r["rule"] == "R-G-NOM"),
              "refuse_rg": sum(1 for r in rows if r["rule"] == "R-G"),
              "r_gt_max": round(max([rgt(g) for g in gts] + [r["r_gt"] for r in rows]), 3)}
+        o["v2p"] = res["v2p_epizody"].get(str(ep))
+        o["v2p_ok"] = bool(o["v2p"] and o["v2p"]["valid"])
         o["a_ok"] = o["r_gt_max"] <= R_E
         o["f_ok"] = o["minus_refuse_pos"] == 0 and o["minus_kont_ticki"] == 0
         if cut_sim is not None:
@@ -123,8 +127,9 @@ def analyze(d):
     pw = []
     if not res["przyrzad_selftest"]:
         pw.append("selftest GT")
-    if res["v2p"] is None or res["v2p"] < V2P_MIN:
-        pw.append(f"V2p {res['v2p']}")
+    for o in eps_out:
+        if not o["v2p_ok"]:
+            pw.append(f"V2p {o['scenario_id']} {(o['v2p'] or {}).get('dsim_dwall')}")
     if res["zegar_ok"] is False:
         pw.append("zegar")
     for o in eps_out:

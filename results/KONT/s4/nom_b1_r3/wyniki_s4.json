@@ -3,7 +3,36 @@
  "przyrzad_selftest": true,
  "zegar_ok": true,
  "zegar_skoki": 0,
- "v2p": 0.8684,
+ "v2p_epizody": {
+  "0": {
+   "valid": false,
+   "n_deep": 4,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.8873,
+   "timejump": 0
+  },
+  "1": {
+   "valid": false,
+   "n_deep": 0,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.8788,
+   "timejump": 0
+  },
+  "2": {
+   "valid": false,
+   "n_deep": 0,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.8575,
+   "timejump": 0
+  },
+  "3": {
+   "valid": false,
+   "n_deep": 0,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.8561,
+   "timejump": 0
+  }
+ },
  "ciecie": false,
  "epizody": [
   {
@@ -18,6 +47,14 @@
    "r_g_nom_wszystkie": 0,
    "refuse_rg": 0,
    "r_gt_max": 23.441,
+   "v2p": {
+    "valid": false,
+    "n_deep": 4,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.8873,
+    "timejump": 0
+   },
+   "v2p_ok": false,
    "a_ok": true,
    "f_ok": true
   },
@@ -33,6 +70,14 @@
    "r_g_nom_wszystkie": 0,
    "refuse_rg": 0,
    "r_gt_max": 23.31,
+   "v2p": {
+    "valid": false,
+    "n_deep": 0,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.8788,
+    "timejump": 0
+   },
+   "v2p_ok": false,
    "a_ok": true,
    "f_ok": true
   },
@@ -48,6 +93,14 @@
    "r_g_nom_wszystkie": 0,
    "refuse_rg": 0,
    "r_gt_max": 23.25,
+   "v2p": {
+    "valid": false,
+    "n_deep": 0,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.8575,
+    "timejump": 0
+   },
+   "v2p_ok": false,
    "a_ok": true,
    "f_ok": true
   },
@@ -63,10 +116,18 @@
    "r_g_nom_wszystkie": 0,
    "refuse_rg": 0,
    "r_gt_max": 23.357,
+   "v2p": {
+    "valid": false,
+    "n_deep": 0,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.8561,
+    "timejump": 0
+   },
+   "v2p_ok": false,
    "a_ok": true,
    "f_ok": true
   }
  ],
  "wazny": false,
- "powod_niewazny": "V2p 0.8684"
+ "powod_niewazny": "V2p c00_s01 0.8873; V2p c01_s01 0.8788; V2p c02_s01 0.8575; V2p c03_s01 0.8561"
 }

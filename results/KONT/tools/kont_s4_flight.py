@@ -86,6 +86,33 @@ _wd_spec = _ilu.spec_from_file_location("infra2_ekf_watchdog", os.path.join(
     os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..")), "tools", "infra2_ekf_watchdog.py"))
 WD = _ilu.module_from_spec(_wd_spec); _wd_spec.loader.exec_module(WD)
 EKF_REINIT_TRIES = 2
+# S4/ANEKS_KONT-4d §1.3: bramka tempa symulacji przed uzbrojeniem — Δsim/Δwall w settle z rtf_stream.jsonl (rtf_sampler,
+# sim + wall; to samo źródło co V2′ sędziego — próbnik dwuzegarowy zegar2.jsonl nie zapisuje czasu sim), okno ostatnich
+# TEMPO_WIN_S s (min. TEMPO_MIN_SPAN_S), próg TEMPO_MIN; poniżej ⇒ kod 9 przed połączeniem z PX4
+TEMPO_MIN, TEMPO_WIN_S, TEMPO_MIN_SPAN_S = 0.93, 60.0, 30.0
+
+
+def tempo_settle(path):
+    """(dsim/dwall, okno_wall_s, n) z ostatnich TEMPO_WIN_S s wall pliku rtf_stream.jsonl; (None, 0, 0) gdy brak danych."""
+    rows = []
+    try:
+        for l in open(path):
+            try:
+                r = json.loads(l)
+            except ValueError:
+                continue
+            if r.get("wall") is not None and r.get("sim") is not None:
+                rows.append((float(r["wall"]), float(r["sim"])))
+    except OSError:
+        return None, 0.0, 0
+    if not rows:
+        return None, 0.0, 0
+    w_end = rows[-1][0]
+    win = [x for x in rows if x[0] >= w_end - TEMPO_WIN_S]
+    span = win[-1][0] - win[0][0]
+    if len(win) < 2 or span < TEMPO_MIN_SPAN_S:
+        return None, round(span, 2), len(win)
+    return round((win[-1][1] - win[0][1]) / span, 4), round(span, 2), len(win)
 # K2 D1 (ANEKS_K2-6 §4, domyka znalezisko R1 u źródła + erratum #3): ławka UZBROJONA DOMYŚLNIE —
 # pos_flag z dead-reckoning po wejściu w pasmo ZAWSZE (obietnica PRE_K2 K1(a) dowieziona). Flaga
 # K2_LEGACY_UNARMED=1 przywraca stan sprzed K2 (monitor pos_flag=None) WYŁĄCZNIE do replay-testów
@@ -221,6 +248,13 @@ def _write_control(phase, episode_id=None, t0_sim=None):
 async def main():
     global _f, _running
     os.makedirs(OUTDIR, exist_ok=True)
+    _tp, _tspan, _tn = tempo_settle(os.path.join(OUTDIR, "rtf_stream.jsonl"))                 # S4/ANEKS_KONT-4d §1.3
+    _t_ok = _tp is not None and _tp >= TEMPO_MIN
+    json.dump({"aneks": "ANEKS_KONT-4d §1.3", "dsim_dwall_settle": _tp, "okno_wall_s": _tspan, "n": _tn, "prog": TEMPO_MIN,
+               "zrodlo": "rtf_stream.jsonl", "ok": _t_ok}, open(os.path.join(OUTDIR, "kont_tempo.json"), "w"), ensure_ascii=False)
+    print(f"[kont_s4] bramka tempa: {_tp} (okno {_tspan} s, n={_tn}) ok={_t_ok}", flush=True)
+    if not _t_ok:
+        print("[kont_s4] BRAMKA TEMPA — boot przerwany przed uzbrojeniem", flush=True); os._exit(9)
     manifest = json.load(open(os.path.join(ROOT, MANIFEST)))
     episodes = _resolve_episodes(manifest)
     exec_params = json.load(open(os.path.join(ROOT, "bench/executor_params.json")))
