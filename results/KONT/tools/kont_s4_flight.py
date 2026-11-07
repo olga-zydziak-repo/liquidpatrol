@@ -79,6 +79,13 @@ Z_GROUND = 0.15                     # S4: przyziemienie GT (PRE_KONT §2.7)
 YAW_ASSERT_DEG = 10.0               # S4: asercja yaw przed uzbrojeniem (ANEKS_KONT-2b §2)
 OFFSET_WIN_S = 6.0                  # S4: okno R-2 (kont_s2_probe_y.py)
 DESC_MAX_S = 60.0                   # S4: bezpiecznik czasu zejścia do GT z < 0.15
+# S4/ANEKS_KONT-4c §3: wymuszony reinit EKF2 w preflight tym samym kodem co watchdog (tools/infra2_ekf_watchdog.py:134
+# do_reinit, :63 sample — import z pliku, nie kopia); konwergencja = REINIT_COOLDOWN_SIM watchdoga; maks. 2 podejścia.
+import importlib.util as _ilu
+_wd_spec = _ilu.spec_from_file_location("infra2_ekf_watchdog", os.path.join(
+    os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..")), "tools", "infra2_ekf_watchdog.py"))
+WD = _ilu.module_from_spec(_wd_spec); _wd_spec.loader.exec_module(WD)
+EKF_REINIT_TRIES = 2
 # K2 D1 (ANEKS_K2-6 §4, domyka znalezisko R1 u źródła + erratum #3): ławka UZBROJONA DOMYŚLNIE —
 # pos_flag z dead-reckoning po wejściu w pasmo ZAWSZE (obietnica PRE_K2 K1(a) dowieziona). Flaga
 # K2_LEGACY_UNARMED=1 przywraca stan sprzed K2 (monitor pos_flag=None) WYŁĄCZNIE do replay-testów
@@ -238,6 +245,35 @@ async def main():
         while _spin_pre[0] and rclpy.ok():
             rclpy.spin_once(ekf, timeout_sec=0.02)
     _th0 = threading.Thread(target=_spin0, daemon=True); _th0.start()
+    # S4/ANEKS_KONT-4c §3: wymuszony reinit EKF2 → konwergencja → |błąd yaw| ≤ 10° ∧ |bias| < BIAS_SLOW (przed R-2)
+    PX4_BIN = os.path.join(ROOT, "PX4-Autopilot/build/px4_sitl_default/bin")
+
+    async def _yaw_bias():
+        yb = None
+        for _ in range(50):
+            if ekf.m is not None and _gt.get("q") is not None:
+                yb = _yaw_blad_deg(float(ekf.m.heading), *_gt["q"]); break
+            await asyncio.sleep(0.1)
+        sm = WD.sample(PX4_BIN)
+        return yb, sm.get("bias_absmax"), sm
+    ekf_pre = []
+    for _try in range(EKF_REINIT_TRIES):
+        _y0, _b0, _ = await _yaw_bias()
+        act = WD.do_reinit(PX4_BIN)
+        _ts = _sim_t[0]
+        while _sim_t[0] - _ts < WD.REINIT_COOLDOWN_SIM:
+            await asyncio.sleep(0.1)
+        _y1, _b1, _sm = await _yaw_bias()
+        _ok = _y1 is not None and abs(_y1) <= YAW_ASSERT_DEG and _b1 is not None and _b1 < WD.BIAS_SLOW
+        ekf_pre.append({"podejscie": _try + 1, "przed": {"yaw_blad_deg": None if _y0 is None else round(_y0, 2), "bias_absmax": _b0},
+                        "reinit": act, "sim_reinit": round(_ts, 3), "po": {"yaw_blad_deg": None if _y1 is None else round(_y1, 2),
+                        "bias_absmax": _b1, "sim": _sm.get("sim")}, "ok": _ok})
+        print(f"[kont_s4] reinit EKF2 #{_try + 1}: {ekf_pre[-1]}", flush=True)
+        if _ok:
+            break
+    json.dump({"aneks": "ANEKS_KONT-4c §3", "bias_prog": WD.BIAS_SLOW, "yaw_prog_deg": YAW_ASSERT_DEG,
+               "konwergencja_sim_s": WD.REINIT_COOLDOWN_SIM, "podejscia": ekf_pre},
+              open(os.path.join(OUTDIR, "kont_ekf_preflight.json"), "w"), ensure_ascii=False, indent=1)
     _s = []
     _t0 = time.monotonic()
     while time.monotonic() - _t0 < 60.0:
@@ -298,6 +334,17 @@ async def main():
         _w({"t": "event", "mono": round(time.monotonic(), 4), "sim": round(_sim_t[0], 4), "ev": s, **kw})
         print(f"[bench] {s} sim={_sim_t[0]:.2f} {kw}", flush=True)
 
+    # S4: asercja yaw przed uzbrojeniem (kont_s2_probe_y.py:213-223), naruszenie: kod 7; ANEKS_KONT-4c §3: przed startem
+    # intruder_motion (brak sieroty przy przerwaniu) i z biasem poniżej BIAS_SLOW watchdoga
+    _yb, _bb, _ = await _yaw_bias()
+    _y_ok = _yb is not None and abs(_yb) <= YAW_ASSERT_DEG and _bb is not None and _bb < WD.BIAS_SLOW
+    json.dump({"yaw_blad_deg": None if _yb is None else round(_yb, 2), "prog_deg": YAW_ASSERT_DEG, "bias_absmax": _bb,
+               "bias_prog": WD.BIAS_SLOW, "ok": _y_ok, "ekf_preflight": ekf_pre},
+              open(os.path.join(OUTDIR, "kont_yaw.json"), "w"), ensure_ascii=False)
+    ev("yaw_assert", yaw_blad_deg=None if _yb is None else round(_yb, 2), bias_absmax=_bb, ok=_y_ok,
+       n_reinit=len(ekf_pre))
+    if not _y_ok:
+        fh.flush(); print("[kont_s4] ASERCJA YAW", flush=True); os._exit(7)
     # intruder_motion obok
     im_proc = None
     if INTRUDER_MOTION:
@@ -307,18 +354,6 @@ async def main():
             cwd=ROOT, env={**os.environ, "PYTHONPATH": f".:{os.environ.get('PYTHONPATH','')}"})
         _write_control("idle")
 
-    # S4: asercja yaw przed uzbrojeniem (kont_s2_probe_y.py:213-223), naruszenie: kod 7
-    _yb = None
-    for _ in range(50):
-        if ekf.m is not None and _gt.get("q") is not None:
-            _yb = _yaw_blad_deg(float(ekf.m.heading), *_gt["q"]); break
-        await asyncio.sleep(0.1)
-    _y_ok = _yb is not None and abs(_yb) <= YAW_ASSERT_DEG
-    json.dump({"yaw_blad_deg": None if _yb is None else round(_yb, 2), "prog_deg": YAW_ASSERT_DEG, "ok": _y_ok},
-              open(os.path.join(OUTDIR, "kont_yaw.json"), "w"))
-    ev("yaw_assert", yaw_blad_deg=None if _yb is None else round(_yb, 2), ok=_y_ok)
-    if not _y_ok:
-        fh.flush(); print("[kont_s4] ASERCJA YAW", flush=True); os._exit(7)
     if not await arm_retry(d):
         print("[bench] ARM FAILED", flush=True); os._exit(2)
     gx0, gy0 = _gt["x"], _gt["y"]                                   # S4: home GT (r_GT)
