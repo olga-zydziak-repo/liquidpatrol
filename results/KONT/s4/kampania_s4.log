@@ -15,3 +15,8 @@
 [kampania 23:52:36] ALARM: nom_b2 nieważny (asercja yaw)
 [kampania 23:52:36] ALARM STOP-KONT4-BUDZET: drugi nieważny boot, rezerwa wyczerpana
 [kampania 23:52:36] KONIEC booty=3/17 noga=27/45 stop=STOP-KONT4-BUDZET pozostało=['nom_b3', 'c08_s01', 'c08_s02', 'c11_s01', 'c11_s02', 'c10_s01', 'c10_s02', 'c05_s01', 'c05_s02', 'c01_s01', 'c01_s02', 'c02_s01', 'c02_s02', 'nom_b1']
+[kampania 00:26:05] === S4 (ANEKS_KONT-4c) start: kolejka ['nom_b1', 'nom_b2', 'nom_b3', 'c08_s01', 'c08_s02', 'c11_s01', 'c11_s02', 'c10_s01', 'c10_s02', 'c05_s01', 'c05_s02', 'c01_s01', 'c01_s02', 'c02_s01', 'c02_s02'], budżet 3/20, noga 27/45, uptime 7545.02 s
+[kampania 00:27:05] nom_b1_r3: próbnik 0 skoków ok=True
+[kampania 00:38:14] nom_b1_r3 rc=0 boot 4/20 (noga 28/45): faza=True t0_us=8080000 uzbrojony=True yaw={'yaw_blad_deg': 6.41, 'prog_deg': 10.0, 'bias_absmax': 0.00013, 'bias_prog': 0.08, 'ok': True, 'ekf_preflight': [{'podejscie': 1, 'przed': {'yaw_blad_deg': 6.42, 'bias_absmax': 0.00011}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 2.04}, 'sim_reinit': 96.504, 'po': {'yaw_blad_deg': 6.39, 'bias_absmax': 0.00013, 'sim': 111.42}, 'ok': True}]} epizody 4/4 cięcie=False przyziemienie=False R-G-NOM=0 breach=False REFUSE(POS)_nominal=[] R-G=[]
+[kampania 00:39:15] nom_b2_r2: próbnik 0 skoków ok=True
+[kampania 00:39:18] KONIEC booty=4/20 noga=28/45 stop=None pozostało=['nom_b3', 'c08_s01', 'c08_s02', 'c11_s01', 'c11_s02', 'c10_s01', 'c10_s02', 'c05_s01', 'c05_s02', 'c01_s01', 'c01_s02', 'c02_s01', 'c02_s02']

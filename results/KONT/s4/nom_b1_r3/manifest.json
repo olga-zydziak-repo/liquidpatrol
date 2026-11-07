@@ -1,0 +1,100 @@
+{
+  "kind": "kont_s4",
+  "world_hash": "887fe3cca89d1cc57d5a1752e1dc8fc9bade44bac3d825d93045235814a3aabd  worlds/world_kont_A3.sdf",
+  "world_hash_kind": "repo",
+  "ulog_sha": "bae51bc98b72d01a8297c7b59309a702aa81730b6d6c59fb5e4de5110183b3e1",
+  "ulog_bytes": 153878277,
+  "model_in_state": true,
+  "kont_s4": {
+    "boot": 28,
+    "epizody": "0,1,2,3",
+    "inject_t": "-",
+    "offset": {
+      "z_off_m": 0.0746,
+      "okno_sim_s": 6.02,
+      "n": 134,
+      "home_alt_kom": 9.9254,
+      "zakres": "home/reset (sieć nie dostaje komendy wysokości)"
+    },
+    "sonda_rc_frozen": 0,
+    "podloga_10hz_ok": 1,
+    "uzbrojony": true,
+    "sonda": {
+      "label": "preflight_nom_b1_r3",
+      "feed": "/home/olga/projects/liquidpatrol/results/KONT/s4/nom_b1_r3/percep_feed.jsonl",
+      "tryb": "live window=35.0s",
+      "prog_frozen": {
+        "dt_p50_max_s_na_klatke": 0.07,
+        "frac_delt_gt_0p10_max": 0.05
+      },
+      "n_delt": 415,
+      "dt_p50_s_na_klatke": 0.064,
+      "dt_p90_s_na_klatke": 0.068,
+      "frac_delt_gt_0p10": 0.0,
+      "hz_p50": 15.62,
+      "span_sim_s": 30.3,
+      "werdykt": "PASS"
+    },
+    "echo": null,
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profil_sha16": "a68a450b91c2ab51"
+  },
+  "kont_s2d": {
+    "aneks": "ANEKS_KONT-1c §3",
+    "initial_absolute_time_us": 8080000,
+    "faza_ok": true,
+    "dolaczenie": {
+      "prog_s": 0.5,
+      "sim_s_przy_starcie_px4": 0.748,
+      "czekanie_wall_s": 5.04,
+      "ok": true
+    }
+  },
+  "zegar": {
+    "timesyncd": "inactive",
+    "clocksource": "tsc",
+    "aneks": "ANEKS_SKAN2-0b §2.2"
+  },
+  "kont_s2g": {
+    "aneks": "ANEKS_KONT-4c + PROMPT_KONT_S4",
+    "boot_s4": 4,
+    "pozycja": "nom_b1",
+    "epizody": "0,1,2,3",
+    "inject_t": "-",
+    "shm": {
+      "sprzatanie": false,
+      "plikow_przed": 21,
+      "plikow_po": 21,
+      "trzymane_przed": {},
+      "stan": "shm_nom_b1_r3.txt"
+    },
+    "sieroty_term": {},
+    "ekf_preflight": {
+      "aneks": "ANEKS_KONT-4c §3",
+      "bias_prog": 0.08,
+      "yaw_prog_deg": 10.0,
+      "konwergencja_sim_s": 15.0,
+      "podejscia": [
+        {
+          "podejscie": 1,
+          "przed": {
+            "yaw_blad_deg": 6.42,
+            "bias_absmax": 0.00011
+          },
+          "reinit": {
+            "rc_stop": 0,
+            "rc_start": 0,
+            "cmd_wall_s": 2.04
+          },
+          "sim_reinit": 96.504,
+          "po": {
+            "yaw_blad_deg": 6.39,
+            "bias_absmax": 0.00013,
+            "sim": 111.42
+          },
+          "ok": true
+        }
+      ]
+    }
+  }
+}

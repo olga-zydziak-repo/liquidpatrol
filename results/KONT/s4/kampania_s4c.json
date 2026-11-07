@@ -1,0 +1,172 @@
+{
+ "booty": 4,
+ "noga": 28,
+ "siatka": {
+  "komorki_niski_m": [
+   "c08",
+   "c11",
+   "c10",
+   "c05"
+  ],
+  "komorki_mediana": [
+   "c01",
+   "c02"
+  ],
+  "m_komorki": {
+   "c00": 5.46,
+   "c01": 5.74,
+   "c02": 5.74,
+   "c03": 4.52,
+   "c04": 7.32,
+   "c05": 4.45,
+   "c06": 6.28,
+   "c07": 5.55,
+   "c08": 2.99,
+   "c09": 5.37,
+   "c10": 3.93,
+   "c11": 3.02
+  },
+  "m_p50": 5.785
+ },
+ "wyniki": {
+  "nom_b1_r3": {
+   "pozycja": "nom_b1",
+   "rc": 0,
+   "ekf_preflight": {
+    "aneks": "ANEKS_KONT-4c §3",
+    "bias_prog": 0.08,
+    "yaw_prog_deg": 10.0,
+    "konwergencja_sim_s": 15.0,
+    "podejscia": [
+     {
+      "podejscie": 1,
+      "przed": {
+       "yaw_blad_deg": 6.42,
+       "bias_absmax": 0.00011
+      },
+      "reinit": {
+       "rc_stop": 0,
+       "rc_start": 0,
+       "cmd_wall_s": 2.04
+      },
+      "sim_reinit": 96.504,
+      "po": {
+       "yaw_blad_deg": 6.39,
+       "bias_absmax": 0.00013,
+       "sim": 111.42
+      },
+      "ok": true
+     }
+    ]
+   },
+   "uzb": true,
+   "faza": true,
+   "t0": 8080000,
+   "yaw": {
+    "yaw_blad_deg": 6.41,
+    "prog_deg": 10.0,
+    "bias_absmax": 0.00013,
+    "bias_prog": 0.08,
+    "ok": true,
+    "ekf_preflight": [
+     {
+      "podejscie": 1,
+      "przed": {
+       "yaw_blad_deg": 6.42,
+       "bias_absmax": 0.00011
+      },
+      "reinit": {
+       "rc_stop": 0,
+       "rc_start": 0,
+       "cmd_wall_s": 2.04
+      },
+      "sim_reinit": 96.504,
+      "po": {
+       "yaw_blad_deg": 6.39,
+       "bias_absmax": 0.00013,
+       "sim": 111.42
+      },
+      "ok": true
+     }
+    ]
+   },
+   "breach": false,
+   "refuse_pos_nominal": [],
+   "refuse_rg": [],
+   "episode_start": 4,
+   "episode_end": 4,
+   "r_g_nom": 0,
+   "cut": false,
+   "przyziemienie": false,
+   "niewazny_kampania": null
+  }
+ },
+ "stop": null,
+ "pozostalo": [
+  [
+   "nom_b3",
+   "8,9,10,11",
+   "-"
+  ],
+  [
+   "c08_s01",
+   "8",
+   "30"
+  ],
+  [
+   "c08_s02",
+   "20",
+   "30"
+  ],
+  [
+   "c11_s01",
+   "11",
+   "30"
+  ],
+  [
+   "c11_s02",
+   "23",
+   "30"
+  ],
+  [
+   "c10_s01",
+   "10",
+   "30"
+  ],
+  [
+   "c10_s02",
+   "22",
+   "30"
+  ],
+  [
+   "c05_s01",
+   "5",
+   "30"
+  ],
+  [
+   "c05_s02",
+   "17",
+   "30"
+  ],
+  [
+   "c01_s01",
+   "1",
+   "30"
+  ],
+  [
+   "c01_s02",
+   "13",
+   "30"
+  ],
+  [
+   "c02_s01",
+   "2",
+   "30"
+  ],
+  [
+   "c02_s02",
+   "14",
+   "30"
+  ]
+ ]
+}
