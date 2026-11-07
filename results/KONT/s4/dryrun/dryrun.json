@@ -1,0 +1,46 @@
+{
+ "driver": "results/KONT/tools/kont_s4_flight.py",
+ "driver_sha256": "4f7bb81a44c157a8402214613fca64e17757844476ffe27bdfdf4d30d2209ac5",
+ "czesc_i": {
+  "ROOT": "/home/olga/projects/liquidpatrol",
+  "git_root": "/home/olga/projects/liquidpatrol",
+  "root_ok": true,
+  "sciezki": {
+   "bench/executor_params.json": true,
+   "r03/kont_gate.py": true,
+   "r03/kont_shield.py": true,
+   "results/KONT/tools/kont_s4_flight.py": true,
+   "results/BENCH/scenario_manifest.json": true
+  },
+  "selfchecki": {
+   "certs_selfcheck": {
+    "rc": 0,
+    "werdykt": [
+     "WERDYKT certs_selfcheck: PASS (9/9 zgodne)"
+    ]
+   },
+   "kont_certs_selfcheck": {
+    "rc": 0,
+    "werdykt": [
+     "WERDYKT kont_certs_selfcheck: PASS (13/13 zgodne)"
+    ]
+   }
+  },
+  "intruder_motion_import_rc": 0,
+  "intruder_motion_stderr": ""
+ },
+ "czesc_i_ok": true,
+ "czesc_ii": {
+  "kroki": [
+   "GzNode()",
+   "rclpy.init()",
+   "EkfSub()",
+   "System.connect(udpin://0.0.0.0:14540)"
+  ],
+  "wynik": "zatrzymane: pierwsze wywołanie sieciowe",
+  "blad": null,
+  "epizody": "0,1,2,3"
+ },
+ "czesc_ii_ok": true,
+ "PASS": true
+}

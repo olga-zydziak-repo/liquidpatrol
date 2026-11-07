@@ -1,0 +1,37 @@
+{
+ "driver": "tools/_kont_s4_flight_przed_4b.py",
+ "driver_sha256": "de018ff3900ed7daebcfa8d88ba992192f5122e803161e720ac822314217e738",
+ "czesc_i": {
+  "ROOT": "/home/olga/projects/liquidpatrol/results/KONT",
+  "git_root": "/home/olga/projects/liquidpatrol",
+  "root_ok": false,
+  "sciezki": {
+   "bench/executor_params.json": false,
+   "r03/kont_gate.py": false,
+   "r03/kont_shield.py": false,
+   "results/KONT/tools/kont_s4_flight.py": false,
+   "results/BENCH/scenario_manifest.json": false
+  },
+  "selfchecki": {
+   "certs_selfcheck": {
+    "rc": 1,
+    "werdykt": []
+   },
+   "kont_certs_selfcheck": {
+    "rc": 2,
+    "werdykt": []
+   }
+  },
+  "intruder_motion_import_rc": 1,
+  "intruder_motion_stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\nModuleNotFoundError: No module named 'harness'\n"
+ },
+ "czesc_i_ok": false,
+ "czesc_ii": {
+  "kroki": [],
+  "wynik": null,
+  "blad": "FileNotFoundError: [Errno 2] No such file or directory: '/home/olga/projects/liquidpatrol/results/KONT/results/BENCH/scenario_manifest.json'",
+  "epizody": "0,1,2,3"
+ },
+ "czesc_ii_ok": false,
+ "PASS": false
+}
