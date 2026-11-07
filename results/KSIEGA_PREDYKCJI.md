@@ -664,3 +664,17 @@ Uwaga CC (bez zmiany predykcji): po S1 P-KONT-3 (T* ≥ 30 s) oceniam niżej,
   nowy estymator zmienia koszt starych akcji. Przy każdej zmianie
   źródła pozycji audytować WSZYSTKIE składowe komend akcji osłony,
   nie tylko tę mierzoną.
+
+## KONT S3 (ANEKS_KONT-4, 7.11.2026): certy KONT PROVED/PASS,
+replikacja CC zgodna (z3 5.1.0/5.3.3, różnice tylko z3_lib)
+- ✗ CC: PROMPT_KONT_S3 §2 cytował kolejność frozen odwrotnie
+  (R-G > R-POS); ANEKS_KONT-3b §1.2 postawił R-G-NOM ponad ABORT/HOLD
+  — oba wyłapane przez wykonawcę przed/po kodzie, naprawione literą
+  (3b §1.1, 4 §2.2). Lista plików §0.3 za wąska (2 pliki).
+- ✗ CC: niespójność brzegowa zamrożenia (R_nom 27.51 vs bariera(0)
+  27.303) — skorygowana do 27.30 w 3b §1.7.
+- Wady wykonawcy nazwane: pierwotny sat P7 ze zbyt luźnej dziedziny
+  (naprawa z dowodem niezmiennika); błąd przyrządu mutantów (19/20 po
+  poprawce, 21/21 z mutantem brzegowym).
+- Zastany czerwony test r02/test_deadman.py (atrapa bez _sp_yaw,
+  od fa5dc242 20.08) — backlog; kryteria PASS modulo ten zastany.
