@@ -4,3 +4,14 @@
 [kampania 23:18:14] ALARM: nom_b1 nieważny (epizody 0/4, cięcie False, przyziemienie False)
 [kampania 23:18:14] nom_b1: dolecenie nom_b1 na końcu kolejki
 [kampania 23:18:29] KONIEC booty=1/16 noga=25/45 stop=None pozostało=['c08_s02', 'c11_s01', 'c11_s02', 'c10_s01', 'c10_s02', 'c05_s01', 'c05_s02', 'c01_s01', 'c01_s02', 'c02_s01', 'c02_s02', 'nom_b2', 'nom_b3', 'nom_b1']
+[kampania 23:39:07] === S4 (ANEKS_KONT-4b) start: kolejka ['nom_b1', 'nom_b2', 'nom_b3', 'c08_s01', 'c08_s02', 'c11_s01', 'c11_s02', 'c10_s01', 'c10_s02', 'c05_s01', 'c05_s02', 'c01_s01', 'c01_s02', 'c02_s01', 'c02_s02'], budżet 1/17, noga 25/45, uptime 4768.11 s
+[kampania 23:40:07] nom_b1_r2: próbnik 0 skoków ok=True
+[kampania 23:43:52] nom_b1_r2 rc=7 boot 2/17 (noga 26/45): faza=True t0_us=7448000 uzbrojony=True yaw={'yaw_blad_deg': 51.64, 'prog_deg': 10.0, 'ok': False} epizody 0/0 cięcie=False przyziemienie=False R-G-NOM=0 breach=False REFUSE(POS)_nominal=[] R-G=[]
+[kampania 23:43:52] ALARM: nom_b1_r2 nieważny (asercja yaw)
+[kampania 23:43:52] nom_b1_r2: dolecenie nom_b1 na końcu kolejki (rezerwa 4b)
+[kampania 23:44:52] nom_b2: próbnik 0 skoków ok=True
+[kampania 23:45:02] nom_b2: sieroty TERM {11940: 'intruder_motion'}, żywe po 10 s: {}
+[kampania 23:52:36] nom_b2 rc=7 boot 3/17 (noga 27/45): faza=True t0_us=7496000 uzbrojony=True yaw={'yaw_blad_deg': 13.26, 'prog_deg': 10.0, 'ok': False} epizody 0/0 cięcie=False przyziemienie=False R-G-NOM=0 breach=False REFUSE(POS)_nominal=[] R-G=[]
+[kampania 23:52:36] ALARM: nom_b2 nieważny (asercja yaw)
+[kampania 23:52:36] ALARM STOP-KONT4-BUDZET: drugi nieważny boot, rezerwa wyczerpana
+[kampania 23:52:36] KONIEC booty=3/17 noga=27/45 stop=STOP-KONT4-BUDZET pozostało=['nom_b3', 'c08_s01', 'c08_s02', 'c11_s01', 'c11_s02', 'c10_s01', 'c10_s02', 'c05_s01', 'c05_s02', 'c01_s01', 'c01_s02', 'c02_s01', 'c02_s02', 'nom_b1']

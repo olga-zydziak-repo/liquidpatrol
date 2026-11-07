@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       12235 16.1  0.0 330892 14120 ?        Sl   23:50   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       12229  3.1  0.0   5028  3652 ?        S    23:50   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s4_launch.sh world_kont_A3
+olga        1011  2.5  1.1 5725416 383884 pts/0  Sl+  22:19   2:15 claude --continue
+olga       10570  0.2  0.0 1341172 7048 ?        S    23:39   0:01 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl --line-buffered -E  rc=|ALARM|STOP|KONIEC|Traceback|Error
+root         241  0.0  0.1 2846916 59624 ?       Ssl  22:19   0:04 /usr/bin/containerd
+root         346  0.0  0.2 6784540 81340 ?       Ssl  22:19   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         840  0.0  0.0   3200  1248 ?        S    22:19   0:00 /init
+root           1  0.0  0.0  22100 13488 ?        Ss   22:19   0:00 /sbin/init
+root          40  0.0  0.0  50476 16784 ?        S<s  22:19   0:00 /usr/lib/systemd/systemd-journald
+olga       12052  0.0  0.0   5028  3700 ?        S    23:45   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s4_boot.sh 27 nom_b2 4,5,6,7 -
+root          86  0.0  0.0  26004  7076 ?        Ss   22:19   0:00 /usr/lib/systemd/systemd-udevd
+olga       10605  0.0  0.0  17396 12628 ?        S    23:39   0:00 python3 results/KONT/tools/kont_s4_campaign_b.py
+polkitd      184  0.0  0.0 308188  8104 ?        Ssl  22:19   0:00 /usr/lib/polkit-1/polkitd --no-debug
+message+     179  0.0  0.0   9796  5592 ?        Ss   22:19   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+olga       10561  0.0  0.0   5164  3908 ?        Ss   23:39   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1794086676922-z5joav.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'set +u; source /opt/ros/jazzy/setup.bash; source ros2_ws/install/setup.bash; PYTHONDONTWRITEBYTECODE=1 python3 results/KONT/tools/kont_s4_campaign_b.py > /tmp/claude-1000/-home-olga-projects-liquidpatrol/98683fb6-9e58-4e0d-85ff-4ff59aa4ce17/scratchpad/kampania_s4b.out 2>&1; echo "rc=$?"; tail -3 results/KONT/s4/kampania_s4.log' < /dev/null && pwd -P >| /tmp/claude-5289-cwd
+root         183  0.0  0.0 1026048 11780 ?       Ssl  22:19   0:00 /usr/bin/lttng-sessiond
+olga         884  0.0  0.0  20392 11636 ?        Ss   22:19   0:00 /usr/lib/systemd/systemd --user
+root         232  0.0  0.0 107064 23240 ?        Ssl  22:19   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root           7  0.0  0.0   3368  2156 hvc0     Sl+  22:19   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate

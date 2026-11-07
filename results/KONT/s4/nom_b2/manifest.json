@@ -1,0 +1,75 @@
+{
+  "kind": "kont_s4",
+  "world_hash": "887fe3cca89d1cc57d5a1752e1dc8fc9bade44bac3d825d93045235814a3aabd  worlds/world_kont_A3.sdf",
+  "world_hash_kind": "repo",
+  "ulog_sha": "3b71c6629d0bba7ef987473a2e24cd3fc9e9ac31ecb6305b18999095494b79ab",
+  "ulog_bytes": 34485254,
+  "model_in_state": true,
+  "kont_s4": {
+    "boot": 27,
+    "epizody": "4,5,6,7",
+    "inject_t": "-",
+    "offset": {
+      "z_off_m": -0.1957,
+      "okno_sim_s": 6.01,
+      "n": 124,
+      "home_alt_kom": 10.1957,
+      "zakres": "home/reset (sieć nie dostaje komendy wysokości)"
+    },
+    "sonda_rc_frozen": 0,
+    "podloga_10hz_ok": 1,
+    "uzbrojony": true,
+    "sonda": {
+      "label": "preflight_nom_b2",
+      "feed": "/home/olga/projects/liquidpatrol/results/KONT/s4/nom_b2/percep_feed.jsonl",
+      "tryb": "live window=35.0s",
+      "prog_frozen": {
+        "dt_p50_max_s_na_klatke": 0.07,
+        "frac_delt_gt_0p10_max": 0.05
+      },
+      "n_delt": 457,
+      "dt_p50_s_na_klatke": 0.068,
+      "dt_p90_s_na_klatke": 0.068,
+      "frac_delt_gt_0p10": 0.0022,
+      "hz_p50": 14.71,
+      "span_sim_s": 31.5,
+      "werdykt": "PASS"
+    },
+    "echo": null,
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profil_sha16": "a68a450b91c2ab51"
+  },
+  "kont_s2d": {
+    "aneks": "ANEKS_KONT-1c §3",
+    "initial_absolute_time_us": 7496000,
+    "faza_ok": true,
+    "dolaczenie": {
+      "prog_s": 0.5,
+      "sim_s_przy_starcie_px4": 0.66,
+      "czekanie_wall_s": 4.4,
+      "ok": true
+    }
+  },
+  "zegar": {
+    "timesyncd": "inactive",
+    "clocksource": "tsc",
+    "aneks": "ANEKS_SKAN2-0b §2.2"
+  },
+  "kont_s2g": {
+    "aneks": "ANEKS_KONT-4b + PROMPT_KONT_S4",
+    "boot_s4": 3,
+    "pozycja": "nom_b2",
+    "epizody": "4,5,6,7",
+    "inject_t": "-",
+    "shm": {
+      "sprzatanie": false,
+      "plikow_przed": 19,
+      "plikow_po": 19,
+      "trzymane_przed": {},
+      "stan": "shm_nom_b2.txt"
+    },
+    "sieroty_term": {
+      "11940": "intruder_motion"
+    }
+  }
+}
