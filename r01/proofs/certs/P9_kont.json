@@ -1,0 +1,226 @@
+{
+  "property": "P9_kont",
+  "verdict": "PROVED",
+  "method": "z3 LRA per koszyk k∈{0…T*−1} + ostrość dwustronna",
+  "z3_lib": "5.0.0",
+  "obligations": {
+    "0": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "1": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "2": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "3": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "4": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "5": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "6": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "7": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "8": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "9": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "10": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "11": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "12": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "13": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "14": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "15": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "16": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "17": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "18": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "19": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "20": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    },
+    "21": {
+      "main": "unsat",
+      "sharp_eps": "sat",
+      "sharp_R": "sat",
+      "sharp_delta": "sat"
+    }
+  },
+  "arithmetic": {
+    "tstar_rule_k_le_21": true,
+    "tstar_rule_k22_breaks": true,
+    "r_nom_le_R0": true,
+    "R_nonincreasing": true,
+    "dt_is_1_20": true,
+    "bucket_index_le_21": true,
+    "kont_shield_table_eq_json": true
+  },
+  "numbers": {
+    "R_k": {
+      "0": "27303/1000",
+      "1": "6791/250",
+      "2": "26837/1000",
+      "3": "13117/500",
+      "4": "644/25",
+      "5": "3158/125",
+      "6": "6257/250",
+      "7": "24793/1000",
+      "8": "24657/1000",
+      "9": "24521/1000",
+      "10": "6037/250",
+      "11": "6037/250",
+      "12": "6037/250",
+      "13": "6037/250",
+      "14": "6037/250",
+      "15": "6037/250",
+      "16": "6037/250",
+      "17": "6037/250",
+      "18": "6037/250",
+      "19": "6037/250",
+      "20": "6037/250",
+      "21": "2986/125"
+    },
+    "R_0_float": 27.303,
+    "R_21_float": 23.888,
+    "eps22_plus_delta": "5849/1000"
+  },
+  "theorem": "∀k≤21: 0≤r_est≤R(k) ∧ 0≤ε≤ε_b(k) ∧ 0≤Δ≤Δ_D5 ∧ 0≤s≤d_stop ∧ |r_c−r_est|≤ε ∧ r_d≤r_est+ε+s+Δ ⇒ r_c≤R_E ∧ r_d≤R_E; R(k)=R_E−d_stop−ε_b(k)−Δ_D5; ostrość: ε_b(k)+δ, R(k)+δ, Δ_D5+δ łamią (δ=1/1000)",
+  "constants": {
+    "freeze": "results/KONT/s2/s2_freeze_bf.json",
+    "freeze_sha256": "ae19f66c6807de6c824bf0fd723965258b15b77963eb866afb78d3dd3740ae4a",
+    "R_E": "32",
+    "d_stop": "57/20",
+    "delta_D5": "381/250",
+    "T_star_s": 22,
+    "m_p50": "579/100",
+    "R_nom": "273/10",
+    "R_nom_source": "ANEKS_KONT-3b §1.7",
+    "eps_b": [
+      "323/1000",
+      "231/500",
+      "789/1000",
+      "174/125",
+      "933/500",
+      "1181/500",
+      "1299/500",
+      "2833/1000",
+      "2969/1000",
+      "621/200",
+      "1739/500",
+      "1739/500",
+      "1739/500",
+      "1739/500",
+      "1739/500",
+      "1739/500",
+      "1739/500",
+      "1739/500",
+      "1739/500",
+      "1739/500",
+      "1739/500",
+      "1869/500"
+    ]
+  },
+  "assumptions": [
+    "A-kont [A4] (ANEKS_KONT-3 §2): ε(t) ≤ ε_b(⌊t_KONT⌋) przez całą KONT i w ticku REFUSE (ciągłość: ostatni ALLOW koszyka k, REFUSE w następnym ticku); Δ ≤ Δ_D5 od REFUSE do przyziemienia (zejście D5 + trzymanie yaw); walidowane w S4, przekroczenie = FAIL nogi.",
+    "A-flag (ANEKS_KONT-3b §1.3): t_KONT od pierwszego ticka flagi cs_gnss_pos=0; opóźnienie odcięcie→flaga 0.004–0.016 s (8/8 S2) poza zegarem.",
+    "A-react (R0.1): przemieszczenie poziome od ostatniego ALLOW do zatrzymania ≤ d_stop = V_MAX·T_REACT + V_MAX²/(2·A_BRAKE) (r01/config.py:24-27).",
+    "|r_true − r_est| ≤ ε: ε = |pos_EKF − (pos_GT ⊖ T_home)| (PRE_KONT Q2), promień przez nierówność trójkąta.",
+    "Twierdzenie nie wymusza T*: bariera R(k) zawiera dla każdego k; T* = 22 s z reguły m_p50 (asercje tstar_rule_*)."
+  ],
+  "code_refs": {
+    "bariera": "r03/kont_shield.py:r_kont/_kont_barrier",
+    "prover": "r01/proofs/p9_kont_verify.py"
+  },
+  "model_sha256": "afa719fcc0b250f7a448240131029d07311b4960a4cf54415727bebdd0e584d9"
+}

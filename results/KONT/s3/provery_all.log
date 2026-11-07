@@ -1,0 +1,75 @@
+=== P9_kont: zawieranie z barierą czasową (z3, per koszyk) ===
+  k= 0 R(k)=27.303 ε_b=0.323: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k= 1 R(k)=27.164 ε_b=0.462: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k= 2 R(k)=26.837 ε_b=0.789: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k= 3 R(k)=26.234 ε_b=1.392: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k= 4 R(k)=25.760 ε_b=1.866: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k= 5 R(k)=25.264 ε_b=2.362: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k= 6 R(k)=25.028 ε_b=2.598: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k= 7 R(k)=24.793 ε_b=2.833: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k= 8 R(k)=24.657 ε_b=2.969: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k= 9 R(k)=24.521 ε_b=3.105: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=10 R(k)=24.148 ε_b=3.478: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=11 R(k)=24.148 ε_b=3.478: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=12 R(k)=24.148 ε_b=3.478: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=13 R(k)=24.148 ε_b=3.478: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=14 R(k)=24.148 ε_b=3.478: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=15 R(k)=24.148 ε_b=3.478: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=16 R(k)=24.148 ε_b=3.478: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=17 R(k)=24.148 ε_b=3.478: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=18 R(k)=24.148 ε_b=3.478: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=19 R(k)=24.148 ε_b=3.478: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=20 R(k)=24.148 ε_b=3.478: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  k=21 R(k)=23.888 ε_b=3.738: {'main': 'unsat', 'sharp_eps': 'sat', 'sharp_R': 'sat', 'sharp_delta': 'sat'}
+  arytmetyka: {'tstar_rule_k_le_21': True, 'tstar_rule_k22_breaks': True, 'r_nom_le_R0': True, 'R_nonincreasing': True, 'dt_is_1_20': True, 'bucket_index_le_21': True, 'kont_shield_table_eq_json': True}
+WERDYKT P9_kont: PROVED
+  P9_kont.json istnieje — zgodność sha: NIE
+  zapisano /home/olga/projects/liquidpatrol/r01/proofs/certs/P9_kont.json
+=== P1_kont: automat nakładki (z3, 1-indukcja) ===
+  base: unsat  ✓
+  inv_step: unsat  ✓
+  P1a: unsat  ✓
+  P1b: unsat  ✓
+  P1c: unsat  ✓
+  P1d: unsat  ✓
+  P1e: unsat  ✓
+  P1f: unsat  ✓
+  P1g: unsat  ✓
+  P1h: unsat  ✓
+  P1i_kont_refuse_pos_reversible: unsat  ✓
+  P1j_kref_sticky: unsat  ✓
+  P1k_exit_only_by_monitor: unsat  ✓
+  P1l_rgnom_nonlatch_state_kept: unsat  ✓
+  P1m_order_pos_kont_over_geo_over_nom: unsat  ✓
+  P1n_kont_allow_needs_no_violation: unsat  ✓
+  nom_applied_no_outward_tangent_kept: unsat  ✓
+WERDYKT P1_kont: PROVED
+  P1_kont.json istnieje — zgodność sha: NIE
+  zapisano /home/olga/projects/liquidpatrol/r01/proofs/certs/P1_kont.json
+=== P7_kont: graf monitora GNSS + t_KONT (enumeracja) ===
+  a_min_lost_run_to_enter: 2
+  b_max_age_kont_allow_ticks: 439
+  b_min_ticks_enter_to_refuse_by_time_no_bar: 439
+  c_min_healthy_run_to_exit: 100
+  e_min_reenter_cycle: 102
+  graph: {'n_states': 78877, 'n_edges': 315508, 'T_ticks': 440, 'debounce': 2, 'hyst': 100}
+  g_product_reduced: {'deb': 2, 'hyst': 3, 'T_ticks': 6, 'n_states': 216, 'n_edges': 1728, 'pos_states': 6, 'gnss_states': 36}
+  checks: {'a_enter_only_lost_bad_deb_minus_1_age_backdated': True, 'a_min_run_eq_deb': True, 'b_no_kont_allow_with_age_ge_T': True, 'b_refuse_at_age_T_exactly': True, 'b_time_refuse_at_T': True, 'c_exit_only_healthy_gh_hyst_minus_1_clears_kref': True, 'c_min_run_eq_hyst': True, 'd_kref_sticky_while_kont': True, 'e_cycle_eq_hyst_plus_deb': True, 'f_bar_refuse_every_age_lt_T': True, 'g_product_reduced_eq_cartesian': True}
+  z3: {'z3_a_enter_step': 'unsat', 'z3_b_allow_age_lt_T': 'unsat', 'z3_c_exit_step': 'unsat', 'z3_d_kref_sticky': 'unsat', 'z3_inv_step': 'unsat'}
+WERDYKT P7_kont: PROVED
+  P7_kont.json istnieje — zgodność sha: TAK
+  zapisano /home/olga/projects/liquidpatrol/r01/proofs/certs/P7_kont.json
+=== P5_kont: konformancja lustro ≡ produkcja, tau_kont ≡ produkcja ===
+  ticki: {'grid': 382, 'fuzz': 4042863, 'fixture': 17725, 'tau': 82681}  rozbieżności: 0  pokrycie: ['R-A', 'R-AUTH', 'R-G', 'R-G-NOM', 'R-H', 'R-KONT', 'R-O', 'R-P', 'R-POS', 'R-R', 'adm', 'cause:T*', 'cause:bariera', 'second_episode']  brak: []
+  fikstura c00_s02_r3: {'n_ticks': 2217, 't_flag_sim': 170.616, 'n_kont_enter': 1, 'n_R_G_NOM': 0, 'n_R_POS_dr': 0, 'kont_entry_minus_flag_s': 0.08, 'refuse_t_kont_s': 22.004, 'refuse_cause': 'T*', 'refuse_r_est': 9.327, 'refuse_minus_flag_s': 22.044}
+  fikstura c02_s01_r4: {'n_ticks': 2244, 't_flag_sim': 173.752, 'n_kont_enter': 1, 'n_R_G_NOM': 0, 'n_R_POS_dr': 0, 'kont_entry_minus_flag_s': 0.1, 'refuse_t_kont_s': 10.416, 'refuse_cause': 'bariera', 'refuse_r_est': 24.162, 'refuse_minus_flag_s': 10.464}
+  fikstura c08_s02a_r2: {'n_ticks': 2134, 't_flag_sim': 160.424, 'n_kont_enter': 1, 'n_R_G_NOM': 0, 'n_R_POS_dr': 0, 'kont_entry_minus_flag_s': 0.1, 'refuse_t_kont_s': 22.016, 'refuse_cause': 'T*', 'refuse_r_est': 6.312, 'refuse_minus_flag_s': 22.068}
+  fikstura c08_s02b_r2: {'n_ticks': 2277, 't_flag_sim': 174.084, 'n_kont_enter': 1, 'n_R_G_NOM': 0, 'n_R_POS_dr': 0, 'kont_entry_minus_flag_s': 0.096, 'refuse_t_kont_s': 22.008, 'refuse_cause': 'T*', 'refuse_r_est': 15.249, 'refuse_minus_flag_s': 22.06}
+  fikstura c08_s04_r3: {'n_ticks': 2150, 't_flag_sim': 169.216, 'n_kont_enter': 1, 'n_R_G_NOM': 0, 'n_R_POS_dr': 0, 'kont_entry_minus_flag_s': 0.096, 'refuse_t_kont_s': 22.02, 'refuse_cause': 'T*', 'refuse_r_est': 15.036, 'refuse_minus_flag_s': 22.068}
+  fikstura c11_s02_r3: {'n_ticks': 2239, 't_flag_sim': 161.556, 'n_kont_enter': 1, 'n_R_G_NOM': 0, 'n_R_POS_dr': 0, 'kont_entry_minus_flag_s': 0.088, 'refuse_t_kont_s': 22.028, 'refuse_cause': 'T*', 'refuse_r_est': 2.706, 'refuse_minus_flag_s': 22.072}
+  fikstura c11_s03_r4: {'n_ticks': 2239, 't_flag_sim': 175.412, 'n_kont_enter': 1, 'n_R_G_NOM': 0, 'n_R_POS_dr': 0, 'kont_entry_minus_flag_s': 0.092, 'refuse_t_kont_s': 22.0, 'refuse_cause': 'T*', 'refuse_r_est': 8.368, 'refuse_minus_flag_s': 22.048}
+  fikstura c11_s04_r3: {'n_ticks': 2225, 't_flag_sim': 172.9, 'n_kont_enter': 1, 'n_R_G_NOM': 0, 'n_R_POS_dr': 0, 'kont_entry_minus_flag_s': 0.096, 'refuse_t_kont_s': 22.048, 'refuse_cause': 'T*', 'refuse_r_est': 16.951, 'refuse_minus_flag_s': 22.092}
+WERDYKT P5_kont: PASS
+  P5_kont.json istnieje — zgodność sha: TAK
+  zapisano /home/olga/projects/liquidpatrol/r01/proofs/certs/P5_kont.json
+czas all 130.58s

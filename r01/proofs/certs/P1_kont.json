@@ -1,0 +1,49 @@
+{
+  "property": "P1_kont",
+  "verdict": "PROVED",
+  "method": "1-induction (z3) + NRA (nom_applied)",
+  "z3_lib": "5.0.0",
+  "obligations": {
+    "base": "unsat",
+    "inv_step": "unsat",
+    "P1a": "unsat",
+    "P1b": "unsat",
+    "P1c": "unsat",
+    "P1d": "unsat",
+    "P1e": "unsat",
+    "P1f": "unsat",
+    "P1g": "unsat",
+    "P1h": "unsat",
+    "P1i_kont_refuse_pos_reversible": "unsat",
+    "P1j_kref_sticky": "unsat",
+    "P1k_exit_only_by_monitor": "unsat",
+    "P1l_rgnom_nonlatch_state_kept": "unsat",
+    "P1m_order_pos_kont_over_geo_over_nom": "unsat",
+    "P1n_kont_allow_needs_no_violation": "unsat",
+    "nom_applied_no_outward_tangent_kept": "unsat"
+  },
+  "leaves": 11,
+  "automaton": "r03/kont_shield.py:KontShield._decide (KONT_MODE=1): latch > R-POS > R-KONT > R-G > R-G-NOM > abort > hold > return > {OBSERVE∧auth_ok | R-AUTH} > patrol; faza ph ∈ {NOMINAL, KONT, KONT_REFUSE}",
+  "properties": {
+    "P1a": "ALLOW ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal ∧ ph'≠KONT_REFUSE ∧ ¬nom",
+    "P1b": "geo ⇒ REFUSE; ¬term ∧ ¬pos ∧ ph'≠KREF ∧ geo ⇒ reason=GEOFENCE ∧ terminal'",
+    "P1c": "REFUSE ⇒ reason ∈ {GEOFENCE,COMMAND_INVALID,STALE_CMD,ABORT,POS_DEGRADED,NO_AUTH}",
+    "P1d": "terminal monotoniczny",
+    "P1e": "OBSERVE ⇒ ALLOW przy ¬geo ¬pos ¬term ¬kref ¬nom",
+    "P1f": "pos_bad ∧ ¬term ⇒ REFUSE(POS_DEGRADED)",
+    "P1g": "OBSERVE-ALLOW ⇒ auth_ok",
+    "P1h": "domknięcie R-AUTH (premisy z ¬kref ¬nom)",
+    "P1i": "ph'=KONT_REFUSE ∧ ¬term ⇒ REFUSE(POS_DEGRADED) ∧ ¬terminal' ∧ st'=POSDEG (odwracalny jak POS_DEGRADED)",
+    "P1j": "KONT_REFUSE zatrzaśnięty, dopóki monitor GNSS w utracie",
+    "P1k": "powrót do NOMINAL wyłącznie przez monitor (¬kflag)",
+    "P1l": "R-G-NOM: REFUSE(GEOFENCE) bez zatrzasku, stan bez zmian",
+    "P1m": "kolejność frozen latch > R-POS > R-G (+ R-KONT w klasie R-POS) — ANEKS_KONT-3b §1.1",
+    "P1n": "ALLOW w KONT ⇒ ¬kviol (t_KONT < T* ∧ r_est ≤ R(⌊t_KONT⌋)) ∧ faza ≠ KONT_REFUSE",
+    "nom_applied": "applied R-G-NOM: (applied−p)·p ≤ 0, składowa styczna zachowana (NRA)"
+  },
+  "assumptions": [
+    "geo/pos_bad/kflag/kviol/nom = predykaty liczone w kodzie; arytmetyka bariery = P9_kont, monitory = P7_kont/P7_posmon, zgodność kod↔model = P5_kont.",
+    "Założenia kanonu P1 (A-auth, A-episode, żywotność osłony) bez zmian."
+  ],
+  "model_sha256": "afa719fcc0b250f7a448240131029d07311b4960a4cf54415727bebdd0e584d9"
+}

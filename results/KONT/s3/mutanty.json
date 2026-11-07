@@ -1,0 +1,134 @@
+{
+ "epizody": 2049,
+ "lustro_czyste_rozbieznosci": 0,
+ "mutanty": [
+  {
+   "mutant": "g_debounce_minus_1",
+   "funkcja": "g_monitor_step",
+   "wykryty": true,
+   "gdzie": "tick 0"
+  },
+  {
+   "mutant": "g_hyst_minus_1",
+   "funkcja": "g_monitor_step",
+   "wykryty": true,
+   "gdzie": "tick 100"
+  },
+  {
+   "mutant": "g_no_backdate",
+   "funkcja": "g_monitor_step",
+   "wykryty": true,
+   "gdzie": "tick 1"
+  },
+  {
+   "mutant": "g_polarity",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 1"
+  },
+  {
+   "mutant": "g_exit_keeps_kref",
+   "funkcja": "g_monitor_step",
+   "wykryty": true,
+   "gdzie": "tick 102"
+  },
+  {
+   "mutant": "g_flicker_no_reset",
+   "funkcja": "g_monitor_step",
+   "wykryty": true,
+   "gdzie": "tick 126"
+  },
+  {
+   "mutant": "b_tstar_strict",
+   "funkcja": "g_barrier_step",
+   "wykryty": true,
+   "gdzie": "wyjątek IndexError"
+  },
+  {
+   "mutant": "b_tstar_minus_1",
+   "funkcja": "g_barrier_step",
+   "wykryty": true,
+   "gdzie": "tick 4"
+  },
+  {
+   "mutant": "b_not_sticky",
+   "funkcja": "g_barrier_step",
+   "wykryty": true,
+   "gdzie": "tick 1217"
+  },
+  {
+   "mutant": "b_bucket_round",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 1"
+  },
+  {
+   "mutant": "b_bar_ge",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 1"
+  },
+  {
+   "mutant": "n_rnom_old",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 0"
+  },
+  {
+   "mutant": "n_rnom_ge",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 0"
+  },
+  {
+   "mutant": "n_outward_sign",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 0"
+  },
+  {
+   "mutant": "n_no_strip",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 0"
+  },
+  {
+   "mutant": "n_state_patrol",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 4"
+  },
+  {
+   "mutant": "n_latching",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 2"
+  },
+  {
+   "mutant": "p_kont_below_geo",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 2"
+  },
+  {
+   "mutant": "p_nom_above_geo",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 0"
+  },
+  {
+   "mutant": "p_pos_disarmed_in_kont",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 1"
+  },
+  {
+   "mutant": "a_kont_action_plain",
+   "funkcja": "mirror_step",
+   "wykryty": true,
+   "gdzie": "tick 5"
+  }
+ ],
+ "wykryte": 21,
+ "razem": 21
+}

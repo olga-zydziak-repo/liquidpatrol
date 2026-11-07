@@ -1,0 +1,151 @@
+{
+  "property": "P5_kont",
+  "verdict": "PASS",
+  "method": "per-tick konformancja: lustro nakładki (mirror_step) ≡ r03/kont_shield.KontShield (decyzja, powód, reguła, stan, applied, detail, faza, t_KONT, przyczyna, licznik epizodów) oraz tau_kont (P1_kont) ≡ produkcja (decyzja, powód, stan, terminal, faza)",
+  "z3_lib": "5.0.0",
+  "ticks": {
+    "grid": 382,
+    "fuzz": 4042863,
+    "fixture": 17725,
+    "tau": 82681
+  },
+  "mismatches": 0,
+  "coverage": [
+    "R-A",
+    "R-AUTH",
+    "R-G",
+    "R-G-NOM",
+    "R-H",
+    "R-KONT",
+    "R-O",
+    "R-P",
+    "R-POS",
+    "R-R",
+    "adm",
+    "cause:T*",
+    "cause:bariera",
+    "second_episode"
+  ],
+  "grid": {
+    "path": "results/KONT/s3/p5_kont_grid.json",
+    "sha256": "6fb380a9ebae0cb1fc076d7b4385909c7a8be210e556f2a0f85fa532ea907e36"
+  },
+  "fuzz": {
+    "episodes": 100000,
+    "seed": 0,
+    "tau_bound_episodes": 2000
+  },
+  "fixture_s2": {
+    "flights": [
+      "c00_s02_r3",
+      "c02_s01_r4",
+      "c08_s02a_r2",
+      "c08_s02b_r2",
+      "c08_s04_r3",
+      "c11_s02_r3",
+      "c11_s03_r4",
+      "c11_s04_r3"
+    ],
+    "reconstruction": "ANEKS_KONT-3b §1.5 (s2_fixture)",
+    "offline_decisions": {
+      "c00_s02_r3": {
+        "n_ticks": 2217,
+        "t_flag_sim": 170.616,
+        "n_kont_enter": 1,
+        "n_R_G_NOM": 0,
+        "n_R_POS_dr": 0,
+        "kont_entry_minus_flag_s": 0.08,
+        "refuse_t_kont_s": 22.004,
+        "refuse_cause": "T*",
+        "refuse_r_est": 9.327,
+        "refuse_minus_flag_s": 22.044
+      },
+      "c02_s01_r4": {
+        "n_ticks": 2244,
+        "t_flag_sim": 173.752,
+        "n_kont_enter": 1,
+        "n_R_G_NOM": 0,
+        "n_R_POS_dr": 0,
+        "kont_entry_minus_flag_s": 0.1,
+        "refuse_t_kont_s": 10.416,
+        "refuse_cause": "bariera",
+        "refuse_r_est": 24.162,
+        "refuse_minus_flag_s": 10.464
+      },
+      "c08_s02a_r2": {
+        "n_ticks": 2134,
+        "t_flag_sim": 160.424,
+        "n_kont_enter": 1,
+        "n_R_G_NOM": 0,
+        "n_R_POS_dr": 0,
+        "kont_entry_minus_flag_s": 0.1,
+        "refuse_t_kont_s": 22.016,
+        "refuse_cause": "T*",
+        "refuse_r_est": 6.312,
+        "refuse_minus_flag_s": 22.068
+      },
+      "c08_s02b_r2": {
+        "n_ticks": 2277,
+        "t_flag_sim": 174.084,
+        "n_kont_enter": 1,
+        "n_R_G_NOM": 0,
+        "n_R_POS_dr": 0,
+        "kont_entry_minus_flag_s": 0.096,
+        "refuse_t_kont_s": 22.008,
+        "refuse_cause": "T*",
+        "refuse_r_est": 15.249,
+        "refuse_minus_flag_s": 22.06
+      },
+      "c08_s04_r3": {
+        "n_ticks": 2150,
+        "t_flag_sim": 169.216,
+        "n_kont_enter": 1,
+        "n_R_G_NOM": 0,
+        "n_R_POS_dr": 0,
+        "kont_entry_minus_flag_s": 0.096,
+        "refuse_t_kont_s": 22.02,
+        "refuse_cause": "T*",
+        "refuse_r_est": 15.036,
+        "refuse_minus_flag_s": 22.068
+      },
+      "c11_s02_r3": {
+        "n_ticks": 2239,
+        "t_flag_sim": 161.556,
+        "n_kont_enter": 1,
+        "n_R_G_NOM": 0,
+        "n_R_POS_dr": 0,
+        "kont_entry_minus_flag_s": 0.088,
+        "refuse_t_kont_s": 22.028,
+        "refuse_cause": "T*",
+        "refuse_r_est": 2.706,
+        "refuse_minus_flag_s": 22.072
+      },
+      "c11_s03_r4": {
+        "n_ticks": 2239,
+        "t_flag_sim": 175.412,
+        "n_kont_enter": 1,
+        "n_R_G_NOM": 0,
+        "n_R_POS_dr": 0,
+        "kont_entry_minus_flag_s": 0.092,
+        "refuse_t_kont_s": 22.0,
+        "refuse_cause": "T*",
+        "refuse_r_est": 8.368,
+        "refuse_minus_flag_s": 22.048
+      },
+      "c11_s04_r3": {
+        "n_ticks": 2225,
+        "t_flag_sim": 172.9,
+        "n_kont_enter": 1,
+        "n_R_G_NOM": 0,
+        "n_R_POS_dr": 0,
+        "kont_entry_minus_flag_s": 0.096,
+        "refuse_t_kont_s": 22.048,
+        "refuse_cause": "T*",
+        "refuse_r_est": 16.951,
+        "refuse_minus_flag_s": 22.092
+      }
+    }
+  },
+  "binds": "P1_kont (tau_kont), P7_kont (lustro monitora)",
+  "model_sha256": "afa719fcc0b250f7a448240131029d07311b4960a4cf54415727bebdd0e584d9"
+}
