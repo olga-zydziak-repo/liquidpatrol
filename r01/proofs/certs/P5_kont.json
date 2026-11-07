@@ -4,10 +4,10 @@
   "method": "per-tick konformancja: lustro nakładki (mirror_step) ≡ r03/kont_shield.KontShield (decyzja, powód, reguła, stan, applied, detail, faza, t_KONT, przyczyna, licznik epizodów) oraz tau_kont (P1_kont) ≡ produkcja (decyzja, powód, stan, terminal, faza)",
   "z3_lib": "5.0.0",
   "ticks": {
-    "grid": 382,
+    "grid": 463,
     "fuzz": 4042863,
     "fixture": 17725,
-    "tau": 82681
+    "tau": 82762
   },
   "mismatches": 0,
   "coverage": [
@@ -28,7 +28,9 @@
   ],
   "grid": {
     "path": "results/KONT/s3/p5_kont_grid.json",
-    "sha256": "6fb380a9ebae0cb1fc076d7b4385909c7a8be210e556f2a0f85fa532ea907e36"
+    "sha256": "6fb380a9ebae0cb1fc076d7b4385909c7a8be210e556f2a0f85fa532ea907e36",
+    "s3b_path": "results/KONT/s3/p5_kont_grid_s3b.json",
+    "s3b_sha256": "b239e5626bd1978d1f5c7329cbe35ccff6fdb9d0ec39cf4764d83f91c76181ca"
   },
   "fuzz": {
     "episodes": 100000,
@@ -55,10 +57,10 @@
         "n_R_G_NOM": 0,
         "n_R_POS_dr": 0,
         "kont_entry_minus_flag_s": 0.08,
-        "refuse_t_kont_s": 22.004,
+        "refuse_t_kont_s": 21.908,
         "refuse_cause": "T*",
-        "refuse_r_est": 9.327,
-        "refuse_minus_flag_s": 22.044
+        "refuse_r_est": 9.518,
+        "refuse_minus_flag_s": 21.948
       },
       "c02_s01_r4": {
         "n_ticks": 2244,
@@ -79,10 +81,10 @@
         "n_R_G_NOM": 0,
         "n_R_POS_dr": 0,
         "kont_entry_minus_flag_s": 0.1,
-        "refuse_t_kont_s": 22.016,
+        "refuse_t_kont_s": 21.924,
         "refuse_cause": "T*",
-        "refuse_r_est": 6.312,
-        "refuse_minus_flag_s": 22.068
+        "refuse_r_est": 6.115,
+        "refuse_minus_flag_s": 21.976
       },
       "c08_s02b_r2": {
         "n_ticks": 2277,
@@ -91,10 +93,10 @@
         "n_R_G_NOM": 0,
         "n_R_POS_dr": 0,
         "kont_entry_minus_flag_s": 0.096,
-        "refuse_t_kont_s": 22.008,
+        "refuse_t_kont_s": 21.904,
         "refuse_cause": "T*",
-        "refuse_r_est": 15.249,
-        "refuse_minus_flag_s": 22.06
+        "refuse_r_est": 15.105,
+        "refuse_minus_flag_s": 21.956
       },
       "c08_s04_r3": {
         "n_ticks": 2150,
@@ -103,10 +105,10 @@
         "n_R_G_NOM": 0,
         "n_R_POS_dr": 0,
         "kont_entry_minus_flag_s": 0.096,
-        "refuse_t_kont_s": 22.02,
+        "refuse_t_kont_s": 21.916,
         "refuse_cause": "T*",
-        "refuse_r_est": 15.036,
-        "refuse_minus_flag_s": 22.068
+        "refuse_r_est": 14.852,
+        "refuse_minus_flag_s": 21.964
       },
       "c11_s02_r3": {
         "n_ticks": 2239,
@@ -115,10 +117,10 @@
         "n_R_G_NOM": 0,
         "n_R_POS_dr": 0,
         "kont_entry_minus_flag_s": 0.088,
-        "refuse_t_kont_s": 22.028,
+        "refuse_t_kont_s": 21.932,
         "refuse_cause": "T*",
-        "refuse_r_est": 2.706,
-        "refuse_minus_flag_s": 22.072
+        "refuse_r_est": 2.586,
+        "refuse_minus_flag_s": 21.976
       },
       "c11_s03_r4": {
         "n_ticks": 2239,
@@ -127,10 +129,10 @@
         "n_R_G_NOM": 0,
         "n_R_POS_dr": 0,
         "kont_entry_minus_flag_s": 0.092,
-        "refuse_t_kont_s": 22.0,
+        "refuse_t_kont_s": 21.9,
         "refuse_cause": "T*",
-        "refuse_r_est": 8.368,
-        "refuse_minus_flag_s": 22.048
+        "refuse_r_est": 8.166,
+        "refuse_minus_flag_s": 21.948
       },
       "c11_s04_r3": {
         "n_ticks": 2225,
@@ -139,13 +141,13 @@
         "n_R_G_NOM": 0,
         "n_R_POS_dr": 0,
         "kont_entry_minus_flag_s": 0.096,
-        "refuse_t_kont_s": 22.048,
+        "refuse_t_kont_s": 21.944,
         "refuse_cause": "T*",
-        "refuse_r_est": 16.951,
-        "refuse_minus_flag_s": 22.092
+        "refuse_r_est": 16.764,
+        "refuse_minus_flag_s": 21.988
       }
     }
   },
   "binds": "P1_kont (tau_kont), P7_kont (lustro monitora)",
-  "model_sha256": "afa719fcc0b250f7a448240131029d07311b4960a4cf54415727bebdd0e584d9"
+  "model_sha256": "9d048fb9dead0bafa46e78c3ed2507a66e7fa9109f288f03a0853512708563d0"
 }

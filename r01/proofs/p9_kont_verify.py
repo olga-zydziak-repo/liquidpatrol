@@ -22,10 +22,13 @@ P9_kont (z3, arytmetyka liniowa), dla KAŻDEGO koszyka k ∈ {0…21}:
   3b §1.7); R(k) nierosnąca; ⌊a·dt⌋ ≤ 21 dla każdego wieku a < T*/dt ticków; tablica kont_shield ≡ JSON.
 
 P1_kont (z3, 1-indukcja; wzorzec r01/proofs/verify.py): automat nakładki. Stan (tm, rsn, st, ph), ph ∈
-  {NOM, KONT, KREF}; wejścia geo, mode, pos_bad, auth_ok, kflag (monitor GNSS w utracie), kviol (t_KONT ≥ T* ∨
-  r_est > R(⌊t_KONT⌋)), nom (r_est > R_nom ∧ cel na zewnątrz). Priorytet: latch > R-POS > R-KONT > R-G >
-  R-G-NOM > abort > hold > return > {OBSERVE∧auth | R-AUTH} > patrol. Obligacje P1a–P1h (jak kanon, z
-  przesłankami KONT), P1i–P1n (KONT, R-G-NOM) + nom_applied (NRA): applied R-G-NOM nie ma składowej na zewnątrz.
+  {NOM, KONT, KREF}; wejścia geo, mode, pos_bad, auth_ok, kflag (monitor GNSS w utracie), kviol (t_KONT ≥
+  T* − 2·dt ∨ r_est > R(⌊t_KONT⌋)), nom (r_est > R_nom ∧ cel na zewnątrz). Priorytet (ANEKS_KONT-4 §2.2):
+  latch > R-POS > R-KONT > R-G > abort > hold > return > R-G-NOM > {OBSERVE∧auth | R-AUTH} > patrol. Obligacje
+  P1a–P1h (jak kanon, z przesłankami KONT), P1i–P1o (KONT, R-G-NOM) + nom_applied (NRA).
+
+S3b (ANEKS_KONT-4 §2.1–2.2): próg REFUSE(T*) = T* − 2·dt (dt z r01/config.py:41), R-G-NOM pod abort/hold/return;
+siatka uzupełniająca prereg results/KONT/s3/p5_kont_grid_s3b.json (pierwsza siatka nietknięta).
 
 P7_kont: wyczerpująca enumeracja grafu monitora GNSS + licznika t_KONT (ticki; stałe produkcji: debounce,
   hyst, T*/dt) na LUSTRZE; stara flaga POS: P7_posmon (kanon) + iloczyn obu monitorów enumerowany w pełni na
@@ -61,6 +64,8 @@ CERTS = os.path.join(_HERE, "certs")
 FREEZE = os.path.join(ROOT, "results/KONT/s2/s2_freeze_bf.json")
 FREEZE_SHA256 = "ae19f66c6807de6c824bf0fd723965258b15b77963eb866afb78d3dd3740ae4a"
 GRID = os.path.join(ROOT, "results/KONT/s3/p5_kont_grid.json")
+GRID_S3B = os.path.join(ROOT, "results/KONT/s3/p5_kont_grid_s3b.json")
+T_MARGIN_TICKS = 2                      # ANEKS_KONT-4 §2.1
 R_NOM_STR = "27.30"                     # ANEKS_KONT-3b §1.7
 S2_DIR = os.path.join(ROOT, "results/KONT/s2")
 
@@ -125,6 +130,8 @@ def prove_p9():
         "R_nonincreasing": all(R_of(c, k + 1) <= R_of(c, k) for k in range(T - 1)),
         "dt_is_1_20": _fr(CFG_DT) == dt,
         "bucket_index_le_21": all(math.floor(a * dt) <= T - 1 for a in range(int(T / dt))),
+        "refuse_threshold_T_minus_2dt": (Fraction(T) - T_MARGIN_TICKS * dt == Fraction(219, 10)
+                                         and KS.T_MARGIN_TICKS == T_MARGIN_TICKS),
         "kont_shield_table_eq_json": (list(KS.EPS_B) == [float(x) for x in c["eps"][:T]]
                                       and _fr(KS.DELTA_D5) == c["delta"] and KS.T_STAR_S == T
                                       and Fraction(str(KS.R_NOM)) == c["r_nom"]
@@ -150,7 +157,7 @@ def mirror_consts():
     th = FM.shield_thresholds()
     c = load_freeze()
     T = c["tstar"]
-    return {**th, "tstar": T, "R_k": [float(c["r_e"] - c["d_stop"]) - float(c["eps"][k]) - float(c["delta"])
+    return {**th, "tstar": T, "tstar_thr": T - T_MARGIN_TICKS * th["dt"], "R_k": [float(c["r_e"] - c["d_stop"]) - float(c["eps"][k]) - float(c["delta"])
                                       for k in range(T)],
             "eps": [float(x) for x in c["eps"][:T]], "delta": float(c["delta"]),
             "d_stop": float(c["d_stop"]), "r_nom": float(c["r_nom"])}
@@ -233,7 +240,7 @@ def mirror_step(st, k, inp, C):
     g = st["g"]
     cs = inp.get("cs_gnss_pos")
     g_monitor_step(g, None if cs is None else (not cs), now, C["debounce_ticks"], C["hyst_ticks"])
-    g_barrier_step(g, now, lambda t: r_est > C["R_k"][int(math.floor(t))], C["tstar"])
+    g_barrier_step(g, now, lambda t: r_est > C["R_k"][int(math.floor(t))], C["tstar_thr"])
     FM.pos_monitor_step(st["pos"], inp.get("pos_flag"), C["debounce_ticks"], C["hyst_ticks"])
     hold = [float(pos[0]), float(pos[1]), float(pos[2])]
     mode, auth_ok = inp.get("mode", M_PATROL), inp.get("auth_ok", True)
@@ -258,11 +265,6 @@ def mirror_step(st, k, inp, C):
         st["terminal"] = (GEOFENCE, "R-G"); st["state"] = DONE
         return out({"state": DONE, "decision": REFUSE, "reason": GEOFENCE, "rule": "R-G", "detail": detail,
                     "applied": hold})
-    if r_est > C["r_nom"] and m_outward(pos, target) > 0.0:
-        ax, ay = m_strip(float(target[0]) - float(pos[0]), float(target[1]) - float(pos[1]), pos)
-        return out({"state": st["state"], "decision": REFUSE, "reason": GEOFENCE, "rule": "R-G-NOM",
-                    "detail": f"r_est>R_nom ({r_est:.2f}>{C['r_nom']:.2f}), składowa na zewnątrz odjęta",
-                    "applied": [float(pos[0]) + ax, float(pos[1]) + ay, float(target[2])]})
     if mode == M_ABORT:
         st["terminal"] = (ABORT, "R-A"); st["state"] = DONE
         return out({"state": DONE, "decision": REFUSE, "reason": ABORT, "rule": "R-A",
@@ -274,6 +276,11 @@ def mirror_step(st, k, inp, C):
         st["state"] = RETURNING
         return out({"state": RETURNING, "decision": HOLD, "reason": None, "rule": "R-R",
                     "detail": "return→RTL(MAVSDK)", "applied": hold})
+    if r_est > C["r_nom"] and m_outward(pos, target) > 0.0:
+        ax, ay = m_strip(float(target[0]) - float(pos[0]), float(target[1]) - float(pos[1]), pos)
+        return out({"state": st["state"], "decision": REFUSE, "reason": GEOFENCE, "rule": "R-G-NOM",
+                    "detail": f"r_est>R_nom ({r_est:.2f}>{C['r_nom']:.2f}), składowa na zewnątrz odjęta",
+                    "applied": [float(pos[0]) + ax, float(pos[1]) + ay, float(target[2])]})
     tg = [float(target[0]), float(target[1]), float(target[2])]
     if mode == M_OBSERVE:
         if not auth_ok:
@@ -323,11 +330,12 @@ def _p1_model():
         a2 = z3.And(a1, z3.Not(kref))
         L_geo = z3.And(a2, geo)
         a3 = z3.And(a2, z3.Not(geo))
-        L_nom = z3.And(a3, nom)
-        ok = z3.And(a3, z3.Not(nom))
-        L_abort = z3.And(ok, mode == V.M_ABORT)
-        L_hold = z3.And(ok, mode == V.M_HOLD)
-        L_return = z3.And(ok, mode == V.M_RETURN)
+        L_abort = z3.And(a3, mode == V.M_ABORT)
+        L_hold = z3.And(a3, mode == V.M_HOLD)
+        L_return = z3.And(a3, mode == V.M_RETURN)
+        auton = z3.And(a3, mode != V.M_ABORT, mode != V.M_HOLD, mode != V.M_RETURN)
+        L_nom = z3.And(auton, nom)
+        ok = z3.And(auton, z3.Not(nom))
         L_observe = z3.And(ok, mode == V.M_OBSERVE, auth_ok)
         L_auth = z3.And(ok, mode == V.M_OBSERVE, z3.Not(auth_ok))
         L_patrol = z3.And(ok, mode == V.M_PATROL)
@@ -381,13 +389,19 @@ def prove_p1():
         "P1k_exit_only_by_monitor": z3.And(z3.Implies(z3.Not(kflag), cp["ph"] == NOM),
                                            z3.Implies(z3.And(c["ph"] == KREF, cp["ph"] != KREF), z3.Not(kflag))),
         "P1l_rgnom_nonlatch_state_kept": z3.Implies(z3.And(z3.Not(tm), z3.Not(pos_bad), z3.Not(kref2),
-                                                           z3.Not(geo), nom),
+                                                           z3.Not(geo), nom,
+                                                           z3.Or(mode == V.M_PATROL, mode == V.M_OBSERVE)),
                                                     z3.And(dec == V.REFUSE, rsn == V.GEOFENCE,
                                                            z3.Not(cp["tm"]), cp["st"] == c["st"])),
         "P1m_order_pos_kont_over_geo_over_nom": z3.And(
             z3.Implies(z3.And(z3.Not(tm), pos_bad), z3.Not(cp["tm"])),
             z3.Implies(z3.And(z3.Not(tm), kref2), z3.Not(cp["tm"])),
             z3.Implies(z3.And(z3.Not(tm), z3.Not(pos_bad), z3.Not(kref2), geo), cp["tm"])),
+        "P1o_abort_hold_return_over_nom": z3.Implies(
+            z3.And(z3.Not(tm), z3.Not(pos_bad), z3.Not(kref2), z3.Not(geo)),
+            z3.And(z3.Implies(mode == V.M_ABORT, z3.And(dec == V.REFUSE, rsn == V.ABORT_R, cp["tm"])),
+                   z3.Implies(mode == V.M_HOLD, z3.And(dec == V.HOLD, cp["st"] == V.HOLDING)),
+                   z3.Implies(mode == V.M_RETURN, z3.And(dec == V.HOLD, cp["st"] == V.RETURNING)))),
         "P1n_kont_allow_needs_no_violation": z3.Implies(z3.And(dec == V.ALLOW, kflag),
                                                          z3.And(z3.Not(kviol), c["ph"] != KREF)),
     }
@@ -465,7 +479,7 @@ def prove_p7():
     c = load_freeze()
     deb, hyst = th["debounce_ticks"], th["hyst_ticks"]
     dt = _fr(th["dt"])
-    tt_fr = Fraction(c["tstar"]) / dt
+    tt_fr = (Fraction(c["tstar"]) - T_MARGIN_TICKS * dt) / dt          # próg REFUSE(T*) w tickach
     assert tt_fr.denominator == 1
     tt = int(tt_fr)
     init, nodes, edges = build_g_graph(deb, hyst, tt)
@@ -608,7 +622,7 @@ def run_conformance_episode(ticks, C, hyst=None, coverage=None, tau_bind=False, 
             c = {"tm": z3.BoolVal(pre["tm"]), "rsn": z3.IntVal(pre["rsn"]), "st": z3.IntVal(pre["st"]),
                  "ph": z3.IntVal(pre["ph"])}
             t = sh._t_kont
-            kviol = bool(sh._kont and t is not None and (t >= C["tstar"] or
+            kviol = bool(sh._kont and t is not None and (t >= C["tstar_thr"] or
                          sh._r_est > C["R_k"][int(math.floor(t))]))
             nom = bool(sh._r_est > C["r_nom"] and m_outward(inp["pos"], inp["target"]) > 0.0)
             cp, dec, rsn, _ = tau(c, z3.BoolVal(geo), z3.IntVal(MODE_ID[inp.get("mode", M_PATROL)]),
@@ -690,6 +704,36 @@ def build_grid(C):
     return {"provenance": {"prover": "r01/proofs/p9_kont_verify.py:build_grid", "debounce": deb, "hyst": hyst,
                            "T_star_s": T, "dt": dt, "R_nom": C["r_nom"],
                            "note": "NIETYKALNE po commicie (prereg). Zmiana ⇒ dokument CC."},
+            "episodes": eps}
+
+
+def build_grid_s3b(C):
+    """Siatka uzupełniająca S3b (prereg, przed pierwszym biegiem P5 po poprawce): brzeg progu T* − 2·dt
+    (ANEKS_KONT-4 §2.1) i R-G-NOM względem trybów (§2.2). Pierwsza siatka (p5_kont_grid.json) nietknięta."""
+    dt, thr = C["dt"], C["tstar_thr"]
+    eps = []
+    IN = (5.0, 0.0, -10.0)
+
+    def run(name, seq):
+        eps.append({"name": name, "hyst": None, "latch": None, "ticks": seq})
+
+    for tend in (thr - dt, thr - 0.001, thr, thr + 0.001):
+        run(f"q1_thr_{tend:.3f}", [_tick(IN, cs_gnss_pos=False, now=x) for x in (0.0, dt, 10.0, 21.0, tend)])
+    n = int(round(1.0 / dt))
+    run("q1_fine_clock_21_22", [_tick(IN, cs_gnss_pos=False, now=x) for x in (0.0, dt)] +
+        [_tick(IN, cs_gnss_pos=False, now=21.0 + i * dt) for i in range(n + 1)])
+    r = C["r_nom"] + 0.01
+    out_tgt = (r + 1.0, 0.5, -10.0)
+    for md, auth in ((M_ABORT, True), (M_HOLD, True), (M_RETURN, True), (M_OBSERVE, True), (M_OBSERVE, False),
+                     (M_PATROL, True)):
+        for cs, tag in ((True, "nom"), (False, "kont")):
+            seq = [_tick((r, 0.0, -10.0), target=out_tgt, mode=md, auth_ok=auth, cs_gnss_pos=cs, now=i * dt)
+                   for i in range(3)]
+            run(f"q2_{md}_{'auth' if auth else 'noauth'}_{tag}", seq)
+    run("q2_hold_then_patrol", [_tick((r, 0.0, -10.0), target=out_tgt, mode=M_HOLD, cs_gnss_pos=True, now=0.0),
+                                _tick((r, 0.0, -10.0), target=out_tgt, mode=M_PATROL, cs_gnss_pos=True, now=dt)])
+    return {"provenance": {"prover": "r01/proofs/p9_kont_verify.py:build_grid_s3b", "T_star_thr": thr, "dt": dt,
+                           "R_nom": C["r_nom"], "note": "prereg S3b (ANEKS_KONT-4); NIETYKALNE po commicie."},
             "episodes": eps}
 
 
@@ -805,6 +849,7 @@ def s2_offline_decisions(flight, C):
 def prove_p5(fuzz_n=100000, tau_random=2000, seed0=0):
     C = mirror_consts()
     grid = json.load(open(GRID))
+    grid["episodes"] = grid["episodes"] + json.load(open(GRID_S3B))["episodes"]
     cov = set()
     mism = []
     n_ticks = {"grid": 0, "fuzz": 0, "fixture": 0, "tau": 0}
@@ -893,8 +938,9 @@ def main_p1():
     _write("P1_kont.json", {
         "property": "P1_kont", "verdict": "PROVED", "method": "1-induction (z3) + NRA (nom_applied)",
         "z3_lib": z3.get_version_string(), "obligations": res, "leaves": 11,
-        "automaton": "r03/kont_shield.py:KontShield._decide (KONT_MODE=1): latch > R-POS > R-KONT > R-G > R-G-NOM > "
-                     "abort > hold > return > {OBSERVE∧auth_ok | R-AUTH} > patrol; faza ph ∈ {NOMINAL, KONT, KONT_REFUSE}",
+        "automaton": "r03/kont_shield.py:KontShield._decide (KONT_MODE=1): latch > R-POS > R-KONT > R-G > abort > hold > "
+                     "return > R-G-NOM > {OBSERVE∧auth_ok | R-AUTH} > patrol (ANEKS_KONT-4 §2.2); faza ph ∈ "
+                     "{NOMINAL, KONT, KONT_REFUSE}",
         "properties": {
             "P1a": "ALLOW ⇒ ¬geo ∧ ¬pos_bad ∧ ¬terminal ∧ ph'≠KONT_REFUSE ∧ ¬nom",
             "P1b": "geo ⇒ REFUSE; ¬term ∧ ¬pos ∧ ph'≠KREF ∧ geo ⇒ reason=GEOFENCE ∧ terminal'",
@@ -905,9 +951,10 @@ def main_p1():
             "P1i": "ph'=KONT_REFUSE ∧ ¬term ⇒ REFUSE(POS_DEGRADED) ∧ ¬terminal' ∧ st'=POSDEG (odwracalny jak POS_DEGRADED)",
             "P1j": "KONT_REFUSE zatrzaśnięty, dopóki monitor GNSS w utracie",
             "P1k": "powrót do NOMINAL wyłącznie przez monitor (¬kflag)",
-            "P1l": "R-G-NOM: REFUSE(GEOFENCE) bez zatrzasku, stan bez zmian",
+            "P1l": "R-G-NOM (PATROL/OBSERVE): REFUSE(GEOFENCE) bez zatrzasku, stan bez zmian",
+            "P1o": "ABORT/HOLD/RETURN ponad R-G-NOM: wynik niezależny od nom (ANEKS_KONT-4 §2.2)",
             "P1m": "kolejność frozen latch > R-POS > R-G (+ R-KONT w klasie R-POS) — ANEKS_KONT-3b §1.1",
-            "P1n": "ALLOW w KONT ⇒ ¬kviol (t_KONT < T* ∧ r_est ≤ R(⌊t_KONT⌋)) ∧ faza ≠ KONT_REFUSE",
+            "P1n": "ALLOW w KONT ⇒ ¬kviol (t_KONT < T* − 2·dt ∧ r_est ≤ R(⌊t_KONT⌋)) ∧ faza ≠ KONT_REFUSE",
             "nom_applied": "applied R-G-NOM: (applied−p)·p ≤ 0, składowa styczna zachowana (NRA)"},
         "assumptions": ["geo/pos_bad/kflag/kviol/nom = predykaty liczone w kodzie; arytmetyka bariery = P9_kont, "
                         "monitory = P7_kont/P7_posmon, zgodność kod↔model = P5_kont.",
@@ -931,19 +978,30 @@ def main_p7():
                   "enumerowany na instancji zredukowanej; z3-duplikat kroku",
         "obligations": res, "checks": chk, "z3_duplicate": z,
         "theorem": "(a) wejście w KONT tylko na fladze utraty po debounce, zegar cofnięty o debounce−1 ticków; "
-                   "(b) brak ALLOW w KONT przy wieku ≥ T*/dt, REFUSE dokładnie przy wieku T*/dt (bez naruszenia bariery); "
+                   "(b) brak ALLOW w KONT przy wieku ≥ (T* − 2·dt)/dt = 438 ticków, REFUSE dokładnie przy tym wieku "
+                   "(bez naruszenia bariery; ANEKS_KONT-4 §2.1); "
                    "(c) wyjście do NOMINAL tylko po hyst zdrowych tickach, czyści KONT_REFUSE; "
                    "(d) KONT_REFUSE trwa do wyjścia; (e) min cykl ponownego wejścia = hyst + debounce (drugi epizod); "
                    "(f) REFUSE z bariery osiągalny w każdym wieku < T*",
         "abstraction": "g_bad saturowany do debounce (czytany tylko przez ≥debounce, jak P7_posmon); wiek saturowany "
-                       "do T*/dt (czytany tylko przez ≥T* — bariera jest wejściem wolnym `bar`); zegar w tickach "
-                       "(now = k·dt). Produkcja liczy t_KONT z `now` zmiennoprzecinkowego: REFUSE przy t_KONT ≥ 22.0 "
-                       "z dokładnością ±1 tick (T1).",
+                       "do progu (T* − 2·dt)/dt (czytany tylko przez ≥ próg — bariera jest wejściem wolnym `bar`); zegar "
+                       "w tickach (now = k·dt). Produkcja liczy t_KONT z `now` zmiennoprzecinkowego: REFUSE przy "
+                       "t_KONT ≥ 21.9 z dokładnością ±1 tick (T1).",
         "composition": "monitor POS (P7_posmon, kanon) i monitor GNSS nie dzielą zmiennych ani wejść; osiągalny "
                        "iloczyn = iloczyn kartezjański (sprawdzone pełną enumeracją na instancji zredukowanej).",
         "constants": {"debounce_source": "r01/shield.py:72 (instancja)", "hyst_source": "r01/shield.py:73-74",
-                      "T_star_ticks": res["graph"]["T_ticks"]},
+                      "T_star_s": 22, "T_margin_ticks": T_MARGIN_TICKS,
+                      "refuse_threshold_ticks": res["graph"]["T_ticks"]},
         "model_sha256": _self_sha()})
+
+
+def main_grid_s3b():
+    if os.path.exists(GRID_S3B):
+        print(f"siatka S3b istnieje ({GRID_S3B}) — prereg nietykalna, nie nadpisuję")
+        return
+    g = build_grid_s3b(mirror_consts())
+    json.dump(g, open(GRID_S3B, "w"), indent=1, ensure_ascii=False)
+    print(f"siatka S3b zapisana: {GRID_S3B} ({len(g['episodes'])} epizodów)")
 
 
 def main_grid():
@@ -975,7 +1033,9 @@ def main_p5():
                   "reguła, stan, applied, detail, faza, t_KONT, przyczyna, licznik epizodów) oraz tau_kont (P1_kont) ≡ "
                   "produkcja (decyzja, powód, stan, terminal, faza)",
         "z3_lib": z3.get_version_string(), "ticks": n, "mismatches": 0, "coverage": cov,
-        "grid": {"path": "results/KONT/s3/p5_kont_grid.json", "sha256": grid_sha},
+        "grid": {"path": "results/KONT/s3/p5_kont_grid.json", "sha256": grid_sha,
+                 "s3b_path": "results/KONT/s3/p5_kont_grid_s3b.json",
+                 "s3b_sha256": hashlib.sha256(open(GRID_S3B, "rb").read()).hexdigest()},
         "fuzz": {"episodes": 100000, "seed": 0, "tau_bound_episodes": 2000},
         "fixture_s2": {"flights": s2_flights(), "reconstruction": "ANEKS_KONT-3b §1.5 (s2_fixture)",
                        "offline_decisions": fx},
@@ -987,6 +1047,8 @@ def main():
     cmd = sys.argv[1] if len(sys.argv) > 1 else "all"
     if cmd == "grid":
         return main_grid()
+    if cmd == "grid_s3b":
+        return main_grid_s3b()
     for name, fn in (("p9", main_p9), ("p1", main_p1), ("p7", main_p7), ("p5", main_p5)):
         if cmd in (name, "all"):
             fn()

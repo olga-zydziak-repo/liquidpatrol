@@ -4,14 +4,14 @@
   "method": "wyczerpująca enumeracja osiągalnego grafu monitora GNSS + licznika t_KONT (BFS, stałe produkcji) na lustrze (g_monitor_step/g_barrier_step ≡ produkcja, P5_kont); iloczyn z monitorem POS enumerowany na instancji zredukowanej; z3-duplikat kroku",
   "obligations": {
     "a_min_lost_run_to_enter": 2,
-    "b_max_age_kont_allow_ticks": 439,
-    "b_min_ticks_enter_to_refuse_by_time_no_bar": 439,
+    "b_max_age_kont_allow_ticks": 437,
+    "b_min_ticks_enter_to_refuse_by_time_no_bar": 437,
     "c_min_healthy_run_to_exit": 100,
     "e_min_reenter_cycle": 102,
     "graph": {
-      "n_states": 78877,
-      "n_edges": 315508,
-      "T_ticks": 440,
+      "n_states": 78473,
+      "n_edges": 313892,
+      "T_ticks": 438,
       "debounce": 2,
       "hyst": 100
     },
@@ -45,13 +45,15 @@
     "z3_d_kref_sticky": "unsat",
     "z3_inv_step": "unsat"
   },
-  "theorem": "(a) wejście w KONT tylko na fladze utraty po debounce, zegar cofnięty o debounce−1 ticków; (b) brak ALLOW w KONT przy wieku ≥ T*/dt, REFUSE dokładnie przy wieku T*/dt (bez naruszenia bariery); (c) wyjście do NOMINAL tylko po hyst zdrowych tickach, czyści KONT_REFUSE; (d) KONT_REFUSE trwa do wyjścia; (e) min cykl ponownego wejścia = hyst + debounce (drugi epizod); (f) REFUSE z bariery osiągalny w każdym wieku < T*",
-  "abstraction": "g_bad saturowany do debounce (czytany tylko przez ≥debounce, jak P7_posmon); wiek saturowany do T*/dt (czytany tylko przez ≥T* — bariera jest wejściem wolnym `bar`); zegar w tickach (now = k·dt). Produkcja liczy t_KONT z `now` zmiennoprzecinkowego: REFUSE przy t_KONT ≥ 22.0 z dokładnością ±1 tick (T1).",
+  "theorem": "(a) wejście w KONT tylko na fladze utraty po debounce, zegar cofnięty o debounce−1 ticków; (b) brak ALLOW w KONT przy wieku ≥ (T* − 2·dt)/dt = 438 ticków, REFUSE dokładnie przy tym wieku (bez naruszenia bariery; ANEKS_KONT-4 §2.1); (c) wyjście do NOMINAL tylko po hyst zdrowych tickach, czyści KONT_REFUSE; (d) KONT_REFUSE trwa do wyjścia; (e) min cykl ponownego wejścia = hyst + debounce (drugi epizod); (f) REFUSE z bariery osiągalny w każdym wieku < T*",
+  "abstraction": "g_bad saturowany do debounce (czytany tylko przez ≥debounce, jak P7_posmon); wiek saturowany do progu (T* − 2·dt)/dt (czytany tylko przez ≥ próg — bariera jest wejściem wolnym `bar`); zegar w tickach (now = k·dt). Produkcja liczy t_KONT z `now` zmiennoprzecinkowego: REFUSE przy t_KONT ≥ 21.9 z dokładnością ±1 tick (T1).",
   "composition": "monitor POS (P7_posmon, kanon) i monitor GNSS nie dzielą zmiennych ani wejść; osiągalny iloczyn = iloczyn kartezjański (sprawdzone pełną enumeracją na instancji zredukowanej).",
   "constants": {
     "debounce_source": "r01/shield.py:72 (instancja)",
     "hyst_source": "r01/shield.py:73-74",
-    "T_star_ticks": 440
+    "T_star_s": 22,
+    "T_margin_ticks": 2,
+    "refuse_threshold_ticks": 438
   },
-  "model_sha256": "afa719fcc0b250f7a448240131029d07311b4960a4cf54415727bebdd0e584d9"
+  "model_sha256": "9d048fb9dead0bafa46e78c3ed2507a66e7fa9109f288f03a0853512708563d0"
 }

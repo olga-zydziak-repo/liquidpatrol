@@ -10,15 +10,17 @@ Reżim KONT (kont_mode=True) dodaje do gramatyki:
     self.pos_hyst_ticks, r01/shield.py:72-74 — czytane z instancji, nie przepisane liczbą);
   - zegar t_KONT liczony od PIERWSZEGO ticka biegu flagi, który dał wejście (cofnięcie o debounce,
     ANEKS_KONT-3b §1.3); koszyk ε_b = ⌊t_KONT⌋;
-  - R-KONT: w KONT ALLOW ⇔ t_KONT < T* ∧ r_est ≤ R_E − d_stop − ε_b(⌊t_KONT⌋) − Δ_D5; pierwsze niespełnienie ⇒
+  - R-KONT: w KONT ALLOW ⇔ t_KONT < T* − 2·dt ∧ r_est ≤ R_E − d_stop − ε_b(⌊t_KONT⌋) − Δ_D5 (margines tickowy:
+    ANEKS_KONT-4 §2.1, dt = self.cfg.dt = r01/config.py:41 DT); pierwsze niespełnienie ⇒
     REFUSE(POS_DEGRADED) zatrzaśnięty do powrotu NOMINAL (odwracalny jak POS_DEGRADED: flaga zdrowa ≥ M);
     akcja = D5 + trzymanie yaw (warstwa komend: r03/kont_gate.py);
   - R-G-NOM: r_est > R_nom ∧ cel na zewnątrz ⇒ REFUSE(GEOFENCE, rule R-G-NOM) BEZ zatrzasku, stan bez zmian,
-    applied = cel bez składowej radialnej na zewnątrz (ANEKS_KONT-3b §1.2);
+    applied = cel bez składowej radialnej na zewnątrz (ANEKS_KONT-3b §1.2); tylko ruch autonomiczny (PATROL,
+    OBSERVE) — ABORT/HOLD/RETURN dostają cele nietknięte (ANEKS_KONT-4 §2.2);
   - stary monitor POS (pos_flag = dead_reckoning) zostaje uzbrojony (ANEKS_KONT-3b §1.4).
-Priorytet: latch > R-POS > R-KONT > R-G > R-G-NOM > abort > hold > return > {OBSERVE|R-AUTH} > patrol
-(latch > R-POS > R-G frozen, shield.py:153-166; R-KONT to istniejące REFUSE(POS) PRE_KONT §2.6, więc w klasie
-R-POS, ponad R-G z tego samego powodu co shield.py:154; R-G-NOM poniżej R-G, ponad abort — ANEKS_KONT-3b §1.2).
+Priorytet: latch > R-POS > R-KONT > R-G > abort > hold > return > R-G-NOM > {OBSERVE|R-AUTH} > patrol
+(latch > R-POS > R-G frozen, shield.py:153-166; R-KONT w klasie R-POS, ponad R-G — ANEKS_KONT-4 §2.3; R-G-NOM
+bezpośrednio nad klasą ALLOW — ANEKS_KONT-4 §2.2).
 
 TCB minimalny: nakładka dostaje gotowe cs_gnss_pos, r_est i zegar pętli `now`; zero percepcji.
 """
@@ -28,7 +30,7 @@ import math
 import os
 
 from r01.config import DELTA_MARGIN
-from r01.shield import PatrolShield, REFUSE, POS_DEGRADED, GEOFENCE, POSDEG, M_PATROL
+from r01.shield import PatrolShield, REFUSE, POS_DEGRADED, GEOFENCE, POSDEG, M_PATROL, M_ABORT, M_HOLD, M_RETURN
 
 # --- zamrożenie (ANEKS_KONT-3 §2 + ANEKS_KONT-3b §1.7); nośnik: s2_freeze_bf.json, wartości wkompilowane ---
 FREEZE_PATH = "results/KONT/s2/s2_freeze_bf.json"
@@ -37,6 +39,7 @@ EPS_B = (0.323, 0.462, 0.789, 1.392, 1.866, 2.362, 2.598, 2.833, 2.969, 3.105, 3
          3.478, 3.478, 3.478, 3.478, 3.478, 3.478, 3.478, 3.478, 3.478, 3.478, 3.738)   # eps_b_obwiednia[0:22]
 DELTA_D5 = 1.524                 # 1.5 × 1.016 (zejścia Y)
 T_STAR_S = 22                    # KONT trwa, dopóki t_KONT < T*
+T_MARGIN_TICKS = 2               # REFUSE(T*) przy t_KONT ≥ T* − 2·dt (ANEKS_KONT-4 §2.1)
 R_NOM = 27.30                    # ANEKS_KONT-3b §1.7 (27.51 → 27.30, bariera koszyka 0 = 27.303)
 D_STOP = DELTA_MARGIN            # 2.85 (r01/config.py:27)
 
@@ -97,7 +100,7 @@ def freeze_check(root="."):
 def kont_echo(shield) -> dict:
     """Echo do manifestu (PROMPT_KONT_S3 §1)."""
     return {"KONT_MODE": int(bool(shield.kont_mode)), "T_star_s": T_STAR_S, "R_nom": R_NOM,
-            "delta_D5": DELTA_D5, "d_stop": D_STOP, "freeze_sha256": FREEZE_SHA256,
+            "delta_D5": DELTA_D5, "d_stop": D_STOP, "T_margin_ticks": T_MARGIN_TICKS, "freeze_sha256": FREEZE_SHA256,
             "debounce_ticks": shield.pos_debounce_ticks, "hyst_ticks": shield.pos_hyst_ticks}
 
 
@@ -151,7 +154,7 @@ class KontShield(PatrolShield):
         self._t_kont = t
         if self._kont_refuse:
             return
-        if t >= T_STAR_S:
+        if t >= T_STAR_S - T_MARGIN_TICKS * self.cfg.dt:
             self._kont_refuse, self.kont_cause = True, CAUSE_TSTAR
         elif r_est > r_kont(int(math.floor(t)), self.cfg.r_e):
             self._kont_refuse, self.kont_cause = True, CAUSE_BARRIER
@@ -194,8 +197,8 @@ class KontShield(PatrolShield):
         # R-G (frozen, zatrzask)
         if self._geofence_violation(pos, vel, target)[0]:
             return super()._decide(k, pos, vel, target, mode, auth_ok)
-        # R-G-NOM: prewencyjny, bez zatrzasku, stan bez zmian
-        if self._r_est > R_NOM and outward(pos, target) > 0.0:
+        # R-G-NOM: prewencyjny, bez zatrzasku, stan bez zmian; poniżej abort/hold/return (ANEKS_KONT-4 §2.2)
+        if mode not in (M_ABORT, M_HOLD, M_RETURN) and self._r_est > R_NOM and outward(pos, target) > 0.0:
             ax, ay = strip_outward((float(target[0]) - float(pos[0]), float(target[1]) - float(pos[1])), pos)
             return {"k": k, "state": self.state, "decision": REFUSE, "reason": GEOFENCE, "rule": R_G_NOM,
                     "detail": f"r_est>R_nom ({self._r_est:.2f}>{R_NOM:.2f}), składowa na zewnątrz odjęta",

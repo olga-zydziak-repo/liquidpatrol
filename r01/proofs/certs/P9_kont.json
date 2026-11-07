@@ -144,6 +144,7 @@
     "R_nonincreasing": true,
     "dt_is_1_20": true,
     "bucket_index_le_21": true,
+    "refuse_threshold_T_minus_2dt": true,
     "kont_shield_table_eq_json": true
   },
   "numbers": {
@@ -222,5 +223,5 @@
     "bariera": "r03/kont_shield.py:r_kont/_kont_barrier",
     "prover": "r01/proofs/p9_kont_verify.py"
   },
-  "model_sha256": "afa719fcc0b250f7a448240131029d07311b4960a4cf54415727bebdd0e584d9"
+  "model_sha256": "9d048fb9dead0bafa46e78c3ed2507a66e7fa9109f288f03a0853512708563d0"
 }

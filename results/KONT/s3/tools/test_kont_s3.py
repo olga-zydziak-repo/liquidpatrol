@@ -2,7 +2,9 @@
 
 T0 pass-through: KONT_MODE=0 ⇒ decyzje bajtowo identyczne ze starą osłoną na fiksturze 8 lotów S2 i fiksturze FV
    (4221/1791 ticków), wejścia zrekonstruowane (ANEKS_KONT-3b §1.5); FV dodatkowo vs decyzje zapisane w trace.
-T1 maszyna stanów, T2 bariera nominalna (R_nom = 27.30, ANEKS_KONT-3b §1.7), T3 tablica ε_b, T4 trzymanie yaw.
+T1 maszyna stanów (próg T* − 2·dt, ANEKS_KONT-4 §2.1), T1′ wiek flagi przy REFUSE < 22.000 s na 8 fiksturach S2,
+T2 bariera nominalna (R_nom = 27.30, ANEKS_KONT-3b §1.7; R-G-NOM pod ABORT/HOLD/RETURN, ANEKS_KONT-4 §2.2),
+T3 tablica ε_b, T4 trzymanie yaw.
 
 Uruchom: PYTHONPATH=.:.certdeps python3 -m pytest -q results/KONT/s3/tools/test_kont_s3.py
 """
@@ -18,7 +20,8 @@ if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
 
 import r03.config as C
-from r01.shield import PatrolShield, ALLOW, REFUSE, POS_DEGRADED, GEOFENCE, M_PATROL
+from r01.shield import (PatrolShield, ALLOW, HOLD, REFUSE, POS_DEGRADED, GEOFENCE, ABORT, M_PATROL, M_ABORT,
+                        M_HOLD, M_RETURN, M_OBSERVE)
 from r03 import kont_shield as KS
 from r03.kont_shield import KontShield, R_NOM, T_STAR_S, r_kont, K_NOMINAL, K_KONT, K_REFUSE
 from r03.kont_gate import KontCommand, is_pos_refuse
@@ -128,9 +131,18 @@ def test_t1_refuse_at_tstar_within_tick():
             last_allow = d["kont"]["t_kont"]
         elif first_ref is None:
             first_ref = d
-    assert last_allow < T_STAR_S
+    thr = T_STAR_S - KS.T_MARGIN_TICKS * DT                   # 21.9 (DT = r01/config.py:41 przez r03/config)
+    assert last_allow < thr
     assert first_ref["rule"] == KS.R_KONT and first_ref["reason"] == POS_DEGRADED and first_ref["detail"] == "T*"
-    assert T_STAR_S - 1e-9 <= first_ref["kont"]["t_kont"] <= T_STAR_S + DT + 1e-9
+    assert thr - 1e-9 <= first_ref["kont"]["t_kont"] <= thr + DT + 1e-9
+
+
+def test_t1prim_true_flag_age_at_refuse_below_22():
+    C_ = P.mirror_consts()
+    for fl in P.s2_flights():
+        o = P.s2_offline_decisions(fl, C_)
+        assert o["n_kont_enter"] == 1, (fl, o)
+        assert o["refuse_minus_flag_s"] < 22.000, (fl, o)     # ANEKS_KONT-4 §2.1
 
 
 def test_t1_barrier_per_bucket():
@@ -196,6 +208,20 @@ def test_t2_nominal_barrier():
     v = kc.patrol({"rule": KS.R_G_NOM}, (2.0, 1.5, 0.0), 10.0, (r, 0.0, -10.0))
     assert v == (0.0, 1.5, 0.0, 10.0)
     assert KontCommand(False).patrol({"rule": KS.R_G_NOM}, (2.0, 1.5, 0.0), 10.0, (r, 0.0, -10.0))[0] == 2.0
+
+
+def test_t2_nominal_barrier_below_abort_hold_return():
+    r = R_NOM + 0.01
+    out = (r + 1.0, 0.5, -10.0)
+    for md, rule, dec in ((M_HOLD, "R-H", HOLD), (M_RETURN, "R-R", HOLD), (M_ABORT, "R-A", REFUSE)):
+        for cs in (True, False):
+            s = _mk()
+            d = _st(s, 0, pos=(r, 0.0, -10.0), target=out, cs=cs, mode=md)
+            assert d["rule"] == rule and d["decision"] == dec, (md, cs, d)
+            assert d["applied"] == [r, 0.0, -10.0]             # cel/zawis nietknięty przez R-G-NOM
+    s = _mk()
+    d = s.step(0, (r, 0.0, -10.0), V0, out, mode=M_OBSERVE, auth_ok=False, cs_gnss_pos=True)
+    assert d["rule"] == KS.R_G_NOM                            # R-G-NOM nad R-AUTH (klasa ALLOW)
 
 
 # ------------------------------------ T3 --------------------------------------

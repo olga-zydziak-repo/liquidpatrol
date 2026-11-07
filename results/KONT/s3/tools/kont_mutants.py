@@ -3,7 +3,7 @@
 r01/proofs/tests_fv_mutants.py; ANEKS_KONT-3b §1.6).
 
 Adekwatność różnicówki: dla KAŻDEGO mutanta z katalogu MUTANTS (prereg, niżej) istnieje ≥ 1 rozbieżność
-mutant-lustro ↔ produkcja (r03/kont_shield.KontShield) na siatce prereg ∪ fiksturze S2 ∪ fuzz (ziarno 1,
+mutant-lustro ↔ produkcja (r03/kont_shield.KontShield) na siatkach prereg (S3 + S3b) ∪ fiksturze S2 ∪ fuzz (ziarno 1,
 2000 epizodów). Mutacja = podmiana tekstu w źródle funkcji lustra w pamięci (dokładnie jedno wystąpienie,
 asercja); p9_kont_verify.py na dysku NIETKNIĘTY. Wyjątek mutanta liczy się jako wykrycie.
 
@@ -47,6 +47,9 @@ MUTANTS = [
      'if g["kref"] and not FM.geofence_violation(pos, vel, target, C["r_e"], C["v_e"], C["v_max"], C["a_brake"])[0]:\n        st["state"] = POSDEG'),
     ("p_nom_above_geo", "mirror_step", "    if viol:\n", "    if viol and not (r_est > C[\"r_nom\"] and m_outward(pos, target) > 0.0):\n"),
     ("p_pos_disarmed_in_kont", "mirror_step", 'if st["pos"]["pos_refuse"]:', 'if st["pos"]["pos_refuse"] and not g["kont"]:'),
+    ("b_no_margin", "mirror_step", 'C["tstar_thr"])', 'C["tstar"])'),
+    ("p_nom_above_abort", "mirror_step", "    if mode == M_ABORT:\n",
+     "    if r_est > C[\"r_nom\"] and m_outward(pos, target) > 0.0:\n        return out({\"state\": st[\"state\"], \"decision\": REFUSE, \"reason\": GEOFENCE, \"rule\": \"R-G-NOM\", \"applied\": hold})\n    if mode == M_ABORT:\n"),
     ("a_kont_action_plain", "mirror_step", '"action": "VELOCITY_DESCENT_YAW_HOLD"', '"action": "VELOCITY_DESCENT"'),
 ]
 
@@ -68,6 +71,7 @@ def _mutate(name, fn, old, new):
 
 def _episodes(C):
     grid = json.load(open(P.GRID))
+    grid["episodes"] += json.load(open(P.GRID_S3B))["episodes"]          # S3b (ANEKS_KONT-4)
     eps = [(e["ticks"], e["hyst"], tuple(e["latch"]) if e["latch"] else None) for e in grid["episodes"]]
     # brzeg równości (r_est = R(k), r_est = R_nom) — brak w siatce prereg (luka nazwana w RAPORT_KONT_S3)
     for k in (0, 9, 21):
