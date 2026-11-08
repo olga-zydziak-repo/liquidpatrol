@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        1662 19.3  0.0 330892 14176 ?        Sl   12:23   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        1023  6.0  1.0 5709016 335852 pts/0  Sl+  12:19   0:13 claude --continue
+olga        1655  3.1  0.0  16948 11104 ?        S    12:23   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/KONT/s4/nom_b3/zegar2.jsonl
+root         360  0.5  0.3 10618540 107976 ?     Ssl  12:19   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         243  0.5  0.2 2994444 73788 ?       Ssl  12:19   0:01 /usr/bin/containerd
+root           1  0.1  0.0  21876 13288 ?        Ss   12:19   0:00 /sbin/init
+root          90  0.0  0.0  26536  7536 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd-udevd
+olga        1461  0.0  0.1  55320 34152 ?        S    12:20   0:00 python3 results/KONT/tools/kont_s4_campaign_f.py
+root          40  0.0  0.0  42180 16484 ?        S<s  12:19   0:00 /usr/lib/systemd/systemd-journald
+root         270  0.0  0.0 107064 23268 ?        Ssl  12:19   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root         206  0.0  0.0 1756636 13860 ?       Ssl  12:19   0:00 /usr/libexec/wsl-pro-service
+olga         959  0.0  0.0  20392 11608 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd --user
+root         205  0.0  0.0  17988  8852 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd-logind
+polkitd      200  0.0  0.0 308188  8180 ?        Ssl  12:19   0:00 /usr/lib/polkit-1/polkitd --no-debug
+syslog       216  0.0  0.0 222524  5980 ?        Ssl  12:19   0:00 /usr/sbin/rsyslogd -n -iNONE
+systemd+     180  0.0  0.0  21352 13232 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd-resolved
+olga        1578  0.0  0.0   5032  3840 ?        S    12:21   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s4_boot.sh 31 nom_b3 8,9,10,11 -
+message+     195  0.0  0.0   9796  5548 ?        Ss   12:19   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+avahi        193  0.0  0.0   8712  4728 ?        Ss   12:19   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]

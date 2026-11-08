@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       11337 16.6  0.0 330892 14104 ?        Sl   13:35   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        1023  0.8  1.0 5709016 325500 pts/0  Sl+  12:19   0:36 claude --continue
+olga        1461  0.3  0.1  81664 61216 ?        S    12:20   0:16 python3 results/KONT/tools/kont_s4_campaign_f.py
+root         243  0.0  0.1 2994444 61396 ?       Ssl  12:19   0:03 /usr/bin/containerd
+root         360  0.0  0.2 10618540 86180 ?      Ssl  12:19   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root           1  0.0  0.0  21876 13292 ?        Ss   12:19   0:00 /sbin/init
+root          40  0.0  0.0  50376 16888 ?        S<s  12:19   0:00 /usr/lib/systemd/systemd-journald
+olga       11187  0.0  0.0   5032  3828 ?        S    13:30   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s4_boot.sh 37 c10_s01 10 30
+polkitd      200  0.0  0.0 308188  8180 ?        Ssl  12:19   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          90  0.0  0.0  26536  7536 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd-udevd
+root         270  0.0  0.0 107064 23268 ?        Ssl  12:19   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+systemd+     180  0.0  0.0  21352 13232 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd-resolved
+olga         959  0.0  0.0  20392 11608 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd --user
+root         205  0.0  0.0  17988  8852 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd-logind
+root         199  0.0  0.0 1026048 11740 ?       Ssl  12:19   0:00 /usr/bin/lttng-sessiond
+message+     195  0.0  0.0   9796  5548 ?        Ss   12:19   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+syslog       216  0.0  0.0 222524  5980 ?        Ssl  12:19   0:00 /usr/sbin/rsyslogd -n -iNONE
+avahi        193  0.0  0.0   8712  4728 ?        Ss   12:19   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
+root         906  0.0  0.0   3200  1248 ?        S    12:19   0:00 /init

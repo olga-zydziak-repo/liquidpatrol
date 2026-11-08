@@ -1,0 +1,120 @@
+{
+  "kind": "kont_s4",
+  "world_hash": "887fe3cca89d1cc57d5a1752e1dc8fc9bade44bac3d825d93045235814a3aabd  worlds/world_kont_A3.sdf",
+  "world_hash_kind": "repo",
+  "ulog_sha": "7b2b089cbf0c9e66702b9b22f29a0001f022510d21f1cf29030ab79fe49b95ad",
+  "ulog_bytes": 64248752,
+  "model_in_state": true,
+  "kont_s4": {
+    "boot": 36,
+    "epizody": "23",
+    "inject_t": "30",
+    "offset": {
+      "z_off_m": -0.0616,
+      "okno_sim_s": 6.0,
+      "n": 124,
+      "home_alt_kom": 10.0616,
+      "zakres": "home/reset (sieć nie dostaje komendy wysokości)"
+    },
+    "sonda_rc_frozen": 0,
+    "podloga_10hz_ok": 1,
+    "uzbrojony": true,
+    "sonda": {
+      "label": "preflight_c11_s02",
+      "feed": "/home/olga/projects/liquidpatrol/results/KONT/s4/c11_s02/percep_feed.jsonl",
+      "tryb": "live window=35.0s",
+      "prog_frozen": {
+        "dt_p50_max_s_na_klatke": 0.07,
+        "frac_delt_gt_0p10_max": 0.05
+      },
+      "n_delt": 471,
+      "dt_p50_s_na_klatke": 0.068,
+      "dt_p90_s_na_klatke": 0.068,
+      "frac_delt_gt_0p10": 0.0021,
+      "hz_p50": 14.71,
+      "span_sim_s": 32.4,
+      "werdykt": "PASS"
+    },
+    "echo": null,
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profil_sha16": "a68a450b91c2ab51"
+  },
+  "kont_s2d": {
+    "aneks": "ANEKS_KONT-1c §3",
+    "initial_absolute_time_us": 7528000,
+    "faza_ok": true,
+    "dolaczenie": {
+      "prog_s": 0.5,
+      "sim_s_przy_starcie_px4": 0.688,
+      "czekanie_wall_s": 4.39,
+      "ok": true
+    }
+  },
+  "zegar": {
+    "timesyncd": "inactive",
+    "clocksource": "tsc",
+    "aneks": "ANEKS_SKAN2-0b §2.2"
+  },
+  "kont_s2g": {
+    "aneks": "ANEKS_KONT-4e + start Olgi po STOP-KONT4-STANOWISKO + PROMPT_KONT_S4",
+    "boot_s4": 12,
+    "pozycja": "c11_s02",
+    "epizody": "23",
+    "inject_t": "30",
+    "shm": {
+      "sprzatanie": false,
+      "plikow_przed": 21,
+      "plikow_po": 21,
+      "trzymane_przed": {},
+      "stan": "shm_c11_s02.txt"
+    },
+    "sieroty_term": {},
+    "ekf_preflight": {
+      "aneks": "ANEKS_KONT-4c §3",
+      "bias_prog": 0.08,
+      "yaw_prog_deg": 10.0,
+      "konwergencja_sim_s": 15.0,
+      "podejscia": [
+        {
+          "podejscie": 1,
+          "przed": {
+            "yaw_blad_deg": 17.27,
+            "bias_absmax": 0.0001
+          },
+          "reinit": {
+            "rc_stop": 0,
+            "rc_start": 0,
+            "cmd_wall_s": 2.033
+          },
+          "sim_reinit": 106.52,
+          "po": {
+            "yaw_blad_deg": 6.38,
+            "bias_absmax": 0.00011,
+            "sim": 120.876
+          },
+          "ok": true
+        }
+      ]
+    },
+    "tempo": {
+      "aneks": "ANEKS_KONT-4d §1.3",
+      "dsim_dwall_settle": 0.9776,
+      "okno_wall_s": 59.95,
+      "n": 729,
+      "prog": 0.93,
+      "zrodlo": "rtf_stream.jsonl",
+      "ok": true
+    },
+    "v2p": {
+      "23": {
+        "valid": true,
+        "n_deep": 2,
+        "longest_s": 0.0,
+        "dsim_dwall": 0.9741,
+        "timejump": 0
+      }
+    },
+    "wazny_analiza": true,
+    "powod_niewazny_analiza": null
+  }
+}

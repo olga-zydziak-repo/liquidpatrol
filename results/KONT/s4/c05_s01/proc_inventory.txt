@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       14441 16.6  0.0 330892 14172 ?        Sl   13:56   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       14436  3.3  0.0   5028  3652 ?        S    13:56   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s4_launch.sh world_kont_A3
+olga        1023  0.7  1.0 5709016 327544 pts/0  Sl+  12:19   0:43 claude --continue
+olga        1461  0.3  0.1  80640 60848 ?        S    12:20   0:19 python3 results/KONT/tools/kont_s4_campaign_f.py
+root         243  0.0  0.1 2994444 61148 ?       Ssl  12:19   0:04 /usr/bin/containerd
+root         360  0.0  0.2 10618540 86012 ?      Ssl  12:19   0:02 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root       14322  0.0  0.0 1756636 13936 ?       Ssl  13:52   0:00 /usr/libexec/wsl-pro-service
+root           1  0.0  0.0  21876 13292 ?        Ss   12:19   0:00 /sbin/init
+root          40  0.0  0.0  50376 16976 ?        S<s  12:19   0:00 /usr/lib/systemd/systemd-journald
+olga       14273  0.0  0.0   5032  3844 ?        S    13:51   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s4_boot.sh 39 c05_s01 5 30
+polkitd      200  0.0  0.0 308188  8180 ?        Ssl  12:19   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          90  0.0  0.0  26536  7536 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd-udevd
+root         270  0.0  0.0 107064 23268 ?        Ssl  12:19   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+syslog       216  0.0  0.0 222524  5980 ?        Ssl  12:19   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         205  0.0  0.0  17988  8852 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd-logind
+root         199  0.0  0.0 1026048 11740 ?       Ssl  12:19   0:00 /usr/bin/lttng-sessiond
+systemd+     180  0.0  0.0  21352 13232 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd-resolved
+olga         959  0.0  0.0  20392 11608 ?        Ss   12:19   0:00 /usr/lib/systemd/systemd --user
+message+     195  0.0  0.0   9796  5548 ?        Ss   12:19   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only

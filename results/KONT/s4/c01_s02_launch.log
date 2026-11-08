@@ -1,0 +1,7 @@
+[run_boot b42] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b42] watchdog EKF2 (preflight-only, max 2 reinity) pid=19861
+model_in_state=1
+[run_boot b42] settle 90s preflight EKF
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b42] DONE flight=kont_s4 world=world_kont_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/KONT/s4/c01_s02

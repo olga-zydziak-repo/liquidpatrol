@@ -1,0 +1,133 @@
+{
+ "boot": "nom_b3",
+ "przyrzad_selftest": true,
+ "zegar_ok": true,
+ "zegar_skoki": 0,
+ "v2p_epizody": {
+  "8": {
+   "valid": false,
+   "n_deep": 2,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.8783,
+   "timejump": 0
+  },
+  "9": {
+   "valid": true,
+   "n_deep": 1,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.9152,
+   "timejump": 0
+  },
+  "10": {
+   "valid": true,
+   "n_deep": 0,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.9069,
+   "timejump": 0
+  },
+  "11": {
+   "valid": false,
+   "n_deep": 0,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.8901,
+   "timejump": 0
+  }
+ },
+ "ciecie": false,
+ "epizody": [
+  {
+   "episode_id": 8,
+   "scenario_id": "c08_s01",
+   "ciecie": false,
+   "t_entry": 2.63,
+   "n_tk": 1619,
+   "minus_refuse_pos": 0,
+   "minus_kont_ticki": 0,
+   "r_g_nom_minus": 0,
+   "r_g_nom_wszystkie": 0,
+   "refuse_rg": 0,
+   "r_gt_max": 24.241,
+   "v2p": {
+    "valid": false,
+    "n_deep": 2,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.8783,
+    "timejump": 0
+   },
+   "v2p_ok": false,
+   "a_ok": true,
+   "f_ok": true
+  },
+  {
+   "episode_id": 9,
+   "scenario_id": "c09_s01",
+   "ciecie": false,
+   "t_entry": 3.81,
+   "n_tk": 1579,
+   "minus_refuse_pos": 0,
+   "minus_kont_ticki": 0,
+   "r_g_nom_minus": 0,
+   "r_g_nom_wszystkie": 0,
+   "refuse_rg": 0,
+   "r_gt_max": 20.992,
+   "v2p": {
+    "valid": true,
+    "n_deep": 1,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.9152,
+    "timejump": 0
+   },
+   "v2p_ok": true,
+   "a_ok": true,
+   "f_ok": true
+  },
+  {
+   "episode_id": 10,
+   "scenario_id": "c10_s01",
+   "ciecie": false,
+   "t_entry": 5.91,
+   "n_tk": 1640,
+   "minus_refuse_pos": 0,
+   "minus_kont_ticki": 0,
+   "r_g_nom_minus": 0,
+   "r_g_nom_wszystkie": 0,
+   "refuse_rg": 0,
+   "r_gt_max": 22.549,
+   "v2p": {
+    "valid": true,
+    "n_deep": 0,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.9069,
+    "timejump": 0
+   },
+   "v2p_ok": true,
+   "a_ok": true,
+   "f_ok": true
+  },
+  {
+   "episode_id": 11,
+   "scenario_id": "c11_s01",
+   "ciecie": false,
+   "t_entry": 7.5,
+   "n_tk": 1704,
+   "minus_refuse_pos": 0,
+   "minus_kont_ticki": 0,
+   "r_g_nom_minus": 0,
+   "r_g_nom_wszystkie": 0,
+   "refuse_rg": 0,
+   "r_gt_max": 25.739,
+   "v2p": {
+    "valid": false,
+    "n_deep": 0,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.8901,
+    "timejump": 0
+   },
+   "v2p_ok": false,
+   "a_ok": true,
+   "f_ok": true
+  }
+ ],
+ "wazny": false,
+ "powod_niewazny": "V2p c08_s01 0.8783; V2p c11_s01 0.8901"
+}
