@@ -714,3 +714,18 @@ replikacja CC zgodna (z3 5.1.0/5.3.3, różnice tylko z3_lib)
   obwiednią sieci — założenie o rozkładzie błędu musi być mierzone
   na tym samym sterowniku, którego dotyczy dowód (kuzyn „zadany ≠
   faktyczny", piąta instancja w programie).
+
+## KOTW recon 1 (ANEKS_KOTW-1, 8.11.2026): kotwica centralna
+CLOSED-BY-RECON (0 bootów)
+- Piła nie domyka się przy żadnej z 27 kombinacji; najgorsza przerwa
+  orbity 37.1 s (CC: 38.6 s niezależnie) ⇒ ε_b(37) 4.567 + Δ 1.524 =
+  6.091 > 5.79 przy idealnej poprawce. Mechanizm: orbita patrzy na
+  zewnątrz, start ma kamerę poziomą nad kotwicą.
+- ✗ projektowe CC: pozycja kotwicy (0,0) wpisana w prompt bez rachunku
+  geometrii spojrzenia; recon sfalsyfikował ją za 0 bootów (ósme
+  zamknięcie kierunku przy biurku w programie).
+- Znaleziska przechodnie: EV-aiding PX4 1.16.2 (timeout 1 s)
+  niezdatny do poprawek co ~20 s ⇒ wariant B (osłona) jedyny;
+  fałszywa admisja na obiekcie statycznym nie jest wykluczona literą
+  percepcji (paralaksa w MTI, brak bramki pozycji w odświeżeniu
+  tracku) — ryzyko nazwane dla każdej przyszłej kotwicy.
