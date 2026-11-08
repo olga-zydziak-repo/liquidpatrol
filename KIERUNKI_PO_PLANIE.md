@@ -699,3 +699,22 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   dowód o komendach, nie o ruchu pojazdu. Werdykty GT bez zmian.
 - Stan: katalog 6 pozycji, 2d w toku. Breach 0 / REFUSE 0 programowo bez
   zmian.
+
+## Dopisek stanu katalogu — 8.11.2026 (CO-KONT-Z, ANEKS_KONT-5)
+- **2d KONTYNUACJA PO UTRACIE GNSS — CLOSED.** Zdolność zmierzona
+  end-to-end w SITL: sieć pod odcięciem GNSS prowadzi zadanie na
+  przepływie optycznym pełne 22 s w 12/12 epizodów (REFUSE w deadline,
+  offboard do końca, zero natywnego failsafe, zero naruszeń R_E przy
+  marginesie ≥ 8.5 m, zero fałszywych wejść w 20 epizodach ramienia
+  nominalnego). Dowód zawierania P9_kont (+P1/P5/P7_kont, replikacja
+  CC) obowiązuje przy założeniu A-kont, spełnionym w 11/12 — w c11_s01
+  obwiednia nauczyciela za ciasna o 11.3% ⇒ S4 formalnie FAIL(b),
+  epizod zmierzony, nie dowiedziony. Mechanizmy nazwane po drodze:
+  skok yaw akcji D5 pod przepływem (usunięty trzymaniem yaw),
+  ściana natywna 4 s na samym IMU, obwiednia nauczyciel≠sieć.
+  Liczby: T* = 22 s (obwiednia nauczyciela), Δ_D5 1.524, R_nom 27.30,
+  koszt bariery 0/48. Budżet 45/45. Kierunek ewentualnego powrotu
+  (nowa pozycja, nieotwarta): obwiednia sieci + świeże potwierdzenie
+  (szac. T*_net 10–13 s, +7 bootów).
+- Katalog: 6 pozycji, 2d zamknięta. Breach 0 / REFUSE(POS) fałszywych 0
+  programowo bez zmian (45 bootów nogi, łącznie ~185 bootów programu).

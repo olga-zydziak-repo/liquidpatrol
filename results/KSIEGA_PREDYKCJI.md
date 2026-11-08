@@ -689,3 +689,28 @@ replikacja CC zgodna (z3 5.1.0/5.3.3, różnice tylko z3_lib)
   nóg); remedium u źródła: kolejka pomija nazwy, dla których istnieje
   jakikolwiek plik w s4. Wada wykonawcy: pliki zauważone, trybu zapisu
   nie sprawdziłam.
+
+## KONT S4 i zamknięcie nogi (ANEKS_KONT-5, 8.11.2026)
+- Drabina S4: FAIL przez (b) w c11_s01 (ε/ε_b 1.113, 548/1411 ticków,
+  od 14.9 s) — obwiednia nauczyciela (n=8) za ciasna dla sieci w 1/12;
+  pozostałe 11/12 ratio ≤ 0.999. (a)(c)(d)(e) 12/12; ramię (−) 20/24
+  czyste (nom_b2 brak — wada kolejki f: lista z `pozostało` przerwanej
+  kolejki zamiast siatka−ważne).
+- P-KONT-5 (0.60, S4 PASS) — ✗. P-KONT-6 (0.90, breach 0) — ✓
+  (45 bootów, 0 naruszeń w całej nodze).
+- Wady wykonawcy (seria S4): ROOT w kopii drivera (1 boot); kontrola
+  yaw po starcie intruder_motion (sieroty); kolejka bez kontroli V2′
+  i V2′ liczona niekanonicznie; próbnik zegara dopisuje zamiast
+  nadpisać (fałszywy STOP); lista pozycji z `pozostało` (utrata
+  nom_b2). Każda nazwana w swoim STOP-ie, żadna nie skaziła liczb.
+- Stanowisko: przyczyną spowolnień był tryb zasilania Windows
+  (cichy → wydajny: 0.86–0.89 → 0.97–0.98) — znalazła Olga; launcher
+  s2y (gz przed PX4) leczy 14/14 FAIL drugiego bootu, ale psuje
+  inicjalizację estymatora w ~połowie bootów (bias/yaw) — mitygacja:
+  wymuszony reinit EKF2 w preflight + kontrola kierunku ≤ 10°
+  (skuteczna 15/15); watchdog biasu nie wykrywa złego yaw (mierzy
+  nie tę obserwowablę).
+- Lekcja nogi: obwiednia błędu zdjęta z nauczyciela nie jest
+  obwiednią sieci — założenie o rozkładzie błędu musi być mierzone
+  na tym samym sterowniku, którego dotyczy dowód (kuzyn „zadany ≠
+  faktyczny", piąta instancja w programie).
