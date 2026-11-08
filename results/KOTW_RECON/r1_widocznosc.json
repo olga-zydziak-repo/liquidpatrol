@@ -1,0 +1,847 @@
+{
+ "n_epizodow": 148,
+ "kampanie": {
+  "FANTOM_S2": 104,
+  "PERC2_S2": 8,
+  "SKAN2_S1": 8,
+  "KONT_S4": 28
+ },
+ "per_h": {
+  "0.5": {
+   "central": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 26.61,
+     "p95": 54.91,
+     "max": 67.99
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 4.84,
+     "p95": 23.78,
+     "max": 57.42
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 514,
+      "p50": 1.14,
+      "p95": 22.9,
+      "max": 42.87
+     },
+     "hold": {
+      "n": 4,
+      "p50": 0.56,
+      "p95": 0.75,
+      "max": 0.75
+     },
+     "approach": {
+      "n": 1,
+      "p50": 6.94,
+      "p95": 6.94,
+      "max": 6.94
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 660,
+      "dl_p50": 1.15,
+      "dl_p95": 9.32,
+      "zasieg_min_p50": 21.65,
+      "zasieg_min": 10.65,
+      "zasieg_max": 29.06
+     },
+     "approach": {
+      "n": 6,
+      "dl_p50": 1.98,
+      "dl_p95": 3.24,
+      "zasieg_min_p50": 17.12,
+      "zasieg_min": 15.4,
+      "zasieg_max": 21.46
+     },
+     "hold": {
+      "n": 1,
+      "dl_p50": 0.92,
+      "dl_p95": 0.92,
+      "zasieg_min_p50": 18.95,
+      "zasieg_min": 18.95,
+      "zasieg_max": 19.46
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0125,
+     "approach": 0.0876,
+     "orbit": 0.2149
+    }
+   },
+   "kadr": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 21.01,
+     "p95": 40.2,
+     "max": 67.26
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 3.23,
+     "p95": 19.11,
+     "max": 53.98
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 521,
+      "p50": 1.66,
+      "p95": 19.88,
+      "max": 39.12
+     },
+     "hold": {
+      "n": 3,
+      "p50": 0.34,
+      "p95": 0.4,
+      "max": 0.4
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 667,
+      "dl_p50": 2.33,
+      "dl_p95": 12.0,
+      "zasieg_min_p50": 19.4,
+      "zasieg_min": 10.65,
+      "zasieg_max": 29.06
+     },
+     "approach": {
+      "n": 4,
+      "dl_p50": 4.18,
+      "dl_p95": 11.0,
+      "zasieg_min_p50": 16.76,
+      "zasieg_min": 13.98,
+      "zasieg_max": 21.22
+     },
+     "hold": {
+      "n": 1,
+      "dl_p50": 0.55,
+      "dl_p95": 0.55,
+      "zasieg_min_p50": 15.62,
+      "zasieg_min": 15.62,
+      "zasieg_max": 15.91
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0159,
+     "approach": 0.1133,
+     "orbit": 0.3063
+    }
+   },
+   "central_W0.5": {
+    "epizody_bez_okna": 146,
+    "przerwa_startowa_s": {
+     "p50": 73.99,
+     "p95": 90.25,
+     "max": 103.68
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 0.0,
+     "p95": 0.0,
+     "max": 0.0
+    },
+    "przerwy_wewnetrzne_s": {},
+    "okna": {
+     "orbit": {
+      "n": 1,
+      "dl_p50": 7.02,
+      "dl_p95": 7.02,
+      "zasieg_min_p50": 10.65,
+      "zasieg_min": 10.65,
+      "zasieg_max": 12.45
+     },
+     "approach": {
+      "n": 1,
+      "dl_p50": 7.36,
+      "dl_p95": 7.36,
+      "zasieg_min_p50": 11.03,
+      "zasieg_min": 11.03,
+      "zasieg_max": 13.49
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0047,
+     "approach": 0.0065,
+     "orbit": 0.001
+    }
+   },
+   "central_W1.0": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 26.61,
+     "p95": 54.91,
+     "max": 67.99
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 4.84,
+     "p95": 23.78,
+     "max": 57.42
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 534,
+      "p50": 1.21,
+      "p95": 22.66,
+      "max": 42.87
+     },
+     "hold": {
+      "n": 4,
+      "p50": 0.56,
+      "p95": 0.75,
+      "max": 0.75
+     },
+     "approach": {
+      "n": 4,
+      "p50": 1.74,
+      "p95": 6.94,
+      "max": 6.94
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 680,
+      "dl_p50": 1.19,
+      "dl_p95": 9.18,
+      "zasieg_min_p50": 21.79,
+      "zasieg_min": 10.65,
+      "zasieg_max": 27.0
+     },
+     "approach": {
+      "n": 9,
+      "dl_p50": 2.54,
+      "dl_p95": 3.24,
+      "zasieg_min_p50": 18.12,
+      "zasieg_min": 15.4,
+      "zasieg_max": 26.99
+     },
+     "hold": {
+      "n": 1,
+      "dl_p50": 0.92,
+      "dl_p95": 0.92,
+      "zasieg_min_p50": 18.95,
+      "zasieg_min": 18.95,
+      "zasieg_max": 19.46
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0122,
+     "approach": 0.0791,
+     "orbit": 0.2086
+    }
+   },
+   "central_W2.0": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 26.61,
+     "p95": 54.91,
+     "max": 67.99
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 4.84,
+     "p95": 23.78,
+     "max": 57.42
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 514,
+      "p50": 1.14,
+      "p95": 22.9,
+      "max": 42.87
+     },
+     "hold": {
+      "n": 4,
+      "p50": 0.56,
+      "p95": 0.75,
+      "max": 0.75
+     },
+     "approach": {
+      "n": 1,
+      "p50": 6.94,
+      "p95": 6.94,
+      "max": 6.94
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 660,
+      "dl_p50": 1.15,
+      "dl_p95": 9.32,
+      "zasieg_min_p50": 21.65,
+      "zasieg_min": 10.65,
+      "zasieg_max": 29.06
+     },
+     "approach": {
+      "n": 6,
+      "dl_p50": 1.98,
+      "dl_p95": 3.24,
+      "zasieg_min_p50": 17.12,
+      "zasieg_min": 15.4,
+      "zasieg_max": 21.46
+     },
+     "hold": {
+      "n": 1,
+      "dl_p50": 0.92,
+      "dl_p95": 0.92,
+      "zasieg_min_p50": 18.95,
+      "zasieg_min": 18.95,
+      "zasieg_max": 19.46
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0125,
+     "approach": 0.0876,
+     "orbit": 0.2149
+    }
+   }
+  },
+  "2.0": {
+   "central": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 24.22,
+     "p95": 44.2,
+     "max": 67.58
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 3.4,
+     "p95": 20.18,
+     "max": 55.49
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 539,
+      "p50": 1.05,
+      "p95": 21.06,
+      "max": 39.92
+     },
+     "hold": {
+      "n": 3,
+      "p50": 0.4,
+      "p95": 0.57,
+      "max": 0.57
+     },
+     "approach": {
+      "n": 1,
+      "p50": 6.88,
+      "p95": 6.88,
+      "max": 6.88
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 685,
+      "dl_p50": 1.66,
+      "dl_p95": 10.72,
+      "zasieg_min_p50": 19.32,
+      "zasieg_min": 10.57,
+      "zasieg_max": 28.38
+     },
+     "approach": {
+      "n": 4,
+      "dl_p50": 3.06,
+      "dl_p95": 3.26,
+      "zasieg_min_p50": 16.43,
+      "zasieg_min": 13.23,
+      "zasieg_max": 17.58
+     },
+     "hold": {
+      "n": 2,
+      "dl_p50": 0.29,
+      "dl_p95": 0.29,
+      "zasieg_min_p50": 18.64,
+      "zasieg_min": 14.64,
+      "zasieg_max": 18.64
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0145,
+     "approach": 0.0961,
+     "orbit": 0.2622
+    }
+   },
+   "kadr": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 18.62,
+     "p95": 40.2,
+     "max": 66.87
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 1.88,
+     "p95": 18.56,
+     "max": 53.3
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 511,
+      "p50": 3.24,
+      "p95": 18.37,
+      "max": 37.78
+     },
+     "hold": {
+      "n": 1,
+      "p50": 0.26,
+      "p95": 0.26,
+      "max": 0.26
+     },
+     "approach": {
+      "n": 1,
+      "p50": 0.33,
+      "p95": 0.33,
+      "max": 0.33
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 651,
+      "dl_p50": 4.15,
+      "dl_p95": 13.42,
+      "zasieg_min_p50": 17.29,
+      "zasieg_min": 10.57,
+      "zasieg_max": 28.38
+     },
+     "approach": {
+      "n": 6,
+      "dl_p50": 4.99,
+      "dl_p95": 11.52,
+      "zasieg_min_p50": 15.29,
+      "zasieg_min": 12.39,
+      "zasieg_max": 20.47
+     },
+     "hold": {
+      "n": 4,
+      "dl_p50": 0.86,
+      "dl_p95": 1.04,
+      "zasieg_min_p50": 13.31,
+      "zasieg_min": 12.17,
+      "zasieg_max": 14.96
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0176,
+     "approach": 0.1176,
+     "orbit": 0.3472
+    }
+   },
+   "central_W0.5": {
+    "epizody_bez_okna": 139,
+    "przerwa_startowa_s": {
+     "p50": 73.44,
+     "p95": 88.14,
+     "max": 103.68
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 43.65,
+     "p95": 64.84,
+     "max": 64.84
+    },
+    "przerwy_wewnetrzne_s": {},
+    "okna": {
+     "orbit": {
+      "n": 8,
+      "dl_p50": 0.4,
+      "dl_p95": 8.08,
+      "zasieg_min_p50": 12.3,
+      "zasieg_min": 10.57,
+      "zasieg_max": 13.5
+     },
+     "approach": {
+      "n": 1,
+      "dl_p50": 0.14,
+      "dl_p95": 0.14,
+      "zasieg_min_p50": 13.23,
+      "zasieg_min": 13.23,
+      "zasieg_max": 13.46
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0048,
+     "approach": 0.007,
+     "orbit": 0.0014
+    }
+   },
+   "central_W1.0": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 24.22,
+     "p95": 44.2,
+     "max": 67.58
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 3.4,
+     "p95": 20.18,
+     "max": 55.49
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 556,
+      "p50": 1.13,
+      "p95": 20.51,
+      "max": 39.92
+     },
+     "hold": {
+      "n": 3,
+      "p50": 0.4,
+      "p95": 0.57,
+      "max": 0.57
+     },
+     "approach": {
+      "n": 1,
+      "p50": 6.88,
+      "p95": 6.88,
+      "max": 6.88
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 702,
+      "dl_p50": 1.69,
+      "dl_p95": 10.33,
+      "zasieg_min_p50": 19.44,
+      "zasieg_min": 10.57,
+      "zasieg_max": 27.0
+     },
+     "approach": {
+      "n": 4,
+      "dl_p50": 3.06,
+      "dl_p95": 3.26,
+      "zasieg_min_p50": 16.43,
+      "zasieg_min": 13.23,
+      "zasieg_max": 17.58
+     },
+     "hold": {
+      "n": 2,
+      "dl_p50": 0.29,
+      "dl_p95": 0.29,
+      "zasieg_min_p50": 18.64,
+      "zasieg_min": 14.64,
+      "zasieg_max": 18.64
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0144,
+     "approach": 0.0918,
+     "orbit": 0.2586
+    }
+   },
+   "central_W2.0": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 24.22,
+     "p95": 44.2,
+     "max": 67.58
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 3.4,
+     "p95": 20.18,
+     "max": 55.49
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 539,
+      "p50": 1.05,
+      "p95": 21.06,
+      "max": 39.92
+     },
+     "hold": {
+      "n": 3,
+      "p50": 0.4,
+      "p95": 0.57,
+      "max": 0.57
+     },
+     "approach": {
+      "n": 1,
+      "p50": 6.88,
+      "p95": 6.88,
+      "max": 6.88
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 685,
+      "dl_p50": 1.66,
+      "dl_p95": 10.72,
+      "zasieg_min_p50": 19.32,
+      "zasieg_min": 10.57,
+      "zasieg_max": 28.38
+     },
+     "approach": {
+      "n": 4,
+      "dl_p50": 3.06,
+      "dl_p95": 3.26,
+      "zasieg_min_p50": 16.43,
+      "zasieg_min": 13.23,
+      "zasieg_max": 17.58
+     },
+     "hold": {
+      "n": 2,
+      "dl_p50": 0.29,
+      "dl_p95": 0.29,
+      "zasieg_min_p50": 18.64,
+      "zasieg_min": 14.64,
+      "zasieg_max": 18.64
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0145,
+     "approach": 0.0961,
+     "orbit": 0.2622
+    }
+   }
+  },
+  "5.0": {
+   "central": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 18.8,
+     "p95": 41.84,
+     "max": 67.6
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 1.42,
+     "p95": 18.55,
+     "max": 24.3
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 474,
+      "p50": 5.36,
+      "p95": 18.7,
+      "max": 37.1
+     },
+     "approach": {
+      "n": 1,
+      "p50": 6.84,
+      "p95": 6.84,
+      "max": 6.84
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 620,
+      "dl_p50": 5.86,
+      "dl_p95": 13.81,
+      "zasieg_min_p50": 14.3,
+      "zasieg_min": 8.36,
+      "zasieg_max": 27.21
+     },
+     "approach": {
+      "n": 3,
+      "dl_p50": 0.28,
+      "dl_p95": 3.26,
+      "zasieg_min_p50": 13.94,
+      "zasieg_min": 8.38,
+      "zasieg_max": 17.73
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0169,
+     "approach": 0.1178,
+     "orbit": 0.3496
+    }
+   },
+   "kadr": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 16.69,
+     "p95": 40.02,
+     "max": 66.93
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 0.0,
+     "p95": 15.13,
+     "max": 20.1
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 475,
+      "p50": 5.88,
+      "p95": 15.82,
+      "max": 35.64
+     },
+     "hold": {
+      "n": 1,
+      "p50": 1.75,
+      "p95": 1.75,
+      "max": 1.75
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 619,
+      "dl_p50": 7.93,
+      "dl_p95": 17.9,
+      "zasieg_min_p50": 13.08,
+      "zasieg_min": 6.89,
+      "zasieg_max": 27.21
+     },
+     "approach": {
+      "n": 5,
+      "dl_p50": 0.7,
+      "dl_p95": 12.26,
+      "zasieg_min_p50": 9.73,
+      "zasieg_min": 7.85,
+      "zasieg_max": 19.26
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0196,
+     "approach": 0.1369,
+     "orbit": 0.4334
+    }
+   },
+   "central_W0.5": {
+    "epizody_bez_okna": 68,
+    "przerwa_startowa_s": {
+     "p50": 62.12,
+     "p95": 85.47,
+     "max": 97.02
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 23.14,
+     "p95": 61.6,
+     "max": 61.92
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 189,
+      "p50": 1.74,
+      "p95": 29.32,
+      "max": 50.96
+     },
+     "approach": {
+      "n": 3,
+      "p50": 3.52,
+      "p95": 5.25,
+      "max": 5.25
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 271,
+      "dl_p50": 0.52,
+      "dl_p95": 3.52,
+      "zasieg_min_p50": 12.2,
+      "zasieg_min": 8.36,
+      "zasieg_max": 13.5
+     },
+     "approach": {
+      "n": 1,
+      "dl_p50": 0.0,
+      "dl_p95": 0.0,
+      "zasieg_min_p50": 8.38,
+      "zasieg_min": 8.38,
+      "zasieg_max": 8.38
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0056,
+     "approach": 0.0185,
+     "orbit": 0.0275
+    }
+   },
+   "central_W1.0": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 18.8,
+     "p95": 41.84,
+     "max": 67.6
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 1.42,
+     "p95": 18.55,
+     "max": 24.3
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 478,
+      "p50": 5.2,
+      "p95": 18.7,
+      "max": 37.1
+     },
+     "approach": {
+      "n": 1,
+      "p50": 6.84,
+      "p95": 6.84,
+      "max": 6.84
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 624,
+      "dl_p50": 5.82,
+      "dl_p95": 13.51,
+      "zasieg_min_p50": 14.31,
+      "zasieg_min": 8.36,
+      "zasieg_max": 27.0
+     },
+     "approach": {
+      "n": 3,
+      "dl_p50": 0.28,
+      "dl_p95": 3.26,
+      "zasieg_min_p50": 13.94,
+      "zasieg_min": 8.38,
+      "zasieg_max": 17.73
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0169,
+     "approach": 0.117,
+     "orbit": 0.3493
+    }
+   },
+   "central_W2.0": {
+    "epizody_bez_okna": 0,
+    "przerwa_startowa_s": {
+     "p50": 18.8,
+     "p95": 41.84,
+     "max": 67.6
+    },
+    "przerwa_koncowa_cenz_s": {
+     "p50": 1.42,
+     "p95": 18.55,
+     "max": 24.3
+    },
+    "przerwy_wewnetrzne_s": {
+     "orbit": {
+      "n": 474,
+      "p50": 5.36,
+      "p95": 18.7,
+      "max": 37.1
+     },
+     "approach": {
+      "n": 1,
+      "p50": 6.84,
+      "p95": 6.84,
+      "max": 6.84
+     }
+    },
+    "okna": {
+     "orbit": {
+      "n": 620,
+      "dl_p50": 5.86,
+      "dl_p95": 13.81,
+      "zasieg_min_p50": 14.3,
+      "zasieg_min": 8.36,
+      "zasieg_max": 27.21
+     },
+     "approach": {
+      "n": 3,
+      "dl_p50": 0.28,
+      "dl_p95": 3.26,
+      "zasieg_min_p50": 13.94,
+      "zasieg_min": 8.38,
+      "zasieg_max": 17.73
+     }
+    },
+    "frac_widoczny_per_faza_srednia": {
+     "hold": 0.0169,
+     "approach": 0.1178,
+     "orbit": 0.3496
+    }
+   }
+  }
+ }
+}
