@@ -3,7 +3,9 @@
 (oryginał nietknięty, wyprodukował nom_b1_r4) ze zmianami wyłącznie: budżet 21 z 5 użytymi; kolejka wg 4e §CO od nom_b2_r2:
 nominały (nom_b2, nom_b3, dolecenie nom_b1), potem 12 cięć wg siatki — 15 pozycji, 1 rezerwa; licznik bramki tempa startuje
 od zera (4e §1.2, remedium operatora), ale przerwanie bramką tempa PIERWSZEGO bootu tej kolejki (bezpośrednio po restarcie)
-⇒ STOP-KONT4-STANOWISKO natychmiast; wyjście kampania_s4e.json. Nagłówek oryginału:
+⇒ STOP-KONT4-STANOWISKO natychmiast; wyjście kampania_s4e.json. Po STOP-KONT4-ZEGAR (fca17539, fałszywy alarm z dopisującego
+próbnika) decyzją CC: wolna_nazwa pomija nazwy, dla których w s4 istnieje jakikolwiek plik z tą nazwą (pierwszy boot
+nom_b2_r3), wyjście kampania_s4e2.json; pliki 4d zostają na miejscu. Nagłówek oryginału:
 results/KONT/tools/kont_s4_campaign_d.py — kolejka S4 po ANEKS_KONT-4d = kopia kont_s4_campaign_c.py (oryginał nietknięty,
 wyprodukował nom_b1_r3) ze zmianami wyłącznie: budżet 20 z 4 użytymi; po każdym locie analiza kont_s4_analyze.analyze
 (V2′ kanoniczne per epizod przez bench/campaign_analyze.judge_boot) — epizod nieważny ⇒ boot nieważny ⇒ dolecenie; bramka
@@ -25,7 +27,19 @@ import time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import kont_s4_campaign as K
-from kont_s4_campaign import G, ROOT, T, PROFIL, S4, NOGA_PRZED, log, zegar, sprzataj_sieroty, shm_krok, wolna_nazwa, wpis_manifest
+from kont_s4_campaign import G, ROOT, T, PROFIL, S4, NOGA_PRZED, log, zegar, sprzataj_sieroty, shm_krok, wpis_manifest
+
+
+def wolna_nazwa(nm):
+    """Jak kont_s2_campaign_g.wolna_nazwa, ale nazwa zajęta także przez pliki (zegar_przed_<n>.jsonl, shm_<n>.txt, <n>_*.log)."""
+    zajete = os.listdir(S4)
+    n = 1
+    while True:
+        c = nm if n == 1 else f"{nm}_r{n}"
+        if not any(f == c or f.startswith(c + "_") or f.startswith(c + ".") or f.endswith("_" + c + ".jsonl") or f.endswith("_" + c + ".txt")
+                   for f in zajete):
+            return c
+        n += 1
 
 BUDZET, UZYTE = 21, 5
 import kont_s4_analyze as A
@@ -37,11 +51,11 @@ def main():
     ciecia = [x for x in pl if x[2] != "-"]
     kolejka = [nom["nom_b2"], nom["nom_b3"], nom["nom_b1"]] + ciecia
     assert len(kolejka) == 15 and len(ciecia) == 12
-    assert not os.path.exists(os.path.join(S4, "kampania_s4e.json")), "kampania_s4e.json istnieje"
+    assert not os.path.exists(os.path.join(S4, "kampania_s4e2.json")), "kampania_s4e2.json istnieje"
     log(f"=== S4 (ANEKS_KONT-4e) start: kolejka {[k[0] for k in kolejka]}, budżet {UZYTE}/{BUDZET}, noga {NOGA_PRZED + UZYTE}/45, "
         f"uptime {open('/proc/uptime').read().split()[0]} s")
     env = {**os.environ, "PERC2_FASTDDS_PROFILE": PROFIL, "PYTHONDONTWRITEBYTECODE": "1"}
-    with open(os.path.join(S4, "zegar_stan_przed_e.txt"), "w") as f:
+    with open(os.path.join(S4, "zegar_stan_przed_e2.txt"), "w") as f:
         subprocess.run("timedatectl status; systemctl is-active systemd-timesyncd; cat /sys/devices/system/clocksource/clocksource0/current_clocksource",
                        shell=True, stdout=f, stderr=subprocess.STDOUT)
     subprocess.run(["sudo", "-n", "systemctl", "stop", "systemd-timesyncd"], check=True)
@@ -182,11 +196,11 @@ def main():
         raise
     finally:
         subprocess.run(["sudo", "-n", "systemctl", "start", "systemd-timesyncd"])
-        with open(os.path.join(S4, "zegar_stan_po_e.txt"), "w") as f:
+        with open(os.path.join(S4, "zegar_stan_po_e2.txt"), "w") as f:
             subprocess.run("timedatectl status; systemctl is-active systemd-timesyncd", shell=True, stdout=f, stderr=subprocess.STDOUT)
         log(f"KONIEC booty={booty}/{BUDZET} noga={NOGA_PRZED + booty}/45 stop={stop} pozostało={[k[0] for k in kolejka]}")
         json.dump({"booty": booty, "noga": NOGA_PRZED + booty, "siatka": sel, "wyniki": wyniki, "stop": stop,
-                   "pozostalo": kolejka}, open(os.path.join(S4, "kampania_s4e.json"), "w"), ensure_ascii=False, indent=1)
+                   "pozostalo": kolejka}, open(os.path.join(S4, "kampania_s4e2.json"), "w"), ensure_ascii=False, indent=1)
     print("KONIEC", booty, stop)
 
 

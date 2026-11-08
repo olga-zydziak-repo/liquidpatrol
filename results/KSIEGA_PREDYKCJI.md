@@ -678,3 +678,14 @@ replikacja CC zgodna (z3 5.1.0/5.3.3, różnice tylko z3_lib)
   poprawce, 21/21 z mutantem brzegowym).
 - Zastany czerwony test r02/test_deadman.py (atrapa bez _sp_yaw,
   od fa5dc242 20.08) — backlog; kryteria PASS modulo ten zastany.
+
+## KONT S4 — wada przyrządu (ANEKS_KONT-4e, decyzja CC 8.11.2026)
+- Wada przyrządu: próbnik zegara `results/SKAN2/tools/skan2_zegar.py`
+  DOPISUJE do pliku (`open(path, "a")`), więc ponowne użycie nazwy
+  bootu skleja próbki dwóch sesji; `--check` liczy wtedy granicę bootów
+  VM jako skok (13598.8 s) i stare skoki jako nowe. Skutek: fałszywy
+  STOP-KONT4-ZEGAR przed nom_b2_r2 (`fca17539`), 0 bootów; same nowe
+  próbki 0 skoków, dryf 0.0 s. Przyrząd nieedytowany (wyniki trzech
+  nóg); remedium u źródła: kolejka pomija nazwy, dla których istnieje
+  jakikolwiek plik w s4. Wada wykonawcy: pliki zauważone, trybu zapisu
+  nie sprawdziłam.
