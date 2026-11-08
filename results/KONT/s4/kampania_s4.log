@@ -30,3 +30,9 @@
 [kampania 02:10:44] === S4 (ANEKS_KONT-4e) start: kolejka ['nom_b2', 'nom_b3', 'nom_b1', 'c08_s01', 'c08_s02', 'c11_s01', 'c11_s02', 'c10_s01', 'c10_s02', 'c05_s01', 'c05_s02', 'c01_s01', 'c01_s02', 'c02_s01', 'c02_s02'], budżet 5/21, noga 29/45, uptime 209.84 s
 [kampania 02:11:44] nom_b2_r2: próbnik 2 skoków ok=False
 [kampania 02:11:44] KONIEC booty=5/21 noga=29/45 stop=STOP-KONT4-ZEGAR pozostało=['nom_b3', 'nom_b1', 'c08_s01', 'c08_s02', 'c11_s01', 'c11_s02', 'c10_s01', 'c10_s02', 'c05_s01', 'c05_s02', 'c01_s01', 'c01_s02', 'c02_s01', 'c02_s02']
+[kampania 02:21:26] === S4 (ANEKS_KONT-4e) start: kolejka ['nom_b2', 'nom_b3', 'nom_b1', 'c08_s01', 'c08_s02', 'c11_s01', 'c11_s02', 'c10_s01', 'c10_s02', 'c05_s01', 'c05_s02', 'c01_s01', 'c01_s02', 'c02_s01', 'c02_s02'], budżet 5/21, noga 29/45, uptime 837.93 s
+[kampania 02:22:27] nom_b2_r3: próbnik 0 skoków ok=True
+[kampania 02:26:05] nom_b2_r3 rc=9 boot 6/21 (noga 30/45): tempo=0.8731 V2p={} ważny_analiza=None faza=True t0_us=7672000 uzbrojony=True yaw=None epizody 0/0 cięcie=False przyziemienie=False R-G-NOM=0 breach=False REFUSE(POS)_nominal=[] R-G=[]
+[kampania 02:26:05] ALARM: nom_b2_r3 bramka tempa 0.8731 — remedium operatora: wsl --shutdown i świeża sesja (4d §1.3)
+[kampania 02:26:05] ALARM STOP-KONT4-STANOWISKO: wolny boot bezpośrednio po restarcie — remedium nieskuteczne (4e §1.2)
+[kampania 02:26:05] KONIEC booty=6/21 noga=30/45 stop=STOP-KONT4-STANOWISKO pozostało=['nom_b3', 'nom_b1', 'c08_s01', 'c08_s02', 'c11_s01', 'c11_s02', 'c10_s01', 'c10_s02', 'c05_s01', 'c05_s02', 'c01_s01', 'c01_s02', 'c02_s01', 'c02_s02']

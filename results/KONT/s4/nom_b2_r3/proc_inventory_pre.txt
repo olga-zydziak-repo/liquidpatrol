@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        2842 17.6  0.0 330892 14188 ?        Sl   02:23   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        1057  3.0  1.1 5709016 357436 pts/0  Sl+  02:07   0:28 claude
+olga        2836  2.9  0.0   5028  3732 ?        S    02:23   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s4_launch.sh world_kont_A3
+root         256  0.1  0.1 2994636 61900 ?       Ssl  02:07   0:01 /usr/bin/containerd
+root         359  0.1  0.3 10987264 102764 ?     Ssl  02:07   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga        2637  0.0  0.1  55316 33984 ?        S    02:21   0:00 python3 results/KONT/tools/kont_s4_campaign_e.py
+root           1  0.0  0.0  22008 13220 ?        Ss   02:07   0:00 /sbin/init
+olga        2742  0.0  0.0   5032  3880 ?        S    02:22   0:00 bash /home/olga/projects/liquidpatrol/results/KONT/tools/kont_s4_boot.sh 30 nom_b2_r3 4,5,6,7 -
+root          87  0.0  0.0  26324  7428 ?        Ss   02:07   0:00 /usr/lib/systemd/systemd-udevd
+root         919  0.0  0.0   3200  1252 ?        S    02:07   0:00 /init
+root          40  0.0  0.0  50476 16536 ?        S<s  02:07   0:00 /usr/lib/systemd/systemd-journald
+olga        2710  0.0  0.0   6312  5592 pts/2    Ss+  02:22   0:00 -bash
+root         251  0.0  0.0 107064 23276 ?        Ssl  02:07   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+olga         965  0.0  0.0  20392 11564 ?        Ss   02:07   0:00 /usr/lib/systemd/systemd --user
+polkitd      200  0.0  0.0 308188  8080 ?        Ssl  02:07   0:00 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     180  0.0  0.0  21352 13160 ?        Ss   02:07   0:00 /usr/lib/systemd/systemd-resolved
+syslog       212  0.0  0.0 222524  6044 ?        Ssl  02:07   0:00 /usr/sbin/rsyslogd -n -iNONE
+avahi        193  0.0  0.0   8712  4732 ?        Ss   02:07   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
+message+     195  0.0  0.0   9800  5532 ?        Ss   02:07   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only

@@ -1,0 +1,8 @@
+[kont nom_b2_r3] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont nom_b2_r3 02:22:27] cooldown 0s
+[kont nom_b2_r3 02:23:42] SUSTAINED CLEAN
+[kont nom_b2_r3] kont_boot pid=2836
+[kont nom_b2_r3 02:24:10] initial absolute time 7672000 us faza_ok=1
+[kont nom_b2_r3 02:24:53] sonda rc_FROZEN=0 podloga10Hz=1
+[kont nom_b2_r3 02:26:05] DONE rc=9 sonda=0
+/home/olga/projects/liquidpatrol/results/KONT/tools/kont_s4_boot.sh: line 94:  3563 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1

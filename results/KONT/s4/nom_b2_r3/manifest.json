@@ -1,0 +1,80 @@
+{
+  "kind": "kont_s4",
+  "world_hash": "887fe3cca89d1cc57d5a1752e1dc8fc9bade44bac3d825d93045235814a3aabd  worlds/world_kont_A3.sdf",
+  "world_hash_kind": "repo",
+  "ulog_sha": "73654f26fcf6337dec15613a32323a9760e56e05b876e7b7df765697fb632716",
+  "ulog_bytes": 28237557,
+  "model_in_state": true,
+  "kont_s4": {
+    "boot": 30,
+    "epizody": "4,5,6,7",
+    "inject_t": "-",
+    "offset": null,
+    "sonda_rc_frozen": 0,
+    "podloga_10hz_ok": 1,
+    "uzbrojony": true,
+    "sonda": {
+      "label": "preflight_nom_b2_r3",
+      "feed": "/home/olga/projects/liquidpatrol/results/KONT/s4/nom_b2_r3/percep_feed.jsonl",
+      "tryb": "live window=35.0s",
+      "prog_frozen": {
+        "dt_p50_max_s_na_klatke": 0.07,
+        "frac_delt_gt_0p10_max": 0.05
+      },
+      "n_delt": 413,
+      "dt_p50_s_na_klatke": 0.064,
+      "dt_p90_s_na_klatke": 0.068,
+      "frac_delt_gt_0p10": 0.0,
+      "hz_p50": 15.62,
+      "span_sim_s": 30.0,
+      "werdykt": "PASS"
+    },
+    "echo": null,
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profil_sha16": "a68a450b91c2ab51"
+  },
+  "kont_s2d": {
+    "aneks": "ANEKS_KONT-1c §3",
+    "initial_absolute_time_us": 7672000,
+    "faza_ok": true,
+    "dolaczenie": {
+      "prog_s": 0.5,
+      "sim_s_przy_starcie_px4": 0.592,
+      "czekanie_wall_s": 4.69,
+      "ok": true
+    }
+  },
+  "zegar": {
+    "timesyncd": "inactive",
+    "clocksource": "tsc",
+    "aneks": "ANEKS_SKAN2-0b §2.2"
+  },
+  "kont_s2g": {
+    "aneks": "ANEKS_KONT-4e + PROMPT_KONT_S4",
+    "boot_s4": 6,
+    "pozycja": "nom_b2",
+    "epizody": "4,5,6,7",
+    "inject_t": "-",
+    "shm": {
+      "sprzatanie": false,
+      "plikow_przed": 0,
+      "plikow_po": 0,
+      "trzymane_przed": {},
+      "stan": "shm_nom_b2_r3.txt"
+    },
+    "sieroty_term": {},
+    "ekf_preflight": null,
+    "tempo": {
+      "aneks": "ANEKS_KONT-4d §1.3",
+      "dsim_dwall_settle": 0.8731,
+      "okno_wall_s": 59.92,
+      "n": 723,
+      "prog": 0.93,
+      "zrodlo": "rtf_stream.jsonl",
+      "ok": false
+    },
+    "v2p": {},
+    "wazny_analiza": null,
+    "powod_niewazny_analiza": null
+  }
+}
