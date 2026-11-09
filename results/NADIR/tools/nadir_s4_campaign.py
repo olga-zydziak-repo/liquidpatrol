@@ -7,10 +7,12 @@ Siatka (PROMPT_NADIR_S4 §R): 12 cięć 1/boot — c01_s01, c01_s03, c02_s01, c0
 c10_s02, c11_s01, c11_s02 (KONT_INJECT_T = 30 s po t_entry, jak KONT S4) + 4 nominały nom_b1…nom_b4 = epizody 4i…4i+3 (i = 0…3;
 nom_b1–b3 = ramię (−) KONT S4, nom_b4 = c00–c03_s02, ta sama reguła). Kolejność jak KONT S4: nom_b1, 12 cięć, nom_b2–b4.
 Kolejka = siatka minus pozycje z bootem ważnym (z dysku: results/NADIR/s4/kampania_ksiega.jsonl, append-only, wiersz per zużyty
-boot) — lekcja kolejki f. Budżet S4 ≤ 16 bootów z księgi, zero rezerwy etapu.
+boot) — lekcja kolejki f. Budżet S4 ≤ 16 bootów z księgi, zero rezerwy etapu; po STOP-NADIR4-BUDZET (5eb4c14c) sygnałem Olgi
++2 z luzu nogi ⇒ BUDZET 18 (noga ≤ 30): boot nieważny ⇒ dolecenie tej pozycji, dopóki siatka mieści się w budżecie;
+2 kolejne przerwania bramką tempa ⇒ STOP-NADIR4-STANOWISKO (wzór kolejki f).
 
 STOPy: breach ⇒ STOP-NADIR4-BREACH; REFUSE(POS) przed cięciem albo w nominale ⇒ STOP-NADIR4-REFUSE-NOMINAL; budżet ⇒
-STOP-NADIR4-BUDZET — przy zerowej rezerwie każdy boot nieważny (bramka tempa, faza, asercja yaw, sonda, analiza: V2′/zegar/
+STOP-NADIR4-BUDZET — (przed rezerwą) każdy boot nieważny (bramka tempa, faza, asercja yaw, sonda, analiza: V2′/zegar/
 selftest/xy_valid, niekompletne epizody) kończy kolejkę tym STOPem (rezerwa wyłącznie z luzu nogi za sygnałem Olgi); bramka
 tempa w pierwszym boocie po restarcie WSL (uptime < 3600 s przy starcie kolejki) ⇒ STOP-NADIR4-STANOWISKO; strażniki: zegar,
 sieroty, env-block ×4 (rc 3, nie boot), guard rc 4/5/6 (nie boot), wyjątek analizy ⇒ STOP-NADIR4-ANALIZA (boot zużyty, dane
@@ -36,7 +38,7 @@ log, zegar, sprzataj_sieroty, shm_krok = G.log, G.zegar, G.sprzataj_sieroty, G.s
 PROFIL = G.PROFIL
 BOOT = os.path.join(ROOT, "results/NADIR/tools/nadir_s4_boot.sh")
 KSIEGA = os.path.join(S4, "kampania_ksiega.jsonl")
-BUDZET, NOGA_PRZED, NOGA_MAX = 16, 11, 30
+BUDZET, NOGA_PRZED, NOGA_MAX = 18, 11, 30            # 16 + 2 rezerwy z luzu nogi (sygnał Olgi po STOP-NADIR4-BUDZET, 9.11)
 CIECIA = ["c01_s01", "c01_s03", "c02_s01", "c02_s03", "c05_s01", "c05_s02", "c08_s01", "c08_s02", "c10_s01", "c10_s02",
           "c11_s01", "c11_s02"]
 EPID = lambda sc: (int(sc[5:7]) - 1) * 12 + int(sc[1:3])          # = kont_s4_campaign.EPID
@@ -93,7 +95,7 @@ def main():
     env = {**os.environ, "PERC2_FASTDDS_PROFILE": PROFIL, "PYTHONDONTWRITEBYTECODE": "1"}
     subprocess.run(["sudo", "-n", "systemctl", "stop", "systemd-timesyncd"], check=True)
     import nadir_s4_analyze as A
-    stop, booty, wyniki, pierwszy = None, uzyte, {}, True
+    stop, booty, wyniki, pierwszy, tempo_streak = None, uzyte, {}, True, 0
     try:
         while kolejka:
             if booty >= BUDZET:
@@ -182,15 +184,22 @@ def main():
             if e["refuse_pos_nominal"]:
                 stop = "STOP-NADIR4-REFUSE-NOMINAL"
                 break
+            tempo_streak = tempo_streak + 1 if (niewazny or "").startswith("bramka tempa") else 0
             if niewazny:
                 kolejka.insert(0, (nm, epids, inj))
                 if niewazny.startswith("bramka tempa") and pierwszy and uptime0 < 3600:
                     stop = "STOP-NADIR4-STANOWISKO"
                     log(f"ALARM {stop}: {name} {niewazny} — pierwszy boot po restarcie WSL")
-                else:
+                elif tempo_streak >= 2:
+                    stop = "STOP-NADIR4-STANOWISKO"
+                    log(f"ALARM {stop}: {name} — 2 kolejne przerwania bramką tempa")
+                elif booty + len(kolejka) > BUDZET:
                     stop = "STOP-NADIR4-BUDZET"
-                    log(f"ALARM {stop}: {name} nieważny ({niewazny}), zero rezerwy etapu — rezerwa z luzu nogi za sygnałem Olgi")
-                break
+                    log(f"ALARM {stop}: {name} nieważny ({niewazny}), budżet wyczerpany bez kompletu siatki")
+                else:
+                    log(f"{name} nieważny ({niewazny}) — dolecenie {nm} (rezerwa: {BUDZET - booty - len(kolejka)} po nim)")
+                if stop:
+                    break
             pierwszy = False
         if stop is None and kolejka:
             stop = "STOP-NADIR4-BUDZET"
