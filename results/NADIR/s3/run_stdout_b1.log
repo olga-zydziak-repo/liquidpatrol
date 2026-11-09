@@ -1,0 +1,12 @@
+[kampania 15:53:49] === NADIR S3 boot 1 b1_passthrough epizody 0,1,2,3 cięcie -; timesyncd przed: inactive
+[kampania 15:54:49] zegar b1_passthrough: ok=True skoki=0
+[kampania 15:54:49] sieroty {} żywe {}; shm {'sprzatanie': True, 'plikow_przed': 11, 'plikow_po': 0, 'trzymane_przed': {}, 'stan': 'shm_b1_passthrough.txt'}
+[kont b1_passthrough] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont b1_passthrough 15:54:49] cooldown 0s
+[kont b1_passthrough 15:56:04] SUSTAINED CLEAN
+[kont b1_passthrough] kont_boot pid=7814
+[kont b1_passthrough 15:56:31] initial absolute time 7436000 us faza_ok=1
+[kont b1_passthrough 15:57:11] sonda rc_FROZEN=0 podloga10Hz=1
+/home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s3_boot.sh: line 112:  8538 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[kont b1_passthrough 16:05:26] DONE rc=0 sonda=0
+[kampania 16:05:26] === koniec b1_passthrough rc=0 637 s tempo={'aneks': 'ANEKS_KONT-4d §1.3', 'dsim_dwall_settle': 0.9663, 'okno_wall_s': 59.94, 'n': 728, 'prog': 0.93, 'zrodlo': 'rtf_stream.jsonl', 'ok': True}

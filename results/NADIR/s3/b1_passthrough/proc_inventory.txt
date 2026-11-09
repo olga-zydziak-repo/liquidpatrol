@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        7820 16.1  0.0 330892 14188 ?        Sl   15:56   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        7814  3.1  0.0   5028  3716 ?        S    15:56   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s3_launch.sh world_nadir2_A3
+olga         985  2.4  1.1 5717224 378584 pts/0  Sl+  14:49   1:37 claude --continue
+root         270  0.0  0.1 3364384 56596 ?       Ssl  14:49   0:03 /usr/bin/containerd
+root         361  0.0  0.2 7669388 83444 ?       Ssl  14:49   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga        7701  0.0  0.0  17200 12280 ?        S    15:53   0:00 python3 results/NADIR/tools/nadir_s3_run.py 1 b1_passthrough 0,1,2,3 -
+root         874  0.0  0.0   3200  1248 ?        S    14:49   0:00 /init
+root        7230  0.0  0.0 1756380 13940 ?       Ssl  15:51   0:00 /usr/libexec/wsl-pro-service
+root           1  0.0  0.0  21868 13212 ?        Ss   14:49   0:00 /sbin/init
+root          86  0.0  0.0  26136  7240 ?        Ss   14:49   0:00 /usr/lib/systemd/systemd-udevd
+root          40  0.0  0.0  50480 16592 ?        S<s  14:49   0:00 /usr/lib/systemd/systemd-journald
+polkitd      200  0.0  0.0 308188  8220 ?        Ssl  14:49   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga         921  0.0  0.0  20396 11596 ?        Ss   14:49   0:00 /usr/lib/systemd/systemd --user
+root         269  0.0  0.0 107064 23360 ?        Ssl  14:49   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+root         199  0.0  0.0 1026052 11756 ?       Ssl  14:49   0:00 /usr/bin/lttng-sessiond
+syslog       213  0.0  0.0 222524  6016 ?        Ssl  14:49   0:00 /usr/sbin/rsyslogd -n -iNONE
+systemd+     182  0.0  0.0  21352 13240 ?        Ss   14:49   0:00 /usr/lib/systemd/systemd-resolved
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  14:49   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root         214  0.0  0.0  17400  6512 ?        Ss   14:49   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
