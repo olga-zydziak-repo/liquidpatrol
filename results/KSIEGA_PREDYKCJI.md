@@ -769,3 +769,19 @@ CLOSED-BY-RECON (0 bootów)
 - Uwaga kalibracyjna: po dwóch zawyżonych szansach w KOTW powyższe
   dawane ostrożnie; różnica mechaniczna — geometria NADIR położona
   pod kamerą i zmierzona na GT, nie zgadywana.
+
+## NADIR S1 — STOP tempa i naprawa (ANEKS_NADIR-1, 9.11.2026)
+- Bramka tempa przerwała pierwszy boot epizodowy przed uzbrojeniem
+  (0.854 < 0.93); A/B gołego gz rozdzielił hipotezy: drugi render +
+  detekcja kosztują 11–13% przy ~9.6 Hz (CC przeliczył z surowych
+  próbek). Zero lotów spalonych; sonda wykryła koszt przed serią.
+- ✗ projektowe CC ×2: (i) prompty reconu i S1 nie kazały sprawdzić
+  kolizji węzłów siatki z bryłami świata — 7/37 pod skrzynkami
+  i budynkiem wyszło dopiero w sondzie; (ii) montaż kamery w origin
+  base_link przypięty w PRE bez rachunku zasłony kadłuba — 16.9%
+  stożka wyszło w b1. Obie naprawy aneksem przed lotami.
+- Wykonawca: R1 identyczność 10/10 domknięta porządnie; decyzja
+  visibility_flags (przepływ nie widzi znaczników — litera ε_b)
+  przyjęta jako dobra; wady drobne nazwane (runner stdout, pierwsza
+  maska, errata OpenCV) — żadna nie zużyła bootu ani nie skaziła
+  liczb.
