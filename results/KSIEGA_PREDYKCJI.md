@@ -750,3 +750,22 @@ CLOSED-BY-RECON (0 bootów)
   wykonany co do litery). Znalezisko CC bez wpływu na liczby: remis
   dominanty fazy w kotw2_obwod.py łamany porządkiem zbioru
   (zależnym od środowiska) — 96 etykiet, werdykt 576/576 niezmienny.
+
+## NADIR — otwarcie nogi (PRE_NADIR, 9.11.2026)
+- Recon NADIR (0 bootów): 264/540 kombinacji dopuszczalnych; s10 "0",
+  ID W1, tryb 12: 48/48 komórek, wąskie gardło c08_s02 zapas 0.11 m
+  (ZMIERZ, tryb 1) / 0.60 m (tryb 12); pokrycie pełną postawą ≥1
+  znacznik 100% misji, τ_max ≤ 0.96 s. CC niezależnie: pokrycie 100%,
+  r_h p50 3.7 m, c08_s02 zapas 0.116 — zgodne.
+- ✗ mechanizmowe CC (rozmowa, 9.11): założenie „poprawka tylko
+  w osłonie wystarcza, sieć nie widzi znaczników" obalone w R3 —
+  setpointy pozycyjne żyją w ramie EKF, misja bez ramy B+ kończyłaby
+  się ~21 s. Znalazł wykonawca; stąd B+ w PRE.
+- P-NADIR-1 (0.70): S1 przechodzi w całości (detekcja ID ≥ 95%,
+  zero fałszywych admisji, tempo ≥ 0.93).
+- P-NADIR-2 (0.75): warunek ważności B przechodzi w S2.
+- P-NADIR-3 (0.55): S4 PASS pełną literą (a)–(f).
+- P-NADIR-4 (0.90): breach 0 w całej nodze.
+- Uwaga kalibracyjna: po dwóch zawyżonych szansach w KOTW powyższe
+  dawane ostrożnie; różnica mechaniczna — geometria NADIR położona
+  pod kamerą i zmierzona na GT, nie zgadywana.
