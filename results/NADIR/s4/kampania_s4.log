@@ -3,3 +3,13 @@
 [kampania 17:31:00] nom_b1 rc=9 boot 1/16 (noga 12/30): tempo=0.9281 ważny=False (bramka tempa 0.9281) litera={} epizody 0/0 cięcie=False przyziemienie=False breach=False REFUSE(POS)_nominal=[]
 [kampania 17:31:00] ALARM STOP-NADIR4-BUDZET: nom_b1 nieważny (bramka tempa 0.9281), zero rezerwy etapu — rezerwa z luzu nogi za sygnałem Olgi
 [kampania 17:31:00] KONIEC booty=1/16 noga=12/30 stop=STOP-NADIR4-BUDZET pozostało=['nom_b1', 'c01_s01', 'c01_s03', 'c02_s01', 'c02_s03', 'c05_s01', 'c05_s02', 'c08_s01', 'c08_s02', 'c10_s01', 'c10_s02', 'c11_s01', 'c11_s02', 'nom_b2', 'nom_b3', 'nom_b4']
+[kampania 21:07:53] === S4 NADIR start: księga 1 bootów, ważne []; kolejka ['nom_b1', 'c01_s01', 'c01_s03', 'c02_s01', 'c02_s03', 'c05_s01', 'c05_s02', 'c08_s01', 'c08_s02', 'c10_s01', 'c10_s02', 'c11_s01', 'c11_s02', 'nom_b2', 'nom_b3', 'nom_b4']; budżet 1/18, noga 12/30, uptime 11784 s
+[kampania 21:08:54] nom_b1_r2: próbnik 0 skoków ok=True
+[kampania 21:20:06] nom_b1_r2 rc=0 boot 2/18 (noga 13/30): tempo=0.9598 ważny=True (None) litera={'c00_s01': {'a_ok': None, 'b_ok': True, 'c_ok': True, 'd_ok': True, 'e_ok': True, 'f_ok': True, 'g_ok': True, 'litera_ok': True}, 'c01_s01': {'a_ok': None, 'b_ok': True, 'c_ok': True, 'd_ok': True, 'e_ok': True, 'f_ok': True, 'g_ok': True, 'litera_ok': True}, 'c02_s01': {'a_ok': None, 'b_ok': True, 'c_ok': True, 'd_ok': True, 'e_ok': True, 'f_ok': True, 'g_ok': True, 'litera_ok': True}, 'c03_s01': {'a_ok': None, 'b_ok': True, 'c_ok': True, 'd_ok': True, 'e_ok': True, 'f_ok': True, 'g_ok': True, 'litera_ok': True}} epizody 4/4 cięcie=False przyziemienie=False breach=False REFUSE(POS)_nominal=[]
+[kampania 21:21:06] c01_s01: próbnik 0 skoków ok=True
+[kampania 21:28:37] c01_s01 rc=9 boot 3/18 (noga 14/30): tempo=0.7335 ważny=False (bramka tempa 0.7335) litera={} epizody 0/0 cięcie=False przyziemienie=False breach=False REFUSE(POS)_nominal=[]
+[kampania 21:28:37] c01_s01 nieważny (bramka tempa 0.7335) — dolecenie c01_s01 (rezerwa: 0 po nim)
+[kampania 21:29:37] c01_s01_r2: próbnik 0 skoków ok=True
+[kampania 21:37:18] c01_s01_r2 rc=9 boot 4/18 (noga 15/30): tempo=0.7396 ważny=False (bramka tempa 0.7396) litera={} epizody 0/0 cięcie=False przyziemienie=False breach=False REFUSE(POS)_nominal=[]
+[kampania 21:37:18] ALARM STOP-NADIR4-STANOWISKO: c01_s01_r2 — 2 kolejne przerwania bramką tempa
+[kampania 21:37:18] KONIEC booty=4/18 noga=15/30 stop=STOP-NADIR4-STANOWISKO pozostało=['c01_s01', 'c01_s03', 'c02_s01', 'c02_s03', 'c05_s01', 'c05_s02', 'c08_s01', 'c08_s02', 'c10_s01', 'c10_s02', 'c11_s01', 'c11_s02', 'nom_b2', 'nom_b3', 'nom_b4']

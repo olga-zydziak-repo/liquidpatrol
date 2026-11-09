@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        8451 15.1  0.0 330892 14148 ?        Sl   21:34   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        8444  2.9  0.0  16948 11168 ?        S    21:34   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/NADIR/s4/c01_s01_r2/zegar2.jsonl
+olga        8445  2.9  0.0   5028  3700 ?        S    21:34   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s4_launch.sh world_nadir2_A3
+olga        1019  1.0  1.1 5721376 376704 pts/0  Sl+  17:51   2:18 claude --continue
+olga        4833  0.5  0.5 517552 171884 ?       SL   21:07   0:09 python3 results/NADIR/tools/nadir_s4_campaign.py
+olga        4839  0.3  0.0 1341172 7036 ?        S    21:07   0:05 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered rc=|ALARM|KONIEC|ENV-BLOCK|GUARD|POD PODŁOGĄ|FAZA|Traceback|STOP|dolecenie
+root         229  0.1  0.1 3215576 58188 ?       Ssl  17:51   0:16 /usr/bin/containerd
+root         336  0.0  0.2 11134600 83072 ?      Ssl  17:51   0:03 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root        8229  0.0  0.0 1756380 13868 ?       Ssl  21:28   0:00 /usr/libexec/wsl-pro-service
+polkitd      175  0.0  0.0 308188  8132 ?        Ssl  17:51   0:00 /usr/lib/polkit-1/polkitd --no-debug
+olga        8254  0.0  0.0   5032  3864 ?        S    21:29   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s4_boot.sh 15 c01_s01_r2 1 30
+root           1  0.0  0.0  21916 13384 ?        Ss   17:51   0:00 /sbin/init
+root          40  0.0  0.0  50476 16684 ?        S<s  17:51   0:00 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26008  7000 ?        Ss   17:51   0:00 /usr/lib/systemd/systemd-udevd
+root         193  0.0  0.0  17400  6428 ?        Ss   17:51   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+message+     170  0.0  0.0   9800  5472 ?        Ss   17:51   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     160  0.0  0.0  21352 13216 ?        Ss   17:51   0:00 /usr/lib/systemd/systemd-resolved
+root         894  0.0  0.0   3200  1252 ?        S    17:51   0:00 /init
+root         223  0.0  0.0 107064 23264 ?        Ssl  17:51   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal

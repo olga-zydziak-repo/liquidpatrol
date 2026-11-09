@@ -1,0 +1,22 @@
+[nadir_obs] img=59 proc=59 det=0 drop=0 flip=0
+[nadir_obs] img=119 proc=119 det=0 drop=0 flip=0
+[nadir_obs] img=177 proc=177 det=0 drop=0 flip=0
+[nadir_obs] img=232 proc=232 det=0 drop=0 flip=0
+[nadir_obs] img=288 proc=288 det=0 drop=0 flip=0
+[nadir_obs] img=343 proc=343 det=0 drop=0 flip=0
+Thread 0x0000794f53bff6c0 (most recent call first):
+  File "/usr/lib/python3.12/threading.py", line 359 in wait
+  File "/usr/lib/python3.12/queue.py", line 180 in get
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 126 in worker
+  File "/usr/lib/python3.12/threading.py", line 1010 in run
+  File "/usr/lib/python3.12/threading.py", line 1073 in _bootstrap_inner
+  File "/usr/lib/python3.12/threading.py", line 1030 in _bootstrap
+
+Current thread 0x0000794f76195740 (most recent call first):
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 781 in _wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 877 in wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 907 in _spin_once_impl
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 926 in spin_once
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 207 in main
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 221 in <module>
+[nadir_obs] DONE {"n_img": 390, "n_drop": 0, "n_proc": 390, "n_det_klatki": 0, "flip_hits": 0, "n_fix": 0, "det_ms": {"p50": 0.4971269991074223, "p95": 1.0626969997247215, "max": 2.7576399988902267}, "zamkniecie": "koniec_petli", "mono": 13538.484}
