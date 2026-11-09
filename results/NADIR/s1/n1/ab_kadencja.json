@@ -1,0 +1,178 @@
+{
+ "opis": "results/NADIR/tools/nadir_n1_ab.py — ANEKS_NADIR-1 §CO (1)+(2): A/B kadencji nadir {5, 3, 2} Hz i maska kadłuba montażu v2.\nGoły gz bez PX4 (wzór B0 / nadir_ab.py), 0 bootów lotnych. Funkcje pomocnicze importowane READ-ONLY z nadir_ab.py\n(Licz, regresja) i nadir_frames.py (env, svc, teardown, quat).",
+ "montaz_z_m": -0.215,
+ "kolejnosc": [
+  "B",
+  "A5",
+  "A3",
+  "A2",
+  "B",
+  "A2",
+  "A3",
+  "A5",
+  "B"
+ ],
+ "baza": 0.97,
+ "prog": 0.94,
+ "timesyncd": "inactive",
+ "opencv": "4.6.0",
+ "przebiegi": [
+  {
+   "tag": "B",
+   "dsim_dwall": 0.9047,
+   "n_probek_okna": 1447,
+   "cofniecia": 0,
+   "loadavg1_po": 3.5,
+   "hz": {
+    "imager": 13.83,
+    "flow": 45.64
+   },
+   "nadir_klatki_z_id": null
+  },
+  {
+   "tag": "A5",
+   "dsim_dwall": 0.9283,
+   "n_probek_okna": 1448,
+   "cofniecia": 0,
+   "loadavg1_po": 2.53,
+   "hz": {
+    "imager": 14.19,
+    "flow": 46.82,
+    "nadir": 4.69
+   },
+   "nadir_klatki_z_id": 656
+  },
+  {
+   "tag": "A3",
+   "dsim_dwall": 0.9075,
+   "n_probek_okna": 1449,
+   "cofniecia": 0,
+   "loadavg1_po": 1.33,
+   "hz": {
+    "imager": 13.87,
+    "flow": 45.76,
+    "nadir": 2.76
+   },
+   "nadir_klatki_z_id": 386
+  },
+  {
+   "tag": "A2",
+   "dsim_dwall": 0.9254,
+   "n_probek_okna": 1450,
+   "cofniecia": 0,
+   "loadavg1_po": 3.04,
+   "hz": {
+    "imager": 14.21,
+    "flow": 46.86,
+    "nadir": 1.89
+   },
+   "nadir_klatki_z_id": 264
+  },
+  {
+   "tag": "B",
+   "dsim_dwall": 0.9259,
+   "n_probek_okna": 1447,
+   "cofniecia": 0,
+   "loadavg1_po": 1.26,
+   "hz": {
+    "imager": 14.2,
+    "flow": 46.84
+   },
+   "nadir_klatki_z_id": null
+  },
+  {
+   "tag": "A2",
+   "dsim_dwall": 0.9227,
+   "n_probek_okna": 1449,
+   "cofniecia": 0,
+   "loadavg1_po": 1.44,
+   "hz": {
+    "imager": 14.06,
+    "flow": 46.37,
+    "nadir": 1.86
+   },
+   "nadir_klatki_z_id": 260
+  },
+  {
+   "tag": "A3",
+   "dsim_dwall": 0.924,
+   "n_probek_okna": 1451,
+   "cofniecia": 0,
+   "loadavg1_po": 2.08,
+   "hz": {
+    "imager": 14.11,
+    "flow": 46.58,
+    "nadir": 2.8
+   },
+   "nadir_klatki_z_id": 392
+  },
+  {
+   "tag": "A5",
+   "dsim_dwall": 0.9271,
+   "n_probek_okna": 1450,
+   "cofniecia": 0,
+   "loadavg1_po": 3.79,
+   "hz": {
+    "imager": 14.21,
+    "flow": 46.86,
+    "nadir": 4.69
+   },
+   "nadir_klatki_z_id": 657
+  },
+  {
+   "tag": "B",
+   "dsim_dwall": 0.9048,
+   "n_probek_okna": 1450,
+   "cofniecia": 0,
+   "loadavg1_po": 3.45,
+   "hz": {
+    "imager": 13.89,
+    "flow": 45.79
+   },
+   "nadir_klatki_z_id": null
+  }
+ ],
+ "B_srednia": 0.9118,
+ "warianty": {
+  "5Hz": {
+   "tempo_A": [
+    0.9283,
+    0.9271
+   ],
+   "stosunek": 1.0174,
+   "przeniesione": 0.9869,
+   "ok_094": true,
+   "ok_093": true
+  },
+  "3Hz": {
+   "tempo_A": [
+    0.9075,
+    0.924
+   ],
+   "stosunek": 1.0043,
+   "przeniesione": 0.9742,
+   "ok_094": true,
+   "ok_093": true
+  },
+  "2Hz": {
+   "tempo_A": [
+    0.9254,
+    0.9227
+   ],
+   "stosunek": 1.0134,
+   "przeniesione": 0.983,
+   "ok_094": true,
+   "ok_093": true
+  }
+ },
+ "wybor_hz": 5,
+ "werdykt": "WYBÓR",
+ "maska_v2": {
+  "montaz_z_m": -0.215,
+  "frac_kadr": 0.0,
+  "frac_stozek_centralny": 0.0,
+  "wymog_le": 0.02,
+  "pass": true,
+  "rowne_px_kontrola_p0_p2": 0.02376
+ }
+}

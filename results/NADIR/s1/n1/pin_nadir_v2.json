@@ -1,0 +1,35 @@
+{
+ "wersja": 2,
+ "aneks": "ANEKS_NADIR-1 §2.2–§2.4",
+ "model_sdf": {
+  "plik": "results/NADIR/s1/zrodla/x500_nadir2_flow/model.sdf",
+  "sha256": "1fa0c57d3863081b51a43f9cb54e6e6a3987be1fe7ab113f51b2fa992cd6a093"
+ },
+ "model_config": {
+  "plik": "results/NADIR/s1/zrodla/x500_nadir2_flow/model.config",
+  "sha256": "5d466b36ab126d11986029bac59eecf07bbdcd51d1d2bac8df159ee4c8dfb887"
+ },
+ "swiat": {
+  "plik": "worlds/world_nadir2_A3.sdf",
+  "sha256": "7f2bbe1360819a8b64ee462ad9c1852e6525b02fa197460953725ca44aeb81d8"
+ },
+ "manifest": {
+  "plik": "results/NADIR/s1/n1/manifest_znaczniki_v2.json",
+  "sha256": "875c331e757818d187a748d3a4272d0a746db243f14bbc9c1ef98a2d4240bf57"
+ },
+ "nadir": {
+  "montaz": "base_link (0, 0, -0.215) m, rpy czujnika (0, +90°, 0)",
+  "os_optyczna": "-z_body",
+  "w_h": [
+   640,
+   480
+  ],
+  "horizontal_fov": 1.74,
+  "f_px": 269.47,
+  "update_hz": 5,
+  "topic": "/world/<W>/model/x500_nadir2_flow_0/link/nadir_link/sensor/nadir/image",
+  "maska_stozek": 0.0,
+  "opencv": "4.6.0 systemowe (bez .b0deps)"
+ },
+ "mono_cam_pin": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c"
+}

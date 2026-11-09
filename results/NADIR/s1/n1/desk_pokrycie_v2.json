@@ -1,0 +1,75 @@
+{
+ "opis": "results/NADIR/tools/nadir_n1_desk.py — ANEKS_NADIR-1 §2.5 desk-bramka pokrycia (0 bootów).",
+ "montaz_z_m": -0.215,
+ "maska": "results/NADIR/s1/n1/maska_v2.png",
+ "maska_frac": 0.0,
+ "ukryte_id": [
+  0,
+  8,
+  15,
+  16,
+  22,
+  32,
+  35
+ ],
+ "bok_min_px": 18.0,
+ "wyniki": {
+  "5Hz": {
+   "klatki": 55851,
+   "z_znacznikiem": 55822,
+   "tau_max": 1.8,
+   "najgorszy": {
+    "kampania": "SKAN2_S1",
+    "boot": "bA_c08",
+    "ep": 44,
+    "scenario": "c08_s04"
+   },
+   "epizody": 148,
+   "per_faza": {
+    "approach": 0.99945,
+    "hold": 0.99955,
+    "orbit": 0.99948
+   },
+   "frac_ge1": 0.99948,
+   "PASS": true
+  },
+  "3Hz": {
+   "klatki": 33542,
+   "z_znacznikiem": 33524,
+   "tau_max": 2.0,
+   "najgorszy": {
+    "kampania": "SKAN2_S1",
+    "boot": "bA_c08",
+    "ep": 44,
+    "scenario": "c08_s04"
+   },
+   "epizody": 148,
+   "per_faza": {
+    "approach": 0.99815,
+    "hold": 0.99963,
+    "orbit": 0.9995
+   },
+   "frac_ge1": 0.99946,
+   "PASS": true
+  },
+  "2Hz": {
+   "klatki": 22384,
+   "z_znacznikiem": 22372,
+   "tau_max": 2.0,
+   "najgorszy": {
+    "kampania": "PERC2_S2",
+    "boot": "bA_c08",
+    "ep": 44,
+    "scenario": "c08_s04"
+   },
+   "epizody": 148,
+   "per_faza": {
+    "approach": 0.99862,
+    "hold": 1.0,
+    "orbit": 0.99945
+   },
+   "frac_ge1": 0.99946,
+   "PASS": true
+  }
+ }
+}
