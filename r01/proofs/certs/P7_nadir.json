@@ -1,0 +1,95 @@
+{
+  "property": "P7_nadir",
+  "verdict": "PROVED",
+  "method": "wyczerpująca enumeracja osiągalnego grafu (BFS, stałe produkcji) monitora GNSS + zegara τ + koszyka na LUSTRZE (KV.g_monitor_step + nadir_barrier_step ≡ produkcja, P5_nadir), osobno per koszyk; instancja zredukowana z pełnym przełączaniem koszyków; z3-duplikat kroku",
+  "obligations": {
+    "thr_ticks": [
+      438,
+      438,
+      438,
+      418
+    ],
+    "debounce": 2,
+    "hyst": 100,
+    "j_worst": 3,
+    "graf_j0": {
+      "n_states": 165908,
+      "n_edges": 1325504
+    },
+    "graf_j1": {
+      "n_states": 165908,
+      "n_edges": 1325504
+    },
+    "graf_j2": {
+      "n_states": 165908,
+      "n_edges": 1325504
+    },
+    "graf_j3": {
+      "n_states": 163888,
+      "n_edges": 1309344
+    },
+    "zredukowana": {
+      "deb": 2,
+      "hyst": 3,
+      "thr": [
+        6,
+        6,
+        6,
+        5
+      ],
+      "n_states": 292,
+      "n_edges": 5550
+    }
+  },
+  "checks": {
+    "j0_a_enter_only_lost_after_deb": true,
+    "j0_b_no_allow_in_utrata_age_ge_thr": true,
+    "j0_b_refuse_exactly_at_thr": true,
+    "j0_c_exit_only_after_hyst_clears_kref": true,
+    "j0_d_kref_sticky_while_utrata_even_with_fix": true,
+    "j0_e_fix_resets_tau": true,
+    "j0_f_bar_refuse_reachable_every_age_lt_thr": true,
+    "j0_g_no_fix_uses_j_worst": true,
+    "j1_a_enter_only_lost_after_deb": true,
+    "j1_b_no_allow_in_utrata_age_ge_thr": true,
+    "j1_b_refuse_exactly_at_thr": true,
+    "j1_c_exit_only_after_hyst_clears_kref": true,
+    "j1_d_kref_sticky_while_utrata_even_with_fix": true,
+    "j1_e_fix_resets_tau": true,
+    "j1_f_bar_refuse_reachable_every_age_lt_thr": true,
+    "j1_g_no_fix_uses_j_worst": true,
+    "j2_a_enter_only_lost_after_deb": true,
+    "j2_b_no_allow_in_utrata_age_ge_thr": true,
+    "j2_b_refuse_exactly_at_thr": true,
+    "j2_c_exit_only_after_hyst_clears_kref": true,
+    "j2_d_kref_sticky_while_utrata_even_with_fix": true,
+    "j2_e_fix_resets_tau": true,
+    "j2_f_bar_refuse_reachable_every_age_lt_thr": true,
+    "j2_g_no_fix_uses_j_worst": true,
+    "j3_a_enter_only_lost_after_deb": true,
+    "j3_b_no_allow_in_utrata_age_ge_thr": true,
+    "j3_b_refuse_exactly_at_thr": true,
+    "j3_c_exit_only_after_hyst_clears_kref": true,
+    "j3_d_kref_sticky_while_utrata_even_with_fix": true,
+    "j3_e_fix_resets_tau": true,
+    "j3_f_bar_refuse_reachable_every_age_lt_thr": true,
+    "j3_g_no_fix_uses_j_worst": true,
+    "red_a_enter_only_lost_after_deb": true,
+    "red_b_no_allow_in_utrata_age_ge_thr": true,
+    "red_b_refuse_exactly_at_thr": true,
+    "red_c_exit_only_after_hyst_clears_kref": true,
+    "red_d_kref_sticky_while_utrata_even_with_fix": true,
+    "red_e_fix_resets_tau": true,
+    "red_f_bar_refuse_reachable_every_age_lt_thr": true,
+    "red_g_no_fix_uses_j_worst": true
+  },
+  "z3_duplicate": {
+    "z3_b_no_allow_age_ge_thr": "unsat",
+    "z3_d_kref_sticky_with_fix": "unsat",
+    "z3_e_fix_resets": "unsat",
+    "z3_c_exit_needs_hyst": "unsat"
+  },
+  "theorem": "(a) wejście w utratę tylko na fladze po debounce; (b) brak ALLOW w utracie przy τ ≥ τ*(j)−2·dt, REFUSE dokładnie przy progu; (c) wyjście tylko po hyst zdrowych tickach, czyści zatrzask; (d) zatrzask trwa w utracie także po nowej poprawce; (e) poprawka zeruje τ i ustawia koszyk; (f) REFUSE z bariery osiągalny w każdym wieku < progu; (g) brak poprawki ⇒ próg koszyka najgorszego",
+  "abstraction": "g_bad saturowany do debounce; wiek (τ w tickach) saturowany do max progu; bariera = wejście wolne; poprawka = wejście ∈ {brak, j}; zegar w tickach (now = k·dt).",
+  "model_sha256": "9405ccff16a3654cd969ba27cb8a6069b26f071a97e8e470ed3a129ba023ad95"
+}

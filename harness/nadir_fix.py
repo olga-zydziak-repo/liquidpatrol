@@ -14,6 +14,9 @@ Rama B+: poprawka poziomo (N, E); wysokość zostaje z EKF (2d sądzi poziomo, b
   p_corr(t) = p_fix + (p_EKF(t) − p_EKF(t_fix)) = p_EKF(t) + Δ;   sp_EKF = sp_net + (p_EKF − p_corr) = sp_net − Δ.
 Bez obserwacji rama nie czeka: przed pierwszą poprawką Δ = 0 (czysty EKF), potem Δ trzymane (propagacja przyrostami EKF);
 τ = t − t_fix liczone jawnie (None przed pierwszą poprawką).
+ANEKS_NADIR-2 §2 (PROMPT_NADIR_S3 §1.1): litera przyjęcia + r_h < R_H_MAX = 8 m (r_h = pozioma odległość kamery w bieżącej
+pozie ramy od pozycji manifestu; dalsza obserwacja odrzucana z powodem „rh”); datagram niesie koszyk poprawki
+kosz = ⌊r_h(najbliższy) / 2⌋ ∈ {0…3} — wejście bariery piły r03/nadir_shield.py.
 Para odrzucana na rzecz trybu 1 (powód w logu), gdy |skala − 1| > PARA_SKALA_MAX albo |δψ| > PARA_DPSI_MAX_DEG — strażnik
 spójności pary (S1: skala p50 ≈ 1, δψ p50 −4°), nie strojenie.
 """
@@ -33,6 +36,7 @@ IW, IH = 640, 480
 EDGE, BOK_MIN = 0.10, 18.0
 MOUNT = np.array([0.0, 0.0, -0.215])       # montaż v2 pod płozami (ANEKS_NADIR-1), rama body FLU
 PARA_SKALA_MAX, PARA_DPSI_MAX_DEG = 0.20, 20.0
+R_H_MAX, KOSZ_M = 8.0, 2.0                 # ANEKS_NADIR-2 §2 (= r03/nadir_shield.R_H_MAX, KOSZ_M; asercja w proverze)
 
 
 def rotm(q):
@@ -123,7 +127,10 @@ class Rama:
             reszta = float(np.hypot(g[0] - zn["E"], g[1] - zn["N"]))
             if reszta >= self.reszta_max:
                 rec["odrz"].append({"id": m["id"], "powod": "reszta", "reszta": round(reszta, 3)}); continue
-            acc.append((m, zn, float(np.hypot(zn["E"] - cam_en[0], zn["N"] - cam_en[1])), reszta))
+            rh = float(np.hypot(zn["E"] - cam_en[0], zn["N"] - cam_en[1]))
+            if rh >= R_H_MAX:                                         # ANEKS_NADIR-2 §2
+                rec["odrz"].append({"id": m["id"], "powod": "rh", "rh": round(rh, 3)}); continue
+            acc.append((m, zn, rh, reszta))
         if not acc:
             rec["powod"] = "brak_przyjetych"
             return self._stan(rec)
@@ -148,7 +155,7 @@ class Rama:
         self.t_fix = float(t_frame)
         self.p_fix_ne = p_fix_ne
         self.n_fix[tryb] += 1
-        rec.update(ok=True, tryb=tryb, ids=[a[0]["id"] for a in acc], p_fix_ne=[round(x, 4) for x in p_fix_ne],
+        rec.update(ok=True, tryb=tryb, ids=[a[0]["id"] for a in acc], kosz=int(near[2] // KOSZ_M), p_fix_ne=[round(x, 4) for x in p_fix_ne],
                    p_ekf_fix=[round(float(x), 4) for x in ekf_pos])
         return self._stan(rec)
 
@@ -174,6 +181,7 @@ class RamaKlient:
         self.seq = 0
         self.last = None
         self.p_fix = None                    # p_fix (N, E) ostatniej przyjętej poprawki
+        self.kosz = None                     # koszyk r_h ostatniej przyjętej poprawki (wejście bariery piły)
         self.nowe = []                       # datagramy od ostatniego odbierz_nowe() — do logu ramy
 
     def drain(self):
@@ -196,6 +204,7 @@ class RamaKlient:
                 self.last = m
                 if m.get("ok"):
                     self.p_fix = m["p_fix_ne"]
+                    self.kosz = m.get("kosz")
 
     def odbierz_nowe(self):
         n, self.nowe = self.nowe, []

@@ -1,0 +1,74 @@
+{
+ "opis": "results/NADIR/tools/nadir_s3_dryrun.py — PROMPT_NADIR_S3 §0.2: próba na sucho skryptów S3 (0 bootów), wzór nadir_s2_dryrun.py.",
+ "1_B1": {
+  "rc": 0,
+  "wynik": {
+   "wynik": "zatrzymane: uzbrojenie",
+   "kroki": [
+    "connect",
+    "arm_retry"
+   ]
+  },
+  "nadir_selfcheck_pass": true,
+  "certs_selfcheck_rc_linia": [
+   "certs_selfcheck rc=0"
+  ],
+  "passthrough_plik": true,
+  "PASS": true,
+  "stderr_ogon": ""
+ },
+ "1_S4": {
+  "rc": 0,
+  "wynik": {
+   "wynik": "zatrzymane: uzbrojenie",
+   "kroki": [
+    "connect",
+    "arm_retry"
+   ]
+  },
+  "nadir_selfcheck_pass": true,
+  "certs_selfcheck_rc_linia": [
+   "certs_selfcheck rc=0"
+  ],
+  "passthrough_plik": false,
+  "PASS": true,
+  "stderr_ogon": ""
+ },
+ "2_blok_S3N": {
+  "B1": {
+   "passthrough_wiersze": 3,
+   "roznice": 0,
+   "wszystkie_eq": true,
+   "klucz_kont_w_decyzji": false,
+   "PASS": true
+  },
+  "S4": {
+   "tau": 0.2,
+   "j": 2,
+   "faza": "KONT",
+   "passthrough_wiersze": 0,
+   "PASS": true
+  },
+  "PASS": true
+ },
+ "3_shellcheck": {
+  "nadir_s3_boot.sh": {
+   "ostrzezenia": 2,
+   "w_oryginale": 2,
+   "nowe": [],
+   "root_absolutny": true,
+   "pipefail": true,
+   "PASS": true
+  },
+  "nadir_s3_launch.sh": {
+   "ostrzezenia": 6,
+   "w_oryginale": 6,
+   "nowe": [],
+   "root_absolutny": true,
+   "pipefail": true,
+   "PASS": true
+  },
+  "PASS": true
+ },
+ "PASS": true
+}

@@ -1,0 +1,190 @@
+{
+  "property": "P5_nadir",
+  "verdict": "PASS",
+  "method": "per-tick konformancja: lustro (mirror_step) ≡ r03/nadir_shield.NadirShield (decyzja, powód, reguła, stan, applied, detail, akcja, faza, t_KONT, τ, koszyk, przyczyna, licznik) + tau_kont (P1) ≡ produkcja; passthrough NADIR_MODE=0: ≡ KontShield i ≡ PatrolShield pełnym dictem",
+  "z3_lib": "5.0.0",
+  "ticks": {
+    "grid": 466,
+    "fuzz": 4027239,
+    "fixture": 4816,
+    "tau": 85300,
+    "passthrough": 1007103
+  },
+  "mismatches": 0,
+  "passthrough_mismatches": 0,
+  "coverage": [
+    "R-A",
+    "R-AUTH",
+    "R-G",
+    "R-G-NOM",
+    "R-H",
+    "R-KONT",
+    "R-O",
+    "R-P",
+    "R-POS",
+    "R-R",
+    "adm",
+    "cause:bariera",
+    "cause:τ*",
+    "refuse_j0",
+    "refuse_j1",
+    "refuse_j2",
+    "refuse_j3",
+    "second_episode",
+    "tau_zero",
+    "utrata_bez_poprawki",
+    "utrata_j0",
+    "utrata_j1",
+    "utrata_j2",
+    "utrata_j3"
+  ],
+  "grid": {
+    "path": "results/NADIR/s3/p5_nadir_grid.json",
+    "sha256": "b680d334a85013e72c9a45f806204cc91bcc69d32ae3465bd514ba1d9bf46381"
+  },
+  "fuzz": {
+    "episodes": 100000,
+    "seed": 0,
+    "tau_bound_episodes": 2000,
+    "passthrough_episodes": 25000
+  },
+  "fixture_s2": {
+    "cuts": [
+      "c08_s02",
+      "c11_s02_r2",
+      "c05_s01_r2",
+      "c02_s01"
+    ],
+    "reconstruction": "s2_fixture (rama.jsonl + tk + demo, litera r_h<8)",
+    "offline_decisions": {
+      "c08_s02": {
+        "n_ticks": 1242,
+        "n_poprawek_odrzuconych_rh_ge_8": 0,
+        "fazy_pierwsze": {
+          "NOMINAL": {
+            "now": 138.744,
+            "tau": null,
+            "j": null,
+            "cause": null,
+            "rule": "R-P",
+            "r_est": 0.034
+          },
+          "KONT": {
+            "now": 177.388,
+            "tau": 0.1880000000000166,
+            "j": 2,
+            "cause": null,
+            "rule": "R-P",
+            "r_est": 15.863
+          }
+        },
+        "n_kont_enter": 1,
+        "tau_utrata_p95": 0.204,
+        "tau_utrata_max": 0.22,
+        "koszyki_w_utracie": {
+          "2": 267,
+          "3": 16,
+          "1": 159,
+          "0": 5
+        },
+        "refuse_offline": false
+      },
+      "c11_s02_r2": {
+        "n_ticks": 1245,
+        "n_poprawek_odrzuconych_rh_ge_8": 1,
+        "fazy_pierwsze": {
+          "NOMINAL": {
+            "now": 135.404,
+            "tau": null,
+            "j": null,
+            "cause": null,
+            "rule": "R-P",
+            "r_est": 0.068
+          },
+          "KONT": {
+            "now": 172.284,
+            "tau": 0.08400000000000318,
+            "j": 0,
+            "cause": null,
+            "rule": "R-P",
+            "r_est": 12.765
+          }
+        },
+        "n_kont_enter": 1,
+        "tau_utrata_p95": 0.208,
+        "tau_utrata_max": 0.224,
+        "koszyki_w_utracie": {
+          "0": 59,
+          "1": 130,
+          "2": 260,
+          "3": 12
+        },
+        "refuse_offline": false
+      },
+      "c05_s01_r2": {
+        "n_ticks": 1120,
+        "n_poprawek_odrzuconych_rh_ge_8": 0,
+        "fazy_pierwsze": {
+          "NOMINAL": {
+            "now": 138.04,
+            "tau": null,
+            "j": null,
+            "cause": null,
+            "rule": "R-P",
+            "r_est": 0.066
+          },
+          "KONT": {
+            "now": 170.328,
+            "tau": 0.12800000000001432,
+            "j": 1,
+            "cause": null,
+            "rule": "R-P",
+            "r_est": 3.793
+          }
+        },
+        "n_kont_enter": 1,
+        "tau_utrata_p95": 0.212,
+        "tau_utrata_max": 0.224,
+        "koszyki_w_utracie": {
+          "1": 199,
+          "2": 186,
+          "0": 60
+        },
+        "refuse_offline": false
+      },
+      "c02_s01": {
+        "n_ticks": 1209,
+        "n_poprawek_odrzuconych_rh_ge_8": 0,
+        "fazy_pierwsze": {
+          "NOMINAL": {
+            "now": 137.8,
+            "tau": null,
+            "j": null,
+            "cause": null,
+            "rule": "R-P",
+            "r_est": 0.016
+          },
+          "KONT": {
+            "now": 175.096,
+            "tau": 0.09600000000000364,
+            "j": 1,
+            "cause": null,
+            "rule": "R-P",
+            "r_est": 15.754
+          }
+        },
+        "n_kont_enter": 1,
+        "tau_utrata_p95": 0.2,
+        "tau_utrata_max": 0.22,
+        "koszyki_w_utracie": {
+          "1": 177,
+          "2": 216,
+          "3": 53
+        },
+        "refuse_offline": false
+      }
+    }
+  },
+  "binds": "P1_nadir (tau_kont), P7_nadir (lustro monitora i zegara τ)",
+  "model_sha256": "9405ccff16a3654cd969ba27cb8a6069b26f071a97e8e470ed3a129ba023ad95"
+}
