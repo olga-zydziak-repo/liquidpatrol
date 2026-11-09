@@ -12,13 +12,21 @@ Wiersz per klatka (JSONL): mono, sim, n_det, tryb lustra, per znacznik id/naroż
 (najkrótsza krawędź), EKF q/pos/heading z wiekiem; czas detekcji. Pozycje (tryb 1 / para) liczy analiza offline
 (results/NADIR/tools/nadir_s1_analyze.py) — z EKF i z GT, żeby rozdzielić wkład postawy.
 Detekcja w wątku roboczym z kolejką 1 (zawsze najnowsza klatka); klatki pominięte liczone (n_drop) i raportowane.
+PROMPT_NADIR_S2 §1.1 — gałąź NADIR_MODE=1 (przy 0 zachowanie pasywne jak wyżej, wiersze bez zmian): producent ramy B+ —
+po detekcji harness/nadir_fix.Rama.obserwacja(sim, det, migawka EKF) i datagram stanu ramy do gniazd z env NADIR_FIX_SOCKS
+(lista ścieżek UDS rozdzielona „:”); rekord w wierszu klatki pod kluczem "fx" (przyjęte/odrzucone obserwacje z powodem).
+PROMPT_NADIR_S2 §1.6 (wada S1: brak summary — proces nie doszedł do ścieżki zamknięcia w 4 s przed SIGKILL): summary
+zapisywany atomowo co 15 s z wątku roboczego (przeżywa SIGKILL), końcowy w handlerze SIGTERM; faulthandler zrzuca stosy
+wątków na stderr przy SIGTERM (diagnoza zawieszenia).
 Użycie: nadir_obs.py --world W --model M --out plik.jsonl
 """
 import argparse
+import faulthandler
 import json
 import os
 import queue
 import signal
+import sys
 import threading
 import time
 
@@ -39,11 +47,42 @@ else:                                                         # OpenCV 4.6 (syst
     _D, _P = cv2.aruco.Dictionary_get(cv2.aruco.DICT_4X4_50), cv2.aruco.DetectorParameters_create()
     _detm = lambda g: cv2.aruco.detectMarkers(g, _D, parameters=_P)
 
+NADIR_MODE = os.environ.get("NADIR_MODE") == "1"
+if NADIR_MODE:                                                # PROMPT_NADIR_S2 §1.1: producent ramy B+
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from harness.nadir_fix import Rama, nadawca
+    _rama = Rama()
+    _send = nadawca([x for x in os.environ.get("NADIR_FIX_SOCKS", "").split(":") if x])
 _stop = [False]
 _ekf = {"q": None, "q_mono": None, "pos": None, "hdg": None, "pos_mono": None}
 _q = queue.Queue(maxsize=1)
 st = {"n_img": 0, "n_drop": 0, "n_proc": 0, "n_det_klatki": 0, "flip_hits": 0, "det_ms": []}
+if NADIR_MODE:
+    st["n_fix"] = 0
 fout = open(a.out, "w", buffering=1)
+_hb = [time.monotonic()]
+
+
+def zapisz_summary(zamkniecie):
+    """PROMPT_NADIR_S2 §1.6: summary atomowo (tmp + rename) — z wątku roboczego co 15 s i z handlera SIGTERM."""
+    ms = sorted(st["det_ms"])
+    summ = {k: v for k, v in st.items() if k != "det_ms"}
+    summ["det_ms"] = {"p50": ms[len(ms) // 2], "p95": ms[int(len(ms) * 0.95)], "max": ms[-1]} if ms else None
+    summ["zamkniecie"] = zamkniecie
+    summ["mono"] = round(time.monotonic(), 3)
+    tmp = a.out + ".summary.json.tmp"
+    with open(tmp, "w") as f:
+        json.dump(summ, f, indent=1)
+    os.replace(tmp, a.out + ".summary.json")
+    return summ
+
+
+def on_term(*_):
+    _stop[0] = True
+    try:
+        zapisz_summary("SIGTERM")
+    except Exception:                                         # noqa: BLE001 — zamknięcie nie może rzucić
+        pass
 
 
 def srodek(c):
@@ -96,8 +135,17 @@ def worker():
             st["n_det_klatki"] += 1
         if tryb:
             st["flip_hits"] += 1
-        fout.write(json.dumps({"t": "nf", "mono": round(mono, 4), "sim": round(sim, 4), "n": len(det), "lustro": tryb,
-                               "det": det, "ms": round(ms, 2), **ekf}) + "\n")
+        row = {"t": "nf", "mono": round(mono, 4), "sim": round(sim, 4), "n": len(det), "lustro": tryb,
+               "det": det, "ms": round(ms, 2), **ekf}
+        if NADIR_MODE:                                         # PROMPT_NADIR_S2 §1.1
+            fx = _rama.obserwacja(sim, det, ekf["ekf_q"], ekf["ekf_pos"])
+            _send(fx)
+            st["n_fix"] += int(fx["ok"])
+            row["fx"] = fx
+        fout.write(json.dumps(row) + "\n")
+        if time.monotonic() - _hb[0] >= 15.0:                  # PROMPT_NADIR_S2 §1.6: summary okresowo (przeżywa SIGKILL)
+            _hb[0] = time.monotonic()
+            zapisz_summary("heartbeat")
 
 
 def on_img(m):
@@ -151,7 +199,8 @@ def main():
     node.create_subscription(VehicleAttitude, "/fmu/out/vehicle_attitude", on_att, qos)
     ex = SingleThreadedExecutor()
     ex.add_node(node)
-    signal.signal(signal.SIGTERM, lambda *_: _stop.__setitem__(0, True))
+    signal.signal(signal.SIGTERM, on_term)
+    faulthandler.register(signal.SIGTERM, file=sys.stderr, all_threads=True, chain=True)   # §1.6: diagnoza, potem on_term
     signal.signal(signal.SIGINT, lambda *_: _stop.__setitem__(0, True))
     t_hb = time.monotonic()
     while not _stop[0] and rclpy.ok():
@@ -162,12 +211,9 @@ def main():
                   f"flip={st['flip_hits']}", flush=True)
     _stop[0] = True
     th.join(timeout=2)
-    ms = sorted(st["det_ms"])
-    summ = {k: v for k, v in st.items() if k != "det_ms"}
-    summ["det_ms"] = {"p50": ms[len(ms) // 2], "p95": ms[int(len(ms) * 0.95)], "max": ms[-1]} if ms else None
+    summ = zapisz_summary("koniec_petli")
     fout.write(json.dumps({"t": "summary", **summ}) + "\n")
     fout.close()
-    json.dump(summ, open(a.out + ".summary.json", "w"), indent=1)
     print(f"[nadir_obs] DONE {json.dumps(summ)}", flush=True)
 
 

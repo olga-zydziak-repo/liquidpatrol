@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- PROMPT_NADIR_S2 §0.2: statyczne opakowanie modelu lotnego x500_nadir2_flow (wzór results/NADIR/s1/zrodla/rig_nadir.sdf), nie lata. -->
+<sdf version='1.9'>
+  <model name='probe'>
+    <static>true</static>
+    <include merge='true'>
+      <uri>x500_nadir2_flow</uri>
+    </include>
+  </model>
+</sdf>

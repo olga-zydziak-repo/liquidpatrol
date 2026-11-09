@@ -23,6 +23,10 @@ odchyłka pomijalna, odnotowana).
 
 Wyjścia plikowe: --log (jsonl rdzenia FeedVision z doklejką t_update_sim — wzór
 LogProxy S2) + <log>.summary.json przy SIGTERM.
+
+PROMPT_NADIR_S2 §1.2 / PRE_NADIR §2.5 — gałąź NADIR_MODE=1 (przy 0 tor bajtowo jak wyżej): źródło own_pos dla
+rdzenia = p_corr ramy B+ (harness/nadir_fix.RamaKlient na gnieździe z env NADIR_SOCK_PERCEP; p_corr = p_EKF + Δ,
+Δ z datagramów producenta harness/nadir_obs.py), doklejka "nadir" {ekf, d_ne, tau, seq} do wierszy loga.
 """
 from __future__ import annotations
 
@@ -40,6 +44,8 @@ if ROOT not in sys.path:
 
 _sim = [0.0]
 _stop = [False]
+NADIR_MODE = os.environ.get("NADIR_MODE") == "1"               # PROMPT_NADIR_S2 §1.2
+_nadir = {}
 
 
 class LogProxy:
@@ -54,6 +60,8 @@ class LogProxy:
             rec = json.loads(s)
             if _sim[0] > 0.0:
                 rec["t_update_sim"] = round(_sim[0], 4)
+            if NADIR_MODE:                                     # PROMPT_NADIR_S2 §1.2: stan ramy przy wierszu
+                rec["nadir"] = dict(_nadir)
             self._f.write(json.dumps(rec) + "\n")
         except (ValueError, TypeError):
             self._f.write(s)
@@ -117,16 +125,30 @@ def main():
           f"core={feed.feed_sha[:16]} device={det.device}", flush=True)
 
     st = {"pos": None, "q": None, "n_img": 0, "wall_ms": []}
+    rama = None
+    if NADIR_MODE:                                              # PROMPT_NADIR_S2 §1.2: own_pos = p_corr
+        from harness.nadir_fix import RamaKlient
+        rama = RamaKlient(os.environ["NADIR_SOCK_PERCEP"])
+
+    def own():
+        if rama is None:
+            return st["pos"]
+        rama.drain()
+        rama.odbierz_nowe()
+        pc = rama.p_corr(st["pos"])
+        _nadir.update(ekf=[round(x, 4) for x in st["pos"]], d_ne=[round(x, 6) for x in rama.d_ne],
+                      tau=None if rama.t_fix is None else round(_sim[0] - rama.t_fix, 4), seq=rama.seq)
+        return pc
 
     def on_pos(m):
         st["pos"] = [float(m.x), float(m.y), float(m.z)]
         if st["q"] is not None:
-            feed.push_own(m.timestamp / 1e6, st["pos"], st["q"])
+            feed.push_own(m.timestamp / 1e6, own(), st["q"])
 
     def on_att(m):
         st["q"] = [float(m.q[0]), float(m.q[1]), float(m.q[2]), float(m.q[3])]
         if st["pos"] is not None:
-            feed.push_own(m.timestamp / 1e6, st["pos"], st["q"])
+            feed.push_own(m.timestamp / 1e6, own(), st["q"])
 
     def on_img(msg):
         t = msg.header.stamp.sec + msg.header.stamp.nanosec / 1e9
@@ -167,6 +189,9 @@ def main():
             "push_frame_wall_ms": ({"n": len(pm), "p50": pm[len(pm) // 2],
                                     "p95": pm[int(len(pm) * 0.95)], "max": pm[-1]} if pm else None),
             "det_v2_sha": det.weights_sha, "feed_sha_v2": fsha, "sim_last": round(_sim[0], 3)}
+    if NADIR_MODE:                                              # PROMPT_NADIR_S2 §1.2/§1.3
+        summ.update(nadir_seq=rama.seq, n_pred_odrzut=feed.n_pred_odrzut)
+        rama.close()
     with open(a.log + ".summary.json", "w") as f:
         json.dump(summ, f, indent=1)
     print(f"[percep] DONE {json.dumps(summ)}", flush=True)

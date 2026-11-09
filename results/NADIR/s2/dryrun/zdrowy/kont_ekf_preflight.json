@@ -1,0 +1,28 @@
+{
+ "aneks": "ANEKS_KONT-4c §3",
+ "bias_prog": 0.08,
+ "yaw_prog_deg": 10.0,
+ "konwergencja_sim_s": 15.0,
+ "podejscia": [
+  {
+   "podejscie": 1,
+   "przed": {
+    "yaw_blad_deg": 30.0,
+    "bias_absmax": 0.13
+   },
+   "reinit": {
+    "rc_stop": 0,
+    "rc_start": 0,
+    "cmd_wall_s": 0.0,
+    "atrapa": true
+   },
+   "sim_reinit": 101.1,
+   "po": {
+    "yaw_blad_deg": 6.4,
+    "bias_absmax": 0.0002,
+    "sim": 116.7
+   },
+   "ok": true
+  }
+ ]
+}

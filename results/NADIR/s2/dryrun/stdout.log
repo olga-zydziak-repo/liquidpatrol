@@ -1,0 +1,90 @@
+{
+ "opis": "results/NADIR/tools/nadir_s2_dryrun.py — PROMPT_NADIR_S2 §0.3: próba na sucho skryptów S2 (0 bootów).",
+ "1_driver_main": {
+  "rc": 0,
+  "wynik": {
+   "wynik": "zatrzymane: uzbrojenie",
+   "reinit_wywolan": 1,
+   "kroki": [
+    "connect",
+    "arm_retry"
+   ]
+  },
+  "PASS": true,
+  "stderr_ogon": ""
+ },
+ "2_bloki_S2N": {
+  "bloki": {
+   "S2N-1_linie": 10,
+   "S2N-2_linie": 14
+  },
+  "NADIR_MODE=1": {
+   "own_net": [
+    1.3,
+    2.4,
+    -12.0
+   ],
+   "own_net_is_own": false,
+   "tgt": [
+    4.7,
+    -3.4,
+    -12.0
+   ],
+   "tgt_is_cmd": false,
+   "ctrl_widzi": [
+    1.3,
+    2.4,
+    -12.0
+   ],
+   "wiersz_klucze_ok": true,
+   "tau": 0.2,
+   "obs_n": 1,
+   "p_fix": [
+    1.5,
+    2.5
+   ],
+   "PASS": true
+  },
+  "NADIR_MODE=0": {
+   "own_net": [
+    1.0,
+    2.0,
+    -12.0
+   ],
+   "own_net_is_own": true,
+   "tgt": [
+    5.0,
+    -3.0,
+    -12.0
+   ],
+   "tgt_is_cmd": true,
+   "ctrl_widzi": [
+    1.0,
+    2.0,
+    -12.0
+   ],
+   "PASS": true
+  },
+  "PASS": true
+ },
+ "3_shellcheck": {
+  "nadir_s2_boot.sh": {
+   "ostrzezenia": 2,
+   "w_oryginale": 2,
+   "nowe": [],
+   "root_absolutny": true,
+   "pipefail": true,
+   "PASS": true
+  },
+  "nadir_s2_launch.sh": {
+   "ostrzezenia": 6,
+   "w_oryginale": 6,
+   "nowe": [],
+   "root_absolutny": true,
+   "pipefail": true,
+   "PASS": true
+  },
+  "PASS": true
+ },
+ "PASS": true
+}

@@ -1,0 +1,460 @@
+{
+ "opis": "results/NADIR/tools/nadir_s2_walidacja.py — PROMPT_NADIR_S2 §1.5: walidacja sucha przed lotami (0 bootów), replay logów.",
+ "A_passthrough_feed": {
+  "baza": "9f7cdd74:harness/feed_vision.py",
+  "boots": {
+   "results/NADIR/s1/b2v2_c08": {
+    "wiersze": 4433,
+    "roznice_mode0": 0,
+    "feed_sha_base": "d6a3367b210f47e7",
+    "feed_sha_mode0": "d6a3367b210f47e7",
+    "mode1": {
+     "n_pred_odrzut": 35,
+     "klasy": {
+      "intruz_przy_tracku_zastanym": 31,
+      "box_nie_na_intruzie": 4
+     },
+     "fresh_mode0": 2321,
+     "fresh_mode1": 2254,
+     "entry_mode0": 2,
+     "entry_mode1": 3,
+     "przyklady": [
+      {
+       "t": 139.392,
+       "d": 16.215,
+       "prog": 7.584,
+       "d_cand_intruz": 0.4,
+       "d_pred_intruz": 16.47,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 139.46,
+       "d": 16.341,
+       "prog": 7.72,
+       "d_cand_intruz": 0.14,
+       "d_pred_intruz": 16.42,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 139.524,
+       "d": 16.668,
+       "prog": 7.848,
+       "d_cand_intruz": 0.27,
+       "d_pred_intruz": 16.43,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 139.592,
+       "d": 16.32,
+       "prog": 7.984,
+       "d_cand_intruz": 0.14,
+       "d_pred_intruz": 16.23,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 139.724,
+       "d": 16.611,
+       "prog": 8.248,
+       "d_cand_intruz": 0.57,
+       "d_pred_intruz": 16.08,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 139.788,
+       "d": 15.995,
+       "prog": 8.376,
+       "d_cand_intruz": 0.29,
+       "d_pred_intruz": 16.08,
+       "klasa": "intruz_przy_tracku_zastanym"
+      }
+     ]
+    }
+   },
+   "results/NADIR/s1/b3v2_c05c11": {
+    "wiersze": 4546,
+    "roznice_mode0": 0,
+    "feed_sha_base": "d6a3367b210f47e7",
+    "feed_sha_mode0": "d6a3367b210f47e7",
+    "mode1": {
+     "n_pred_odrzut": 33,
+     "klasy": {
+      "intruz_przy_tracku_zastanym": 11,
+      "box_nie_na_intruzie": 22
+     },
+     "fresh_mode0": 2392,
+     "fresh_mode1": 2356,
+     "entry_mode0": 2,
+     "entry_mode1": 3,
+     "przyklady": [
+      {
+       "t": 138.864,
+       "d": 8.599,
+       "prog": 6.128,
+       "d_cand_intruz": 1.06,
+       "d_pred_intruz": 8.2,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 138.932,
+       "d": 8.533,
+       "prog": 6.264,
+       "d_cand_intruz": 1.04,
+       "d_pred_intruz": 8.18,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 138.996,
+       "d": 7.947,
+       "prog": 6.392,
+       "d_cand_intruz": 1.0,
+       "d_pred_intruz": 8.13,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 139.128,
+       "d": 8.216,
+       "prog": 6.656,
+       "d_cand_intruz": 0.94,
+       "d_pred_intruz": 8.03,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 139.196,
+       "d": 7.674,
+       "prog": 6.792,
+       "d_cand_intruz": 1.01,
+       "d_pred_intruz": 7.98,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 139.26,
+       "d": 8.084,
+       "prog": 6.92,
+       "d_cand_intruz": 1.03,
+       "d_pred_intruz": 7.93,
+       "klasa": "intruz_przy_tracku_zastanym"
+      }
+     ]
+    }
+   },
+   "results/KONT/s4/c08_s02": {
+    "wiersze": 3126,
+    "roznice_mode0": 0,
+    "feed_sha_base": "d6a3367b210f47e7",
+    "feed_sha_mode0": "d6a3367b210f47e7",
+    "mode1": {
+     "n_pred_odrzut": 67,
+     "klasy": {
+      "intruz_przy_tracku_zastanym": 34,
+      "box_nie_na_intruzie": 33
+     },
+     "fresh_mode0": 1210,
+     "fresh_mode1": 1140,
+     "entry_mode0": 1,
+     "entry_mode1": 2,
+     "przyklady": [
+      {
+       "t": 141.24,
+       "d": 15.308,
+       "prog": 7.448,
+       "d_cand_intruz": 1.11,
+       "d_pred_intruz": 16.23,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 141.308,
+       "d": 16.01,
+       "prog": 7.584,
+       "d_cand_intruz": 0.45,
+       "d_pred_intruz": 16.27,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 141.372,
+       "d": 15.949,
+       "prog": 7.712,
+       "d_cand_intruz": 0.15,
+       "d_pred_intruz": 15.82,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 141.44,
+       "d": 16.19,
+       "prog": 7.848,
+       "d_cand_intruz": 0.29,
+       "d_pred_intruz": 16.04,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 141.504,
+       "d": 16.087,
+       "prog": 7.976,
+       "d_cand_intruz": 0.39,
+       "d_pred_intruz": 15.87,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 141.572,
+       "d": 16.039,
+       "prog": 8.112,
+       "d_cand_intruz": 0.27,
+       "d_pred_intruz": 15.82,
+       "klasa": "intruz_przy_tracku_zastanym"
+      }
+     ]
+    }
+   },
+   "results/KONT/s4/c11_s02": {
+    "wiersze": 3189,
+    "roznice_mode0": 0,
+    "feed_sha_base": "d6a3367b210f47e7",
+    "feed_sha_mode0": "d6a3367b210f47e7",
+    "mode1": {
+     "n_pred_odrzut": 0,
+     "klasy": {},
+     "fresh_mode0": 996,
+     "fresh_mode1": 996,
+     "entry_mode0": 3,
+     "entry_mode1": 3,
+     "przyklady": []
+    }
+   },
+   "results/KONT/s4/c05_s01": {
+    "wiersze": 3099,
+    "roznice_mode0": 0,
+    "feed_sha_base": "d6a3367b210f47e7",
+    "feed_sha_mode0": "d6a3367b210f47e7",
+    "mode1": {
+     "n_pred_odrzut": 12,
+     "klasy": {
+      "box_nie_na_intruzie": 1,
+      "intruz_przy_tracku_zastanym": 11
+     },
+     "fresh_mode0": 940,
+     "fresh_mode1": 926,
+     "entry_mode0": 2,
+     "entry_mode1": 3,
+     "przyklady": [
+      {
+       "t": 136.092,
+       "d": 12.977,
+       "prog": 9.432,
+       "d_cand_intruz": null,
+       "d_pred_intruz": null,
+       "klasa": "box_nie_na_intruzie"
+      },
+      {
+       "t": 140.184,
+       "d": 8.818,
+       "prog": 6.128,
+       "d_cand_intruz": 1.35,
+       "d_pred_intruz": 8.37,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 140.252,
+       "d": 8.706,
+       "prog": 6.264,
+       "d_cand_intruz": 1.27,
+       "d_pred_intruz": 8.37,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 140.316,
+       "d": 8.19,
+       "prog": 6.392,
+       "d_cand_intruz": 1.25,
+       "d_pred_intruz": 8.37,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 140.384,
+       "d": 8.038,
+       "prog": 6.528,
+       "d_cand_intruz": 1.08,
+       "d_pred_intruz": 8.33,
+       "klasa": "intruz_przy_tracku_zastanym"
+      },
+      {
+       "t": 140.448,
+       "d": 8.073,
+       "prog": 6.656,
+       "d_cand_intruz": 1.1,
+       "d_pred_intruz": 8.27,
+       "klasa": "intruz_przy_tracku_zastanym"
+      }
+     ]
+    }
+   },
+   "results/KONT/s4/c02_s01": {
+    "wiersze": 3211,
+    "roznice_mode0": 0,
+    "feed_sha_base": "d6a3367b210f47e7",
+    "feed_sha_mode0": "d6a3367b210f47e7",
+    "mode1": {
+     "n_pred_odrzut": 36,
+     "klasy": {
+      "box_nie_na_intruzie": 36
+     },
+     "fresh_mode0": 973,
+     "fresh_mode1": 934,
+     "entry_mode0": 2,
+     "entry_mode1": 3,
+     "przyklady": [
+      {
+       "t": 207.968,
+       "d": 14.782,
+       "prog": 6.528,
+       "d_cand_intruz": 17.53,
+       "d_pred_intruz": 9.92,
+       "klasa": "box_nie_na_intruzie"
+      },
+      {
+       "t": 208.032,
+       "d": 15.046,
+       "prog": 6.656,
+       "d_cand_intruz": 17.5,
+       "d_pred_intruz": 10.93,
+       "klasa": "box_nie_na_intruzie"
+      },
+      {
+       "t": 208.1,
+       "d": 15.531,
+       "prog": 6.792,
+       "d_cand_intruz": 17.55,
+       "d_pred_intruz": 12.31,
+       "klasa": "box_nie_na_intruzie"
+      },
+      {
+       "t": 208.164,
+       "d": 15.772,
+       "prog": 6.92,
+       "d_cand_intruz": 16.88,
+       "d_pred_intruz": 13.46,
+       "klasa": "box_nie_na_intruzie"
+      },
+      {
+       "t": 208.232,
+       "d": 16.367,
+       "prog": 7.056,
+       "d_cand_intruz": 17.43,
+       "d_pred_intruz": 14.37,
+       "klasa": "box_nie_na_intruzie"
+      },
+      {
+       "t": 208.296,
+       "d": 16.976,
+       "prog": 7.184,
+       "d_cand_intruz": 16.8,
+       "d_pred_intruz": 15.72,
+       "klasa": "box_nie_na_intruzie"
+      }
+     ]
+    }
+   }
+  },
+  "roznice_mode0": 0,
+  "wiersze": 21604,
+  "PASS": true
+ },
+ "B_sp_max_odchylka": 1.7763568394002505e-15,
+ "B_PASS": true,
+ "C_poprawki": {
+  "n": 1474,
+  "n_para": 1420,
+  "jeden_max_odchylka_od_wzoru_S1_m": 5.3460035278798945e-05,
+  "jeden_n": 54,
+  "per_koszyk": {
+   "jeden 0-2": {
+    "n": 36,
+    "p50": 0.028,
+    "p95": 0.209,
+    "s1_p95": 0.201,
+    "p95_le_s1": false
+   },
+   "jeden 2-4": {
+    "n": 6,
+    "p50": 0.062,
+    "p95": 0.244,
+    "s1_p95": 0.359,
+    "p95_le_s1": true
+   },
+   "jeden 4-6": {
+    "n": 7,
+    "p50": 0.17,
+    "p95": 0.469,
+    "s1_p95": 0.566,
+    "p95_le_s1": true
+   },
+   "jeden 6-8": {
+    "n": 1,
+    "p50": 0.129,
+    "p95": 0.129,
+    "s1_p95": 0.745,
+    "p95_le_s1": true
+   },
+   "jeden 8-10": {
+    "n": 4,
+    "p50": 0.611,
+    "p95": 0.632,
+    "s1_p95": 0.932,
+    "p95_le_s1": true
+   },
+   "para 0-2": {
+    "n": 126,
+    "p50": 0.045,
+    "p95": 0.1,
+    "s1_p95": 0.1,
+    "p95_le_s1": true
+   },
+   "para 2-4": {
+    "n": 570,
+    "p50": 0.041,
+    "p95": 0.084,
+    "s1_p95": 0.084,
+    "p95_le_s1": true
+   },
+   "para 4-6": {
+    "n": 655,
+    "p50": 0.044,
+    "p95": 0.086,
+    "s1_p95": 0.086,
+    "p95_le_s1": true
+   },
+   "para 6-8": {
+    "n": 60,
+    "p50": 0.047,
+    "p95": 0.128,
+    "s1_p95": 0.128,
+    "p95_le_s1": true
+   },
+   "para 8-10": {
+    "n": 7,
+    "p50": 0.069,
+    "p95": 0.092,
+    "s1_p95": 0.092,
+    "p95_le_s1": true
+   },
+   "para 10-99": {
+    "n": 2,
+    "p50": 0.108,
+    "p95": 0.108,
+    "s1_p95": 0.108,
+    "p95_le_s1": true
+   }
+  },
+  "nota": "per_koszyk dla trybu jeden opisowo (podzbiór obserwacji S1) — errata przed lotami, docstring",
+  "PASS": true
+ },
+ "C_p_corr": {
+  "n_tickow": 29540,
+  "p50": 0.04,
+  "p95": 0.093,
+  "max": 0.647,
+  "s1_tryb1_ekf_p95": 1.039,
+  "PASS": true,
+  "tau_p95": 0.205,
+  "tau_max": 0.412
+ },
+ "PASS": true
+}

@@ -54,6 +54,14 @@ FRAME_HZ_NOMINAL = 15.0                     # kamera stock (D3)
 # 1.26 m (kalibracja S1) + ruch celu ≤1 m/s w oknie ZOH + jitter zasięgu pinhole ~1 m
 # przy widocznym celu — a FP tła leżały ≥5 m (768/810 powyżej progu 5 m, RAPORT_2A_S2 §4).
 REFRESH_GATE_M = 3.0
+# PROMPT_NADIR_S2 §1.3 / PRE_NADIR §2.5 — WYŁĄCZNIE gałąź NADIR_MODE=1 (przy 0 tor bajtowo jak wyżej): bramka pozycji
+# przewidywanej także na ścieżce admisyjnej (central∧mti) — odświeżenie przyjęte ⇔ |cand − pred| ≤ M0 + V·Δt (Δt od ostatniej
+# świeżej). Kalibracja z 20 bootów KONT S4 + NADIR S1 (percep_feed): odświeżenia mti z trackiem na intruzie p99 0.43 m,
+# max 5.5 m (skok prędkości linreg 3–4.6 m/s); wszystkie > 5 m to track zastany (teleport intruza do pozy startowej, powrót
+# z fałszywego tracku). M0 = 6.0 m (podłoga FP tła 5 m + 1), V = 2.0 m/s (2 × prędkość intruza 1.0 m/s — zapas na manewr).
+NADIR_MODE = os.environ.get("NADIR_MODE") == "1"
+NADIR_PRED_GATE_M0 = 6.0
+NADIR_PRED_V_M_S = 2.0
 
 
 def box_to_ned(box: Box, own_pos_ned, q_frd2ned):
@@ -136,6 +144,9 @@ class FeedVision:
                        "pos": "pinhole_raw", "trk_vel": "linreg_1s_sim",
                        "refresh_gate": "admisja(central∧mti) OR okno predykcji (ANEKS_2A-1 N2)",
                        "refresh_gate_m": REFRESH_GATE_M}
+        if NADIR_MODE:                                               # PROMPT_NADIR_S2 §1.3
+            self.params["nadir_pred_gate"] = {"m0": NADIR_PRED_GATE_M0, "v_m_s": NADIR_PRED_V_M_S}
+        self.n_pred_odrzut = 0
         self.feed_sha = hashlib.sha256(json.dumps(self.params, sort_keys=True).encode()).hexdigest()
         self._own = None                 # (sim_t, pos_ned[3], q[4] wxyz) — ostatni stan pokładowy
         self._last_pos = None
@@ -189,6 +200,7 @@ class FeedVision:
         fresh = False
         gate = None
         pos = None
+        odrzut = None
         if self.channel.locked and box is not None and self._own is not None:
             cand = box_to_ned(box, self._own[1], self._own[2])
             if cand is not None:
@@ -201,6 +213,17 @@ class FeedVision:
                 # NIGDY refresh z top-1 tła (lekcja S2: 768/810 FP-admisji po ENTRY).
                 if self.channel.last_conj["central"] and bool(mti_ok):
                     gate = "mti"
+                    if NADIR_MODE and self._last_pos is not None:    # PROMPT_NADIR_S2 §1.3: bramka predykcji
+                        dt = t - self._last_fresh_sim if self._last_fresh_sim is not None else 0.0
+                        vel = self._trk_vel(t)
+                        pred = [self._last_pos[k] + vel[k] * dt for k in range(3)]
+                        dp = math.dist(cand, pred)
+                        if dp > NADIR_PRED_GATE_M0 + NADIR_PRED_V_M_S * dt:
+                            gate = None
+                            odrzut = {"d": round(dp, 3), "prog": round(NADIR_PRED_GATE_M0 + NADIR_PRED_V_M_S * dt, 3),
+                                      "dt": round(dt, 4), "pred": [round(x, 4) for x in pred],
+                                      "cand": [round(x, 4) for x in cand]}
+                            self.n_pred_odrzut += 1
                 elif self._last_pos is not None:
                     dt = t - self._last_fresh_sim if self._last_fresh_sim is not None else 0.0
                     vel = self._trk_vel(t)
@@ -218,7 +241,7 @@ class FeedVision:
                     if len(self._issued) > 4 and self._issued[0][0] < lo:
                         self._issued = [s for s in self._issued if s[0] >= lo]
         if self._log:
-            self._log.write(json.dumps({
+            row = {
                 "t_frame": round(t, 4), "wall": round(time.monotonic(), 4),
                 "box": ([round(box.cx, 4), round(box.cy, 4), round(box.w, 4), round(box.h, 4)]
                         if box else None),
@@ -227,7 +250,10 @@ class FeedVision:
                 "gate": gate,
                 "own_pos_ned": ([round(x, 4) for x in self._own[1]] if self._own else None),
                 "own_q": ([round(x, 6) for x in self._own[2]] if self._own else None),
-                "trk_pos_ned": ([round(x, 4) for x in pos] if pos else None)}) + "\n")
+                "trk_pos_ned": ([round(x, 4) for x in pos] if pos else None)}
+            if NADIR_MODE:                                           # PROMPT_NADIR_S2 §1.3: log odrzuceń z powodem
+                row["pred_odrzut"] = odrzut
+            self._log.write(json.dumps(row) + "\n")
             self._log.flush()
         return ev
 
