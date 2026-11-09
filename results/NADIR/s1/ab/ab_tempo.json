@@ -1,0 +1,78 @@
+{
+ "opis": "results/NADIR/tools/nadir_ab.py — diagnostyka tempa A/B po STOP-NADIR1-TEMPO (decyzja Olgi 9.11: „rób test A/B”).\nGoły gz bez PX4 (wzór B0 z KONT), 0 bootów lotnych. Rozdziela hipotezy: (a) drugi render nadir vs (b) stanowisko.",
+ "instalacja_modelu": "istniał, identyczny",
+ "opencv": "4.6.0",
+ "timesyncd": "inactive",
+ "warm_s": 20.0,
+ "win_s": 120.0,
+ "przebiegi": [
+  {
+   "tag": "A_nadir",
+   "dsim_dwall": 0.623,
+   "n_probek_okna": 1334,
+   "loadavg1_po": 2.01,
+   "klatki": {
+    "imager": 1343,
+    "flow": 4431,
+    "nadir": 1343
+   },
+   "nadir_klatki_z_id": 1343,
+   "hz": {
+    "imager": 9.59,
+    "flow": 31.65,
+    "nadir": 9.59
+   }
+  },
+  {
+   "tag": "B_flow",
+   "dsim_dwall": 0.6982,
+   "n_probek_okna": 1403,
+   "loadavg1_po": 3.18,
+   "klatki": {
+    "imager": 1503,
+    "flow": 4958
+   },
+   "nadir_klatki_z_id": null,
+   "hz": {
+    "imager": 10.74,
+    "flow": 35.41
+   }
+  },
+  {
+   "tag": "A_nadir",
+   "dsim_dwall": 0.6117,
+   "n_probek_okna": 1343,
+   "loadavg1_po": 3.11,
+   "klatki": {
+    "imager": 1330,
+    "flow": 4388,
+    "nadir": 1330
+   },
+   "nadir_klatki_z_id": 1330,
+   "hz": {
+    "imager": 9.5,
+    "flow": 31.34,
+    "nadir": 9.5
+   }
+  },
+  {
+   "tag": "B_flow",
+   "dsim_dwall": 0.6918,
+   "n_probek_okna": 1401,
+   "loadavg1_po": 4.33,
+   "klatki": {
+    "imager": 1493,
+    "flow": 4923
+   },
+   "nadir_klatki_z_id": null,
+   "hz": {
+    "imager": 10.66,
+    "flow": 35.16
+   }
+  }
+ ],
+ "srednia": {
+  "A_nadir": 0.6174,
+  "B_flow": 0.695
+ }
+}
