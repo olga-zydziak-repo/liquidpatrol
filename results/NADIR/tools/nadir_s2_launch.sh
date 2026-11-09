@@ -49,7 +49,10 @@ source env_gpu.sh >/dev/null 2>&1 || true
 export HEADLESS=1 GALLIUM_DRIVER=d3d12 MESA_D3D12_DEFAULT_ADAPTER_NAME=NVIDIA RENDER_BACKEND="mesa-d3d12"
 B0SP="$ROOT/.b0deps/lib/python3.12/site-packages"
 
-teardown(){ python3 "$ROOT/results/KONT/tools/kont_inw.py" KILL gz px4 MicroXRCEAgent mavsdk_server gate_run_r03 k1_arm_n infra1_empty_flight kont_s2_probe_y kont_s4_flight nadir_s2_flight rtf_sampler parameter_bridge nadir_obs >/dev/null; sleep 2; }
+# PROMPT_NADIR_S2 §1.6 (przyczyna z bootu S2 c08_s02: brak zrzutu faulthandler, summary z heartbeat — nadir_obs dostawał SIGKILL
+# z tej listy, zanim boot wysłał TERM): najpierw TERM do nadir_obs i do 5 s na zamknięcie, potem KILL jak dotąd.
+teardown(){ python3 "$ROOT/results/KONT/tools/kont_inw.py" TERM nadir_obs >/dev/null; for _i in 1 2 3 4 5; do python3 "$ROOT/results/KONT/tools/kont_inw.py" LIST nadir_obs | grep -q . || break; sleep 1; done
+  python3 "$ROOT/results/KONT/tools/kont_inw.py" KILL gz px4 MicroXRCEAgent mavsdk_server gate_run_r03 k1_arm_n infra1_empty_flight kont_s2_probe_y kont_s4_flight nadir_s2_flight rtf_sampler parameter_bridge nadir_obs >/dev/null; sleep 2; }
 
 # ============ 1. B4 (orphany + cooldown) + inwentarz + BRAMKA PROCESOWA §3 ============
 ORPH_PAT='gz sim|bin/px4|MicroXRCEAgent|mavsdk_server|gate_run_r03|k1_arm_n|infra1_empty_flight|rtf_sampler|ruby.*gz'
