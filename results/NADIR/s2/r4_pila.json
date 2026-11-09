@@ -1,0 +1,742 @@
+{
+ "c08_s02": {
+  "scenariusz": "c08_s02",
+  "m": 2.99,
+  "n_tickow": 1240,
+  "ticki_bez_poprawki": 2,
+  "u_max": 2.235,
+  "u_max_bez_GNSS": 2.235,
+  "ticki_u_gt_m": 0,
+  "u_p95": 1.955,
+  "najgorszy": {
+   "sim": 186.444,
+   "u": 2.235,
+   "eps_fix": 0.388,
+   "tau": 0.044,
+   "bez_GNSS": true
+  },
+  "tau_p95": 0.204,
+  "tau_max": 0.22,
+  "ogony_tau_gt_1s": [],
+  "ogony_przy_koronach": 0,
+  "PASS": true,
+  "r5": {
+   "odrzucenia": [
+    {
+     "t": 139.46,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.86,
+     "prog": 7.584,
+     "d_cand_intruz": 0.34,
+     "d_pred_intruz": 16.14
+    },
+    {
+     "t": 139.524,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.089,
+     "prog": 7.712,
+     "d_cand_intruz": 0.35,
+     "d_pred_intruz": 15.35
+    },
+    {
+     "t": 139.592,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 14.541,
+     "prog": 7.848,
+     "d_cand_intruz": 0.51,
+     "d_pred_intruz": 14.39
+    },
+    {
+     "t": 139.656,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.818,
+     "prog": 7.976,
+     "d_cand_intruz": 0.4,
+     "d_pred_intruz": 16.06
+    },
+    {
+     "t": 139.724,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.704,
+     "prog": 8.112,
+     "d_cand_intruz": 0.42,
+     "d_pred_intruz": 16.06
+    },
+    {
+     "t": 139.788,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.721,
+     "prog": 8.24,
+     "d_cand_intruz": 0.35,
+     "d_pred_intruz": 16.0
+    },
+    {
+     "t": 139.856,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.413,
+     "prog": 8.376,
+     "d_cand_intruz": 0.55,
+     "d_pred_intruz": 15.9
+    },
+    {
+     "t": 139.92,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.33,
+     "prog": 8.504,
+     "d_cand_intruz": 0.53,
+     "d_pred_intruz": 15.79
+    },
+    {
+     "t": 139.988,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.044,
+     "prog": 8.64,
+     "d_cand_intruz": 0.82,
+     "d_pred_intruz": 15.79
+    },
+    {
+     "t": 140.052,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.295,
+     "prog": 8.768,
+     "d_cand_intruz": 0.54,
+     "d_pred_intruz": 15.74
+    },
+    {
+     "t": 140.12,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.138,
+     "prog": 8.904,
+     "d_cand_intruz": 0.59,
+     "d_pred_intruz": 15.64
+    },
+    {
+     "t": 140.184,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.241,
+     "prog": 9.032,
+     "d_cand_intruz": 0.56,
+     "d_pred_intruz": 15.58
+    },
+    {
+     "t": 140.252,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.476,
+     "prog": 9.168,
+     "d_cand_intruz": 0.49,
+     "d_pred_intruz": 15.53
+    },
+    {
+     "t": 140.316,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.536,
+     "prog": 9.296,
+     "d_cand_intruz": 0.42,
+     "d_pred_intruz": 15.47
+    },
+    {
+     "t": 140.384,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.462,
+     "prog": 9.432,
+     "d_cand_intruz": 0.74,
+     "d_pred_intruz": 15.42
+    },
+    {
+     "t": 140.448,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.37,
+     "prog": 9.56,
+     "d_cand_intruz": 0.66,
+     "d_pred_intruz": 15.37
+    },
+    {
+     "t": 140.516,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 15.0,
+     "prog": 9.696,
+     "d_cand_intruz": 0.41,
+     "d_pred_intruz": 15.26
+    },
+    {
+     "t": 140.58,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 14.808,
+     "prog": 9.824,
+     "d_cand_intruz": 0.58,
+     "d_pred_intruz": 15.26
+    },
+    {
+     "t": 140.648,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 14.194,
+     "prog": 9.96,
+     "d_cand_intruz": 1.1,
+     "d_pred_intruz": 15.21
+    },
+    {
+     "t": 140.712,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 13.832,
+     "prog": 10.088,
+     "d_cand_intruz": 1.41,
+     "d_pred_intruz": 15.11
+    },
+    {
+     "t": 140.78,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 14.042,
+     "prog": 10.224,
+     "d_cand_intruz": 1.12,
+     "d_pred_intruz": 15.05
+    },
+    {
+     "t": 208.628,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.826,
+     "prog": 6.136,
+     "d_cand_intruz": 14.37,
+     "d_pred_intruz": 3.12
+    },
+    {
+     "t": 214.632,
+     "w_ep": false,
+     "klasa": "box_nie_na_intruzie",
+     "d": 8.706,
+     "prog": 6.392,
+     "d_cand_intruz": null,
+     "d_pred_intruz": null
+    }
+   ],
+   "klasy": {
+    "intruz_przy_tracku_zastanym_w_epizodzie": 21,
+    "box_nie_na_intruzie_w_epizodzie": 1,
+    "box_nie_na_intruzie_poza": 1
+   },
+   "odrzucenia_prawdziwego_intruza": 0,
+   "PASS": true
+  }
+ },
+ "c11_s02_r2": {
+  "scenariusz": "c11_s02",
+  "m": 3.02,
+  "n_tickow": 1244,
+  "ticki_bez_poprawki": 1,
+  "u_max": 2.082,
+  "u_max_bez_GNSS": 1.998,
+  "ticki_u_gt_m": 0,
+  "u_p95": 1.962,
+  "najgorszy": {
+   "sim": 150.416,
+   "u": 2.082,
+   "eps_fix": 0.235,
+   "tau": 0.016,
+   "bez_GNSS": false
+  },
+  "tau_p95": 0.208,
+  "tau_max": 0.224,
+  "ogony_tau_gt_1s": [],
+  "ogony_przy_koronach": 0,
+  "PASS": true,
+  "r5": {
+   "odrzucenia": [
+    {
+     "t": 205.392,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 12.513,
+     "prog": 6.656,
+     "d_cand_intruz": 12.14,
+     "d_pred_intruz": 0.62
+    },
+    {
+     "t": 206.976,
+     "w_ep": false,
+     "klasa": "box_nie_na_intruzie",
+     "d": 8.174,
+     "prog": 6.392,
+     "d_cand_intruz": null,
+     "d_pred_intruz": null
+    }
+   ],
+   "klasy": {
+    "box_nie_na_intruzie_w_epizodzie": 1,
+    "box_nie_na_intruzie_poza": 1
+   },
+   "odrzucenia_prawdziwego_intruza": 0,
+   "PASS": true
+  }
+ },
+ "c05_s01_r2": {
+  "scenariusz": "c05_s01",
+  "m": 10.33,
+  "n_tickow": 1120,
+  "ticki_bez_poprawki": 0,
+  "u_max": 2.042,
+  "u_max_bez_GNSS": 2.042,
+  "ticki_u_gt_m": 0,
+  "u_p95": 1.937,
+  "najgorszy": {
+   "sim": 189.04,
+   "u": 2.042,
+   "eps_fix": 0.195,
+   "tau": 0.04,
+   "bez_GNSS": true
+  },
+  "tau_p95": 0.212,
+  "tau_max": 0.228,
+  "ogony_tau_gt_1s": [],
+  "ogony_przy_koronach": 0,
+  "PASS": true,
+  "r5": {
+   "odrzucenia": [
+    {
+     "t": 138.072,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 8.596,
+     "prog": 6.128,
+     "d_cand_intruz": 0.38,
+     "d_pred_intruz": 8.44
+    },
+    {
+     "t": 138.14,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 8.702,
+     "prog": 6.264,
+     "d_cand_intruz": 0.39,
+     "d_pred_intruz": 8.44
+    },
+    {
+     "t": 138.204,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 8.607,
+     "prog": 6.392,
+     "d_cand_intruz": 0.38,
+     "d_pred_intruz": 8.41
+    },
+    {
+     "t": 138.272,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 8.149,
+     "prog": 6.528,
+     "d_cand_intruz": 0.49,
+     "d_pred_intruz": 8.35
+    },
+    {
+     "t": 138.336,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 8.216,
+     "prog": 6.656,
+     "d_cand_intruz": 0.73,
+     "d_pred_intruz": 8.35
+    },
+    {
+     "t": 138.404,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 7.69,
+     "prog": 6.792,
+     "d_cand_intruz": 0.66,
+     "d_pred_intruz": 8.29
+    },
+    {
+     "t": 138.468,
+     "w_ep": true,
+     "klasa": "intruz_przy_tracku_zastanym",
+     "d": 6.963,
+     "prog": 6.92,
+     "d_cand_intruz": 1.35,
+     "d_pred_intruz": 8.23
+    },
+    {
+     "t": 138.732,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 10.919,
+     "prog": 6.392,
+     "d_cand_intruz": 11.23,
+     "d_pred_intruz": 1.3
+    }
+   ],
+   "klasy": {
+    "intruz_przy_tracku_zastanym_w_epizodzie": 7,
+    "box_nie_na_intruzie_w_epizodzie": 1
+   },
+   "odrzucenia_prawdziwego_intruza": 0,
+   "PASS": true
+  }
+ },
+ "c02_s01": {
+  "scenariusz": "c02_s01",
+  "m": 5.79,
+  "n_tickow": 1208,
+  "ticki_bez_poprawki": 1,
+  "u_max": 2.024,
+  "u_max_bez_GNSS": 1.963,
+  "ticki_u_gt_m": 0,
+  "u_p95": 1.928,
+  "najgorszy": {
+   "sim": 144.012,
+   "u": 2.024,
+   "eps_fix": 0.177,
+   "tau": 0.012,
+   "bez_GNSS": false
+  },
+  "tau_p95": 0.2,
+  "tau_max": 0.228,
+  "ogony_tau_gt_1s": [],
+  "ogony_przy_koronach": 0,
+  "PASS": true,
+  "r5": {
+   "odrzucenia": [
+    {
+     "t": 203.808,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 14.398,
+     "prog": 6.128,
+     "d_cand_intruz": 15.6,
+     "d_pred_intruz": 4.66
+    },
+    {
+     "t": 203.876,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 14.113,
+     "prog": 6.264,
+     "d_cand_intruz": 15.24,
+     "d_pred_intruz": 5.12
+    },
+    {
+     "t": 203.94,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 13.928,
+     "prog": 6.392,
+     "d_cand_intruz": 14.96,
+     "d_pred_intruz": 5.63
+    },
+    {
+     "t": 204.008,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 14.392,
+     "prog": 6.528,
+     "d_cand_intruz": 15.54,
+     "d_pred_intruz": 6.27
+    },
+    {
+     "t": 204.072,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 13.196,
+     "prog": 6.656,
+     "d_cand_intruz": 13.34,
+     "d_pred_intruz": 6.98
+    },
+    {
+     "t": 204.14,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 14.287,
+     "prog": 6.792,
+     "d_cand_intruz": 14.9,
+     "d_pred_intruz": 7.9
+    },
+    {
+     "t": 204.204,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 14.751,
+     "prog": 6.92,
+     "d_cand_intruz": 15.41,
+     "d_pred_intruz": 8.59
+    },
+    {
+     "t": 204.272,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 14.773,
+     "prog": 7.056,
+     "d_cand_intruz": 15.15,
+     "d_pred_intruz": 9.05
+    },
+    {
+     "t": 204.336,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 15.023,
+     "prog": 7.184,
+     "d_cand_intruz": 15.35,
+     "d_pred_intruz": 9.5
+    },
+    {
+     "t": 204.404,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 15.387,
+     "prog": 7.32,
+     "d_cand_intruz": 15.37,
+     "d_pred_intruz": 10.42
+    },
+    {
+     "t": 204.536,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 15.024,
+     "prog": 7.584,
+     "d_cand_intruz": 15.5,
+     "d_pred_intruz": 8.77
+    },
+    {
+     "t": 204.6,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 15.57,
+     "prog": 7.712,
+     "d_cand_intruz": 16.18,
+     "d_pred_intruz": 9.27
+    },
+    {
+     "t": 204.668,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 19.216,
+     "prog": 7.848,
+     "d_cand_intruz": 17.06,
+     "d_pred_intruz": 16.89
+    },
+    {
+     "t": 204.732,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 15.572,
+     "prog": 7.976,
+     "d_cand_intruz": 16.85,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 204.8,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 14.276,
+     "prog": 8.112,
+     "d_cand_intruz": 15.29,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 204.864,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 14.497,
+     "prog": 8.24,
+     "d_cand_intruz": 15.56,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 204.932,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 14.481,
+     "prog": 8.376,
+     "d_cand_intruz": 15.53,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 204.996,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 14.309,
+     "prog": 8.504,
+     "d_cand_intruz": 15.31,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.064,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 16.307,
+     "prog": 8.64,
+     "d_cand_intruz": 17.73,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.128,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 12.453,
+     "prog": 8.768,
+     "d_cand_intruz": 12.76,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.26,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 15.922,
+     "prog": 9.032,
+     "d_cand_intruz": 17.24,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.392,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 12.861,
+     "prog": 9.296,
+     "d_cand_intruz": 13.27,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.46,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.608,
+     "prog": 9.432,
+     "d_cand_intruz": 11.19,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.524,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.07,
+     "prog": 9.56,
+     "d_cand_intruz": 8.81,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.592,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.15,
+     "prog": 9.696,
+     "d_cand_intruz": 8.78,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.656,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.249,
+     "prog": 9.824,
+     "d_cand_intruz": 8.63,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.724,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.198,
+     "prog": 9.96,
+     "d_cand_intruz": 8.85,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.788,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.252,
+     "prog": 10.088,
+     "d_cand_intruz": 8.84,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.856,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.324,
+     "prog": 10.224,
+     "d_cand_intruz": 8.8,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.92,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.363,
+     "prog": 10.352,
+     "d_cand_intruz": 8.81,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 205.988,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.423,
+     "prog": 10.488,
+     "d_cand_intruz": 8.86,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 206.052,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.403,
+     "prog": 10.616,
+     "d_cand_intruz": 8.98,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 206.12,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.442,
+     "prog": 10.752,
+     "d_cand_intruz": 9.01,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 206.184,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.475,
+     "prog": 10.88,
+     "d_cand_intruz": 10.34,
+     "d_pred_intruz": 4.31
+    },
+    {
+     "t": 206.252,
+     "w_ep": true,
+     "klasa": "box_nie_na_intruzie",
+     "d": 11.429,
+     "prog": 11.016,
+     "d_cand_intruz": 9.97,
+     "d_pred_intruz": 4.31
+    }
+   ],
+   "klasy": {
+    "box_nie_na_intruzie_w_epizodzie": 35
+   },
+   "odrzucenia_prawdziwego_intruza": 0,
+   "PASS": true
+  }
+ }
+}

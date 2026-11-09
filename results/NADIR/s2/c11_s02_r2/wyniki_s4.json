@@ -1,0 +1,153 @@
+{
+ "boot": "c11_s02_r2",
+ "przyrzad_selftest": true,
+ "zegar_ok": true,
+ "zegar_skoki": 0,
+ "v2p_epizody": {
+  "23": {
+   "valid": true,
+   "n_deep": 2,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.9228,
+   "timejump": 0
+  }
+ },
+ "ciecie": true,
+ "epizody": [
+  {
+   "episode_id": 23,
+   "scenario_id": "c11_s02",
+   "ciecie": true,
+   "t_entry": 6.74,
+   "n_tk": 1511,
+   "minus_refuse_pos": 0,
+   "minus_kont_ticki": 0,
+   "r_g_nom_minus": 0,
+   "r_g_nom_wszystkie": 0,
+   "refuse_rg": 0,
+   "r_gt_max": 20.735,
+   "v2p": {
+    "valid": true,
+    "n_deep": 2,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.9228,
+    "timejump": 0
+   },
+   "v2p_ok": true,
+   "a_ok": true,
+   "f_ok": true,
+   "t_cut": 172.2,
+   "t_flag": 172.2,
+   "opoznienie_flagi_s": 0.0,
+   "refuse": {
+    "sim": 194.16,
+    "rule": "R-KONT",
+    "cause": "T*",
+    "t_kont": 21.92,
+    "k": 21,
+    "R_k": 23.888,
+    "r_est": 4.833,
+    "r_gt": 4.949,
+    "heading_deg": -90.53
+   },
+   "t_land": 206.724,
+   "kontynuacja_s": 21.96,
+   "przyczyna_konca": "T*",
+   "eps_max_kont": 3.027,
+   "eps_max_ratio": 1.06,
+   "eps_naruszenia": [
+    [
+     3.988,
+     1.402,
+     1.392
+    ],
+    [
+     4.0,
+     1.418,
+     1.392
+    ],
+    [
+     7.399,
+     2.846,
+     2.833
+    ],
+    [
+     7.416,
+     2.838,
+     2.833
+    ],
+    [
+     7.428,
+     2.854,
+     2.833
+    ],
+    [
+     7.44,
+     2.869,
+     2.833
+    ],
+    [
+     7.447,
+     2.854,
+     2.833
+    ],
+    [
+     7.454,
+     2.859,
+     2.833
+    ],
+    [
+     7.468,
+     2.891,
+     2.833
+    ],
+    [
+     7.479,
+     2.905,
+     2.833
+    ]
+   ],
+   "n_eps_naruszen": 92,
+   "eps_przy_refuse": 0.44,
+   "delta_zejscia": 0.592,
+   "T_home": [
+    0.036,
+    0.022
+   ],
+   "healthy_p95": 0.0273,
+   "b_ok": false,
+   "c_frac_track": 1.0,
+   "c_frac_pasmo": 0.903,
+   "c_n": 463,
+   "c_d_gt_p50": 8.57,
+   "c_ok": true,
+   "d_lat_petla_s": 0.0,
+   "d_lat_wiek_flagi_s": 0.06,
+   "wiek_flagi_przy_refuse_s": 21.96,
+   "d_ok": true,
+   "e_nav_poza_14": [],
+   "e_failsafe_max": 0,
+   "nav_przejscia": [
+    [
+     207.668,
+     4
+    ],
+    [
+     207.68,
+     18
+    ]
+   ],
+   "failsafe_przejscia": [
+    [
+     0.0,
+     0
+    ]
+   ],
+   "e_ok": true,
+   "xy_valid_do_refuse": true,
+   "dr_max_kont": 0
+  }
+ ],
+ "wazny": true,
+ "powod_niewazny": null
+}

@@ -1,0 +1,5 @@
+[kampania 14:09:35] === NADIR S2 boot 2 c11_s02 epizody 23 cięcie 30; timesyncd przed: inactive
+[kampania 14:10:35] zegar c11_s02: ok=True skoki=0
+[kampania 14:10:35] sieroty {} żywe {}; shm {'sprzatanie': True, 'plikow_przed': 21, 'plikow_po': 0, 'trzymane_przed': {}, 'stan': 'shm_c11_s02.txt'}
+[kont c11_s02] ENV-BLOCK: kolizja: 30326 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1794210504381-5wdo35.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'git add results/NADIR/tools/nadir_s2_launch.sh && git commit -q -m "NADIR [S2 §1.6]: teardown launchera S2 — TERM nadir_obs i do 5 s przed KILL (boot 1 c08_s02: brak zrzutu faulthandler, summary z heartbeat ⇒ SIGKILL z listy teardown przed TERM bootu; ta sama przyczyna braku summary w S1)  Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && git log --oneline -1 && python3 results/NADIR/tools/nadir_s2_run.py 2 c11_s02 23 30 > results/NADIR/s2/run_stdout_c11_s02.log 2>&1' && pwd -P >| /tmp/claude-6a8d-cwd
+[kampania 14:10:35] === koniec c11_s02 rc=3 0 s tempo=None

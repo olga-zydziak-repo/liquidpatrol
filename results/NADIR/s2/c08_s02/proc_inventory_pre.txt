@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       28363 19.3  0.0 330892 14072 ?        Sl   14:04   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       28356  3.1  0.0  16948 11204 ?        S    14:04   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/NADIR/s2/c08_s02/zegar2.jsonl
+olga       28357  3.1  0.0   5028  3696 ?        S    14:04   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s2_launch.sh world_nadir2_A3
+olga        1082  1.9  1.2 5725420 413448 pts/2  Sl+  08:48   6:08 claude --continue
+root         240  0.1  0.1 3290268 60240 ?       Ssl  08:47   0:21 /usr/bin/containerd
+root         344  0.0  0.2 10102480 84100 ?      Ssl  08:47   0:04 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga       28279  0.0  0.0   5032  3892 ?        S    14:02   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s2_boot.sh 1 c08_s02 20 30
+root         894  0.0  0.0   3200  1248 ?        S    08:47   0:01 /init
+olga       28239  0.0  0.0  17176 12264 ?        S    14:01   0:00 python3 results/NADIR/tools/nadir_s2_run.py 1 c08_s02 20 30
+root       24997  0.0  0.0 1830368 11796 ?       Ssl  13:58   0:00 /usr/libexec/wsl-pro-service
+polkitd      183  0.0  0.0 308188  8036 ?        Ssl  08:47   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          40  0.0  0.0  66868 19060 ?        S<s  08:47   0:00 /usr/lib/systemd/systemd-journald
+root           1  0.0  0.0  21956 13284 ?        Ss   08:47   0:00 /sbin/init
+root          86  0.0  0.0  26004  7032 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd-udevd
+root         195  0.0  0.0  17400  6356 ?        Ss   08:47   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+syslog       196  0.0  0.0 222524  6048 ?        Ssl  08:47   0:00 /usr/sbin/rsyslogd -n -iNONE
+systemd+     165  0.0  0.0  21352 13220 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd-resolved
+root         182  0.0  0.0 1026048 11892 ?       Ssl  08:47   0:00 /usr/bin/lttng-sessiond
+root         188  0.0  0.0  17988  8832 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd-logind

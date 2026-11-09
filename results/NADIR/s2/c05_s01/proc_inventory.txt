@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       34199 15.6  0.0 330892 14116 ?        Sl   14:34   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       34193  3.1  0.0   5028  3744 ?        S    14:34   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s2_launch.sh world_nadir2_A3
+olga        1082  1.9  1.2 5725420 389812 pts/2  Sl+  08:48   6:35 claude --continue
+root         240  0.1  0.1 3290268 60228 ?       Ssl  08:47   0:22 /usr/bin/containerd
+root         344  0.0  0.2 10102480 84104 ?      Ssl  08:47   0:04 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root       34062  0.0  0.0 1756380 13668 ?       Ssl  14:29   0:00 /usr/libexec/wsl-pro-service
+root         894  0.0  0.0   3200  1248 ?        S    08:47   0:01 /init
+olga       34030  0.0  0.0   5032  3836 ?        S    14:29   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s2_boot.sh 4 c05_s01 5 30
+polkitd      183  0.0  0.0 308188  8036 ?        Ssl  08:47   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          40  0.0  0.0  66868 19228 ?        S<s  08:47   0:00 /usr/lib/systemd/systemd-journald
+olga       33972  0.0  0.0  17176 12264 ?        S    14:28   0:00 python3 results/NADIR/tools/nadir_s2_run.py 4 c05_s01 5 30
+root           1  0.0  0.0  21956 13284 ?        Ss   08:47   0:00 /sbin/init
+root          86  0.0  0.0  26004  7032 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd-udevd
+root         195  0.0  0.0  17400  6356 ?        Ss   08:47   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+syslog       196  0.0  0.0 222524  6048 ?        Ssl  08:47   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         182  0.0  0.0 1026048 11904 ?       Ssl  08:47   0:00 /usr/bin/lttng-sessiond
+systemd+     165  0.0  0.0  21352 13220 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd-resolved
+message+     178  0.0  0.0   9804  5528 ?        Ss   08:47   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root           7  0.0  0.0   3220  2148 hvc0     Sl+  08:47   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate

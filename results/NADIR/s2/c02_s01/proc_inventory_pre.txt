@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        3084 13.3  0.0 330892 14108 ?        Sl   15:03   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga         985  2.1  1.0 5713116 329464 pts/0  Sl+  14:49   0:17 claude --continue
+root         270  0.1  0.1 3364384 57240 ?       Ssl  14:49   0:01 /usr/bin/containerd
+root         361  0.1  0.3 7669388 100496 ?      Ssl  14:49   0:00 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root           1  0.0  0.0  21868 13204 ?        Ss   14:49   0:00 /sbin/init
+root          86  0.0  0.0  26136  7240 ?        Ss   14:49   0:00 /usr/lib/systemd/systemd-udevd
+root          40  0.0  0.0  50480 16516 ?        S<s  14:49   0:00 /usr/lib/systemd/systemd-journald
+olga         921  0.0  0.0  20396 11596 ?        Ss   14:49   0:00 /usr/lib/systemd/systemd --user
+root         269  0.0  0.0 107064 23360 ?        Ssl  14:49   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+polkitd      200  0.0  0.0 308188  8220 ?        Ssl  14:49   0:00 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     182  0.0  0.0  21352 13240 ?        Ss   14:49   0:00 /usr/lib/systemd/systemd-resolved
+olga        2931  0.0  0.0   5032  3844 ?        S    14:58   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s2_boot.sh 6 c02_s01 2 30
+olga        2908  0.0  0.0  17176 12264 ?        S    14:57   0:00 python3 results/NADIR/tools/nadir_s2_run.py 6 c02_s01 2 30
+syslog       213  0.0  0.0 222524  6016 ?        Ssl  14:49   0:00 /usr/sbin/rsyslogd -n -iNONE
+message+     195  0.0  0.0   9804  5484 ?        Ss   14:49   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         199  0.0  0.0 1026052 11732 ?       Ssl  14:49   0:00 /usr/bin/lttng-sessiond
+avahi        193  0.0  0.0   8760  4744 ?        Ss   14:49   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
+olga         944  0.0  0.0   6216  5488 pts/1    S+   14:49   0:00 -bash
+root         874  0.0  0.0   3200  1248 ?        S    14:49   0:00 /init

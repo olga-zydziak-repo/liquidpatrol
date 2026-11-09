@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       32367 16.6  0.0 330892 14144 ?        Sl   14:23   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        1082  1.9  1.2 5725420 407488 pts/2  Sl+  08:48   6:27 claude --continue
+root         240  0.1  0.1 3290268 60196 ?       Ssl  08:47   0:22 /usr/bin/containerd
+root         344  0.0  0.2 10102480 84104 ?      Ssl  08:47   0:04 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         894  0.0  0.0   3200  1248 ?        S    08:47   0:01 /init
+olga       32218  0.0  0.0   5032  3836 ?        S    14:18   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s2_boot.sh 3 c11_s02_r2 23 30
+polkitd      183  0.0  0.0 308188  8036 ?        Ssl  08:47   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          40  0.0  0.0  66868 19168 ?        S<s  08:47   0:00 /usr/lib/systemd/systemd-journald
+olga       32141  0.0  0.0  17176 12232 ?        S    14:17   0:00 python3 results/NADIR/tools/nadir_s2_run.py 3 c11_s02_r2 23 30
+root           1  0.0  0.0  21956 13284 ?        Ss   08:47   0:00 /sbin/init
+root          86  0.0  0.0  26004  7032 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd-udevd
+root         195  0.0  0.0  17400  6356 ?        Ss   08:47   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+syslog       196  0.0  0.0 222524  6048 ?        Ssl  08:47   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         182  0.0  0.0 1026048 11904 ?       Ssl  08:47   0:00 /usr/bin/lttng-sessiond
+systemd+     165  0.0  0.0  21352 13220 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd-resolved
+root           7  0.0  0.0   3220  2148 hvc0     Sl+  08:47   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root         188  0.0  0.0  17988  8832 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd-logind
+message+     178  0.0  0.0   9804  5528 ?        Ss   08:47   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+olga         938  0.0  0.0  20396 11572 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd --user

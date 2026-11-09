@@ -1,0 +1,12 @@
+[kampania 14:10:52] === NADIR S2 boot 2 c11_s02 epizody 23 cięcie 30; timesyncd przed: inactive
+[kampania 14:11:52] zegar c11_s02: ok=True skoki=0
+[kampania 14:11:52] sieroty {} żywe {}; shm {'sprzatanie': True, 'plikow_przed': 0, 'plikow_po': 0, 'trzymane_przed': {}, 'stan': 'shm_c11_s02.txt'}
+[kont c11_s02] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont c11_s02 14:11:52] cooldown 94s
+[kont c11_s02 14:14:42] SUSTAINED CLEAN
+[kont c11_s02] kont_boot pid=30789
+[kont c11_s02 14:15:09] initial absolute time 7520000 us faza_ok=1
+[kont c11_s02 14:15:48] sonda rc_FROZEN=0 podloga10Hz=1
+/home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s2_boot.sh: line 108: 31514 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+[kont c11_s02 14:17:06] DONE rc=9 sonda=0
+[kampania 14:17:06] === koniec c11_s02 rc=9 314 s tempo={'aneks': 'ANEKS_KONT-4d §1.3', 'dsim_dwall_settle': 0.9099, 'okno_wall_s': 59.96, 'n': 727, 'prog': 0.93, 'zrodlo': 'rtf_stream.jsonl', 'ok': False}

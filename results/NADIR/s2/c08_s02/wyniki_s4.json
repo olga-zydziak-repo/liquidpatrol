@@ -1,0 +1,102 @@
+{
+ "boot": "c08_s02",
+ "przyrzad_selftest": true,
+ "zegar_ok": true,
+ "zegar_skoki": 0,
+ "v2p_epizody": {
+  "20": {
+   "valid": true,
+   "n_deep": 2,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.9549,
+   "timejump": 0
+  }
+ },
+ "ciecie": true,
+ "epizody": [
+  {
+   "episode_id": 20,
+   "scenario_id": "c08_s02",
+   "ciecie": true,
+   "t_entry": 8.53,
+   "n_tk": 1435,
+   "minus_refuse_pos": 0,
+   "minus_kont_ticki": 0,
+   "r_g_nom_minus": 0,
+   "r_g_nom_wszystkie": 0,
+   "refuse_rg": 0,
+   "r_gt_max": 24.204,
+   "v2p": {
+    "valid": true,
+    "n_deep": 2,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.9549,
+    "timejump": 0
+   },
+   "v2p_ok": true,
+   "a_ok": true,
+   "f_ok": true,
+   "t_cut": 177.292,
+   "t_flag": 177.296,
+   "opoznienie_flagi_s": 0.004,
+   "refuse": {
+    "sim": 199.264,
+    "rule": "R-KONT",
+    "cause": "T*",
+    "t_kont": 21.924,
+    "k": 21,
+    "R_k": 23.888,
+    "r_est": 19.695,
+    "r_gt": 21.228,
+    "heading_deg": 133.12
+   },
+   "t_land": 208.716,
+   "kontynuacja_s": 21.968,
+   "przyczyna_konca": "T*",
+   "eps_max_kont": 2.595,
+   "eps_max_ratio": 0.84,
+   "eps_naruszenia": [],
+   "n_eps_naruszen": 0,
+   "eps_przy_refuse": 1.685,
+   "delta_zejscia": 0.673,
+   "T_home": [
+    0.008,
+    0.035
+   ],
+   "healthy_p95": 0.0729,
+   "b_ok": true,
+   "c_frac_track": 1.0,
+   "c_frac_pasmo": 1.0,
+   "c_n": 449,
+   "c_d_gt_p50": 8.18,
+   "c_ok": true,
+   "d_lat_petla_s": 0.0,
+   "d_lat_wiek_flagi_s": 0.068,
+   "wiek_flagi_przy_refuse_s": 21.968,
+   "d_ok": true,
+   "e_nav_poza_14": [],
+   "e_failsafe_max": 0,
+   "nav_przejscia": [
+    [
+     209.72,
+     4
+    ],
+    [
+     209.732,
+     18
+    ]
+   ],
+   "failsafe_przejscia": [
+    [
+     0.0,
+     0
+    ]
+   ],
+   "e_ok": true,
+   "xy_valid_do_refuse": true,
+   "dr_max_kont": 0
+  }
+ ],
+ "wazny": true,
+ "powod_niewazny": null
+}

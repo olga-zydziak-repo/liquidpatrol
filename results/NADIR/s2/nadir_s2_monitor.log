@@ -1,0 +1,49 @@
+[kont c08_s02] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont c08_s02 14:02:50] cooldown 0s
+[kont c08_s02 14:04:06] SUSTAINED CLEAN
+[kont c08_s02] kont_boot pid=28357
+[kont c08_s02 14:04:33] initial absolute time 7428000 us faza_ok=1
+{"label": "preflight_c08_s02", "feed": "/home/olga/projects/liquidpatrol/results/NADIR/s2/c08_s02/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 447, "dt_p50_s_na_klatke": 0.064, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 15.62, "span_sim_s": 31.5, "werdykt": "PASS"}
+[kont c08_s02 14:05:12] sonda rc_FROZEN=0 podloga10Hz=1
+[kont c08_s02 14:08:26] DONE rc=0 sonda=0
+[kont c11_s02] ENV-BLOCK: kolizja: 30326 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1794210504381-5wdo35.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'git add results/NADIR/tools/nadir_s2_launch.sh && git commit -q -m "NADIR [S2 §1.6]: teardown launchera S2 — TERM nadir_obs i do 5 s przed KILL (boot 1 c08_s02: brak zrzutu faulthandler, summary z heartbeat ⇒ SIGKILL z listy teardown przed TERM bootu; ta sama przyczyna braku summary w S1)  Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" && git log --oneline -1 && python3 results/NADIR/tools/nadir_s2_run.py 2 c11_s02 23 30 > results/NADIR/s2/run_stdout_c11_s02.log 2>&1' && pwd -P >| /tmp/claude-6a8d-cwd
+[kont c11_s02] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont c11_s02 14:11:52] cooldown 94s
+[kont c11_s02 14:14:42] SUSTAINED CLEAN
+[kont c11_s02] kont_boot pid=30789
+[kont c11_s02 14:15:09] initial absolute time 7520000 us faza_ok=1
+{"label": "preflight_c11_s02", "feed": "/home/olga/projects/liquidpatrol/results/NADIR/s2/c11_s02/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 407, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0025, "hz_p50": 14.71, "span_sim_s": 28.3, "werdykt": "PASS"}
+[kont c11_s02 14:15:48] sonda rc_FROZEN=0 podloga10Hz=1
+[kont c11_s02 14:17:06] DONE rc=9 sonda=0
+[kont c11_s02_r2] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont c11_s02_r2 14:18:20] cooldown 226s
+[kont c11_s02_r2 14:23:22] SUSTAINED CLEAN
+[kont c11_s02_r2] kont_boot pid=32361
+[kont c11_s02_r2 14:23:49] initial absolute time 7452000 us faza_ok=1
+{"label": "preflight_c11_s02_r2", "feed": "/home/olga/projects/liquidpatrol/results/NADIR/s2/c11_s02_r2/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 434, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0023, "hz_p50": 14.71, "span_sim_s": 30.1, "werdykt": "PASS"}
+[kont c11_s02_r2 14:24:28] sonda rc_FROZEN=0 podloga10Hz=1
+[kont c11_s02_r2 14:27:48] DONE rc=0 sonda=0
+[kont c05_s01] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont c05_s01 14:29:11] cooldown 217s
+[kont c05_s01 14:34:04] SUSTAINED CLEAN
+[kont c05_s01] kont_boot pid=34193
+[kont c05_s01 14:34:31] initial absolute time 7540000 us faza_ok=1
+{"label": "preflight_c05_s01", "feed": "/home/olga/projects/liquidpatrol/results/NADIR/s2/c05_s01/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 425, "dt_p50_s_na_klatke": 0.064, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 15.62, "span_sim_s": 30.4, "werdykt": "PASS"}
+[kont c05_s01 14:35:11] sonda rc_FROZEN=0 podloga10Hz=1
+[kont c05_s01 14:36:29] DONE rc=9 sonda=0
+[kont c05_s01_r2] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont c05_s01_r2 14:51:49] cooldown 0s
+[kont c05_s01_r2 14:53:04] SUSTAINED CLEAN
+[kont c05_s01_r2] kont_boot pid=1410
+[kont c05_s01_r2 14:53:32] initial absolute time 7428000 us faza_ok=1
+{"label": "preflight_c05_s01_r2", "feed": "/home/olga/projects/liquidpatrol/results/NADIR/s2/c05_s01_r2/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 451, "dt_p50_s_na_klatke": 0.064, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 15.62, "span_sim_s": 31.9, "werdykt": "PASS"}
+[kont c05_s01_r2 14:54:12] sonda rc_FROZEN=0 podloga10Hz=1
+[kont c05_s01_r2 14:57:21] DONE rc=0 sonda=0
+[kont c02_s01] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont c02_s01 14:58:21] cooldown 240s
+[kont c02_s01 15:03:36] SUSTAINED CLEAN
+[kont c02_s01] kont_boot pid=3078
+[kont c02_s01 15:04:03] initial absolute time 7420000 us faza_ok=1
+{"label": "preflight_c02_s01", "feed": "/home/olga/projects/liquidpatrol/results/NADIR/s2/c02_s01/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 456, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0022, "hz_p50": 14.71, "span_sim_s": 31.4, "werdykt": "PASS"}
+[kont c02_s01 15:04:43] sonda rc_FROZEN=0 podloga10Hz=1
+[kont c02_s01 15:07:58] DONE rc=0 sonda=0

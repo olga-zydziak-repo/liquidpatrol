@@ -1,0 +1,65 @@
+{
+  "kind": "nadir_s2",
+  "world_hash": "7f2bbe1360819a8b64ee462ad9c1852e6525b02fa197460953725ca44aeb81d8  worlds/world_nadir2_A3.sdf",
+  "world_hash_kind": "repo",
+  "ulog_sha": "43fd7d52b319c105b5a079759b56822283bd6fc36e9170b673fb228282de5b4c",
+  "ulog_bytes": 61585757,
+  "model_in_state": true,
+  "nadir_s2": {
+    "rama": "B+ NADIR_MODE=1",
+    "socks": [
+      "rama_drv.sock",
+      "rama_perc.sock"
+    ]
+  },
+  "kont_s4": {
+    "boot": 5,
+    "epizody": "5",
+    "inject_t": "30",
+    "offset": {
+      "z_off_m": 0.0324,
+      "okno_sim_s": 6.02,
+      "n": 126,
+      "home_alt_kom": 9.9676,
+      "zakres": "home/reset (sieć nie dostaje komendy wysokości)"
+    },
+    "sonda_rc_frozen": 0,
+    "podloga_10hz_ok": 1,
+    "uzbrojony": true,
+    "sonda": {
+      "label": "preflight_c05_s01_r2",
+      "feed": "/home/olga/projects/liquidpatrol/results/NADIR/s2/c05_s01_r2/percep_feed.jsonl",
+      "tryb": "live window=35.0s",
+      "prog_frozen": {
+        "dt_p50_max_s_na_klatke": 0.07,
+        "frac_delt_gt_0p10_max": 0.05
+      },
+      "n_delt": 451,
+      "dt_p50_s_na_klatke": 0.064,
+      "dt_p90_s_na_klatke": 0.068,
+      "frac_delt_gt_0p10": 0.0,
+      "hz_p50": 15.62,
+      "span_sim_s": 31.9,
+      "werdykt": "PASS"
+    },
+    "echo": null,
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profil_sha16": "a68a450b91c2ab51"
+  },
+  "kont_s2d": {
+    "aneks": "ANEKS_KONT-1c §3",
+    "initial_absolute_time_us": 7428000,
+    "faza_ok": true,
+    "dolaczenie": {
+      "prog_s": 0.5,
+      "sim_s_przy_starcie_px4": 0.58,
+      "czekanie_wall_s": 7.1,
+      "ok": true
+    }
+  },
+  "zegar": {
+    "timesyncd": "inactive",
+    "clocksource": "tsc",
+    "aneks": "ANEKS_SKAN2-0b §2.2"
+  }
+}

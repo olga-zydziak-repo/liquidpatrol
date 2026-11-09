@@ -1,0 +1,30 @@
+[nadir_obs] img=69 proc=69 det=0 drop=0 flip=0
+[nadir_obs] img=140 proc=140 det=0 drop=0 flip=0
+[nadir_obs] img=211 proc=211 det=0 drop=0 flip=0
+[nadir_obs] img=280 proc=280 det=0 drop=0 flip=0
+[nadir_obs] img=351 proc=351 det=0 drop=0 flip=0
+[nadir_obs] img=423 proc=423 det=0 drop=0 flip=0
+[nadir_obs] img=493 proc=493 det=0 drop=0 flip=0
+[nadir_obs] img=563 proc=563 det=0 drop=0 flip=0
+[nadir_obs] img=629 proc=629 det=35 drop=0 flip=0
+[nadir_obs] img=698 proc=698 det=104 drop=0 flip=0
+[nadir_obs] img=768 proc=768 det=174 drop=0 flip=0
+[nadir_obs] img=837 proc=837 det=243 drop=0 flip=0
+[nadir_obs] img=907 proc=907 det=313 drop=0 flip=0
+[nadir_obs] img=976 proc=976 det=352 drop=0 flip=0
+Thread 0x000073e5a59ff6c0 (most recent call first):
+  File "/usr/lib/python3.12/threading.py", line 359 in wait
+  File "/usr/lib/python3.12/queue.py", line 180 in get
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 126 in worker
+  File "/usr/lib/python3.12/threading.py", line 1010 in run
+  File "/usr/lib/python3.12/threading.py", line 1073 in _bootstrap_inner
+  File "/usr/lib/python3.12/threading.py", line 1030 in _bootstrap
+
+Current thread 0x000073e5c3e1b740 (most recent call first):
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 781 in _wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 877 in wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 907 in _spin_once_impl
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 926 in spin_once
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 207 in main
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 221 in <module>
+[nadir_obs] DONE {"n_img": 1044, "n_drop": 0, "n_proc": 1044, "n_det_klatki": 352, "flip_hits": 0, "n_fix": 346, "det_ms": {"p50": 0.48162800158024766, "p95": 5.793726999399951, "max": 9.137706001638435}, "zamkniecie": "koniec_petli", "mono": 20408.534}

@@ -1,0 +1,252 @@
+{
+ "c08_s02": {
+  "scenariusz": "c08_s02",
+  "t_entry": 8.53,
+  "t_entry_kont_s4": 2.62,
+  "kontynuacja_s": 21.968,
+  "kontynuacja_kont_s4": 21.968,
+  "przyczyna_konca": "T*",
+  "przyczyna_kont_s4": "T*",
+  "c_frac_track": 1.0,
+  "c_frac_pasmo": 1.0,
+  "c_kont_s4": [
+   1.0,
+   1.0
+  ],
+  "litera_kont_s4": {
+   "a_ok": true,
+   "b_ok": true,
+   "c_ok": true,
+   "d_ok": true,
+   "e_ok": true,
+   "f_ok": true,
+   "v2p_ok": true
+  },
+  "refuse": {
+   "sim": 199.264,
+   "rule": "R-KONT",
+   "cause": "T*",
+   "t_kont": 21.924,
+   "k": 21,
+   "R_k": 23.888,
+   "r_est": 19.695,
+   "r_gt": 21.228,
+   "heading_deg": 133.12
+  },
+  "refuse_poza_bariera": 0,
+  "breach": false,
+  "skoki_p_corr": {
+   "n": 328,
+   "p50": 0.031,
+   "p95": 0.184,
+   "max": 0.568
+  },
+  "v2p": {
+   "valid": true,
+   "n_deep": 2,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.9549,
+   "timejump": 0
+  },
+  "tempo_settle": {
+   "aneks": "ANEKS_KONT-4d §1.3",
+   "dsim_dwall_settle": 0.9664,
+   "okno_wall_s": 59.98,
+   "n": 729,
+   "prog": 0.93,
+   "zrodlo": "rtf_stream.jsonl",
+   "ok": true
+  },
+  "wazny_k4": true,
+  "powod_niewazny_k4": null
+ },
+ "c11_s02_r2": {
+  "scenariusz": "c11_s02",
+  "t_entry": 6.74,
+  "t_entry_kont_s4": 6.75,
+  "kontynuacja_s": 21.96,
+  "kontynuacja_kont_s4": 21.972,
+  "przyczyna_konca": "T*",
+  "przyczyna_kont_s4": "T*",
+  "c_frac_track": 1.0,
+  "c_frac_pasmo": 0.903,
+  "c_kont_s4": [
+   1.0,
+   0.911
+  ],
+  "litera_kont_s4": {
+   "a_ok": true,
+   "b_ok": false,
+   "c_ok": true,
+   "d_ok": true,
+   "e_ok": true,
+   "f_ok": true,
+   "v2p_ok": true
+  },
+  "refuse": {
+   "sim": 194.16,
+   "rule": "R-KONT",
+   "cause": "T*",
+   "t_kont": 21.92,
+   "k": 21,
+   "R_k": 23.888,
+   "r_est": 4.833,
+   "r_gt": 4.949,
+   "heading_deg": -90.53
+  },
+  "refuse_poza_bariera": 0,
+  "breach": false,
+  "skoki_p_corr": {
+   "n": 320,
+   "p50": 0.037,
+   "p95": 0.193,
+   "max": 0.399
+  },
+  "v2p": {
+   "valid": true,
+   "n_deep": 2,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.9228,
+   "timejump": 0
+  },
+  "tempo_settle": {
+   "aneks": "ANEKS_KONT-4d §1.3",
+   "dsim_dwall_settle": 0.9409,
+   "okno_wall_s": 59.92,
+   "n": 729,
+   "prog": 0.93,
+   "zrodlo": "rtf_stream.jsonl",
+   "ok": true
+  },
+  "wazny_k4": true,
+  "powod_niewazny_k4": null
+ },
+ "c05_s01_r2": {
+  "scenariusz": "c05_s01",
+  "t_entry": 2.16,
+  "t_entry_kont_s4": 2.47,
+  "kontynuacja_s": 21.964,
+  "kontynuacja_kont_s4": 21.988,
+  "przyczyna_konca": "T*",
+  "przyczyna_kont_s4": "T*",
+  "c_frac_track": 1.0,
+  "c_frac_pasmo": 1.0,
+  "c_kont_s4": [
+   1.0,
+   1.0
+  ],
+  "litera_kont_s4": {
+   "a_ok": true,
+   "b_ok": true,
+   "c_ok": true,
+   "d_ok": true,
+   "e_ok": true,
+   "f_ok": true,
+   "v2p_ok": true
+  },
+  "refuse": {
+   "sim": 192.196,
+   "rule": "R-KONT",
+   "cause": "T*",
+   "t_kont": 21.92,
+   "k": 21,
+   "R_k": 23.888,
+   "r_est": 7.742,
+   "r_gt": 7.233,
+   "heading_deg": 138.34
+  },
+  "refuse_poza_bariera": 0,
+  "breach": false,
+  "skoki_p_corr": {
+   "n": 290,
+   "p50": 0.036,
+   "p95": 0.138,
+   "max": 0.315
+  },
+  "v2p": {
+   "valid": true,
+   "n_deep": 2,
+   "longest_s": 0.243,
+   "dsim_dwall": 0.9485,
+   "timejump": 0
+  },
+  "tempo_settle": {
+   "aneks": "ANEKS_KONT-4d §1.3",
+   "dsim_dwall_settle": 0.9539,
+   "okno_wall_s": 59.94,
+   "n": 729,
+   "prog": 0.93,
+   "zrodlo": "rtf_stream.jsonl",
+   "ok": true
+  },
+  "wazny_k4": true,
+  "powod_niewazny_k4": null
+ },
+ "c02_s01": {
+  "scenariusz": "c02_s01",
+  "t_entry": 7.16,
+  "t_entry_kont_s4": 8.86,
+  "kontynuacja_s": 21.972,
+  "kontynuacja_kont_s4": 21.968,
+  "przyczyna_konca": "T*",
+  "przyczyna_kont_s4": "T*",
+  "c_frac_track": 1.0,
+  "c_frac_pasmo": 1.0,
+  "c_kont_s4": [
+   1.0,
+   1.0
+  ],
+  "litera_kont_s4": {
+   "a_ok": true,
+   "b_ok": true,
+   "c_ok": true,
+   "d_ok": true,
+   "e_ok": true,
+   "f_ok": true,
+   "v2p_ok": true
+  },
+  "refuse": {
+   "sim": 196.972,
+   "rule": "R-KONT",
+   "cause": "T*",
+   "t_kont": 21.928,
+   "k": 21,
+   "R_k": 23.888,
+   "r_est": 10.792,
+   "r_gt": 12.514,
+   "heading_deg": 129.04
+  },
+  "refuse_poza_bariera": 0,
+  "breach": false,
+  "skoki_p_corr": {
+   "n": 318,
+   "p50": 0.037,
+   "p95": 0.149,
+   "max": 0.289
+  },
+  "v2p": {
+   "valid": true,
+   "n_deep": 1,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.9551,
+   "timejump": 0
+  },
+  "tempo_settle": {
+   "aneks": "ANEKS_KONT-4d §1.3",
+   "dsim_dwall_settle": 0.9526,
+   "okno_wall_s": 59.95,
+   "n": 729,
+   "prog": 0.93,
+   "zrodlo": "rtf_stream.jsonl",
+   "ok": true
+  },
+  "wazny_k4": true,
+  "powod_niewazny_k4": null
+ },
+ "skala_szumu_GNSS_nominal_KONT_0.2s": {
+  "n": 12284,
+  "p50": 0.013,
+  "p95": 0.034,
+  "max": 0.111
+ }
+}

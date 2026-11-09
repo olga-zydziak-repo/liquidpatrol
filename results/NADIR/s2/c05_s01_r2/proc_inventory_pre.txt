@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        1416 19.3  0.0 330892 14100 ?        Sl   14:53   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga         985  6.1  1.0 5713116 335224 pts/0  Sl+  14:49   0:11 claude --continue
+olga        1410  3.2  0.0   5028  3736 ?        S    14:53   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s2_launch.sh world_nadir2_A3
+root         270  0.4  0.2 3364384 64660 ?       Ssl  14:49   0:00 /usr/bin/containerd
+root         361  0.4  0.3 7669388 116472 ?      Ssl  14:49   0:00 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root           1  0.1  0.0  21868 13204 ?        Ss   14:49   0:00 /sbin/init
+root          40  0.0  0.0  42284 16412 ?        S<s  14:49   0:00 /usr/lib/systemd/systemd-journald
+root          86  0.0  0.0  26136  7240 ?        Ss   14:49   0:00 /usr/lib/systemd/systemd-udevd
+olga         921  0.0  0.0  20396 11596 ?        Ss   14:49   0:00 /usr/lib/systemd/systemd --user
+root         269  0.0  0.0 107064 23360 ?        Ssl  14:49   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+polkitd      200  0.0  0.0 308188  8220 ?        Ssl  14:49   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root         206  0.0  0.0 1756636 13716 ?       Ssl  14:49   0:00 /usr/libexec/wsl-pro-service
+systemd+     182  0.0  0.0  21352 13240 ?        Ss   14:49   0:00 /usr/lib/systemd/systemd-resolved
+olga        1332  0.0  0.0   5032  3844 ?        S    14:51   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s2_boot.sh 5 c05_s01_r2 5 30
+syslog       213  0.0  0.0 222524  6012 ?        Ssl  14:49   0:00 /usr/sbin/rsyslogd -n -iNONE
+message+     195  0.0  0.0   9804  5484 ?        Ss   14:49   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+avahi        193  0.0  0.0   8760  4744 ?        Ss   14:49   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
+olga        1269  0.0  0.0  17176 12300 ?        S    14:50   0:00 python3 results/NADIR/tools/nadir_s2_run.py 5 c05_s01_r2 5 30
+olga         944  0.0  0.0   6216  5488 pts/1    S+   14:49   0:00 -bash
