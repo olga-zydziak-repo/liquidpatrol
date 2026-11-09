@@ -729,3 +729,24 @@ CLOSED-BY-RECON (0 bootów)
   fałszywa admisja na obiekcie statycznym nie jest wykluczona literą
   percepcji (paralaksa w MTI, brak bramki pozycji w odświeżeniu
   tracku) — ryzyko nazwane dla każdej przyszłej kotwicy.
+
+## KOTW recon 2 i zamknięcie nogi (ANEKS_KOTW-2, 8.11.2026): obwód
+0/576 ⇒ KOTW CLOSED W CAŁOŚCI (0 bootów)
+- Obwód naprawia czas (najgorsza przerwa orbity 37→9.4 s, start ~0 s,
+  widoczność 87%), ale nie dokładność: poprawka z 23–44 m to 2.5 m
+  optymistycznie przy budżecie 0.54 m w komórce najgorszej orbity;
+  para kotwic 5/48 (geometria przecięcia mnoży błąd elewacyjny).
+  Granica: pozioma kamera nie daje naraz krótkiej przerwy i bliskiego
+  zasięgu. Dziewiąte zamknięcie przy biurku; cała noga za 0 bootów.
+- Bias yaw −3° z S4 rozdzielony: prawdziwy błąd estymatora
+  (−0.6…−5.1°, δψ 5.8°), nie artefakt dopasowania czasu.
+- R4′: przejęcie tracku w paśmie [5, 18] m geometrycznie niemożliwe
+  z obwodu; koincydencja ≤ 5° na 18–45 m do 8.3% próbek ⇒ bramka
+  pozycji przewidywanej warunkiem PRE każdej przyszłej kotwicy.
+- ✗ kalibracyjne CC ×2 (rozmowa, nie prereg): szanse domknięcia piły
+  dawane na 0.5–0.6 i 0.6 — wynik 0/27 i 0/576; za optymistycznie
+  o geometrii spojrzenia, drugi raz w tej samej nodze.
+- Wykonawca: obie sesje deskowe czyste (bramki, zakresy, prereg
+  wykonany co do litery). Znalezisko CC bez wpływu na liczby: remis
+  dominanty fazy w kotw2_obwod.py łamany porządkiem zbioru
+  (zależnym od środowiska) — 96 etykiet, werdykt 576/576 niezmienny.

@@ -718,3 +718,22 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   (szac. T*_net 10–13 s, +7 bootów).
 - Katalog: 6 pozycji, 2d zamknięta. Breach 0 / REFUSE(POS) fałszywych 0
   programowo bez zmian (45 bootów nogi, łącznie ~185 bootów programu).
+
+## Dopisek stanu katalogu — 8.11.2026 (CO-KOTW-2, ANEKS_KOTW-2)
+- **KOTW (kotwica wizyjna: lot bez limitu czasu po utracie GNSS) —
+  CLOSED W CAŁOŚCI, 0 bootów.** Otwarta i zamknięta 8.11 dwoma
+  reconami przy biurku: środek strefy przegrywa na czasie (przerwa
+  37.1 s ⇒ 6.09 > 5.79 m przy idealnej poprawce), obwód na dokładności
+  (przerwa 9.4 s, ale poprawka 2.5 m z 23–44 m przy budżecie 0.54 m);
+  para kotwic 5/48. Zdanie graniczne: przy poziomej kamerze misji nie
+  istnieje rozmieszczenie kotwic dające naraz krótką przerwę
+  i bliski zasięg. Prereg ANEKS_KOTW-1 §2 wykonany: trzeciego
+  podejścia nie ma. Dźwignie nazwane, NIEOTWARTE (wymagają zmiany
+  misji/FROZEN, czyli nowej pozycji katalogu): kamera pochylona lub
+  druga w dół, okresowe spojrzenie wstecz, kotwice obwodowe z lepszym
+  źródłem kursu. Znaleziska przechodnie: bias yaw estymatora
+  prawdziwy (δψ 5.8°), bramka pozycji przewidywanej warunkiem PRE
+  każdej kotwicy w polu widzenia.
+- Katalog: 2d zamknięta budżetem czasu (T* = 22 s), KOTW zamknięta
+  granicą geometrii. Breach 0 / REFUSE(POS) fałszywych 0 programowo
+  bez zmian (~190 bootów programu; noga KOTW 0).
