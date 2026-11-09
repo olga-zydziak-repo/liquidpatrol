@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       47444 15.6  0.0 330892 14180 ?        Sl   02:26   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       47438  3.0  0.0   5028  3652 ?        S    02:26   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s1_launch.sh world_nadir_A3
+olga        1023  1.0  1.2 5725428 413020 pts/0  Sl+  Nov08   9:09 claude --continue
+root       47399  0.2  0.0 1756636 13824 ?       Ssl  02:26   0:00 /usr/libexec/wsl-pro-service
+root         243  0.0  0.1 2994444 59776 ?       Ssl  Nov08   0:37 /usr/bin/containerd
+root         360  0.0  0.2 10618540 86144 ?      Ssl  Nov08   0:09 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga       47257  0.0  0.0  17172 12260 ?        S    02:24   0:00 python3 results/NADIR/tools/nadir_s1_run.py 2 b2_c08 20,44
+olga       47347  0.0  0.0   5032  3872 ?        S    02:25   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s1_boot.sh 2 b2_c08 20,44 -
+polkitd      200  0.0  0.0 308188  8180 ?        Ssl  Nov08   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root         906  0.0  0.0   3200  1248 ?        S    Nov08   0:01 /init
+root           1  0.0  0.0  21976 13320 ?        Ss   Nov08   0:01 /sbin/init
+root          40  0.0  0.0  50508 17980 ?        S<s  Nov08   0:01 /usr/lib/systemd/systemd-journald
+root          90  0.0  0.0  26536  7536 ?        Ss   Nov08   0:00 /usr/lib/systemd/systemd-udevd
+message+     195  0.0  0.0   9796  5552 ?        Ss   Nov08   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         211  0.0  0.0  17400  6472 ?        Ss   Nov08   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+root         205  0.0  0.0  17988  8852 ?        Ss   Nov08   0:00 /usr/lib/systemd/systemd-logind
+systemd+     180  0.0  0.0  21352 13232 ?        Ss   Nov08   0:00 /usr/lib/systemd/systemd-resolved
+syslog       216  0.0  0.0 222524  5984 ?        Ssl  Nov08   0:00 /usr/sbin/rsyslogd -n -iNONE
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  Nov08   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate

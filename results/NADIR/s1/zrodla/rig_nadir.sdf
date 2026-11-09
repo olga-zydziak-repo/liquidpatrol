@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Rig bootu b1 NADIR S1: statyczne opakowanie x500_nadir_flow, nie lata (wzór results/KONT/s1/zrodla/rig_flow.sdf). -->
+<sdf version='1.9'>
+  <model name='probe'>
+    <static>true</static>
+    <include merge='true'>
+      <uri>x500_nadir_flow</uri>
+    </include>
+  </model>
+</sdf>

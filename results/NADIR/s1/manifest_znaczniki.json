@@ -1,0 +1,366 @@
+{
+ "opis": "results/NADIR/tools/nadir_gen.py — budowa S1 nogi NADIR (PROMPT_NADIR_S1 §1.1–§1.3, PRE_NADIR §2.1–§2.2). Tylko nowe pliki.",
+ "s_m": 10.0,
+ "R_E_m": 32.0,
+ "W_m": 1.0,
+ "plyta_m": 1.3333,
+ "z_m": 0.03,
+ "slownik": "DICT_4X4_50",
+ "visibility_flags": 4,
+ "flow_visibility_mask": 4294967291,
+ "swiat_bazowy": {
+  "plik": "worlds/world_kont_A3.sdf",
+  "sha256": "887fe3cca89d1cc57d5a1752e1dc8fc9bade44bac3d825d93045235814a3aabd"
+ },
+ "n": 37,
+ "n_kolizje": 7,
+ "znaczniki": [
+  {
+   "id": 0,
+   "E": -30.0,
+   "N": -10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id00.png",
+   "png_sha256": "2f3b3d28a8176a4876395b375c669f86e2f131f3418271329564e36560711cf3"
+  },
+  {
+   "id": 1,
+   "E": -30.0,
+   "N": 0.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [
+    "tex_19"
+   ],
+   "png": "worlds/nadir_markers/aruco4x4_id01.png",
+   "png_sha256": "a91401c5b657afbdc0a47053425ad4e319f93286a526572f797f9c45a9da7fe9"
+  },
+  {
+   "id": 2,
+   "E": -30.0,
+   "N": 10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id02.png",
+   "png_sha256": "3b03244ae59429000338e63b7ec671c5553c387bb3868e022e433414d0589aed"
+  },
+  {
+   "id": 3,
+   "E": -20.0,
+   "N": -20.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id03.png",
+   "png_sha256": "40b6177700d5417c5a0eb4e0428e61614f7c5206c2c1d679d7915f05dbf94307"
+  },
+  {
+   "id": 4,
+   "E": -20.0,
+   "N": -10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [
+    "tex_22"
+   ],
+   "png": "worlds/nadir_markers/aruco4x4_id04.png",
+   "png_sha256": "bd9f4892d5b65849f4297c132beb3214d0fa81037d9914a85c82f4ffaf8fbe00"
+  },
+  {
+   "id": 5,
+   "E": -20.0,
+   "N": 0.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id05.png",
+   "png_sha256": "e2e5563b5ae4afa17ad58dc802ef2b6faef59d327c1fea5f0ca9616b15cf5e0a"
+  },
+  {
+   "id": 6,
+   "E": -20.0,
+   "N": 10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id06.png",
+   "png_sha256": "467687bb8cbdb727cb0c71542afd93676e0aed4cc11a4c1aac9c0a579047c6d1"
+  },
+  {
+   "id": 7,
+   "E": -20.0,
+   "N": 20.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [
+    "tex_23"
+   ],
+   "png": "worlds/nadir_markers/aruco4x4_id07.png",
+   "png_sha256": "262146fa66dd1712a35fe7cb4112b7c59e7276eac49275de34d8dff41f7dd687"
+  },
+  {
+   "id": 8,
+   "E": -10.0,
+   "N": -30.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id08.png",
+   "png_sha256": "0d6840c599892f6dbe045da0fb6a7e67fa697053cc96e470a4c694cc5bbb9582"
+  },
+  {
+   "id": 9,
+   "E": -10.0,
+   "N": -20.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id09.png",
+   "png_sha256": "8838009ca7cd3996f9e05026886390436efbe22b8ea57a6991fb70f29e934211"
+  },
+  {
+   "id": 10,
+   "E": -10.0,
+   "N": -10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id10.png",
+   "png_sha256": "d80116156cda234a579da1be0106a2c6dc5debc8f237d1ba66f3920d336b78e5"
+  },
+  {
+   "id": 11,
+   "E": -10.0,
+   "N": 0.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id11.png",
+   "png_sha256": "633d9cc2e03138050ccf8ad38325df33450577c4773df972e938954eb5415d6c"
+  },
+  {
+   "id": 12,
+   "E": -10.0,
+   "N": 10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id12.png",
+   "png_sha256": "292110698f1b567b53c044aba38aecf19f1ba6e6518b956fdeb4c745a59f0cae"
+  },
+  {
+   "id": 13,
+   "E": -10.0,
+   "N": 20.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id13.png",
+   "png_sha256": "080395364ac273b88b46ed809f0d9fe44b673cd0b201d0b237b8b7862c3ebd2a"
+  },
+  {
+   "id": 14,
+   "E": -10.0,
+   "N": 30.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [
+    "bldg_6"
+   ],
+   "png": "worlds/nadir_markers/aruco4x4_id14.png",
+   "png_sha256": "dbbe82975cad2a4272daf3aeda3af985aae7018b46b22c438ea58a46eb5584c0"
+  },
+  {
+   "id": 15,
+   "E": 0.0,
+   "N": -30.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id15.png",
+   "png_sha256": "81e0c7a6485bcd9ecd275a4de75369625bea18d6e83d694cf4d487200ea522bf"
+  },
+  {
+   "id": 16,
+   "E": 0.0,
+   "N": -20.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id16.png",
+   "png_sha256": "f35ddec0da7b14d22c4416e6a7b4f34b0979fc498a09f516a7c57f39f73bd2cc"
+  },
+  {
+   "id": 17,
+   "E": 0.0,
+   "N": -10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id17.png",
+   "png_sha256": "6cbdc77adfc55cb3d6a1826c319773676db4f2c5d4e187e612069db08192996d"
+  },
+  {
+   "id": 18,
+   "E": 0.0,
+   "N": 0.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id18.png",
+   "png_sha256": "30bf45d9bd7adf742b4383a79786726f1cdd88c5f5b050bcd6f4fabf7845170c"
+  },
+  {
+   "id": 19,
+   "E": 0.0,
+   "N": 10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id19.png",
+   "png_sha256": "be028e00013d45de162f26ca455426a57847d0d2438904ca254e165cad201f13"
+  },
+  {
+   "id": 20,
+   "E": 0.0,
+   "N": 20.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id20.png",
+   "png_sha256": "607b510893839a7c5c4e9466d6f31b28da761de9c315b4792007b4fbd57ca4d9"
+  },
+  {
+   "id": 21,
+   "E": 0.0,
+   "N": 30.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id21.png",
+   "png_sha256": "3903f39a6f98909f2d801b8dbd3e808ebcd995018c7ef8e48561769f56fc08ce"
+  },
+  {
+   "id": 22,
+   "E": 10.0,
+   "N": -30.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id22.png",
+   "png_sha256": "656ccfc4d67125fedef5e8da5d95b06dc3357289b4fc85427601dc09b124407d"
+  },
+  {
+   "id": 23,
+   "E": 10.0,
+   "N": -20.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id23.png",
+   "png_sha256": "61e28623472ec4b941e0e8bb01f103d42ea873c553d29e482b9d337075c63e79"
+  },
+  {
+   "id": 24,
+   "E": 10.0,
+   "N": -10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [
+    "tex_46"
+   ],
+   "png": "worlds/nadir_markers/aruco4x4_id24.png",
+   "png_sha256": "bfb472278c762f4661afbbd7d0f4730fd615c293e09879e4a5acc5410ea9425c"
+  },
+  {
+   "id": 25,
+   "E": 10.0,
+   "N": 0.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id25.png",
+   "png_sha256": "3a99dc1b7c0b48c27cb2981112f075a21b60d5f2afbed1ca3fe80ccea44ca038"
+  },
+  {
+   "id": 26,
+   "E": 10.0,
+   "N": 10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id26.png",
+   "png_sha256": "d892c083b82bf16f7fa0b197ced6eff84b5035c5c4d1bd0cd21be46c6a240d90"
+  },
+  {
+   "id": 27,
+   "E": 10.0,
+   "N": 20.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [
+    "tex_48"
+   ],
+   "png": "worlds/nadir_markers/aruco4x4_id27.png",
+   "png_sha256": "047092c9b4512d79d172299c852c1b0c3f11905d299247a07fab725b737e3f66"
+  },
+  {
+   "id": 28,
+   "E": 10.0,
+   "N": 30.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id28.png",
+   "png_sha256": "abc4f2fafec5fba0767ae349fe132a6c69af72c5c9281d09c3ffa69163b2f365"
+  },
+  {
+   "id": 29,
+   "E": 20.0,
+   "N": -20.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id29.png",
+   "png_sha256": "7be16dfab335bf1325d7006a180e955c3004ef4440c53b95759efefb34dc4efe"
+  },
+  {
+   "id": 30,
+   "E": 20.0,
+   "N": -10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id30.png",
+   "png_sha256": "d852b7ef510439cb872b85fa2ed76d046c55c7ab1c0105e3b825ec34deecd32d"
+  },
+  {
+   "id": 31,
+   "E": 20.0,
+   "N": 0.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [
+    "tex_60"
+   ],
+   "png": "worlds/nadir_markers/aruco4x4_id31.png",
+   "png_sha256": "562d3aebbed8e1e5bff1ffa0770204a9eefd37f0e64a46ecca04ee805cc8b3a9"
+  },
+  {
+   "id": 32,
+   "E": 20.0,
+   "N": 10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id32.png",
+   "png_sha256": "c171d37cbaea8c040aba22a5c68b6e6b36a797cb13997e7757938b465438cb80"
+  },
+  {
+   "id": 33,
+   "E": 20.0,
+   "N": 20.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id33.png",
+   "png_sha256": "eb2cf4ab75510b9ff7e9408509232952f4e1afbed39c6c666341ecdf73712b57"
+  },
+  {
+   "id": 34,
+   "E": 30.0,
+   "N": -10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id34.png",
+   "png_sha256": "fc9568791255d71b0f3c637852e383ddf5c0ceb6f8bc8eaf478b338241277e5a"
+  },
+  {
+   "id": 35,
+   "E": 30.0,
+   "N": 0.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id35.png",
+   "png_sha256": "3a814102ae1fb4f748a4e2c21006fb7623b96a8a509a0d457683bac61066af68"
+  },
+  {
+   "id": 36,
+   "E": 30.0,
+   "N": 10.0,
+   "z": 0.03,
+   "kolizje_z_brylami": [],
+   "png": "worlds/nadir_markers/aruco4x4_id36.png",
+   "png_sha256": "e4f707a26777b7cdd6ade05261e330aa1bdc0327f711021faab47d5b8a895eec"
+  }
+ ]
+}

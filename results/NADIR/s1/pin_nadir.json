@@ -1,0 +1,39 @@
+{
+ "model_sdf": {
+  "plik": "results/NADIR/s1/zrodla/x500_nadir_flow/model.sdf",
+  "sha256": "5f918c9c73f3712ad2b8593d00921b5597ea3e3d71c89b81fb44faba94a4896d"
+ },
+ "model_config": {
+  "plik": "results/NADIR/s1/zrodla/x500_nadir_flow/model.config",
+  "sha256": "9098d0b4c3d6708b328558771de00f10444eaaf285dbf5eea0756d8318e1cf74"
+ },
+ "rig": {
+  "plik": "results/NADIR/s1/zrodla/rig_nadir.sdf",
+  "sha256": "5d379a6344324e7202da6a1a019ab4b3d50867f6e0f46cd14b364d7b52527cb6"
+ },
+ "zrodlo_modelu": {
+  "plik": "PX4-Autopilot/Tools/simulation/gz/models/x500_mono_cam_flow/model.sdf",
+  "sha256": "8bf215cafcd79f405e62a872d9455f7993effbf4b7a651a65e80379f6b68d623"
+ },
+ "swiat": {
+  "plik": "worlds/world_nadir_A3.sdf",
+  "sha256": "a28e96e421a393a3b2a6cc92bd0970c63196736fbe9a587ebdb9682980555bd0"
+ },
+ "nadir": {
+  "montaz": "base_link origin, rpy czujnika (0, +90°, 0)",
+  "os_optyczna": "-z_body",
+  "w_h": [
+   640,
+   480
+  ],
+  "horizontal_fov": 1.74,
+  "f_px": 269.97,
+  "update_hz": 15,
+  "topic": "/world/<W>/model/x500_nadir_flow_0/link/nadir_link/sensor/nadir/image",
+  "obraz": "u w prawo = -y_body, v w dół = -x_body (góra kadru = przód)"
+ },
+ "mono_cam_pin": {
+  "plik": "PX4-Autopilot/Tools/simulation/gz/models/mono_cam/model.sdf",
+  "sha256": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c"
+ }
+}
