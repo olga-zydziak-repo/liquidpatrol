@@ -1,0 +1,13 @@
+[kampania 10:25:18] === NADIR S1 boot 3 b2v2_c08 epizody 20,44; timesyncd przed: inactive
+[kampania 10:26:18] zegar b2v2_c08: ok=True skoki=0
+[kampania 10:26:18] sieroty {} żywe {}; shm {'sprzatanie': True, 'plikow_przed': 0, 'plikow_po': 0, 'trzymane_przed': {}, 'stan': 'shm_b2v2_c08.txt'}
+[kont b2v2_c08] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont b2v2_c08 10:26:18] cooldown 0s
+[kont b2v2_c08 10:27:34] SUSTAINED CLEAN
+[kont b2v2_c08] kont_boot pid=9960
+[kont b2v2_c08 10:28:01] initial absolute time 7436000 us faza_ok=1
+[kont b2v2_c08 10:28:42] sonda rc_FROZEN=0 podloga10Hz=1
+/home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s1v2_boot.sh: line 102: 10679 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+/home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s1v2_boot.sh: line 102: 10681 Killed                  setsid nohup env NADIR_FLIP=0 PYTHONPATH="$ROOT:${PYTHONPATH:-}" FASTRTPS_DEFAULT_PROFILES_FILE="$PERC2_FASTDDS_PROFILE" python3 "$ROOT/harness/nadir_obs.py" --world $WORLD --model x500_nadir2_flow_0 --out "$OUTDIR/nadir_obs.jsonl" > "$OUTDIR/nadir_obs_stdout.log" 2>&1
+[kont b2v2_c08 10:33:27] DONE rc=0 sonda=0
+[kampania 10:33:27] === koniec b2v2_c08 rc=0 429 s tempo={'aneks': 'ANEKS_KONT-4d §1.3', 'dsim_dwall_settle': 0.9659, 'okno_wall_s': 59.98, 'n': 729, 'prog': 0.93, 'zrodlo': 'rtf_stream.jsonl', 'ok': True}

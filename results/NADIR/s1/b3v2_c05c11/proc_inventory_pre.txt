@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       12279 17.8  0.0 330892 14112 ?        Sl   10:39   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       12273  3.5  0.0   5028  3740 ?        S    10:39   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s1v2_launch.sh world_nadir2_A3
+olga       12272  3.3  0.0  16948 11180 ?        S    10:39   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/NADIR/s1/b3v2_c05c11/zegar2.jsonl
+olga        1082  1.9  1.1 5725420 377780 pts/2  Sl+  08:48   2:11 claude --continue
+root         240  0.0  0.1 3290268 60292 ?       Ssl  08:47   0:06 /usr/bin/containerd
+root         344  0.0  0.2 10102480 84800 ?      Ssl  08:47   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         894  0.0  0.0   3200  1248 ?        S    08:47   0:00 /init
+root          40  0.0  0.0  66868 18796 ?        S<s  08:47   0:00 /usr/lib/systemd/systemd-journald
+root           1  0.0  0.0  21956 13284 ?        Ss   08:47   0:00 /sbin/init
+olga       12157  0.0  0.0   5032  3840 ?        S    10:35   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s1v2_boot.sh 4 b3v2_c05c11 5,23 -
+olga       11869  0.0  0.0  17176 12284 ?        S    10:34   0:00 python3 results/NADIR/tools/nadir_s1v2_run.py 4 b3v2_c05c11 5,23
+polkitd      183  0.0  0.0 308188  8036 ?        Ssl  08:47   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          86  0.0  0.0  26004  7032 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd-udevd
+syslog       196  0.0  0.0 222524  6044 ?        Ssl  08:47   0:00 /usr/sbin/rsyslogd -n -iNONE
+olga         938  0.0  0.0  20396 11572 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd --user
+root         235  0.0  0.0 107064 23276 ?        Ssl  08:47   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+systemd+     165  0.0  0.0  21352 13220 ?        Ss   08:47   0:00 /usr/lib/systemd/systemd-resolved
+root         195  0.0  0.0  17400  6356 ?        Ss   08:47   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+message+     178  0.0  0.0   9804  5528 ?        Ss   08:47   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
