@@ -785,3 +785,32 @@ CLOSED-BY-RECON (0 bootów)
   przyjęta jako dobra; wady drobne nazwane (runner stdout, pierwsza
   maska, errata OpenCV) — żadna nie zużyła bootu ani nie skaziła
   liczb.
+
+## NADIR S2 — charakteryzacja piły (ANEKS_NADIR-2, 9.11.2026)
+- 4 cięcia GNSS pod osłoną 2d: 0 przekroczeń ε_b w 440 oknach bez
+  GNSS (max 0.94 miarą 3D; CC niezależnie 0.84 w 2D); sieć na p_corr:
+  ENTRY i orbita do REFUSE(T*) 4/4, kontynuacja 21.96–21.97 s; skoki
+  p_corr ~5× szum GNSS i sieć je znosi; u_max 2.02–2.24 przy
+  m 2.99–10.33. P-NADIR-2 (0.75) ✓.
+- FREEZE: ε_fix_freeze per koszyk 0.305/0.293/0.227/0.582 m
+  (1.5 × max użytej poprawki, oba reżimy); litera przyjęcia + r_h<8 m.
+- Bias kursu estymatora stały w epizodzie, różny między bootami
+  (−1.5…−4.6°), nie dryfuje po cięciu (trend ≤0.27°/s); para znaczników
+  (87% poprawek) zdejmuje go z namiaru — potwierdzenie mechanizmu
+  z reconu KOTW R2 na żywym torze.
+- Trzecia instancja „zadany ≠ faktyczny" w rodzinie c11: obwiednia
+  nauczyciela 2d przekroczona o 6% długohoryzontowo (ten sam EKF, bez
+  nakładki); NADIR nieczuły — konsumuje ε_b tylko w prefiksie okien.
+- ✗ projektowe CC: PROMPT_NADIR_S2 §R żądał „2 cięcia na boot" wbrew
+  literze drivera KONT (cięcie kończy boot zejściem) — wychwycone
+  przez wykonawcę przed spaleniem boota; decyzja: 1 cięcie/boot.
+  ✗ metodyczne CC (weryfikacja S1F): miara odległości tracku od
+  znacznika liczona poziomo zamiast 3D — 2 fałszywe trafienia,
+  skorygowane w tej samej turze, litera wykonawcy słuszna.
+- Wykonawca: przyczyną braku summary rejestratora była własna
+  procedura sprzątania launchera z S1 (znaleziona i naprawiona,
+  a91bb94e); jedno kryterium walidacji suchej postawione źle
+  i poprawione przed lotami (nazwane w raporcie); strażnik kolizji
+  zablokował start od słowa w linii poleceń (0 bootów). Dwa booty
+  przerwane bramką tempa przed uzbrojeniem (0.910/0.925) — remedium
+  operatora (restart WSL) skuteczne, wzór 4e.
