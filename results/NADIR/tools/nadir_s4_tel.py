@@ -5,8 +5,9 @@ Trzy trwałe procesy, każdy wiersz jsonl z polem src i t_guest (time.time() go�
 korelacji z rtf_stream; zegar Windows obok jako t_win):
   src=gpu   nvidia-smi --query-gpu=<NV_Q> -lms 1000 (1 Hz): pstate, zegary SM/MEM, moc, obciążenie, temperatura,
             clocks_event_reasons.active;
-  src=gpuproc  powershell.exe: Win32_PerfFormattedData_GPUPerformanceCounters_GPUEngine — suma UtilizationPercentage per pid,
-            czołówka 5 z nazwą procesu (zapytanie CIM trwa ~6 s, kadencja = max(Dt, czas zapytania));
+  src=gpuproc  powershell.exe: Win32_PerfFormattedData_GPUPerformanceCounters_GPUEngine — suma UtilizationPercentage per
+            (pid, adapter LUID), czołówka 5 z nazwą procesu; adapter z DedicatedUsage > 0 (GPUAdapterMemory) = dGPU (NVIDIA),
+            reszta iGPU — rozdział per adapter po decyzji CC 10.11 (wcześniej suma obu kart);
   src=win   powershell.exe: próbnik hosta jak nadir_stanowisko.PS_LOOP (procesory logiczne, czołówka 5 po CPU, bateria;
             powercfg co 12. próbka) — naprawa kadencji z ANEKS_NADIR-4 §1.6: lista zamiast konkatenacji tablic, sen do
             terminu (nie Dt po pracy), pole dur_s = czas zapytań w próbce.
@@ -50,17 +51,21 @@ $t0 = Get-Date; $last = $t0
 while (((Get-Date) - $t0).TotalSeconds -lt $Secs) {
   $next = $last.AddSeconds($Dt); $w = ($next - (Get-Date)).TotalMilliseconds; if ($w -gt 0) { Start-Sleep -Milliseconds ([int]$w) }
   $now = Get-Date; $last = $now
+  $ad = @{}
+  foreach ($m in (Get-CimInstance Win32_PerfFormattedData_GPUPerformanceCounters_GPUAdapterMemory)) {
+    if ($m.Name -match "luid_0x[0-9A-Fa-f]+_(0x[0-9A-Fa-f]+)_phys") { if ($m.DedicatedUsage -gt 0) { $ad[$matches[1]] = "dGPU" } elseif (-not $ad.ContainsKey($matches[1])) { $ad[$matches[1]] = "iGPU" } } }
   $agg = @{}
   foreach ($e in (Get-CimInstance Win32_PerfFormattedData_GPUPerformanceCounters_GPUEngine)) {
-    if ($e.UtilizationPercentage -gt 0 -and $e.Name -match "^pid_(\d+)_.*engtype_(.+)$") {
-      $key = $matches[1]; if (-not $agg.ContainsKey($key)) { $agg[$key] = @{} }
-      $et = $matches[2]; $agg[$key][$et] = [int]$agg[$key][$et] + [int]$e.UtilizationPercentage } }
+    if ($e.UtilizationPercentage -gt 0 -and $e.Name -match "^pid_(\d+)_luid_0x[0-9A-Fa-f]+_(0x[0-9A-Fa-f]+)_.*engtype_(.+)$") {
+      $key = $matches[1] + "|" + $matches[2]; if (-not $agg.ContainsKey($key)) { $agg[$key] = @{} }
+      $et = $matches[3]; $agg[$key][$et] = [int]$agg[$key][$et] + [int]$e.UtilizationPercentage } }
   $rows = New-Object System.Collections.Generic.List[object]
   foreach ($k in $agg.Keys) { $s = 0; foreach ($v in $agg[$k].Values) { $s += $v }
-    $n = (Get-Process -Id ([int]$k) -ErrorAction SilentlyContinue).ProcessName
-    $rows.Add([pscustomobject]@{pid=[int]$k; n=$n; util=$s; eng=$agg[$k]}) }
+    $pid_, $luid = $k.Split("|")
+    $n = (Get-Process -Id ([int]$pid_) -ErrorAction SilentlyContinue).ProcessName
+    $rows.Add([pscustomobject]@{pid=[int]$pid_; n=$n; luid=$luid; ad=$ad[$luid]; util=$s; eng=$agg[$k]}) }
   $top = $rows | Sort-Object util -Descending | Select-Object -First 5
-  $o = [ordered]@{t_win=[math]::Round(([DateTimeOffset]$now).ToUnixTimeMilliseconds()/1000.0,2); dur_s=[math]::Round(((Get-Date)-$now).TotalSeconds,2); top=$top}
+  $o = [ordered]@{t_win=[math]::Round(([DateTimeOffset]$now).ToUnixTimeMilliseconds()/1000.0,2); dur_s=[math]::Round(((Get-Date)-$now).TotalSeconds,2); adaptery=$ad; top=$top}
   [Console]::Out.WriteLine(($o | ConvertTo-Json -Compress -Depth 4)); [Console]::Out.Flush()
 }
 """
@@ -141,7 +146,10 @@ def podsumuj(path, t0=None, t1=None):
         for r in w:
             top = r.get("top") or []
             for p in ([top] if isinstance(top, dict) else top):     # ConvertTo-Json: jeden element ⇒ obiekt, nie lista
-                cnt.setdefault(p.get("n") or str(p.get("pid")), []).append(p.get("pct", p.get("util")))
+                k = p.get("n") or str(p.get("pid"))
+                if src == "gpuproc" and p.get("ad"):
+                    k += "@" + p["ad"]
+                cnt.setdefault(k, []).append(p.get("pct", p.get("util")))
         o["czolowka"] = sorted(((k, st.median(v), len(v)) for k, v in cnt.items()), key=lambda x: -x[1])[:6]
         if src == "win":
             o["maxfreq_med"] = round(st.median(st.mean(c[2] for c in r["cpu"]) for r in w), 1)

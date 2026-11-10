@@ -2,7 +2,7 @@
 """results/NADIR/tools/nadir_s4_bramka.py — ANEKS_NADIR-4 §3.1/§3.2/§3.4/§3.5 (0 bootów, bez PX4, nic nie uzbraja).
 
 Tryby:
-  bramka <tag> [--tel]   §3.1: przyrząd A = nadir_n1_ab.run(i, "A5", e) BEZ ZMIAN KODU (rig A_5, rozgrzewka 20 s + okno 120 s,
+  bramka <tag> [--tel]   §3.1 (NO-GO ⇒ czołówka obcych procesów GPU/CPU dla operatora, decyzja CC 10.11): przyrząd A = nadir_n1_ab.run(i, "A5", e) BEZ ZMIAN KODU (rig A_5, rozgrzewka 20 s + okno 120 s,
                          odniesienie 0.9283 / 0.9271); jedyna zmiana: katalogi wyjścia modułu (N1, ZRN) przekierowane do
                          results/NADIR/s4/bramka/<tag>/ (rig generowany tą samą rig(5), sha porównane z odniesieniem).
                          --tel = wariant C (telemetria §3.3 nadir_s4_tel.Telemetria2 w tle). GO ⇔ tempo ≥ 0.90 ⇒ kod 0;
@@ -69,8 +69,32 @@ def przyrzad_a(tag, tel):
     if tel:
         res["tel_okno"] = TL.podsumuj(tp, *res["okno_t_guest"])
     res["GO"] = r["dsim_dwall"] is not None and r["dsim_dwall"] >= PROG and res["rig_zgodny"]
+    if not res["GO"]:
+        res["czolowka_operatora"] = czolowka_operatora(res, d)
     json.dump(res, open(os.path.join(d, "bramka.json"), "w"), ensure_ascii=False, indent=1)
     return res
+
+
+WLASNE = {"vmwp", "vmmem", "vmmemWSL", "WindowsTerminal", "powershell", "Idle", "System", "nvidia-smi", "conhost", "OpenConsole"}
+
+
+def czolowka_operatora(res, d):
+    """Decyzja CC 10.11: przy NO-GO czołówka procesów Windows na GPU (gpuproc, per adapter) i CPU (win) dla operatora — co zamknąć.
+    Wariant C: z okna pomiaru; wariant A (bez telemetrii): migawka 20 s Telemetria2 po pomiarze. Pomija WSL, terminal i własne próbniki."""
+    import nadir_s4_tel as TL
+    t = res.get("tel_okno")
+    if not t:
+        tp = os.path.join(d, "telemetria_nogo.jsonl")
+        tl = TL.Telemetria2(tp, 30)
+        time.sleep(20)
+        tl.close()
+        t = TL.podsumuj(tp)
+    obce = lambda xs: [x for x in xs if x[0].split("@")[0] not in WLASNE]
+    out = {"gpu": obce(t.get("gpuproc", {}).get("czolowka", [])), "cpu": obce(t.get("win", {}).get("czolowka", []))}
+    print("NO-GO — aplikacje Windows do zamknięcia (nazwa, mediana %, liczba próbek):", flush=True)
+    print("  GPU:", out["gpu"] or "brak obcych", flush=True)
+    print("  CPU:", out["cpu"] or "brak obcych", flush=True)
+    return out
 
 
 def profil10(p):
