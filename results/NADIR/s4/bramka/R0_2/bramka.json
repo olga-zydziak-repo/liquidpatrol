@@ -1,0 +1,159 @@
+{
+ "tag": "R0_2",
+ "wariant": "C",
+ "t": "2026-11-10 14:32:39",
+ "tempo": 0.9211,
+ "prog": 0.9,
+ "odniesienie": [
+  0.9283,
+  0.9271
+ ],
+ "n1_run": {
+  "tag": "A5",
+  "dsim_dwall": 0.9211,
+  "n_probek_okna": 1451,
+  "cofniecia": 0,
+  "loadavg1_po": 3.77,
+  "hz": {
+   "imager": 14.07,
+   "flow": 46.41,
+   "nadir": 4.65
+  },
+  "nadir_klatki_z_id": 651
+ },
+ "rig_zgodny": true,
+ "timesyncd": "inactive",
+ "okno_t_guest": [
+  1794317434.96,
+  1794317554.96
+ ],
+ "profil10": [
+  [
+   0,
+   0.927
+  ],
+  [
+   10,
+   0.908
+  ],
+  [
+   20,
+   0.935
+  ],
+  [
+   30,
+   0.911
+  ],
+  [
+   40,
+   0.918
+  ],
+  [
+   50,
+   0.936
+  ],
+  [
+   60,
+   0.918
+  ],
+  [
+   70,
+   0.931
+  ],
+  [
+   80,
+   0.925
+  ],
+  [
+   90,
+   0.904
+  ],
+  [
+   100,
+   0.933
+  ],
+  [
+   110,
+   0.901
+  ],
+  [
+   120,
+   0.918
+  ],
+  [
+   130,
+   0.927
+  ]
+ ],
+ "tel_okno": {
+  "gpu": {
+   "n": 119,
+   "pstate_udzial": {
+    "P4": 0.445,
+    "P5": 0.462,
+    "P8": 0.092
+   },
+   "sm_med": 277.0,
+   "mem_med": 810.0,
+   "moc_med": 21.43,
+   "util_med": 26.0,
+   "flaga_0x4_udzial": 0.782
+  },
+  "win": {
+   "n": 24,
+   "kadencja_med_s": 5.02,
+   "dur_med_s": 0.69,
+   "czolowka": [
+    [
+     "powershell",
+     0.3,
+     36
+    ],
+    [
+     "WindowsTerminal",
+     0.13,
+     23
+    ],
+    [
+     "ipf_helper",
+     0.07,
+     24
+    ],
+    [
+     "PredatorSense",
+     0.045,
+     10
+    ],
+    [
+     "QuickPanelOSD",
+     0.04,
+     6
+    ],
+    [
+     "codex",
+     0.04,
+     1
+    ]
+   ],
+   "maxfreq_med": 96.6
+  },
+  "gpuproc": {
+   "n": 24,
+   "kadencja_med_s": 5.01,
+   "dur_med_s": 0.345,
+   "czolowka": [
+    [
+     "vmwp",
+     39.0,
+     24
+    ],
+    [
+     "WindowsTerminal",
+     1,
+     13
+    ]
+   ]
+  }
+ },
+ "GO": true
+}

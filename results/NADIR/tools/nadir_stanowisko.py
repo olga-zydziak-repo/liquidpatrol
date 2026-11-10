@@ -322,6 +322,10 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     RIG_SHA = sha(RIG)
     a = sys.argv[1:]
+    if a[0] in ("sonda", "bramka", "seria"):                       # ANEKS_NADIR-4 §3.2: tempo tylko przy zatrzymanym timesyncd
+        ts = subprocess.run(["systemctl", "is-active", "systemd-timesyncd"], capture_output=True, text=True).stdout.strip()
+        if ts != "inactive":
+            print(f"ODMOWA (ANEKS_NADIR-4 §3.2): systemd-timesyncd = {ts!r} ≠ inactive", flush=True); sys.exit(2)
     if a[0] == "sonda":
         sonda(a[1])
     elif a[0] == "bramka":
