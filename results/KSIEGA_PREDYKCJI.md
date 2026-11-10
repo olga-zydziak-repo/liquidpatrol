@@ -834,3 +834,30 @@ CLOSED-BY-RECON (0 bootów)
 - Lekcje: kontrola stanowiska musi być związana obliczeniowo; bramka
   zdrowia należy przed bootem, nie w nim; „ta sama pozycja" przy
   kolejce z ponowieniami nie niesie informacji o pozycji.
+
+## NADIR S4 — diagnoza stanowiska (ANEKS_NADIR-4, 10.11.2026)
+- Matryca M0–M3/M5 (0 bootów): okno w tle, profil turbo i 30 min
+  bezczynności nie zmieniają tempa; częstotliwość CPU stała, brak
+  procesu hosta. H2 (bezczynność / rdzenie E), hipoteza nr 1 CC —
+  ✗ kalibracyjne CC.
+- Znalezisko wykonawcy: dzisiejsze sondy zaniżał zegar — timesyncd
+  wznowiony przez kolejkę przy STOP-ie daje skoki +1.35 s co ~33 s
+  (ok. 4% tempa); po korekcie przyrząd A 0.937 / 0.920 ≈ odniesienie
+  0.928 (CC przeliczył niezależnie, zgodność do 0.001). Wada
+  wykonawcy nazwana: stan timesyncd zapisywany w każdej sondzie,
+  niesprawdzony przed matrycą.
+- Znalezisko CC: pod obciążeniem stosu karta graficzna pracuje na
+  277 MHz w stanach P5/P8 przy ~21 W, z aktywnym programowym limitem
+  mocy; tempo koreluje z udziałem P8 (r = −0.59, n = 22), a trzy
+  najwolniejsze przebiegi nie mają żadnej próbki w stanie wyższym.
+  Sygnatura
+  „zdrowy start, zjazd po 10–20 s" wspólna z porannym wolnym bootem.
+  Hipoteza wiodąca dla skoków −20…−25%, niepotwierdzona na dużym
+  skoku.
+- ✗ projektowe CC: ANEKS_NADIR-3 zlecił nową sondę zamiast użyć
+  przyrządu, z którego pochodziło odniesienie — powstał przyrząd B
+  o innym zachowaniu; bramka wraca na przyrząd A.
+- Lekcje: pomiar tempa tylko przy zatrzymanym timesyncd (asercja
+  w narzędziu); odniesienie i bramka muszą pochodzić z tego samego
+  przyrządu; tempo programu liczone jest zegarem gościa, który chodzi
+  ~3–4% wolniej od czasu rzeczywistego.
