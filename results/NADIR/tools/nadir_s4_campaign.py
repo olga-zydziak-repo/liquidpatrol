@@ -38,7 +38,7 @@ log, zegar, sprzataj_sieroty, shm_krok = G.log, G.zegar, G.sprzataj_sieroty, G.s
 PROFIL = G.PROFIL
 BOOT = os.path.join(ROOT, "results/NADIR/tools/nadir_s4_boot.sh")
 KSIEGA = os.path.join(S4, "kampania_ksiega.jsonl")
-BUDZET, NOGA_PRZED, NOGA_MAX = 18, 11, 30            # 16 + 2 rezerwy z luzu nogi (sygnał Olgi po STOP-NADIR4-BUDZET, 9.11)
+BUDZET, NOGA_PRZED, NOGA_MAX = 19, 11, 30            # 16 + 3 rezerwy = cały luz nogi (sygnał Olgi 10.11 po STOP-NADIR4-STANOWISKO; 18 było wadą rachunku)
 CIECIA = ["c01_s01", "c01_s03", "c02_s01", "c02_s03", "c05_s01", "c05_s02", "c08_s01", "c08_s02", "c10_s01", "c10_s02",
           "c11_s01", "c11_s02"]
 EPID = lambda sc: (int(sc[5:7]) - 1) * 12 + int(sc[1:3])          # = kont_s4_campaign.EPID
