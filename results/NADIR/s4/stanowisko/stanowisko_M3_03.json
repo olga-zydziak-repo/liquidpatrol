@@ -1,0 +1,192 @@
+{
+ "tag": "M3_03",
+ "t_start": "2026-11-10 12:50:31",
+ "profil_oem": "wydajny",
+ "glxinfo_B": [
+  "Extended renderer info (GLX_MESA_query_renderer):",
+  "Vendor: Microsoft Corporation (0xffffffff)",
+  "Device: D3D12 (NVIDIA GeForce RTX 5070 Ti Laptop GPU) (0xffffffff)",
+  "Max core profile version: 4.6",
+  "OpenGL renderer string: D3D12 (NVIDIA GeForce RTX 5070 Ti Laptop GPU)",
+  "OpenGL core profile version string: 4.6 (Core Profile) Mesa 25.2.8-0ubuntu0.24.04.2"
+ ],
+ "rig_sha": "c2180a8d2a64a16bd62fca4ba44ef173bd23851147a728c8750d1bae5fd60a74",
+ "warm_s": 20.0,
+ "win_s": 60.0,
+ "odniesienie": [
+  0.9283,
+  0.9271
+ ],
+ "prog_go": 0.9,
+ "timesyncd": "active",
+ "loadavg_przed": [
+  "0.27",
+  "0.99",
+  "0.79"
+ ],
+ "a": {
+  "gz_a5": 0.8928,
+  "n_probek_okna": 709,
+  "okno": [
+   1794311460.34,
+   1794311520.34
+  ],
+  "hz": {
+   "imager": 14.28,
+   "flow": 47.11,
+   "nadir": 4.72
+  },
+  "nadir_klatki_z_id": 378,
+  "wzgl_odniesienia": 0.9624
+ },
+ "b_det_v2": {
+  "device": "cuda",
+  "n": 300,
+  "p50_ms": 3.772,
+  "p95_ms": 10.111,
+  "okno": [
+   1794311530.7,
+   1794311535.15
+  ],
+  "klatka": "results/KONT/s1/frames/R1_p1_srodek_z10.png",
+  "klatka_sha": "9638dce501d62c4c2fc24de0f9f2352c05ed3b21378b31c966a60e8d803ce082"
+ },
+ "b_cpu": {
+  "jednowatkowa_med_ms": 49.36,
+  "8proc_med_ms": 47.34,
+  "8proc_p90_ms": 51.4
+ },
+ "t_koniec": "2026-11-10 12:52:16",
+ "c_okno_det": {
+  "n_win": 0,
+  "n_gpu": 1,
+  "gpu_util_med": 49.0,
+  "gpu_temp_med": 56.0,
+  "gpu_power_med": 62.5,
+  "gpu_sm_med": 1612.0,
+  "gpu_pstate": [
+   "P4"
+  ],
+  "gpu_reasons": [
+   "0x0000000000000000"
+  ]
+ },
+ "c_okno_a": {
+  "n_win": 2,
+  "n_gpu": 12,
+  "perf_med": 151.5,
+  "maxfreq_med": 96.4,
+  "util_med": 30.8,
+  "maxfreq_min_proc": 85,
+  "bateria": {
+   "BatteryStatus": 2,
+   "EstimatedChargeRemaining": 100
+  },
+  "schemat": "31b9d370-8fa5-4ab5-a015-8e16560b4b91  (Acer)",
+  "czolowka": [
+   [
+    "WindowsTerminal",
+    0.11,
+    2
+   ],
+   [
+    "chrome",
+    0.08,
+    1
+   ],
+   [
+    "ipf_helper",
+    0.07,
+    2
+   ],
+   [
+    "powershell",
+    0.04,
+    2
+   ],
+   [
+    "PredatorSense",
+    0.03,
+    2
+   ],
+   [
+    "nvcontainer",
+    0.02,
+    1
+   ]
+  ],
+  "gpu_util_med": 28.0,
+  "gpu_temp_med": 52.0,
+  "gpu_power_med": 22.7,
+  "gpu_sm_med": 277.0,
+  "gpu_pstate": [
+   "P4",
+   "P5",
+   "P8"
+  ],
+  "gpu_reasons": [
+   "0x0000000000000000",
+   "0x0000000000000004"
+  ]
+ },
+ "c_cala": {
+  "n_win": 3,
+  "n_gpu": 20,
+  "perf_med": 149,
+  "maxfreq_med": 96.1,
+  "util_med": 29.5,
+  "maxfreq_min_proc": 84,
+  "bateria": {
+   "BatteryStatus": 2,
+   "EstimatedChargeRemaining": 100
+  },
+  "schemat": "31b9d370-8fa5-4ab5-a015-8e16560b4b91  (Acer)",
+  "czolowka": [
+   [
+    "WindowsTerminal",
+    0.13,
+    3
+   ],
+   [
+    "chrome",
+    0.08,
+    1
+   ],
+   [
+    "ipf_helper",
+    0.07,
+    3
+   ],
+   [
+    "powershell",
+    0.04,
+    3
+   ],
+   [
+    "ChatGPT",
+    0.03,
+    1
+   ],
+   [
+    "PredatorSense",
+    0.02,
+    3
+   ]
+  ],
+  "gpu_util_med": 28.0,
+  "gpu_temp_med": 52.0,
+  "gpu_power_med": 22.5,
+  "gpu_sm_med": 277.0,
+  "gpu_pstate": [
+   "P4",
+   "P5",
+   "P8"
+  ],
+  "gpu_reasons": [
+   "0x0000000000000000",
+   "0x0000000000000004"
+  ]
+ },
+ "GO": false,
+ "t_od_startu_s": 540.0
+}

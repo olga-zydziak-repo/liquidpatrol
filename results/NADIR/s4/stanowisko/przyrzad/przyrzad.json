@@ -1,0 +1,788 @@
+{
+ "opis": "results/NADIR/tools/nadir_stanowisko_przyrzad.py — rozszerzenie diagnozy ANEKS_NADIR-3 po M3 (sygnał CC 10.11), 0 bootów:\ntest przyrządu. Kolejność A, C, B, A, C, B:\n  A = oryginalne nadir_n1_ab.run(i, \"A5\", e) (import READ-ONLY, rig A_5, WARM 20 s + okno 120 s jak 9.11), bez telemetrii hosta\n      i bez dodatkowych procesów; jedyna zmiana: katalogi wyjścia N1/ZRN modułu przekierowane do results/NADIR/s4/stanowisko/przyrzad\n      (oryginał pisałby do results/NADIR/s1/n1 i nadpisał pliki odniesienia; rig generowany tą samą funkcją rig(5) — sha porównane\n      z results/NADIR/s1/zrodla/n1/rig_ab_5hz.sdf);\n  C = to samo co A z włączoną samą telemetrią hosta (nadir_stanowisko.Telemetria: powershell.exe + nvidia-smi co 5 s);\n  B = nowa sonda nadir_stanowisko.sonda tak, jak szła w matrycy (gz_a5 60 s + det_v2 + CPU + telemetria, PROFIL_OEM z env).\nTempo każdego przebiegu: nadir_ab.regresja (rozgrzewka 20 s) w oknie 120 s (metoda 9.11) i 60 s (metoda sondy); dla B dostępne\ntylko okno 60 s (sonda zapisuje 83 s). Profil tempa co 10 s ściany (Δsim/Δwall kolejnych przedziałów). Odniesienie 9.11 z plików\nresults/NADIR/s1/n1/rtf_{1,7}_A5.jsonl przeliczone tą samą funkcją.\nNa końcu: zmiany w Windows od 9.11 10:00 (historia Windows Update, Get-HotFix, zdarzenia MsiInstaller 11707/1033, sterownik GPU\nz Win32_VideoController, wsl --version).\nWyjście: results/NADIR/s4/stanowisko/przyrzad/przyrzad.json\n",
+ "kolejnosc": [
+  "A",
+  "C",
+  "B",
+  "A",
+  "C",
+  "B"
+ ],
+ "profil_oem": "wydajny",
+ "odniesienie_9_11": {
+  "results/NADIR/s1/n1/rtf_1_A5.jsonl": {
+   "okno120": 0.9283,
+   "okno60": 0.9265,
+   "profil10": [
+    [
+     0,
+     0.876
+    ],
+    [
+     10,
+     0.924
+    ],
+    [
+     20,
+     0.937
+    ],
+    [
+     30,
+     0.942
+    ],
+    [
+     40,
+     0.913
+    ],
+    [
+     50,
+     0.933
+    ],
+    [
+     60,
+     0.918
+    ],
+    [
+     70,
+     0.942
+    ],
+    [
+     80,
+     0.938
+    ],
+    [
+     90,
+     0.904
+    ],
+    [
+     100,
+     0.938
+    ],
+    [
+     110,
+     0.94
+    ],
+    [
+     120,
+     0.918
+    ],
+    [
+     130,
+     0.92
+    ]
+   ]
+  },
+  "results/NADIR/s1/n1/rtf_7_A5.jsonl": {
+   "okno120": 0.9271,
+   "okno60": 0.9265,
+   "profil10": [
+    [
+     0,
+     0.946
+    ],
+    [
+     10,
+     0.923
+    ],
+    [
+     20,
+     0.939
+    ],
+    [
+     30,
+     0.919
+    ],
+    [
+     40,
+     0.918
+    ],
+    [
+     50,
+     0.927
+    ],
+    [
+     60,
+     0.933
+    ],
+    [
+     70,
+     0.928
+    ],
+    [
+     80,
+     0.931
+    ],
+    [
+     90,
+     0.94
+    ],
+    [
+     100,
+     0.908
+    ],
+    [
+     110,
+     0.922
+    ],
+    [
+     120,
+     0.94
+    ],
+    [
+     130,
+     0.929
+    ]
+   ]
+  }
+ },
+ "przebiegi": [
+  {
+   "i": 0,
+   "tag": "A",
+   "t": "13:12:59",
+   "n1_run": {
+    "tag": "A5",
+    "dsim_dwall": 0.9019,
+    "n_probek_okna": 1407,
+    "cofniecia": 0,
+    "loadavg1_po": 1.26,
+    "hz": {
+     "imager": 14.36,
+     "flow": 47.36,
+     "nadir": 4.74
+    },
+    "nadir_klatki_z_id": 664
+   },
+   "okno120": 0.9019,
+   "okno60": 0.9068,
+   "profil10": [
+    [
+     0,
+     0.9
+    ],
+    [
+     10,
+     0.817
+    ],
+    [
+     20,
+     0.936
+    ],
+    [
+     30,
+     0.937
+    ],
+    [
+     40,
+     0.809
+    ],
+    [
+     50,
+     0.939
+    ],
+    [
+     60,
+     0.944
+    ],
+    [
+     70,
+     0.932
+    ],
+    [
+     80,
+     0.829
+    ],
+    [
+     90,
+     0.938
+    ],
+    [
+     100,
+     0.941
+    ],
+    [
+     110,
+     0.801
+    ],
+    [
+     120,
+     0.941
+    ],
+    [
+     130,
+     0.942
+    ]
+   ]
+  },
+  {
+   "i": 1,
+   "tag": "C",
+   "t": "13:15:37",
+   "n1_run": {
+    "tag": "A5",
+    "dsim_dwall": 0.8881,
+    "n_probek_okna": 1390,
+    "cofniecia": 0,
+    "loadavg1_po": 1.67,
+    "hz": {
+     "imager": 14.17,
+     "flow": 46.75,
+     "nadir": 4.69
+    },
+    "nadir_klatki_z_id": 656
+   },
+   "okno120": 0.8881,
+   "okno60": 0.8873,
+   "profil10": [
+    [
+     0,
+     0.898
+    ],
+    [
+     10,
+     0.927
+    ],
+    [
+     20,
+     0.805
+    ],
+    [
+     30,
+     0.915
+    ],
+    [
+     40,
+     0.928
+    ],
+    [
+     50,
+     0.812
+    ],
+    [
+     60,
+     0.92
+    ],
+    [
+     70,
+     0.908
+    ],
+    [
+     80,
+     0.817
+    ],
+    [
+     91,
+     0.936
+    ],
+    [
+     101,
+     0.928
+    ],
+    [
+     111,
+     0.92
+    ],
+    [
+     121,
+     0.807
+    ],
+    [
+     131,
+     0.931
+    ]
+   ],
+   "c": {
+    "n_win": 13,
+    "n_gpu": 31,
+    "perf_med": 145.7,
+    "maxfreq_med": 96.1,
+    "util_med": 26.7,
+    "maxfreq_min_proc": 66,
+    "bateria": {
+     "BatteryStatus": 2,
+     "EstimatedChargeRemaining": 100
+    },
+    "schemat": "31b9d370-8fa5-4ab5-a015-8e16560b4b91  (Acer)",
+    "czolowka": [
+     [
+      "powershell",
+      0.14,
+      13
+     ],
+     [
+      "WindowsTerminal",
+      0.1,
+      13
+     ],
+     [
+      "chrome",
+      0.08,
+      3
+     ],
+     [
+      "ipf_helper",
+      0.07,
+      13
+     ],
+     [
+      "nvcontainer",
+      0.05,
+      1
+     ],
+     [
+      "uihost",
+      0.03,
+      1
+     ]
+    ],
+    "gpu_util_med": 27.0,
+    "gpu_temp_med": 55.0,
+    "gpu_power_med": 21.8,
+    "gpu_sm_med": 277.0,
+    "gpu_pstate": [
+     "P4",
+     "P5",
+     "P8"
+    ],
+    "gpu_reasons": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "i": 2,
+   "tag": "B",
+   "t": "13:18:14",
+   "okno120": null,
+   "okno60": 0.8284,
+   "profil10": [
+    [
+     0,
+     0.876
+    ],
+    [
+     10,
+     0.902
+    ],
+    [
+     20,
+     0.759
+    ],
+    [
+     30,
+     0.864
+    ],
+    [
+     40,
+     0.874
+    ],
+    [
+     50,
+     0.87
+    ],
+    [
+     60,
+     0.741
+    ],
+    [
+     70,
+     0.87
+    ]
+   ],
+   "det_p50_ms": 8.934,
+   "cpu": {
+    "jednowatkowa_med_ms": 43.17,
+    "8proc_med_ms": 45.17,
+    "8proc_p90_ms": 49.16
+   },
+   "c": {
+    "n_win": 5,
+    "n_gpu": 12,
+    "perf_med": 154.5,
+    "maxfreq_med": 98.2,
+    "util_med": 32.9,
+    "maxfreq_min_proc": 81,
+    "bateria": {
+     "BatteryStatus": 2,
+     "EstimatedChargeRemaining": 100
+    },
+    "schemat": "31b9d370-8fa5-4ab5-a015-8e16560b4b91  (Acer)",
+    "czolowka": [
+     [
+      "powershell",
+      0.15,
+      5
+     ],
+     [
+      "mc-fw-host",
+      0.1,
+      1
+     ],
+     [
+      "WindowsTerminal",
+      0.08,
+      5
+     ],
+     [
+      "ipf_helper",
+      0.07,
+      5
+     ],
+     [
+      "msedgewebview2",
+      0.05,
+      1
+     ],
+     [
+      "PredatorSense",
+      0.04,
+      3
+     ]
+    ],
+    "gpu_util_med": 33.5,
+    "gpu_temp_med": 56.0,
+    "gpu_power_med": 21.8,
+    "gpu_sm_med": 277.0,
+    "gpu_pstate": [
+     "P5",
+     "P8"
+    ],
+    "gpu_reasons": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "i": 3,
+   "tag": "A",
+   "t": "13:20:01",
+   "n1_run": {
+    "tag": "A5",
+    "dsim_dwall": 0.881,
+    "n_probek_okna": 1384,
+    "cofniecia": 0,
+    "loadavg1_po": 2.88,
+    "hz": {
+     "imager": 14.07,
+     "flow": 46.43,
+     "nadir": 4.65
+    },
+    "nadir_klatki_z_id": 651
+   },
+   "okno120": 0.881,
+   "okno60": 0.8783,
+   "profil10": [
+    [
+     0,
+     0.888
+    ],
+    [
+     10,
+     0.906
+    ],
+    [
+     20,
+     0.797
+    ],
+    [
+     30,
+     0.904
+    ],
+    [
+     40,
+     0.917
+    ],
+    [
+     50,
+     0.935
+    ],
+    [
+     60,
+     0.79
+    ],
+    [
+     70,
+     0.925
+    ],
+    [
+     80,
+     0.911
+    ],
+    [
+     90,
+     0.798
+    ],
+    [
+     100,
+     0.916
+    ],
+    [
+     110,
+     0.92
+    ],
+    [
+     120,
+     0.791
+    ],
+    [
+     130,
+     0.915
+    ]
+   ]
+  },
+  {
+   "i": 4,
+   "tag": "C",
+   "t": "13:22:39",
+   "n1_run": {
+    "tag": "A5",
+    "dsim_dwall": 0.8783,
+    "n_probek_okna": 1386,
+    "cofniecia": 0,
+    "loadavg1_po": 2.27,
+    "hz": {
+     "imager": 13.92,
+     "flow": 45.91,
+     "nadir": 4.6
+    },
+    "nadir_klatki_z_id": 644
+   },
+   "okno120": 0.8783,
+   "okno60": 0.8828,
+   "profil10": [
+    [
+     0,
+     0.807
+    ],
+    [
+     10,
+     0.921
+    ],
+    [
+     20,
+     0.931
+    ],
+    [
+     30,
+     0.822
+    ],
+    [
+     40,
+     0.912
+    ],
+    [
+     50,
+     0.923
+    ],
+    [
+     60,
+     0.929
+    ],
+    [
+     70,
+     0.788
+    ],
+    [
+     80,
+     0.912
+    ],
+    [
+     90,
+     0.926
+    ],
+    [
+     100,
+     0.789
+    ],
+    [
+     110,
+     0.889
+    ],
+    [
+     120,
+     0.87
+    ],
+    [
+     130,
+     0.749
+    ]
+   ],
+   "c": {
+    "n_win": 13,
+    "n_gpu": 31,
+    "perf_med": 146.6,
+    "maxfreq_med": 96.5,
+    "util_med": 26.9,
+    "maxfreq_min_proc": 76,
+    "bateria": {
+     "BatteryStatus": 2,
+     "EstimatedChargeRemaining": 100
+    },
+    "schemat": "31b9d370-8fa5-4ab5-a015-8e16560b4b91  (Acer)",
+    "czolowka": [
+     [
+      "powershell",
+      0.14,
+      13
+     ],
+     [
+      "WindowsTerminal",
+      0.11,
+      12
+     ],
+     [
+      "ipf_helper",
+      0.07,
+      13
+     ],
+     [
+      "chrome",
+      0.07,
+      2
+     ],
+     [
+      "uihost",
+      0.04,
+      1
+     ],
+     [
+      "nvcontainer",
+      0.04,
+      1
+     ]
+    ],
+    "gpu_util_med": 27.0,
+    "gpu_temp_med": 55.0,
+    "gpu_power_med": 22.8,
+    "gpu_sm_med": 277.0,
+    "gpu_pstate": [
+     "P4",
+     "P5",
+     "P8"
+    ],
+    "gpu_reasons": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  },
+  {
+   "i": 5,
+   "tag": "B",
+   "t": "13:25:18",
+   "okno120": null,
+   "okno60": 0.8443,
+   "profil10": [
+    [
+     0,
+     0.893
+    ],
+    [
+     10,
+     0.798
+    ],
+    [
+     20,
+     0.873
+    ],
+    [
+     30,
+     0.879
+    ],
+    [
+     40,
+     0.762
+    ],
+    [
+     50,
+     0.876
+    ],
+    [
+     60,
+     0.869
+    ],
+    [
+     70,
+     0.761
+    ]
+   ],
+   "det_p50_ms": 3.905,
+   "cpu": {
+    "jednowatkowa_med_ms": 47.37,
+    "8proc_med_ms": 48.38,
+    "8proc_p90_ms": 52.27
+   },
+   "c": {
+    "n_win": 5,
+    "n_gpu": 11,
+    "perf_med": 150.4,
+    "maxfreq_med": 98,
+    "util_med": 33.2,
+    "maxfreq_min_proc": 86,
+    "bateria": {
+     "BatteryStatus": 2,
+     "EstimatedChargeRemaining": 100
+    },
+    "schemat": "31b9d370-8fa5-4ab5-a015-8e16560b4b91  (Acer)",
+    "czolowka": [
+     [
+      "WindowsTerminal",
+      0.17,
+      5
+     ],
+     [
+      "powershell",
+      0.16,
+      5
+     ],
+     [
+      "ipf_helper",
+      0.07,
+      5
+     ],
+     [
+      "PredatorSense",
+      0.04,
+      3
+     ],
+     [
+      "QuickPanelOSD",
+      0.04,
+      1
+     ],
+     [
+      "codex",
+      0.01,
+      1
+     ]
+    ],
+    "gpu_util_med": 36.0,
+    "gpu_temp_med": 57.0,
+    "gpu_power_med": 21.9,
+    "gpu_sm_med": 277.0,
+    "gpu_pstate": [
+     "P5",
+     "P8"
+    ],
+    "gpu_reasons": [
+     "0x0000000000000000",
+     "0x0000000000000004"
+    ]
+   }
+  }
+ ],
+ "rig_sha_wygenerowany": "c2180a8d2a64a16bd62fca4ba44ef173bd23851147a728c8750d1bae5fd60a74",
+ "rig_sha_odniesienia": "c2180a8d2a64a16bd62fca4ba44ef173bd23851147a728c8750d1bae5fd60a74",
+ "rig_zgodny": true,
+ "windows": {
+  "od": "2026-11-09 10:00",
+  "windows_update_historia": "[{\"Date\":\"2026-11-10T06:19:57\",\"Title\":\"Aktualizacja analizy zabezpieczeń dla Microsoft Defender Antivirus - KB2267602 (Wersja 1.463.220.0) - Bieżący kanał (ogólna dostępność)\",\"ResultCode\":2,\"Operation\":1},{\"Date\":\"2026-11-09T22:35:45\",\"Title\":\"9NRZT3Q9R3DL-Microsoft.WindowsAppRuntime.2\",\"ResultCode\":2,\"Operation\":1},{\"Date\":\"2026-11-09T22:35:45\",\"Title\":\"9NRZT3Q9R3DL-Microsoft.WindowsAppRuntime.2\",\"ResultCode\":2,\"Operation\":1},{\"Date\":\"2026-11-09T22:35:45\",\"Title\":\"9NRZT3Q9R3DL-Microsoft.WindowsAppRuntime.2\",\"ResultCode\":2,\"Operation\":1},{\"Date\":\"2026-11-09T22:35:45\",\"Title\":\"9NRZT3Q9R3DL-Microsoft.WindowsAppRuntime.2\",\"ResultCode\":2,\"Operation\":1},{\"Date\":\"2026-11-09T22:35:45\",\"Title\":\"9NRZT3Q9R3DL-Microsoft.WindowsAppRuntime.2\",\"ResultCode\":2,\"Operation\":1},{\"Date\":\"2026-11-09T22:35:45\",\"Title\":\"9NRZT3Q9R3DL-Microsoft.WindowsAppRuntime.2\",\"ResultCode\":2,\"Operation\":1},{\"Date\":\"2026-11-09T17:32:18\",\"Title\":\"Aktualizacja analizy zabezpieczeń dla Microsoft Defender Antivirus - KB2267602 (Wersja 1.463.212.0) - Bieżący kanał (ogólna dostępność)\",\"ResultCode\":2,\"Operation\":1},{\"Date\":\"2026-11-09T11:57:23\",\"Title\":\"Aktualizacja analizy zabezpieczeń dla Microsoft Defender Antivirus - KB2267602 (Wersja 1.463.207.0) - Bieżący kanał (ogólna dostępność)\",\"ResultCode\":2,\"Operation\":1}]",
+  "hotfix": "",
+  "msi_instalacje": "",
+  "sterownik_gpu": "[{\"Name\":\"Intel(R) Graphics\",\"DriverVersion\":\"32.0.101.6629\",\"DriverDate\":\"2025-02-18T01:00:00\"},{\"Name\":\"NVIDIA GeForce RTX 5070 Ti Laptop GPU\",\"DriverVersion\":\"32.0.15.7713\",\"DriverDate\":\"2025-08-25T02:00:00\"}]",
+  "wsl_version": "Wersja podsystemu WSL: 2.7.10.0\r\nWersja jądra: 6.18.33.2-2\r\nWersja usługi WSLg: 1.0.73.2\r\nWersja MSRDC: 1.2.6676\r\nWersja Direct3D: 1.611.1-81528511\r\nWersja DXCore: 10.0.26100.1-240331-1435.ge-release\r\nWersja systemu Windows: 10.0.26200.9711",
+  "nvidia_smi_driver": "NVIDIA GeForce RTX 5070 Ti Laptop GPU, 577.13"
+ }
+}
