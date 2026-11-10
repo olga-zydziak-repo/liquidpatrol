@@ -17,6 +17,10 @@ selftest/xy_valid, niekompletne epizody) kończy kolejkę tym STOPem (rezerwa wy
 tempa w pierwszym boocie po restarcie WSL (uptime < 3600 s przy starcie kolejki) ⇒ STOP-NADIR4-STANOWISKO; strażniki: zegar,
 sieroty, env-block ×4 (rc 3, nie boot), guard rc 4/5/6 (nie boot), wyjątek analizy ⇒ STOP-NADIR4-ANALIZA (boot zużyty, dane
 zostają). Naruszenie litery (a)–(g) NIE jest STOPem (PROMPT_NADIR_S4 §2: FAIL nogi zapisany, kampania dolatuje siatkę).
+ANEKS_NADIR-4 (po „ratyfikuję N3"): przed każdym bootem bramka zdrowia §3.1 = nadir_s4_bramka.py bramka (przyrząd A, GO ⇔ tempo
+≥ 0.90; NO-GO ⇒ boot nie startuje, nic nie zużyte, po 3 min powtórka w wariancie C; trzecie NO-GO z rzędu ⇒ STOP-NADIR4-STANOWISKO;
+błąd przyrządu ⇒ STOP-NADIR4-BRAMKA); próby w bramka_ksiega.jsonl. W tle każdego bootu telemetria §3.3 (nadir_s4_tel.Telemetria2)
+⇒ <boot>/host_telemetria.jsonl, podsumowanie w wierszu księgi. Bramka tempa w boocie 0.93 bez zmian.
 Użycie: nadir_s4_campaign.py [--sucho]  (--sucho: plan, księga, budżet; 0 bootów). Wyjście: kampania_s4.json, kampania_s4.log.
 """
 import json
@@ -29,6 +33,7 @@ ROOT = "/home/olga/projects/liquidpatrol"
 sys.path[:0] = [os.path.join(ROOT, "results/KONT/tools"), os.path.join(ROOT, "results/NADIR/tools"), ROOT]
 import kont_s4_campaign as K                       # READ-ONLY: stan, zdarzenia (import przestawia G na KONT/s4 — niżej z powrotem)
 import kont_s2_campaign_g as G
+import nadir_s4_tel as TL                          # ANEKS_NADIR-4 §3.3
 
 S4 = os.path.join(ROOT, "results/NADIR/s4")
 G.S2 = S4
@@ -38,7 +43,9 @@ log, zegar, sprzataj_sieroty, shm_krok = G.log, G.zegar, G.sprzataj_sieroty, G.s
 PROFIL = G.PROFIL
 BOOT = os.path.join(ROOT, "results/NADIR/tools/nadir_s4_boot.sh")
 KSIEGA = os.path.join(S4, "kampania_ksiega.jsonl")
-BUDZET, NOGA_PRZED, NOGA_MAX = 19, 11, 30            # 16 + 3 rezerwy = cały luz nogi (sygnał Olgi 10.11 po STOP-NADIR4-STANOWISKO; 18 było wadą rachunku)
+BUDZET, NOGA_PRZED, NOGA_MAX = 24, 11, 35            # ANEKS_NADIR-3 §4.4 po „ratyfikuję N3" (10.11): 16 zużytych w nodze + 15 pozycji + 4 rezerwy; było 19/30
+BRAMKA = os.path.join(ROOT, "results/NADIR/tools/nadir_s4_bramka.py")
+BRAMKA_KSIEGA = os.path.join(S4, "bramka_ksiega.jsonl")
 CIECIA = ["c01_s01", "c01_s03", "c02_s01", "c02_s03", "c05_s01", "c05_s02", "c08_s01", "c08_s02", "c10_s01", "c10_s02",
           "c11_s01", "c11_s02"]
 EPID = lambda sc: (int(sc[5:7]) - 1) * 12 + int(sc[1:3])          # = kont_s4_campaign.EPID
@@ -69,6 +76,44 @@ def wolna_nazwa(nm):
                    for f in zajete):
             return c
         n += 1
+
+
+def bramka_zdrowia(name):
+    """ANEKS_NADIR-4 §3.1: A; NO-GO ⇒ 3 min ⇒ C; trzecie NO-GO z rzędu ⇒ False. Błąd przyrządu (rc 2) ⇒ None."""
+    proby = []
+    for k in range(3):
+        if k:
+            time.sleep(180)
+        tag = f"{name}_g{k + 1}"
+        r = subprocess.run([sys.executable, BRAMKA, "bramka", tag] + (["--tel"] if k else []), cwd=ROOT, capture_output=True, text=True)
+        try:
+            b = json.load(open(os.path.join(S4, "bramka", tag, "bramka.json")))
+        except (OSError, ValueError):
+            b = {}
+        p = {"pozycja_nazwa": name, "tag": tag, "wariant": "C" if k else "A", "rc": r.returncode, "tempo": b.get("tempo"),
+             "czolowka_operatora": b.get("czolowka_operatora"), "t": time.strftime("%F %T")}
+        proby.append(p)
+        with open(BRAMKA_KSIEGA, "a") as f:
+            f.write(json.dumps(p, ensure_ascii=False) + "\n")
+        log(f"{name}: bramka zdrowia {tag} ({p['wariant']}) rc={r.returncode} tempo={p['tempo']}"
+            + (f" — do zamknięcia: GPU {p['czolowka_operatora']['gpu']} CPU {p['czolowka_operatora']['cpu']}" if p["czolowka_operatora"] else ""))
+        if r.returncode == 0:
+            return True, proby
+        if r.returncode != 1:
+            log(f"{name}: bramka zdrowia błąd: {(r.stdout + r.stderr)[-800:]}")
+            return None, proby
+    return False, proby
+
+
+def tel_skrot(tp):
+    try:
+        t = TL.podsumuj(tp)
+    except Exception as ex:
+        return {"blad": repr(ex)}
+    g = t.get("gpu", {})
+    return {"gpu_n": g.get("n"), "pstate": g.get("pstate_udzial"), "sm_med": g.get("sm_med"), "moc_med": g.get("moc_med"),
+            "flaga_0x4": g.get("flaga_0x4_udzial"), "gpuproc": t.get("gpuproc", {}).get("czolowka"), "win": t.get("win", {}).get("czolowka"),
+            "kadencja_win_s": t.get("win", {}).get("kadencja_med_s")}
 
 
 def wpis_manifest(d, wpis):
@@ -107,6 +152,14 @@ def main():
                 break
             nm, epids, inj = kolejka[0]
             name = wolna_nazwa(nm)
+            go, proby = bramka_zdrowia(name)
+            if go is None:
+                stop = "STOP-NADIR4-BRAMKA"
+                break
+            if not go:
+                stop = "STOP-NADIR4-STANOWISKO"
+                log(f"ALARM {stop}: {name} — trzecie NO-GO bramki zdrowia z rzędu (§3.1), boot nie startował, nic nie zużyte")
+                break
             ok, z = zegar(name)
             log(f"{name}: próbnik {z['skoki']} skoków ok={ok}")
             if not ok:
@@ -119,17 +172,22 @@ def main():
                 stop = "STOP-NADIR4-SIEROTY"
                 break
             shm = shm_krok(name, False)
-            for _ in range(4):
-                r = subprocess.run(["bash", BOOT, str(NOGA_PRZED + booty + 1), name, epids, inj], cwd=ROOT, env=env,
-                                   capture_output=True, text=True)
-                open(os.path.join(S4, f"{name}_driver.log"), "a").write(r.stdout + r.stderr)
-                if r.returncode != 3:
+            tp = os.path.join(S4, f"{name}_host_telemetria.jsonl")
+            tl = TL.Telemetria2(tp, 3600)
+            try:
+                for _ in range(4):
+                    r = subprocess.run(["bash", BOOT, str(NOGA_PRZED + booty + 1), name, epids, inj], cwd=ROOT, env=env,
+                                       capture_output=True, text=True)
+                    open(os.path.join(S4, f"{name}_driver.log"), "a").write(r.stdout + r.stderr)
+                    if r.returncode != 3:
+                        break
+                    log(f"{name}: env-block rc=3, nie boot, czekam 120 s")
+                    time.sleep(120)
+                else:
+                    stop = "STOP-NADIR4-ENV"
                     break
-                log(f"{name}: env-block rc=3, nie boot, czekam 120 s")
-                time.sleep(120)
-            else:
-                stop = "STOP-NADIR4-ENV"
-                break
+            finally:
+                tl.close()
             if r.returncode in (4, 5, 6):
                 stop = "STOP-NADIR4-GUARD"
                 log(f"ALARM {stop}: {name} rc={r.returncode}, stos nie ruszył, nie boot")
@@ -137,6 +195,9 @@ def main():
             booty += 1
             kolejka.pop(0)
             d = os.path.join(S4, name)
+            if os.path.isdir(d):
+                os.replace(tp, os.path.join(d, "host_telemetria.jsonl"))
+                tp = os.path.join(d, "host_telemetria.jsonl")
             s, e = K.stan(d), K.zdarzenia(d)
             try:
                 kt = json.load(open(os.path.join(d, "kont_tempo.json")))
@@ -168,7 +229,7 @@ def main():
             wpis = {"boot_s4": booty, "boot_noga": NOGA_PRZED + booty, "pozycja": nm, "nazwa": name, "epizody": epids, "inject_t": inj,
                     "rc": r.returncode, "tempo": kt, "wazny": niewazny is None, "niewazny": niewazny, "litera": lit,
                     "litera_ok": (an or {}).get("litera_ok"), "breach": e["breach"], "refuse_pos_nominal": e["refuse_pos_nominal"],
-                    "shm": shm, "sieroty_term": {str(k): v for k, v in znal.items()}, "t": time.strftime("%F %T")}
+                    "shm": shm, "bramka_zdrowia": proby, "tel": tel_skrot(tp), "sieroty_term": {str(k): v for k, v in znal.items()}, "t": time.strftime("%F %T")}
             with open(KSIEGA, "a") as f:
                 f.write(json.dumps(wpis, ensure_ascii=False) + "\n")
             wpis_manifest(d, wpis)

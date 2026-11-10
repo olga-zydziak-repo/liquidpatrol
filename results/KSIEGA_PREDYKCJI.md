@@ -861,3 +861,5 @@ CLOSED-BY-RECON (0 bootów)
   w narzędziu); odniesienie i bramka muszą pochodzić z tego samego
   przyrządu; tempo programu liczone jest zegarem gościa, który chodzi
   ~3–4% wolniej od czasu rzeczywistego.
+- Zmiana PRE (sygnał „ratyfikuję N3", ANEKS_NADIR-3 §4.4): limit nogi
+  30 → 35, limit S4 19 → 24.
