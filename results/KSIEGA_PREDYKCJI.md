@@ -814,3 +814,23 @@ CLOSED-BY-RECON (0 bootów)
   zablokował start od słowa w linii poleceń (0 bootów). Dwa booty
   przerwane bramką tempa przed uzbrojeniem (0.910/0.925) — remedium
   operatora (restart WSL) skuteczne, wzór 4e.
+
+## NADIR S4 — stanowisko (ANEKS_NADIR-3, 10.11.2026)
+- S4: 5 bootów zużytych, 1 ważny (nominał); 4 przerwane bramką tempa
+  przed uzbrojeniem (0.928 / 0.734 / 0.740 / 0.781). W nodze 7 z 16
+  bootów spłonęło przed uzbrojeniem — zero informacji o tezie.
+- Znalezisko CC z danych: tempo ↔ czas wnioskowania detektora
+  r = 0.994 (15 bootów), ArUco na CPU +20% ⇒ wspólny, skokowy czynnik
+  prędkości maszyny ~0.75–0.81. Pozycja c01_s01 wykluczona (leciała
+  w nominale przy 0.956; „3/3" to artefakt kolejki ponowień). Termika
+  wykluczona dla wieczoru (9 min płasko; przełączenie w bezczynnej
+  przerwie 13–19 min po ostatnim sygnale operatora).
+- ✗ CC ×2: (i) zatwierdzona kontrola „goły gz" (wzór 4e/f) nie jest
+  związana obliczeniowo — ślepa na spowolnienie maszyny; (ii) grant
+  „+2" przyjęty bez przeliczenia 11 + 16 = 27.
+- Wykonawca: zbieżność z pozycją nazwana jako nierozstrzygnięta
+  zamiast ogłoszona mechanizmem — dobra praktyka; luz nogi policzony
+  2 zamiast 3 (nazwane w STOP-STANOWISKO).
+- Lekcje: kontrola stanowiska musi być związana obliczeniowo; bramka
+  zdrowia należy przed bootem, nie w nim; „ta sama pozycja" przy
+  kolejce z ponowieniami nie niesie informacji o pozycji.
