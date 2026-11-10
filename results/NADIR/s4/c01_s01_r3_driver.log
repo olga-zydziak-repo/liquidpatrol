@@ -1,0 +1,8 @@
+[kont c01_s01_r3] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont c01_s01_r3 07:26:31] cooldown 0s
+[kont c01_s01_r3 07:28:22] SUSTAINED CLEAN
+[kont c01_s01_r3] kont_boot pid=2359
+[kont c01_s01_r3 07:28:47] initial absolute time 7420000 us faza_ok=1
+[kont c01_s01_r3 07:29:28] sonda rc_FROZEN=0 podloga10Hz=1
+[kont c01_s01_r3 07:30:44] DONE rc=9 sonda=0
+/home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s4_boot.sh: line 118:  3052 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1

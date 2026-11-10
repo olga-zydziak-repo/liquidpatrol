@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        2365 15.1  0.0 330892 14136 ?        Sl   07:28   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        1120  4.1  1.2 5709016 392164 pts/0  Sl+  07:20   0:20 claude --continue
+olga        2358  3.0  0.0  16948 11108 ?        S    07:28   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/NADIR/s4/c01_s01_r3/zegar2.jsonl
+root         364  0.2  0.3 11429592 108748 ?     Ssl  07:19   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         243  0.2  0.2 3290204 70828 ?       Ssl  07:19   0:01 /usr/bin/containerd
+olga        2280  0.1  0.0 1341172 7000 ?        S    07:27   0:00 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl --line-buffered -E rc=|ALARM|KONIEC|tempo|TEMPO|bramk|uzbro|ARM|DONE|Traceback|Error|brudny
+olga        1953  0.1  0.4 479112 132196 ?       SL   07:25   0:00 python3 results/NADIR/tools/nadir_s4_campaign.py
+root           1  0.0  0.0  21876 13232 ?        Ss   07:19   0:00 /sbin/init
+root          40  0.0  0.0  66868 17676 ?        S<s  07:19   0:00 /usr/lib/systemd/systemd-journald
+root         944  0.0  0.0   3200  1252 ?        S    07:19   0:00 /init
+root          86  0.0  0.0  26144  7200 ?        Ss   07:19   0:00 /usr/lib/systemd/systemd-udevd
+root         259  0.0  0.0 107064 23276 ?        Ssl  07:19   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+olga         990  0.0  0.0  20392 11600 ?        Ss   07:19   0:00 /usr/lib/systemd/systemd --user
+root         206  0.0  0.0 1830368 13980 ?       Ssl  07:19   0:00 /usr/libexec/wsl-pro-service
+polkitd      200  0.0  0.0 308188  8184 ?        Ssl  07:19   0:00 /usr/lib/polkit-1/polkitd --no-debug
+systemd+     182  0.0  0.0  21352 13184 ?        Ss   07:19   0:00 /usr/lib/systemd/systemd-resolved
+syslog       213  0.0  0.0 222524  5996 ?        Ssl  07:19   0:00 /usr/sbin/rsyslogd -n -iNONE
+avahi        193  0.0  0.0   8712  4764 ?        Ss   07:19   0:00 avahi-daemon: running [LAPTOP-T1VG9G41-2.local]
+root         204  0.0  0.0  17988  8884 ?        Ss   07:19   0:00 /usr/lib/systemd/systemd-logind
