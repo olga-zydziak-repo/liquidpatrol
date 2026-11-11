@@ -1,0 +1,38 @@
+{
+  "property": "P1_nad2",
+  "verdict": "PROVED",
+  "method": "1-induction (z3) + NRA (nom_applied) + wyłączność/wyczerpanie liści (model = p9_kont_verify._p1_model)",
+  "z3_lib": "5.0.0",
+  "obligations": {
+    "base": "unsat",
+    "inv_step": "unsat",
+    "P1a": "unsat",
+    "P1b": "unsat",
+    "P1c": "unsat",
+    "P1d": "unsat",
+    "P1e": "unsat",
+    "P1f": "unsat",
+    "P1g": "unsat",
+    "P1h": "unsat",
+    "P1i_kont_refuse_pos_reversible": "unsat",
+    "P1j_kref_sticky": "unsat",
+    "P1k_exit_only_by_monitor": "unsat",
+    "P1l_rgnom_nonlatch_state_kept": "unsat",
+    "P1m_order_pos_kont_over_geo_over_nom": "unsat",
+    "P1o_abort_hold_return_over_nom": "unsat",
+    "P1n_kont_allow_needs_no_violation": "unsat",
+    "nom_applied_no_outward_tangent_kept": "unsat",
+    "P1p_leaves_exclusive": "unsat",
+    "P1p_leaves_exhaustive": "unsat"
+  },
+  "leaves": 11,
+  "automaton": "r03/nadir_shield.py:NadirShield (NADIR_MODE=1, nad2) — _decide = KontShield._decide (nietknięty); latch > R-POS > R-KONT(tabela U) > R-G > abort > hold > return > R-G-NOM > {OBSERVE∧auth | R-AUTH} > patrol; kviol = τ ≥ τ* − 2·dt ∨ przedział poza tabelą ∨ r_est(rama wybrana) > R(przedział, koszyk, tryb)",
+  "model_source": {
+    "file": "r01/proofs/p9_kont_verify.py:_p1_model/prove_p1 (READ-ONLY)",
+    "sha256": "9d048fb9dead0bafa46e78c3ed2507a66e7fa9109f288f03a0853512708563d0"
+  },
+  "assumptions": [
+    "geo/pos_bad/kflag/kviol/nom = predykaty liczone w kodzie w ramie wybranej; arytmetyka tabeli = P9_nad2, monitor + zegar τ = P7_nad2, zgodność kod↔model = P5_nad2 (tau_bind na fiksturze S4 i fuzzie)."
+  ],
+  "model_sha256": "fb9ade23d4db47932073ce1d52697faa3821d9c8ae226d0668bd9fe306b55174"
+}
