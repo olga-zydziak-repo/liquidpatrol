@@ -1,0 +1,44 @@
+{
+  "run_id": "envblock-b5",
+  "arm": "E",
+  "point": 0.0,
+  "boot_n": 5,
+  "kind": "env-block",
+  "rc": 0,
+  "finalize_rc": 0,
+  "crash_reason": null,
+  "ts": 1794439433.3035207,
+  "run_valid": null,
+  "reason": "proc_gate: cudzy proces >2% CPU lub loadavg>1.5 (§3)",
+  "nad2_s2": {
+    "manifest_scenariuszy": "results/NADIR/s4/scenario_manifest_s4.json",
+    "NADIR_MODE": "1",
+    "KONT_MODE": "1",
+    "passthrough": "0",
+    "litera": "NAD2"
+  },
+  "kont_s4": {
+    "boot": 5,
+    "epizody": "25",
+    "inject_t": "30",
+    "offset": null,
+    "sonda_rc_frozen": 9,
+    "podloga_10hz_ok": 0,
+    "uzbrojony": false,
+    "sonda": null,
+    "echo": null,
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profil_sha16": "a68a450b91c2ab51"
+  },
+  "kont_s2d": {
+    "aneks": "ANEKS_KONT-1c §3",
+    "initial_absolute_time_us": null,
+    "faza_ok": false,
+    "dolaczenie": null
+  },
+  "zegar": {
+    "timesyncd": "inactive",
+    "clocksource": "tsc",
+    "aneks": "ANEKS_SKAN2-0b §2.2"
+  }
+}

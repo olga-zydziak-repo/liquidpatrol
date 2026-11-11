@@ -1,0 +1,18 @@
+[kampania 23:41:43] === NAD2 S3 start: księga 0 bootów, ważne []; kolejka ['nom_b1', 'c01_s01', 'c01_s03', 'c02_s01', 'c02_s03', 'c05_s01', 'c05_s02', 'c08_s01', 'c08_s02', 'c10_s01', 'c10_s02', 'c11_s01', 'c11_s02', 'nom_b2', 'nom_b3', 'nom_b4']; budżet 0/19, noga 2/22
+0 {'tag': 'A5', 'dsim_dwall': 0.9229, 'n_probek_okna': 1452, 'cofniecia': 0, 'loadavg1_po': 2.81, 'hz': {'imager': 14.08, 'flow': 46.46, 'nadir': 4.65}, 'nadir_klatki_z_id': 651}
+[kampania 23:44:19] nom_b1: bramka zdrowia nom_b1_g1 (A) GO=True tempo=0.9229
+[kampania 23:45:19] nom_b1: próbnik 0 skoków ok=True
+[kampania 23:56:02] nom_b1: wyciąg ULG {'plik': '/home/olga/projects/liquidpatrol/results/NAD2/s3/nom_b1/ulg.jsonl.gz', 'MB': 2.8, 'n': {'estimator_aid_src_optical_flow': 8993, 'estimator_optical_flow_vel': 8993, 'estimator_status_flags': 407, 'vehicle_angular_velocity': 17963, 'vehicle_attitude': 89924, 'vehicle_local_position': 44962, 'vehicle_status': 715}, 'okno': [138.34, 498.06]}
+[kampania 23:56:03] nom_b1 rc=0 boot 1/19 (noga 3/22): tempo=0.9643 ważny=True (None) epizody=[{'episode_id': 0, 'scenario_id': 'c00_s01', 'bezpieczenstwo_ok': True, 'D1': None, 'B1': True, 'B2': True, 'B3': True, 'B4': True, 'B5': True}, {'episode_id': 1, 'scenario_id': 'c01_s01', 'bezpieczenstwo_ok': True, 'D1': None, 'B1': True, 'B2': True, 'B3': True, 'B4': True, 'B5': True}, {'episode_id': 2, 'scenario_id': 'c02_s01', 'bezpieczenstwo_ok': True, 'D1': None, 'B1': True, 'B2': True, 'B3': True, 'B4': True, 'B5': True}, {'episode_id': 3, 'scenario_id': 'c03_s01', 'bezpieczenstwo_ok': True, 'D1': None, 'B1': True, 'B2': True, 'B3': True, 'B4': True, 'B5': True}] sprawdziany={'s1': True, 's2': True, 's3': True} breach=False REFUSE(POS) fałszywe=0/0
+0 {'tag': 'A5', 'dsim_dwall': 0.9315, 'n_probek_okna': 1449, 'cofniecia': 0, 'loadavg1_po': 2.15, 'hz': {'imager': 14.29, 'flow': 47.14, 'nadir': 4.72}, 'nadir_klatki_z_id': 661}
+[kampania 23:58:38] c01_s01: bramka zdrowia c01_s01_g1 (A) GO=True tempo=0.9315
+[kampania 23:59:38] c01_s01: próbnik 0 skoków ok=True
+[kampania 00:08:07] c01_s01: wyciąg ULG {'plik': '/home/olga/projects/liquidpatrol/results/NAD2/s3/c01_s01/ulg.jsonl.gz', 'MB': 1.25, 'n': {'estimator_aid_src_optical_flow': 3983, 'estimator_optical_flow_vel': 3983, 'estimator_status_flags': 183, 'vehicle_angular_velocity': 7940, 'vehicle_attitude': 39825, 'vehicle_local_position': 19913, 'vehicle_status': 320}, 'okno': [139.26, 298.56]}
+[kampania 00:08:07] c01_s01 rc=0 boot 2/19 (noga 4/22): tempo=0.9628 ważny=True (None) epizody=[{'episode_id': 1, 'scenario_id': 'c01_s01', 'bezpieczenstwo_ok': True, 'D1': {'dostepne': True, 'kontynuacja_od_t_inj_s': 110.548, 'frac_track': 1.0, 'frac_pasmo': 1.0, 'refuse_misja': 0}, 'B1': True, 'B2': True, 'B3': True, 'B4': True}] sprawdziany={'s1': True, 's2': True, 's3': True} breach=False REFUSE(POS) fałszywe=0/0
+0 {'tag': 'A5', 'dsim_dwall': 0.9114, 'n_probek_okna': 1448, 'cofniecia': 0, 'loadavg1_po': 3.17, 'hz': {'imager': 14.01, 'flow': 46.24, 'nadir': 4.63}, 'nadir_klatki_z_id': 648}
+[kampania 00:10:42] c01_s03: bramka zdrowia c01_s03_g1 (A) GO=True tempo=0.9114
+[kampania 00:11:42] c01_s03: próbnik 0 skoków ok=True
+[kampania 00:24:05] c01_s03: env-block rc=3, nie boot, czekam 120 s
+[kampania 00:26:05] ALARM STOP-NAD2-3-GUARD: c01_s03 rc=4, stos nie ruszył, nie boot
+[kampania 00:26:05] KONIEC booty=2/19 noga=4/22 stop=STOP-NAD2-3-GUARD pozostało=['c01_s03', 'c02_s01', 'c02_s03', 'c05_s01', 'c05_s02', 'c08_s01', 'c08_s02', 'c10_s01', 'c10_s02', 'c11_s01', 'c11_s02', 'nom_b2', 'nom_b3', 'nom_b4']
+KONIEC 2 STOP-NAD2-3-GUARD
