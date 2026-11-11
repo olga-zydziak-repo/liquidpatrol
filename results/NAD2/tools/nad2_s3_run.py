@@ -20,6 +20,7 @@ Po każdym boocie: wyciąg ULG (nad2_ulg), analizator (nad2_analyze: B1–B5, D1
 100% ⇒ STOP-NAD2-3-PRZYRZAD). STOPy globalne verbatim: breach ⇒ STOP; REFUSE(POS) fałszywy ⇒ STOP; budżet ⇒ STOP (breach =
 zdarzenie breach drivera albo B2 margines ≤ 0; REFUSE(POS) fałszywy = przed cięciem / w nominale, z trace albo analizatora).
 Naruszenie litery B1–B5 / D1 nie jest STOPem: zapis, kampania dolatuje siatkę.
+Po STOP-NAD2-3-GUARD (decyzja Olgi 12.11): env-block (rc 3, nie boot) ⇒ kolejna próba pod wolną nazwą (stub launchera zostaje), ≤ 4.
 Użycie: nad2_s3_run.py [--sucho]   (--sucho: plan i stan księgi, 0 bootów). Wyjście: kampania_s3.log, kampania_s3.json.
 """
 import json
@@ -171,7 +172,10 @@ def main():
             tl = TL.Telemetria2(tp, 3600)
             t0 = time.time()
             try:
-                for _ in range(4):
+                for k in range(4):
+                    if k:                              # env-block launchera zostawia stub manifestu ⇒ wolna nazwa (STOP-NAD2-3-GUARD)
+                        name = wolna_nazwa(nm)
+                        log(f"{nm}: po env-blocku próba {k + 1} pod nazwą {name}")
                     n0 = os.path.getsize(MON_S2) if os.path.exists(MON_S2) else 0
                     r = subprocess.run(["bash", BOOT, str(NOGA_PRZED + booty + 1), f"../s3/{name}", epids, inj], cwd=ROOT, env=env,
                                        capture_output=True, text=True)
