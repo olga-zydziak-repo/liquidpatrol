@@ -1,0 +1,149 @@
+{
+ "czesc1": {
+  "NAD2": {
+   "rc": 0,
+   "wynik": {
+    "wynik": "zatrzymane: uzbrojenie",
+    "kroki": [
+     "connect",
+     "arm_retry"
+    ]
+   },
+   "nad2_selfcheck_pass": true,
+   "odmowa_litera": false,
+   "odmowa_nadir0": false,
+   "ogon": "0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.7}, 'ok': True}\n[bench] yaw_assert sim=124.20 {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'ok': True, 'n_reinit': 1}\nWYNIK {\"wynik\": \"zatrzymane: uzbrojenie\", \"kroki\": [\"connect\", \"arm_retry\"]}\n"
+  },
+  "bez_litery": {
+   "rc": 8,
+   "wynik": null,
+   "nad2_selfcheck_pass": false,
+   "odmowa_litera": true,
+   "odmowa_nadir0": false,
+   "ogon": " reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 30.0, 'bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.6}, 'ok': True}\n[nad2] NADIR_LITERA != NAD2 — ODMOWA\n"
+  },
+  "nadir0_bez_passthrough": {
+   "rc": 8,
+   "wynik": null,
+   "nad2_selfcheck_pass": false,
+   "odmowa_litera": false,
+   "odmowa_nadir0": true,
+   "ogon": "t_s4] reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 30.0, 'bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.6}, 'ok': True}\n[nad2] NADIR_MODE != 1 — ODMOWA\n"
+  },
+  "PASS": true,
+  "meta_nad2": null
+ },
+ "czesc2": {
+  "NAD2_NAD2": true,
+  "datagram_NADIR1": true,
+  "meta_bez_litery": true,
+  "brak_datagramow": true,
+  "PASS": true
+ },
+ "czesc3": {
+  "nad2_boot.sh": {
+   "ostrzezenia": 2,
+   "w_oryginale": 2,
+   "nowe": [],
+   "root_absolutny": true,
+   "pipefail": true,
+   "bash_n": true,
+   "PASS": true
+  },
+  "nad2_launch.sh": {
+   "ostrzezenia": 6,
+   "w_oryginale": 6,
+   "nowe": [],
+   "root_absolutny": true,
+   "pipefail": true,
+   "bash_n": true,
+   "PASS": true
+  },
+  "straznik_trybow": {
+   "1/1/0/NADIR1": {
+    "rc": 5,
+    "odmowa": true
+   },
+   "1/1/1/NAD2": {
+    "rc": 5,
+    "odmowa": true
+   },
+   "0/0/1/NAD2": {
+    "rc": 5,
+    "odmowa": true
+   },
+   "1/0/0/NAD2": {
+    "rc": 5,
+    "odmowa": true
+   },
+   "///": {
+    "rc": 5,
+    "odmowa": true
+   },
+   "PASS": true
+  },
+  "kolejka_sucho": {
+   "rc": 0,
+   "plan": [
+    "P",
+    "C"
+   ],
+   "PASS": true
+  },
+  "PASS": true
+ },
+ "czesc4": {
+  "ulg": {
+   "MB": 1.28,
+   "okno": [
+    138.14,
+    298.8
+   ]
+  },
+  "analizator": {
+   "B1": true,
+   "B2": true,
+   "B3": true,
+   "B4": true,
+   "D1": true,
+   "max_e_do_U": 0.3066,
+   "zapas_bariery_min": 1.7063
+  },
+  "sprawdziany": {
+   "s1": true,
+   "s2": true,
+   "s3": true
+  },
+  "sprawdziany_liczby": {
+   "s1": {
+    "klatki": 1498,
+    "zgodne": 1498,
+    "max_dp_fix_m": 0.0,
+    "poprawki_bez_trybu_lub_litery": 0,
+    "ok": true
+   },
+   "s2": {
+    "ticki_utraty": 2347,
+    "R_k_niezgodne": 0,
+    "poprawki_w_obs": 782,
+    "poprawki_bez_trybu_lub_litery": 0,
+    "ok": true
+   },
+   "s3": {
+    "ticki_utraty": 2495,
+    "zle_utrata": 0,
+    "ticki_nominal": 760,
+    "zle_nominal": 0,
+    "pierwszy_tick_utraty": {
+     "tick": 760,
+     "sim": 175.98,
+     "rama": "corr"
+    },
+    "ok": true
+   }
+  },
+  "negatyw_stara_sciezka_s3": false,
+  "PASS": true
+ },
+ "PASS": true
+}

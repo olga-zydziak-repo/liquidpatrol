@@ -18,6 +18,7 @@ po detekcji harness/nadir_fix.Rama.obserwacja(sim, det, migawka EKF) i datagram 
 PROMPT_NADIR_S2 §1.6 (wada S1: brak summary — proces nie doszedł do ścieżki zamknięcia w 4 s przed SIGKILL): summary
 zapisywany atomowo co 15 s z wątku roboczego (przeżywa SIGKILL), końcowy w handlerze SIGTERM; faulthandler zrzuca stosy
 wątków na stderr przy SIGTERM (diagnoza zawieszenia).
+PROMPT_NAD2_S2 §1.1: przy NADIR_MODE=1 meta niesie literę producenta ramy (env NADIR_LITERA, harness/nadir_fix.Rama).
 Użycie: nadir_obs.py --world W --model M --out plik.jsonl
 """
 import argparse
@@ -186,8 +187,11 @@ def main():
         _ekf["hdg"] = round(float(m.heading), 5)
         _ekf["pos_mono"] = time.monotonic()
 
-    fout.write(json.dumps({"t": "meta", "topic": TOPIC, "opencv": cv2.__version__, "slownik": "DICT_4X4_50", "flip": FLIP,
-                           "mono": round(time.monotonic(), 4)}) + "\n")
+    _meta = {"t": "meta", "topic": TOPIC, "opencv": cv2.__version__, "slownik": "DICT_4X4_50", "flip": FLIP,
+             "mono": round(time.monotonic(), 4)}
+    if NADIR_MODE:                                             # PROMPT_NAD2_S2 §1.1: litera producenta ramy w meta
+        _meta["litera"] = _rama.litera
+    fout.write(json.dumps(_meta) + "\n")
     th = threading.Thread(target=worker, daemon=True)
     th.start()
     gn = GzNode()

@@ -10,6 +10,8 @@ results/NADIR/tools/nadir_s4_flight.py (nietknięty) ze zmianami oznaczonymi „
     zdarzenie „breach” z estymaty liczone z r_est ramy wybranej (w utracie EKF dryfuje do 8.5 m — S4), breach_gt bez zmian;
     applied decyzji już w ramie EKF (osłona przelicza); datagram ramy niesie tryb (RamaKlient.tryb → tabela U);
   - kontynuacja od t_inj_sim z nastawą T_CONT_S = 110.5 s (ANEKS_NADIR-5 §2.2, PRE_NAD2 §5);
+  - przed pierwszym epizodem zgodność litery producenta ramy (meta nadir_obs.jsonl i datagram) z osłoną NAD2, inaczej kod 8
+    (PROMPT_NAD2_S2 §1.1);
   - selfcheck certów + results/NAD2/tools/nad2_certs_selfcheck.py (P*_nad2 ↔ prover, tabela U ↔ freeze_U.json);
   - log: tk + rama dostają d["nad2"] (rama, przedział, tryb, r_est osłony, d_ne) i tryb ramy; meta: nad2 (stałe tabeli, sha
     tabeli/PRE/ANEKS, sha drivera, osłony, kroku). Nagłówek oryginału:
@@ -544,6 +546,23 @@ async def main():
             await asyncio.sleep(DT)
         return False
 
+    if rama is not None and shield.nad2:                              # NAD2: zgodność litery producent ramy ↔ osłona (S2 §1.1)
+        _lit, _tl0, _meta_lit = None, time.monotonic(), None
+        while time.monotonic() - _tl0 < 30.0 and _lit is None:
+            rama.drain()
+            for _m in rama.nowe:                                       # podgląd bez zdejmowania (log ramy dostaje je w 1. ticku)
+                if _m.get("powod") != "brak_ekf":
+                    _lit = _m.get("litera", "NADIR1")
+            await asyncio.sleep(0.2)
+        try:
+            with open(os.path.join(OUTDIR, "nadir_obs.jsonl")) as _fo:
+                _meta_lit = json.loads(_fo.readline()).get("litera")
+        except (OSError, ValueError):
+            _meta_lit = None
+        ev("nad2_litera", datagram=_lit, meta_producenta=_meta_lit, oslona="NAD2")
+        if _lit != "NAD2" or _meta_lit != "NAD2":
+            print(f"[nad2] LITERA producenta datagram={_lit} meta={_meta_lit} ≠ osłona NAD2 — ODMOWA", flush=True)
+            _f.flush(); os._exit(8)
     for ep in episodes:
         ctrl = make_controller(CONTROLLER, params=exec_params, orbit_dir=ep["orbit_dir"],
                                vmax=V_MAX, home_ned=(0.0, 0.0, HOME_Z))     # S4: R-2
