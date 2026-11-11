@@ -8,3 +8,19 @@
 [nad2 dryrun_guard] GUARD: tryby NM=0 KM=0 PT=1 LIT=NAD2 poza dopuszczonymi (1/1/0/NAD2 albo 0/0/1/NADIR1)
 [nad2 dryrun_guard] GUARD: tryby NM=1 KM=0 PT=0 LIT=NAD2 poza dopuszczonymi (1/1/0/NAD2 albo 0/0/1/NADIR1)
 [nad2 dryrun_guard] GUARD: tryby NM= KM= PT= LIT= poza dopuszczonymi (1/1/0/NAD2 albo 0/0/1/NADIR1)
+[kont p_passthrough] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont p_passthrough 20:22:54] cooldown 0s
+[kont p_passthrough 20:24:09] SUSTAINED CLEAN
+[kont p_passthrough] kont_boot pid=16284
+[kont p_passthrough 20:24:37] initial absolute time 7412000 us faza_ok=1
+{"label": "preflight_p_passthrough", "feed": "/home/olga/projects/liquidpatrol/results/NAD2/s2/p_passthrough/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 472, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 14.71, "span_sim_s": 33.5, "werdykt": "PASS"}
+[kont p_passthrough 20:25:18] sonda rc_FROZEN=0 podloga10Hz=1
+[kont p_passthrough 20:33:14] DONE rc=0 sonda=0
+[kont c11_s02] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont c11_s02 20:36:50] cooldown 84s
+[kont c11_s02 20:39:30] SUSTAINED CLEAN
+[kont c11_s02] kont_boot pid=18294
+[kont c11_s02 20:39:56] initial absolute time 7408000 us faza_ok=1
+{"label": "preflight_c11_s02", "feed": "/home/olga/projects/liquidpatrol/results/NAD2/s2/c11_s02/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 482, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0021, "hz_p50": 14.71, "span_sim_s": 33.2, "werdykt": "PASS"}
+[kont c11_s02 20:40:36] sonda rc_FROZEN=0 podloga10Hz=1
+[kont c11_s02 20:45:22] DONE rc=0 sonda=0

@@ -1,0 +1,107 @@
+{
+ "przebiegi": [
+  {
+   "booty": 2,
+   "stop": null,
+   "wyniki": {
+    "p_passthrough": {
+     "boot_s2": 1,
+     "lot": "P",
+     "nazwa": "p_passthrough",
+     "rc": 0,
+     "czas_s": 621.3,
+     "tempo": {
+      "aneks": "ANEKS_KONT-4d §1.3",
+      "dsim_dwall_settle": 0.967,
+      "okno_wall_s": 59.95,
+      "n": 730,
+      "prog": 0.93,
+      "zrodlo": "rtf_stream.jsonl",
+      "ok": true
+     },
+     "bramka_tempa": false,
+     "bramka_zdrowia": [
+      {
+       "tag": "p_passthrough_g1",
+       "wariant": "A",
+       "tempo": 0.9323,
+       "GO": true,
+       "czolowka_operatora": null,
+       "t": "2026-11-11 20:21:54"
+      }
+     ],
+     "shm": {
+      "sprzatanie": false,
+      "plikow_przed": 0,
+      "plikow_po": 0,
+      "trzymane_przed": {},
+      "stan": "shm_p_passthrough.txt"
+     },
+     "breach": false,
+     "nad2_litera": null,
+     "t": "2026-11-11 20:33:15",
+     "passthrough": {
+      "ticki": 6405,
+      "roznice": 0,
+      "kont_mode": false,
+      "nadir_mode": false,
+      "cien": "PatrolShield"
+     },
+     "passthrough_ok": true
+    },
+    "c11_s02": {
+     "boot_s2": 2,
+     "lot": "C",
+     "nazwa": "c11_s02",
+     "rc": 0,
+     "czas_s": 513.1,
+     "tempo": {
+      "aneks": "ANEKS_KONT-4d §1.3",
+      "dsim_dwall_settle": 0.9652,
+      "okno_wall_s": 60.0,
+      "n": 730,
+      "prog": 0.93,
+      "zrodlo": "rtf_stream.jsonl",
+      "ok": true
+     },
+     "bramka_tempa": false,
+     "bramka_zdrowia": [
+      {
+       "tag": "c11_s02_g1",
+       "wariant": "A",
+       "tempo": 0.9249,
+       "GO": true,
+       "czolowka_operatora": null,
+       "t": "2026-11-11 20:35:50"
+      }
+     ],
+     "shm": {
+      "sprzatanie": false,
+      "plikow_przed": 17,
+      "plikow_po": 17,
+      "trzymane_przed": {},
+      "stan": "shm_c11_s02.txt"
+     },
+     "breach": false,
+     "nad2_litera": {
+      "t": "event",
+      "mono": 22633.0212,
+      "sim": 140.16,
+      "ev": "nad2_litera",
+      "datagram": "NAD2",
+      "meta_producenta": "NAD2",
+      "oslona": "NAD2"
+     },
+     "t": "2026-11-11 20:45:23",
+     "analiza_bezpieczenstwo_ok": true,
+     "sprawdziany": {
+      "s1": true,
+      "s2": true,
+      "s3": true
+     }
+    }
+   },
+   "pozostalo": []
+  }
+ ]
+}
