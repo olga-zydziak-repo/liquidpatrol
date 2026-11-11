@@ -937,3 +937,24 @@ CLOSED-BY-RECON (0 bootów)
   przesłanki dostaje kryterium w literze; obwiednia niemonotoniczna
   tam, gdzie fizyka jest monotoniczna, to sygnał za małej próby;
   litera przyjęcia obserwacji wymaga rachunku pokrycia.
+
+## NADIR-II — recon S0 (PROMPT_NAD2_S0, 11.11.2026)
+- Recon otwarty sygnałem Olgi 11.11 („ja bym to cisnęła dalej");
+  0 bootów, loty dopiero po PRE_NAD2 i ratyfikacji. Śmierć kierunku
+  i reguła wyboru wariantu prerejestrowane w PROMPT_NAD2_S0 §2;
+  bezpieczeństwo (przesłanka) i dostępność (brak odmowy) liczone
+  osobno — dopuszczalna utrata dostępności tylko w dwóch
+  najwęższych komórkach.
+- Znalezisko CC po ANEKS_NADIR-5 (do potwierdzenia w R1): obserwator
+  bierze próbkę EKF przy przybyciu klatki, nie w t_frame — p_corr
+  spóźnia się wobec prawdy o ok. 0.09 s lotu (średnio 0.19 m wzdłuż
+  toru). Zdanie z ANEKS_NADIR-5 §1.5 „dane w repo parowania nie
+  rozstrzygają" stoi do R1; kandydat rozstrzygnięcia: fizyczne jest
+  parowanie z przesunięciem (max 0.73 m, 40 ticków).
+- P-NAD2-R1 (0.75): R1 potwierdzi opóźnienie klatki 0.07–0.14 s.
+- P-NAD2-R2 (0.80): kierunek przeżywa recon (istnieje para wariant
+  × reguła bez Ś1 i Ś2).
+- P-NAD2-R3 (0.65): przeżywa już przy regule A.
+- P-NAD2-R4 (0.35): istnieje para z 12/12 komórek dostępnych.
+- P-NAD2-R5 (0.55): T1 sprowadza błąd poprawki jednym znacznikiem
+  do max ≤ 0.40 m w koszykach poniżej 8 m.
