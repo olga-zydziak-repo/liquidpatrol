@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       42989 15.1  0.0 330892 14100 ?        Sl   23:50   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       42983  2.9  0.0  16948 11208 ?        S    23:50   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/NADIR/s4/c05_s01/zegar2.jsonl
+olga       42984  2.9  0.0   5028  3724 ?        S    23:50   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s4_launch.sh world_nadir2_A3
+olga        1120  1.1  1.1 5725420 384276 pts/0  Sl+  07:34  11:01 claude --continue
+olga       34499  0.4  0.5 760024 193664 ?       SLl  22:56   0:14 python3 results/NADIR/tools/nadir_s4_campaign.py
+olga       39684  0.2  0.0 1341172 7612 ?        S    23:26   0:03 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered bramka zdrowia|rc=[0-9]+ boot|ALARM|KONIEC|nieważny|Traceback|błąd
+olga       42830  0.0  0.0 129352 22316 ?        Sl   23:47   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         243  0.0  0.1 3290204 59100 ?       Ssl  07:33   0:31 /usr/bin/containerd
+root         364  0.0  0.2 11429592 87404 ?      Ssl  07:33   0:10 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root          86  0.0  0.0  26144  7200 ?        Ss   07:33   0:04 /usr/lib/systemd/systemd-udevd
+root          40  0.0  0.0  66868 21068 ?        S<s  07:33   0:02 /usr/lib/systemd/systemd-journald
+polkitd      200  0.0  0.0 308188  8188 ?        Ssl  07:33   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root         944  0.0  0.0   3200  1252 ?        S    07:33   0:01 /init
+root           1  0.0  0.0  21832 13244 ?        Ss   07:33   0:01 /sbin/init
+message+     195  0.0  0.0   9800  5540 ?        Ss   07:33   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         211  0.0  0.0  17400  6432 ?        Ss   07:33   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+root         204  0.0  0.0  17988  8884 ?        Ss   07:33   0:00 /usr/lib/systemd/systemd-logind
+syslog       213  0.0  0.0 222524  6008 ?        Ssl  07:33   0:00 /usr/sbin/rsyslogd -n -iNONE
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  07:33   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate

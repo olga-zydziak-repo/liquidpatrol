@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       61801 17.8  0.0 330892 14152 ?        Sl   01:57   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       61794  3.3  0.0  16948 11152 ?        S    01:57   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/NADIR/s4/nom_b3/zegar2.jsonl
+olga       61795  3.3  0.0   5028  3656 ?        S    01:57   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s4_launch.sh world_nadir2_A3
+olga        1120  1.1  1.2 5725420 409764 pts/0  Sl+  Nov10  12:24 claude --continue
+olga       34499  0.4  0.7 821580 255156 ?       SLl  Nov10   0:50 python3 results/NADIR/tools/nadir_s4_campaign.py
+olga       61562  0.0  0.0 129352 22380 ?        Sl   01:55   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         243  0.0  0.1 3290204 59116 ?       Ssl  Nov10   0:33 /usr/bin/containerd
+root         364  0.0  0.2 11429592 87416 ?      Ssl  Nov10   0:11 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root          86  0.0  0.0  26144  7200 ?        Ss   Nov10   0:04 /usr/lib/systemd/systemd-udevd
+olga       61567  0.0  0.0   5032  3824 ?        S    01:55   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s4_boot.sh 30 nom_b3 8,9,10,11 -
+root          40  0.0  0.0  75060 25680 ?        S<s  Nov10   0:02 /usr/lib/systemd/systemd-journald
+polkitd      200  0.0  0.0 308188  8188 ?        Ssl  Nov10   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root         944  0.0  0.0   3200  1252 ?        S    Nov10   0:01 /init
+root           1  0.0  0.0  21832 13244 ?        Ss   Nov10   0:01 /sbin/init
+message+     195  0.0  0.0   9800  5540 ?        Ss   Nov10   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         211  0.0  0.0  17400  6432 ?        Ss   Nov10   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+syslog       213  0.0  0.0 222524  6012 ?        Ssl  Nov10   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         204  0.0  0.0  17988  8884 ?        Ss   Nov10   0:00 /usr/lib/systemd/systemd-logind
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  Nov10   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate

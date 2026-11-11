@@ -1,0 +1,184 @@
+{
+ "tag": "c10_s02_g2",
+ "wariant": "C",
+ "t": "2026-11-11 00:53:06",
+ "tempo": 0.8971,
+ "prog": 0.9,
+ "odniesienie": [
+  0.9283,
+  0.9271
+ ],
+ "n1_run": {
+  "tag": "A5",
+  "dsim_dwall": 0.8971,
+  "n_probek_okna": 1447,
+  "cofniecia": 0,
+  "loadavg1_po": 2.58,
+  "hz": {
+   "imager": 13.78,
+   "flow": 45.44,
+   "nadir": 4.55
+  },
+  "nadir_klatki_z_id": 637
+ },
+ "rig_zgodny": true,
+ "timesyncd": "inactive",
+ "okno_t_guest": [
+  1794354661.32,
+  1794354781.32
+ ],
+ "profil10": [
+  [
+   0,
+   0.871
+  ],
+  [
+   10,
+   0.904
+  ],
+  [
+   20,
+   0.908
+  ],
+  [
+   30,
+   0.898
+  ],
+  [
+   40,
+   0.903
+  ],
+  [
+   50,
+   0.894
+  ],
+  [
+   60,
+   0.897
+  ],
+  [
+   70,
+   0.903
+  ],
+  [
+   80,
+   0.896
+  ],
+  [
+   90,
+   0.899
+  ],
+  [
+   101,
+   0.885
+  ],
+  [
+   111,
+   0.89
+  ],
+  [
+   121,
+   0.906
+  ],
+  [
+   131,
+   0.9
+  ]
+ ],
+ "tel_okno": {
+  "gpu": {
+   "n": 120,
+   "pstate_udzial": {
+    "P4": 0.258,
+    "P5": 0.575,
+    "P8": 0.167
+   },
+   "sm_med": 277.0,
+   "mem_med": 810.0,
+   "moc_med": 22.615000000000002,
+   "util_med": 28.0,
+   "flaga_0x4_udzial": 0.617
+  },
+  "win": {
+   "n": 20,
+   "kadencja_med_s": 6.01,
+   "dur_med_s": 0.74,
+   "czolowka": [
+    [
+     "powershell",
+     0.27,
+     34
+    ],
+    [
+     "WindowsTerminal",
+     0.11499999999999999,
+     20
+    ],
+    [
+     "ipf_helper",
+     0.07,
+     20
+    ],
+    [
+     "NVIDIA Overlay",
+     0.035,
+     2
+    ],
+    [
+     "nvsphelper64",
+     0.03,
+     2
+    ],
+    [
+     "ChatGPT",
+     0.03,
+     5
+    ]
+   ],
+   "maxfreq_med": 96.2
+  },
+  "gpuproc": {
+   "n": 23,
+   "kadencja_med_s": 5.01,
+   "dur_med_s": 0.35,
+   "czolowka": [
+    [
+     "vmwp@dGPU",
+     40,
+     23
+    ],
+    [
+     "WindowsTerminal@iGPU",
+     1.0,
+     12
+    ]
+   ]
+  }
+ },
+ "GO": false,
+ "czolowka_operatora": {
+  "gpu": [],
+  "cpu": [
+   [
+    "ipf_helper",
+    0.07,
+    20
+   ],
+   [
+    "NVIDIA Overlay",
+    0.035,
+    2
+   ],
+   [
+    "nvsphelper64",
+    0.03,
+    2
+   ],
+   [
+    "ChatGPT",
+    0.03,
+    5
+   ]
+  ]
+ }
+}

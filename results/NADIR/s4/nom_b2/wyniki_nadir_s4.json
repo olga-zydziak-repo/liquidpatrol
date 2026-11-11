@@ -1,0 +1,750 @@
+{
+ "boot": "nom_b2",
+ "przyrzad_selftest": true,
+ "zegar_ok": true,
+ "zegar_skoki": 0,
+ "v2p_epizody": {
+  "4": {
+   "valid": true,
+   "n_deep": 2,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.9528,
+   "timejump": 0
+  },
+  "5": {
+   "valid": true,
+   "n_deep": 0,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.9567,
+   "timejump": 0
+  },
+  "6": {
+   "valid": true,
+   "n_deep": 0,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.956,
+   "timejump": 0
+  },
+  "7": {
+   "valid": true,
+   "n_deep": 0,
+   "longest_s": 0.0,
+   "dsim_dwall": 0.9547,
+   "timejump": 0
+  }
+ },
+ "skew_s": null,
+ "epizody": [
+  {
+   "episode_id": 4,
+   "scenario_id": "c04_s01",
+   "m": 8.0,
+   "ciecie": false,
+   "t_entry": 8.75,
+   "n_tk": 1618,
+   "n_tk_misja": 1618,
+   "v2p": {
+    "valid": true,
+    "n_deep": 2,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.9528,
+    "timejump": 0
+   },
+   "v2p_ok": true,
+   "refuse_misja": {
+    "n": 0,
+    "reguly": [],
+    "przyczyny": [],
+    "pierwszy_sim": null
+   },
+   "refuse_po_zejsciu": 0,
+   "kont_ticki_nie_nominal": 0,
+   "koszt_bariery_refuse": 0,
+   "r_gt_max": 20.165,
+   "margines_min_R_E": 11.835,
+   "c_ok": true,
+   "tau": {
+    "p50": 0.116,
+    "p95": 0.208,
+    "max": 0.228,
+    "n": 1618
+   },
+   "tau_po_cieciu": {
+    "p50": null,
+    "p95": null,
+    "max": null,
+    "n": 0
+   },
+   "e_ok": true,
+   "u_max": 2.429,
+   "u_max_do_m": 0.3036,
+   "u_ticki_gt_m": 0,
+   "u_ticki_nieokreslone": 0,
+   "u_niezgodnosci_z_oslona": 0,
+   "b_ok": true,
+   "koszyki_poprawek": {
+    "0": 79,
+    "1": 109,
+    "2": 203,
+    "3": 3
+   },
+   "koszt_kontrfaktyczny_ticki": 0,
+   "zapas_bariery_min": 6.648,
+   "odrzucenia_rh": 560,
+   "n_poprawek": 394,
+   "n_poprawek_misja": 394,
+   "eps_fix_live": {
+    "p95": 0.163,
+    "max": 0.698
+   },
+   "eps_fix_live_ponad_freeze": 2,
+   "u_live_max": 2.5453,
+   "bias_kursu": {
+    "n": 290,
+    "p50": -3.837,
+    "trend_deg_s": -0.0872
+   },
+   "g_3d": {
+    "z_GNSS": {
+     "n": 394,
+     "z_przekroczeniem": 1,
+     "max_inc_do_eps_b": 1.4528,
+     "tau_gt_2s": 1,
+     "najgorsze": [
+      {
+       "t_fix": 216.6,
+       "klasa": "z_GNSS",
+       "tau_max": 267.732,
+       "n_probek": 26749,
+       "max_inc_do_eps_b": 1.4528,
+       "przekroczenia": 74
+      },
+      {
+       "t_fix": 147.0,
+       "klasa": "z_GNSS",
+       "tau_max": 0.211,
+       "n_probek": 20,
+       "max_inc_do_eps_b": 0.311,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 146.6,
+       "klasa": "z_GNSS",
+       "tau_max": 0.212,
+       "n_probek": 20,
+       "max_inc_do_eps_b": 0.2606,
+       "przekroczenia": 0
+      }
+     ]
+    },
+    "bez_GNSS": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "zejscie": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "przekroczenia_misja": 1
+   },
+   "g_2d": {
+    "z_GNSS": {
+     "n": 394,
+     "z_przekroczeniem": 1,
+     "max_inc_do_eps_b": 1.4339,
+     "tau_gt_2s": 1,
+     "najgorsze": [
+      {
+       "t_fix": 216.6,
+       "klasa": "z_GNSS",
+       "tau_max": 267.74,
+       "n_probek": 26750,
+       "max_inc_do_eps_b": 1.4339,
+       "przekroczenia": 72
+      },
+      {
+       "t_fix": 146.6,
+       "klasa": "z_GNSS",
+       "tau_max": 0.212,
+       "n_probek": 20,
+       "max_inc_do_eps_b": 0.2577,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 152.2,
+       "klasa": "z_GNSS",
+       "tau_max": 0.212,
+       "n_probek": 20,
+       "max_inc_do_eps_b": 0.2127,
+       "przekroczenia": 0
+      }
+     ]
+    },
+    "bez_GNSS": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "zejscie": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "przekroczenia_misja": 1
+   },
+   "g_ok": false,
+   "d": {
+    "nav_poza_14": [],
+    "failsafe_max": 0,
+    "ok": true
+   },
+   "d_ok": true,
+   "f_ok": true,
+   "litera_ok": true
+  },
+  {
+   "episode_id": 5,
+   "scenario_id": "c05_s01",
+   "m": 10.33,
+   "ciecie": false,
+   "t_entry": 5.58,
+   "n_tk": 1545,
+   "n_tk_misja": 1545,
+   "v2p": {
+    "valid": true,
+    "n_deep": 0,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.9567,
+    "timejump": 0
+   },
+   "v2p_ok": true,
+   "refuse_misja": {
+    "n": 0,
+    "reguly": [],
+    "przyczyny": [],
+    "pierwszy_sim": null
+   },
+   "refuse_po_zejsciu": 0,
+   "kont_ticki_nie_nominal": 0,
+   "koszt_bariery_refuse": 0,
+   "r_gt_max": 19.422,
+   "margines_min_R_E": 12.578,
+   "c_ok": true,
+   "tau": {
+    "p50": 0.12,
+    "p95": 0.204,
+    "max": 0.392,
+    "n": 1545
+   },
+   "tau_po_cieciu": {
+    "p50": null,
+    "p95": null,
+    "max": null,
+    "n": 0
+   },
+   "e_ok": true,
+   "u_max": 2.429,
+   "u_max_do_m": 0.2351,
+   "u_ticki_gt_m": 0,
+   "u_ticki_nieokreslone": 0,
+   "u_niezgodnosci_z_oslona": 0,
+   "b_ok": true,
+   "koszyki_poprawek": {
+    "0": 65,
+    "1": 108,
+    "2": 176,
+    "3": 29
+   },
+   "koszt_kontrfaktyczny_ticki": 0,
+   "zapas_bariery_min": 7.616,
+   "odrzucenia_rh": 586,
+   "n_poprawek": 377,
+   "n_poprawek_misja": 377,
+   "eps_fix_live": {
+    "p95": 0.205,
+    "max": 0.663
+   },
+   "eps_fix_live_ponad_freeze": 5,
+   "u_live_max": 2.5101,
+   "bias_kursu": {
+    "n": 294,
+    "p50": -4.699,
+    "trend_deg_s": -0.0424
+   },
+   "g_3d": {
+    "z_GNSS": {
+     "n": 377,
+     "z_przekroczeniem": 1,
+     "max_inc_do_eps_b": 1.127,
+     "tau_gt_2s": 1,
+     "najgorsze": [
+      {
+       "t_fix": 301.2,
+       "klasa": "z_GNSS",
+       "tau_max": 183.132,
+       "n_probek": 18289,
+       "max_inc_do_eps_b": 1.127,
+       "przekroczenia": 32
+      },
+      {
+       "t_fix": 229.8,
+       "klasa": "z_GNSS",
+       "tau_max": 0.209,
+       "n_probek": 21,
+       "max_inc_do_eps_b": 0.2269,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 237.4,
+       "klasa": "z_GNSS",
+       "tau_max": 0.216,
+       "n_probek": 22,
+       "max_inc_do_eps_b": 0.1645,
+       "przekroczenia": 0
+      }
+     ]
+    },
+    "bez_GNSS": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "zejscie": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "przekroczenia_misja": 1
+   },
+   "g_2d": {
+    "z_GNSS": {
+     "n": 377,
+     "z_przekroczeniem": 1,
+     "max_inc_do_eps_b": 1.101,
+     "tau_gt_2s": 1,
+     "najgorsze": [
+      {
+       "t_fix": 301.2,
+       "klasa": "z_GNSS",
+       "tau_max": 183.14,
+       "n_probek": 18290,
+       "max_inc_do_eps_b": 1.101,
+       "przekroczenia": 27
+      },
+      {
+       "t_fix": 229.8,
+       "klasa": "z_GNSS",
+       "tau_max": 0.209,
+       "n_probek": 21,
+       "max_inc_do_eps_b": 0.2236,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 237.4,
+       "klasa": "z_GNSS",
+       "tau_max": 0.216,
+       "n_probek": 22,
+       "max_inc_do_eps_b": 0.1644,
+       "przekroczenia": 0
+      }
+     ]
+    },
+    "bez_GNSS": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "zejscie": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "przekroczenia_misja": 1
+   },
+   "g_ok": false,
+   "d": {
+    "nav_poza_14": [],
+    "failsafe_max": 0,
+    "ok": true
+   },
+   "d_ok": true,
+   "f_ok": true,
+   "litera_ok": true
+  },
+  {
+   "episode_id": 6,
+   "scenario_id": "c06_s01",
+   "m": 6.46,
+   "ciecie": false,
+   "t_entry": 6.14,
+   "n_tk": 1558,
+   "n_tk_misja": 1558,
+   "v2p": {
+    "valid": true,
+    "n_deep": 0,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.956,
+    "timejump": 0
+   },
+   "v2p_ok": true,
+   "refuse_misja": {
+    "n": 0,
+    "reguly": [],
+    "przyczyny": [],
+    "pierwszy_sim": null
+   },
+   "refuse_po_zejsciu": 0,
+   "kont_ticki_nie_nominal": 0,
+   "koszt_bariery_refuse": 0,
+   "r_gt_max": 19.071,
+   "margines_min_R_E": 12.929,
+   "c_ok": true,
+   "tau": {
+    "p50": 0.12,
+    "p95": 0.208,
+    "max": 0.416,
+    "n": 1558
+   },
+   "tau_po_cieciu": {
+    "p50": null,
+    "p95": null,
+    "max": null,
+    "n": 0
+   },
+   "e_ok": true,
+   "u_max": 2.429,
+   "u_max_do_m": 0.376,
+   "u_ticki_gt_m": 0,
+   "u_ticki_nieokreslone": 0,
+   "u_niezgodnosci_z_oslona": 0,
+   "b_ok": true,
+   "koszyki_poprawek": {
+    "0": 50,
+    "1": 135,
+    "2": 171,
+    "3": 25
+   },
+   "koszt_kontrfaktyczny_ticki": 0,
+   "zapas_bariery_min": 7.952,
+   "odrzucenia_rh": 632,
+   "n_poprawek": 380,
+   "n_poprawek_misja": 380,
+   "eps_fix_live": {
+    "p95": 0.258,
+    "max": 0.683
+   },
+   "eps_fix_live_ponad_freeze": 12,
+   "u_live_max": 2.5297,
+   "bias_kursu": {
+    "n": 305,
+    "p50": -4.801,
+    "trend_deg_s": -0.0621
+   },
+   "g_3d": {
+    "z_GNSS": {
+     "n": 380,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": 0.6438,
+     "tau_gt_2s": 1,
+     "najgorsze": [
+      {
+       "t_fix": 388.0,
+       "klasa": "z_GNSS",
+       "tau_max": 96.332,
+       "n_probek": 9630,
+       "max_inc_do_eps_b": 0.6438,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 317.6,
+       "klasa": "z_GNSS",
+       "tau_max": 0.419,
+       "n_probek": 40,
+       "max_inc_do_eps_b": 0.2588,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 316.6,
+       "klasa": "z_GNSS",
+       "tau_max": 0.214,
+       "n_probek": 22,
+       "max_inc_do_eps_b": 0.2458,
+       "przekroczenia": 0
+      }
+     ]
+    },
+    "bez_GNSS": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "zejscie": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "przekroczenia_misja": 0
+   },
+   "g_2d": {
+    "z_GNSS": {
+     "n": 380,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": 0.6358,
+     "tau_gt_2s": 1,
+     "najgorsze": [
+      {
+       "t_fix": 388.0,
+       "klasa": "z_GNSS",
+       "tau_max": 96.34,
+       "n_probek": 9631,
+       "max_inc_do_eps_b": 0.6358,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 317.6,
+       "klasa": "z_GNSS",
+       "tau_max": 0.419,
+       "n_probek": 40,
+       "max_inc_do_eps_b": 0.2588,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 316.6,
+       "klasa": "z_GNSS",
+       "tau_max": 0.214,
+       "n_probek": 22,
+       "max_inc_do_eps_b": 0.24,
+       "przekroczenia": 0
+      }
+     ]
+    },
+    "bez_GNSS": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "zejscie": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "przekroczenia_misja": 0
+   },
+   "g_ok": true,
+   "d": {
+    "nav_poza_14": [],
+    "failsafe_max": 0,
+    "ok": true
+   },
+   "d_ok": true,
+   "f_ok": true,
+   "litera_ok": true
+  },
+  {
+   "episode_id": 7,
+   "scenario_id": "c07_s01",
+   "m": 5.55,
+   "ciecie": false,
+   "t_entry": 6.54,
+   "n_tk": 1568,
+   "n_tk_misja": 1568,
+   "v2p": {
+    "valid": true,
+    "n_deep": 0,
+    "longest_s": 0.0,
+    "dsim_dwall": 0.9547,
+    "timejump": 0
+   },
+   "v2p_ok": true,
+   "refuse_misja": {
+    "n": 0,
+    "reguly": [],
+    "przyczyny": [],
+    "pierwszy_sim": null
+   },
+   "refuse_po_zejsciu": 0,
+   "kont_ticki_nie_nominal": 0,
+   "koszt_bariery_refuse": 0,
+   "r_gt_max": 20.669,
+   "margines_min_R_E": 11.331,
+   "c_ok": true,
+   "tau": {
+    "p50": 0.12,
+    "p95": 0.204,
+    "max": 0.232,
+    "n": 1568
+   },
+   "tau_po_cieciu": {
+    "p50": null,
+    "p95": null,
+    "max": null,
+    "n": 0
+   },
+   "e_ok": true,
+   "u_max": 2.429,
+   "u_max_do_m": 0.4377,
+   "u_ticki_gt_m": 0,
+   "u_ticki_nieokreslone": 0,
+   "u_niezgodnosci_z_oslona": 0,
+   "b_ok": true,
+   "koszyki_poprawek": {
+    "0": 82,
+    "1": 122,
+    "2": 153,
+    "3": 27
+   },
+   "koszt_kontrfaktyczny_ticki": 0,
+   "zapas_bariery_min": 6.378,
+   "odrzucenia_rh": 620,
+   "n_poprawek": 383,
+   "n_poprawek_misja": 383,
+   "eps_fix_live": {
+    "p95": 0.224,
+    "max": 0.311
+   },
+   "eps_fix_live_ponad_freeze": 3,
+   "u_live_max": 2.1582,
+   "bias_kursu": {
+    "n": 279,
+    "p50": -5.292,
+    "trend_deg_s": -0.0205
+   },
+   "g_3d": {
+    "z_GNSS": {
+     "n": 383,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": 0.9356,
+     "tau_gt_2s": 1,
+     "najgorsze": [
+      {
+       "t_fix": 472.0,
+       "klasa": "z_GNSS",
+       "tau_max": 12.332,
+       "n_probek": 1231,
+       "max_inc_do_eps_b": 0.9356,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 402.0,
+       "klasa": "z_GNSS",
+       "tau_max": 0.197,
+       "n_probek": 20,
+       "max_inc_do_eps_b": 0.2428,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 402.6,
+       "klasa": "z_GNSS",
+       "tau_max": 0.215,
+       "n_probek": 20,
+       "max_inc_do_eps_b": 0.1681,
+       "przekroczenia": 0
+      }
+     ]
+    },
+    "bez_GNSS": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "zejscie": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "przekroczenia_misja": 0
+   },
+   "g_2d": {
+    "z_GNSS": {
+     "n": 383,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": 0.907,
+     "tau_gt_2s": 1,
+     "najgorsze": [
+      {
+       "t_fix": 472.0,
+       "klasa": "z_GNSS",
+       "tau_max": 12.34,
+       "n_probek": 1232,
+       "max_inc_do_eps_b": 0.907,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 402.0,
+       "klasa": "z_GNSS",
+       "tau_max": 0.197,
+       "n_probek": 20,
+       "max_inc_do_eps_b": 0.2403,
+       "przekroczenia": 0
+      },
+      {
+       "t_fix": 402.6,
+       "klasa": "z_GNSS",
+       "tau_max": 0.215,
+       "n_probek": 20,
+       "max_inc_do_eps_b": 0.1679,
+       "przekroczenia": 0
+      }
+     ]
+    },
+    "bez_GNSS": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "zejscie": {
+     "n": 0,
+     "z_przekroczeniem": 0,
+     "max_inc_do_eps_b": null,
+     "tau_gt_2s": 0,
+     "najgorsze": []
+    },
+    "przekroczenia_misja": 0
+   },
+   "g_ok": true,
+   "d": {
+    "nav_poza_14": [],
+    "failsafe_max": 0,
+    "ok": true
+   },
+   "d_ok": true,
+   "f_ok": true,
+   "litera_ok": true
+  }
+ ],
+ "wazny": true,
+ "powod_niewazny": null,
+ "litera_ok": true
+}

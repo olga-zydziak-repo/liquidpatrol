@@ -1,0 +1,49 @@
+[nadir_obs] img=72 proc=72 det=0 drop=0 flip=0
+[nadir_obs] img=143 proc=143 det=0 drop=0 flip=0
+[nadir_obs] img=216 proc=216 det=0 drop=0 flip=0
+[nadir_obs] img=287 proc=287 det=0 drop=0 flip=0
+[nadir_obs] img=360 proc=360 det=0 drop=0 flip=0
+[nadir_obs] img=432 proc=432 det=0 drop=0 flip=0
+[nadir_obs] img=503 proc=503 det=0 drop=0 flip=0
+[nadir_obs] img=575 proc=575 det=0 drop=0 flip=0
+[nadir_obs] img=643 proc=643 det=42 drop=0 flip=0
+[nadir_obs] img=713 proc=713 det=112 drop=0 flip=0
+[nadir_obs] img=785 proc=785 det=184 drop=0 flip=0
+[nadir_obs] img=857 proc=857 det=256 drop=0 flip=0
+[nadir_obs] img=929 proc=929 det=328 drop=0 flip=0
+[nadir_obs] img=1001 proc=1001 det=400 drop=0 flip=0
+[nadir_obs] img=1072 proc=1072 det=471 drop=0 flip=0
+[nadir_obs] img=1144 proc=1144 det=543 drop=0 flip=0
+[nadir_obs] img=1216 proc=1216 det=615 drop=0 flip=0
+[nadir_obs] img=1288 proc=1288 det=687 drop=0 flip=0
+[nadir_obs] img=1359 proc=1359 det=758 drop=0 flip=0
+[nadir_obs] img=1431 proc=1431 det=830 drop=0 flip=0
+[nadir_obs] img=1503 proc=1503 det=902 drop=0 flip=0
+[nadir_obs] img=1575 proc=1575 det=974 drop=0 flip=0
+[nadir_obs] img=1647 proc=1647 det=1046 drop=0 flip=0
+[nadir_obs] img=1719 proc=1718 det=1117 drop=0 flip=0
+[nadir_obs] img=1790 proc=1790 det=1189 drop=0 flip=0
+[nadir_obs] img=1861 proc=1861 det=1260 drop=0 flip=0
+[nadir_obs] img=1933 proc=1933 det=1332 drop=0 flip=0
+[nadir_obs] img=2005 proc=2005 det=1404 drop=0 flip=0
+[nadir_obs] img=2076 proc=2076 det=1475 drop=0 flip=0
+[nadir_obs] img=2148 proc=2148 det=1547 drop=0 flip=0
+[nadir_obs] img=2219 proc=2219 det=1618 drop=0 flip=0
+[nadir_obs] img=2291 proc=2291 det=1690 drop=0 flip=0
+[nadir_obs] img=2363 proc=2363 det=1761 drop=0 flip=0
+Thread 0x00007104ff4ff6c0 (most recent call first):
+  File "/usr/lib/python3.12/threading.py", line 359 in wait
+  File "/usr/lib/python3.12/queue.py", line 180 in get
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 126 in worker
+  File "/usr/lib/python3.12/threading.py", line 1010 in run
+  File "/usr/lib/python3.12/threading.py", line 1073 in _bootstrap_inner
+  File "/usr/lib/python3.12/threading.py", line 1030 in _bootstrap
+
+Current thread 0x00007105219c7740 (most recent call first):
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 781 in _wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 877 in wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 907 in _spin_once_impl
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 926 in spin_once
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 207 in main
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 221 in <module>
+[nadir_obs] DONE {"n_img": 2402, "n_drop": 0, "n_proc": 2402, "n_det_klatki": 1791, "flip_hits": 0, "n_fix": 1785, "det_ms": {"p50": 3.6960540019208565, "p95": 6.487740000011399, "max": 10.142915998585522}, "zamkniecie": "koniec_petli", "mono": 65850.635}

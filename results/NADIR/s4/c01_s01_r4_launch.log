@@ -1,0 +1,7 @@
+[run_boot b17] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b17] watchdog EKF2 (preflight-only, max 2 reinity) pid=35753
+model_in_state=1
+[run_boot b17] settle 90s preflight EKF
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b17] DONE flight=nadir_s4 world=world_nadir2_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/NADIR/s4/c01_s01_r4

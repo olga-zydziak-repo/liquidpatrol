@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       63851 11.7  0.0 330892 14108 ?        Sl   02:12   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        1120  1.1  1.2 5725420 390552 pts/0  Sl+  Nov10  12:33 claude --continue
+olga       34499  0.4  0.7 811864 245520 ?       SLl  Nov10   0:57 python3 results/NADIR/tools/nadir_s4_campaign.py
+olga       61705  0.1  0.0 1341172 7608 ?        S    01:56   0:01 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered bramka zdrowia|rc=[0-9]+ boot|ALARM|KONIEC|nieważny|Traceback|błąd
+olga       63665  0.0  0.0 129352 22316 ?        Sl   02:10   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         243  0.0  0.1 3290204 59120 ?       Ssl  Nov10   0:34 /usr/bin/containerd
+root       63785  0.0  0.0 1756636 13764 ?       Ssl  02:12   0:00 /usr/libexec/wsl-pro-service
+root         364  0.0  0.2 11429592 87420 ?      Ssl  Nov10   0:11 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root          86  0.0  0.0  26144  7200 ?        Ss   Nov10   0:04 /usr/lib/systemd/systemd-udevd
+olga       63670  0.0  0.0   5032  3848 ?        S    02:10   0:00 bash /home/olga/projects/liquidpatrol/results/NADIR/tools/nadir_s4_boot.sh 31 nom_b4 12,13,14,15 -
+root          40  0.0  0.0  75060 25828 ?        S<s  Nov10   0:02 /usr/lib/systemd/systemd-journald
+polkitd      200  0.0  0.0 308188  8188 ?        Ssl  Nov10   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root         944  0.0  0.0   3200  1252 ?        S    Nov10   0:01 /init
+root           1  0.0  0.0  21832 13244 ?        Ss   Nov10   0:01 /sbin/init
+message+     195  0.0  0.0   9800  5540 ?        Ss   Nov10   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         211  0.0  0.0  17400  6432 ?        Ss   Nov10   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+syslog       213  0.0  0.0 222524  6012 ?        Ssl  Nov10   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         204  0.0  0.0  17988  8884 ?        Ss   Nov10   0:00 /usr/lib/systemd/systemd-logind
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  Nov10   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate

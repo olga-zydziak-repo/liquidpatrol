@@ -1,0 +1,190 @@
+{
+  "kind": "nadir_s4",
+  "world_hash": "7f2bbe1360819a8b64ee462ad9c1852e6525b02fa197460953725ca44aeb81d8  worlds/world_nadir2_A3.sdf",
+  "world_hash_kind": "repo",
+  "ulog_sha": "294ad5d01d06097dd4af08f5e5dbd5311027361bef2cfdd1dfbf0086bbfbb0b3",
+  "ulog_bytes": 88697766,
+  "model_in_state": true,
+  "nadir_s4": {
+    "manifest_scenariuszy": "results/NADIR/s4/scenario_manifest_s4.json",
+    "NADIR_MODE": "1",
+    "KONT_MODE": "1",
+    "passthrough": "0"
+  },
+  "kont_s4": {
+    "boot": 17,
+    "epizody": "1",
+    "inject_t": "30",
+    "offset": {
+      "z_off_m": -0.1177,
+      "okno_sim_s": 6.04,
+      "n": 125,
+      "home_alt_kom": 10.1177,
+      "zakres": "home/reset (sieć nie dostaje komendy wysokości)"
+    },
+    "sonda_rc_frozen": 0,
+    "podloga_10hz_ok": 1,
+    "uzbrojony": true,
+    "sonda": {
+      "label": "preflight_c01_s01_r4",
+      "feed": "/home/olga/projects/liquidpatrol/results/NADIR/s4/c01_s01_r4/percep_feed.jsonl",
+      "tryb": "live window=35.0s",
+      "prog_frozen": {
+        "dt_p50_max_s_na_klatke": 0.07,
+        "frac_delt_gt_0p10_max": 0.05
+      },
+      "n_delt": 480,
+      "dt_p50_s_na_klatke": 0.068,
+      "dt_p90_s_na_klatke": 0.068,
+      "frac_delt_gt_0p10": 0.0,
+      "hz_p50": 14.71,
+      "span_sim_s": 34.0,
+      "werdykt": "PASS"
+    },
+    "echo": null,
+    "pin_mono_cam_model_sdf": "3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c",
+    "fastdds_profil_sha16": "a68a450b91c2ab51"
+  },
+  "kont_s2d": {
+    "aneks": "ANEKS_KONT-1c §3",
+    "initial_absolute_time_us": 7408000,
+    "faza_ok": true,
+    "dolaczenie": {
+      "prog_s": 0.5,
+      "sim_s_przy_starcie_px4": 0.548,
+      "czekanie_wall_s": 4.38,
+      "ok": true
+    }
+  },
+  "zegar": {
+    "timesyncd": "inactive",
+    "clocksource": "tsc",
+    "aneks": "ANEKS_SKAN2-0b §2.2"
+  },
+  "nadir_s4_kampania": {
+    "boot_s4": 6,
+    "boot_noga": 17,
+    "pozycja": "c01_s01",
+    "nazwa": "c01_s01_r4",
+    "epizody": "1",
+    "inject_t": "30",
+    "rc": 0,
+    "tempo": {
+      "aneks": "ANEKS_KONT-4d §1.3",
+      "dsim_dwall_settle": 0.9744,
+      "okno_wall_s": 59.96,
+      "n": 727,
+      "prog": 0.93,
+      "zrodlo": "rtf_stream.jsonl",
+      "ok": true
+    },
+    "wazny": true,
+    "niewazny": null,
+    "litera": {
+      "c01_s01": {
+        "a_ok": true,
+        "b_ok": true,
+        "c_ok": true,
+        "d_ok": true,
+        "e_ok": true,
+        "f_ok": null,
+        "g_ok": true,
+        "litera_ok": true
+      }
+    },
+    "litera_ok": true,
+    "breach": false,
+    "refuse_pos_nominal": [],
+    "shm": {
+      "sprzatanie": false,
+      "plikow_przed": 17,
+      "plikow_po": 17,
+      "trzymane_przed": {},
+      "stan": "shm_c01_s01_r4.txt"
+    },
+    "bramka_zdrowia": [
+      {
+        "pozycja_nazwa": "c01_s01_r4",
+        "tag": "c01_s01_r4_g1",
+        "wariant": "A",
+        "rc": 0,
+        "tempo": 0.9346,
+        "czolowka_operatora": null,
+        "t": "2026-11-10 22:58:51"
+      }
+    ],
+    "tel": {
+      "gpu_n": 464,
+      "pstate": {
+        "P4": 0.586,
+        "P5": 0.121,
+        "P8": 0.293
+      },
+      "sm_med": 277.0,
+      "moc_med": 24.41,
+      "flaga_0x4": 0.5,
+      "gpuproc": [
+        [
+          "vmwp@dGPU",
+          22,
+          65
+        ],
+        [
+          "System@dGPU",
+          14.5,
+          2
+        ],
+        [
+          "dwm@iGPU",
+          11,
+          1
+        ],
+        [
+          "dwm@dGPU",
+          1.5,
+          12
+        ],
+        [
+          "WindowsTerminal@iGPU",
+          1.0,
+          14
+        ]
+      ],
+      "win": [
+        [
+          "explorer",
+          0.465,
+          2
+        ],
+        [
+          "audiodg",
+          0.31,
+          1
+        ],
+        [
+          "powershell",
+          0.27,
+          153
+        ],
+        [
+          "WindowsTerminal",
+          0.11,
+          64
+        ],
+        [
+          "RtkUWP",
+          0.08,
+          1
+        ],
+        [
+          "ipf_helper",
+          0.07,
+          79
+        ]
+      ],
+      "kadencja_win_s": 5.01
+    },
+    "sieroty_term": {},
+    "t": "2026-11-10 23:07:40"
+  }
+}
