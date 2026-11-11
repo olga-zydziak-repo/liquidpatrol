@@ -958,3 +958,42 @@ CLOSED-BY-RECON (0 bootów)
 - P-NAD2-R4 (0.35): istnieje para z 12/12 komórek dostępnych.
 - P-NAD2-R5 (0.55): T1 sprowadza błąd poprawki jednym znacznikiem
   do max ≤ 0.40 m w koszykach poniżej 8 m.
+
+## NADIR-II — recon rozliczony, otwarcie nogi (PRE_NAD2, 11.11.2026)
+- Recon STOP-NAD2R (0 bootów): kierunek żyje, reguła wyboru wskazała
+  T1Z2C0 · A. CC przeliczył R1, R2, R3 i R5 własnym kodem: zgodność
+  co do trzeciej cyfry (F pary do 0.007 m); replay litery CC
+  odtwarza 27 800 decyzji z lotu w 100%.
+- P-NAD2-R1 (0.75) — ✗: opóźnienia klatki nie ma (mediana 8 ms, p95
+  16 ms). ✗ metodyczne CC: hipoteza zbudowana na przesunięciu
+  gt_judge bez sprawdzenia, że dotyczy ono próbek ticku. Parowanie
+  z ANEKS_NADIR-5 §1.5 rozstrzygnięte: GT w chwili próbki EKF, max
+  błędu pozycji poprawionej 0.677 m, ponad sumę składników 2 ticki
+  (nie 40).
+- P-NAD2-R2 (0.80) ✓, P-NAD2-R3 (0.65) ✓, P-NAD2-R4 (0.35) ✓,
+  P-NAD2-R5 (0.55) ✗ (sam T1 zostawia 0.437 m). Recon: 3/5 przy
+  sumie szans 3.10.
+- Znalezisko wykonawcy, potwierdzone przez CC: w S3/S4 osłona
+  liczyła r_est z surowego EKF (do 7.0 m od pozycji poprawionej,
+  mediana 0.96 m), a P9_nadir zakładał pozycję poprawioną. ✗
+  projektowe CC (PROMPT_NADIR_S3 nie nazwał wejścia osłony; replika
+  certów i fikstura P5 porównują lustro z produkcją na tych samych
+  wejściach) i ✗ wykonawcy (implementacja). Werdykt S4 bez zmian;
+  warunek dowodu nie był spełniony także po stronie wejścia. Lekcja:
+  każdy cert osłony ma obligację wejścia — wielkość z twierdzenia
+  musi być tą, która w locie trafia do osłony.
+- ✗ projektowe CC ×3 w prompcie reconu: kolejność „najprostszy"
+  pominęła (T0, Z2); reguła „n < 100 dziedziczy wyższy koszyk"
+  niewykonalna dla trybu jeden w Z2 (rozstrzygnięte w PRE §2.2);
+  „komórka dostępna" z warunkiem u′ ≤ m — rachunkiem na promieniu
+  historycznym z 1–3 epizodów, od którego loty S4 odbiegają
+  o −2.9…+3.2 m; o odmowie rozstrzyga zapas bariery przy promieniu
+  faktycznym (PRE §2.3).
+- Wykonawca: sam wykrył i odrzucił własną wersję replayu zawyżającą
+  dostępność w ok. 10% ticków; odstępstwa od litery nazwane wprost;
+  R4 — zrywy to błąd prędkości z przepływu przy obrocie kadłuba
+  (ω ≥ 0.5 rad/s), przyjmowany przez EKF bez odrzuceń.
+- NADIR-II otwarta ratyfikacją PRE_NAD2. Predykcje: P-NAD2-1 (0.75)
+  S1 w całości; P-NAD2-2 (0.80) litera bezpieczeństwa bez naruszeń;
+  P-NAD2-3 (0.85) dostępność ≥ 10/12; P-NAD2-4 (0.45) dostępność
+  12/12; P-NAD2-5 (0.60) bramka PASS; P-NAD2-6 (0.90) breach 0.

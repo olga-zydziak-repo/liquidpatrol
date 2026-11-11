@@ -769,3 +769,12 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   geometrii, NADIR bramką dowodu przy zmierzonej zdolności 5 × T*.
   Breach 0 / REFUSE(POS) fałszywych 0 programowo bez zmian
   (31 bootów nogi, łącznie ~220 bootów programu).
+
+## Dopisek stanu katalogu — 11.11.2026 (CO-NAD2-0, PRE_NAD2)
+- **NADIR-II — OTWARTA** (nowa pozycja po NADIR): ważny dowód
+  zawierania dla lotu bez GNSS na znacznikach naziemnych. Przesłanka
+  na błędzie pozycji poprawionej (tabela z danych S4, zapas 1.5),
+  litera przyjęcia bez dziur (Z2 + T1), osłona w ramie poprawionej;
+  bezpieczeństwo i dostępność sądzone osobno (próg dostępności
+  10/12). Świeża bramka 12 + 4, budżet ≤ 22 booty. Po FAIL bramki
+  trzeciego podejścia w tej architekturze nie ma.
