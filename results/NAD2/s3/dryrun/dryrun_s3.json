@@ -1,0 +1,177 @@
+{
+ "1_kod_bd975df5": {
+  "sciezki": [
+   "r03/nadir_shield.py",
+   "r03/kont_shield.py",
+   "r03",
+   "harness/nadir_fix.py",
+   "harness/nadir_obs.py",
+   "r01/proofs",
+   "results/NAD2/s1/freeze_U.json",
+   "results/NAD2/tools/nad2_flight.py",
+   "results/NAD2/tools/nad2_krok.py",
+   "results/NAD2/tools/nad2_boot.sh",
+   "results/NAD2/tools/nad2_launch.sh",
+   "results/NAD2/tools/nad2_analyze.py",
+   "results/NAD2/tools/nad2_ulg.py",
+   "results/NAD2/tools/nad2_s2_spr.py",
+   "results/NAD2/tools/nad2_certs_selfcheck.py",
+   "results/NADIR/s4/scenario_manifest_s4.json"
+  ],
+  "brak": [],
+  "diff_rc": 0,
+  "porcelain": "",
+  "PASS": true
+ },
+ "2_kolejka_sucho": {
+  "rc": 0,
+  "kolejka": [
+   "nom_b1",
+   "c01_s01",
+   "c01_s03",
+   "c02_s01",
+   "c02_s03",
+   "c05_s01",
+   "c05_s02",
+   "c08_s01",
+   "c08_s02",
+   "c10_s01",
+   "c10_s02",
+   "c11_s01",
+   "c11_s02",
+   "nom_b2",
+   "nom_b3",
+   "nom_b4"
+  ],
+  "epizody": {
+   "nom_b1": [
+    "0,1,2,3",
+    "-"
+   ],
+   "c01_s01": [
+    "1",
+    "30"
+   ],
+   "c01_s03": [
+    "25",
+    "30"
+   ],
+   "c02_s01": [
+    "2",
+    "30"
+   ],
+   "c02_s03": [
+    "26",
+    "30"
+   ],
+   "c05_s01": [
+    "5",
+    "30"
+   ],
+   "c05_s02": [
+    "17",
+    "30"
+   ],
+   "c08_s01": [
+    "8",
+    "30"
+   ],
+   "c08_s02": [
+    "20",
+    "30"
+   ],
+   "c10_s01": [
+    "10",
+    "30"
+   ],
+   "c10_s02": [
+    "22",
+    "30"
+   ],
+   "c11_s01": [
+    "11",
+    "30"
+   ],
+   "c11_s02": [
+    "23",
+    "30"
+   ],
+   "nom_b2": [
+    "4,5,6,7",
+    "-"
+   ],
+   "nom_b3": [
+    "8,9,10,11",
+    "-"
+   ],
+   "nom_b4": [
+    "12,13,14,15",
+    "-"
+   ]
+  },
+  "PASS": true
+ },
+ "3_boot_s3": {
+  "guard_litera": {
+   "rc": 5,
+   "oczekiwany": 5,
+   "wyjscie": "[nad2 ../s3/dryrun/_repo2] GUARD: tryby NM=1 KM=1 PT=0 LIT=NADIR1 poza dopuszczonymi (1/1/0/NAD2 albo 0/0/1/NADIR1)\n",
+   "ok": true
+  },
+  "repo2": {
+   "rc": 4,
+   "oczekiwany": 4,
+   "wyjscie": "[kont ../s3/dryrun/_repo2] REPO-2: manifest istnieje — ODMOWA\n",
+   "ok": true
+  },
+  "przenies_monitor": {
+   "ok": true
+  },
+  "monitor_smoke_nietkniety": true,
+  "PASS": true
+ },
+ "4_lancuch": {
+  "ciecie": {
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.532,
+    "frac_track": 1.0,
+    "frac_pasmo": 0.96,
+    "refuse_misja": 0
+   },
+   "spr": {
+    "s1": true,
+    "s2": true,
+    "s3": true
+   },
+   "ulg": 1.28,
+   "ok": true
+  },
+  "nominal_syn": {
+   "spr": {
+    "s1": true,
+    "s2": true,
+    "s3": true
+   },
+   "ticki_nominal": 756,
+   "ok": true
+  },
+  "negatyw": {
+   "spr": {
+    "s1": true,
+    "s2": false,
+    "s3": false
+   },
+   "przyrzad_ok": false,
+   "ok": true
+  },
+  "PASS": true
+ },
+ "PASS": true
+}
