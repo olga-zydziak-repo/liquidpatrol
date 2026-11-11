@@ -737,3 +737,35 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
 - Katalog: 2d zamknięta budżetem czasu (T* = 22 s), KOTW zamknięta
   granicą geometrii. Breach 0 / REFUSE(POS) fałszywych 0 programowo
   bez zmian (~190 bootów programu; noga KOTW 0).
+
+## Dopisek stanu katalogu — 11.11.2026 (CO-N5, ANEKS_NADIR-5)
+- **NADIR (kamera w dół + siatka znaczników naziemnych: lot po
+  utracie GNSS bez limitu czasu) — CLOSED, bramka S4 FAIL przez (g).**
+  Zdolność zmierzona end-to-end w SITL: sieć pod odcięciem GNSS
+  prowadzi zadanie 110 s (5 × T*) w 12/12 cięć na pozycji
+  poprawianej znacznikami 5 Hz (track 100%, zero REFUSE, offboard do
+  końca, zero naruszeń R_E przy marginesie min 7.47 m, zero
+  fałszywych wejść w 16 epizodach nominalnych); błąd pozycji
+  poprawionej nie rośnie z czasem (max 0.67–0.73 m przy błędzie
+  własnym EKF do 8.5 m). Dowód zawierania P9_nadir (+P1/P5/P7_nadir,
+  replikacja CC) nie obowiązuje dla tych lotów: przesłanka A-nadir
+  nie trzyma w obu połowach (przyrost w oknie 36/6581, błąd poprawki
+  jednym znacznikiem 62/6582) — loty zmierzone, nie dowiedzione. Lot
+  dłuższy niż 110 s niezmierzony. Budżet 31/35.
+- Mechanizmy nazwane: zrywy błędu EKF przy hamowaniu w szybkich
+  komórkach; dziury litery przyjęcia niewidoczne dla ⌊τ⌋; poprawka
+  jednym znacznikiem niesie bias kursu (para go zdejmuje:
+  0 przekroczeń na 11 250); bias kursu po cięciu przesuwa się
+  (−3.4° → +1.2° w 110 s).
+- Kierunek ewentualnego powrotu (nowa pozycja, NIEOTWARTA):
+  przesłanka na sumie |p_corr − GT| per tick z danych S4
+  (27 253 ticki), z zapasem i rozdzielczością τ poniżej sekundy;
+  poprawka jednym znacznikiem z bieżącym biasem z par albo para
+  z partnerem ≥ 8 m; świeża bramka 12 + 4. Rachunek wstępny (nie
+  przesłanka): 1.5 × 0.73 + Δ_D5 = 2.62 ≤ 2.99 w najwęższej komórce,
+  zapas 0.37 m. Recon przy biurku na danych S4 (0 bootów; ULG
+  u wykonawcy na zrywy przy hamowaniu), szac. całość 18–22 booty.
+- Katalog: 2d zamknięta budżetem czasu (T* = 22 s), KOTW granicą
+  geometrii, NADIR bramką dowodu przy zmierzonej zdolności 5 × T*.
+  Breach 0 / REFUSE(POS) fałszywych 0 programowo bez zmian
+  (31 bootów nogi, łącznie ~220 bootów programu).

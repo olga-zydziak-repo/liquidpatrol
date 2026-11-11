@@ -863,3 +863,77 @@ CLOSED-BY-RECON (0 bootów)
   ~3–4% wolniej od czasu rzeczywistego.
 - Zmiana PRE (sygnał „ratyfikuję N3", ANEKS_NADIR-3 §4.4): limit nogi
   30 → 35, limit S4 19 → 24.
+
+## NADIR S4 i zamknięcie nogi (ANEKS_NADIR-5, 11.11.2026)
+- Drabina S4: FAIL przez (g) w 5/12 cięć — przyrost błędu EKF
+  w oknie między poprawkami ponad ε_b(⌊τ⌋) w 36 z 6581 okien bez
+  GNSS (0.55%, max 2.09; c08_s01, c08_s02, c10_s01, c10_s02,
+  c11_s02). (a) 12/12 po orzeczeniu CC (od wstrzyknięcia
+  110.004–110.052 s; analizator liczył od stempla zdarzenia,
+  4–12 ms później). (b)–(f) 0 naruszeń, nominały 16/16. CC odtworzył
+  (g) definicją analizatora co do okna (28/28 epizodów), resztę
+  własnym kodem; (d) przyjęte z ULG wykonawcy.
+- Zdolność zmierzona: 12/12 cięć × 110 s (5 × T*) bez GNSS na
+  pozycji poprawianej znacznikami — track 100%, REFUSE 0, breach 0,
+  margines do R_E min 7.47 m, koszt bariery 0; błąd pozycji
+  poprawionej płaski w czasie (p95 0.2–0.4 m, max 0.67–0.73 m) przy
+  błędzie własnym EKF do 8.5 m.
+- P-NADIR-1 (0.70) — ✗ (śmierć S1 po literze tempa, ANEKS_NADIR-1;
+  po naprawie S1F czyste). P-NADIR-3 (0.55, S4 PASS) — ✗: litera
+  (a)–(f) z PRE spełniona, bramka z (g) dodanym przed lotami FAIL.
+  P-NADIR-4 (0.90, breach 0) — ✓ (31 bootów). Noga: 2/4 przy sumie
+  szans 2.90 — szanse CC nadal zawyżone. ✓ P-NADIR-2 z S2 było
+  wynikiem próby 440 okien; na 6581 oknach warunek nie trzyma.
+- Przesłanka A-nadir (CC) nie trzyma w obu połowach. (i) Przyrost:
+  32 okna to zrywy błędu EKF 1.6–2.5 m/s przy hamowaniu (31/32 przy
+  malejącej prędkości, |a| mediana 1.9 m/s²; tylko sześć
+  najszybszych komórek), 4 okna to dziury przyjęcia 0.4–1.0 s (oba
+  maksima). (ii) Błąd poprawki: bez GNSS 62/6582 ponad
+  ε_fix_freeze (max 2.21), nominały 314/6565 — wszystkie jednym
+  znacznikiem; para 0 z 11 250 (max 0.225 m). Błąd jednego
+  znacznika ≈ r_h · sin|bias kursu| (r = 0.71). Suma per tick:
+  2–40 z 27 253 ticków ponad sumę składników (o 0.11 m
+  w najgorszym).
+- ✗ projektowe CC ×4: (1) obwiednia nauczyciela 2d użyta wobec sieci
+  w prefiksie okien i przyjęta po S2 przy max 0.94 na 440 oknach —
+  zapas 6% na próbie za małej na ogon ~1%; teza z ANEKS_NADIR-2
+  §3.2 („NADIR nieczuły") obalona; kolejna instancja „zadany ≠
+  faktyczny" i powtórka lekcji KONT-5. (2) FREEZE „1.5 × max"
+  z czterech cięć nie rozróżnia trybu poprawki i wyszedł
+  niemonotoniczny (koszyk 4–6 m najniższy) — przyjęty bez pytania.
+  (3) Litera S4 strzegła jednej połowy przesłanki certu. (4) Litera
+  przyjęcia (18 px, r_h < 8 m, krawędź) zostawia klatki bez
+  obserwacji, a ⌊τ⌋ nie widzi ich przez pierwszą sekundę — wbrew
+  zdaniu z ANEKS_NADIR-2 §2.
+- ✗ metodyczne CC (weryfikacja S4): okna grupowane po `seq` (licznik
+  rekordów, nie poprawek); hipoteza artefaktu wyrównania czasu
+  (obalona: przy zerowym przesunięciu 17 okien, max 1.88); hipoteza
+  narastania z czasem (obalona: 5/10/8/7/6 na 22 s). Skorygowane
+  w tej samej turze.
+- Korekta w przód zdania z ANEKS_NADIR-2: bias kursu po cięciu nie
+  jest stały — mediana 12 lotów −3.4° → +1.2° w 110 s, tempo maleje
+  (0.94 / 0.62 / 0.46° na kolejne 22 s); dalej niezmierzone.
+- Wykonawca: kampania 16/16 bez STOP-u stanowiska; analizator (g)
+  poprawny; (a) i własna wada nastawy nazwane uczciwie; „mechanizm
+  niezmierzony" zamiast zgadywania. Wady: nastawa T_CONT równa
+  progowi i odniesienie od stempla zdarzenia; ostatnie okno epizodu
+  niedomykane (4 fałszywe „✗ (g)" w nominałach, kolumna
+  informacyjna); obserwabla błędu poprawki policzona, lecz
+  niewyniesiona do raportu płaskiego mimo wartości niezerowych
+  w 27/28 epizodów.
+- Stanowisko (10.11, DIAGNOZA_STANOWISKA_2 i decyzje CC bez aneksu):
+  zegar gościa pod obciążeniem równy zegarowi Windows (1.00000) —
+  zdanie „gość ~3–4% wolniej" z ANEKS_NADIR-4 cofnięte, ✗ CC;
+  ustawienie karty „maksymalna wydajność" odrzucone regułą; drugi
+  użytkownik karty po stronie Windows obniża tempo (PredatorSense
+  ~33% ⇒ 0.85, Chrome ~18% ⇒ 0.88–0.90; r = −0.94, n = 11) — reguła
+  stanowiska: podczas kolejki żadnych aplikacji okienkowych poza
+  terminalem. Skutek: 16 bootów 0.9355–0.9744, bramka zdrowia
+  18 pomiarów / 3 NO-GO / 0 STOP-ów. Duży skok −20…−25% nigdy
+  niezarejestrowany z telemetrią — przyczyna nieustalona.
+- Lekcje nogi: przesłanka dowodu ma być mierzona na wielkości, którą
+  dowód konsumuje (tu |p_corr − GT| per tick), na sterowniku
+  docelowym i na próbie rzędu ekspozycji bramki; każda połowa
+  przesłanki dostaje kryterium w literze; obwiednia niemonotoniczna
+  tam, gdzie fizyka jest monotoniczna, to sygnał za małej próby;
+  litera przyjęcia obserwacji wymaga rachunku pokrycia.
