@@ -1,0 +1,131 @@
+{
+ "STOP": "F_jeden nie odtwarza się w tolerancji 0.01 m (PROMPT_NAD2_S1 §1.4)",
+ "PRE_F_jeden": [
+  0.253,
+  0.329,
+  0.44,
+  0.442,
+  0.442
+ ],
+ "konwencja_timestamp_sample": {
+  "F_jeden": [
+   0.2562,
+   0.3376,
+   0.4445,
+   0.4527,
+   0.4527
+  ],
+  "opis": {
+   "0": {
+    "n": 551,
+    "max_wlasny": 0.2562,
+    "pole": 0.2562,
+    "F": 0.2562,
+    "regula": "wlasna"
+   },
+   "1": {
+    "n": 2630,
+    "max_wlasny": 0.3376,
+    "pole": 0.3376,
+    "F": 0.3376,
+    "regula": "wlasna"
+   },
+   "2": {
+    "n": 3034,
+    "max_wlasny": 0.4445,
+    "pole": 0.4445,
+    "F": 0.4445,
+    "regula": "wlasna"
+   },
+   "3": {
+    "n": 366,
+    "max_wlasny": 0.4527,
+    "pole": 0.4527,
+    "F": 0.4527,
+    "regula": "wlasna"
+   },
+   "4": {
+    "n": 20,
+    "max_wlasny": 0.3396,
+    "pole": 0.4527,
+    "F": 0.4527,
+    "regula": "n<100: max(wlasna, biezace nizszych, pula trybu)"
+   }
+  },
+  "rozbieznosc": [
+   0.0032,
+   0.0086,
+   0.0045,
+   0.0107,
+   0.0107
+  ]
+ },
+ "konwencja_timestamp": {
+  "F_jeden": [
+   0.2527,
+   0.3294,
+   0.44,
+   0.442,
+   0.442
+  ],
+  "opis": {
+   "0": {
+    "n": 551,
+    "max_wlasny": 0.2527,
+    "pole": 0.2527,
+    "F": 0.2527,
+    "regula": "wlasna"
+   },
+   "1": {
+    "n": 2630,
+    "max_wlasny": 0.3294,
+    "pole": 0.3294,
+    "F": 0.3294,
+    "regula": "wlasna"
+   },
+   "2": {
+    "n": 3034,
+    "max_wlasny": 0.44,
+    "pole": 0.44,
+    "F": 0.44,
+    "regula": "wlasna"
+   },
+   "3": {
+    "n": 366,
+    "max_wlasny": 0.442,
+    "pole": 0.442,
+    "F": 0.442,
+    "regula": "wlasna"
+   },
+   "4": {
+    "n": 20,
+    "max_wlasny": 0.3396,
+    "pole": 0.442,
+    "F": 0.442,
+    "regula": "n<100: max(wlasna, biezace nizszych, pula trybu)"
+   }
+  },
+  "rozbieznosc": [
+   -0.0003,
+   0.0004,
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "G_rozbieznosc": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "F_para_rozbieznosc": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "pre_sha256": "eea6fcc82b1a14b9dfacd710ec4c6c0f426bbbea34b549ab4c1511de9567e634"
+}

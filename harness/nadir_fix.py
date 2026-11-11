@@ -19,6 +19,12 @@ pozie ramy od pozycji manifestu; dalsza obserwacja odrzucana z powodem „rh”)
 kosz = ⌊r_h(najbliższy) / 2⌋ ∈ {0…3} — wejście bariery piły r03/nadir_shield.py.
 Para odrzucana na rzecz trybu 1 (powód w logu), gdy |skala − 1| > PARA_SKALA_MAX albo |δψ| > PARA_DPSI_MAX_DEG — strażnik
 spójności pary (S1: skala p50 ≈ 1, δψ p50 −4°), nie strojenie.
+PRE_NAD2 §3.1–3.2 (PROMPT_NAD2_S1 §1.1) — litera wybierana JAWNIE przełącznikiem `litera` (argument Rama; domyślnie z env
+NADIR_LITERA, brak ⇒ „NADIR1” = stara litera bez zmiany zachowania). Litera „NAD2”: bok ≥ 16 px, najbliższy znacznik r_h < 10 m,
+partner pary bez limitu r_h (największa baza), koszyk ⌊r_h/2⌋ ∈ {0…4}; T1 — poprawka jednym znacznikiem obraca wektor poziomy
+kamera→znacznik o δψ ostatniej PRZYJĘTEJ pary, jeśli para ma ≤ T1_WIEK_S (2 s); skala bez korekty; bramka przyjęcia (reszta)
+bez korekty. Datagram niesie tryb poprawki (pole „tryb”) i literę (pole „litera”, tylko przy NAD2 — przy NADIR1 datagram
+bajtowo jak dotąd).
 """
 from __future__ import annotations
 
@@ -37,6 +43,9 @@ EDGE, BOK_MIN = 0.10, 18.0
 MOUNT = np.array([0.0, 0.0, -0.215])       # montaż v2 pod płozami (ANEKS_NADIR-1), rama body FLU
 PARA_SKALA_MAX, PARA_DPSI_MAX_DEG = 0.20, 20.0
 R_H_MAX, KOSZ_M = 8.0, 2.0                 # ANEKS_NADIR-2 §2 (= r03/nadir_shield.R_H_MAX, KOSZ_M; asercja w proverze)
+LITERY = ("NADIR1", "NAD2")
+LITERA_ENV = "NADIR_LITERA"
+BOK_MIN_NAD2, R_H_NEAR_NAD2, T1_WIEK_S = 16.0, 10.0, 2.0   # PRE_NAD2 §3.1–3.2 (litera Z2 + korekta kursu T1)
 
 
 def rotm(q):
@@ -82,7 +91,10 @@ def fix_para(R, z_cam, obs):
 class Rama:
     """Producent: obserwacje → poprawka → Δ. Jeden obiekt na proces nadir_obs."""
 
-    def __init__(self, manifest=MANIFEST):
+    def __init__(self, manifest=MANIFEST, litera=None):
+        self.litera = os.environ.get(LITERA_ENV, "NADIR1") if litera is None else litera
+        assert self.litera in LITERY, self.litera
+        self.para_dpsi = None                  # NAD2/T1: (t_frame, δψ [rad]) ostatniej przyjętej pary
         man = json.load(open(manifest))
         self.zn = {z["id"]: z for z in man["znaczniki"]}
         self.s = man["s_m"]
@@ -105,12 +117,16 @@ class Rama:
         if ekf_q is None or ekf_pos is None:
             rec["powod"] = "brak_ekf"
             return self._stan(rec)
+        nad2 = self.litera == "NAD2"
+        if nad2:
+            rec["litera"] = "NAD2"
+        bok_min = BOK_MIN_NAD2 if nad2 else BOK_MIN
         Re = ekf_R(ekf_q)
         off = Re @ MOUNT
         z_cam = -ekf_pos[2] + off[2]
         pc = self.p_corr(ekf_pos)
         cam_en = np.array([pc[1], pc[0]]) + off[:2]                  # bieżąca poza ramy: kamera w ENU (E, N)
-        acc = []
+        acc, far = [], []
         for m in det:
             zn = self.zn.get(m["id"])
             if zn is None:
@@ -118,7 +134,7 @@ class Rama:
             u, v = m["uv"]
             if min(u / IW, 1 - u / IW, v / IH, 1 - v / IH) < EDGE:
                 rec["odrz"].append({"id": m["id"], "powod": "krawedz"}); continue
-            if m["bok"] < BOK_MIN:
+            if m["bok"] < bok_min:
                 rec["odrz"].append({"id": m["id"], "powod": "bok", "bok": m["bok"]}); continue
             r = ray_world(Re, u, v)
             if r[2] >= -1e-6:
@@ -128,20 +144,37 @@ class Rama:
             if reszta >= self.reszta_max:
                 rec["odrz"].append({"id": m["id"], "powod": "reszta", "reszta": round(reszta, 3)}); continue
             rh = float(np.hypot(zn["E"] - cam_en[0], zn["N"] - cam_en[1]))
+            if nad2:                                                  # PRE_NAD2 §3.1: najbliższy < 10 m, partner bez limitu
+                (acc if rh < R_H_NEAR_NAD2 else far).append((m, zn, rh, reszta))
+                continue
             if rh >= R_H_MAX:                                         # ANEKS_NADIR-2 §2
                 rec["odrz"].append({"id": m["id"], "powod": "rh", "rh": round(rh, 3)}); continue
             acc.append((m, zn, rh, reszta))
         if not acc:
+            for a in far:
+                rec["odrz"].append({"id": a[0]["id"], "powod": "rh_bez_bliskiego", "rh": round(a[2], 3)})
             rec["powod"] = "brak_przyjetych"
             return self._stan(rec)
         acc.sort(key=lambda a: a[2])
         near = acc[0]
-        cam1 = fix1(Re, z_cam, near[0]["uv"][0], near[0]["uv"][1], near[1])
+        if nad2:                                                      # PRE_NAD2 §3.2: T1 (obrót wektora poziomego o δψ pary)
+            u0, v0 = near[0]["uv"]
+            r0 = ray_world(Re, u0, v0)
+            hv = ((near[1]["z"] - z_cam) / r0[2]) * r0[:2]
+            if self.para_dpsi is not None and float(t_frame) - self.para_dpsi[0] <= T1_WIEK_S:
+                c_, s_ = math.cos(self.para_dpsi[1]), math.sin(self.para_dpsi[1])
+                hv = np.array([[c_, -s_], [s_, c_]]) @ hv
+                rec["t1"] = {"dpsi_deg": round(math.degrees(self.para_dpsi[1]), 3),
+                             "wiek_s": round(float(t_frame) - self.para_dpsi[0], 3)}
+            cam1 = np.array([near[1]["E"], near[1]["N"]]) - hv
+        else:
+            cam1 = fix1(Re, z_cam, near[0]["uv"][0], near[0]["uv"][1], near[1])
         rec["jeden"] = {"id": near[0]["id"], "rh_est": round(near[2], 3), "reszta": round(near[3], 3),
                         "p_ne": [round(float(cam1[1] - off[1]), 4), round(float(cam1[0] - off[0]), 4)]}
         p_en, tryb = cam1 - off[:2], "jeden"
-        if len(acc) >= 2:
-            part = max(acc[1:], key=lambda a: math.hypot(a[1]["E"] - near[1]["E"], a[1]["N"] - near[1]["N"]))
+        partnerzy = acc[1:] + far
+        if partnerzy:
+            part = max(partnerzy, key=lambda a: math.hypot(a[1]["E"] - near[1]["E"], a[1]["N"] - near[1]["N"]))
             obs = [(near[0]["uv"][0], near[0]["uv"][1], near[1]), (part[0]["uv"][0], part[0]["uv"][1], part[1])]
             pp, dpsi, sk = fix_para(Re, z_cam, obs)
             rec["para"] = {"ids": [near[0]["id"], part[0]["id"]], "dpsi_deg": round(dpsi, 3), "skala": round(float(sk), 4),
@@ -150,6 +183,8 @@ class Rama:
                 rec["para"]["odrzucona"] = "spojnosc"
             else:
                 p_en, tryb = pp - off[:2], "para"
+                if nad2:
+                    self.para_dpsi = (float(t_frame), math.radians(dpsi))
         p_fix_ne = [float(p_en[1]), float(p_en[0])]
         self.d_ne = [p_fix_ne[0] - ekf_pos[0], p_fix_ne[1] - ekf_pos[1]]
         self.t_fix = float(t_frame)
@@ -182,6 +217,7 @@ class RamaKlient:
         self.last = None
         self.p_fix = None                    # p_fix (N, E) ostatniej przyjętej poprawki
         self.kosz = None                     # koszyk r_h ostatniej przyjętej poprawki (wejście bariery piły)
+        self.tryb = None                     # PRE_NAD2 §3.2: tryb ostatniej przyjętej poprawki (para | jeden) — wejście tabeli U
         self.nowe = []                       # datagramy od ostatniego odbierz_nowe() — do logu ramy
 
     def drain(self):
@@ -205,6 +241,7 @@ class RamaKlient:
                 if m.get("ok"):
                     self.p_fix = m["p_fix_ne"]
                     self.kosz = m.get("kosz")
+                    self.tryb = m.get("tryb")
 
     def odbierz_nowe(self):
         n, self.nowe = self.nowe, []
