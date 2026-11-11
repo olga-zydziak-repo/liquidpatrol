@@ -997,3 +997,24 @@ CLOSED-BY-RECON (0 bootów)
   S1 w całości; P-NAD2-2 (0.80) litera bezpieczeństwa bez naruszeń;
   P-NAD2-3 (0.85) dostępność ≥ 10/12; P-NAD2-4 (0.45) dostępność
   12/12; P-NAD2-5 (0.60) bramka PASS; P-NAD2-6 (0.90) breach 0.
+
+## NADIR-II S1 — konwencja czasu FREEZE (ANEKS_NAD2-1, 11.11.2026)
+- STOP-NAD2-1-FREEZE (0 bootów): F_jeden z PRE nie odtworzyło się
+  w tolerancji (0.4527 wobec 0.442 m, +0.0107). Przyczyna: tabela
+  PRE łączyła dwie konwencje chwili porównania z GT — F_para
+  wykonawcy w timestamp_sample, F_jeden CC w timestamp (ok. 4 ms
+  później). ✗ projektowe CC: FREEZE złożony z liczb dwóch autorów
+  bez wspólnej definicji chwili; prompt reconu kazał podać obie
+  konwencje i nie wskazał kanonu. Tolerancja 0.01 m z promptu S1
+  zadziałała.
+- Decyzja: kanon nogi = timestamp_sample; F_jeden 0.2562 / 0.3376 /
+  0.4445 / 0.4527 / 0.4527 m (ratyfikacja NAD2-1). CC odtworzył obie
+  konwencje własnym kodem; w kanonie liczby CC i wykonawcy są
+  identyczne, także F pary (wyjaśnia różnicę 0.007 m z PRE §1.4).
+- Przedział osłony z τ + 0.012 s (wniosek wykonawcy 0.02 s
+  skorygowany: przy 0.02 nominalna kadencja przekracza krawędź
+  0.25 s w 12 z 27 253 ticków S4); REFUSE(τ*) przy τ ≥ 0.95 s; (B1)
+  sądzi wobec przedziału użytego przez osłonę.
+- Wykonawca: STOP bez wyboru konwencji pod wynik; stara litera
+  w nowym kodzie bez zmiany zachowania (W1 PASS; replay CC: 27 800
+  decyzji w 100%).
