@@ -1076,3 +1076,35 @@ CLOSED-BY-RECON (0 bootów)
   i ziarnem przy zgodnym prefiksie 200 s, inaczej wahadło po tym
   samym torze; bez skoków, bez zmian w harness; fallback nazwany:
   intruz stojący od 200 s.
+
+## NADIR-II — lot długi rozliczony (ANEKS_NAD2-4, 12.11.2026)
+- Lot L (c10_s01, 1 boot, poza budżetem nogi): 600.516 s bez GNSS,
+  0 REFUSE w misji, B1–B4 bez naruszeń — B1 12 246 ticków, max
+  e_corr/U 0.412, max e_corr 0.54 m; margines do R_E min 7.635 m;
+  zapas bariery min 1.864 m; intruz w ruchu cały lot (wahadło,
+  600 m drogi). CC przeliczył całość własnym kodem z repo; zgodność
+  z raportem pełna.
+- Okna po 100 s: e_corr p95 0.19–0.25 m przez cały lot (płasko)
+  przy błędzie własnym EKF rosnącym ok. 2.9 m na 100 s, do 20.6 m;
+  składniki przesłanki bez trendu (przyrost do 0.49, zakotwiczenie
+  do 0.67 dopuszczalnego). Bias kursu z par: −0.04° → +5.28°;
+  +2.1° na 100 s w pierwszych 300 s, w ostatnich 300 s trend
+  nieodróżnialny od zera (+0.2, przedział 90%: −0.5 do +0.6).
+  Rama koryguje pozycję, nie kurs; po 600 s niezmierzone.
+- P-NAD2-L1 (0.70) ✓, P-NAD2-L2 (0.85) ✓, P-NAD2-L3 (0.75) ✓,
+  P-NAD2-L4 (0.60) ✗ (5.28° > 3°). Lot długi: 3/4 przy sumie szans
+  2.90.
+- ✗ projektowe CC: próg ciągłości 1e-6 m (ANEKS_NAD2-3) poniżej
+  rozdzielczości generatora (początki odcinków zaokrąglane do
+  1e-4 m) — przedłużenie generatorem odpadło o 2e-5 m; ten sam próg
+  odrzuciłby 5 z 80 ruchomych epizodów manifestu bramki. Poleciało
+  wahadło, bez szkody dla pomiaru. Lekcja: tolerancja testu nie może
+  być ostrzejsza niż rozdzielczość przyrządu, który sprawdza; próg
+  kalibruje się na wzorze już zaakceptowanym.
+- Wykonawca: STOP przed lotem zamiast intruza ze skokami; pozycja 2
+  literą aneksu, bez naginania progu; zmiana własnego kryterium
+  w teście na sucho nazwana w raporcie. Usterka etykiety:
+  pozycja_aneksu = 1 w testy_s4.json przy manifeście wahadła.
+- Stan wątku lotu bez GNSS: bez znaczników 22 s z twierdzeniem (2d);
+  nad polem znaczników dowód ze sprawdzoną przesłanką — 12 lotów
+  po 110 s i jeden lot 600 s.

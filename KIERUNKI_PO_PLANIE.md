@@ -798,3 +798,21 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   geometrii, 0 bootów), NADIR (110 s zmierzone, dowód nieważny),
   NADIR-II (110 s pod ważnym dowodem). Breach 0 / REFUSE(POS)
   fałszywych 0 programowo bez zmian (~240 bootów programu).
+
+## Dopisek stanu katalogu — 12.11.2026 (CO-NAD2-4, ANEKS_NAD2-4)
+- **Lot długi NADIR-II wykonany** (pozycja z dopisku CO-NAD2-2):
+  600.5 s bez GNSS w jednym locie (c10_s01, intruz w ruchu cały
+  czas), 0 odmów w misji, przesłanka dowodu trzyma w 12 246 tickach
+  (zużycie do 41%), błąd pozycji poprawionej płaski (p95
+  0.19–0.25 m) przy błędzie własnym EKF do 20.6 m.
+- Nazwana granica: bias kursu po utracie GNSS dochodzi do ok. 5°
+  i w drugiej połowie lotu nie ma trendu; rama go nie koryguje,
+  przebieg po 600 s niezmierzony. Pozostałe granice bez zmian: SITL,
+  jedna sceneria, pełna widoczność znaczników; jeden lot nie
+  zastępuje próby.
+- Noga NADIR-II nie ma otwartych pozycji. Niezmierzone i nieotwarte:
+  inna sceneria i gorsza widoczność znaczników; bias kursu w lotach
+  dłuższych niż 600 s; zrywy EKF przy obrocie kadłuba (estymator
+  nietknięty). Nowa noga w tym wątku tylko na sygnał Olgi.
+- Breach 0 / REFUSE(POS) fałszywych 0 programowo bez zmian
+  (~240 bootów programu).
