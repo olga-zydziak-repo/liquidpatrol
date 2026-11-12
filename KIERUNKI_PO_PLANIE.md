@@ -778,3 +778,23 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   bezpieczeństwo i dostępność sądzone osobno (próg dostępności
   10/12). Świeża bramka 12 + 4, budżet ≤ 22 booty. Po FAIL bramki
   trzeciego podejścia w tej architekturze nie ma.
+
+## Dopisek stanu katalogu — 12.11.2026 (CO-NAD2-2, ANEKS_NAD2-2)
+- **NADIR-II — CLOSED, bramka PASS.** Lot po utracie GNSS nad polem
+  znaczników naziemnych pod dowodem zawierania, którego przesłanka
+  trzyma na świeżych lotach: 12/12 cięć × 110 s, 28 513 ticków,
+  0 przekroczeń przesłanki (zużycie do 37%), 0 odmów w misji,
+  margines do R_E min 6.43 m, 16/16 epizodów nominalnych czystych;
+  certy P9/P1/P5/P7_nad2 replikowane przez CC. Budżet 18/22.
+- Zakres: SITL, jedna sceneria, pełna widoczność znaczników;
+  przesłanka sprawdzona na 12 lotach, nie dowiedziona; bez znaczników
+  zostaje 22 s z twierdzeniem (2d); dowód nie ma limitu czasu,
+  zmierzone jest 110 s na lot.
+- Niezamknięte, nazwane: lot długi 600 s (PRE_NAD2 §5 S4, ≤ 2 booty,
+  na sygnał Olgi); inna sceneria i gorsza widoczność znaczników —
+  niezmierzone; zrywy EKF przy obrocie kadłuba — mechanizm częściowo
+  zmierzony, estymator nietknięty.
+- Wątek lotu bez GNSS: 2d (22 s z twierdzeniem), KOTW (granica
+  geometrii, 0 bootów), NADIR (110 s zmierzone, dowód nieważny),
+  NADIR-II (110 s pod ważnym dowodem). Breach 0 / REFUSE(POS)
+  fałszywych 0 programowo bez zmian (~240 bootów programu).

@@ -1018,3 +1018,37 @@ CLOSED-BY-RECON (0 bootów)
 - Wykonawca: STOP bez wyboru konwencji pod wynik; stara litera
   w nowym kodzie bez zmiany zachowania (W1 PASS; replay CC: 27 800
   decyzji w 100%).
+
+## NADIR-II — bramka i zamknięcie nogi (ANEKS_NAD2-2, 12.11.2026)
+- Smoke S2 (2 booty): passthrough bitowy 6405/6405; cięcie c11_s02 —
+  sprawdziany 100%, B1 max 0.359, 0 REFUSE w misji.
+- Bramka S3 PASS (16 bootów, wszystkie ważne): B1–B5 0 naruszeń w 28
+  epizodach; D1 12/12 przy progu 10. B1: 28 513 ticków, max
+  e_corr/U 0.374, max e_corr 0.50 m; margines do R_E min 6.43 m;
+  r_est = |p_corr| w 29 584/29 584 ticków KONT; nominały 16/16.
+  CC przeliczył całość własnym kodem z repo, w tym B4 z wyciągów
+  ULG; zgodność z raportem pełna.
+- P-NAD2-1 (0.75) — ✗ (śmierć S1 po literze: F_jeden nie odtworzyło
+  się; naprawa ANEKS_NAD2-1). P-NAD2-2 (0.80) ✓, P-NAD2-3 (0.85) ✓,
+  P-NAD2-4 (0.45) ✓, P-NAD2-5 (0.60) ✓, P-NAD2-6 (0.90) ✓ (18
+  bootów). Noga: 5/6 przy sumie szans 4.35.
+- Gdzie było ciasno: zapas bariery min 0.479 m (c08_s01) i 0.826 m
+  (c11_s01) — dostępność 12/12 zależała od realizacji trajektorii;
+  dwie klatki misji bez poprawki (τ max 0.380 s); horyzont prawdziwy
+  ponad τ + 0.012 s o 4 ms w jednym cięciu (dodatek z maksimum próby
+  nie jest obwiednią); składniki przesłanki w KONT do 0.47
+  (przyrost) i 0.67 (zakotwiczenie) zapasu.
+- Lekcje nogi: przesłanka mierzona na wielkości, którą dowód
+  konsumuje, z próby rzędu ekspozycji bramki i z zapasem na sumie,
+  przeszła świeże loty przy zużyciu 37%; obligacja wejścia w cercie
+  łapie klasę błędu, która w S4 przeszła niezauważona; chwila
+  porównania z GT ma jeden kanon dla wszystkich autorów liczb;
+  litera musi rozstrzygać remisy (partner pary przy równej bazie —
+  kanonem kolejność produkcji).
+- Proces: dwa starty bez bootu z wad kolejki; druga poprawka kolejki
+  (e6670f52) weszła po ręcznym zatrzymaniu, bez STOP-u i sygnału —
+  kod lotu nietknięty, werdykt bez wpływu; odtąd każda zmiana
+  narzędzia w trakcie kampanii przechodzi przez STOP.
+- Wykonawca: recon z kalibracją własnego replayu, znalezisko r_est,
+  STOP na konwencji czasu zamiast obejścia, obligacja wejścia jako
+  wydzielony moduł lotu, kampania 16/16.
