@@ -807,3 +807,107 @@ Całe v7 wypalone po angielsku, akty 1–7, karty i plansza. Oznaczenia, które 
 
 Klipy EN w `clips_en/` zostają na dysku (celowe `??`). W commicie: `tools/democ_en.py`, `clips_en/teksty_*.json`,
 logi renderu, ten dopisek. Wersje PL v7 zostają jako historia montażu. **Do publikacji idzie wersja EN** (po seansie CC).
+
+## Montaż v7.1 EN (dopisek po seansie CC nad v7 EN; wykonanie PROMPT_DEMOC_V71, sha256 5f466f84…; wszystko wyżej NIETKNIĘTE)
+
+**§0 bramka.** origin/master = `ca428a89` (DEMOC-7-EN), `origin/master..HEAD` puste, porcelain czysty poza nazwanymi `??`.
+Zero bootów, zero SITL: te same klatki, dane, segmenty tempa i czasy aktów. Oryginały v1–v7 i `democ_en.py` nietknięte;
+narzędzia v7.1 to nowe pliki: kopie `*_71.py`, przyrząd `democ_kolizje.py`, sterownik `democ_en_71.py` (`UKLAD=v7`
+woła oryginały, `UKLAD=v71` kopie).
+
+**§3 przyrząd.** `democ_kolizje.py` rejestruje w kolejności rysowania:
+- napisy: PIL `textbbox`; `cv2.putText` z `getTextSize` (linia bazowa wliczona). Panel mapy 640×640 przeliczany na
+  klatkę z przesunięciem (0, 56), klatka nadir 480×640 w skali 0.625 od (660, 690);
+- wypełnienia: PIL `rectangle` z alfą ≥ 200, `cv2.rectangle` wypełniony, region `draw_brain`.
+
+Przy zapisie klatki: cień scalony z napisem; napis zasłonięty w całości później usunięty, częściowo = kolizja; przecięcia
+napis–napis (pole > 0) i wyjścia poza panel (najmniejszy panel z tabeli kroku zawierający lewy górny róg napisu). Etap 1
+klipów z mini-mózgiem dołączany do etapu 2 po numerze klatki. Klip aktu 2 w akcie 5 to grafika.
+
+**`kolizje_v7.json`** (stan v7 EN):
+- 3240 kolizji: napis–napis 2011, poza panelem 847, poza panelami 382.
+- Per klip: akt1 46, akt2 263, akt3 148, akt4a 192, akt4b 538, akt5 1910, akt6 33, akt7 A 98, akt7 B 0, karty 12.
+- Sprawdzenie §1, wszystkie przedziały trafione (**PASS**, bez STOP-u). Klatki kolizji ±2 s:
+
+| klasa | przedział (s filmu) i kolizja | klatki |
+|---|---|---|
+| K1 | 120–122 DECOY ↔ ORBIT | 35 |
+| K1 | 138–146 DECOY ↔ ORBIT | 93 |
+| K1 | 148–156 REVOKED ↔ PHASE | 291 |
+| K2 | 124 TRACK → APPROACH ↔ DISTANCE | 17 |
+| K3 | 48–56 home ↔ intruder | 114 |
+| K3 | 84–94 drone ↔ SHIELD REFUSE | 113 |
+| K3 | 96–104 home ↔ drone | 115 |
+| K3 | 124 home ↔ drone | 25 |
+| K5 | 160–194 wartości ↔ vn/ve/vd | 744 |
+
+Poza §1 przyrząd znalazł też:
+- akt 5: nagłówki „STATE SPACE…” poza panelami, „LIVE NETWORK…” i „|r| = …” poza panelem wykresu (po 382 klatki);
+- akt 7 A: ID znaczników przy krawędzi wkładki nadir poza panelem i na tytule wkładki; „single marker” poza wkładką;
+- karty: 12 przecięć, które są **artefaktem przyrządu, nie filmu**. `democ_en.karty_en` rysuje trzy karty przed pierwszym
+  zapisem, więc ich napisy trafiały do jednej klatki; w v7.1 karty są rysowane i zapisywane po kolei (hunk §3 sterownika).
+
+**`kolizje_v71.json` = 0** (po zmianach; agregacja z asercją zera przed montażem). Rejestry per krok:
+`kolizje_rejestry/{v7,v71}/*.json.gz`.
+
+**Zmiany układu per reguła §2:**
+- **§2.2** panel reguły aktu 4: wiersze warunków co 25 px. Etykieta stanu we własnym wierszu, krój B36, a gdy nie mieści się
+  w 600 px — B28 (78%). PHASE od x = 24/110, DISTANCE od x = 372 (odstęp ≥ 16 px). Wartość fazy w kroju 30 → 23 px (≥ 75%),
+  a jeśli nadal za szeroka, DISTANCE w następnym wierszu.
+- **§2.3** mapa (`democ_topdown_71.etykiety`, a dla aktu 4 kopia w `Panel4`):
+  - osiem położeń wokół punktu; przeszkody: inne etykiety, znaczniki punktów, napis strefy, „N”, stopka;
+  - pierwszeństwo: zdarzenie > drone > intruder/decoy/target > home;
+  - półprzezroczysta podkładka pod etykietą; etykiety mierzone po tłumaczeniu (`cv2.getTextSize` podmieniony w sterowniku);
+  - etykieta znika tylko przy braku miejsca: „home” w 9 klatkach aktu 2, „drone” w 34 klatkach aktu 3. W akcie 3 przy
+    zgrupowanych SHIELD REFUSE / TOUCHDOWN / TARGET LOCK dla „drone” nie ma żadnego z ośmiu położeń, nawet bez etykiet
+    o niższym pierwszeństwie.
+- **§2.4** mini-mózg (akty 1, 2, 4a, 4b, 6, 7): tytuł w pasku nad panelem, podpis pod panelem, oba na podkładce; pole neuronów
+  bez napisów. Tytuł nad panelem to moja poprawka po kontaktówce (ta sama klasa co K4: tytuł leżał na górnym rzędzie neuronów).
+- **§2.5** akt 5:
+  - „vn +0.0” itd. w jednym wierszu, do prawej krawędzi panelu sieci;
+  - „|r| = …” do prawej w panelu wykresu, na podkładce;
+  - „direction / to target” 8 px od kompasu;
+  - „STATE SPACE…” wewnątrz panelu PCA, 12 px od dołu („stable cycle…” 16 px wyżej);
+  - „LIVE NETWORK…” wewnątrz panelu sieci, 6 px od góry.
+- **§2.6** akt 6: tarcza wiatru w (582, 582) r 46 poza okręgiem strefy. Etykiety wiatru i opis strzałki w lewym dolnym rogu,
+  z asercją odległości od środka strefy. Wykres porywu od x = 60, opisy „3.6” / „0.4” na lewo od obszaru krzywej.
+- **§2.1** (akt 7, poza listą §1): ID znacznika na wkładce nadir rysowane tylko, gdy mieści się w obrazie (zarys znacznika
+  zostaje zawsze); etykieta trybu dosunięta do prawej krawędzi wkładki.
+- **§2.7:** teksty bez zmian poza §5, tryb ścisły tłumaczenia bez zmian.
+
+**Diffy kopii wobec oryginałów** (każdy hunk przypisany; sprawdzone skryptem — w dodanych liniach każdego hunku jest znacznik §
+albo nagłówek kopii):
+- **`democ_topdown_71.py`** (`1754c028d99f9ef1`) wobec `democ_topdown.py`: 8 hunków, 66 linii — `-2 +2,5` nagłówek/§1/§2.3; `-38,0 +43,40` §2.3; `-130 +174,2` §2.3; `-134,2 +179` §2.3; `-141,2 +185` §2.3; `-152,2 +195` §2.3; `-162 +204` §2.3; `-168,2 +210,4` §2.3.
+- **`democ_overlay_v2_71.py`** (`aa359f829366ade9`) wobec `democ_overlay_v2.py`: 2 hunków, 7 linii — `-2 +2,4` nagłówek/§2.3; `-31 +34` §2.3.
+- **`democ_overlay_v31_71.py`** (`9f8efcb0666ec87c`) wobec `democ_overlay_v31.py`: 11 hunków, 49 linii — `-2 +2,7` nagłówek/§2.2/§2.3; `-50,0 +57,2` §2.2; `-169 +177,2` §2.3; `-172,2 +181` §2.3; `-179,2 +187` §2.3; `-186,2 +193,3` §2.3; `-331 +339` §2.3; `-445 +453` §2.2; `-450 +458` §2.2; `-457 +465,2` §2.2; `-476,5 +485,11` §2.2.
+- **`democ_overlay_v5_71.py`** (`4d17e35818fbd5d1`) wobec `democ_overlay_v5.py`: 8 hunków, 38 linii — `-2 +2,8` nagłówek/§2.4/§2.5; `-167,2 +174,4` §2.4; `-287 +296` §2.5; `-299,2 +308,2` §2.5; `-302 +311` §2.5; `-323,2 +332,4` §2.5; `-326 +337` §2.5; `-331,4 +342,3` §2.5.
+- **`democ_overlay_v6_71.py`** (`ea86f2c486485ddd`) wobec `democ_overlay_v6.py`: 8 hunków, 44 linii — `-2 +2,8` nagłówek/§2.3/§2.4/§2.5/§2.6; `-38 +45` §2.3; `-40 +47` §2.4; `-113,0 +121,3` §2.6; `-118,3 +128,4` §2.6; `-212 +223` §2.6; `-227,3 +238,6` §2.6; `-252,4 +266,6` §2.4/§2.6.
+- **`democ_overlay_v7_71.py`** (`a784b56d70a57b31`) wobec `democ_overlay_v7.py`: 8 hunków, 52 linii — `-2 +2,9` nagłówek/§2/§2.1/§2.4/§2.5/§4/§6; `-45 +53,2` §2.4/§4; `-103,0 +113,21` §4; `-320,2 +350,4` §2.1; `-337 +369` §4; `-339,0 +372` §4; `-390 +423,2` §2.1; `-408,2 +442,4` §2.4.
+- **`democ_en_71.py`** (`2a26c66813a8a87c`) wobec `democ_en.py`: 18 hunków, 141 linii — `-2 +2,6` nagłówek/§1/§2/§3/§4/§5; `-25 +30,2` §3; `-219,0 +226,2` §2.3; `-225,0 +234,11` §2/§4; `-229 +248` §2/§6; `-231,4 +250,4` §2/§4/§6; `-236 +255` §2/§4/§6; `-238,9 +257,9` §2/§4/§6; `-255 +274,2` §5; `-270 +290` §2/§5; `-272,4 +292,5` §3; `-288 +309` §6; `-298,2 +319,2` §6; `-303,0 +325,15` §3; `-306 +342` §3; `-310,0 +347` §3; `-316 +353,45` §1/§3; `-320,0 +402,4` §3.
+
+**§4 mini-mózg w akcie 7.**
+- Adapter `rep_nad2` w `democ_overlay_v7_71.py`: 3131 wierszy `demo.jsonl`, `own_pos_ned` := `p_corr` z `rama.jsonl`
+  po (epizod, tick), komplet (brak wiersza ramy ⇒ STOP, nie zaszło). Potem `replay_episode(…, "ncp", fantom=True)`.
+- **Kotwica: p50 5.65·10⁻⁴, p95 1.163·10⁻³, max 2.26·10⁻³ m/s** ≤ 5·10⁻³ ⇒ mini-mózg wchodzi do części A.
+- Różnica p95 wobec odniesienia CC (1.16·10⁻³): 3·10⁻⁶ < 2·10⁻⁴.
+- Znalezisko (bez zmiany kodu lotu): w trybie NAD2 `own_pos_ned` z `demo.jsonl` nie jest wejściem sieci; wejściem jest
+  `p_corr` z `rama.jsonl`.
+
+**§5 plansza:** „Zero zone breaches and zero false refusals in ~240 simulation runs.”, reszta bez zmian.
+
+**§6 wyjścia.** Długości jak v7: 308.0 s i 68.7 s. Liczby klatek aktów jak w v7. Kotwice akt 5 / akt 6 bez zmian
+(1.18·10⁻³ / 1.16·10⁻³). Asercje części B bez zmian. Render powtórzony od zera końcowymi narzędziami: sumy wideo identyczne.
+Kontaktówka `kontaktowka_v71.jpg` (w commicie): wycinki przed (v7 EN) i po (v7.1 EN) dla K1, K2, K3 (akty 2, 3, 4a),
+K4 (akt 1), K5, K6 (mapa i pasek porywu) oraz mini-mózg w akcie 7. Kolizje napis–grafika (K4, K6, krzywe w K5, „drone” na
+śladzie) widać na wycinkach.
+
+| plik (na dysku + kopia na pulpicie) | sha256 |
+|---|---|
+| `results/DEMO_C/DEMO_C_v71_EN.mp4` (308.0 s, 102 MB) | `f49233fa89ada764ad5b5b4aa88c95a38da825749cad79f172380f54ba358dc2` |
+| `results/DEMO_C/DEMO_C_v71_GPS_EN.mp4` (68.7 s, 27 MB) | `131686d6f0f3756698424096236078fc0573fa6191166cc9926a0bf9ddbedd6a` |
+
+**W commicie:** 8 nowych narzędzi (`democ_kolizje.py`, `democ_en_71.py`, `democ_topdown_71.py`, `democ_overlay_v{2,31,5,6,7}_71.py`),
+`kolizje_v7.json`, `kolizje_v71.json`, `kolizje_rejestry/`, mapy napisów `clips_en71/v71/teksty_*.json`,
+`kontaktowka_v71.jpg`, ten dopisek. Klipy i kontrolny render v7 w `clips_en71/` zostają na dysku (`??`).
+Edycje istniejących plików: wyłącznie ten dopisek. **Na zewnątrz idzie v7.1 EN, nie v7.**
+**Push = Olga („wypchnięte” — CC ogląda v7.1 z załącznika).** **STOP-DEMOC-71.**
