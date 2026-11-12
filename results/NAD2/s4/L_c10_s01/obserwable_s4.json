@@ -1,0 +1,359 @@
+{
+ "boot": "L_c10_s01",
+ "t_inj_sim": 176.3,
+ "zejscie_planowe_sim": 776.816,
+ "kontynuacja_s": 600.516,
+ "przyziemienie": true,
+ "refuse": [],
+ "B": {
+  "B1": {
+   "ok": true,
+   "przekroczenia": 0,
+   "ticki_utraty": 12270,
+   "max_e_do_U": 0.4117,
+   "ticki_ocenione": 12246
+  },
+  "B2": {
+   "ok": true,
+   "margines_min": 7.635
+  },
+  "B3": {
+   "ok": true,
+   "zle": 0,
+   "ticki_utraty": 12270
+  },
+  "B4": {
+   "ok": true,
+   "nav": {
+    "nav_poza_14": [],
+    "failsafe_max": 0,
+    "ok": true
+   },
+   "refuse_pos": 0,
+   "refuse_pos_falszywe": 0,
+   "refuse_pos_zgodne_z_regula": 0
+  }
+ },
+ "D1": {
+  "dostepne": true,
+  "kontynuacja_od_t_inj_s": 600.516,
+  "frac_track": 1.0,
+  "frac_pasmo": 0.98,
+  "refuse_misja": 0
+ },
+ "przedzialy_100s": {
+  "000": {
+   "e_corr": {
+    "p50": 0.1377,
+    "p95": 0.2533,
+    "max": 0.4473,
+    "n": 2016
+   },
+   "max_e_do_U": 0.3458,
+   "a_max_do_1_5F": 0.6687,
+   "przyrost_max_do_1_5G": 0.3395,
+   "bias_kursu_p50_deg": -0.035,
+   "n_par": 500,
+   "ekf_wlasny": {
+    "p50": 2.3738,
+    "max": 3.6643
+   },
+   "zapas_bariery_min": 2.445,
+   "r_est_max": 23.9481,
+   "tau_max": 0.224,
+   "przedzialy": {
+    "0": 2016
+   },
+   "tryby": {
+    "para": 2016
+   },
+   "refuse_ticki": 0,
+   "ticki": 2016,
+   "klatki_bez_poprawki": 0,
+   "klatki": 500,
+   "track": 1.0,
+   "pasmo": 0.965,
+   "cs_opt_flow": 1.0,
+   "cs_gnss_pos": 0.0,
+   "nav_state": [
+    14
+   ],
+   "tempo": 0.968
+  },
+  "100": {
+   "e_corr": {
+    "p50": 0.0947,
+    "p95": 0.2025,
+    "max": 0.3991,
+    "n": 2014
+   },
+   "max_e_do_U": 0.3086,
+   "a_max_do_1_5F": 0.4847,
+   "przyrost_max_do_1_5G": 0.3049,
+   "bias_kursu_p50_deg": 2.681,
+   "n_par": 500,
+   "ekf_wlasny": {
+    "p50": 4.8473,
+    "max": 9.145
+   },
+   "zapas_bariery_min": 3.5617,
+   "r_est_max": 22.7709,
+   "tau_max": 0.228,
+   "przedzialy": {
+    "0": 2014
+   },
+   "tryby": {
+    "para": 2014
+   },
+   "refuse_ticki": 0,
+   "ticki": 2014,
+   "klatki_bez_poprawki": 0,
+   "klatki": 500,
+   "track": 1.0,
+   "pasmo": 0.987,
+   "cs_opt_flow": 1.0,
+   "cs_gnss_pos": 0.0,
+   "nav_state": [
+    14
+   ],
+   "tempo": 0.9701
+  },
+  "200": {
+   "e_corr": {
+    "p50": 0.0936,
+    "p95": 0.1957,
+    "max": 0.5325,
+    "n": 2011
+   },
+   "max_e_do_U": 0.4117,
+   "a_max_do_1_5F": 0.4638,
+   "przyrost_max_do_1_5G": 0.4909,
+   "bias_kursu_p50_deg": 3.804,
+   "n_par": 499,
+   "ekf_wlasny": {
+    "p50": 8.4564,
+    "max": 11.8249
+   },
+   "zapas_bariery_min": 4.2841,
+   "r_est_max": 22.1091,
+   "tau_max": 0.232,
+   "przedzialy": {
+    "0": 2011
+   },
+   "tryby": {
+    "para": 2007,
+    "jeden": 4
+   },
+   "refuse_ticki": 0,
+   "ticki": 2011,
+   "klatki_bez_poprawki": 0,
+   "klatki": 500,
+   "track": 1.0,
+   "pasmo": 1.0,
+   "cs_opt_flow": 1.0,
+   "cs_gnss_pos": 0.0,
+   "nav_state": [
+    14
+   ],
+   "tempo": 0.9711
+  },
+  "300": {
+   "e_corr": {
+    "p50": 0.0807,
+    "p95": 0.1928,
+    "max": 0.5375,
+    "n": 2013
+   },
+   "max_e_do_U": 0.335,
+   "a_max_do_1_5F": 0.3708,
+   "przyrost_max_do_1_5G": 0.4604,
+   "bias_kursu_p50_deg": 5.044,
+   "n_par": 497,
+   "ekf_wlasny": {
+    "p50": 10.9165,
+    "max": 15.0246
+   },
+   "zapas_bariery_min": 3.8949,
+   "r_est_max": 22.4982,
+   "tau_max": 0.4,
+   "przedzialy": {
+    "0": 2009,
+    "1": 4
+   },
+   "tryby": {
+    "para": 2005,
+    "jeden": 8
+   },
+   "refuse_ticki": 0,
+   "ticki": 2013,
+   "klatki_bez_poprawki": 1,
+   "klatki": 500,
+   "track": 1.0,
+   "pasmo": 0.96,
+   "cs_opt_flow": 1.0,
+   "cs_gnss_pos": 0.0,
+   "nav_state": [
+    14
+   ],
+   "tempo": 0.971
+  },
+  "400": {
+   "e_corr": {
+    "p50": 0.1107,
+    "p95": 0.2473,
+    "max": 0.3751,
+    "n": 2008
+   },
+   "max_e_do_U": 0.29,
+   "a_max_do_1_5F": 0.4939,
+   "przyrost_max_do_1_5G": 0.2991,
+   "bias_kursu_p50_deg": 4.511,
+   "n_par": 500,
+   "ekf_wlasny": {
+    "p50": 13.1025,
+    "max": 16.5119
+   },
+   "zapas_bariery_min": 1.8643,
+   "r_est_max": 24.5289,
+   "tau_max": 0.228,
+   "przedzialy": {
+    "0": 2008
+   },
+   "tryby": {
+    "para": 2008
+   },
+   "refuse_ticki": 0,
+   "ticki": 2008,
+   "klatki_bez_poprawki": 0,
+   "klatki": 500,
+   "track": 1.0,
+   "pasmo": 0.97,
+   "cs_opt_flow": 1.0,
+   "cs_gnss_pos": 0.0,
+   "nav_state": [
+    14
+   ],
+   "tempo": 0.9729
+  },
+  "500": {
+   "e_corr": {
+    "p50": 0.0915,
+    "p95": 0.2028,
+    "max": 0.3667,
+    "n": 2005
+   },
+   "max_e_do_U": 0.2835,
+   "a_max_do_1_5F": 0.4347,
+   "przyrost_max_do_1_5G": 0.3018,
+   "bias_kursu_p50_deg": 5.282,
+   "n_par": 500,
+   "ekf_wlasny": {
+    "p50": 17.0303,
+    "max": 20.5935
+   },
+   "zapas_bariery_min": 3.9956,
+   "r_est_max": 22.337,
+   "tau_max": 0.228,
+   "przedzialy": {
+    "0": 2005
+   },
+   "tryby": {
+    "para": 2005
+   },
+   "refuse_ticki": 0,
+   "ticki": 2005,
+   "klatki_bez_poprawki": 0,
+   "klatki": 500,
+   "track": 1.0,
+   "pasmo": 1.0,
+   "cs_opt_flow": 1.0,
+   "cs_gnss_pos": 0.0,
+   "nav_state": [
+    14
+   ],
+   "tempo": 0.9756
+  },
+  "600": {
+   "e_corr": {
+    "p50": 0.0642,
+    "p95": 0.1145,
+    "max": 0.1185,
+    "n": 10
+   },
+   "max_e_do_U": 0.0961,
+   "a_max_do_1_5F": 0.2697,
+   "przyrost_max_do_1_5G": 0.2027,
+   "bias_kursu_p50_deg": 4.586,
+   "n_par": 3,
+   "ekf_wlasny": {
+    "p50": 15.3876,
+    "max": 15.6319
+   },
+   "zapas_bariery_min": 16.4423,
+   "r_est_max": 9.9508,
+   "tau_max": 0.168,
+   "przedzialy": {
+    "0": 10
+   },
+   "tryby": {
+    "para": 10
+   },
+   "refuse_ticki": 0,
+   "ticki": 10,
+   "klatki_bez_poprawki": 0,
+   "klatki": 3,
+   "track": 1.0,
+   "pasmo": 1.0,
+   "cs_opt_flow": null,
+   "cs_gnss_pos": null,
+   "nav_state": [
+    14
+   ],
+   "tempo": 0.9659
+  },
+  "zejscie": {
+   "e_corr": {
+    "p50": 0.1078,
+    "p95": 0.1785,
+    "max": 0.2342,
+    "n": 169
+   },
+   "max_e_do_U": 0.1899,
+   "a_max_do_1_5F": 0.3977,
+   "przyrost_max_do_1_5G": 0.2574,
+   "bias_kursu_p50_deg": 4.987,
+   "n_par": 8,
+   "ekf_wlasny": {
+    "p50": 16.3636,
+    "max": 16.7162
+   },
+   "zapas_bariery_min": 14.928,
+   "r_est_max": 9.8724,
+   "tau_max": 2.224,
+   "przedzialy": {
+    "0": 153,
+    "1": 4,
+    "2": 4,
+    "3": 4,
+    "4": 4,
+    "None": 24
+   },
+   "tryby": {
+    "para": 36,
+    "jeden": 157
+   },
+   "refuse_ticki": 26,
+   "ticki": 193,
+   "klatki_bez_poprawki": 82,
+   "klatki": 119,
+   "track": null,
+   "pasmo": null,
+   "cs_opt_flow": 1.0,
+   "cs_gnss_pos": 0.0,
+   "nav_state": [
+    14
+   ],
+   "tempo": 0.9791
+  }
+ }
+}

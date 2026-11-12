@@ -1,0 +1,38 @@
+{
+ "rodzaj": "ciecie",
+ "ok": {
+  "s1": true,
+  "s2": true,
+  "s3": true
+ },
+ "szczegoly": {
+  "s1": {
+   "klatki": 3941,
+   "zgodne": 3941,
+   "max_dp_fix_m": 0.0,
+   "poprawki_bez_trybu_lub_litery": 0,
+   "przyklady": [],
+   "ok": true
+  },
+  "s2": {
+   "ticki_utraty": 12246,
+   "R_k_niezgodne": 0,
+   "poprawki_w_obs": 3213,
+   "poprawki_bez_trybu_lub_litery": 0,
+   "ok": true
+  },
+  "s3": {
+   "ticki_utraty": 12270,
+   "zle_utrata": 0,
+   "ticki_nominal": 700,
+   "zle_nominal": 0,
+   "pierwszy_tick_utraty": {
+    "tick": 700,
+    "sim": 176.364,
+    "rama": "corr"
+   },
+   "ok": true
+  }
+ },
+ "przyrzad_ok": true
+}

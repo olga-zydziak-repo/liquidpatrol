@@ -1,0 +1,122 @@
+{
+ "boot": "L_c10_s01",
+ "t_inj_sim": 176.3,
+ "zejscie_planowe_sim": 776.816,
+ "kontynuacja_s": 600.516,
+ "przyziemienie": true,
+ "refuse": [],
+ "B": {
+  "B1": {
+   "ok": true,
+   "przekroczenia": 0,
+   "ticki_utraty": 12270,
+   "max_e_do_U": 0.4117,
+   "ticki_ocenione": 12246
+  },
+  "B2": {
+   "ok": true,
+   "margines_min": 7.635
+  },
+  "B3": {
+   "ok": true,
+   "zle": 0,
+   "ticki_utraty": 12270
+  },
+  "B4": {
+   "ok": true,
+   "nav": {
+    "nav_poza_14": [],
+    "failsafe_max": 0,
+    "ok": true
+   },
+   "refuse_pos": 0,
+   "refuse_pos_falszywe": 0,
+   "refuse_pos_zgodne_z_regula": 0
+  }
+ },
+ "D1": {
+  "dostepne": true,
+  "kontynuacja_od_t_inj_s": 600.516,
+  "frac_track": 1.0,
+  "frac_pasmo": 0.98,
+  "refuse_misja": 0
+ },
+ "przedzialy_100s": {
+  "ostatnie_100": {
+   "e_corr": {
+    "p50": 0.0913,
+    "p95": 0.2028,
+    "max": 0.3667,
+    "n": 2005
+   },
+   "max_e_do_U": 0.2835,
+   "a_max_do_1_5F": 0.4347,
+   "przyrost_max_do_1_5G": 0.3018,
+   "bias_kursu_p50_deg": 5.282,
+   "n_par": 500,
+   "ekf_wlasny": {
+    "p50": 17.0303,
+    "max": 20.5935
+   },
+   "zapas_bariery_min": 3.9956,
+   "r_est_max": 22.337,
+   "tau_max": 0.228,
+   "przedzialy": {
+    "0": 2005
+   },
+   "tryby": {
+    "para": 2005
+   },
+   "refuse_ticki": 0,
+   "ticki": 2005,
+   "klatki_bez_poprawki": 0,
+   "klatki": 500,
+   "track": 1.0,
+   "pasmo": 1.0,
+   "cs_opt_flow": 1.0,
+   "cs_gnss_pos": 0.0,
+   "nav_state": [
+    14
+   ],
+   "tempo": 0.9755
+  },
+  "pierwsze_100": {
+   "e_corr": {
+    "p50": 0.1377,
+    "p95": 0.2533,
+    "max": 0.4473,
+    "n": 2016
+   },
+   "max_e_do_U": 0.3458,
+   "a_max_do_1_5F": 0.6687,
+   "przyrost_max_do_1_5G": 0.3395,
+   "bias_kursu_p50_deg": -0.035,
+   "n_par": 500,
+   "ekf_wlasny": {
+    "p50": 2.3738,
+    "max": 3.6643
+   },
+   "zapas_bariery_min": 2.445,
+   "r_est_max": 23.9481,
+   "tau_max": 0.224,
+   "przedzialy": {
+    "0": 2016
+   },
+   "tryby": {
+    "para": 2016
+   },
+   "refuse_ticki": 0,
+   "ticki": 2016,
+   "klatki_bez_poprawki": 0,
+   "klatki": 500,
+   "track": 1.0,
+   "pasmo": 0.965,
+   "cs_opt_flow": 1.0,
+   "cs_gnss_pos": 0.0,
+   "nav_state": [
+    14
+   ],
+   "tempo": 0.968
+  }
+ }
+}

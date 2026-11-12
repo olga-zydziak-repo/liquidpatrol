@@ -1,0 +1,70 @@
+[nadir_obs] img=72 proc=72 det=0 drop=0 flip=0
+[nadir_obs] img=145 proc=145 det=0 drop=0 flip=0
+[nadir_obs] img=219 proc=219 det=0 drop=0 flip=0
+[nadir_obs] img=293 proc=293 det=0 drop=0 flip=0
+[nadir_obs] img=366 proc=366 det=0 drop=0 flip=0
+[nadir_obs] img=439 proc=439 det=0 drop=0 flip=0
+[nadir_obs] img=512 proc=512 det=0 drop=0 flip=0
+[nadir_obs] img=586 proc=586 det=0 drop=0 flip=0
+[nadir_obs] img=656 proc=656 det=42 drop=0 flip=0
+[nadir_obs] img=729 proc=729 det=115 drop=0 flip=0
+[nadir_obs] img=800 proc=800 det=186 drop=0 flip=0
+[nadir_obs] img=873 proc=873 det=259 drop=0 flip=0
+[nadir_obs] img=945 proc=945 det=331 drop=0 flip=0
+[nadir_obs] img=1018 proc=1018 det=404 drop=0 flip=0
+[nadir_obs] img=1091 proc=1091 det=477 drop=0 flip=0
+[nadir_obs] img=1163 proc=1163 det=549 drop=0 flip=0
+[nadir_obs] img=1236 proc=1236 det=622 drop=0 flip=0
+[nadir_obs] img=1309 proc=1309 det=695 drop=0 flip=0
+[nadir_obs] img=1381 proc=1381 det=767 drop=0 flip=0
+[nadir_obs] img=1454 proc=1454 det=840 drop=0 flip=0
+[nadir_obs] img=1527 proc=1527 det=913 drop=0 flip=0
+[nadir_obs] img=1600 proc=1600 det=986 drop=0 flip=0
+[nadir_obs] img=1673 proc=1672 det=1058 drop=0 flip=0
+[nadir_obs] img=1745 proc=1745 det=1131 drop=0 flip=0
+[nadir_obs] img=1818 proc=1818 det=1204 drop=0 flip=0
+[nadir_obs] img=1891 proc=1891 det=1277 drop=0 flip=0
+[nadir_obs] img=1964 proc=1964 det=1350 drop=0 flip=0
+[nadir_obs] img=2037 proc=2037 det=1423 drop=0 flip=0
+[nadir_obs] img=2110 proc=2110 det=1496 drop=0 flip=0
+[nadir_obs] img=2182 proc=2182 det=1568 drop=0 flip=0
+[nadir_obs] img=2255 proc=2255 det=1641 drop=0 flip=0
+[nadir_obs] img=2328 proc=2328 det=1714 drop=0 flip=0
+[nadir_obs] img=2401 proc=2401 det=1787 drop=0 flip=0
+[nadir_obs] img=2474 proc=2474 det=1860 drop=0 flip=0
+[nadir_obs] img=2547 proc=2547 det=1933 drop=0 flip=0
+[nadir_obs] img=2619 proc=2619 det=2005 drop=0 flip=0
+[nadir_obs] img=2692 proc=2692 det=2078 drop=0 flip=0
+[nadir_obs] img=2765 proc=2765 det=2151 drop=0 flip=0
+[nadir_obs] img=2838 proc=2838 det=2224 drop=0 flip=0
+[nadir_obs] img=2910 proc=2910 det=2296 drop=0 flip=0
+[nadir_obs] img=2984 proc=2983 det=2369 drop=0 flip=0
+[nadir_obs] img=3056 proc=3056 det=2442 drop=0 flip=0
+[nadir_obs] img=3129 proc=3129 det=2515 drop=0 flip=0
+[nadir_obs] img=3203 proc=3203 det=2589 drop=0 flip=0
+[nadir_obs] img=3276 proc=3276 det=2662 drop=0 flip=0
+[nadir_obs] img=3349 proc=3349 det=2735 drop=0 flip=0
+[nadir_obs] img=3422 proc=3422 det=2808 drop=0 flip=0
+[nadir_obs] img=3495 proc=3495 det=2881 drop=0 flip=0
+[nadir_obs] img=3568 proc=3568 det=2954 drop=0 flip=0
+[nadir_obs] img=3642 proc=3642 det=3028 drop=0 flip=0
+[nadir_obs] img=3715 proc=3715 det=3101 drop=0 flip=0
+[nadir_obs] img=3788 proc=3788 det=3174 drop=0 flip=0
+[nadir_obs] img=3861 proc=3861 det=3245 drop=0 flip=0
+[nadir_obs] img=3935 proc=3935 det=3245 drop=0 flip=0
+Thread 0x00007c09a3fff6c0 (most recent call first):
+  File "/usr/lib/python3.12/threading.py", line 359 in wait
+  File "/usr/lib/python3.12/queue.py", line 180 in get
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 127 in worker
+  File "/usr/lib/python3.12/threading.py", line 1010 in run
+  File "/usr/lib/python3.12/threading.py", line 1073 in _bootstrap_inner
+  File "/usr/lib/python3.12/threading.py", line 1030 in _bootstrap
+
+Current thread 0x00007c09c6706740 (most recent call first):
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 781 in _wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 877 in wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 907 in _spin_once_impl
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 926 in spin_once
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 211 in main
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 225 in <module>
+[nadir_obs] DONE {"n_img": 3941, "n_drop": 0, "n_proc": 3941, "n_det_klatki": 3245, "flip_hits": 0, "n_fix": 3244, "det_ms": {"p50": 4.2695550073403865, "p95": 7.095006003510207, "max": 11.7218800005503}, "zamkniecie": "koniec_petli", "mono": 74080.679}
