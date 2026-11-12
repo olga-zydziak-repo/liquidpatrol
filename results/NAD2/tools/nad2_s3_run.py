@@ -21,6 +21,7 @@ Po każdym boocie: wyciąg ULG (nad2_ulg), analizator (nad2_analyze: B1–B5, D1
 zdarzenie breach drivera albo B2 margines ≤ 0; REFUSE(POS) fałszywy = przed cięciem / w nominale, z trace albo analizatora).
 Naruszenie litery B1–B5 / D1 nie jest STOPem: zapis, kampania dolatuje siatkę.
 Po STOP-NAD2-3-GUARD (decyzja Olgi 12.11): env-block (rc 3, nie boot) ⇒ kolejna próba pod wolną nazwą (stub launchera zostaje), ≤ 4.
+Po zawieszeniu c05_s01 (12.11): bramka zdrowia w procesie potomnym (wątki gz-transport przyrządu nie zostają w kolejce).
 Użycie: nad2_s3_run.py [--sucho]   (--sucho: plan i stan księgi, 0 bootów). Wyjście: kampania_s3.log, kampania_s3.json.
 """
 import json
@@ -76,20 +77,32 @@ def wolna_nazwa(nm):
         n += 1
 
 
+BRAMKA_PY = """
+import json, os, sys
+sys.path[:0] = {sciezki!r}
+import nadir_s4_bramka as B
+B.OUT = {out!r}
+B.zegar_ok()
+r = B.przyrzad_a({tag!r}, tel={tel!r})
+print("WYNIK " + json.dumps({{k: r.get(k) for k in ("wariant", "tempo", "GO", "czolowka_operatora")}}, ensure_ascii=False, default=str))
+"""
+
+
 def bramka_zdrowia(name):
-    import nadir_s4_bramka as B
-    B.OUT = os.path.join(S3, "bramka")
+    """Przyrząd A w procesie potomnym: wątki gz-transport (ZMQ) przyrządu kończą się z nim, nie zostają w kolejce (po zawieszeniu
+    c05_s01: kolejka 2.2–2.6% CPU > 2.0 w proc_gate bootu przez 33 min)."""
     proby = []
     for k in range(3):
         if k:
             time.sleep(180)
-        B.zegar_ok()
         tag = f"{name}_g{k + 1}"
-        try:
-            r = B.przyrzad_a(tag, tel=bool(k))
-        except Exception as ex:
-            log(f"{name}: bramka zdrowia błąd {ex!r}")
+        kod = BRAMKA_PY.format(sciezki=[os.path.join(ROOT, "results/NADIR/tools"), os.path.join(ROOT, "results/KONT/tools"), ROOT], out=os.path.join(S3, "bramka"), tag=tag, tel=bool(k))
+        w = subprocess.run([sys.executable, "-c", kod], cwd=ROOT, capture_output=True, text=True)
+        line = next((l for l in w.stdout.splitlines() if l.startswith("WYNIK ")), None)
+        if w.returncode != 0 or line is None:
+            log(f"{name}: bramka zdrowia błąd rc={w.returncode}: {(w.stdout + w.stderr)[-600:]}")
             return None, proby
+        r = json.loads(line[6:])
         p = {"tag": tag, "wariant": r["wariant"], "tempo": r["tempo"], "GO": r["GO"], "czolowka_operatora": r.get("czolowka_operatora"),
              "t": time.strftime("%F %T")}
         proby.append(p)

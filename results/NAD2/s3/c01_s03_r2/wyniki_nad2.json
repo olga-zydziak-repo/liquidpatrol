@@ -1,0 +1,92 @@
+{
+ "boot": "c01_s03_r2",
+ "epizody": [
+  {
+   "episode_id": 25,
+   "scenario_id": "c01_s03",
+   "m": 6.1,
+   "ciecie": true,
+   "B1": {
+    "ok": true,
+    "przekroczenia": 0,
+    "ticki_utraty": 2465,
+    "max_e_do_U": 0.2578,
+    "ticki_ocenione": 2356
+   },
+   "B3": {
+    "ok": true,
+    "zle": 0,
+    "ticki_utraty": 2465
+   },
+   "e_corr": {
+    "p50": 0.1282,
+    "p95": 0.2086,
+    "max": 0.4109,
+    "n": 2356
+   },
+   "przedzialy": {
+    "0": 2340,
+    "1": 4,
+    "2": 4,
+    "3": 4,
+    "4": 4,
+    "None": 109
+   },
+   "tryby_ticki": {
+    "para": 2259,
+    "jeden": 206
+   },
+   "zapas_bariery_min": 1.6207,
+   "u_prim_gt_m_ticki": 0,
+   "tau": {
+    "p50": 0.124,
+    "p95": 0.3216,
+    "max": 6.42
+   },
+   "B2": {
+    "ok": true,
+    "margines_min": 8.623
+   },
+   "B4": {
+    "ok": true,
+    "nav": {
+     "nav_poza_14": [],
+     "failsafe_max": 0,
+     "ok": true
+    },
+    "refuse_pos": 0,
+    "refuse_pos_falszywe": 0,
+    "refuse_pos_zgodne_z_regula": 0
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.528,
+    "frac_track": 1.0,
+    "frac_pasmo": 1.0,
+    "refuse_misja": 0
+   },
+   "a_poprawek": {
+    "n": 758,
+    "p95": 0.1549,
+    "max": 0.3743,
+    "max_do_1_5F": 0.739
+   },
+   "bias_kursu_par": {
+    "n": 714,
+    "p50": 1.207
+   },
+   "bezpieczenstwo_ok": true
+  }
+ ],
+ "tempo": {
+  "aneks": "ANEKS_KONT-4d §1.3",
+  "dsim_dwall_settle": 0.9498,
+  "okno_wall_s": 59.98,
+  "n": 730,
+  "prog": 0.93,
+  "zrodlo": "rtf_stream.jsonl",
+  "ok": true
+ },
+ "bezpieczenstwo_ok": true,
+ "wazny": true
+}

@@ -1,0 +1,7 @@
+[run_boot b6] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b6] watchdog EKF2 (preflight-only, max 2 reinity) pid=32674
+model_in_state=1
+[run_boot b6] settle 90s preflight EKF
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b6] DONE flight=nad2 world=world_nadir2_A3 rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/NAD2/s2/../s3/c02_s01

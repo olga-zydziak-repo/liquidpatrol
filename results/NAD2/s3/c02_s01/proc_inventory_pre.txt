@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       31873 13.3  0.0 330892 14128 ?        Sl   00:45   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       29553  3.6  0.6 2646828 206492 ?      SLl  00:28   0:37 python3 results/NAD2/tools/nad2_s3_run.py
+olga        1078  1.6  1.1 5725416 385864 pts/0  Sl+  Nov11  10:17 claude --continue
+olga       29587  0.2  0.0 1341172 7536 ?        S    00:29   0:02 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered  rc=[0-9]+ boot |ALARM|KONIEC|Traceback|Error|GO=False|nieważny|env-block|po env-blocku
+root         269  0.1  0.1 2994572 56424 ?       Ssl  Nov11   0:43 /usr/bin/containerd
+olga       31761  0.0  0.0 129356 22336 ?        Sl   00:43   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         358  0.0  0.2 10176212 85576 ?      Ssl  Nov11   0:07 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga       31766  0.0  0.0   5028  3656 ?        S    00:43   0:00 bash /home/olga/projects/liquidpatrol/results/NAD2/tools/nad2_boot.sh 6 ../s3/c02_s01 2 30
+root         907  0.0  0.0   3200  1252 ?        S    Nov11   0:01 /init
+polkitd      200  0.0  0.0 308188  8084 ?        Ssl  Nov11   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root          40  0.0  0.0  50516 17600 ?        S<s  Nov11   0:01 /usr/lib/systemd/systemd-journald
+root           1  0.0  0.0  21960 13316 ?        Ss   Nov11   0:01 /sbin/init
+root          86  0.0  0.0  26668  7720 ?        Ss   Nov11   0:00 /usr/lib/systemd/systemd-udevd
+message+     195  0.0  0.0   9800  5528 ?        Ss   Nov11   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         214  0.0  0.0  17400  6452 ?        Ss   Nov11   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  Nov11   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root         205  0.0  0.0  17988  8844 ?        Ss   Nov11   0:00 /usr/lib/systemd/systemd-logind
+olga         953  0.0  0.0  20392 11596 ?        Ss   Nov11   0:00 /usr/lib/systemd/systemd --user
+syslog       212  0.0  0.0 222524  6024 ?        Ssl  Nov11   0:00 /usr/sbin/rsyslogd -n -iNONE
