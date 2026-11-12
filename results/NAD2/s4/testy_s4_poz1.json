@@ -1,0 +1,88 @@
+{
+ "manifest": "results/NAD2/s4/scenario_manifest_s4L_poz1.json",
+ "sha256": "9e7d4ad3c1c599221a0d4b6f767a6ba8692fd98276d0306ffc172a6508707583",
+ "pozycja_aneksu": 1,
+ "T1_prefiks": {
+  "max_delta_c10_s01_m": 0.0,
+  "max_delta_120_ep_m": 0.0,
+  "PASS": true
+ },
+ "T2_ciaglosc": {
+  "v": 1.0,
+  "max_krok_m": 0.10002057409909759,
+  "prog_m": 0.100001,
+  "n_probek": 8001,
+  "PASS": false
+ },
+ "T3_predkosc_dysk": {
+  "v_odcinkow": [
+   1.0
+  ],
+  "n_odcinkow": 58,
+  "zakres_s": [
+   0.0,
+   813.7698
+  ],
+  "r_max_m": 17.9987,
+  "disk_r_m": 18.0,
+  "PASS": true
+ },
+ "T4_na_sucho": {
+  "ep_dur_s": 800.0,
+  "t_ostatni_s": 799.98,
+  "n_setpose": 40000,
+  "max_krok_cmd_m": 0.020123,
+  "droga_600_700_m": 99.98,
+  "kontrast_bramka_t_ostatni_s": 199.98,
+  "PASS": true
+ },
+ "T5_domyslne": {
+  "bez_env": {
+   "T_CONT_S": 110.5,
+   "WALL_MAX_CUT_S": 300.0,
+   "LIMIT": 3145728,
+   "manifest": [
+    "results/NADIR/s4/scenario_manifest_s4.json",
+    "090af08bc9a1ef1c6f024a1bb81a816b1f4231e1d0407783466f1dfe322909c0"
+   ]
+  },
+  "z_env_lotu": {
+   "T_CONT_S": 600.5,
+   "WALL_MAX_CUT_S": 1000.0,
+   "LIMIT": 10485760,
+   "manifest": [
+    "results/NAD2/s4/scenario_manifest_s4L_poz1.json",
+    "9e7d4ad3c1c599221a0d4b6f767a6ba8692fd98276d0306ffc172a6508707583"
+   ]
+  },
+  "env_lotu": {
+   "NAD2_T_CONT_S": "600.5",
+   "NAD2_WALL_MAX_CUT_S": "1000",
+   "NAD2_ULG_LIMIT_MB": "10",
+   "NAD2_MANIFEST": "results/NAD2/s4/scenario_manifest_s4L_poz1.json",
+   "NAD2_MANIFEST_SHA": "9e7d4ad3c1c599221a0d4b6f767a6ba8692fd98276d0306ffc172a6508707583"
+  },
+  "bash_n": true,
+  "PASS": true
+ },
+ "T6_diff": {
+  "zamrozone_diff_rc": 0,
+  "n_linii_zmienionych": 12,
+  "linie": [
+   "-S4MAN=\"results/NADIR/s4/scenario_manifest_s4.json\"; S4MAN_SHA=\"090af08bc9a1ef1c6f024a1bb81a816b1f4231e1d0407783466f1dfe322909c0\"",
+   "+S4MAN=\"${NAD2_MANIFEST:-results/NADIR/s4/scenario_manifest_s4.json}\"; S4MAN_SHA=\"${NAD2_MANIFEST_SHA:-090af08bc9a1ef1c6f024a1bb81a816b1f4231e1d0407783466f1dfe322909c0}\"   # S4 lot długi (ANEKS_NAD2-3 §2): env, dom. bramka",
+   "-S3_NM=\"$NM\" S3_KM=\"$KM\" S3_PT=\"$PT\" S3_LIT=\"$LIT\" S4_EPIDS=\"$EPIDS\" S4_INJ=\"$INJ\" python3 - \"$OUTDIR\" \"$BN\" \"$SONDA_RC\" \"$ARM_OK\" \"$PIN_GOT\" \"$PSHA\" \"${T0_US:-}\" \"$FAZA_OK\" <<'PY'",
+   "+S3_MAN=\"$S4MAN\" S3_NM=\"$NM\" S3_KM=\"$KM\" S3_PT=\"$PT\" S3_LIT=\"$LIT\" S4_EPIDS=\"$EPIDS\" S4_INJ=\"$INJ\" python3 - \"$OUTDIR\" \"$BN\" \"$SONDA_RC\" \"$ARM_OK\" \"$PIN_GOT\" \"$PSHA\" \"${T0_US:-}\" \"$FAZA_OK\" <<'PY'",
+   "-m[\"nad2_s2\"] = {\"manifest_scenariuszy\": \"results/NADIR/s4/scenario_manifest_s4.json\", \"NADIR_MODE\": os.environ.get(\"S3_NM\"), \"KONT_MODE\": os.environ.get(\"S3_KM\"), \"passthrough\": os.environ.get(\"S3_PT\"), \"litera\": os.environ.get(\"S3_LIT\")}",
+   "+m[\"nad2_s2\"] = {\"manifest_scenariuszy\": os.environ.get(\"S3_MAN\", \"results/NADIR/s4/scenario_manifest_s4.json\"), \"NADIR_MODE\": os.environ.get(\"S3_NM\"), \"KONT_MODE\": os.environ.get(\"S3_KM\"), \"passthrough\": os.environ.get(\"S3_PT\"), \"litera\": os.environ.get(\"S3_LIT\")}",
+   "-T_CONT_S = 110.5                    # NAD2: nastawa z zapasem; kontynuacja od t_inj_sim (litera ≥ 110 s; ANEKS_NADIR-5 §2.2)",
+   "-WALL_MAX_CUT_S = 300.0              # S4N: bezpiecznik wall epizodu cięcia (t_entry ≤ 25 + 30 + 110 s sim)",
+   "+T_CONT_S = float(os.environ.get(\"NAD2_T_CONT_S\", \"110.5\"))             # S4 lot długi (ANEKS_NAD2-3 §2): env, dom. bramka; NAD2: nastawa z zapasem; kontynuacja od t_inj_sim (litera ≥ 110 s; ANEKS_NADIR-5 §2.2)",
+   "+WALL_MAX_CUT_S = float(os.environ.get(\"NAD2_WALL_MAX_CUT_S\", \"300.0\"))  # S4 lot długi: env, dom. bramka; S4N: bezpiecznik wall epizodu cięcia (t_entry ≤ 25 + 30 + 110 s sim)",
+   "-LIMIT = 3 * 1024 * 1024",
+   "+LIMIT = int(float(os.environ.get(\"NAD2_ULG_LIMIT_MB\", \"3\")) * 1024 * 1024)   # S4 lot długi (ANEKS_NAD2-3 §2): env, dom. 3 MB"
+  ],
+  "PASS": true
+ },
+ "PASS": false
+}

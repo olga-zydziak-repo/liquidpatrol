@@ -20,7 +20,7 @@ import nad2_wyciag_ulg as W
 
 TEMATY = dict(W.TEMATY)
 TEMATY["vehicle_status"] = (["timestamp", "nav_state", "failsafe", "arming_state"], None)
-LIMIT = 3 * 1024 * 1024
+LIMIT = int(float(os.environ.get("NAD2_ULG_LIMIT_MB", "3")) * 1024 * 1024)   # S4 lot długi (ANEKS_NAD2-3 §2): env, dom. 3 MB
 
 
 def okno(d):

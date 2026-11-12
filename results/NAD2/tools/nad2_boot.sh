@@ -41,7 +41,7 @@ NM="${BOOT_NADIR_MODE:-}"; KM="${BOOT_KONT_MODE:-}"; PT="${BOOT_PASSTHROUGH:-}";
 if [ "$NM" = "1" ] && [ "$KM" = "1" ] && [ "$PT" = "0" ] && [ "$LIT" = "NAD2" ]; then :
 elif [ "$NM" = "0" ] && [ "$KM" = "0" ] && [ "$PT" = "1" ] && [ "$LIT" = "NADIR1" ]; then :
 else echo "[nad2 $NAME] GUARD: tryby NM=$NM KM=$KM PT=$PT LIT=$LIT poza dopuszczonymi (1/1/0/NAD2 albo 0/0/1/NADIR1)" | tee -a "$MONLOG"; exit 5; fi
-S4MAN="results/NADIR/s4/scenario_manifest_s4.json"; S4MAN_SHA="090af08bc9a1ef1c6f024a1bb81a816b1f4231e1d0407783466f1dfe322909c0"
+S4MAN="${NAD2_MANIFEST:-results/NADIR/s4/scenario_manifest_s4.json}"; S4MAN_SHA="${NAD2_MANIFEST_SHA:-090af08bc9a1ef1c6f024a1bb81a816b1f4231e1d0407783466f1dfe322909c0}"   # S4 lot długi (ANEKS_NAD2-3 §2): env, dom. bramka
 B0SP="$ROOT/.b0deps/lib/python3.12/site-packages"
 WORLD=world_nadir2_A3
 MONO=/world/$WORLD/model/x500_nadir2_flow_0/link/camera_link/sensor/imager/image
@@ -131,13 +131,13 @@ if [ -n "$PP" ]; then kill -TERM -- -"$PP" 2>/dev/null || kill -TERM "$PP" 2>/de
 kill -TERM "$ZG" 2>/dev/null
 python3 "$ROOT/results/KONT/tools/kont_inw.py" KILL parameter_bridge px4 MicroXRCEAgent gz >/dev/null
 sleep 2; date +%s > results/.last_boot_end
-S3_NM="$NM" S3_KM="$KM" S3_PT="$PT" S3_LIT="$LIT" S4_EPIDS="$EPIDS" S4_INJ="$INJ" python3 - "$OUTDIR" "$BN" "$SONDA_RC" "$ARM_OK" "$PIN_GOT" "$PSHA" "${T0_US:-}" "$FAZA_OK" <<'PY'
+S3_MAN="$S4MAN" S3_NM="$NM" S3_KM="$KM" S3_PT="$PT" S3_LIT="$LIT" S4_EPIDS="$EPIDS" S4_INJ="$INJ" python3 - "$OUTDIR" "$BN" "$SONDA_RC" "$ARM_OK" "$PIN_GOT" "$PSHA" "${T0_US:-}" "$FAZA_OK" <<'PY'
 import json, os, subprocess, sys
 o, bn, rc, arm, pin, psha, t0us, faza = sys.argv[1:9]
 mp = os.path.join(o, "manifest.json")
 m = json.load(open(mp)) if os.path.exists(mp) else {"kind": "kont_probe"}
 sp = os.path.join(o, "sonda_preflight.json"); ep = os.path.join(o, "kont_echo.json")
-m["nad2_s2"] = {"manifest_scenariuszy": "results/NADIR/s4/scenario_manifest_s4.json", "NADIR_MODE": os.environ.get("S3_NM"), "KONT_MODE": os.environ.get("S3_KM"), "passthrough": os.environ.get("S3_PT"), "litera": os.environ.get("S3_LIT")}
+m["nad2_s2"] = {"manifest_scenariuszy": os.environ.get("S3_MAN", "results/NADIR/s4/scenario_manifest_s4.json"), "NADIR_MODE": os.environ.get("S3_NM"), "KONT_MODE": os.environ.get("S3_KM"), "passthrough": os.environ.get("S3_PT"), "litera": os.environ.get("S3_LIT")}
 m["kont_s4"] = {"boot": int(bn), "epizody": os.environ.get("S4_EPIDS"), "inject_t": os.environ.get("S4_INJ"), "offset": json.load(open(os.path.join(o, "kont_offset.json"))) if os.path.exists(os.path.join(o, "kont_offset.json")) else None, "sonda_rc_frozen": int(rc), "podloga_10hz_ok": int(arm), "uzbrojony": int(arm) == 1,
                 "sonda": json.load(open(sp)) if os.path.exists(sp) else None, "echo": json.load(open(ep)) if os.path.exists(ep) else None,
                 "pin_mono_cam_model_sdf": pin, "fastdds_profil_sha16": psha}

@@ -124,8 +124,8 @@ ALT = C.ALT_M
 DT = C.DT
 TICK_HZ = C.TICK_HZ
 T_ORB = 70.0
-T_CONT_S = 110.5                    # NAD2: nastawa z zapasem; kontynuacja od t_inj_sim (litera ≥ 110 s; ANEKS_NADIR-5 §2.2)
-WALL_MAX_CUT_S = 300.0              # S4N: bezpiecznik wall epizodu cięcia (t_entry ≤ 25 + 30 + 110 s sim)
+T_CONT_S = float(os.environ.get("NAD2_T_CONT_S", "110.5"))             # S4 lot długi (ANEKS_NAD2-3 §2): env, dom. bramka; NAD2: nastawa z zapasem; kontynuacja od t_inj_sim (litera ≥ 110 s; ANEKS_NADIR-5 §2.2)
+WALL_MAX_CUT_S = float(os.environ.get("NAD2_WALL_MAX_CUT_S", "300.0"))  # S4 lot długi: env, dom. bramka; S4N: bezpiecznik wall epizodu cięcia (t_entry ≤ 25 + 30 + 110 s sim)
 ENTRY_MAX = 25.0
 # K2 B4: hook denialu. K2_INJECT_T = sekundy po t_entry do wstrzyknięcia EKF2_GPS_CTRL=0.
 # BRAK zmiennej ⇒ zero denialu (loty nominalne IDENTYCZNE jak dotąd).
