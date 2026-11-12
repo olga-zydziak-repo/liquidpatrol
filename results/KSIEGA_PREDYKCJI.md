@@ -1052,3 +1052,15 @@ CLOSED-BY-RECON (0 bootów)
 - Wykonawca: recon z kalibracją własnego replayu, znalezisko r_est,
   STOP na konwencji czasu zamiast obejścia, obligacja wejścia jako
   wydzielony moduł lotu, kampania 16/16.
+
+## NADIR-II — lot długi (PROMPT_NAD2_S4, 12.11.2026)
+- Otwarty sygnałem Olgi „lot długi NAD2" po PASS bramki:
+  obserwacyjny, ≤ 2 booty poza budżetem nogi; jedno cięcie c10_s01
+  × 600 s pod kodem i tabelą bramki. Naruszenie litery
+  bezpieczeństwa nie zmienia werdyktu bramki, ale daje zdaniu
+  „dowód nie ma limitu czasu" zmierzoną granicę.
+- P-NAD2-L1 (0.70): lot kończy 600 s bez REFUSE w misji.
+- P-NAD2-L2 (0.85): B1–B4 bez naruszeń w całym locie.
+- P-NAD2-L3 (0.75): p95 e_corr w ostatnich 100 s ≤ 1.25 × p95
+  w pierwszych 100 s.
+- P-NAD2-L4 (0.60): |mediana biasu kursu| w ostatnich 100 s ≤ 3°.
