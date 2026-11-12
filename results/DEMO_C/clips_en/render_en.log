@@ -1,0 +1,37 @@
+[overlay_v2] akt 3 c03_s01: 239 klatek → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt3_v2.mp4
+[democ_en] akt3_v2 OK
+[overlay_v31] akt1 c08_s03: 353 klatek → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt1_v31.mp4; kroki (sim abs) [115.964, 116.292, 116.292, 116.292]
+[democ_en] akt1_v31 OK
+[overlay_v31] akt 4a w00a_s01: 296 klatek → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt4a_v31.mp4
+[democ_en] akt4a_v31 OK
+[overlay_v31] akt 4b m01_s01: 341 klatek → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt4b_v31.mp4
+[democ_en] akt4b_v31 OK
+[brain-clip] c08_s03: 353 klatek → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt1_v5.mp4
+[democ_en] akt1_v5 OK
+[brain-clip] c10_s02: 341 klatek → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt2_v5.mp4
+[democ_en] akt2_v5 OK
+[brain-clip] w00a_s01: 296 klatek → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt4a_v5.mp4
+[democ_en] akt4a_v5 OK
+[brain-clip] m01_s01: 341 klatek → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt4b_v5.mp4
+[democ_en] akt4b_v5 OK
+[akt5] kotwica c10_s02: p50=5.71e-04 p95=1.18e-03 max=2.33e-03
+[akt5] corr(n0, sin_brg) tego ujęcia: +0.957
+[akt5-v5] 382 klatek → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt5_v5.mp4
+[democ_en] akt5_v5 OK
+[akt6] kotwica replayu c04_s01: p50=6.11e-04 p95=1.16e-03 max=2.08e-03
+[akt6] przechył w oknie epizodu: n=18149 p50=8.2 max=20.0 deg
+[akt6] c04_s01: 441 klatek (44.1 s), klatki kamery 441/441 → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt6_v6.mp4
+{"klatek": 441, "dur_s": 44.1, "kotwica": {"n_tick": 1430, "n_infer": 1415, "p50": 0.000610513646811861, "p95": 0.001164046714252664, "max": 0.0020800822630322457, "p95_infer": 0.0011695387401856605, "max_hold": 0.0}, "tilt_max_ep": 19.95756185851224, "tilt_p50_ep": 8.172479243423506}
+[democ_en] akt6_v6 OK
+[aktA] kotwica replayu: p50=4.90e-01 p95=2.22e+00 max=2.66e+00 → mini-mózg=False
+[aktA] 296 klatek (29.6 s), kamera 296/296, nadir 296/296 → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt7_A.mp4
+{"klatek": 296, "dur_s": 29.6, "klatki_cam": 296, "klatki_nadir": 296, "kotwica": {"n_tick": 3131, "n_infer": 3057, "p50": 0.49043514592472603, "p95": 2.2174649087717437, "max": 2.656130282677608, "p95_infer": 2.226970317845186, "max_hold": 0.0}, "mini_mozg": false, "t_inj": 175.956, "t_zp": 286.46, "kontynuacja": 110.504, "ulg": "boot.ulg", "napisy": [[0.0, 5.0, "GPS działa — sieć krąży wokół intruza"], [5.0, 9.0, "GPS ODCIĘTY (celowo, test)"], [9.0, 15.0, "pozycję daje kamera w dół: znaczniki naziemne co 10 m"], [15.0, 21.0, "ta sama sieć: 20 neuronów, 1903 parametry — prowadzi lot dalej"], [21.0, 30.6, "osłona z dowodem pilnuje strefy"]]}
+[democ_en] akt7_A OK
+[aktB] asercje {'kontynuacja_s': 600.516, 'ticki_misji_z_tabela': 12077, 'max_e_do_U': 0.4117, 'max_surowy_m': 20.594, 'zrodlo_ulg': 'ulg.jsonl.gz'}
+[aktB] 201 klatek (20.1 s) → /home/olga/projects/liquidpatrol/results/DEMO_C/clips_en/akt7_B.mp4
+{"klatek": 201, "dur_s": 20.1, "asercje": {"kontynuacja_s": 600.516, "ticki_misji_z_tabela": 12077, "max_e_do_U": 0.4117, "max_surowy_m": 20.594, "zrodlo_ulg": "ulg.jsonl.gz"}}
+[democ_en] akt7_B OK
+[karty_en] OK
+[democ_en] karty OK
+[cut_en] v7 EN 308.0 s {'akt1_v5': 35.3, 'akt2_v5': 34.1, 'akt3_v2': 23.9, 'akt4a_v5': 29.6, 'akt4b_v5': 34.1, 'akt5_v5': 38.2, 'akt6_v6': 44.1, 'karta_wejscia_v7': 4.0, 'akt7_A': 29.6, 'akt7_B': 20.1, 'karta_zakresu_v7': 6.0, 'plansza_v7': 9.0}; klip GPS EN 68.7 s
+[democ_en] cut OK

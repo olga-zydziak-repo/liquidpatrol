@@ -772,3 +772,38 @@ ZANIM mp4 pójdzie na zewnątrz).** **STOP-DEMOC-7.**
 **Diff-stat commitu (bez tego akapitu):** 85 files changed, 64815 insertions(+); nowe pliki poza `s7_gps/`: 4 narzędzia + `DEMO_C_v7_en.srt`; zmienione istniejące: `RAPORT_DEMO_C.md` i `KSIEGA_PREDYKCJI.md` (wyłącznie dopisek).
 
 **Porcelain po commicie (oczekiwany):** wyłącznie `??` klatek jpg (`*/frames/`, w tym `s7_gps/take1_c10_s01/{cam,nadir}/frames/`), `clips/` (mp4/png) i plików mp4 `DEMO_C_*.mp4` — jak przy v1–v6.
+
+### Wersja angielska v7 (decyzja Olgi 12.11: „Demo musi być po angielsku” + bez oznaczeń wewnętrznych; dopisek append-only)
+
+Całe v7 wypalone po angielsku, akty 1–7, karty i plansza. Oznaczenia, które widzowi nic nie mówią (epizod c10_s01, nazwy
+światów, det_v2, EKF2_GPS_CTRL, D5, REFUSE(POS), t_acq sędziego), zastąpione opisem: „mission clock”, „the shield refuses
+→ safe descent”, „target acquired after … s” itd. Teksty bazują na tłumaczeniach z `DEMO_C_v6_en.srt` / `DEMO_C_v7_en.srt`
+(wybór Olgi); tam, gdzie srt niósł żargon, uprościłem. Etykiety HUD przetłumaczyłem sam. Zero bootów; v1–v7 nietknięte.
+
+- **Mechanizm:** NOWY `tools/democ_en.py`.
+  - Każdy krok to osobny proces. Przed importem narzędzia podmienia funkcje rysujące tekst (PIL `ImageDraw.text` /
+    `textlength`, `cv2.putText`) na wersje tłumaczące słownikiem PL→EN. Najpierw dokładne dopasowanie, potem reguły
+    regex dla napisów z liczbami.
+  - **Tryb ścisły:** nieznany napis z polskimi znakami albo słowami przerywa render. Złapał jeden brak (numerowane kroki
+    admisji), dopisany.
+  - Potem woła `main()` narzędzi v2/v3.1/v5/v6/v7 z tymi samymi argumentami co przy oryginałach. Argumenty i segmenty
+    tempa odtworzyłem z transkryptów sesji.
+  - Te same klatki i dane; zmienia się wyłącznie tekst.
+- **Kontrola:**
+  - liczby klatek aktów równe oryginałom (353 / 341 / 239 / 296 / 341 / 382 / 441 / 296 / 201);
+  - kotwice replayu jak w v5/v6 (akt 5 p95 1.18e-3, akt 6 1.16e-3);
+  - asercje części B jak w v7;
+  - długość 308.0 s jak PL v7.
+- Pełna mapa wszystkich wypalonych napisów PL→EN (4507 wpisów, z wartościami liczbowymi): `clips_en/teksty_*.json`.
+- **Poprawki po przeglądzie klatek:** skrócone etykiety, które po angielsku wchodziły na sąsiednie pola (mini-mózg,
+  panel reguły aktu 4, tytuł i podpisy aktu 5, legenda i tytuł wkładki nadir w akcie 7, stan osłony w akcie 3).
+- **Plansza EN:** „~140 boots” z srt zastąpione „~140 simulation runs” (słowo „boot” jest żargonem); reszta
+  według srt + linia v7.
+
+| plik (na dysku + kopia na pulpicie, sumy zgodne) | sha256 |
+|---|---|
+| `results/DEMO_C/DEMO_C_v7_EN.mp4` (308.0 s, 101 MB) | `c1ffe0f0ddd8580cc14956958e79ea902e1e285f826591c673b326e8be3bc395` |
+| `results/DEMO_C/DEMO_C_v7_GPS_EN.mp4` (68.7 s, 27 MB) | `05a2b60564bf5d260b8dc84b8a9939b728c404fa31b1a32a532523197fc0b4e6` |
+
+Klipy EN w `clips_en/` zostają na dysku (celowe `??`). W commicie: `tools/democ_en.py`, `clips_en/teksty_*.json`,
+logi renderu, ten dopisek. Wersje PL v7 zostają jako historia montażu. **Do publikacji idzie wersja EN** (po seansie CC).
