@@ -1064,3 +1064,15 @@ CLOSED-BY-RECON (0 bootów)
 - P-NAD2-L3 (0.75): p95 e_corr w ostatnich 100 s ≤ 1.25 × p95
   w pierwszych 100 s.
 - P-NAD2-L4 (0.60): |mediana biasu kursu| w ostatnich 100 s ≤ 3°.
+
+## NADIR-II — lot długi, ruch intruza (ANEKS_NAD2-3, 12.11.2026)
+- STOP-NAD2-4-INTRUZ przed startem (0 bootów): wzór ruchu c10_s01
+  trwa 200 s, potem intruz stoi; prompt dopuszczał tylko powtarzanie
+  wzoru i jedną zmianę env. ✗ projektowe CC: prompt lotu długiego
+  napisany bez sprawdzenia czasu trwania wzoru ruchu — warunek
+  „jeśli wzór się kończy" był w tekście, ale z niewykonalnym
+  remedium.
+- Decyzja: nowy manifest — przedłużenie tym samym generatorem
+  i ziarnem przy zgodnym prefiksie 200 s, inaczej wahadło po tym
+  samym torze; bez skoków, bez zmian w harness; fallback nazwany:
+  intruz stojący od 200 s.
