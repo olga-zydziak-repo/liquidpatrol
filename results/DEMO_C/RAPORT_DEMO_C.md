@@ -674,3 +674,101 @@ frames_index, sondy; boot.ulg wg gitignore, ulog_sha w manifeście), `judge_take
 zostają na dysku (celowe `??`). Edycje istniejących plików: wyłącznie ten dopisek (append-only).
 **Push = Olga („wypchnięte"). CC przed publikacją weryfikuje kryteria i k z repo oraz ogląda v6
 z załącznika.** **STOP-DEMOC-6.**
+
+## Akt 7 (v7) „Bez GPS" (dopisek po CO-NAD2-4; wykonanie PROMPT_DEMOC_V7, sha256 c89f8226…; wszystko wyżej NIETKNIĘTE)
+
+**§0 bramka.** origin/master = `20d4b744` (CO-NAD2-4, ANEKS_NAD2-4 byte-check 8081543a PASS), `origin/master..HEAD`
+puste. Porcelain nie był czysty: w korzeniu repo leżały 42 pliki bootu, wszystkie bajtowe kopie
+`results/NAD2/s3/c10_s01` (moja wada przy teście raportu S4: `cp -r` z pustą zmienną docelową). Każdy plik
+porównałem z oryginałem (`cmp`, 42/42 zgodne), dopiero potem usunąłem. Do żadnego commita nie weszły. Po tym
+porcelain był czysty poza nazwanymi `??` (wideo, jpg). FROZEN wykonaniem (`s7_gps/bramka_frozen.json`,
+`s7_gps/testy_frozen_t5t6.json`): `nad2_s4_testy.py` T1–T6 PASS (T5 wartości domyślne = bramka; T6 diff od
+bd975df5 pusty dla zamrożonych), plik S4 nietknięty; `nad2_tabela_check` wszystkie pola True (tabela 6a118fd4);
+wagi `net/frozen/ncp.npz` 0337d5ea; świat `world_nadir2_A3` 7f2bbe13; profil FastDDS a68a450b; pin mono_cam 3354ae1e.
+
+**§1 ujęcie.** Jeden take, VALID. Rezerwa (take 2) nieużyta.
+
+| take | epizod | litera (nad2_analyze + sprawdziany bramki S3) | tempo bootu | bramka zdrowia | klatki: pokładowa / nadir | ujęcie |
+|---|---|---|---|---|---|---|
+| `take1_c10_s01` | 10 (c10_s01), cięcie KONT_INJECT_T 30, tryby 1/1/0/NAD2, T_CONT_S 110.5, manifest bramki | B1 0/2311 (max e/U 0.285), B2 margines 8.322 m, B3 0/2430, B4 nav 14 / failsafe 0, REFUSE(POS) 0; D1 kontynuacja 110.504 s, track 1.000, pasmo 0.971, REFUSE w misji 0; sprawdziany (s1)–(s3) 100% | 0.9696 | A GO 0.920 | 4531 / 1497 (0 zgubionych w zrzutniku nadir) | **VALID** |
+
+Odrzuconych take'ów: brak. Breach 0, REFUSE(POS) fałszywy 0. Próbnik zegara 0 skoków, linie „brudny” proc_gate 0,
+timesyncd zatrzymany na czas lotu i wznowiony przez kolejkę. Zrzutnik kamery pokładowej skończył wyjątkiem
+`ExternalShutdownException` przy zamykaniu (sprzątanie H5), ale indeks ma 4531 klatek do 312.84 s sim i pokrywa
+całe okno aktu (296/296 klatek wideo).
+
+Kolejka: `tools/democ_v7_run.py` = kopia `nad2_s4_run.py` z podmianami:
+- katalog `s7_gps`, boot `democ_v7_boot.sh`, nazwy `take<k>_c10_s01`;
+- bez env lotu długiego (domyślne = bramka);
+- STOP-DEMOC-7-*, budżet 2;
+- VALID wg §1.3 i take 2 tylko przy braku VALID;
+- przyrząd (s1)/(s2) < 100% ⇒ STOP jak w bramce.
+
+**Diff drivera** `tools/democ_v7_boot.sh` wobec `results/NAD2/tools/nad2_boot.sh` (nietknięty), 7 hunków:
+- **H1** (`@@ -1,0 +2,10`) nagłówek z listą hunków.
+- **H2** (`@@ -37,3 +47,3`) katalog `results/DEMO_C/s7_gps`, log `democ_v7_monitor.log`.
+- **H3** (`@@ -56 +66`) strażnik kolizji: `|framedump|nadirdump`, samowykluczenie `democ_v7_boot`.
+- **H4a** (`@@ -93 +103`) zmienne `FD`, `ND`.
+- **H4** (`@@ -114,0 +125,7`) po starcie `nadir_obs`:
+  - `democ_framedump.py` na moście ROS kamery pokładowej, wszystkie klatki, pod profilem FastDDS;
+  - NOWY `democ_nadirdump.py`: gz-transport nadir, wszystkie klatki, osobny proces, wzór subskrypcji z
+    `nadir_obs.py`, `nadir_obs` nietknięty.
+- **H5** (`@@ -127,0 +145,3`) sprzątanie: TERM obu zrzutników, do 10 s, potem KILL.
+- **H6** (`@@ -147,0 +168,4`) blok manifestu `democ_v7` (liczby klatek z indeksów).
+Launcher, tryby, pin, profil, cooldown, proc_gate, sonda: bez zmian.
+
+**§2 część A** (`tools/democ_overlay_v7.py aktA`): 29.6 s.
+- Oś czasu: 5 s przed cięciem ×1 → 10 s po ×1 → ×8 do planowego zejścia → zejście 2 s wideo (×4) z podpisem
+  „planowe zejście po 110 s”.
+- Kamera pokładowa: 296/296 klatek, ramki celu z percep_feed.
+- Wkładka nadir: 296/296 klatek; obrysy i ID z `nadir_obs.jsonl`, kolor z `fx` zapisu (ids przyjęte /
+  `odrz`), podpis trybu.
+- Panel: GT, pierścień `p_corr`, kropkowany `p_ekf`, intruz, R_E, 37 znaczników z `manifest_znaczniki_v2.json`.
+- HUD: błędy liczone kanonem analizatora. Funkcja `t_probki` jest wewnętrzna w `nad2_analyze.analyze` i nie da
+  się jej zaimportować. Wzór przepisałem 1:1 (to samo okno [−0.4, +0.1] s), a zgodność sprawdza asercja przed
+  renderem: liczba ocenionych ticków 2311 i max e/U 0.285 = `wyniki_nad2.json`.
+- Napisy FROZEN w kolejności §2, napis uczciwości przez cały akt.
+- **Mini-mózg: kotwica replayu nie trzyma** — p95 |replay − cmd| = 2.22 m/s > 5·10⁻³ (p50 0.49, n 3131).
+  Akt idzie bez mini-mózgu. Prawdopodobna przyczyna: kontroler tego lotu to `net_skan2`, a replay odtwarza
+  tylko sieć i wrapper `net_fantom`.
+
+**§3 część B** (`aktB`): 20.1 s, TEMPO ×30, ogony 60 s. Źródło: logi `results/NAD2/s4/L_c10_s01` z repo — trace,
+rama, gt_intruder, nadir_obs (gzip). Kanon czasu B1 pochodzi z wyciągu `ulg.jsonl.gz` z tego samego katalogu w
+repo (`vehicle_local_position` w pełnej kadencji, z `timestamp_sample`). To czwarte źródło jest poza listą §3,
+nazwane tutaj; `boot.ulg` nieużyty. Asercje (wszystkie trzymają):
+- kontynuacja **600.516 s**;
+- ticki misji z tabelą **12 077**;
+- max e_corr/U **0.4117**;
+- max odległość surowego estymatora od prawdy **20.594 m**.
+
+**§4 plansze:** karta wejścia 4 s, karta zakresu 6 s (teksty FROZEN, zdanie od nowej linii, asercja zgodności
+tekstu). Plansza v7 = PLANSZA6 + linia §4.3 przed wierszem zamykającym. Słowa zakazane §4.4: asercja w kodzie, 0 trafień.
+
+**§6 montaż.** Format 1920×1080@10, tor cv2 mp4v (jak v1–v6).
+- `DEMO_C_v7.mp4` **308.0 s** ≤ 310: v6 bez planszy 239.3 s + karta 4.0 + A 29.6 + B 20.1 + zakres 6.0 + plansza v7 9 s.
+- `DEMO_C_v7_GPS.mp4` **68.7 s** ≤ 75: akt 7 + plansza v7.
+- `DEMO_C_v7_en.srt` NOWY: bloki v6 bez planszy + akt 7 + plansza v7 EN.
+Wideo łącznie > 25 MB ⇒ **NA DYSKU**, sha256:
+
+| plik (na dysku) | sha256 |
+|---|---|
+| `results/DEMO_C/DEMO_C_v7.mp4` (308.0 s, 99 MB) | `8b57ba349bef72fd3972536d125db33b505d6d844f4e66101406dd13e038520a` |
+| `results/DEMO_C/DEMO_C_v7_GPS.mp4` (68.7 s, 26 MB) | `45992dbb04cfdc1291dbc82f357b517f551419e1dabde25d9bfb71a6585f33c7` |
+| `results/DEMO_C/clips/akt7_A.mp4` (29.6 s, 18 MB) | `12cece5fdceed160c551df81528a3e13d239d85bc726e97637c9e2327d39ef63` |
+| `results/DEMO_C/clips/akt7_B.mp4` (20.1 s, 7 MB) | `60b8a3c40e059ddec29bbc462120af63f81d62566f194ea4263d1becff0704f8` |
+| `results/DEMO_C/DEMO_C_v7_en.srt` (w commicie) | `d88fffcd1501560073cbe7746acda4adc3bed4e73678763bbbbd4b7abaf7fe01` |
+
+Źródło v6 `DEMO_C_v6.mp4` sha `5033018b…` (sprawdzone). Kopii na pulpicie nie robiłem (prompt ich nie wymaga).
+
+**Predykcje:** P-DEMOC-7a (0.75) ✓ — take 1 VALID pełną literą §1.3; P-DEMOC-7b (0.85) ✓ — tempo 0.9696 ≥ 0.93.
+
+**W commicie:** narzędzia `democ_v7_boot.sh`, `democ_nadirdump.py`, `democ_v7_run.py`, `democ_overlay_v7.py`;
+`DEMO_C_v7_en.srt`; `s7_gps/` (bramka FROZEN, take z manifestem, trace, rama, demo, nadir_obs, percep_feed, indeksy
+klatek, wyciąg ULG, wyniki_nad2, sprawdziany, logi kolejki); ten dopisek; blok KSIĘGI. Klatki jpg, png kart i mp4
+zostają na dysku (celowe `??`). Edycje istniejących plików: wyłącznie ten dopisek i KSIĘGA (append-only).
+**Push = Olga („wypchnięte” — CC przelicza literę ujęcia, sprawdza liczby na napisach i ogląda v7 z załącznika,
+ZANIM mp4 pójdzie na zewnątrz).** **STOP-DEMOC-7.**
+
+**Diff-stat commitu (bez tego akapitu):** 85 files changed, 64815 insertions(+); nowe pliki poza `s7_gps/`: 4 narzędzia + `DEMO_C_v7_en.srt`; zmienione istniejące: `RAPORT_DEMO_C.md` i `KSIEGA_PREDYKCJI.md` (wyłącznie dopisek).
+
+**Porcelain po commicie (oczekiwany):** wyłącznie `??` klatek jpg (`*/frames/`, w tym `s7_gps/take1_c10_s01/{cam,nadir}/frames/`), `clips/` (mp4/png) i plików mp4 `DEMO_C_*.mp4` — jak przy v1–v6.

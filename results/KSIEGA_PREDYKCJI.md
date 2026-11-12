@@ -1108,3 +1108,12 @@ CLOSED-BY-RECON (0 bootów)
 - Stan wątku lotu bez GNSS: bez znaczników 22 s z twierdzeniem (2d);
   nad polem znaczników dowód ze sprawdzoną przesłanką — 12 lotów
   po 110 s i jeden lot 600 s.
+
+## DEMOC v7 — akt „Bez GPS" (PROMPT_DEMOC_V7, 12.11.2026)
+- P-DEMOC-7a (0.75): take 1 jest VALID pełną literą §1.3.
+- P-DEMOC-7b (0.85): tempo bootu ze zrzutem dwóch kamer ≥ 0.93
+  w każdym take'u.
+- Rozliczenie wykonawcy (STOP-DEMOC-7): P-DEMOC-7a ✓ (take 1 VALID: B1–B4,
+  D1 110.504 s, sprawdziany 100%); P-DEMOC-7b ✓ (tempo 0.9696 ze zrzutem
+  dwóch kamer). 1/2 bootów. Mini-mózg poza aktem: kotwica replayu p95
+  2.22 m/s > 5e-3 (kontroler net_skan2 poza literą replayu).
