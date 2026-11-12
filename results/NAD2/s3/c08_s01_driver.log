@@ -1,0 +1,8 @@
+[kont ../s3/c08_s01] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont ../s3/c08_s01 02:29:36] cooldown 83s
+[kont ../s3/c08_s01 02:32:15] SUSTAINED CLEAN
+[kont ../s3/c08_s01] kont_boot pid=41977
+[kont ../s3/c08_s01 02:32:42] initial absolute time 7416000 us faza_ok=1
+[kont ../s3/c08_s01 02:33:21] sonda rc_FROZEN=0 podloga10Hz=1
+[kont ../s3/c08_s01 02:38:08] DONE rc=0 sonda=0
+/home/olga/projects/liquidpatrol/results/NAD2/tools/nad2_boot.sh: line 127: 42718 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1

@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       51503 13.3  0.0 330892 14176 ?        Sl   03:32   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       51496  3.3  0.0  16948 11212 ?        S    03:32   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/NAD2/s2/../s3/c11_s02/zegar2.jsonl
+olga       51497  3.3  0.0   5028  3756 ?        S    03:32   0:00 bash /home/olga/projects/liquidpatrol/results/NAD2/tools/nad2_launch.sh world_nadir2_A3
+olga        1078  1.5  1.1 5725416 387048 pts/0  Sl+  Nov11  11:52 claude --continue
+olga       47542  0.2  0.0 1341172 7524 ?        S    03:03   0:04 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl --line-buffered brudny: [0-9]* [0-9.]* python3 results/NAD2/tools/nad2_s3_run
+olga       37735  0.2  0.2 327496 80288 ?        Sl   02:03   0:13 python3 results/NAD2/tools/nad2_s3_run.py
+olga       47541  0.2  0.0 1341172 7632 ?        S    03:03   0:04 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered  rc=[0-9]+ boot |ALARM|KONIEC|Traceback|Error|GO=False|nieważny|env-block|po env-blocku|bramka zdrowia błąd
+root         269  0.1  0.1 2994572 56540 ?       Ssl  Nov11   0:49 /usr/bin/containerd
+olga       51391  0.0  0.0 129356 22324 ?        Dl   03:30   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         358  0.0  0.2 10176212 85584 ?      Ssl  Nov11   0:09 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root         907  0.0  0.0   3200  1252 ?        S    Nov11   0:02 /init
+root       50642  0.0  0.0 1830368 13932 ?       Ssl  03:21   0:00 /usr/libexec/wsl-pro-service
+polkitd      200  0.0  0.0 308188  8084 ?        Ssl  Nov11   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root          40  0.0  0.0  50516 18704 ?        S<s  Nov11   0:01 /usr/lib/systemd/systemd-journald
+root           1  0.0  0.0  21960 13332 ?        Ss   Nov11   0:01 /sbin/init
+root          86  0.0  0.0  26668  7720 ?        Ss   Nov11   0:01 /usr/lib/systemd/systemd-udevd
+message+     195  0.0  0.0   9800  5528 ?        Ss   Nov11   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         214  0.0  0.0  17400  6452 ?        Ss   Nov11   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  Nov11   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
