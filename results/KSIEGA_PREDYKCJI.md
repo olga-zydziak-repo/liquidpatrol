@@ -1117,3 +1117,21 @@ CLOSED-BY-RECON (0 bootów)
   D1 110.504 s, sprawdziany 100%); P-DEMOC-7b ✓ (tempo 0.9696 ze zrzutem
   dwóch kamer). 1/2 bootów. Mini-mózg poza aktem: kotwica replayu p95
   2.22 m/s > 5e-3 (kontroler net_skan2 poza literą replayu).
+
+## NADIR-III — recon (PROMPT_NAD3_S0, 13.11.2026), predykcje CC
+- P-NAD3-R1 (0.85): powierzchnia R1 wariant (a) zgadza się z §1
+  promptu do 0.05 m we wszystkich wymienionych punktach.
+- P-NAD3-R2 (0.70): co najmniej 6 z 12 komórek bramki ma r_max
+  > 20 m — promień 20 m wymaga zmiany geometrii zadania, nie wyboru
+  komórek.
+- P-NAD3-R3 (0.75): replay lotu długiego 0.5 m pod granicą przy
+  biasie radialnym: 0 ticków e_corr > U′.
+- P-NAD3-R4 (0.65): replay 0.5 m nad granicą daje REFUSE albo
+  przekroczenie przesłanki w co najmniej 9 z 13 lotów — granica jest
+  ostra, nie zachowawcza o więcej niż 0.5 m.
+- P-NAD3-R5 (0.70): przy szumie białym, E_max = 2 m, 1 Hz skok Δ p95
+  przekracza największy krok nastawy zmierzony w NAD2 — model biały
+  bez ograniczenia tempa nie nadaje się do lotów.
+- P-NAD3-R6 (0.60): G dla τ ∈ (1.05, 3.0] s pochodzi z mniej niż 100
+  okien niezależnych — tabela na długie τ wymaga dosiania z logów
+  NAD2 przed FREEZE.
