@@ -1,0 +1,4386 @@
+{
+ "r_zadania": 20.0,
+ "tau_proj": {
+  "f4_K0": 0.428,
+  "f2_K0": 0.628,
+  "f1_K0": 1.028,
+  "f1_K1": 2.028
+ },
+ "powierzchnia_tau_proj": {
+  "r14_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 7.559,
+    "E_d": 4.535
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 7.607,
+    "E_d": 4.564
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r14_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": 7.173,
+    "E_d": 4.304
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": 7.182,
+    "E_d": 4.309
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r14_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": 6.567,
+    "E_d": 3.94
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": 6.416,
+    "E_d": 3.849
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r14_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": 5.653,
+    "E_d": 3.392
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": 5.107,
+    "E_d": 3.064
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r15_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 6.892,
+    "E_d": 4.135
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 6.94,
+    "E_d": 4.164
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r15_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": 6.506,
+    "E_d": 3.904
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": 6.515,
+    "E_d": 3.909
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r15_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": 5.901,
+    "E_d": 3.54
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": 5.749,
+    "E_d": 3.449
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r15_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": 4.987,
+    "E_d": 2.992
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": 4.44,
+    "E_d": 2.664
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r16_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 6.226,
+    "E_d": 3.735
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 6.274,
+    "E_d": 3.764
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r16_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": 5.84,
+    "E_d": 3.504
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": 5.849,
+    "E_d": 3.509
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r16_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": 5.234,
+    "E_d": 3.14
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": 5.082,
+    "E_d": 3.049
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r16_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": 4.32,
+    "E_d": 2.592
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": 3.773,
+    "E_d": 2.264
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r17_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 5.559,
+    "E_d": 3.335
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 5.607,
+    "E_d": 3.364
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r17_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": 5.173,
+    "E_d": 3.104
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": 5.182,
+    "E_d": 3.109
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r17_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": 4.567,
+    "E_d": 2.74
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": 4.416,
+    "E_d": 2.649
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r17_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": 3.653,
+    "E_d": 2.192
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": 3.107,
+    "E_d": 1.864
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r18_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 4.892,
+    "E_d": 2.935
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 4.94,
+    "E_d": 2.964
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r18_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": 4.506,
+    "E_d": 2.704
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": 4.515,
+    "E_d": 2.709
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r18_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": 3.901,
+    "E_d": 2.34
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": 3.749,
+    "E_d": 2.249
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r18_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": 2.987,
+    "E_d": 1.792
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": 2.44,
+    "E_d": 1.464
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r19_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 4.226,
+    "E_d": 2.535
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 4.274,
+    "E_d": 2.564
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r19_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": 3.84,
+    "E_d": 2.304
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": 3.849,
+    "E_d": 2.309
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r19_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": 3.234,
+    "E_d": 1.94
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": 3.082,
+    "E_d": 1.849
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r19_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": 2.32,
+    "E_d": 1.392
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": 1.773,
+    "E_d": 1.064
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r20_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 3.559,
+    "E_d": 2.135
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 3.607,
+    "E_d": 2.164
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r20_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": 3.173,
+    "E_d": 1.904
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": 3.182,
+    "E_d": 1.909
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r20_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": 2.567,
+    "E_d": 1.54
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": 2.416,
+    "E_d": 1.449
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r20_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": 1.653,
+    "E_d": 0.992
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": 1.107,
+    "E_d": 0.664
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r21_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 2.892,
+    "E_d": 1.735
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 2.94,
+    "E_d": 1.764
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r21_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": 2.506,
+    "E_d": 1.504
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": 2.515,
+    "E_d": 1.509
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r21_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": 1.901,
+    "E_d": 1.14
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": 1.749,
+    "E_d": 1.049
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r21_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": 0.987,
+    "E_d": 0.592
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": 0.44,
+    "E_d": 0.264
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r22_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 2.226,
+    "E_d": 1.335
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 2.274,
+    "E_d": 1.364
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r22_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": 1.84,
+    "E_d": 1.104
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": 1.849,
+    "E_d": 1.109
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r22_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": 1.234,
+    "E_d": 0.74
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": 1.082,
+    "E_d": 0.649
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r22_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": 0.32,
+    "E_d": 0.192
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": -0.227,
+    "E_d": -0.136
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r23_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 1.559,
+    "E_d": 0.935
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 1.607,
+    "E_d": 0.964
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r23_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": 1.173,
+    "E_d": 0.704
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": 1.182,
+    "E_d": 0.709
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r23_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": 0.567,
+    "E_d": 0.34
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": 0.416,
+    "E_d": 0.249
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r23_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": -0.347,
+    "E_d": -0.208
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": -0.893,
+    "E_d": -0.536
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r24_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 0.892,
+    "E_d": 0.535
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 0.94,
+    "E_d": 0.564
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r24_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": 0.506,
+    "E_d": 0.304
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": 0.515,
+    "E_d": 0.309
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r24_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": -0.099,
+    "E_d": -0.06
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": -0.251,
+    "E_d": -0.151
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r24_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": -1.013,
+    "E_d": -0.608
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": -1.56,
+    "E_d": -0.936
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r25_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": 0.226,
+    "E_d": 0.135
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": 0.274,
+    "E_d": 0.164
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r25_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": -0.16,
+    "E_d": -0.096
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": -0.151,
+    "E_d": -0.091
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r25_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": -0.766,
+    "E_d": -0.46
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": -0.918,
+    "E_d": -0.551
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r25_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": -1.68,
+    "E_d": -1.008
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": -2.227,
+    "E_d": -1.336
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r26_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": -0.441,
+    "E_d": -0.265
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": -0.393,
+    "E_d": -0.236
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r26_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": -0.827,
+    "E_d": -0.496
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": -0.818,
+    "E_d": -0.491
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r26_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": -1.433,
+    "E_d": -0.86
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": -1.584,
+    "E_d": -0.951
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r26_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": -2.347,
+    "E_d": -1.408
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": -2.893,
+    "E_d": -1.736
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  },
+  "r27_f4_K0": {
+   "G_tabela": {
+    "G": 1.0722,
+    "E_s": -1.108,
+    "E_d": -0.665
+   },
+   "G_NAD2": {
+    "G": 1.0242,
+    "E_s": -1.06,
+    "E_d": -0.636
+   },
+   "tau_proj": 0.428,
+   "tau_star": 0.529,
+   "przedzial": 1
+  },
+  "r27_f2_K0": {
+   "G_tabela": {
+    "G": 1.4583,
+    "E_s": -1.494,
+    "E_d": -0.896
+   },
+   "G_NAD2": {
+    "G": 1.4492,
+    "E_s": -1.485,
+    "E_d": -0.891
+   },
+   "tau_proj": 0.628,
+   "tau_star": 0.729,
+   "przedzial": 2
+  },
+  "r27_f1_K0": {
+   "G_tabela": {
+    "G": 2.0638,
+    "E_s": -2.099,
+    "E_d": -1.26
+   },
+   "G_NAD2": {
+    "G": 2.2156,
+    "E_s": -2.251,
+    "E_d": -1.351
+   },
+   "tau_proj": 1.028,
+   "tau_star": 1.129,
+   "przedzial": 4
+  },
+  "r27_f1_K1": {
+   "G_tabela": {
+    "G": 2.9781,
+    "E_s": -3.013,
+    "E_d": -1.808
+   },
+   "G_NAD2": {
+    "G": 3.5247,
+    "E_s": -3.56,
+    "E_d": -2.136
+   },
+   "tau_proj": 2.028,
+   "tau_star": 2.129,
+   "przedzial": 6
+  }
+ },
+ "punkty": {
+  "P1_zapas": {
+   "f": 4,
+   "K": 0,
+   "E_max": 1.0,
+   "granice_r20": {
+    "G_tabela": {
+     "G": 1.0722,
+     "E_s": 3.559,
+     "E_d": 2.135
+    },
+    "G_NAD2": {
+     "G": 1.0242,
+     "E_s": 3.607,
+     "E_d": 2.164
+    },
+    "tau_proj": 0.428,
+    "tau_star": 0.529,
+    "przedzial": 1
+   },
+   "replay": {
+    "c01_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 1,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4462,
+     "zapas_oslony_min": 0.029,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.4462,
+       1.901
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       16.03,
+       0.4434,
+       0.029
+      ],
+      "bialy/1": [
+       false,
+       null,
+       null,
+       0.4193,
+       0.187
+      ],
+      "bialy/2": [
+       false,
+       null,
+       null,
+       0.4143,
+       0.284
+      ],
+      "bialy/3": [
+       false,
+       null,
+       null,
+       0.4364,
+       0.236
+      ],
+      "wolny_2s/1": [
+       false,
+       null,
+       null,
+       0.4266,
+       0.21
+      ],
+      "wolny_2s/2": [
+       false,
+       null,
+       null,
+       0.4231,
+       0.625
+      ],
+      "wolny_2s/3": [
+       false,
+       null,
+       null,
+       0.4099,
+       0.38
+      ],
+      "wolny_10s/1": [
+       false,
+       null,
+       null,
+       0.4105,
+       0.229
+      ],
+      "wolny_10s/2": [
+       false,
+       null,
+       null,
+       0.4024,
+       0.699
+      ],
+      "wolny_10s/3": [
+       false,
+       null,
+       null,
+       0.4009,
+       0.147
+      ]
+     }
+    },
+    "c01_s03_r2": {
+     "n_przebiegow": 11,
+     "refuse_misja": 1,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4527,
+     "zapas_oslony_min": 0.007,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.4527,
+       1.771
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       17.06,
+       0.4433,
+       0.1
+      ],
+      "bialy/1": [
+       false,
+       null,
+       null,
+       0.4259,
+       0.271
+      ],
+      "bialy/2": [
+       false,
+       null,
+       null,
+       0.4335,
+       0.117
+      ],
+      "bialy/3": [
+       false,
+       null,
+       null,
+       0.4303,
+       0.327
+      ],
+      "wolny_2s/1": [
+       false,
+       null,
+       null,
+       0.4321,
+       0.09
+      ],
+      "wolny_2s/2": [
+       false,
+       null,
+       null,
+       0.422,
+       0.61
+      ],
+      "wolny_2s/3": [
+       false,
+       null,
+       null,
+       0.4177,
+       0.396
+      ],
+      "wolny_10s/1": [
+       false,
+       null,
+       null,
+       0.4278,
+       0.091
+      ],
+      "wolny_10s/2": [
+       false,
+       null,
+       null,
+       0.4139,
+       0.742
+      ],
+      "wolny_10s/3": [
+       false,
+       null,
+       null,
+       0.4104,
+       0.007
+      ]
+     }
+    },
+    "c02_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 5,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4845,
+     "zapas_oslony_min": 0.009,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.4418,
+       1.774
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       6.17,
+       0.4567,
+       0.237
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       102.16,
+       0.4584,
+       0.558
+      ],
+      "bialy/2": [
+       false,
+       null,
+       null,
+       0.4731,
+       0.127
+      ],
+      "bialy/3": [
+       false,
+       null,
+       null,
+       0.428,
+       0.773
+      ],
+      "wolny_2s/1": [
+       false,
+       null,
+       null,
+       0.4431,
+       0.104
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       102.16,
+       0.4845,
+       0.245
+      ],
+      "wolny_2s/3": [
+       false,
+       null,
+       null,
+       0.4126,
+       0.287
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       29.26,
+       0.4325,
+       0.009
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       102.16,
+       0.4664,
+       0.33
+      ],
+      "wolny_10s/3": [
+       false,
+       null,
+       null,
+       0.4266,
+       0.416
+      ]
+     }
+    },
+    "c02_s03": {
+     "n_przebiegow": 11,
+     "refuse_misja": 1,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4658,
+     "zapas_oslony_min": 0.074,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.436,
+       1.828
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       29.77,
+       0.4591,
+       0.074
+      ],
+      "bialy/1": [
+       false,
+       null,
+       null,
+       0.4354,
+       0.358
+      ],
+      "bialy/2": [
+       false,
+       null,
+       null,
+       0.4289,
+       0.304
+      ],
+      "bialy/3": [
+       false,
+       null,
+       null,
+       0.4658,
+       0.188
+      ],
+      "wolny_2s/1": [
+       false,
+       null,
+       null,
+       0.406,
+       0.493
+      ],
+      "wolny_2s/2": [
+       false,
+       null,
+       null,
+       0.4614,
+       0.877
+      ],
+      "wolny_2s/3": [
+       false,
+       null,
+       null,
+       0.4532,
+       0.837
+      ],
+      "wolny_10s/1": [
+       false,
+       null,
+       null,
+       0.4279,
+       0.156
+      ],
+      "wolny_10s/2": [
+       false,
+       null,
+       null,
+       0.4029,
+       0.315
+      ],
+      "wolny_10s/3": [
+       false,
+       null,
+       null,
+       0.4293,
+       0.736
+      ]
+     }
+    },
+    "c05_s01_r2": {
+     "n_przebiegow": 11,
+     "refuse_misja": 0,
+     "przyczyny": [],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.461,
+     "zapas_oslony_min": 3.476,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.4507,
+       5.473
+      ],
+      "bias_na_zewnatrz/1": [
+       false,
+       null,
+       null,
+       0.4586,
+       3.476
+      ],
+      "bialy/1": [
+       false,
+       null,
+       null,
+       0.4245,
+       3.883
+      ],
+      "bialy/2": [
+       false,
+       null,
+       null,
+       0.4524,
+       3.692
+      ],
+      "bialy/3": [
+       false,
+       null,
+       null,
+       0.461,
+       3.875
+      ],
+      "wolny_2s/1": [
+       false,
+       null,
+       null,
+       0.4493,
+       3.925
+      ],
+      "wolny_2s/2": [
+       false,
+       null,
+       null,
+       0.4215,
+       4.468
+      ],
+      "wolny_2s/3": [
+       false,
+       null,
+       null,
+       0.4371,
+       3.481
+      ],
+      "wolny_10s/1": [
+       false,
+       null,
+       null,
+       0.4352,
+       3.921
+      ],
+      "wolny_10s/2": [
+       false,
+       null,
+       null,
+       0.4015,
+       5.19
+      ],
+      "wolny_10s/3": [
+       false,
+       null,
+       null,
+       0.4246,
+       3.533
+      ]
+     }
+    },
+    "c05_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 1,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.465,
+     "zapas_oslony_min": 0.014,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.465,
+       1.987
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       83.37,
+       0.4583,
+       0.014
+      ],
+      "bialy/1": [
+       false,
+       null,
+       null,
+       0.4217,
+       0.448
+      ],
+      "bialy/2": [
+       false,
+       null,
+       null,
+       0.4244,
+       0.328
+      ],
+      "bialy/3": [
+       false,
+       null,
+       null,
+       0.4292,
+       0.141
+      ],
+      "wolny_2s/1": [
+       false,
+       null,
+       null,
+       0.4224,
+       0.938
+      ],
+      "wolny_2s/2": [
+       false,
+       null,
+       null,
+       0.4443,
+       0.153
+      ],
+      "wolny_2s/3": [
+       false,
+       null,
+       null,
+       0.4381,
+       0.743
+      ],
+      "wolny_10s/1": [
+       false,
+       null,
+       null,
+       0.4452,
+       1.076
+      ],
+      "wolny_10s/2": [
+       false,
+       null,
+       null,
+       0.3845,
+       0.457
+      ],
+      "wolny_10s/3": [
+       false,
+       null,
+       null,
+       0.4411,
+       1.443
+      ]
+     }
+    },
+    "c08_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4915,
+     "zapas_oslony_min": 0.008,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       65.48,
+       0.4462,
+       0.269
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       64.17,
+       0.4763,
+       0.03
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       64.48,
+       0.4915,
+       0.471
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       64.48,
+       0.4408,
+       0.716
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       64.22,
+       0.4414,
+       0.045
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       64.17,
+       0.4664,
+       0.031
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       64.48,
+       0.4532,
+       0.664
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       65.08,
+       0.4252,
+       0.008
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       64.48,
+       0.4783,
+       0.574
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       64.48,
+       0.4542,
+       0.563
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       65.28,
+       0.4833,
+       0.017
+      ]
+     }
+    },
+    "c08_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 0,
+     "przyczyny": [],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4379,
+     "zapas_oslony_min": 1.359,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.4363,
+       3.358
+      ],
+      "bias_na_zewnatrz/1": [
+       false,
+       null,
+       null,
+       0.4379,
+       1.359
+      ],
+      "bialy/1": [
+       false,
+       null,
+       null,
+       0.4249,
+       2.351
+      ],
+      "bialy/2": [
+       false,
+       null,
+       null,
+       0.4127,
+       2.23
+      ],
+      "bialy/3": [
+       false,
+       null,
+       null,
+       0.4246,
+       1.685
+      ],
+      "wolny_2s/1": [
+       false,
+       null,
+       null,
+       0.4271,
+       2.382
+      ],
+      "wolny_2s/2": [
+       false,
+       null,
+       null,
+       0.4164,
+       1.917
+      ],
+      "wolny_2s/3": [
+       false,
+       null,
+       null,
+       0.423,
+       1.875
+      ],
+      "wolny_10s/1": [
+       false,
+       null,
+       null,
+       0.4372,
+       2.483
+      ],
+      "wolny_10s/2": [
+       false,
+       null,
+       null,
+       0.3916,
+       1.746
+      ],
+      "wolny_10s/3": [
+       false,
+       null,
+       null,
+       0.4311,
+       1.872
+      ]
+     }
+    },
+    "c10_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 2,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4873,
+     "zapas_oslony_min": 0.037,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.4296,
+       1.299
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       88.86,
+       0.4873,
+       0.271
+      ],
+      "bialy/1": [
+       false,
+       null,
+       null,
+       0.4614,
+       0.144
+      ],
+      "bialy/2": [
+       false,
+       null,
+       null,
+       0.4263,
+       0.593
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       88.91,
+       0.461,
+       0.037
+      ],
+      "wolny_2s/1": [
+       false,
+       null,
+       null,
+       0.4536,
+       0.117
+      ],
+      "wolny_2s/2": [
+       false,
+       null,
+       null,
+       0.4265,
+       0.533
+      ],
+      "wolny_2s/3": [
+       false,
+       null,
+       null,
+       0.436,
+       0.263
+      ],
+      "wolny_10s/1": [
+       false,
+       null,
+       null,
+       0.4334,
+       0.519
+      ],
+      "wolny_10s/2": [
+       false,
+       null,
+       null,
+       0.427,
+       0.601
+      ],
+      "wolny_10s/3": [
+       false,
+       null,
+       null,
+       0.4301,
+       0.248
+      ]
+     }
+    },
+    "c10_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 10,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.531,
+     "zapas_oslony_min": 0.017,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.4556,
+       0.477
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       1.8,
+       0.531,
+       0.067
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       2.1,
+       0.4706,
+       0.066
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       2.25,
+       0.4825,
+       0.044
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       2.1,
+       0.4914,
+       0.585
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       2.1,
+       0.4813,
+       0.494
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       3.1,
+       0.4866,
+       0.112
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       2.1,
+       0.4504,
+       0.025
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       2.0,
+       0.5169,
+       0.017
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       2.1,
+       0.4732,
+       0.252
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       2.2,
+       0.4466,
+       0.03
+      ]
+     }
+    },
+    "c11_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4741,
+     "zapas_oslony_min": 0.018,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       27.53,
+       0.4559,
+       0.577
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       25.65,
+       0.4741,
+       0.071
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       26.88,
+       0.408,
+       0.018
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       26.53,
+       0.4135,
+       0.597
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       27.08,
+       0.4238,
+       0.232
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       26.53,
+       0.4304,
+       0.277
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       26.53,
+       0.4192,
+       0.188
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       26.48,
+       0.4217,
+       0.065
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       26.53,
+       0.4395,
+       0.271
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       26.53,
+       0.3837,
+       0.218
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       26.28,
+       0.429,
+       0.052
+      ]
+     }
+    },
+    "c11_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 2,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4942,
+     "zapas_oslony_min": 0.019,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.4542,
+       1.634
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       64.43,
+       0.4942,
+       0.441
+      ],
+      "bialy/1": [
+       false,
+       null,
+       null,
+       0.4537,
+       0.198
+      ],
+      "bialy/2": [
+       false,
+       null,
+       null,
+       0.4616,
+       0.412
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       64.43,
+       0.4362,
+       0.605
+      ],
+      "wolny_2s/1": [
+       false,
+       null,
+       null,
+       0.474,
+       0.982
+      ],
+      "wolny_2s/2": [
+       false,
+       null,
+       null,
+       0.4564,
+       1.037
+      ],
+      "wolny_2s/3": [
+       false,
+       null,
+       null,
+       0.4598,
+       0.019
+      ],
+      "wolny_10s/1": [
+       false,
+       null,
+       null,
+       0.4698,
+       0.08
+      ],
+      "wolny_10s/2": [
+       false,
+       null,
+       null,
+       0.4439,
+       0.804
+      ],
+      "wolny_10s/3": [
+       false,
+       null,
+       null,
+       0.4589,
+       0.036
+      ]
+     }
+    },
+    "L_c10_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 10,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5471,
+     "zapas_oslony_min": 0.009,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.4576,
+       0.6
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       88.48,
+       0.5048,
+       0.034
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       489.36,
+       0.4905,
+       0.146
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       488.4,
+       0.4782,
+       0.025
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       489.36,
+       0.5063,
+       0.087
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       488.35,
+       0.4827,
+       0.272
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       489.36,
+       0.5002,
+       0.009
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       488.45,
+       0.5247,
+       0.049
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       488.35,
+       0.4644,
+       0.255
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       488.35,
+       0.4738,
+       0.384
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       488.45,
+       0.5471,
+       0.087
+      ]
+     }
+    }
+   }
+  },
+  "P2_granica": {
+   "f": 1,
+   "K": 1,
+   "E_max": 1.0,
+   "granice_r20": {
+    "G_tabela": {
+     "G": 2.9781,
+     "E_s": 1.653,
+     "E_d": 0.992
+    },
+    "G_NAD2": {
+     "G": 3.5247,
+     "E_s": 1.107,
+     "E_d": 0.664
+    },
+    "tau_proj": 2.028,
+    "tau_star": 2.129,
+    "przedzial": 6
+   },
+   "replay": {
+    "c01_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4402,
+     "zapas_oslony_min": 0.003,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       14.53,
+       0.4386,
+       0.039
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       13.7,
+       0.4395,
+       0.152
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       14.13,
+       0.3803,
+       0.003
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       13.2,
+       0.4062,
+       0.045
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       14.68,
+       0.4066,
+       0.217
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       13.7,
+       0.4101,
+       0.493
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       13.65,
+       0.4124,
+       0.19
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       13.65,
+       0.4334,
+       0.191
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       13.7,
+       0.3966,
+       0.511
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       14.53,
+       0.3971,
+       0.057
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       13.65,
+       0.4402,
+       0.132
+      ]
+     }
+    },
+    "c01_s03_r2": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4321,
+     "zapas_oslony_min": 0.007,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       15.84,
+       0.4296,
+       0.42
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       14.09,
+       0.4288,
+       0.015
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       14.79,
+       0.3776,
+       0.096
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       14.98,
+       0.3995,
+       0.007
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       14.84,
+       0.4107,
+       1.082
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       14.19,
+       0.3986,
+       0.03
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       14.84,
+       0.4107,
+       0.336
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       14.84,
+       0.4247,
+       0.851
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       14.14,
+       0.3734,
+       0.061
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       14.84,
+       0.4082,
+       0.739
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       14.84,
+       0.4321,
+       0.907
+      ]
+     }
+    },
+    "c02_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4446,
+     "zapas_oslony_min": 0.004,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       4.96,
+       0.4189,
+       0.63
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       2.97,
+       0.4446,
+       1.009
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       3.11,
+       0.4076,
+       0.017
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       4.28,
+       0.3796,
+       0.008
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       4.28,
+       0.4012,
+       0.04
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       3.4,
+       0.3954,
+       0.072
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       3.97,
+       0.4069,
+       1.037
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       3.97,
+       0.4427,
+       0.098
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       3.45,
+       0.3853,
+       0.004
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       3.97,
+       0.3737,
+       0.651
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       3.93,
+       0.4404,
+       0.035
+      ]
+     }
+    },
+    "c02_s03": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4475,
+     "zapas_oslony_min": 0.039,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       4.52,
+       0.4183,
+       0.191
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       3.58,
+       0.4475,
+       0.439
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       4.36,
+       0.402,
+       0.046
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       3.4,
+       0.3807,
+       0.042
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       4.56,
+       0.3919,
+       0.48
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       3.68,
+       0.4177,
+       0.039
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       4.56,
+       0.3958,
+       0.689
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       4.56,
+       0.4128,
+       0.414
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       3.58,
+       0.3814,
+       0.995
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       4.56,
+       0.3669,
+       0.645
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       4.56,
+       0.4181,
+       0.334
+      ]
+     }
+    },
+    "c05_s01_r2": {
+     "n_przebiegow": 11,
+     "refuse_misja": 1,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4549,
+     "zapas_oslony_min": 0.21,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.4257,
+       1.903
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       11.56,
+       0.4549,
+       0.271
+      ],
+      "bialy/1": [
+       false,
+       null,
+       null,
+       0.4218,
+       0.21
+      ],
+      "bialy/2": [
+       false,
+       null,
+       null,
+       0.4209,
+       1.752
+      ],
+      "bialy/3": [
+       false,
+       null,
+       null,
+       0.3885,
+       1.49
+      ],
+      "wolny_2s/1": [
+       false,
+       null,
+       null,
+       0.3958,
+       0.441
+      ],
+      "wolny_2s/2": [
+       false,
+       null,
+       null,
+       0.4272,
+       1.138
+      ],
+      "wolny_2s/3": [
+       false,
+       null,
+       null,
+       0.4119,
+       0.997
+      ],
+      "wolny_10s/1": [
+       false,
+       null,
+       null,
+       0.3973,
+       0.539
+      ],
+      "wolny_10s/2": [
+       false,
+       null,
+       null,
+       0.4024,
+       1.571
+      ],
+      "wolny_10s/3": [
+       false,
+       null,
+       null,
+       0.4233,
+       1.133
+      ]
+     }
+    },
+    "c05_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.465,
+     "zapas_oslony_min": 0.006,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       81.91,
+       0.465,
+       0.053
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       33.22,
+       0.4523,
+       0.019
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       53.66,
+       0.4105,
+       0.055
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       54.06,
+       0.3758,
+       0.129
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       54.06,
+       0.3706,
+       0.549
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       55.06,
+       0.3842,
+       0.032
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       32.98,
+       0.4263,
+       0.24
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       34.03,
+       0.4112,
+       0.687
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       33.98,
+       0.3734,
+       0.261
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       32.98,
+       0.4138,
+       0.172
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       34.62,
+       0.4107,
+       0.006
+      ]
+     }
+    },
+    "c08_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5375,
+     "zapas_oslony_min": 0.004,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       31.21,
+       0.4121,
+       0.078
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       28.76,
+       0.4616,
+       0.004
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       30.26,
+       0.4306,
+       0.057
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       29.74,
+       0.452,
+       0.024
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       29.25,
+       0.4507,
+       0.715
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       29.16,
+       0.3901,
+       0.059
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       29.3,
+       0.3986,
+       0.068
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       29.25,
+       0.5375,
+       0.924
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       29.2,
+       0.3883,
+       0.136
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       29.25,
+       0.4745,
+       1.003
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       29.4,
+       0.4797,
+       0.058
+      ]
+     }
+    },
+    "c08_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 10,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4543,
+     "zapas_oslony_min": 0.02,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.4363,
+       0.109
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       0.73,
+       0.4251,
+       0.934
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       55.1,
+       0.4543,
+       0.048
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       83.78,
+       0.4411,
+       0.159
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       24.52,
+       0.422,
+       0.026
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       82.78,
+       0.3786,
+       0.335
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       83.72,
+       0.4118,
+       0.046
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       24.47,
+       0.4008,
+       0.02
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       82.96,
+       0.3805,
+       0.084
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       82.68,
+       0.3793,
+       0.405
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       24.57,
+       0.3919,
+       0.07
+      ]
+     }
+    },
+    "c10_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.494,
+     "zapas_oslony_min": 0.031,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       88.66,
+       0.3872,
+       0.209
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       31.61,
+       0.494,
+       0.117
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       87.47,
+       0.4884,
+       0.037
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       87.71,
+       0.4446,
+       0.061
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       87.67,
+       0.4315,
+       0.427
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       87.62,
+       0.3954,
+       0.158
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       87.97,
+       0.3968,
+       0.031
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       87.67,
+       0.4264,
+       0.316
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       87.62,
+       0.3651,
+       0.213
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       87.76,
+       0.3675,
+       0.073
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       87.67,
+       0.4604,
+       0.321
+      ]
+     }
+    },
+    "c10_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5545,
+     "zapas_oslony_min": 0.01,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       1.05,
+       0.4327,
+       0.093
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       0.7,
+       0.5545,
+       0.178
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       0.85,
+       0.4841,
+       0.106
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       0.24,
+       0.4187,
+       0.061
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       0.7,
+       0.5328,
+       0.02
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       0.89,
+       0.4379,
+       0.01
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       0.6,
+       0.4646,
+       0.103
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       0.29,
+       0.4645,
+       0.089
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       0.89,
+       0.4467,
+       0.318
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       0.6,
+       0.5022,
+       0.036
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       0.5,
+       0.4518,
+       0.075
+      ]
+     }
+    },
+    "c11_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.4497,
+     "zapas_oslony_min": 0.06,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       25.21,
+       0.4497,
+       0.066
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       0.09,
+       0.4458,
+       null
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       0.34,
+       0.4126,
+       0.61
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       0.09,
+       0.4001,
+       null
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       1.33,
+       0.3908,
+       0.06
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       0.34,
+       0.4049,
+       0.315
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       0.09,
+       0.4125,
+       null
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       0.09,
+       0.4196,
+       null
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       0.34,
+       0.3359,
+       0.403
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       0.09,
+       0.4034,
+       null
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       0.09,
+       0.4194,
+       null
+      ]
+     }
+    },
+    "c11_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5398,
+     "zapas_oslony_min": 0.0,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       63.19,
+       0.4542,
+       0.13
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       4.55,
+       0.5398,
+       0.035
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       6.26,
+       0.4895,
+       0.882
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       30.02,
+       0.4172,
+       0.006
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       29.92,
+       0.4042,
+       0.004
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       30.67,
+       0.4407,
+       0.004
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       5.21,
+       0.4493,
+       0.868
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       63.24,
+       0.4335,
+       0.124
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       30.83,
+       0.4486,
+       0.0
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       5.21,
+       0.4193,
+       0.872
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       32.05,
+       0.4096,
+       0.011
+      ]
+     }
+    },
+    "L_c10_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.6012,
+     "zapas_oslony_min": 0.002,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       88.14,
+       0.5713,
+       1.018
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       30.7,
+       0.6012,
+       0.003
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       88.04,
+       0.492,
+       0.073
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       87.6,
+       0.4633,
+       0.093
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       87.3,
+       0.5986,
+       0.076
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       88.14,
+       0.5022,
+       0.37
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       87.84,
+       0.4739,
+       0.069
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       87.15,
+       0.49,
+       1.001
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       88.14,
+       0.5382,
+       0.389
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       87.69,
+       0.5201,
+       0.002
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       87.15,
+       0.4843,
+       0.862
+      ]
+     }
+    }
+   }
+  },
+  "P3_nad": {
+   "f": 1,
+   "K": 1,
+   "E_max": 2.0,
+   "granice_r20": {
+    "G_tabela": {
+     "G": 2.9781,
+     "E_s": 1.653,
+     "E_d": 0.992
+    },
+    "G_NAD2": {
+     "G": 3.5247,
+     "E_s": 1.107,
+     "E_d": 0.664
+    },
+    "tau_proj": 2.028,
+    "tau_star": 2.129,
+    "przedzial": 6
+   },
+   "replay": {
+    "c01_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5187,
+     "zapas_oslony_min": 0.012,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       14.24,
+       0.5182,
+       0.056
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       11.75,
+       0.5187,
+       0.012
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       12.05,
+       0.4701,
+       0.079
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       12.5,
+       0.4925,
+       0.338
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       13.4,
+       0.4894,
+       0.038
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       12.0,
+       0.4992,
+       0.102
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       12.86,
+       0.5012,
+       0.09
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       12.86,
+       0.5146,
+       0.065
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       12.05,
+       0.4663,
+       0.02
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       13.25,
+       0.491,
+       0.034
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       12.8,
+       0.5174,
+       0.035
+      ]
+     }
+    },
+    "c01_s03_r2": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5133,
+     "zapas_oslony_min": 0.012,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       14.79,
+       0.5123,
+       0.304
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       12.52,
+       0.5119,
+       0.053
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       14.09,
+       0.4687,
+       0.058
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       12.82,
+       0.4874,
+       0.75
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       14.64,
+       0.4921,
+       0.329
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       13.66,
+       0.4915,
+       0.073
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       13.71,
+       0.4988,
+       0.012
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       13.66,
+       0.508,
+       0.062
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       13.61,
+       0.4619,
+       0.035
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       14.44,
+       0.4982,
+       0.434
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       13.61,
+       0.5133,
+       0.02
+      ]
+     }
+    },
+    "c02_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5213,
+     "zapas_oslony_min": 0.041,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       4.96,
+       0.5054,
+       0.115
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       1.2,
+       0.5213,
+       0.077
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       2.59,
+       0.4947,
+       0.432
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       2.04,
+       0.4752,
+       0.082
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       2.87,
+       0.4892,
+       0.058
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       1.84,
+       0.4893,
+       0.076
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       3.88,
+       0.4958,
+       0.041
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       2.24,
+       0.517,
+       0.057
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       2.92,
+       0.4824,
+       0.08
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       2.59,
+       0.4758,
+       0.061
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       1.99,
+       0.5153,
+       0.895
+      ]
+     }
+    },
+    "c02_s03": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5235,
+     "zapas_oslony_min": 0.004,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       4.22,
+       0.5049,
+       0.033
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       1.55,
+       0.5235,
+       0.934
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       1.89,
+       0.469,
+       0.033
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       2.57,
+       0.4743,
+       0.288
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       3.3,
+       0.4785,
+       0.004
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       2.53,
+       0.5043,
+       0.082
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       3.11,
+       0.4904,
+       0.078
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       2.81,
+       0.5012,
+       0.057
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       2.18,
+       0.4671,
+       0.066
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       3.06,
+       0.4651,
+       0.068
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       2.67,
+       0.5049,
+       0.071
+      ]
+     }
+    },
+    "c05_s01_r2": {
+     "n_przebiegow": 11,
+     "refuse_misja": 10,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5284,
+     "zapas_oslony_min": 0.01,
+     "per_model": {
+      "bias_do_srodka/1": [
+       false,
+       null,
+       null,
+       0.5092,
+       1.375
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       9.34,
+       0.5284,
+       0.029
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       10.63,
+       0.4976,
+       0.01
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       13.6,
+       0.5023,
+       0.613
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       10.2,
+       0.476,
+       0.034
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       10.63,
+       0.4918,
+       0.326
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       11.62,
+       0.5108,
+       0.657
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       11.62,
+       0.4992,
+       0.621
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       10.63,
+       0.4671,
+       0.495
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       15.61,
+       0.4939,
+       0.34
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       11.62,
+       0.5064,
+       0.628
+      ]
+     }
+    },
+    "c05_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5352,
+     "zapas_oslony_min": 0.012,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       55.21,
+       0.5352,
+       0.012
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       29.33,
+       0.5269,
+       0.042
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       31.76,
+       0.4907,
+       0.02
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       30.03,
+       0.471,
+       1.06
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       32.02,
+       0.4522,
+       0.728
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       31.66,
+       0.482,
+       0.015
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       30.03,
+       0.5097,
+       0.367
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       32.68,
+       0.5002,
+       0.032
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       31.16,
+       0.4605,
+       0.027
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       30.03,
+       0.5009,
+       0.585
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       33.83,
+       0.4975,
+       0.055
+      ]
+     }
+    },
+    "c08_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5341,
+     "zapas_oslony_min": 0.002,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       30.26,
+       0.5012,
+       0.115
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       28.21,
+       0.5321,
+       0.021
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       28.92,
+       0.4553,
+       0.048
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       29.25,
+       0.4963,
+       0.905
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       28.86,
+       0.4607,
+       0.465
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       28.46,
+       0.4852,
+       0.07
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       29.1,
+       0.492,
+       0.002
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       28.16,
+       0.5341,
+       0.133
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       28.61,
+       0.4712,
+       0.11
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       29.06,
+       0.4827,
+       0.119
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       29.25,
+       0.5067,
+       0.017
+      ]
+     }
+    },
+    "c08_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5185,
+     "zapas_oslony_min": 0.025,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       83.43,
+       0.5141,
+       0.025
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       0.1,
+       0.5086,
+       null
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       0.33,
+       0.5185,
+       0.442
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       0.1,
+       0.4927,
+       null
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       0.1,
+       0.4762,
+       null
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       0.73,
+       0.4655,
+       0.038
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       0.1,
+       0.4992,
+       null
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       0.1,
+       0.4935,
+       null
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       0.53,
+       0.4652,
+       0.4
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       0.1,
+       0.4793,
+       null
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       0.1,
+       0.4874,
+       null
+      ]
+     }
+    },
+    "c10_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5385,
+     "zapas_oslony_min": 0.021,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       88.51,
+       0.4816,
+       0.021
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       8.7,
+       0.5385,
+       0.044
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       32.69,
+       0.5011,
+       0.363
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       29.68,
+       0.4788,
+       0.494
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       29.68,
+       0.5033,
+       0.622
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       30.69,
+       0.4909,
+       0.696
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       29.83,
+       0.4909,
+       0.067
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       30.08,
+       0.5085,
+       0.026
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       30.69,
+       0.449,
+       0.381
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       29.68,
+       0.4654,
+       0.959
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       29.88,
+       0.5124,
+       0.063
+      ]
+     }
+    },
+    "c10_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5789,
+     "zapas_oslony_min": 0.06,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       0.89,
+       0.5122,
+       0.889
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       0.1,
+       0.5789,
+       null
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       0.29,
+       0.4867,
+       0.666
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       0.1,
+       0.4652,
+       null
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       0.1,
+       0.4849,
+       null
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       0.34,
+       0.4912,
+       0.06
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       0.1,
+       0.5201,
+       null
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       0.1,
+       0.5207,
+       null
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       0.5,
+       0.4382,
+       0.419
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       0.1,
+       0.5046,
+       null
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       0.1,
+       0.5182,
+       null
+      ]
+     }
+    },
+    "c11_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5255,
+     "zapas_oslony_min": 0.677,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       0.34,
+       0.5255,
+       0.677
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       0.09,
+       0.5229,
+       null
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       0.09,
+       0.4913,
+       null
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       0.09,
+       0.4881,
+       null
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       0.09,
+       0.4795,
+       null
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       0.09,
+       0.4951,
+       null
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       0.09,
+       0.501,
+       null
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       0.09,
+       0.5059,
+       null
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       0.09,
+       0.4266,
+       null
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       0.09,
+       0.483,
+       null
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       0.09,
+       0.5057,
+       null
+      ]
+     }
+    },
+    "c11_s02": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.5618,
+     "zapas_oslony_min": 0.007,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       32.6,
+       0.5289,
+       0.031
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       3.86,
+       0.5618,
+       0.09
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       4.36,
+       0.5043,
+       0.049
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       5.21,
+       0.5012,
+       0.403
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       3.25,
+       0.4916,
+       1.103
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       5.06,
+       0.4567,
+       0.007
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       3.65,
+       0.5251,
+       0.063
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       5.21,
+       0.5059,
+       0.586
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       4.71,
+       0.437,
+       0.026
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       3.65,
+       0.5016,
+       0.029
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       5.21,
+       0.4986,
+       0.246
+      ]
+     }
+    },
+    "L_c10_s01": {
+     "n_przebiegow": 11,
+     "refuse_misja": 11,
+     "przyczyny": [
+      "bariera"
+     ],
+     "e_gt_U": 0,
+     "max_e_do_U": 0.6121,
+     "zapas_oslony_min": 0.001,
+     "per_model": {
+      "bias_do_srodka/1": [
+       true,
+       "bariera",
+       88.14,
+       0.5412,
+       0.517
+      ],
+      "bias_na_zewnatrz/1": [
+       true,
+       "bariera",
+       29.84,
+       0.6121,
+       0.08
+      ],
+      "bialy/1": [
+       true,
+       "bariera",
+       32.13,
+       0.5089,
+       0.178
+      ],
+      "bialy/2": [
+       true,
+       "bariera",
+       29.44,
+       0.501,
+       0.032
+      ],
+      "bialy/3": [
+       true,
+       "bariera",
+       29.49,
+       0.5896,
+       0.01
+      ],
+      "wolny_2s/1": [
+       true,
+       "bariera",
+       30.12,
+       0.5451,
+       0.802
+      ],
+      "wolny_2s/2": [
+       true,
+       "bariera",
+       29.79,
+       0.5261,
+       0.057
+      ],
+      "wolny_2s/3": [
+       true,
+       "bariera",
+       29.94,
+       0.5166,
+       0.065
+      ],
+      "wolny_10s/1": [
+       true,
+       "bariera",
+       30.12,
+       0.5113,
+       0.495
+      ],
+      "wolny_10s/2": [
+       true,
+       "bariera",
+       29.59,
+       0.5174,
+       0.093
+      ],
+      "wolny_10s/3": [
+       true,
+       "bariera",
+       29.84,
+       0.5023,
+       0.001
+      ]
+     }
+    }
+   }
+  }
+ }
+}
