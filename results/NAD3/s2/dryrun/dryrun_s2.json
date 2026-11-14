@@ -1,0 +1,394 @@
+{
+ "czesc1": {
+  "start": {
+   "rc": 0,
+   "wynik": {
+    "wynik": "zatrzymane: uzbrojenie",
+    "kroki": [
+     "connect",
+     "arm_retry"
+    ]
+   },
+   "nad3_selfcheck_pass": true,
+   "odmowa": null,
+   "meta_nad3": {
+    "oslona": {
+     "tabela": "/home/olga/projects/liquidpatrol/results/NAD3/s1/freeze_U_P1.json",
+     "sha256_tabeli": "806f5e90c3dc5844c2870d4485b272c45f7816dff84e3e9d8bb77f143bfde722",
+     "punkt": "P1",
+     "E": 1.0,
+     "tau_star_s": 1.15,
+     "prog_zatrzasku_ticki": 21,
+     "krawedzie_tau_s": [
+      0.35,
+      0.55,
+      0.75,
+      0.95,
+      1.15
+     ],
+     "G": [
+      0.8573,
+      1.2703,
+      1.6614,
+      2.059,
+      2.3471
+     ]
+    },
+    "oslona_env": "nad3",
+    "sha_driver": "06678f3845c388bed3ffc0e913c11de04ce7a913d1d6e4a1a14ec0a9582b2a56",
+    "sha_krok": "d3282cbd87677f0204fa9e4772a60ef07d68463a750056ea8cf02d573fb5da90",
+    "sha_degrad": "7c9db5c0dd18d6b3c765457264f297d6b9786e1bc9f2496016d3798d69c01896",
+    "sha_obs": "e1b220f2a0564f20bab81fd6f08bd96214c38bbd432b7cb5fe17392a65715f25",
+    "sha_shield": "940a9baf3ec0083ca3361cbc001506cd25576822915fc7aecbeba27f37dd77a6"
+   },
+   "ogon": "",
+   "oczekiwany_rc": 0,
+   "ok": true
+  },
+  "bez_oslony_nad3": {
+   "rc": 8,
+   "wynik": null,
+   "nad3_selfcheck_pass": false,
+   "odmowa": "[nad3] NADIR_OSLONA != nad3 — ODMOWA",
+   "meta_nad3": null,
+   "ogon": " reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 30.0, 'bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.9}, 'ok': True}\n[nad3] NADIR_OSLONA != nad3 — ODMOWA\n",
+   "oczekiwany_rc": 8,
+   "ok": true
+  },
+  "litera_NADIR1": {
+   "rc": 8,
+   "wynik": null,
+   "nad3_selfcheck_pass": false,
+   "odmowa": "[nad3] NADIR_LITERA != NAD2 — ODMOWA",
+   "meta_nad3": null,
+   "ogon": " reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 30.0, 'bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.9}, 'ok': True}\n[nad3] NADIR_LITERA != NAD2 — ODMOWA\n",
+   "oczekiwany_rc": 8,
+   "ok": true
+  },
+  "brak_tabeli_41": {
+   "rc": 41,
+   "wynik": null,
+   "nad3_selfcheck_pass": false,
+   "odmowa": "[nad3] osłona: [41] brak tabeli NAD3: '/nie/ma/tabeli.json' — ODMOWA",
+   "meta_nad3": null,
+   "ogon": ", 'przed': {'yaw_blad_deg': 30.0, 'bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.9}, 'ok': True}\n[nad3] osłona: [41] brak tabeli NAD3: '/nie/ma/tabeli.json' — ODMOWA\n",
+   "oczekiwany_rc": 41,
+   "ok": true
+  },
+  "zla_suma_42": {
+   "rc": 42,
+   "wynik": null,
+   "nad3_selfcheck_pass": false,
+   "odmowa": "[nad3] osłona: [42] sha tabeli 806f5e90c3dc5844 / plik 806f5e90c3dc5844 / oczekiwana 0000000000000000 — ODMOWA",
+   "meta_nad3": null,
+   "ogon": "smax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.9}, 'ok': True}\n[nad3] osłona: [42] sha tabeli 806f5e90c3dc5844 / plik 806f5e90c3dc5844 / oczekiwana 0000000000000000 — ODMOWA\n",
+   "oczekiwany_rc": 42,
+   "ok": true
+  },
+  "nieznany_rezim_44": {
+   "rc": 44,
+   "wynik": null,
+   "nad3_selfcheck_pass": false,
+   "odmowa": "[nad3] osłona: [44] NADIR_OSLONA='xx' — ODMOWA",
+   "meta_nad3": null,
+   "ogon": "F2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 30.0, 'bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.9}, 'ok': True}\n[nad3] osłona: [44] NADIR_OSLONA='xx' — ODMOWA\n",
+   "oczekiwany_rc": 44,
+   "ok": true
+  },
+  "stala_tabeli_45": {
+   "rc": 45,
+   "wynik": null,
+   "nad3_selfcheck_pass": false,
+   "odmowa": "[nad3] osłona: [45] tabela NAD3 niezgodna z osłoną: ['tau_star_ostatnia_krawedz', 'prog_calkowity'] — ODMOWA",
+   "meta_nad3": null,
+   "ogon": "absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.9}, 'ok': True}\n[nad3] osłona: [45] tabela NAD3 niezgodna z osłoną: ['tau_star_ostatnia_krawedz', 'prog_calkowity'] — ODMOWA\n",
+   "oczekiwany_rc": 45,
+   "ok": true
+  },
+  "kod_43": "nieosiągalny z env drivera — test_nad3_s1.py::test_odmowa_startu_kody",
+  "PASS": true
+ },
+ "czesc2": {
+  "bias_P1": {
+   "wynik": "start",
+   "oczekiwany": "start",
+   "ok": true
+  },
+  "bez_degradacji_ze_zgoda": {
+   "wynik": "start",
+   "oczekiwany": "start",
+   "ok": true
+  },
+  "bez_degradacji_bez_zgody": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "degradacja_przy_zgodzie_bez": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "E_niezgodne": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "model_bialy": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "f_2": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "K_1": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "datagram_NADIR1": {
+   "wynik": "kod8",
+   "oczekiwany": "kod8",
+   "ok": true
+  },
+  "meta_bez_litery": {
+   "wynik": "kod8",
+   "oczekiwany": "kod8",
+   "ok": true
+  },
+  "PASS": true
+ },
+ "czesc3": {
+  "nad3_boot.sh": {
+   "ostrzezenia": 2,
+   "w_oryginale": 2,
+   "nowe": [],
+   "root_absolutny": true,
+   "pipefail": true,
+   "bash_n": true,
+   "PASS": true
+  },
+  "nad3_launch.sh": {
+   "ostrzezenia": 6,
+   "w_oryginale": 6,
+   "nowe": [],
+   "root_absolutny": true,
+   "pipefail": true,
+   "bash_n": true,
+   "PASS": true
+  },
+  "straznik": {
+   "tryb_NADIR1": {
+    "rc": 5,
+    "komunikat": "[nad3 dryrun_guard] GUARD: tryby NM=1 KM=1 PT=0 LIT=NADIR1 poza dopuszczonym (1/1/0/NAD2)",
+    "ok": true
+   },
+   "tryb_PT1": {
+    "rc": 5,
+    "komunikat": "[nad3 dryrun_guard] GUARD: tryby NM=1 KM=1 PT=1 LIT=NAD2 poza dopuszczonym (1/1/0/NAD2)",
+    "ok": true
+   },
+   "tryb_NM0": {
+    "rc": 5,
+    "komunikat": "[nad3 dryrun_guard] GUARD: tryby NM=0 KM=1 PT=0 LIT=NAD2 poza dopuszczonym (1/1/0/NAD2)",
+    "ok": true
+   },
+   "punkt_P4": {
+    "rc": 5,
+    "komunikat": "[nad3 dryrun_guard] GUARD: BOOT_PUNKT=P4 (P1|P2|P3)",
+    "ok": true
+   },
+   "punkt_pusty": {
+    "rc": 5,
+    "komunikat": "[nad3 dryrun_guard] GUARD: BOOT_PUNKT= (P1|P2|P3)",
+    "ok": true
+   },
+   "degrad_bialy": {
+    "rc": 5,
+    "komunikat": "[nad3 dryrun_guard] GUARD: BOOT_DEGRAD=bialy (na_zewnatrz|do_srodka|0)",
+    "ok": true
+   },
+   "degrad_pusty": {
+    "rc": 5,
+    "komunikat": "[nad3 dryrun_guard] GUARD: BOOT_DEGRAD= (na_zewnatrz|do_srodka|0)",
+    "ok": true
+   },
+   "etap_s9": {
+    "rc": 5,
+    "komunikat": "[nad3 dryrun_guard] GUARD: NAD3_ETAP=s9",
+    "ok": true
+   },
+   "poprawna_kombinacja": {
+    "rc": 5,
+    "komunikat": "[kont dryrun_guard] GUARD: brak PERC2_FASTDDS_PROFILE",
+    "ok": true
+   },
+   "PASS": true
+  },
+  "nad3_degrad_z_boota": {
+   "na_zewnatrz": {
+    "rc": 0,
+    "NAD3_DEGRAD": {
+     "model": "bias_rad",
+     "kierunek": "na_zewnatrz",
+     "E_max": 1.75,
+     "f": 1,
+     "K": 0,
+     "ziarno": 7
+    },
+    "bez": "BEZ=0"
+   },
+   "do_srodka": {
+    "rc": 0,
+    "NAD3_DEGRAD": {
+     "model": "bias_rad",
+     "kierunek": "do_srodka",
+     "E_max": 1.75,
+     "f": 1,
+     "K": 0,
+     "ziarno": 7
+    },
+    "bez": "BEZ=0"
+   },
+   "0": {
+    "rc": 0,
+    "NAD3_DEGRAD": null,
+    "bez": "BEZ=1"
+   },
+   "PASS": true
+  },
+  "kolejka_sucho": {
+   "rc": 0,
+   "plan": [
+    "N1",
+    "N2",
+    "B3",
+    "B4"
+   ],
+   "mapa_epizodow": {
+    "N1": [
+     "c00_s01",
+     "c01_s01",
+     "c05_s01",
+     "c10_s01"
+    ],
+    "N2": [
+     "c02_s01",
+     "c03_s01",
+     "c05_s01",
+     "c10_s01"
+    ],
+    "B3": [
+     "c05_s01"
+    ],
+    "B4": [
+     "c05_s01"
+    ]
+   },
+   "PASS": true
+  },
+  "PASS": true
+ },
+ "czesc4": {
+  "b4": {
+   "ulg_MB": 1.25,
+   "analizator": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true,
+    "max_e_do_U": 0.4321
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.52,
+     "p95": 0.968,
+     "max": 1.02
+    },
+    "skok_delta": {
+     "n": 119,
+     "p50": 0.4787,
+     "p95": 1.0096,
+     "max": 1.6032
+    },
+    "n_pred_odrzut": 13,
+    "r_max_gt_misja_po_fladze": 19.594,
+    "max_e_do_U": 0.4321,
+    "refuse_misja": []
+   },
+   "sprawdziany": {
+    "replay": true,
+    "s1_decymacja": true,
+    "s3_meta": true
+   },
+   "b1_nieocenione": {
+    "ticki_utraty": 2473,
+    "nieocenione": 51,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 51,
+      "faza_misji": 0,
+      "pierwszy_tick": 3127
+     }
+    }
+   },
+   "decymacja": {
+    "dostarczone": 160,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.02,
+    "ok": true
+   }
+  },
+  "negatywy": {
+   "E_podmienione_replay": false,
+   "kierunek_meta_s3": false
+  },
+  "b3": {
+   "replay": true,
+   "klucze": true
+  },
+  "geometria_dym": {
+   "epizody": 4,
+   "r_max": [
+    [
+     "c04_s01",
+     19.889,
+     0.928,
+     0.873,
+     true
+    ],
+    [
+     "c05_s01",
+     19.239,
+     0.9,
+     0.874,
+     true
+    ],
+    [
+     "c06_s01",
+     19.257,
+     0.926,
+     0.91,
+     true
+    ],
+    [
+     "c07_s01",
+     20.958,
+     0.941,
+     0.891,
+     true
+    ]
+   ]
+  },
+  "PASS": true
+ },
+ "PASS": true
+}
