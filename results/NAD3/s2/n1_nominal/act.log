@@ -1,0 +1,34 @@
+[kont_s4] bramka tempa: 0.9396 (okno 59.95 s, n=728) ok=True
+[kont_s4] reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 5.62, 'bias_absmax': 0.00011}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 2.041}, 'sim_reinit': 103.58, 'po': {'yaw_blad_deg': 5.56, 'bias_absmax': 0.00012, 'sim': 117.896}, 'ok': True}
+[bench] yaw_assert sim=125.71 {'yaw_blad_deg': 5.57, 'bias_absmax': 0.00012, 'ok': True, 'n_reinit': 1}
+[bench] armed sim=125.73 {'gt_home': [-0.0, -0.0]}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NAD3/s2/n1_nominal/episode_control.json
+[bench] takeoff sim=125.77 {}
+[bench] offboard sim=136.55 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] nad2_litera sim=136.92 {'datagram': 'NAD2', 'meta_producenta': 'NAD2', 'oslona': 'NAD2'}
+[bench] nad3_degradacja sim=136.92 {'meta_producenta': None, 'E_tabeli': 1.0, 'bez_degradacji': True, 'zgodna': True}
+[bench] intruder_start_gate sim=137.02 {'episode_id': 0, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.06, 'pose': [10.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [10.0, 0.0, -10.0]}
+[bench] episode_start sim=137.02 {'episode_id': 0, 'scenario_id': 'c00_s01', 't0_sim': 137.02}
+[bench] episode_end sim=211.04 {'episode_id': 0, 't_entry': 4.01, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False, 'n_r_g_nom': 0, 'n_kont_enter': 0, 'refuse_rec': None, 'descending': False, 'zejscie_planowe': None}
+[bench] intruder_start_gate sim=217.92 {'episode_id': 1, 'status': 'OK', 'n_setpose': 35, 'wait_sim': 1.632, 'pose': [0.0, 10.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 10.0, -10.0]}
+[bench] episode_start sim=217.92 {'episode_id': 1, 'scenario_id': 'c01_s01', 't0_sim': 217.924}
+[bench] episode_end sim=299.62 {'episode_id': 1, 't_entry': 11.68, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False, 'n_r_g_nom': 0, 'n_kont_enter': 0, 'refuse_rec': None, 'descending': False, 'zejscie_planowe': None}
+[bench] intruder_start_gate sim=305.78 {'episode_id': 5, 'status': 'OK', 'n_setpose': 1, 'wait_sim': 0.0, 'pose': [0.0, 10.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 10.0, -10.0]}
+[bench] episode_start sim=305.78 {'episode_id': 5, 'scenario_id': 'c05_s01', 't0_sim': 305.784}
+[bench] episode_end sim=380.47 {'episode_id': 5, 't_entry': 4.67, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False, 'n_r_g_nom': 0, 'n_kont_enter': 0, 'refuse_rec': None, 'descending': False, 'zejscie_planowe': None}
+[bench] intruder_start_gate sim=385.64 {'episode_id': 10, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.084, 'pose': [-10.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-10.0, 0.0, -10.0]}
+[bench] episode_start sim=385.66 {'episode_id': 10, 'scenario_id': 'c10_s01', 't0_sim': 385.644}
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/olga/projects/liquidpatrol/harness/intruder_motion.py", line 185, in <module>
+    main()
+  File "/home/olga/projects/liquidpatrol/harness/intruder_motion.py", line 169, in main
+    ep = manifest["episodes"][this_id]
+         ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+IndexError: list index out of range
+[bench] episode_end sim=458.55 {'episode_id': 10, 't_entry': 2.88, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False, 'n_r_g_nom': 0, 'n_kont_enter': 0, 'refuse_rec': None, 'descending': False, 'zejscie_planowe': None}
+[bench] reset_done sim=464.35 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NAD3/s2/n1_nominal/trace.jsonl (demo n=6543)

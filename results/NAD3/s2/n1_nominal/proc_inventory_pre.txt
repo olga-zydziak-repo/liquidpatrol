@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       15002 15.6  0.0 330892 14160 ?        Sl   00:33   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       14569  5.1  0.5 2631924 191492 ?      SLl  00:28   0:14 python3 results/NAD3/tools/nad3_s2_run.py
+olga       14995  3.0  0.0   5028  3712 ?        S    00:33   0:00 bash /home/olga/projects/liquidpatrol/results/NAD3/tools/nad3_launch.sh world_nadir2_A3
+olga        1040  1.4  1.2 5713164 418232 pts/0  Sl+  Nov14   4:39 claude --continue
+olga       14582  0.1  0.0 1341172 7060 ?        S    00:28   0:00 ugrep -G --ignore-files --hidden -I --exclude-dir=.git --exclude-dir=.svn --exclude-dir=.hg --exclude-dir=.bzr --exclude-dir=.jj --exclude-dir=.sl -E --line-buffered start:|bramka zdrowia|rc=|geometria|sprawdziany|analizator|ALARM|STOP|KONIEC|nieważny|guard|env-block|Traceback|Error
+root         252  0.1  0.1 2846980 58528 ?       Ssl  Nov14   0:19 /usr/bin/containerd
+olga       14891  0.0  0.0 129356 22328 ?        Sl   00:31   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         350  0.0  0.2 10544936 86364 ?      Ssl  Nov14   0:04 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga       14895  0.0  0.0   5028  3744 ?        S    00:31   0:00 bash /home/olga/projects/liquidpatrol/results/NAD3/tools/nad3_boot.sh 1 n1_nominal 0,1,4,5 -
+root       14783  0.0  0.0 1830368 13952 ?       Ssl  00:28   0:00 /usr/libexec/wsl-pro-service
+root           1  0.0  0.0  21988 12604 ?        Ss   Nov14   0:01 /usr/lib/systemd/systemd --system --deserialize=115
+root         897  0.0  0.0   3200  1248 ?        S    Nov14   0:00 /init
+root          40  0.0  0.0  50476 17016 ?        S<s  Nov14   0:00 /usr/lib/systemd/systemd-journald
+olga       14529  0.0  0.0   5160  3940 ?        Ss   00:28   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1794683885916-8mm0fb.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'set +u; source /opt/ros/jazzy/setup.bash >/dev/null 2>&1; source ros2_ws/install/setup.bash >/dev/null 2>&1; export PYTHONDONTWRITEBYTECODE=1; python3 results/NAD3/tools/nad3_s2_run.py > /tmp/claude-1000/-home-olga-projects-liquidpatrol/8ae8f6cb-345f-452f-9041-28f95502f571/scratchpad/kolejka_s2.out 2>&1; echo "RC=$?" >> /tmp/claude-1000/-home-olga-projects-liquidpatrol/8ae8f6cb-345f-452f-9041-28f95502f571/scratchpad/kolejka_s2.out' < /dev/null && pwd -P >| /tmp/claude-b335-cwd
+polkitd      197  0.0  0.0 308188  8172 ?        Ssl  Nov14   0:00 /usr/lib/polkit-1/polkitd --no-debug
+message+     192  0.0  0.0   9808  5604 ?        Ss   Nov14   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root          86  0.0  0.0  26536  7600 ?        Ss   Nov14   0:00 /usr/lib/systemd/systemd-udevd
+root         202  0.0  0.0  17988  8888 ?        Ss   Nov14   0:00 /usr/lib/systemd/systemd-logind
+systemd+     176  0.0  0.0  21352 13236 ?        Ss   Nov14   0:00 /usr/lib/systemd/systemd-resolved

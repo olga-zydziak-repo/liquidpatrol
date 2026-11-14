@@ -1,3 +1,12 @@
 [kampania 00:26:25] === NAD3 S2 (na sucho) start: zużyte 0/4, nieważne 0, plan ['N1', 'N2', 'B3', 'B4']
 [kampania 00:27:01] === NAD3 S2 (na sucho) start: zużyte 0/4, nieważne 0, plan ['N1', 'N2', 'B3', 'B4']
 [kampania 00:27:45] === NAD3 S2 (na sucho) start: zużyte 0/4, nieważne 0, plan ['N1', 'N2', 'B3', 'B4']
+[kampania 00:28:19] === NAD3 S2 start: zużyte 0/4, nieważne 0, plan ['N1', 'N2', 'B3', 'B4']
+[kampania 00:30:55] n1_nominal: bramka zdrowia n1_nominal_g1 (A) GO=True tempo=0.9032
+[kampania 00:31:55] n1_nominal: próbnik 0 skoków ok=True
+[kampania 00:42:23] n1_nominal rc=0 boot 1 tempo=0.9396 breach=False litera={'t': 'event', 'mono': 19068.2092, 'sim': 136.924, 'ev': 'nad2_litera', 'datagram': 'NAD2', 'meta_producenta': 'NAD2', 'oslona': 'NAD2'} nad3={'t': 'event', 'mono': 19068.2092, 'sim': 136.924, 'ev': 'nad3_degradacja', 'meta_producenta': None, 'E_tabeli': 1.0, 'bez_degradacji': True, 'zgodna': True}
+[kampania 00:42:25] n1_nominal: wyciąg ULG {'plik': '/home/olga/projects/liquidpatrol/results/NAD3/s2/n1_nominal/ulg.jsonl.gz', 'MB': 2.54, 'n': {'estimator_aid_src_optical_flow': 8088, 'estimator_optical_flow_vel': 8088, 'estimator_status_flags': 428, 'vehicle_angular_velocity': 16145, 'vehicle_attitude': 80879, 'vehicle_local_position': 40440, 'vehicle_status': 643}, 'okno': [136.02, 459.55]}
+[kampania 00:42:26] n1_nominal: analizator ważny=True bezpieczeństwo_ok=True
+[kampania 00:42:26] n1_nominal: geometria {'bramka_ok': True, 'niespelnione': 0, 'r_max': {'c00_s01': 18.326, 'c01_s01': 18.143, 'c05_s01': 18.831, 'c10_s01': 12.175}}
+[kampania 00:45:21] n2_nominal: bramka zdrowia n2_nominal_g1 (A) GO=False tempo=0.866 — do zamknięcia: {'gpu': [('chrome@iGPU', 17, 3), ('dwm@iGPU', 2.5, 2), ('Code@iGPU', 2, 1)], 'cpu': [('python', 2.93, 3), ('ChatGPT', 0.33, 2), ('chrome', 0.25, 9), ('Code', 0.2, 1)]}
+[kampania 00:46:04] KONIEC booty=1/4 stop=None pozostało=['N2', 'B3', 'B4']
