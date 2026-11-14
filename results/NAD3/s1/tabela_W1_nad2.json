@@ -1,0 +1,52 @@
+{
+ "tabela": {
+  "punkt": "W1_nad2",
+  "E": 0.0,
+  "krawedzie_tau_s": [
+   0.25,
+   0.45,
+   0.65,
+   0.85,
+   1.05
+  ],
+  "G": [
+   0.6251,
+   1.0722,
+   1.4583,
+   1.7894,
+   2.0638
+  ],
+  "F": {
+   "para": [
+    0.1968,
+    0.2372,
+    0.2372,
+    0.2372,
+    0.2577
+   ],
+   "jeden": [
+    0.2562,
+    0.3376,
+    0.4445,
+    0.4527,
+    0.4527
+   ]
+  },
+  "zapas": 1.5,
+  "delta_D5": 1.524,
+  "R_E": 32.0,
+  "d_stop": 2.85,
+  "tau_star_s": 1.05,
+  "tau_eps_s": 0.012,
+  "prog_zatrzasku_ticki": 19,
+  "dt_s": 0.05,
+  "pole_brak": [
+   "jeden",
+   4
+  ],
+  "regula": "U′ = 1.5·(F_zn + E + G); u′ = U′ + Δ_D5; R = R_E − d_stop − u′ (W1: parametry NAD2, E = 0)"
+ },
+ "sha256_tabeli": "7b82aea8677175f535b9cd412841abbc0563d58c6ae878b2d5b2c4eebb948fb2",
+ "uwaga": "tabela testowa W1 (PROMPT_NAD3_S1 §4), nie FREEZE",
+ "zrodlo": "results/NAD2/s1/freeze_U.json (sha256_tabeli 6a118fd404491b04…)"
+}

@@ -1,0 +1,93 @@
+{
+ "krawedzie_tau_s": [
+  0.35,
+  0.55,
+  0.75,
+  0.95,
+  1.15
+ ],
+ "G": [
+  0.8573,
+  1.2703,
+  1.6614,
+  2.059,
+  2.3471
+ ],
+ "G_CC": [
+  0.8573,
+  1.2703,
+  1.6614,
+  2.059,
+  2.3471
+ ],
+ "roznica": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tolerancja": 0.01,
+ "n_lotow": 25,
+ "loty": [
+  "NADIR_S4/c01_s01_r4",
+  "NADIR_S4/c01_s03",
+  "NADIR_S4/c02_s01",
+  "NADIR_S4/c02_s03",
+  "NADIR_S4/c05_s01",
+  "NADIR_S4/c05_s02",
+  "NADIR_S4/c08_s01",
+  "NADIR_S4/c08_s02",
+  "NADIR_S4/c10_s01",
+  "NADIR_S4/c10_s02",
+  "NADIR_S4/c11_s01",
+  "NADIR_S4/c11_s02",
+  "NAD2/c01_s01",
+  "NAD2/c01_s03_r2",
+  "NAD2/c02_s01",
+  "NAD2/c02_s03",
+  "NAD2/c05_s01_r2",
+  "NAD2/c05_s02",
+  "NAD2/c08_s01",
+  "NAD2/c08_s02",
+  "NAD2/c10_s01",
+  "NAD2/c10_s02",
+  "NAD2/c11_s01",
+  "NAD2/c11_s02",
+  "NAD2/L_c10_s01"
+ ],
+ "argmax": {
+  "0.35": {
+   "lot": "NADIR_S4/c08_s01",
+   "tau_prim": 0.35
+  },
+  "0.55": {
+   "lot": "NADIR_S4/c08_s01",
+   "tau_prim": 0.55
+  },
+  "0.75": {
+   "lot": "NAD2/L_c10_s01",
+   "tau_prim": 0.75
+  },
+  "0.95": {
+   "lot": "NAD2/L_c10_s01",
+   "tau_prim": 0.95
+  },
+  "1.15": {
+   "lot": "NAD2/L_c10_s01",
+   "tau_prim": 1.15
+  }
+ },
+ "okno": "[flaga cs_gnss_pos → 0, zejście planowe], siatka 0.01 s, poziomo, maksimum bieżące po τ′ ≤ krawędź",
+ "sprawdzian_PRE_4": {
+  "E_d": 1.3705,
+  "E_s": 2.2842,
+  "bariera_min_P1": 21.9263,
+  "wykonalne_P1": true,
+  "bariera_min_P2": 20.8013,
+  "wykonalne_P2": true,
+  "bariera_min_P3": 19.3013,
+  "wykonalne_P3": false,
+  "ok": true
+ }
+}

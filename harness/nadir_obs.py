@@ -19,6 +19,9 @@ PROMPT_NADIR_S2 §1.6 (wada S1: brak summary — proces nie doszedł do ścieżk
 zapisywany atomowo co 15 s z wątku roboczego (przeżywa SIGKILL), końcowy w handlerze SIGTERM; faulthandler zrzuca stosy
 wątków na stderr przy SIGTERM (diagnoza zawieszenia).
 PROMPT_NAD2_S2 §1.1: przy NADIR_MODE=1 meta niesie literę producenta ramy (env NADIR_LITERA, harness/nadir_fix.Rama).
+PRE_NAD3 §5.1 (PROMPT_NAD3_S1 §1.1): przy NADIR_MODE=1 datagram idzie przez harness/nad3_degrad (env NAD3_DEGRAD) między
+Rama.obserwacja a wysyłką; env nieustawiony ⇒ ten sam obiekt, datagram, wiersz i meta bajtowo jak dotąd. Przy włączonej
+degradacji: wiersz niesie poprawkę czystą ("fx") i zdegradowaną ("fx_deg" z polem "nad3": E, slot), meta konfigurację ("nad3").
 Użycie: nadir_obs.py --world W --model M --out plik.jsonl
 """
 import argparse
@@ -54,6 +57,8 @@ if NADIR_MODE:                                                # PROMPT_NADIR_S2 
     from harness.nadir_fix import Rama, nadawca
     _rama = Rama()
     _send = nadawca([x for x in os.environ.get("NADIR_FIX_SOCKS", "").split(":") if x])
+    from harness import nad3_degrad                           # NAD3: degradacja za producentem (PRE_NAD3 §5.1)
+    _deg = nad3_degrad.z_env()
 _stop = [False]
 _ekf = {"q": None, "q_mono": None, "pos": None, "hdg": None, "pos_mono": None}
 _q = queue.Queue(maxsize=1)
@@ -140,9 +145,12 @@ def worker():
                "det": det, "ms": round(ms, 2), **ekf}
         if NADIR_MODE:                                         # PROMPT_NADIR_S2 §1.1
             fx = _rama.obserwacja(sim, det, ekf["ekf_q"], ekf["ekf_pos"])
-            _send(fx)
+            fxw = _deg.przetworz(fx)                           # NAD3: wyłączona ⇒ fxw is fx
+            _send(fxw)
             st["n_fix"] += int(fx["ok"])
             row["fx"] = fx
+            if fxw is not fx:
+                row["fx_deg"] = fxw
         fout.write(json.dumps(row) + "\n")
         if time.monotonic() - _hb[0] >= 15.0:                  # PROMPT_NADIR_S2 §1.6: summary okresowo (przeżywa SIGKILL)
             _hb[0] = time.monotonic()
@@ -191,6 +199,8 @@ def main():
              "mono": round(time.monotonic(), 4)}
     if NADIR_MODE:                                             # PROMPT_NAD2_S2 §1.1: litera producenta ramy w meta
         _meta["litera"] = _rama.litera
+        if _deg.echo() is not None:                            # NAD3: konfiguracja degradacji tylko przy włączonej
+            _meta["nad3"] = _deg.echo()
     fout.write(json.dumps(_meta) + "\n")
     th = threading.Thread(target=worker, daemon=True)
     th.start()

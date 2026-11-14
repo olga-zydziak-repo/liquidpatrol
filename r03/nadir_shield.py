@@ -29,6 +29,16 @@ domyślnie env NADIR_LITERA == "NAD2"; brak ⇒ stary reżim NADIR-I bez zmiany 
     EKF; r_est = |pozycja w ramie wybranej|; cała gramatyka (R-KONT, R-G, R-G-NOM, applied) liczy w ramie wybranej; wyjście
     applied przeliczane do ramy EKF (applied − Δ w N, E) i to jest „applied” decyzji; oryginał w d["nad2"]["applied_rama"].
 Stałe tabeli wkompilowane z sumą sha tabeli (results/NAD2/s1/freeze_U.json, sha256_tabeli) i sha PRE/ANEKS (wzór ANEKS_SHA256).
+
+PRE_NAD3 §5.2 (PROMPT_NAD3_S1 §1.2) — reżim „nad3” obok „nad2”, wybierany JAWNIE: argument `nad3` (domyślnie env NADIR_OSLONA
+== "nad3"); tabela punktu z pliku (argument `tabela` / env NAD3_TABELA) i oczekiwana suma (argument `tabela_sha` / env
+NAD3_TABELA_SHA). Krawędzie τ, G, E, F, zapas, τ*, dodatek τ i próg zatrzasku w tickach czytane z tabeli; przy starcie:
+sha256 kanonicznego JSON tabeli = pole pliku = oczekiwana, stałe R_E / d_stop / Δ_D5 tabeli = osłony, (τ* − 2·dt)/dt = próg
+całkowity, τ* = ostatnia krawędź. Bariera i rama jak NAD2 z U′ = zapas·(F(koszyk, tryb) + E + G(przedział)).
+Odmowa startu (NadirStartError z kodem, nie wartość domyślna): 41 brak tabeli / brak oczekiwanej sumy, 42 sha niezgodne,
+43 kombinacja nad2 + nad3 (argument nad2=True przy nad3 albo NADIR_OSLONA=nad2 przy nad3=True), 44 nieznana wartość
+NADIR_OSLONA, 45 stała tabeli niezgodna z osłoną. Przy nad3 litera producenta ramy pozostaje NAD2 (env NADIR_LITERA = NAD2 to
+litera Rama, nie reżim osłony); reżim „nad2” wyłączony. Bez NADIR_OSLONA i bez argumentu nad3 — zachowanie bez zmian.
 """
 from __future__ import annotations
 import math
@@ -65,6 +75,80 @@ TAU_EPS_NAD2 = 0.012                                        # ANEKS_NAD2-1 §2.3
 KOSZ_N_NAD2, TRYBY_NAD2 = 5, ("para", "jeden")
 POLE_BRAK_NAD2 = ("jeden", 4)                               # brak poprawki od wejścia w utratę
 LITERA_ENV = "NADIR_LITERA"
+
+# --- NAD3 (PRE_NAD3 §4–§5; ratyfikacja Olgi 14.11.2026) ---
+OSLONA_ENV, NAD3_TABELA_ENV, NAD3_SHA_ENV = "NADIR_OSLONA", "NAD3_TABELA", "NAD3_TABELA_SHA"
+OSLONY = ("", "nad2", "nad3")
+KOD_BRAK_TABELI, KOD_SHA, KOD_KOMBINACJA, KOD_OSLONA, KOD_STALA = 41, 42, 43, 44, 45
+
+
+class NadirStartError(RuntimeError):
+    """Odmowa startu osłony z kodem (PROMPT_NAD3_S1 §1.2) — driver kończy proces tym kodem."""
+
+    def __init__(self, kod, msg):
+        super().__init__(f"[{kod}] {msg}")
+        self.kod = kod
+
+
+def tabela_sha(tabela) -> str:
+    import json, hashlib
+    return hashlib.sha256(json.dumps(tabela, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+def nad3_tabela(path, sha_oczekiwana, r_e=None, dt=None):
+    """Wczytanie i sprawdzenie tabeli punktu NAD3; zwraca słownik stałych (float) albo rzuca NadirStartError."""
+    import json
+    if not path or not os.path.exists(path):
+        raise NadirStartError(KOD_BRAK_TABELI, f"brak tabeli NAD3: {path!r}")
+    if not sha_oczekiwana:
+        raise NadirStartError(KOD_BRAK_TABELI, "brak oczekiwanej sumy tabeli NAD3")
+    doc = json.load(open(path))
+    t = doc.get("tabela")
+    if t is None:
+        raise NadirStartError(KOD_BRAK_TABELI, f"plik bez pola tabela: {path}")
+    sha = tabela_sha(t)
+    if not (sha == doc.get("sha256_tabeli") == sha_oczekiwana):
+        raise NadirStartError(KOD_SHA, f"sha tabeli {sha[:16]} / plik {str(doc.get('sha256_tabeli'))[:16]} / oczekiwana "
+                                       f"{str(sha_oczekiwana)[:16]}")
+    kraw = tuple(float(x) for x in t["krawedzie_tau_s"])
+    dt = float(t["dt_s"]) if dt is None else float(dt)
+    thr = (float(t["tau_star_s"]) - T_MARGIN_TICKS * dt) / dt
+    sprawdz = {"R_E": r_e is None or float(t["R_E"]) == float(r_e), "d_stop": float(t["d_stop"]) == D_STOP,
+               "delta_D5": float(t["delta_D5"]) == DELTA_D5, "dt": float(t["dt_s"]) == dt,
+               "tau_star_ostatnia_krawedz": float(t["tau_star_s"]) == kraw[-1],
+               "prog_calkowity": abs(thr - round(thr)) < 1e-9 and int(round(thr)) == int(t["prog_zatrzasku_ticki"]),
+               "ksztalt": len(t["G"]) == len(kraw) and all(len(t["F"][tr]) == KOSZ_N_NAD2 for tr in TRYBY_NAD2),
+               "pole_brak": tuple(t["pole_brak"]) == POLE_BRAK_NAD2}
+    zle = [k for k, v in sprawdz.items() if not v]
+    if zle:
+        raise NadirStartError(KOD_STALA, f"tabela NAD3 niezgodna z osłoną: {zle}")
+    return {"path": path, "sha": sha, "punkt": t.get("punkt"), "kraw": kraw, "G": tuple(float(x) for x in t["G"]),
+            "F": {tr: tuple(float(x) for x in t["F"][tr]) for tr in TRYBY_NAD2}, "E": float(t["E"]), "zapas": float(t["zapas"]),
+            "tau_star": float(t["tau_star_s"]), "tau_eps": float(t["tau_eps_s"]), "prog_ticki": int(t["prog_zatrzasku_ticki"])}
+
+
+def przedzial_nad3(T, tau):
+    t = tau + T["tau_eps"]
+    for i, kr in enumerate(T["kraw"]):
+        if t <= kr:
+            return i
+    return None
+
+
+def u_nad3(T, i, k, tryb):
+    """u′ = U′ + Δ_D5, U′ = zapas·(F(k, tryb) + E + G(i)) (przy E = 0 bitowo jak u_nad2)."""
+    return T["zapas"] * (T["F"][tryb][k] + T["E"] + T["G"][i]) + DELTA_D5
+
+
+def r_nad3(T, i, k, tryb, r_e):
+    return r_e - D_STOP - u_nad3(T, i, k, tryb)
+
+
+def nad3_echo(shield) -> dict:
+    T = getattr(shield, "nad3_T", None)
+    return None if T is None else {"tabela": T["path"], "sha256_tabeli": T["sha"], "punkt": T["punkt"], "E": T["E"],
+                                   "tau_star_s": T["tau_star"], "prog_zatrzasku_ticki": T["prog_ticki"],
+                                   "krawedzie_tau_s": list(T["kraw"]), "G": list(T["G"])}
 
 
 def nad2_from_env() -> bool:
@@ -130,10 +214,23 @@ def nadir_echo(shield) -> dict:
 
 
 class NadirShield(KontShield):
-    def __init__(self, cfg=None, kont_mode=None, nadir_mode=None, nad2=None):
+    def __init__(self, cfg=None, kont_mode=None, nadir_mode=None, nad2=None, nad3=None, tabela=None, tabela_sha=None):
         nm = nadir_mode_from_env() if nadir_mode is None else bool(nadir_mode)
         super().__init__(cfg, kont_mode=(True if nm else kont_mode))
         self.nadir_mode = nm
+        self.nad3, self.nad3_T = False, None
+        osl = os.environ.get(OSLONA_ENV, "")                                     # NAD3: jawny wybór reżimu osłony
+        if osl not in OSLONY:
+            raise NadirStartError(KOD_OSLONA, f"{OSLONA_ENV}={osl!r}")
+        n3 = (osl == "nad3") if nad3 is None else bool(nad3)
+        if n3 and (nad2 is True or osl == "nad2"):
+            raise NadirStartError(KOD_KOMBINACJA, "reżim nad2 i nad3 jednocześnie")
+        if n3 and nm:
+            self.nad3_T = nad3_tabela(tabela if tabela is not None else os.environ.get(NAD3_TABELA_ENV),
+                                      tabela_sha if tabela_sha is not None else os.environ.get(NAD3_SHA_ENV),
+                                      r_e=self.cfg.r_e, dt=self.cfg.dt)
+            self.nad3, self.nad2 = True, False
+            return
         self.nad2 = (nad2_from_env() if nad2 is None else bool(nad2)) and nm      # NAD2 tylko w reżimie NADIR
 
     def reset(self):
@@ -150,6 +247,8 @@ class NadirShield(KontShield):
     def _kont_barrier(self, now, r_est):
         if not self.nadir_mode:
             return super()._kont_barrier(now, r_est)
+        if self.nad3:                                                            # NAD3: bariera tabeli punktu
+            return self._nad3_barrier(now, r_est)
         if self.nad2:
             return self._nad2_barrier(now, r_est)
         self._t_kont = None
@@ -192,6 +291,62 @@ class NadirShield(KontShield):
         elif r_est > r_nad2(i, j, tr, self.cfg.r_e):
             self._kont_refuse, self.kont_cause = True, CAUSE_BARRIER
 
+    def _nad3_barrier(self, now, r_est):
+        """PRE_NAD3 §4: jak _nad2_barrier, krawędzie / G / E / τ* z tabeli punktu; REFUSE(τ*) przy τ ≥ τ* − 2·dt."""
+        T = self.nad3_T
+        self._t_kont = None
+        self._tau = self._j_eff = self._tryb_eff = self._przedzial = None
+        if not self._kont:
+            return
+        self._t_kont = now - self._kont_t0
+        if self._t_fix is None:
+            t0, (tr, j) = self._kont_t0, POLE_BRAK_NAD2
+        else:
+            t0, tr, j = self._t_fix, self._tryb, self._j
+        tau = max(0.0, now - t0)
+        i = przedzial_nad3(T, tau)
+        self._tau, self._j_eff, self._tryb_eff, self._przedzial = tau, j, tr, i
+        if self._kont_refuse:
+            return
+        if tau >= T["tau_star"] - T_MARGIN_TICKS * self.cfg.dt or i is None:
+            self._kont_refuse, self.kont_cause = True, CAUSE_TAUSTAR
+        elif r_est > r_nad3(T, i, j, tr, self.cfg.r_e):
+            self._kont_refuse, self.kont_cause = True, CAUSE_BARRIER
+
+    def _step_nad3(self, k, pos, vel, target, mode, pos_flag, auth_ok, cs_gnss_pos, now, dr, t_fix, kosz_j, tryb,
+                   pos_corr, target_corr):
+        """Kształt 1:1 z _step_nad2 (wybór ramy po monitorze, r_est z ramy wybranej, applied przeliczane do EKF); R i u z tabeli
+        punktu; d["nad2"] o tym samym kształcie (rama, d_ne, przedział, tryb, r_est, applied_rama) + d["nad3"] (punkt, sha)."""
+        T = self.nad3_T
+        if t_fix is not None and kosz_j is not None:
+            self._t_fix, self._j = float(t_fix), int(kosz_j)
+            self._tryb = tryb if tryb in TRYBY_NAD2 else "jeden"
+        now = k * self.cfg.dt if now is None else float(now)
+        self._gnss_monitor(None if cs_gnss_pos is None else (not cs_gnss_pos), now)
+        corr = self._kont and pos_corr is not None and target_corr is not None
+        self._rama = "corr" if corr else "ekf"
+        pu, tu = (pos_corr, target_corr) if corr else (pos, target)
+        dn, de = ((float(pos_corr[0]) - float(pos[0]), float(pos_corr[1]) - float(pos[1])) if corr else (0.0, 0.0))
+        self._r_est = math.hypot(float(pu[0]), float(pu[1]))
+        self._kont_barrier(now, self._r_est)
+        d = PatrolShield.step(self, k, pu, vel, tu, mode=mode, pos_flag=pos_flag, auth_ok=auth_ok)
+        a = d.get("applied")
+        app_r = list(a) if a is not None else None
+        if a is not None and corr:
+            d["applied"] = [float(a[0]) - dn, float(a[1]) - de, float(a[2])]
+        kb = self._przedzial
+        d["kont"] = {"phase": self.kont_phase(), "now": round(now, 4),
+                     "t_kont": (round(self._t_kont, 4) if self._t_kont is not None else None),
+                     "k": kb, "R_k": (round(r_nad3(T, kb, self._j_eff, self._tryb_eff, self.cfg.r_e), 3) if kb is not None else None),
+                     "r_est": round(self._r_est, 3), "cause": self.kont_cause, "n_enter": self.n_kont_enter,
+                     "cs_gnss_pos": cs_gnss_pos, "dr": dr}
+        d["nadir"] = {"tau": (round(self._tau, 4) if self._tau is not None else None), "k": kb, "j": self._j_eff,
+                      "t_fix": self._t_fix, "u": (round(u_nad3(T, kb, self._j_eff, self._tryb_eff), 4) if kb is not None else None)}
+        d["nad2"] = {"rama": self._rama, "d_ne": [round(dn, 6), round(de, 6)], "przedzial": kb, "tryb": self._tryb_eff,
+                     "r_est": self._r_est, "applied_rama": app_r}
+        d["nad3"] = {"punkt": T["punkt"], "sha256_tabeli": T["sha"][:16]}
+        return d
+
     def _step_nad2(self, k, pos, vel, target, mode, pos_flag, auth_ok, cs_gnss_pos, now, dr, t_fix, kosz_j, tryb,
                    pos_corr, target_corr):
         """Kształt 1:1 z KontShield.step (monitor → bariera → PatrolShield.step → d["kont"]), z wyborem ramy po monitorze."""
@@ -226,6 +381,9 @@ class NadirShield(KontShield):
     def step(self, k, pos, vel, target, mode="PATROL", pos_flag=None, auth_ok=True,
              cs_gnss_pos=None, now=None, r_est=None, dr=None, t_fix=None, kosz_j=None, tryb=None,
              pos_corr=None, target_corr=None):
+        if self.nadir_mode and self.nad3:                    # PRE_NAD3 §5.2 (tabela punktu, rama jak NAD2)
+            return self._step_nad3(k, pos, vel, target, mode, pos_flag, auth_ok, cs_gnss_pos, now, dr, t_fix, kosz_j, tryb,
+                                   pos_corr, target_corr)
         if self.nadir_mode and self.nad2:                    # PRE_NAD2 §3.4 (r_est wyłącznie z ramy wybranej)
             return self._step_nad2(k, pos, vel, target, mode, pos_flag, auth_ok, cs_gnss_pos, now, dr, t_fix, kosz_j, tryb,
                                    pos_corr, target_corr)

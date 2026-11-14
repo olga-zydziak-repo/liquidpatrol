@@ -8,6 +8,10 @@ DYSK r ≤ 18 m wokół home (32 − 10 − 3.5 − 0.5), z = 10 m. Kierunek orb
 
 Determinizm: RNG = random.Random(seed*100 + cell_index). `position_at(ep, t_rel)` = f(sim_t) (interpolacja
 liniowa po odcinkach). Frame = HOME-planar (x=Północ, y=Wschód, home=origin); intruder_motion mapuje do gz.
+
+PROMPT_NAD3_S1 §1.4 (PRE_NAD3 §4): RANGE0, DISK_R i próg zawracania (PROG_ZAWRACANIA, dotąd literał 14.0) są parametrami
+gen_episode / gen_manifest (argumenty range0, disk_r, prog_zawracania); brak argumentu ⇒ wartość modułowa w chwili wywołania
+(dotychczasowe manifesty odtwarzają się bit w bit — test results/NAD3/tools/test_nad3_s1.py).
 """
 import json
 import math
@@ -17,6 +21,7 @@ import random
 HOME = (0.0, 0.0)
 RANGE0 = 15.0           # zasięg startowy intruza [m]
 DISK_R = 18.0           # twardy dysk trajektorii [m]
+PROG_ZAWRACANIA = 14.0  # r powyżej progu ⇒ kurs ku środkowi [m] (NAD3: parametr)
 Z_INTR = 10.0           # stała wysokość intruza [m]
 EP_DUR_S = 110.0        # dług. trajektorii na epizod (T_orb 70 + podejście + zapas)
 V_INTR = (0.0, 0.5, 1.0)
@@ -29,18 +34,21 @@ CELLS = [{"cell_index": i, "v_intr": v, "bearing_deg": b}
          for i, (v, b) in enumerate((v, b) for v in V_INTR for b in BEARINGS)]
 
 
-def _start_pos(bearing_deg):
+def _start_pos(bearing_deg, range0=None):
+    r0 = RANGE0 if range0 is None else range0
     th = math.radians(bearing_deg)
-    return (RANGE0 * math.cos(th), RANGE0 * math.sin(th))
+    return (r0 * math.cos(th), r0 * math.sin(th))
 
 
-def gen_episode(cell, seed):
+def gen_episode(cell, seed, range0=None, disk_r=None, prog_zawracania=None):
     # Odcinki: KONIEC każdego ≤ DISK_R (dystans-od-origin wypukły wzdłuż prostej → max w końcach;
     # oba końce ≤18 ⇒ cała trasa ≤18). Blisko krawędzi/przy przekroczeniu — kurs ku środkowi.
     ci = cell["cell_index"]
     v_intr = cell["v_intr"]
     rng = random.Random(seed * 100 + ci)
-    sx, sy = _start_pos(cell["bearing_deg"])
+    disk = DISK_R if disk_r is None else disk_r
+    prog = PROG_ZAWRACANIA if prog_zawracania is None else prog_zawracania
+    sx, sy = _start_pos(cell["bearing_deg"], range0)
     segs = []
     t = 0.0
     x, y = sx, sy
@@ -50,7 +58,7 @@ def gen_episode(cell, seed):
     else:
         while t < EP_DUR_S:
             r = math.hypot(x, y)
-            if r > 14.0:
+            if r > prog:
                 heading = math.degrees(math.atan2(-y, -x))          # blisko krawędzi → ku środkowi
             else:
                 heading = rng.uniform(0.0, 360.0)
@@ -59,7 +67,7 @@ def gen_episode(cell, seed):
             # cap dur na czas WYJŚCIA z dysku: |start + v·h·t| = DISK_R (kwadrat: v²t² + 2v(x·hx+y·hy)t + (r²−R²)=0)
             a = v_intr * v_intr
             b = 2.0 * v_intr * (x * hx + y * hy)
-            c = r * r - DISK_R * DISK_R                              # ≤ 0 (start w dysku)
+            c = r * r - disk * disk                                  # ≤ 0 (start w dysku)
             disc = b * b - 4.0 * a * c
             t_exit = (-b + math.sqrt(disc)) / (2.0 * a) if a > 0 and disc >= 0 else dur
             dur_ok = min(dur, max(0.1, t_exit))                     # ≤ czas wyjścia → koniec ≤ DISK_R
@@ -101,15 +109,16 @@ def position_at(ep, t_rel):
     return (last["x0"] + last["v"] * hx * dt, last["y0"] + last["v"] * hy * dt, z)
 
 
-def gen_manifest():
+def gen_manifest(range0=None, disk_r=None, prog_zawracania=None):
     """120 epizodów: blok 1 (ziarna 1–4 × 12 komórek = 48), blok 2 (ziarna 5–10 × 12 = 72). Seed-major w bloku."""
+    kw = {"range0": range0, "disk_r": disk_r, "prog_zawracania": prog_zawracania}
     eps = []
     for seed in BLOCK1_SEEDS:
         for cell in CELLS:
-            eps.append(gen_episode(cell, seed))
+            eps.append(gen_episode(cell, seed, **kw))
     for seed in BLOCK2_SEEDS:
         for cell in CELLS:
-            eps.append(gen_episode(cell, seed))
+            eps.append(gen_episode(cell, seed, **kw))
     for i, e in enumerate(eps):
         e["episode_id"] = i
     return {
@@ -118,7 +127,8 @@ def gen_manifest():
         "seeds": list(SEEDS),
         "block1_seeds": list(BLOCK1_SEEDS),
         "block2_seeds": list(BLOCK2_SEEDS),
-        "disk_r_m": DISK_R, "range0_m": RANGE0, "z_intr_m": Z_INTR, "ep_dur_s": EP_DUR_S,
+        "disk_r_m": DISK_R if disk_r is None else disk_r, "range0_m": RANGE0 if range0 is None else range0,
+        "z_intr_m": Z_INTR, "ep_dur_s": EP_DUR_S,
         "test_rule": "seed % 4 == 0",
         "cells": CELLS,
         "episodes": eps,

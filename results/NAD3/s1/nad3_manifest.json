@@ -1,0 +1,74 @@
+{
+ "manifest": "results/NAD3/s1/scenario_manifest_nad3.json",
+ "sha256": "74da23dedd6c46fa020f375041089ce0e96e8cf927f5e91e80a2c372dd83e7cd",
+ "parametry": {
+  "range0": 10.0,
+  "disk_r": 11.0,
+  "prog_zawracania": 8.5
+ },
+ "ep_dur_s": 200.0,
+ "testy": {
+  "c00_s01": {
+   "r_max_zadane": 10.0,
+   "r_max_probka": 10.0,
+   "r_max_konce_obliczone": 10.0,
+   "skok_max_m": 0.0,
+   "r_ok": true,
+   "ciaglosc_ok": true,
+   "czas_ok": true,
+   "n_odcinkow": 1
+  },
+  "c01_s01": {
+   "r_max_zadane": 10.0,
+   "r_max_probka": 10.0,
+   "r_max_konce_obliczone": 10.0,
+   "skok_max_m": 0.0,
+   "r_ok": true,
+   "ciaglosc_ok": true,
+   "czas_ok": true,
+   "n_odcinkow": 1
+  },
+  "c02_s01": {
+   "r_max_zadane": 10.0,
+   "r_max_probka": 10.0,
+   "r_max_konce_obliczone": 10.0,
+   "skok_max_m": 0.0,
+   "r_ok": true,
+   "ciaglosc_ok": true,
+   "czas_ok": true,
+   "n_odcinkow": 1
+  },
+  "c03_s01": {
+   "r_max_zadane": 10.0,
+   "r_max_probka": 10.0,
+   "r_max_konce_obliczone": 10.0,
+   "skok_max_m": 0.0,
+   "r_ok": true,
+   "ciaglosc_ok": true,
+   "czas_ok": true,
+   "n_odcinkow": 1
+  },
+  "c05_s01": {
+   "r_max_zadane": 11.000003,
+   "r_max_probka": 10.997752,
+   "r_max_konce_obliczone": 10.999983,
+   "skok_max_m": 7.222e-05,
+   "r_ok": true,
+   "ciaglosc_ok": true,
+   "czas_ok": true,
+   "n_odcinkow": 13
+  },
+  "c10_s01": {
+   "r_max_zadane": 11.000035,
+   "r_max_probka": 11.000035,
+   "r_max_konce_obliczone": 11.000052,
+   "skok_max_m": 0.00010192,
+   "r_ok": true,
+   "ciaglosc_ok": true,
+   "czas_ok": true,
+   "n_odcinkow": 16
+  }
+ },
+ "tolerancja_ciaglosci_m": 0.0002414,
+ "tolerancja_promienia_m": 0.0001
+}

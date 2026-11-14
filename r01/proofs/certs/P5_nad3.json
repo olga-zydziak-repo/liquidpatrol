@@ -1,0 +1,186 @@
+{
+  "property": "P5_nad3",
+  "verdict": "PASS",
+  "method": "per-tick konformancja: lustro (p9_nad2_verify.mirror_step_nad2 ze stałymi tabeli punktu) ≡ r03/nadir_shield.NadirShield (nadir_mode=1, nad3, tabela P1/P2/P3) + tau_kont (P1) ≡ produkcja; obligacja wejścia na ścieżce drivera (nad3_krok.krok) na fiksturze 13 lotów NAD2 z degradacją punktu, mutant z ramą czystą; przejścia ramy; passthrough NADIR_MODE=0 z nad3 ≡ KontShield pełnym dictem; mutant krawędzi tabeli wykryty",
+  "z3_lib": "5.0.0",
+  "tabele": {
+    "P1": {
+      "ok": true,
+      "ticks": {
+        "grid": 500,
+        "fuzz": 1359374,
+        "fixture": 103720,
+        "tau": 40747,
+        "passthrough": 167153
+      },
+      "missing": [],
+      "coverage_n": 67,
+      "obligacja_wejscia": {
+        "ticki_utraty": 83708,
+        "ticki_nominal": 20012,
+        "r_est_zly": 0,
+        "applied_zly": 0,
+        "bramka_zla": 0,
+        "max_dr": 0.0,
+        "PASS": true
+      },
+      "mutant_czysta_rama": {
+        "ticki_utraty": 83708,
+        "ticki_nominal": 20012,
+        "r_est_zly": 83708,
+        "applied_zly": 0,
+        "bramka_zla": 83708,
+        "max_dr": 2.482894289,
+        "PASS": false
+      },
+      "mutant_wykryty": true,
+      "przejscia_ok": true,
+      "przejscia": {
+        "wejscie": [
+          {
+            "k": 4,
+            "rama": "corr",
+            "r_est": 6.082762530298219,
+            "r_corr": 6.082762530298219
+          }
+        ],
+        "wyjscie": [
+          {
+            "k": 106,
+            "rama": "ekf",
+            "r_est": 4.47213595499958,
+            "r_ekf": 4.47213595499958
+          }
+        ]
+      },
+      "tabela_sha256": "806f5e90c3dc5844c2870d4485b272c45f7816dff84e3e9d8bb77f143bfde722",
+      "kierunki_fikstury": [
+        "na_zewnatrz",
+        "do_srodka"
+      ]
+    },
+    "P2": {
+      "ok": true,
+      "ticks": {
+        "grid": 500,
+        "fuzz": 1362160,
+        "fixture": 51860,
+        "tau": 40032,
+        "passthrough": 178320
+      },
+      "missing": [],
+      "coverage_n": 67,
+      "obligacja_wejscia": {
+        "ticki_utraty": 41854,
+        "ticki_nominal": 10006,
+        "r_est_zly": 0,
+        "applied_zly": 0,
+        "bramka_zla": 0,
+        "max_dr": 0.0,
+        "PASS": true
+      },
+      "mutant_czysta_rama": {
+        "ticki_utraty": 41854,
+        "ticki_nominal": 10006,
+        "r_est_zly": 41854,
+        "applied_zly": 0,
+        "bramka_zla": 41854,
+        "max_dr": 3.211221148,
+        "PASS": false
+      },
+      "mutant_wykryty": true,
+      "przejscia_ok": true,
+      "przejscia": {
+        "wejscie": [
+          {
+            "k": 4,
+            "rama": "corr",
+            "r_est": 6.082762530298219,
+            "r_corr": 6.082762530298219
+          }
+        ],
+        "wyjscie": [
+          {
+            "k": 106,
+            "rama": "ekf",
+            "r_est": 4.47213595499958,
+            "r_ekf": 4.47213595499958
+          }
+        ]
+      },
+      "tabela_sha256": "28e193dedcaffc86c81709065ab92ef9f893776b2ae84e510907518f90de5d85",
+      "kierunki_fikstury": [
+        "na_zewnatrz"
+      ]
+    },
+    "P3": {
+      "ok": true,
+      "ticks": {
+        "grid": 500,
+        "fuzz": 1389718,
+        "fixture": 51860,
+        "tau": 40631,
+        "passthrough": 179139
+      },
+      "missing": [],
+      "coverage_n": 67,
+      "obligacja_wejscia": {
+        "ticki_utraty": 41854,
+        "ticki_nominal": 10006,
+        "r_est_zly": 0,
+        "applied_zly": 0,
+        "bramka_zla": 0,
+        "max_dr": 0.0,
+        "PASS": true
+      },
+      "mutant_czysta_rama": {
+        "ticki_utraty": 41854,
+        "ticki_nominal": 10006,
+        "r_est_zly": 41854,
+        "applied_zly": 0,
+        "bramka_zla": 41854,
+        "max_dr": 3.737589581,
+        "PASS": false
+      },
+      "mutant_wykryty": true,
+      "przejscia_ok": true,
+      "przejscia": {
+        "wejscie": [
+          {
+            "k": 4,
+            "rama": "corr",
+            "r_est": 6.082762530298219,
+            "r_corr": 6.082762530298219
+          }
+        ],
+        "wyjscie": [
+          {
+            "k": 106,
+            "rama": "ekf",
+            "r_est": 4.47213595499958,
+            "r_ekf": 4.47213595499958
+          }
+        ]
+      },
+      "tabela_sha256": "841e3ae43eae9d0cc4219c03f0ffb791b13861ad97c080ee987298354974835c",
+      "kierunki_fikstury": [
+        "do_srodka"
+      ]
+    }
+  },
+  "ostrosc_mutanty_tabeli": {
+    "kraw2_0_80": {
+      "odrzucony": true,
+      "przez": "rozbieżność konformancji lustro ≠ produkcja"
+    }
+  },
+  "fuzz": {
+    "episodes_per_tabela": 34000,
+    "tau_bound_per_tabela": 1000,
+    "seed": "0 + numer punktu",
+    "passthrough_per_tabela": 4250
+  },
+  "fixture": "13 lotów NAD2 (12 cięć S3 + L_c10_s01): wejścia z rama.jsonl + tk + demo; strumień producenta z replayu Rama NAD2; degradacja harness/nad3_degrad (bias_rad, f 1, K 0, ziarno 1) — P1 oba kierunki, P2 na zewnątrz, P3 do środka",
+  "binds": "P7_nad3 (lustro monitora i zegara τ), P9_nad3 (założenie r_est = |p_corr′|)",
+  "model_sha256": "1e37670e726210bb7c981b35d30526de199e582e904ccd4a5f79ab0dd58e1720"
+}
