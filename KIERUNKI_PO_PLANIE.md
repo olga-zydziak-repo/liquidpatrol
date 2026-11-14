@@ -816,3 +816,15 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   nietknięty). Nowa noga w tym wątku tylko na sygnał Olgi.
 - Breach 0 / REFUSE(POS) fałszywych 0 programowo bez zmian
   (~240 bootów programu).
+
+## Dopisek stanu katalogu — 14.11.2026 (CO-NAD3-0, PRE_NAD3)
+- **NADIR-III — otwarta, PRE ratyfikowany.** Zdegradowane źródło
+  poprawki: znaczniki z wstrzykniętym błędem ograniczonym, 1 Hz,
+  zadanie do 20 m (nowy manifest, intruz bliżej środka), trzy
+  poziomy błędu 1.0 / 1.75 / 2.75 m. Cel: zmierzony kontrakt dla
+  przyszłego źródła absolutnego bez znaczników.
+- Recon (0 bootów): wymaganie wyznacza dostępność, nie
+  bezpieczeństwo — osłona liczy błąd źródła dwukrotnie. Przy 20 m
+  i 1 Hz: dostępność do 1.37 m, bezpieczeństwo do 2.28 m.
+- Budżet ≤ 22 booty. Dopasowanie obrazu do mapy otwiera się dopiero
+  z liczbami tej nogi jako bramką wejścia.

@@ -1135,3 +1135,31 @@ CLOSED-BY-RECON (0 bootów)
 - P-NAD3-R6 (0.60): G dla τ ∈ (1.05, 3.0] s pochodzi z mniej niż 100
   okien niezależnych — tabela na długie τ wymaga dosiania z logów
   NAD2 przed FREEZE.
+
+## NADIR-III — PRE (PRE_NAD3, 14.11.2026)
+- Recon rozliczony: P-NAD3-R1 ✓, R2 ✓, R3 ✓, R4 ✗, R5 ✓, R6 ✗ —
+  4/6 przy sumie szans 4.25. CC odtworzył JSON-y reconu bajt w bajt
+  i własnym kodem: r_max 13 lotów (do 0.01 m), tabelę r5 (do 4.
+  cyfry), świeże G NAD2 (do 3. cyfry), odstęp klatek 0.2 s.
+- ✗ projektowe CC w PROMPT_NAD3_S0: wzór τ bez siatki klatki 5 Hz
+  i dodatku osłony; odwrócony kierunek najgorszego biasu; rachunek
+  wymagań bez dostępności (przy 20 m i 1 Hz: 3.0 m → 1.37 m).
+  Lekcja: wymaganie na źródło liczy się z obu stron — przesłanki
+  i odmowy — i na siatce czasu przyrządu, nie wzoru.
+- Dopisek do NAD2 (bez zmiany werdyktu): tabela G z NADIR S4 nie
+  ogranicza z góry lotów NAD2 od τ = 0.85 s (do +0.15 m przy 1.05 s,
+  +0.43 m przy 2 s w locie długim). W NAD2 τ nie przekroczyło 0.40 s,
+  a przesłanką była suma e_corr ≤ U.
+- Predykcje CC, przed pierwszym lotem:
+  - P-NAD3-1 (0.80): bramka geometrii przechodzi na pierwszym
+    manifeście (r_max ≤ 19.5 m w 8/8 epizodów nominalnych).
+  - P-NAD3-2 (0.75): P1 — 4/4 cięcia bez REFUSE w misji.
+  - P-NAD3-3 (0.90): zero przekroczeń przesłanki w 12 cięciach,
+    max e′/U′ ≤ 0.75.
+  - P-NAD3-4 (0.65): bias do środka nie przesuwa toru — różnica
+    r_max GT między lotami o przeciwnym znaku biasu < 1.0 m w co
+    najmniej 4 z 6 par.
+  - P-NAD3-5 (0.75): P3, bias na zewnątrz — REFUSE(bariera) w 2/2,
+    B4 czyste.
+  - P-NAD3-6 (0.60): P2 — najwyżej 1 REFUSE w 4 cięciach.
+  - P-NAD3-7 (0.70): zero REFUSE(τ*) w 12 cięciach.
