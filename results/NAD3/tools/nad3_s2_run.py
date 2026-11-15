@@ -5,8 +5,9 @@ READ-ONLY, ścieżki przestawione na results/NAD3/s2), bramka zdrowia przyrząde
 katalog wyjścia results/NAD3/s2/bramka; A, NO-GO ⇒ 3 min ⇒ C; trzecie NO-GO z rzędu ⇒ STOP-NAD3-2-STANOWISKO), telemetria w tle
 bootu. Boot: results/NAD3/tools/nad3_boot.sh (NAD3_ETAP=s2, tryb NM=1 KM=1 PT=0 LIT=NAD2, BOOT_PUNKT=P1).
 Kolejność wiążąca (§2): N1 (nominał, epizody c00, c01, c05, c10) → bramka geometrii → N2 (c02, c03, c05, c10) → bramka geometrii →
-B3 (cięcie c05, bez degradacji) → B4 (cięcie c05, P1, bias na zewnątrz). Epizody podawane INDEKSEM listy manifestu NAD3
-(driver: manifest["episodes"][i]): c00 0, c01 1, c02 2, c03 3, c05 4, c10 5. Cięcia KONT_INJECT_T 30, kontynuacja 110.5 s.
+B3 (cięcie c05, bez degradacji) → B4 (cięcie c05, P1, bias na zewnątrz). ANEKS_NAD3-1 §3.2/§3.5: manifest NAD3 v2 (pełna lista
+120, pozycja = episode_id), epizody podawane numerem kanonu (c00 0, c01 1, c02 2, c03 3, c05 5, c10 10); przed każdym bootem asercja
+niezmiennika na manifeście z strażnika boota (pozycja = episode_id dla 120/120, scenario_id planu zgodne) ⇒ inaczej STOP-NAD3-2-MANIFEST. Cięcia KONT_INJECT_T 30, kontynuacja 110.5 s.
 Po każdym boocie: wyciąg ULG (results/NAD2/tools/nad2_ulg — READ-ONLY), analizator nad3_analyze; po N1/N2 nad3_s2_geom (bramka
 r_max ≤ 19.5 m — przekroczenie ⇒ STOP-NAD3-2-GEOM; kryterium nominału niespełnione w > 1 z 8 ⇒ STOP-NAD3-2-SMIERC-GEOM); po B3/B4
 nad3_s2_spr (replay < 100% ⇒ STOP-NAD3-2-REPLAY; B1–B4 naruszone ⇒ STOP-NAD3-2-FAIL; B4: r_max GT > 19.5 m ⇒ STOP-NAD3-2-RMAX).
@@ -39,11 +40,23 @@ BUDZET = 4
 NOGA_PRZED = 0                                     # NADIR-III: pierwszy boot nogi (budżet nogi ≤ 22)
 BAZA = {"BOOT_NADIR_MODE": "1", "BOOT_KONT_MODE": "1", "BOOT_PASSTHROUGH": "0", "BOOT_LITERA": "NAD2", "BOOT_PUNKT": "P1",
         "BOOT_ZIARNO": "1", "NAD3_ETAP": "s2"}
-LOTY = {"N1": {"nazwa": "n1_nominal", "epizody": "0,1,4,5", "inject": "-", "env": {**BAZA, "BOOT_DEGRAD": "0"}},
-        "N2": {"nazwa": "n2_nominal", "epizody": "2,3,4,5", "inject": "-", "env": {**BAZA, "BOOT_DEGRAD": "0"}},
-        "B3": {"nazwa": "b3_c05_bez_degradacji", "epizody": "4", "inject": "30", "env": {**BAZA, "BOOT_DEGRAD": "0"}},
-        "B4": {"nazwa": "b4_c05_p1_na_zewnatrz", "epizody": "4", "inject": "30", "env": {**BAZA, "BOOT_DEGRAD": "na_zewnatrz"}}}
+MANIFEST = os.path.join(ROOT, "results/NAD3/s1/scenario_manifest_nad3_v2.json")   # ANEKS_NAD3-1 §3.2
+LOTY = {"N1": {"nazwa": "n1_nominal", "epizody": "0,1,5,10", "inject": "-", "env": {**BAZA, "BOOT_DEGRAD": "0"}},
+        "N2": {"nazwa": "n2_nominal", "epizody": "2,3,5,10", "inject": "-", "env": {**BAZA, "BOOT_DEGRAD": "0"}},
+        "B3": {"nazwa": "b3_c05_bez_degradacji", "epizody": "5", "inject": "30", "env": {**BAZA, "BOOT_DEGRAD": "0"}},
+        "B4": {"nazwa": "b4_c05_p1_na_zewnatrz", "epizody": "5", "inject": "30", "env": {**BAZA, "BOOT_DEGRAD": "na_zewnatrz"}}}
 KOLEJNOSC = ("N1", "N2", "B3", "B4")
+SCEN = {"N1": ["c00_s01", "c01_s01", "c05_s01", "c10_s01"], "N2": ["c02_s01", "c03_s01", "c05_s01", "c10_s01"], "B3": ["c05_s01"],
+        "B4": ["c05_s01"]}
+
+
+def niezmiennik(lot):
+    """ANEKS_NAD3-1 §3.4: pozycja = episode_id w całej liście; wpis po pozycji (driver) i po numerze (intruder_motion) ten sam."""
+    eps = json.load(open(MANIFEST))["episodes"]
+    ids = [int(x) for x in LOTY[lot]["epizody"].split(",")]
+    ok = len(eps) == 120 and all(i == e["episode_id"] for i, e in enumerate(eps))
+    ok = ok and [eps[i]["scenario_id"] for i in ids] == SCEN[lot]
+    return ok
 
 
 def ksiega():
@@ -87,6 +100,9 @@ def bramka_zdrowia(name):
 
 def boot(lot, bn):
     L = LOTY[lot]
+    if not niezmiennik(lot):                                          # ANEKS_NAD3-1 §3.4
+        log(f"{lot}: niezmiennik manifestu złamany — STOP przed bootem")
+        return "STOP-NAD3-2-MANIFEST", None
     name = wolna(L["nazwa"])
     go, proby = bramka_zdrowia(name)
     if go is None:
@@ -216,8 +232,12 @@ def main():
                 nieocenione_geom[lot] = p["geometria"]["niespelnione"]
                 if not p["geometria"]["bramka_ok"]:
                     stop = "STOP-NAD3-2-GEOM"; break
-                if sum(nieocenione_geom.values()) > 1:
+                # ANEKS_NAD3-1 §3.7–§3.8: bramka na 6 ważnych epizodach (c00, c01 z N1 — oba spełniają kryteria; 4 z N2);
+                # 1 niespełniony ⇒ STOP i aneks, ≥ 2 ⇒ śmierć geometrii
+                if lot == "N2" and nieocenione_geom["N2"] >= 2:
                     stop = "STOP-NAD3-2-SMIERC-GEOM"; break
+                if lot == "N2" and nieocenione_geom["N2"] == 1:
+                    stop = "STOP-NAD3-2-GEOM-NOMINAL"; break
             else:
                 s = p["sprawdziany"]
                 if not s.get("replay", False):

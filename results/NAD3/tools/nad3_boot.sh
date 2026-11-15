@@ -62,7 +62,7 @@ case "$DEG" in
   *) echo "[nad3 $NAME] GUARD: BOOT_DEGRAD=$DEG (na_zewnatrz|do_srodka|0)" | tee -a "$MONLOG"; exit 5;;
 esac
 N3ENV=(); [ -n "$N3DEG" ] && N3ENV=(NAD3_DEGRAD="$N3DEG")                                   # NAD3: env producenta (tablica — JSON ze spacjami)
-S4MAN="${NAD3_MANIFEST:-results/NAD3/s1/scenario_manifest_nad3.json}"; S4MAN_SHA="${NAD3_MANIFEST_SHA:-74da23dedd6c46fa020f375041089ce0e96e8cf927f5e91e80a2c372dd83e7cd}"   # NAD3: manifest NAD3
+S4MAN="${NAD3_MANIFEST:-results/NAD3/s1/scenario_manifest_nad3_v2.json}"; S4MAN_SHA="${NAD3_MANIFEST_SHA:-2f3b4a94b68d5bf31ce44e1818f4e6cee797949d8df93f5c0e3023775b96acfe}"   # NAD3: manifest NAD3 v2 (ANEKS_NAD3-1 §3.2, pełna lista 120)
 B0SP="$ROOT/.b0deps/lib/python3.12/site-packages"
 WORLD=world_nadir2_A3
 MONO=/world/$WORLD/model/x500_nadir2_flow_0/link/camera_link/sensor/imager/image

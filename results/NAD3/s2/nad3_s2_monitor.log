@@ -30,3 +30,11 @@
 {"label": "preflight_n1_nominal", "feed": "/home/olga/projects/liquidpatrol/results/NAD3/s2/n1_nominal/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 450, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 14.71, "span_sim_s": 32.3, "werdykt": "PASS"}
 [kont n1_nominal 00:34:17] sonda rc_FROZEN=0 podloga10Hz=1
 [kont n1_nominal 00:42:23] DONE rc=0 sonda=0
+[nad3 dryrun_guard] GUARD: tryby NM=1 KM=1 PT=0 LIT=NADIR1 poza dopuszczonym (1/1/0/NAD2)
+[nad3 dryrun_guard] GUARD: tryby NM=1 KM=1 PT=1 LIT=NAD2 poza dopuszczonym (1/1/0/NAD2)
+[nad3 dryrun_guard] GUARD: tryby NM=0 KM=1 PT=0 LIT=NAD2 poza dopuszczonym (1/1/0/NAD2)
+[nad3 dryrun_guard] GUARD: BOOT_PUNKT=P4 (P1|P2|P3)
+[nad3 dryrun_guard] GUARD: BOOT_PUNKT= (P1|P2|P3)
+[nad3 dryrun_guard] GUARD: BOOT_DEGRAD=bialy (na_zewnatrz|do_srodka|0)
+[nad3 dryrun_guard] GUARD: BOOT_DEGRAD= (na_zewnatrz|do_srodka|0)
+[kont dryrun_guard] GUARD: brak PERC2_FASTDDS_PROFILE

@@ -24,7 +24,12 @@ wzór results/NAD2/tools/nad2_s2_dryrun.py (nietknięty).
     nad2_ulg.wyciag, nad3_analyze (B1–B4), nad3_s2_spr B4 ((r), (s1), (s3), b1 nieocenione) — oczekiwane PASS; kontrole negatywne:
     fx_deg z podmienionym E ⇒ (r) FAIL; meta producenta z kierunkiem do_srodka ⇒ (s3) FAIL. Ten sam lot bez degradacji ⇒ nad3_s2_spr B3
     ((k), (r)) PASS. nad3_s2_geom na nominale NAD2 nom_b2 (wyniki z nad2_analyze podstawione) — dymny bieg narzędzia.
-Wyjście: results/NAD3/s2/dryrun/dryrun_s2.json.
+(5) ANEKS_NAD3-1 §3.4 — próba procesu intruza: dla każdego epizodu planu (N2: 2, 3, 5, 10; B3/B4: 5; kontrolnie N1: 0, 1, 5, 10)
+    wpis wybrany ścieżką drivera (funkcja _resolve_episodes wycięta DOSŁOWNIE z nad3_flight.py, BENCH_EPISODE_IDS z kolejki) i ścieżką
+    procesu intruza (`manifest["episodes"][episode_id]` — wyrażenie sprawdzone w harness/intruder_motion.py, numer = episode_id wpisu
+    drivera, jak w episode_control.json) ma ten sam scenario_id i te same odcinki; negatyw: manifest z S1 z planem N1 jak poleciał
+    (indeksy 0, 1, 4, 5) ⇒ rozjazd dla numerów 5 (tor c10) i 10 (IndexError).
+Wyjście: results/NAD3/s2/dryrun_v2/dryrun_s2.json (próba S2 na v2; pierwsza próba na S1 zostaje w results/NAD3/s2/dryrun).
 """
 import asyncio
 import copy
@@ -40,9 +45,10 @@ import textwrap
 
 ROOT = "/home/olga/projects/liquidpatrol"
 T = os.path.join(ROOT, "results/NAD3/tools")
-OUT = os.path.join(ROOT, "results/NAD3/s2/dryrun")
+OUT = os.path.join(ROOT, "results/NAD3/s2/dryrun_v2")
 DRV = os.path.join(T, "nad3_flight.py")
-MAN = "results/NAD3/s1/scenario_manifest_nad3.json"
+MAN = "results/NAD3/s1/scenario_manifest_nad3_v2.json"            # ANEKS_NAD3-1 §3.4: próba powtórzona na v2
+MAN_V1 = "results/NAD3/s1/scenario_manifest_nad3.json"
 TAB = os.path.join(ROOT, "results/NAD3/s1/freeze_U_P1.json")
 sys.path[:0] = [ROOT, os.path.join(ROOT, "results/KONT/tools"), T, os.path.join(ROOT, "results/NAD2/tools"),
                 os.path.join(ROOT, "results/NAD3_RECON/tools")]
@@ -263,9 +269,9 @@ def czesc3():
     man = json.load(open(os.path.join(ROOT, MAN)))["episodes"]
     mapa = {lot: [man[int(i)]["scenario_id"] for i in v["epizody"].split(",")] for lot, v in (plan.get("loty") or {}).items()}
     mapa_ok = mapa == {"N1": ["c00_s01", "c01_s01", "c05_s01", "c10_s01"], "N2": ["c02_s01", "c03_s01", "c05_s01", "c10_s01"],
-                       "B3": ["c05_s01"], "B4": ["c05_s01"]}
+                       "B3": ["c05_s01"], "B4": ["c05_s01"]} and all(i == e["episode_id"] for i, e in enumerate(man))
     out["kolejka_sucho"] = {"rc": r.returncode, "plan": plan.get("plan"), "mapa_epizodow": mapa,
-                            "PASS": r.returncode == 0 and plan.get("plan") == ["N1", "N2", "B3", "B4"] and mapa_ok}
+                            "PASS": r.returncode == 0 and plan.get("plan") == ["N2", "B3", "B4"] and mapa_ok}   # N1 zużyty (ANEKS_NAD3-1 §3.6)
     # sprzątanie logu kolejki na sucho (kolejka pisze kampania_s2.log)
     out["PASS"] = all(v["PASS"] for v in out.values() if isinstance(v, dict))
     return out
@@ -403,6 +409,38 @@ def czesc4():
     return out
 
 
+def czesc5():
+    src = open(DRV, encoding="utf8").read()
+    i = src.index("def _resolve_episodes(manifest):")
+    j = src.index("\n\n\n", i)
+    fn = src[i:j]
+    im = open(os.path.join(ROOT, "harness/intruder_motion.py"), encoding="utf8").read()
+    assert 'ep = manifest["episodes"][this_id]' in im and 'this_id = ctl["episode_id"]' in im
+
+    def sprawdz(man_path, ids):
+        man = json.load(open(os.path.join(ROOT, man_path)))
+        ns = {"os": type("O", (), {"environ": {"BENCH_QUEUE": ""}})(), "EP_IDS": ",".join(map(str, ids)), "N_EP": 99}
+        exec(compile(fn, DRV + ":_resolve_episodes", "exec"), ns)
+        drv = ns["_resolve_episodes"](man)
+        wyn = []
+        for e in drv:
+            eid = e["episode_id"]
+            try:
+                ie = man["episodes"][eid]
+                zg = ie["scenario_id"] == e["scenario_id"] and ie["segments"] == e["segments"]
+                wyn.append({"episode_id": eid, "driver": e["scenario_id"], "intruz": ie["scenario_id"], "zgodne": zg})
+            except IndexError:
+                wyn.append({"episode_id": eid, "driver": e["scenario_id"], "intruz": "IndexError", "zgodne": False})
+        return wyn
+    plan = {"N2": [2, 3, 5, 10], "B3": [5], "B4": [5], "N1_kontrolnie": [0, 1, 5, 10]}
+    w = {k: sprawdz(MAN, v) for k, v in plan.items()}
+    neg = sprawdz(MAN_V1, [0, 1, 4, 5])
+    rozjazd = sorted(x["episode_id"] for x in neg if not x["zgodne"])
+    out = {"v2": w, "negatyw_S1_plan_N1": neg, "rozjazd_S1": rozjazd}
+    out["PASS"] = all(x["zgodne"] for v in w.values() for x in v) and rozjazd == [5, 10]
+    return out
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     w = {"czesc1": czesc1_all()}
@@ -412,7 +450,9 @@ def main():
     print("czesc3", w["czesc3"]["PASS"], flush=True)
     w["czesc4"] = czesc4()
     print("czesc4", w["czesc4"]["PASS"], flush=True)
-    w["PASS"] = all(w[k]["PASS"] for k in ("czesc1", "czesc2", "czesc3", "czesc4"))
+    w["czesc5"] = czesc5()
+    print("czesc5", w["czesc5"]["PASS"], w["czesc5"]["rozjazd_S1"], flush=True)
+    w["PASS"] = all(w[k]["PASS"] for k in ("czesc1", "czesc2", "czesc3", "czesc4", "czesc5"))
     json.dump(w, open(os.path.join(OUT, "dryrun_s2.json"), "w"), ensure_ascii=False, indent=1, default=str)
     print(json.dumps({k: (v["PASS"] if isinstance(v, dict) else v) for k, v in w.items()}))
 

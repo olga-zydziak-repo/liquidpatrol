@@ -89,11 +89,13 @@ def test_generator_domyslne_bit_w_bit():
 
 
 def test_manifest_nad3_suma_w_boot():
-    m = json.load(open(os.path.join(ROOT, "results/NAD3/s1/nad3_manifest.json")))
+    m = json.load(open(os.path.join(ROOT, "results/NAD3/s1/nad3_manifest_v2.json")))   # ANEKS_NAD3-1 §3.3: v2
     import hashlib
     assert hashlib.sha256(open(os.path.join(ROOT, m["manifest"]), "rb").read()).hexdigest() == m["sha256"]
     assert m["sha256"] in open(os.path.join(ROOT, "results/NAD3/tools/nad3_boot.sh")).read()
     assert all(t["r_ok"] and t["ciaglosc_ok"] and t["czas_ok"] for t in m["testy"].values())
+    man = json.load(open(os.path.join(ROOT, m["manifest"])))["episodes"]
+    assert len(man) == 120 and all(i == e["episode_id"] for i, e in enumerate(man))     # pozycja = numer epizodu
 
 
 def _tab(p):
