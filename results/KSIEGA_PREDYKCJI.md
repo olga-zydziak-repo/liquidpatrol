@@ -1232,3 +1232,22 @@ CLOSED-BY-RECON (0 bootów)
     przechodzi przez filtr tracku i przesuwa tor o ułamek E;
   - predykcja o odmowach musi nazywać fazę lotu;
   - zmiana narzędzia w kampanii bez STOP-u — drugi raz (NAD2, NAD3).
+
+## ORTO — recon (PROMPT_ORTO_S0, 15.11.2026), predykcje CC
+- P-ORTO-R1 (0.90): dla trzech łat we Wrocławiu istnieją co najmniej
+  dwie edycje o pikselu ≤ 10 cm z różnych lat.
+- P-ORTO-R2 (0.75): kontrola (ta sama edycja): najlepszy kandydat ma
+  błąd p50 ≤ 0.10 m i max ≤ 0.50 m na lotach oceny.
+- P-ORTO-R3 (0.50): łata A, różne lata: po odrzucaniu największy
+  błąd przyjętej poprawki ≤ 1.0 m na wszystkich lotach oceny.
+- P-ORTO-R4 (0.25): łata C, różne lata: to samo ≤ 1.0 m i żadnej
+  przerwy ponad 1.15 s.
+- P-ORTO-R5 (0.65): przed odrzucaniem co najmniej jedna łata ma próby
+  z błędem ponad 2.28 m — ogon istnieje i reguła odrzucania jest
+  konieczna.
+- P-ORTO-R6 (0.55): na łacie A największa przerwa między przyjętymi
+  poprawkami przekracza 1.15 s w co najmniej jednym locie oceny —
+  tabela NAD3 z τ* 1.15 s nie wystarczy.
+- P-ORTO-R7 (0.80): samymi flagami nowej warstwy nie da się pokazać
+  podłoża wyłącznie kamerze w dół; potrzebna zmiana masek kamery
+  przepływu i kamery misji.
