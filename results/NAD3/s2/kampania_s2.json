@@ -81,6 +81,145 @@
     "B4"
    ],
    "powtorki": {}
+  },
+  {
+   "booty": 2,
+   "stop": "STOP-NAD3-2-GEOM-NOMINAL",
+   "wyniki": {
+    "n2_nominal": {
+     "boot_s2": 2,
+     "lot": "N2",
+     "nazwa": "n2_nominal",
+     "rc": 0,
+     "czas_s": 590.6,
+     "tempo": {
+      "aneks": "ANEKS_KONT-4d §1.3",
+      "dsim_dwall_settle": 0.9632,
+      "okno_wall_s": 59.99,
+      "n": 728,
+      "prog": 0.93,
+      "zrodlo": "rtf_stream.jsonl",
+      "ok": true
+     },
+     "bramka_tempa": false,
+     "bramka_zdrowia": [
+      {
+       "tag": "n2_nominal_g1",
+       "wariant": "A",
+       "tempo": 0.8885,
+       "GO": false,
+       "czolowka_operatora": {
+        "gpu": [
+         [
+          "chrome@iGPU",
+          17,
+          3
+         ],
+         [
+          "dwm@iGPU",
+          2,
+          3
+         ],
+         [
+          "Code@iGPU",
+          2,
+          1
+         ],
+         [
+          "dwm@dGPU",
+          2,
+          1
+         ]
+        ],
+        "cpu": [
+         [
+          "python",
+          2.93,
+          3
+         ],
+         [
+          "chrome",
+          0.25,
+          9
+         ],
+         [
+          "ChatGPT",
+          0.22,
+          3
+         ],
+         [
+          "Code",
+          0.2,
+          1
+         ],
+         [
+          "ipf_helper",
+          0.03,
+          1
+         ]
+        ]
+       },
+       "t": "2026-11-15 12:08:04"
+      },
+      {
+       "tag": "n2_nominal_g2",
+       "wariant": "C",
+       "tempo": 0.9208,
+       "GO": true,
+       "czolowka_operatora": null,
+       "t": "2026-11-15 12:13:39"
+      }
+     ],
+     "shm": {
+      "sprzatanie": false,
+      "plikow_przed": 0,
+      "plikow_po": 0,
+      "trzymane_przed": {},
+      "stan": "shm_n2_nominal.txt"
+     },
+     "epizod_wystartowal": true,
+     "breach": false,
+     "nad2_litera": {
+      "t": "event",
+      "mono": 1136.5442,
+      "sim": 139.156,
+      "ev": "nad2_litera",
+      "datagram": "NAD2",
+      "meta_producenta": "NAD2",
+      "oslona": "NAD2"
+     },
+     "nad3_degradacja": {
+      "t": "event",
+      "mono": 1136.5442,
+      "sim": 139.156,
+      "ev": "nad3_degradacja",
+      "meta_producenta": null,
+      "E_tabeli": 1.0,
+      "bez_degradacji": true,
+      "zgodna": true
+     },
+     "t": "2026-11-15 12:24:30",
+     "po_boocie": {
+      "analiza_bezpieczenstwo_ok": true,
+      "wazny": true,
+      "geometria": {
+       "bramka_ok": true,
+       "niespelnione": 1,
+       "r_max": {
+        "c02_s01": 18.271,
+        "c03_s01": 0.485,
+        "c05_s01": 15.997,
+        "c10_s01": 18.87
+       }
+      }
+     }
+    }
+   },
+   "pozostalo": [
+    "B3",
+    "B4"
+   ],
+   "powtorki": {}
   }
  ]
 }

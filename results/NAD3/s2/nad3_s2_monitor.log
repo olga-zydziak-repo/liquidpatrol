@@ -38,3 +38,11 @@
 [nad3 dryrun_guard] GUARD: BOOT_DEGRAD=bialy (na_zewnatrz|do_srodka|0)
 [nad3 dryrun_guard] GUARD: BOOT_DEGRAD= (na_zewnatrz|do_srodka|0)
 [kont dryrun_guard] GUARD: brak PERC2_FASTDDS_PROFILE
+[kont n2_nominal] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont n2_nominal 12:14:39] cooldown 0s
+[kont n2_nominal 12:15:55] SUSTAINED CLEAN
+[kont n2_nominal] kont_boot pid=3146
+[kont n2_nominal 12:16:20] initial absolute time 7556000 us faza_ok=1
+{"label": "preflight_n2_nominal", "feed": "/home/olga/projects/liquidpatrol/results/NAD3/s2/n2_nominal/percep_feed.jsonl", "tryb": "live window=35.0s", "prog_frozen": {"dt_p50_max_s_na_klatke": 0.07, "frac_delt_gt_0p10_max": 0.05}, "n_delt": 478, "dt_p50_s_na_klatke": 0.068, "dt_p90_s_na_klatke": 0.068, "frac_delt_gt_0p10": 0.0, "hz_p50": 14.71, "span_sim_s": 33.7, "werdykt": "PASS"}
+[kont n2_nominal 12:17:01] sonda rc_FROZEN=0 podloga10Hz=1
+[kont n2_nominal 12:24:30] DONE rc=0 sonda=0
