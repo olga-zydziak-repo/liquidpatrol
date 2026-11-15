@@ -1195,3 +1195,17 @@ CLOSED-BY-RECON (0 bootów)
   admisji; bramka sprawdza oba osobno.
 - Decyzja: c03 poza nominałami S3; cięcie bez wejścia nieważne dla
   bramki i powtarzane z rezerwy.
+
+## NADIR-III — ANEKS_NAD3-3 (15.11.2026): S2 zamknięte, zgoda na S3
+- S2: 4/4 booty. Geometria PASS na 5 epizodach z misją (max
+  18.870 m); cięcia c05 w pełnym oknie 15.53 i 15.48 m.
+- B3 (bez degradacji): 0 przekroczeń, max e/U 0.10. B4 (P1, 1 m na
+  zewnątrz, 1 Hz): 0 przekroczeń, max e′/U′ 0.42, e′ p50 1.17 m;
+  poprawki co 1.000 s, τ max 1.024 s; replay 100% w obu. CC
+  odtworzył liczby własnym kodem z tabelą wpisaną z PRE §4.
+- REFUSE w misji 0; zatrzask τ* dopiero w zejściu planowym (jak NAD2).
+- Obserwacja do P-NAD3-4, bez rozliczenia: r_max B3 wobec B4 różni
+  się o 0.05 m, ale to para o różnym E, nie o przeciwnym znaku.
+- Geometria ciaśniejsza niż w PRE (c05 do 16 m, c10 do 18.9 m):
+  z reguły bariery odmowa przy biasie na zewnątrz jest oczekiwana
+  tylko w c10. Predykcje P-NAD3-5 i P-NAD3-6 stoją bez zmian.
