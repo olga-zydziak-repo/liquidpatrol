@@ -1,0 +1,17 @@
+{
+ "uwaga": "Opis wzrokowy okien 100 × 100 m PO pobraniu (PROMPT_ORTO_S0 R1: łaty wybrane i zacommitowane przed pobraniem, 664d8459; wymiany łaty nie ma). Liczby ostrości i sprawdzianów: r1_sprawdziany.json (orto_r1_spr.py). Podglądy poza repo.",
+ "A": {"klasa_zamierzona": "wyraźna struktura: niska zabudowa, ulice",
+       "klasa_faktyczna": "mieszana: domy jednorodzinne przy ulicy w połowie NW okna, w połowie SE zwarte korony drzew",
+       "zmiana_2012_2025": "drzewa urosły i zakryły część dachów i ulicy; w rogu SE nowa droga dwujezdniowa z chodnikiem (brak w 2012); 2012 nalot wiosenny (jasne, bez pełnego liścia), 2025-08 letni (ostre cienie)"},
+ "B": {"klasa_zamierzona": "mieszana: park, alejki, drzewa",
+       "klasa_faktyczna": "prawie w całości korony drzew (tekstura bez geometrii), alejek w oknie praktycznie brak; pas jezdni przy dolnej krawędzi",
+       "zmiana_2012_2025": "2012-04: drzewa częściowo bez liści, jasne; 2025-08: pełne ulistnienie, ciemne korony i cienie — wygląd koron różny w całym oknie"},
+ "C": {"klasa_zamierzona": "jednolita: nawierzchnia lotniska — pas i trawa",
+       "klasa_faktyczna": "jednolita jak zamierzono (pas/droga kołowania po przekątnej z lampami, trawa), ALE źródło zgrubione we wszystkich 10 edycjach ≤ 10 cm: obraz złożony z gładko interpolowanych bloków rzędu metrów (wycinek 10 × 10 m z edycji 2024 o pikselu 5 cm to gładki gradient); po rozmyciu do 0.8 m zostaje 64–78 % energii gradientu wobec 4–12 % (A) i 1–7 % (B) — zgrubienie obszaru lotniska w danych publicznych",
+       "zmiana_2012_2025": "kolor nawierzchni i położenie widocznych lamp różne między edycjami (przy zgrubieniu nie rozstrzygam, czy to zmiana świata, czy artefakt zgrubienia)"},
+ "true_ortho": "WMS TrueOrtho (warstwy PrawdziwaOrtofotomapa i Skorowidze) w prostokątach wszystkich trzech łat: obraz jednolicie biały (odchylenie 0) — brak ortofotomapy prawdziwej; używana jest ortofotomapa standardowa (arkusze z WFS Skorowidze)",
+ "wms_highresolution": "serwuje edycję 2024-04-27 (odpowiedź 0.77–0.94), nie najnowszą; przesunięcie okna z GeoTIFF wobec WMS 0.12–0.41 px po 0.1 m (≤ 4.1 cm)",
+ "przeliczenie_ukladow": "s1: ta sama edycja 2012-04-28 z arkusza PL-1992 i z arkusza PL-2000:S6 po przeliczeniu do siatki PL-1992: A 0.05 px (odp. 0.89), B 0.04 px (0.88); C odpowiedź 0.09 (zgrubienie i jednolitość — sprawdzian nie rozstrzyga w C)",
+ "para": "we wszystkich łatach „świat” = 2012-04-28 (PL-1992, 0.10 m), „mapa” = 2025-08-12 (PL-2000:S6, 0.10 m, okno przeliczone do PL-1992); kontrola = okno „mapy” po obu stronach",
+ "edycja_2014": "arkusz 2014-03-12 dla A i B to TIFF paskowy (bez kafli) — czytnik Range go nie czyta; nie wchodzi do pary (para = największy odstęp dat)"
+}

@@ -1,0 +1,480 @@
+{
+ "A": {
+  "s1": {
+   "dx_px": -0.0,
+   "dy_px": 0.054,
+   "odpowiedz": 0.8903,
+   "para": "2012-04-28 PL-1992 vs PL-2000:S6"
+  },
+  "s2": {
+   "zapytanie": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/HighResolution?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Raster&STYLES=&CRS=EPSG:2180&BBOX=361103.0662579676,366054.0796254921,361203.0662579676,366154.0796254921&WIDTH=1000&HEIGHT=1000&FORMAT=image/png",
+   "edycje": {
+    "2012-04-28 PL-1992": {
+     "dx_px": 2.702,
+     "dy_px": -22.528,
+     "odpowiedz": 0.0274
+    },
+    "2012-04-28 PL-2000:S6": {
+     "dx_px": -129.374,
+     "dy_px": 37.43,
+     "odpowiedz": 0.0069
+    },
+    "2021-05-09 PL-1992": {
+     "dx_px": -62.629,
+     "dy_px": 24.491,
+     "odpowiedz": -0.0036
+    },
+    "2022-05-18 PL-1992": {
+     "dx_px": -0.824,
+     "dy_px": 0.203,
+     "odpowiedz": 0.2888
+    },
+    "2024-04-27 PL-1992": {
+     "dx_px": -0.248,
+     "dy_px": -0.123,
+     "odpowiedz": 0.9121
+    },
+    "2025-03-20 PL-2000:S6": {
+     "dx_px": -0.192,
+     "dy_px": 0.08,
+     "odpowiedz": 0.0917
+    },
+    "2025-08-12 PL-2000:S6": {
+     "dx_px": -0.806,
+     "dy_px": 0.071,
+     "odpowiedz": 0.0471
+    }
+   },
+   "serwowana": "2024-04-27 PL-1992"
+  },
+  "s3": {
+   "PrawdziwaOrtofotomapa": {
+    "zapytanie": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/TrueOrtho?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=PrawdziwaOrtofotomapa&STYLES=&CRS=EPSG:2180&BBOX=361103.0662579676,366054.0796254921,361203.0662579676,366154.0796254921&WIDTH=500&HEIGHT=500&FORMAT=image/png",
+    "odchylenie_jasnosci": 0.0,
+    "srednia": 255.0
+   },
+   "Skorowidze": {
+    "zapytanie": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/TrueOrtho?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Skorowidze&STYLES=&CRS=EPSG:2180&BBOX=361103.0662579676,366054.0796254921,361203.0662579676,366154.0796254921&WIDTH=500&HEIGHT=500&FORMAT=image/png",
+    "odchylenie_jasnosci": 0.0,
+    "srednia": 255.0
+   }
+  },
+  "s4": {
+   "2012-04-28 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.574,
+     "0.40m": 0.295,
+     "0.80m": 0.119,
+     "1.60m": 0.042
+    },
+    "piksel_efektywny_m": 0.4,
+    "piksel_m": 0.1,
+    "arkusz": "M-33-35-C-a-4-3"
+   },
+   "2012-04-28 PL-2000:S6": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.569,
+     "0.40m": 0.29,
+     "0.80m": 0.116,
+     "1.60m": 0.041
+    },
+    "piksel_efektywny_m": 0.4,
+    "piksel_m": 0.1,
+    "arkusz": "6.148.13.06"
+   },
+   "2014-03-12 PL-1992": {
+    "nieczytany": "brak tagu 322 (TIFF paskowy)",
+    "arkusz": "M-33-35-C-a-4",
+    "wlk_mb": "1133"
+   },
+   "2021-05-09 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.52,
+     "0.20m": 0.235,
+     "0.40m": 0.085,
+     "0.80m": 0.029
+    },
+    "piksel_efektywny_m": 0.2,
+    "piksel_m": 0.05,
+    "arkusz": "M-33-35-C-a-4-3"
+   },
+   "2022-05-18 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.52,
+     "0.20m": 0.247,
+     "0.40m": 0.092,
+     "0.80m": 0.032
+    },
+    "piksel_efektywny_m": 0.2,
+    "piksel_m": 0.05,
+    "arkusz": "M-33-35-C-a-4-3"
+   },
+   "2024-04-27 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.55,
+     "0.20m": 0.271,
+     "0.40m": 0.106,
+     "0.80m": 0.039
+    },
+    "piksel_efektywny_m": 0.2,
+    "piksel_m": 0.05,
+    "arkusz": "M-33-35-C-a-4-3"
+   },
+   "2025-03-20 PL-2000:S6": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.449,
+     "0.20m": 0.193,
+     "0.40m": 0.071,
+     "0.80m": 0.025
+    },
+    "piksel_efektywny_m": 0.1,
+    "piksel_m": 0.05,
+    "arkusz": "6.148.13.06.3"
+   },
+   "2025-08-12 PL-2000:S6": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.458,
+     "0.40m": 0.187,
+     "0.80m": 0.061,
+     "1.60m": 0.018
+    },
+    "piksel_efektywny_m": 0.2,
+    "piksel_m": 0.1,
+    "arkusz": "6.148.13.06.3"
+   }
+  }
+ },
+ "B": {
+  "s1": {
+   "dx_px": -0.024,
+   "dy_px": 0.035,
+   "odpowiedz": 0.879,
+   "para": "2012-04-28 PL-1992 vs PL-2000:S6"
+  },
+  "s2": {
+   "zapytanie": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/HighResolution?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Raster&STYLES=&CRS=EPSG:2180&BBOX=362331.28115080576,365875.95517998055,362431.28115080576,365975.95517998055&WIDTH=1000&HEIGHT=1000&FORMAT=image/png",
+   "edycje": {
+    "2012-04-28 PL-1992": {
+     "dx_px": 27.898,
+     "dy_px": 41.843,
+     "odpowiedz": 0.0134
+    },
+    "2012-04-28 PL-2000:S6": {
+     "dx_px": 34.032,
+     "dy_px": 30.914,
+     "odpowiedz": 0.0028
+    },
+    "2021-05-09 PL-1992": {
+     "dx_px": 58.454,
+     "dy_px": 51.214,
+     "odpowiedz": 0.0061
+    },
+    "2022-05-18 PL-1992": {
+     "dx_px": 1.32,
+     "dy_px": 3.072,
+     "odpowiedz": 0.131
+    },
+    "2024-04-27 PL-1992": {
+     "dx_px": -0.18,
+     "dy_px": -0.41,
+     "odpowiedz": 0.9353
+    },
+    "2025-03-20 PL-2000:S6": {
+     "dx_px": 89.137,
+     "dy_px": 4.296,
+     "odpowiedz": 0.0094
+    },
+    "2025-08-12 PL-2000:S6": {
+     "dx_px": 106.117,
+     "dy_px": 6.798,
+     "odpowiedz": 0.0046
+    }
+   },
+   "serwowana": "2024-04-27 PL-1992"
+  },
+  "s3": {
+   "PrawdziwaOrtofotomapa": {
+    "zapytanie": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/TrueOrtho?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=PrawdziwaOrtofotomapa&STYLES=&CRS=EPSG:2180&BBOX=362331.28115080576,365875.95517998055,362431.28115080576,365975.95517998055&WIDTH=500&HEIGHT=500&FORMAT=image/png",
+    "odchylenie_jasnosci": 0.0,
+    "srednia": 255.0
+   },
+   "Skorowidze": {
+    "zapytanie": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/TrueOrtho?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Skorowidze&STYLES=&CRS=EPSG:2180&BBOX=362331.28115080576,365875.95517998055,362431.28115080576,365975.95517998055&WIDTH=500&HEIGHT=500&FORMAT=image/png",
+    "odchylenie_jasnosci": 0.0,
+    "srednia": 255.0
+   }
+  },
+  "s4": {
+   "2012-04-28 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.474,
+     "0.40m": 0.199,
+     "0.80m": 0.065,
+     "1.60m": 0.02
+    },
+    "piksel_efektywny_m": 0.2,
+    "piksel_m": 0.1,
+    "arkusz": "M-33-35-C-a-4-1"
+   },
+   "2012-04-28 PL-2000:S6": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.468,
+     "0.40m": 0.194,
+     "0.80m": 0.062,
+     "1.60m": 0.019
+    },
+    "piksel_efektywny_m": 0.2,
+    "piksel_m": 0.1,
+    "arkusz": "6.148.12.05"
+   },
+   "2014-03-12 PL-1992": {
+    "nieczytany": "brak tagu 322 (TIFF paskowy)",
+    "arkusz": "M-33-35-C-a-4",
+    "wlk_mb": "1133"
+   },
+   "2021-05-09 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.415,
+     "0.20m": 0.145,
+     "0.40m": 0.039,
+     "0.80m": 0.01
+    },
+    "piksel_efektywny_m": 0.1,
+    "piksel_m": 0.05,
+    "arkusz": "M-33-35-C-a-4-1"
+   },
+   "2022-05-18 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.46,
+     "0.20m": 0.187,
+     "0.40m": 0.054,
+     "0.80m": 0.014
+    },
+    "piksel_efektywny_m": 0.1,
+    "piksel_m": 0.05,
+    "arkusz": "M-33-35-C-a-4-1"
+   },
+   "2024-04-27 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.462,
+     "0.20m": 0.185,
+     "0.40m": 0.053,
+     "0.80m": 0.014
+    },
+    "piksel_efektywny_m": 0.1,
+    "piksel_m": 0.05,
+    "arkusz": "M-33-35-C-a-4-1"
+   },
+   "2025-03-20 PL-2000:S6": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.402,
+     "0.20m": 0.148,
+     "0.40m": 0.043,
+     "0.80m": 0.012
+    },
+    "piksel_efektywny_m": 0.1,
+    "piksel_m": 0.05,
+    "arkusz": "6.148.12.05.2"
+   },
+   "2025-08-12 PL-2000:S6": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.422,
+     "0.40m": 0.149,
+     "0.80m": 0.037,
+     "1.60m": 0.008
+    },
+    "piksel_efektywny_m": 0.2,
+    "piksel_m": 0.1,
+    "arkusz": "6.148.12.05.2"
+   }
+  }
+ },
+ "C": {
+  "s1": {
+   "dx_px": 0.242,
+   "dy_px": -0.721,
+   "odpowiedz": 0.0894,
+   "para": "2012-04-28 PL-1992 vs PL-2000:S6"
+  },
+  "s2": {
+   "zapytanie": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/HighResolution?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Raster&STYLES=&CRS=EPSG:2180&BBOX=361621.75092890114,351976.67560841056,361721.75092890114,352076.67560841056&WIDTH=1000&HEIGHT=1000&FORMAT=image/png",
+   "edycje": {
+    "2012-04-28 PL-1992": {
+     "dx_px": -0.793,
+     "dy_px": -1.703,
+     "odpowiedz": 0.075
+    },
+    "2012-04-28 PL-2000:S6": {
+     "dx_px": 85.816,
+     "dy_px": 59.723,
+     "odpowiedz": -0.0086
+    },
+    "2014-03-12 PL-1992": {
+     "dx_px": -9.949,
+     "dy_px": -6.418,
+     "odpowiedz": 0.0024
+    },
+    "2017-05-18 PL-2000:S6": {
+     "dx_px": 0.246,
+     "dy_px": -0.401,
+     "odpowiedz": 0.0773
+    },
+    "2020-05-09 PL-2000:S6": {
+     "dx_px": -136.86,
+     "dy_px": 99.307,
+     "odpowiedz": -0.0025
+    },
+    "2021-05-09 PL-1992": {
+     "dx_px": -0.145,
+     "dy_px": -0.756,
+     "odpowiedz": 0.1182
+    },
+    "2022-05-18 PL-1992": {
+     "dx_px": -0.891,
+     "dy_px": -0.709,
+     "odpowiedz": 0.1589
+    },
+    "2024-04-27 PL-1992": {
+     "dx_px": -0.141,
+     "dy_px": -0.302,
+     "odpowiedz": 0.7739
+    },
+    "2025-03-20 PL-2000:S6": {
+     "dx_px": 0.13,
+     "dy_px": -1.124,
+     "odpowiedz": 0.0807
+    },
+    "2025-08-12 PL-2000:S6": {
+     "dx_px": 0.984,
+     "dy_px": 0.558,
+     "odpowiedz": 0.0786
+    }
+   },
+   "serwowana": "2024-04-27 PL-1992"
+  },
+  "s3": {
+   "PrawdziwaOrtofotomapa": {
+    "zapytanie": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/TrueOrtho?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=PrawdziwaOrtofotomapa&STYLES=&CRS=EPSG:2180&BBOX=361621.75092890114,351976.67560841056,361721.75092890114,352076.67560841056&WIDTH=500&HEIGHT=500&FORMAT=image/png",
+    "odchylenie_jasnosci": 0.0,
+    "srednia": 255.0
+   },
+   "Skorowidze": {
+    "zapytanie": "https://mapy.geoportal.gov.pl/wss/service/PZGIK/ORTO/WMS/TrueOrtho?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&LAYERS=Skorowidze&STYLES=&CRS=EPSG:2180&BBOX=361621.75092890114,351976.67560841056,361721.75092890114,352076.67560841056&WIDTH=500&HEIGHT=500&FORMAT=image/png",
+    "odchylenie_jasnosci": 0.0,
+    "srednia": 255.0
+   }
+  },
+  "s4": {
+   "2012-04-28 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.892,
+     "0.40m": 0.84,
+     "0.80m": 0.779,
+     "1.60m": 0.665
+    },
+    "piksel_efektywny_m": null,
+    "piksel_m": 0.09999999999980062,
+    "arkusz": "M-33-34-D-b-3-3"
+   },
+   "2012-04-28 PL-2000:S6": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.885,
+     "0.40m": 0.832,
+     "0.80m": 0.769,
+     "1.60m": 0.65
+    },
+    "piksel_efektywny_m": null,
+    "piksel_m": 0.09999999962659785,
+    "arkusz": "6.148.11.07"
+   },
+   "2014-03-12 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.909,
+     "0.40m": 0.866,
+     "0.80m": 0.803,
+     "1.60m": 0.673
+    },
+    "piksel_efektywny_m": null,
+    "piksel_m": 0.09999999999975817,
+    "arkusz": "M-33-34-D-b-3"
+   },
+   "2017-05-18 PL-2000:S6": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.906,
+     "0.40m": 0.858,
+     "0.80m": 0.791,
+     "1.60m": 0.655
+    },
+    "piksel_efektywny_m": null,
+    "piksel_m": 0.10000000000011641,
+    "arkusz": "6.148.11.07"
+   },
+   "2020-05-09 PL-2000:S6": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.901,
+     "0.40m": 0.857,
+     "0.80m": 0.798,
+     "1.60m": 0.68
+    },
+    "piksel_efektywny_m": null,
+    "piksel_m": 0.10000000000011641,
+    "arkusz": "6.148.11.07"
+   },
+   "2021-05-09 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.771,
+     "0.20m": 0.703,
+     "0.40m": 0.662,
+     "0.80m": 0.613
+    },
+    "piksel_efektywny_m": null,
+    "piksel_m": 0.05000000000036777,
+    "arkusz": "M-33-34-D-b-3-3"
+   },
+   "2022-05-18 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.739,
+     "0.20m": 0.668,
+     "0.40m": 0.631,
+     "0.80m": 0.588
+    },
+    "piksel_efektywny_m": null,
+    "piksel_m": 0.05000000000036777,
+    "arkusz": "M-33-34-D-b-3-3"
+   },
+   "2024-04-27 PL-1992": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.788,
+     "0.20m": 0.725,
+     "0.40m": 0.688,
+     "0.80m": 0.641
+    },
+    "piksel_efektywny_m": null,
+    "piksel_m": 0.05000000000036777,
+    "arkusz": "M-33-34-D-b-3-3"
+   },
+   "2025-03-20 PL-2000:S6": {
+    "energia_po_rozmyciu": {
+     "0.10m": 0.682,
+     "0.20m": 0.595,
+     "0.40m": 0.557,
+     "0.80m": 0.517
+    },
+    "piksel_efektywny_m": null,
+    "piksel_m": 0.050000000000058206,
+    "arkusz": "6.148.11.07.1"
+   },
+   "2025-08-12 PL-2000:S6": {
+    "energia_po_rozmyciu": {
+     "0.20m": 0.9,
+     "0.40m": 0.854,
+     "0.80m": 0.794,
+     "1.60m": 0.674
+    },
+    "piksel_efektywny_m": null,
+    "piksel_m": 0.10000000000011641,
+    "arkusz": "6.148.11.07.1"
+   }
+  }
+ }
+}
