@@ -15,6 +15,9 @@ Boot nieważny stanowiskowo przed startem epizodu (bramka zdrowia NO-GO, bramka 
 liczy się; jedna powtórka; drugi nieważny ⇒ STOP-NAD3-2-STANOWISKO. Kod 9 drivera jest wspólny dla bramki tempa (KONT) i niezgodności
 degradacji (NAD3) — rozróżnienie: kont_tempo.json vs zdarzenie „nad3_degradacja” (zgodna = false ⇒ STOP-NAD3-2-DEGRAD). Kody
 41–45 (odmowa startu osłony) i 4–6 (strażnik boota) ⇒ STOP bez zużycia. timesyncd: stop na starcie, start na końcu.
+ANEKS_NAD3-2 §3.5: cięcie bez wejścia (B3/B4 bez zdarzenia „denial” — brak akwizycji, brak ticków utraty) liczy się do budżetu,
+jest nieważne dla smoke (wpis księgi bez_wejscia = true, lot nie jest „zrobiony”) i powtarzane RAZ z rezerwy (+1 boot ponad 4 — boot
+korekty geometrii PRE §6); drugie cięcie bez wejścia ⇒ STOP-NAD3-2-BEZ-WEJSCIA. Analiza po boocie pomijana dla lotu bez wejścia.
 Użycie: nad3_s2_run.py [--sucho]. Wyjście: results/NAD3/s2/kampania_s2.log, kampania_s2.json, kampania_ksiega.jsonl.
 """
 import json
@@ -37,6 +40,7 @@ log = G.log
 BOOT = os.path.join(ROOT, "results/NAD3/tools/nad3_boot.sh")
 KSIEGA = os.path.join(S2, "kampania_ksiega.jsonl")
 BUDZET = 4
+REZERWA_BEZ_WEJSCIA = 1                            # ANEKS_NAD3-2 §3.5
 NOGA_PRZED = 0                                     # NADIR-III: pierwszy boot nogi (budżet nogi ≤ 22)
 BAZA = {"BOOT_NADIR_MODE": "1", "BOOT_KONT_MODE": "1", "BOOT_PASSTHROUGH": "0", "BOOT_LITERA": "NAD2", "BOOT_PUNKT": "P1",
         "BOOT_ZIARNO": "1", "NAD3_ETAP": "s2"}
@@ -152,6 +156,9 @@ def boot(lot, bn):
             "epizod_wystartowal": "episode_start" in names,
             "breach": any(n in ("breach", "breach_gt") for n in names), "nad2_litera": next((e for e in ev if e.get("ev") == "nad2_litera"), None),
             "nad3_degradacja": n3, "t": time.strftime("%F %T")}
+    if lot in ("B3", "B4"):                                           # ANEKS_NAD3-2 §3.5: cięcie bez wejścia
+        wpis["wejscie"] = "denial" in names
+        wpis["bez_wejscia"] = wpis["epizod_wystartowal"] and not wpis["wejscie"]
     with open(KSIEGA, "a") as f:
         f.write(json.dumps(wpis, ensure_ascii=False, default=str) + "\n")
     log(f"{name} rc={r.returncode} boot {bn} tempo={(kt or {}).get('dsim_dwall_settle')} breach={wpis['breach']} "
@@ -196,12 +203,14 @@ def main():
     os.makedirs(S2, exist_ok=True)
     ks = ksiega()
     zuzyte = [w for w in ks if w.get("epizod_wystartowal")]
-    zrobione = {w["lot"] for w in zuzyte}
+    zrobione = {w["lot"] for w in zuzyte if not w.get("bez_wejscia")}
+    bez_wejscia = sum(1 for w in zuzyte if w.get("bez_wejscia"))
     niewazne = sum(1 for w in ks if not w.get("epizod_wystartowal"))
     plan = [l for l in KOLEJNOSC if l not in zrobione]
-    log(f"=== NAD3 S2 {'(na sucho) ' if sucho else ''}start: zużyte {len(zuzyte)}/{BUDZET}, nieważne {niewazne}, plan {plan}")
+    log(f"=== NAD3 S2 {'(na sucho) ' if sucho else ''}start: zużyte {len(zuzyte)}/{BUDZET}, nieważne {niewazne}, "
+        f"bez wejścia {bez_wejscia}/{REZERWA_BEZ_WEJSCIA}, plan {plan}")
     if sucho:
-        print(json.dumps({"plan": plan, "uzyte": len(zuzyte), "budzet": BUDZET, "loty": LOTY}, ensure_ascii=False))
+        print(json.dumps({"plan": plan, "uzyte": len(zuzyte), "budzet": BUDZET, "bez_wejscia": bez_wejscia, "loty": LOTY}, ensure_ascii=False))
         return
     subprocess.run(["sudo", "-n", "systemctl", "stop", "systemd-timesyncd"], check=True)
     stop, wyniki, uzyte = None, {}, len(zuzyte)
@@ -209,7 +218,7 @@ def main():
     nieocenione_geom = {}
     try:
         while plan:
-            if uzyte >= BUDZET:
+            if uzyte >= BUDZET + min(bez_wejscia, REZERWA_BEZ_WEJSCIA):
                 stop = "STOP-NAD3-2-BUDZET"; break
             lot = plan[0]
             st, w = boot(lot, NOGA_PRZED + uzyte + 1)
@@ -225,6 +234,12 @@ def main():
             wyniki[w["nazwa"]] = w
             if w["breach"]:
                 stop = "STOP-NAD3-2-BREACH"; break
+            if w.get("bez_wejscia"):                                  # ANEKS_NAD3-2 §3.5
+                bez_wejscia += 1
+                log(f"{w['nazwa']}: cięcie bez wejścia (brak akwizycji) — boot zużyty, lot nieważny ({bez_wejscia}/{REZERWA_BEZ_WEJSCIA + 1})")
+                if bez_wejscia > REZERWA_BEZ_WEJSCIA:
+                    stop = "STOP-NAD3-2-BEZ-WEJSCIA"; break
+                continue
             plan.pop(0)
             p = po_boocie(lot, w["nazwa"])
             wyniki[w["nazwa"]]["po_boocie"] = p
