@@ -835,3 +835,18 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   trzech klatek detekcja ∧ ruch. Komórka c03 (kierunek 270°): 16.0 s
   do blokady przy 15 m (NAD2), brak blokady w 40 s przy 10 m (NAD3).
   Mechanizm niezmierzony. Otwarcie tylko decyzją Olgi.
+
+## Dopisek stanu katalogu — 15.11.2026 (CO-NAD3-4, ANEKS_NAD3-4)
+- **NADIR-III — CLOSED, PASS (V-A).** Zdegradowane źródło poprawki:
+  dowód i osłona NAD2 znoszą poprawkę 1 Hz z błędem do 1.0 m przy
+  zadaniu do 20 m (4/4 lotów); przy 1.75 i 2.75 m osłona odmawia
+  zgodnie z regułą, bezpieczeństwo bez naruszeń w 12 cięciach.
+- **Następna pozycja wątku, nieotwarta: źródło absolutne bez
+  znaczników** (dopasowanie obrazu z kamery w dół do mapy scenerii).
+  Bramka wejścia z tej nogi: błąd największy, nie typowy, do 1.0 m
+  przy co najmniej 1 Hz, bez skoków poza granicę. Pierwszy krok to
+  pomiar ogona błędu na zapisanych klatkach, przy biurku. Otwarcie
+  tylko decyzją Olgi.
+- Obserwacje bez pozycji: tor zależy od kierunku błędu o 0.4–0.8 m
+  (mechanizm niezmierzony); admisja celu stojącego (dopisek
+  CO-NAD3-2).

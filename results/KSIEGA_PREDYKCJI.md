@@ -1209,3 +1209,26 @@ CLOSED-BY-RECON (0 bootów)
 - Geometria ciaśniejsza niż w PRE (c05 do 16 m, c10 do 18.9 m):
   z reguły bariery odmowa przy biasie na zewnątrz jest oczekiwana
   tylko w c10. Predykcje P-NAD3-5 i P-NAD3-6 stoją bez zmian.
+
+## NADIR-III — bramka i zamknięcie nogi (ANEKS_NAD3-4, 15.11.2026)
+- Werdykt V-A. 12 cięć (3 poziomy błędu × 2 komórki × 2 kierunki
+  biasu) i 2 nominały: B1–B5 bez naruszeń; P1 dostępne 4/4 (próg 3).
+  14/14 lotów ważnych, rezerwa 0/3, noga 18/22.
+- Przesłanka: 24 285 ticków, zero przekroczeń, max e′/U′ 0.539.
+  CC odtworzył własnym kodem z tabelami wpisanymi z PRE §4.
+- Odmowy w misji: 2, obie REFUSE(bariera) w c10 na zewnątrz (P2 po
+  8.94 s, P3 po 7.88 s). REFUSE(τ*) w misji 0.
+- Kontrakt źródła przy zadaniu do 20 m: 1 Hz, błąd ograniczony;
+  zmierzone 1.0 m; rachunek 1.37 m (dostępność) i 2.28 m
+  (bezpieczeństwo).
+- Predykcje bramki 5/7 przy sumie szans 5.15 (✗ P-NAD3-5, ✗ literą
+  P-NAD3-7); noga łącznie 9/13 przy 9.40.
+- Lekcje:
+  - wymaganie na źródło wyznacza dostępność, nie bezpieczeństwo —
+    osłona liczy błąd dwa razy;
+  - odmowa zapada w ostatnim przedziale τ, więc częstość ustawia jej
+    moment;
+  - błąd stały znosi się w wejściu sieci, błąd zmienny w czasie
+    przechodzi przez filtr tracku i przesuwa tor o ułamek E;
+  - predykcja o odmowach musi nazywać fazę lotu;
+  - zmiana narzędzia w kampanii bez STOP-u — drugi raz (NAD2, NAD3).
