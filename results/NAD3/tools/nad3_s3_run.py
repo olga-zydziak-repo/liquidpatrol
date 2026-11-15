@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """results/NAD3/tools/nad3_s3_run.py — kolejka bramki S3 NADIR-III (PROMPT_NAD3_S3 §1–§4, ANEKS_NAD3-3 §3; ≤ 17 bootów) = wzór
 results/NAD3/tools/nad3_s2_run.py: strażniki stanowiska kont_s2_campaign_g (READ-ONLY, ścieżki na results/NAD3/s3), bramka zdrowia
-przyrządem A (results/NADIR/tools/nadir_s4_bramka — katalog results/NAD3/s3/bramka; A, NO-GO ⇒ 3 min ⇒ C, trzecie NO-GO z rzędu ⇒
+przyrządem A w procesie potomnym (results/NADIR/tools/nadir_s4_bramka — katalog results/NAD3/s3/bramka; A, NO-GO ⇒ 3 min ⇒ C, trzecie NO-GO z rzędu ⇒
 STOP-NAD3-3-STANOWISKO, nic nie zużyte), telemetria w tle bootu, boot results/NAD3/tools/nad3_boot.sh (NAD3_ETAP=s3, tryb 1/1/0/NAD2,
 manifest v2, ziarno 1).
 Plan: 14 pozycji w kolejności wiążącej (nad3_s3_lot.PLAN): cięcia P1 (c05/c10 × na zewnątrz/do środka), nominał NA (P1, na zewnątrz,
@@ -103,20 +103,33 @@ def wolna(nm):
         n += 1
 
 
+BRAMKA_PY = """
+import json, os, sys
+sys.path[:0] = {sciezki!r}
+import nadir_s4_bramka as B
+B.OUT = {out!r}
+B.zegar_ok()
+r = B.przyrzad_a({tag!r}, tel={tel!r})
+print("WYNIK " + json.dumps({{k: r.get(k) for k in ("wariant", "tempo", "GO", "czolowka_operatora")}}, ensure_ascii=False, default=str))
+"""
+
+
 def bramka_zdrowia(name):
-    import nadir_s4_bramka as B
-    B.OUT = os.path.join(S3, "bramka")
+    """Przyrząd A w procesie potomnym (wzór results/NAD2/tools/nad2_s3_run.py, poprawka e6670f52): wątki gz-transport (ZMQ) przyrządu
+    kończą się z nim i nie zostają w kolejce — w procesie kolejki dawały 2.4–2.9% CPU > 2.0 w proc_gate bootu (zawieszenie poz. 3, 15.11)."""
     proby = []
     for k in range(3):
         if k:
             time.sleep(180)
-        B.zegar_ok()
         tag = f"{name}_g{k + 1}"
-        try:
-            r = B.przyrzad_a(tag, tel=bool(k))
-        except Exception as ex:
-            log(f"{name}: bramka zdrowia błąd {ex!r}")
+        kod = BRAMKA_PY.format(sciezki=[os.path.join(ROOT, "results/NADIR/tools"), os.path.join(ROOT, "results/KONT/tools"), ROOT],
+                               out=os.path.join(S3, "bramka"), tag=tag, tel=bool(k))
+        w = subprocess.run([sys.executable, "-c", kod], cwd=ROOT, capture_output=True, text=True)
+        line = next((l for l in w.stdout.splitlines() if l.startswith("WYNIK ")), None)
+        if w.returncode != 0 or line is None:
+            log(f"{name}: bramka zdrowia błąd rc={w.returncode}: {(w.stdout + w.stderr)[-600:]}")
             return None, proby
+        r = json.loads(line[6:])
         p = {"tag": tag, "wariant": r["wariant"], "tempo": r["tempo"], "GO": r["GO"], "czolowka_operatora": r.get("czolowka_operatora"),
              "t": time.strftime("%F %T")}
         proby.append(p)

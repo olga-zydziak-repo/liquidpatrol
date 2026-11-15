@@ -1,0 +1,92 @@
+{
+ "pozycja": 1,
+ "rodzaj": "ciecie",
+ "punkt": "P1",
+ "kierunek": "na_zewnatrz",
+ "epizody": [
+  {
+   "episode_id": 5,
+   "scenario_id": "c05_s01",
+   "ciecie": true,
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.54,
+    "frac_track": 1.0,
+    "frac_pasmo": 1.0,
+    "refuse_misja": 0
+   },
+   "max_e_do_U": 0.4319,
+   "e_corr": {
+    "p50": 1.1666,
+    "p95": 1.4882,
+    "max": 1.7965,
+    "n": 2390
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.516,
+     "p95": 0.964,
+     "max": 1.02
+    },
+    "skok_delta": {
+     "n": 118,
+     "p50": 0.4307,
+     "p95": 0.7795,
+     "max": 1.2205
+    },
+    "n_pred_odrzut": 1,
+    "r_max_gt_misja_po_fladze": 15.393,
+    "max_e_do_U": 0.4319,
+    "refuse_misja": []
+   },
+   "r_max_gt_misja": 15.393,
+   "r_sr_gt_misja": 8.315,
+   "t_entry": 3.04,
+   "okno_misji_s": 143.58,
+   "odmowa_w_misji": null,
+   "max_r_est_misja": 16.71,
+   "min_zapas_bariery_misja": 5.54,
+   "track": 1.0,
+   "pasmo": 1.0
+  }
+ ],
+ "boot": "p01_p1_c05_zew",
+ "wazny_analizator": true,
+ "replay_ok": true,
+ "meta_ok": true,
+ "decymacja_ok": true,
+ "decymacja": {
+  "dostarczone": 158,
+  "sloty_scisle_rosnace": true,
+  "odstep_t_fix": {
+   "min": 1.0,
+   "p50": 1.0,
+   "max": 1.0
+  },
+  "tau_max_misja": 1.02,
+  "ok": true
+ },
+ "tempo": 0.9758,
+ "wazny": true,
+ "b1_nieocenione": {
+  "ticki_utraty": 2448,
+  "nieocenione": 58,
+  "przyczyny": {
+   "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+    "n": 58,
+    "faza_misji": 0,
+    "pierwszy_tick": 3063
+   }
+  }
+ },
+ "b1_nieocenione_w_misji": 0,
+ "wejscie": true,
+ "litera_ok": true,
+ "D1_dostepne": true
+}
