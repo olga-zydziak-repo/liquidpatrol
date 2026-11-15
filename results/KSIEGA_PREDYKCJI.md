@@ -1163,3 +1163,19 @@ CLOSED-BY-RECON (0 bootów)
     B4 czyste.
   - P-NAD3-6 (0.60): P2 — najwyżej 1 REFUSE w 4 cięciach.
   - P-NAD3-7 (0.70): zero REFUSE(τ*) w 12 cięciach.
+
+## NADIR-III — ANEKS_NAD3-1 (15.11.2026): wada manifestu, S2 po N1
+- STOP-NAD3-2-MANIFEST: manifest NAD3 z S1 (6 epizodów, numery
+  0, 1, 2, 3, 5, 10) złamał niezmiennik „pozycja na liście = numer
+  epizodu". Proces intruza indeksuje numerem, driver pozycją. W N1
+  epizod c05 poleciał z torem c10, a przy c10 proces intruza padł.
+  Bezpieczeństwo nienaruszone (B1–B5 czyste w 4/4). Ważne pomiary
+  geometrii: c00 18.33 m i c01 18.14 m przy bramce 19.5 m.
+- ✗ projektowe CC: podzbiór komórek w literze PROMPT_NAD3_S1 §1.4
+  bez sprawdzenia, że wzorzec jest pełną listą; przegląd S1 nie objął
+  procesów czytających manifest.
+- ✗ wykonawcy: próba na sucho objęła driver, nie proces intruza.
+- Lekcja: wejście wspólne dla kilku procesów sprawdza się na sucho
+  w każdym z nich, a niezmiennik formatu jest asercją, nie zwyczajem.
+- Naprawa: pełna lista 120 epizodów, kod bez zmian. Bramka geometrii
+  na 6 ważnych epizodach nominalnych; P-NAD3-1 rozlicza się na 6/6.
