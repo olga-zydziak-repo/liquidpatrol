@@ -74,9 +74,10 @@ def niezmiennik(poz):
 
 def procesy():
     try:
-        out = subprocess.run([TASKLIST, "/FO", "CSV"], capture_output=True, text=True, timeout=30).stdout.lower()
+        out = subprocess.run([TASKLIST, "/FO", "CSV"], capture_output=True, timeout=30).stdout.decode("utf-8", errors="replace").lower()
+        # tasklist pisze w stronie kodowej Windows (np. 0xFF w kolumnie pamięci) — nazwy procesów są ASCII
     except (OSError, subprocess.TimeoutExpired) as ex:
-        return None, repr(ex)
+        return False, repr(ex)                      # brak odczytu listy procesów ⇒ jak niezgodność (STOP, bez bootu)
     zn = {z: out.count(f'"{z}"') for z in ZAKAZANE}
     return all(v == 0 for v in zn.values()), zn
 

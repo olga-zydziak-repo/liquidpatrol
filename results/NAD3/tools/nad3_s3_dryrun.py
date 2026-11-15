@@ -7,7 +7,7 @@
     = {bias_rad, kierunek pozycji, E_max = E tabeli punktu, f 1, K 0, ziarno 1}.
 (3) driver ↔ proces intruza dla każdego epizodu planu (0, 1, 2, 5, 10) na manifeście v2: _resolve_episodes wycięta dosłownie z drivera
     i `manifest["episodes"][episode_id]` (wyrażenie sprawdzone w harness/intruder_motion.py) — ten sam scenario_id i odcinki.
-(4) scenariusze reguł §4 na kolejce z atrapą bootu (księga w katalogu tymczasowym): wszystko ważne ⇒ 14 bootów bez STOP; naruszenie ⇒
+(4) odczyt listy procesów Windows na żywo (tasklist.exe, strona kodowa) i scenariusze reguł §4 na kolejce z atrapą bootu (księga w katalogu tymczasowym): wszystko ważne ⇒ 14 bootów bez STOP; naruszenie ⇒
     STOP-NAD3-3-VC natychmiast; replay < 100% ⇒ STOP-NAD3-3-PRZYRZAD; cięcie bez wejścia ⇒ powtórka z rezerwy; czwarta potrzeba
     rezerwy ⇒ STOP-NAD3-3-REZERWA; P1 dostępne 2/4 ⇒ STOP-NAD3-3-P1 przed pozycją 5; P1 3/4 ⇒ dalej; procesy Windows ⇒ STOP bez bootu.
 (5) sędzia nad3_s3_lot na lotach S2 (kopie dowiązaniami): B4 jako pozycja 1 ⇒ ważny, litera, D1; B3 jako pozycja 3 ⇒ nieważny (bez
@@ -142,7 +142,11 @@ def czesc4():
     ok["P1_3_z_4"] = r["stop"] is None and r["booty"] == 14
     r = scen("procesy", lambda p, n: "wazny", procesy_ok=False)
     ok["procesy"] = r["stop"] == "STOP-NAD3-3-PROCESY" and r["booty"] == 0
-    return {"scenariusze": wyniki, "ok": ok, "PASS": all(ok.values())}
+    import importlib
+    importlib.reload(Q)                                               # prawdziwa funkcja procesy() (bez atrapy) — odczyt tasklist.exe na żywo
+    pr = Q.procesy()
+    ok["procesy_na_zywo_odczyt"] = isinstance(pr[1], dict) and set(pr[1]) == {"chrome.exe", "chatgpt.exe"}
+    return {"scenariusze": wyniki, "procesy_na_zywo": pr, "ok": ok, "PASS": all(ok.values())}
 
 
 def czesc5():
