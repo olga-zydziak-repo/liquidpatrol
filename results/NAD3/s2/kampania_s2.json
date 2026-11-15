@@ -220,6 +220,182 @@
     "B4"
    ],
    "powtorki": {}
+  },
+  {
+   "booty": 4,
+   "stop": null,
+   "wyniki": {
+    "b3_c05_bez_degradacji": {
+     "boot_s2": 3,
+     "lot": "B3",
+     "nazwa": "b3_c05_bez_degradacji",
+     "rc": 0,
+     "czas_s": 422.1,
+     "tempo": {
+      "aneks": "ANEKS_KONT-4d §1.3",
+      "dsim_dwall_settle": 0.9753,
+      "okno_wall_s": 60.0,
+      "n": 728,
+      "prog": 0.93,
+      "zrodlo": "rtf_stream.jsonl",
+      "ok": true
+     },
+     "bramka_tempa": false,
+     "bramka_zdrowia": [
+      {
+       "tag": "b3_c05_bez_degradacji_g1",
+       "wariant": "A",
+       "tempo": 0.9278,
+       "GO": true,
+       "czolowka_operatora": null,
+       "t": "2026-11-15 14:04:03"
+      }
+     ],
+     "shm": {
+      "sprzatanie": false,
+      "plikow_przed": 13,
+      "plikow_po": 13,
+      "trzymane_przed": {},
+      "stan": "shm_b3_c05_bez_degradacji.txt"
+     },
+     "epizod_wystartowal": true,
+     "breach": false,
+     "nad2_litera": {
+      "t": "event",
+      "mono": 7423.1441,
+      "sim": 140.392,
+      "ev": "nad2_litera",
+      "datagram": "NAD2",
+      "meta_producenta": "NAD2",
+      "oslona": "NAD2"
+     },
+     "nad3_degradacja": {
+      "t": "event",
+      "mono": 7423.1441,
+      "sim": 140.392,
+      "ev": "nad3_degradacja",
+      "meta_producenta": null,
+      "E_tabeli": 1.0,
+      "bez_degradacji": true,
+      "zgodna": true
+     },
+     "t": "2026-11-15 14:12:05",
+     "wejscie": true,
+     "bez_wejscia": false,
+     "po_boocie": {
+      "analiza_bezpieczenstwo_ok": true,
+      "wazny": true,
+      "sprawdziany": {
+       "replay": true,
+       "klucze": true
+      },
+      "b1_nieocenione": {
+       "ticki_utraty": 2447,
+       "nieocenione": 45,
+       "przyczyny": {
+        "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+         "n": 45,
+         "faza_misji": 0,
+         "pierwszy_tick": 3076
+        }
+       }
+      },
+      "r_max_gt": {
+       "c05_s01": 15.529
+      }
+     }
+    },
+    "b4_c05_p1_na_zewnatrz": {
+     "boot_s2": 4,
+     "lot": "B4",
+     "nazwa": "b4_c05_p1_na_zewnatrz",
+     "rc": 0,
+     "czas_s": 717.1,
+     "tempo": {
+      "aneks": "ANEKS_KONT-4d §1.3",
+      "dsim_dwall_settle": 0.9766,
+      "okno_wall_s": 59.95,
+      "n": 729,
+      "prog": 0.93,
+      "zrodlo": "rtf_stream.jsonl",
+      "ok": true
+     },
+     "bramka_tempa": false,
+     "bramka_zdrowia": [
+      {
+       "tag": "b4_c05_p1_na_zewnatrz_g1",
+       "wariant": "A",
+       "tempo": 0.9273,
+       "GO": true,
+       "czolowka_operatora": null,
+       "t": "2026-11-15 14:14:42"
+      }
+     ],
+     "shm": {
+      "sprzatanie": false,
+      "plikow_przed": 17,
+      "plikow_po": 17,
+      "trzymane_przed": {},
+      "stan": "shm_b4_c05_p1_na_zewnatrz.txt"
+     },
+     "epizod_wystartowal": true,
+     "breach": false,
+     "nad2_litera": {
+      "t": "event",
+      "mono": 8358.1045,
+      "sim": 142.396,
+      "ev": "nad2_litera",
+      "datagram": "NAD2",
+      "meta_producenta": "NAD2",
+      "oslona": "NAD2"
+     },
+     "nad3_degradacja": {
+      "t": "event",
+      "mono": 8358.1045,
+      "sim": 142.396,
+      "ev": "nad3_degradacja",
+      "meta_producenta": {
+       "model": "bias_rad",
+       "kierunek": "na_zewnatrz",
+       "E_max": 1.0,
+       "f": 1,
+       "K": 0,
+       "ziarno": 1
+      },
+      "E_tabeli": 1.0,
+      "bez_degradacji": false,
+      "zgodna": true
+     },
+     "t": "2026-11-15 14:27:39",
+     "wejscie": true,
+     "bez_wejscia": false,
+     "po_boocie": {
+      "analiza_bezpieczenstwo_ok": true,
+      "wazny": true,
+      "sprawdziany": {
+       "replay": true,
+       "s1_decymacja": true,
+       "s3_meta": true
+      },
+      "b1_nieocenione": {
+       "ticki_utraty": 2433,
+       "nieocenione": 107,
+       "przyczyny": {
+        "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+         "n": 107,
+         "faza_misji": 0,
+         "pierwszy_tick": 2999
+        }
+       }
+      },
+      "r_max_gt": {
+       "c05_s01": 15.479
+      }
+     }
+    }
+   },
+   "pozostalo": [],
+   "powtorki": {}
   }
  ]
 }

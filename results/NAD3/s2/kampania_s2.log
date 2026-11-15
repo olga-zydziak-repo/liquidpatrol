@@ -22,3 +22,17 @@
 [kampania 12:24:33] n2_nominal: geometria {'bramka_ok': True, 'niespelnione': 1, 'r_max': {'c02_s01': 18.271, 'c03_s01': 0.485, 'c05_s01': 15.997, 'c10_s01': 18.87}}
 [kampania 12:24:33] KONIEC booty=2/4 stop=STOP-NAD3-2-GEOM-NOMINAL pozostało=['B3', 'B4']
 [kampania 14:01:09] === NAD3 S2 (na sucho) start: zużyte 2/4, nieważne 0, bez wejścia 0/1, plan ['B3', 'B4']
+[kampania 14:01:28] === NAD3 S2 start: zużyte 2/4, nieważne 0, bez wejścia 0/1, plan ['B3', 'B4']
+[kampania 14:04:03] b3_c05_bez_degradacji: bramka zdrowia b3_c05_bez_degradacji_g1 (A) GO=True tempo=0.9278
+[kampania 14:05:03] b3_c05_bez_degradacji: próbnik 0 skoków ok=True
+[kampania 14:12:05] b3_c05_bez_degradacji rc=0 boot 3 tempo=0.9753 breach=False litera={'t': 'event', 'mono': 7423.1441, 'sim': 140.392, 'ev': 'nad2_litera', 'datagram': 'NAD2', 'meta_producenta': 'NAD2', 'oslona': 'NAD2'} nad3={'t': 'event', 'mono': 7423.1441, 'sim': 140.392, 'ev': 'nad3_degradacja', 'meta_producenta': None, 'E_tabeli': 1.0, 'bez_degradacji': True, 'zgodna': True}
+[kampania 14:12:06] b3_c05_bez_degradacji: wyciąg ULG {'plik': '/home/olga/projects/liquidpatrol/results/NAD3/s2/b3_c05_bez_degradacji/ulg.jsonl.gz', 'MB': 1.23, 'n': {'estimator_aid_src_optical_flow': 3922, 'estimator_optical_flow_vel': 3922, 'estimator_status_flags': 189, 'vehicle_angular_velocity': 7832, 'vehicle_attitude': 39220, 'vehicle_local_position': 19610, 'vehicle_status': 314}, 'okno': [139.5, 296.37]}
+[kampania 14:12:07] b3_c05_bez_degradacji: analizator ważny=True bezpieczeństwo_ok=True
+[kampania 14:12:07] b3_c05_bez_degradacji: sprawdziany {'replay': True, 'klucze': True} r_max {'c05_s01': 15.529}
+[kampania 14:14:42] b4_c05_p1_na_zewnatrz: bramka zdrowia b4_c05_p1_na_zewnatrz_g1 (A) GO=True tempo=0.9273
+[kampania 14:15:42] b4_c05_p1_na_zewnatrz: próbnik 0 skoków ok=True
+[kampania 14:27:39] b4_c05_p1_na_zewnatrz rc=0 boot 4 tempo=0.9766 breach=False litera={'t': 'event', 'mono': 8358.1045, 'sim': 142.396, 'ev': 'nad2_litera', 'datagram': 'NAD2', 'meta_producenta': 'NAD2', 'oslona': 'NAD2'} nad3={'t': 'event', 'mono': 8358.1045, 'sim': 142.396, 'ev': 'nad3_degradacja', 'meta_producenta': {'model': 'bias_rad', 'kierunek': 'na_zewnatrz', 'E_max': 1.0, 'f': 1, 'K': 0, 'ziarno': 1}, 'E_tabeli': 1.0, 'bez_degradacji': False, 'zgodna': True}
+[kampania 14:27:41] b4_c05_p1_na_zewnatrz: wyciąg ULG {'plik': '/home/olga/projects/liquidpatrol/results/NAD3/s2/b4_c05_p1_na_zewnatrz/ulg.jsonl.gz', 'MB': 1.23, 'n': {'estimator_aid_src_optical_flow': 3908, 'estimator_optical_flow_vel': 3908, 'estimator_status_flags': 192, 'vehicle_angular_velocity': 7800, 'vehicle_attitude': 39086, 'vehicle_local_position': 19543, 'vehicle_status': 312}, 'okno': [141.48, 297.82]}
+[kampania 14:27:41] b4_c05_p1_na_zewnatrz: analizator ważny=True bezpieczeństwo_ok=True
+[kampania 14:27:42] b4_c05_p1_na_zewnatrz: sprawdziany {'replay': True, 's1_decymacja': True, 's3_meta': True} r_max {'c05_s01': 15.479}
+[kampania 14:27:42] KONIEC booty=4/4 stop=None pozostało=[]

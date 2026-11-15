@@ -1,0 +1,80 @@
+{
+ "replay": {
+  "producent": {
+   "n_fx": 1483,
+   "fx_niezgodne": 0,
+   "fx_deg_niezgodne": 0,
+   "max_abs_d": 0.0,
+   "przyklad": null,
+   "konfiguracja": null
+  },
+  "oslona": {
+   "n": 3121,
+   "przedzial": 0,
+   "tau": 0,
+   "R_k": 0,
+   "faza": 0,
+   "dec": 0,
+   "rule": 0,
+   "d_ne": 0,
+   "brak_tk": 0,
+   "zatrzask_zapis": 3074,
+   "zatrzask_replay": 3074,
+   "przyklad": null
+  },
+  "ok": true
+ },
+ "b1_nieocenione": {
+  "ticki_utraty": 2447,
+  "nieocenione": 45,
+  "przyczyny": {
+   "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+    "n": 45,
+    "faza_misji": 0,
+    "pierwszy_tick": 3076
+   }
+  }
+ },
+ "klucze": {
+  "wiersze_z_fx_deg": 0,
+  "meta_ma_nad3": false,
+  "klucze_meta_eq_NAD2": true,
+  "klucze_wiersza_eq_NAD2": true,
+  "klucze_fx_eq_NAD2": true,
+  "klucze_wiersza": [
+   [
+    "det",
+    "ekf_hdg",
+    "ekf_pos",
+    "ekf_pos_age",
+    "ekf_q",
+    "ekf_q_age",
+    "fx",
+    "lustro",
+    "mono",
+    "ms",
+    "n",
+    "sim",
+    "t"
+   ]
+  ],
+  "klucze_wiersza_NAD2": [
+   [
+    "det",
+    "ekf_hdg",
+    "ekf_pos",
+    "ekf_pos_age",
+    "ekf_q",
+    "ekf_q_age",
+    "fx",
+    "lustro",
+    "mono",
+    "ms",
+    "n",
+    "sim",
+    "t"
+   ]
+  ],
+  "ok": true
+ }
+}
