@@ -1,0 +1,25 @@
+[kont_s4] bramka tempa: 0.974 (okno 59.91 s, n=727) ok=True
+[kont_s4] reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 5.61, 'bias_absmax': 0.00012}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 2.036}, 'sim_reinit': 106.868, 'po': {'yaw_blad_deg': 5.57, 'bias_absmax': 0.00011, 'sim': 121.216}, 'ok': True}
+[bench] yaw_assert sim=128.64 {'yaw_blad_deg': 5.57, 'bias_absmax': 0.00011, 'ok': True, 'n_reinit': 1}
+[bench] armed sim=128.66 {'gt_home': [-0.0, -0.0]}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NAD3/s3/p05_p1_nom_zew_NA/episode_control.json
+[bench] takeoff sim=128.68 {}
+[bench] offboard sim=140.05 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] nad2_litera sim=140.42 {'datagram': 'NAD2', 'meta_producenta': 'NAD2', 'oslona': 'NAD2'}
+[bench] nad3_degradacja sim=140.42 {'meta_producenta': {'model': 'bias_rad', 'kierunek': 'na_zewnatrz', 'E_max': 1.0, 'f': 1, 'K': 0, 'ziarno': 1}, 'E_tabeli': 1.0, 'bez_degradacji': False, 'zgodna': True}
+[bench] intruder_start_gate sim=140.51 {'episode_id': 0, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.068, 'pose': [10.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [10.0, 0.0, -10.0]}
+[bench] episode_start sim=140.51 {'episode_id': 0, 'scenario_id': 'c00_s01', 't0_sim': 140.512}
+[bench] episode_end sim=219.44 {'episode_id': 0, 't_entry': 8.9, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False, 'n_r_g_nom': 0, 'n_kont_enter': 0, 'refuse_rec': None, 'descending': False, 'zejscie_planowe': None}
+[bench] intruder_start_gate sim=227.49 {'episode_id': 1, 'status': 'OK', 'n_setpose': 7, 'wait_sim': 0.288, 'pose': [0.0, 10.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 10.0, -10.0]}
+[bench] episode_start sim=227.49 {'episode_id': 1, 'scenario_id': 'c01_s01', 't0_sim': 227.492}
+[bench] episode_end sim=301.28 {'episode_id': 1, 't_entry': 3.77, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False, 'n_r_g_nom': 0, 'n_kont_enter': 0, 'refuse_rec': None, 'descending': False, 'zejscie_planowe': None}
+[bench] intruder_start_gate sim=307.68 {'episode_id': 5, 'status': 'OK', 'n_setpose': 1, 'wait_sim': 0.0, 'pose': [0.0, 10.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 10.0, -10.0]}
+[bench] episode_start sim=307.69 {'episode_id': 5, 'scenario_id': 'c05_s01', 't0_sim': 307.684}
+[bench] episode_end sim=381.62 {'episode_id': 5, 't_entry': 3.88, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False, 'n_r_g_nom': 0, 'n_kont_enter': 0, 'refuse_rec': None, 'descending': False, 'zejscie_planowe': None}
+[bench] intruder_start_gate sim=389.14 {'episode_id': 10, 'status': 'OK', 'n_setpose': 3, 'wait_sim': 0.088, 'pose': [-10.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-10.0, 0.0, -10.0]}
+[bench] episode_start sim=389.14 {'episode_id': 10, 'scenario_id': 'c10_s01', 't0_sim': 389.14}
+[bench] episode_end sim=464.44 {'episode_id': 10, 't_entry': 5.29, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False, 'n_r_g_nom': 0, 'n_kont_enter': 0, 'refuse_rec': None, 'descending': False, 'zejscie_planowe': None}
+[bench] reset_done sim=469.41 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NAD3/s3/p05_p1_nom_zew_NA/trace.jsonl (demo n=6221)

@@ -1,0 +1,106 @@
+{
+ "pozycja": 12,
+ "rodzaj": "ciecie",
+ "punkt": "P3",
+ "kierunek": "na_zewnatrz",
+ "epizody": [
+  {
+   "episode_id": 10,
+   "scenario_id": "c10_s01",
+   "ciecie": true,
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": false,
+    "kontynuacja_od_t_inj_s": null,
+    "frac_track": 0.0,
+    "frac_pasmo": 0.0,
+    "refuse_misja": 215
+   },
+   "max_e_do_U": 0.5024,
+   "e_corr": {
+    "p50": 2.813,
+    "p95": 3.0181,
+    "max": 3.2401,
+    "n": 280
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.518,
+     "p95": 0.964,
+     "max": 1.012
+    },
+    "skok_delta": {
+     "n": 13,
+     "p50": 0.3244,
+     "p95": 0.6679,
+     "max": 0.693
+    },
+    "n_pred_odrzut": 0,
+    "r_max_gt_misja_po_fladze": 16.759,
+    "max_e_do_U": 0.5024,
+    "refuse_misja": [
+     {
+      "sim": 184.548,
+      "detail": null,
+      "rule": "R-KONT"
+     }
+    ]
+   },
+   "r_max_gt_misja": 16.759,
+   "r_sr_gt_misja": 7.42,
+   "t_entry": 5.65,
+   "okno_misji_s": 43.52,
+   "odmowa_w_misji": {
+    "tick": 880,
+    "od_ciecia_s": 7.88,
+    "przyczyna": "bariera",
+    "r_est": 19.832,
+    "bariera_R_k": 19.625,
+    "r_gt": 16.832,
+    "tau": 0.948
+   },
+   "max_r_est_misja": 19.752,
+   "min_zapas_bariery_misja": 0.305,
+   "track": 0.0,
+   "pasmo": 0.0
+  }
+ ],
+ "boot": "p12_p3_c10_zew",
+ "wazny_analizator": true,
+ "replay_ok": true,
+ "meta_ok": true,
+ "decymacja_ok": true,
+ "decymacja": {
+  "dostarczone": 56,
+  "sloty_scisle_rosnace": true,
+  "odstep_t_fix": {
+   "min": 1.0,
+   "p50": 1.0,
+   "max": 1.0
+  },
+  "tau_max_misja": 1.012,
+  "ok": true
+ },
+ "tempo": 0.9769,
+ "wazny": true,
+ "b1_nieocenione": {
+  "ticki_utraty": 371,
+  "nieocenione": 91,
+  "przyczyny": {
+   "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+    "n": 91,
+    "faza_misji": 0,
+    "pierwszy_tick": 1004
+   }
+  }
+ },
+ "b1_nieocenione_w_misji": 0,
+ "wejscie": true,
+ "litera_ok": true,
+ "D1_dostepne": false
+}

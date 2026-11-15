@@ -89,7 +89,9 @@ def sedzia(d, poz):
         lit = lit and o.get("bezpieczenstwo_ok", False)
         if o["ciecie"]:
             ut = [r for r in ms if r.get("ph") in UTRATA and (r.get("nad2") or {}).get("przedzial") is not None]
-            ref = next((r for r in ms if r.get("ph") == "KONT_REFUSE"), None)
+            # odmowa w misji: pierwszy zatrzask przed zejściem planowym — tick zatrzasku ma już desc = True (D5 startuje w tym ticku),
+            # więc szukany wśród wszystkich ticków epizodu przed zejściem planowym, nie tylko w ms (poprawka po poz. 7 S3)
+            ref = next((r for r in rama if r["ep"] == ep and r.get("ph") == "KONT_REFUSE" and r["sim"] < zp.get(ep, 1e18)), None)
             if ref is not None:
                 g = min(gt, key=lambda x: abs(x["sim"] - ref["sim"]))
                 e["odmowa_w_misji"] = {"tick": ref["tick"], "od_ciecia_s": round(ref["sim"] - cut["t_inj_sim"], 2) if cut else None,

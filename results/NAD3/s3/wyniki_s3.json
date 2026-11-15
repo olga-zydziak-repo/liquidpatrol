@@ -1,0 +1,1313 @@
+{
+ "werdykt": "V-A",
+ "naruszenia_pozycje": [],
+ "P1_dostepne": "4/4",
+ "tabela": [
+  {
+   "pozycja": 1,
+   "rodzaj": "ciecie",
+   "punkt": "P1",
+   "kierunek": "na_zewnatrz",
+   "lot": "p01_p1_c05_zew",
+   "boot_nogi": 5,
+   "tempo": 0.9758,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 2448,
+    "nieocenione": 58,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 58,
+      "faza_misji": 0,
+      "pierwszy_tick": 3063
+     }
+    }
+   },
+   "scenario": "c05_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.54,
+    "frac_track": 1.0,
+    "frac_pasmo": 1.0,
+    "refuse_misja": 0
+   },
+   "D1_dostepne": true,
+   "t_entry": 3.04,
+   "odmowa_w_misji": null,
+   "odmowa_w_zejsciu": {
+    "tick": 3061,
+    "po_zejsciu_s": 8.42,
+    "przyczyna": "τ*",
+    "tau": 1.052,
+    "r_est": 12.525,
+    "bariera_R_k": 22.099
+   },
+   "max_r_est_misja": 16.71,
+   "min_zapas_bariery_misja": 5.54,
+   "r_max_gt_misja": 15.393,
+   "r_sr_gt_misja": 8.315,
+   "max_e_do_U": 0.4319,
+   "e_corr": {
+    "p50": 1.1666,
+    "p95": 1.4882,
+    "max": 1.7965,
+    "n": 2390
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.516,
+     "p95": 0.964,
+     "max": 1.02
+    },
+    "skok_delta": {
+     "n": 118,
+     "p50": 0.4307,
+     "p95": 0.7795,
+     "max": 1.2205
+    },
+    "n_pred_odrzut": 1,
+    "r_max_gt_misja_po_fladze": 15.393,
+    "max_e_do_U": 0.4319,
+    "refuse_misja": []
+   },
+   "track": 1.0,
+   "pasmo": 1.0,
+   "decymacja": {
+    "dostarczone": 158,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.02,
+    "ok": true
+   }
+  },
+  {
+   "pozycja": 2,
+   "rodzaj": "ciecie",
+   "punkt": "P1",
+   "kierunek": "na_zewnatrz",
+   "lot": "p02_p1_c10_zew",
+   "boot_nogi": 6,
+   "tempo": 0.9735,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 2458,
+    "nieocenione": 112,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 112,
+      "faza_misji": 0,
+      "pierwszy_tick": 3053
+     }
+    }
+   },
+   "scenario": "c10_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.54,
+    "frac_track": 1.0,
+    "frac_pasmo": 0.955,
+    "refuse_misja": 0
+   },
+   "D1_dostepne": true,
+   "t_entry": 4.5,
+   "odmowa_w_misji": null,
+   "odmowa_w_zejsciu": {
+    "tick": 3051,
+    "po_zejsciu_s": 6.02,
+    "przyczyna": "τ*",
+    "tau": 1.072,
+    "r_est": 8.531,
+    "bariera_R_k": 21.939
+   },
+   "max_r_est_misja": 20.032,
+   "min_zapas_bariery_misja": 2.218,
+   "r_max_gt_misja": 18.076,
+   "r_sr_gt_misja": 8.986,
+   "max_e_do_U": 0.4481,
+   "e_corr": {
+    "p50": 1.1185,
+    "p95": 1.5289,
+    "max": 2.1367,
+    "n": 2346
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.52,
+     "p95": 0.964,
+     "max": 1.02
+    },
+    "skok_delta": {
+     "n": 116,
+     "p50": 0.4375,
+     "p95": 1.1121,
+     "max": 1.5192
+    },
+    "n_pred_odrzut": 51,
+    "r_max_gt_misja_po_fladze": 18.076,
+    "max_e_do_U": 0.4481,
+    "refuse_misja": []
+   },
+   "track": 1.0,
+   "pasmo": 0.955,
+   "decymacja": {
+    "dostarczone": 157,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.02,
+    "ok": true
+   }
+  },
+  {
+   "pozycja": 3,
+   "rodzaj": "ciecie",
+   "punkt": "P1",
+   "kierunek": "do_srodka",
+   "lot": "p03_p1_c05_srod_r2",
+   "boot_nogi": 7,
+   "tempo": 0.9737,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 2439,
+    "nieocenione": 92,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 92,
+      "faza_misji": 0,
+      "pierwszy_tick": 3020
+     }
+    }
+   },
+   "scenario": "c05_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.508,
+    "frac_track": 1.0,
+    "frac_pasmo": 1.0,
+    "refuse_misja": 0
+   },
+   "D1_dostepne": true,
+   "t_entry": 3.01,
+   "odmowa_w_misji": null,
+   "odmowa_w_zejsciu": {
+    "tick": 3018,
+    "po_zejsciu_s": 6.32,
+    "przyczyna": "τ*",
+    "tau": 1.052,
+    "r_est": 10.418,
+    "bariera_R_k": 21.939
+   },
+   "max_r_est_misja": 15.135,
+   "min_zapas_bariery_misja": 7.165,
+   "r_max_gt_misja": 15.758,
+   "r_sr_gt_misja": 8.4,
+   "max_e_do_U": 0.3576,
+   "e_corr": {
+    "p50": 0.8425,
+    "p95": 1.0235,
+    "max": 1.3863,
+    "n": 2347
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.516,
+     "p95": 0.9646,
+     "max": 1.02
+    },
+    "skok_delta": {
+     "n": 116,
+     "p50": 0.3646,
+     "p95": 0.7425,
+     "max": 0.9866
+    },
+    "n_pred_odrzut": 3,
+    "r_max_gt_misja_po_fladze": 15.758,
+    "max_e_do_U": 0.3576,
+    "refuse_misja": []
+   },
+   "track": 1.0,
+   "pasmo": 1.0,
+   "decymacja": {
+    "dostarczone": 156,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.02,
+    "ok": true
+   }
+  },
+  {
+   "pozycja": 4,
+   "rodzaj": "ciecie",
+   "punkt": "P1",
+   "kierunek": "do_srodka",
+   "lot": "p04_p1_c10_srod",
+   "boot_nogi": 8,
+   "tempo": 0.971,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 2467,
+    "nieocenione": 130,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 130,
+      "faza_misji": 0,
+      "pierwszy_tick": 3047
+     }
+    }
+   },
+   "scenario": "c10_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.54,
+    "frac_track": 1.0,
+    "frac_pasmo": 0.924,
+    "refuse_misja": 0
+   },
+   "D1_dostepne": true,
+   "t_entry": 4.86,
+   "odmowa_w_misji": null,
+   "odmowa_w_zejsciu": {
+    "tick": 3045,
+    "po_zejsciu_s": 5.67,
+    "przyczyna": "τ*",
+    "tau": 1.056,
+    "r_est": 6.303,
+    "bariera_R_k": 21.939
+   },
+   "max_r_est_misja": 18.481,
+   "min_zapas_bariery_misja": 3.769,
+   "r_max_gt_misja": 18.869,
+   "r_sr_gt_misja": 9.553,
+   "max_e_do_U": 0.4359,
+   "e_corr": {
+    "p50": 0.8687,
+    "p95": 1.1135,
+    "max": 1.9607,
+    "n": 2337
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.516,
+     "p95": 0.968,
+     "max": 1.02
+    },
+    "skok_delta": {
+     "n": 116,
+     "p50": 0.3713,
+     "p95": 0.9129,
+     "max": 1.9037
+    },
+    "n_pred_odrzut": 23,
+    "r_max_gt_misja_po_fladze": 18.869,
+    "max_e_do_U": 0.4359,
+    "refuse_misja": []
+   },
+   "track": 1.0,
+   "pasmo": 0.924,
+   "decymacja": {
+    "dostarczone": 157,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.02,
+    "ok": true
+   }
+  },
+  {
+   "pozycja": 5,
+   "rodzaj": "nominal",
+   "punkt": "P1",
+   "kierunek": "na_zewnatrz",
+   "lot": "p05_p1_nom_zew_NA",
+   "boot_nogi": 9,
+   "tempo": 0.974,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 0,
+    "nieocenione": 0,
+    "przyczyny": {}
+   },
+   "epizody": [
+    {
+     "scenario_id": "c00_s01",
+     "B": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true
+     },
+     "akwizycja": true,
+     "B5_pusty": false,
+     "t_entry": 8.9,
+     "r_max_gt_misja": 18.411,
+     "r_sr_gt_misja": 9.249,
+     "okno_misji_s": 78.92
+    },
+    {
+     "scenario_id": "c01_s01",
+     "B": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true
+     },
+     "akwizycja": true,
+     "B5_pusty": false,
+     "t_entry": 3.77,
+     "r_max_gt_misja": 18.145,
+     "r_sr_gt_misja": 10.794,
+     "okno_misji_s": 73.79
+    },
+    {
+     "scenario_id": "c05_s01",
+     "B": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true
+     },
+     "akwizycja": true,
+     "B5_pusty": false,
+     "t_entry": 3.88,
+     "r_max_gt_misja": 16.209,
+     "r_sr_gt_misja": 8.093,
+     "okno_misji_s": 73.92
+    },
+    {
+     "scenario_id": "c10_s01",
+     "B": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true
+     },
+     "akwizycja": true,
+     "B5_pusty": false,
+     "t_entry": 5.29,
+     "r_max_gt_misja": 18.857,
+     "r_sr_gt_misja": 10.101,
+     "okno_misji_s": 75.3
+    }
+   ]
+  },
+  {
+   "pozycja": 6,
+   "rodzaj": "ciecie",
+   "punkt": "P2",
+   "kierunek": "na_zewnatrz",
+   "lot": "p06_p2_c05_zew",
+   "boot_nogi": 10,
+   "tempo": 0.976,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 2484,
+    "nieocenione": 43,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 43,
+      "faza_misji": 0,
+      "pierwszy_tick": 3113
+     }
+    }
+   },
+   "scenario": "c05_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.512,
+    "frac_track": 1.0,
+    "frac_pasmo": 1.0,
+    "refuse_misja": 0
+   },
+   "D1_dostepne": true,
+   "t_entry": 3.03,
+   "odmowa_w_misji": null,
+   "odmowa_w_zejsciu": {
+    "tick": 3112,
+    "po_zejsciu_s": 9.45,
+    "przyczyna": "τ*",
+    "tau": 1.088,
+    "r_est": 13.099,
+    "bariera_R_k": 21.096
+   },
+   "max_r_est_misja": 17.535,
+   "min_zapas_bariery_misja": 3.656,
+   "r_max_gt_misja": 15.472,
+   "r_sr_gt_misja": 8.272,
+   "max_e_do_U": 0.494,
+   "e_corr": {
+    "p50": 1.9023,
+    "p95": 2.2151,
+    "max": 2.5476,
+    "n": 2441
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.516,
+     "p95": 0.968,
+     "max": 1.024
+    },
+    "skok_delta": {
+     "n": 119,
+     "p50": 0.5337,
+     "p95": 0.957,
+     "max": 1.5566
+    },
+    "n_pred_odrzut": 16,
+    "r_max_gt_misja_po_fladze": 15.472,
+    "max_e_do_U": 0.494,
+    "refuse_misja": []
+   },
+   "track": 1.0,
+   "pasmo": 1.0,
+   "decymacja": {
+    "dostarczone": 159,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.024,
+    "ok": true
+   }
+  },
+  {
+   "pozycja": 7,
+   "rodzaj": "ciecie",
+   "punkt": "P2",
+   "kierunek": "na_zewnatrz",
+   "lot": "p07_p2_c10_zew",
+   "boot_nogi": 11,
+   "tempo": 0.9758,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 374,
+    "nieocenione": 33,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 33,
+      "faza_misji": 0,
+      "pierwszy_tick": 1075
+     }
+    }
+   },
+   "scenario": "c10_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": false,
+    "kontynuacja_od_t_inj_s": null,
+    "frac_track": 0.0,
+    "frac_pasmo": 0.0,
+    "refuse_misja": 197
+   },
+   "D1_dostepne": false,
+   "t_entry": 6.02,
+   "odmowa_w_misji": {
+    "tick": 911,
+    "od_ciecia_s": 8.94,
+    "przyczyna": "bariera",
+    "r_est": 21.194,
+    "bariera_R_k": 21.125,
+    "r_gt": 19.137,
+    "tau": 0.96
+   },
+   "odmowa_w_zejsciu": null,
+   "max_r_est_misja": 21.135,
+   "min_zapas_bariery_misja": 0.422,
+   "r_max_gt_misja": 19.12,
+   "r_sr_gt_misja": 7.562,
+   "max_e_do_U": 0.4479,
+   "e_corr": {
+    "p50": 1.7366,
+    "p95": 1.9054,
+    "max": 2.1148,
+    "n": 341
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.512,
+     "p95": 0.964,
+     "max": 1.02
+    },
+    "skok_delta": {
+     "n": 16,
+     "p50": 0.3155,
+     "p95": 0.591,
+     "max": 0.8255
+    },
+    "n_pred_odrzut": 1,
+    "r_max_gt_misja_po_fladze": 19.12,
+    "max_e_do_U": 0.4479,
+    "refuse_misja": [
+     {
+      "sim": 185.36,
+      "detail": null,
+      "rule": "R-KONT"
+     }
+    ]
+   },
+   "track": 0.0,
+   "pasmo": 0.0,
+   "decymacja": {
+    "dostarczone": 59,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.02,
+    "ok": true
+   }
+  },
+  {
+   "pozycja": 8,
+   "rodzaj": "ciecie",
+   "punkt": "P2",
+   "kierunek": "do_srodka",
+   "lot": "p08_p2_c05_srod",
+   "boot_nogi": 12,
+   "tempo": 0.9765,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 2426,
+    "nieocenione": 124,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 124,
+      "faza_misji": 0,
+      "pierwszy_tick": 2976
+     }
+    }
+   },
+   "scenario": "c05_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.524,
+    "frac_track": 1.0,
+    "frac_pasmo": 0.993,
+    "refuse_misja": 0
+   },
+   "D1_dostepne": true,
+   "t_entry": 3.02,
+   "odmowa_w_misji": null,
+   "odmowa_w_zejsciu": {
+    "tick": 2974,
+    "po_zejsciu_s": 4.34,
+    "przyczyna": "τ*",
+    "tau": 1.056,
+    "r_est": 4.482,
+    "bariera_R_k": 20.814
+   },
+   "max_r_est_misja": 14.926,
+   "min_zapas_bariery_misja": 6.261,
+   "r_max_gt_misja": 16.141,
+   "r_sr_gt_misja": 8.582,
+   "max_e_do_U": 0.4394,
+   "e_corr": {
+    "p50": 1.6063,
+    "p95": 1.7619,
+    "max": 1.9747,
+    "n": 2302
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.516,
+     "p95": 0.964,
+     "max": 1.02
+    },
+    "skok_delta": {
+     "n": 114,
+     "p50": 0.4801,
+     "p95": 1.1329,
+     "max": 3.2633
+    },
+    "n_pred_odrzut": 2,
+    "r_max_gt_misja_po_fladze": 16.141,
+    "max_e_do_U": 0.4394,
+    "refuse_misja": []
+   },
+   "track": 1.0,
+   "pasmo": 0.993,
+   "decymacja": {
+    "dostarczone": 154,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.02,
+    "ok": true
+   }
+  },
+  {
+   "pozycja": 9,
+   "rodzaj": "ciecie",
+   "punkt": "P2",
+   "kierunek": "do_srodka",
+   "lot": "p09_p2_c10_srod",
+   "boot_nogi": 13,
+   "tempo": 0.9765,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 2454,
+    "nieocenione": 33,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 33,
+      "faza_misji": 0,
+      "pierwszy_tick": 3160
+     }
+    }
+   },
+   "scenario": "c10_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.536,
+    "frac_track": 1.0,
+    "frac_pasmo": 0.932,
+    "refuse_misja": 0
+   },
+   "D1_dostepne": true,
+   "t_entry": 6.4,
+   "odmowa_w_misji": null,
+   "odmowa_w_zejsciu": {
+    "tick": 3159,
+    "po_zejsciu_s": 9.98,
+    "przyczyna": "τ*",
+    "tau": 1.1,
+    "r_est": 7.173,
+    "bariera_R_k": 21.096
+   },
+   "max_r_est_misja": 17.679,
+   "min_zapas_bariery_misja": 3.611,
+   "r_max_gt_misja": 18.969,
+   "r_sr_gt_misja": 9.504,
+   "max_e_do_U": 0.461,
+   "e_corr": {
+    "p50": 1.629,
+    "p95": 1.8723,
+    "max": 2.4408,
+    "n": 2421
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.52,
+     "p95": 0.968,
+     "max": 1.024
+    },
+    "skok_delta": {
+     "n": 120,
+     "p50": 0.4435,
+     "p95": 1.0071,
+     "max": 3.4209
+    },
+    "n_pred_odrzut": 25,
+    "r_max_gt_misja_po_fladze": 18.969,
+    "max_e_do_U": 0.461,
+    "refuse_misja": []
+   },
+   "track": 1.0,
+   "pasmo": 0.932,
+   "decymacja": {
+    "dostarczone": 163,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.024,
+    "ok": true
+   }
+  },
+  {
+   "pozycja": 10,
+   "rodzaj": "nominal",
+   "punkt": "P1",
+   "kierunek": "do_srodka",
+   "lot": "p10_p1_nom_srod_NB",
+   "boot_nogi": 14,
+   "tempo": 0.9757,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 0,
+    "nieocenione": 0,
+    "przyczyny": {}
+   },
+   "epizody": [
+    {
+     "scenario_id": "c01_s01",
+     "B": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true
+     },
+     "akwizycja": true,
+     "B5_pusty": false,
+     "t_entry": 2.11,
+     "r_max_gt_misja": 18.134,
+     "r_sr_gt_misja": 10.915,
+     "okno_misji_s": 72.12
+    },
+    {
+     "scenario_id": "c02_s01",
+     "B": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true
+     },
+     "akwizycja": true,
+     "B5_pusty": false,
+     "t_entry": 13.55,
+     "r_max_gt_misja": 18.271,
+     "r_sr_gt_misja": 9.929,
+     "okno_misji_s": 83.56
+    },
+    {
+     "scenario_id": "c05_s01",
+     "B": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true
+     },
+     "akwizycja": true,
+     "B5_pusty": false,
+     "t_entry": 3.82,
+     "r_max_gt_misja": 17.462,
+     "r_sr_gt_misja": 8.425,
+     "okno_misji_s": 73.82
+    },
+    {
+     "scenario_id": "c10_s01",
+     "B": {
+      "B1": true,
+      "B2": true,
+      "B3": true,
+      "B4": true,
+      "B5": true
+     },
+     "akwizycja": true,
+     "B5_pusty": false,
+     "t_entry": 5.93,
+     "r_max_gt_misja": 18.794,
+     "r_sr_gt_misja": 9.883,
+     "okno_misji_s": 75.93
+    }
+   ]
+  },
+  {
+   "pozycja": 11,
+   "rodzaj": "ciecie",
+   "punkt": "P3",
+   "kierunek": "na_zewnatrz",
+   "lot": "p11_p3_c05_zew",
+   "boot_nogi": 15,
+   "tempo": 0.9734,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 2466,
+    "nieocenione": 57,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 57,
+      "faza_misji": 0,
+      "pierwszy_tick": 3085
+     }
+    }
+   },
+   "scenario": "c05_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.508,
+    "frac_track": 1.0,
+    "frac_pasmo": 1.0,
+    "refuse_misja": 0
+   },
+   "D1_dostepne": true,
+   "t_entry": 3.0,
+   "odmowa_w_misji": null,
+   "odmowa_w_zejsciu": {
+    "tick": 3083,
+    "po_zejsciu_s": 8.55,
+    "przyczyna": "τ*",
+    "tau": 1.072,
+    "r_est": 13.896,
+    "bariera_R_k": 19.596
+   },
+   "max_r_est_misja": 18.607,
+   "min_zapas_bariery_misja": 1.093,
+   "r_max_gt_misja": 15.439,
+   "r_sr_gt_misja": 8.27,
+   "max_e_do_U": 0.5382,
+   "e_corr": {
+    "p50": 2.8901,
+    "p95": 3.1928,
+    "max": 3.7147,
+    "n": 2409
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.516,
+     "p95": 0.968,
+     "max": 1.024
+    },
+    "skok_delta": {
+     "n": 118,
+     "p50": 0.6901,
+     "p95": 1.2402,
+     "max": 2.7222
+    },
+    "n_pred_odrzut": 42,
+    "r_max_gt_misja_po_fladze": 15.439,
+    "max_e_do_U": 0.5382,
+    "refuse_misja": []
+   },
+   "track": 1.0,
+   "pasmo": 1.0,
+   "decymacja": {
+    "dostarczone": 158,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 0.8,
+     "p50": 1.0,
+     "max": 1.2
+    },
+    "tau_max_misja": 1.024,
+    "ok": true
+   }
+  },
+  {
+   "pozycja": 12,
+   "rodzaj": "ciecie",
+   "punkt": "P3",
+   "kierunek": "na_zewnatrz",
+   "lot": "p12_p3_c10_zew",
+   "boot_nogi": 16,
+   "tempo": 0.9769,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 371,
+    "nieocenione": 91,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 91,
+      "faza_misji": 0,
+      "pierwszy_tick": 1004
+     }
+    }
+   },
+   "scenario": "c10_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": false,
+    "kontynuacja_od_t_inj_s": null,
+    "frac_track": 0.0,
+    "frac_pasmo": 0.0,
+    "refuse_misja": 215
+   },
+   "D1_dostepne": false,
+   "t_entry": 5.65,
+   "odmowa_w_misji": {
+    "tick": 880,
+    "od_ciecia_s": 7.88,
+    "przyczyna": "bariera",
+    "r_est": 19.832,
+    "bariera_R_k": 19.625,
+    "r_gt": 16.832,
+    "tau": 0.948
+   },
+   "odmowa_w_zejsciu": null,
+   "max_r_est_misja": 19.752,
+   "min_zapas_bariery_misja": 0.305,
+   "r_max_gt_misja": 16.759,
+   "r_sr_gt_misja": 7.42,
+   "max_e_do_U": 0.5024,
+   "e_corr": {
+    "p50": 2.813,
+    "p95": 3.0181,
+    "max": 3.2401,
+    "n": 280
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.518,
+     "p95": 0.964,
+     "max": 1.012
+    },
+    "skok_delta": {
+     "n": 13,
+     "p50": 0.3244,
+     "p95": 0.6679,
+     "max": 0.693
+    },
+    "n_pred_odrzut": 0,
+    "r_max_gt_misja_po_fladze": 16.759,
+    "max_e_do_U": 0.5024,
+    "refuse_misja": [
+     {
+      "sim": 184.548,
+      "detail": null,
+      "rule": "R-KONT"
+     }
+    ]
+   },
+   "track": 0.0,
+   "pasmo": 0.0,
+   "decymacja": {
+    "dostarczone": 56,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.012,
+    "ok": true
+   }
+  },
+  {
+   "pozycja": 13,
+   "rodzaj": "ciecie",
+   "punkt": "P3",
+   "kierunek": "do_srodka",
+   "lot": "p13_p3_c05_srod",
+   "boot_nogi": 17,
+   "tempo": 0.9756,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 2432,
+    "nieocenione": 111,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 111,
+      "faza_misji": 0,
+      "pierwszy_tick": 2983
+     }
+    }
+   },
+   "scenario": "c05_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.536,
+    "frac_track": 1.0,
+    "frac_pasmo": 1.0,
+    "refuse_misja": 0
+   },
+   "D1_dostepne": true,
+   "t_entry": 2.43,
+   "odmowa_w_misji": null,
+   "odmowa_w_zejsciu": {
+    "tick": 2981,
+    "po_zejsciu_s": 4.91,
+    "przyczyna": "τ*",
+    "tau": 1.064,
+    "r_est": 7.316,
+    "bariera_R_k": 19.625
+   },
+   "max_r_est_misja": 13.75,
+   "min_zapas_bariery_misja": 5.958,
+   "r_max_gt_misja": 16.11,
+   "r_sr_gt_misja": 8.457,
+   "max_e_do_U": 0.5004,
+   "e_corr": {
+    "p50": 2.606,
+    "p95": 2.773,
+    "max": 3.1198,
+    "n": 2321
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.516,
+     "p95": 0.968,
+     "max": 1.02
+    },
+    "skok_delta": {
+     "n": 115,
+     "p50": 0.5939,
+     "p95": 1.2391,
+     "max": 5.4355
+    },
+    "n_pred_odrzut": 7,
+    "r_max_gt_misja_po_fladze": 16.11,
+    "max_e_do_U": 0.5004,
+    "refuse_misja": []
+   },
+   "track": 1.0,
+   "pasmo": 1.0,
+   "decymacja": {
+    "dostarczone": 154,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.02,
+    "ok": true
+   }
+  },
+  {
+   "pozycja": 14,
+   "rodzaj": "ciecie",
+   "punkt": "P3",
+   "kierunek": "do_srodka",
+   "lot": "p14_p3_c10_srod",
+   "boot_nogi": 18,
+   "tempo": 0.9741,
+   "wazny": true,
+   "litera_ok": true,
+   "b1_nieocenione": {
+    "ticki_utraty": 2459,
+    "nieocenione": 109,
+    "przyczyny": {
+     "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+      "n": 109,
+      "faza_misji": 0,
+      "pierwszy_tick": 3086
+     }
+    }
+   },
+   "scenario": "c10_s01",
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.516,
+    "frac_track": 1.0,
+    "frac_pasmo": 0.956,
+    "refuse_misja": 0
+   },
+   "D1_dostepne": true,
+   "t_entry": 6.25,
+   "odmowa_w_misji": null,
+   "odmowa_w_zejsciu": {
+    "tick": 3084,
+    "po_zejsciu_s": 6.16,
+    "przyczyna": "τ*",
+    "tau": 1.06,
+    "r_est": 5.439,
+    "bariera_R_k": 19.314
+   },
+   "max_r_est_misja": 16.774,
+   "min_zapas_bariery_misja": 2.851,
+   "r_max_gt_misja": 18.969,
+   "r_sr_gt_misja": 10.116,
+   "max_e_do_U": 0.5122,
+   "e_corr": {
+    "p50": 2.651,
+    "p95": 2.9018,
+    "max": 3.2778,
+    "n": 2350
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.52,
+     "p95": 0.9674,
+     "max": 1.028
+    },
+    "skok_delta": {
+     "n": 116,
+     "p50": 0.6144,
+     "p95": 1.2271,
+     "max": 2.7058
+    },
+    "n_pred_odrzut": 26,
+    "r_max_gt_misja_po_fladze": 18.969,
+    "max_e_do_U": 0.5122,
+    "refuse_misja": []
+   },
+   "track": 1.0,
+   "pasmo": 0.956,
+   "decymacja": {
+    "dostarczone": 159,
+    "sloty_scisle_rosnace": true,
+    "odstep_t_fix": {
+     "min": 1.0,
+     "p50": 1.0,
+     "max": 1.0
+    },
+    "tau_max_misja": 1.028,
+    "ok": true
+   }
+  }
+ ],
+ "pary": {
+  "P1/c05": {
+   "r_max_do_srodka": 15.758,
+   "r_max_na_zewnatrz": 15.393,
+   "roznica_r_max": 0.365,
+   "r_sr_do_srodka": 8.4,
+   "r_sr_na_zewnatrz": 8.315,
+   "roznica_r_sr": 0.085
+  },
+  "P1/c10": {
+   "r_max_do_srodka": 18.869,
+   "r_max_na_zewnatrz": 18.076,
+   "roznica_r_max": 0.793,
+   "r_sr_do_srodka": 9.553,
+   "r_sr_na_zewnatrz": 8.986,
+   "roznica_r_sr": 0.567
+  },
+  "P2/c05": {
+   "r_max_do_srodka": 16.141,
+   "r_max_na_zewnatrz": 15.472,
+   "roznica_r_max": 0.669,
+   "r_sr_do_srodka": 8.582,
+   "r_sr_na_zewnatrz": 8.272,
+   "roznica_r_sr": 0.31
+  },
+  "P2/c10": {
+   "r_max_do_srodka": 18.969,
+   "r_max_na_zewnatrz": 19.12,
+   "roznica_r_max": -0.151,
+   "r_sr_do_srodka": 9.504,
+   "r_sr_na_zewnatrz": 7.562,
+   "roznica_r_sr": 1.942
+  },
+  "P3/c05": {
+   "r_max_do_srodka": 16.11,
+   "r_max_na_zewnatrz": 15.439,
+   "roznica_r_max": 0.671,
+   "r_sr_do_srodka": 8.457,
+   "r_sr_na_zewnatrz": 8.27,
+   "roznica_r_sr": 0.187
+  },
+  "P3/c10": {
+   "r_max_do_srodka": 18.969,
+   "r_max_na_zewnatrz": 16.759,
+   "roznica_r_max": 2.21,
+   "r_sr_do_srodka": 10.116,
+   "r_sr_na_zewnatrz": 7.42,
+   "roznica_r_sr": 2.696
+  }
+ },
+ "predykcje_liczby": {
+  "P-NAD3-2_P1_ciecia_bez_REFUSE_w_misji": "4/4",
+  "P-NAD3-3_przekroczenia_przeslanki_12_ciec": 0,
+  "P-NAD3-3_max_e_do_U_12_ciec": 0.5382,
+  "P-NAD3-5_P3_na_zewnatrz_REFUSE_bariera": {
+   "c05_s01": null,
+   "c10_s01": "bariera"
+  },
+  "P-NAD3-5_P3_na_zewnatrz_B4": {
+   "c05_s01": true,
+   "c10_s01": true
+  },
+  "P-NAD3-6_P2_REFUSE_w_misji": "1/4",
+  "P-NAD3-7_REFUSE_tau_w_misji_12_ciec": 0,
+  "P-NAD3-7_REFUSE_tau_w_zejsciu_12_ciec": 10,
+  "P-NAD3-4_pary_roznica_r_max_lt_1m": "5/6"
+ },
+ "booty": {
+  "S3": 14,
+  "wazne": 14,
+  "rezerwa": 0
+ }
+}

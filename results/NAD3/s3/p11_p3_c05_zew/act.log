@@ -1,0 +1,22 @@
+[kont_s4] bramka tempa: 0.9734 (okno 59.94 s, n=728) ok=True
+[kont_s4] reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 5.51, 'bias_absmax': 0.00013}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 2.034}, 'sim_reinit': 106.504, 'po': {'yaw_blad_deg': 5.57, 'bias_absmax': 0.00012, 'sim': 120.748}, 'ok': True}
+[bench] yaw_assert sim=128.60 {'yaw_blad_deg': 5.58, 'bias_absmax': 0.00012, 'ok': True, 'n_reinit': 1}
+[bench] armed sim=128.64 {'gt_home': [-0.0, -0.0]}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/NAD3/s3/p11_p3_c05_zew/episode_control.json
+[bench] takeoff sim=128.66 {}
+[bench] offboard sim=139.91 {}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] nad2_litera sim=140.29 {'datagram': 'NAD2', 'meta_producenta': 'NAD2', 'oslona': 'NAD2'}
+[bench] nad3_degradacja sim=140.29 {'meta_producenta': {'model': 'bias_rad', 'kierunek': 'na_zewnatrz', 'E_max': 2.75, 'f': 1, 'K': 0, 'ziarno': 1}, 'E_tabeli': 2.75, 'bez_degradacji': False, 'zgodna': True}
+[bench] intruder_start_gate sim=140.39 {'episode_id': 5, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.072, 'pose': [0.0, 10.0, -10.0], 'attempts': 1, 'start_ned': [0.0, 10.0, -10.0]}
+[bench] episode_start sim=140.39 {'episode_id': 5, 'scenario_id': 'c05_s01', 't0_sim': 140.388}
+[bench] denial sim=173.42 {'episode_id': 5, 't_inj_sim': 173.412, 'inj_t_rel': 33.024, 'r_gt': 6.07, 'r_est': 6.26, 'track_valid': True}
+[bench] zejscie_planowe sim=283.92 {'episode_id': 5, 'sim': 283.92, 't_rel': 143.532, 'od_ciecia_s': 110.508, 'dec': 'ALLOW', 'rule': 'R-P', 'nadir': {'tau': 0.52, 'k': 1, 'j': 0, 't_fix': 283.4, 'u': 7.8497}, 'r_est': 11.299, 'r_gt': 10.921}
+[bench] refuse_pos_land sim=283.92 {'episode_id': 5}
+[bench] h_switch sim=289.14 {'episode_id': 5}
+[bench] touchdown sim=293.38 {'episode_id': 5}
+[bench] gt_przyziemienie sim=295.36 {'episode_id': 5, 'z': 0.146, 'r_gt': 11.44}
+[bench] episode_end sim=295.36 {'episode_id': 5, 't_entry': 3.0, 'refuse': 0, 'breach': False, 't_inj_sim': 173.412, 'denied': True, 'n_r_g_nom': 0, 'n_kont_enter': 1, 'refuse_rec': None, 'descending': True, 'zejscie_planowe': {'sim': 283.92, 't_rel': 143.532, 'od_ciecia_s': 110.508, 'dec': 'ALLOW', 'rule': 'R-P', 'nadir': {'tau': 0.52, 'k': 1, 'j': 0, 't_fix': 283.4, 'u': 7.8497}, 'r_est': 11.299, 'r_gt': 10.921}}
+[bench] denial_boot_end sim=295.36 {'episode_id': 5}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/NAD3/s3/p11_p3_c05_zew/trace.jsonl (demo n=3142)

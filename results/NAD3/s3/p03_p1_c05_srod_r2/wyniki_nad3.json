@@ -1,0 +1,115 @@
+{
+ "boot": "p03_p1_c05_srod_r2",
+ "epizody": [
+  {
+   "episode_id": 5,
+   "scenario_id": "c05_s01",
+   "m": 10.33,
+   "ciecie": true,
+   "B1": {
+    "ok": true,
+    "przekroczenia": 0,
+    "ticki_utraty": 2439,
+    "max_e_do_U": 0.3576,
+    "ticki_ocenione": 2347
+   },
+   "B3": {
+    "ok": true,
+    "zle": 0,
+    "ticki_utraty": 2439
+   },
+   "e_corr": {
+    "p50": 0.8425,
+    "p95": 1.0235,
+    "max": 1.3863,
+    "n": 2347
+   },
+   "przedzialy": {
+    "0": 750,
+    "1": 472,
+    "2": 467,
+    "3": 472,
+    "4": 186,
+    "None": 92
+   },
+   "tryby_ticki": {
+    "para": 2324,
+    "jeden": 115
+   },
+   "zapas_bariery_min": 7.165,
+   "u_prim_gt_m_ticki": 0,
+   "tau": {
+    "p50": 0.536,
+    "p95": 1.004,
+    "max": 5.692
+   },
+   "B2": {
+    "ok": true,
+    "margines_min": 16.242
+   },
+   "B4": {
+    "ok": true,
+    "nav": {
+     "nav_poza_14": [],
+     "failsafe_max": 0,
+     "ok": true
+    },
+    "refuse_pos": 0,
+    "refuse_pos_falszywe": 0,
+    "refuse_pos_zgodne_z_regula": 0
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.508,
+    "frac_track": 1.0,
+    "frac_pasmo": 1.0,
+    "refuse_misja": 0
+   },
+   "a_poprawek": {
+    "n": 150,
+    "p95": 1.011,
+    "max": 1.0729,
+    "max_do_1_5F": 0.5782
+   },
+   "bias_kursu_par": {
+    "n": 145,
+    "p50": -1.112
+   },
+   "nad3_obserwable": {
+    "tau_misja": {
+     "p50": 0.516,
+     "p95": 0.9646,
+     "max": 1.02
+    },
+    "skok_delta": {
+     "n": 116,
+     "p50": 0.3646,
+     "p95": 0.7425,
+     "max": 0.9866
+    },
+    "n_pred_odrzut": 3,
+    "r_max_gt_misja_po_fladze": 15.758,
+    "max_e_do_U": 0.3576,
+    "refuse_misja": []
+   },
+   "bezpieczenstwo_ok": true
+  }
+ ],
+ "tabela_nad3": {
+  "punkt": "P1",
+  "E": 1.0,
+  "sha256_tabeli": "806f5e90c3dc5844c2870d4485b272c45f7816dff84e3e9d8bb77f143bfde722",
+  "tau_star": 1.15
+ },
+ "tempo": {
+  "aneks": "ANEKS_KONT-4d §1.3",
+  "dsim_dwall_settle": 0.9737,
+  "okno_wall_s": 60.0,
+  "n": 729,
+  "prog": 0.93,
+  "zrodlo": "rtf_stream.jsonl",
+  "ok": true
+ },
+ "bezpieczenstwo_ok": true,
+ "wazny": true
+}

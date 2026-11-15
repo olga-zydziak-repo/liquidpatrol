@@ -1,0 +1,367 @@
+{
+  "spec": "INFRA2-6/E1",
+  "instance": 0,
+  "px4_bin": "/home/olga/projects/liquidpatrol/PX4-Autopilot/build/px4_sitl_default/bin",
+  "params": {
+    "FFF_LATCH": 1024,
+    "BIAS_SLOW": 0.08,
+    "SLOW_AFTER_SIM": 60.0,
+    "SLOW_WIN_SIM": 30.0,
+    "FAST_CONSEC": 2,
+    "MAX_REINITS": 2,
+    "POLL_S": 5.0,
+    "bias_metric": "max_abs_axis"
+  },
+  "started_wall": 1794765336.274,
+  "samples": [
+    {
+      "wall": 1794765336.304,
+      "sim": 10.904,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.09272,
+        0.01818,
+        0.11462
+      ],
+      "bias_absmax": 0.11462,
+      "bias_norm": 0.148544
+    },
+    {
+      "wall": 1794765341.342,
+      "sim": 15.26,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.03401,
+        0.006,
+        0.06126
+      ],
+      "bias_absmax": 0.06126,
+      "bias_norm": 0.070324
+    },
+    {
+      "wall": 1794765346.377,
+      "sim": 20.22,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.01696,
+        0.00405,
+        0.01347
+      ],
+      "bias_absmax": 0.01696,
+      "bias_norm": 0.022034
+    },
+    {
+      "wall": 1794765351.412,
+      "sim": 25.14,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.01088,
+        0.00397,
+        0.00053
+      ],
+      "bias_absmax": 0.01088,
+      "bias_norm": 0.011594
+    },
+    {
+      "wall": 1794765356.448,
+      "sim": 30.036,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.007,
+        0.00279,
+        -0.00056
+      ],
+      "bias_absmax": 0.007,
+      "bias_norm": 0.007556
+    },
+    {
+      "wall": 1794765361.481,
+      "sim": 34.532,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00475,
+        0.00218,
+        -0.00069
+      ],
+      "bias_absmax": 0.00475,
+      "bias_norm": 0.005272
+    },
+    {
+      "wall": 1794765366.517,
+      "sim": 39.476,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00322,
+        0.00184,
+        -0.00039
+      ],
+      "bias_absmax": 0.00322,
+      "bias_norm": 0.003729
+    },
+    {
+      "wall": 1794765371.548,
+      "sim": 44.756,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00221,
+        0.00148,
+        -0.00019
+      ],
+      "bias_absmax": 0.00221,
+      "bias_norm": 0.002667
+    },
+    {
+      "wall": 1794765376.581,
+      "sim": 49.38,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00162,
+        0.00117,
+        -0.00012
+      ],
+      "bias_absmax": 0.00162,
+      "bias_norm": 0.002002
+    },
+    {
+      "wall": 1794765381.615,
+      "sim": 54.364,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00118,
+        0.00089,
+        -0.0001
+      ],
+      "bias_absmax": 0.00118,
+      "bias_norm": 0.001481
+    },
+    {
+      "wall": 1794765386.649,
+      "sim": 58.78,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00091,
+        0.00069,
+        -7e-05
+      ],
+      "bias_absmax": 0.00091,
+      "bias_norm": 0.001144
+    },
+    {
+      "wall": 1794765391.682,
+      "sim": 63.476,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.0007,
+        0.00051,
+        -8e-05
+      ],
+      "bias_absmax": 0.0007,
+      "bias_norm": 0.00087
+    },
+    {
+      "wall": 1794765396.717,
+      "sim": 68.452,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00054,
+        0.00038,
+        -8e-05
+      ],
+      "bias_absmax": 0.00054,
+      "bias_norm": 0.000665
+    },
+    {
+      "wall": 1794765401.752,
+      "sim": 73.452,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00043,
+        0.00029,
+        -9e-05
+      ],
+      "bias_absmax": 0.00043,
+      "bias_norm": 0.000526
+    },
+    {
+      "wall": 1794765406.785,
+      "sim": 78.452,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00035,
+        0.00023,
+        -9e-05
+      ],
+      "bias_absmax": 0.00035,
+      "bias_norm": 0.000428
+    },
+    {
+      "wall": 1794765411.821,
+      "sim": 83.452,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00029,
+        0.00018,
+        -7e-05
+      ],
+      "bias_absmax": 0.00029,
+      "bias_norm": 0.000348
+    },
+    {
+      "wall": 1794765416.854,
+      "sim": 88.452,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00025,
+        0.00014,
+        -7e-05
+      ],
+      "bias_absmax": 0.00025,
+      "bias_norm": 0.000295
+    },
+    {
+      "wall": 1794765421.889,
+      "sim": 93.452,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00021,
+        0.00012,
+        -7e-05
+      ],
+      "bias_absmax": 0.00021,
+      "bias_norm": 0.000252
+    },
+    {
+      "wall": 1794765426.925,
+      "sim": 98.452,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00019,
+        0.00011,
+        -8e-05
+      ],
+      "bias_absmax": 0.00019,
+      "bias_norm": 0.000234
+    },
+    {
+      "wall": 1794765431.958,
+      "sim": 103.456,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00017,
+        0.0001,
+        -8e-05
+      ],
+      "bias_absmax": 0.00017,
+      "bias_norm": 0.000213
+    },
+    {
+      "wall": 1794765436.996,
+      "sim": 108.536,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00017,
+        8e-05,
+        -2e-05
+      ],
+      "bias_absmax": 0.00017,
+      "bias_norm": 0.000189
+    },
+    {
+      "wall": 1794765442.03,
+      "sim": 112.872,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00013,
+        6e-05,
+        -9e-05
+      ],
+      "bias_absmax": 0.00013,
+      "bias_norm": 0.000169
+    },
+    {
+      "wall": 1794765447.067,
+      "sim": 117.912,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00014,
+        8e-05,
+        -8e-05
+      ],
+      "bias_absmax": 0.00014,
+      "bias_norm": 0.00018
+    },
+    {
+      "wall": 1794765452.1,
+      "sim": 122.952,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00011,
+        7e-05,
+        -9e-05
+      ],
+      "bias_absmax": 0.00011,
+      "bias_norm": 0.000158
+    },
+    {
+      "wall": 1794765457.136,
+      "sim": 127.992,
+      "fff": 0,
+      "fbav": 0,
+      "gyro_bias": [
+        -0.00011,
+        7e-05,
+        -8e-05
+      ],
+      "bias_absmax": 0.00011,
+      "bias_norm": 0.000153
+    }
+  ],
+  "reinits": [],
+  "n_reinits": 0,
+  "bias_max": 0.11462,
+  "bias_last": {
+    "wall": 1794765457.136,
+    "sim": 127.992,
+    "fff": 0,
+    "fbav": 0,
+    "gyro_bias": [
+      -0.00011,
+      7e-05,
+      -8e-05
+    ],
+    "bias_absmax": 0.00011,
+    "bias_norm": 0.000153
+  },
+  "first_fault_sim": {
+    "filter_fault_1024": null,
+    "fs_bad_acc_vertical": null
+  },
+  "n_poll_fail": 0,
+  "preflight_only": true,
+  "armed_sim": 132.66,
+  "stopped_reason": "ARMED_preflight_only"
+}

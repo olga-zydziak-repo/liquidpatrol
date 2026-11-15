@@ -1,0 +1,150 @@
+{
+ "pozycja": 10,
+ "rodzaj": "nominal",
+ "punkt": "P1",
+ "kierunek": "do_srodka",
+ "epizody": [
+  {
+   "episode_id": 1,
+   "scenario_id": "c01_s01",
+   "ciecie": false,
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true,
+    "B5": true
+   },
+   "D1": null,
+   "max_e_do_U": 0.0,
+   "e_corr": null,
+   "obserwable": {
+    "tau_misja": null,
+    "skok_delta": null,
+    "n_pred_odrzut": 1,
+    "r_max_gt_misja_po_fladze": 18.134,
+    "max_e_do_U": 0.0,
+    "refuse_misja": []
+   },
+   "r_max_gt_misja": 18.134,
+   "r_sr_gt_misja": 10.915,
+   "t_entry": 2.11,
+   "okno_misji_s": 72.12,
+   "akwizycja": true,
+   "B5_pusty": false
+  },
+  {
+   "episode_id": 2,
+   "scenario_id": "c02_s01",
+   "ciecie": false,
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true,
+    "B5": true
+   },
+   "D1": null,
+   "max_e_do_U": 0.0,
+   "e_corr": null,
+   "obserwable": {
+    "tau_misja": null,
+    "skok_delta": null,
+    "n_pred_odrzut": 1,
+    "r_max_gt_misja_po_fladze": 18.271,
+    "max_e_do_U": 0.0,
+    "refuse_misja": []
+   },
+   "r_max_gt_misja": 18.271,
+   "r_sr_gt_misja": 9.929,
+   "t_entry": 13.55,
+   "okno_misji_s": 83.56,
+   "akwizycja": true,
+   "B5_pusty": false
+  },
+  {
+   "episode_id": 5,
+   "scenario_id": "c05_s01",
+   "ciecie": false,
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true,
+    "B5": true
+   },
+   "D1": null,
+   "max_e_do_U": 0.0,
+   "e_corr": null,
+   "obserwable": {
+    "tau_misja": null,
+    "skok_delta": null,
+    "n_pred_odrzut": 1,
+    "r_max_gt_misja_po_fladze": 17.462,
+    "max_e_do_U": 0.0,
+    "refuse_misja": []
+   },
+   "r_max_gt_misja": 17.462,
+   "r_sr_gt_misja": 8.425,
+   "t_entry": 3.82,
+   "okno_misji_s": 73.82,
+   "akwizycja": true,
+   "B5_pusty": false
+  },
+  {
+   "episode_id": 10,
+   "scenario_id": "c10_s01",
+   "ciecie": false,
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true,
+    "B5": true
+   },
+   "D1": null,
+   "max_e_do_U": 0.0,
+   "e_corr": null,
+   "obserwable": {
+    "tau_misja": null,
+    "skok_delta": null,
+    "n_pred_odrzut": 1,
+    "r_max_gt_misja_po_fladze": 18.794,
+    "max_e_do_U": 0.0,
+    "refuse_misja": []
+   },
+   "r_max_gt_misja": 18.794,
+   "r_sr_gt_misja": 9.883,
+   "t_entry": 5.93,
+   "okno_misji_s": 75.93,
+   "akwizycja": true,
+   "B5_pusty": false
+  }
+ ],
+ "boot": "p10_p1_nom_srod_NB",
+ "wazny_analizator": true,
+ "replay_ok": true,
+ "meta_ok": true,
+ "decymacja_ok": true,
+ "decymacja": {
+  "dostarczone": 346,
+  "sloty_scisle_rosnace": true,
+  "odstep_t_fix": {
+   "min": 1.0,
+   "p50": 1.0,
+   "max": 1.0
+  },
+  "tau_max_misja": null,
+  "ok": true
+ },
+ "tempo": 0.9757,
+ "wazny": true,
+ "b1_nieocenione": {
+  "ticki_utraty": 0,
+  "nieocenione": 0,
+  "przyczyny": {}
+ },
+ "b1_nieocenione_w_misji": 0,
+ "wejscie": null,
+ "litera_ok": true
+}
