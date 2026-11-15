@@ -828,3 +828,10 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   i 1 Hz: dostępność do 1.37 m, bezpieczeństwo do 2.28 m.
 - Budżet ≤ 22 booty. Dopasowanie obrazu do mapy otwiera się dopiero
   z liczbami tej nogi jako bramką wejścia.
+
+## Dopisek stanu katalogu — 15.11.2026 (CO-NAD3-2)
+- **Obserwacja, pozycja nieotwarta: admisja celu stojącego.** Cel
+  nieruchomy oglądany z zawisu przy skanie kursem rzadko składa serię
+  trzech klatek detekcja ∧ ruch. Komórka c03 (kierunek 270°): 16.0 s
+  do blokady przy 15 m (NAD2), brak blokady w 40 s przy 10 m (NAD3).
+  Mechanizm niezmierzony. Otwarcie tylko decyzją Olgi.

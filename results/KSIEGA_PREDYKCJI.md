@@ -1179,3 +1179,19 @@ CLOSED-BY-RECON (0 bootów)
   w każdym z nich, a niezmiennik formatu jest asercją, nie zwyczajem.
 - Naprawa: pełna lista 120 epizodów, kod bez zmian. Bramka geometrii
   na 6 ważnych epizodach nominalnych; P-NAD3-1 rozlicza się na 6/6.
+
+## NADIR-III — ANEKS_NAD3-2 (15.11.2026): geometria po N2
+- Manifest v2 potwierdzony lotem. Bramka promienia: 5 epizodów
+  z misją, max 18.870 m (c10) przy progu 19.5 m. P-NAD3-1 ✓ na
+  promieniu, z zastrzeżeniem: c03 bez misji, wynik dla promienia pusty.
+- c03 w N2: brak akwizycji celu stojącego w 40 s (detekcja w 179
+  z 606 klatek, potwierdzenie ruchu w 18, przyjętych 0). W bramce NAD2
+  przy 15 m ta sama komórka blokowała ostatnia, po 16.0 s.
+  Bezpieczeństwo czyste w 8/8 epizodów obu nominałów.
+- ✗ CC bez predykcji: żadna z siedmiu predykcji PRE nie obejmowała
+  akwizycji. Ryzyko geometrii nazwane w PRE dotyczyło sieci, nie toru
+  admisji.
+- Lekcja: zmiana położenia celu ma dwóch odbiorców — sieć i tor
+  admisji; bramka sprawdza oba osobno.
+- Decyzja: c03 poza nominałami S3; cięcie bez wejścia nieważne dla
+  bramki i powtarzane z rezerwy.
