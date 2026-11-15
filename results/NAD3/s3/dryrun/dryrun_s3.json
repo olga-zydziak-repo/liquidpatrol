@@ -1,0 +1,613 @@
+{
+ "czesc1_plan": {
+  "rc": 0,
+  "plan": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14
+  ],
+  "pozycje": [
+   [
+    1,
+    "P1",
+    "na_zewnatrz",
+    "5",
+    "30"
+   ],
+   [
+    2,
+    "P1",
+    "na_zewnatrz",
+    "10",
+    "30"
+   ],
+   [
+    3,
+    "P1",
+    "do_srodka",
+    "5",
+    "30"
+   ],
+   [
+    4,
+    "P1",
+    "do_srodka",
+    "10",
+    "30"
+   ],
+   [
+    5,
+    "P1",
+    "na_zewnatrz",
+    "0,1,5,10",
+    "-"
+   ],
+   [
+    6,
+    "P2",
+    "na_zewnatrz",
+    "5",
+    "30"
+   ],
+   [
+    7,
+    "P2",
+    "na_zewnatrz",
+    "10",
+    "30"
+   ],
+   [
+    8,
+    "P2",
+    "do_srodka",
+    "5",
+    "30"
+   ],
+   [
+    9,
+    "P2",
+    "do_srodka",
+    "10",
+    "30"
+   ],
+   [
+    10,
+    "P1",
+    "do_srodka",
+    "1,2,5,10",
+    "-"
+   ],
+   [
+    11,
+    "P3",
+    "na_zewnatrz",
+    "5",
+    "30"
+   ],
+   [
+    12,
+    "P3",
+    "na_zewnatrz",
+    "10",
+    "30"
+   ],
+   [
+    13,
+    "P3",
+    "do_srodka",
+    "5",
+    "30"
+   ],
+   [
+    14,
+    "P3",
+    "do_srodka",
+    "10",
+    "30"
+   ]
+  ],
+  "PASS": true
+ },
+ "czesc2_straznik": {
+  "1": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "na_zewnatrz",
+    "E_max": 1.0,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "2": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "na_zewnatrz",
+    "E_max": 1.0,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "3": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "do_srodka",
+    "E_max": 1.0,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "4": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "do_srodka",
+    "E_max": 1.0,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "5": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "na_zewnatrz",
+    "E_max": 1.0,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "6": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "na_zewnatrz",
+    "E_max": 1.75,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "7": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "na_zewnatrz",
+    "E_max": 1.75,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "8": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "do_srodka",
+    "E_max": 1.75,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "9": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "do_srodka",
+    "E_max": 1.75,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "10": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "do_srodka",
+    "E_max": 1.0,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "11": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "na_zewnatrz",
+    "E_max": 2.75,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "12": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "na_zewnatrz",
+    "E_max": 2.75,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "13": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "do_srodka",
+    "E_max": 2.75,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "14": {
+   "rc": 5,
+   "do_profilu": true,
+   "NAD3_DEGRAD": {
+    "model": "bias_rad",
+    "kierunek": "do_srodka",
+    "E_max": 2.75,
+    "f": 1,
+    "K": 0,
+    "ziarno": 1
+   },
+   "cfg_ok": true,
+   "ok": true
+  },
+  "PASS": true
+ },
+ "czesc3_intruz": {
+  "pary": {
+   "1/5": {
+    "driver": "c05_s01",
+    "intruz": "c05_s01",
+    "zgodne": true
+   },
+   "2/10": {
+    "driver": "c10_s01",
+    "intruz": "c10_s01",
+    "zgodne": true
+   },
+   "3/5": {
+    "driver": "c05_s01",
+    "intruz": "c05_s01",
+    "zgodne": true
+   },
+   "4/10": {
+    "driver": "c10_s01",
+    "intruz": "c10_s01",
+    "zgodne": true
+   },
+   "5/0": {
+    "driver": "c00_s01",
+    "intruz": "c00_s01",
+    "zgodne": true
+   },
+   "5/1": {
+    "driver": "c01_s01",
+    "intruz": "c01_s01",
+    "zgodne": true
+   },
+   "5/5": {
+    "driver": "c05_s01",
+    "intruz": "c05_s01",
+    "zgodne": true
+   },
+   "5/10": {
+    "driver": "c10_s01",
+    "intruz": "c10_s01",
+    "zgodne": true
+   },
+   "6/5": {
+    "driver": "c05_s01",
+    "intruz": "c05_s01",
+    "zgodne": true
+   },
+   "7/10": {
+    "driver": "c10_s01",
+    "intruz": "c10_s01",
+    "zgodne": true
+   },
+   "8/5": {
+    "driver": "c05_s01",
+    "intruz": "c05_s01",
+    "zgodne": true
+   },
+   "9/10": {
+    "driver": "c10_s01",
+    "intruz": "c10_s01",
+    "zgodne": true
+   },
+   "10/1": {
+    "driver": "c01_s01",
+    "intruz": "c01_s01",
+    "zgodne": true
+   },
+   "10/2": {
+    "driver": "c02_s01",
+    "intruz": "c02_s01",
+    "zgodne": true
+   },
+   "10/5": {
+    "driver": "c05_s01",
+    "intruz": "c05_s01",
+    "zgodne": true
+   },
+   "10/10": {
+    "driver": "c10_s01",
+    "intruz": "c10_s01",
+    "zgodne": true
+   },
+   "11/5": {
+    "driver": "c05_s01",
+    "intruz": "c05_s01",
+    "zgodne": true
+   },
+   "12/10": {
+    "driver": "c10_s01",
+    "intruz": "c10_s01",
+    "zgodne": true
+   },
+   "13/5": {
+    "driver": "c05_s01",
+    "intruz": "c05_s01",
+    "zgodne": true
+   },
+   "14/10": {
+    "driver": "c10_s01",
+    "intruz": "c10_s01",
+    "zgodne": true
+   }
+  },
+  "PASS": true
+ },
+ "czesc4_reguly": {
+  "scenariusze": {
+   "wszystko_wazne": {
+    "stop": null,
+    "booty": 14,
+    "rezerwa": 0,
+    "loty": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14
+    ]
+   },
+   "naruszenie_poz2": {
+    "stop": "STOP-NAD3-3-VC",
+    "booty": 2,
+    "rezerwa": 0,
+    "loty": [
+     1,
+     2
+    ]
+   },
+   "przyrzad_poz6": {
+    "stop": "STOP-NAD3-3-PRZYRZAD",
+    "booty": 6,
+    "rezerwa": 0,
+    "loty": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "bez_wejscia_poz1_raz": {
+    "stop": null,
+    "booty": 15,
+    "rezerwa": 1,
+    "loty": [
+     1,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14
+    ]
+   },
+   "rezerwa_czwarta": {
+    "stop": "STOP-NAD3-3-REZERWA",
+    "booty": 15,
+    "rezerwa": 4,
+    "loty": [
+     1,
+     2,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     12
+    ]
+   },
+   "stanowisko_w_locie": {
+    "stop": null,
+    "booty": 15,
+    "rezerwa": 1,
+    "loty": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14
+    ]
+   },
+   "P1_2_z_4": {
+    "stop": "STOP-NAD3-3-P1",
+    "booty": 4,
+    "rezerwa": 0,
+    "loty": [
+     1,
+     2,
+     3,
+     4
+    ]
+   },
+   "P1_3_z_4": {
+    "stop": null,
+    "booty": 14,
+    "rezerwa": 0,
+    "loty": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11,
+     12,
+     13,
+     14
+    ]
+   },
+   "procesy": {
+    "stop": "STOP-NAD3-3-PROCESY",
+    "booty": 0,
+    "rezerwa": 0,
+    "loty": []
+   }
+  },
+  "ok": {
+   "wszystko_wazne": true,
+   "naruszenie_poz2": true,
+   "przyrzad_poz6": true,
+   "bez_wejscia_poz1_raz": true,
+   "rezerwa_czwarta": true,
+   "stanowisko_w_locie": true,
+   "P1_2_z_4": true,
+   "P1_3_z_4": true,
+   "procesy": true
+  },
+  "PASS": true
+ },
+ "czesc5_sedzia": {
+  "b4_c05_p1_na_zewnatrz": {
+   "wazny": true,
+   "replay_ok": true,
+   "meta_ok": true,
+   "decymacja_ok": true,
+   "litera_ok": true,
+   "wejscie": true,
+   "D1_dostepne": true,
+   "ok": true
+  },
+  "b3_c05_bez_degradacji": {
+   "wazny": false,
+   "replay_ok": true,
+   "meta_ok": false,
+   "decymacja_ok": false,
+   "litera_ok": true,
+   "wejscie": true,
+   "D1_dostepne": true,
+   "ok": true
+  },
+  "PASS": true
+ },
+ "PASS": true
+}
