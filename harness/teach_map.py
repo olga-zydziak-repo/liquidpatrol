@@ -29,6 +29,9 @@ Trzy fazy (PROMPT_TEACH_S1 §1.1):
                wysokości i kwadrat klatki kluczowej z wysokości, na której powstała; część wspólna / pole kwadratu kadru).
 Przed pierwszą przyjętą poprawką Δ = 0 i t_fix datagramu = None (osłona liczy τ od wejścia w utratę, pole braku poprawki).
 Obraz wejściowy: BGR (jak render reconu z cv2.imread); proces nadir_obs konwertuje RGB z gz do BGR.
+PROMPT_TEACH_S2 §1 (TEACH-S2): F2 — klatka w utracie przy mapie bez żadnego kadru nie zamyka mapy (bufor pusty albo kadr z bufora
+z czasem ≥ chwila flagi — odrzucony), wiersz ma fazę „przed_mapa”; zamknięcie raz, przy pierwszej klatce w utracie z mapą niepustą.
+F3 — rejestr zamknięcia (georef) niesie pełną listę wiązań [czas kadru, klatka kluczowa, r_E, r_N, zgodne, przyjęte].
 """
 from __future__ import annotations
 
@@ -231,7 +234,8 @@ class Producent:
                        "kf": [{"k": k, "sim": round(y["sim"], 3), "cam_ekf": [round(float(v), 4) for v in y["cam_ekf"]],
                                "a": round(float(y["a"]), 4), "theta_deg": round(math.degrees(float(self.G[k, 0])), 6),
                                "t": [round(float(v), 6) for v in self.G[k, 1:]],
-                               "n_wiazan": sum(1 for w in wz if w[1] == k and w[5])} for k, y in enumerate(self.kf)]}
+                               "n_wiazan": sum(1 for w in wz if w[1] == k and w[5])} for k, y in enumerate(self.kf)],
+                       "wiazania": [w[:6] for w in wz]}                                     # TEACH-S2 F3
         return self.georef
 
     # --- lokalizacja
@@ -303,6 +307,16 @@ class Producent:
             rec["powod"] = "mapa"
             self.rejestr = reg
             return self._stan(rec)
+        if not self.zamknieta:                                  # TEACH-S2 F2: pusta mapa się nie zamyka
+            tf = float(t_flagi) if t_flagi is not None else float(t_frame)
+            if not self.kadry and not (self.bufor is not None and self.bufor["sim"] < tf):
+                reg = {"faza": "przed_mapa"}
+                if self.bufor is not None:
+                    reg["odrzucony_z_bufora"] = round(self.bufor["sim"], 4)
+                self.bufor = None
+                rec["powod"] = "przed_mapa"
+                self.rejestr = reg
+                return self._stan(rec)
         reg = {"faza": "lok"}
         if not self.zamknieta:                                  # pierwsza klatka przy fladze 0: zamknięcie mapy
             tz0 = time.perf_counter()

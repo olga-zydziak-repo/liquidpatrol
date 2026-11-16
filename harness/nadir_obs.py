@@ -31,6 +31,9 @@ TEACH_MODE z niepustym NAD3_DEGRAD ⇒ odmowa startu kodem 47. Tryb cienia TEACH
 wymagana, inaczej kod 48) zastępuje flagę (flaga = sim < TEACH_T_CIEN), datagram niewysyłany, wynik tylko w rejestrze.
 Opcjonalna stała maska obrazu TEACH_MASKA (plik obrazu W × H, 0 = piksel pominięty), domyślnie brak. Bez TEACH_MODE datagram,
 wiersz i meta bajtowo jak dotąd.
+PROMPT_TEACH_S2 §1 F1 (TEACH-S2): chwila flagi = czas OSTATNIEGO spadku cs_gnss_pos z 1 na 0 (pierwsza wiadomość z 0 bez
+wcześniejszej 1 nie jest spadkiem); powrót flagi do 1 przed zamknięciem mapy kasuje zatrzask; przed pierwszą wiadomością flaga
+nieznana (None). W trybie cienia wiersz niesie też flagę rzeczywistą i stan zatrzasku ("gnss_rz", "t_flagi_rz"), tylko do rejestru.
 Użycie: nadir_obs.py --world W --model M --out plik.jsonl
 """
 import argparse
@@ -191,6 +194,8 @@ def worker():
             row["fx"] = fx
             row["teach"] = _prod.rejestr
             row["gnss"], row["t_flagi"] = gn["cs"], gn["t_flagi"]
+            if TEACH_CIEN:                                     # TEACH-S2 F1: flaga rzeczywista i zatrzask (rejestr)
+                row["gnss_rz"], row["t_flagi_rz"] = gn["cs_rz"], gn["t_flagi_rz"]
         elif NADIR_MODE:                                       # PROMPT_NADIR_S2 §1.1
             fx = _rama.obserwacja(sim, det, ekf["ekf_q"], ekf["ekf_pos"])
             fxw = _deg.przetworz(fx)                           # NAD3: wyłączona ⇒ fxw is fx
@@ -203,6 +208,16 @@ def worker():
         if time.monotonic() - _hb[0] >= 15.0:                  # PROMPT_NADIR_S2 §1.6: summary okresowo (przeżywa SIGKILL)
             _hb[0] = time.monotonic()
             zapisz_summary("heartbeat")
+
+
+def teach_flaga(cs, t_s):
+    """TEACH-S2 F1: chwila flagi = czas ostatniego spadku cs_gnss_pos z 1 na 0 (pierwsze 0 bez wcześniejszej 1 nie jest spadkiem);
+    powrót do 1 przed zamknięciem mapy kasuje zatrzask; przed pierwszą wiadomością flaga nieznana (None)."""
+    if not cs and _gnss["cs"] is True:
+        _gnss["t_flagi"] = round(float(t_s), 6)
+    elif cs and not _prod.zamknieta:
+        _gnss["t_flagi"] = None
+    _gnss["cs"] = bool(cs)
 
 
 def on_img(m):
@@ -218,7 +233,7 @@ def on_img(m):
     if TEACH_MODE:                                            # TEACH: BGR (render reconu = cv2.imread) i flaga przy klatce
         bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR) if ch == 3 else cv2.cvtColor(img[:, :, 0], cv2.COLOR_GRAY2BGR)
         if TEACH_CIEN:
-            gn = {"cs": sim < T_CIEN, "t_flagi": T_CIEN}
+            gn = {"cs": sim < T_CIEN, "t_flagi": T_CIEN, "cs_rz": _gnss["cs"], "t_flagi_rz": _gnss["t_flagi"]}   # TEACH-S2 F1
         else:
             gn = dict(_gnss)
         item = item + (bgr, gn)
@@ -253,11 +268,8 @@ def main():
         _ekf["hdg"] = round(float(m.heading), 5)
         _ekf["pos_mono"] = time.monotonic()
 
-    def on_flags(m):                                          # TEACH: cs_gnss_pos; chwila flagi = pierwsza wiadomość z 0
-        cs = bool(m.cs_gnss_pos)
-        if not cs and _gnss["t_flagi"] is None:
-            _gnss["t_flagi"] = round(m.timestamp / 1e6, 6)
-        _gnss["cs"] = cs
+    def on_flags(m):                                          # TEACH-S2 F1
+        teach_flaga(bool(m.cs_gnss_pos), m.timestamp / 1e6)
 
     _meta = {"t": "meta", "topic": TOPIC, "opencv": cv2.__version__, "slownik": "DICT_4X4_50", "flip": FLIP,
              "mono": round(time.monotonic(), 4)}
