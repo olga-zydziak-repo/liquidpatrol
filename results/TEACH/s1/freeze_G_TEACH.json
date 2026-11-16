@@ -1,0 +1,180 @@
+{
+ "krawedzie_tau_s": [
+  0.35,
+  0.55,
+  0.75,
+  0.95,
+  1.15,
+  1.35,
+  1.55,
+  1.75,
+  1.95,
+  2.15
+ ],
+ "G": [
+  0.8573,
+  1.2703,
+  1.6614,
+  2.059,
+  2.3471,
+  2.5715,
+  2.7572,
+  2.8929,
+  3.1498,
+  3.3315
+ ],
+ "G_CC": [
+  0.8573,
+  1.2703,
+  1.6614,
+  2.059,
+  2.3471,
+  2.5715,
+  2.7572,
+  2.8929,
+  3.1498,
+  3.3315
+ ],
+ "roznica": [
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tolerancja": 0.01,
+ "n_lotow": 38,
+ "G_25_lotow": [
+  0.8573,
+  1.2703,
+  1.6614,
+  2.059,
+  2.3471,
+  2.5715,
+  2.7572,
+  2.8929,
+  3.1498,
+  3.3315
+ ],
+ "nad3_podnosi_pole": [
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false
+ ],
+ "loty": [
+  "NADIR_S4/c01_s01_r4",
+  "NADIR_S4/c01_s03",
+  "NADIR_S4/c02_s01",
+  "NADIR_S4/c02_s03",
+  "NADIR_S4/c05_s01",
+  "NADIR_S4/c05_s02",
+  "NADIR_S4/c08_s01",
+  "NADIR_S4/c08_s02",
+  "NADIR_S4/c10_s01",
+  "NADIR_S4/c10_s02",
+  "NADIR_S4/c11_s01",
+  "NADIR_S4/c11_s02",
+  "NAD2/c01_s01",
+  "NAD2/c01_s03_r2",
+  "NAD2/c02_s01",
+  "NAD2/c02_s03",
+  "NAD2/c05_s01_r2",
+  "NAD2/c05_s02",
+  "NAD2/c08_s01",
+  "NAD2/c08_s02",
+  "NAD2/c10_s01",
+  "NAD2/c10_s02",
+  "NAD2/c11_s01",
+  "NAD2/c11_s02",
+  "NAD2/L_c10_s01",
+  "NAD3_S3/p01_p1_c05_zew",
+  "NAD3_S3/p02_p1_c10_zew",
+  "NAD3_S3/p03_p1_c05_srod_r2",
+  "NAD3_S3/p04_p1_c10_srod",
+  "NAD3_S3/p06_p2_c05_zew",
+  "NAD3_S3/p07_p2_c10_zew",
+  "NAD3_S3/p08_p2_c05_srod",
+  "NAD3_S3/p09_p2_c10_srod",
+  "NAD3_S3/p11_p3_c05_zew",
+  "NAD3_S3/p12_p3_c10_zew",
+  "NAD3_S3/p13_p3_c05_srod",
+  "NAD3_S3/p14_p3_c10_srod",
+  "NAD3_S2/b4_c05_p1_na_zewnatrz"
+ ],
+ "argmax": {
+  "0.35": {
+   "lot": "NADIR_S4/c08_s01",
+   "tau_prim": 0.35
+  },
+  "0.55": {
+   "lot": "NADIR_S4/c08_s01",
+   "tau_prim": 0.55
+  },
+  "0.75": {
+   "lot": "NAD2/L_c10_s01",
+   "tau_prim": 0.75
+  },
+  "0.95": {
+   "lot": "NAD2/L_c10_s01",
+   "tau_prim": 0.95
+  },
+  "1.15": {
+   "lot": "NAD2/L_c10_s01",
+   "tau_prim": 1.15
+  },
+  "1.35": {
+   "lot": "NAD2/L_c10_s01",
+   "tau_prim": 1.35
+  },
+  "1.55": {
+   "lot": "NAD2/L_c10_s01",
+   "tau_prim": 1.55
+  },
+  "1.75": {
+   "lot": "NAD2/L_c10_s01",
+   "tau_prim": 1.75
+  },
+  "1.95": {
+   "lot": "NAD2/L_c10_s01",
+   "tau_prim": 1.95
+  },
+  "2.15": {
+   "lot": "NAD2/L_c10_s01",
+   "tau_prim": 2.15
+  }
+ },
+ "okno": "[flaga cs_gnss_pos → 0, zejście planowe], siatka 0.01 s, poziomo, maksimum bieżące po τ′ ≤ krawędź",
+ "sprawdzian_PRE_4": {
+  "bariery": [
+   24.84,
+   24.2205,
+   23.6339,
+   23.0375,
+   22.6053,
+   22.2687,
+   21.9902,
+   21.7866,
+   21.4013,
+   21.1287
+  ],
+  "u_max": 8.0213,
+  "wykonalne": true,
+  "E_d_tau_star": 1.0515,
+  "E_s_tau_star": 1.7525,
+  "E_d_0": 2.536,
+  "E_s_0": 4.2267,
+  "ok": true
+ }
+}

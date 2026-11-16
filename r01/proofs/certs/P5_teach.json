@@ -1,0 +1,76 @@
+{
+  "property": "P5_teach",
+  "verdict": "PASS",
+  "method": "per-tick konformancja: lustro (p9_nad2_verify.mirror_step_nad2 ze stałymi tabeli TEACH) ≡ r03/nadir_shield.NadirShield (nadir_mode=1, nad3, tabela TEACH) na siatce brzegów i fuzzie z 10 przedziałami + tau_kont (P1) ≡ produkcja; obligacja wejścia na ścieżce drivera (nad3_krok.krok) na fiksturze 13 lotów × 3 łaty ze strumieniem poprawek mapy, mutant bez poprawki; przejścia ramy; passthrough NADIR_MODE=0 z nad3 ≡ KontShield pełnym dictem; mutant krawędzi tabeli wykryty",
+  "z3_lib": "5.0.0",
+  "tabele": {
+    "TEACH": {
+      "ok": true,
+      "ticks": {
+        "grid": 830,
+        "fuzz": 1383996,
+        "fixture": 139884,
+        "tau": 41489,
+        "passthrough": 164896
+      },
+      "missing": [],
+      "coverage_n": 117,
+      "obligacja_wejscia": {
+        "ticki_utraty": 112644,
+        "ticki_nominal": 27240,
+        "r_est_zly": 0,
+        "applied_zly": 0,
+        "bramka_zla": 0,
+        "max_dr": 0.0,
+        "PASS": true
+      },
+      "mutant_czysta_rama": {
+        "ticki_utraty": 112644,
+        "ticki_nominal": 27240,
+        "r_est_zly": 112599,
+        "applied_zly": 0,
+        "bramka_zla": 112599,
+        "max_dr": 17.505312885,
+        "PASS": false
+      },
+      "mutant_wykryty": true,
+      "przejscia_ok": true,
+      "przejscia": {
+        "wejscie": [
+          {
+            "k": 4,
+            "rama": "corr",
+            "r_est": 6.082762530298219,
+            "r_corr": 6.082762530298219
+          }
+        ],
+        "wyjscie": [
+          {
+            "k": 106,
+            "rama": "ekf",
+            "r_est": 4.47213595499958,
+            "r_ekf": 4.47213595499958
+          }
+        ]
+      },
+      "tabela_sha256": "7a56ba1b95f206415709d88595f868e07577d94bbeacc56f8065df9831688642",
+      "wariant_K": "K",
+      "n_lotow_fikstury": 39
+    }
+  },
+  "ostrosc_mutanty_tabeli": {
+    "kraw2_0_80": {
+      "odrzucony": true,
+      "przez": "rozbieżność konformancji lustro ≠ produkcja"
+    }
+  },
+  "fuzz": {
+    "episodes_per_tabela": 34000,
+    "tau_bound_per_tabela": 1000,
+    "seed": 7,
+    "passthrough_per_tabela": 4250
+  },
+  "fixture": "13 lotów reconu TEACH (12 cięć NAD3 S3 + L_c10_s01) × łaty S, M, J: wejścia z rama.jsonl + tk + demo; strumień poprawek mapy z W2/W4 (results/TEACH/tools/teach_strumien.py) dostarczany w miejscu seq datagramu lotu",
+  "binds": "P7_teach (lustro monitora i zegara τ), P9_teach (założenie r_est = |p_corr|)",
+  "model_sha256": "1e4b7ecadae24db022186d06df6fc744f9d42e42bb51281ecaf76cce4df8a1ba"
+}

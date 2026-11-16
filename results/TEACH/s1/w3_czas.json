@@ -1,0 +1,253 @@
+{
+ "wariant_K": "K",
+ "rdzen": "3",
+ "cv2": "4.6.0",
+ "python": "3.12.3",
+ "interpreter": "/usr/bin/python3",
+ "zgodne_z_reconem": true,
+ "polecenie": "taskset -c 3 python3 /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_w2.py --wariant K --procesy 1 --laty S --wyj /tmp/teach_w3_go4_5dre",
+ "zamkniecie_ms": {
+  "max": 97.07,
+  "p50": 82.2,
+  "wymog": 500.0,
+  "spelniony": true
+ },
+ "opoznienie_pierwszej_poprawki_s": {
+  "max": 0.188,
+  "min": 0.004
+ },
+ "kadr_mapa_ms": {
+  "p50_max": 41.01,
+  "p95_max": 52.01,
+  "max": 161.79
+ },
+ "kadr_lokalizacja_ms": {
+  "p50_max": 33.49,
+  "p95_max": 40.11,
+  "max": 64.99
+ },
+ "per_lot": {
+  "L_c10_s01": {
+   "ms_mapa": {
+    "p50": 37.43,
+    "p95": 51.18,
+    "max": 146.88
+   },
+   "ms_lok": {
+    "p50": 28.06,
+    "p95": 34.31,
+    "max": 44.99
+   },
+   "ms_od_flagi_do_georef": 93.28,
+   "ms_wiazania_przy_zamknieciu": 5.8,
+   "ms_rozwiazanie": 42.04,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.1
+  },
+  "p01_p1_c05_zew": {
+   "ms_mapa": {
+    "p50": 33.62,
+    "p95": 39.51,
+    "max": 127.21
+   },
+   "ms_lok": {
+    "p50": 27.13,
+    "p95": 32.21,
+    "max": 40.39
+   },
+   "ms_od_flagi_do_georef": 74.22,
+   "ms_wiazania_przy_zamknieciu": 3.84,
+   "ms_rozwiazanie": 34.3,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.112
+  },
+  "p02_p1_c10_zew": {
+   "ms_mapa": {
+    "p50": 34.29,
+    "p95": 41.29,
+    "max": 76.69
+   },
+   "ms_lok": {
+    "p50": 25.19,
+    "p95": 30.87,
+    "max": 33.83
+   },
+   "ms_od_flagi_do_georef": 87.85,
+   "ms_wiazania_przy_zamknieciu": 9.67,
+   "ms_rozwiazanie": 40.56,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.088
+  },
+  "p03_p1_c05_srod_r2": {
+   "ms_mapa": {
+    "p50": 35.23,
+    "p95": 42.07,
+    "max": 151.0
+   },
+   "ms_lok": {
+    "p50": 26.46,
+    "p95": 31.32,
+    "max": 36.67
+   },
+   "ms_od_flagi_do_georef": 73.88,
+   "ms_wiazania_przy_zamknieciu": 3.75,
+   "ms_rozwiazanie": 32.51,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.18
+  },
+  "p04_p1_c10_srod": {
+   "ms_mapa": {
+    "p50": 33.43,
+    "p95": 46.06,
+    "max": 80.07
+   },
+   "ms_lok": {
+    "p50": 25.81,
+    "p95": 33.94,
+    "max": 46.8
+   },
+   "ms_od_flagi_do_georef": 76.98,
+   "ms_wiazania_przy_zamknieciu": 3.85,
+   "ms_rozwiazanie": 35.34,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.156
+  },
+  "p06_p2_c05_zew": {
+   "ms_mapa": {
+    "p50": 41.01,
+    "p95": 52.01,
+    "max": 135.13
+   },
+   "ms_lok": {
+    "p50": 27.71,
+    "p95": 33.64,
+    "max": 47.75
+   },
+   "ms_od_flagi_do_georef": 86.33,
+   "ms_wiazania_przy_zamknieciu": 4.32,
+   "ms_rozwiazanie": 34.0,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.076
+  },
+  "p07_p2_c10_zew": {
+   "ms_mapa": {
+    "p50": 39.3,
+    "p95": 51.7,
+    "max": 113.97
+   },
+   "ms_lok": {
+    "p50": 33.49,
+    "p95": 40.11,
+    "max": 48.8
+   },
+   "ms_od_flagi_do_georef": 85.74,
+   "ms_wiazania_przy_zamknieciu": 4.78,
+   "ms_rozwiazanie": 38.74,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.176
+  },
+  "p08_p2_c05_srod": {
+   "ms_mapa": {
+    "p50": 37.12,
+    "p95": 50.73,
+    "max": 156.16
+   },
+   "ms_lok": {
+    "p50": 28.35,
+    "p95": 36.36,
+    "max": 47.76
+   },
+   "ms_od_flagi_do_georef": 97.07,
+   "ms_wiazania_przy_zamknieciu": 4.16,
+   "ms_rozwiazanie": 36.33,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.004
+  },
+  "p09_p2_c10_srod": {
+   "ms_mapa": {
+    "p50": 32.34,
+    "p95": 39.49,
+    "max": 161.79
+   },
+   "ms_lok": {
+    "p50": 26.29,
+    "p95": 30.47,
+    "max": 37.46
+   },
+   "ms_od_flagi_do_georef": 82.2,
+   "ms_wiazania_przy_zamknieciu": 4.52,
+   "ms_rozwiazanie": 37.96,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.016
+  },
+  "p11_p3_c05_zew": {
+   "ms_mapa": {
+    "p50": 33.34,
+    "p95": 38.61,
+    "max": 118.7
+   },
+   "ms_lok": {
+    "p50": 25.53,
+    "p95": 30.35,
+    "max": 34.83
+   },
+   "ms_od_flagi_do_georef": 67.23,
+   "ms_wiazania_przy_zamknieciu": 3.99,
+   "ms_rozwiazanie": 29.1,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.188
+  },
+  "p12_p3_c10_zew": {
+   "ms_mapa": {
+    "p50": 34.17,
+    "p95": 45.69,
+    "max": 107.49
+   },
+   "ms_lok": {
+    "p50": 30.61,
+    "p95": 39.6,
+    "max": 64.99
+   },
+   "ms_od_flagi_do_georef": 83.54,
+   "ms_wiazania_przy_zamknieciu": 4.24,
+   "ms_rozwiazanie": 36.86,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.136
+  },
+  "p13_p3_c05_srod": {
+   "ms_mapa": {
+    "p50": 34.33,
+    "p95": 41.24,
+    "max": 150.66
+   },
+   "ms_lok": {
+    "p50": 26.64,
+    "p95": 31.99,
+    "max": 39.5
+   },
+   "ms_od_flagi_do_georef": 71.77,
+   "ms_wiazania_przy_zamknieciu": 3.62,
+   "ms_rozwiazanie": 31.08,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.18
+  },
+  "p14_p3_c10_srod": {
+   "ms_mapa": {
+    "p50": 32.07,
+    "p95": 41.9,
+    "max": 78.26
+   },
+   "ms_lok": {
+    "p50": 25.38,
+    "p95": 31.25,
+    "max": 43.27
+   },
+   "ms_od_flagi_do_georef": 73.88,
+   "ms_wiazania_przy_zamknieciu": 4.28,
+   "ms_rozwiazanie": 32.64,
+   "n_dop_pozno": 0,
+   "opoznienie_pierwszej_poprawki_s": 0.012
+  }
+ },
+ "uwaga": "kadr mapy: decyzja klatki kluczowej + prostowanie + cechy SIFT + dopasowania wyprzedzające (w buforze jednej klatki koszt przypada na następną klatkę); kadr lokalizacji: prostowanie + cechy + do 3 dopasowań; zamknięcie: zbiór wiązań z bufora dopasowań + Gauss–Newton M4 + włączenie kadru z bufora"
+}

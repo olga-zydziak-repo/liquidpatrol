@@ -1,0 +1,286 @@
+{
+ "regula": "PRE_TEACH §6 S1: K′ ⇔ ∀ grupa: Δmax błąd ≤ 0.02 m ∧ max przerwa nie rośnie ∧ #przerw > 1.15 s nie rośnie; ∧ ∃ grupa: max przerwa albo #przerw > 1.15 s maleje",
+ "grupy": {
+  "S/12_ciec": {
+   "K": {
+    "n_lotow": 12,
+    "blad_max": 0.7324,
+    "blad_p95": 0.5297,
+    "udz_przyj": 0.9986,
+    "przerwa_max": 1.4,
+    "przerwy_gt_115": 1
+   },
+   "K′": {
+    "n_lotow": 12,
+    "blad_max": 0.7989,
+    "blad_p95": 0.548,
+    "udz_przyj": 1.0,
+    "przerwa_max": 0.2,
+    "przerwy_gt_115": 0
+   },
+   "warunki": {
+    "blad": false,
+    "przerwa": true,
+    "n_przerw": true
+   },
+   "maleje": true,
+   "przerwy_K": [
+    {
+     "od": 58.09,
+     "s": 1.4,
+     "pokrycie_max": 0.277,
+     "w_mapie": false
+    }
+   ],
+   "przerwy_K′": []
+  },
+  "S/lot_dlugi": {
+   "K": {
+    "n_lotow": 1,
+    "blad_max": 0.8462,
+    "blad_p95": 0.3895,
+    "udz_przyj": 0.9813,
+    "przerwa_max": 2.4,
+    "przerwy_gt_115": 6
+   },
+   "K′": {
+    "n_lotow": 1,
+    "blad_max": 0.8462,
+    "blad_p95": 0.4478,
+    "udz_przyj": 0.9867,
+    "przerwa_max": 5.6,
+    "przerwy_gt_115": 2
+   },
+   "warunki": {
+    "blad": true,
+    "przerwa": false,
+    "n_przerw": true
+   },
+   "maleje": true,
+   "przerwy_K": [
+    {
+     "od": 65.5,
+     "s": 1.2,
+     "pokrycie_max": 0.32,
+     "w_mapie": false
+    },
+    {
+     "od": 94.1,
+     "s": 1.4,
+     "pokrycie_max": 0.175,
+     "w_mapie": false
+    },
+    {
+     "od": 250.3,
+     "s": 2.4,
+     "pokrycie_max": 0.221,
+     "w_mapie": false
+    },
+    {
+     "od": 279.3,
+     "s": 1.8,
+     "pokrycie_max": 0.284,
+     "w_mapie": false
+    },
+    {
+     "od": 464.7,
+     "s": 1.4,
+     "pokrycie_max": 0.309,
+     "w_mapie": false
+    },
+    {
+     "od": 490.7,
+     "s": 2.2,
+     "pokrycie_max": 0.044,
+     "w_mapie": false
+    }
+   ],
+   "przerwy_K′": [
+    {
+     "od": 91.1,
+     "s": 2.2,
+     "pokrycie_max": 0.059,
+     "w_mapie": false
+    },
+    {
+     "od": 488.9,
+     "s": 5.6,
+     "pokrycie_max": 0.125,
+     "w_mapie": false
+    }
+   ]
+  },
+  "M/12_ciec": {
+   "K": {
+    "n_lotow": 12,
+    "blad_max": 0.7525,
+    "blad_p95": 0.5371,
+    "udz_przyj": 1.0,
+    "przerwa_max": 0.2,
+    "przerwy_gt_115": 0
+   },
+   "K′": {
+    "n_lotow": 12,
+    "blad_max": 0.8237,
+    "blad_p95": 0.5561,
+    "udz_przyj": 1.0,
+    "przerwa_max": 0.2,
+    "przerwy_gt_115": 0
+   },
+   "warunki": {
+    "blad": false,
+    "przerwa": true,
+    "n_przerw": true
+   },
+   "maleje": false,
+   "przerwy_K": [],
+   "przerwy_K′": []
+  },
+  "M/lot_dlugi": {
+   "K": {
+    "n_lotow": 1,
+    "blad_max": 0.9457,
+    "blad_p95": 0.3897,
+    "udz_przyj": 0.989,
+    "przerwa_max": 2.2,
+    "przerwy_gt_115": 3
+   },
+   "K′": {
+    "n_lotow": 1,
+    "blad_max": 0.9328,
+    "blad_p95": 0.4383,
+    "udz_przyj": 0.9883,
+    "przerwa_max": 5.2,
+    "przerwy_gt_115": 2
+   },
+   "warunki": {
+    "blad": true,
+    "przerwa": false,
+    "n_przerw": true
+   },
+   "maleje": true,
+   "przerwy_K": [
+    {
+     "od": 94.1,
+     "s": 1.2,
+     "pokrycie_max": 0.162,
+     "w_mapie": false
+    },
+    {
+     "od": 250.3,
+     "s": 2.2,
+     "pokrycie_max": 0.206,
+     "w_mapie": false
+    },
+    {
+     "od": 490.7,
+     "s": 1.8,
+     "pokrycie_max": 0.029,
+     "w_mapie": false
+    }
+   ],
+   "przerwy_K′": [
+    {
+     "od": 91.1,
+     "s": 2.2,
+     "pokrycie_max": 0.059,
+     "w_mapie": false
+    },
+    {
+     "od": 489.1,
+     "s": 5.2,
+     "pokrycie_max": 0.113,
+     "w_mapie": false
+    }
+   ]
+  },
+  "J/12_ciec": {
+   "K": {
+    "n_lotow": 12,
+    "blad_max": 0.7083,
+    "blad_p95": 0.5333,
+    "udz_przyj": 1.0,
+    "przerwa_max": 0.2,
+    "przerwy_gt_115": 0
+   },
+   "K′": {
+    "n_lotow": 12,
+    "blad_max": 0.7795,
+    "blad_p95": 0.5425,
+    "udz_przyj": 1.0,
+    "przerwa_max": 0.2,
+    "przerwy_gt_115": 0
+   },
+   "warunki": {
+    "blad": false,
+    "przerwa": true,
+    "n_przerw": true
+   },
+   "maleje": false,
+   "przerwy_K": [],
+   "przerwy_K′": []
+  },
+  "J/lot_dlugi": {
+   "K": {
+    "n_lotow": 1,
+    "blad_max": 0.9015,
+    "blad_p95": 0.405,
+    "udz_przyj": 0.9917,
+    "przerwa_max": 2.2,
+    "przerwy_gt_115": 3
+   },
+   "K′": {
+    "n_lotow": 1,
+    "blad_max": 0.9015,
+    "blad_p95": 0.4744,
+    "udz_przyj": 0.9877,
+    "przerwa_max": 5.4,
+    "przerwy_gt_115": 2
+   },
+   "warunki": {
+    "blad": true,
+    "przerwa": false,
+    "n_przerw": true
+   },
+   "maleje": true,
+   "przerwy_K": [
+    {
+     "od": 94.3,
+     "s": 1.2,
+     "pokrycie_max": 0.175,
+     "w_mapie": false
+    },
+    {
+     "od": 250.3,
+     "s": 2.2,
+     "pokrycie_max": 0.206,
+     "w_mapie": false
+    },
+    {
+     "od": 490.5,
+     "s": 1.8,
+     "pokrycie_max": 0.023,
+     "w_mapie": false
+    }
+   ],
+   "przerwy_K′": [
+    {
+     "od": 90.9,
+     "s": 2.4,
+     "pokrycie_max": 0.059,
+     "w_mapie": false
+    },
+    {
+     "od": 489.1,
+     "s": 5.4,
+     "pokrycie_max": 0.125,
+     "w_mapie": false
+    }
+   ]
+  }
+ },
+ "nic_nie_pogarsza": false,
+ "cos_maleje": true,
+ "K2_przyjety": false,
+ "wariant": "K"
+}

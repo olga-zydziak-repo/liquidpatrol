@@ -1,0 +1,695 @@
+{
+  "property": "P9_teach",
+  "verdict": "PROVED",
+  "method": "z3 LRA na tabeli TEACH × pole (przedział τ 0…9 × koszyk 0…4 × tryb) + ostrość trójstronna (U′, R, Δ_D5); tabela jako parametr wczytywany przez osłonę (sha); mutanty tabeli odrzucone",
+  "z3_lib": "5.0.0",
+  "tabele": {
+    "TEACH": {
+      "ok": true,
+      "obligations": {
+        "para_i0_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i0_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i0_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i0_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i0_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i1_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i1_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i1_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i1_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i1_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i2_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i2_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i2_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i2_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i2_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i3_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i3_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i3_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i3_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i3_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i4_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i4_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i4_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i4_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i4_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i5_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i5_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i5_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i5_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i5_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i6_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i6_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i6_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i6_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i6_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i7_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i7_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i7_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i7_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i7_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i8_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i8_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i8_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i8_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i8_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i9_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i9_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i9_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i9_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "para_i9_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i0_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i0_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i0_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i0_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i0_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i1_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i1_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i1_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i1_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i1_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i2_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i2_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i2_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i2_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i2_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i3_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i3_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i3_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i3_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i3_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i4_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i4_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i4_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i4_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i4_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i5_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i5_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i5_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i5_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i5_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i6_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i6_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i6_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i6_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i6_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i7_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i7_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i7_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i7_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i7_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i8_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i8_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i8_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i8_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i8_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i9_k0": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i9_k1": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i9_k2": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i9_k3": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        },
+        "jeden_i9_k4": {
+          "main": "unsat",
+          "sharp_U": "sat",
+          "sharp_R": "sat",
+          "sharp_delta": "sat"
+        }
+      },
+      "arithmetic": {
+        "stale_tabeli_eq_freeze": true,
+        "kraw_rosnace": true,
+        "R_nonincreasing_in_i": true,
+        "R_nonincreasing_in_k": true,
+        "tau_star_eq_last_edge": true,
+        "dt_is_1_20": true,
+        "thr_plus_eps_le_last_edge": true,
+        "thr_ticks_integer_eq_prog": true,
+        "pole_brak_max_U_each_i": true,
+        "pole_brak_eq_shield": true,
+        "shield_u_eq_rational": true,
+        "wykonalne_eq_pole_tabeli": true
+      },
+      "wykonalne_r_zad_20": true,
+      "tabela": "results/TEACH/s1/freeze_U_TEACH.json",
+      "tabela_sha256": "7a56ba1b95f206415709d88595f868e07577d94bbeacc56f8065df9831688642",
+      "E": "1",
+      "G": [
+        "8573/10000",
+        "12703/10000",
+        "8307/5000",
+        "2059/1000",
+        "23471/10000",
+        "5143/2000",
+        "6893/2500",
+        "28929/10000",
+        "15749/5000",
+        "6663/2000"
+      ],
+      "krawedzie": [
+        "7/20",
+        "11/20",
+        "3/4",
+        "19/20",
+        "23/20",
+        "27/20",
+        "31/20",
+        "7/4",
+        "39/20",
+        "43/20"
+      ],
+      "tau_star": "43/20",
+      "prog_ticki": 41,
+      "R_min": "16903/800"
+    }
+  },
+  "ostrosc_mutanty_tabeli": {
+    "tau_star_2_10": {
+      "odrzucony": true,
+      "przez": "osłona kod 45"
+    },
+    "G_nierosnace": {
+      "odrzucony": true,
+      "przez": "prover UNPROVEN"
+    }
+  },
+  "theorem": "∀ pole tabeli TEACH: 0≤r_est≤R ∧ 0≤ε≤U′ ∧ 0≤Δ≤Δ_D5 ∧ 0≤s≤d_stop ∧ |r_c−r_est|≤ε ∧ r_d≤r_est+ε+s+Δ ⇒ r_c≤R_E ∧ r_d≤R_E; R = R_E − d_stop − U′ − Δ_D5, U′ = 1.5·(F + E + G(przedział)), F = 0, E = 1.00 m; wykonalność u′ ≤ m(20 m) prawdziwa (asercja zgodności z polem tabeli)",
+  "constants": {
+    "freeze": "results/KONT/s2/s2_freeze_bf.json",
+    "freeze_sha256": "ae19f66c6807de6c824bf0fd723965258b15b77963eb866afb78d3dd3740ae4a",
+    "R_E": "32",
+    "d_stop": "57/20",
+    "delta_D5": "381/250",
+    "m_p50": "579/100",
+    "r_zad": "20",
+    "pre": "PRE_TEACH.md",
+    "pre_sha256": "ee1a4bb70129dde42cf7b2fba0bfa6807bae9aeac676e2e031e0d22eb8ab0e54"
+  },
+  "assumptions": [
+    "A-teach (PRE_TEACH §4, §6): |p_corr − GT(czas próbki EKF)| ≤ U′(przedział osłony) poziomo, p_corr = p_EKF + Δ z poprawki mapy własnego lotu (harness/teach_map, M4 / SIFT, a12_geo0_g1.5), U′ = 1.5·(F + E + G), F = 0, E = 1.00 m, G z unii 25 lotów (38 lotów nie podnosi pola); oraz r_est osłony = |p_corr| (obligacja wejścia P5_teach (b)). Walidowane w bramce S3 jako (B1) i (B3); naruszenie = FAIL nogi.",
+    "A-react (R0.1): przemieszczenie od ostatniego ALLOW do zatrzymania ≤ d_stop (r01/config.py:24-27).",
+    "A-D5 (ANEKS_KONT-3): dryf zejścia ≤ Δ_D5 od REFUSE do przyziemienia.",
+    "Brak poprawki od wejścia w utratę ⇒ pole (jeden, koszyk 4) = najgorsze, τ od zera zegara utraty.",
+    "Przedział τ wybiera osłona z τ + 0.012 s; (B1) sądzi wobec U′ przedziału użytego przez osłonę."
+  ],
+  "code_refs": {
+    "bariera": "r03/nadir_shield.py:NadirShield._nad3_barrier, r_nad3, przedzial_nad3, nad3_tabela",
+    "rama": "r03/nadir_shield.py:NadirShield._step_nad3",
+    "driver": "results/NAD3/tools/nad3_krok.py:krok",
+    "zrodlo": "harness/teach_map.py",
+    "prover": "r01/proofs/p9_teach_verify.py"
+  },
+  "model_sha256": "1e4b7ecadae24db022186d06df6fc744f9d42e42bb51281ecaf76cce4df8a1ba"
+}

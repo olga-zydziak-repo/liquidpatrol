@@ -22,6 +22,15 @@ PROMPT_NAD2_S2 §1.1: przy NADIR_MODE=1 meta niesie literę producenta ramy (env
 PRE_NAD3 §5.1 (PROMPT_NAD3_S1 §1.1): przy NADIR_MODE=1 datagram idzie przez harness/nad3_degrad (env NAD3_DEGRAD) między
 Rama.obserwacja a wysyłką; env nieustawiony ⇒ ten sam obiekt, datagram, wiersz i meta bajtowo jak dotąd. Przy włączonej
 degradacji: wiersz niesie poprawkę czystą ("fx") i zdegradowaną ("fx_deg" z polem "nad3": E, slot), meta konfigurację ("nad3").
+PRE_TEACH §5.1 (PROMPT_TEACH_S1 §1.2): gałąź TEACH_MODE=1 (tylko razem z NADIR_MODE=1) — producent mapy z własnego lotu
+harness/teach_map.Producent zamiast harness/nadir_fix.Rama (wariant doboru kandydatów z results/TEACH/s1/tor.json, suma sprawdzana);
+obraz RGB z gz konwertowany do BGR; flaga GNSS z /fmu/out/estimator_status_flags (cs_gnss_pos; chwila flagi = timestamp
+pierwszej wiadomości z 0); detektor znaczników liczy dalej każdą klatkę (wiersz: n, det — świadek tezy), wiersz niesie datagram
+("fx"), rejestr producenta ("teach") i flagę ("gnss", "t_flagi"); meta: "litera" = "TEACH" i "teach" (echo producenta, sumy).
+TEACH_MODE z niepustym NAD3_DEGRAD ⇒ odmowa startu kodem 47. Tryb cienia TEACH_CIEN=1: chwila cięcia TEACH_T_CIEN (czas sim,
+wymagana, inaczej kod 48) zastępuje flagę (flaga = sim < TEACH_T_CIEN), datagram niewysyłany, wynik tylko w rejestrze.
+Opcjonalna stała maska obrazu TEACH_MASKA (plik obrazu W × H, 0 = piksel pominięty), domyślnie brak. Bez TEACH_MODE datagram,
+wiersz i meta bajtowo jak dotąd.
 Użycie: nadir_obs.py --world W --model M --out plik.jsonl
 """
 import argparse
@@ -52,19 +61,46 @@ else:                                                         # OpenCV 4.6 (syst
     _detm = lambda g: cv2.aruco.detectMarkers(g, _D, parameters=_P)
 
 NADIR_MODE = os.environ.get("NADIR_MODE") == "1"
+TEACH_MODE = NADIR_MODE and os.environ.get("TEACH_MODE") == "1"     # TEACH: producent mapy z własnego lotu (PRE_TEACH §5.1)
 if NADIR_MODE:                                                # PROMPT_NADIR_S2 §1.1: producent ramy B+
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     from harness.nadir_fix import Rama, nadawca
-    _rama = Rama()
+    if not TEACH_MODE:                                        # TEACH: Rama tylko poza gałęzią TEACH
+        _rama = Rama()
     _send = nadawca([x for x in os.environ.get("NADIR_FIX_SOCKS", "").split(":") if x])
     from harness import nad3_degrad                           # NAD3: degradacja za producentem (PRE_NAD3 §5.1)
     _deg = nad3_degrad.z_env()
+if TEACH_MODE:                                                # TEACH: wariant toru, maska, tryb cienia
+    if os.environ.get("NAD3_DEGRAD", "").strip():
+        print("[nadir_obs] TEACH_MODE z NAD3_DEGRAD — ODMOWA", flush=True)
+        sys.exit(47)
+    from harness import teach_map
+    _tor_p = os.path.join(teach_map.ROOT, "results/TEACH/s1/tor.json")
+    _tor = json.load(open(_tor_p))
+    assert teach_map.kan_sha(_tor["tor"]) == _tor["sha256_toru"], "suma tor.json"
+    _maska_p = os.environ.get("TEACH_MASKA", "")
+    _maska = cv2.imread(_maska_p, cv2.IMREAD_GRAYSCALE) if _maska_p else None
+    if _maska_p and _maska is None:
+        print(f"[nadir_obs] TEACH_MASKA {_maska_p!r} nieczytelna — ODMOWA", flush=True)
+        sys.exit(48)
+    _prod = teach_map.Producent(wariant=_tor["tor"]["wariant_K"], maska=_maska)
+    TEACH_CIEN = os.environ.get("TEACH_CIEN") == "1"
+    T_CIEN = None
+    if TEACH_CIEN:
+        try:
+            T_CIEN = float(os.environ["TEACH_T_CIEN"])
+        except (KeyError, ValueError):
+            print("[nadir_obs] TEACH_CIEN bez TEACH_T_CIEN — ODMOWA", flush=True)
+            sys.exit(48)
 _stop = [False]
 _ekf = {"q": None, "q_mono": None, "pos": None, "hdg": None, "pos_mono": None}
+_gnss = {"cs": None, "t_flagi": None}                         # TEACH: flaga GNSS i chwila jej spadku (czas sim)
 _q = queue.Queue(maxsize=1)
 st = {"n_img": 0, "n_drop": 0, "n_proc": 0, "n_det_klatki": 0, "flip_hits": 0, "det_ms": []}
 if NADIR_MODE:
     st["n_fix"] = 0
+if TEACH_MODE:                                                # TEACH
+    st["n_det_znacznikow"] = 0
 fout = open(a.out, "w", buffering=1)
 _hb = [time.monotonic()]
 
@@ -129,7 +165,10 @@ def detect(gray):
 def worker():
     while not _stop[0]:
         try:
-            mono, sim, gray, ekf = _q.get(timeout=0.2)
+            if TEACH_MODE:                                     # TEACH: kadr kolorowy (BGR) i flaga
+                mono, sim, gray, ekf, bgr, gn = _q.get(timeout=0.2)
+            else:
+                mono, sim, gray, ekf = _q.get(timeout=0.2)
         except queue.Empty:
             continue
         t0 = time.monotonic()
@@ -143,7 +182,16 @@ def worker():
             st["flip_hits"] += 1
         row = {"t": "nf", "mono": round(mono, 4), "sim": round(sim, 4), "n": len(det), "lustro": tryb,
                "det": det, "ms": round(ms, 2), **ekf}
-        if NADIR_MODE:                                         # PROMPT_NADIR_S2 §1.1
+        if TEACH_MODE:                                         # TEACH: producent mapy; znaczniki tylko do rejestru
+            st["n_det_znacznikow"] += len(det)
+            fx = _prod.obserwacja(sim, bgr, ekf["ekf_q"], ekf["ekf_pos"], gn["cs"], gn["t_flagi"])
+            if not TEACH_CIEN:
+                _send(fx)
+            st["n_fix"] += int(fx["ok"])
+            row["fx"] = fx
+            row["teach"] = _prod.rejestr
+            row["gnss"], row["t_flagi"] = gn["cs"], gn["t_flagi"]
+        elif NADIR_MODE:                                       # PROMPT_NADIR_S2 §1.1
             fx = _rama.obserwacja(sim, det, ekf["ekf_q"], ekf["ekf_pos"])
             fxw = _deg.przetworz(fx)                           # NAD3: wyłączona ⇒ fxw is fx
             _send(fxw)
@@ -166,15 +214,23 @@ def on_img(m):
     gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY) if ch == 3 else img[:, :, 0].copy()
     ekf = {"ekf_q": _ekf["q"], "ekf_q_age": None if _ekf["q_mono"] is None else round(mono - _ekf["q_mono"], 4),
            "ekf_pos": _ekf["pos"], "ekf_hdg": _ekf["hdg"], "ekf_pos_age": None if _ekf["pos_mono"] is None else round(mono - _ekf["pos_mono"], 4)}
+    item = (mono, sim, gray, ekf)
+    if TEACH_MODE:                                            # TEACH: BGR (render reconu = cv2.imread) i flaga przy klatce
+        bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR) if ch == 3 else cv2.cvtColor(img[:, :, 0], cv2.COLOR_GRAY2BGR)
+        if TEACH_CIEN:
+            gn = {"cs": sim < T_CIEN, "t_flagi": T_CIEN}
+        else:
+            gn = dict(_gnss)
+        item = item + (bgr, gn)
     try:
-        _q.put_nowait((mono, sim, gray, ekf))
+        _q.put_nowait(item)
     except queue.Full:
         st["n_drop"] += 1
         try:
             _q.get_nowait()
         except queue.Empty:
             pass
-        _q.put_nowait((mono, sim, gray, ekf))
+        _q.put_nowait(item)
 
 
 def main():
@@ -183,6 +239,8 @@ def main():
     from rclpy.qos import QoSProfile, ReliabilityPolicy, HistoryPolicy
     from rclpy.executors import SingleThreadedExecutor
     from px4_msgs.msg import VehicleLocalPosition, VehicleAttitude
+    if TEACH_MODE:                                            # TEACH: flaga GNSS estymatora
+        from px4_msgs.msg import EstimatorStatusFlags
     from gz.transport13 import Node as GzNode
     from gz.msgs10.image_pb2 import Image
 
@@ -195,9 +253,22 @@ def main():
         _ekf["hdg"] = round(float(m.heading), 5)
         _ekf["pos_mono"] = time.monotonic()
 
+    def on_flags(m):                                          # TEACH: cs_gnss_pos; chwila flagi = pierwsza wiadomość z 0
+        cs = bool(m.cs_gnss_pos)
+        if not cs and _gnss["t_flagi"] is None:
+            _gnss["t_flagi"] = round(m.timestamp / 1e6, 6)
+        _gnss["cs"] = cs
+
     _meta = {"t": "meta", "topic": TOPIC, "opencv": cv2.__version__, "slownik": "DICT_4X4_50", "flip": FLIP,
              "mono": round(time.monotonic(), 4)}
-    if NADIR_MODE:                                             # PROMPT_NAD2_S2 §1.1: litera producenta ramy w meta
+    if TEACH_MODE:                                             # TEACH: producent mapy w meta
+        _meta["litera"] = "TEACH"
+        _meta["teach"] = {**_prod.echo(), "tor": _tor["tor"], "sha256_toru": _tor["sha256_toru"], "cien": TEACH_CIEN,
+                          "t_cien": T_CIEN, "maska_plik": _maska_p or None,
+                          "sha_obs": teach_map.hashlib.sha256(open(os.path.abspath(__file__), "rb").read()).hexdigest(),
+                          "sha_teach_map": teach_map.hashlib.sha256(open(teach_map.__file__, "rb").read()).hexdigest(),
+                          "python": sys.version.split()[0], "interpreter": sys.executable}
+    elif NADIR_MODE:                                           # PROMPT_NAD2_S2 §1.1: litera producenta ramy w meta
         _meta["litera"] = _rama.litera
         if _deg.echo() is not None:                            # NAD3: konfiguracja degradacji tylko przy włączonej
             _meta["nad3"] = _deg.echo()
@@ -211,6 +282,8 @@ def main():
     qos = QoSProfile(depth=1, history=HistoryPolicy.KEEP_LAST, reliability=ReliabilityPolicy.BEST_EFFORT)
     node.create_subscription(VehicleLocalPosition, "/fmu/out/vehicle_local_position", on_pos, qos)
     node.create_subscription(VehicleAttitude, "/fmu/out/vehicle_attitude", on_att, qos)
+    if TEACH_MODE:                                             # TEACH
+        node.create_subscription(EstimatorStatusFlags, "/fmu/out/estimator_status_flags", on_flags, qos)
     ex = SingleThreadedExecutor()
     ex.add_node(node)
     signal.signal(signal.SIGTERM, on_term)

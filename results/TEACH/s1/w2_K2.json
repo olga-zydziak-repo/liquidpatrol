@@ -1,0 +1,1461 @@
+{
+ "wariant": "K′",
+ "cv2": "4.6.0",
+ "python": "3.12.3",
+ "interpreter": "/usr/bin/python3",
+ "procesy": 8,
+ "zgodne_wszystkie": false,
+ "n": 39,
+ "wyniki": [
+  {
+   "lot": "L_c10_s01",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 11,
+    "n_kf_ref": 11,
+    "d_sim_kf": 0.0,
+    "n_przyj": 2962,
+    "n_przyj_ref": 2946,
+    "max": 0.8462,
+    "max_ref": 0.8462,
+    "d_theta_deg": 4.8e-05,
+    "d_t_m": 4.9e-05,
+    "n_wierszy": 3002,
+    "n_wierszy_ref": 3002,
+    "wiersze_rozne_k_zgodne_przyjeta": 604,
+    "zgodne": false
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 49.9,
+     "p95": 65.72,
+     "max": 203.57
+    },
+    "ms_lok": {
+     "p50": 39.09,
+     "p95": 53.37,
+     "max": 84.57
+    },
+    "ms_od_flagi_do_georef": 91.47,
+    "ms_wiazania_przy_zamknieciu": 6.41,
+    "ms_rozwiazanie": 44.04,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.1
+   },
+   "zegar_s": 160.0
+  },
+  {
+   "lot": "p01_p1_c05_zew",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.6787,
+    "max_ref": 0.6787,
+    "d_theta_deg": 4.6e-05,
+    "d_t_m": 5e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 44,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 53.98,
+     "p95": 70.07,
+     "max": 200.01
+    },
+    "ms_lok": {
+     "p50": 41.06,
+     "p95": 56.38,
+     "max": 74.29
+    },
+    "ms_od_flagi_do_georef": 94.46,
+    "ms_wiazania_przy_zamknieciu": 5.26,
+    "ms_rozwiazanie": 41.58,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.112
+   },
+   "zegar_s": 40.9
+  },
+  {
+   "lot": "p02_p1_c10_zew",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 545,
+    "max": 0.7989,
+    "max_ref": 0.7324,
+    "d_theta_deg": 4.7e-05,
+    "d_t_m": 5e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 175,
+    "zgodne": false
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 50.1,
+     "p95": 72.97,
+     "max": 116.98
+    },
+    "ms_lok": {
+     "p50": 37.4,
+     "p95": 50.9,
+     "max": 83.0
+    },
+    "ms_od_flagi_do_georef": 108.54,
+    "ms_wiazania_przy_zamknieciu": 6.04,
+    "ms_rozwiazanie": 49.72,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.088
+   },
+   "zegar_s": 39.0
+  },
+  {
+   "lot": "p03_p1_c05_srod_r2",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.6232,
+    "max_ref": 0.6232,
+    "d_theta_deg": 4.6e-05,
+    "d_t_m": 4.6e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 37,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 52.79,
+     "p95": 71.34,
+     "max": 207.27
+    },
+    "ms_lok": {
+     "p50": 40.32,
+     "p95": 54.25,
+     "max": 65.74
+    },
+    "ms_od_flagi_do_georef": 109.6,
+    "ms_wiazania_przy_zamknieciu": 5.45,
+    "ms_rozwiazanie": 45.67,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.18
+   },
+   "zegar_s": 40.8
+  },
+  {
+   "lot": "p04_p1_c10_srod",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.3953,
+    "max_ref": 0.3953,
+    "d_theta_deg": 3.6e-05,
+    "d_t_m": 4.8e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 132,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 49.36,
+     "p95": 64.38,
+     "max": 121.02
+    },
+    "ms_lok": {
+     "p50": 36.96,
+     "p95": 47.65,
+     "max": 55.85
+    },
+    "ms_od_flagi_do_georef": 108.58,
+    "ms_wiazania_przy_zamknieciu": 5.4,
+    "ms_rozwiazanie": 47.38,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.156
+   },
+   "zegar_s": 37.9
+  },
+  {
+   "lot": "p06_p2_c05_zew",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.7224,
+    "max_ref": 0.7224,
+    "d_theta_deg": 5e-05,
+    "d_t_m": 5e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 9,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 52.92,
+     "p95": 69.91,
+     "max": 216.13
+    },
+    "ms_lok": {
+     "p50": 43.53,
+     "p95": 56.62,
+     "max": 83.88
+    },
+    "ms_od_flagi_do_georef": 96.54,
+    "ms_wiazania_przy_zamknieciu": 5.45,
+    "ms_rozwiazanie": 41.18,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.076
+   },
+   "zegar_s": 42.3
+  },
+  {
+   "lot": "p07_p2_c10_zew",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 10,
+    "n_kf_ref": 10,
+    "d_sim_kf": 0.0,
+    "n_przyj": 44,
+    "n_przyj_ref": 44,
+    "max": 0.548,
+    "max_ref": 0.548,
+    "d_theta_deg": 4.9e-05,
+    "d_t_m": 4.9e-05,
+    "n_wierszy": 44,
+    "n_wierszy_ref": 44,
+    "wiersze_rozne_k_zgodne_przyjeta": 4,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 53.22,
+     "p95": 71.42,
+     "max": 169.58
+    },
+    "ms_lok": {
+     "p50": 45.37,
+     "p95": 52.01,
+     "max": 52.94
+    },
+    "ms_od_flagi_do_georef": 133.25,
+    "ms_wiazania_przy_zamknieciu": 6.82,
+    "ms_rozwiazanie": 63.33,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.176
+   },
+   "zegar_s": 15.3
+  },
+  {
+   "lot": "p08_p2_c05_srod",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 553,
+    "max": 0.576,
+    "max_ref": 0.6091,
+    "d_theta_deg": 4.5e-05,
+    "d_t_m": 5e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 45,
+    "zgodne": false
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 54.8,
+     "p95": 74.78,
+     "max": 272.15
+    },
+    "ms_lok": {
+     "p50": 46.66,
+     "p95": 61.56,
+     "max": 98.25
+    },
+    "ms_od_flagi_do_georef": 119.77,
+    "ms_wiazania_przy_zamknieciu": 6.37,
+    "ms_rozwiazanie": 53.17,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.004
+   },
+   "zegar_s": 45.2
+  },
+  {
+   "lot": "p09_p2_c10_srod",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 11,
+    "n_kf_ref": 11,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 553,
+    "max": 0.4423,
+    "max_ref": 0.4423,
+    "d_theta_deg": 4.9e-05,
+    "d_t_m": 4.4e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 68,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 56.37,
+     "p95": 70.77,
+     "max": 276.72
+    },
+    "ms_lok": {
+     "p50": 45.7,
+     "p95": 59.27,
+     "max": 85.1
+    },
+    "ms_od_flagi_do_georef": 131.53,
+    "ms_wiazania_przy_zamknieciu": 7.33,
+    "ms_rozwiazanie": 56.79,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.016
+   },
+   "zegar_s": 45.1
+  },
+  {
+   "lot": "p11_p3_c05_zew",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 8,
+    "n_kf_ref": 8,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.5192,
+    "max_ref": 0.5192,
+    "d_theta_deg": 5e-05,
+    "d_t_m": 4.8e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 56,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 58.08,
+     "p95": 74.14,
+     "max": 205.07
+    },
+    "ms_lok": {
+     "p50": 46.24,
+     "p95": 60.63,
+     "max": 85.14
+    },
+    "ms_od_flagi_do_georef": 112.56,
+    "ms_wiazania_przy_zamknieciu": 7.45,
+    "ms_rozwiazanie": 45.13,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.188
+   },
+   "zegar_s": 44.6
+  },
+  {
+   "lot": "p12_p3_c10_zew",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 10,
+    "n_kf_ref": 10,
+    "d_sim_kf": 0.0,
+    "n_przyj": 39,
+    "n_przyj_ref": 39,
+    "max": 0.2953,
+    "max_ref": 0.2953,
+    "d_theta_deg": 4.5e-05,
+    "d_t_m": 4.9e-05,
+    "n_wierszy": 39,
+    "n_wierszy_ref": 39,
+    "wiersze_rozne_k_zgodne_przyjeta": 2,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 54.38,
+     "p95": 72.9,
+     "max": 193.62
+    },
+    "ms_lok": {
+     "p50": 44.07,
+     "p95": 53.95,
+     "max": 59.54
+    },
+    "ms_od_flagi_do_georef": 125.99,
+    "ms_wiazania_przy_zamknieciu": 8.03,
+    "ms_rozwiazanie": 49.53,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.136
+   },
+   "zegar_s": 14.9
+  },
+  {
+   "lot": "p13_p3_c05_srod",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.6254,
+    "max_ref": 0.6254,
+    "d_theta_deg": 4.9e-05,
+    "d_t_m": 4.5e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 45,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 64.63,
+     "p95": 81.35,
+     "max": 255.23
+    },
+    "ms_lok": {
+     "p50": 42.8,
+     "p95": 56.24,
+     "max": 81.64
+    },
+    "ms_od_flagi_do_georef": 129.83,
+    "ms_wiazania_przy_zamknieciu": 4.99,
+    "ms_rozwiazanie": 45.12,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.18
+   },
+   "zegar_s": 43.3
+  },
+  {
+   "lot": "p14_p3_c10_srod",
+   "lata": "S",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 553,
+    "max": 0.4801,
+    "max_ref": 0.4801,
+    "d_theta_deg": 4.5e-05,
+    "d_t_m": 4.9e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 46,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 59.2,
+     "p95": 85.18,
+     "max": 141.92
+    },
+    "ms_lok": {
+     "p50": 39.78,
+     "p95": 48.48,
+     "max": 72.04
+    },
+    "ms_od_flagi_do_georef": 122.91,
+    "ms_wiazania_przy_zamknieciu": 5.67,
+    "ms_rozwiazanie": 54.85,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.012
+   },
+   "zegar_s": 41.8
+  },
+  {
+   "lot": "L_c10_s01",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 11,
+    "n_kf_ref": 11,
+    "d_sim_kf": 0.0,
+    "n_przyj": 2967,
+    "n_przyj_ref": 2969,
+    "max": 0.9328,
+    "max_ref": 0.9457,
+    "d_theta_deg": 4.8e-05,
+    "d_t_m": 4.5e-05,
+    "n_wierszy": 3002,
+    "n_wierszy_ref": 3002,
+    "wiersze_rozne_k_zgodne_przyjeta": 609,
+    "zgodne": false
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 94.38,
+     "p95": 136.43,
+     "max": 835.86
+    },
+    "ms_lok": {
+     "p50": 99.13,
+     "p95": 130.67,
+     "max": 192.09
+    },
+    "ms_od_flagi_do_georef": 192.31,
+    "ms_wiazania_przy_zamknieciu": 9.1,
+    "ms_rozwiazanie": 62.0,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.1
+   },
+   "zegar_s": 337.6
+  },
+  {
+   "lot": "p01_p1_c05_zew",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.6826,
+    "max_ref": 0.6826,
+    "d_theta_deg": 4.2e-05,
+    "d_t_m": 4.6e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 44,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 99.74,
+     "p95": 129.92,
+     "max": 806.1
+    },
+    "ms_lok": {
+     "p50": 110.93,
+     "p95": 137.54,
+     "max": 185.66
+    },
+    "ms_od_flagi_do_georef": 159.02,
+    "ms_wiazania_przy_zamknieciu": 4.7,
+    "ms_rozwiazanie": 44.78,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.112
+   },
+   "zegar_s": 85.2
+  },
+  {
+   "lot": "p02_p1_c10_zew",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 553,
+    "max": 0.8237,
+    "max_ref": 0.7525,
+    "d_theta_deg": 4.9e-05,
+    "d_t_m": 5e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 202,
+    "zgodne": false
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 81.96,
+     "p95": 115.3,
+     "max": 358.23
+    },
+    "ms_lok": {
+     "p50": 87.1,
+     "p95": 114.21,
+     "max": 158.76
+    },
+    "ms_od_flagi_do_georef": 140.13,
+    "ms_wiazania_przy_zamknieciu": 4.97,
+    "ms_rozwiazanie": 43.61,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.088
+   },
+   "zegar_s": 67.3
+  },
+  {
+   "lot": "p03_p1_c05_srod_r2",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.6168,
+    "max_ref": 0.6168,
+    "d_theta_deg": 4.8e-05,
+    "d_t_m": 4.9e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 39,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 96.99,
+     "p95": 128.67,
+     "max": 840.85
+    },
+    "ms_lok": {
+     "p50": 109.36,
+     "p95": 136.47,
+     "max": 160.51
+    },
+    "ms_od_flagi_do_georef": 152.99,
+    "ms_wiazania_przy_zamknieciu": 4.93,
+    "ms_rozwiazanie": 45.35,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.18
+   },
+   "zegar_s": 83.8
+  },
+  {
+   "lot": "p04_p1_c10_srod",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.4076,
+    "max_ref": 0.4076,
+    "d_theta_deg": 4.8e-05,
+    "d_t_m": 4.9e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 128,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 79.49,
+     "p95": 100.53,
+     "max": 267.08
+    },
+    "ms_lok": {
+     "p50": 91.6,
+     "p95": 114.82,
+     "max": 133.62
+    },
+    "ms_od_flagi_do_georef": 131.79,
+    "ms_wiazania_przy_zamknieciu": 5.02,
+    "ms_rozwiazanie": 42.08,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.156
+   },
+   "zegar_s": 68.1
+  },
+  {
+   "lot": "p06_p2_c05_zew",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.7074,
+    "max_ref": 0.7074,
+    "d_theta_deg": 3.7e-05,
+    "d_t_m": 4.8e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 14,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 94.07,
+     "p95": 122.8,
+     "max": 697.51
+    },
+    "ms_lok": {
+     "p50": 111.83,
+     "p95": 135.87,
+     "max": 159.74
+    },
+    "ms_od_flagi_do_georef": 161.22,
+    "ms_wiazania_przy_zamknieciu": 4.8,
+    "ms_rozwiazanie": 39.9,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.076
+   },
+   "zegar_s": 85.4
+  },
+  {
+   "lot": "p07_p2_c10_zew",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 10,
+    "n_kf_ref": 10,
+    "d_sim_kf": 0.0,
+    "n_przyj": 44,
+    "n_przyj_ref": 44,
+    "max": 0.5512,
+    "max_ref": 0.5512,
+    "d_theta_deg": 4.9e-05,
+    "d_t_m": 4.6e-05,
+    "n_wierszy": 44,
+    "n_wierszy_ref": 44,
+    "wiersze_rozne_k_zgodne_przyjeta": 7,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 97.76,
+     "p95": 130.27,
+     "max": 721.67
+    },
+    "ms_lok": {
+     "p50": 96.12,
+     "p95": 116.61,
+     "max": 137.67
+    },
+    "ms_od_flagi_do_georef": 196.64,
+    "ms_wiazania_przy_zamknieciu": 7.82,
+    "ms_rozwiazanie": 49.76,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.176
+   },
+   "zegar_s": 25.4
+  },
+  {
+   "lot": "p08_p2_c05_srod",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 553,
+    "max": 0.5736,
+    "max_ref": 0.5938,
+    "d_theta_deg": 3.7e-05,
+    "d_t_m": 4.6e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 45,
+    "zgodne": false
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 105.36,
+     "p95": 139.25,
+     "max": 961.69
+    },
+    "ms_lok": {
+     "p50": 113.68,
+     "p95": 139.36,
+     "max": 156.44
+    },
+    "ms_od_flagi_do_georef": 171.71,
+    "ms_wiazania_przy_zamknieciu": 5.39,
+    "ms_rozwiazanie": 45.37,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.004
+   },
+   "zegar_s": 87.1
+  },
+  {
+   "lot": "p09_p2_c10_srod",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 11,
+    "n_kf_ref": 11,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 553,
+    "max": 0.4197,
+    "max_ref": 0.4197,
+    "d_theta_deg": 5e-05,
+    "d_t_m": 4.8e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 78,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 97.52,
+     "p95": 152.12,
+     "max": 954.82
+    },
+    "ms_lok": {
+     "p50": 108.31,
+     "p95": 133.29,
+     "max": 191.81
+    },
+    "ms_od_flagi_do_georef": 198.19,
+    "ms_wiazania_przy_zamknieciu": 8.01,
+    "ms_rozwiazanie": 59.48,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.016
+   },
+   "zegar_s": 82.9
+  },
+  {
+   "lot": "p11_p3_c05_zew",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 8,
+    "n_kf_ref": 8,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.5194,
+    "max_ref": 0.5194,
+    "d_theta_deg": 4.8e-05,
+    "d_t_m": 4.6e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 59,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 102.26,
+     "p95": 147.09,
+     "max": 787.08
+    },
+    "ms_lok": {
+     "p50": 110.41,
+     "p95": 138.37,
+     "max": 171.66
+    },
+    "ms_od_flagi_do_georef": 154.83,
+    "ms_wiazania_przy_zamknieciu": 6.2,
+    "ms_rozwiazanie": 40.72,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.188
+   },
+   "zegar_s": 85.4
+  },
+  {
+   "lot": "p12_p3_c10_zew",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 10,
+    "n_kf_ref": 10,
+    "d_sim_kf": 0.0,
+    "n_przyj": 39,
+    "n_przyj_ref": 39,
+    "max": 0.2943,
+    "max_ref": 0.2943,
+    "d_theta_deg": 4.7e-05,
+    "d_t_m": 4.9e-05,
+    "n_wierszy": 39,
+    "n_wierszy_ref": 39,
+    "wiersze_rozne_k_zgodne_przyjeta": 17,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 98.59,
+     "p95": 137.42,
+     "max": 414.92
+    },
+    "ms_lok": {
+     "p50": 81.89,
+     "p95": 92.76,
+     "max": 94.38
+    },
+    "ms_od_flagi_do_georef": 160.82,
+    "ms_wiazania_przy_zamknieciu": 5.86,
+    "ms_rozwiazanie": 45.18,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.136
+   },
+   "zegar_s": 24.5
+  },
+  {
+   "lot": "p13_p3_c05_srod",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.6195,
+    "max_ref": 0.6195,
+    "d_theta_deg": 4.8e-05,
+    "d_t_m": 5e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 46,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 104.26,
+     "p95": 126.9,
+     "max": 854.03
+    },
+    "ms_lok": {
+     "p50": 113.28,
+     "p95": 139.69,
+     "max": 203.57
+    },
+    "ms_od_flagi_do_georef": 143.05,
+    "ms_wiazania_przy_zamknieciu": 5.08,
+    "ms_rozwiazanie": 40.71,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.18
+   },
+   "zegar_s": 86.9
+  },
+  {
+   "lot": "p14_p3_c10_srod",
+   "lata": "M",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 553,
+    "max": 0.4611,
+    "max_ref": 0.4611,
+    "d_theta_deg": 4.9e-05,
+    "d_t_m": 4.6e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 57,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 84.78,
+     "p95": 134.08,
+     "max": 359.83
+    },
+    "ms_lok": {
+     "p50": 95.44,
+     "p95": 123.99,
+     "max": 171.67
+    },
+    "ms_od_flagi_do_georef": 173.38,
+    "ms_wiazania_przy_zamknieciu": 11.8,
+    "ms_rozwiazanie": 51.52,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.012
+   },
+   "zegar_s": 74.3
+  },
+  {
+   "lot": "L_c10_s01",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 11,
+    "n_kf_ref": 11,
+    "d_sim_kf": 0.0,
+    "n_przyj": 2965,
+    "n_przyj_ref": 2977,
+    "max": 0.9015,
+    "max_ref": 0.9015,
+    "d_theta_deg": 4.7e-05,
+    "d_t_m": 4.6e-05,
+    "n_wierszy": 3002,
+    "n_wierszy_ref": 3002,
+    "wiersze_rozne_k_zgodne_przyjeta": 545,
+    "zgodne": false
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 78.61,
+     "p95": 139.12,
+     "max": 493.35
+    },
+    "ms_lok": {
+     "p50": 84.17,
+     "p95": 114.42,
+     "max": 169.31
+    },
+    "ms_od_flagi_do_georef": 151.45,
+    "ms_wiazania_przy_zamknieciu": 7.18,
+    "ms_rozwiazanie": 50.53,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.1
+   },
+   "zegar_s": 305.0
+  },
+  {
+   "lot": "p01_p1_c05_zew",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.6702,
+    "max_ref": 0.6702,
+    "d_theta_deg": 4.2e-05,
+    "d_t_m": 4.4e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 42,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 91.21,
+     "p95": 130.81,
+     "max": 632.11
+    },
+    "ms_lok": {
+     "p50": 93.06,
+     "p95": 108.45,
+     "max": 162.07
+    },
+    "ms_od_flagi_do_georef": 157.32,
+    "ms_wiazania_przy_zamknieciu": 5.15,
+    "ms_rozwiazanie": 45.56,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.112
+   },
+   "zegar_s": 75.5
+  },
+  {
+   "lot": "p02_p1_c10_zew",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 553,
+    "max": 0.7795,
+    "max_ref": 0.7083,
+    "d_theta_deg": 4.3e-05,
+    "d_t_m": 4.9e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 177,
+    "zgodne": false
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 82.24,
+     "p95": 107.11,
+     "max": 388.41
+    },
+    "ms_lok": {
+     "p50": 81.13,
+     "p95": 94.38,
+     "max": 104.35
+    },
+    "ms_od_flagi_do_georef": 142.14,
+    "ms_wiazania_przy_zamknieciu": 4.92,
+    "ms_rozwiazanie": 48.37,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.088
+   },
+   "zegar_s": 65.6
+  },
+  {
+   "lot": "p03_p1_c05_srod_r2",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.6162,
+    "max_ref": 0.6162,
+    "d_theta_deg": 4.8e-05,
+    "d_t_m": 4.7e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 31,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 82.62,
+     "p95": 101.23,
+     "max": 565.78
+    },
+    "ms_lok": {
+     "p50": 82.87,
+     "p95": 93.59,
+     "max": 109.06
+    },
+    "ms_od_flagi_do_georef": 131.65,
+    "ms_wiazania_przy_zamknieciu": 4.99,
+    "ms_rozwiazanie": 37.93,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.18
+   },
+   "zegar_s": 66.1
+  },
+  {
+   "lot": "p04_p1_c10_srod",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.4118,
+    "max_ref": 0.4118,
+    "d_theta_deg": 3.6e-05,
+    "d_t_m": 4.9e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 112,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 70.94,
+     "p95": 95.4,
+     "max": 408.57
+    },
+    "ms_lok": {
+     "p50": 74.26,
+     "p95": 91.08,
+     "max": 100.4
+    },
+    "ms_od_flagi_do_georef": 130.35,
+    "ms_wiazania_przy_zamknieciu": 4.86,
+    "ms_rozwiazanie": 41.34,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.156
+   },
+   "zegar_s": 60.4
+  },
+  {
+   "lot": "p06_p2_c05_zew",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.7045,
+    "max_ref": 0.7045,
+    "d_theta_deg": 5e-05,
+    "d_t_m": 4.7e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 24,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 83.63,
+     "p95": 107.0,
+     "max": 557.58
+    },
+    "ms_lok": {
+     "p50": 91.24,
+     "p95": 107.6,
+     "max": 128.38
+    },
+    "ms_od_flagi_do_georef": 161.09,
+    "ms_wiazania_przy_zamknieciu": 5.75,
+    "ms_rozwiazanie": 43.56,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.076
+   },
+   "zegar_s": 72.0
+  },
+  {
+   "lot": "p07_p2_c10_zew",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 10,
+    "n_kf_ref": 10,
+    "d_sim_kf": 0.0,
+    "n_przyj": 44,
+    "n_przyj_ref": 44,
+    "max": 0.544,
+    "max_ref": 0.544,
+    "d_theta_deg": 4.5e-05,
+    "d_t_m": 4.6e-05,
+    "n_wierszy": 44,
+    "n_wierszy_ref": 44,
+    "wiersze_rozne_k_zgodne_przyjeta": 0,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 70.8,
+     "p95": 101.34,
+     "max": 539.6
+    },
+    "ms_lok": {
+     "p50": 87.45,
+     "p95": 100.57,
+     "max": 103.97
+    },
+    "ms_od_flagi_do_georef": 140.15,
+    "ms_wiazania_przy_zamknieciu": 5.5,
+    "ms_rozwiazanie": 45.73,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.176
+   },
+   "zegar_s": 20.2
+  },
+  {
+   "lot": "p08_p2_c05_srod",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 553,
+    "max": 0.5694,
+    "max_ref": 0.5993,
+    "d_theta_deg": 4.9e-05,
+    "d_t_m": 5e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 44,
+    "zgodne": false
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 82.0,
+     "p95": 100.56,
+     "max": 589.58
+    },
+    "ms_lok": {
+     "p50": 84.79,
+     "p95": 99.9,
+     "max": 117.91
+    },
+    "ms_od_flagi_do_georef": 138.45,
+    "ms_wiazania_przy_zamknieciu": 5.02,
+    "ms_rozwiazanie": 42.88,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.004
+   },
+   "zegar_s": 67.0
+  },
+  {
+   "lot": "p09_p2_c10_srod",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 11,
+    "n_kf_ref": 11,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 553,
+    "max": 0.4124,
+    "max_ref": 0.4124,
+    "d_theta_deg": 4.9e-05,
+    "d_t_m": 4.2e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 67,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 78.71,
+     "p95": 101.33,
+     "max": 746.42
+    },
+    "ms_lok": {
+     "p50": 79.0,
+     "p95": 98.34,
+     "max": 113.93
+    },
+    "ms_od_flagi_do_georef": 146.86,
+    "ms_wiazania_przy_zamknieciu": 5.62,
+    "ms_rozwiazanie": 42.73,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.016
+   },
+   "zegar_s": 64.9
+  },
+  {
+   "lot": "p11_p3_c05_zew",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 8,
+    "n_kf_ref": 8,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.5165,
+    "max_ref": 0.5165,
+    "d_theta_deg": 3.5e-05,
+    "d_t_m": 4.5e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 47,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 82.89,
+     "p95": 102.85,
+     "max": 526.44
+    },
+    "ms_lok": {
+     "p50": 70.01,
+     "p95": 96.45,
+     "max": 117.86
+    },
+    "ms_od_flagi_do_georef": 157.22,
+    "ms_wiazania_przy_zamknieciu": 9.17,
+    "ms_rozwiazanie": 41.09,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.188
+   },
+   "zegar_s": 59.5
+  },
+  {
+   "lot": "p12_p3_c10_zew",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 10,
+    "n_kf_ref": 10,
+    "d_sim_kf": 0.0,
+    "n_przyj": 39,
+    "n_przyj_ref": 39,
+    "max": 0.2953,
+    "max_ref": 0.2953,
+    "d_theta_deg": 5e-05,
+    "d_t_m": 5e-05,
+    "n_wierszy": 39,
+    "n_wierszy_ref": 39,
+    "wiersze_rozne_k_zgodne_przyjeta": 2,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 81.29,
+     "p95": 106.81,
+     "max": 547.91
+    },
+    "ms_lok": {
+     "p50": 91.06,
+     "p95": 99.93,
+     "max": 103.36
+    },
+    "ms_od_flagi_do_georef": 148.68,
+    "ms_wiazania_przy_zamknieciu": 6.06,
+    "ms_rozwiazanie": 45.57,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.136
+   },
+   "zegar_s": 21.2
+  },
+  {
+   "lot": "p13_p3_c05_srod",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 552,
+    "n_przyj_ref": 552,
+    "max": 0.6194,
+    "max_ref": 0.6194,
+    "d_theta_deg": 5e-05,
+    "d_t_m": 4.1e-05,
+    "n_wierszy": 552,
+    "n_wierszy_ref": 552,
+    "wiersze_rozne_k_zgodne_przyjeta": 46,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 84.37,
+     "p95": 106.78,
+     "max": 757.89
+    },
+    "ms_lok": {
+     "p50": 68.52,
+     "p95": 81.38,
+     "max": 92.5
+    },
+    "ms_od_flagi_do_georef": 133.32,
+    "ms_wiazania_przy_zamknieciu": 5.01,
+    "ms_rozwiazanie": 37.94,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.18
+   },
+   "zegar_s": 58.0
+  },
+  {
+   "lot": "p14_p3_c10_srod",
+   "lata": "J",
+   "porownanie": {
+    "n_kf": 9,
+    "n_kf_ref": 9,
+    "d_sim_kf": 0.0,
+    "n_przyj": 553,
+    "n_przyj_ref": 553,
+    "max": 0.4631,
+    "max_ref": 0.4631,
+    "d_theta_deg": 3.9e-05,
+    "d_t_m": 4.7e-05,
+    "n_wierszy": 553,
+    "n_wierszy_ref": 553,
+    "wiersze_rozne_k_zgodne_przyjeta": 46,
+    "zgodne": true
+   },
+   "czas": {
+    "ms_mapa": {
+     "p50": 74.7,
+     "p95": 106.23,
+     "max": 453.75
+    },
+    "ms_lok": {
+     "p50": 66.29,
+     "p95": 79.46,
+     "max": 90.61
+    },
+    "ms_od_flagi_do_georef": 142.72,
+    "ms_wiazania_przy_zamknieciu": 7.45,
+    "ms_rozwiazanie": 39.84,
+    "n_dop_pozno": 0,
+    "opoznienie_pierwszej_poprawki_s": 0.012
+   },
+   "zegar_s": 57.4
+  }
+ ],
+ "sumy_toru": {
+  "results/TEACH_RECON2/tools/teach2.py": "07925633a8447c1d7b1bfa0beba0c8d514ce92a869d4e666047a61c5dd5d744d",
+  "results/TEACH_RECON/tools/teach_r34.py": "3536a28ef05a16689f1cce7192d59688459e784b40c39d2f76eb9cf9e5f87e34",
+  "results/ORTO_RECON/tools/orto_r2.py": "442103535187535a3f4b5c4bec5b138d7059f4b4ecc3ca11c90a9a416a903268",
+  "results/ORTO_RECON/tools/orto_r3.py": "0410dfbf91a63fb728998b3622019215b763eeca1ae860d18f1ad52b50633873"
+ },
+ "zegar_s": 372.7
+}
