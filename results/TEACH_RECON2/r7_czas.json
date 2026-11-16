@@ -1,0 +1,106 @@
+{
+ "lata": "S",
+ "procesy": 1,
+ "watki_cv2": 1,
+ "loty": {
+  "p02_p1_c10_zew": {
+   "n_przed": 182,
+   "n_kf": 9,
+   "wiazanie_na_kadr_ms": {
+    "p50": 34.78,
+    "p95": 42.39
+   },
+   "render_pomocniczy_ms": {
+    "p50": 3.56,
+    "p95": 4.6
+   },
+   "rozwiazanie_ms": {
+    "M3": {
+     "p50": 10.23,
+     "p95": 12.74
+    },
+    "M4": {
+     "p50": 29.36,
+     "p95": 30.3
+    }
+   },
+   "n_wiazan": {
+    "K1_SIFT": 546,
+    "K2_AKAZE": 546
+   }
+  },
+  "p13_p3_c05_srod": {
+   "n_przed": 173,
+   "n_kf": 9,
+   "wiazanie_na_kadr_ms": {
+    "p50": 36.3,
+    "p95": 41.35
+   },
+   "render_pomocniczy_ms": {
+    "p50": 3.6,
+    "p95": 4.96
+   },
+   "rozwiazanie_ms": {
+    "M3": {
+     "p50": 10.39,
+     "p95": 11.53
+    },
+    "M4": {
+     "p50": 26.14,
+     "p95": 28.61
+    }
+   },
+   "n_wiazan": {
+    "K1_SIFT": 519,
+    "K2_AKAZE": 519
+   }
+  },
+  "L_c10_s01": {
+   "n_przed": 185,
+   "n_kf": 11,
+   "wiazanie_na_kadr_ms": {
+    "p50": 35.25,
+    "p95": 39.84
+   },
+   "render_pomocniczy_ms": {
+    "p50": 3.65,
+    "p95": 4.88
+   },
+   "rozwiazanie_ms": {
+    "M3": {
+     "p50": 12.06,
+     "p95": 13.0
+    },
+    "M4": {
+     "p50": 30.54,
+     "p95": 33.1
+    }
+   },
+   "n_wiazan": {
+    "K1_SIFT": 555,
+    "K2_AKAZE": 555
+   }
+  }
+ },
+ "razem": {
+  "wiazanie_na_kadr_ms": {
+   "p50": 35.58,
+   "p95": 41.42
+  },
+  "render_pomocniczy_ms": {
+   "p50": 3.61,
+   "p95": 4.89
+  },
+  "rozwiazanie_na_lot_i_rodzaj_ms": {
+   "M3": {
+    "p50": 10.68,
+    "p95": 12.74
+   },
+   "M4": {
+    "p50": 28.82,
+    "p95": 31.61
+   }
+  },
+  "uwaga": "wiązanie na kadr obejmuje oba rodzaje cech i render pomocniczy; dron płaci bez renderu"
+ }
+}
