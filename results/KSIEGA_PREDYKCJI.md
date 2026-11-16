@@ -1331,3 +1331,39 @@ CLOSED-BY-RECON (0 bootów)
   przyjętych ≤ 0.70 m.
 - P-TEACH-R14 (0.85): mapa M4, łata S, SIFT, lot długi: żadnej przerwy
   ponad 2.15 s w mapie.
+
+## TEACH — PRE (PRE_TEACH, 16.11.2026)
+- Recon S0B rozliczony: P-TEACH-R8…R14 7/7 przy sumie szans 4.55
+  (z S0 razem 8/14 przy 8.45). Mapa M4 z SIFT: 12 cięć max
+  0.71–0.75 m, lot długi 0.85–0.95 m na łatach S, M, J; wszystkie
+  przerwy ponad 1.15 s poza mapą. CC własnym kodem: georeferencja
+  z zapisanych wiązań zgodna do 4. cyfry (732 rozwiązania na
+  wariant), poprawki i błędy 154 910 wyników do 0.0001 m, żadnego
+  wiązania po chwili cięcia.
+- Znalezisko weryfikacji: dobór kandydatów nie zna wysokości klatki
+  kluczowej; małe klatki ze startu wypierają klatkę przelotową
+  (przerwa 1.4 s w p02 przy 56–96 zgodnych punktach dostępnych
+  w klatce niewybranej).
+- ✗ projektowe CC: dobór kandydatów ślepy na rozmiar klatki
+  kluczowej w obu promptach; zbędne sito odległości; predykcje
+  jednego reconu związane jednym mechanizmem (S0 1/7, S0B 7/7).
+  Lekcja: w zestawie predykcji co najmniej dwie mają zależeć od
+  czego innego niż pozostałe.
+- Predykcje CC, przed pierwszą linią kodu S1:
+  - P-TEACH-1 (0.85): S1 — moduł lotu odtwarza recon bez naprawy
+    toru, a georeferencja jest gotowa ≤ 0.5 s po fladze.
+  - P-TEACH-2 (0.55): K′ przyjęty wg reguły PRE §6.
+  - P-TEACH-3 (0.80): boot statyczny — kamera przepływu i kamera
+    misji piksel w piksel jak w starym świecie, zero detekcji
+    znaczników w kamerze w dół.
+  - P-TEACH-4 (0.60): oba booty cienia przechodzą bramkę obrazu za
+    pierwszym razem.
+  - P-TEACH-5 (0.85): zero przekroczeń przesłanki w smoke i 12
+    cięciach, max e′/U′ ≤ 0.60.
+  - P-TEACH-6 (0.70): co najmniej 11 z 12 cięć dostępnych.
+  - P-TEACH-7 (0.65): największy błąd poprawki w lotach bramki
+    ≤ 1.00 m na każdej łacie.
+  - P-TEACH-8 (0.60): łąka nie gorsza od parkingu — max błąd
+    poprawki na J ≤ max na S + 0.20 m.
+  - P-TEACH-9 (0.75): zero REFUSE(τ*) w misji w 12 cięciach.
+  - P-TEACH-10 (0.50): werdykt V-A.

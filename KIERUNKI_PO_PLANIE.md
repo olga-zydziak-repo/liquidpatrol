@@ -870,3 +870,15 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
 - **TEACH, recon S0B — otwarty** (PROMPT_TEACH_S0B): mapa spięta
   obrazem i zakotwiczona w torze EKF sprzed cięcia. Drugie i ostatnie
   podejście przy biurku; śmierć zamyka nogę.
+
+## Dopisek stanu katalogu — 16.11.2026 (CO-TEACH-2, PRE_TEACH)
+- **TEACH, recon S0B — CLOSED, żyje.** Mapa spięta obrazem
+  i zakotwiczona w torze EKF sprzed cięcia: błąd poprawki do 0.75 m
+  na 12 cięciach i 0.95 m w locie długim, tak samo na parkingu,
+  osiedlu i łące; 0 bootów.
+- **TEACH — otwarta, PRE ratyfikowany.** Lot bez GNSS i bez
+  znaczników z poprawką z mapy własnego lotu; sieć i osłona bez
+  zmiany kodu, nowa tylko tabela (E 1.00 m, τ* 2.15 s) i źródło.
+  Bramka: 12 cięć na trzech terenach. Budżet ≤ 24 booty.
+- Po werdykcie, osobnymi decyzjami: lot długi z okrążeniem uczącym;
+  teren dla wszystkich kamer z nowym pomiarem G.
