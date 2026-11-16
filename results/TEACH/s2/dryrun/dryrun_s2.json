@@ -1,0 +1,322 @@
+{
+ "1_main_drivera": {
+  "start": {
+   "rc": 0,
+   "wynik": {
+    "wynik": "zatrzymane: uzbrojenie",
+    "kroki": [
+     "connect",
+     "arm_retry"
+    ]
+   },
+   "teach_selfcheck_pass": true,
+   "odmowa": null,
+   "meta_teach": {
+    "oslona": {
+     "tabela": "/home/olga/projects/liquidpatrol/results/TEACH/s1/freeze_U_TEACH.json",
+     "sha256_tabeli": "7a56ba1b95f206415709d88595f868e07577d94bbeacc56f8065df9831688642",
+     "punkt": "TEACH",
+     "E": 1.0,
+     "tau_star_s": 2.15,
+     "prog_zatrzasku_ticki": 41,
+     "krawedzie_tau_s": [
+      0.35,
+      0.55,
+      0.75,
+      0.95,
+      1.15,
+      1.35,
+      1.55,
+      1.75,
+      1.95,
+      2.15
+     ],
+     "G": [
+      0.8573,
+      1.2703,
+      1.6614,
+      2.059,
+      2.3471,
+      2.5715,
+      2.7572,
+      2.8929,
+      3.1498,
+      3.3315
+     ]
+    },
+    "sha_driver": "e906249b4dcfd99e23dfad311d48d2d1614e9af0eedea79a8c48f96db3409529",
+    "sha_producent": "c6cbff8faa73f8484a31cd7f6f97d5bb88c0094ba3241986b79004b6e6021b4f",
+    "sha_obs": "74f962ab8e92695935063d55c78cf9b4c6723525471c73526aedbe87e158dbfd",
+    "sha_tor": "e76187a4786dfbbf8949a6711912f4d49572739e321de1c7efb0fefbf3629846",
+    "teach_mode": "1"
+   },
+   "ogon": "",
+   "oczekiwany_rc": 0,
+   "ok": true
+  },
+  "bez_TEACH_MODE": {
+   "rc": 8,
+   "wynik": null,
+   "teach_selfcheck_pass": false,
+   "odmowa": "[teach] TEACH_MODE != 1 — ODMOWA",
+   "meta_teach": null,
+   "ogon": "_s4] reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 30.0, 'bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 117.0}, 'ok': True}\n[teach] TEACH_MODE != 1 — ODMOWA\n",
+   "oczekiwany_rc": 8,
+   "ok": true
+  },
+  "tabela_P1_NAD3": {
+   "rc": 8,
+   "wynik": null,
+   "teach_selfcheck_pass": false,
+   "odmowa": "[teach] tabela osłony {'tabela': '/home/olga/projects/liquidpatrol/results/NAD3/s1/freeze_U_P1.json', 'sha256_tabeli': '806f5e90c3dc5844c2870d4485b272c45f7816dff84e3e9d8bb77f143bfde722', 'punkt': 'P1', 'E': 1.0, 'tau_star_s': 1.15, 'prog_zatrzasku_ticki': 21, 'krawedzie_tau_s': [0.35, 0.55, 0.75, 0.95, 1.15], 'G': [0.8573, 1.2703, 1.6614, 2.059, 2.3471]} ≠ TEACH — ODMOWA",
+   "meta_teach": null,
+   "ogon": "/NAD3/s1/freeze_U_P1.json', 'sha256_tabeli': '806f5e90c3dc5844c2870d4485b272c45f7816dff84e3e9d8bb77f143bfde722', 'punkt': 'P1', 'E': 1.0, 'tau_star_s': 1.15, 'prog_zatrzasku_ticki': 21, 'krawedzie_tau_s': [0.35, 0.55, 0.75, 0.95, 1.15], 'G': [0.8573, 1.2703, 1.6614, 2.059, 2.3471]} ≠ TEACH — ODMOWA\n",
+   "oczekiwany_rc": 8,
+   "ok": true
+  },
+  "bez_NADIR_OSLONA": {
+   "rc": 8,
+   "wynik": null,
+   "teach_selfcheck_pass": false,
+   "odmowa": "[nad3] NADIR_OSLONA != nad3 — ODMOWA",
+   "meta_teach": null,
+   "ogon": " reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 30.0, 'bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.8}, 'ok': True}\n[nad3] NADIR_OSLONA != nad3 — ODMOWA\n",
+   "oczekiwany_rc": 8,
+   "ok": true
+  },
+  "zla_suma_42": {
+   "rc": 42,
+   "wynik": null,
+   "teach_selfcheck_pass": false,
+   "odmowa": "[nad3] osłona: [42] sha tabeli 7a56ba1b95f20641 / plik 7a56ba1b95f20641 / oczekiwana 0000000000000000 — ODMOWA",
+   "meta_teach": null,
+   "ogon": "smax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.9}, 'ok': True}\n[nad3] osłona: [42] sha tabeli 7a56ba1b95f20641 / plik 7a56ba1b95f20641 / oczekiwana 0000000000000000 — ODMOWA\n",
+   "oczekiwany_rc": 42,
+   "ok": true
+  },
+  "PASS": true
+ },
+ "2_blok_producenta": {
+  "lot": {
+   "wynik": "start",
+   "oczekiwany": "start",
+   "ok": true
+  },
+  "cien": {
+   "wynik": "start",
+   "oczekiwany": "start",
+   "ok": true
+  },
+  "datagram_Rama": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "meta_z_nad3": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "inna_suma_toru": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "meta_cien_przy_locie": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "meta_lot_przy_cieniu": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "meta_bez_litery_TEACH": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "lot_bez_datagramow": {
+   "wynik": "kod9",
+   "oczekiwany": "kod9",
+   "ok": true
+  },
+  "PASS": true
+ },
+ "3_producent_straznik": {
+  "nadir_obs_kody": {
+   "47": 47,
+   "48": 48,
+   "PASS": true
+  },
+  "straznik": {
+   "lata_X": {
+    "rc": 5,
+    "komunikat": "[teach dryrun_guard] GUARD: BOOT_LATA=X (S|M|J)",
+    "ok": true
+   },
+   "lata_pusta": {
+    "rc": 5,
+    "komunikat": "[teach dryrun_guard] GUARD: BOOT_LATA= (S|M|J)",
+    "ok": true
+   },
+   "cien_2": {
+    "rc": 5,
+    "komunikat": "[teach dryrun_guard] GUARD: BOOT_CIEN=2 (0|1)",
+    "ok": true
+   },
+   "cien_bez_T": {
+    "rc": 5,
+    "komunikat": "[teach dryrun_guard] GUARD: BOOT_CIEN=1 bez BOOT_T_CIEN",
+    "ok": true
+   },
+   "maska_bez_pliku": {
+    "rc": 5,
+    "komunikat": "[teach dryrun_guard] GUARD: BOOT_MASKA=/nie/ma/maski.png brak pliku",
+    "ok": true
+   },
+   "tryb_NM0": {
+    "rc": 5,
+    "komunikat": "[teach dryrun_guard] GUARD: tryby NM=0 KM=1 PT=0 poza dopuszczonym (1/1/0)",
+    "ok": true
+   },
+   "tryb_PT1": {
+    "rc": 5,
+    "komunikat": "[teach dryrun_guard] GUARD: tryby NM=1 KM=1 PT=1 poza dopuszczonym (1/1/0)",
+    "ok": true
+   },
+   "etap_s9": {
+    "rc": 5,
+    "komunikat": "[teach dryrun_guard] GUARD: TEACH_ETAP=s9",
+    "ok": true
+   },
+   "poprawna_kombinacja": {
+    "rc": 5,
+    "komunikat": "[kont dryrun_guard] GUARD: brak PERC2_FASTDDS_PROFILE",
+    "ok": true
+   },
+   "poprawny_cien": {
+    "rc": 5,
+    "komunikat": "[kont dryrun_guard] GUARD: brak PERC2_FASTDDS_PROFILE",
+    "ok": true
+   },
+   "PASS": true
+  },
+  "bash_n": {
+   "teach_boot.sh": true,
+   "teach_launch.sh": true,
+   "PASS": true
+  },
+  "PASS": true
+ },
+ "4_lot": {
+  "klatki": 1483,
+  "datagramy_odebrane": 1483,
+  "fazy_przed_startem": [
+   "mapa",
+   "przed_mapa"
+  ],
+  "t_flagi_w_chwili_startu": null,
+  "zamkniecia": 1,
+  "zamkniecie_sim": 173.8,
+  "t_flagi_producenta": 173.696,
+  "spadek_ulg": 173.696,
+  "wejscie_oslony_w_utrate": 173.796,
+  "mapa_kadry": 176,
+  "mapa_kf": 9,
+  "n_wiazan_w_rejestrze": 528,
+  "poprawki_przyjete": 586,
+  "analizator": {
+   "wazny": false,
+   "powod": [
+    "zero_detekcji_znacznikow"
+   ],
+   "epizody": [
+    {
+     "scen": "c05_s01",
+     "B1": true,
+     "B2": true,
+     "B3": true,
+     "B4": true,
+     "max_e_do_U": 0.2698,
+     "D1": true
+    }
+   ],
+   "zrodlo": {
+    "warunki_waznosci": {
+     "zero_detekcji_znacznikow": false,
+     "brak_mapy_po_fladze": true,
+     "georef_raz": true
+    },
+    "blad_poprawki": {
+     "n": 586,
+     "p50": 0.3601,
+     "p95": 0.5804,
+     "max": 0.6767
+    },
+    "opoznienie_pierwszej_poprawki_s": 0.104,
+    "skok_delta_pierwsza_m": 0.0507,
+    "przerwy": {
+     "max": 0.2,
+     "gt_115": 0,
+     "gt_215": 0,
+     "lista_gt_115": []
+    },
+    "georef": {
+     "t_flagi": 173.696,
+     "n_kadrow_mapy": 176,
+     "n_kf": 9,
+     "n_wiazan": 528,
+     "n_wiazan_przyjetych": 528,
+     "n_dop_pozno": 0,
+     "ms_zamkniecie": 39.74,
+     "ms_rozwiazanie": 35.54,
+     "wariant_K": "K",
+     "ms_od_flagi_do_georef": 64.13
+    },
+    "n_det_znacznikow": 3
+   }
+  },
+  "PASS": false
+ },
+ "4_cien": {
+  "klatki": 1239,
+  "datagramy_odebrane": 0,
+  "zamkniecia": 1,
+  "zamkniecie_sim": 173.6,
+  "t_flagi_producenta": 173.6,
+  "mapa_kadry": 175,
+  "mapa_kf": 10,
+  "flaga_rzeczywista_zmiany": [
+   [
+    13.0,
+    false,
+    null
+   ],
+   [
+    20.0,
+    true,
+    null
+   ],
+   [
+    107.2,
+    false,
+    107.092
+   ],
+   [
+    115.0,
+    true,
+    null
+   ]
+  ],
+  "zatrzask_rz_w_chwili_startu": null,
+  "poprawki_przyjete_w_rejestrze": 433,
+  "fazy": [
+   "lok",
+   "mapa"
+  ],
+  "PASS": true
+ },
+ "PASS": false
+}
