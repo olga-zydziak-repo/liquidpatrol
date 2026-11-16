@@ -1288,3 +1288,31 @@ CLOSED-BY-RECON (0 bootów)
   2.15 s przez 600 s.
 - P-TEACH-R7 (0.60): czas klatki lepszego rodzaju cech bez obciążenia
   ≤ 200 ms.
+
+## TEACH — zamknięcie reconu S0 (ANEKS_TEACH-1, 16.11.2026)
+- Recon TEACH-S0 CLOSED, śmierć Ś2 literą: mapa z klatek sprzed
+  cięcia georeferowana wprost z EKF (M1) albo z jedną stałą kursu na
+  lot (M2) daje max błąd przyjętej poprawki 1.81–1.86 m i 1.92–1.97 m
+  przy progu 1.37 m, tak samo na trzech łatach, także na samych 12
+  cięciach NAD3. Ś1 literą przez przerwy lotu długiego (do 3.6 s poza
+  obszarem widzianym przed cięciem), nie przez błąd. 0 bootów.
+- Kontrola M0 (georeferencja idealna): max 0.23–0.28 m, przyjętych
+  97.8–99.7%, na 12 cięciach przerwy SIFT do 0.4 s; parking, osiedle
+  i łąka bez różnicy. Czas kadru: SIFT p95 24 ms, AKAZE 14 ms.
+- CC własnym kodem: tabela 18/18 wierszy; model z samych póz odtwarza
+  błąd M1 kadr po kadrze (p95 różnicy 0.04 m, max 0.115 m na 6777
+  kadrach) — błąd to georeferencja klatki kluczowej, nie dopasowanie;
+  kurs klatek kluczowych p50 2.8°, p95 6.4°, max 14.0°, ze zmianą
+  znaku w locie; pozycja EKF przed cięciem wyprzedza GT o 0.10–0.12 s
+  razy prędkość.
+- Predykcje 1/7 przy sumie szans 3.90 (✓ tylko R7); chybienia
+  w stronę optymizmu.
+- ✗ projektowe CC: Ś1 mieszało przyrząd z pokryciem; M2 zakładało
+  stały błąd kursu w locie; wynik bez wektorów i numeru klatki
+  kluczowej; pokrycie liczone sumą kadrów zamiast klatkami kluczowymi.
+- Lekcje: kryterium przyrządu bada tylko przyrząd; zanim wyceni się
+  poprawkę stałą, sprawdza się, czy błąd jest stały; wynik per kadr
+  niesie wektory, nie same moduły.
+- Rachunek CC z póz (nie pomiar): mapa spięta obrazem i zakotwiczona
+  w torze EKF, obrót i przesunięcie na klatkę kluczową, skala stała —
+  max 0.9–1.1 m na 12 cięciach; same kotwice bez spójności 1.15–1.39 m.

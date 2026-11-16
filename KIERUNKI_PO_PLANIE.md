@@ -861,3 +861,12 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   przekazanie PROMPT_TEACH_S0.
 - Pozycja nieotwarta: wiek cudzej mapy (drabina edycji 2021, 2022,
   2024). Otwarcie tylko decyzją Olgi.
+
+## Dopisek stanu katalogu — 16.11.2026 (CO-TEACH-1, ANEKS_TEACH-1)
+- **TEACH, recon S0 — CLOSED przy biurku (Ś2).** Mapa z własnego lotu
+  georeferowana wprost z EKF: poza progiem 1.37 m przez błąd kursu
+  klatek kluczowych. Dopasowanie do takiej mapy przy georeferencji
+  idealnej: 0.2–0.3 m na każdym terenie.
+- **TEACH, recon S0B — otwarty** (PROMPT_TEACH_S0B): mapa spięta
+  obrazem i zakotwiczona w torze EKF sprzed cięcia. Drugie i ostatnie
+  podejście przy biurku; śmierć zamyka nogę.
