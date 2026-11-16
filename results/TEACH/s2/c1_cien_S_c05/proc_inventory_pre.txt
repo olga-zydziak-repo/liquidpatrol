@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       26229 15.6  0.0 330892 14184 ?        Sl   23:49   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       25861  4.9  0.5 2632756 191716 ?      SLl  23:44   0:14 python3 results/TEACH/tools/teach_s2_run.py C1
+olga       16107  3.0  1.2 5709064 401144 pts/4  Sl+  22:03   3:12 claude
+olga       26116  1.8  0.4 795704 138284 ?       SLsl 23:48   0:01 /usr/bin/python3 /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_rejestrator.py --world world_teach_S --model x500_teach_flow_0 --out /home/olga/teach_stanowisko/c1_cien_S_c05
+root         249  0.1  0.1 2920520 60120 ?       Ssl  12:05   0:46 /usr/bin/containerd
+olga       26112  0.0  0.0 129356 22452 ?        Sl   23:48   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         361  0.0  0.2 10987200 86020 ?      Ssl  12:05   0:08 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root       16085  0.0  0.0   3200  1256 ?        S    22:03   0:01 /init
+olga       26117  0.0  0.0   5028  3724 ?        S    23:48   0:00 bash /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_boot.sh 3 c1_cien_S_c05 5 -
+olga       25821  0.0  0.0   5160  3924 ?        Ss   23:44   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1794863071541-1j4727.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'cd /home/olga/projects/liquidpatrol; source /opt/ros/jazzy/setup.bash >/dev/null 2>&1; source ros2_ws/install/setup.bash >/dev/null 2>&1; python3 results/TEACH/tools/teach_s2_run.py C1 > /tmp/claude-1000/-home-olga-projects-liquidpatrol/ecc58dba-1afe-4d26-81a0-93463b2b7a6b/scratchpad/c1.log 2>&1; tail -3 /tmp/claude-1000/-home-olga-projects-liquidpatrol/ecc58dba-1afe-4d26-81a0-93463b2b7a6b/scratchpad/c1.log' < /dev/null && pwd -P >| /tmp/claude-e1c2-cwd
+root          40  0.0  0.0  66864 20336 ?        S<s  12:05   0:01 /usr/lib/systemd/systemd-journald
+root           1  0.0  0.0  21912 13352 ?        Ss   12:05   0:01 /sbin/init
+polkitd      197  0.0  0.0 308188  8200 ?        Ssl  12:05   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root          87  0.0  0.0  26140  7180 ?        Ss   12:05   0:00 /usr/lib/systemd/systemd-udevd
+message+     192  0.0  0.0   9804  5532 ?        Ss   12:05   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         208  0.0  0.0  17400  6348 ?        Ss   12:05   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  12:05   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root         202  0.0  0.0  17988  8840 ?        Ss   12:05   0:00 /usr/lib/systemd/systemd-logind
+systemd+     182  0.0  0.0  21352 13228 ?        Ss   12:05   0:00 /usr/lib/systemd/systemd-resolved

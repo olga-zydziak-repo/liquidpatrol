@@ -1,0 +1,137 @@
+{
+ "boot": "c1_cien_S_c05",
+ "t_cien": 173.6,
+ "koniec_misji": 212.164,
+ "kadry_okna": 193,
+ "przyjete_okna": 193,
+ "bramka_obrazu": {
+  "blad_max": 0.4862,
+  "udzial_przyjetych": 1.0,
+  "zgodne_z_manifestem": 0,
+  "ok": true
+ },
+ "blad_poprawki_okna": {
+  "p50": 0.3386,
+  "p95": 0.4216,
+  "max": 0.4862
+ },
+ "detekcje": {
+  "surowe": {
+   "n": 0,
+   "id": [],
+   "bok_max": null,
+   "n_kadrow": 0
+  },
+  "zgodne": {
+   "n": 0,
+   "id": [],
+   "odl_p95": null,
+   "odl_max": null,
+   "lista": []
+  },
+  "odl_wszystkich_z_manifestu": {
+   "n": 0,
+   "min": null
+  }
+ },
+ "przerwy": {
+  "max": 0.2,
+  "gt_115": 0,
+  "gt_215": 0,
+  "lista_gt_115": []
+ },
+ "opoznienie_pierwszej_poprawki_s": 0.0,
+ "georef": {
+  "t_flagi": 173.6,
+  "n_kadrow_mapy": 180,
+  "n_kf": 9,
+  "n_wiazan": 540,
+  "n_wiazan_przyjetych": 540,
+  "n_dop_pozno": 0,
+  "ms_zamkniecie": 43.35,
+  "ms_rozwiazanie": 39.19,
+  "wariant_K": "K",
+  "ms_od_flagi_do_georef": 67.49
+ },
+ "kf_reszta_kursu_deg": {
+  "p50": 1.7293,
+  "p95": 2.2946,
+  "max": 2.4758
+ },
+ "kf_reszta_srodka_m": {
+  "p50": 0.1818,
+  "p95": 0.2321,
+  "max": 0.2472
+ },
+ "czas_ms": {
+  "mapa": {
+   "p50": 23.23,
+   "p95": 28.06,
+   "max": 42.79
+  },
+  "lokalizacja": {
+   "p50": 10.91,
+   "p95": 12.91,
+   "max": 16.07
+  },
+  "detektor_znacznikow": {
+   "p50": 0.72,
+   "p95": 1.72,
+   "max": 4.75
+  }
+ },
+ "n_drop": 0,
+ "n_img": 1094,
+ "n_proc": 1094,
+ "piksele_nieruchome": {
+  "n_kadrow": 38,
+  "udzial": 0.0,
+  "pikseli": 0
+ },
+ "kadry_rejestratora": 226,
+ "F1": {
+  "zmiany_flagi_rzeczywistej": [
+   [
+    13.8,
+    null,
+    null
+   ],
+   [
+    14.6,
+    true,
+    null
+   ],
+   [
+    65.6,
+    false,
+    1794869451.438482
+   ],
+   [
+    68.0,
+    true,
+    null
+   ],
+   [
+    105.8,
+    false,
+    1794869493.388589
+   ],
+   [
+    107.2,
+    true,
+    null
+   ]
+  ],
+  "start_sim": 127.716,
+  "zatrzask_w_chwili_startu": null,
+  "zamkniecia": [
+   173.6
+  ],
+  "zamkniecie_w_chwili_cienia": true,
+  "ok": true
+ },
+ "fazy": [
+  "lok",
+  "mapa"
+ ]
+}

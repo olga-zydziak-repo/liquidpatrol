@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       28224 13.3  0.0 330892 14164 ?        Sl   00:00   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       27841  4.5  0.5 2628660 191884 ?      SLl  Nov16   0:15 python3 results/TEACH/tools/teach_s2_run.py C2
+olga       28218  3.2  0.0   5028  3708 ?        S    00:00   0:00 bash /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_launch.sh world_teach_J
+olga       16107  2.8  1.2 5709064 414604 pts/4  Sl+  Nov16   3:22 claude
+olga       28107  1.5  0.4 795704 138600 ?       SLsl Nov16   0:01 /usr/bin/python3 /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_rejestrator.py --world world_teach_J --model x500_teach_flow_0 --out /home/olga/teach_stanowisko/c2_cien_J_c10
+root         249  0.1  0.1 2920520 59724 ?       Ssl  Nov16   0:46 /usr/bin/containerd
+olga       28103  0.0  0.0 129356 22540 ?        Sl   Nov16   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         361  0.0  0.2 10987200 85428 ?      Ssl  Nov16   0:08 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root       16085  0.0  0.0   3200  1256 ?        S    Nov16   0:01 /init
+olga       28108  0.0  0.0   5028  3660 ?        S    Nov16   0:00 bash /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_boot.sh 4 c2_cien_J_c10 10 -
+root          40  0.0  0.0  66864 20468 ?        S<s  Nov16   0:01 /usr/lib/systemd/systemd-journald
+olga       27801  0.0  0.0   5160  3952 ?        Ss   Nov16   0:00 /bin/bash -c source /home/olga/.claude/shell-snapshots/snapshot-bash-1794863071541-1j4727.sh 2>/dev/null || true && shopt -u extglob 2>/dev/null || true && { \builtin unalias -- 'unsetenv'; \builtin unset -f -- 'unsetenv'; } >/dev/null 2>&1 || true && eval 'cd /home/olga/projects/liquidpatrol; source /opt/ros/jazzy/setup.bash >/dev/null 2>&1; source ros2_ws/install/setup.bash >/dev/null 2>&1; python3 results/TEACH/tools/teach_s2_run.py C2 > /tmp/claude-1000/-home-olga-projects-liquidpatrol/ecc58dba-1afe-4d26-81a0-93463b2b7a6b/scratchpad/c2.log 2>&1; tail -2 /tmp/claude-1000/-home-olga-projects-liquidpatrol/ecc58dba-1afe-4d26-81a0-93463b2b7a6b/scratchpad/c2.log | cut -c1-300' < /dev/null && pwd -P >| /tmp/claude-2211-cwd
+root           1  0.0  0.0  21912 13352 ?        Ss   Nov16   0:01 /sbin/init
+polkitd      197  0.0  0.0 308188  8200 ?        Ssl  Nov16   0:01 /usr/lib/polkit-1/polkitd --no-debug
+root          87  0.0  0.0  26140  7180 ?        Ss   Nov16   0:00 /usr/lib/systemd/systemd-udevd
+message+     192  0.0  0.0   9804  5532 ?        Ss   Nov16   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+root         208  0.0  0.0  17400  6348 ?        Ss   Nov16   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  Nov16   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root         202  0.0  0.0  17988  8840 ?        Ss   Nov16   0:00 /usr/lib/systemd/systemd-logind

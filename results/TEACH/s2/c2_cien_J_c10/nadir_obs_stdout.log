@@ -1,0 +1,31 @@
+[nadir_obs] img=71 proc=71 det=0 drop=0 flip=0
+[nadir_obs] img=145 proc=145 det=0 drop=0 flip=0
+[nadir_obs] img=218 proc=218 det=0 drop=0 flip=0
+[nadir_obs] img=291 proc=291 det=0 drop=0 flip=0
+[nadir_obs] img=365 proc=365 det=0 drop=0 flip=0
+[nadir_obs] img=438 proc=438 det=0 drop=0 flip=0
+[nadir_obs] img=511 proc=511 det=0 drop=0 flip=0
+[nadir_obs] img=584 proc=584 det=0 drop=0 flip=0
+[nadir_obs] img=653 proc=653 det=0 drop=0 flip=0
+[nadir_obs] img=726 proc=726 det=0 drop=0 flip=0
+[nadir_obs] img=798 proc=798 det=0 drop=0 flip=0
+[nadir_obs] img=870 proc=870 det=0 drop=0 flip=0
+[nadir_obs] img=942 proc=942 det=0 drop=0 flip=0
+[nadir_obs] img=1014 proc=1014 det=0 drop=0 flip=0
+[nadir_obs] img=1087 proc=1087 det=0 drop=0 flip=0
+Thread 0x00007db57fbff6c0 (most recent call first):
+  File "/usr/lib/python3.12/threading.py", line 359 in wait
+  File "/usr/lib/python3.12/queue.py", line 180 in get
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 172 in worker
+  File "/usr/lib/python3.12/threading.py", line 1010 in run
+  File "/usr/lib/python3.12/threading.py", line 1073 in _bootstrap_inner
+  File "/usr/lib/python3.12/threading.py", line 1030 in _bootstrap
+
+Current thread 0x00007db5e0a28740 (most recent call first):
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 781 in _wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 877 in wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 907 in _spin_once_impl
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 926 in spin_once
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 306 in main
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 320 in <module>
+[nadir_obs] DONE {"n_img": 1115, "n_drop": 0, "n_proc": 1115, "n_det_klatki": 0, "flip_hits": 0, "n_fix": 273, "n_det_znacznikow": 0, "det_ms": {"p50": 0.5868820007890463, "p95": 2.33086000662297, "max": 4.3427429991425015}, "zamkniecie": "koniec_petli", "mono": 43134.379}
