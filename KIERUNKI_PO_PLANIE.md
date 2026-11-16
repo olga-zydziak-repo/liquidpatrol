@@ -850,3 +850,14 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
 - Obserwacje bez pozycji: tor zależy od kierunku błędu o 0.4–0.8 m
   (mechanizm niezmierzony); admisja celu stojącego (dopisek
   CO-NAD3-2).
+
+## Dopisek stanu katalogu — 16.11.2026 (CO-ORTO-1, ANEKS_ORTO-1)
+- **ORTO, recon — CLOSED przy biurku (Ś3).** Cudza mapa z edycji
+  sprzed 13 lat i z innej pory roku: poza kontraktem na wszystkich
+  łatach. Ta sama edycja po obu stronach: 0.2 m bez przerw.
+- **Następna pozycja wątku: TEACH — mapa z własnego lotu.** Dron
+  buduje mapę z klatek kamery w dół, dopóki ma GNSS, i po cięciu
+  dopasowuje do niej bieżący kadr. Recon przy biurku otwiera
+  przekazanie PROMPT_TEACH_S0.
+- Pozycja nieotwarta: wiek cudzej mapy (drabina edycji 2021, 2022,
+  2024). Otwarcie tylko decyzją Olgi.

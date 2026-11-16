@@ -1251,3 +1251,24 @@ CLOSED-BY-RECON (0 bootów)
 - P-ORTO-R7 (0.80): samymi flagami nowej warstwy nie da się pokazać
   podłoża wyłącznie kamerze w dół; potrzebna zmiana masek kamery
   przepływu i kamery misji.
+
+## ORTO — zamknięcie reconu (ANEKS_ORTO-1, 16.11.2026)
+- Recon ORTO-S0 CLOSED, śmierć Ś3 literą: na parze edycji
+  2012-04-28 → 2025-08-12 żaden kandydat na żadnej łacie nie mieści
+  się w 1.37 m i przerwach 2.15 s. Bieg oceny przerwany decyzją Olgi
+  przy 42/78 zadań; kryterium jest maksimum po lotach, więc
+  rozstrzygają je loty policzone (A: 2.70 m i przerwa 71 s; B: 25.5 m;
+  C: 59.9 m). 0 bootów.
+- Kontrola (ta sama edycja): cechy p50 0.03–0.07 m, max 0.18 m, bez
+  przerw, na lotach oceny A i B.
+- Predykcje 5/7 przy sumie szans 4.40 (✗ R3, ✗ literą R4).
+- ✗ projektowe CC: reguła pary bez górnej granicy odstępu i bez pory
+  roku; łaty wybierane bez podglądu (dwie z koron drzew, jedna
+  ocenzurowana); brak budżetu obliczeń.
+- Lekcje: reguła doboru danych ma granicę z obu stron; wybór po
+  obejrzeniu, ale przed pomiarem, nie jest podglądaniem wyniku; każdy
+  bieg przy biurku ma limit czasu i zapis cząstkowy.
+- CC własnym kodem z zapisów lotów: mapa z klatek sprzed cięcia
+  pokrywa co najmniej połowę kadru w 99–100% klatek po cięciu
+  (geometria NAD3) i w 97% (NAD2); EKF przed cięciem: pozycja p50
+  0.21 m, max 0.42 m, kurs p50 2.9°, p95 4.8°, max 15.2°.
