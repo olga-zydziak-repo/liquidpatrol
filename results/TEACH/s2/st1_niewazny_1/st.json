@@ -1,0 +1,49 @@
+{
+ "tag": "ST1",
+ "model": "x500_nadir2_flow",
+ "zrodlo_modelu": "results/NADIR/s1/zrodla/x500_nadir2_flow",
+ "swiat": "world_nadir2_A3",
+ "poza": [
+  25.0,
+  0.0,
+  11.0
+ ],
+ "world_hash": "7f2bbe1360819a8b64ee462ad9c1852e6525b02fa197460953725ca44aeb81d8  worlds/world_nadir2_A3.sdf",
+ "sha_model_sdf": "1fa0c57d3863081b51a43f9cb54e6e6a3987be1fe7ab113f51b2fa992cd6a093",
+ "spawn": "data: true",
+ "tematy": {
+  "imager": true,
+  "flow": true,
+  "nadir": true,
+  "lidar": true
+ },
+ "dane": {
+  "t0_sim": null,
+  "imager": [],
+  "flow": [],
+  "nadir": [],
+  "lidar": []
+ },
+ "swiadek": {
+  "detekcje": {
+   "surowe": {
+    "n": 0,
+    "id": [],
+    "bok_max": null,
+    "n_kadrow": 0
+   },
+   "zgodne": {
+    "n": 0,
+    "id": [],
+    "odl_p95": null,
+    "odl_max": null,
+    "lista": []
+   },
+   "odl_wszystkich_z_manifestu": {
+    "n": 0,
+    "min": null
+   }
+  },
+  "nadir_std_jasnosci": []
+ }
+}

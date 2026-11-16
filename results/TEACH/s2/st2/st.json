@@ -1,0 +1,156 @@
+{
+ "tag": "ST2",
+ "model": "x500_teach_flow",
+ "zrodlo_modelu": "results/TEACH/s1/zrodla/x500_teach_flow",
+ "swiat": "world_teach_S",
+ "poza": [
+  25.0,
+  0.0,
+  11.0
+ ],
+ "world_hash": "38f1f4ace1e27adfe059f786a9b2004e026911911ae30258af1b0b69d3cc2486  worlds/world_teach_S.sdf",
+ "sha_model_sdf": "656ccc9b2040fd96c863f3bb44fa740ca7b7a40ac745773aa06d663f30b4a447",
+ "spawn": "data: true",
+ "tematy": {
+  "imager": true,
+  "flow": true,
+  "nadir": true,
+  "lidar": true
+ },
+ "dane": {
+  "t0_sim": 1.62,
+  "imager": [
+   {
+    "sim": 5.612,
+    "plik": "imager_0.png",
+    "ksztalt": [
+     480,
+     640,
+     3
+    ]
+   },
+   {
+    "sim": 5.676,
+    "plik": "imager_1.png",
+    "ksztalt": [
+     480,
+     640,
+     3
+    ]
+   },
+   {
+    "sim": 5.744,
+    "plik": "imager_2.png",
+    "ksztalt": [
+     480,
+     640,
+     3
+    ]
+   }
+  ],
+  "flow": [
+   {
+    "sim": 5.62,
+    "plik": "flow_0.png",
+    "ksztalt": [
+     100,
+     100,
+     3
+    ]
+   },
+   {
+    "sim": 5.64,
+    "plik": "flow_1.png",
+    "ksztalt": [
+     100,
+     100,
+     3
+    ]
+   },
+   {
+    "sim": 5.66,
+    "plik": "flow_2.png",
+    "ksztalt": [
+     100,
+     100,
+     3
+    ]
+   }
+  ],
+  "nadir": [
+   {
+    "sim": 5.8,
+    "plik": "nadir_0.png",
+    "ksztalt": [
+     480,
+     640,
+     3
+    ]
+   },
+   {
+    "sim": 6.0,
+    "plik": "nadir_1.png",
+    "ksztalt": [
+     480,
+     640,
+     3
+    ]
+   },
+   {
+    "sim": 6.2,
+    "plik": "nadir_2.png",
+    "ksztalt": [
+     480,
+     640,
+     3
+    ]
+   }
+  ],
+  "lidar": [
+   {
+    "sim": 5.62,
+    "zakresy": [
+     11.18075
+    ]
+   },
+   {
+    "sim": 5.64,
+    "zakresy": [
+     11.18075
+    ]
+   },
+   {
+    "sim": 5.66,
+    "zakresy": [
+     11.18075
+    ]
+   }
+  ]
+ },
+ "swiadek": {
+  "detekcje": {
+   "surowe": {
+    "n": 0,
+    "id": [],
+    "bok_max": null,
+    "n_kadrow": 0
+   },
+   "zgodne": {
+    "n": 0,
+    "id": [],
+    "odl_p95": null,
+    "odl_max": null,
+    "lista": []
+   },
+   "odl_wszystkich_z_manifestu": {
+    "n": 0,
+    "min": null
+   }
+  },
+  "nadir_std_jasnosci": [
+   34.8,
+   34.8,
+   34.8
+  ]
+ }
+}
