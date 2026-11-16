@@ -12,6 +12,10 @@ results/NAD3/tools/nad3_analyze.py (nietknięty) ze zmianami oznaczonymi „TEAC
   - warunki ważności lotu (PRE_TEACH §6): zero detekcji znaczników w kamerze w dół przez cały lot; żadna klatka kluczowa ani
     wiązanie po fladze (kadr włączony do mapy z czasem ≥ chwila flagi ULG, klatka kluczowa georeferencji po fladze); georeferencja
     rozwiązana dokładnie raz. Niespełnienie ⇒ lot nieważny (nie FAIL nogi).
+ANEKS_TEACH-2 §3 (TEACH-2A): świadek tezy = zero detekcji ZGODNYCH Z MANIFESTEM — ID z manifestu znaczników v2 i punkt gruntu
+środka detekcji (promień piksela uv przy pozie GT kadru, kamera w dół z przypiętego modelu — orto_r2.Kam, przecięty z płaszczyzną
+z = z znacznika) nie dalej niż 1.0 m od pozycji tego ID; detekcje surowe jako obserwabla (liczba, ID, bok). Funkcja zgodnosc_detekcji
+liczy też poza lotem TEACH (sprawdziany aneksu §4.3).
 Wyjście <boot>/wyniki_teach.json. Nagłówek oryginału:
 results/NAD3/tools/nad3_analyze.py — analizator nogi NADIR-III (PROMPT_NAD3_S1 §1.3, PRE_NAD3 §6) = KOPIA
 results/NAD2/tools/nad2_analyze.py (nietknięty) ze zmianami oznaczonymi „NAD3:” wyłącznie:
@@ -107,6 +111,61 @@ def tabela_lotu(d):
     return T if T["punkt"] == "TEACH" else None
 
 
+MANIFEST_V2 = os.path.join(ROOT, "results/NADIR/s1/n1/manifest_znaczniki_v2.json")
+PROG_ZGODNOSCI_M = 1.0
+_KAM = {}
+
+
+def kamera_nadir():
+    if "k" not in _KAM:
+        sys.path[:0] = [os.path.join(ROOT, "results/ORTO_RECON/tools")]
+        import orto_r2 as R2
+        _KAM["k"] = (R2, R2.Kam(R2.kamera()))
+    return _KAM["k"]
+
+
+def punkt_gruntu(p_enu, q, uv, z):
+    """TEACH-2A: punkt (E, N) przecięcia promienia piksela uv (indeksy pikseli jak uv detektora) z płaszczyzną z, poza GT (p ENU,
+    q FLU→ENU); None, gdy promień nie trafia płaszczyzny."""
+    R2, kam = kamera_nadir()
+    C, Rk = kam.poza(np.asarray(p_enu, float), R2.rotm(q))
+    dcz = np.array([1.0, -(uv[0] + 0.5 - kam.W / 2) / kam.F, -(uv[1] + 0.5 - kam.H / 2) / kam.F])
+    r = Rk @ dcz
+    if r[2] >= -1e-9:
+        return None
+    t = (z - C[2]) / r[2]
+    return C[:2] + t * r[:2]
+
+
+def zgodnosc_detekcji(wpisy, gt_pose):
+    """TEACH-2A: wpisy = [(sim, [det {id, uv, bok}])]; zwraca obserwable surowe i zgodne z manifestem (ANEKS_TEACH-2 §3.1)."""
+    man = {z["id"]: z for z in json.load(open(MANIFEST_V2))["znaczniki"]}
+    sur, zg, odl = [], [], []
+    for sim, det in wpisy:
+        if not det:
+            continue
+        p, q = gt_pose(sim)
+        for m in det:
+            sur.append({"sim": sim, "id": m["id"], "bok": m.get("bok")})
+            z = man.get(m["id"])
+            if z is None:
+                continue
+            g = punkt_gruntu(p, q, m["uv"], z["z"])
+            if g is None:
+                continue
+            dd = float(np.hypot(g[0] - z["E"], g[1] - z["N"]))
+            odl.append(dd)
+            if dd <= PROG_ZGODNOSCI_M:
+                zg.append({"sim": sim, "id": m["id"], "bok": m.get("bok"), "odl_m": round(dd, 4)})
+    boki = [x["bok"] for x in sur if x["bok"] is not None]
+    return {"surowe": {"n": len(sur), "id": sorted({x["id"] for x in sur}), "bok_max": max(boki) if boki else None,
+                       "n_kadrow": len({x["sim"] for x in sur})},
+            "zgodne": {"n": len(zg), "id": sorted({x["id"] for x in zg}),
+                       "odl_p95": round(float(np.quantile([x["odl_m"] for x in zg], .95)), 4) if zg else None,
+                       "odl_max": round(max(x["odl_m"] for x in zg), 4) if zg else None, "lista": zg[:50]},
+            "odl_wszystkich_z_manifestu": {"n": len(odl), "min": round(min(odl), 4) if odl else None}}
+
+
 def zrodlo_teach(d, GTp, t_flag, t_konca, gt_pose):
     """TEACH: obserwable i ważność źródła z nadir_obs.jsonl; GTp(t) = GT NED, gt_pose(t) = (p ENU, q FLU→ENU)."""
     nf = jl(os.path.join(d, "nadir_obs.jsonl"), "nf")
@@ -114,6 +173,7 @@ def zrodlo_teach(d, GTp, t_flag, t_konca, gt_pose):
     out = {"meta_litera": meta.get("litera"), "wariant_K": (meta.get("teach") or {}).get("wariant_K"),
            "n_klatek": len(nf), "n_det_znacznikow": int(sum(r.get("n", 0) for r in nf)),
            "n_klatek_z_detekcja": sum(1 for r in nf if r.get("n", 0))}
+    out["detekcje"] = zgodnosc_detekcji([(r["sim"], r.get("det")) for r in nf], gt_pose)          # TEACH-2A
     tr = [r for r in nf if r.get("teach") is not None]
     if not tr:
         out.update(wazny=False, powod_niewazny="brak producenta TEACH w nadir_obs.jsonl")
@@ -123,7 +183,7 @@ def zrodlo_teach(d, GTp, t_flag, t_konca, gt_pose):
     G = geo[0]["teach"]["georef"] if geo else None
     po_fladze_mapa = [w for w in wl if t_flag is not None and w["sim"] >= t_flag]
     kf_po = [k for k in (G or {}).get("kf", []) if t_flag is not None and k["sim"] >= t_flag]
-    out["warunki_waznosci"] = {"zero_detekcji_znacznikow": out["n_det_znacznikow"] == 0,
+    out["warunki_waznosci"] = {"zero_detekcji_zgodnych_z_manifestem": out["detekcje"]["zgodne"]["n"] == 0,   # TEACH-2A
                                "brak_mapy_po_fladze": not po_fladze_mapa and not kf_po, "georef_raz": len(geo) == 1}
     out["kadry_mapy_po_fladze"], out["kf_po_fladze"] = len(po_fladze_mapa), len(kf_po)
     out["wazny"] = all(out["warunki_waznosci"].values())

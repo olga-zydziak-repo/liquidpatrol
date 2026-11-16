@@ -80,7 +80,7 @@
    "teach_selfcheck_pass": false,
    "odmowa": "[nad3] NADIR_OSLONA != nad3 — ODMOWA",
    "meta_teach": null,
-   "ogon": " reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 30.0, 'bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.8}, 'ok': True}\n[nad3] NADIR_OSLONA != nad3 — ODMOWA\n",
+   "ogon": " reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 30.0, 'bias_absmax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 117.0}, 'ok': True}\n[nad3] NADIR_OSLONA != nad3 — ODMOWA\n",
    "oczekiwany_rc": 8,
    "ok": true
   },
@@ -90,7 +90,7 @@
    "teach_selfcheck_pass": false,
    "odmowa": "[nad3] osłona: [42] sha tabeli 7a56ba1b95f20641 / plik 7a56ba1b95f20641 / oczekiwana 0000000000000000 — ODMOWA",
    "meta_teach": null,
-   "ogon": "smax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 116.9}, 'ok': True}\n[nad3] osłona: [42] sha tabeli 7a56ba1b95f20641 / plik 7a56ba1b95f20641 / oczekiwana 0000000000000000 — ODMOWA\n",
+   "ogon": "smax': 0.13}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 0.0, 'atrapa': True}, 'sim_reinit': 101.1, 'po': {'yaw_blad_deg': 6.4, 'bias_absmax': 0.0002, 'sim': 117.0}, 'ok': True}\n[nad3] osłona: [42] sha tabeli 7a56ba1b95f20641 / plik 7a56ba1b95f20641 / oczekiwana 0000000000000000 — ODMOWA\n",
    "oczekiwany_rc": 42,
    "ok": true
   },
@@ -228,10 +228,8 @@
   "n_wiazan_w_rejestrze": 528,
   "poprawki_przyjete": 586,
   "analizator": {
-   "wazny": false,
-   "powod": [
-    "zero_detekcji_znacznikow"
-   ],
+   "wazny": true,
+   "powod": null,
    "epizody": [
     {
      "scen": "c05_s01",
@@ -245,7 +243,7 @@
    ],
    "zrodlo": {
     "warunki_waznosci": {
-     "zero_detekcji_znacznikow": false,
+     "zero_detekcji_zgodnych_z_manifestem": true,
      "brak_mapy_po_fladze": true,
      "georef_raz": true
     },
@@ -270,15 +268,36 @@
      "n_wiazan": 528,
      "n_wiazan_przyjetych": 528,
      "n_dop_pozno": 0,
-     "ms_zamkniecie": 39.74,
-     "ms_rozwiazanie": 35.54,
+     "ms_zamkniecie": 33.82,
+     "ms_rozwiazanie": 29.84,
      "wariant_K": "K",
-     "ms_od_flagi_do_georef": 64.13
+     "ms_od_flagi_do_georef": 59.21
     },
-    "n_det_znacznikow": 3
+    "n_det_znacznikow": 2,
+    "detekcje": {
+     "surowe": {
+      "n": 2,
+      "id": [
+       17
+      ],
+      "bok_max": 5.83,
+      "n_kadrow": 2
+     },
+     "zgodne": {
+      "n": 0,
+      "id": [],
+      "odl_p95": null,
+      "odl_max": null,
+      "lista": []
+     },
+     "odl_wszystkich_z_manifestu": {
+      "n": 2,
+      "min": 7.7475
+     }
+    }
    }
   },
-  "PASS": false
+  "PASS": true
  },
  "4_cien": {
   "klatki": 1239,
@@ -318,5 +337,5 @@
   ],
   "PASS": true
  },
- "PASS": false
+ "PASS": true
 }

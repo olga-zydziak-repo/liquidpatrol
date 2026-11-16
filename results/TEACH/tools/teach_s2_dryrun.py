@@ -24,6 +24,7 @@ wzór results/NAD3/tools/nad3_s2_dryrun.py (nietknięty).
       zatrzask skasowany w chwili startu (armed);
       „cień” — p05_p1_nom_zew_NA (nominał), TEACH_T_CIEN 173.6: nic nie wysłane, jedno zamknięcie w chwili cienia, wiersz niesie flagę
       rzeczywistą i zatrzask, zatrzask w chwili startu skasowany.
+ANEKS_TEACH-2 (TEACH-2A): ważność wg „zero detekcji zgodnych z manifestem” (teach_analyze), producent z NADIR_FLIP=0 jak w boocie.
 Wyjście: results/TEACH/s2/dryrun/dryrun_s2.json (+ katalogi epizodów syntetycznych w katalogu tymczasowym — nie w repo).
 """
 import asyncio
@@ -270,7 +271,7 @@ def epizod(d, env, t_konca=None):
     sk = socket.socket(socket.AF_UNIX, socket.SOCK_DGRAM)
     sp = os.path.join(tmp, "drv.sock"); sk.bind(sp); sk.setblocking(False)
     outp = os.path.join(tmp, "nadir_obs.jsonl")
-    mod = zaladuj({**env, "NADIR_FIX_SOCKS": sp}, outp)
+    mod = zaladuj({**env, "NADIR_FIX_SOCKS": sp, "NADIR_FLIP": "0"}, outp)          # TEACH-2A: lustro jak w boocie
     meta = {"t": "meta", "litera": "TEACH", "teach": {**mod._prod.echo(), "sha256_toru": mod._tor["sha256_toru"],
                                                       "cien": mod.TEACH_CIEN, "t_cien": mod.T_CIEN}}
     with open(outp, "w") as f0:
@@ -385,7 +386,8 @@ def syntetyczny_lot():
                         "epizody": [{"scen": o["scenario_id"], **{b: o[b]["ok"] for b in ("B1", "B2", "B3", "B4") if b in o},
                                      "max_e_do_U": o["B1"]["max_e_do_U"], "D1": (o.get("D1") or {}).get("dostepne")} for o in res["epizody"]],
                         "zrodlo": {k: res["teach"].get(k) for k in ("warunki_waznosci", "blad_poprawki", "opoznienie_pierwszej_poprawki_s",
-                                                                   "skok_delta_pierwsza_m", "przerwy", "georef", "n_det_znacznikow")}}}
+                                                                   "skok_delta_pierwsza_m", "przerwy", "georef", "n_det_znacznikow",
+                                                                   "detekcje")}}}                     # TEACH-2A
     w["PASS"] = (w["datagramy_odebrane"] == w["klatki"] and set(fazy_przed) <= {"przed_mapa", "mapa"} and w["t_flagi_w_chwili_startu"] is None
                  and w["zamkniecia"] == 1 and w["mapa_kadry"] > 0 and abs(w["t_flagi_producenta"] - t_spadku) < 1e-6
                  and res.get("wazny") is True and all(e.get(b, True) for e in w["analizator"]["epizody"] for b in ("B1", "B2", "B3", "B4"))

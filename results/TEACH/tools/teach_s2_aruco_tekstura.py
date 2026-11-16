@@ -2,9 +2,12 @@
 """results/TEACH/tools/teach_s2_aruco_tekstura.py — znalezisko próby na sucho S2 (0 bootów): detektor znaczników bootu (harness/nadir_obs.py:
 cv2.aruco DICT_4X4_50, parametry domyślne, bez lustra — NADIR_FLIP=0 jak w teach_boot.sh) na kadrach reconu TEACH (render terenu łat S, M, J
 przy pozie GT, results/TEACH_RECON/r2_klatki.json.gz — serie przed i po, 13 lotów). Liczy detekcje na samym terenie (świat bez znaczników):
-liczba, kadry, ID, bok [px]. Wyjście: results/TEACH/s2/dryrun/aruco_tekstura.json."""
+liczba, kadry, ID, bok [px]. Wyjście: results/TEACH/s2/dryrun/aruco_tekstura.json.
+ANEKS_TEACH-2 §4.3 (TEACH-2A): każda detekcja niesie uv; po skanie zgodność z manifestem (teach_analyze.zgodnosc_detekcji: ID z manifestu
+v2, punkt gruntu środka z pozy GT kadru ≤ 1.0 m od pozycji ID) — oczekiwane 0 zgodnych."""
 from multiprocessing import Pool
 import numpy as np
+import gzip, json, os, sys
 ROOT = "/home/olga/projects/liquidpatrol"
 sys.path[:0] = [ROOT, os.path.join(ROOT, "results/ORTO_RECON/tools")]
 import cv2, orto_r2 as R2
@@ -24,6 +27,7 @@ def zad(arg):
             for cc, i in zip(c, ids.ravel()):
                 cc = cc.reshape(4, 2)
                 out.append({"lot": k["lot"], "seria": k["seria"], "sim": k["sim"], "id": int(i),
+                            "uv": [round(float(x), 2) for x in cc.mean(0)], "gt_p": k["gt_p"], "gt_q": k["gt_q"],
                             "bok": round(min(float(np.linalg.norm(cc[j] - cc[(j + 1) % 4])) for j in range(4)), 2)})
     return lata, i1 - i0, out
 
@@ -41,4 +45,20 @@ if __name__ == "__main__":
         for d in v["det"]:
             per[d["lot"]] = per.get(d["lot"], 0) + 1
         print("  per lot", per)
+    sys.path.insert(0, os.path.join(ROOT, "results/TEACH/tools"))
+    import teach_analyze as A
+    for l, v in res.items():
+        poz = {(d["lot"], d["sim"]): (d["gt_p"], d["gt_q"]) for d in v["det"]}
+        wp = {}
+        for d in v["det"]:
+            wp.setdefault((d["lot"], d["sim"]), []).append({"id": d["id"], "uv": d["uv"], "bok": d["bok"]})
+        zg = {"surowe": {"n": 0}, "zgodne": {"n": 0, "lista": []}}
+        for (lot, sim), det in wp.items():
+            z = A.zgodnosc_detekcji([(sim, det)], lambda t, _k=(lot, sim): poz[_k])
+            zg["surowe"]["n"] += z["surowe"]["n"]; zg["zgodne"]["n"] += z["zgodne"]["n"]
+            zg["zgodne"]["lista"] += [{"lot": lot, **x} for x in z["zgodne"]["lista"]]
+        v["zgodnosc_z_manifestem"] = zg
+        print(l, "surowe", zg["surowe"]["n"], "ZGODNE Z MANIFESTEM", zg["zgodne"]["n"], zg["zgodne"]["lista"][:5])
+    print("RAZEM kadry", sum(v["klatki"] for v in res.values()), "surowe", sum(len(v["det"]) for v in res.values()),
+          "zgodne", sum(v["zgodnosc_z_manifestem"]["zgodne"]["n"] for v in res.values()))
     json.dump(res, open(os.path.join(ROOT, "results/TEACH/s2/dryrun/aruco_tekstura.json"), "w"))
