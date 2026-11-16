@@ -1272,3 +1272,19 @@ CLOSED-BY-RECON (0 bootów)
   pokrywa co najmniej połowę kadru w 99–100% klatek po cięciu
   (geometria NAD3) i w 97% (NAD2); EKF przed cięciem: pozycja p50
   0.21 m, max 0.42 m, kurs p50 2.9°, p95 4.8°, max 15.2°.
+
+## TEACH — recon (PROMPT_TEACH_S0, 16.11.2026), predykcje CC
+- P-TEACH-R1 (0.85): mapa M0, łata S: największy błąd przyjętej
+  poprawki ≤ 0.5 m i żadnej przerwy ponad 1.15 s na 13 lotach.
+- P-TEACH-R2 (0.35): mapa M1 (kurs surowy), łata S: największy błąd
+  ≤ 1.0 m na 13 lotach.
+- P-TEACH-R3 (0.65): mapa M2 (kurs skalibrowany), łata S: największy
+  błąd ≤ 1.0 m na 13 lotach.
+- P-TEACH-R4 (0.55): mapa M2, łata M: największy błąd ≤ 1.0 m na 13
+  lotach.
+- P-TEACH-R5 (0.30): mapa M2, łata J: największy błąd ≤ 1.37 m
+  i przerwy ≤ 2.15 s.
+- P-TEACH-R6 (0.60): mapa M2, łata S, lot długi: żadnej przerwy ponad
+  2.15 s przez 600 s.
+- P-TEACH-R7 (0.60): czas klatki lepszego rodzaju cech bez obciążenia
+  ≤ 200 ms.
