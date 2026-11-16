@@ -1,0 +1,529 @@
+{
+ "kryterium": "(1) max błąd przyjętej ≤ 1.0 m na 6 cięciach c05 i ≥ 1 przyjęta; (2) min max przerwa, max przyjętych; (3) pusty dopuszczalny: min max błąd przyjętej, potem min max przerwa",
+ "wybrane": {
+  "A/para/K1_SIFT": {
+   "id": "a4_geo0_g1.5",
+   "a": 4,
+   "geo": false,
+   "g0": 1.5
+  },
+  "A/para/K2_AKAZE": {
+   "id": "a4_geo0_gNone",
+   "a": 4,
+   "geo": false,
+   "g0": null
+  },
+  "A/para/K3_NCC": {
+   "id": "c0.4_q1.2_g1.5",
+   "c": 0.4,
+   "q": 1.2,
+   "g0": 1.5
+  },
+  "A/kontrola/K1_SIFT": {
+   "id": "a12_geo0_g1.5",
+   "a": 12,
+   "geo": false,
+   "g0": 1.5
+  },
+  "A/kontrola/K2_AKAZE": {
+   "id": "a12_geo0_g1.5",
+   "a": 12,
+   "geo": false,
+   "g0": 1.5
+  },
+  "A/kontrola/K3_NCC": {
+   "id": "c0.3_q1.0_g1.5",
+   "c": 0.3,
+   "q": 1.0,
+   "g0": 1.5
+  },
+  "B/para/K1_SIFT": {
+   "id": "a4_geo0_g1.5",
+   "a": 4,
+   "geo": false,
+   "g0": 1.5
+  },
+  "B/para/K2_AKAZE": null,
+  "B/para/K3_NCC": null,
+  "B/kontrola/K1_SIFT": {
+   "id": "a12_geo0_g1.5",
+   "a": 12,
+   "geo": false,
+   "g0": 1.5
+  },
+  "B/kontrola/K2_AKAZE": {
+   "id": "a12_geo0_g1.5",
+   "a": 12,
+   "geo": false,
+   "g0": 1.5
+  },
+  "B/kontrola/K3_NCC": {
+   "id": "c0.3_q1.0_g1.5",
+   "c": 0.3,
+   "q": 1.0,
+   "g0": 1.5
+  },
+  "C/para/K1_SIFT": null,
+  "C/para/K2_AKAZE": null,
+  "C/para/K3_NCC": {
+   "id": "c0.3_q1.1_gNone",
+   "c": 0.3,
+   "q": 1.1,
+   "g0": null
+  },
+  "C/kontrola/K1_SIFT": null,
+  "C/kontrola/K2_AKAZE": null,
+  "C/kontrola/K3_NCC": {
+   "id": "c0.3_q1.0_g1.5",
+   "c": 0.3,
+   "q": 1.0,
+   "g0": 1.5
+  }
+ },
+ "tabela": {
+  "A/para/K1_SIFT": {
+   "tryb_wyboru": "najmniejszy_blad",
+   "regula": "a4_geo0_g1.5",
+   "n_dopuszczalnych": 0,
+   "n_regul": 36,
+   "strojenie": {
+    "err_acc_max": 37.68655127653347,
+    "n_przyj": 34,
+    "przerwa_max": 52.599999999999994,
+    "przerwy_gt_115": 38,
+    "przerwy_gt_215": 36,
+    "acc_gt_137": 34,
+    "acc_gt_228": 34,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 217.20806054075618,
+    "n_przyj": 192,
+    "przerwa_max": 110.4,
+    "przerwy_gt_115": 13,
+    "przerwy_gt_215": 12,
+    "acc_gt_137": 192,
+    "acc_gt_228": 191,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "A/para/K2_AKAZE": {
+   "tryb_wyboru": "najmniejszy_blad",
+   "regula": "a4_geo0_gNone",
+   "n_dopuszczalnych": 0,
+   "n_regul": 36,
+   "strojenie": {
+    "err_acc_max": 20.06604625513963,
+    "n_przyj": 1,
+    "przerwa_max": 110.404,
+    "przerwy_gt_115": 7,
+    "przerwy_gt_215": 6,
+    "acc_gt_137": 1,
+    "acc_gt_228": 1,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 263.51599314158204,
+    "n_przyj": 194,
+    "przerwa_max": 107.60000000000002,
+    "przerwy_gt_115": 9,
+    "przerwy_gt_215": 9,
+    "acc_gt_137": 194,
+    "acc_gt_228": 193,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "A/para/K3_NCC": {
+   "tryb_wyboru": "najmniejszy_blad",
+   "regula": "c0.4_q1.2_g1.5",
+   "n_dopuszczalnych": 0,
+   "n_regul": 72,
+   "strojenie": {
+    "err_acc_max": 2.091729129823712,
+    "n_przyj": 10,
+    "przerwa_max": 106.20400000000001,
+    "przerwy_gt_115": 12,
+    "przerwy_gt_215": 12,
+    "acc_gt_137": 4,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 60.62337864971368,
+    "n_przyj": 3138,
+    "przerwa_max": 3.0,
+    "przerwy_gt_115": 13,
+    "przerwy_gt_215": 3,
+    "acc_gt_137": 3138,
+    "acc_gt_228": 3133,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "A/kontrola/K1_SIFT": {
+   "tryb_wyboru": "dopuszczalny",
+   "regula": "a12_geo0_g1.5",
+   "n_dopuszczalnych": 36,
+   "n_regul": 36,
+   "strojenie": {
+    "err_acc_max": 0.21565058463450187,
+    "n_przyj": 3313,
+    "przerwa_max": 0.20000000000004547,
+    "przerwy_gt_115": 0,
+    "przerwy_gt_215": 0,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 0.21565058463450187,
+    "n_przyj": 3313,
+    "przerwa_max": 0.20000000000004547,
+    "przerwy_gt_115": 0,
+    "przerwy_gt_215": 0,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "A/kontrola/K2_AKAZE": {
+   "tryb_wyboru": "dopuszczalny",
+   "regula": "a12_geo0_g1.5",
+   "n_dopuszczalnych": 36,
+   "n_regul": 36,
+   "strojenie": {
+    "err_acc_max": 0.2062728628742798,
+    "n_przyj": 3313,
+    "przerwa_max": 0.20000000000004547,
+    "przerwy_gt_115": 0,
+    "przerwy_gt_215": 0,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 0.2062728628742798,
+    "n_przyj": 3313,
+    "przerwa_max": 0.20000000000004547,
+    "przerwy_gt_115": 0,
+    "przerwy_gt_215": 0,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "A/kontrola/K3_NCC": {
+   "tryb_wyboru": "dopuszczalny",
+   "regula": "c0.3_q1.0_g1.5",
+   "n_dopuszczalnych": 72,
+   "n_regul": 72,
+   "strojenie": {
+    "err_acc_max": 0.8492274058720244,
+    "n_przyj": 2918,
+    "przerwa_max": 10.0,
+    "przerwy_gt_115": 20,
+    "przerwy_gt_215": 9,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 0.8492274058720244,
+    "n_przyj": 3138,
+    "przerwa_max": 3.0,
+    "przerwy_gt_115": 13,
+    "przerwy_gt_215": 3,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "B/para/K1_SIFT": {
+   "tryb_wyboru": "najmniejszy_blad",
+   "regula": "a4_geo0_g1.5",
+   "n_dopuszczalnych": 0,
+   "n_regul": 36,
+   "strojenie": {
+    "err_acc_max": 54.283584572891165,
+    "n_przyj": 4,
+    "przerwa_max": 110.388,
+    "przerwy_gt_115": 10,
+    "przerwy_gt_215": 10,
+    "acc_gt_137": 4,
+    "acc_gt_228": 4,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 370.55227720975074,
+    "n_przyj": 129,
+    "przerwa_max": 109.60000000000002,
+    "przerwy_gt_115": 11,
+    "przerwy_gt_215": 9,
+    "acc_gt_137": 129,
+    "acc_gt_228": 129,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "B/para/K2_AKAZE": {
+   "tryb_wyboru": "nic_nie_przyjmuje",
+   "regula": null,
+   "n_dopuszczalnych": 0,
+   "n_regul": 36,
+   "strojenie": null,
+   "wszystko": {
+    "err_acc_max": 342.80516425297793,
+    "n_przyj": 210,
+    "przerwa_max": 109.6,
+    "przerwy_gt_115": 16,
+    "przerwy_gt_215": 13,
+    "acc_gt_137": 210,
+    "acc_gt_228": 210,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "B/para/K3_NCC": {
+   "tryb_wyboru": "nic_nie_przyjmuje",
+   "regula": null,
+   "n_dopuszczalnych": 0,
+   "n_regul": 72,
+   "strojenie": null,
+   "wszystko": {
+    "err_acc_max": 63.406924893502975,
+    "n_przyj": 3138,
+    "przerwa_max": 3.0,
+    "przerwy_gt_115": 13,
+    "przerwy_gt_215": 3,
+    "acc_gt_137": 3138,
+    "acc_gt_228": 3138,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "B/kontrola/K1_SIFT": {
+   "tryb_wyboru": "dopuszczalny",
+   "regula": "a12_geo0_g1.5",
+   "n_dopuszczalnych": 36,
+   "n_regul": 36,
+   "strojenie": {
+    "err_acc_max": 0.22306605278381417,
+    "n_przyj": 3313,
+    "przerwa_max": 0.20000000000004547,
+    "przerwy_gt_115": 0,
+    "przerwy_gt_215": 0,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 0.22306605278381417,
+    "n_przyj": 3313,
+    "przerwa_max": 0.20000000000004547,
+    "przerwy_gt_115": 0,
+    "przerwy_gt_215": 0,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "B/kontrola/K2_AKAZE": {
+   "tryb_wyboru": "dopuszczalny",
+   "regula": "a12_geo0_g1.5",
+   "n_dopuszczalnych": 36,
+   "n_regul": 36,
+   "strojenie": {
+    "err_acc_max": 0.2030657015583741,
+    "n_przyj": 3313,
+    "przerwa_max": 0.20000000000004547,
+    "przerwy_gt_115": 0,
+    "przerwy_gt_215": 0,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 0.2030657015583741,
+    "n_przyj": 3313,
+    "przerwa_max": 0.20000000000004547,
+    "przerwy_gt_115": 0,
+    "przerwy_gt_215": 0,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "B/kontrola/K3_NCC": {
+   "tryb_wyboru": "dopuszczalny",
+   "regula": "c0.3_q1.0_g1.5",
+   "n_dopuszczalnych": 72,
+   "n_regul": 72,
+   "strojenie": {
+    "err_acc_max": 0.6203959636437342,
+    "n_przyj": 2913,
+    "przerwa_max": 9.400000000000006,
+    "przerwy_gt_115": 19,
+    "przerwy_gt_215": 9,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 0.6465489150725009,
+    "n_przyj": 3138,
+    "przerwa_max": 3.0,
+    "przerwy_gt_115": 13,
+    "przerwy_gt_215": 3,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "C/para/K1_SIFT": {
+   "tryb_wyboru": "nic_nie_przyjmuje",
+   "regula": null,
+   "n_dopuszczalnych": 0,
+   "n_regul": 36,
+   "strojenie": null,
+   "wszystko": {
+    "err_acc_max": null,
+    "n_przyj": 0,
+    "przerwa_max": 110.404,
+    "przerwy_gt_115": 6,
+    "przerwy_gt_215": 6,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "C/para/K2_AKAZE": {
+   "tryb_wyboru": "nic_nie_przyjmuje",
+   "regula": null,
+   "n_dopuszczalnych": 0,
+   "n_regul": 36,
+   "strojenie": null,
+   "wszystko": {
+    "err_acc_max": null,
+    "n_przyj": 0,
+    "przerwa_max": 110.404,
+    "przerwy_gt_115": 6,
+    "przerwy_gt_215": 6,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "C/para/K3_NCC": {
+   "tryb_wyboru": "najmniejszy_blad",
+   "regula": "c0.3_q1.1_gNone",
+   "n_dopuszczalnych": 0,
+   "n_regul": 72,
+   "strojenie": {
+    "err_acc_max": 18.23183905777259,
+    "n_przyj": 6,
+    "przerwa_max": 107.0,
+    "przerwy_gt_115": 12,
+    "przerwy_gt_215": 12,
+    "acc_gt_137": 6,
+    "acc_gt_228": 6,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 31.330671608964327,
+    "n_przyj": 3138,
+    "przerwa_max": 3.0,
+    "przerwy_gt_115": 13,
+    "przerwy_gt_215": 3,
+    "acc_gt_137": 3023,
+    "acc_gt_228": 2855,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "C/kontrola/K1_SIFT": {
+   "tryb_wyboru": "nic_nie_przyjmuje",
+   "regula": null,
+   "n_dopuszczalnych": 0,
+   "n_regul": 36,
+   "strojenie": null,
+   "wszystko": {
+    "err_acc_max": null,
+    "n_przyj": 0,
+    "przerwa_max": 110.404,
+    "przerwy_gt_115": 6,
+    "przerwy_gt_215": 6,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "C/kontrola/K2_AKAZE": {
+   "tryb_wyboru": "nic_nie_przyjmuje",
+   "regula": null,
+   "n_dopuszczalnych": 0,
+   "n_regul": 36,
+   "strojenie": null,
+   "wszystko": {
+    "err_acc_max": null,
+    "n_przyj": 0,
+    "przerwa_max": 110.404,
+    "przerwy_gt_115": 6,
+    "przerwy_gt_215": 6,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   }
+  },
+  "C/kontrola/K3_NCC": {
+   "tryb_wyboru": "dopuszczalny",
+   "regula": "c0.3_q1.0_g1.5",
+   "n_dopuszczalnych": 66,
+   "n_regul": 72,
+   "strojenie": {
+    "err_acc_max": 0.7424595923238867,
+    "n_przyj": 3133,
+    "przerwa_max": 3.0,
+    "przerwy_gt_115": 13,
+    "przerwy_gt_215": 3,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   },
+   "wszystko": {
+    "err_acc_max": 0.7588639282871666,
+    "n_przyj": 3138,
+    "przerwa_max": 3.0,
+    "przerwy_gt_115": 13,
+    "przerwy_gt_215": 3,
+    "acc_gt_137": 0,
+    "acc_gt_228": 0,
+    "n": 3313,
+    "loty": 6
+   }
+  }
+ }
+}
