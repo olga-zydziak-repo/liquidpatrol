@@ -1367,3 +1367,23 @@ CLOSED-BY-RECON (0 bootów)
     poprawki na J ≤ max na S + 0.20 m.
   - P-TEACH-9 (0.75): zero REFUSE(τ*) w misji w 12 cięciach.
   - P-TEACH-10 (0.50): werdykt V-A.
+
+## TEACH — po S1 (PROMPT_TEACH_S2, 16.11.2026)
+- S1 PASS, 0 bootów. P-TEACH-1 ✓ (moduł lotu odtwarza recon 39/39
+  bez naprawy, zamknięcie mapy 97 ms). P-TEACH-2 ✗ (K′ odrzucony
+  regułą: usuwa przerwę p02, ale błąd na 12 cięciach +0.07 m
+  i przerwy w locie długim do 5.6 s). W lotach dobór K z reconu.
+- Replikacja CC: certy P9 / P7 / P5_teach powtórzone (z3 5.4.1,
+  liczniki ticków równe), lemat zawierania osobnym sformułowaniem
+  10/10; tabela i G co do cyfry; 25 827 wierszy modułu lotu równe
+  reconowi; georeferencja równa własnemu rozwiązaniu dla 366 klatek;
+  przesłanka na siatce klatek 0 przekroczeń, max e′/U′ 0.35.
+- Znalezisko przeglądu kodu: producent zatrzaskuje chwilę flagi na
+  pierwszym zerze i zamyka mapę przy pierwszej klatce w utracie,
+  a w boocie flaga jest zerem przed startem (higiena GPS, restart
+  EKF ok. 107 s). Mapa zamknęłaby się pusta; replay i tryb cienia
+  tego nie widzą. Naprawa F1–F2 przed pierwszym bootem.
+- ✗ projektowe CC: litera S1 nie przewidziała flagi 0 przed startem;
+  diagnoza K′ trafna dla p02, a poprawka szkodzi w locie długim.
+  Lekcja: warunek wyzwalany flagą sprawdza się na pełnej sekwencji
+  bootu, nie na oknie misji.
