@@ -1387,3 +1387,18 @@ CLOSED-BY-RECON (0 bootów)
   diagnoza K′ trafna dla p02, a poprawka szkodzi w locie długim.
   Lekcja: warunek wyzwalany flagą sprawdza się na pełnej sekwencji
   bootu, nie na oknie misji.
+
+## TEACH — ANEKS_TEACH-2 (16.11.2026): korekta świadka tezy
+- S2 zatrzymany próbą na sucho przed pierwszym bootem (0/24).
+  Poprawki F1–F3 zielone (commit 34fd058b).
+- Przyczyna: warunek „zero detekcji znaczników" łamie sama tekstura —
+  22 fałszywe detekcje słownika 4×4 na 32 937 kadrach reconu (ID 17
+  i 37, bok do 14.8 px); na łacie S nieważnych byłoby 5 z 12 cięć.
+- Nowe brzmienie: zero detekcji zgodnych z manifestem (ID z manifestu
+  i punkt gruntu środka z pozy GT nie dalej niż 1.0 m od pozycji tego
+  ID). Moc świadka zmierzona przez CC na lotach NAD3: 3932 / 3971 /
+  8760 detekcji, wszystkie zgodne, odległość p95 0.05 m, max 0.25 m.
+- ✗ projektowe CC: warunek na wynik detektora zapisany bez pomiaru
+  jego fałszywych alarmów na docelowym obrazie. Lekcja: świadek ma
+  mieć zmierzoną moc i zmierzony fałszywy alarm, zanim trafi do
+  litery.
