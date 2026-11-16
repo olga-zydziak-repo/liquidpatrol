@@ -1316,3 +1316,18 @@ CLOSED-BY-RECON (0 bootów)
 - Rachunek CC z póz (nie pomiar): mapa spięta obrazem i zakotwiczona
   w torze EKF, obrót i przesunięcie na klatkę kluczową, skala stała —
   max 0.9–1.1 m na 12 cięciach; same kotwice bez spójności 1.15–1.39 m.
+
+## TEACH — recon S0B (PROMPT_TEACH_S0B, 16.11.2026), predykcje CC
+- P-TEACH-R8 (0.75): mapa M4, łata S, SIFT, 12 cięć: największy błąd
+  przyjętej poprawki ≤ 1.37 m i przerwy ≤ 2.15 s.
+- P-TEACH-R9 (0.40): tamże największy błąd ≤ 1.0 m.
+- P-TEACH-R10 (0.70): mapa M4, łata S, SIFT, lot długi: największy
+  błąd ≤ 1.37 m.
+- P-TEACH-R11 (0.70): mapa M4, łata J, SIFT, 12 cięć: największy błąd
+  ≤ 1.37 m.
+- P-TEACH-R12 (0.45): mapa M3 (bez spójności), łata S, SIFT, 12 cięć:
+  największy błąd ≤ 1.37 m.
+- P-TEACH-R13 (0.70): mapa M4, łata S, SIFT, 12 cięć: p95 błędu
+  przyjętych ≤ 0.70 m.
+- P-TEACH-R14 (0.85): mapa M4, łata S, SIFT, lot długi: żadnej przerwy
+  ponad 2.15 s w mapie.
