@@ -1,0 +1,12 @@
+{
+ "opis": "PROMPT_TEACH_S0 R1 — trzy okna 100 × 100 m we Wrocławiu wybrane PO OBEJRZENIU edycji 2024 (podgląd WMS HighResolution, r1_podglad_kandydatow.jpg, 9 kandydatów), PRZED jakimkolwiek dopasowaniem; wymiany łaty nie ma.",
+ "uklad_wejscia": "WGS84 (EPSG:4326), stopnie",
+ "bok_m": 100.0,
+ "edycja": "2024-04-27, piksel 0.05 m",
+ "laty": {
+  "S": {"klasa": "struktura: parking z liniami i rzędami aut, jezdnie wewnętrzne, mało koron drzew (parking przy CH Magnolia Park)", "lat": 51.1185, "lon": 16.9905, "kandydat": "S2_magnolia"},
+  "M": {"klasa": "mieszana: łata A reconu ORTO (Sępolno), środek bez zmian", "lat": 51.1015, "lon": 17.0870, "kandydat": "ORTO A"},
+  "J": {"klasa": "jednolita: łąka / nieużytek trawiasty ze słabymi ścieżkami (Ołtaszyn)", "lat": 51.0570, "lon": 17.0400, "kandydat": "J3_pole_oltaszyn"}
+ },
+ "odrzucone": {"S1_stadion_parking": "dach stadionu w oknie", "S3_bielany_retail": "trafiony ogródki i drzewa, nie parking", "S4_kozanow_osiedle": "bloki i drzewa", "S5_swojczyce_przem": "zabudowa jednorodzinna z drzewami", "J1_pola_marsowe": "trafiona zabudowa i ogródki", "J2_pole_jerzmanowo": "pas drzew i granica pól w oknie", "J4_blonia_wroc": "las"}
+}
