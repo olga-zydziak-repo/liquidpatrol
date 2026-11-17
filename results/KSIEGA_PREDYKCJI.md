@@ -1539,3 +1539,16 @@ CLOSED-BY-RECON (0 bootów)
     misji ≤ największy w pierwszych 100 s + 0.15 m.
   - P-TEACH2-8 (0.65): klatek zgubionych w fazie mapy najwyżej 15.
   - P-TEACH2-9 (0.65): promień drona (GT) w misji najwyżej 20.5 m.
+
+## TEACH-II — ANEKS_TEACH2-1 (17.11.2026): tolerancja sprawdzianów manifestu
+- STOP-TEACH2-1-MANIFEST przed bootem, 0/3: krok 0.100017 m przy progu
+  0.1 m, promień 11.000052 m przy progu 11.0 m. Przyczyna:
+  zaokrąglenie początków odcinków v2 do 0.1 mm. Manifest poprawny:
+  pierwsze 200 s równe v2, wahadło lustrzane do 0.03 mm (CC własnym
+  kodem).
+- Litera: krok ≤ v·0.1 s + 0.001 m, promień ≤ 11.001 m. Manifest bez
+  zmian (sha d0841872). Budowa i reszta próby na sucho przyjęte.
+- P-TEACH2-1 (0.85) ✗ — budowa zatrzymała się STOP-em, z winy progu.
+- ✗ CC: próg na wielkości liczonej bez tolerancji liczbowej.
+  Lekcja: sprawdzian poprawności niesie tolerancję o rzędy mniejszą
+  od wady, którą ma łapać, i o rzędy większą od zaokrągleń.
