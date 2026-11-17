@@ -1,0 +1,271 @@
+{
+ "1_manifest": {
+  "sprawdziany_c10_s01": {
+   "pierwsze_200s_rowne_v2": true,
+   "n_odcinkow_200s": 16,
+   "max_roznica_pozycji_0_200s_m": 0.0,
+   "krok_max_0p1s_m": 0.100017,
+   "ciagly": false,
+   "promien_max_m": 11.0001,
+   "promien_ok": false,
+   "koniec_ostatniego_odcinka_s": 1000.0,
+   "ep_dur_s": 1000.0,
+   "ok": false
+  },
+  "sha256": "d0841872d453259ea78b4cc598f2720f9d5b50f4ac86177f3ca5b51cdd27858c",
+  "sha_pliku_zgodna": true,
+  "PASS": false
+ },
+ "2_plan_straznik": {
+  "plan": {
+   "nazwa": "L1_S_c10",
+   "env": {
+    "BOOT_NADIR_MODE": "1",
+    "BOOT_KONT_MODE": "1",
+    "BOOT_PASSTHROUGH": "0",
+    "TEACH_ETAP": "s3",
+    "BOOT_LATA": "S",
+    "BOOT_CIEN": "0",
+    "NAD3_MANIFEST": "results/TEACH2/scenario_manifest_teach2L.json",
+    "NAD3_MANIFEST_SHA": "d0841872d453259ea78b4cc598f2720f9d5b50f4ac86177f3ca5b51cdd27858c",
+    "NAD2_T_CONT_S": "600.5",
+    "NAD2_WALL_MAX_CUT_S": "1000"
+   },
+   "args": [
+    "10",
+    "200"
+   ],
+   "budzet": 3,
+   "zuzyte": 0,
+   "niezmiennik": true,
+   "NAD2_ULG_LIMIT_MB": "10",
+   "boot": "/home/olga/projects/liquidpatrol/results/TEACH2/tools/teach2_boot.sh"
+  },
+  "env_zgodny": true,
+  "manifest_w_env_zgodny": true,
+  "niezmiennik": true,
+  "bash_n": true,
+  "diff_boot": [
+   "> # results/TEACH2/tools/teach2_boot.sh — KOPIA results/TEACH/tools/teach_boot.sh (nietknięty), PROMPT_TEACH2_S1 §1: zmiana WYŁĄCZNIE",
+   "> # ścieżki wyników (OUTDIR, MONLOG, mkdir → results/TEACH2/s1; wiersze „# TEACH2: ścieżka wyników”). Reszta bez zmian (w tym strażnik",
+   "> # TEACH_ETAP ∈ {s2, s3}: kolejka podaje s3, meta „etap” = s3).",
+   "< OUTDIR=\"$ROOT/results/TEACH/$ETAP/$NAME\"",
+   "< MONLOG=\"$ROOT/results/TEACH/$ETAP/teach_${ETAP}_monitor.log\"",
+   "< mkdir -p \"$ROOT/results/TEACH/$ETAP\"",
+   "> OUTDIR=\"$ROOT/results/TEACH2/s1/$NAME\"                                                                     # TEACH2: ścieżka wyników",
+   "> MONLOG=\"$ROOT/results/TEACH2/s1/teach2_s1_monitor.log\"                                                    # TEACH2: ścieżka wyników",
+   "> mkdir -p \"$ROOT/results/TEACH2/s1\"                                                                        # TEACH2: ścieżka wyników"
+  ],
+  "diff_tylko_sciezka": true,
+  "straznik": {
+   "a_bez_profilu": {
+    "rc": 5,
+    "ok": true
+   },
+   "b_zla_suma_manifestu": {
+    "rc": 5,
+    "ok": true,
+    "komunikat": "[kont dryrun_guard_b] GUARD: manifest S4 sha"
+   }
+  },
+  "PASS": true
+ },
+ "3_regresja": {
+  "werdykt_nowy": "L-A",
+  "D1_s3": true,
+  "roznice": {},
+  "regresja_eU": {
+   "max_e_do_U_tu": 0.2104,
+   "analizator": 0.2104,
+   "zgodne": true
+  },
+  "blad_poprawki_misja_max_rowny_s3": true,
+  "okna": 2,
+  "poprawek_w_pliku": 596,
+  "georef_z_wiazaniami": 555,
+  "PASS": true
+ },
+ "4_sprawdzian": {
+  "procent": 100.0,
+  "oslona_ticki": 3248,
+  "poprawki": 596,
+  "georef": {
+   "d_theta_deg": 5e-07,
+   "d_t_m": 4.8e-07,
+   "ok": true
+  },
+  "PASS": true
+ },
+ "5_reguly": {
+  "funkcje": {
+   "naruszenie": [
+    "L-C",
+    "STOP-TEACH2-1-LC"
+   ],
+   "sprawdzian_ponizej_100": [
+    "niewazny_przyrzad",
+    "STOP-TEACH2-1-PRZYRZAD"
+   ],
+   "swiat_kod": [
+    "niewazny_swiat_kod",
+    "STOP-TEACH2-1-SWIAT-KOD"
+   ],
+   "bez_wejscia": [
+    "bez_wejscia",
+    null
+   ],
+   "stanowisko": [
+    "niewazny_stanowisko",
+    null
+   ],
+   "tau_wolna": [
+    "powtorka_tau_wolna",
+    null
+   ],
+   "L_B": [
+    "L-B",
+    null
+   ],
+   "L_A": [
+    "L-A",
+    null
+   ]
+  },
+  "funkcje_ok": {
+   "naruszenie": true,
+   "sprawdzian_ponizej_100": true,
+   "swiat_kod": true,
+   "bez_wejscia": true,
+   "stanowisko": true,
+   "tau_wolna": true,
+   "L_B": true,
+   "L_A": true
+  },
+  "decyzja": {
+   "bez_wejscia_boot1": [
+    "dalej",
+    null
+   ],
+   "tau_wolna_boot2": [
+    "dalej",
+    null
+   ],
+   "czwarty_boot": [
+    "stop",
+    "STOP-TEACH2-1-BUDZET"
+   ],
+   "L_B": [
+    "koniec",
+    null
+   ],
+   "L_A": [
+    "koniec",
+    null
+   ],
+   "L_C": [
+    "stop",
+    null
+   ]
+  },
+  "decyzja_ok": {
+   "bez_wejscia_boot1": true,
+   "tau_wolna_boot2": true,
+   "czwarty_boot": true,
+   "L_B": true,
+   "L_A": true,
+   "L_C": true
+  },
+  "pelny_sedzia": {
+   "tau_1p5s_wolna": {
+    "t_odmowy": 174.964,
+    "werdykt": "powtorka",
+    "status": [
+     "powtorka_tau_wolna",
+     null
+    ],
+    "powtorka": true,
+    "wolna_w_chwili_flagi": true,
+    "klatka_w_chwili_flagi": {
+     "sim_wiersza": 173.128,
+     "s": 0.8,
+     "kf": null,
+     "n_dop": 3
+    },
+    "odmowa_od_flagi_s": 1.536,
+    "kontynuacja_do_odmowy_s": 1.544,
+    "przyczyna": "τ*",
+    "DL": false,
+    "litera_ok": true,
+    "przerwa_zrodla": {
+     "poczatek": 174.8,
+     "dlugosc_s": 0.164,
+     "kadry": 0,
+     "powody": {},
+     "zgodne_w_kadrach": [],
+     "odl_od_najblizszej_kf_m": null
+    }
+   },
+   "tau_1p5s_bez_wolnej": {
+    "t_odmowy": 174.964,
+    "werdykt": "L-B",
+    "status": [
+     "L-B",
+     null
+    ],
+    "powtorka": false,
+    "wolna_w_chwili_flagi": false,
+    "klatka_w_chwili_flagi": null,
+    "odmowa_od_flagi_s": 1.536,
+    "kontynuacja_do_odmowy_s": 1.544,
+    "przyczyna": "τ*",
+    "DL": false,
+    "litera_ok": true,
+    "przerwa_zrodla": {
+     "poczatek": 174.8,
+     "dlugosc_s": 0.164,
+     "kadry": 0,
+     "powody": {},
+     "zgodne_w_kadrach": [],
+     "odl_od_najblizszej_kf_m": null
+    }
+   },
+   "odmowa_100s_po_cieciu": {
+    "t_odmowy": 273.44,
+    "werdykt": "L-B",
+    "status": [
+     "L-B",
+     null
+    ],
+    "powtorka": false,
+    "wolna_w_chwili_flagi": false,
+    "klatka_w_chwili_flagi": null,
+    "odmowa_od_flagi_s": 100.012,
+    "kontynuacja_do_odmowy_s": 100.02,
+    "przyczyna": "τ*",
+    "DL": false,
+    "litera_ok": true,
+    "przerwa_zrodla": {
+     "poczatek": 273.4,
+     "dlugosc_s": 0.04,
+     "kadry": 0,
+     "powody": {},
+     "zgodne_w_kadrach": [],
+     "odl_od_najblizszej_kf_m": null
+    }
+   }
+  },
+  "pelny_ok": {
+   "tau_1p5s_wolna": true,
+   "tau_1p5s_bez_wolnej": true,
+   "odmowa_100s_po_cieciu": true
+  },
+  "PASS": true
+ },
+ "PASS_czesci": {
+  "1_manifest": false,
+  "2_plan_straznik": true,
+  "3_regresja": true,
+  "4_sprawdzian": true,
+  "5_reguly": true
+ }
+}
