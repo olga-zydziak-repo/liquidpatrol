@@ -1,0 +1,6046 @@
+{
+ "laty": {
+  "S": {
+   "pary": 24,
+   "pary_S1_ok": 24,
+   "max_wspolne": [
+    0.4221,
+    "c1_cien_S_c05",
+    "p06_M_c05_a"
+   ],
+   "max_dalej": [
+    0.646,
+    "c1_cien_S_c05",
+    "p13_J_c05_b"
+   ],
+   "dalej_udzial_lacznie": 1.0,
+   "dalej_udzial_c10": 1.0,
+   "wspolne_przerwy_gt115": 0,
+   "dalej_przerwy_gt115": 0
+  },
+  "M": {
+   "pary": 24,
+   "pary_S1_ok": 24,
+   "max_wspolne": [
+    0.4192,
+    "c1_cien_S_c05",
+    "p13_J_c05_b"
+   ],
+   "max_dalej": [
+    0.6316,
+    "c1_cien_S_c05",
+    "p13_J_c05_b"
+   ],
+   "dalej_udzial_lacznie": 1.0,
+   "dalej_udzial_c10": 1.0,
+   "wspolne_przerwy_gt115": 0,
+   "dalej_przerwy_gt115": 0
+  },
+  "J": {
+   "pary": 24,
+   "pary_S1_ok": 24,
+   "max_wspolne": [
+    0.4193,
+    "c1_cien_S_c05",
+    "p13_J_c05_b"
+   ],
+   "max_dalej": [
+    0.6268,
+    "c1_cien_S_c05",
+    "p13_J_c05_b"
+   ],
+   "dalej_udzial_lacznie": 1.0,
+   "dalej_udzial_c10": 1.0,
+   "wspolne_przerwy_gt115": 0,
+   "dalej_przerwy_gt115": 0
+  }
+ },
+ "S1_zachodzi": false,
+ "zadania": [
+  {
+   "nauka": "c1_cien_S_c05",
+   "lata": "S",
+   "mapa": {
+    "n_kadrow_mapy": 373,
+    "n_kf": 10,
+    "n_wiazan": 1119,
+    "n_wiazan_przyjetych": 1119,
+    "ms_zamkniecie": 99.4,
+    "ms_z_ostatnim_kadrem": 149.12,
+    "ostatni_kadr": 212.0,
+    "pierwszy_kadr_mapy": 137.6
+   },
+   "przebiegi": [
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "S",
+     "powt": "p01_S_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.06,
+     "wspolne": {
+      "kadry": 378,
+      "przyjete": 378,
+      "udzial": 1.0,
+      "blad": {
+       "n": 378,
+       "p50": 0.205,
+       "p95": 0.361,
+       "max": 0.4153
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 150,
+      "zgodne_p50": 285,
+      "przed_flaga": {
+       "kadry": 178,
+       "przyjete": 178,
+       "udzial": 1.0,
+       "blad": {
+        "n": 178,
+        "p50": 0.1235,
+        "p95": 0.2349,
+        "max": 0.2596
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2674,
+        "p95": 0.3794,
+        "max": 0.4153
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.278,
+       "p95": 0.5733,
+       "max": 0.6113
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 153,
+      "zgodne_p50": 279,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 99.4,
+      "ms_z_ostatnim_kadrem": 149.12,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 35.4,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "S",
+     "powt": "p03_S_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 140.512,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 374,
+      "przyjete": 374,
+      "udzial": 1.0,
+      "blad": {
+       "n": 374,
+       "p50": 0.1908,
+       "p95": 0.2871,
+       "max": 0.351
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 144,
+      "zgodne_p50": 281,
+      "przed_flaga": {
+       "kadry": 159,
+       "przyjete": 159,
+       "udzial": 1.0,
+       "blad": {
+        "n": 159,
+        "p50": 0.13,
+        "p95": 0.2178,
+        "max": 0.2696
+       }
+      },
+      "po_fladze": {
+       "kadry": 215,
+       "przyjete": 215,
+       "udzial": 1.0,
+       "blad": {
+        "n": 215,
+        "p50": 0.2199,
+        "p95": 0.3042,
+        "max": 0.351
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 338,
+      "przyjete": 338,
+      "udzial": 1.0,
+      "blad": {
+       "n": 338,
+       "p50": 0.3093,
+       "p95": 0.4602,
+       "max": 0.5123
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 145,
+      "zgodne_p50": 274,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 99.4,
+      "ms_z_ostatnim_kadrem": 149.12,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 34.6,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "S",
+     "powt": "p06_M_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.476,
+     "flaga_ep": 33.032,
+     "wspolne": {
+      "kadry": 377,
+      "przyjete": 377,
+      "udzial": 1.0,
+      "blad": {
+       "n": 377,
+       "p50": 0.1957,
+       "p95": 0.3574,
+       "max": 0.4221
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 145,
+      "zgodne_p50": 281,
+      "przed_flaga": {
+       "kadry": 177,
+       "przyjete": 177,
+       "udzial": 1.0,
+       "blad": {
+        "n": 177,
+        "p50": 0.1311,
+        "p95": 0.2172,
+        "max": 0.2535
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2561,
+        "p95": 0.3779,
+        "max": 0.4221
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2835,
+       "p95": 0.5722,
+       "max": 0.6414
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 164,
+      "zgodne_p50": 288,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 99.4,
+      "ms_z_ostatnim_kadrem": 149.12,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 32.6,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "S",
+     "powt": "p08_M_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.2042,
+       "p95": 0.3516,
+       "max": 0.4157
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 149,
+      "zgodne_p50": 291,
+      "przed_flaga": {
+       "kadry": 176,
+       "przyjete": 176,
+       "udzial": 1.0,
+       "blad": {
+        "n": 176,
+        "p50": 0.127,
+        "p95": 0.2315,
+        "max": 0.3541
+       }
+      },
+      "po_fladze": {
+       "kadry": 199,
+       "przyjete": 199,
+       "udzial": 1.0,
+       "blad": {
+        "n": 199,
+        "p50": 0.2582,
+        "p95": 0.3706,
+        "max": 0.4157
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 353,
+      "przyjete": 353,
+      "udzial": 1.0,
+      "blad": {
+       "n": 353,
+       "p50": 0.2859,
+       "p95": 0.5369,
+       "max": 0.5864
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 157,
+      "zgodne_p50": 277,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 99.4,
+      "ms_z_ostatnim_kadrem": 149.12,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 31.0,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "S",
+     "powt": "p11_J_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.544,
+     "flaga_ep": 33.092,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.1962,
+       "p95": 0.3685,
+       "max": 0.408
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 151,
+      "zgodne_p50": 289,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.1298,
+        "p95": 0.2194,
+        "max": 0.2497
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2486,
+        "p95": 0.3828,
+        "max": 0.408
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2834,
+       "p95": 0.5448,
+       "max": 0.5977
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 165,
+      "zgodne_p50": 289,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 99.4,
+      "ms_z_ostatnim_kadrem": 149.12,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 32.6,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "S",
+     "powt": "p13_J_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.512,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.2023,
+       "p95": 0.3624,
+       "max": 0.4206
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 149,
+      "zgodne_p50": 284,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.131,
+        "p95": 0.2202,
+        "max": 0.2428
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2643,
+        "p95": 0.3896,
+        "max": 0.4206
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2868,
+       "p95": 0.5569,
+       "max": 0.646
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 167,
+      "zgodne_p50": 287,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 99.4,
+      "ms_z_ostatnim_kadrem": 149.12,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 31.3,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 222.7,
+   "rss_mb": 249.1
+  },
+  {
+   "nauka": "c2_cien_J_c10",
+   "lata": "S",
+   "mapa": {
+    "n_kadrow_mapy": 390,
+    "n_kf": 12,
+    "n_wiazan": 1170,
+    "n_wiazan_przyjetych": 1170,
+    "ms_zamkniecie": 96.27,
+    "ms_z_ostatnim_kadrem": 149.6,
+    "ostatni_kadr": 216.2,
+    "pierwszy_kadr_mapy": 138.4
+   },
+   "przebiegi": [
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "S",
+     "powt": "p02_S_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 145.708,
+     "flaga_ep": 35.256,
+     "wspolne": {
+      "kadry": 390,
+      "przyjete": 390,
+      "udzial": 1.0,
+      "blad": {
+       "n": 390,
+       "p50": 0.1179,
+       "p95": 0.2569,
+       "max": 0.307
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 166,
+      "zgodne_p50": 234,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.0987,
+        "p95": 0.1624,
+        "max": 0.2293
+       }
+      },
+      "po_fladze": {
+       "kadry": 204,
+       "przyjete": 204,
+       "udzial": 1.0,
+       "blad": {
+        "n": 204,
+        "p50": 0.1476,
+        "p95": 0.2759,
+        "max": 0.307
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 348,
+      "przyjete": 348,
+      "udzial": 1.0,
+      "blad": {
+       "n": 348,
+       "p50": 0.1542,
+       "p95": 0.2724,
+       "max": 0.3304
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 163,
+      "zgodne_p50": 246,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 96.27,
+      "ms_z_ostatnim_kadrem": 149.6,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 35.0,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "S",
+     "powt": "p04_S_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 140.516,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 390,
+      "przyjete": 390,
+      "udzial": 1.0,
+      "blad": {
+       "n": 390,
+       "p50": 0.1126,
+       "p95": 0.2529,
+       "max": 0.3015
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 162,
+      "zgodne_p50": 257,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.1116,
+        "p95": 0.1625,
+        "max": 0.2421
+       }
+      },
+      "po_fladze": {
+       "kadry": 230,
+       "przyjete": 230,
+       "udzial": 1.0,
+       "blad": {
+        "n": 230,
+        "p50": 0.1128,
+        "p95": 0.2788,
+        "max": 0.3015
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 322,
+      "przyjete": 322,
+      "udzial": 1.0,
+      "blad": {
+       "n": 322,
+       "p50": 0.1557,
+       "p95": 0.2636,
+       "max": 0.2834
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 170,
+      "zgodne_p50": 244,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 96.27,
+      "ms_z_ostatnim_kadrem": 149.6,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 33.5,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "S",
+     "powt": "p07_M_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 146.26,
+     "flaga_ep": 35.808,
+     "wspolne": {
+      "kadry": 391,
+      "przyjete": 391,
+      "udzial": 1.0,
+      "blad": {
+       "n": 391,
+       "p50": 0.1094,
+       "p95": 0.2906,
+       "max": 0.3577
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 168,
+      "zgodne_p50": 250,
+      "przed_flaga": {
+       "kadry": 189,
+       "przyjete": 189,
+       "udzial": 1.0,
+       "blad": {
+        "n": 189,
+        "p50": 0.0855,
+        "p95": 0.1428,
+        "max": 0.1992
+       }
+      },
+      "po_fladze": {
+       "kadry": 202,
+       "przyjete": 202,
+       "udzial": 1.0,
+       "blad": {
+        "n": 202,
+        "p50": 0.1641,
+        "p95": 0.3098,
+        "max": 0.3577
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 351,
+      "przyjete": 351,
+      "udzial": 1.0,
+      "blad": {
+       "n": 351,
+       "p50": 0.1701,
+       "p95": 0.2674,
+       "max": 0.3029
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 149,
+      "zgodne_p50": 248,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 96.27,
+      "ms_z_ostatnim_kadrem": 149.6,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 31.9,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "S",
+     "powt": "p09_M_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 145.892,
+     "flaga_ep": 35.424,
+     "wspolne": {
+      "kadry": 389,
+      "przyjete": 389,
+      "udzial": 1.0,
+      "blad": {
+       "n": 389,
+       "p50": 0.1116,
+       "p95": 0.2665,
+       "max": 0.3132
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 165,
+      "zgodne_p50": 233,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.09,
+        "p95": 0.153,
+        "max": 0.2287
+       }
+      },
+      "po_fladze": {
+       "kadry": 203,
+       "przyjete": 203,
+       "udzial": 1.0,
+       "blad": {
+        "n": 203,
+        "p50": 0.1428,
+        "p95": 0.2721,
+        "max": 0.3132
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 349,
+      "przyjete": 349,
+      "udzial": 1.0,
+      "blad": {
+       "n": 349,
+       "p50": 0.1562,
+       "p95": 0.272,
+       "max": 0.3288
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 153,
+      "zgodne_p50": 253,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 96.27,
+      "ms_z_ostatnim_kadrem": 149.6,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 30.1,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "S",
+     "powt": "p12_J_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 140.544,
+     "flaga_ep": 30.08,
+     "wspolne": {
+      "kadry": 391,
+      "przyjete": 391,
+      "udzial": 1.0,
+      "blad": {
+       "n": 391,
+       "p50": 0.1066,
+       "p95": 0.2356,
+       "max": 0.2607
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 160,
+      "zgodne_p50": 254,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.1058,
+        "p95": 0.1728,
+        "max": 0.2067
+       }
+      },
+      "po_fladze": {
+       "kadry": 231,
+       "przyjete": 231,
+       "udzial": 1.0,
+       "blad": {
+        "n": 231,
+        "p50": 0.1071,
+        "p95": 0.245,
+        "max": 0.2607
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 322,
+      "przyjete": 322,
+      "udzial": 1.0,
+      "blad": {
+       "n": 322,
+       "p50": 0.1674,
+       "p95": 0.2542,
+       "max": 0.2669
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 155,
+      "zgodne_p50": 249,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 96.27,
+      "ms_z_ostatnim_kadrem": 149.6,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 31.0,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "S",
+     "powt": "p14_J_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 145.164,
+     "flaga_ep": 34.712,
+     "wspolne": {
+      "kadry": 390,
+      "przyjete": 390,
+      "udzial": 1.0,
+      "blad": {
+       "n": 390,
+       "p50": 0.1076,
+       "p95": 0.1739,
+       "max": 0.2175
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 166,
+      "zgodne_p50": 245,
+      "przed_flaga": {
+       "kadry": 183,
+       "przyjete": 183,
+       "udzial": 1.0,
+       "blad": {
+        "n": 183,
+        "p50": 0.1023,
+        "p95": 0.1513,
+        "max": 0.2175
+       }
+      },
+      "po_fladze": {
+       "kadry": 207,
+       "przyjete": 207,
+       "udzial": 1.0,
+       "blad": {
+        "n": 207,
+        "p50": 0.1124,
+        "p95": 0.1804,
+        "max": 0.2054
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 345,
+      "przyjete": 345,
+      "udzial": 1.0,
+      "blad": {
+       "n": 345,
+       "p50": 0.1598,
+       "p95": 0.2351,
+       "max": 0.2848
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 164,
+      "zgodne_p50": 258,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 96.27,
+      "ms_z_ostatnim_kadrem": 149.6,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 30.5,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 217.4,
+   "rss_mb": 246.3
+  },
+  {
+   "nauka": "p05_N1_S_c10_cien",
+   "lata": "S",
+   "mapa": {
+    "n_kadrow_mapy": 387,
+    "n_kf": 12,
+    "n_wiazan": 1161,
+    "n_wiazan_przyjetych": 1159,
+    "ms_zamkniecie": 101.08,
+    "ms_z_ostatnim_kadrem": 155.76,
+    "ostatni_kadr": 214.6,
+    "pierwszy_kadr_mapy": 137.4
+   },
+   "przebiegi": [
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "S",
+     "powt": "p02_S_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 145.708,
+     "flaga_ep": 35.256,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.1542,
+       "p95": 0.282,
+       "max": 0.3397
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 151,
+      "zgodne_p50": 241,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.124,
+        "p95": 0.1798,
+        "max": 0.2044
+       }
+      },
+      "po_fladze": {
+       "kadry": 202,
+       "przyjete": 202,
+       "udzial": 1.0,
+       "blad": {
+        "n": 202,
+        "p50": 0.1778,
+        "p95": 0.2912,
+        "max": 0.3397
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 350,
+      "przyjete": 350,
+      "udzial": 1.0,
+      "blad": {
+       "n": 350,
+       "p50": 0.2108,
+       "p95": 0.3095,
+       "max": 0.3729
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 140,
+      "zgodne_p50": 245,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1159,
+      "ms_zamkniecie": 101.08,
+      "ms_z_ostatnim_kadrem": 155.76,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 34.4,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "S",
+     "powt": "p04_S_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 140.516,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.1308,
+       "p95": 0.3047,
+       "max": 0.3449
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 144,
+      "zgodne_p50": 236,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.1113,
+        "p95": 0.2284,
+        "max": 0.2839
+       }
+      },
+      "po_fladze": {
+       "kadry": 228,
+       "przyjete": 228,
+       "udzial": 1.0,
+       "blad": {
+        "n": 228,
+        "p50": 0.1457,
+        "p95": 0.3153,
+        "max": 0.3449
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 324,
+      "przyjete": 324,
+      "udzial": 1.0,
+      "blad": {
+       "n": 324,
+       "p50": 0.1915,
+       "p95": 0.3103,
+       "max": 0.3659
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 171,
+      "zgodne_p50": 232,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1159,
+      "ms_zamkniecie": 101.08,
+      "ms_z_ostatnim_kadrem": 155.76,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 33.3,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "S",
+     "powt": "p07_M_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 146.26,
+     "flaga_ep": 35.808,
+     "wspolne": {
+      "kadry": 389,
+      "przyjete": 389,
+      "udzial": 1.0,
+      "blad": {
+       "n": 389,
+       "p50": 0.1523,
+       "p95": 0.3127,
+       "max": 0.3905
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 156,
+      "zgodne_p50": 250,
+      "przed_flaga": {
+       "kadry": 189,
+       "przyjete": 189,
+       "udzial": 1.0,
+       "blad": {
+        "n": 189,
+        "p50": 0.1264,
+        "p95": 0.1757,
+        "max": 0.2011
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.1818,
+        "p95": 0.3278,
+        "max": 0.3905
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 353,
+      "przyjete": 353,
+      "udzial": 1.0,
+      "blad": {
+       "n": 353,
+       "p50": 0.2079,
+       "p95": 0.3101,
+       "max": 0.3394
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 163,
+      "zgodne_p50": 241,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1159,
+      "ms_zamkniecie": 101.08,
+      "ms_z_ostatnim_kadrem": 155.76,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 32.4,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "S",
+     "powt": "p09_M_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 145.892,
+     "flaga_ep": 35.424,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.1492,
+       "p95": 0.2926,
+       "max": 0.3459
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 149,
+      "zgodne_p50": 239,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.1187,
+        "p95": 0.1695,
+        "max": 0.1861
+       }
+      },
+      "po_fladze": {
+       "kadry": 202,
+       "przyjete": 202,
+       "udzial": 1.0,
+       "blad": {
+        "n": 202,
+        "p50": 0.1743,
+        "p95": 0.3019,
+        "max": 0.3459
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 350,
+      "przyjete": 350,
+      "udzial": 1.0,
+      "blad": {
+       "n": 350,
+       "p50": 0.2156,
+       "p95": 0.3119,
+       "max": 0.3689
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 134,
+      "zgodne_p50": 245,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1159,
+      "ms_zamkniecie": 101.08,
+      "ms_z_ostatnim_kadrem": 155.76,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 30.2,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "S",
+     "powt": "p12_J_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 140.544,
+     "flaga_ep": 30.08,
+     "wspolne": {
+      "kadry": 389,
+      "przyjete": 389,
+      "udzial": 1.0,
+      "blad": {
+       "n": 389,
+       "p50": 0.1345,
+       "p95": 0.2866,
+       "max": 0.3097
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 139,
+      "zgodne_p50": 231,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.1176,
+        "p95": 0.2363,
+        "max": 0.2934
+       }
+      },
+      "po_fladze": {
+       "kadry": 229,
+       "przyjete": 229,
+       "udzial": 1.0,
+       "blad": {
+        "n": 229,
+        "p50": 0.1446,
+        "p95": 0.2902,
+        "max": 0.3097
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 324,
+      "przyjete": 324,
+      "udzial": 1.0,
+      "blad": {
+       "n": 324,
+       "p50": 0.2055,
+       "p95": 0.3056,
+       "max": 0.341
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 164,
+      "zgodne_p50": 238,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1159,
+      "ms_zamkniecie": 101.08,
+      "ms_z_ostatnim_kadrem": 155.76,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 31.1,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "S",
+     "powt": "p14_J_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 145.164,
+     "flaga_ep": 34.712,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.1328,
+       "p95": 0.2203,
+       "max": 0.2593
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 148,
+      "zgodne_p50": 223,
+      "przed_flaga": {
+       "kadry": 183,
+       "przyjete": 183,
+       "udzial": 1.0,
+       "blad": {
+        "n": 183,
+        "p50": 0.1284,
+        "p95": 0.182,
+        "max": 0.2593
+       }
+      },
+      "po_fladze": {
+       "kadry": 205,
+       "przyjete": 205,
+       "udzial": 1.0,
+       "blad": {
+        "n": 205,
+        "p50": 0.1355,
+        "p95": 0.2253,
+        "max": 0.2486
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 347,
+      "przyjete": 347,
+      "udzial": 1.0,
+      "blad": {
+       "n": 347,
+       "p50": 0.2102,
+       "p95": 0.3083,
+       "max": 0.3455
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 157,
+      "zgodne_p50": 244,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1159,
+      "ms_zamkniecie": 101.08,
+      "ms_z_ostatnim_kadrem": 155.76,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 30.3,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 216.5,
+   "rss_mb": 247.5
+  },
+  {
+   "nauka": "p10_N2_J_c05_cien",
+   "lata": "S",
+   "mapa": {
+    "n_kadrow_mapy": 372,
+    "n_kf": 10,
+    "n_wiazan": 1116,
+    "n_wiazan_przyjetych": 1113,
+    "ms_zamkniecie": 113.51,
+    "ms_z_ostatnim_kadrem": 185.77,
+    "ostatni_kadr": 209.8,
+    "pierwszy_kadr_mapy": 135.6
+   },
+   "przebiegi": [
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "S",
+     "powt": "p01_S_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.06,
+     "wspolne": {
+      "kadry": 378,
+      "przyjete": 378,
+      "udzial": 1.0,
+      "blad": {
+       "n": 378,
+       "p50": 0.1985,
+       "p95": 0.3182,
+       "max": 0.3568
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 158,
+      "zgodne_p50": 291,
+      "przed_flaga": {
+       "kadry": 178,
+       "przyjete": 178,
+       "udzial": 1.0,
+       "blad": {
+        "n": 178,
+        "p50": 0.1622,
+        "p95": 0.2262,
+        "max": 0.3227
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2449,
+        "p95": 0.3402,
+        "max": 0.3568
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2659,
+       "p95": 0.5518,
+       "max": 0.5894
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 171,
+      "zgodne_p50": 279,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1113,
+      "ms_zamkniecie": 113.51,
+      "ms_z_ostatnim_kadrem": 185.77,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 33.3,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "S",
+     "powt": "p03_S_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 140.512,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 374,
+      "przyjete": 374,
+      "udzial": 1.0,
+      "blad": {
+       "n": 374,
+       "p50": 0.1965,
+       "p95": 0.2754,
+       "max": 0.3033
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 156,
+      "zgodne_p50": 286,
+      "przed_flaga": {
+       "kadry": 159,
+       "przyjete": 159,
+       "udzial": 1.0,
+       "blad": {
+        "n": 159,
+        "p50": 0.1833,
+        "p95": 0.246,
+        "max": 0.2582
+       }
+      },
+      "po_fladze": {
+       "kadry": 215,
+       "przyjete": 215,
+       "udzial": 1.0,
+       "blad": {
+        "n": 215,
+        "p50": 0.2077,
+        "p95": 0.2841,
+        "max": 0.3033
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 338,
+      "przyjete": 338,
+      "udzial": 1.0,
+      "blad": {
+       "n": 338,
+       "p50": 0.2937,
+       "p95": 0.4627,
+       "max": 0.4752
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 193,
+      "zgodne_p50": 281,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1113,
+      "ms_zamkniecie": 113.51,
+      "ms_z_ostatnim_kadrem": 185.77,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 31.2,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "S",
+     "powt": "p06_M_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.476,
+     "flaga_ep": 33.032,
+     "wspolne": {
+      "kadry": 377,
+      "przyjete": 377,
+      "udzial": 1.0,
+      "blad": {
+       "n": 377,
+       "p50": 0.2009,
+       "p95": 0.3223,
+       "max": 0.3924
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 161,
+      "zgodne_p50": 290,
+      "przed_flaga": {
+       "kadry": 177,
+       "przyjete": 177,
+       "udzial": 1.0,
+       "blad": {
+        "n": 177,
+        "p50": 0.1613,
+        "p95": 0.2284,
+        "max": 0.3232
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.241,
+        "p95": 0.3424,
+        "max": 0.3924
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2671,
+       "p95": 0.5525,
+       "max": 0.6087
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 177,
+      "zgodne_p50": 280,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1113,
+      "ms_zamkniecie": 113.51,
+      "ms_z_ostatnim_kadrem": 185.77,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 29.9,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "S",
+     "powt": "p08_M_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 376,
+      "przyjete": 376,
+      "udzial": 1.0,
+      "blad": {
+       "n": 376,
+       "p50": 0.1993,
+       "p95": 0.3139,
+       "max": 0.3425
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 157,
+      "zgodne_p50": 295,
+      "przed_flaga": {
+       "kadry": 176,
+       "przyjete": 176,
+       "udzial": 1.0,
+       "blad": {
+        "n": 176,
+        "p50": 0.164,
+        "p95": 0.2278,
+        "max": 0.3181
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2394,
+        "p95": 0.3291,
+        "max": 0.3425
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2779,
+       "p95": 0.5288,
+       "max": 0.5572
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 186,
+      "zgodne_p50": 274,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1113,
+      "ms_zamkniecie": 113.51,
+      "ms_z_ostatnim_kadrem": 185.77,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 29.9,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "S",
+     "powt": "p11_J_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.544,
+     "flaga_ep": 33.092,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.1995,
+       "p95": 0.3243,
+       "max": 0.3703
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 156,
+      "zgodne_p50": 293,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.1609,
+        "p95": 0.2295,
+        "max": 0.3233
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2359,
+        "p95": 0.3409,
+        "max": 0.3703
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2612,
+       "p95": 0.5188,
+       "max": 0.5556
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 179,
+      "zgodne_p50": 285,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1113,
+      "ms_zamkniecie": 113.51,
+      "ms_z_ostatnim_kadrem": 185.77,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 30.0,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "S",
+     "powt": "p13_J_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.512,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.2044,
+       "p95": 0.3326,
+       "max": 0.4044
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 159,
+      "zgodne_p50": 292,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.1648,
+        "p95": 0.2284,
+        "max": 0.3149
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2346,
+        "p95": 0.363,
+        "max": 0.4044
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2781,
+       "p95": 0.5393,
+       "max": 0.6043
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 179,
+      "zgodne_p50": 283,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1113,
+      "ms_zamkniecie": 113.51,
+      "ms_z_ostatnim_kadrem": 185.77,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 29.5,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 203.7,
+   "rss_mb": 253.2
+  },
+  {
+   "nauka": "c1_cien_S_c05",
+   "lata": "M",
+   "mapa": {
+    "n_kadrow_mapy": 373,
+    "n_kf": 10,
+    "n_wiazan": 1119,
+    "n_wiazan_przyjetych": 1119,
+    "ms_zamkniecie": 116.87,
+    "ms_z_ostatnim_kadrem": 265.72,
+    "ostatni_kadr": 212.0,
+    "pierwszy_kadr_mapy": 137.6
+   },
+   "przebiegi": [
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "M",
+     "powt": "p01_S_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.06,
+     "wspolne": {
+      "kadry": 378,
+      "przyjete": 378,
+      "udzial": 1.0,
+      "blad": {
+       "n": 378,
+       "p50": 0.2082,
+       "p95": 0.36,
+       "max": 0.3906
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 316,
+      "zgodne_p50": 747,
+      "przed_flaga": {
+       "kadry": 178,
+       "przyjete": 178,
+       "udzial": 1.0,
+       "blad": {
+        "n": 178,
+        "p50": 0.1202,
+        "p95": 0.2388,
+        "max": 0.2597
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2648,
+        "p95": 0.3785,
+        "max": 0.3906
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2788,
+       "p95": 0.5697,
+       "max": 0.6003
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 350,
+      "zgodne_p50": 752,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 116.87,
+      "ms_z_ostatnim_kadrem": 265.72,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 76.9,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "M",
+     "powt": "p03_S_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 140.512,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 374,
+      "przyjete": 374,
+      "udzial": 1.0,
+      "blad": {
+       "n": 374,
+       "p50": 0.1933,
+       "p95": 0.2926,
+       "max": 0.3367
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 320,
+      "zgodne_p50": 715,
+      "przed_flaga": {
+       "kadry": 159,
+       "przyjete": 159,
+       "udzial": 1.0,
+       "blad": {
+        "n": 159,
+        "p50": 0.132,
+        "p95": 0.2269,
+        "max": 0.2661
+       }
+      },
+      "po_fladze": {
+       "kadry": 215,
+       "przyjete": 215,
+       "udzial": 1.0,
+       "blad": {
+        "n": 215,
+        "p50": 0.2178,
+        "p95": 0.3043,
+        "max": 0.3367
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 338,
+      "przyjete": 338,
+      "udzial": 1.0,
+      "blad": {
+       "n": 338,
+       "p50": 0.3086,
+       "p95": 0.4739,
+       "max": 0.5342
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 250,
+      "zgodne_p50": 710,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 116.87,
+      "ms_z_ostatnim_kadrem": 265.72,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 69.0,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "M",
+     "powt": "p06_M_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.476,
+     "flaga_ep": 33.032,
+     "wspolne": {
+      "kadry": 377,
+      "przyjete": 377,
+      "udzial": 1.0,
+      "blad": {
+       "n": 377,
+       "p50": 0.1991,
+       "p95": 0.3586,
+       "max": 0.4167
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 325,
+      "zgodne_p50": 732,
+      "przed_flaga": {
+       "kadry": 177,
+       "przyjete": 177,
+       "udzial": 1.0,
+       "blad": {
+        "n": 177,
+        "p50": 0.1275,
+        "p95": 0.2199,
+        "max": 0.2572
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2546,
+        "p95": 0.3756,
+        "max": 0.4167
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2782,
+       "p95": 0.5694,
+       "max": 0.6275
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 352,
+      "zgodne_p50": 754,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 116.87,
+      "ms_z_ostatnim_kadrem": 265.72,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 71.7,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "M",
+     "powt": "p08_M_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.2047,
+       "p95": 0.3543,
+       "max": 0.3994
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 325,
+      "zgodne_p50": 744,
+      "przed_flaga": {
+       "kadry": 176,
+       "przyjete": 176,
+       "udzial": 1.0,
+       "blad": {
+        "n": 176,
+        "p50": 0.1212,
+        "p95": 0.2401,
+        "max": 0.3865
+       }
+      },
+      "po_fladze": {
+       "kadry": 199,
+       "przyjete": 199,
+       "udzial": 1.0,
+       "blad": {
+        "n": 199,
+        "p50": 0.2555,
+        "p95": 0.3689,
+        "max": 0.3994
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 353,
+      "przyjete": 353,
+      "udzial": 1.0,
+      "blad": {
+       "n": 353,
+       "p50": 0.29,
+       "p95": 0.5374,
+       "max": 0.6099
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 307,
+      "zgodne_p50": 727,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 116.87,
+      "ms_z_ostatnim_kadrem": 265.72,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 73.2,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "M",
+     "powt": "p11_J_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.544,
+     "flaga_ep": 33.092,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.1984,
+       "p95": 0.3655,
+       "max": 0.4049
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 321,
+      "zgodne_p50": 739,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.1268,
+        "p95": 0.2231,
+        "max": 0.2505
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2499,
+        "p95": 0.3809,
+        "max": 0.4049
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2799,
+       "p95": 0.5452,
+       "max": 0.5912
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 349,
+      "zgodne_p50": 750,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 116.87,
+      "ms_z_ostatnim_kadrem": 265.72,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 69.5,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "M",
+     "powt": "p13_J_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.512,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.2052,
+       "p95": 0.3617,
+       "max": 0.4192
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 323,
+      "zgodne_p50": 735,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.1297,
+        "p95": 0.225,
+        "max": 0.2503
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2629,
+        "p95": 0.3836,
+        "max": 0.4192
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2808,
+       "p95": 0.5574,
+       "max": 0.6316
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 364,
+      "zgodne_p50": 758,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 116.87,
+      "ms_z_ostatnim_kadrem": 265.72,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 57.3,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 468.2,
+   "rss_mb": 379.0
+  },
+  {
+   "nauka": "c2_cien_J_c10",
+   "lata": "M",
+   "mapa": {
+    "n_kadrow_mapy": 390,
+    "n_kf": 12,
+    "n_wiazan": 1170,
+    "n_wiazan_przyjetych": 1170,
+    "ms_zamkniecie": 111.89,
+    "ms_z_ostatnim_kadrem": 224.34,
+    "ostatni_kadr": 216.2,
+    "pierwszy_kadr_mapy": 138.4
+   },
+   "przebiegi": [
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "M",
+     "powt": "p02_S_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 145.708,
+     "flaga_ep": 35.256,
+     "wspolne": {
+      "kadry": 390,
+      "przyjete": 390,
+      "udzial": 1.0,
+      "blad": {
+       "n": 390,
+       "p50": 0.1187,
+       "p95": 0.2546,
+       "max": 0.3153
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 317,
+      "zgodne_p50": 600,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.1063,
+        "p95": 0.1635,
+        "max": 0.2348
+       }
+      },
+      "po_fladze": {
+       "kadry": 204,
+       "przyjete": 204,
+       "udzial": 1.0,
+       "blad": {
+        "n": 204,
+        "p50": 0.1447,
+        "p95": 0.279,
+        "max": 0.3153
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 348,
+      "przyjete": 348,
+      "udzial": 1.0,
+      "blad": {
+       "n": 348,
+       "p50": 0.1553,
+       "p95": 0.2696,
+       "max": 0.3206
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 270,
+      "zgodne_p50": 581,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 111.89,
+      "ms_z_ostatnim_kadrem": 224.34,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 72.5,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "M",
+     "powt": "p04_S_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 140.516,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 390,
+      "przyjete": 390,
+      "udzial": 1.0,
+      "blad": {
+       "n": 390,
+       "p50": 0.1162,
+       "p95": 0.2527,
+       "max": 0.2934
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 366,
+      "zgodne_p50": 581,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.1093,
+        "p95": 0.1623,
+        "max": 0.2594
+       }
+      },
+      "po_fladze": {
+       "kadry": 230,
+       "przyjete": 230,
+       "udzial": 1.0,
+       "blad": {
+        "n": 230,
+        "p50": 0.1198,
+        "p95": 0.2697,
+        "max": 0.2934
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 322,
+      "przyjete": 322,
+      "udzial": 1.0,
+      "blad": {
+       "n": 322,
+       "p50": 0.1526,
+       "p95": 0.2631,
+       "max": 0.2863
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 257,
+      "zgodne_p50": 544,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 111.89,
+      "ms_z_ostatnim_kadrem": 224.34,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 63.4,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "M",
+     "powt": "p07_M_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 146.26,
+     "flaga_ep": 35.808,
+     "wspolne": {
+      "kadry": 391,
+      "przyjete": 391,
+      "udzial": 1.0,
+      "blad": {
+       "n": 391,
+       "p50": 0.1185,
+       "p95": 0.2922,
+       "max": 0.3659
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 341,
+      "zgodne_p50": 619,
+      "przed_flaga": {
+       "kadry": 189,
+       "przyjete": 189,
+       "udzial": 1.0,
+       "blad": {
+        "n": 189,
+        "p50": 0.0904,
+        "p95": 0.1416,
+        "max": 0.2
+       }
+      },
+      "po_fladze": {
+       "kadry": 202,
+       "przyjete": 202,
+       "udzial": 1.0,
+       "blad": {
+        "n": 202,
+        "p50": 0.1512,
+        "p95": 0.3076,
+        "max": 0.3659
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 351,
+      "przyjete": 351,
+      "udzial": 1.0,
+      "blad": {
+       "n": 351,
+       "p50": 0.1601,
+       "p95": 0.2703,
+       "max": 0.3131
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 240,
+      "zgodne_p50": 575,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 111.89,
+      "ms_z_ostatnim_kadrem": 224.34,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 67.5,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "M",
+     "powt": "p09_M_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 145.892,
+     "flaga_ep": 35.424,
+     "wspolne": {
+      "kadry": 389,
+      "przyjete": 389,
+      "udzial": 1.0,
+      "blad": {
+       "n": 389,
+       "p50": 0.1163,
+       "p95": 0.2661,
+       "max": 0.3154
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 314,
+      "zgodne_p50": 588,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.0954,
+        "p95": 0.154,
+        "max": 0.241
+       }
+      },
+      "po_fladze": {
+       "kadry": 203,
+       "przyjete": 203,
+       "udzial": 1.0,
+       "blad": {
+        "n": 203,
+        "p50": 0.1394,
+        "p95": 0.2737,
+        "max": 0.3154
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 349,
+      "przyjete": 349,
+      "udzial": 1.0,
+      "blad": {
+       "n": 349,
+       "p50": 0.1597,
+       "p95": 0.2672,
+       "max": 0.3192
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 286,
+      "zgodne_p50": 608,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 111.89,
+      "ms_z_ostatnim_kadrem": 224.34,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 69.7,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "M",
+     "powt": "p12_J_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 140.544,
+     "flaga_ep": 30.08,
+     "wspolne": {
+      "kadry": 391,
+      "przyjete": 391,
+      "udzial": 1.0,
+      "blad": {
+       "n": 391,
+       "p50": 0.1084,
+       "p95": 0.2303,
+       "max": 0.2553
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 359,
+      "zgodne_p50": 560,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.1033,
+        "p95": 0.1695,
+        "max": 0.2149
+       }
+      },
+      "po_fladze": {
+       "kadry": 231,
+       "przyjete": 231,
+       "udzial": 1.0,
+       "blad": {
+        "n": 231,
+        "p50": 0.1111,
+        "p95": 0.2394,
+        "max": 0.2553
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 322,
+      "przyjete": 322,
+      "udzial": 1.0,
+      "blad": {
+       "n": 322,
+       "p50": 0.1649,
+       "p95": 0.2502,
+       "max": 0.275
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 258,
+      "zgodne_p50": 567,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 111.89,
+      "ms_z_ostatnim_kadrem": 224.34,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 61.9,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "M",
+     "powt": "p14_J_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 145.164,
+     "flaga_ep": 34.712,
+     "wspolne": {
+      "kadry": 390,
+      "przyjete": 390,
+      "udzial": 1.0,
+      "blad": {
+       "n": 390,
+       "p50": 0.1128,
+       "p95": 0.1785,
+       "max": 0.224
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 344,
+      "zgodne_p50": 569,
+      "przed_flaga": {
+       "kadry": 183,
+       "przyjete": 183,
+       "udzial": 1.0,
+       "blad": {
+        "n": 183,
+        "p50": 0.1074,
+        "p95": 0.1537,
+        "max": 0.224
+       }
+      },
+      "po_fladze": {
+       "kadry": 207,
+       "przyjete": 207,
+       "udzial": 1.0,
+       "blad": {
+        "n": 207,
+        "p50": 0.1179,
+        "p95": 0.1849,
+        "max": 0.2025
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 345,
+      "przyjete": 345,
+      "udzial": 1.0,
+      "blad": {
+       "n": 345,
+       "p50": 0.161,
+       "p95": 0.2373,
+       "max": 0.2767
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 258,
+      "zgodne_p50": 603,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 111.89,
+      "ms_z_ostatnim_kadrem": 224.34,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 58.9,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 440.9,
+   "rss_mb": 377.5
+  },
+  {
+   "nauka": "p05_N1_S_c10_cien",
+   "lata": "M",
+   "mapa": {
+    "n_kadrow_mapy": 387,
+    "n_kf": 12,
+    "n_wiazan": 1161,
+    "n_wiazan_przyjetych": 1161,
+    "ms_zamkniecie": 122.96,
+    "ms_z_ostatnim_kadrem": 227.16,
+    "ostatni_kadr": 214.6,
+    "pierwszy_kadr_mapy": 137.4
+   },
+   "przebiegi": [
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "M",
+     "powt": "p02_S_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 145.708,
+     "flaga_ep": 35.256,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.1551,
+       "p95": 0.2794,
+       "max": 0.3453
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 334,
+      "zgodne_p50": 634,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.1213,
+        "p95": 0.183,
+        "max": 0.2075
+       }
+      },
+      "po_fladze": {
+       "kadry": 202,
+       "przyjete": 202,
+       "udzial": 1.0,
+       "blad": {
+        "n": 202,
+        "p50": 0.1798,
+        "p95": 0.2873,
+        "max": 0.3453
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 350,
+      "przyjete": 350,
+      "udzial": 1.0,
+      "blad": {
+       "n": 350,
+       "p50": 0.2181,
+       "p95": 0.3173,
+       "max": 0.3698
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 265,
+      "zgodne_p50": 570,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 122.96,
+      "ms_z_ostatnim_kadrem": 227.16,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 72.8,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "M",
+     "powt": "p04_S_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 140.516,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.1302,
+       "p95": 0.3041,
+       "max": 0.3377
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 340,
+      "zgodne_p50": 580,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.112,
+        "p95": 0.2246,
+        "max": 0.2809
+       }
+      },
+      "po_fladze": {
+       "kadry": 228,
+       "przyjete": 228,
+       "udzial": 1.0,
+       "blad": {
+        "n": 228,
+        "p50": 0.1445,
+        "p95": 0.3207,
+        "max": 0.3377
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 324,
+      "przyjete": 324,
+      "udzial": 1.0,
+      "blad": {
+       "n": 324,
+       "p50": 0.2019,
+       "p95": 0.3184,
+       "max": 0.357
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 270,
+      "zgodne_p50": 553,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 122.96,
+      "ms_z_ostatnim_kadrem": 227.16,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 63.6,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "M",
+     "powt": "p07_M_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 146.26,
+     "flaga_ep": 35.808,
+     "wspolne": {
+      "kadry": 389,
+      "przyjete": 389,
+      "udzial": 1.0,
+      "blad": {
+       "n": 389,
+       "p50": 0.1525,
+       "p95": 0.3107,
+       "max": 0.392
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 342,
+      "zgodne_p50": 643,
+      "przed_flaga": {
+       "kadry": 189,
+       "przyjete": 189,
+       "udzial": 1.0,
+       "blad": {
+        "n": 189,
+        "p50": 0.1253,
+        "p95": 0.1856,
+        "max": 0.2193
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.1802,
+        "p95": 0.3233,
+        "max": 0.392
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 353,
+      "przyjete": 353,
+      "udzial": 1.0,
+      "blad": {
+       "n": 353,
+       "p50": 0.2139,
+       "p95": 0.3147,
+       "max": 0.3476
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 257,
+      "zgodne_p50": 585,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 122.96,
+      "ms_z_ostatnim_kadrem": 227.16,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 67.2,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "M",
+     "powt": "p09_M_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 145.892,
+     "flaga_ep": 35.424,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.149,
+       "p95": 0.2907,
+       "max": 0.3481
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 328,
+      "zgodne_p50": 630,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.1172,
+        "p95": 0.1691,
+        "max": 0.1969
+       }
+      },
+      "po_fladze": {
+       "kadry": 202,
+       "przyjete": 202,
+       "udzial": 1.0,
+       "blad": {
+        "n": 202,
+        "p50": 0.1721,
+        "p95": 0.3016,
+        "max": 0.3481
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 350,
+      "przyjete": 350,
+      "udzial": 1.0,
+      "blad": {
+       "n": 350,
+       "p50": 0.2256,
+       "p95": 0.3173,
+       "max": 0.3684
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 273,
+      "zgodne_p50": 569,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 122.96,
+      "ms_z_ostatnim_kadrem": 227.16,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 69.6,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "M",
+     "powt": "p12_J_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 140.544,
+     "flaga_ep": 30.08,
+     "wspolne": {
+      "kadry": 389,
+      "przyjete": 389,
+      "udzial": 1.0,
+      "blad": {
+       "n": 389,
+       "p50": 0.1308,
+       "p95": 0.2862,
+       "max": 0.3037
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 322,
+      "zgodne_p50": 552,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.1192,
+        "p95": 0.2339,
+        "max": 0.287
+       }
+      },
+      "po_fladze": {
+       "kadry": 229,
+       "przyjete": 229,
+       "udzial": 1.0,
+       "blad": {
+        "n": 229,
+        "p50": 0.139,
+        "p95": 0.2923,
+        "max": 0.3037
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 324,
+      "przyjete": 324,
+      "udzial": 1.0,
+      "blad": {
+       "n": 324,
+       "p50": 0.217,
+       "p95": 0.3084,
+       "max": 0.3369
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 234,
+      "zgodne_p50": 554,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 122.96,
+      "ms_z_ostatnim_kadrem": 227.16,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 60.0,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "M",
+     "powt": "p14_J_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 145.164,
+     "flaga_ep": 34.712,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.1314,
+       "p95": 0.2249,
+       "max": 0.2867
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 328,
+      "zgodne_p50": 536,
+      "przed_flaga": {
+       "kadry": 183,
+       "przyjete": 183,
+       "udzial": 1.0,
+       "blad": {
+        "n": 183,
+        "p50": 0.1272,
+        "p95": 0.1839,
+        "max": 0.2493
+       }
+      },
+      "po_fladze": {
+       "kadry": 205,
+       "przyjete": 205,
+       "udzial": 1.0,
+       "blad": {
+        "n": 205,
+        "p50": 0.1334,
+        "p95": 0.231,
+        "max": 0.2867
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 347,
+      "przyjete": 347,
+      "udzial": 1.0,
+      "blad": {
+       "n": 347,
+       "p50": 0.2257,
+       "p95": 0.3098,
+       "max": 0.3403
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 230,
+      "zgodne_p50": 626,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 122.96,
+      "ms_z_ostatnim_kadrem": 227.16,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 58.2,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 438.5,
+   "rss_mb": 364.2
+  },
+  {
+   "nauka": "p10_N2_J_c05_cien",
+   "lata": "M",
+   "mapa": {
+    "n_kadrow_mapy": 372,
+    "n_kf": 10,
+    "n_wiazan": 1116,
+    "n_wiazan_przyjetych": 1116,
+    "ms_zamkniecie": 109.76,
+    "ms_z_ostatnim_kadrem": 245.54,
+    "ostatni_kadr": 209.8,
+    "pierwszy_kadr_mapy": 135.6
+   },
+   "przebiegi": [
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "M",
+     "powt": "p01_S_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.06,
+     "wspolne": {
+      "kadry": 378,
+      "przyjete": 378,
+      "udzial": 1.0,
+      "blad": {
+       "n": 378,
+       "p50": 0.1982,
+       "p95": 0.3113,
+       "max": 0.3531
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 352,
+      "zgodne_p50": 719,
+      "przed_flaga": {
+       "kadry": 178,
+       "przyjete": 178,
+       "udzial": 1.0,
+       "blad": {
+        "n": 178,
+        "p50": 0.1598,
+        "p95": 0.2239,
+        "max": 0.332
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2471,
+        "p95": 0.3334,
+        "max": 0.3531
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2591,
+       "p95": 0.5429,
+       "max": 0.5803
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 380,
+      "zgodne_p50": 703,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 109.76,
+      "ms_z_ostatnim_kadrem": 245.54,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 71.9,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "M",
+     "powt": "p03_S_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 140.512,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 374,
+      "przyjete": 374,
+      "udzial": 1.0,
+      "blad": {
+       "n": 374,
+       "p50": 0.1948,
+       "p95": 0.2769,
+       "max": 0.3123
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 370,
+      "zgodne_p50": 694,
+      "przed_flaga": {
+       "kadry": 159,
+       "przyjete": 159,
+       "udzial": 1.0,
+       "blad": {
+        "n": 159,
+        "p50": 0.1765,
+        "p95": 0.2421,
+        "max": 0.255
+       }
+      },
+      "po_fladze": {
+       "kadry": 215,
+       "przyjete": 215,
+       "udzial": 1.0,
+       "blad": {
+        "n": 215,
+        "p50": 0.2064,
+        "p95": 0.2826,
+        "max": 0.3123
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 338,
+      "przyjete": 338,
+      "udzial": 1.0,
+      "blad": {
+       "n": 338,
+       "p50": 0.2971,
+       "p95": 0.4661,
+       "max": 0.4755
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 392,
+      "zgodne_p50": 689,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 109.76,
+      "ms_z_ostatnim_kadrem": 245.54,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 64.2,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "M",
+     "powt": "p06_M_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.476,
+     "flaga_ep": 33.032,
+     "wspolne": {
+      "kadry": 377,
+      "przyjete": 377,
+      "udzial": 1.0,
+      "blad": {
+       "n": 377,
+       "p50": 0.1998,
+       "p95": 0.3197,
+       "max": 0.3837
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 345,
+      "zgodne_p50": 709,
+      "przed_flaga": {
+       "kadry": 177,
+       "przyjete": 177,
+       "udzial": 1.0,
+       "blad": {
+        "n": 177,
+        "p50": 0.1602,
+        "p95": 0.2234,
+        "max": 0.3311
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2435,
+        "p95": 0.3413,
+        "max": 0.3837
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2564,
+       "p95": 0.5454,
+       "max": 0.5927
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 381,
+      "zgodne_p50": 703,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 109.76,
+      "ms_z_ostatnim_kadrem": 245.54,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 58.1,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "M",
+     "powt": "p08_M_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 376,
+      "przyjete": 376,
+      "udzial": 1.0,
+      "blad": {
+       "n": 376,
+       "p50": 0.1963,
+       "p95": 0.3166,
+       "max": 0.3496
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 341,
+      "zgodne_p50": 717,
+      "przed_flaga": {
+       "kadry": 176,
+       "przyjete": 176,
+       "udzial": 1.0,
+       "blad": {
+        "n": 176,
+        "p50": 0.1607,
+        "p95": 0.2263,
+        "max": 0.3394
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2334,
+        "p95": 0.3264,
+        "max": 0.3496
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.272,
+       "p95": 0.5249,
+       "max": 0.5514
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 411,
+      "zgodne_p50": 692,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 109.76,
+      "ms_z_ostatnim_kadrem": 245.54,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 56.7,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "M",
+     "powt": "p11_J_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.544,
+     "flaga_ep": 33.092,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.1997,
+       "p95": 0.3202,
+       "max": 0.3669
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 348,
+      "zgodne_p50": 716,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.1596,
+        "p95": 0.2256,
+        "max": 0.3344
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2346,
+        "p95": 0.3383,
+        "max": 0.3669
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2569,
+       "p95": 0.5082,
+       "max": 0.5548
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 388,
+      "zgodne_p50": 716,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 109.76,
+      "ms_z_ostatnim_kadrem": 245.54,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 55.3,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "M",
+     "powt": "p13_J_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.512,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.2042,
+       "p95": 0.3281,
+       "max": 0.3972
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 350,
+      "zgodne_p50": 712,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.1646,
+        "p95": 0.2243,
+        "max": 0.327
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2363,
+        "p95": 0.3579,
+        "max": 0.3972
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2726,
+       "p95": 0.529,
+       "max": 0.5872
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 387,
+      "zgodne_p50": 715,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 109.76,
+      "ms_z_ostatnim_kadrem": 245.54,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 53.4,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 402.4,
+   "rss_mb": 380.3
+  },
+  {
+   "nauka": "c1_cien_S_c05",
+   "lata": "J",
+   "mapa": {
+    "n_kadrow_mapy": 373,
+    "n_kf": 10,
+    "n_wiazan": 1119,
+    "n_wiazan_przyjetych": 1119,
+    "ms_zamkniecie": 96.23,
+    "ms_z_ostatnim_kadrem": 191.87,
+    "ostatni_kadr": 212.0,
+    "pierwszy_kadr_mapy": 137.6
+   },
+   "przebiegi": [
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "J",
+     "powt": "p01_S_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.06,
+     "wspolne": {
+      "kadry": 378,
+      "przyjete": 378,
+      "udzial": 1.0,
+      "blad": {
+       "n": 378,
+       "p50": 0.206,
+       "p95": 0.3599,
+       "max": 0.3905
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 315,
+      "zgodne_p50": 588,
+      "przed_flaga": {
+       "kadry": 178,
+       "przyjete": 178,
+       "udzial": 1.0,
+       "blad": {
+        "n": 178,
+        "p50": 0.1188,
+        "p95": 0.2359,
+        "max": 0.2563
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2649,
+        "p95": 0.3751,
+        "max": 0.3905
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2777,
+       "p95": 0.5614,
+       "max": 0.5953
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 333,
+      "zgodne_p50": 568,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 96.23,
+      "ms_z_ostatnim_kadrem": 191.87,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 65.8,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "J",
+     "powt": "p03_S_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 140.512,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 374,
+      "przyjete": 374,
+      "udzial": 1.0,
+      "blad": {
+       "n": 374,
+       "p50": 0.1893,
+       "p95": 0.2875,
+       "max": 0.333
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 287,
+      "zgodne_p50": 554,
+      "przed_flaga": {
+       "kadry": 159,
+       "przyjete": 159,
+       "udzial": 1.0,
+       "blad": {
+        "n": 159,
+        "p50": 0.1324,
+        "p95": 0.2221,
+        "max": 0.2648
+       }
+      },
+      "po_fladze": {
+       "kadry": 215,
+       "przyjete": 215,
+       "udzial": 1.0,
+       "blad": {
+        "n": 215,
+        "p50": 0.2163,
+        "p95": 0.3015,
+        "max": 0.333
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 338,
+      "przyjete": 338,
+      "udzial": 1.0,
+      "blad": {
+       "n": 338,
+       "p50": 0.3096,
+       "p95": 0.469,
+       "max": 0.5143
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 310,
+      "zgodne_p50": 528,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 96.23,
+      "ms_z_ostatnim_kadrem": 191.87,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 56.8,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "J",
+     "powt": "p06_M_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.476,
+     "flaga_ep": 33.032,
+     "wspolne": {
+      "kadry": 377,
+      "przyjete": 377,
+      "udzial": 1.0,
+      "blad": {
+       "n": 377,
+       "p50": 0.197,
+       "p95": 0.3547,
+       "max": 0.4148
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 297,
+      "zgodne_p50": 573,
+      "przed_flaga": {
+       "kadry": 177,
+       "przyjete": 177,
+       "udzial": 1.0,
+       "blad": {
+        "n": 177,
+        "p50": 0.1263,
+        "p95": 0.2177,
+        "max": 0.2549
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2538,
+        "p95": 0.3737,
+        "max": 0.4148
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2773,
+       "p95": 0.5645,
+       "max": 0.6218
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 338,
+      "zgodne_p50": 564,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 96.23,
+      "ms_z_ostatnim_kadrem": 191.87,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 57.0,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "J",
+     "powt": "p08_M_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.2029,
+       "p95": 0.3543,
+       "max": 0.3935
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 302,
+      "zgodne_p50": 592,
+      "przed_flaga": {
+       "kadry": 176,
+       "przyjete": 176,
+       "udzial": 1.0,
+       "blad": {
+        "n": 176,
+        "p50": 0.1215,
+        "p95": 0.2367,
+        "max": 0.3617
+       }
+      },
+      "po_fladze": {
+       "kadry": 199,
+       "przyjete": 199,
+       "udzial": 1.0,
+       "blad": {
+        "n": 199,
+        "p50": 0.2562,
+        "p95": 0.3665,
+        "max": 0.3935
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 353,
+      "przyjete": 353,
+      "udzial": 1.0,
+      "blad": {
+       "n": 353,
+       "p50": 0.2847,
+       "p95": 0.5378,
+       "max": 0.5812
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 318,
+      "zgodne_p50": 560,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 96.23,
+      "ms_z_ostatnim_kadrem": 191.87,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 50.6,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "J",
+     "powt": "p11_J_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.544,
+     "flaga_ep": 33.092,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.197,
+       "p95": 0.3656,
+       "max": 0.4043
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 298,
+      "zgodne_p50": 587,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.1273,
+        "p95": 0.2215,
+        "max": 0.2443
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.251,
+        "p95": 0.385,
+        "max": 0.4043
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2814,
+       "p95": 0.5375,
+       "max": 0.5879
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 347,
+      "zgodne_p50": 569,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 96.23,
+      "ms_z_ostatnim_kadrem": 191.87,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 52.6,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c1_cien_S_c05",
+     "lata": "J",
+     "powt": "p13_J_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.004,
+     "koniec_misji_ep": 143.512,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.2035,
+       "p95": 0.3585,
+       "max": 0.4193
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 301,
+      "zgodne_p50": 578,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.1277,
+        "p95": 0.2221,
+        "max": 0.2408
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2648,
+        "p95": 0.383,
+        "max": 0.4193
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2808,
+       "p95": 0.5502,
+       "max": 0.6268
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 347,
+      "zgodne_p50": 567,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 373,
+      "n_kf": 10,
+      "n_wiazan": 1119,
+      "n_wiazan_przyjetych": 1119,
+      "ms_zamkniecie": 96.23,
+      "ms_z_ostatnim_kadrem": 191.87,
+      "ostatni_kadr": 212.0,
+      "pierwszy_kadr_mapy": 137.6
+     },
+     "zegar_s": 51.2,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 371.7,
+   "rss_mb": 367.4
+  },
+  {
+   "nauka": "c2_cien_J_c10",
+   "lata": "J",
+   "mapa": {
+    "n_kadrow_mapy": 390,
+    "n_kf": 12,
+    "n_wiazan": 1170,
+    "n_wiazan_przyjetych": 1170,
+    "ms_zamkniecie": 106.76,
+    "ms_z_ostatnim_kadrem": 206.79,
+    "ostatni_kadr": 216.2,
+    "pierwszy_kadr_mapy": 138.4
+   },
+   "przebiegi": [
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "J",
+     "powt": "p02_S_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 145.708,
+     "flaga_ep": 35.256,
+     "wspolne": {
+      "kadry": 390,
+      "przyjete": 390,
+      "udzial": 1.0,
+      "blad": {
+       "n": 390,
+       "p50": 0.1198,
+       "p95": 0.2553,
+       "max": 0.3139
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 308,
+      "zgodne_p50": 489,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.1031,
+        "p95": 0.1638,
+        "max": 0.2249
+       }
+      },
+      "po_fladze": {
+       "kadry": 204,
+       "przyjete": 204,
+       "udzial": 1.0,
+       "blad": {
+        "n": 204,
+        "p50": 0.1525,
+        "p95": 0.2797,
+        "max": 0.3139
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 348,
+      "przyjete": 348,
+      "udzial": 1.0,
+      "blad": {
+       "n": 348,
+       "p50": 0.158,
+       "p95": 0.2692,
+       "max": 0.3236
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 336,
+      "zgodne_p50": 515,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 106.76,
+      "ms_z_ostatnim_kadrem": 206.79,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 67.0,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "J",
+     "powt": "p04_S_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 140.516,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 390,
+      "przyjete": 390,
+      "udzial": 1.0,
+      "blad": {
+       "n": 390,
+       "p50": 0.1132,
+       "p95": 0.2494,
+       "max": 0.2957
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 327,
+      "zgodne_p50": 517,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.1081,
+        "p95": 0.1567,
+        "max": 0.2511
+       }
+      },
+      "po_fladze": {
+       "kadry": 230,
+       "przyjete": 230,
+       "udzial": 1.0,
+       "blad": {
+        "n": 230,
+        "p50": 0.1144,
+        "p95": 0.2696,
+        "max": 0.2957
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 322,
+      "przyjete": 322,
+      "udzial": 1.0,
+      "blad": {
+       "n": 322,
+       "p50": 0.1573,
+       "p95": 0.2589,
+       "max": 0.2783
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 361,
+      "zgodne_p50": 520,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 106.76,
+      "ms_z_ostatnim_kadrem": 206.79,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 60.5,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "J",
+     "powt": "p07_M_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 146.26,
+     "flaga_ep": 35.808,
+     "wspolne": {
+      "kadry": 391,
+      "przyjete": 391,
+      "udzial": 1.0,
+      "blad": {
+       "n": 391,
+       "p50": 0.1104,
+       "p95": 0.2911,
+       "max": 0.364
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 315,
+      "zgodne_p50": 504,
+      "przed_flaga": {
+       "kadry": 189,
+       "przyjete": 189,
+       "udzial": 1.0,
+       "blad": {
+        "n": 189,
+        "p50": 0.0852,
+        "p95": 0.1409,
+        "max": 0.1967
+       }
+      },
+      "po_fladze": {
+       "kadry": 202,
+       "przyjete": 202,
+       "udzial": 1.0,
+       "blad": {
+        "n": 202,
+        "p50": 0.1678,
+        "p95": 0.3056,
+        "max": 0.364
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 351,
+      "przyjete": 351,
+      "udzial": 1.0,
+      "blad": {
+       "n": 351,
+       "p50": 0.1741,
+       "p95": 0.2701,
+       "max": 0.3014
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 323,
+      "zgodne_p50": 524,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 106.76,
+      "ms_z_ostatnim_kadrem": 206.79,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 61.7,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "J",
+     "powt": "p09_M_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 145.892,
+     "flaga_ep": 35.424,
+     "wspolne": {
+      "kadry": 389,
+      "przyjete": 389,
+      "udzial": 1.0,
+      "blad": {
+       "n": 389,
+       "p50": 0.1147,
+       "p95": 0.2661,
+       "max": 0.3168
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 298,
+      "zgodne_p50": 485,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.0929,
+        "p95": 0.151,
+        "max": 0.2315
+       }
+      },
+      "po_fladze": {
+       "kadry": 203,
+       "przyjete": 203,
+       "udzial": 1.0,
+       "blad": {
+        "n": 203,
+        "p50": 0.1463,
+        "p95": 0.2756,
+        "max": 0.3168
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 349,
+      "przyjete": 349,
+      "udzial": 1.0,
+      "blad": {
+       "n": 349,
+       "p50": 0.1595,
+       "p95": 0.2678,
+       "max": 0.3308
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 304,
+      "zgodne_p50": 528,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 106.76,
+      "ms_z_ostatnim_kadrem": 206.79,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 66.9,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "J",
+     "powt": "p12_J_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 140.544,
+     "flaga_ep": 30.08,
+     "wspolne": {
+      "kadry": 391,
+      "przyjete": 391,
+      "udzial": 1.0,
+      "blad": {
+       "n": 391,
+       "p50": 0.1048,
+       "p95": 0.2293,
+       "max": 0.2533
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 326,
+      "zgodne_p50": 521,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.1022,
+        "p95": 0.1688,
+        "max": 0.207
+       }
+      },
+      "po_fladze": {
+       "kadry": 231,
+       "przyjete": 231,
+       "udzial": 1.0,
+       "blad": {
+        "n": 231,
+        "p50": 0.1085,
+        "p95": 0.238,
+        "max": 0.2533
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 322,
+      "przyjete": 322,
+      "udzial": 1.0,
+      "blad": {
+       "n": 322,
+       "p50": 0.1688,
+       "p95": 0.2498,
+       "max": 0.2642
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 348,
+      "zgodne_p50": 528,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 106.76,
+      "ms_z_ostatnim_kadrem": 206.79,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 60.2,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "c2_cien_J_c10",
+     "lata": "J",
+     "powt": "p14_J_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 76.164,
+     "koniec_misji_ep": 145.164,
+     "flaga_ep": 34.712,
+     "wspolne": {
+      "kadry": 390,
+      "przyjete": 390,
+      "udzial": 1.0,
+      "blad": {
+       "n": 390,
+       "p50": 0.1077,
+       "p95": 0.179,
+       "max": 0.2473
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 307,
+      "zgodne_p50": 512,
+      "przed_flaga": {
+       "kadry": 183,
+       "przyjete": 183,
+       "udzial": 1.0,
+       "blad": {
+        "n": 183,
+        "p50": 0.1025,
+        "p95": 0.1512,
+        "max": 0.2129
+       }
+      },
+      "po_fladze": {
+       "kadry": 207,
+       "przyjete": 207,
+       "udzial": 1.0,
+       "blad": {
+        "n": 207,
+        "p50": 0.113,
+        "p95": 0.1866,
+        "max": 0.2473
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 345,
+      "przyjete": 345,
+      "udzial": 1.0,
+      "blad": {
+       "n": 345,
+       "p50": 0.1628,
+       "p95": 0.2424,
+       "max": 0.2743
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 333,
+      "zgodne_p50": 519,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 390,
+      "n_kf": 12,
+      "n_wiazan": 1170,
+      "n_wiazan_przyjetych": 1170,
+      "ms_zamkniecie": 106.76,
+      "ms_z_ostatnim_kadrem": 206.79,
+      "ostatni_kadr": 216.2,
+      "pierwszy_kadr_mapy": 138.4
+     },
+     "zegar_s": 58.8,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 419.8,
+   "rss_mb": 358.3
+  },
+  {
+   "nauka": "p05_N1_S_c10_cien",
+   "lata": "J",
+   "mapa": {
+    "n_kadrow_mapy": 387,
+    "n_kf": 12,
+    "n_wiazan": 1161,
+    "n_wiazan_przyjetych": 1161,
+    "ms_zamkniecie": 130.0,
+    "ms_z_ostatnim_kadrem": 226.64,
+    "ostatni_kadr": 214.6,
+    "pierwszy_kadr_mapy": 137.4
+   },
+   "przebiegi": [
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "J",
+     "powt": "p02_S_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 145.708,
+     "flaga_ep": 35.256,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.1562,
+       "p95": 0.2788,
+       "max": 0.347
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 296,
+      "zgodne_p50": 492,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.1212,
+        "p95": 0.1808,
+        "max": 0.2091
+       }
+      },
+      "po_fladze": {
+       "kadry": 202,
+       "przyjete": 202,
+       "udzial": 1.0,
+       "blad": {
+        "n": 202,
+        "p50": 0.1795,
+        "p95": 0.2851,
+        "max": 0.347
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 350,
+      "przyjete": 350,
+      "udzial": 1.0,
+      "blad": {
+       "n": 350,
+       "p50": 0.2068,
+       "p95": 0.3213,
+       "max": 0.3782
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 299,
+      "zgodne_p50": 517,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 130.0,
+      "ms_z_ostatnim_kadrem": 226.64,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 66.4,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "J",
+     "powt": "p04_S_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 140.516,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.1301,
+       "p95": 0.3051,
+       "max": 0.3425
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 308,
+      "zgodne_p50": 496,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.1135,
+        "p95": 0.2395,
+        "max": 0.2884
+       }
+      },
+      "po_fladze": {
+       "kadry": 228,
+       "przyjete": 228,
+       "udzial": 1.0,
+       "blad": {
+        "n": 228,
+        "p50": 0.1452,
+        "p95": 0.3197,
+        "max": 0.3425
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 324,
+      "przyjete": 324,
+      "udzial": 1.0,
+      "blad": {
+       "n": 324,
+       "p50": 0.1924,
+       "p95": 0.3104,
+       "max": 0.3466
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 354,
+      "zgodne_p50": 506,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 130.0,
+      "ms_z_ostatnim_kadrem": 226.64,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 61.0,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "J",
+     "powt": "p07_M_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 146.26,
+     "flaga_ep": 35.808,
+     "wspolne": {
+      "kadry": 389,
+      "przyjete": 389,
+      "udzial": 1.0,
+      "blad": {
+       "n": 389,
+       "p50": 0.154,
+       "p95": 0.3106,
+       "max": 0.3976
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 299,
+      "zgodne_p50": 513,
+      "przed_flaga": {
+       "kadry": 189,
+       "przyjete": 189,
+       "udzial": 1.0,
+       "blad": {
+        "n": 189,
+        "p50": 0.1248,
+        "p95": 0.185,
+        "max": 0.2148
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.1804,
+        "p95": 0.3261,
+        "max": 0.3976
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 353,
+      "przyjete": 353,
+      "udzial": 1.0,
+      "blad": {
+       "n": 353,
+       "p50": 0.2056,
+       "p95": 0.3087,
+       "max": 0.3442
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 357,
+      "zgodne_p50": 535,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 130.0,
+      "ms_z_ostatnim_kadrem": 226.64,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 61.2,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "J",
+     "powt": "p09_M_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 145.892,
+     "flaga_ep": 35.424,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.1509,
+       "p95": 0.2932,
+       "max": 0.3457
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 301,
+      "zgodne_p50": 491,
+      "przed_flaga": {
+       "kadry": 186,
+       "przyjete": 186,
+       "udzial": 1.0,
+       "blad": {
+        "n": 186,
+        "p50": 0.1161,
+        "p95": 0.1688,
+        "max": 0.1923
+       }
+      },
+      "po_fladze": {
+       "kadry": 202,
+       "przyjete": 202,
+       "udzial": 1.0,
+       "blad": {
+        "n": 202,
+        "p50": 0.1757,
+        "p95": 0.3043,
+        "max": 0.3457
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 350,
+      "przyjete": 350,
+      "udzial": 1.0,
+      "blad": {
+       "n": 350,
+       "p50": 0.2148,
+       "p95": 0.3215,
+       "max": 0.3801
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 302,
+      "zgodne_p50": 533,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 130.0,
+      "ms_z_ostatnim_kadrem": 226.64,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 66.2,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "J",
+     "powt": "p12_J_c10_a",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 140.544,
+     "flaga_ep": 30.08,
+     "wspolne": {
+      "kadry": 389,
+      "przyjete": 389,
+      "udzial": 1.0,
+      "blad": {
+       "n": 389,
+       "p50": 0.1341,
+       "p95": 0.2892,
+       "max": 0.3129
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 294,
+      "zgodne_p50": 496,
+      "przed_flaga": {
+       "kadry": 160,
+       "przyjete": 160,
+       "udzial": 1.0,
+       "blad": {
+        "n": 160,
+        "p50": 0.1146,
+        "p95": 0.2433,
+        "max": 0.3129
+       }
+      },
+      "po_fladze": {
+       "kadry": 229,
+       "przyjete": 229,
+       "udzial": 1.0,
+       "blad": {
+        "n": 229,
+        "p50": 0.1431,
+        "p95": 0.2937,
+        "max": 0.3071
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 324,
+      "przyjete": 324,
+      "udzial": 1.0,
+      "blad": {
+       "n": 324,
+       "p50": 0.2076,
+       "p95": 0.3069,
+       "max": 0.3333
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 348,
+      "zgodne_p50": 524,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 130.0,
+      "ms_z_ostatnim_kadrem": 226.64,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 58.9,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p05_N1_S_c10_cien",
+     "lata": "J",
+     "powt": "p14_J_c10_b",
+     "komorka": "c10",
+     "koniec_nauki_ep": 75.78,
+     "koniec_misji_ep": 145.164,
+     "flaga_ep": 34.712,
+     "wspolne": {
+      "kadry": 388,
+      "przyjete": 388,
+      "udzial": 1.0,
+      "blad": {
+       "n": 388,
+       "p50": 0.1323,
+       "p95": 0.2262,
+       "max": 0.2518
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 290,
+      "zgodne_p50": 477,
+      "przed_flaga": {
+       "kadry": 183,
+       "przyjete": 183,
+       "udzial": 1.0,
+       "blad": {
+        "n": 183,
+        "p50": 0.1247,
+        "p95": 0.1869,
+        "max": 0.2518
+       }
+      },
+      "po_fladze": {
+       "kadry": 205,
+       "przyjete": 205,
+       "udzial": 1.0,
+       "blad": {
+        "n": 205,
+        "p50": 0.1369,
+        "p95": 0.2319,
+        "max": 0.245
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 347,
+      "przyjete": 347,
+      "udzial": 1.0,
+      "blad": {
+       "n": 347,
+       "p50": 0.2149,
+       "p95": 0.3044,
+       "max": 0.3287
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 324,
+      "zgodne_p50": 509,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 387,
+      "n_kf": 12,
+      "n_wiazan": 1161,
+      "n_wiazan_przyjetych": 1161,
+      "ms_zamkniecie": 130.0,
+      "ms_z_ostatnim_kadrem": 226.64,
+      "ostatni_kadr": 214.6,
+      "pierwszy_kadr_mapy": 137.4
+     },
+     "zegar_s": 58.0,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 415.6,
+   "rss_mb": 361.7
+  },
+  {
+   "nauka": "p10_N2_J_c05_cien",
+   "lata": "J",
+   "mapa": {
+    "n_kadrow_mapy": 372,
+    "n_kf": 10,
+    "n_wiazan": 1116,
+    "n_wiazan_przyjetych": 1116,
+    "ms_zamkniecie": 78.91,
+    "ms_z_ostatnim_kadrem": 151.68,
+    "ostatni_kadr": 209.8,
+    "pierwszy_kadr_mapy": 135.6
+   },
+   "przebiegi": [
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "J",
+     "powt": "p01_S_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.06,
+     "wspolne": {
+      "kadry": 378,
+      "przyjete": 378,
+      "udzial": 1.0,
+      "blad": {
+       "n": 378,
+       "p50": 0.1989,
+       "p95": 0.3097,
+       "max": 0.351
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 296,
+      "zgodne_p50": 545,
+      "przed_flaga": {
+       "kadry": 178,
+       "przyjete": 178,
+       "udzial": 1.0,
+       "blad": {
+        "n": 178,
+        "p50": 0.1608,
+        "p95": 0.225,
+        "max": 0.3208
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2471,
+        "p95": 0.3338,
+        "max": 0.351
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2679,
+       "p95": 0.5481,
+       "max": 0.5822
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 358,
+      "zgodne_p50": 550,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 78.91,
+      "ms_z_ostatnim_kadrem": 151.68,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 47.6,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "J",
+     "powt": "p03_S_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 140.512,
+     "flaga_ep": 30.072,
+     "wspolne": {
+      "kadry": 374,
+      "przyjete": 374,
+      "udzial": 1.0,
+      "blad": {
+       "n": 374,
+       "p50": 0.1965,
+       "p95": 0.2798,
+       "max": 0.3054
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 315,
+      "zgodne_p50": 532,
+      "przed_flaga": {
+       "kadry": 159,
+       "przyjete": 159,
+       "udzial": 1.0,
+       "blad": {
+        "n": 159,
+        "p50": 0.1804,
+        "p95": 0.2428,
+        "max": 0.2555
+       }
+      },
+      "po_fladze": {
+       "kadry": 215,
+       "przyjete": 215,
+       "udzial": 1.0,
+       "blad": {
+        "n": 215,
+        "p50": 0.2086,
+        "p95": 0.2854,
+        "max": 0.3054
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 338,
+      "przyjete": 338,
+      "udzial": 1.0,
+      "blad": {
+       "n": 338,
+       "p50": 0.2944,
+       "p95": 0.462,
+       "max": 0.4709
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 380,
+      "zgodne_p50": 530,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 78.91,
+      "ms_z_ostatnim_kadrem": 151.68,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 49.0,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "J",
+     "powt": "p06_M_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.476,
+     "flaga_ep": 33.032,
+     "wspolne": {
+      "kadry": 377,
+      "przyjete": 377,
+      "udzial": 1.0,
+      "blad": {
+       "n": 377,
+       "p50": 0.2012,
+       "p95": 0.318,
+       "max": 0.3801
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 296,
+      "zgodne_p50": 548,
+      "przed_flaga": {
+       "kadry": 177,
+       "przyjete": 177,
+       "udzial": 1.0,
+       "blad": {
+        "n": 177,
+        "p50": 0.1604,
+        "p95": 0.2253,
+        "max": 0.3205
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2448,
+        "p95": 0.3378,
+        "max": 0.3801
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2625,
+       "p95": 0.5501,
+       "max": 0.5895
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 380,
+      "zgodne_p50": 550,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 78.91,
+      "ms_z_ostatnim_kadrem": 151.68,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 49.4,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "J",
+     "powt": "p08_M_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.508,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 376,
+      "przyjete": 376,
+      "udzial": 1.0,
+      "blad": {
+       "n": 376,
+       "p50": 0.1994,
+       "p95": 0.3125,
+       "max": 0.3405
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 298,
+      "zgodne_p50": 562,
+      "przed_flaga": {
+       "kadry": 176,
+       "przyjete": 176,
+       "udzial": 1.0,
+       "blad": {
+        "n": 176,
+        "p50": 0.1623,
+        "p95": 0.2255,
+        "max": 0.3184
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2379,
+        "p95": 0.3218,
+        "max": 0.3405
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2755,
+       "p95": 0.5268,
+       "max": 0.5446
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 407,
+      "zgodne_p50": 536,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 78.91,
+      "ms_z_ostatnim_kadrem": 151.68,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 45.4,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "J",
+     "powt": "p11_J_c05_a",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.544,
+     "flaga_ep": 33.092,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.1994,
+       "p95": 0.3181,
+       "max": 0.3593
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 296,
+      "zgodne_p50": 559,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.1596,
+        "p95": 0.2285,
+        "max": 0.3226
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2367,
+        "p95": 0.3372,
+        "max": 0.3593
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.261,
+       "p95": 0.5122,
+       "max": 0.5439
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 370,
+      "zgodne_p50": 562,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 78.91,
+      "ms_z_ostatnim_kadrem": 151.68,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 43.2,
+     "warunek_S1": true
+    },
+    {
+     "nauka": "p10_N2_J_c05_cien",
+     "lata": "J",
+     "powt": "p13_J_c05_b",
+     "komorka": "c05",
+     "koniec_nauki_ep": 73.064,
+     "koniec_misji_ep": 143.512,
+     "flaga_ep": 33.044,
+     "wspolne": {
+      "kadry": 375,
+      "przyjete": 375,
+      "udzial": 1.0,
+      "blad": {
+       "n": 375,
+       "p50": 0.2036,
+       "p95": 0.3266,
+       "max": 0.3964
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 301,
+      "zgodne_p50": 558,
+      "przed_flaga": {
+       "kadry": 175,
+       "przyjete": 175,
+       "udzial": 1.0,
+       "blad": {
+        "n": 175,
+        "p50": 0.1662,
+        "p95": 0.2269,
+        "max": 0.3124
+       }
+      },
+      "po_fladze": {
+       "kadry": 200,
+       "przyjete": 200,
+       "udzial": 1.0,
+       "blad": {
+        "n": 200,
+        "p50": 0.2387,
+        "p95": 0.3591,
+        "max": 0.3964
+       }
+      }
+     },
+     "dalej": {
+      "kadry": 352,
+      "przyjete": 352,
+      "udzial": 1.0,
+      "blad": {
+       "n": 352,
+       "p50": 0.2734,
+       "p95": 0.5352,
+       "max": 0.5812
+      },
+      "przerwy": {
+       "max": 0.2,
+       "gt_115": 0,
+       "lista_gt_115": []
+      },
+      "zgodne_p5": 379,
+      "zgodne_p50": 551,
+      "do_pierwszej_przerwy_s": null
+     },
+     "mapa": {
+      "n_kadrow_mapy": 372,
+      "n_kf": 10,
+      "n_wiazan": 1116,
+      "n_wiazan_przyjetych": 1116,
+      "ms_zamkniecie": 78.91,
+      "ms_z_ostatnim_kadrem": 151.68,
+      "ostatni_kadr": 209.8,
+      "pierwszy_kadr_mapy": 135.6
+     },
+     "zegar_s": 44.0,
+     "warunek_S1": true
+    }
+   ],
+   "zegar_s": 308.9,
+   "rss_mb": 363.8
+  }
+ ],
+ "sumy_toru": {
+  "results/TEACH_RECON2/tools/teach2.py": "07925633a8447c1d7b1bfa0beba0c8d514ce92a869d4e666047a61c5dd5d744d",
+  "results/TEACH_RECON/tools/teach_r34.py": "3536a28ef05a16689f1cce7192d59688459e784b40c39d2f76eb9cf9e5f87e34",
+  "results/ORTO_RECON/tools/orto_r2.py": "442103535187535a3f4b5c4bec5b138d7059f4b4ecc3ca11c90a9a416a903268",
+  "results/ORTO_RECON/tools/orto_r3.py": "0410dfbf91a63fb728998b3622019215b763eeca1ae860d18f1ad52b50633873"
+ },
+ "wariant": "K",
+ "procesy": 8,
+ "zegar_s": 724.6
+}
