@@ -1,0 +1,556 @@
+{
+ "1_plan_straznik": {
+  "plan": {
+   "1": {
+    "nazwa": "p01_S_c05_a",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "S",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "5",
+     "30"
+    ]
+   },
+   "2": {
+    "nazwa": "p02_S_c10_a",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "S",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "10",
+     "30"
+    ]
+   },
+   "3": {
+    "nazwa": "p03_S_c05_b",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "S",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "5",
+     "30"
+    ]
+   },
+   "4": {
+    "nazwa": "p04_S_c10_b",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "S",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "10",
+     "30"
+    ]
+   },
+   "5": {
+    "nazwa": "p05_N1_S_c10_cien",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "S",
+     "BOOT_CIEN": "1",
+     "BOOT_T_CIEN": "176.5"
+    },
+    "args": [
+     "10",
+     "-"
+    ]
+   },
+   "6": {
+    "nazwa": "p06_M_c05_a",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "M",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "5",
+     "30"
+    ]
+   },
+   "7": {
+    "nazwa": "p07_M_c10_a",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "M",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "10",
+     "30"
+    ]
+   },
+   "8": {
+    "nazwa": "p08_M_c05_b",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "M",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "5",
+     "30"
+    ]
+   },
+   "9": {
+    "nazwa": "p09_M_c10_b",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "M",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "10",
+     "30"
+    ]
+   },
+   "10": {
+    "nazwa": "p10_N2_J_c05_cien",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "J",
+     "BOOT_CIEN": "1",
+     "BOOT_T_CIEN": "173.6"
+    },
+    "args": [
+     "5",
+     "-"
+    ]
+   },
+   "11": {
+    "nazwa": "p11_J_c05_a",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "J",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "5",
+     "30"
+    ]
+   },
+   "12": {
+    "nazwa": "p12_J_c10_a",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "J",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "10",
+     "30"
+    ]
+   },
+   "13": {
+    "nazwa": "p13_J_c05_b",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "J",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "5",
+     "30"
+    ]
+   },
+   "14": {
+    "nazwa": "p14_J_c10_b",
+    "env": {
+     "BOOT_NADIR_MODE": "1",
+     "BOOT_KONT_MODE": "1",
+     "BOOT_PASSTHROUGH": "0",
+     "TEACH_ETAP": "s3",
+     "BOOT_LATA": "J",
+     "BOOT_CIEN": "0"
+    },
+    "args": [
+     "10",
+     "30"
+    ]
+   }
+  },
+  "n_pozycji": 14,
+  "niezmiennik": {
+   "wszystkie": true,
+   "zla_kolejnosc_odrzucona": true
+  },
+  "straznik": {
+   "pozycje": {
+    "1": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_01] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "2": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_02] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "3": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_03] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "4": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_04] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "5": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_05] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "6": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_06] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "7": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_07] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "8": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_08] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "9": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_09] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "10": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_10] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "11": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_11] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "12": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_12] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "13": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_13] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    },
+    "14": {
+     "rc": 5,
+     "komunikat": "[kont dryrun_guard_14] GUARD: brak PERC2_FASTDDS_PROFILE",
+     "ok": true
+    }
+   },
+   "etap_s9_odrzucony": true
+  },
+  "bash_n": true,
+  "plan_zgodny_z_promptem": {
+   "1": true,
+   "2": true,
+   "3": true,
+   "4": true,
+   "5": true,
+   "6": true,
+   "7": true,
+   "8": true,
+   "9": true,
+   "10": true,
+   "11": true,
+   "12": true,
+   "13": true,
+   "14": true
+  },
+  "PASS": true
+ },
+ "2_swiaty": {
+  "S": {
+   "gz_sdf_k": "Valid.",
+   "valid": true,
+   "zasoby": 39,
+   "brak": [],
+   "sha_sdf": true,
+   "tekstura_w_sdf": true,
+   "sha_tekstury": true,
+   "ok": true
+  },
+  "M": {
+   "gz_sdf_k": "Valid.",
+   "valid": true,
+   "zasoby": 39,
+   "brak": [],
+   "sha_sdf": true,
+   "tekstura_w_sdf": true,
+   "sha_tekstury": true,
+   "ok": true
+  },
+  "J": {
+   "gz_sdf_k": "Valid.",
+   "valid": true,
+   "zasoby": 39,
+   "brak": [],
+   "sha_sdf": true,
+   "tekstura_w_sdf": true,
+   "sha_tekstury": true,
+   "ok": true
+  },
+  "PASS": true
+ },
+ "3_sprawdzian_ostrosc": {
+  "SM": {
+   "ok": true,
+   "procent": 100.0,
+   "oslona_ticki": 3187,
+   "poprawki": 584,
+   "max_abs_m": 5.06e-05,
+   "georef": {
+    "d_theta_deg": 3.7e-07,
+    "d_t_m": 4.7e-07
+   }
+  },
+  "a_seq": 804,
+  "a_poprawka_0001": {
+   "wykryte": true,
+   "czesc": "poprawki",
+   "szczegoly": {
+    "niezgodne": 1,
+    "max_abs_m": 0.0009565
+   },
+   "inne_czesci_czerwone": []
+  },
+  "b_usuniete": {
+   "kadr": 173.0,
+   "wiazan": 3
+  },
+  "b_wiazania_ostatniego": {
+   "wykryte": true,
+   "czesc": "georef",
+   "szczegoly": {
+    "d_theta_deg": 0.00774203,
+    "d_t_m": 0.00116052
+   },
+   "inne_czesci_czerwone": []
+  },
+  "c_tick": 1820,
+  "c_decyzja": {
+   "wykryte": true,
+   "czesc": "oslona",
+   "szczegoly": {
+    "dec": 1,
+    "rule": 0,
+    "faza": 0
+   },
+   "inne_czesci_czerwone": []
+  },
+  "PASS": true
+ },
+ "4_lot_bez_poprawek": {
+  "analizator_skonczyl": true,
+  "przyjete": 0,
+  "zamkniecia": 1,
+  "B": {
+   "B1": true,
+   "B2": true,
+   "B3": true,
+   "B4": true
+  },
+  "B1": {
+   "przekroczenia": 0,
+   "ticki_ocenione": 43,
+   "max_e_do_U": 0.1003
+  },
+  "D1": {
+   "dostepne": false,
+   "kontynuacja_od_t_inj_s": 110.54,
+   "frac_track": 1.0,
+   "frac_pasmo": 1.0,
+   "refuse_misja": 2178
+  },
+  "odmowa_w_misji": {
+   "tick": 714,
+   "sim": 175.828,
+   "od_ciecia_s": 2.14,
+   "przyczyna": "τ*",
+   "r_est": 10.24,
+   "bariera_R_k": 21.129,
+   "r_gt": 9.924,
+   "tau": 2.084,
+   "przerwa_zrodla": {
+    "poczatek": 173.696,
+    "dlugosc_s": 2.132,
+    "kadry": 11,
+    "powody": {
+     "brak_dopasowania": 11
+    },
+    "pokrycie_max": 0.99
+   }
+  },
+  "litera_ok": false,
+  "b1_nieocenione_w_misji": 2176,
+  "b1_nieocenione_przyczyny": {
+   "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+    "n": 2405,
+    "faza_misji": 2176,
+    "pierwszy_tick": 716
+   }
+  },
+  "uwaga": "trajektoria syntetyczna (p01) nie schodzi po zatrzasku — ticki KONT_REFUSE zostają w fazie misji; w locie zejście D5 wyłącza je z misji (desc)",
+  "PASS": true
+ },
+ "5_reguly": {
+  "naruszenie": {
+   "wynik": [
+    "naruszenie",
+    "STOP-TEACH-3-VC"
+   ],
+   "oczek": [
+    "naruszenie",
+    "STOP-TEACH-3-VC"
+   ],
+   "ok": true
+  },
+  "sprawdzian_ponizej_100": {
+   "wynik": [
+    "niewazny_przyrzad",
+    "STOP-TEACH-3-PRZYRZAD"
+   ],
+   "oczek": [
+    "niewazny_przyrzad",
+    "STOP-TEACH-3-PRZYRZAD"
+   ],
+   "ok": true
+  },
+  "detekcja_zgodna": {
+   "wynik": [
+    "niewazny_swiat_kod",
+    "STOP-TEACH-3-SWIAT-KOD"
+   ],
+   "oczek": [
+    "niewazny_swiat_kod",
+    "STOP-TEACH-3-SWIAT-KOD"
+   ],
+   "ok": true
+  },
+  "ciecie_bez_wejscia": {
+   "wynik": [
+    "bez_wejscia",
+    null
+   ],
+   "oczek": [
+    "bez_wejscia",
+    null
+   ],
+   "ok": true
+  },
+  "stanowisko_w_locie": {
+   "wynik": [
+    "niewazny_stanowisko",
+    null
+   ],
+   "oczek": [
+    "niewazny_stanowisko",
+    null
+   ],
+   "ok": true
+  },
+  "breach": {
+   "wynik": [
+    "breach",
+    "STOP-TEACH-3-BREACH"
+   ],
+   "oczek": [
+    "breach",
+    "STOP-TEACH-3-BREACH"
+   ],
+   "ok": true
+  },
+  "wazny": {
+   "wynik": [
+    "wazny",
+    null
+   ],
+   "oczek": [
+    "wazny",
+    null
+   ],
+   "ok": true
+  },
+  "prog_S_2z4": {
+   "wynik": "STOP-TEACH-3-S",
+   "oczek": "STOP-TEACH-3-S",
+   "ok": true
+  },
+  "prog_S_3z4": {
+   "wynik": null,
+   "oczek": null,
+   "ok": true
+  },
+  "czwarta_rezerwa": {
+   "wynik": "STOP-TEACH-3-REZERWA",
+   "oczek": "STOP-TEACH-3-REZERWA",
+   "ok": true
+  },
+  "trzecia_rezerwa": {
+   "wynik": null,
+   "oczek": null,
+   "ok": true
+  },
+  "noga_23": {
+   "wynik": "STOP-TEACH-3-NOGA",
+   "oczek": "STOP-TEACH-3-NOGA",
+   "ok": true
+  },
+  "PASS": true
+ },
+ "PASS": true
+}

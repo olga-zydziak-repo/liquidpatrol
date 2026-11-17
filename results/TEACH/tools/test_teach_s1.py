@@ -225,6 +225,7 @@ def test_analizator_zrodlo():
         k = min(gt.values(), key=lambda x: abs(x["sim"] - t))
         return k["gt_p"], k["gt_q"]
     o = A.zrodlo_teach(d, GTp, t_cut, po[29]["sim"], pose)
-    assert o["wazny"] and o["warunki_waznosci"] == {"zero_detekcji_znacznikow": True, "brak_mapy_po_fladze": True, "georef_raz": True}
+    assert o["wazny"] and o["warunki_waznosci"] == {"zero_detekcji_zgodnych_z_manifestem": True, "brak_mapy_po_fladze": True,
+                                                    "georef_raz": True}                    # TEACH-3S: klucz świadka ANEKS_TEACH-2
     assert o["blad_poprawki"]["n"] > 0 and o["blad_poprawki"]["max"] < 1.0
     assert o["opoznienie_pierwszej_poprawki_s"] is not None and o["georef"]["n_kf"] > 0

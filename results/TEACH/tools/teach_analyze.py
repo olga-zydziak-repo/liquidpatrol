@@ -16,6 +16,10 @@ ANEKS_TEACH-2 §3 (TEACH-2A): świadek tezy = zero detekcji ZGODNYCH Z MANIFESTE
 środka detekcji (promień piksela uv przy pozie GT kadru, kamera w dół z przypiętego modelu — orto_r2.Kam, przecięty z płaszczyzną
 z = z znacznika) nie dalej niż 1.0 m od pozycji tego ID; detekcje surowe jako obserwabla (liczba, ID, bok). Funkcja zgodnosc_detekcji
 liczy też poza lotem TEACH (sprawdziany aneksu §4.3).
+PROMPT_TEACH_S3 §1 (TEACH-3S): zapis wyniku odporny na typy numpy (lot bez żadnej przyjętej poprawki kończy się osądem); ważność
+w nominale (bez cięcia) wobec chwili cienia z meta nadir_obs („teach”.„t_cien”); nowe pola źródła: największy błąd poprawki w pierwszej
+i drugiej połowie okna misji [flaga, koniec misji], udział przyjętych w oknie [klatka zamknięcia, koniec misji], oś czasu (chwila flagi
+z ULG, wejście osłony w utratę, klatka zamknięcia, ostatni kadr mapy — także wobec flagi).
 Wyjście <boot>/wyniki_teach.json. Nagłówek oryginału:
 results/NAD3/tools/nad3_analyze.py — analizator nogi NADIR-III (PROMPT_NAD3_S1 §1.3, PRE_NAD3 §6) = KOPIA
 results/NAD2/tools/nad2_analyze.py (nietknięty) ze zmianami oznaczonymi „NAD3:” wyłącznie:
@@ -166,10 +170,16 @@ def zgodnosc_detekcji(wpisy, gt_pose):
             "odl_wszystkich_z_manifestu": {"n": len(odl), "min": round(min(odl), 4) if odl else None}}
 
 
+def _json_default(x):                                                # TEACH-3S: typy numpy w zapisie wyniku
+    return x.item() if hasattr(x, "item") else str(x)
+
+
 def zrodlo_teach(d, GTp, t_flag, t_konca, gt_pose):
     """TEACH: obserwable i ważność źródła z nadir_obs.jsonl; GTp(t) = GT NED, gt_pose(t) = (p ENU, q FLU→ENU)."""
     nf = jl(os.path.join(d, "nadir_obs.jsonl"), "nf")
     meta = next((r for r in jl(os.path.join(d, "nadir_obs.jsonl"), "meta")), {})
+    t_cien = (meta.get("teach") or {}).get("t_cien")                 # TEACH-3S: nominał — ważność wobec chwili cienia
+    t_waz = t_flag if t_flag is not None else (float(t_cien) if t_cien is not None else None)
     out = {"meta_litera": meta.get("litera"), "wariant_K": (meta.get("teach") or {}).get("wariant_K"),
            "n_klatek": len(nf), "n_det_znacznikow": int(sum(r.get("n", 0) for r in nf)),
            "n_klatek_z_detekcja": sum(1 for r in nf if r.get("n", 0))}
@@ -181,11 +191,18 @@ def zrodlo_teach(d, GTp, t_flag, t_konca, gt_pose):
     wl = [r["teach"]["wlaczony"] for r in tr if r["teach"].get("wlaczony")]
     geo = [r for r in tr if r["teach"].get("georef")]
     G = geo[0]["teach"]["georef"] if geo else None
-    po_fladze_mapa = [w for w in wl if t_flag is not None and w["sim"] >= t_flag]
-    kf_po = [k for k in (G or {}).get("kf", []) if t_flag is not None and k["sim"] >= t_flag]
+    po_fladze_mapa = [w for w in wl if t_waz is not None and w["sim"] >= t_waz]                      # TEACH-3S: t_waz
+    kf_po = [k for k in (G or {}).get("kf", []) if t_waz is not None and k["sim"] >= t_waz]
+    wz_po = [w for w in (G or {}).get("wiazania", []) if t_waz is not None and w[0] >= t_waz]
     out["warunki_waznosci"] = {"zero_detekcji_zgodnych_z_manifestem": out["detekcje"]["zgodne"]["n"] == 0,   # TEACH-2A
-                               "brak_mapy_po_fladze": not po_fladze_mapa and not kf_po, "georef_raz": len(geo) == 1}
-    out["kadry_mapy_po_fladze"], out["kf_po_fladze"] = len(po_fladze_mapa), len(kf_po)
+                               "brak_mapy_po_fladze": not po_fladze_mapa and not kf_po and not wz_po, "georef_raz": len(geo) == 1}
+    out["kadry_mapy_po_fladze"], out["kf_po_fladze"], out["wiazania_po_fladze"] = len(po_fladze_mapa), len(kf_po), len(wz_po)
+    out["chwila_waznosci"] = {"t": t_waz, "zrodlo": "flaga ULG" if t_flag is not None else ("chwila cienia" if t_waz is not None else None)}
+    t_zamk = geo[0]["sim"] if geo else None                           # TEACH-3S: oś czasu
+    t_ost = max((w["sim"] for w in wl), default=None)
+    out["os_czasu"] = {"flaga_ulg": t_flag, "klatka_zamkniecia": t_zamk, "ostatni_kadr_mapy": t_ost,
+                       "zamkniecie_wobec_flagi_s": round(t_zamk - t_waz, 4) if (t_zamk is not None and t_waz is not None) else None,
+                       "ostatni_kadr_wobec_flagi_s": round(t_ost - t_waz, 4) if (t_ost is not None and t_waz is not None) else None}
     out["wazny"] = all(out["warunki_waznosci"].values())
     if not out["wazny"]:
         out["powod_niewazny"] = [k for k, v in out["warunki_waznosci"].items() if not v]
@@ -201,6 +218,18 @@ def zrodlo_teach(d, GTp, t_flag, t_konca, gt_pose):
         err.append(float(math.hypot(r["fx"]["p_fix_ne"][0] - g[0], r["fx"]["p_fix_ne"][1] - g[1])))
     out["blad_poprawki"] = ({"n": len(err), "p50": round(float(np.median(err)), 4), "p95": round(float(np.quantile(err, .95)), 4),
                              "max": round(max(err), 4)} if err else None)
+    if t_waz is not None and t_konca is not None:                    # TEACH-3S: połowy okna misji i udział przyjętych
+        srod = t_waz + (t_konca - t_waz) / 2
+        e1 = [e for r, e in zip(ok, err) if t_waz <= r["fx"]["t_frame"] < srod]
+        e2 = [e for r, e in zip(ok, err) if srod <= r["fx"]["t_frame"] <= t_konca]
+        out["blad_poprawki_polowy"] = {"okno": [t_waz, t_konca], "srodek": round(srod, 3),
+                                       "max_pierwsza": round(max(e1), 4) if e1 else None, "n_pierwsza": len(e1),
+                                       "max_druga": round(max(e2), 4) if e2 else None, "n_druga": len(e2)}
+        if t_zamk is not None:
+            okn = [r for r in nf if t_zamk <= r["sim"] <= t_konca]
+            npr = sum(1 for r in okn if (r.get("fx") or {}).get("ok"))
+            out["udzial_przyjetych_okna"] = {"okno": [t_zamk, t_konca], "kadry": len(okn), "przyjete": npr,
+                                             "udzial": round(npr / len(okn), 4) if okn else None}
     if t_flag is not None:
         t_ok = [r["fx"]["t_frame"] for r in ok if r["fx"]["t_frame"] >= t_flag and (t_konca is None or r["fx"]["t_frame"] <= t_konca)]
         out["opoznienie_pierwszej_poprawki_s"] = round(t_ok[0] - t_flag, 3) if t_ok else None
@@ -456,11 +485,20 @@ def analyze(d, out=None):
         return p, (qq / np.linalg.norm(qq)).tolist()
     c_eps = [o for o in res["epizody"] if o["ciecie"]]
     zp_c = e1("zejscie_planowe", cut["episode_id"]) if cut else None
-    res["teach"] = zrodlo_teach(d, GT, t_flag, zp_c["sim"] if zp_c else None, gt_pose)
+    t_kon = zp_c["sim"] if zp_c else None
+    if cut is None:                                                  # TEACH-3S: nominał — koniec misji epizodu (bez zejścia)
+        mis_all = [r["sim"] for r in rama if r.get("phase") in MISJA and not r.get("desc")]
+        t_kon = max(mis_all) if mis_all else None
+    res["teach"] = zrodlo_teach(d, GT, t_flag, t_kon, gt_pose)
+    ut0 = next((r["sim"] for r in rama if r.get("ph") not in (None, "NOMINAL")), None)          # TEACH-3S: wejście osłony w utratę
+    res["teach"].setdefault("os_czasu", {})["wejscie_oslony_w_utrate"] = ut0
+    if ut0 is not None and t_flag is not None:
+        res["teach"]["os_czasu"]["wejscie_oslony_wobec_flagi_s"] = round(ut0 - t_flag, 4)
     res["wazny"] = bool(res["teach"].get("wazny"))
     if not res["wazny"]:
         res["powod_niewazny"] = res["teach"].get("powod_niewazny")
-    json.dump(res, open(out or os.path.join(d, "wyniki_teach.json"), "w"), ensure_ascii=False, indent=1)   # TEACH
+    json.dump(res, open(out or os.path.join(d, "wyniki_teach.json"), "w"), ensure_ascii=False, indent=1,
+              default=_json_default)                                 # TEACH; TEACH-3S: typy numpy
     return res
 
 
