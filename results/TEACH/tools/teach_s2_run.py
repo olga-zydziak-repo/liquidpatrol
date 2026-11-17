@@ -91,7 +91,10 @@ def main():
     zuzyte = [w for w in ks if w.get("epizod_wystartowal")]
     nr = BOOTY_STATYCZNE + len(zuzyte) + 1
     if lot == "SM":
-        cienie = {w["lot"] for w in zuzyte if w.get("bramka_obrazu") is True}
+        def bramka_obrazu(w):                       # wynik oceny cienia (teach_s2_cien → <nazwa>/cien_s2.json); księga go nie niesie
+            p = os.path.join(S2, w["nazwa"], "cien_s2.json")
+            return os.path.exists(p) and json.load(open(p))["bramka_obrazu"]["ok"] is True
+        cienie = {w["lot"] for w in zuzyte if w["lot"] in ("C1", "C2") and bramka_obrazu(w)}
         if cienie != {"C1", "C2"}:
             sys.exit(f"SM: bramka obrazu niespełniona w obu cieniach ({cienie}) — ODMOWA")
     if nr > BUDZET:
