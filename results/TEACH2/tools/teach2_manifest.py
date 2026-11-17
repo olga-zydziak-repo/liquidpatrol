@@ -6,7 +6,8 @@ results/NAD2/tools/nad2_s4_manifest.py (import, plik nietknięty) — odcinki [0
 długość ustawiana w tym procesie (moduł: EP_DUR_S_L) na 1000 s ⇒ pięć nóg po 200 s. Każdy z 120 epizodów przez `wahadlo` (pola
 epizodu bez zmian, w tym episode_id ⇒ niezmiennik pozycja = numer zostaje); nagłówek manifestu jak v2, ep_dur_s 1000, pole „zrodlo”.
 Sprawdziany dla c10_s01 (PROMPT §1): pierwsze 200 s równe v2 odcinek w odcinek; tor ciągły przez 1000 s (position_at co 0.1 s, krok
-≤ 0.1 m); promień intruza ≤ 11.0 m. Wyjście: results/TEACH2/scenario_manifest_teach2L.json + teach2_manifest.json (sha256, sprawdziany).
+≤ 0.1 m); promień intruza ≤ 11.0 m — progi zastąpione przez ANEKS_TEACH2-1 §3: krok ≤ v·0.1 s + 0.001 m, promień ≤ 11.001 m;
+--sprawdz: sprawdziany na istniejącym pliku bez regeneracji (ANEKS_TEACH2-1 §4.3). Wyjście: results/TEACH2/scenario_manifest_teach2L.json + teach2_manifest.json (sha256, sprawdziany).
 """
 import copy
 import hashlib
@@ -26,6 +27,17 @@ V2 = os.path.join(ROOT, "results/NAD3/s1/scenario_manifest_nad3_v2.json")
 OUT = os.path.join(ROOT, "results/TEACH2/scenario_manifest_teach2L.json")
 DLUGOSC = 1000.0
 SCEN = "c10_s01"
+TOL_KROK, R_MAX = 0.001, 11.001                          # ANEKS_TEACH2-1 §3 (zastępuje progi 0.1 m / 11.0 m z PROMPT_TEACH2_S1 §1)
+
+
+def sprawdz_istniejacy():
+    """ANEKS_TEACH2-1 §4.3: sprawdziany na istniejącym manifeście (bez regeneracji); suma pliku = zapisana."""
+    info = json.load(open(os.path.join(ROOT, "results/TEACH2/teach2_manifest.json")))
+    sha = hashlib.sha256(open(OUT, "rb").read()).hexdigest()
+    v2e = next(e for e in json.load(open(V2))["episodes"] if e["scenario_id"] == SCEN)
+    e = next(e for e in json.load(open(OUT))["episodes"] if e["scenario_id"] == SCEN)
+    spr = sprawdziany(v2e, e)
+    return {"sha256": sha, "sha_zgodna_z_zapisana": sha == info["sha256"], "sprawdziany_c10_s01": spr, "ok": spr["ok"] and sha == info["sha256"]}
 
 
 def sprawdziany(v2_ep, ep):
@@ -39,10 +51,14 @@ def sprawdziany(v2_ep, ep):
     r = float(np.max(np.hypot(p[:, 0], p[:, 1])))
     p0 = np.array([S.position_at(v2_ep, x)[:2] for x in t[t <= 200.0]])
     d200 = float(np.max(np.hypot(*(p[: len(p0)] - p0).T)))
+    v = max(sg["v"] for sg in ep["segments"])
+    krok_max, r_max = v * 0.1 + TOL_KROK, R_MAX                       # ANEKS_TEACH2-1 §3
     return {"pierwsze_200s_rowne_v2": bool(rowne), "n_odcinkow_200s": len(pierwsze), "max_roznica_pozycji_0_200s_m": round(d200, 9),
-            "krok_max_0p1s_m": round(krok, 6), "ciagly": krok <= 0.1 + 1e-6, "promien_max_m": round(r, 4), "promien_ok": r <= 11.0 + 1e-9,
+            "krok_max_0p1s_m": round(krok, 6), "prog_kroku_m": round(krok_max, 6), "ciagly": krok <= krok_max,
+            "promien_max_m": round(r, 6), "prog_promienia_m": r_max, "promien_ok": r <= r_max,
             "koniec_ostatniego_odcinka_s": ep["segments"][-1]["t1"], "ep_dur_s": ep["ep_dur_s"],
-            "ok": bool(rowne) and krok <= 0.1 + 1e-6 and r <= 11.0 + 1e-9 and ep["segments"][-1]["t1"] >= DLUGOSC - 1e-6}
+            "litera": "ANEKS_TEACH2-1 §3: krok ≤ v·0.1 s + 0.001 m, promień ≤ 11.001 m",
+            "ok": bool(rowne) and krok <= krok_max and r <= r_max and ep["segments"][-1]["t1"] >= DLUGOSC - 1e-6}
 
 
 def main():
@@ -68,4 +84,8 @@ def main():
 
 
 if __name__ == "__main__":
+    if "--sprawdz" in sys.argv[1:]:
+        w = sprawdz_istniejacy()
+        print(json.dumps(w, ensure_ascii=False))
+        sys.exit(0 if w["ok"] else 2)
     main()
