@@ -11,6 +11,8 @@ Faza „na ziemi” = te same kadry z wysokością EKF 1 m (pod H_MIN — nie wc
   - pusta mapa z kadrem w buforze sprzed flagi ⇒ zamknięcie z jednym kadrem (F2: bufor niepusty);
   - F3: zamknięcie niesie pełną listę wiązań, zgodną z wiązaniami producenta;
   - tryb cienia: wiersz niesie flagę rzeczywistą i zatrzask (gnss_rz, t_flagi_rz).
+ANEKS_TEACH-3 §4.4: sekwencje przepisane na flagę jako stan (producent bez chwili flagi; stempel w wierszu „ts_flagi”): jedno
+zamknięcie, mapa niepusta, kadr z bufora odrzucony, τ = 0 przy pierwszej klatce po zamknięciu; ścieżka z podaną chwilą bez zmian.
 Uruchom: python3 -m pytest -q results/TEACH/tools/test_teach_s2.py
 """
 import copy
@@ -86,7 +88,14 @@ def kadry():
     return przed, po
 
 
+def zamkniecie(rows):
+    geo = [r for r in rows if r["teach"].get("georef")]
+    assert len(geo) == 1
+    return geo[0]
+
+
 def test_zero_od_poczatku_potem_mapa_i_spadek():
+    """TEACH-3: flaga jako stan — zamknięcie przy pierwszej klatce z flagą 0, chwila = czas tej klatki, kadr z bufora odrzucony, τ = 0."""
     przed, po = kadry()
     plan = [(k, True, False) for k in przed[:15]] + [(przed[15], True, True)] + [(k, True, None) for k in przed[16:25]]
     plan += [(k, False, None) for k in przed[25:120]]
@@ -96,9 +105,13 @@ def test_zero_od_poczatku_potem_mapa_i_spadek():
     assert all(f in ("przed_mapa", "mapa") for f in fazy[:120])
     assert fazy[:15] == ["przed_mapa"] * 15
     assert mod._prod.n_zamkniec == 1 and len(mod._prod.kadry) > 0
-    geo = [r for r in rows if r["teach"].get("georef")]
-    assert len(geo) == 1 and geo[0]["sim"] == round(po[0]["sim"], 4)
-    assert abs(mod._prod.t_flagi - round(po[0]["sim"] - 0.05, 6)) < 1e-9
+    g = zamkniecie(rows)
+    assert g["sim"] == round(po[0]["sim"], 4) and mod._prod.t_flagi == float(round(po[0]["sim"], 4))
+    assert g["teach"]["odrzucony_z_bufora"] == round(przed[119]["sim"], 4)                # kadr z bufora odrzucony
+    assert max(x["sim"] for x in mod._prod.kadry) == przed[118]["sim"]
+    assert g["teach"]["tau"] == 0.0                                                      # τ od klatki zamknięcia
+    assert all(r["t_flagi"] is None for r in rows)                                       # producent nie dostaje chwili flagi
+    assert rows[-1]["ts_flagi"] == round(po[0]["sim"] - 0.05, 6)                          # stempel tylko w rejestrze
     assert any(r["fx"]["ok"] for r in rows[120:])
     assert not any(r["fx"]["ok"] for r in rows[:120])
 
@@ -113,22 +126,42 @@ def test_zero_caly_czas():
 
 
 def test_restart_ekf():
+    """0 → 1 → 0 → 1 → mapa → 0: jedno zamknięcie, przy pierwszej klatce ostatniego zera; mapa niepusta."""
     przed, po = kadry()
     plan = [(przed[0], True, False)] + [(k, True, None) for k in przed[1:5]]
     plan += [(przed[5], True, True)] + [(k, True, None) for k in przed[6:10]]
     plan += [(przed[10], True, False)] + [(k, True, None) for k in przed[11:15]]       # spadek na ziemi (restart EKF)
-    plan += [(przed[15], True, True)] + [(k, True, None) for k in przed[16:20]]       # powrót kasuje zatrzask
+    plan += [(przed[15], True, True)] + [(k, True, None) for k in przed[16:20]]       # powrót do 1
     plan += [(k, False, None) for k in przed[20:110]]
     plan += [(po[0], False, False)] + [(k, False, None) for k in po[1:10]]
     mod, rows = sekwencja(plan)
-    t_rest = [r["t_flagi"] for r in rows[10:15]]
-    assert all(t == round(przed[10]["sim"] - 0.05, 6) for t in t_rest)               # zatrzask na spadku przy restarcie
-    assert all(r["t_flagi"] is None for r in rows[15:110])                            # skasowany powrotem do 1
+    assert [r["teach"]["faza"] for r in rows[10:15]] == ["przed_mapa"] * 5                # zero na ziemi przy pustej mapie
+    assert all(r["ts_flagi"] == round(przed[10]["sim"] - 0.05, 6) for r in rows[10:15])  # zatrzask stempla (rejestr)
+    assert all(r["ts_flagi"] is None for r in rows[15:110])
     assert mod._prod.n_zamkniec == 1 and len(mod._prod.kadry) > 0
-    assert abs(mod._prod.t_flagi - round(po[0]["sim"] - 0.05, 6)) < 1e-9
+    g = zamkniecie(rows)
+    assert g["sim"] == round(po[0]["sim"], 4) and g["teach"]["tau"] == 0.0
+    assert "odrzucony_z_bufora" in g["teach"] and "wlaczony" not in g["teach"]
 
 
-def test_bufor_niepusty_zamyka():
+def test_bufor_przy_flagi_jako_stanie():
+    przed, _ = kadry()
+    k0, k1, k2 = przed[30], przed[31], przed[32]
+    P = TM.Producent("K")                                                # lot: kadr z bufora odrzucony, pusta mapa się nie zamyka
+    P.obserwacja(k0["sim"], k0["_img"], k0["ekf_q"], k0["ekf_pos"], 1)
+    P.obserwacja(k1["sim"], k1["_img"], k1["ekf_q"], k1["ekf_pos"], 0)
+    assert P.n_zamkniec == 0 and P.rejestr["faza"] == "przed_mapa" and P.rejestr["odrzucony_z_bufora"] == round(k0["sim"], 4)
+    assert P.bufor is None and not P.kadry
+    P1 = TM.Producent("K")                                               # lot: kadr wchodzi, gdy po nim przyszła klatka z flagą 1
+    for k in (k0, k1):
+        P1.obserwacja(k["sim"], k["_img"], k["ekf_q"], k["ekf_pos"], 1)
+    P1.obserwacja(k2["sim"], k2["_img"], k2["ekf_q"], k2["ekf_pos"], 0)
+    assert P1.n_zamkniec == 1 and [x["sim"] for x in P1.kadry] == [k0["sim"]] and P1.t_flagi == k2["sim"]
+    assert P1.rejestr["odrzucony_z_bufora"] == round(k1["sim"], 4) and P1.rejestr["tau"] == 0.0
+
+
+def test_bufor_z_podana_chwila():
+    """Tryb cienia / replay z podaną chwilą bez zmian (TEACH-S2 F2)."""
     przed, _ = kadry()
     P = TM.Producent("K")
     k0, k1 = przed[30], przed[31]

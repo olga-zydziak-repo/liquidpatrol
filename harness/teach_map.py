@@ -32,6 +32,9 @@ Obraz wejściowy: BGR (jak render reconu z cv2.imread); proces nadir_obs konwert
 PROMPT_TEACH_S2 §1 (TEACH-S2): F2 — klatka w utracie przy mapie bez żadnego kadru nie zamyka mapy (bufor pusty albo kadr z bufora
 z czasem ≥ chwila flagi — odrzucony), wiersz ma fazę „przed_mapa”; zamknięcie raz, przy pierwszej klatce w utracie z mapą niepustą.
 F3 — rejestr zamknięcia (georef) niesie pełną listę wiązań [czas kadru, klatka kluczowa, r_E, r_N, zgodne, przyjęte].
+ANEKS_TEACH-3 §3.2 (TEACH-3): w locie producent dostaje flagę jako stan przy klatce, bez chwili flagi (t_flagi=None); utrata = flaga 0
+przy klatce; kadr z bufora wtedy nie wchodzi do mapy (wchodzi tylko, gdy po nim nadeszła klatka z flagą 1); chwila zamknięcia = czas
+pierwszej klatki w utracie i od niej τ. Tryb cienia i replay z podaną chwilą bez zmian.
 """
 from __future__ import annotations
 
@@ -307,9 +310,11 @@ class Producent:
             rec["powod"] = "mapa"
             self.rejestr = reg
             return self._stan(rec)
+        # TEACH-3: bez podanej chwili flagi (lot) kadr z bufora nie wchodzi do mapy; chwila zamknięcia = czas tej klatki
+        tf = float(t_flagi) if t_flagi is not None else float(t_frame)
+        z_bufora = t_flagi is not None and self.bufor is not None and self.bufor["sim"] < tf
         if not self.zamknieta:                                  # TEACH-S2 F2: pusta mapa się nie zamyka
-            tf = float(t_flagi) if t_flagi is not None else float(t_frame)
-            if not self.kadry and not (self.bufor is not None and self.bufor["sim"] < tf):
+            if not self.kadry and not z_bufora:
                 reg = {"faza": "przed_mapa"}
                 if self.bufor is not None:
                     reg["odrzucony_z_bufora"] = round(self.bufor["sim"], 4)
@@ -320,8 +325,7 @@ class Producent:
         reg = {"faza": "lok"}
         if not self.zamknieta:                                  # pierwsza klatka przy fladze 0: zamknięcie mapy
             tz0 = time.perf_counter()
-            tf = float(t_flagi) if t_flagi is not None else float(t_frame)
-            if self.bufor is not None and self.bufor["sim"] < tf:
+            if z_bufora:                                        # TEACH-3
                 reg["wlaczony"] = self._wlacz_do_mapy(self.bufor)
             elif self.bufor is not None:
                 reg["odrzucony_z_bufora"] = round(self.bufor["sim"], 4)

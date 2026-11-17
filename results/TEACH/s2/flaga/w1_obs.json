@@ -1,0 +1,50 @@
+{
+ "lot": "results/NAD3/s3/p01_p1_c05_zew",
+ "n_klatek": 240,
+ "n_z_detekcja": 180,
+ "odniesienie": "ad1e71fd:harness/nadir_obs.py",
+ "tryby": {
+  "NADIR_MODE=0": {
+   "wiersze": 240,
+   "rozne": 0,
+   "meta_rowne": true,
+   "summary_rowne": true,
+   "n_det_klatki": 180,
+   "n_fx_ok": 0,
+   "zgodne": true
+  },
+  "NADIR_MODE=0 + TEACH_MODE=1": {
+   "wiersze": 240,
+   "rozne": 0,
+   "meta_rowne": true,
+   "summary_rowne": true,
+   "n_det_klatki": 180,
+   "n_fx_ok": 0,
+   "zgodne": true
+  },
+  "NADIR_MODE=1/NAD2": {
+   "wiersze": 240,
+   "rozne": 0,
+   "meta_rowne": true,
+   "summary_rowne": true,
+   "n_det_klatki": 180,
+   "n_fx_ok": 180,
+   "zgodne": true
+  },
+  "NADIR_MODE=1/NAD2/NAD3_DEGRAD": {
+   "wiersze": 240,
+   "rozne": 0,
+   "meta_rowne": true,
+   "summary_rowne": true,
+   "n_det_klatki": 180,
+   "n_fx_ok": 180,
+   "zgodne": true
+  }
+ },
+ "kody_odmowy": {
+  "TEACH+NAD3_DEGRAD": 47,
+  "TEACH_CIEN bez TEACH_T_CIEN": 48
+ },
+ "kody_ok": true,
+ "zgodne_wszystkie": true
+}

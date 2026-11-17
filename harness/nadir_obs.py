@@ -34,6 +34,9 @@ wiersz i meta bajtowo jak dotąd.
 PROMPT_TEACH_S2 §1 F1 (TEACH-S2): chwila flagi = czas OSTATNIEGO spadku cs_gnss_pos z 1 na 0 (pierwsza wiadomość z 0 bez
 wcześniejszej 1 nie jest spadkiem); powrót flagi do 1 przed zamknięciem mapy kasuje zatrzask; przed pierwszą wiadomością flaga
 nieznana (None). W trybie cienia wiersz niesie też flagę rzeczywistą i stan zatrzasku ("gnss_rz", "t_flagi_rz"), tylko do rejestru.
+ANEKS_TEACH-3 §3.2 (TEACH-3): w locie producent dostaje flagę jako stan przy klatce, bez chwili flagi (t_flagi=None) — stempel
+wiadomości DDS (m.timestamp) jest w czasie epoki, nie sim; idzie wyłącznie do rejestru (wiersz: "ts_flagi" = stempel zatrzasku F1).
+Tryb cienia bez zmian.
 Użycie: nadir_obs.py --world W --model M --out plik.jsonl
 """
 import argparse
@@ -97,7 +100,7 @@ if TEACH_MODE:                                                # TEACH: wariant t
             sys.exit(48)
 _stop = [False]
 _ekf = {"q": None, "q_mono": None, "pos": None, "hdg": None, "pos_mono": None}
-_gnss = {"cs": None, "t_flagi": None}                         # TEACH: flaga GNSS i chwila jej spadku (czas sim)
+_gnss = {"cs": None, "t_flagi": None}                         # TEACH: flaga GNSS i stempel jej spadku (TEACH-3: epoka, tylko rejestr)
 _q = queue.Queue(maxsize=1)
 st = {"n_img": 0, "n_drop": 0, "n_proc": 0, "n_det_klatki": 0, "flip_hits": 0, "det_ms": []}
 if NADIR_MODE:
@@ -187,7 +190,7 @@ def worker():
                "det": det, "ms": round(ms, 2), **ekf}
         if TEACH_MODE:                                         # TEACH: producent mapy; znaczniki tylko do rejestru
             st["n_det_znacznikow"] += len(det)
-            fx = _prod.obserwacja(sim, bgr, ekf["ekf_q"], ekf["ekf_pos"], gn["cs"], gn["t_flagi"])
+            fx = _prod.obserwacja(sim, bgr, ekf["ekf_q"], ekf["ekf_pos"], gn["cs"], gn["t_flagi"])   # TEACH-3: lot ⇒ t_flagi None
             if not TEACH_CIEN:
                 _send(fx)
             st["n_fix"] += int(fx["ok"])
@@ -196,6 +199,8 @@ def worker():
             row["gnss"], row["t_flagi"] = gn["cs"], gn["t_flagi"]
             if TEACH_CIEN:                                     # TEACH-S2 F1: flaga rzeczywista i zatrzask (rejestr)
                 row["gnss_rz"], row["t_flagi_rz"] = gn["cs_rz"], gn["t_flagi_rz"]
+            else:                                              # TEACH-3: stempel wiadomości (epoka) tylko do rejestru
+                row["ts_flagi"] = gn["ts_flagi"]
         elif NADIR_MODE:                                       # PROMPT_NADIR_S2 §1.1
             fx = _rama.obserwacja(sim, det, ekf["ekf_q"], ekf["ekf_pos"])
             fxw = _deg.przetworz(fx)                           # NAD3: wyłączona ⇒ fxw is fx
@@ -234,8 +239,8 @@ def on_img(m):
         bgr = cv2.cvtColor(img, cv2.COLOR_RGB2BGR) if ch == 3 else cv2.cvtColor(img[:, :, 0], cv2.COLOR_GRAY2BGR)
         if TEACH_CIEN:
             gn = {"cs": sim < T_CIEN, "t_flagi": T_CIEN, "cs_rz": _gnss["cs"], "t_flagi_rz": _gnss["t_flagi"]}   # TEACH-S2 F1
-        else:
-            gn = dict(_gnss)
+        else:                                                 # TEACH-3: flaga jako stan przy klatce, bez chwili flagi
+            gn = {"cs": _gnss["cs"], "t_flagi": None, "ts_flagi": _gnss["t_flagi"]}
         item = item + (bgr, gn)
     try:
         _q.put_nowait(item)
