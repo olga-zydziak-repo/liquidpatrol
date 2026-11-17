@@ -1,0 +1,83 @@
+[nadir_obs] img=73 proc=73 det=0 drop=0 flip=0
+[nadir_obs] img=146 proc=146 det=0 drop=0 flip=0
+[nadir_obs] img=219 proc=219 det=0 drop=0 flip=0
+[nadir_obs] img=292 proc=292 det=0 drop=0 flip=0
+[nadir_obs] img=365 proc=365 det=0 drop=0 flip=0
+[nadir_obs] img=437 proc=437 det=0 drop=0 flip=0
+[nadir_obs] img=510 proc=510 det=0 drop=0 flip=0
+[nadir_obs] img=583 proc=583 det=0 drop=0 flip=0
+[nadir_obs] img=653 proc=653 det=0 drop=0 flip=0
+[nadir_obs] img=725 proc=725 det=0 drop=0 flip=0
+[nadir_obs] img=798 proc=798 det=0 drop=0 flip=0
+[nadir_obs] img=870 proc=870 det=0 drop=0 flip=0
+[nadir_obs] img=942 proc=942 det=0 drop=0 flip=0
+[nadir_obs] img=1014 proc=1014 det=0 drop=0 flip=0
+[nadir_obs] img=1086 proc=1086 det=0 drop=0 flip=0
+[nadir_obs] img=1158 proc=1158 det=0 drop=0 flip=0
+[nadir_obs] img=1230 proc=1230 det=0 drop=0 flip=0
+[nadir_obs] img=1301 proc=1301 det=0 drop=0 flip=0
+[nadir_obs] img=1371 proc=1371 det=0 drop=0 flip=0
+[nadir_obs] img=1441 proc=1441 det=0 drop=0 flip=0
+[nadir_obs] img=1511 proc=1511 det=0 drop=0 flip=0
+[nadir_obs] img=1582 proc=1582 det=0 drop=0 flip=0
+[nadir_obs] img=1652 proc=1652 det=0 drop=0 flip=0
+[nadir_obs] img=1724 proc=1724 det=0 drop=0 flip=0
+[nadir_obs] img=1795 proc=1795 det=0 drop=0 flip=0
+[nadir_obs] img=1867 proc=1867 det=0 drop=0 flip=0
+[nadir_obs] img=1938 proc=1938 det=0 drop=0 flip=0
+[nadir_obs] img=2009 proc=2009 det=0 drop=0 flip=0
+[nadir_obs] img=2079 proc=2079 det=0 drop=0 flip=0
+[nadir_obs] img=2149 proc=2149 det=0 drop=0 flip=0
+[nadir_obs] img=2218 proc=2218 det=0 drop=0 flip=0
+[nadir_obs] img=2286 proc=2286 det=0 drop=0 flip=0
+[nadir_obs] img=2355 proc=2355 det=0 drop=0 flip=0
+[nadir_obs] img=2425 proc=2425 det=0 drop=0 flip=0
+[nadir_obs] img=2496 proc=2496 det=0 drop=0 flip=0
+[nadir_obs] img=2566 proc=2566 det=0 drop=0 flip=0
+[nadir_obs] img=2638 proc=2638 det=0 drop=0 flip=0
+[nadir_obs] img=2709 proc=2709 det=0 drop=0 flip=0
+[nadir_obs] img=2781 proc=2781 det=0 drop=0 flip=0
+[nadir_obs] img=2852 proc=2852 det=0 drop=0 flip=0
+[nadir_obs] img=2924 proc=2924 det=0 drop=0 flip=0
+[nadir_obs] img=2994 proc=2994 det=1 drop=0 flip=0
+[nadir_obs] img=3065 proc=3065 det=1 drop=0 flip=0
+[nadir_obs] img=3135 proc=3135 det=1 drop=0 flip=0
+[nadir_obs] img=3204 proc=3204 det=1 drop=0 flip=0
+[nadir_obs] img=3274 proc=3274 det=2 drop=0 flip=0
+[nadir_obs] img=3345 proc=3345 det=2 drop=0 flip=0
+[nadir_obs] img=3415 proc=3415 det=2 drop=0 flip=0
+[nadir_obs] img=3487 proc=3487 det=2 drop=0 flip=0
+[nadir_obs] img=3558 proc=3558 det=2 drop=0 flip=0
+[nadir_obs] img=3629 proc=3629 det=2 drop=0 flip=0
+[nadir_obs] img=3699 proc=3699 det=2 drop=0 flip=0
+[nadir_obs] img=3770 proc=3770 det=2 drop=0 flip=0
+[nadir_obs] img=3839 proc=3839 det=2 drop=0 flip=0
+[nadir_obs] img=3908 proc=3908 det=2 drop=0 flip=0
+[nadir_obs] img=3977 proc=3977 det=2 drop=0 flip=0
+[nadir_obs] img=4046 proc=4046 det=2 drop=0 flip=0
+[nadir_obs] img=4116 proc=4116 det=2 drop=0 flip=0
+[nadir_obs] img=4186 proc=4186 det=2 drop=0 flip=0
+[nadir_obs] img=4257 proc=4257 det=2 drop=0 flip=0
+[nadir_obs] img=4328 proc=4328 det=2 drop=0 flip=0
+[nadir_obs] img=4399 proc=4399 det=2 drop=0 flip=0
+[nadir_obs] img=4471 proc=4471 det=2 drop=0 flip=0
+[nadir_obs] img=4542 proc=4542 det=2 drop=0 flip=0
+[nadir_obs] img=4613 proc=4613 det=2 drop=0 flip=0
+[nadir_obs] img=4683 proc=4683 det=2 drop=0 flip=0
+[nadir_obs] img=4754 proc=4753 det=2 drop=0 flip=0
+Thread 0x000071bebaffb6c0 (most recent call first):
+  File "/usr/lib/python3.12/threading.py", line 359 in wait
+  File "/usr/lib/python3.12/queue.py", line 180 in get
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 175 in worker
+  File "/usr/lib/python3.12/threading.py", line 1010 in run
+  File "/usr/lib/python3.12/threading.py", line 1073 in _bootstrap_inner
+  File "/usr/lib/python3.12/threading.py", line 1030 in _bootstrap
+
+Current thread 0x000071bf08b8c740 (most recent call first):
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 781 in _wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 877 in wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 907 in _spin_once_impl
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 926 in spin_once
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 311 in main
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 325 in <module>
+[nadir_obs] DONE {"n_img": 4784, "n_drop": 0, "n_proc": 4784, "n_det_klatki": 2, "flip_hits": 0, "n_fix": 3037, "n_det_znacznikow": 2, "det_ms": {"p50": 1.5690759973949753, "p95": 2.3374140000669286, "max": 4.043146000185516}, "zamkniecie": "koniec_petli", "mono": 35857.625}
