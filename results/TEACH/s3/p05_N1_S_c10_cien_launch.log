@@ -1,0 +1,7 @@
+[run_boot b10] proc_gate §3 CLEAN
+GUI_PROCS=[brak]
+[run_boot b10] watchdog EKF2 (preflight-only, max 2 reinity) pid=22579
+model_in_state=1
+[run_boot b10] settle 90s preflight EKF
+[augment] world_hash=True ulog_sha=True model_in_state=True
+[run_boot b10] DONE flight=teach world=world_teach_S rc=0 finalize=0 → /home/olga/projects/liquidpatrol/results/TEACH/s3/p05_N1_S_c10_cien

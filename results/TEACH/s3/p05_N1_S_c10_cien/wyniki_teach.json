@@ -1,0 +1,177 @@
+{
+ "boot": "p05_N1_S_c10_cien",
+ "epizody": [
+  {
+   "episode_id": 10,
+   "scenario_id": "c10_s01",
+   "m": 8.38,
+   "ciecie": false,
+   "B1": {
+    "ok": true,
+    "przekroczenia": 0,
+    "ticki_utraty": 0,
+    "max_e_do_U": 0.0,
+    "ticki_ocenione": 0
+   },
+   "B3": {
+    "ok": true,
+    "zle": 0,
+    "ticki_utraty": 0
+   },
+   "e_corr": null,
+   "przedzialy": {},
+   "tryby_ticki": {},
+   "zapas_bariery_min": null,
+   "u_prim_gt_m_ticki": 0,
+   "tau": null,
+   "B2": {
+    "ok": true,
+    "margines_min": 13.135
+   },
+   "B4": {
+    "ok": true,
+    "nav": null,
+    "refuse_pos": 0,
+    "refuse_pos_falszywe": 0,
+    "refuse_pos_zgodne_z_regula": 0
+   },
+   "B5": {
+    "ok": true,
+    "ticki_nie_nominal": 0,
+    "refuse": 0
+   },
+   "a_poprawek": null,
+   "bias_kursu_par": null,
+   "nad3_obserwable": {
+    "tau_misja": null,
+    "skok_delta": null,
+    "n_pred_odrzut": 0,
+    "r_max_gt_misja_po_fladze": 18.865,
+    "max_e_do_U": 0.0,
+    "refuse_misja": []
+   },
+   "bezpieczenstwo_ok": true
+  }
+ ],
+ "tabela_teach": {
+  "punkt": "TEACH",
+  "E": 1.0,
+  "sha256_tabeli": "7a56ba1b95f206415709d88595f868e07577d94bbeacc56f8065df9831688642",
+  "tau_star": 2.15
+ },
+ "tempo": {
+  "aneks": "ANEKS_KONT-4d §1.3",
+  "dsim_dwall_settle": 0.9544,
+  "okno_wall_s": 59.99,
+  "n": 730,
+  "prog": 0.93,
+  "zrodlo": "rtf_stream.jsonl",
+  "ok": true
+ },
+ "bezpieczenstwo_ok": true,
+ "teach": {
+  "meta_litera": "TEACH",
+  "wariant_K": "K",
+  "n_klatek": 1107,
+  "n_det_znacznikow": 0,
+  "n_klatek_z_detekcja": 0,
+  "detekcje": {
+   "surowe": {
+    "n": 0,
+    "id": [],
+    "bok_max": null,
+    "n_kadrow": 0
+   },
+   "zgodne": {
+    "n": 0,
+    "id": [],
+    "odl_p95": null,
+    "odl_max": null,
+    "lista": []
+   },
+   "odl_wszystkich_z_manifestu": {
+    "n": 0,
+    "min": null
+   }
+  },
+  "warunki_waznosci": {
+   "zero_detekcji_zgodnych_z_manifestem": true,
+   "brak_mapy_po_fladze": true,
+   "georef_raz": true
+  },
+  "kadry_mapy_po_fladze": 0,
+  "kf_po_fladze": 0,
+  "wiazania_po_fladze": 0,
+  "chwila_waznosci": {
+   "t": 176.5,
+   "zrodlo": "chwila cienia"
+  },
+  "os_czasu": {
+   "flaga_ulg": null,
+   "klatka_zamkniecia": 176.6,
+   "ostatni_kadr_mapy": 176.4,
+   "zamkniecie_wobec_flagi_s": 0.1,
+   "ostatni_kadr_wobec_flagi_s": -0.1,
+   "wejscie_oslony_w_utrate": null
+  },
+  "wazny": true,
+  "georef": {
+   "t_flagi": 176.5,
+   "n_kadrow_mapy": 196,
+   "n_kf": 10,
+   "n_wiazan": 588,
+   "n_wiazan_przyjetych": 588,
+   "n_dop_pozno": 0,
+   "ms_zamkniecie": 48.08,
+   "ms_rozwiazanie": 40.71,
+   "wariant_K": "K",
+   "ms_od_flagi_do_georef": 70.73
+  },
+  "blad_poprawki": {
+   "n": 268,
+   "p50": 0.0973,
+   "p95": 0.2445,
+   "max": 0.4484
+  },
+  "blad_poprawki_polowy": {
+   "okno": [
+    176.5,
+    214.732
+   ],
+   "srodek": 195.616,
+   "max_pierwsza": 0.1435,
+   "n_pierwsza": 96,
+   "max_druga": 0.2582,
+   "n_druga": 95
+  },
+  "udzial_przyjetych_okna": {
+   "okno": [
+    176.6,
+    214.732
+   ],
+   "kadry": 191,
+   "przyjete": 191,
+   "udzial": 1.0
+  },
+  "czas_ms": {
+   "mapa": {
+    "p50": 21.05,
+    "p95": 25.09,
+    "max": 48.16
+   },
+   "lokalizacja": {
+    "p50": 10.38,
+    "p95": 12.1,
+    "max": 13.92
+   },
+   "detektor_znacznikow": {
+    "p50": 0.62,
+    "p95": 1.84,
+    "max": 3.43
+   }
+  },
+  "n_drop": 0,
+  "n_img": 1107
+ },
+ "wazny": true
+}

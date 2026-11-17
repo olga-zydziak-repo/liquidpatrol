@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       33312 13.3  0.0 330892 14204 ?        Sl   19:50   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       33307  3.3  0.0   5028  3744 ?        S    19:50   0:00 bash /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_launch.sh world_teach_J
+olga        1115  1.6  1.1 5725464 355092 pts/0  Sl+  14:33   5:18 claude
+olga       33196  1.5  0.4 796104 138212 ?       SLsl 19:47   0:02 /usr/bin/python3 /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_rejestrator.py --world world_teach_J --model x500_teach_flow_0 --out /home/olga/teach_stanowisko/p11_J_c05_a
+olga       12394  0.2  0.7 794640 237948 ?       SLl  17:27   0:20 python3 results/TEACH/tools/teach_s3_run.py
+root         267  0.0  0.1 2994124 59388 ?       Ssl  14:32   0:17 /usr/bin/containerd
+olga       33191  0.0  0.0 129352 22392 ?        Sl   19:47   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         359  0.0  0.2 11134472 89220 ?      Ssl  14:32   0:03 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root        1095  0.0  0.0   3200  1256 ?        S    14:33   0:01 /init
+olga       33198  0.0  0.0   5028  3848 ?        S    19:47   0:00 bash /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_boot.sh 16 p11_J_c05_a 5 30
+root          86  0.0  0.0  26496  7572 ?        Ss   14:32   0:00 /usr/lib/systemd/systemd-udevd
+root          40  0.0  0.0  66868 19096 ?        S<s  14:32   0:00 /usr/lib/systemd/systemd-journald
+polkitd      200  0.0  0.0 308188  8116 ?        Ssl  14:32   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root       32874  0.0  0.0 1756380 13776 ?       Ssl  19:43   0:00 /usr/libexec/wsl-pro-service
+root           1  0.0  0.0  21952 13280 ?        Ss   14:32   0:00 /sbin/init
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  14:32   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root         214  0.0  0.0  17400  6476 ?        Ss   14:32   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+syslog       212  0.0  0.0 222524  6028 ?        Ssl  14:32   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         199  0.0  0.0 1026044 11776 ?       Ssl  14:32   0:00 /usr/bin/lttng-sessiond

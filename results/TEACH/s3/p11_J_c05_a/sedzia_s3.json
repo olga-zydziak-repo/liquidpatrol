@@ -1,0 +1,262 @@
+{
+ "pozycja": 11,
+ "rodzaj": "ciecie",
+ "lata": "J",
+ "epizod": 5,
+ "powt": "a",
+ "t_cien": null,
+ "boot": "p11_J_c05_a",
+ "tempo": 0.9562,
+ "analizator_wazny": true,
+ "warunki_waznosci": {
+  "zero_detekcji_zgodnych_z_manifestem": true,
+  "brak_mapy_po_fladze": true,
+  "georef_raz": true
+ },
+ "sprawdzian": {
+  "ok": true,
+  "procent": 100.0,
+  "oslona_ticki": 3221,
+  "poprawki": 587,
+  "georef": {
+   "d_theta_deg": 4.9e-07,
+   "d_t_m": 4.7e-07,
+   "ok": true
+  }
+ },
+ "meta": {
+  "pola": {
+   "tabela": true,
+   "tor": true,
+   "sha_producenta": true,
+   "lata": true,
+   "model": true,
+   "cien": true,
+   "etap": true
+  },
+  "ok": true,
+  "wartosci": {
+   "world": "world_teach_J",
+   "model": "x500_teach_flow_0",
+   "sha_producent": "4eefeddacbf6977d7e7e7bd544777c55260c622be899be667642aba9fb1fcd7e",
+   "sha_obs": "db96a4a71ebce8d38d704e9f66b191c6788045534c7401fc360daf8f3fd3ffff",
+   "tor": "0ffd62e38939aacda3f4c1be3f950aea1c1e7b282e19f1bd03193a93272c6f61",
+   "cien": false,
+   "t_cien": null,
+   "etap": "s3"
+  }
+ },
+ "wejscie": true,
+ "niewaznosc": [],
+ "wazny": true,
+ "b1_nieocenione": {
+  "ticki_utraty": 2534,
+  "nieocenione": 39,
+  "przyczyny": {
+   "przedział None (τ + 0.012 poza ostatnią krawędzią — po zatrzasku τ*)": {
+    "n": 39,
+    "faza_misji": 0,
+    "pierwszy_tick": 3182
+   }
+  }
+ },
+ "b1_nieocenione_w_misji": 0,
+ "epizody": [
+  {
+   "episode_id": 5,
+   "scenario_id": "c05_s01",
+   "ciecie": true,
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true
+   },
+   "B_szczegoly": {
+    "B1": {
+     "ok": true,
+     "przekroczenia": 0,
+     "ticki_utraty": 2534,
+     "max_e_do_U": 0.2656,
+     "ticki_ocenione": 2495
+    },
+    "B2": {
+     "ok": true,
+     "margines_min": 16.53
+    },
+    "B3": {
+     "ok": true,
+     "zle": 0,
+     "ticki_utraty": 2534
+    },
+    "B4": {
+     "ok": true,
+     "nav": {
+      "nav_poza_14": [],
+      "failsafe_max": 0,
+      "ok": true
+     },
+     "refuse_pos": 0,
+     "refuse_pos_falszywe": 0,
+     "refuse_pos_zgodne_z_regula": 0
+    }
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.516,
+    "frac_track": 1.0,
+    "frac_pasmo": 1.0,
+    "refuse_misja": 0
+   },
+   "max_e_do_U": 0.2656,
+   "e_corr": {
+    "p50": 0.3699,
+    "p95": 0.5569,
+    "max": 0.7401,
+    "n": 2495
+   },
+   "tau": {
+    "p50": 0.132,
+    "p95": 0.224,
+    "max": 4.028
+   },
+   "obserwable": {
+    "tau_misja": {
+     "p50": 0.128,
+     "p95": 0.2196,
+     "max": 0.236
+    },
+    "skok_delta": {
+     "n": 587,
+     "p50": 0.0897,
+     "p95": 0.1613,
+     "max": 0.3299
+    },
+    "n_pred_odrzut": 10,
+    "r_max_gt_misja_po_fladze": 15.47,
+    "max_e_do_U": 0.2656,
+    "refuse_misja": []
+   },
+   "t_entry": 3.04,
+   "okno_misji": [
+    138.032,
+    281.576
+   ],
+   "r_max_gt_misja": 15.47,
+   "max_blad_ekf_misja": 3.379,
+   "odmowa_w_misji": null,
+   "track": 1.0,
+   "pasmo": 1.0
+  }
+ ],
+ "litera_ok": true,
+ "zrodlo": {
+  "blad_poprawki": {
+   "n": 587,
+   "p50": 0.3642,
+   "p95": 0.5332,
+   "max": 0.6283
+  },
+  "blad_poprawki_polowy": {
+   "okno": [
+    171.124,
+    281.624
+   ],
+   "srodek": 226.374,
+   "max_pierwsza": 0.4427,
+   "n_pierwsza": 276,
+   "max_druga": 0.6283,
+   "n_druga": 277
+  },
+  "udzial_przyjetych_okna": {
+   "okno": [
+    171.2,
+    281.624
+   ],
+   "kadry": 553,
+   "przyjete": 553,
+   "udzial": 1.0
+  },
+  "przerwy": {
+   "max": 0.2,
+   "gt_115": 0,
+   "gt_215": 0,
+   "lista_gt_115": []
+  },
+  "os_czasu": {
+   "flaga_ulg": 171.124,
+   "klatka_zamkniecia": 171.2,
+   "ostatni_kadr_mapy": 170.8,
+   "zamkniecie_wobec_flagi_s": 0.076,
+   "ostatni_kadr_wobec_flagi_s": -0.324,
+   "wejscie_oslony_w_utrate": 171.212,
+   "wejscie_oslony_wobec_flagi_s": 0.088
+  },
+  "opoznienie_pierwszej_poprawki_s": 0.076,
+  "skok_delta_pierwsza_m": 0.0512,
+  "georef": {
+   "t_flagi": 171.2,
+   "n_kadrow_mapy": 174,
+   "n_kf": 9,
+   "n_wiazan": 522,
+   "n_wiazan_przyjetych": 522,
+   "n_dop_pozno": 0,
+   "ms_zamkniecie": 43.35,
+   "ms_rozwiazanie": 39.16,
+   "wariant_K": "K",
+   "ms_od_flagi_do_georef": 45.03
+  },
+  "czas_ms": {
+   "mapa": {
+    "p50": 23.64,
+    "p95": 27.54,
+    "max": 56.44
+   },
+   "lokalizacja": {
+    "p50": 13.04,
+    "p95": 14.96,
+    "max": 18.73
+   },
+   "detektor_znacznikow": {
+    "p50": 1.53,
+    "p95": 2.43,
+    "max": 5.07
+   }
+  },
+  "n_drop": 0,
+  "n_img": 1471,
+  "detekcje": {
+   "surowe": {
+    "n": 0,
+    "id": [],
+    "bok_max": null,
+    "n_kadrow": 0
+   },
+   "zgodne": {
+    "n": 0,
+    "id": [],
+    "odl_p95": null,
+    "odl_max": null,
+    "lista": []
+   },
+   "odl_wszystkich_z_manifestu": {
+    "n": 0,
+    "min": null
+   }
+  },
+  "chwila_waznosci": {
+   "t": 171.124,
+   "zrodlo": "flaga ULG"
+  },
+  "kurs_kf": {
+   "przed_max_deg": 9.969,
+   "po_max_deg": 3.248,
+   "n": 9
+  }
+ },
+ "D1_dostepne": true,
+ "kadry": {
+  "kadry_stanowiska": 300,
+  "do_repo": 6
+ }
+}

@@ -1,0 +1,127 @@
+{
+ "boot": "p10_N2_J_c05_cien",
+ "t_cien": 173.6,
+ "koniec_misji": 209.808,
+ "kadry_okna": 182,
+ "przyjete_okna": 182,
+ "bramka_obrazu": {
+  "blad_max": 0.449,
+  "udzial_przyjetych": 1.0,
+  "zgodne_z_manifestem": 0,
+  "ok": true
+ },
+ "blad_poprawki_okna": {
+  "p50": 0.3367,
+  "p95": 0.4352,
+  "max": 0.449
+ },
+ "detekcje": {
+  "surowe": {
+   "n": 0,
+   "id": [],
+   "bok_max": null,
+   "n_kadrow": 0
+  },
+  "zgodne": {
+   "n": 0,
+   "id": [],
+   "odl_p95": null,
+   "odl_max": null,
+   "lista": []
+  },
+  "odl_wszystkich_z_manifestu": {
+   "n": 0,
+   "min": null
+  }
+ },
+ "przerwy": {
+  "max": 0.2,
+  "gt_115": 0,
+  "gt_215": 0,
+  "lista_gt_115": []
+ },
+ "opoznienie_pierwszej_poprawki_s": 0.0,
+ "georef": {
+  "t_flagi": 173.6,
+  "n_kadrow_mapy": 190,
+  "n_kf": 9,
+  "n_wiazan": 570,
+  "n_wiazan_przyjetych": 570,
+  "n_dop_pozno": 0,
+  "ms_zamkniecie": 43.92,
+  "ms_rozwiazanie": 39.58,
+  "wariant_K": "K",
+  "ms_od_flagi_do_georef": 69.14
+ },
+ "kf_reszta_kursu_deg": {
+  "p50": 1.665,
+  "p95": 2.0021,
+  "max": 2.0374
+ },
+ "kf_reszta_srodka_m": {
+  "p50": 0.1783,
+  "p95": 0.2413,
+  "max": 0.2422
+ },
+ "czas_ms": {
+  "mapa": {
+   "p50": 23.56,
+   "p95": 27.46,
+   "max": 47.37
+  },
+  "lokalizacja": {
+   "p50": 12.35,
+   "p95": 14.05,
+   "max": 18.81
+  },
+  "detektor_znacznikow": {
+   "p50": 0.59,
+   "p95": 2.3,
+   "max": 3.43
+  }
+ },
+ "n_drop": 0,
+ "n_img": 1090,
+ "n_proc": 1090,
+ "piksele_nieruchome": {
+  "n_kadrow": 38,
+  "udzial": 0.0,
+  "pikseli": 0
+ },
+ "kadry_rejestratora": 224,
+ "F1": {
+  "zmiany_flagi_rzeczywistej": [
+   [
+    12.0,
+    null,
+    null
+   ],
+   [
+    13.0,
+    true,
+    null
+   ],
+   [
+    104.2,
+    false,
+    1794940910.502165
+   ],
+   [
+    105.6,
+    true,
+    null
+   ]
+  ],
+  "start_sim": 125.632,
+  "zatrzask_w_chwili_startu": null,
+  "zamkniecia": [
+   173.6
+  ],
+  "zamkniecie_w_chwili_cienia": true,
+  "ok": true
+ },
+ "fazy": [
+  "lok",
+  "mapa"
+ ]
+}

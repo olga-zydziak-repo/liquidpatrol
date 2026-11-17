@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       18785 16.6  0.0 330892 14136 ?        Sl   18:13   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       18778  3.3  0.0  16948 11216 ?        S    18:13   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/TEACH/s3/p04_S_c10_b/zegar2.jsonl
+olga        1115  2.1  1.1 5717264 369092 pts/0  Sl+  14:33   4:39 claude
+olga       18675  1.6  0.4 796104 138344 ?       SLsl 18:11   0:01 /usr/bin/python3 /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_rejestrator.py --world world_teach_S --model x500_teach_flow_0 --out /home/olga/teach_stanowisko/p04_S_c10_b
+olga       12394  0.2  0.7 791424 226852 ?       SLl  17:27   0:06 python3 results/TEACH/tools/teach_s3_run.py
+root         267  0.1  0.1 2994124 59248 ?       Ssl  14:32   0:14 /usr/bin/containerd
+olga       18669  0.0  0.0 129352 22380 ?        Sl   18:11   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         359  0.0  0.2 11134472 89204 ?      Ssl  14:32   0:03 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root        1095  0.0  0.0   3200  1256 ?        S    14:33   0:01 /init
+root       18608  0.0  0.0 1830624 14044 ?       Ssl  18:10   0:00 /usr/libexec/wsl-pro-service
+root          86  0.0  0.0  26496  7572 ?        Ss   14:32   0:00 /usr/lib/systemd/systemd-udevd
+polkitd      200  0.0  0.0 308188  8116 ?        Ssl  14:32   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root           1  0.0  0.0  21952 13256 ?        Ss   14:32   0:00 /sbin/init
+root          40  0.0  0.0  66868 18200 ?        S<s  14:32   0:00 /usr/lib/systemd/systemd-journald
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  14:32   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root         214  0.0  0.0  17400  6476 ?        Ss   14:32   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+systemd+     182  0.0  0.0  21352 13188 ?        Ss   14:32   0:00 /usr/lib/systemd/systemd-resolved
+olga         965  0.0  0.0  20392 11632 ?        Ss   14:32   0:00 /usr/lib/systemd/systemd --user
+root         259  0.0  0.0 107064 23252 ?        Ssl  14:32   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal

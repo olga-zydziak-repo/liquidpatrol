@@ -1,0 +1,232 @@
+{
+ "boot": "p02_S_c10_a",
+ "epizody": [
+  {
+   "episode_id": 10,
+   "scenario_id": "c10_s01",
+   "m": 8.38,
+   "ciecie": true,
+   "B1": {
+    "ok": true,
+    "przekroczenia": 0,
+    "ticki_utraty": 2522,
+    "max_e_do_U": 0.2104,
+    "ticki_ocenione": 2499
+   },
+   "B3": {
+    "ok": true,
+    "zle": 0,
+    "ticki_utraty": 2522
+   },
+   "e_corr": {
+    "p50": 0.271,
+    "p95": 0.4198,
+    "max": 0.5862,
+    "n": 2499
+   },
+   "przedzialy": {
+    "0": 2460,
+    "1": 6,
+    "2": 4,
+    "3": 4,
+    "4": 5,
+    "5": 4,
+    "6": 4,
+    "7": 4,
+    "8": 4,
+    "9": 4,
+    "None": 23
+   },
+   "tryby_ticki": {
+    "jeden": 2522
+   },
+   "zapas_bariery_min": 5.3382,
+   "u_prim_gt_m_ticki": 0,
+   "tau": {
+    "p50": 0.128,
+    "p95": 0.22,
+    "max": 3.26
+   },
+   "B2": {
+    "ok": true,
+    "margines_min": 13.024
+   },
+   "B4": {
+    "ok": true,
+    "nav": {
+     "nav_poza_14": [],
+     "failsafe_max": 0,
+     "ok": true
+    },
+    "refuse_pos": 0,
+    "refuse_pos_falszywe": 0,
+    "refuse_pos_zgodne_z_regula": 0
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.512,
+    "frac_track": 1.0,
+    "frac_pasmo": 0.918,
+    "refuse_misja": 0
+   },
+   "a_poprawek": {
+    "n": 596,
+    "p95": 0.3659,
+    "max": 0.4401,
+    "max_do_1_5F": 0.2934
+   },
+   "bias_kursu_par": null,
+   "nad3_obserwable": {
+    "tau_misja": {
+     "p50": 0.124,
+     "p95": 0.216,
+     "max": 0.232
+    },
+    "skok_delta": {
+     "n": 596,
+     "p50": 0.0764,
+     "p95": 0.2643,
+     "max": 0.369
+    },
+    "n_pred_odrzut": 46,
+    "r_max_gt_misja_po_fladze": 18.976,
+    "max_e_do_U": 0.2104,
+    "refuse_misja": []
+   },
+   "bezpieczenstwo_ok": true
+  }
+ ],
+ "tabela_teach": {
+  "punkt": "TEACH",
+  "E": 1.0,
+  "sha256_tabeli": "7a56ba1b95f206415709d88595f868e07577d94bbeacc56f8065df9831688642",
+  "tau_star": 2.15
+ },
+ "tempo": {
+  "aneks": "ANEKS_KONT-4d §1.3",
+  "dsim_dwall_settle": 0.9499,
+  "okno_wall_s": 59.94,
+  "n": 729,
+  "prog": 0.93,
+  "zrodlo": "rtf_stream.jsonl",
+  "ok": true
+ },
+ "bezpieczenstwo_ok": true,
+ "teach": {
+  "meta_litera": "TEACH",
+  "wariant_K": "K",
+  "n_klatek": 1488,
+  "n_det_znacznikow": 4,
+  "n_klatek_z_detekcja": 4,
+  "detekcje": {
+   "surowe": {
+    "n": 4,
+    "id": [
+     17,
+     37
+    ],
+    "bok_max": 5.39,
+    "n_kadrow": 4
+   },
+   "zgodne": {
+    "n": 0,
+    "id": [],
+    "odl_p95": null,
+    "odl_max": null,
+    "lista": []
+   },
+   "odl_wszystkich_z_manifestu": {
+    "n": 1,
+    "min": 14.9124
+   }
+  },
+  "warunki_waznosci": {
+   "zero_detekcji_zgodnych_z_manifestem": true,
+   "brak_mapy_po_fladze": true,
+   "georef_raz": true
+  },
+  "kadry_mapy_po_fladze": 0,
+  "kf_po_fladze": 0,
+  "wiazania_po_fladze": 0,
+  "chwila_waznosci": {
+   "t": 173.428,
+   "zrodlo": "flaga ULG"
+  },
+  "os_czasu": {
+   "flaga_ulg": 173.428,
+   "klatka_zamkniecia": 173.6,
+   "ostatni_kadr_mapy": 173.2,
+   "zamkniecie_wobec_flagi_s": 0.172,
+   "ostatni_kadr_wobec_flagi_s": -0.228,
+   "wejscie_oslony_w_utrate": 173.52,
+   "wejscie_oslony_wobec_flagi_s": 0.092
+  },
+  "wazny": true,
+  "georef": {
+   "t_flagi": 173.6,
+   "n_kadrow_mapy": 185,
+   "n_kf": 10,
+   "n_wiazan": 555,
+   "n_wiazan_przyjetych": 552,
+   "n_dop_pozno": 0,
+   "ms_zamkniecie": 48.45,
+   "ms_rozwiazanie": 42.62,
+   "wariant_K": "K",
+   "ms_od_flagi_do_georef": 48.89
+  },
+  "blad_poprawki": {
+   "n": 596,
+   "p50": 0.2482,
+   "p95": 0.366,
+   "max": 0.4361
+  },
+  "blad_poprawki_polowy": {
+   "okno": [
+    173.428,
+    283.932
+   ],
+   "srodek": 228.68,
+   "max_pierwsza": 0.4361,
+   "n_pierwsza": 276,
+   "max_druga": 0.4261,
+   "n_druga": 276
+  },
+  "udzial_przyjetych_okna": {
+   "okno": [
+    173.6,
+    283.932
+   ],
+   "kadry": 552,
+   "przyjete": 552,
+   "udzial": 1.0
+  },
+  "opoznienie_pierwszej_poprawki_s": 0.172,
+  "skok_delta_pierwsza_m": 0.3299,
+  "przerwy": {
+   "max": 0.2,
+   "gt_115": 0,
+   "gt_215": 0,
+   "lista_gt_115": []
+  },
+  "czas_ms": {
+   "mapa": {
+    "p50": 21.39,
+    "p95": 25.47,
+    "max": 31.97
+   },
+   "lokalizacja": {
+    "p50": 10.43,
+    "p95": 12.08,
+    "max": 15.75
+   },
+   "detektor_znacznikow": {
+    "p50": 1.1,
+    "p95": 1.88,
+    "max": 5.29
+   }
+  },
+  "n_drop": 0,
+  "n_img": 1488
+ },
+ "wazny": true
+}

@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       12782 15.6  0.0 330892 14172 ?        Sl   17:31   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        1115  2.4  1.1 5717264 382448 pts/0  Sl+  14:33   4:21 claude
+olga       12685  1.6  0.4 796104 138440 ?       SLsl 17:30   0:01 /usr/bin/python3 /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_rejestrator.py --world world_teach_S --model x500_teach_flow_0 --out /home/olga/teach_stanowisko/p01_S_c05_a
+root         267  0.1  0.1 2994124 59168 ?       Ssl  14:32   0:13 /usr/bin/containerd
+olga       12394  0.0  0.4 702536 135036 ?       SLl  17:27   0:00 python3 results/TEACH/tools/teach_s3_run.py
+olga       12679  0.0  0.0 129352 22388 ?        Sl   17:30   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         359  0.0  0.2 11134472 89196 ?      Ssl  14:32   0:02 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga       12686  0.0  0.0   5028  3848 ?        S    17:30   0:00 bash /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_boot.sh 6 p01_S_c05_a 5 30
+root        1095  0.0  0.0   3200  1256 ?        S    14:33   0:01 /init
+polkitd      200  0.0  0.0 308188  8116 ?        Ssl  14:32   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          86  0.0  0.0  26496  7572 ?        Ss   14:32   0:00 /usr/lib/systemd/systemd-udevd
+root           1  0.0  0.0  21952 13256 ?        Ss   14:32   0:00 /sbin/init
+root          40  0.0  0.0  66868 17776 ?        S<s  14:32   0:00 /usr/lib/systemd/systemd-journald
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  14:32   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root         214  0.0  0.0  17400  6476 ?        Ss   14:32   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+systemd+     182  0.0  0.0  21352 13188 ?        Ss   14:32   0:00 /usr/lib/systemd/systemd-resolved
+olga         965  0.0  0.0  20392 11632 ?        Ss   14:32   0:00 /usr/lib/systemd/systemd --user
+root         259  0.0  0.0 107064 23252 ?        Ssl  14:32   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+syslog       212  0.0  0.0 222524  6024 ?        Ssl  14:32   0:00 /usr/sbin/rsyslogd -n -iNONE

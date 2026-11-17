@@ -1,0 +1,229 @@
+{
+ "boot": "p11_J_c05_a",
+ "epizody": [
+  {
+   "episode_id": 5,
+   "scenario_id": "c05_s01",
+   "m": 10.33,
+   "ciecie": true,
+   "B1": {
+    "ok": true,
+    "przekroczenia": 0,
+    "ticki_utraty": 2534,
+    "max_e_do_U": 0.2656,
+    "ticki_ocenione": 2495
+   },
+   "B3": {
+    "ok": true,
+    "zle": 0,
+    "ticki_utraty": 2534
+   },
+   "e_corr": {
+    "p50": 0.3699,
+    "p95": 0.5569,
+    "max": 0.7401,
+    "n": 2495
+   },
+   "przedzialy": {
+    "0": 2455,
+    "1": 5,
+    "2": 4,
+    "3": 4,
+    "4": 5,
+    "5": 4,
+    "6": 5,
+    "7": 4,
+    "8": 5,
+    "9": 4,
+    "None": 39
+   },
+   "tryby_ticki": {
+    "jeden": 2534
+   },
+   "zapas_bariery_min": 9.0396,
+   "u_prim_gt_m_ticki": 0,
+   "tau": {
+    "p50": 0.132,
+    "p95": 0.224,
+    "max": 4.028
+   },
+   "B2": {
+    "ok": true,
+    "margines_min": 16.53
+   },
+   "B4": {
+    "ok": true,
+    "nav": {
+     "nav_poza_14": [],
+     "failsafe_max": 0,
+     "ok": true
+    },
+    "refuse_pos": 0,
+    "refuse_pos_falszywe": 0,
+    "refuse_pos_zgodne_z_regula": 0
+   },
+   "D1": {
+    "dostepne": true,
+    "kontynuacja_od_t_inj_s": 110.516,
+    "frac_track": 1.0,
+    "frac_pasmo": 1.0,
+    "refuse_misja": 0
+   },
+   "a_poprawek": {
+    "n": 587,
+    "p95": 0.5387,
+    "max": 0.6198,
+    "max_do_1_5F": 0.4132
+   },
+   "bias_kursu_par": null,
+   "nad3_obserwable": {
+    "tau_misja": {
+     "p50": 0.128,
+     "p95": 0.2196,
+     "max": 0.236
+    },
+    "skok_delta": {
+     "n": 587,
+     "p50": 0.0897,
+     "p95": 0.1613,
+     "max": 0.3299
+    },
+    "n_pred_odrzut": 10,
+    "r_max_gt_misja_po_fladze": 15.47,
+    "max_e_do_U": 0.2656,
+    "refuse_misja": []
+   },
+   "bezpieczenstwo_ok": true
+  }
+ ],
+ "tabela_teach": {
+  "punkt": "TEACH",
+  "E": 1.0,
+  "sha256_tabeli": "7a56ba1b95f206415709d88595f868e07577d94bbeacc56f8065df9831688642",
+  "tau_star": 2.15
+ },
+ "tempo": {
+  "aneks": "ANEKS_KONT-4d §1.3",
+  "dsim_dwall_settle": 0.9562,
+  "okno_wall_s": 59.97,
+  "n": 730,
+  "prog": 0.93,
+  "zrodlo": "rtf_stream.jsonl",
+  "ok": true
+ },
+ "bezpieczenstwo_ok": true,
+ "teach": {
+  "meta_litera": "TEACH",
+  "wariant_K": "K",
+  "n_klatek": 1471,
+  "n_det_znacznikow": 0,
+  "n_klatek_z_detekcja": 0,
+  "detekcje": {
+   "surowe": {
+    "n": 0,
+    "id": [],
+    "bok_max": null,
+    "n_kadrow": 0
+   },
+   "zgodne": {
+    "n": 0,
+    "id": [],
+    "odl_p95": null,
+    "odl_max": null,
+    "lista": []
+   },
+   "odl_wszystkich_z_manifestu": {
+    "n": 0,
+    "min": null
+   }
+  },
+  "warunki_waznosci": {
+   "zero_detekcji_zgodnych_z_manifestem": true,
+   "brak_mapy_po_fladze": true,
+   "georef_raz": true
+  },
+  "kadry_mapy_po_fladze": 0,
+  "kf_po_fladze": 0,
+  "wiazania_po_fladze": 0,
+  "chwila_waznosci": {
+   "t": 171.124,
+   "zrodlo": "flaga ULG"
+  },
+  "os_czasu": {
+   "flaga_ulg": 171.124,
+   "klatka_zamkniecia": 171.2,
+   "ostatni_kadr_mapy": 170.8,
+   "zamkniecie_wobec_flagi_s": 0.076,
+   "ostatni_kadr_wobec_flagi_s": -0.324,
+   "wejscie_oslony_w_utrate": 171.212,
+   "wejscie_oslony_wobec_flagi_s": 0.088
+  },
+  "wazny": true,
+  "georef": {
+   "t_flagi": 171.2,
+   "n_kadrow_mapy": 174,
+   "n_kf": 9,
+   "n_wiazan": 522,
+   "n_wiazan_przyjetych": 522,
+   "n_dop_pozno": 0,
+   "ms_zamkniecie": 43.35,
+   "ms_rozwiazanie": 39.16,
+   "wariant_K": "K",
+   "ms_od_flagi_do_georef": 45.03
+  },
+  "blad_poprawki": {
+   "n": 587,
+   "p50": 0.3642,
+   "p95": 0.5332,
+   "max": 0.6283
+  },
+  "blad_poprawki_polowy": {
+   "okno": [
+    171.124,
+    281.624
+   ],
+   "srodek": 226.374,
+   "max_pierwsza": 0.4427,
+   "n_pierwsza": 276,
+   "max_druga": 0.6283,
+   "n_druga": 277
+  },
+  "udzial_przyjetych_okna": {
+   "okno": [
+    171.2,
+    281.624
+   ],
+   "kadry": 553,
+   "przyjete": 553,
+   "udzial": 1.0
+  },
+  "opoznienie_pierwszej_poprawki_s": 0.076,
+  "skok_delta_pierwsza_m": 0.0512,
+  "przerwy": {
+   "max": 0.2,
+   "gt_115": 0,
+   "gt_215": 0,
+   "lista_gt_115": []
+  },
+  "czas_ms": {
+   "mapa": {
+    "p50": 23.64,
+    "p95": 27.54,
+    "max": 56.44
+   },
+   "lokalizacja": {
+    "p50": 13.04,
+    "p95": 14.96,
+    "max": 18.73
+   },
+   "detektor_znacznikow": {
+    "p50": 1.53,
+    "p95": 2.43,
+    "max": 5.07
+   }
+  },
+  "n_drop": 0,
+  "n_img": 1471
+ },
+ "wazny": true
+}

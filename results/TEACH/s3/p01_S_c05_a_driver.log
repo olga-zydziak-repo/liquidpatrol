@@ -1,0 +1,9 @@
+[kont p01_S_c05_a] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont p01_S_c05_a 17:30:42] cooldown 0s
+[kont p01_S_c05_a 17:31:58] SUSTAINED CLEAN
+[kont p01_S_c05_a] kont_boot pid=12776
+[kont p01_S_c05_a 17:32:23] initial absolute time 7460000 us faza_ok=1
+[kont p01_S_c05_a 17:33:03] sonda rc_FROZEN=0 podloga10Hz=1
+[kont p01_S_c05_a 17:37:49] DONE rc=0 sonda=0
+/home/olga/projects/liquidpatrol/results/TEACH/tools/teach_boot.sh: line 155: 13500 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1
+/home/olga/projects/liquidpatrol/results/TEACH/tools/teach_boot.sh: line 155: 13648 Aborted                 (core dumped) setsid nohup env "${TEACHENV[@]}" NADIR_FIX_SOCKS="$RS_DRV:$RS_PERC" NADIR_FLIP=0 PYTHONPATH="$ROOT:${PYTHONPATH:-}" FASTRTPS_DEFAULT_PROFILES_FILE="$PERC2_FASTDDS_PROFILE" python3 "$ROOT/harness/nadir_obs.py" --world $WORLD --model x500_teach_flow_0 --out "$OUTDIR/nadir_obs.jsonl" > "$OUTDIR/nadir_obs_stdout.log" 2>&1

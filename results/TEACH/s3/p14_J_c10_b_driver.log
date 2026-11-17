@@ -1,0 +1,8 @@
+[kont p14_J_c10_b] PIN OK model.sdf=3354ae1e8bcb99cec143317fce607e460b13a451bc59f1da98e50e5ddd0ee64c profil=a68a450b91c2ab51
+[kont p14_J_c10_b 20:34:41] cooldown 0s
+[kont p14_J_c10_b 20:35:57] SUSTAINED CLEAN
+[kont p14_J_c10_b] kont_boot pid=39499
+[kont p14_J_c10_b 20:36:22] initial absolute time 7592000 us faza_ok=1
+[kont p14_J_c10_b 20:37:01] sonda rc_FROZEN=0 podloga10Hz=1
+[kont p14_J_c10_b 20:41:52] DONE rc=0 sonda=0
+/home/olga/projects/liquidpatrol/results/TEACH/tools/teach_boot.sh: line 155: 40230 Killed                  setsid nohup ros2 run ros_gz_bridge parameter_bridge "${MONO}@sensor_msgs/msg/Image[gz.msgs.Image" > "$OUTDIR/bridge_v2.log" 2>&1

@@ -1,0 +1,15 @@
+[kont_s4] bramka tempa: 0.9544 (okno 59.99 s, n=730) ok=True
+[kont_s4] reinit EKF2 #1: {'podejscie': 1, 'przed': {'yaw_blad_deg': 5.54, 'bias_absmax': 0.00011}, 'reinit': {'rc_stop': 0, 'rc_start': 0, 'cmd_wall_s': 2.035}, 'sim_reinit': 105.788, 'po': {'yaw_blad_deg': 5.56, 'bias_absmax': 0.00012, 'sim': 120.756}, 'ok': True}
+[bench] yaw_assert sim=127.61 {'yaw_blad_deg': 5.57, 'bias_absmax': 0.00011, 'ok': True, 'n_reinit': 1}
+[bench] armed sim=127.63 {'gt_home': [-0.0, -0.0]}
+[intruder_motion] gotowy; kontrola=/home/olga/projects/liquidpatrol/results/TEACH/s3/p05_N1_S_c10_cien/episode_control.json
+[bench] takeoff sim=127.66 {}
+[bench] offboard sim=138.84 {}
+[bench] teach_producent sim=138.84 {'datagram': None, 'meta_litera': 'TEACH', 'meta_tor': '0ffd62e38939aacda3f4c1be3f950aea1c1e7b282e19f1bd03193a93272c6f61', 'tor': '0ffd62e38939aacda3f4c1be3f950aea1c1e7b282e19f1bd03193a93272c6f61', 'cien': True, 'nad3': None, 'wariant_K': 'K', 'zgodny': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] intruder_start_gate sim=138.95 {'episode_id': 10, 'status': 'OK', 'n_setpose': 4, 'wait_sim': 0.076, 'pose': [-10.0, 0.0, -10.0], 'attempts': 1, 'start_ned': [-10.0, 0.0, -10.0]}
+[bench] episode_start sim=138.95 {'episode_id': 10, 'scenario_id': 'c10_s01', 't0_sim': 138.952}
+[bench] episode_end sim=214.73 {'episode_id': 10, 't_entry': 5.76, 'refuse': 0, 'breach': False, 't_inj_sim': None, 'denied': False, 'n_r_g_nom': 0, 'n_kont_enter': 0, 'refuse_rec': None, 'descending': False, 'zejscie_planowe': None}
+[bench] reset_done sim=219.71 {'in_gate': True}
+Received ack for not-existing command: 176! Ignoring... (mavlink_command_sender.cpp:304)
+[bench] done -> /home/olga/projects/liquidpatrol/results/TEACH/s3/p05_N1_S_c10_cien/trace.jsonl (demo n=1563)

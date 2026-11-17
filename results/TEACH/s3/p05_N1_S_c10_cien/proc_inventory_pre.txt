@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga       21785 16.6  0.0 330892 14156 ?        Sl   18:35   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga       21779  3.2  0.0   5028  3660 ?        S    18:35   0:00 bash /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_launch.sh world_teach_S
+olga        1115  2.0  1.0 5725464 353900 pts/0  Sl+  14:33   4:51 claude
+olga       21688  1.6  0.4 796104 138392 ?       SLsl 18:34   0:01 /usr/bin/python3 /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_rejestrator.py --world world_teach_S --model x500_teach_flow_0 --out /home/olga/teach_stanowisko/p05_N1_S_c10_cien
+olga       12394  0.2  0.7 791424 226868 ?       SLl  17:27   0:08 python3 results/TEACH/tools/teach_s3_run.py
+root         267  0.1  0.1 2994124 59252 ?       Ssl  14:32   0:15 /usr/bin/containerd
+olga       21682  0.0  0.0 129352 22376 ?        Sl   18:34   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         359  0.0  0.2 11134472 89212 ?      Ssl  14:32   0:03 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga       21689  0.0  0.0   5028  3892 ?        S    18:34   0:00 bash /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_boot.sh 10 p05_N1_S_c10_cien 10 -
+root        1095  0.0  0.0   3200  1256 ?        S    14:33   0:01 /init
+root          86  0.0  0.0  26496  7572 ?        Ss   14:32   0:00 /usr/lib/systemd/systemd-udevd
+polkitd      200  0.0  0.0 308188  8116 ?        Ssl  14:32   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root           1  0.0  0.0  21952 13272 ?        Ss   14:32   0:00 /sbin/init
+root          40  0.0  0.0  66868 18392 ?        S<s  14:32   0:00 /usr/lib/systemd/systemd-journald
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  14:32   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+root         214  0.0  0.0  17400  6476 ?        Ss   14:32   0:00 /usr/sbin/wpa_supplicant -u -s -O DIR=/run/wpa_supplicant GROUP=netdev
+syslog       212  0.0  0.0 222524  6024 ?        Ssl  14:32   0:00 /usr/sbin/rsyslogd -n -iNONE
+message+     195  0.0  0.0   9804  5616 ?        Ss   14:32   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+systemd+     182  0.0  0.0  21352 13188 ?        Ss   14:32   0:00 /usr/lib/systemd/systemd-resolved

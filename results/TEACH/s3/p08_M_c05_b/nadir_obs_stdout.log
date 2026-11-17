@@ -1,0 +1,37 @@
+[nadir_obs] img=70 proc=70 det=0 drop=0 flip=0
+[nadir_obs] img=142 proc=142 det=0 drop=0 flip=0
+[nadir_obs] img=214 proc=214 det=0 drop=0 flip=0
+[nadir_obs] img=286 proc=286 det=0 drop=0 flip=0
+[nadir_obs] img=357 proc=357 det=0 drop=0 flip=0
+[nadir_obs] img=429 proc=429 det=0 drop=0 flip=0
+[nadir_obs] img=500 proc=500 det=0 drop=0 flip=0
+[nadir_obs] img=572 proc=572 det=0 drop=0 flip=0
+[nadir_obs] img=639 proc=639 det=0 drop=0 flip=0
+[nadir_obs] img=708 proc=708 det=0 drop=0 flip=0
+[nadir_obs] img=778 proc=778 det=0 drop=0 flip=0
+[nadir_obs] img=849 proc=849 det=0 drop=0 flip=0
+[nadir_obs] img=919 proc=919 det=0 drop=0 flip=0
+[nadir_obs] img=986 proc=986 det=0 drop=0 flip=0
+[nadir_obs] img=1053 proc=1053 det=0 drop=0 flip=0
+[nadir_obs] img=1120 proc=1120 det=0 drop=0 flip=0
+[nadir_obs] img=1185 proc=1185 det=0 drop=0 flip=0
+[nadir_obs] img=1251 proc=1251 det=0 drop=0 flip=0
+[nadir_obs] img=1318 proc=1318 det=0 drop=0 flip=0
+[nadir_obs] img=1385 proc=1385 det=0 drop=0 flip=0
+[nadir_obs] img=1453 proc=1453 det=0 drop=0 flip=0
+Thread 0x00007104d1cff6c0 (most recent call first):
+  File "/usr/lib/python3.12/threading.py", line 359 in wait
+  File "/usr/lib/python3.12/queue.py", line 180 in get
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 175 in worker
+  File "/usr/lib/python3.12/threading.py", line 1010 in run
+  File "/usr/lib/python3.12/threading.py", line 1073 in _bootstrap_inner
+  File "/usr/lib/python3.12/threading.py", line 1030 in _bootstrap
+
+Current thread 0x0000710516a36740 (most recent call first):
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 781 in _wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 877 in wait_for_ready_callbacks
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 907 in _spin_once_impl
+  File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 926 in spin_once
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 311 in main
+  File "/home/olga/projects/liquidpatrol/harness/nadir_obs.py", line 325 in <module>
+[nadir_obs] DONE {"n_img": 1467, "n_drop": 0, "n_proc": 1467, "n_det_klatki": 0, "flip_hits": 0, "n_fix": 585, "n_det_znacznikow": 0, "det_ms": {"p50": 1.4704990026075393, "p95": 2.6070059975609183, "max": 11.044186001527123}, "zamkniecie": "koniec_petli", "mono": 17034.931}

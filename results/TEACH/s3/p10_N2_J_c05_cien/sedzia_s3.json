@@ -1,0 +1,239 @@
+{
+ "pozycja": 10,
+ "rodzaj": "nominal",
+ "lata": "J",
+ "epizod": 5,
+ "powt": "N2",
+ "t_cien": 173.6,
+ "boot": "p10_N2_J_c05_cien",
+ "tempo": 0.9492,
+ "analizator_wazny": true,
+ "warunki_waznosci": {
+  "zero_detekcji_zgodnych_z_manifestem": true,
+  "brak_mapy_po_fladze": true,
+  "georef_raz": true
+ },
+ "sprawdzian": {
+  "ok": true,
+  "procent": 100.0,
+  "oslona_ticki": 1524,
+  "poprawki": 263,
+  "georef": {
+   "d_theta_deg": 4.8e-07,
+   "d_t_m": 4.9e-07,
+   "ok": true
+  }
+ },
+ "meta": {
+  "pola": {
+   "tabela": true,
+   "tor": true,
+   "sha_producenta": true,
+   "lata": true,
+   "model": true,
+   "cien": true,
+   "etap": true
+  },
+  "ok": true,
+  "wartosci": {
+   "world": "world_teach_J",
+   "model": "x500_teach_flow_0",
+   "sha_producent": "4eefeddacbf6977d7e7e7bd544777c55260c622be899be667642aba9fb1fcd7e",
+   "sha_obs": "db96a4a71ebce8d38d704e9f66b191c6788045534c7401fc360daf8f3fd3ffff",
+   "tor": "0ffd62e38939aacda3f4c1be3f950aea1c1e7b282e19f1bd03193a93272c6f61",
+   "cien": true,
+   "t_cien": 173.6,
+   "etap": "s3"
+  }
+ },
+ "wejscie": null,
+ "niewaznosc": [],
+ "wazny": true,
+ "b1_nieocenione": {
+  "ticki_utraty": 0,
+  "nieocenione": 0,
+  "przyczyny": {}
+ },
+ "b1_nieocenione_w_misji": 0,
+ "epizody": [
+  {
+   "episode_id": 5,
+   "scenario_id": "c05_s01",
+   "ciecie": false,
+   "B": {
+    "B1": true,
+    "B2": true,
+    "B3": true,
+    "B4": true,
+    "B5": true
+   },
+   "B_szczegoly": {
+    "B1": {
+     "ok": true,
+     "przekroczenia": 0,
+     "ticki_utraty": 0,
+     "max_e_do_U": 0.0,
+     "ticki_ocenione": 0
+    },
+    "B2": {
+     "ok": true,
+     "margines_min": 16.503
+    },
+    "B3": {
+     "ok": true,
+     "zle": 0,
+     "ticki_utraty": 0
+    },
+    "B4": {
+     "ok": true,
+     "nav": null,
+     "refuse_pos": 0,
+     "refuse_pos_falszywe": 0,
+     "refuse_pos_zgodne_z_regula": 0
+    },
+    "B5": {
+     "ok": true,
+     "ticki_nie_nominal": 0,
+     "refuse": 0
+    }
+   },
+   "D1": null,
+   "max_e_do_U": 0.0,
+   "e_corr": null,
+   "tau": null,
+   "obserwable": {
+    "tau_misja": null,
+    "skok_delta": null,
+    "n_pred_odrzut": 1,
+    "r_max_gt_misja_po_fladze": 15.497,
+    "max_e_do_U": 0.0,
+    "refuse_misja": []
+   },
+   "t_entry": 3.03,
+   "okno_misji": [
+    136.744,
+    209.808
+   ],
+   "r_max_gt_misja": 15.497,
+   "max_blad_ekf_misja": 0.322,
+   "akwizycja": true,
+   "B5_pusty": false
+  }
+ ],
+ "litera_ok": true,
+ "zrodlo": {
+  "blad_poprawki": {
+   "n": 263,
+   "p50": 0.2793,
+   "p95": 0.4348,
+   "max": 0.5371
+  },
+  "blad_poprawki_polowy": {
+   "okno": [
+    173.6,
+    209.808
+   ],
+   "srodek": 191.704,
+   "max_pierwsza": 0.449,
+   "n_pierwsza": 91,
+   "max_druga": 0.3912,
+   "n_druga": 91
+  },
+  "udzial_przyjetych_okna": {
+   "okno": [
+    173.6,
+    209.808
+   ],
+   "kadry": 182,
+   "przyjete": 182,
+   "udzial": 1.0
+  },
+  "przerwy": null,
+  "os_czasu": {
+   "flaga_ulg": null,
+   "klatka_zamkniecia": 173.6,
+   "ostatni_kadr_mapy": 173.4,
+   "zamkniecie_wobec_flagi_s": 0.0,
+   "ostatni_kadr_wobec_flagi_s": -0.2,
+   "wejscie_oslony_w_utrate": null
+  },
+  "opoznienie_pierwszej_poprawki_s": null,
+  "skok_delta_pierwsza_m": null,
+  "georef": {
+   "t_flagi": 173.6,
+   "n_kadrow_mapy": 190,
+   "n_kf": 9,
+   "n_wiazan": 570,
+   "n_wiazan_przyjetych": 570,
+   "n_dop_pozno": 0,
+   "ms_zamkniecie": 43.92,
+   "ms_rozwiazanie": 39.58,
+   "wariant_K": "K",
+   "ms_od_flagi_do_georef": 69.14
+  },
+  "czas_ms": {
+   "mapa": {
+    "p50": 23.56,
+    "p95": 27.46,
+    "max": 47.37
+   },
+   "lokalizacja": {
+    "p50": 12.35,
+    "p95": 14.05,
+    "max": 18.81
+   },
+   "detektor_znacznikow": {
+    "p50": 0.59,
+    "p95": 2.3,
+    "max": 3.43
+   }
+  },
+  "n_drop": 0,
+  "n_img": 1090,
+  "detekcje": {
+   "surowe": {
+    "n": 0,
+    "id": [],
+    "bok_max": null,
+    "n_kadrow": 0
+   },
+   "zgodne": {
+    "n": 0,
+    "id": [],
+    "odl_p95": null,
+    "odl_max": null,
+    "lista": []
+   },
+   "odl_wszystkich_z_manifestu": {
+    "n": 0,
+    "min": null
+   }
+  },
+  "chwila_waznosci": {
+   "t": 173.6,
+   "zrodlo": "chwila cienia"
+  },
+  "kurs_kf": {
+   "przed_max_deg": 6.882,
+   "po_max_deg": 2.054,
+   "n": 9
+  }
+ },
+ "cien": {
+  "t_cien": 173.6,
+  "koniec_misji": 209.808,
+  "kadry_okna": 182,
+  "przyjete_okna": 182,
+  "bramka_obrazu": {
+   "blad_max": 0.449,
+   "udzial_przyjetych": 1.0,
+   "zgodne_z_manifestem": 0,
+   "ok": true
+  },
+  "blad_poprawki_okna": {
+   "p50": 0.3367,
+   "p95": 0.4352,
+   "max": 0.449
+  }
+ }
+}
