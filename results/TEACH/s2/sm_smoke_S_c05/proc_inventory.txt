@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        6157 16.1  0.0 330892 14168 ?        Sl   15:30   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        5763  4.7  0.5 2628912 191836 ?      SLl  15:25   0:13 python3 results/TEACH/tools/teach_s2_run.py SM
+olga        1115  3.2  1.2 5709060 397548 pts/0  Sl+  14:33   1:52 claude
+olga        6150  3.1  0.0  16948 11176 ?        S    15:30   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/TEACH/s2/sm_smoke_S_c05/zegar2.jsonl
+olga        6151  3.1  0.0   5028  3656 ?        S    15:30   0:00 bash /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_launch.sh world_teach_S
+olga        6065  1.7  0.4 796104 138012 ?       SLsl 15:29   0:01 /usr/bin/python3 /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_rejestrator.py --world world_teach_S --model x500_teach_flow_0 --out /home/olga/teach_stanowisko/sm_smoke_S_c05
+root         267  0.1  0.1 2994124 59276 ?       Ssl  14:32   0:04 /usr/bin/containerd
+olga        6061  0.0  0.0 129352 22372 ?        Sl   15:29   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root         359  0.0  0.3 11134472 98076 ?      Ssl  14:32   0:01 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+root        1095  0.0  0.0   3200  1256 ?        S    14:33   0:00 /init
+olga        6066  0.0  0.0   5028  3896 ?        S    15:29   0:00 bash /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_boot.sh 5 sm_smoke_S_c05 5 30
+root           1  0.0  0.0  21952 13256 ?        Ss   14:32   0:00 /sbin/init
+root          86  0.0  0.0  26496  7572 ?        Ss   14:32   0:00 /usr/lib/systemd/systemd-udevd
+polkitd      200  0.0  0.0 308188  8116 ?        Ssl  14:32   0:00 /usr/lib/polkit-1/polkitd --no-debug
+root          40  0.0  0.0  66868 17616 ?        S<s  14:32   0:00 /usr/lib/systemd/systemd-journald
+root           7  0.0  0.0   3220  2152 hvc0     Sl+  14:32   0:00 plan9 --control-socket 7 --log-level 4 --server-fd 8 --pipe-fd 10 --log-truncate
+olga         965  0.0  0.0  20392 11632 ?        Ss   14:32   0:00 /usr/lib/systemd/systemd --user
+root         259  0.0  0.0 107064 23252 ?        Ssl  14:32   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+message+     195  0.0  0.0   9804  5608 ?        Ss   14:32   0:00 @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
