@@ -1428,3 +1428,31 @@ CLOSED-BY-RECON (0 bootów)
 - Predykcja CC przed smoke:
   - P-TEACH-11 (0.70): SM ważny, B1–B4 bez naruszeń, zero REFUSE
     w misji, największy błąd poprawki ≤ 1.00 m.
+
+## TEACH — ANEKS_TEACH-4 (17.11.2026): S2 rozliczony, zgoda na bramkę
+- S2 PASS, 5 bootów (5/24). SM (łata S, c05): pierwszy lot bez GNSS
+  i bez znaczników z poprawką z mapy w pętli — ważny, B1–B4 bez
+  naruszeń, zero REFUSE w misji, kontynuacja 110.5 s. P-TEACH-11 ✓.
+  Noga dotąd 4/5 przy sumie szans 3.50.
+- CC własnym kodem: B1 0 przekroczeń na 2439 tickach, max e′/U′ 0.23;
+  replay osłony z tabeli PRE 0 różnic na 2501 tickach utraty; błąd
+  poprawki p50 / p95 / max 0.313 / 0.504 / 0.567 m, przyjętych 552
+  z 552;
+  georeferencja z 522 wiązań równa zapisanej; poprawki z wierszy
+  równe datagramowi do 0.0001 m; ostatni kadr mapy 0.268 s przed
+  flagą z ULG; zgodnych detekcji znaczników 0.
+- Pętla: błąd własny EKF do 5.05 m, błąd poprawki do 0.57 m.
+- Pomiar na lotach wykonanych: błąd przechyłu EKF po utracie GNSS nie
+  rośnie w 600 s lotu długiego c10 (p95 0.75–1.03°, przy 12 m to
+  0.16–0.22 m); w c05 mediana w drugiej połowie okna wyższa
+  o 0.10–0.23° we wszystkich lotach, poza 110 s bez pomiaru.
+- Brak w raporcie SM: replay (czwarty warunek ważności) niewykonany,
+  narzędzia nie ma; zrobił go CC. Narzędzie w budowie S3.
+- ✗ CC: próg „90% kadrów po cięciu" bez nazwanego końca okna.
+  Lekcja: ułamek zawsze z nazwanym oknem.
+- Predykcje CC przed bramką (P-TEACH-5 … 10 stoją bez zmian):
+  - P-TEACH-12 (0.75): największy błąd poprawki w 12 cięciach
+    ≤ 0.80 m.
+  - P-TEACH-13 (0.75): blok M — 4 z 4 cięć dostępne.
+  - P-TEACH-14 (0.80): w żadnym z 14 lotów producent nie gubi
+    klatki, a zamknięcie mapy trwa ≤ 100 ms w każdym z 12 cięć.
