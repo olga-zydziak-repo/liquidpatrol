@@ -1456,3 +1456,30 @@ CLOSED-BY-RECON (0 bootów)
   - P-TEACH-13 (0.75): blok M — 4 z 4 cięć dostępne.
   - P-TEACH-14 (0.80): w żadnym z 14 lotów producent nie gubi
     klatki, a zamknięcie mapy trwa ≤ 100 ms w każdym z 12 cięć.
+
+## TEACH — bramka i zamknięcie nogi (ANEKS_TEACH-5, 17.11.2026)
+- Werdykt V-A. 12 cięć (parking, osiedle, łąka × c05, c10 × 2)
+  i 2 nominały w cieniu: B1–B5 bez naruszeń; dostępne 12/12 (próg 9).
+  14/14 lotów ważnych, rezerwa 0/3, noga 19/24.
+- Przesłanka: 29 865 ticków, zero przekroczeń, max e′/U′ 0.31. CC
+  odtworzył własnym kodem z tabelą wpisaną z PRE §4; replay osłony
+  0 różnic na 30 475 tickach; georeferencja z zapisanych wiązań
+  zgodna w 14/14; 6615 poprawek zgodnych z datagramem do 0.0001 m.
+- Błąd poprawki max 0.730 / 0.757 / 0.754 m (S / M / J) przy błędzie
+  własnym EKF do 7.6 m. Przyjęte 6615 z 6629 kadrów okien misji.
+- REFUSE w misji 0. Dwie przerwy źródła, obie c10 na krawędzi mapy:
+  1.2 s i 2.0 s. W drugiej klatka kończąca przerwę przyjęta przy 12
+  punktach zgodnych (próg 12) i τ 2.02 s (zatrzask 2.05 s).
+- Predykcje bramki 9/9 przy sumie szans 6.35; noga od PRE 13/14 przy
+  9.85; z reconem 21/28 przy 18.30.
+- Lekcje:
+  - na krawędzi mapy liczba punktów zgodnych spada z setek poniżej
+    12 w około 4 s lotu, 15–19 m od środka klatki kluczowej; błąd
+    poprawki do końca zwykły;
+  - dostępność na mapie z własnego lotu zależy od tego, czy zadanie
+    mieści się w obszarze widzianym przed utratą, nie od terenu;
+  - wynik 12/12 trzeba czytać razem z zapasem: jedno cięcie dzielił
+    od odmowy jeden tick;
+  - po udanym locie w pętli szanse z reconu należy podnieść, zamiast
+    przepisywać je sprzed lotu;
+  - warunek ważności bez narzędzia nie jest sprawdzany (replay w S2).

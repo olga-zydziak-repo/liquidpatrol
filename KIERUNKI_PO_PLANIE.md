@@ -882,3 +882,21 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   Bramka: 12 cięć na trzech terenach. Budżet ≤ 24 booty.
 - Po werdykcie, osobnymi decyzjami: lot długi z okrążeniem uczącym;
   teren dla wszystkich kamer z nowym pomiarem G.
+
+## Dopisek stanu katalogu — 17.11.2026 (CO-TEACH-5, ANEKS_TEACH-5)
+- **TEACH — CLOSED, PASS (V-A).** Lot bez GNSS i bez znaczników
+  z poprawką z mapy zbudowanej przez drona przed utratą: 12/12 cięć
+  na parkingu, osiedlu i łące, 110 s, bez odmowy w misji; litera
+  bezpieczeństwa bez naruszeń w 14 lotach; błąd poprawki do 0.76 m.
+  Sieć, osłona i reguła bez zmiany kodu.
+- **Pozycje nieotwarte, osobnymi decyzjami Olgi:**
+  - lot długi z okrążeniem uczącym. Warunek z tej bramki: mapa ma
+    pokryć cały obszar zadania z zapasem (c10 sięga 19.2 m, próg
+    dopasowania leży 15–19 m od środka klatki kluczowej). Pierwszy
+    krok przy biurku: mapa z okrążenia wobec klatek lotu
+    10-minutowego;
+  - teren dla wszystkich kamer z nowym pomiarem G.
+- Obserwacje bez pozycji: liczba punktów zgodnych maleje przez około
+  4 s przed krawędzią mapy — sygnał wyprzedzający, dziś nieużywany;
+  pierwsza klatka za krawędzią leży przy przewidywaniu mimo 9–11
+  punktów; wiersze producenta nie zapisują pokrycia kadru mapą.
