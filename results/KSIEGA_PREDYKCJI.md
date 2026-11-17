@@ -1507,3 +1507,35 @@ CLOSED-BY-RECON (0 bootów)
     parametrami i narzędziami.
   - P-TEACH2-R7 (0.60): w oknie „dalej" przyjętych co najmniej 95%
     klatek na każdej łacie, łącznie po parach c10.
+
+## TEACH-II — PRE (PRE_TEACH2, 17.11.2026)
+- Recon rozliczony, żadna śmierć: P-TEACH2-R1…R7 7/7 przy sumie szans
+  4.70. Mapa z jednego lotu obsługuje inny przebieg: 72/72 par, okno
+  wspólne max 0.422 m, okno dalej max 0.646 m, przyjęte 52 386 z 52 386
+  klatek. Zamknięcie mapy z 200 s: 206–270 ms (1013 kadrów, 16 klatek
+  kluczowych). Promień przewidywany 22.17 m przy barierze 24.84 m.
+- CC własnym kodem: warunek Ś1 z wierszy 24/24 na każdej łacie;
+  geometria na 12 cięciach (11.17 m); mapy nauki tylko z kadrów lotu
+  uczącego. Błędy R3 klatka po klatce i czasy nie sprawdzone.
+- Znalezisko R4: nowa klatka kluczowa dopasowuje wszystkie wcześniejsze
+  kadry, do których trójki weszła; pojedyncza klatka fazy mapy do
+  0.62 s na parkingu (render osiedla 1.81 s). Kod lotu bez zmian;
+  reguła powtórki w PRE §5.
+- ✗ CC: odległość dron–intruz z trzech lotów zamiast dwunastu; wyniki
+  reconu bez wektorów (powtórzona lekcja z TEACH-1); szanse za niskie
+  drugi raz z rzędu.
+- Decyzje: nauka 200 s, c10, parking, jeden lot, bez nominału w cieniu.
+- Predykcje CC przed budową:
+  - P-TEACH2-1 (0.85): budowa i próba na sucho bez STOP-u i bez
+    zmiany harness, osłony i drivera.
+  - P-TEACH2-2 (0.75): werdykt L-A w pierwszym ważnym locie.
+  - P-TEACH2-3 (0.90): zero przekroczeń przesłanki, max e′/U′ ≤ 0.60.
+  - P-TEACH2-4 (0.75): największy błąd poprawki w misji ≤ 0.80 m.
+  - P-TEACH2-5 (0.80): przyjętych co najmniej 99.5% klatek okna misji
+    i żadnej przerwy ponad 1.15 s.
+  - P-TEACH2-6 (0.70): zamknięcie mapy w locie ≤ 0.40 s i pierwsza
+    poprawka ≤ 0.8 s po fladze.
+  - P-TEACH2-7 (0.70): największy błąd poprawki w ostatnich 100 s
+    misji ≤ największy w pierwszych 100 s + 0.15 m.
+  - P-TEACH2-8 (0.65): klatek zgubionych w fazie mapy najwyżej 15.
+  - P-TEACH2-9 (0.65): promień drona (GT) w misji najwyżej 20.5 m.

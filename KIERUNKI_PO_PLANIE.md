@@ -908,3 +908,16 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   rozstrzyga, czy mapa z jednego lotu obsłuży inny przebieg, ile
   trwa zamknięcie mapy z 200 s i czy lot da się złożyć bez zmiany
   kodu lotu.
+
+## Dopisek stanu katalogu — 17.11.2026 (CO-TEACH2-1, PRE_TEACH2)
+- **TEACH-II, recon — CLOSED, żyje.** Mapa z jednego lotu z GNSS
+  obsługuje inny przebieg tej samej komórki: błąd do 0.42 m w części
+  wspólnej wzoru, bez przerw, na parkingu, osiedlu i łące; 0 bootów.
+- **TEACH-II — otwarta, PRE ratyfikowany.** Jeden lot: 200 s nauki
+  z GNSS, potem 600 s bez GNSS i bez znaczników na wahadle c10 nad
+  parkingiem. Sieć, osłona, tabela i tor mapy bez zmian. Budżet
+  ≤ 3 booty.
+- Obserwacja bez pozycji: producent w fazie mapy nie jest czasu
+  rzeczywistego przy późnych klatkach kluczowych (kolejka 1, klatki
+  gubione). Przy dłuższej nauce albo innym sprzęcie wymaga rozłożenia
+  dopasowań w czasie.
