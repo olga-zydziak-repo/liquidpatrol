@@ -900,3 +900,11 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   4 s przed krawędzią mapy — sygnał wyprzedzający, dziś nieużywany;
   pierwsza klatka za krawędzią leży przy przewidywaniu mimo 9–11
   punktów; wiersze producenta nie zapisują pokrycia kadru mapą.
+
+## Dopisek stanu katalogu — 17.11.2026 (CO-TEACH2-0)
+- **TEACH-II — otwarta, recon przy biurku** (PROMPT_TEACH2_S0): lot
+  długi bez GNSS i bez znaczników na mapie z pierwszego przebiegu
+  wzoru z GNSS. Sieć, osłona, tabela i tor mapy bez zmian. Recon
+  rozstrzyga, czy mapa z jednego lotu obsłuży inny przebieg, ile
+  trwa zamknięcie mapy z 200 s i czy lot da się złożyć bez zmiany
+  kodu lotu.

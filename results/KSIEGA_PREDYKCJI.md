@@ -1483,3 +1483,27 @@ CLOSED-BY-RECON (0 bootów)
   - po udanym locie w pętli szanse z reconu należy podnieść, zamiast
     przepisywać je sprzed lotu;
   - warunek ważności bez narzędzia nie jest sprawdzany (replay w S2).
+
+## TEACH-II — otwarcie i recon przy biurku (PROMPT_TEACH2_S0, 17.11.2026)
+- Pozycja otwarta sygnałem Olgi „otwieram lot długi" po V-A nogi
+  TEACH. Cel: lot 10 minut bez GNSS i bez znaczników na mapie
+  z własnego lotu. Droga: nauką jest pierwszy pełny przebieg wzoru
+  intruza (200 s) z GNSS, lecony przez sieć; bez lotu skryptowego.
+- Rachunek CC przed reconem: wzór v2 w kole 11.0 m, dron do 21.7 m
+  przy barierze 24.84 m; po 146 s lotu każdy punkt koła r ≤ 20 m
+  najwyżej 11.8 m od pozycji drona; powtórzenia komórki w 5.0 m od
+  siebie; do 10 m od kadru mapy przyjęte 6333/6333 klatek bramki.
+- Predykcje CC przed reconem:
+  - P-TEACH2-R1 (0.80): wierność przyrządu zdana na obu lotach.
+  - P-TEACH2-R2 (0.80): Ś1 nie zachodzi — co najmniej 22 z 24 par
+    na każdej łacie.
+  - P-TEACH2-R3 (0.65): największy błąd w oknie „wspólne", wszystkie
+    72 przebiegi, ≤ 0.90 m.
+  - P-TEACH2-R4 (0.55): zamknięcie mapy z nauki 200 s ≤ 0.5 s na
+    każdej łacie (max z trzech).
+  - P-TEACH2-R5 (0.55): klatek kluczowych w mapie z 200 s najwyżej
+    30 na każdej łacie.
+  - P-TEACH2-R6 (0.75): Ś4 nie zachodzi — lot do złożenia
+    parametrami i narzędziami.
+  - P-TEACH2-R7 (0.60): w oknie „dalej" przyjętych co najmniej 95%
+    klatek na każdej łacie, łącznie po parach c10.
