@@ -1402,3 +1402,29 @@ CLOSED-BY-RECON (0 bootów)
   jego fałszywych alarmów na docelowym obrazie. Lekcja: świadek ma
   mieć zmierzoną moc i zmierzony fałszywy alarm, zanim trafi do
   litery.
+
+## TEACH — ANEKS_TEACH-3 (17.11.2026): flaga jako stan, S2 przed smoke
+- S2 po 4 bootach (4/24): świat ST1 / ST2 PASS; cienie C1 (parking)
+  i C2 (łąka) przechodzą bramkę obrazu za pierwszym razem — błąd
+  poprawki max 0.49 / 0.36 m, przyjętych 100%, zero detekcji
+  znaczników. P-TEACH-3 ✓, P-TEACH-4 ✓.
+- CC własnym kodem: błędy C1 / C2 z GT jak w raporcie; georeferencja
+  z zapisanych wiązań równa zapisanej; poprawki z wierszy równe
+  datagramowi do 0.0001 m; żadnego wiązania po chwili cienia.
+- STOP przed smoke: chwila flagi w producencie brana ze stempla
+  wiadomości DDS, który jest w czasie epoki, nie sim. W locie
+  z cięciem każda poprawka zostałaby odrzucona. Złapane sprawdzianem
+  na żywo w bootach cienia.
+- Rozstrzygnięcie: flaga jako stan przy klatce, bez stempla; kadr
+  z bufora nie wchodzi do mapy. Pomiar CC na 12 cięciach NAD3: flaga
+  dociera w 0.02 s; w 2 z 12 lotów klatka ujęta 0–4 ms po fladze
+  (wyścig); przy nowej regule ostatni kadr mapy co najmniej 0.2 s
+  przed flagą. Koszt z danych reconu: błąd przebiegu ± 0.004 m.
+- ✗ projektowe CC: „chwila flagi" bez nazwanej podstawy czasu
+  w dwóch promptach; przegląd kodu nie sprawdził podstawy czasu
+  stempla; własny sprawdzian zrobiony na ULG (czas sim). Lekcja:
+  każda wielkość czasu w kodzie lotu ma nazwaną podstawę; stempel
+  wiadomości DDS nie jest czasem sim.
+- Predykcja CC przed smoke:
+  - P-TEACH-11 (0.70): SM ważny, B1–B4 bez naruszeń, zero REFUSE
+    w misji, największy błąd poprawki ≤ 1.00 m.
