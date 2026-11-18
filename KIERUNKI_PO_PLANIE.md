@@ -947,3 +947,21 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   sieci), pościg w poziomie przy wysokości trzymanej z zewnątrz,
   rachunek złożenia z barierą i wykonalność dowodu własnymi
   narzędziami. Po reconie jedna droga dalej, wybrana aneksem.
+
+## Dopisek stanu katalogu — 18.11.2026 (CO-PETLA-1, ANEKS_PETLA-1)
+- **PĘTLA — CLOSED-BY-RECON.** Dowodu obejmującego wnętrze sieci nie
+  będzie: zdanie o braku odmowy jest fałszywe na modelu w pionie
+  i niecertyfikowalne w poziomie własnymi narzędziami. Sieć, osłona
+  i kod lotu bez zmian.
+- **Pozycje nieotwarte, osobnymi decyzjami Olgi:**
+  - PION — wysokość poza siecią: komenda pionowa z regulatora na
+    wysokość odniesienia, z dolną i górną granicą oraz certem
+    obwiedni pionowej; wymaga PRE i lotów regresji. Zdejmuje
+    ucieczkę wysokości i warunek wstępny startu;
+  - ŚCIANA — reguła bez zatrzasku wewnątrz bariery piły bez GNSS,
+    razem z poprawką litery dostępności (ticki ściany nie są
+    odmową). Z PION-em daje zdanie o braku odmowy dla dowolnego
+    sterownika o ograniczonej komendzie;
+  - dowód relacyjny wnętrza sieci (opis stanu związany z historią
+    wejścia albo narzędzia zewnętrzne) — nie otwierać bez nowego
+    pomysłu na opis.

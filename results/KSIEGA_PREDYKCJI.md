@@ -1608,3 +1608,33 @@ CLOSED-BY-RECON (0 bootów)
     dla D z lotów.
   - P-PETLA-R8 (0.70): Ś4 nie zachodzi.
   - P-PETLA-R9 (0.30): Ś5 nie zachodzi.
+
+## PĘTLA — recon i zamknięcie pozycji (ANEKS_PETLA-1, 18.11.2026)
+- CLOSED-BY-RECON, 0 bootów. Ś2 i Ś5 zachodzą. Zdania „w misji pętla
+  sieć–napęd–osłona nie dochodzi do odmowy" nie da się dowieść dla
+  sieci takiej, jaka leci: w pionie fałszywe na modelu, w poziomie
+  fałszywe na każdym z trzech opisów zbioru stanów (certyfikat 0%).
+- Znaleziska: komenda pionowa sieci kopiuje własną prędkość pionową
+  (nachylenie 0.955), trzymanie wysokości ze stałą czasową 26 s;
+  w pętli brak odniesienia wysokości i dolnej granicy; sieć
+  startowana ze stanu zerowego wznosi się o około 4 m (w lotach
+  start 2 m pod intruzem).
+- Model: 56 zdarzeń ucieczki wysokości w 126 000 biegów po 300 s,
+  wszystkie w górę, 50 przed setną sekundą. CC własnym kodem: start
+  z 12 m 28 w 50 400, start z 8 m jak w lotach 2 w 50 400. Wariant
+  z wysokością trzymaną z zewnątrz: 0 zdarzeń, dystans do 11.18 m,
+  promień do 20.81 m.
+- Rachunek złożenia: przy przesłankach dowodu koło intruza do 9.58 m
+  (przedział 0), loty miały 11.0 m.
+- Predykcje 7/9 przy sumie szans 6.15 (✗ R5, R9).
+- ✗ CC: stan początkowy symulacji wpisany z opisu, nie z lotu;
+  sonda z niedopasowanym pionem; Ś4 bez przedziału; jedna próba dla
+  udziału znaku. ✗ wykonawca: mianownik zdarzeń; opóźnienie silnika
+  o tick większe niż w tabeli; wniosek o wieku tracka bez wartości
+  odniesienia.
+- Lekcje:
+  - stan początkowy symulacji bierze się z pierwszego ticka lotów,
+    a wynik podaje osobno dla startu i lotu ustalonego;
+  - zdanie o wpływie zmiennej wymaga wartości odniesienia;
+  - szukanie kontrprzykładów przed dowodem kosztowało 25 minut
+    i zamknęło pytanie, którego dowód by nie zamknął.
