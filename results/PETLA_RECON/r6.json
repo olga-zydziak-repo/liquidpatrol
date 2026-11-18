@@ -1,0 +1,118 @@
+{
+ "przeslanki": {
+  "U_prim_0": 2.7859499999999997,
+  "eps_rel_max_po_30s": 1.3638460470302356,
+  "e_trk_max_po_30s": 1.6014874336066454,
+  "D_loty": 11.10611284833717,
+  "D_R5_rodziny_v1": 10.856102470267146,
+  "D_R5_szukanie": 10.309899841400789,
+  "D_R5": 10.856102470267146,
+  "eps_rel_pierwsze_30s_max": 11.964943253104044
+ },
+ "statusy": {
+  "(1) |q|<=rho": "definicja klasy",
+  "(2)-(5) nierówności": "algebra (trójkąt)",
+  "(6) e'<=U'": "przesłanka istniejącego dowodu (P9_teach; w lotach 0 przekroczeń)",
+  "(7) eps_rel": "zmierzona (R2, 15 lotów, misja po 30 s); pierwsze 30 s do 11.96 m — poza przesłanką",
+  "(8) D": "zmierzona (loty) / model (R5)",
+  "(9) bariera": "kod osłony (nadir_shield.py:311-313), tabela z sumą"
+ },
+ "przedzialy": [
+  {
+   "i": 0,
+   "R": 24.84,
+   "U_prim": 2.7859,
+   "rho_dowod_D_loty": 9.584,
+   "rho_zmierz_D_loty": 12.132,
+   "rho_dowod_D_R5": 9.834,
+   "rho_zmierz_D_R5": 12.382
+  },
+  {
+   "i": 1,
+   "R": 24.2205,
+   "U_prim": 3.4054,
+   "rho_dowod_D_loty": 8.345,
+   "rho_zmierz_D_loty": 11.513,
+   "rho_dowod_D_R5": 8.595,
+   "rho_zmierz_D_R5": 11.763
+  },
+  {
+   "i": 2,
+   "R": 23.6339,
+   "U_prim": 3.9921,
+   "rho_dowod_D_loty": 7.172,
+   "rho_zmierz_D_loty": 10.926,
+   "rho_dowod_D_R5": 7.422,
+   "rho_zmierz_D_R5": 11.176
+  },
+  {
+   "i": 3,
+   "R": 23.0375,
+   "U_prim": 4.5885,
+   "rho_dowod_D_loty": 5.979,
+   "rho_zmierz_D_loty": 10.33,
+   "rho_dowod_D_R5": 6.229,
+   "rho_zmierz_D_R5": 10.58
+  },
+  {
+   "i": 4,
+   "R": 22.6053,
+   "U_prim": 5.0206,
+   "rho_dowod_D_loty": 5.115,
+   "rho_zmierz_D_loty": 9.898,
+   "rho_dowod_D_R5": 5.365,
+   "rho_zmierz_D_R5": 10.148
+  },
+  {
+   "i": 5,
+   "R": 22.2687,
+   "U_prim": 5.3572,
+   "rho_dowod_D_loty": 4.441,
+   "rho_zmierz_D_loty": 9.561,
+   "rho_dowod_D_R5": 4.692,
+   "rho_zmierz_D_R5": 9.811
+  },
+  {
+   "i": 6,
+   "R": 21.9902,
+   "U_prim": 5.6358,
+   "rho_dowod_D_loty": 3.884,
+   "rho_zmierz_D_loty": 9.283,
+   "rho_dowod_D_R5": 4.134,
+   "rho_zmierz_D_R5": 9.533
+  },
+  {
+   "i": 7,
+   "R": 21.7866,
+   "U_prim": 5.8393,
+   "rho_dowod_D_loty": 3.477,
+   "rho_zmierz_D_loty": 9.079,
+   "rho_dowod_D_R5": 3.727,
+   "rho_zmierz_D_R5": 9.329
+  },
+  {
+   "i": 8,
+   "R": 21.4013,
+   "U_prim": 6.2247,
+   "rho_dowod_D_loty": 2.707,
+   "rho_zmierz_D_loty": 8.694,
+   "rho_dowod_D_R5": 2.957,
+   "rho_zmierz_D_R5": 8.944
+  },
+  {
+   "i": 9,
+   "R": 21.1287,
+   "U_prim": 6.4973,
+   "rho_dowod_D_loty": 2.161,
+   "rho_zmierz_D_loty": 8.421,
+   "rho_dowod_D_R5": 2.412,
+   "rho_zmierz_D_R5": 8.671
+  }
+ ],
+ "korekta_c": {
+  "CC_rho_plus_D_dowod": 20.65,
+  "tu_rho_plus_D_dowod": 20.69,
+  "CC_rho_plus_D_zmierz": 23.24,
+  "tu_rho_plus_D_zmierz": 23.239
+ }
+}

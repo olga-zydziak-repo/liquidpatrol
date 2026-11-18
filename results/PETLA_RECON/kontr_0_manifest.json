@@ -1,0 +1,62 @@
+{
+ "episode": {
+  "scenario_id": "c10_s01",
+  "cell": {
+   "v_intr": 1.0,
+   "bearing_deg": 180
+  },
+  "cell_index": 10,
+  "seed": 1,
+  "block": 1,
+  "is_test": false,
+  "orbit_dir": "CW",
+  "start_pos": [
+   -6.4564144234573755,
+   -5.236777580732226,
+   10.0
+  ],
+  "z": 10.0,
+  "ep_dur_s": 1000.0,
+  "segments": [
+   {
+    "t0": 0.0,
+    "t1": 5.35,
+    "x0": -6.4564144234573755,
+    "y0": -5.236777580732226,
+    "heading_deg": -140.95459932632755,
+    "v": 0.5
+   },
+   {
+    "t0": 5.35,
+    "t1": 5.4,
+    "x0": -8.533945281047925,
+    "y0": -6.921856372883812,
+    "heading_deg": -140.95459932632912,
+    "v": 0.23620161
+   },
+   {
+    "t0": 5.4,
+    "t1": 299.95,
+    "x0": -8.543117545232196,
+    "y0": -6.929295967726148,
+    "heading_deg": 26.56505117707799,
+    "v": 0.0
+   }
+  ],
+  "episode_id": 10,
+  "orbit_dir_wygenerowany_200s": "CCW",
+  "petla_kontrprzyklad": {
+   "k": 0,
+   "zrodlo": "results/PETLA_RECON/kontr.json"
+  }
+ },
+ "sprawdzian": {
+  "krok_max": 0.05000000000000165,
+  "prog_kroku": 0.051000000000000004,
+  "krok_ok": true,
+  "promien_max": 11.000000000000002,
+  "promien_ok": true,
+  "n_odcinkow": 3,
+  "zgodnosc_z_zapisem_max_m": 1.6758116906701664e-14
+ }
+}
