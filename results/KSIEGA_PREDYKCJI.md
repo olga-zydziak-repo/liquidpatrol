@@ -1552,3 +1552,30 @@ CLOSED-BY-RECON (0 bootów)
 - ✗ CC: próg na wielkości liczonej bez tolerancji liczbowej.
   Lekcja: sprawdzian poprawności niesie tolerancję o rzędy mniejszą
   od wady, którą ma łapać, i o rzędy większą od zaokrągleń.
+
+## TEACH-II — lot długi i zamknięcie pozycji (ANEKS_TEACH2-2, 18.11.2026)
+- Werdykt L-A w pierwszym boocie (1/3). 200 s nauki z GNSS, potem
+  600.52 s bez GNSS i bez znaczników nad parkingiem (c10, wahadło v2):
+  B1–B4 bez naruszeń, zero REFUSE w misji, track 1.000, pasmo 0.971.
+- Przesłanka: 12 638 ticków, zero przekroczeń, max e′/U′ 0.24. CC
+  odtworzył własnym kodem z tabelą wpisaną z PRE; replay osłony
+  0 różnic na 12 696 tickach; georeferencja z 3119 wiązań zgodna;
+  3003 poprawki zgodne z datagramem do 0.0001 m.
+- Błąd poprawki p50 / p95 / max 0.234 / 0.352 / 0.449 m, przyjęte
+  3003/3003; w oknach po 100 s max 0.37–0.45 m bez trendu, przy
+  błędzie własnym EKF rosnącym do 17.4 m.
+- Mapa 1041 kadrów / 15 klatek kluczowych / 3119 wiązań; zamknięcie
+  383 ms w locie (206 ms przy biurku); poprawka w osłonie 0.464 s po
+  fladze; zero zgubionych klatek, zero wolnych klatek kluczowych.
+- Predykcje PRE 8/9 przy sumie szans 6.75 (✗ P-TEACH2-1); pozycja
+  z reconem 15/16 przy 11.45.
+- Lekcje:
+  - mapa obejmująca całe zadanie zdejmuje jedyne ciasne miejsce
+    bramki (krawędź mapy), a dłuższa nauka z GNSS zmniejsza błąd;
+  - błąd poprawki z mapy nie zależy od dryfu EKF (korelacja −0.11
+    przy dryfie do 17 m);
+  - czasy z biurka nie przenoszą się na lot wprost: zamknięcie mapy
+    pod obciążeniem symulacji trwało niemal dwa razy dłużej, a wolne
+    klatki z renderu w gz nie wystąpiły;
+  - „pierwsza poprawka po fladze" ma dwie miary: czas klatki i chwilę
+    dotarcia do osłony; próg trzeba pisać na tej drugiej.

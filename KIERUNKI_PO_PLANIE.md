@@ -921,3 +921,20 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   rzeczywistego przy późnych klatkach kluczowych (kolejka 1, klatki
   gubione). Przy dłuższej nauce albo innym sprzęcie wymaga rozłożenia
   dopasowań w czasie.
+
+## Dopisek stanu katalogu — 18.11.2026 (CO-TEACH2-2, ANEKS_TEACH2-2)
+- **TEACH-II — CLOSED, PASS (L-A).** Lot 10 minut bez GNSS i bez
+  znaczników na mapie z 200 s własnego lotu z GNSS: jeden lot nad
+  parkingiem, bez odmowy, litera bez naruszeń, błąd poprawki do
+  0.45 m bez wzrostu w czasie. Sieć, osłona, tabela i tor mapy bez
+  zmiany kodu.
+- **Wątek lotu bez GNSS — stan:** ze znacznikami 10 minut (NADIR-II);
+  zmierzony kontrakt źródła (NADIR-III); bez znaczników 12/12 na
+  trzech terenach po 110 s (TEACH); bez znaczników 10 minut
+  (TEACH-II).
+- **Pozycje nieotwarte, osobnymi decyzjami Olgi:**
+  - lot długi na osiedlu i łące oraz w komórce c05;
+  - teren dla wszystkich kamer z nowym pomiarem G;
+  - mapa z innego dnia albo przy innym świetle;
+  - producent czasu rzeczywistego przy większych mapach (rozłożenie
+    dopasowań, czas zamknięcia).
