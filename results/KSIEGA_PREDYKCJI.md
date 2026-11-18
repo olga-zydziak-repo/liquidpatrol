@@ -1579,3 +1579,32 @@ CLOSED-BY-RECON (0 bootów)
     klatki z renderu w gz nie wystąpiły;
   - „pierwsza poprawka po fladze" ma dwie miary: czas klatki i chwilę
     dotarcia do osłony; próg trzeba pisać na tej drugiej.
+
+## PĘTLA — otwarcie i recon przy biurku (PROMPT_PETLA_S0, 18.11.2026)
+- Pozycja otwarta sygnałem Olgi „otwieram pętlę" po L-A nogi
+  TEACH-II. Pytanie: czy zdanie „w misji pętla sieć–napęd–osłona nie
+  dochodzi do odmowy" da się dowieść, dla jakiej klasy intruzów
+  i przy jakich przesłankach. Recon szuka najpierw kontrprzykładów.
+- Rachunek CC przed reconem: replay 57 222 ticków do 0.003 m/s;
+  w misji dystans do 11.17 m, składowa komendy ku celowi ≥ 0.883 m/s
+  od 10.5 m; nierówność trójkąta przy przesłankach dowodu zamyka się
+  dla koła intruza ρ ≤ 9.15 m (lecone 11.0 m); komenda pionowa sieci
+  równa własnej prędkości pionowej (nachylenie 0.956), czułość na
+  rel_z +0.038 1/s, znak odwrotny w 14.7% stanów; w sondzie CC
+  ucieczka wysokości w najwyżej 16 z 900 biegów dla torów otwartych.
+- Predykcje CC przed reconem:
+  - P-PETLA-R1 (0.90): replay odtwarza komendę do 0.005 m/s na co
+    najmniej 57 000 tickach, a w misji składowa ku celowi przy
+    d ≥ 10.5 m nie schodzi poniżej 0.85 m/s.
+  - P-PETLA-R2 (0.75): Ś1 nie zachodzi.
+  - P-PETLA-R3 (0.90): bez napędu mediana czułości jednokrokowej
+    komendy pionowej na własną prędkość pionową leży w 0.9–1.1,
+    a ustalona czułość na rel_z ma znak odwrotny w 5–25% stanów.
+  - P-PETLA-R4 (0.60): Ś2 zachodzi.
+  - P-PETLA-R5 (0.40): istnieje kontrprzykład otwarty odporny w co
+    najmniej 10 z 20 powtórzeń.
+  - P-PETLA-R6 (0.75): Ś3 nie zachodzi.
+  - P-PETLA-R7 (0.85): ρ* przy przesłankach dowodu poniżej 11.0 m
+    dla D z lotów.
+  - P-PETLA-R8 (0.70): Ś4 nie zachodzi.
+  - P-PETLA-R9 (0.30): Ś5 nie zachodzi.

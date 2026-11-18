@@ -938,3 +938,12 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   - mapa z innego dnia albo przy innym świetle;
   - producent czasu rzeczywistego przy większych mapach (rozłożenie
     dopasowań, czas zamknięcia).
+
+## Dopisek stanu katalogu — 18.11.2026 (CO-PETLA-0)
+- **PĘTLA — otwarta, recon przy biurku** (PROMPT_PETLA_S0): dowód
+  obejmujący sieć — czy pętla sieć–napęd–osłona może dojść do odmowy
+  w misji. Sieć, osłona i kod lotu bez zmian, 0 bootów. Recon
+  rozstrzyga hipotezę H-PION (ucieczka wysokości przez kanał pionowy
+  sieci), pościg w poziomie przy wysokości trzymanej z zewnątrz,
+  rachunek złożenia z barierą i wykonalność dowodu własnymi
+  narzędziami. Po reconie jedna droga dalej, wybrana aneksem.
