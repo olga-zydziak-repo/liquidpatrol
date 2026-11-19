@@ -965,3 +965,14 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   - dowód relacyjny wnętrza sieci (opis stanu związany z historią
     wejścia albo narzędzia zewnętrzne) — nie otwierać bez nowego
     pomysłu na opis.
+
+## Dopisek stanu katalogu — 20.11.2026 (CO-ARKUSZ-0)
+- **ARKUSZ — otwarta, recon przy biurku** (PROMPT_ARKUSZ_S0): dowód
+  z mechanizmu. Pomiar arkusza stanów sieci, stanów czułych i drabiny
+  szczebli dowodu od pudełek do współrzędnych arkusza. 0 bootów,
+  sieć, osłona i kod lotu bez zmian.
+- **PION** — rekomendacja CC (regulator na wysokość, poza siecią)
+  przyjęta przez Olgę 19.11; pozycja nieotwarta. Dziedzina ARKUSZA
+  zakłada jej wynik.
+- **KOPIA** — prompt wydany 19.11 (27063ae6…), pozycja nieotwarta;
+  czeka na decyzję Olgi po reconie ARKUSZA.

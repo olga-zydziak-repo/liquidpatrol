@@ -1638,3 +1638,31 @@ CLOSED-BY-RECON (0 bootów)
   - zdanie o wpływie zmiennej wymaga wartości odniesienia;
   - szukanie kontrprzykładów przed dowodem kosztowało 25 minut
     i zamknęło pytanie, którego dowód by nie zamknął.
+
+## ARKUSZ — otwarcie, dowód z mechanizmu, recon przy biurku (PROMPT_ARKUSZ_S0, 20.11.2026)
+- Pozycja otwarta sygnałem Olgi „otwieram ARKUSZ" po zamknięciu
+  PĘTLI. Teza: stany sieci w locie leżą na cienkim arkuszu
+  wyznaczonym przez sytuację fizyczną, a dowód prowadzony we
+  współrzędnych arkusza przechodzi tam, gdzie pudełka dały 0%.
+- Rachunek CC przed sesją: na lotach sytuacja bieżąca wyjaśnia
+  99.7% wariancji stanu (reszta p99 0.060), historia nic nie dodaje;
+  z wag ostatnie 8 s wejścia odtwarza stan do 0.002; w modelu
+  z wysokością z zewnątrz 67 431 komórek, półszerokość pudełka p99
+  0.108, bez fałd; pudełka lokalne rozchodzą się w dwóch iteracjach;
+  zaburzenie stanu maleje po 20 krokach do 0.066 w medianie, ale
+  w 0.03% prób rośnie.
+- Predykcje CC przed sesją:
+  - P-ARKUSZ-1 (0.90): na lotach testowych wariancja niewyjaśniona
+    w medianie ≤ 1% i reszta p99 ≤ 0.08.
+  - P-ARKUSZ-2 (0.85): w modelu komórek o półszerokości ponad 0.25
+    jest mniej niż 1% (Ś2 nie zachodzi).
+  - P-ARKUSZ-3 (0.85): po 20 krokach wzmocnienie ponad 1 w 0.01–0.1%
+    prób.
+  - P-ARKUSZ-4 (0.60): Ś3 nie zachodzi.
+  - P-ARKUSZ-5 (0.90): szczebel D1 dowodzi lematu dla mniej niż 5%
+    czasu pobytu.
+  - P-ARKUSZ-6 (0.55): Ś4 nie zachodzi.
+  - P-ARKUSZ-7 (0.30): któryś szczebel dowodzi lematu dla co najmniej
+    90% czasu pobytu.
+  - P-ARKUSZ-8 (0.50): S′ dowiedzione w co najmniej 99% komórek dla
+    d₀ ≤ 9.5 m.
