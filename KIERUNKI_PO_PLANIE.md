@@ -976,3 +976,24 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   zakłada jej wynik.
 - **KOPIA** — prompt wydany 19.11 (27063ae6…), pozycja nieotwarta;
   czeka na decyzję Olgi po reconie ARKUSZA.
+
+## Dopisek stanu katalogu — 20.11.2026 (CO-ARKUSZ-1, ANEKS_ARKUSZ-1)
+- **ARKUSZ — CLOSED-BY-RECON.** Arkusz stanów sieci zmierzony; lemat
+  arkusza niedowiedziony (0%), lemat k-krokowy w brzmieniu promptu
+  fałszywy. Sieć, osłona i kod lotu bez zmian.
+- **Dowód obejmujący sieć na wagach zamrożonych — zamknięty** po
+  dwóch podejściach (PĘTLA, ARKUSZ). Nie otwierać ponownie rodziną
+  pudełek, współrzędnych arkusza ani jednej metryki kwadratowej:
+  promień macierzy modułów jakobianu kroku wynosi 2.1.
+- **Kandydat BLIŹNIAK — nieotwarty, osobną decyzją Olgi.** Uczeń
+  o tej samej architekturze, kurczący z konstrukcji, i dowód prawa
+  pościgu na nim; sieć zamrożona jako kontrola. Najpierw recon przy
+  biurku (0 bootów), loty dopiero po jego przejściu. Sonda CC
+  w ANEKS_ARKUSZ-1 §5. Zakłada wynik PION-u.
+- **KOPIA** — nieotwarta; prompt z 19.11 nieaktualny (bramka
+  6d8cbaf0). Rekomendacja CC: jedna noga treningu, nie dwie; dźwignie
+  KOPII do rozważenia w BLIŹNIAKU.
+- **PION, ŚCIANA** — bez zmian (PION: rekomendacja przyjęta 19.11,
+  pozycja nieotwarta).
+- **Pakowanie** (artykuł, nota, film) — odłożone; każda kolejna noga
+  je przesuwa.

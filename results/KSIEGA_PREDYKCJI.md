@@ -1666,3 +1666,34 @@ CLOSED-BY-RECON (0 bootów)
     90% czasu pobytu.
   - P-ARKUSZ-8 (0.50): S′ dowiedzione w co najmniej 99% komórek dla
     d₀ ≤ 9.5 m.
+
+## ARKUSZ — recon i zamknięcie pozycji (ANEKS_ARKUSZ-1, 20.11.2026)
+- CLOSED-BY-RECON, 0 bootów. Ś4 zachodzi, Ś1–Ś3 nie. Lemat arkusza
+  dowiedziony dla 0% czasu pobytu na każdym szczeblu (D1, D2, D3).
+- Arkusz istnieje: loty testowe 0.22% wariancji niewyjaśnionej,
+  reszta p99 0.057; model 0 komórek pofałdowanych; wymiar 6; z wag
+  stan odtwarzany z 8 s wejścia do 0.002. CC: ta sama mapa na 48
+  lotach LIQ zostawia resztę p50 0.074, p99 0.28.
+- Stany czułe rzadkie: po 20 krokach wzrost w 0.005–0.05% prób,
+  0.03% czasu w modelu i 0.09% w lotach.
+- Przyczyna porażki dowodu zmierzona: promień spektralny kroku 0.92,
+  promień macierzy modułów jakobianu 2.1, norma max 3.4; skurcz
+  dopiero wielokrokowy, złożenie ograniczeń przez 10 kroków 10¹³.
+  CC: jedna metryka kwadratowa daje skurcz w 32% stanów.
+- Lemat k-krokowy w brzmieniu promptu fałszywy: stałe pchnięcie ±Δ
+  przez 10 i 20 ticków wyprowadza stan o 0.6–0.9 od arkusza
+  w komórkach niosących 10.7% i 20.4% czasu (CC: 11.3% i 24.4%).
+- Predykcje 4/8 przy sumie szans 5.45 (✗ 3, 6, 7, 8).
+- ✗ CC: klasa wejść lematu bez pamięci; szanse kroku dowodu
+  postawione z sondy zjawiska, mimo własnej sondy z rozejściem
+  pudełek; P-3 bez rozkładu zaburzenia.
+- Sonda CC po reconie (nie wynik): uczeń o tej samej architekturze
+  z rzutem na ‖∂h′/∂h‖ ≤ 0.90 w normie max naśladuje nauczyciela
+  jak sieć zamrożona (VAL 0.0473 wobec 0.0485); pudełka mają punkt
+  stały; w oszacowaniu pierwszego rzędu prawo pościgu od 9.5 m
+  w 99.7% komórek. Orbita w modelu wolniejsza (1.54 wobec 1.75 m/s).
+- Lekcje:
+  - przed promptem dowodu sonduje się sam krok dowodu i z tej sondy
+    stawia szansę;
+  - klasa wejść w lemacie o układzie z pamięcią sama musi pamiętać;
+  - szukanie kontrprzykładów zamawia się razem z dowodem.
