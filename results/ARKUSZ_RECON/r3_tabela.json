@@ -1,0 +1,413 @@
+{
+ "tablica": [
+  {
+   "szczebel": "D1",
+   "k": 1,
+   "zakres": "wszystkie komórki i pary",
+   "dowiedzione_komorki": 0.0,
+   "dowiedzione_czas": 0.0,
+   "iteracje": 1,
+   "operacje_par": 5095605,
+   "czas_s": 10.355884313583374,
+   "polszer_obrazu_stan_p50_iter0": 0.9615231022358461,
+   "polszer_Z_koncowa_stan": {
+    "p50": 0.04381740505431847,
+    "p99": 0.11951749628322582,
+    "max": 0.2460030750191008
+   },
+   "test_start": {
+    "punkty": 1000000,
+    "pary": 10000,
+    "wyjatki_wspolrzednych": 0,
+    "zdany": true,
+    "najmniejszy_zapas": 0.0825563981092382
+   },
+   "test_koniec": {
+    "punkty": 1000000,
+    "pary": 10000,
+    "wyjatki_wspolrzednych": 0,
+    "zdany": true,
+    "najmniejszy_zapas": 0.08384247393454258
+   }
+  },
+  {
+   "szczebel": "D2",
+   "k": 1,
+   "zakres": "wszystkie komórki i pary",
+   "dowiedzione_komorki": 0.0,
+   "dowiedzione_czas": 0.0,
+   "iteracje": 1,
+   "operacje_par": 5095605,
+   "czas_s": 169.36800265312195,
+   "polszer_obrazu_stan_p50_iter0": 1.4289529482954537,
+   "polszer_Z_koncowa_stan": {
+    "p50": 0.03380628231897145,
+    "p99": 0.11687940435013776,
+    "max": 0.25454966819584307
+   },
+   "test_start": {
+    "punkty": 1000000,
+    "pary": 10000,
+    "wyjatki_wspolrzednych": 0,
+    "zdany": true,
+    "najmniejszy_zapas": 0.2065886483439761
+   },
+   "test_koniec": {
+    "punkty": 1000000,
+    "pary": 10000,
+    "wyjatki_wspolrzednych": 0,
+    "zdany": true,
+    "najmniejszy_zapas": 0.21660874488865403
+   }
+  },
+  {
+   "szczebel": "D2",
+   "k": 1,
+   "zakres": "próba 200 + 200 komórek źródłowych (jednostajna / ważona czasem)",
+   "zrodla_wszystkie_cele_ok": [
+    0,
+    0
+   ],
+   "pary_ok": [
+    0,
+    0
+   ],
+   "pary": [
+    16512,
+    23151
+   ],
+   "polszer_ograniczenia_reszty_mediana": [
+    1.4681037001959405,
+    1.681649442810879
+   ],
+   "czas_s": 5.021212339401245,
+   "test": {
+    "punkty": 1000000,
+    "wyjatki_obwiedni_hk": 0,
+    "punkty_reszty": 737416,
+    "wyjatki_reszty": 0,
+    "zdany": true
+   }
+  },
+  {
+   "szczebel": "D2",
+   "k": 10,
+   "zakres": "próba 200 + 200 komórek źródłowych (jednostajna / ważona czasem)",
+   "zrodla_wszystkie_cele_ok": [
+    0,
+    0
+   ],
+   "pary_ok": [
+    0,
+    0
+   ],
+   "pary": [
+    1204092,
+    1278520
+   ],
+   "polszer_ograniczenia_reszty_mediana": [
+    32092356837800.6,
+    36332744359105.18
+   ],
+   "czas_s": 22.98523449897766,
+   "test": {
+    "punkty": 1000000,
+    "wyjatki_obwiedni_hk": 0,
+    "punkty_reszty": 192852,
+    "wyjatki_reszty": 0,
+    "zdany": true
+   }
+  },
+  {
+   "szczebel": "D2",
+   "k": 20,
+   "zakres": "próba 200 + 200 komórek źródłowych (jednostajna / ważona czasem)",
+   "zrodla_wszystkie_cele_ok": [
+    0,
+    0
+   ],
+   "pary_ok": [
+    0,
+    0
+   ],
+   "pary": [
+    2865688,
+    2697962
+   ],
+   "polszer_ograniczenia_reszty_mediana": [
+    2.040300581118129e+28,
+    2.309886738459903e+28
+   ],
+   "czas_s": 44.48148036003113,
+   "test": {
+    "punkty": 1000000,
+    "wyjatki_obwiedni_hk": 0,
+    "punkty_reszty": 139751,
+    "wyjatki_reszty": 0,
+    "zdany": true
+   }
+  },
+  {
+   "szczebel": "D3",
+   "k": 1,
+   "zakres": "wszystkie komórki i pary",
+   "dowiedzione_komorki": 0.0,
+   "dowiedzione_czas": 0.0,
+   "iteracje": 1,
+   "operacje_par": 5095605,
+   "czas_s": 208.92223691940308,
+   "polszer_obrazu_stan_p50_iter0": 198.1745440096882,
+   "polszer_Z_koncowa_stan": {
+    "p50": 0.24011717387595094,
+    "p99": 1.0083536746525565,
+    "max": 28.259031522413668
+   },
+   "test_start": {
+    "punkty": 1000000,
+    "pary": 10000,
+    "wyjatki_wspolrzednych": 0,
+    "zdany": true,
+    "najmniejszy_zapas": 0.5816551567319065
+   },
+   "test_koniec": {
+    "punkty": 1000000,
+    "pary": 10000,
+    "wyjatki_wspolrzednych": 0,
+    "zdany": true,
+    "najmniejszy_zapas": 0.6136253029908337
+   }
+  },
+  {
+   "szczebel": "D3",
+   "k": 1,
+   "zakres": "próba 200 + 200 komórek źródłowych (jednostajna / ważona czasem)",
+   "zrodla_wszystkie_cele_ok": [
+    0,
+    0
+   ],
+   "pary_ok": [
+    0,
+    0
+   ],
+   "pary": [
+    16512,
+    23151
+   ],
+   "polszer_ograniczenia_reszty_mediana": [
+    27.451388253127583,
+    31.014403310010145
+   ],
+   "czas_s": 5.6723103523254395,
+   "test": {
+    "punkty": 1000000,
+    "wyjatki_obwiedni_hk": 0,
+    "punkty_reszty": 737416,
+    "wyjatki_reszty": 0,
+    "zdany": true
+   }
+  },
+  {
+   "szczebel": "D3",
+   "k": 10,
+   "zakres": "próba 200 + 200 komórek źródłowych (jednostajna / ważona czasem)",
+   "zrodla_wszystkie_cele_ok": [
+    0,
+    0
+   ],
+   "pary_ok": [
+    0,
+    0
+   ],
+   "pary": [
+    1204092,
+    1278520
+   ],
+   "polszer_ograniczenia_reszty_mediana": [
+    664321281561135.1,
+    769999248477892.2
+   ],
+   "czas_s": 25.032872200012207,
+   "test": {
+    "punkty": 1000000,
+    "wyjatki_obwiedni_hk": 0,
+    "punkty_reszty": 192852,
+    "wyjatki_reszty": 0,
+    "zdany": true
+   }
+  },
+  {
+   "szczebel": "D3",
+   "k": 20,
+   "zakres": "próba 200 + 200 komórek źródłowych (jednostajna / ważona czasem)",
+   "zrodla_wszystkie_cele_ok": [
+    0,
+    0
+   ],
+   "pary_ok": [
+    0,
+    0
+   ],
+   "pary": [
+    2865688,
+    2697962
+   ],
+   "polszer_ograniczenia_reszty_mediana": [
+    4.141641994675524e+29,
+    4.748904963599008e+29
+   ],
+   "czas_s": 56.844457387924194,
+   "test": {
+    "punkty": 1000000,
+    "wyjatki_obwiedni_hk": 0,
+    "punkty_reszty": 139751,
+    "wyjatki_reszty": 0,
+    "zdany": true
+   }
+  },
+  {
+   "szczebel": "D4",
+   "k": null,
+   "uwaga": "niewykonany (prompt: jeśli starczy czasu)"
+  }
+ ],
+ "sufit": {
+  "kontrprzyklady": {
+   "k1_dane": {
+    "dopuszczalne": 200000,
+    "kontrprzyklady_D2D3": 0,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 0.0,
+    "kontrprzyklady_D1": 0,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.0
+   },
+   "k1_losowe": {
+    "dopuszczalne": 193139,
+    "kontrprzyklady_D2D3": 0,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 0.0,
+    "kontrprzyklady_D1": 0,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.0
+   },
+   "k1_pchniecie": {
+    "dopuszczalne": 190046,
+    "kontrprzyklady_D2D3": 1,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 7.936507936507937e-07,
+    "kontrprzyklady_D1": 0,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.0
+   },
+   "k1_pchniecie_pol": {
+    "dopuszczalne": 197103,
+    "kontrprzyklady_D2D3": 0,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 0.0,
+    "kontrprzyklady_D1": 0,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.0
+   },
+   "k10_dane": {
+    "dopuszczalne": 200000,
+    "kontrprzyklady_D2D3": 0,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 0.0,
+    "kontrprzyklady_D1": 0,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.0
+   },
+   "k10_losowe": {
+    "dopuszczalne": 68131,
+    "kontrprzyklady_D2D3": 66,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 0.0017583333333333333,
+    "kontrprzyklady_D1": 0,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.0
+   },
+   "k10_pchniecie": {
+    "dopuszczalne": 7057,
+    "kontrprzyklady_D2D3": 1629,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 0.10705555555555556,
+    "kontrprzyklady_D1": 96,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.006103571428571429
+   },
+   "k10_pchniecie_pol": {
+    "dopuszczalne": 20336,
+    "kontrprzyklady_D2D3": 464,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 0.010216269841269842,
+    "kontrprzyklady_D1": 0,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.0
+   },
+   "k20_dane": {
+    "dopuszczalne": 200000,
+    "kontrprzyklady_D2D3": 0,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 0.0,
+    "kontrprzyklady_D1": 0,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.0
+   },
+   "k20_losowe": {
+    "dopuszczalne": 15765,
+    "kontrprzyklady_D2D3": 88,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 0.0017896825396825397,
+    "kontrprzyklady_D1": 0,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.0
+   },
+   "k20_pchniecie": {
+    "dopuszczalne": 5903,
+    "kontrprzyklady_D2D3": 2481,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 0.20430198412698414,
+    "kontrprzyklady_D1": 585,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.04781468253968254
+   },
+   "k20_pchniecie_pol": {
+    "dopuszczalne": 7218,
+    "kontrprzyklady_D2D3": 690,
+    "czas_pobytu_w_falsyfikowanych_D2D3": 0.038049206349206346,
+    "kontrprzyklady_D1": 23,
+    "czas_pobytu_w_falsyfikowanych_D1": 0.00027936507936507935
+   }
+  },
+  "sprzezony_k1": {
+   "D2": {
+    "iter": 14,
+    "stabilne_komorki": 9.598924920408915e-05,
+    "stabilne_czas": 7.5396825396825394e-06,
+    "zamrozone": 62373,
+    "zamrozone_czas": 0.9997146825396825,
+    "polszer_Z_p50": 0.220798422812167,
+    "polszer_Z_p99": 0.24952242275352937
+   },
+   "D1": {
+    "iter": 14,
+    "stabilne_komorki": 6.399283280272609e-05,
+    "stabilne_czas": 3.5714285714285714e-06,
+    "zamrozone": 62364,
+    "zamrozone_czas": 0.9998785714285714,
+    "polszer_Z_p50": 0.22440392883416682,
+    "polszer_Z_p99": 0.2495749231226524
+   }
+  },
+  "rozprzezony_k1": {
+   "D1": {
+    "iter": 5,
+    "dowiedzione_komorki": 0.0,
+    "dowiedzione_czas": 0.0,
+    "zamrozone": 56486,
+    "zamrozone_czas": 0.9635527777777778,
+    "polszer_obrazu_stan_p50": 0.2622030027134306,
+    "polszer_obrazu_stan_max": 0.38907164528063165,
+    "czas_s": 103.39682006835938
+   },
+   "D2": {
+    "iter": 5,
+    "dowiedzione_komorki": 3.1996416401363046e-05,
+    "dowiedzione_czas": 2.777777777777778e-06,
+    "zamrozone": 60828,
+    "zamrozone_czas": 0.9861,
+    "polszer_obrazu_stan_p50": 0.2764043159949129,
+    "polszer_obrazu_stan_max": 1.0777687416965591,
+    "czas_s": 165.19653415679932
+   },
+   "D3": {
+    "iter": 0,
+    "dowiedzione_komorki": 0.0,
+    "dowiedzione_czas": 0.0,
+    "zamrozone": 62507,
+    "zamrozone_czas": 1.0,
+    "polszer_obrazu_stan_p50": 1.2962549254114941,
+    "polszer_obrazu_stan_max": 192.46232271159212,
+    "czas_s": 52.43804931640625
+   }
+  }
+ }
+}

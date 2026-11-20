@@ -1,0 +1,308 @@
+{
+ "dziedzina": {
+  "komorki": 62507,
+  "pary": 5095605,
+  "delta_x1_2": [
+   0.32111639247616386,
+   0.05284072818874801,
+   0.2381533294394987,
+   0.12302962203392687,
+   0.04949804075173585,
+   0.01194415033741273
+  ],
+  "rel_z": [
+   1.8781037762029251,
+   2.1244915971834497
+  ],
+  "vd": [
+   -0.05602191704030491,
+   0.05656603146303592
+  ],
+  "komorki_ge8": 30605,
+  "rho_srodek": {
+   "p50": 0.9236426504620645,
+   "p99": 0.9936701127664956,
+   "max": 1.0441685941011167,
+   "udzial_ge1": 0.005967331658854208
+  },
+  "cond_T": {
+   "p50": 52.226651518691995,
+   "max": 13632.840969473402
+  },
+  "czas_s": 49.22968363761902
+ },
+ "testy": {
+  "D1_start": {
+   "punkty": 1000000,
+   "pary": 10000,
+   "wyjatki_wspolrzednych": 0,
+   "zdany": true,
+   "najmniejszy_zapas": 0.0825563981092382
+  },
+  "D1_koniec": {
+   "punkty": 1000000,
+   "pary": 10000,
+   "wyjatki_wspolrzednych": 0,
+   "zdany": true,
+   "najmniejszy_zapas": 0.08384247393454258
+  },
+  "D2_start": {
+   "punkty": 1000000,
+   "pary": 10000,
+   "wyjatki_wspolrzednych": 0,
+   "zdany": true,
+   "najmniejszy_zapas": 0.2065886483439761
+  },
+  "D2_koniec": {
+   "punkty": 1000000,
+   "pary": 10000,
+   "wyjatki_wspolrzednych": 0,
+   "zdany": true,
+   "najmniejszy_zapas": 0.21660874488865403
+  },
+  "D3_start": {
+   "punkty": 1000000,
+   "pary": 10000,
+   "wyjatki_wspolrzednych": 0,
+   "zdany": true,
+   "najmniejszy_zapas": 0.5816551567319065
+  },
+  "D3_koniec": {
+   "punkty": 1000000,
+   "pary": 10000,
+   "wyjatki_wspolrzednych": 0,
+   "zdany": true,
+   "najmniejszy_zapas": 0.6136253029908337
+  }
+ },
+ "k1": {
+  "D1": {
+   "historia": [
+    {
+     "iter": 0,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 62507,
+     "zamrozone_czas": 1.0,
+     "polszer_obrazu_stan_p50": 0.9615231022358461,
+     "polszer_obrazu_stan_max": 1.4478845041009551,
+     "czas_s": 10.353749752044678
+    }
+   ],
+   "operacje_par": 5095605,
+   "czas_s": 10.355884313583374,
+   "polszer_Z_koncowa_stan": {
+    "p50": 0.04381740505431847,
+    "p99": 0.11951749628322582,
+    "max": 0.2460030750191008
+   }
+  },
+  "D2": {
+   "historia": [
+    {
+     "iter": 0,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 62507,
+     "zamrozone_czas": 1.0,
+     "polszer_obrazu_stan_p50": 1.4289529482954537,
+     "polszer_obrazu_stan_max": 3.2416594997670423,
+     "czas_s": 169.36260318756104
+    }
+   ],
+   "operacje_par": 5095605,
+   "czas_s": 169.36800265312195,
+   "polszer_Z_koncowa_stan": {
+    "p50": 0.03380628231897145,
+    "p99": 0.11687940435013776,
+    "max": 0.25454966819584307
+   }
+  },
+  "D3": {
+   "historia": [
+    {
+     "iter": 0,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 62507,
+     "zamrozone_czas": 1.0,
+     "polszer_obrazu_stan_p50": 198.1745440096882,
+     "polszer_obrazu_stan_max": 141616.7874789957,
+     "czas_s": 208.91611075401306
+    }
+   ],
+   "operacje_par": 5095605,
+   "czas_s": 208.92223691940308,
+   "polszer_Z_koncowa_stan": {
+    "p50": 0.24011717387595094,
+    "p99": 1.0083536746525565,
+    "max": 28.259031522413668
+   }
+  }
+ },
+ "sufit_empiryczny_k1": {
+  "D1": {
+   "historia": [
+    {
+     "iter": 0,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 347,
+     "zamrozone_czas": 0.0009206349206349207,
+     "polszer_obrazu_stan_p50": 0.15444836688282995,
+     "polszer_obrazu_stan_max": 0.34330785782690754,
+     "czas_s": 17.078160762786865
+    },
+    {
+     "iter": 1,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 6371,
+     "zamrozone_czas": 0.10517539682539682,
+     "polszer_obrazu_stan_p50": 0.19973793584400376,
+     "polszer_obrazu_stan_max": 0.3320939256464517,
+     "czas_s": 35.494181394577026
+    },
+    {
+     "iter": 2,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 23482,
+     "zamrozone_czas": 0.42253452380952383,
+     "polszer_obrazu_stan_p50": 0.23602250588686038,
+     "polszer_obrazu_stan_max": 0.3800438148379699,
+     "czas_s": 52.03564476966858
+    },
+    {
+     "iter": 3,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 41111,
+     "zamrozone_czas": 0.7352349206349207,
+     "polszer_obrazu_stan_p50": 0.2547296529474997,
+     "polszer_obrazu_stan_max": 0.3740521223250425,
+     "czas_s": 69.49109816551208
+    },
+    {
+     "iter": 4,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 51367,
+     "zamrozone_czas": 0.897409126984127,
+     "polszer_obrazu_stan_p50": 0.26045438138878596,
+     "polszer_obrazu_stan_max": 0.37593926311027437,
+     "czas_s": 86.23341822624207
+    },
+    {
+     "iter": 5,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 56486,
+     "zamrozone_czas": 0.9635527777777778,
+     "polszer_obrazu_stan_p50": 0.2622030027134306,
+     "polszer_obrazu_stan_max": 0.38907164528063165,
+     "czas_s": 103.39682006835938
+    }
+   ],
+   "operacje_par": 30573630,
+   "czas_s": 103.3984751701355,
+   "polszer_Z_koncowa_stan": {
+    "p50": 0.2317674804903988,
+    "p99": 0.24972457874609189,
+    "max": 0.24999974400841424
+   }
+  },
+  "D2": {
+   "historia": [
+    {
+     "iter": 0,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 6680,
+     "zamrozone_czas": 0.018481746031746033,
+     "polszer_obrazu_stan_p50": 0.17770017024843987,
+     "polszer_obrazu_stan_max": 1.173246510290877,
+     "czas_s": 28.671210289001465
+    },
+    {
+     "iter": 1,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 23772,
+     "zamrozone_czas": 0.26226746031746034,
+     "polszer_obrazu_stan_p50": 0.2347285827590181,
+     "polszer_obrazu_stan_max": 1.0889366301078565,
+     "czas_s": 57.39735651016235
+    },
+    {
+     "iter": 2,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 44427,
+     "zamrozone_czas": 0.6575123015873016,
+     "polszer_obrazu_stan_p50": 0.26465744975809175,
+     "polszer_obrazu_stan_max": 1.3393163661489587,
+     "czas_s": 84.00142693519592
+    },
+    {
+     "iter": 3,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 54988,
+     "zamrozone_czas": 0.8822702380952381,
+     "polszer_obrazu_stan_p50": 0.2735989850712792,
+     "polszer_obrazu_stan_max": 1.1199183569232627,
+     "czas_s": 111.25440692901611
+    },
+    {
+     "iter": 4,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 59177,
+     "zamrozone_czas": 0.9610345238095238,
+     "polszer_obrazu_stan_p50": 0.27568137077580696,
+     "polszer_obrazu_stan_max": 1.0840230640229434,
+     "czas_s": 138.04572057724
+    },
+    {
+     "iter": 5,
+     "dowiedzione_komorki": 3.1996416401363046e-05,
+     "dowiedzione_czas": 2.777777777777778e-06,
+     "zamrozone": 60828,
+     "zamrozone_czas": 0.9861,
+     "polszer_obrazu_stan_p50": 0.2764043159949129,
+     "polszer_obrazu_stan_max": 1.0777687416965591,
+     "czas_s": 165.19653415679932
+    }
+   ],
+   "operacje_par": 30573630,
+   "czas_s": 165.20289492607117,
+   "polszer_Z_koncowa_stan": {
+    "p50": 0.2203942003748097,
+    "p99": 0.2495895607908709,
+    "max": 0.25454966819584307
+   }
+  },
+  "D3": {
+   "historia": [
+    {
+     "iter": 0,
+     "dowiedzione_komorki": 0.0,
+     "dowiedzione_czas": 0.0,
+     "zamrozone": 62507,
+     "zamrozone_czas": 1.0,
+     "polszer_obrazu_stan_p50": 1.2962549254114941,
+     "polszer_obrazu_stan_max": 192.46232271159212,
+     "czas_s": 52.43804931640625
+    }
+   ],
+   "operacje_par": 5095605,
+   "czas_s": 52.446513175964355,
+   "polszer_Z_koncowa_stan": {
+    "p50": 0.24011717387595094,
+    "p99": 1.0083536746525565,
+    "max": 28.259031522413668
+   }
+  }
+ }
+}
