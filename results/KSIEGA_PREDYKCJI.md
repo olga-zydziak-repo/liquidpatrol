@@ -1731,3 +1731,31 @@ CLOSED-BY-RECON (0 bootów)
     w ruchu.
   - P-BLIZ-12 (0.10): istnieje kandydat do lotów według reguły
     z §4.
+
+## BLIŹNIAK — recon i zamknięcie pozycji (ANEKS_BLIZNIAK-1, 21.11.2026)
+- CLOSED-BY-RECON, 0 bootów. Ś3 zachodzi; Ś2, Ś4, Ś5 nie; Ś1 co do
+  litery dla B90 (ostatni bit), bez wpływu na wynik.
+- Na B30 (B(W) = 0.3 z wag) dowiedzione formami afinicznymi
+  z podziałem: S(0.3) we wszystkich komórkach od 10.5 m, S(1.0) od
+  11.75 m (Δ_A); od 10.0 m 99.934%, 471 wyjątków. Lemat U:
+  półszerokość do 0.311 od piątego ticka. Test wykonawcy 10⁶
+  i niezależny test CC 6.18 mln historii: zero naruszeń, zapas co
+  najmniej 0.32 m/s.
+- Ten sam kod na Z i K: pudełko stanu ma pełny zakres.
+- Cena: VAL +16% wobec K; orbita w modelu pętli 1.48 wobec 1.745 m/s,
+  poniżej GRU (1.674); kandydata do lotów brak. Orbita wraca przy
+  B(W) = 12 (1.725 m/s), przy 3 już jej nie ma (1.533).
+- Model pętli ustawia Z > GRU > MLP jak loty; ławka offline nie
+  rozróżnia żadnego ramienia (każde 120/120).
+- Przesłanki na lotach TEACH: 99.12% ticków misji (loty testowe),
+  99.23% (wszystkie).
+- H-PAMIĘĆ w postaci „prędkość celu" obalona; strata największa
+  w pierwszych 10 s.
+- Predykcje 7/12 przy sumie szans 8.25 (✗ 4, 7, 8, 11, 12).
+- ✗ CC: próg Ś3 z minimum próbek zamiast z sondy luzu metody;
+  przepis rzutu bez zapasu; sonda przesłanek na złym wyborze
+  ticków; H-PAMIĘĆ.
+- Lekcje:
+  - szansę progu dowodu stawia się z sondy luzu metody;
+  - rzut na ograniczenie z jawnym zapasem;
+  - sonda przesłanek na tym samym wyborze ticków co wynik.

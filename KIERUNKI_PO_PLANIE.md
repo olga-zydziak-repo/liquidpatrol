@@ -1008,3 +1008,21 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   celu i kierunku obiegu: osobna decyzja po wyniku BLIŹNIAKA.
 - **PION, ŚCIANA** — bez zmian.
 - **Pakowanie** — po STOP-ie BLIŹNIAKA, niezależnie od wyniku.
+
+## Dopisek stanu katalogu — 21.11.2026 (CO-BLIZNIAK-1, ANEKS_BLIZNIAK-1)
+- **BLIŹNIAK — CLOSED-BY-RECON.** Bliźniak dowodliwy istnieje
+  (prawo pościgu od 10.5 m), kandydata do lotów brak. Sieć
+  zamrożona, osłona i kod lotu bez zmian.
+- **Dowód obejmujący sieć, która leci — zamknięty** dla NCP-20
+  z obecnymi wejściami, po trzech nogach (PĘTLA, ARKUSZ, BLIŹNIAK).
+  Zmierzone: szybka orbita występuje tylko razem z krokiem
+  rozszerzającym w jednym kroku; krok kurczący daje dowód i wolną
+  orbitę.
+- **Kandydat WEJŚCIA — nieotwarty, bez rekomendacji otwarcia teraz:**
+  uczeń bez pamięci z kierunkiem obiegu i prędkością celu na
+  wejściu. Osobną decyzją Olgi.
+- **KOPIA** — wycofana jako osobna pozycja.
+- **PION** — bez zmian (rekomendacja przyjęta 19.11, pozycja
+  nieotwarta). Nie blokuje pakowania.
+- **ŚCIANA** — bez zmian.
+- **Pakowanie** (artykuł, nota, film) — następne.
