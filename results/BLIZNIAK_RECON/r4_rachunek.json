@@ -1,0 +1,59 @@
+{
+ "A": {
+  "0.5": {
+   "v": 0.6,
+   "d1": 11.25,
+   "dD_opoznienie": 1.295,
+   "dD_inercja": 1.0008724152082085,
+   "D_cech": 13.545872415208208,
+   "D_prawdziwy": 14.90987241520821,
+   "rho_sciana_GNSS_27_30": 12.390127584791792,
+   "rho_przedzial0_24_84": 7.144127584791789
+  },
+  "1.0": {
+   "v": 1.2,
+   "d1": 12.25,
+   "dD_opoznienie": 1.47,
+   "dD_inercja": 1.0745374527985012,
+   "D_cech": 14.794537452798501,
+   "D_prawdziwy": 16.1585374527985,
+   "rho_sciana_GNSS_27_30": 11.141462547201499,
+   "rho_przedzial0_24_84": 5.895462547201497
+  },
+  "skladniki": {
+   "profil S": "dowiedziony (E3, 𝒟, 𝒞)",
+   "przesłanki P1–P3": "zmierzone (99.1% / 99.6% ticków)",
+   "napęd N (L, τ)": "zmierzony (PĘTLA R3)",
+   "A1 przełożenie komendy na v_r": "założone",
+   "ε_rel 1.364 m": "zmierzone (PĘTLA)",
+   "U′(0) 2.786 m": "przesłanka dowodu P9_teach",
+   "wysokość z regulatora (P4)": "założona",
+   "intruz ≤ v_q": "założone (klasa)"
+  }
+ },
+ "B": {
+  "0.5": {
+   "v": 0.6,
+   "d1": 14.25,
+   "dD_opoznienie": 1.295,
+   "dD_inercja": 1.0008724152082085,
+   "D_cech": 16.54587241520821,
+   "D_prawdziwy": 17.90987241520821,
+   "rho_sciana_GNSS_27_30": 9.390127584791792,
+   "rho_przedzial0_24_84": 4.144127584791789
+  },
+  "1.0": {
+   "uwaga": "brak dowiedzionego v > v_q"
+  },
+  "skladniki": {
+   "profil S": "dowiedziony (E3, 𝒟, 𝒞)",
+   "przesłanki P1–P3": "zmierzone (99.1% / 99.6% ticków)",
+   "napęd N (L, τ)": "zmierzony (PĘTLA R3)",
+   "A1 przełożenie komendy na v_r": "założone",
+   "ε_rel 1.364 m": "zmierzone (PĘTLA)",
+   "U′(0) 2.786 m": "przesłanka dowodu P9_teach",
+   "wysokość z regulatora (P4)": "założona",
+   "intruz ≤ v_q": "założone (klasa)"
+  }
+ }
+}
