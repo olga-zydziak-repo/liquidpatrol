@@ -1759,3 +1759,14 @@ CLOSED-BY-RECON (0 bootów)
   - szansę progu dowodu stawia się z sondy luzu metody;
   - rzut na ograniczenie z jawnym zapasem;
   - sonda przesłanek na tym samym wyborze ticków co wynik.
+
+## DEMO-C v8 — otwarcie dokrętki (PROMPT_DEMOC_V8, 21.11.2026)
+- Akt 8 „Bez GPS, bez znaczników": część A — nowe ujęcie sędziowane
+  literą bramki S3 TEACH (łąka, c10), część B — lot 10-minutowy
+  TEACH-II z logów. Budżet ≤ 3 booty. Akty 1–7 nietknięte, film EN.
+- Predykcje CC przed sesją:
+  - P-DEMOC8-1 (0.80): pierwsze ujęcie VALID.
+  - P-DEMOC8-2 (0.90): ujęcie VALID w budżecie.
+  - P-DEMOC8-3 (0.60): kotwica replayu trzyma i mini-mózg wchodzi.
+  - P-DEMOC8-4 (0.85): wszystkie asercje części B trzymają bez
+    zmiany liczb z ANEKS_TEACH2-2.

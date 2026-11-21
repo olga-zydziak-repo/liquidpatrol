@@ -1,0 +1,67 @@
+{
+ "testy_teach": {
+  "rc": 0,
+  "ogon": [
+   ".................                                                        [100%]",
+   "17 passed in 20.29s"
+  ],
+  "ok": true
+ },
+ "certs_selfcheck": {
+  "rc": 0,
+  "ogon": [
+   "  OK    tabela_U_P3          ← freeze_U_P3.json       841e3ae43eae9d0c…",
+   "  OK    tabela_U_TEACH       ← freeze_U_TEACH.json    7a56ba1b95f20641…",
+   "WERDYKT teach_certs_selfcheck: PASS (24/24 zgodne)"
+  ],
+  "ok": true
+ },
+ "tabela": {
+  "sha256_tabeli": "7a56ba1b95f206415709d88595f868e07577d94bbeacc56f8065df9831688642",
+  "ok": true
+ },
+ "producent": {
+  "harness/nadir_obs.py": "db96a4a71ebce8d38d704e9f66b191c6788045534c7401fc360daf8f3fd3ffff",
+  "harness/teach_map.py": "4eefeddacbf6977d7e7e7bd544777c55260c622be899be667642aba9fb1fcd7e",
+  "ok": true
+ },
+ "tor_mapy": {
+  "sha256_toru": "0ffd62e38939aacda3f4c1be3f950aea1c1e7b282e19f1bd03193a93272c6f61",
+  "kan_sha": "0ffd62e38939aacda3f4c1be3f950aea1c1e7b282e19f1bd03193a93272c6f61",
+  "ok": true
+ },
+ "swiaty": {
+  "S": {
+   "swiat": "38f1f4ace1e27adfe059f786a9b2004e026911911ae30258af1b0b69d3cc2486",
+   "swiat_ok": true,
+   "swiat_px4_ok": true,
+   "tekstura": "13ac9a7938418d7d47acfa216c6acc783c931c45af8d9959dd51b0b3eb359e24",
+   "tekstura_ok": true
+  },
+  "J": {
+   "swiat": "1f97c0d052a958c865132c8a42630443ad0fc3d6dc0a1e012f8ac0e7c4f98249",
+   "swiat_ok": true,
+   "swiat_px4_ok": true,
+   "tekstura": "693a1d072142fa220eb7c6bf34dacf8c790706880b2721a446bb4dc7276200f1",
+   "tekstura_ok": true
+  }
+ },
+ "model": {
+  "zrodlo": "656ccc9b2040fd96c863f3bb44fa740ca7b7a40ac745773aa06d663f30b4a447",
+  "zainstalowany": "656ccc9b2040fd96c863f3bb44fa740ca7b7a40ac745773aa06d663f30b4a447",
+  "ok": true
+ },
+ "wagi_ncp": {
+  "sha": "0337d5eae1471bb99ef329d939be195a9ea846017045b8ddac22f3d97bc2ae36",
+  "ok": true
+ },
+ "kod_lotu_od_5ad2555e": {
+  "diff_stat": "(pusty)",
+  "ok": true
+ },
+ "timesyncd": {
+  "stan": "active",
+  "uwaga": "przed bootem ma być nieaktywny (kolejka sprawdza)"
+ },
+ "PASS": true
+}
