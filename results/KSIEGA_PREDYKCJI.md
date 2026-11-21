@@ -1697,3 +1697,37 @@ CLOSED-BY-RECON (0 bootów)
     stawia szansę;
   - klasa wejść w lemacie o układzie z pamięcią sama musi pamiętać;
   - szukanie kontrprzykładów zamawia się razem z dowodem.
+
+## BLIŹNIAK — otwarcie, recon przy biurku (PROMPT_BLIZNIAK_S0, 20.11.2026)
+- Pytanie: czy uczeń o architekturze NCP-20, trenowany z rzutem na
+  ograniczenie normy max kroku B(W) ≤ γ < 1, daje się objąć ścisłym
+  dowodem prawa pościgu i ile to kosztuje w locie. 0 bootów; sieć
+  zamrożona, osłona i kod lotu bez zmian.
+- Sonda CC przed promptem (kod CC, nie wynik): błąd VAL Z 0.0485,
+  K 0.0414, B90 0.0473, B50 0.0479, B30 0.0481; ławka offline 120/120
+  dla każdego; model pętli, prędkość styczna: Z 1.75, K 1.76,
+  GRU 1.69, bliźniaki 1.54, MLP k=5 0.29 m/s; prawo pościgu na
+  próbkach B30: 0.70 m/s od 10.0 m, 1.19 od 10.5 m.
+- ✗ CC: w ANEKS_ARKUSZ-1 §5 naśladowanie bliźniaka porównane z siecią
+  zamrożoną zamiast z kontrolą treningu (cena +14%, nie zero);
+  szansa lotów 0.5 postawiona przed kalibracją modelu na GRU i MLP.
+- Predykcje CC przed sesją:
+  - P-BLIZ-1 (0.90): błąd VAL K, B90, B50, B30 w ±0.001 od sondy.
+  - P-BLIZ-2 (0.90): B30 i B50 mają 12/12 na ziarnach TEST i co
+    najmniej 118/120 na wszystkich.
+  - P-BLIZ-3 (0.85): Ś5 nie zachodzi; MLP poniżej 0.6 m/s.
+  - P-BLIZ-4 (0.85): średnia prędkość styczna każdego z B90, B50,
+    B30 poniżej GRU; w najgorszej rodzinie poniżej 1.0 m/s.
+  - P-BLIZ-5 (0.85): C3 nie przekracza 1.65 m/s.
+  - P-BLIZ-6 (0.40): C12 leży w 0.05 m/s od K.
+  - P-BLIZ-7 (0.70): Ś3 nie zachodzi.
+  - P-BLIZ-8 (0.45): S(1.0) dowiedzione we wszystkich komórkach od
+    d₁ ≤ 11.0 m na B30 przy Δ_A.
+  - P-BLIZ-9 (0.90): na Z i K pudełko U_k nie maleje poniżej
+    półszerokości 0.9.
+  - P-BLIZ-10 (0.85): Ś4 nie zachodzi.
+  - P-BLIZ-11 (0.50): różnica B30 − Z w prędkości stycznej przy
+    stojącym celu jest mniejsza niż połowa różnicy przy celu
+    w ruchu.
+  - P-BLIZ-12 (0.10): istnieje kandydat do lotów według reguły
+    z §4.

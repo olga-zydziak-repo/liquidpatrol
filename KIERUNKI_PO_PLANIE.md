@@ -997,3 +997,14 @@ ERRATUM_XAI-1). Zdanie kanoniczne programu i demo v5 BEZ ZMIAN.
   pozycja nieotwarta).
 - **Pakowanie** (artykuł, nota, film) — odłożone; każda kolejna noga
   je przesuwa.
+
+## Dopisek stanu katalogu — 20.11.2026 (CO-BLIZNIAK-0)
+- **BLIŹNIAK — otwarta, recon przy biurku** (PROMPT_BLIZNIAK_S0):
+  uczeń kurczący z konstrukcji, dowód prawa pościgu na nim, cena
+  dowodliwości w modelu pętli skalibrowanym na NCP, GRU i MLP.
+  0 bootów. Loty tylko dla kandydata według reguły zapisanej
+  w prompcie; CC ocenia szansę kandydata na 0.10.
+- **KOPIA** — nie wraca jako osobna noga. Podanie uczniowi prędkości
+  celu i kierunku obiegu: osobna decyzja po wyniku BLIŹNIAKA.
+- **PION, ŚCIANA** — bez zmian.
+- **Pakowanie** — po STOP-ie BLIŹNIAKA, niezależnie od wyniku.
