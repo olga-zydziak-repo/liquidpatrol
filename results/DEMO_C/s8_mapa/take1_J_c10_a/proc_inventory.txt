@@ -1,0 +1,20 @@
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+olga        2170 15.6  0.0 330892 14136 ?        Sl   09:38   0:00 /opt/ros/jazzy/opt/gz_transport_vendor/libexec/gz/transport13/gz-transport-topic -l
+olga        1014  7.4  1.2 5725460 410880 pts/0  Sl+  09:32   0:29 claude --continue
+olga        2163  3.1  0.0  16948 11152 ?        S    09:38   0:00 python3 /home/olga/projects/liquidpatrol/results/SKAN2/tools/skan2_zegar.py /home/olga/projects/liquidpatrol/results/DEMO_C/s8_mapa/take1_J_c10_a/zegar2.jsonl
+olga        2164  3.1  0.0   5028  3756 ?        S    09:38   0:00 bash /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_launch.sh world_teach_J
+olga        2074  1.7  0.4 796104 138260 ?       SLsl 09:37   0:01 /usr/bin/python3 /home/olga/projects/liquidpatrol/results/TEACH/tools/teach_rejestrator.py --world world_teach_J --model x500_teach_flow_0 --out /home/olga/teach_stanowisko/take1_J_c10_a
+root         276  0.2  0.2 2994444 70372 ?       Ssl  09:31   0:01 /usr/bin/containerd
+root         390  0.2  0.3 10913276 105272 ?     Ssl  09:31   0:00 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+olga        1366  0.1  0.4 702760 135016 ?       SLl  09:33   0:00 python3 results/DEMO_C/tools/democ_v8_run.py
+olga        2070  0.0  0.0 129352 22388 ?        Sl   09:37   0:00 nvidia-smi --query-gpu=pstate,clocks.sm,clocks.mem,power.draw,utilization.gpu,temperature.gpu,clocks_event_reasons.active --format=csv,noheader,nounits -lms 1000
+root           1  0.0  0.0  21956 13232 ?        Ss   09:31   0:00 /sbin/init
+root         915  0.0  0.0   3200  1244 ?        S    09:31   0:00 /init
+root          87  0.0  0.0  26200  7268 ?        Ss   09:31   0:00 /usr/lib/systemd/systemd-udevd
+root          40  0.0  0.0  50376 16592 ?        S<s  09:31   0:00 /usr/lib/systemd/systemd-journald
+root         274  0.0  0.0 107064 23272 ?        Ssl  09:31   0:00 /usr/bin/python3 /usr/share/unattended-upgrades/unattended-upgrade-shutdown --wait-for-signal
+olga        2075  0.0  0.0   5028  3848 ?        S    09:37   0:00 bash /home/olga/projects/liquidpatrol/results/DEMO_C/tools/democ_v8_boot.sh 1 take1_J_c10_a 10 30
+olga         950  0.0  0.0  20392 11568 ?        Ss   09:31   0:00 /usr/lib/systemd/systemd --user
+systemd+     117  0.0  0.0  21484 13212 ?        Ss   09:31   0:00 /usr/lib/systemd/systemd-resolved
+syslog       243  0.0  0.0 222524  5696 ?        Ssl  09:31   0:00 /usr/sbin/rsyslogd -n -iNONE
+root         237  0.0  0.0 1756380 13616 ?       Ssl  09:31   0:00 /usr/libexec/wsl-pro-service

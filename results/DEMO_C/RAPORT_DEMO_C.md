@@ -911,3 +911,113 @@ K4 (akt 1), K5, K6 (mapa i pasek porywu) oraz mini-mózg w akcie 7. Kolizje napi
 `kontaktowka_v71.jpg`, ten dopisek. Klipy i kontrolny render v7 w `clips_en71/` zostają na dysku (`??`).
 Edycje istniejących plików: wyłącznie ten dopisek. **Na zewnątrz idzie v7.1 EN, nie v7.**
 **Push = Olga („wypchnięte” — CC ogląda v7.1 z załącznika).** **STOP-DEMOC-71.**
+
+## Akt 8 (v8) „Bez GPS, bez znaczników" (dopisek po CO-BLIZNIAK-1; wykonanie PROMPT_DEMOC_V8, sha256 542c29c4…; wszystko wyżej NIETKNIĘTE)
+
+**§0 bramka.** origin/master = `5d6683e2` (CO-BLIZNIAK-1; `ANEKS_BLIZNIAK-1.md` 191172f1), `origin/master..HEAD` puste, porcelain
+czysty poza nazwanymi `??`. Sumy §0.3 zgodne (ncp 0337d5ea, światy S 38f1f4ac / J 1f97c0d0, teach_boot dcadee8e, teach_s3_run c1cd7f5d,
+teach_s3_lot 55cbcfbe, teach_analyze c206ab6e, teach_s3_spr a0e2c015, democ_framedump 413301f5, democ_nadirdump 54b5438f,
+democ_overlay_v7_71 a784b56d, democ_en_71 2a26c668, democ_kolizje 7bf04035, DEMO_C_v7_en.srt d88fffcd); `DEMO_C_v71_EN.mp4` f49233fa.
+FROZEN TEACH wykonaniem (`s8_mapa/bramka_frozen.json`, narzędzie `democ_v8_bramka.py`): pytest test_teach_s1 + s2 17/17, certy 24/24,
+tabela 7a56ba1b, nadir_obs db96a4a7, teach_map 4eefedda, tor mapy kan_sha = sha256_toru (0ffd62e3…), światy i tekstury S, J zgodne
+ze swiaty.json (też kopie w PX4), model x500_teach_flow źródło = zainstalowany (656ccc9b), kod lotu bez zmian od 5ad2555e (git diff
+pusty). [CO-DEMOC-8-0] `df0f03a1` przed bootem. Stanowisko: Chrome i ChatGPT zamknięte przez Olgę przed bootem (pierwszy test kolejki
+pokazał 21 + 13 procesów — boot nie ruszył do zamknięcia); timesyncd zatrzymany na czas bootu i wznowiony przeze mnie po bootcie.
+
+**§3 ujęcie.** Jeden boot, VALID. Rezerwa nieużyta. Booty 1/3.
+
+| take | epizod | litera (teach_analyze + teach_s3_spr przez sędziego teach_s3_lot, pozycja 12) | tempo | bramka zdrowia | klatki w oknie aktu: pokładowa / w dół | ujęcie |
+|---|---|---|---|---|---|---|
+| `take1_J_c10_a` | 10 (c10_s01), łata J, cięcie 30 s po wejściu | B1 0/2524 (max e′/U′ 0.2391), B2 margines 12.669 m, B3 0/2577, B4 OK; ważność: zero detekcji zgodnych, mapa bez kadru po fladze (ostatni −0.264 s), zamknięcie raz (+0.136 s), sprawdzian 100%, meta OK, wejście; D1 kontynuacja 110.54 s, track 1.000, pasmo 0.959, odmowy w misji 0; błąd poprawki p50 0.262 / max 0.543 m (589) | 0.9628 | A GO 0.9135 | 2306 (przerwa max 0.068 s) / 761 (0.2 s), okno [138.4, 290.6] s | **VALID** |
+
+Zrzutniki: 4545 klatek kamery pokładowej, 1502 kamery w dół (manifest `democ_v8`). Breach 0, REFUSE w misji 0, próbnik zegara 0 skoków.
+Ujęcie nie wchodzi do statystyk TEACH (DEMO ≠ POMIAR).
+
+**Diff kopii** (hunk po hunku):
+- `tools/democ_v8_boot.sh` wobec `results/TEACH/tools/teach_boot.sh` (nietknięty), 7 hunków:
+  - **H1** `@@ -1,4 +1,14` nagłówek z listą hunków;
+  - **H2** `@@ -50,9 +60,9` katalog `results/DEMO_C/s8_mapa`, log `democ_v8_monitor.log` (TEACH_ETAP=s3 zostaje strażnikiem);
+  - **H3** `@@ -81,7 +91,7` strażnik kolizji: `|framedump|nadirdump`, samowykluczenie `democ_v8_boot`;
+  - **H4a** `@@ -118,7 +128,7` zmienne `FD`, `ND`;
+  - **H4** `@@ -140,6 +150,13` po starcie `nadir_obs`: `democ_framedump.py` (most ROS kamery pokładowej, profil FastDDS) i
+    `democ_nadirdump.py` (gz-transport, model `x500_teach_flow_0`);
+  - **H5** `@@ -153,6 +170,9` sprzątanie: TERM obu zrzutników, do 10 s, potem KILL;
+  - **H6** `@@ -175,6 +195,10` blok manifestu `democ_v8`.
+- `tools/democ_v8_run.py` wobec `results/TEACH/tools/teach_s3_run.py` (nietknięty), 13 hunków, każdy w jednej z grup:
+  - **V8-a** (`@@ -38,26 +52,28`, `@@ -293,16 +355,16`, `@@ -315,10 +377,10`): katalog `s8_mapa`, log `democ_v8.log`, boot `democ_v8_boot.sh`,
+    `democ_v8.json`, nagłówki logów;
+  - **V8-b** (`@@ -1,26 +1,40` docstring, `@@ -96,9 +112,9`, `@@ -270,6 +327,11` część): plan = pozycja 12, nazwa `take<k>_J_c10_a`;
+  - **V8-c** (`@@ -38,26 +52,28` część, `@@ -221/-231/-241/-282`): budżet 3, sygnały `STOP-DEMOC-8-*` (podmiana nazw w strażnikach);
+  - **V8-d** (`@@ -115,40 +131,81`, `@@ -270,6 +327,11`, `@@ -293`): funkcje `ujecie` i `_ciaglosc` — VALID = status ważny sędziego
+    ∧ brak odmowy w misji ∧ D1 kontynuacja ≥ 110 s ∧ komplet klatek obu kamer w oknie [początek fazy mapy, zejście + 4 s]
+    (przerwa ≤ 1.0 s, oba końce pokryte), zapis `ujecia.jsonl`; take nie VALID ⇒ następny w identycznych warunkach;
+  - **V8-e** (`@@ -191,26 +248,26`): reguła łaty S po pozycji 4 usunięta, liczniki nogi zerowe.
+  Strażniki stanowiska, procesy Windows, timesyncd, bramka zdrowia, zegar, sieroty, telemetria, rejestrator, wyciąg ULG, sędzia — bez zmian.
+
+**§3 część A** (`tools/democ_v8_overlay.py aktA`, przez `democ_v8_en.py`): **34.9 s**, 349 klatek, kamera 349/349, w dół 349/349.
+- Oś czasu: faza mapy [138.4, t_inj − 4 = 172.05] s ściśnięta do 8 s — **TEMPO ×4.21** (podpisane „SPEED ×4.2”); [172.05, 184.05] ×1
+  (cięcie 176.05, zamknięcie mapy 176.2 w tym odcinku); ×8 do zejścia 286.59; zejście 2 s ×4.
+- Kamera pokładowa z ramkami celu wyłącznie z `percep_feed`. Wkładka w dół: kadr po stemplu sim; w fazie mapy „map frame n · keyframe k”
+  z wiersza `wlaczony` producenta; po cięciu „keyframe k · N matching points” z wiersza `lok` (`k`, `zgodne`). Współrzędnych punktów
+  zapis nie niesie — nie są rysowane.
+- Panel: prawda, pierścień p_corr w utracie, kropkowany p_ekf, intruz, R_E = 32 m; obrysy 9 klatek kluczowych od chwili zapisu.
+  Obrys: środek `cam_ekf` z georeferencji (asercja ≤ 1.0 m od `ekf_pos` wiersza nf producenta), wymiar = rzut FOV 1.74 rad / 640×480
+  (model.sdf, sha w asercji) z wysokości `a` klatki, obrót = `ekf_hdg` wiersza nf.
+- HUD kanonem `teach_analyze` (tabela lotu przez `tabela_lotu`, `U_of`, okno t_probki [−0.4, +0.1] przepisane 1:1): asercje
+  ticki ocenione **2524**, max e′/U′ **0.2391**, max e_corr **0.7245 m** = `wyniki_teach.json`.
+- **Mini-mózg wchodzi:** replay NCP-20 na `demo.jsonl` z `own_pos_ned := p_corr` z ramy, stan zmienia się tylko w ticku approach/orbit
+  z ważnym trackiem; **kotwica p50 5.58·10⁻⁴, p95 1.12·10⁻³, max 1.99·10⁻³ m/s (n 3167)** ≤ 5·10⁻³.
+- Napisy §5 w kolejności (0–12 s, 12–15, 15–20, 20–26, 26–32.9, zejście 32.9–34.9), napis uczciwości przez całą część A.
+
+**§4 część B** (`aktB`): **26.9 s**, ×30 od startu epizodu (139.65 s) do zejścia (946.46 s), 0 bootów. Źródło `results/TEACH2/s1/L1_S_c10`
+z repo (trace, rama, gt_intruder, nadir_obs, poprawki_teach2, boot.ulg przez `teach_analyze.ulg`, sedzia_teach2, kadry). Asercje
+(wszystkie trzymają): kontynuacja **600.52 s**; ticki ocenione **12 638**; przekroczeń **0**; max e′/U′ **0.2362**; błąd poprawki max
+**0.4495 m** (3003 poprawki w misji, = sędzia); track **1.000**; odmów w misji **0** (rama i sędzia); błąd własny EKF max **17.448 m**
+(= sędzia 17.448). Data lotu z logu (`ts` trace): **18.11.2026** = data z promptu. Obrysy 15 klatek kluczowych w fazie nauki,
+miniatury 12 kadrów z `kadry/` w chwilach zapisu z podpisem czasu.
+
+**§5 plansze:** karta wejścia 5 s, karta zakresu 6 s (zdania od nowej linii, asercja zgodności tekstu), plansza v8 = plansza v7.1 EN
++ linia §5 przed wierszem zamykającym. Słowa zakazane: asercja w kodzie na każdym wypalonym napisie i bloku srt (lista v7 + odpowiedniki EN
++ §5; „proved” przy map/fix/position/source) — 0 trafień.
+
+**§6 montaż i kolizje.** Format 1920×1080@10, cv2 mp4v. Przyrząd `democ_kolizje` (plik nietknięty) na każdym kroku aktu 8, tabela
+paneli części B (`aktB8`) dopisana w procesie kroku: **`kolizje_v8.json` = 0 kolizji** (karta, A, B, karta zakresu, plansza; 81.8 s).
+
+| plik (na dysku, poza repo) | długość | sha256 |
+|---|---|---|
+| `results/DEMO_C/DEMO_C_v8_EN.mp4` (133 MB) | **380.8 s** ≤ 390 (v7.1 bez planszy 299.0 + karta 5 + A 34.9 + B 26.9 + zakres 6 + plansza 9) | `d3a4a858132e84a358adf07ec870e34bcb833147b6b12f56b5df311778377d60` |
+| `results/DEMO_C/DEMO_C_v8_NOMARKERS_EN.mp4` (30 MB) | **81.8 s** ≤ 90 | `1ad3bac0cd3a344a8e03b4403e4848e3f4bd6615884efac345e246113ae32466` |
+| `results/DEMO_C/clips_v8/akt8_A.mp4` | 34.9 s | `a5da98b668829d558032f4bf1a66df79a000481946da916027842a4e333835de` |
+| `results/DEMO_C/clips_v8/akt8_B.mp4` | 26.9 s | `1a399a0b05016571e1b5d162bbae04d427838426363964af0d757025b613cf35` |
+| `results/DEMO_C/DEMO_C_v8_en.srt` (w commicie) | — | `aa5a3d887bbe9f80aef81836b950f9f5c3f02c407849f886fd42340a31da8f0f` |
+| `results/DEMO_C/kontaktowka_v8.jpg` (w commicie) | — | `30a7a7d20711c92e8e967dcef1e45c34798fb0efafee8eeacac28ed51e70ed8d` |
+
+**Znalezisko do seansu (bez zmiany filmu):** świat J niesie 37 znaczników aktu 7 z `visibility_flags` 4. Kamera pokładowa (maska
+0xFFFFFFF5) je widzi, kamera w dół (maska 8) nie. W części A na obrazie z kamery pokładowej widać więc na ziemi znaczniki, choć poprawka
+pozycji ich nie używa (0 detekcji zgodnych, wkładka w dół pokazuje sam teren). Napis „no markers, no beacons” mówi prawdę o źródle
+pozycji, ale widz może zrozumieć, że na ziemi znaczników nie ma. Decyzja (napis, kadrowanie, zostawienie) — CC / Olga.
+
+**Odchylenia od promptu:**
+1. **Wykres części B:** zamiast błędu pozycji poprawionej per tick pokazuje błąd każdej poprawki z mapy (`poprawki_teach2.jsonl`,
+   max 0.4495 m) obok odległości estymatora bez poprawek od prawdy (wspólna oś czasu, dwa pasy). Powód: napis zamrożony mówi „position
+   error never above 0.45 m”, a to liczba błędu poprawki (ANEKS_TEACH2-2); błąd pozycji poprawionej między poprawkami dochodzi do
+   0.658 m (p95 0.402) i na wykresie przeczyłby napisowi. HUD części B pokazuje bieżący błąd pozycji poprawionej (bez liczby w napisie).
+2. **Faza mapy w A:** ściśnięta jest [początek fazy mapy, t_inj − 4], a nie do zamknięcia mapy — zamknięcie (176.2 s) wypada 0.15 s
+   po cięciu, wewnątrz odcinka ×1; tempo ×4.21 policzone z tego odcinka.
+3. **Zegar misji w A** zaczyna od −1.8 s: faza mapy startuje przed zdarzeniem startu epizodu.
+4. **Obrys klatki kluczowej** to rzut pola widzenia (wielkość pochodna); asercja środka wobec `ekf_pos` wiersza nf producenta, nie wobec
+   ramy — klatka 0 leży przed pierwszym tickiem ramy.
+5. **Mini-mózg** liczony własnym replayem (warunki z §3 promptu), nie `xai_replay.replay_episode`.
+6. **Słowa zakazane:** lista v7 była polska — sprawdzam ją razem z odpowiednikami angielskimi.
+7. **Karta wejścia** łamana po zdaniach na 3 linie (tekst bez zmian).
+8. **srt:** baza `DEMO_C_v7_en.srt` (v7.1 nie miał nowego srt): bloki aktów 1–7 jak dotąd, blok planszy v7 zastąpiony planszą v8.
+9. **Tabela paneli `aktB8`** przyrządu kolizji dopisywana w procesie kroku (plik przyrządu nietknięty).
+10. **timesyncd** wznowiony przeze mnie zaraz po bootcie (w S3 TEACH robiła to Olga po sesji).
+
+**Predykcje:** P-DEMOC8-1 (0.80) — pierwsze ujęcie VALID; P-DEMOC8-2 (0.90) — VALID w budżecie (1/3); P-DEMOC8-3 (0.60) — kotwica
+p95 1.12·10⁻³, mini-mózg wchodzi; P-DEMOC8-4 (0.85) — asercje części B bez zmiany liczb ANEKS_TEACH2-2. (Bez rozliczenia.)
+
+**W commicie:** narzędzia `democ_v8_bramka.py`, `democ_v8_boot.sh`, `democ_v8_run.py`, `democ_v8_overlay.py`, `democ_v8_en.py`;
+`s8_mapa/` bez klatek jpg, `boot.ulg` i gniazd; `clips_v8/*.json` (wyniki kroków, rejestry kolizji, cut); `kolizje_v8.json`;
+`DEMO_C_v8_en.srt`; `kontaktowka_v8.jpg`; ten dopisek. Wideo i png kart na dysku (`??`). Push = Olga; CC przelicza literę ujęcia,
+sprawdza liczby na napisach i ogląda klatki, zanim film pójdzie na zewnątrz. Ostatnia bramka — seans Olgi. **STOP-DEMOC-8.**
